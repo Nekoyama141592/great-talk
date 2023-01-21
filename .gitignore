@@ -3,13 +3,15 @@
 *.log
 *.pyc
 *.swp
+*.env
 .DS_Store
 .atom/
 .buildlog/
 .history
 .svn/
 migrate_working_dir/
-
+lib/gen/firebase_options_dev.dart
+lib/gen/firebase_options_prod.dart
 # IntelliJ related
 *.iml
 *.ipr
