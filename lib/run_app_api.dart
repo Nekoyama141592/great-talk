@@ -12,7 +12,7 @@ class RunAppApi {
     await Firebase.initializeApp(
       options: _getFirebaseOption(flavor)
     );
-    runApp(App());
+    runApp(const App());
   }
 
   static FirebaseOptions _getFirebaseOption(Flavor flavor) {
