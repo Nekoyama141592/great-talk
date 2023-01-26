@@ -33,6 +33,8 @@ class ChatPage extends HookWidget {
         shape: appBarShape(context),
       ),
       body: Chat(
+        avatarBuilder: (text) => UserAvatar(author: person),
+        showUserAvatars: true,
         messages: messages.value, 
         onSendPressed: (partialText) async {
           await ChatApi.onSendPressed(context,partialText, messages, person);
