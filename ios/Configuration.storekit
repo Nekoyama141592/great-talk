@@ -1,0 +1,77 @@
+{
+  "identifier" : "58EA09A5",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "18CE9D18",
+      "localizations" : [
+
+      ],
+      "name" : "nolimit_chat",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "7.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "A1FB4432",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "subscription_month",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "月額プラン",
+          "subscriptionGroupID" : "18CE9D18",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "79.9",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6CC3C06F",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "subscription_annual",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "年額プラン",
+          "subscriptionGroupID" : "18CE9D18",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 2
+  }
+}
