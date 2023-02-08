@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/api/chat_gpt_api.dart';
 import 'package:great_talk/api/show_toast.dart';
+import 'package:great_talk/common/routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // common
 import 'package:great_talk/common/strings.dart';
@@ -34,7 +35,9 @@ class ChatApi {
     }
     final msg = partialText.text;
     _addMessage(msg,messages,user);
-    if (chatCount < chatLimitPerDay) {
+    // TODO:
+    // if (chatCount < chatLimitPerDay) {
+      if (1 == 2) {
       final name = person.lastName!;
       final innerContext = ShowToast.showIndicator(context);
       final prompt = "$nameになりきって、$nameの口調で以下の問いに答えてください$msg";
@@ -45,6 +48,7 @@ class ChatApi {
     } else {
       _addMessage(chatLimitMsg2, messages, person);
       await ShowToast.showBasicFlutterToast(chatLimitMsg1, toastSeconds);
+      toSubscribePage(context);
     }
   }
 

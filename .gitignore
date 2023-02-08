@@ -13,6 +13,9 @@ migrate_working_dir/
 lib/gen/firebase_options_dev.dart
 lib/gen/firebase_options_prod.dart
 Great_Talk.mobileprovision
+things_todo.txt
+lib/iap_constants/subscription_constants.dart
+lib/iap_constants/my_product_list.dart
 # IntelliJ related
 *.iml
 *.ipr
