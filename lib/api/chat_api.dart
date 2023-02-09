@@ -16,8 +16,6 @@ class ChatApi {
   // 現在のユーザーを定義.
   static const user = types.User(id: 'current_user');
   static const chatLimitPerDay = 2;
-  static const int toastSeconds = 8;
-  static const String chatLimitMsg1 = "(実は1チャットあたり2円ほどかかってしまいます...)";
   static String chatLimitMsg2 = "楽しい会話は1日$chatLimitPerDay回まで！プランに登録して、もっと知識を深めませんか？";
   // 与えられたpersonとのチャット履歴を取得
   static Future<List<types.Message>> getChatLog(types.User person) async {
@@ -47,7 +45,6 @@ class ChatApi {
       await _setValues(prefs,messages.value, person.id,chatCount);
     } else {
       _addMessage(chatLimitMsg2, messages, person);
-      await ShowToast.showBasicFlutterToast(chatLimitMsg1, toastSeconds);
       toSubscribePage(context);
     }
   }
