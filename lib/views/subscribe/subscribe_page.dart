@@ -131,13 +131,8 @@ class _MyAppState extends State<SubscribePage> {
       stack.add(
         Stack(
           children: const <Widget>[
-            Opacity(
-              opacity: 0.3,
-              child: ModalBarrier(dismissible: false, color: Colors.grey),
-            ),
-            Center(
-              child: CircularProgressIndicator(),
-            ),
+            Opacity(opacity: 0.3, child: ModalBarrier(dismissible: false, color: Colors.grey),),
+            Center(child: CircularProgressIndicator(),),
           ],
         ),
       );
@@ -188,8 +183,7 @@ class _MyAppState extends State<SubscribePage> {
       } else {
         if (purchaseDetails.status == PurchaseStatus.error) {
           handleError(purchaseDetails.error!);
-        } else if (purchaseDetails.status == PurchaseStatus.purchased ||
-            purchaseDetails.status == PurchaseStatus.restored) {
+        } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
           final bool valid = await _verifyPurchase(purchaseDetails);
           if (valid) {
             deliverProduct(purchaseDetails);
@@ -198,9 +192,7 @@ class _MyAppState extends State<SubscribePage> {
             return;
           }
         }
-        if (purchaseDetails.pendingCompletePurchase) {
-          await _inAppPurchase.completePurchase(purchaseDetails);
-        }
+        if (purchaseDetails.pendingCompletePurchase) await _inAppPurchase.completePurchase(purchaseDetails);
       }
     }
   }
