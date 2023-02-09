@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:great_talk/api/chat_api.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/widgets.dart';
 
@@ -14,7 +15,7 @@ class PlanDescriptions extends StatelessWidget {
     final children = [
       ListTile(
         leading: const Icon(Icons.check),
-        title: boldText('無料プランではチャットは一日二回!')
+        title: boldText('無料プランではチャットは1日${ChatApi.chatLimitPerDay}回!')
       ),
       const Divider(),
       ListTile(

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
 import 'package:great_talk/iap_constants/my_product_list.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
@@ -19,15 +20,17 @@ import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 final bool _kAutoConsume = Platform.isIOS || true;
 
 class SubscribePage extends StatefulWidget {
+  const SubscribePage({Key? key}) : super(key: key);
   @override
   State<SubscribePage> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<SubscribePage> {
+  final PurchasesController purchasesController = PurchasesController.to;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
   List<ProductDetails> _products = myProductList;
-  List<PurchaseDetails> _purchases = <PurchaseDetails>[];
+  final _purchases = PurchasesController.to.purchases;
   bool _isAvailable = false;
   bool _purchasePending = false;
   bool _loading = true;
@@ -53,7 +56,7 @@ class _MyAppState extends State<SubscribePage> {
       setState(() {
         _isAvailable = isAvailable;
         // _products = <ProductDetails>[];
-        _purchases = <PurchaseDetails>[];
+        purchasesController.setPurchases(<PurchaseDetails>[]);
         _purchasePending = false;
         _loading = false;
       });
@@ -71,7 +74,7 @@ class _MyAppState extends State<SubscribePage> {
         _queryProductError = productDetailResponse.error!.message;
         _isAvailable = isAvailable;
         // _products = productDetailResponse.productDetails;
-        _purchases = <PurchaseDetails>[];
+        purchasesController.setPurchases(<PurchaseDetails>[]);
         _purchasePending = false;
         _loading = false;
       });
@@ -83,7 +86,7 @@ class _MyAppState extends State<SubscribePage> {
         _queryProductError = null;
         _isAvailable = isAvailable;
         // _products = productDetailResponse.productDetails;
-        _purchases = <PurchaseDetails>[];
+        purchasesController.setPurchases(<PurchaseDetails>[]);
         _purchasePending = false;
         _loading = false;
       });
@@ -156,7 +159,7 @@ class _MyAppState extends State<SubscribePage> {
   Future<void> deliverProduct(PurchaseDetails purchaseDetails) async {
     // IMPORTANT!! Always verify purchase details before delivering the product.
     setState(() {
-      _purchases.add(purchaseDetails);
+      purchasesController.addPurchase(purchaseDetails);
       _purchasePending = false;
     });
   }
