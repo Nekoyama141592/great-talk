@@ -1,6 +1,6 @@
 class DateConverter {
   
-  static DateTime _intToDateTime(int date) {
+  static DateTime intToDateTime(int date) {
     var year = date ~/ 10000;
     var month = (date % 10000) ~/ 100;
     var day = date % 100;
@@ -11,12 +11,11 @@ class DateConverter {
     return (date.year * 10000) + (date.month * 100) + date.day;
   }
 
-  static bool is24HourPassed(int last, DateTime now) {
-    final date1 = _intToDateTime(last);
-    final date2 = now;
-    final difference = date2.difference(date1);
-    return difference.inHours >= 24;
-  }
-
   static int nowDateTime() => DateTime.now().millisecondsSinceEpoch;
+  // 2つのDateTimeを受け取り、それらの日付（日、月、年）が異なる場合にtrueを返します.また、同一の日付であればfalseを返します.
+  static bool isCrossingDate(DateTime startDate, DateTime endDate) {
+    return startDate.day != endDate.day ||
+        startDate.month != endDate.month ||
+        startDate.year != endDate.year;
+  }
 }

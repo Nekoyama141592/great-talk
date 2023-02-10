@@ -88,8 +88,9 @@ class ChatApi {
 
   static bool _is24HoursFromLast(SharedPreferences prefs) {
     final int last = prefs.getInt(lastChatDatePrefsKey) ?? 0;
+    final lastDay = DateConverter.intToDateTime(last);
     final now = DateTime.now();
-    return last == 0 ? true : DateConverter.is24HourPassed(last, now);
+    return last == 0 ? true : DateConverter.isCrossingDate(lastDay, now);
   }
 
   static bool _allowChat(int chatCount) {
