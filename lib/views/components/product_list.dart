@@ -7,12 +7,11 @@ import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 class ProductList extends StatelessWidget {
-  const ProductList({Key? key,required this.loading,required this.isAvailable,required this.inAppPurchase,required this.products,required this.purchases}) : super(key: key);
+  const ProductList({Key? key,required this.loading,required this.isAvailable,required this.inAppPurchase,required this.products}) : super(key: key);
   final bool loading;
   final bool isAvailable;
   final InAppPurchase inAppPurchase;
   final List<ProductDetails> products;
-  final List<PurchaseDetails> purchases;
 
   @override 
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class ProductList extends StatelessWidget {
           ? IconButton(onPressed: () => InAppPurchaseApi.confirmPriceChange(context,inAppPurchase),icon: const Icon(Icons.upgrade))
           : ElevatedButton(
             style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(kSecondaryColor)),
-            onPressed: () => InAppPurchaseApi.onPurchaseButtonPressed(inAppPurchase, productDetails, purchases),
+            onPressed: () => InAppPurchaseApi.onPurchaseButtonPressed(inAppPurchase, productDetails),
             child: Text(productDetails.price),
           )
         )));

@@ -25,7 +25,6 @@ class _MyAppState extends State<SubscribePage> {
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
   List<ProductDetails> _products = [];
-  final _purchases = PurchasesController.to.purchases;
   bool _isAvailable = false;
   bool _purchasePending = false;
   bool _loading = true;
@@ -114,7 +113,7 @@ class _MyAppState extends State<SubscribePage> {
         ListView(
           children: <Widget>[
             PlanDescriptions(loading: _loading),
-            ProductList(loading: _loading, isAvailable: _isAvailable, inAppPurchase: _inAppPurchase, products: _products, purchases: _purchases),
+            ProductList(loading: _loading, isAvailable: _isAvailable, inAppPurchase: _inAppPurchase, products: _products),
             RestoreButton(loading: _loading, inAppPurchase: _inAppPurchase)
           ],
         ),
