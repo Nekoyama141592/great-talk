@@ -23,7 +23,8 @@ class ChatPage extends HookWidget {
   Widget build(context) {
     final messages = useState(<types.Message>[]);
     final String name = getName(person);
-    final PurchasesController purchasesController = Get.put(PurchasesController());
+    // このページでPurchasesContollerを使用する場合は、以下の式をpurchasesに代入する.
+    Get.put(PurchasesController());
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
       	messages.value = await ChatApi.getChatLog(person);
