@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/api/in_app_purchase_api.dart';
 import 'package:great_talk/common/colors.dart';
+import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 class ProductList extends StatelessWidget {
@@ -20,12 +21,10 @@ class ProductList extends StatelessWidget {
     final List<ListTile> productList = <ListTile>[];
     productList.addAll(products.map(
       (ProductDetails productDetails) {
-        PurchaseDetails? previousPurchase;
-        if (purchases.isNotEmpty) previousPurchase = purchases.firstWhere((element) => element.productID == productDetails.id,);
         return ListTile(
           contentPadding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 16.0),
           title: productDetails.id == kMonthSubscriptionId ? boldSecondaryColorText("${productDetails.title} おすすめ！") : boldText(productDetails.title),
-          trailing: previousPurchase != null
+          trailing: PurchasesController.to.hasProductBeenPurchased(productDetails)
               ? IconButton(onPressed: () => InAppPurchaseApi.confirmPriceChange(context,inAppPurchase),icon: const Icon(Icons.upgrade))
               : ElevatedButton(
                   style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(kSecondaryColor)),
