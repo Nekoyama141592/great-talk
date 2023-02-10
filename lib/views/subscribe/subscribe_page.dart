@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:great_talk/common/others.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
@@ -14,13 +15,24 @@ import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
-class SubscribePage extends StatefulWidget {
+class SubscribePage extends StatelessWidget {
   const SubscribePage({Key? key}) : super(key: key);
   @override
-  State<SubscribePage> createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('サブスクリプション'),shape: appBarShape(context),),
+      body: const SubscribeView()
+    );
+  }
 }
 
-class _MyAppState extends State<SubscribePage> {
+class SubscribeView extends StatefulWidget {
+  const SubscribeView({Key? key}) : super(key: key);
+  @override
+  State<SubscribeView> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<SubscribeView> {
   final PurchasesController purchasesController = PurchasesController.to;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
@@ -132,10 +144,7 @@ class _MyAppState extends State<SubscribePage> {
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('サブスクリプション'),),
-      body: Stack(children: stack,),
-    );
+    return Stack(children: stack);
   }
 
 
