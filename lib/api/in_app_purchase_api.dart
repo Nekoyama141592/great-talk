@@ -13,13 +13,11 @@ class InAppPurchaseApi {
     late PurchaseParam purchaseParam;
     if (Platform.isAndroid) {
       purchaseParam = GooglePlayPurchaseParam(
-          productDetails: productDetails,
-          changeSubscriptionParam: (oldSubscription != null)
-              ? ChangeSubscriptionParam(
-                  oldPurchaseDetails: oldSubscription,
-                  prorationMode:ProrationMode.immediateWithTimeProration,
-                )
-              : null);
+        productDetails: productDetails,
+        changeSubscriptionParam: (oldSubscription != null)
+        ? ChangeSubscriptionParam(oldPurchaseDetails: oldSubscription,prorationMode:ProrationMode.immediateWithTimeProration)
+        : null
+      );
     } else {
       purchaseParam = PurchaseParam(productDetails: productDetails);
     }
