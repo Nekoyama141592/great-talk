@@ -14,15 +14,18 @@ import 'package:great_talk/common/strings.dart';
 // api
 import 'package:great_talk/api/date_converter.dart';
 class ChatApi {
+
   // 現在のユーザーを定義.
   static const user = types.User(id: 'current_user');
   static const chatLimitPerDay = 2;
+
   // 与えられたpersonとのチャット履歴を取得
   static Future<List<types.Message>> getChatLog(types.User person) async {
     List<types.Message> a = await _getLocalMessages(person.id);
     debugPrint("==========取得されました==========");
     return a;
   }
+
   // 送信ボタンが押された時の処理
   static Future<void> onSendPressed(BuildContext context,types.PartialText partialText,ValueNotifier<List<types.Message>> messages,types.User person) async {
     final prefs = await SharedPreferences.getInstance();
@@ -31,13 +34,11 @@ class ChatApi {
     if (_is24HoursFromLast(prefs)) {
       chatCount = 0;
     }
-    final msg = partialText.text;
-    _addMessage(msg,messages,user);
-    // if (chatCount < chatLimitPerDay) {
-    if (PurchasesController.to.purchases.isNotEmpty) {
-      final name = person.lastName!;
+    if (_allowChat(chatCount)) {
+      final msg = partialText.text;
+      _addMessage(msg,messages,user);
       final innerContext = ShowToast.showIndicator(context);
-      final prompt = "$nameになりきって、$nameの口調で以下の問いに答えてください$msg";
+      final prompt = createPrompt(person, msg);
       final answerText = await ChatGPTApi.fetchApi(prompt);
       _addMessage(answerText, messages, person);
       Navigator.pop(innerContext);
@@ -91,6 +92,14 @@ class ChatApi {
     return last == 0 ? true : DateConverter.is24HourPassed(last, now);
   }
 
+  static bool _allowChat(int chatCount) {
+    return chatCount < chatLimitPerDay || PurchasesController.to.purchases.isNotEmpty;
+  }
+
+  static String createPrompt(types.User person,String msg) {
+    final name = person.lastName!;
+    return "$nameになりきって、$nameの口調で以下の問いに答えてください\n\n$msg";
+  }
   static void _addMessage(String str,ValueNotifier<List<types.Message>> messages,types.User author) {
     final textMessage = types.TextMessage(
       author: author,
