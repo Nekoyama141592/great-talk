@@ -12,9 +12,6 @@ class PurchasesController extends GetxController {
   void addPurchase(PurchaseDetails purchaseDetails) => purchases = RxList.from(purchases)..add(purchaseDetails);
   bool hasProductBeenPurchased(ProductDetails productDetails) => purchases.map((element) => element.productID).toList().contains(productDetails.id);
 
-  RxList<String> tests = <String>[].obs;
-  void addTest(String test) => tests = RxList.from(tests)..add(test);
-
   Future<void> _fetchPurchases() async {
     final InAppPurchase inAppPurchase = InAppPurchase.instance;
     await inAppPurchase.restorePurchases();
