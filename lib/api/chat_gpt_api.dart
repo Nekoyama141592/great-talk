@@ -9,6 +9,7 @@ class ChatGPTApi {
       prompt: prompt,
       model: ChatGptModel.textDavinci003.key,
     );
-    return await chatGpt.createCompletion(request) ?? "返答が取得できませんでした";
+    // return await chatGpt.createCompletion(request) ?? "返答が取得できませんでした";
+    return Future.delayed(const Duration(seconds: 3),(() => '0.02ドル課金されました'));
   }
 }
