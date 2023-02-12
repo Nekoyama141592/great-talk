@@ -1,6 +1,5 @@
 // flutter
 import 'package:flutter/material.dart';
-import 'package:great_talk/views/components/person_cards.dart';
 // packages
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
