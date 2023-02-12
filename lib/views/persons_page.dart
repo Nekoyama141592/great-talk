@@ -33,14 +33,16 @@ class PersonsPage extends HookWidget {
         shape: appBarShape(context)
       ),
       floatingActionButton:
-      FloatingActionButton(
+      pageIndex.value == 0
+      ? FloatingActionButton(
         onPressed: () {
           isSearching.value = !isSearching.value;
           results.value = fullPersons;
         },
         backgroundColor: kPrimaryColor,
         child: isSearching.value ? const Icon(Icons.search_off) : const Icon(Icons.search),
-      ),
+      )
+      : const SizedBox.shrink(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: bnbElements,
