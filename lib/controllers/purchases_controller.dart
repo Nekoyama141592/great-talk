@@ -38,7 +38,6 @@ class PurchasesController extends GetxController {
   void onInit() {
     final Stream<List<PurchaseDetails>> purchaseUpdated = inAppPurchase.purchaseStream;
     subscription = purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
-      ShowToast.showToast("listenした長さ: ${purchaseDetailsList.length}"); // 1
         _listenToPurchaseUpdated(purchaseDetailsList); // 成功
       }, onDone: () {
        
