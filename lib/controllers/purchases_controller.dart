@@ -25,7 +25,7 @@ class PurchasesController extends GetxController {
   final queryProductError = "".obs; // 使われていない.
 
   PurchasesController() {
-    // _fetchPurchases();
+    _fetchPurchases();
   }
 
   void _addPurchase(PurchaseDetails purchaseDetails) => purchases(List.from(purchases)..add(purchaseDetails));
