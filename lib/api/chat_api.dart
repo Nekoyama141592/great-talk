@@ -28,6 +28,7 @@ class ChatApi {
 
   // 送信ボタンが押された時の処理
   static Future<void> onSendPressed(BuildContext context,types.PartialText partialText,ValueNotifier<List<types.Message>> messages,types.User person) async {
+    await PurchasesController.to.restorePurchases(); // 購入内容を復元
     final prefs = await SharedPreferences.getInstance();
     int chatCount = _getChatCount(prefs);
     // もし、最後のチャットから24時間経過していたらchatCountを0にして送信を許可

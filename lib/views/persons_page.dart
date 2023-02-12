@@ -22,7 +22,7 @@ class PersonsPage extends HookWidget {
   @override
   Widget build(context) {
     // このページでPurchasesContollerを使用する場合は、以下の式をpurchasesに代入する.
-    Get.put(PurchasesController());
+    final PurchasesController purchasesController =  Get.put(PurchasesController());
     final results = useState(fullPersons);
     final isSearching = useState(false);
     final pageIndex = useState(0);
@@ -47,7 +47,10 @@ class PersonsPage extends HookWidget {
         type: BottomNavigationBarType.fixed,
         items: bnbElements,
         currentIndex: pageIndex.value,
-        onTap: (index) => pageController.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.easeIn)
+        onTap: (index) async {
+          pageController.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
+          if (index == 1) await purchasesController.restorePurchases();
+        }
       ),
       body: PageView(
         onPageChanged: (index) => pageIndex.value = index,

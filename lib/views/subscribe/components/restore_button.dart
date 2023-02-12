@@ -17,7 +17,7 @@ class RestoreButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             TextButton(
-              onPressed: () => controller.inAppPurchase.restorePurchases(),
+              onPressed: () async => await controller.restorePurchases(),
               child: const Text('購入を復元',style: TextStyle(color: Colors.black),),
             ),
           ],

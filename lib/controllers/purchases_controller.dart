@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/api/show_toast.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
@@ -24,30 +25,21 @@ class PurchasesController extends GetxController {
   final loading = true.obs;
   final queryProductError = "".obs; // 使われていない.
 
-  PurchasesController() {
-    _fetchPurchases();
-  }
-
   void _addPurchase(PurchaseDetails purchaseDetails) => purchases(List.from(purchases)..add(purchaseDetails));
 
 
   bool hasProductBeenPurchased(ProductDetails productDetails) => purchases.map((element) => element.productID).toList().contains(productDetails.id);
 
-  Future<void> _fetchPurchases() async {
-    final InAppPurchase inAppPurchase = InAppPurchase.instance;
-    await inAppPurchase.restorePurchases();
-    final isEmpty = await inAppPurchase.purchaseStream.isEmpty;
-    if (!isEmpty) {
-      final x = await inAppPurchase.purchaseStream.first;
-      _listenToPurchaseUpdated(x);
-    }
+  Future<void> restorePurchases() async {
+    if(purchases.isEmpty) await inAppPurchase.restorePurchases();
   }
 
   @override
   void onInit() {
     final Stream<List<PurchaseDetails>> purchaseUpdated = inAppPurchase.purchaseStream;
     subscription = purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
-        _listenToPurchaseUpdated(purchaseDetailsList);
+      ShowToast.showToast("listenした長さ: ${purchaseDetailsList.length}"); // 1
+        _listenToPurchaseUpdated(purchaseDetailsList); // 成功
       }, onDone: () {
        
       }, onError: (Object error) {

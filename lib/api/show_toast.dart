@@ -1,11 +1,12 @@
 // flutter
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// common
-import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/colors.dart';
 
 class ShowToast {
+
+  static Future<void> showToast(String msg) async {
+    await Fluttertoast.showToast(msg: msg);
+  }
   static BuildContext showIndicator(BuildContext context) {
     BuildContext innerContext = context;
     showDialog(
