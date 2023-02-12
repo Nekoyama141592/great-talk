@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class RestoreButton extends StatelessWidget {
-  const RestoreButton({Key? key,required this.loading,required this.inAppPurchase}) : super(key: key);
-  final bool loading;
-  final InAppPurchase inAppPurchase;
+  const RestoreButton({Key? key,}) : super(key: key);
   @override 
   Widget build(BuildContext context) {
-    if (loading) {
-      return Container();
-    }
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          TextButton(
-            onPressed: () => inAppPurchase.restorePurchases(),
-            child: const Text('購入を復元',style: TextStyle(color: Colors.black),),
-          ),
-        ],
-      ),
-    );
+    final controller = PurchasesController.to;
+    return Obx((() {
+      return controller.loading.value
+      ? Container()
+      : Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            TextButton(
+              onPressed: () => controller.inAppPurchase.restorePurchases(),
+              child: const Text('購入を復元',style: TextStyle(color: Colors.black),),
+            ),
+          ],
+        ),
+      );
+    }));
   }
 }

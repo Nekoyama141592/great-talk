@@ -62,7 +62,7 @@ class PersonsPage extends HookWidget {
               child: PersonCards(persons: results.value,),
             ),
           ) : const PersonCards(persons: fullPersons),
-          const SubscribeView()
+          SubscribeView()
         ],
       )
     );
