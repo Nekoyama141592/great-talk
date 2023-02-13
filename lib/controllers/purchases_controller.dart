@@ -23,8 +23,16 @@ class PurchasesController extends GetxController {
 
   void _addPurchase(PurchaseDetails purchaseDetails) => purchases(List.from(purchases)..add(purchaseDetails));
 
+  bool hasProductBeenPurchased(ProductDetails productDetails) {
+    bool result;
+    if (Platform.isAndroid) {
+      result = purchases.isNotEmpty ? purchases.last.productID == productDetails.id : false;
+    } else {
+      result = purchases.map((element) => element.productID).toList().contains(productDetails.id);
+    }
+    return result;
+  }
 
-  bool hasProductBeenPurchased(ProductDetails productDetails) => purchases.map((element) => element.productID).toList().contains(productDetails.id);
 
   Future<void> restorePurchases() async {
     if(purchases.isEmpty) await inAppPurchase.restorePurchases();
