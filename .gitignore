@@ -17,6 +17,7 @@ lib/iap_constants/subscription_constants.dart
 lib/iap_constants/my_product_list.dart
 json/
 cloud_functions/
+firestore_rules/
 # IntelliJ related
 *.iml
 *.ipr
