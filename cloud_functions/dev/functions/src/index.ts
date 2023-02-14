@@ -2,6 +2,8 @@ import * as functions from "firebase-functions";
 import * as crypto from "crypto";
 import {google} from "googleapis";
 import axios from "axios";
+import * as admin from "firebase-admin";
+admin.initializeApp();
 
 const RECEIPT_VERIFICATION_ENDPOINT_SANDBOX = "https://sandbox.itunes.apple.com/verifyReceipt";
 const RECEIPT_VERIFICATION_ENDPOINT_FOR_IOS_PROD = "https://buy.itunes.apple.com/verifyReceipt";
@@ -22,8 +24,6 @@ const playDeveloperApiClient = google.androidpublisher({
   version: "v3",
   auth: authClient,
 });
-import * as admin from 'firebase-admin';
-admin.initializeApp();
 
 /**
 @function getPrivateKey
@@ -65,6 +65,17 @@ function chunkSplit(str: string, len: number, end: string): string {
   }
   return match.join(end);
 }
+/**
+ * Saves the Android receipt data to Firestore.
+ * @function saveDataToFirestore
+ * @param {Object} json - The Android receipt data in JSON format.
+ * @param {string} path - The path to save data.
+ * @return {Promise} A promise that resolves with the reference.
+ */
+function saveDataToFirestore(json: object, path: string) {
+  const db = admin.firestore();
+  return db.collection(path).add(json);
+}
 
 export const verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
   if (req.method !== "POST") {
@@ -93,7 +104,7 @@ export const verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
   }
 
   const decodedReceipt = JSON.parse(receipt);
-  // await saveAndroidReceipt(decodedReceipt);
+  await saveDataToFirestore(decodedReceipt, "androidReceipts");
 
   const typeOfSubscription = decodedReceipt["autoRenewing"];
   if (typeOfSubscription) {
@@ -116,7 +127,7 @@ export const verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
       return;
     }
 
-    // await saveAndroidSubscriptionData(subscriptions);
+    await saveDataToFirestore(subscriptions, "androidSubscriptions");
   } else {
     const purchases = playDeveloperApiClient.purchases;
     const response = await purchases.voidedpurchases.list({
@@ -175,11 +186,11 @@ export const verifyIOSReceipt = functions.https.onRequest(async (req, res) => {
     return;
   }
   const receiptCollections: Array<object> = result["latest_receipt_info"];
-  // for (let transaction of receiptCollections) {
-  //     await saveTransactionIOs(transaction);
-  // }
+  for (const transaction of receiptCollections) {
+    await saveDataToFirestore(transaction, "iosTransactions");
+  }
   res.status(200).send(JSON.stringify({
-    essage: "Receipt registration successful.",
+    message: "Receipt registration successful.",
     transactions: receiptCollections,
   }));
 });
