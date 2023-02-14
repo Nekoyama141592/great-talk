@@ -1,6 +1,6 @@
 #include "Generated.xcconfig"
 
-FLUTTER_TARGET=lib/main_testing.dart
-ASSET_PREFIX=testing
+FLUTTER_TARGET=lib/main_verification.dart
+ASSET_PREFIX=verification
 BUNDLE_NAME=Great Talk Verification
 BUNDLE_DISPLAY_NAME=Great Talk Verification
