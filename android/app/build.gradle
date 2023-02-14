@@ -40,6 +40,11 @@ android {
             applicationId "com.firebaseapp.great_talk_dev"
             resValue "string", "app_name", "Great Talk Dev"
         }
+        testing {
+            dimension "flavor-type"
+            applicationId "com.firebaseapp.great_talk_testing"
+            resValue "string", "app_name", "Great Talk Testing"
+        }
         prod {
             dimension "flavor-type"
             applicationId "com.firebaseapp.great_talk"

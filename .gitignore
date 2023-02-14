@@ -10,8 +10,7 @@
 .history
 .svn/
 migrate_working_dir/
-lib/gen/firebase_options_dev.dart
-lib/gen/firebase_options_prod.dart
+lib/gen/
 Great_Talk.mobileprovision
 things_todo.txt
 lib/iap_constants/subscription_constants.dart

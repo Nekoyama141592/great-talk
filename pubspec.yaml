@@ -61,6 +61,13 @@ flavorizr:
         applicationId: "com.firebaseapp.great_talk_dev"
       ios:
         bundleId: "com.firebaseapp.greatTalkDev"
+    testing:
+      app:
+        name: "Great Talk Testing"
+      android:
+        applicationId: "com.firebaseapp.great_talk_testing"
+      ios:
+        bundleId: "com.firebaseapp.greatTalkTesting"
     prod:
       app:
         name: "Great Talk"

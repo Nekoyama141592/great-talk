@@ -8,6 +8,7 @@ import 'package:great_talk/app.dart';
 import 'package:great_talk/flavors.dart';
 import 'package:great_talk/gen/firebase_options_dev.dart' as dev;
 import 'package:great_talk/gen/firebase_options_prod.dart' as prod;
+import 'package:great_talk/gen/firebase_options_testing.dart' as testing;
 class RunAppApi {
   static Future<void> runGreatTalk(Flavor flavor) async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +25,8 @@ class RunAppApi {
       return dev.DefaultFirebaseOptions.currentPlatform;
       case Flavor.PROD:
       return prod.DefaultFirebaseOptions.currentPlatform;
+      case Flavor.TESTING:
+      return testing.DefaultFirebaseOptions.currentPlatform;
     }
   }
 }

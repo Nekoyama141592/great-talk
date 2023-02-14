@@ -1,0 +1,6 @@
+#include "Generated.xcconfig"
+
+FLUTTER_TARGET=lib/main_testing.dart
+ASSET_PREFIX=testing
+BUNDLE_NAME=Great Talk Testing
+BUNDLE_DISPLAY_NAME=Great Talk Testing
