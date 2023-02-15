@@ -122,43 +122,7 @@ class PurchasesController extends GetxController {
   }
 
   Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) async {
-    if (Platform.isAndroid) {
-      try {
-        /// Androidの場合アイテムの購入時、レシートと同時にそのレシートの署名を取得出来ます。
-        final body = json.encode({
-          'signature': purchaseDetails.verificationData.serverVerificationData,
-          'receipt': purchaseDetails.verificationData.localVerificationData,
-        });
-        /// 200以外のステータスコードを受信した場合、`catch`にて補足され即座に`false`が返却されます。
-        final uri = Uri.parse(ENV.getVerifyAndroidEndpoint());
-        final headers = {'Content-Type': 'application/json'};
-        await http.post(uri,headers: headers, body: body);
-      } catch (e) {
-        await FirebaseFirestore.instance.collection("android_verify_purchase_errors").doc().set({"error": e.toString(),});
-        return false;
-      }
-    } else if (Platform.isIOS) {
-      try {
-        final body = json.encode({
-          'data': purchaseDetails.verificationData.localVerificationData,// Base64エンコードされたレシートデータ
-        });
-        /// 200以外のステータスコードを受信した場合、`catch`にて補足され即座に`false`が返却されます。
-        final response = await http.post(Uri.parse(ENV.getVerifyIosEndpoint()), body: body);
-        final decoded = json.decode(response.body);//サーバーから返ってきたデータ
-        final transactions = decoded['transactions'];//必要なデータの取り出し
-        //expires_date_msが有効期限のエポックミリ秒
-        int expiresDateMs = int.parse(transactions.last['expires_date_ms']);//int型に変更
-        //現在時刻を加工
-        String  now = DateTime.now().toUtc().millisecondsSinceEpoch.toString();//現在時刻をエポックミリ秒に変換
-        int nowMs = int.parse(now);//int型に変換
-        //有効期限と現在時刻を比較
-        if(expiresDateMs < nowMs) return false;
-      } catch (e) {
-        await FirebaseFirestore.instance.collection("ios_verify_purchase_errors").doc().set({"error": e.toString(),});
-        return false;
-      }
-    }
-    return true;
+    return Future.value(false);
   }
 
   void _handleInvalidPurchase(PurchaseDetails purchaseDetails) {
