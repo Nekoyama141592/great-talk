@@ -130,7 +130,9 @@ class PurchasesController extends GetxController {
           'receipt': purchaseDetails.verificationData.localVerificationData,
         });
         /// 200以外のステータスコードを受信した場合、`catch`にて補足され即座に`false`が返却されます。
-        await http.post(Uri.parse(ENV.getVerifyAndroidEndpoint()), body: body);
+        final uri = Uri.parse(ENV.getVerifyAndroidEndpoint());
+        final headers = {'Content-Type': 'application/json'};
+        await http.post(uri,headers: headers, body: body);
       } catch (e) {
         await FirebaseFirestore.instance.collection("android_verify_purchase_errors").doc().set({"error": e.toString(),});
         return false;
