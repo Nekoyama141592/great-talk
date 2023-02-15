@@ -27,7 +27,7 @@ class ProductList extends StatelessWidget {
             : ElevatedButton(
               style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(kSecondaryColor)),
               onPressed: () => InAppPurchaseApi.onPurchaseButtonPressed(inAppPurchase, productDetails),
-              child: Text(productDetails.price),
+              child: Text("${productDetails.currencySymbol}${productDetails.price}"),
             )
           )));
         },
