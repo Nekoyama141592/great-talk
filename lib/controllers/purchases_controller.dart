@@ -1,11 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/api/env.dart';
-import 'package:http/http.dart' as http;
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
