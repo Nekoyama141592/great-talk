@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/common/widgets.dart';
@@ -28,7 +27,7 @@ class ProductList extends StatelessWidget {
             : ElevatedButton(
               style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(kSecondaryColor)),
               onPressed: () => InAppPurchaseApi.onPurchaseButtonPressed(inAppPurchase, productDetails),
-              child: Text(Platform.isIOS ? "${productDetails.currencySymbol}${productDetails.price}" : productDetails.price),
+              child: boldText(productDetails.price)
             )
           )));
         },
