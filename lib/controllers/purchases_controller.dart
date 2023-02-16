@@ -120,7 +120,7 @@ class PurchasesController extends GetxController {
   }
 
   Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) async {
-    return Future.value(false);
+    return Future.value(true);
   }
 
   void _handleInvalidPurchase(PurchaseDetails purchaseDetails) {
