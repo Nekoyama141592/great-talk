@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:get/get.dart';
+import 'package:great_talk/common/bools.dart';
+import 'package:great_talk/iap_constants/my_product_list.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
@@ -14,13 +16,14 @@ class PurchasesController extends GetxController {
   final purchases = <PurchaseDetails>[].obs;
   final InAppPurchase inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> subscription;
-  final products = <ProductDetails>[].obs;
+  final products = isProd() ? <ProductDetails>[].obs : myProductList.obs;
   final isAvailable = false.obs;
   final purchasePending = false.obs;
   final loading = true.obs;
   final queryProductError = "".obs; // 使われていない.
 
   void _addPurchase(PurchaseDetails purchaseDetails) => purchases(List.from(purchases)..add(purchaseDetails));
+  void _setProducts(List<ProductDetails> productList) => isProd() ? products(productList) : products(myProductList);
 
   bool hasProductBeenPurchased(ProductDetails productDetails) {
     bool result;
@@ -34,7 +37,7 @@ class PurchasesController extends GetxController {
 
 
   Future<void> restorePurchases() async {
-    if(purchases.isEmpty) await inAppPurchase.restorePurchases();
+    if(purchases.isEmpty && isProd()) await inAppPurchase.restorePurchases();
   }
 
   @override
@@ -64,7 +67,7 @@ class PurchasesController extends GetxController {
     final bool storeConnected = await inAppPurchase.isAvailable();
     if (!storeConnected) {
       isAvailable(storeConnected);
-      products(<ProductDetails>[]);
+      _setProducts(<ProductDetails>[]);
       purchases(<PurchaseDetails>[]);
       purchasePending(false);
       loading(false);
@@ -80,7 +83,7 @@ class PurchasesController extends GetxController {
     if (productDetailResponse.error != null) {
       queryProductError (productDetailResponse.error!.message);
       isAvailable(storeConnected);
-      products(productDetailResponse.productDetails);
+      _setProducts(productDetailResponse.productDetails);
       purchases(<PurchaseDetails>[]);
       purchasePending(false);
       loading(false);
@@ -90,7 +93,7 @@ class PurchasesController extends GetxController {
     if (productDetailResponse.productDetails.isEmpty) {
       queryProductError('');
       isAvailable(storeConnected);
-      products(productDetailResponse.productDetails);
+      _setProducts(productDetailResponse.productDetails);
       purchases(<PurchaseDetails>[]);
       purchasePending(false);
       loading(false);
@@ -98,7 +101,7 @@ class PurchasesController extends GetxController {
     }
 
     isAvailable(storeConnected);
-    products(productDetailResponse.productDetails);
+    _setProducts(productDetailResponse.productDetails);
     purchasePending(false);
     loading(false);
   }
