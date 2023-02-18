@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 // packages
 import 'package:get/get.dart';
-import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/flavors.dart';
+import 'package:great_talk/themes/themes.dart';
 // components
 import 'package:great_talk/views/persons_page.dart';
 
@@ -14,9 +14,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: F.title,
-      theme: ThemeData.light().copyWith(
-        appBarTheme: const AppBarTheme(color: kPrimaryColor),
-      ),
+      theme: lightThemeData(context),
       home: const PersonsPage()
     );
   }
