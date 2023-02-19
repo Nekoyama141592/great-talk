@@ -25,7 +25,7 @@ class PlanDescriptions extends StatelessWidget {
         const Divider(),
         ListTile(
           leading: const Icon(Icons.check,color: kSecondaryColor,),
-          title: boldText("$storeStr からいつでもキャンセル可能！")
+          title: boldText("$storeStr からいつでもキャンセルできます")
         ),
         const Divider(),
         ListTile(
