@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:great_talk/common/bools.dart';
 import 'package:great_talk/common/others.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
+import 'package:great_talk/views/components/policy_buttons.dart';
 
 import 'package:great_talk/views/components/product_list.dart';
 import 'package:great_talk/views/subscribe/components/plan_descriptions.dart';
-import 'package:great_talk/views/subscribe/components/restore_buttons.dart';
+import 'package:great_talk/views/subscribe/components/restore_button.dart';
 
 class SubscribePage extends StatelessWidget {
   const SubscribePage({Key? key}) : super(key: key);
@@ -29,7 +31,7 @@ class SubscribeView extends StatelessWidget {
         children: const <Widget>[
           PlanDescriptions(),
           ProductList(),
-          RestoreButtons()
+          RestoreButton(),
         ],
       ),
       Obx((() {
