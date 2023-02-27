@@ -48,7 +48,7 @@ class PersonsPage extends HookWidget {
         items: bnbElements,
         currentIndex: pageIndex.value,
         onTap: (index) async {
-          pageController.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
+          pageController.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.fastLinearToSlowEaseIn);
           if (index == 1) await purchasesController.restorePurchases();
         }
       ),
