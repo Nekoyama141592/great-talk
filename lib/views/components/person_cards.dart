@@ -20,11 +20,11 @@ class PersonCards extends StatelessWidget {
       itemBuilder: ((context, index) {
         final person = persons[index];
         final String name = getName(person);
-        final imageUrl = person.imageUrl!;
+        
         return Padding(
           padding: EdgeInsets.symmetric(vertical: defaultPadding(context) ),
           child: ListTile(
-            leading: CircleImage(imageUrl: imageUrl),
+            leading: CircleImage(person: person),
             title: boldText(name),
             onTap: () => toChatPage(context: context,person: person),
           ),
