@@ -1,21 +1,32 @@
 // packages
-import 'package:flutter/foundation.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:dio/dio.dart';
-import 'package:great_talk/common/current_user.dart';
+import 'package:great_talk/common/persons.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ChatGPTApi {
   
-  static Future<String> fetchApi(List<types.Message> messages) async {
+  static Future<String> fetchApi(List<types.Message> messages,types.User person) async {
     final chatGpt = ChatGpt(apiKey: dotenv.get("OPEN_AI_API_KEY")); 
-    final result = messages.map((e) => _toValidMessage(e)).toList().reversed.toList();
+    final result = _createMessages(messages, person);
     final request = CompletionRequest(model: "gpt-3.5-turbo",messages: result,maxTokens: 1000,);
     final Map<String,dynamic> res = await chatGpt.createCompletion(request);
-    debugPrint('成功しました');
     return res["choices"][0]["message"]["content"].toString().trim();
+  }
+
+  static List<Map<String, dynamic>> _createMessages(List<types.Message> messages,types.User person) {
+    final List<Map<String,dynamic>> result = messages.map((e) => _toValidMessage(e)).toList().reversed.toList();
+    if (person.id != chatGPTId) result.insert(0, _systemMsg(person));
+    return result;
+  }
+  static Map<String,dynamic> _systemMsg(types.User person) {
+    final name = person.lastName;
+    return {
+      "role": "system",
+      "content": "$nameになりきって$nameの口調で返答して下さい。",
+    };
   }
   static Map<String,dynamic> _toValidMessage(types.Message msg) => {
     "role": msg.author.id == chatUiCurrrentUser.id ? "user" : "assistant",

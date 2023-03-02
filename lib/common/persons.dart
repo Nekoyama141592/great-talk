@@ -1,5 +1,10 @@
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+const String chatGPTId = "chatGPT";
+// 現在のユーザーを定義.
+const chatUiCurrrentUser = types.User(id: 'current_user');
+
 const fullPersons = [
+  types.User(id: chatGPTId, lastName: '普通のAIチャット', imageUrl: 'https://pbs.twimg.com/media/FqNXz8saAAEdaXz?format=jpg&name=medium' ),
   types.User(id: 'Isaac Newton', lastName: 'アイザック・ニュートン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/GodfreyKneller-IsaacNewton-1689.jpg/225px-GodfreyKneller-IsaacNewton-1689.jpg' ),
   types.User(id: 'Charles Darwin', lastName: 'チャールズ・ダーウィン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Hw-darwin.jpg/225px-Hw-darwin.jpg' ),
   types.User(id: 'Shibasaburo Kitasato', lastName: '北里柴三郎', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Kitasato_Shibasaburo.jpg/250px-Kitasato_Shibasaburo.jpg' ),
@@ -59,7 +64,6 @@ const fullPersons = [
   types.User(id: 'Johannes Kepler', lastName: 'ヨハネス・ケプラー', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Kepler.png/225px-Kepler.png' ),
   types.User(id: 'Ferdinand Magellan', lastName: 'フェルディナンド・マゼラン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Ferdinand_Magellan.jpg/180px-Ferdinand_Magellan.jpg' ),
   types.User(id: 'Fusayoshi Omori', lastName: '大森房吉', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Omori_Fusakichi.jpg/225px-Omori_Fusakichi.jpg' ),
-  types.User(id: 'The Eastern Memoirs (Volume 1, Number 1)', lastName: '東方見聞録', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Polo_-_Delle_meravigliose_cose_del_mondo%2C_del_MCCCCXCVI_adi_XIII_del_mese_de_iunio_-_2325986_Scan00007.tif/lossy-page1-220px-Polo_-_Delle_meravigliose_cose_del_mondo%2C_del_MCCCCXCVI_adi_XIII_del_mese_de_iunio_-_2325986_Scan00007.tif.jpg' ),
   types.User(id: 'Robert Boyle', lastName: 'ロバート・ボイル', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Robert_Boyle_0001.jpg/250px-Robert_Boyle_0001.jpg' ),
   types.User(id: 'Sven Hedin.', lastName: 'スヴェン・ヘディン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Sven_Hedin_01.jpg/250px-Sven_Hedin_01.jpg' ),
   types.User(id: 'Heike Kammerling Onnes.', lastName: 'ヘイケ・カメルリング・オネス', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Kamerlingh_portret.jpg/200px-Kamerlingh_portret.jpg' ),
