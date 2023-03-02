@@ -119,14 +119,6 @@ class PurchasesController extends GetxController {
     purchasePending(false);
   }
 
-  Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) async {
-    return Future.value(true);
-  }
-
-  void _handleInvalidPurchase(PurchaseDetails purchaseDetails) {
-    // handle invalid purchase here if  _verifyPurchase` failed.
-  }
-
   Future<void> _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async {
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
       if (purchaseDetails.status == PurchaseStatus.pending) {
@@ -135,13 +127,8 @@ class PurchasesController extends GetxController {
         if (purchaseDetails.status == PurchaseStatus.error) {
           handleError(purchaseDetails.error!);
         } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
-          final bool valid = await _verifyPurchase(purchaseDetails);
-          if (valid) {
-            deliverProduct(purchaseDetails);
-          } else {
-            _handleInvalidPurchase(purchaseDetails);
-            return;
-          }
+          deliverProduct(purchaseDetails);
+          return;
         }
         if (purchaseDetails.pendingCompletePurchase) await inAppPurchase.completePurchase(purchaseDetails);
       }
