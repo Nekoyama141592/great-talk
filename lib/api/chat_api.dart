@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/api/chat_gpt_api.dart';
 import 'package:great_talk/api/show_toast.dart';
+import 'package:great_talk/common/current_user.dart';
 import 'package:great_talk/common/routes.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,10 +15,8 @@ import 'package:great_talk/common/strings.dart';
 // api
 import 'package:great_talk/api/date_converter.dart';
 class ChatApi {
-
-  // 現在のユーザーを定義.
-  static const user = types.User(id: 'current_user');
-  static const chatLimitPerDay = 2;
+  // TODO: 絶対直せ.
+  static const chatLimitPerDay = 3;
 
   // 与えられたpersonとのチャット履歴を取得
   static Future<List<types.Message>> getChatLog(types.User person) async {
@@ -37,10 +36,9 @@ class ChatApi {
     }
     if (_allowChat(chatCount)) {
       final msg = partialText.text;
-      _addMessage(msg,messages,user);
+      _addMessage(msg,messages,chatUiCurrrentUser);
       final innerContext = ShowToast.showIndicator(context);
-      final prompt = createPrompt(person, msg);
-      final answerText = await ChatGPTApi.fetchApi(prompt);
+      final answerText = await ChatGPTApi.fetchApi(messages.value);
       _addMessage(answerText, messages, person);
       Navigator.pop(innerContext);
       await _setValues(prefs,messages.value, person.id,chatCount);
@@ -96,11 +94,6 @@ class ChatApi {
 
   static bool _allowChat(int chatCount) {
     return chatCount < chatLimitPerDay || PurchasesController.to.purchases.isNotEmpty;
-  }
-
-  static String createPrompt(types.User person,String msg) {
-    final name = person.lastName!;
-    return "$nameになりきって、$nameの口調で以下の問いに答えてください\n\n$msg";
   }
   static void _addMessage(String str,ValueNotifier<List<types.Message>> messages,types.User author) {
     final textMessage = types.TextMessage(

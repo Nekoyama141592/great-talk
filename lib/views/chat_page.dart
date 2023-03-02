@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 // api
 import 'package:great_talk/api/chat_api.dart';
+import 'package:great_talk/common/current_user.dart';
 import 'package:great_talk/common/others.dart';
 // common
 import 'package:great_talk/common/strings.dart';
@@ -39,7 +40,7 @@ class ChatPage extends HookWidget {
         onSendPressed: (partialText) async {
           await ChatApi.onSendPressed(context,partialText, messages, person);
         },
-        user: ChatApi.user,
+        user: chatUiCurrrentUser,
       ),
     );
   }
