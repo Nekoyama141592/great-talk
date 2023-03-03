@@ -10,6 +10,7 @@ import 'package:great_talk/common/persons.dart';
 // packages
 import 'package:get/get.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/flavors.dart';
 import 'package:great_talk/views/components/person_cards.dart';
@@ -29,7 +30,7 @@ class PersonsPage extends HookWidget {
     final PageController pageController = usePageController();
     return Scaffold(
       appBar: AppBar(
-        title: boldText(F.title),
+        title: boldText(appName),
         shape: appBarShape(context)
       ),
       floatingActionButton:

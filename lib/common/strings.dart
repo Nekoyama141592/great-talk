@@ -50,3 +50,4 @@ String getPlanName(ProductDetails productDetails) {
 }
 
 const String clearChatMsg = "チャット履歴を全て削除しました";
+const String appName = "偉人talk";
