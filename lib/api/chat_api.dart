@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/api/chat_gpt_api.dart';
 import 'package:great_talk/api/show_toast.dart';
+import 'package:great_talk/api/wolfram_api.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/routes.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
@@ -29,18 +30,26 @@ class ChatApi {
   static Future<void> onSendPressed(BuildContext context,types.PartialText partialText,ValueNotifier<List<types.Message>> messages,types.User person) async {
     final prefs = await SharedPreferences.getInstance();
     int chatCount = _getChatCount(prefs);
+    final msg = partialText.text;
     // もし、最後のチャットから24時間経過していたらchatCountを0にして送信を許可
     if (_is24HoursFromLast(prefs)) {
       chatCount = 0;
     }
     if (_allowChat(chatCount)) {
-      final msg = partialText.text;
       _addMessage(msg,messages,chatUiCurrrentUser);
       final innerContext = ShowToast.showIndicator(context);
-      await ChatGPTApi.fetchApi(messages.value,person).then((answerText) {
-        _addMessage(answerText, messages, person);
-        Navigator.pop(innerContext);
-      });
+      if (person.id != wolframId) {
+        await ChatGPTApi.fetchApi(messages.value,person).then((answerText) {
+          _addMessage(answerText, messages, person);
+          Navigator.pop(innerContext);
+        });
+      } else {
+        // wolframの場合
+        await WolframApi.fetchApi(msg).then((answerText) {
+          _addMessage(answerText, messages, person);
+          Navigator.pop(innerContext);
+        });
+      }
       await _setValues(prefs,messages.value, person.id,chatCount);
     } else {
       toSubscribePage(context);

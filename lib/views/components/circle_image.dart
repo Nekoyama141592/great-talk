@@ -20,7 +20,7 @@ class CircleImage extends StatelessWidget {
       height: length,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        image: person.id == chatGPTId ? DecorationImage(image: image,fit: BoxFit.fill) : DecorationImage(image: image),
+        image: person.id == chatGPTId || person.id == wolframId ? DecorationImage(image: image,fit: BoxFit.fill) : DecorationImage(image: image),
       ),
     );
   }

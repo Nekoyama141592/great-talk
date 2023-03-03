@@ -1,10 +1,12 @@
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 const String chatGPTId = "chatGPT";
+const String wolframId = "wolfram";
 // 現在のユーザーを定義.
 const chatUiCurrrentUser = types.User(id: 'current_user');
 
 const fullPersons = [
-  types.User(id: chatGPTId, lastName: '普通のAIチャット', imageUrl: 'https://pbs.twimg.com/media/FqNXz8saAAEdaXz?format=jpg&name=medium' ),
+  types.User(id: chatGPTId, lastName: '普通のAIチャット', imageUrl: 'https://pbs.twimg.com/media/FqNXz8saAAEdaXz?format=jpg&name=medium'),
+  types.User(id: wolframId, lastName: '普通の計算AIチャット', imageUrl: 'https://cdn.pixabay.com/photo/2016/10/29/14/49/cube-1780775__480.jpg'),
   types.User(id: 'Isaac Newton', lastName: 'アイザック・ニュートン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/GodfreyKneller-IsaacNewton-1689.jpg/225px-GodfreyKneller-IsaacNewton-1689.jpg' ),
   types.User(id: 'Charles Darwin', lastName: 'チャールズ・ダーウィン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Hw-darwin.jpg/225px-Hw-darwin.jpg' ),
   types.User(id: 'Shibasaburo Kitasato', lastName: '北里柴三郎', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Kitasato_Shibasaburo.jpg/250px-Kitasato_Shibasaburo.jpg' ),
