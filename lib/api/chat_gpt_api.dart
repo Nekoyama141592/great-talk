@@ -11,9 +11,13 @@ class ChatGPTApi {
   static Future<String> fetchApi(List<types.Message> messages,types.User person) async {
     final chatGpt = ChatGpt(apiKey: dotenv.get("OPEN_AI_API_KEY")); 
     final result = _createMessages(messages, person);
-    final request = CompletionRequest(model: "gpt-3.5-turbo",messages: result,maxTokens: 1000,);
-    final Map<String,dynamic> res = await chatGpt.createCompletion(request);
-    return res["choices"][0]["message"]["content"].toString().trim();
+    final request = CompletionRequest(model: "gpt-3.5-turbo",messages: result,maxTokens: 4096,);
+    try {
+      final Map<String,dynamic> res = await chatGpt.createCompletion(request);
+      return res["choices"][0]["message"]["content"].toString().trim();
+    } catch(e) {
+      return "返答が取得できませんでした";
+    }
   }
 
   static List<Map<String, dynamic>> _createMessages(List<types.Message> messages,types.User person) {
