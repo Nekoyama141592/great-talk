@@ -48,3 +48,5 @@ String getPlanName(ProductDetails productDetails) {
   msg += "プラン";
   return msg;
 }
+
+const String clearChatMsg = "チャット履歴を全て削除しました";

@@ -57,6 +57,11 @@ class ChatApi {
     final jsonString = jsonEncode(messages).toString();
     await prefs.setString(personId, jsonString);
   }
+  static Future<void> cleanLocalMessage(String personId) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(personId, "");
+    await ShowToast.showFlutterToast(clearChatMsg);
+  }
 
   static Future<void> _setLocalDate(SharedPreferences prefs) async {
     final dateInt = DateConverter.dateTimeToInt(DateTime.now());
