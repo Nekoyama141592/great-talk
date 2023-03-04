@@ -39,13 +39,15 @@ class ChatApi {
       _addMessage(msg,messages,chatUiCurrrentUser);
       final innerContext = ShowToast.showIndicator(context);
       if (person.id != wolframId) {
-        await ChatGPTApi.fetchApi(messages.value,person).then((answerText) {
+        final reqBody = ChatGPTApi.createChatGPTReqBody(messages.value, person);
+        await ChatGPTApi.fetchApi(reqBody).then((answerText) {
           _addMessage(answerText, messages, person);
           Navigator.pop(innerContext);
         });
       } else {
         // wolframの場合
-        await WolframApi.fetchApi(msg).then((answerText) {
+        final query = await ChatGPTApi.createWolframQuery(msg);
+        await WolframApi.fetchApi(query).then((answerText) {
           _addMessage(answerText, messages, person);
           Navigator.pop(innerContext);
         });
@@ -68,7 +70,7 @@ class ChatApi {
   }
   static Future<void> cleanLocalMessage(String personId) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(personId, "");
+    await prefs.remove(personId);
     await ShowToast.showFlutterToast(clearChatMsg);
   }
 
@@ -119,4 +121,5 @@ class ChatApi {
     messages.value = List.from(messages.value)..insert(0, textMessage);
   }
 }
+
 

@@ -8,10 +8,9 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ChatGPTApi {
   
-  static Future<String> fetchApi(List<types.Message> messages,types.User person) async {
+  static Future<String> fetchApi(List<Map<String, dynamic>> reqBody) async {
     final chatGpt = ChatGpt(apiKey: dotenv.get("OPEN_AI_API_KEY")); 
-    final result = _createMessages(messages, person);
-    final request = CompletionRequest(model: "gpt-3.5-turbo",messages: result,maxTokens: 4096,);
+    final request = CompletionRequest(model: "gpt-3.5-turbo",messages: reqBody,maxTokens: 4000);
     try {
       final Map<String,dynamic> res = await chatGpt.createCompletion(request);
       return res["choices"][0]["message"]["content"].toString().trim();
@@ -20,7 +19,7 @@ class ChatGPTApi {
     }
   }
 
-  static List<Map<String, dynamic>> _createMessages(List<types.Message> messages,types.User person) {
+  static List<Map<String, dynamic>> createChatGPTReqBody(List<types.Message> messages,types.User person) {
     final List<Map<String,dynamic>> result = messages.map((e) => _toValidMessage(e)).toList().reversed.toList();
     if (person.id != chatGPTId) result.insert(0, _systemMsg(person));
     return result;
@@ -35,7 +34,16 @@ class ChatGPTApi {
   static Map<String,dynamic> _toValidMessage(types.Message msg) => {
     "role": msg.author.id == chatUiCurrrentUser.id ? "user" : "assistant",
     "content": msg.toJson()["text"],
-  }; 
+  };
+
+  static Future<String> createWolframQuery(String msg) async {
+    final reqBody = [
+      {"role": "system","content": "以下の文をWolframの指示文にして。余分な文字はいらない"},
+      {"role": "user","content": msg,}
+    ];
+    final String query = await fetchApi(reqBody);
+    return query;
+  }
 }
 const openAiBaseUrl = 'https://api.openai.com/v1/chat';
 
