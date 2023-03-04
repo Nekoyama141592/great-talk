@@ -13,7 +13,7 @@ class WolframApi {
       return result;
     } catch (e) {
       debugPrint(e.toString());
-      return 'Error occurred while getting result';
+      return '計算結果が取得できませんでした';
     }
   }
 
