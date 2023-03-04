@@ -49,7 +49,7 @@ flutter:
 flutter_icons:
   android: true
   ios: true
-  image_path: 'assets/images/logo.jpeg'
+  image_path: 'assets/images/logo2.png'
 # Flavorの設定
 flavorizr:
   app:
