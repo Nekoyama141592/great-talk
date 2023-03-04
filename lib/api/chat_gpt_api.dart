@@ -10,7 +10,7 @@ class ChatGPTApi {
   
   static Future<String> fetchApi(List<Map<String, dynamic>> reqBody) async {
     final chatGpt = ChatGpt(apiKey: dotenv.get("OPEN_AI_API_KEY")); 
-    final request = CompletionRequest(model: "gpt-3.5-turbo",messages: reqBody,maxTokens: 4000);
+    final request = CompletionRequest(model: "gpt-3.5-turbo",messages: reqBody,maxTokens: 255);
     try {
       final Map<String,dynamic> res = await chatGpt.createCompletion(request);
       return res["choices"][0]["message"]["content"].toString().trim();
