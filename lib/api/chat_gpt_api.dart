@@ -15,7 +15,7 @@ class ChatGPTApi {
       final Map<String,dynamic> res = await chatGpt.createCompletion(request);
       return res["choices"][0]["message"]["content"].toString().trim();
     } catch(e) {
-      return "返答が取得できませんでした";
+      return "返答が取得できませんでした。\n\n文字数オーバーの可能性があります。\n\n人物一覧ページに戻り、履歴を消去したいユーザーの名前を長押ししてください。";
     }
   }
 
