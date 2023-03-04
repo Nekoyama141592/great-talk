@@ -9,7 +9,7 @@ class WolframApi {
     final dio = Dio();
     try {
       final response = await dio.get(wolframApiUrl);
-      final result = "${response.data.toString()} by Wolfram";
+      final result = response.data.toString();
       return result;
     } catch (e) {
       debugPrint(e.toString());
