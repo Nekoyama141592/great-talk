@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/api/in_app_purchase_api.dart';
+import 'package:great_talk/api/show_toast.dart';
 import 'package:great_talk/api/url_api.dart';
 import 'package:great_talk/common/bools.dart';
 import 'package:great_talk/common/strings.dart';
@@ -43,7 +44,13 @@ class PolicyButtons extends StatelessWidget {
           ),
           const Divider(),
           SecondaryColorButton(
-            onPressed: () async => await InAppPurchaseApi.onPurchaseButtonPressed(inAppPurchase, productDetails).then((value) => Navigator.pop(innerContext)),
+            onPressed: () async{
+              try {
+                await InAppPurchaseApi.onPurchaseButtonPressed(inAppPurchase, productDetails).then((value) => Navigator.pop(innerContext));
+              } catch(e) {
+                await ShowToast.showFlutterToast("購入前にエラーが発生しました").then((value) => Navigator.pop(context));
+              }
+            },
             child: Container(
               padding: const EdgeInsets.all(8.0),
               margin: const EdgeInsets.all(8.0),
