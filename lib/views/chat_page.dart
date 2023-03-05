@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 // api
 import 'package:great_talk/api/chat_api.dart';
+import 'package:great_talk/common/colors.dart';
 // common
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/others.dart';
@@ -34,6 +35,7 @@ class ChatPage extends HookWidget {
         shape: appBarShape(context),
       ),
       body: Chat(
+        theme: const DefaultChatTheme(primaryColor: kPrimaryColor),
         avatarBuilder: (text) => UserAvatar(author: person),
         showUserAvatars: true,
         messages: messages.value, 
