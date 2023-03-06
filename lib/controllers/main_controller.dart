@@ -13,7 +13,7 @@ class MainController extends GetxController {
     prefs = await SharedPreferences.getInstance();
     final bool isAgreedToTerms = prefs.getBool(isAgreedToTermsPrefsKey) ?? false;
     const style = TextStyle(fontSize: 20,color: Colors.black);
-    if(isAgreedToTerms == true) {
+    if(isAgreedToTerms == false) {
       Get.dialog(AlertDialog(
         content: SizedBox(
           height: Get.height * 0.75,
