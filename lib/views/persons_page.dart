@@ -62,9 +62,7 @@ class PersonsPage extends HookWidget {
           isSearching.value ?
           SearchScreen(
             results: results,
-            onQueryChanged: (query) {
-              results.value = SearchApi.search(results, query);
-            } ,
+            onQueryChanged: (query) => results.value = SearchApi.search(query),
             child: Container(
               margin: EdgeInsets.symmetric(vertical: defaultPadding(context)*7),
               child: PersonCards(persons: results.value,),
