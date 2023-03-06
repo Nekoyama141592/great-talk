@@ -52,9 +52,9 @@ String getPlanName(ProductDetails productDetails) {
 const String appName = "偉人talk";
 // msg
 const String clearChatMsg = "チャット履歴を全て削除しました";
+const String calculateFailedMsg = '計算結果が取得できませんでした';
 const String wrongInfoMsg = """
 注意
-このアプリはベータ版です。
 AIからの返事は誤った内容が含まれることがあります。
 あくまでエンターテイメントとしてご利用ください。
 ご理解のほどよろしくお願いいたします。

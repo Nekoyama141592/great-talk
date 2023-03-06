@@ -35,20 +35,30 @@ class ChatApi {
     if (_is24HoursFromLast(prefs)) {
       chatCount = 0;
     }
+    // もう少しコードをきれいに整理する.
     if (_allowChat(chatCount)) {
       _addMessage(msg,messages,chatUiCurrrentUser);
       final innerContext = ShowToast.showIndicator(context);
       if (person.id != wolframId) {
         final reqBody = ChatGPTApi.createGreatPeopleReqBody(messages.value, person);
         await ChatGPTApi.fetchApi(reqBody).then((answerText) {
-          _addMessage(answerText, messages, person);
-          Navigator.pop(innerContext);
+          _addMessageAndPop(answerText, messages, person,innerContext);
         });
       } else {
         // wolframの場合
-        await WolframApi.fetchApi(msg).then((answerText) {
-          _addMessage(answerText, messages, person);
-          Navigator.pop(innerContext);
+        await WolframApi.fetchApi(msg).then((en) async {
+          if (en == calculateFailedMsg) {
+            final reqBody = ChatGPTApi.createBasicQuery(msg);
+            await ChatGPTApi.fetchApi(reqBody).then((value) {
+              final answerText = "計算AIから結果が得られなかったので普通のAIが対応します。\n\n$value";
+              _addMessageAndPop(answerText, messages, person,innerContext);
+            });
+          } else {
+            final reqBody = WolframApi.createChatGPTJaReqBody(en);
+            await ChatGPTApi.fetchApi(reqBody).then((answerText) {
+              _addMessageAndPop(answerText, messages, person,innerContext);
+            });
+          }
         });
       }
       await _setValues(prefs,messages.value, person.id,chatCount);
@@ -57,6 +67,10 @@ class ChatApi {
     }
   }
 
+  static void _addMessageAndPop(String str,ValueNotifier<List<types.Message>> messages,types.User author,BuildContext innerContext) {
+    _addMessage(str, messages, author);
+    Navigator.pop(innerContext);
+  }
   static Future<void> _setValues(SharedPreferences prefs,List<types.Message> messages,String personId,int chatCount) async {
     await _setLocalMessage(prefs,messages,personId);
     await _setLocalDate(prefs);

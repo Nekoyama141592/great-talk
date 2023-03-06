@@ -44,6 +44,8 @@ class ChatGPTApi {
     final String query = await fetchApi(reqBody);
     return query;
   }
+
+  static List<Map<String,dynamic>> createBasicQuery(String msg) => [{"role": "user","content": msg,}];
 }
 const openAiBaseUrl = 'https://api.openai.com/v1/chat';
 

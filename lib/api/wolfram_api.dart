@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:great_talk/api/chat_gpt_api.dart';
+import 'package:great_talk/common/strings.dart';
 class WolframApi {
   static Future<String> fetchApi(String msg) async {
     final query = await ChatGPTApi.createWolframQuery(msg);
@@ -12,16 +13,13 @@ class WolframApi {
     try {
       final response = await dio.get(wolframApiUrl);
       final en = response.data.toString();
-      final reqBody = [
-        {"role": "system","content": "わかりやすい日本語にして",},
-        {"role": "user","content": en,}
-      ];
-      final result = await ChatGPTApi.fetchApi(reqBody);
-      return result;
+      return en;
     } catch (e) {
-      debugPrint(e.toString());
-      return '計算結果が取得できませんでした';
+      return calculateFailedMsg;
     }
   }
-
+  static List<Map<String,dynamic> > createChatGPTJaReqBody(String en) => [
+    {"role": "system","content": "わかりやすい日本語にして",},
+    {"role": "user","content": en,}
+  ];
 }
