@@ -36,7 +36,7 @@ class PolicyButtons extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async => await UrlApi.toTosPage(),
-            child: whiteText('利用規約')
+            child: whiteText(tosText)
           ),
           if(isIOS()) TextButton(
             onPressed: () async => await UrlApi.toEULAPage(),

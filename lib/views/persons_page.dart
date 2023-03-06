@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
+import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/flavors.dart';
 import 'package:great_talk/views/components/person_cards.dart';
 import 'package:great_talk/views/components/search_screen.dart';
@@ -24,6 +25,7 @@ class PersonsPage extends HookWidget {
   Widget build(context) {
     // このページでPurchasesContollerを使用する場合は、以下の式をpurchasesに代入する.
     final PurchasesController purchasesController =  Get.put(PurchasesController());
+    Get.put(MainController());
     final results = useState(fullPersons);
     final isSearching = useState(false);
     final pageIndex = useState(0);

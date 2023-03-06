@@ -14,7 +14,7 @@ String getName(types.User person) => person.lastName ?? 'UNKNOWN';
 // prefs_key
 const lastChatDatePrefsKey = "lastChatDate";
 const chatCountPrefsKey = "chatCount";
-
+const isAgreedToTermsPrefsKey = "isAgreedToTerms";
 String getPlanDescription(ProductDetails productDetails) {
   String msg = "";
   switch(productDetails.id) {
@@ -49,5 +49,16 @@ String getPlanName(ProductDetails productDetails) {
   return msg;
 }
 
-const String clearChatMsg = "チャット履歴を全て削除しました";
 const String appName = "偉人talk";
+// msg
+const String clearChatMsg = "チャット履歴を全て削除しました";
+const String wrongInfoMsg = """
+注意
+このアプリはベータ版です。
+AIからの返事は誤った内容が含まれることがあります。
+あくまでエンターテイメントとしてご利用ください。
+ご理解のほどよろしくお願いいたします。
+""";
+// text
+const String tosText = "利用規約";
+const String agreeText = "同意する";
