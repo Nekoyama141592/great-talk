@@ -16,7 +16,7 @@ import 'package:great_talk/common/strings.dart';
 // api
 import 'package:great_talk/api/date_converter.dart';
 class ChatApi {
-  static const chatLimitPerDay = 20;
+  static const chatLimitPerDay = 10;
 
   // 与えられたpersonとのチャット履歴を取得
   static Future<List<types.Message>> getChatLog(types.User person) async {
