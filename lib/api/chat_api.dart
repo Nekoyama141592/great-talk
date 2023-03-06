@@ -39,15 +39,14 @@ class ChatApi {
       _addMessage(msg,messages,chatUiCurrrentUser);
       final innerContext = ShowToast.showIndicator(context);
       if (person.id != wolframId) {
-        final reqBody = ChatGPTApi.createChatGPTReqBody(messages.value, person);
+        final reqBody = ChatGPTApi.createGreatPeopleReqBody(messages.value, person);
         await ChatGPTApi.fetchApi(reqBody).then((answerText) {
           _addMessage(answerText, messages, person);
           Navigator.pop(innerContext);
         });
       } else {
         // wolframの場合
-        final query = await ChatGPTApi.createWolframQuery(msg);
-        await WolframApi.fetchApi(query).then((answerText) {
+        await WolframApi.fetchApi(msg).then((answerText) {
           _addMessage(answerText, messages, person);
           Navigator.pop(innerContext);
         });

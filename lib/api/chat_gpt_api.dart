@@ -19,7 +19,7 @@ class ChatGPTApi {
     }
   }
 
-  static List<Map<String, dynamic>> createChatGPTReqBody(List<types.Message> messages,types.User person) {
+  static List<Map<String, dynamic>> createGreatPeopleReqBody(List<types.Message> messages,types.User person) {
     final List<Map<String,dynamic>> result = messages.map((e) => _toValidMessage(e)).toList().reversed.toList();
     if (person.id != chatGPTId) result.insert(0, _systemMsg(person));
     return result;
