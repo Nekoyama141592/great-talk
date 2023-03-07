@@ -6,10 +6,11 @@ import 'package:great_talk/api/search_controller.dart';
 import 'package:great_talk/common/doubles.dart';
 // common
 import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/routes.dart';
 import 'package:great_talk/common/widgets.dart';
 // packages
+import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:great_talk/views/chat_page.dart';
 // components
 import 'package:great_talk/views/components/circle_image.dart';
 
@@ -28,7 +29,7 @@ class PersonCards extends StatelessWidget {
           child: ListTile(
             leading: CircleImage(person: person),
             title: boldText(name),
-            onTap: () => toChatPage(context: context,person: person),
+            onTap: () => Get.to(ChatPage(person: person)),
             onLongPress: () => ChatApi.showCleanLocalMsgDialog(person.id),
           ),
         );

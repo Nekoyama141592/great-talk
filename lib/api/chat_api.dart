@@ -10,10 +10,10 @@ import 'package:great_talk/api/chat_gpt_api.dart';
 import 'package:great_talk/api/show_toast.dart';
 import 'package:great_talk/api/wolfram_api.dart';
 import 'package:great_talk/common/persons.dart';
-import 'package:great_talk/common/routes.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
+import 'package:great_talk/views/subscribe/subscribe_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:get/get.dart';
+import 'package:in_app_review/in_app_review.dart';
 // common
 import 'package:great_talk/common/strings.dart';
 // api
@@ -66,10 +66,18 @@ class ChatApi {
       }
       await _setValues(prefs,messages.value, person.id,chatCount);
     } else {
-      toSubscribePage(context);
+      // チャットが許されていない場合
+      await _requestReview();
+      Get.to(const SubscribePage());
     }
   }
-
+  static Future<void> _requestReview() async {
+    final InAppReview inAppReview = InAppReview.instance;
+    final isAvailable = await inAppReview.isAvailable();
+    if (isAvailable) {
+      await inAppReview.requestReview();
+    }
+  }
   static void _addMessageAndPop(String str,ValueNotifier<List<types.Message>> messages,types.User author) {
     _addMessage(str, messages, author);
     Get.back();
