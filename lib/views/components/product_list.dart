@@ -32,9 +32,7 @@ class ProductList extends StatelessWidget {
             trailing: PurchasesController.to.hasProductBeenPurchased(productDetails)
             ? IconButton(onPressed: () => InAppPurchaseApi.confirmPriceChange(context,inAppPurchase),icon: const Icon(Icons.upgrade))
             : SecondaryColorButton(
-              onPressed: !isIOS() 
-              ? () async => await InAppPurchaseApi.onPurchaseButtonPressed(inAppPurchase, productDetails)
-              : () {
+              onPressed: () {
                 showDialog(
                   context: context, 
                   barrierColor: Colors.black,

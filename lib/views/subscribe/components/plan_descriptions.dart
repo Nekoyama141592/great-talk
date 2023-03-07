@@ -29,8 +29,8 @@ class PlanDescriptions extends StatelessWidget {
         ),
         const Divider(),
         ListTile(
-          leading: const Icon(Icons.sentiment_very_dissatisfied),
-          title: boldText("（実は開発者が1チャットあたり2円ほど負担してます...）")
+          leading: const Icon(Icons.check),
+          title: boldText("購入したその日に課金されます")
         ),
       ];
     return Obx((() => PurchasesController.to.loading.value ? const Card(child: ListTile(title: Text('情報を取得しています'))) : Card(child: Column(children: children))));
