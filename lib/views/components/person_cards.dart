@@ -27,7 +27,7 @@ class PersonCards extends StatelessWidget {
             leading: CircleImage(person: person),
             title: boldText(name),
             onTap: () => toChatPage(context: context,person: person),
-            onLongPress: () async => await ChatApi.cleanLocalMessage(person.id),
+            onLongPress: () => ChatApi.showCleanLocalMsgDialog(person.id),
           ),
         );
       })

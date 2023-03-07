@@ -1,8 +1,10 @@
 // dart
 import 'dart:convert';
 // flutter
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // packages
+import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/api/chat_gpt_api.dart';
 import 'package:great_talk/api/show_toast.dart';
@@ -81,7 +83,23 @@ class ChatApi {
     final jsonString = jsonEncode(messages).toString();
     await prefs.setString(personId, jsonString);
   }
-  static Future<void> cleanLocalMessage(String personId) async {
+
+  static void showCleanLocalMsgDialog(String personId) {
+    Get.dialog(CupertinoAlertDialog(
+      content: const Text("履歴を全て削除しますがよろしいですか？"),
+      actions: [
+        CupertinoDialogAction(onPressed: Get.back,child: const Text('キャンセル')),
+        CupertinoDialogAction(
+          isDestructiveAction: true,
+          onPressed: () async {
+            await _cleanLocalMessage(personId);
+            Get.back();
+          },
+          child: const Text("OK"))
+      ],
+    ));
+  }
+  static Future<void> _cleanLocalMessage(String personId) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(personId);
     await ShowToast.showFlutterToast(clearChatMsg);
