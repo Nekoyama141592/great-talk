@@ -16,6 +16,7 @@ const fullPersons = [
   types.User(id: 'Carl Friedrich Gauss', lastName: 'カール・フリードリヒ・ガウス', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Carl_Friedrich_Gauss.jpg/225px-Carl_Friedrich_Gauss.jpg' ),
   types.User(id: 'Nikola Tesla', lastName: 'ニコラ・テスラ', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Tesla_Sarony.jpg/225px-Tesla_Sarony.jpg' ),
   types.User(id: 'Michael Faraday', lastName: 'マイケル・ファラデー', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Michael_Faraday_001.jpg/200px-Michael_Faraday_001.jpg' ),
+  types.User(id: 'Srinivasa Ramanujan', lastName: 'シュリニヴァーサ・ラマヌジャン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Srinivasa_Ramanujan_-_OPC_-_1.jpg/450px-Srinivasa_Ramanujan_-_OPC_-_1.jpg' ),
   types.User(id: "Yosano Akiko",lastName: "与謝野晶子",imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/72/Akiko_Yosano_younger.jpg"),
   types.User(id: 'Jean-Henri Fabre.', lastName: 'ジャン・アンリ・ファーブル', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Jean-henri_fabre.jpg/225px-Jean-henri_fabre.jpg' ),
   types.User(id: 'Louis Pasteur', lastName: 'ルイ・パスツール', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Louis_Pasteur.jpg/225px-Louis_Pasteur.jpg' ),
