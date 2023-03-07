@@ -19,7 +19,7 @@ import 'package:great_talk/common/strings.dart';
 // api
 import 'package:great_talk/api/date_converter.dart';
 class ChatApi {
-  static const chatLimitPerDay = 5;
+  static const chatLimitPerDay = 20;
 
   // 与えられたpersonとのチャット履歴を取得
   static Future<List<types.Message>> getChatLog(types.User person) async {
@@ -80,7 +80,9 @@ class ChatApi {
   }
   static void _addMessageAndPop(String str,ValueNotifier<List<types.Message>> messages,types.User author) {
     _addMessage(str, messages, author);
-    Get.back();
+    if(Get.isDialogOpen ?? true) {
+      Get.back();
+    }
   }
   static Future<void> _setValues(SharedPreferences prefs,List<types.Message> messages,String personId,int chatCount) async {
     await _setLocalMessage(prefs,messages,personId);
