@@ -13,6 +13,7 @@ import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/routes.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 // common
 import 'package:great_talk/common/strings.dart';
 // api
@@ -40,11 +41,11 @@ class ChatApi {
     // もう少しコードをきれいに整理する.
     if (_allowChat(chatCount)) {
       _addMessage(msg,messages,chatUiCurrrentUser);
-      final innerContext = ShowToast.showIndicator(context);
+      Get.dialog(const Center(child: CircularProgressIndicator(),));
       if (person.id != wolframId) {
         final reqBody = ChatGPTApi.createGreatPeopleReqBody(messages.value, person);
         await ChatGPTApi.fetchApi(reqBody).then((answerText) {
-          _addMessageAndPop(answerText, messages, person,innerContext);
+          _addMessageAndPop(answerText, messages, person);
         });
       } else {
         // wolframの場合
@@ -53,12 +54,12 @@ class ChatApi {
             final reqBody = ChatGPTApi.createBasicQuery(msg);
             await ChatGPTApi.fetchApi(reqBody).then((value) {
               final answerText = "計算AIから結果が得られなかったので普通のAIが対応します。\n\n$value";
-              _addMessageAndPop(answerText, messages, person,innerContext);
+              _addMessageAndPop(answerText, messages, person);
             });
           } else {
             final reqBody = WolframApi.createChatGPTJaReqBody(en);
             await ChatGPTApi.fetchApi(reqBody).then((answerText) {
-              _addMessageAndPop(answerText, messages, person,innerContext);
+              _addMessageAndPop(answerText, messages, person);
             });
           }
         });
@@ -69,9 +70,9 @@ class ChatApi {
     }
   }
 
-  static void _addMessageAndPop(String str,ValueNotifier<List<types.Message>> messages,types.User author,BuildContext innerContext) {
+  static void _addMessageAndPop(String str,ValueNotifier<List<types.Message>> messages,types.User author) {
     _addMessage(str, messages, author);
-    Navigator.pop(innerContext);
+    Get.back();
   }
   static Future<void> _setValues(SharedPreferences prefs,List<types.Message> messages,String personId,int chatCount) async {
     await _setLocalMessage(prefs,messages,personId);
