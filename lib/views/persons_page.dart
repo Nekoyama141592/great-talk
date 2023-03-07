@@ -1,6 +1,6 @@
 // flutter
 import 'package:flutter/material.dart';
-import 'package:great_talk/api/search_api.dart';
+import 'package:great_talk/api/search_controller.dart';
 import 'package:great_talk/common/bottom_navigation_bar_elements.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
@@ -23,10 +23,9 @@ class PersonsPage extends HookWidget {
   const PersonsPage({Key? key}) : super(key: key);
   @override
   Widget build(context) {
-    // このページでPurchasesContollerを使用する場合は、以下の式をpurchasesに代入する.
-    final PurchasesController purchasesController =  Get.put(PurchasesController());
+    final PurchasesController purchasesController = Get.put(PurchasesController());
     Get.put(MainController());
-    final results = useState(fullPersons);
+    final SearchController searchController = Get.put(SearchController());
     final isSearching = useState(false);
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
@@ -40,7 +39,7 @@ class PersonsPage extends HookWidget {
       ? FloatingActionButton(
         onPressed: () {
           isSearching.value = !isSearching.value;
-          results.value = fullPersons;
+          searchController.reset();
         },
         backgroundColor: kPrimaryColor,
         child: isSearching.value ? const Icon(Icons.search_off) : const Icon(Icons.search),
@@ -61,13 +60,12 @@ class PersonsPage extends HookWidget {
         children: [
           isSearching.value ?
           SearchScreen(
-            results: results,
-            onQueryChanged: (query) => results.value = SearchApi.search(query),
+            onQueryChanged: (query) => searchController.search(query),
             child: Container(
               margin: EdgeInsets.symmetric(vertical: defaultPadding(context)*7),
-              child: PersonCards(persons: results.value,),
+              child: const PersonCards(),
             ),
-          ) : const PersonCards(persons: fullPersons),
+          ) : const PersonCards(),
           SubscribeView()
         ],
       )

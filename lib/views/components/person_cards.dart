@@ -1,6 +1,8 @@
 // flutter
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:great_talk/api/chat_api.dart';
+import 'package:great_talk/api/search_controller.dart';
 import 'package:great_talk/common/doubles.dart';
 // common
 import 'package:great_talk/common/strings.dart';
@@ -12,14 +14,14 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/views/components/circle_image.dart';
 
 class PersonCards extends StatelessWidget {
-  const PersonCards({Key? key,required this.persons}) : super(key: key);
-  final List<types.User> persons;
+  const PersonCards({Key? key}) : super(key: key);
   @override
   Widget build(context) {
-    return ListView.builder(
-      itemCount: persons.length,
+    final SearchController searchController = SearchController.to;
+    return Obx(() => ListView.builder(
+      itemCount: searchController.results.length,
       itemBuilder: ((context, index) {
-        final person = persons[index];
+        final person = searchController.results[index];
         final String name = getName(person);
         return Padding(
           padding: EdgeInsets.symmetric(vertical: defaultPadding(context) ),
@@ -31,6 +33,6 @@ class PersonCards extends StatelessWidget {
           ),
         );
       })
-    );
+    ));
   }
 }

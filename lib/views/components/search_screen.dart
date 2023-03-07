@@ -7,11 +7,9 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 class SearchScreen extends StatelessWidget {
   const SearchScreen({
     Key? key,
-    required this.results,
     required this.onQueryChanged,
     required this.child
   }) : super(key: key);
-  final ValueNotifier<List<types.User>> results;
   final void Function(String)? onQueryChanged;
   final Widget child;
   @override 
