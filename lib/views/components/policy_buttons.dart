@@ -27,7 +27,7 @@ class PolicyButtons extends StatelessWidget {
           ),
           const PlanDescriptions(),
           const Divider(),
-          Card(child: ListTile(leading: const Icon(Icons.money),title: boldText(getPlanDescription(productDetails)),),),
+          Card(child: ListTile(leading: const Icon(Icons.money),title: boldText(getPlanDescription(productDetails.id,productDetails.price)),),),
           const Divider(),
           const Expanded(child: SizedBox()),
           TextButton(

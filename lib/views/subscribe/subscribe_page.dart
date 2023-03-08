@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/common/bools.dart';
 import 'package:great_talk/common/others.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/views/components/policy_buttons.dart';
+import 'package:great_talk/views/components/price_list.dart';
 
 import 'package:great_talk/views/components/product_list.dart';
 import 'package:great_talk/views/subscribe/components/plan_descriptions.dart';
@@ -26,28 +29,28 @@ class SubscribeView extends StatelessWidget {
   final PurchasesController purchasesController = PurchasesController.to;
   @override
   Widget build(BuildContext context) {
-    final children = [
-      ListView(
-        children: const <Widget>[
-          PlanDescriptions(),
-          ProductList(),
-          RestoreButton(),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const PlanDescriptions(),
+          const ProductList(),
+          const RestoreButton(),
+          if (Platform.isAndroid) const PriceList(),
+          Obx((() {
+            if (purchasesController.purchasePending.value) {
+              return Stack(
+                children: const <Widget>[
+                  Opacity(opacity: 0.3, child: ModalBarrier(dismissible: false, color: Colors.grey),),
+                  Center(child: CircularProgressIndicator(),),
+                ],
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          }))
         ],
       ),
-      Obx((() {
-        if (purchasesController.purchasePending.value) {
-          return Stack(
-            children: const <Widget>[
-              Opacity(opacity: 0.3, child: ModalBarrier(dismissible: false, color: Colors.grey),),
-              Center(child: CircularProgressIndicator(),),
-            ],
-          );
-        } else {
-          return const SizedBox.shrink();
-        }
-      }))
-    ];
-    return Stack(children: children);
+    );
   }
 
 

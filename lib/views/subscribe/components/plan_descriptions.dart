@@ -29,7 +29,7 @@ class PlanDescriptions extends StatelessWidget {
         ),
         const Divider(),
         ListTile(
-          leading: const Icon(Icons.check),
+          leading: const Icon(Icons.check,color: kSecondaryColor,),
           title: boldText("購入したその日に課金されます")
         ),
       ];

@@ -15,9 +15,9 @@ String getName(types.User person) => person.lastName ?? 'UNKNOWN';
 const lastChatDatePrefsKey = "lastChatDate";
 const chatCountPrefsKey = "chatCount";
 const isAgreedToTermsPrefsKey = "isAgreedToTerms";
-String getPlanDescription(ProductDetails productDetails) {
+String getPlanDescription(String productID,String price) {
   String msg = "";
-  switch(productDetails.id) {
+  switch(productID) {
     case(kAnnualSubscriptionId):
     msg = "1年";
     break;
@@ -28,7 +28,7 @@ String getPlanDescription(ProductDetails productDetails) {
     msg = "1週間";
     break;
   }
-  msg += "あたり${productDetails.price}です。";
+  msg += "あたり$priceです。";
   return msg;
 }
 
