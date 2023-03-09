@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/common/strings.dart';
@@ -7,10 +8,7 @@ import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:great_talk/views/components/policy_buttons.dart';
 import 'package:great_talk/views/components/secondary_color_button.dart';
-import 'package:great_talk/views/subscribe/components/plan_descriptions.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:great_talk/api/url_api.dart';
-import 'package:great_talk/common/bools.dart';
 
 class ProductList extends StatelessWidget {
   const ProductList({Key? key}) : super(key: key);
@@ -32,7 +30,10 @@ class ProductList extends StatelessWidget {
             trailing: PurchasesController.to.hasProductBeenPurchased(productDetails)
             ? IconButton(onPressed: () => InAppPurchaseApi.confirmPriceChange(context,inAppPurchase),icon: const Icon(Icons.upgrade))
             : SecondaryColorButton(
-              onPressed: () {
+              onPressed: 
+              Platform.isAndroid
+              ? () async => await InAppPurchaseApi.onPurchaseButtonPressed(inAppPurchase, productDetails)
+              : () {
                 showDialog(
                   context: context, 
                   barrierColor: Colors.black,
