@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:great_talk/api/chat_gpt_api.dart';
 import 'package:great_talk/common/strings.dart';
