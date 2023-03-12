@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/api/chat_gpt_api.dart';
+import 'package:great_talk/api/search_controller.dart';
 import 'package:great_talk/api/show_toast.dart';
 import 'package:great_talk/api/wolfram_api.dart';
 import 'package:great_talk/common/persons.dart';
@@ -64,7 +65,7 @@ class ChatApi {
           }
         });
       }
-      await _setValues(prefs,messages.value, person.id,chatCount);
+      await _setValues(prefs,messages.value, person,chatCount);
     } else {
       // チャットが許されていない場合
       await _requestReview();
@@ -84,36 +85,17 @@ class ChatApi {
       Get.back();
     }
   }
-  static Future<void> _setValues(SharedPreferences prefs,List<types.Message> messages,String personId,int chatCount) async {
+  static Future<void> _setValues(SharedPreferences prefs,List<types.Message> messages,types.User person,int chatCount) async {
+    final String personId = person.id;
     await _setLocalMessage(prefs,messages,personId);
     await _setLocalDate(prefs);
     await _setChatCount(prefs,chatCount);
+    await SearchController.to.setLatestPersons(prefs, person);
   }
 
   static Future<void> _setLocalMessage(SharedPreferences prefs,List<types.Message> messages,String personId) async {
     final jsonString = jsonEncode(messages).toString();
     await prefs.setString(personId, jsonString);
-  }
-
-  static void showCleanLocalMsgDialog(String personId) {
-    Get.dialog(CupertinoAlertDialog(
-      content: const Text("履歴を全て削除しますがよろしいですか？"),
-      actions: [
-        CupertinoDialogAction(onPressed: Get.back,child: const Text('キャンセル')),
-        CupertinoDialogAction(
-          isDestructiveAction: true,
-          onPressed: () async {
-            await _cleanLocalMessage(personId);
-            Get.back();
-          },
-          child: const Text("OK"))
-      ],
-    ));
-  }
-  static Future<void> _cleanLocalMessage(String personId) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(personId);
-    await ShowToast.showFlutterToast(clearChatMsg);
   }
 
   static Future<void> _setLocalDate(SharedPreferences prefs) async {
@@ -141,6 +123,27 @@ class ChatApi {
       messages = [];
     }
     return messages;
+  }
+
+  static void showCleanLocalMsgDialog(String personId) {
+    Get.dialog(CupertinoAlertDialog(
+      content: const Text("履歴を全て削除しますがよろしいですか？"),
+      actions: [
+        CupertinoDialogAction(onPressed: Get.back,child: const Text('キャンセル')),
+        CupertinoDialogAction(
+          isDestructiveAction: true,
+          onPressed: () async {
+            await _cleanLocalMessage(personId);
+            Get.back();
+          },
+          child: const Text("OK"))
+      ],
+    ));
+  }
+  static Future<void> _cleanLocalMessage(String personId) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(personId);
+    await ShowToast.showFlutterToast(clearChatMsg);
   }
 
   static bool _is24HoursFromLast(SharedPreferences prefs) {

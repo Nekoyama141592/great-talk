@@ -12,9 +12,11 @@ String randomString() {
 String getName(types.User person) => person.lastName ?? 'UNKNOWN';
 
 // prefs_key
+// personIdで各々のChat履歴
 const lastChatDatePrefsKey = "lastChatDate";
 const chatCountPrefsKey = "chatCount";
 const isAgreedToTermsPrefsKey = "isAgreedToTerms";
+const latestPersonsPrefsKey = "latestPersons";
 String getPlanDescription(String productID,String price) {
   String msg = "";
   switch(productID) {
