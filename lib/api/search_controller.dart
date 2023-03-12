@@ -1,9 +1,11 @@
 // dart
 import 'dart:convert';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:great_talk/api/date_converter.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/strings.dart';
+import 'package:great_talk/domain/chat_user_metadata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchController extends GetxController{
@@ -23,8 +25,13 @@ class SearchController extends GetxController{
     _getLatestPersons(prefs);
   }
 
-  Future<void> setLatestPersons(SharedPreferences prefs,types.User person) async {
-    final List<types.User> latestPersons = List.from(results)..remove(person)..insert(_startIndex, person);
+  Future<void> setLatestPersons(SharedPreferences prefs,types.User person,String lastAnswer) async {
+    // 新たにmetadataを設定する.
+    final int lastSeen = DateConverter.nowDateTime();
+    final Map<String,dynamic> metadata = ChatUserMetadata(lastAnswer: lastAnswer, lastSeen: lastSeen).toJson();
+    final newPerson = person.copyWith(metadata: metadata);
+    // チャットした人物を上に持ってくる.
+    final List<types.User> latestPersons = List.from(results)..remove(newPerson)..insert(_startIndex, newPerson);
     results(latestPersons);
     final jsonString = jsonEncode(latestPersons).toString();
     await prefs.setString(latestPersonsPrefsKey, jsonString);

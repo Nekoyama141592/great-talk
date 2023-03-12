@@ -41,11 +41,16 @@ class ChatApi {
     }
     // もう少しコードをきれいに整理する.
     if (_allowChat(chatCount)) {
+      // 現在のユーザーのチャット.
       _addMessage(msg,messages,chatUiCurrrentUser);
+      // ダイアログを表示.
       Get.dialog(const Center(child: CircularProgressIndicator(),));
+      // 返答を生成.
+      String answerText = "";
       if (person.id != wolframId) {
         final reqBody = ChatGPTApi.createGreatPeopleReqBody(messages.value, person);
-        await ChatGPTApi.fetchApi(reqBody).then((answerText) {
+        await ChatGPTApi.fetchApi(reqBody).then((value) {
+          answerText = value;
           _addMessageAndPop(answerText, messages, person);
         });
       } else {
@@ -54,18 +59,19 @@ class ChatApi {
           if (en == calculateFailedMsg) {
             final reqBody = ChatGPTApi.createBasicQuery(msg);
             await ChatGPTApi.fetchApi(reqBody).then((value) {
-              final answerText = "計算AIから結果が得られなかったので普通のAIが対応します。\n\n$value";
+              answerText = "計算AIから結果が得られなかったので普通のAIが対応します。\n\n$value";
               _addMessageAndPop(answerText, messages, person);
             });
           } else {
             final reqBody = WolframApi.createChatGPTJaReqBody(en);
-            await ChatGPTApi.fetchApi(reqBody).then((answerText) {
+            await ChatGPTApi.fetchApi(reqBody).then((value) {
+              answerText = value;
               _addMessageAndPop(answerText, messages, person);
             });
           }
         });
       }
-      await _setValues(prefs,messages.value, person,chatCount);
+      await _setValues(prefs,messages.value, person,chatCount,answerText);
     } else {
       // チャットが許されていない場合
       await _requestReview();
@@ -85,12 +91,12 @@ class ChatApi {
       Get.back();
     }
   }
-  static Future<void> _setValues(SharedPreferences prefs,List<types.Message> messages,types.User person,int chatCount) async {
+  static Future<void> _setValues(SharedPreferences prefs,List<types.Message> messages,types.User person,int chatCount,String lastAnswer) async {
     final String personId = person.id;
     await _setLocalMessage(prefs,messages,personId);
     await _setLocalDate(prefs);
     await _setChatCount(prefs,chatCount);
-    await SearchController.to.setLatestPersons(prefs, person);
+    await SearchController.to.setLatestPersons(prefs, person,lastAnswer);
   }
 
   static Future<void> _setLocalMessage(SharedPreferences prefs,List<types.Message> messages,String personId) async {

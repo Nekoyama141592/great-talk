@@ -1,4 +1,5 @@
 // packages
+import 'package:great_talk/domain/chat_user_metadata.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:uuid/uuid.dart';
@@ -50,7 +51,7 @@ String getPlanName(ProductDetails productDetails) {
   msg += "プラン";
   return msg;
 }
-
+String mapMetadataToLastAnswer(Map<String,dynamic> mapMetadata) => ChatUserMetadata.fromJson(mapMetadata).lastAnswer;
 const String appName = "偉人talk";
 // msg
 const String clearChatMsg = "チャット履歴を全て削除しました";
