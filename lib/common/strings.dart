@@ -17,7 +17,7 @@ String getName(types.User person) => person.lastName ?? 'UNKNOWN';
 const lastChatDatePrefsKey = "lastChatDate";
 const chatCountPrefsKey = "chatCount";
 const isAgreedToTermsPrefsKey = "isAgreedToTerms";
-const latestPersonsPrefsKey = "latestPersons";
+const localPersonsPrefsKey = "localPersons";
 String getPlanDescription(String productID,String price) {
   String msg = "";
   switch(productID) {

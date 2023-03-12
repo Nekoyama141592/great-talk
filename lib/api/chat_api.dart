@@ -131,7 +131,7 @@ class ChatApi {
     return messages;
   }
 
-  static void showCleanLocalMsgDialog(String personId) {
+  static void showCleanLocalMsgDialog(types.User person) {
     Get.dialog(CupertinoAlertDialog(
       content: const Text("履歴を全て削除しますがよろしいですか？"),
       actions: [
@@ -139,16 +139,17 @@ class ChatApi {
         CupertinoDialogAction(
           isDestructiveAction: true,
           onPressed: () async {
-            await _cleanLocalMessage(personId);
+            await _cleanLocalMessage(person);
             Get.back();
           },
           child: const Text("OK"))
       ],
     ));
   }
-  static Future<void> _cleanLocalMessage(String personId) async {
+  static Future<void> _cleanLocalMessage(types.User person) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(personId);
+    await SearchController.to.cleanMetadata(person);
+    await prefs.remove(person.id);
     await ShowToast.showFlutterToast(clearChatMsg);
   }
 

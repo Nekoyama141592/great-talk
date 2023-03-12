@@ -31,20 +31,29 @@ class SearchController extends GetxController{
     final Map<String,dynamic> metadata = ChatUserMetadata(lastAnswer: lastAnswer, lastSeen: lastSeen).toJson();
     final newPerson = person.copyWith(metadata: metadata);
     // チャットした人物を上に持ってくる.
-    final List<types.User> latestPersons = List.from(results)..remove(newPerson)..insert(_startIndex, newPerson);
+    final List<types.User> latestPersons = List.from(results);
+    latestPersons.remove(person);
+    latestPersons.insert(_startIndex, newPerson);
     results(latestPersons);
     final jsonString = jsonEncode(latestPersons).toString();
-    await prefs.setString(latestPersonsPrefsKey, jsonString);
+    await prefs.setString(localPersonsPrefsKey, jsonString);
+  }
+
+  Future<void> cleanMetadata(types.User person) async {
+    final List<types.User> x = List.from(results);
+    x[x.indexOf(person)] = person.copyWith(metadata: null);
+    results(x);
+    final jsonString = jsonEncode(x).toString();
+    await prefs.setString(localPersonsPrefsKey, jsonString);
   }
 
   void _getLatestPersons(SharedPreferences prefs) {
-    final String jsonString = prefs.getString(latestPersonsPrefsKey) ?? "";
+    final String jsonString = prefs.getString(localPersonsPrefsKey) ?? "";
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
       List<types.User> latestPersons = decodedJson.map((e) => types.User.fromJson(e) ).toList();
       results(latestPersons);
     }
-    
   }
 
 

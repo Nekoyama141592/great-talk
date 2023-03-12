@@ -33,7 +33,7 @@ class PersonCards extends StatelessWidget {
             title: boldText(name),
             subtitle: mapMetadata != null ? Text(mapMetadataToLastAnswer(mapMetadata),overflow: TextOverflow.ellipsis,) : null,
             onTap: () => Get.to(ChatPage(person: person)),
-            onLongPress: () => ChatApi.showCleanLocalMsgDialog(person.id),
+            onLongPress: () => ChatApi.showCleanLocalMsgDialog(person),
           ),
         );
       })
