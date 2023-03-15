@@ -47,13 +47,8 @@ class ChatApi {
       Get.dialog(const Center(child: CircularProgressIndicator(),));
       // 返答を生成.
       String answerText = "";
-      if (person.id != wolframId) {
-        final reqBody = ChatGPTApi.createGreatPeopleReqBody(messages.value, person);
-        await ChatGPTApi.fetchApi(reqBody).then((value) {
-          answerText = value;
-          _addMessageAndPop(answerText, messages, person);
-        });
-      } else {
+      switch (person.id) {
+        case wolframId:
         // wolframの場合
         await WolframApi.fetchApi(msg).then((en) async {
           if (en == calculateFailedMsg) {
@@ -70,6 +65,14 @@ class ChatApi {
             });
           }
         });
+        break;
+        default:
+        final reqBody = ChatGPTApi.createGreatPeopleReqBody(messages.value, person);
+        await ChatGPTApi.fetchApi(reqBody).then((value) {
+          answerText = value;
+          _addMessageAndPop(answerText, messages, person);
+        });
+        break;
       }
       await _setValues(prefs,messages.value, person,chatCount,answerText);
     } else {
