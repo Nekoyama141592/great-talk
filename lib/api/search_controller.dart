@@ -14,7 +14,7 @@ class SearchController extends GetxController{
   late SharedPreferences prefs;
   RxList<types.User> results = fullPersons.obs;
   // 最新のChatした人をおくindex
-  static const int _startIndex = 2;
+  static const int _startIndex = 0;
 
   SearchController() {
     init();
@@ -32,7 +32,7 @@ class SearchController extends GetxController{
     final newPerson = person.copyWith(metadata: metadata);
     // チャットした人物を上に持ってくる.
     final List<types.User> latestPersons = List.from(results);
-    latestPersons.remove(person);
+    latestPersons.removeWhere((element) => element.id == person.id);
     latestPersons.insert(_startIndex, newPerson);
     results(latestPersons);
     final jsonString = jsonEncode(latestPersons).toString();
