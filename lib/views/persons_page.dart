@@ -5,15 +5,13 @@ import 'package:great_talk/common/bottom_navigation_bar_elements.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/others.dart';
-// common
-import 'package:great_talk/common/persons.dart';
 // packages
 import 'package:get/get.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/main_controller.dart';
-import 'package:great_talk/flavors.dart';
+import 'package:great_talk/controllers/notification_controller.dart';
 import 'package:great_talk/views/components/person_cards.dart';
 import 'package:great_talk/views/components/search_screen.dart';
 import 'package:great_talk/views/subscribe/subscribe_page.dart';
@@ -26,6 +24,7 @@ class PersonsPage extends HookWidget {
     final PurchasesController purchasesController = Get.put(PurchasesController());
     Get.put(MainController());
     final SearchController searchController = Get.put(SearchController());
+    Get.put(NotificationController());
     final isSearching = useState(false);
     final pageIndex = useState(0);
     final PageController pageController = usePageController();

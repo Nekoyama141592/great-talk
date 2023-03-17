@@ -201,6 +201,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
+  cross_file:
+    dependency: transitive
+    description:
+      name: cross_file
+      sha256: "0b0036e8cccbfbe0555fd83c1d31a6f30b77a96b598b35a5d36dd41f718695e9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.3+4"
   crypto:
     dependency: transitive
     description:
@@ -233,6 +241,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.5"
+  dbus:
+    dependency: transitive
+    description:
+      name: dbus
+      sha256: "6f07cba3f7b3448d42d015bfd3d53fe12e5b36da2423f23838efc1d5fb31a263"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.8"
   diffutil_dart:
     dependency: transitive
     description:
@@ -329,6 +345,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.2"
+  firebase_storage:
+    dependency: "direct main"
+    description:
+      name: firebase_storage
+      sha256: f19205107b521752384497024b3554ecfecd5d142ad08b522dff1f81dd81efc4
+      url: "https://pub.dev"
+    source: hosted
+    version: "11.0.15"
+  firebase_storage_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_storage_platform_interface
+      sha256: "818e64f900401b6553184c9e1ca9ac057029d75d85f07f974f155b6e019699d6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.31"
+  firebase_storage_web:
+    dependency: transitive
+    description:
+      name: firebase_storage_web
+      sha256: "1244fb06db0f5a28a20057919c3e45bd745b9bc37feb5a25ba2aaa4b4947dd74"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.24"
   fixnum:
     dependency: transitive
     description:
@@ -342,6 +382,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_app_badger:
+    dependency: "direct main"
+    description:
+      name: flutter_app_badger
+      sha256: "64d4a279bab862ed28850431b9b446b9820aaae0bf363322d51077419f930fa8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.0"
   flutter_chat_types:
     dependency: transitive
     description:
@@ -422,6 +470,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_local_notifications:
+    dependency: "direct main"
+    description:
+      name: flutter_local_notifications
+      sha256: "293995f94e120c8afce768981bd1fa9c5d6de67c547568e3b42ae2defdcbb4a0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "13.0.0"
+  flutter_local_notifications_linux:
+    dependency: transitive
+    description:
+      name: flutter_local_notifications_linux
+      sha256: ccb08b93703aeedb58856e5637450bf3ffec899adb66dc325630b68994734b89
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0+1"
+  flutter_local_notifications_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_local_notifications_platform_interface
+      sha256: "5ec1feac5f7f7d9266759488bc5f76416152baba9aa1b26fe572246caa00d1ab"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.0"
+  flutter_native_timezone:
+    dependency: "direct main"
+    description:
+      name: flutter_native_timezone
+      sha256: ed7bfb982f036243de1c068e269182a877100c994f05143c8b26a325e28c1b02
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   flutter_parsed_text:
     dependency: transitive
     description:
@@ -430,6 +510,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.1"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: c224ac897bed083dabf11f238dd11a239809b446740be0c2044608c50029ffdf
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.9"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -544,6 +632,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      sha256: "64b21d9f0e065f9ab0e4dde458076226c97382cc0c6949144cb874c62bf8e9f8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.7"
+  image_picker_android:
+    dependency: transitive
+    description:
+      name: image_picker_android
+      sha256: "42b2f33dcddd18921d650cc3e816e97ec03e43729ef4e132c39c39406319b1d2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.6+4"
+  image_picker_for_web:
+    dependency: transitive
+    description:
+      name: image_picker_for_web
+      sha256: "98f50d6b9f294c8ba35e25cc0d13b04bfddd25dbc8d32fa9d566a6572f2c081c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.12"
+  image_picker_ios:
+    dependency: transitive
+    description:
+      name: image_picker_ios
+      sha256: "50e882fe0a06bf0c8f7f5bce78d30975f279213293afc9471dc35f05617c50ff"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.7+1"
+  image_picker_platform_interface:
+    dependency: transitive
+    description:
+      name: image_picker_platform_interface
+      sha256: "1991219d9dbc42a99aff77e663af8ca51ced592cd6685c9485e3458302d3d4f8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.3"
   in_app_purchase:
     dependency: "direct main"
     description:
@@ -1013,6 +1141,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
+  timezone:
+    dependency: transitive
+    description:
+      name: timezone
+      sha256: "24c8fcdd49a805d95777a39064862133ff816ebfffe0ceff110fb5960e557964"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.1"
   timing:
     dependency: transitive
     description:
@@ -1145,10 +1281,10 @@ packages:
     dependency: transitive
     description:
       name: xdg_directories
-      sha256: ee1505df1426458f7f60aac270645098d318a8b4766d85fde75f76f2e21807d1
+      sha256: bd512f03919aac5f1313eb8249f223bacf4927031bf60b02601f81f687689e86
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "0.2.0+3"
   xml:
     dependency: transitive
     description:
