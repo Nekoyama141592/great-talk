@@ -95,13 +95,13 @@ class NotificationController extends GetxController with WidgetsBindingObserver 
       0,
       appName,
       message,
-      RepeatInterval.everyMinute,
+      RepeatInterval.daily,
       NotificationDetails(
         android: AndroidNotificationDetails(
           'periodicNotification',
           '定期的な通知',
-          importance: Importance.max,
-          priority: Priority.high,
+          importance: Importance.low,
+          priority: Priority.low,
           ongoing: true,
           largeIcon: const DrawableResourceAndroidBitmap('ic_notification'),
           styleInformation: BigTextStyleInformation(message),
