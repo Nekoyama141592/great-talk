@@ -4,19 +4,15 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/api/date_converter.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/domain/chat_user_metadata/chat_user_metadata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SearchController extends GetxController{
-
-  static SearchController get to => Get.find<SearchController>();
+abstract class PersonsController extends GetxController{
   late SharedPreferences prefs;
-  RxList<types.User> results = fullPersons.obs;
-  // 最新のChatした人をおくindex
-  static const int _startIndex = 0;
+  final RxList<types.User> results;
+  final String personsPrefsKey;
 
-  SearchController() {
+  PersonsController(this.results,this.personsPrefsKey) {
     init();
   }
 
@@ -33,10 +29,10 @@ class SearchController extends GetxController{
     // チャットした人物を上に持ってくる.
     final List<types.User> latestPersons = List.from(results);
     latestPersons.removeWhere((element) => element.id == person.id);
-    latestPersons.insert(_startIndex, newPerson);
+    latestPersons.insert(0, newPerson);
     results(latestPersons);
     final jsonString = jsonEncode(latestPersons).toString();
-    await prefs.setString(localPersonsPrefsKey, jsonString);
+    await prefs.setString(personsPrefsKey, jsonString);
   }
 
   Future<void> cleanMetadata(types.User person) async {
@@ -44,11 +40,11 @@ class SearchController extends GetxController{
     x[x.indexOf(person)] = person.copyWith(metadata: null);
     results(x);
     final jsonString = jsonEncode(x).toString();
-    await prefs.setString(localPersonsPrefsKey, jsonString);
+    await prefs.setString(personsPrefsKey, jsonString);
   }
 
   void _getLatestPersons(SharedPreferences prefs) {
-    final String jsonString = prefs.getString(localPersonsPrefsKey) ?? "";
+    final String jsonString = prefs.getString(personsPrefsKey) ?? "";
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
       List<types.User> latestPersons = decodedJson.map((e) => types.User.fromJson(e) ).toList();

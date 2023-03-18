@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/api/chat_api.dart';
-import 'package:great_talk/api/search_controller.dart';
+import 'package:great_talk/controllers/persons_controller.dart';
+import 'package:great_talk/controllers/professionals_controller.dart';
+import 'package:great_talk/controllers/search_controller.dart';
 import 'package:great_talk/common/doubles.dart';
 // common
 import 'package:great_talk/common/strings.dart';
@@ -16,14 +18,15 @@ import 'package:great_talk/views/chat_page.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 
 class PersonCards extends StatelessWidget {
-  const PersonCards({Key? key}) : super(key: key);
+  const PersonCards({Key? key,required this.isProMode }) : super(key: key);
+  final bool isProMode;
   @override
   Widget build(context) {
-    final SearchController searchController = SearchController.to;
+    final PersonsController personsController = isProMode ? ProfessionalsController.to : SearchController.to;
     return Obx(() => ListView.builder(
-      itemCount: searchController.results.length,
+      itemCount: personsController.results.length,
       itemBuilder: ((context, index) {
-        final person = searchController.results[index];
+        final person = personsController.results[index];
         final String name = getName(person);
         final mapMetadata = person.metadata;
         return Padding(
@@ -32,8 +35,8 @@ class PersonCards extends StatelessWidget {
             leading: CircleImage(person: person),
             title: boldText(name),
             subtitle: mapMetadata != null ? Text(mapMetadataToLastAnswer(mapMetadata),overflow: TextOverflow.ellipsis,) : null,
-            onTap: () => Get.to(ChatPage(person: person)),
-            onLongPress: () => ChatApi.showCleanLocalMsgDialog(person),
+            onTap: () => Get.to(ChatPage(person: person,controller: personsController,)),
+            onLongPress: () => ChatApi.showCleanLocalMsgDialog(person,personsController),
           ),
         );
       })

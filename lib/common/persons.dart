@@ -4,9 +4,11 @@ const String wolframId = "wolfram";
 // 現在のユーザーを定義.
 const chatUiCurrrentUser = types.User(id: 'current_user');
 
-const fullPersons = [
+const proPersons = [
   types.User(id: chatGPTId, lastName: '普通のAIチャット', imageUrl: 'https://pbs.twimg.com/media/FqNXz8saAAEdaXz?format=jpg&name=medium'),
   types.User(id: wolframId, lastName: '普通の計算AIチャット', imageUrl: 'https://cdn.pixabay.com/photo/2016/10/29/14/49/cube-1780775__480.jpg'),
+];
+const fullPersons = [
   types.User(id: 'Albert Einstein.', lastName: 'アルベルト・アインシュタイン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Einstein1921_by_F_Schmutzer_2.jpg/225px-Einstein1921_by_F_Schmutzer_2.jpg' ),
   types.User(id: 'Isaac Newton', lastName: 'アイザック・ニュートン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/GodfreyKneller-IsaacNewton-1689.jpg/225px-GodfreyKneller-IsaacNewton-1689.jpg' ),
   types.User(id: 'Charles Darwin', lastName: 'チャールズ・ダーウィン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Hw-darwin.jpg/225px-Hw-darwin.jpg' ),

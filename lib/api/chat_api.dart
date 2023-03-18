@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/api/chat_gpt_api.dart';
-import 'package:great_talk/api/search_controller.dart';
+import 'package:great_talk/controllers/persons_controller.dart';
+import 'package:great_talk/controllers/search_controller.dart';
 import 'package:great_talk/api/show_toast.dart';
 import 'package:great_talk/api/wolfram_api.dart';
 import 'package:great_talk/common/persons.dart';
@@ -31,7 +32,7 @@ class ChatApi {
   }
 
   // 送信ボタンが押された時の処理
-  static Future<void> onSendPressed(BuildContext context,types.PartialText partialText,ValueNotifier<List<types.Message>> messages,types.User person) async {
+  static Future<void> onSendPressed(BuildContext context,types.PartialText partialText,ValueNotifier<List<types.Message>> messages,types.User person,PersonsController controller) async {
     final prefs = await SharedPreferences.getInstance();
     int chatCount = _getChatCount(prefs);
     final msg = partialText.text;
@@ -74,7 +75,7 @@ class ChatApi {
         });
         break;
       }
-      await _setValues(prefs,messages.value, person,chatCount,answerText);
+      await _setValues(prefs,messages.value, person,chatCount,answerText,controller);
     } else {
       // チャットが許されていない場合
       await _requestReview();
@@ -94,12 +95,12 @@ class ChatApi {
       Get.back();
     }
   }
-  static Future<void> _setValues(SharedPreferences prefs,List<types.Message> messages,types.User person,int chatCount,String lastAnswer) async {
+  static Future<void> _setValues(SharedPreferences prefs,List<types.Message> messages,types.User person,int chatCount,String lastAnswer,PersonsController controller) async {
     final String personId = person.id;
     await _setLocalMessage(prefs,messages,personId);
     await _setLocalDate(prefs);
     await _setChatCount(prefs,chatCount);
-    await SearchController.to.setLatestPersons(prefs, person,lastAnswer);
+    await controller.setLatestPersons(prefs, person,lastAnswer);
   }
 
   static Future<void> _setLocalMessage(SharedPreferences prefs,List<types.Message> messages,String personId) async {
@@ -134,7 +135,7 @@ class ChatApi {
     return messages;
   }
 
-  static void showCleanLocalMsgDialog(types.User person) {
+  static void showCleanLocalMsgDialog(types.User person,PersonsController controller) {
     Get.dialog(CupertinoAlertDialog(
       content: const Text("履歴を全て削除しますがよろしいですか？"),
       actions: [
@@ -142,16 +143,16 @@ class ChatApi {
         CupertinoDialogAction(
           isDestructiveAction: true,
           onPressed: () async {
-            await _cleanLocalMessage(person);
+            await _cleanLocalMessage(person,controller);
             Get.back();
           },
           child: const Text("OK"))
       ],
     ));
   }
-  static Future<void> _cleanLocalMessage(types.User person) async {
+  static Future<void> _cleanLocalMessage(types.User person,PersonsController controller) async {
     final prefs = await SharedPreferences.getInstance();
-    await SearchController.to.cleanMetadata(person);
+    await controller.cleanMetadata(person);
     await prefs.remove(person.id);
     await ShowToast.showFlutterToast(clearChatMsg);
   }

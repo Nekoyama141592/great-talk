@@ -18,6 +18,7 @@ const lastChatDatePrefsKey = "lastChatDate";
 const chatCountPrefsKey = "chatCount";
 const isAgreedToTermsPrefsKey = "isAgreedToTerms";
 const localPersonsPrefsKey = "localPersons";
+const professionalsPrefsKey = "professionals";
 String getPlanDescription(String productID,String price) {
   String msg = "";
   switch(productID) {

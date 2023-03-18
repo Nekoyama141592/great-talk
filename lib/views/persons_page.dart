@@ -1,6 +1,7 @@
 // flutter
 import 'package:flutter/material.dart';
-import 'package:great_talk/api/search_controller.dart';
+import 'package:great_talk/controllers/professionals_controller.dart';
+import 'package:great_talk/controllers/search_controller.dart';
 import 'package:great_talk/common/bottom_navigation_bar_elements.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
@@ -24,6 +25,7 @@ class PersonsPage extends HookWidget {
     final PurchasesController purchasesController = Get.put(PurchasesController());
     Get.put(MainController());
     final SearchController searchController = Get.put(SearchController());
+    Get.put(ProfessionalsController());
     Get.put(NotificationController());
     final isSearching = useState(false);
     final pageIndex = useState(0);
@@ -62,9 +64,10 @@ class PersonsPage extends HookWidget {
             onQueryChanged: (query) => searchController.search(query),
             child: Container(
               margin: EdgeInsets.symmetric(vertical: defaultPadding(context)*7),
-              child: const PersonCards(),
+              child: const PersonCards(isProMode: false),
             ),
-          ) : const PersonCards(),
+          ) : const PersonCards(isProMode: false,),
+          const PersonCards(isProMode: true),
           SubscribeView()
         ],
       )
