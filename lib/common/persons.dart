@@ -5,8 +5,8 @@ const String wolframId = "wolfram";
 const chatUiCurrrentUser = types.User(id: 'current_user');
 
 const proPersons = [
-  types.User(id: chatGPTId, lastName: '普通のAIチャット', imageUrl: 'https://pbs.twimg.com/media/FqNXz8saAAEdaXz?format=jpg&name=medium'),
-  types.User(id: wolframId, lastName: '普通の計算AIチャット', imageUrl: 'https://cdn.pixabay.com/photo/2016/10/29/14/49/cube-1780775__480.jpg'),
+  types.User(id: chatGPTId, lastName: 'なんでもAI', imageUrl: 'https://pbs.twimg.com/media/FqNXz8saAAEdaXz?format=jpg&name=medium'),
+  types.User(id: wolframId, lastName: '数学の先生', imageUrl: 'https://cdn.pixabay.com/photo/2016/10/29/14/49/cube-1780775__480.jpg'),
 ];
 const fullPersons = [
   types.User(id: 'Albert Einstein.', lastName: 'アルベルト・アインシュタイン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Einstein1921_by_F_Schmutzer_2.jpg/225px-Einstein1921_by_F_Schmutzer_2.jpg' ),
