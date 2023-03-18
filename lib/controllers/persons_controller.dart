@@ -18,7 +18,7 @@ abstract class PersonsController extends GetxController{
 
   Future<void> init() async {
     prefs = await SharedPreferences.getInstance();
-    _getLatestPersons(prefs);
+    getLatestPersons(prefs);
   }
 
   Future<void> setLatestPersons(SharedPreferences prefs,types.User person,String lastAnswer) async {
@@ -43,7 +43,8 @@ abstract class PersonsController extends GetxController{
     await prefs.setString(personsPrefsKey, jsonString);
   }
 
-  void _getLatestPersons(SharedPreferences prefs) {
+  // search_controllerのoverrideを消して、privateにする
+  void getLatestPersons(SharedPreferences prefs) {
     final String jsonString = prefs.getString(personsPrefsKey) ?? "";
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
