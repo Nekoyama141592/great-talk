@@ -4,6 +4,6 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 
 class SearchController extends PersonsController {
-  SearchController() : super(fullPersons.obs,localPersonsPrefsKey);
+  SearchController() : super(fullPersons.obs,localPersonsPrefsKey,fullPersons);
   static SearchController get to => Get.find<SearchController>();
 }

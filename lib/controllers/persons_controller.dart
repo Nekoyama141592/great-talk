@@ -2,7 +2,6 @@
 import 'dart:convert';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/api/date_converter.dart';
-import 'package:great_talk/common/persons.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/domain/chat_user_metadata/chat_user_metadata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,8 +10,9 @@ abstract class PersonsController extends GetxController{
   late SharedPreferences prefs;
   final RxList<types.User> results;
   final String personsPrefsKey;
+  final List<types.User> initialPersons;
 
-  PersonsController(this.results,this.personsPrefsKey) {
+  PersonsController(this.results,this.personsPrefsKey,this.initialPersons) {
     init();
   }
 
@@ -55,7 +55,7 @@ abstract class PersonsController extends GetxController{
 
   void search(String query) {
     if (query.isNotEmpty) {
-      results.value = fullPersons.where((element) {
+      results.value = initialPersons.where((element) {
         final name = element.lastName!.toLowerCase();
         final id = element.id.toLowerCase().replaceAll(" ", "");
         return name.contains(query) || id.contains(query);
@@ -63,7 +63,7 @@ abstract class PersonsController extends GetxController{
     }
   }
 
-  void reset() => results(fullPersons);
+  void reset() => results(initialPersons);
 
 
 }
