@@ -79,6 +79,7 @@
 		B3351FDE351558067AD5E7F5 /* Pods-Runner.release-testing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-testing.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-testing.xcconfig"; sourceTree = "<group>"; };
 		BE846390E58859ABB86B1B7D /* Pods-Runner.release-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-prod.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-prod.xcconfig"; sourceTree = "<group>"; };
 		BF0281532B800D732B22E9EA /* Pods-Runner.debug-testing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-testing.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-testing.xcconfig"; sourceTree = "<group>"; };
+		D8596B7629C4283800D12F74 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		E2E2B4970F6702F634D8EDEB /* Pods-Runner.debug-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-prod.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-prod.xcconfig"; sourceTree = "<group>"; };
 		E97A2E39EBFC3E01C06E6A48 /* Pods-Runner.debug-dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-dev.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-dev.xcconfig"; sourceTree = "<group>"; };
 		ED9E36D48768349A5640E52D /* prodLaunchScreen.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = prodLaunchScreen.storyboard; path = Runner/prodLaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -156,6 +157,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				D8596B7629C4283800D12F74 /* Runner.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -507,6 +509,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
@@ -519,7 +522,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = "偉人talk";
-				PROVISIONING_PROFILE_SPECIFIER = "Great Talk";
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -995,6 +998,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
@@ -1007,7 +1011,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = "偉人talk";
-				PROVISIONING_PROFILE_SPECIFIER = "Great Talk";
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1021,6 +1025,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
@@ -1033,7 +1038,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = "偉人talk";
-				PROVISIONING_PROFILE_SPECIFIER = "Great Talk";
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1398,6 +1403,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BF0281532B800D732B22E9EA /* Pods-Runner.debug-testing.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				PRODUCT_NAME = "偉人talk";
 			};
 			name = "Debug-testing";
@@ -1406,6 +1412,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9D1862030B7D933D1EB0FE6F /* Pods-Runner.profile-testing.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				PRODUCT_NAME = "偉人talk";
 			};
 			name = "Profile-testing";
@@ -1414,6 +1421,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B3351FDE351558067AD5E7F5 /* Pods-Runner.release-testing.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				PRODUCT_NAME = "偉人talk";
 			};
 			name = "Release-testing";
@@ -1422,6 +1430,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4F1AA57C78E513CFBEB9201A /* Pods-Runner.debug-verification.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				PRODUCT_NAME = "偉人talk";
 			};
 			name = "Debug-verification";
@@ -1430,6 +1439,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 22B423482F85C37C851EDC11 /* Pods-Runner.profile-verification.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				PRODUCT_NAME = "偉人talk";
 			};
 			name = "Profile-verification";
@@ -1438,6 +1448,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 005B6ACB265E70B738725EF1 /* Pods-Runner.release-verification.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				PRODUCT_NAME = "偉人talk";
 			};
 			name = "Release-verification";
@@ -1446,8 +1457,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E97A2E39EBFC3E01C06E6A48 /* Pods-Runner.debug-dev.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				PRODUCT_NAME = "偉人talk";
-				PROVISIONING_PROFILE_SPECIFIER = "Great Talk";
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Debug-dev";
 		};
@@ -1455,9 +1467,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B126F82EA1C047C0119D5D8 /* Pods-Runner.profile-dev.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				PRODUCT_NAME = "偉人talk";
-				PROVISIONING_PROFILE_SPECIFIER = "Great Talk";
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Profile-dev";
 		};
@@ -1465,8 +1478,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F59BCF81F0A0697BD90E28AA /* Pods-Runner.release-dev.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				PRODUCT_NAME = "偉人talk";
-				PROVISIONING_PROFILE_SPECIFIER = "Great Talk";
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Release-dev";
 		};
@@ -1474,9 +1488,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E2E2B4970F6702F634D8EDEB /* Pods-Runner.debug-prod.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				PRODUCT_NAME = "偉人talk";
-				PROVISIONING_PROFILE_SPECIFIER = "Great Talk";
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Debug-prod";
 		};
@@ -1484,10 +1500,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7CCD7BDD43E8541AA2CBB744 /* Pods-Runner.profile-prod.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				PRODUCT_NAME = "偉人talk";
-				PROVISIONING_PROFILE_SPECIFIER = "Great Talk";
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Profile-prod";
 		};
@@ -1495,9 +1513,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BE846390E58859ABB86B1B7D /* Pods-Runner.release-prod.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				PRODUCT_NAME = "偉人talk";
-				PROVISIONING_PROFILE_SPECIFIER = "Great Talk";
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Release-prod";
 		};

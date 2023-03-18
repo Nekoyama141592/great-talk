@@ -5,7 +5,7 @@ import 'package:great_talk/api/date_converter.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/domain/chat_user_metadata.dart';
+import 'package:great_talk/domain/chat_user_metadata/chat_user_metadata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchController extends GetxController{

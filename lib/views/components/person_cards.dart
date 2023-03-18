@@ -10,7 +10,7 @@ import 'package:great_talk/common/widgets.dart';
 // packages
 import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:great_talk/domain/chat_user_metadata.dart';
+import 'package:great_talk/domain/chat_user_metadata/chat_user_metadata.dart';
 import 'package:great_talk/views/chat_page.dart';
 // components
 import 'package:great_talk/views/components/circle_image.dart';
