@@ -52,7 +52,7 @@ String getPlanName(ProductDetails productDetails) {
   msg += "プラン";
   return msg;
 }
-String mapMetadataToLastAnswer(Map<String,dynamic> mapMetadata) => ChatUserMetadata.fromJson(mapMetadata).lastAnswer;
+String? mapMetadataToLastAnswer(Map<String,dynamic>? mapMetadata) => mapMetadata == null ? null : ChatUserMetadata.fromJson(mapMetadata).lastAnswer;
 const String appName = "偉人talk";
 // msg
 const String clearChatMsg = "チャット履歴を全て削除しました";

@@ -20,7 +20,7 @@ ChatUserMetadata _$ChatUserMetadataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ChatUserMetadata {
-  String get lastAnswer => throw _privateConstructorUsedError;
+  String? get lastAnswer => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $ChatUserMetadataCopyWith<$Res> {
           ChatUserMetadata value, $Res Function(ChatUserMetadata) then) =
       _$ChatUserMetadataCopyWithImpl<$Res, ChatUserMetadata>;
   @useResult
-  $Res call({String lastAnswer, String? description});
+  $Res call({String? lastAnswer, String? description});
 }
 
 /// @nodoc
@@ -51,14 +51,14 @@ class _$ChatUserMetadataCopyWithImpl<$Res, $Val extends ChatUserMetadata>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lastAnswer = null,
+    Object? lastAnswer = freezed,
     Object? description = freezed,
   }) {
     return _then(_value.copyWith(
-      lastAnswer: null == lastAnswer
+      lastAnswer: freezed == lastAnswer
           ? _value.lastAnswer
           : lastAnswer // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -75,7 +75,7 @@ abstract class _$$_ChatUserMetadataCopyWith<$Res>
       __$$_ChatUserMetadataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String lastAnswer, String? description});
+  $Res call({String? lastAnswer, String? description});
 }
 
 /// @nodoc
@@ -89,14 +89,14 @@ class __$$_ChatUserMetadataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lastAnswer = null,
+    Object? lastAnswer = freezed,
     Object? description = freezed,
   }) {
     return _then(_$_ChatUserMetadata(
-      lastAnswer: null == lastAnswer
+      lastAnswer: freezed == lastAnswer
           ? _value.lastAnswer
           : lastAnswer // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -108,13 +108,13 @@ class __$$_ChatUserMetadataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ChatUserMetadata implements _ChatUserMetadata {
-  const _$_ChatUserMetadata({required this.lastAnswer, this.description});
+  const _$_ChatUserMetadata({this.lastAnswer, this.description});
 
   factory _$_ChatUserMetadata.fromJson(Map<String, dynamic> json) =>
       _$$_ChatUserMetadataFromJson(json);
 
   @override
-  final String lastAnswer;
+  final String? lastAnswer;
   @override
   final String? description;
 
@@ -154,14 +154,14 @@ class _$_ChatUserMetadata implements _ChatUserMetadata {
 
 abstract class _ChatUserMetadata implements ChatUserMetadata {
   const factory _ChatUserMetadata(
-      {required final String lastAnswer,
+      {final String? lastAnswer,
       final String? description}) = _$_ChatUserMetadata;
 
   factory _ChatUserMetadata.fromJson(Map<String, dynamic> json) =
       _$_ChatUserMetadata.fromJson;
 
   @override
-  String get lastAnswer;
+  String? get lastAnswer;
   @override
   String? get description;
   @override

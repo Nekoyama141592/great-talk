@@ -8,7 +8,7 @@ part of 'chat_user_metadata.dart';
 
 _$_ChatUserMetadata _$$_ChatUserMetadataFromJson(Map<String, dynamic> json) =>
     _$_ChatUserMetadata(
-      lastAnswer: json['lastAnswer'] as String,
+      lastAnswer: json['lastAnswer'] as String?,
       description: json['description'] as String?,
     );
 

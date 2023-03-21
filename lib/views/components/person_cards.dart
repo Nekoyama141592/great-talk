@@ -28,13 +28,13 @@ class PersonCards extends StatelessWidget {
       itemBuilder: ((context, index) {
         final person = personsController.results[index];
         final String name = getName(person);
-        final mapMetadata = person.metadata;
+        final String? lastAnswer = mapMetadataToLastAnswer(person.metadata);
         return Padding(
           padding: EdgeInsets.symmetric(vertical: defaultPadding(context) ),
           child: ListTile(
             leading: CircleImage(person: person),
             title: boldText(name),
-            subtitle: mapMetadata != null ? Text(mapMetadataToLastAnswer(mapMetadata),overflow: TextOverflow.ellipsis,) : null,
+            subtitle: lastAnswer != null ? Text(lastAnswer,overflow: TextOverflow.ellipsis,) : null,
             onTap: () => Get.to(ChatPage(person: person,controller: personsController,)),
             onLongPress: () => ChatApi.showCleanLocalMsgDialog(person,personsController),
           ),
