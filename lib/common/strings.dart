@@ -53,7 +53,7 @@ String getPlanName(ProductDetails productDetails) {
   return msg;
 }
 String? mapMetadataToLastAnswer(Map<String,dynamic>? mapMetadata) => mapMetadata == null ? null : ChatUserMetadata.fromJson(mapMetadata).lastAnswer;
-const String appName = "偉人talk";
+const String appName = "すごいAIあぷり";
 // msg
 const String clearChatMsg = "チャット履歴を全て削除しました";
 const String calculateFailedMsg = '計算結果が取得できませんでした';

@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/api/chat_gpt_api.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
-import 'package:great_talk/controllers/search_controller.dart';
 import 'package:great_talk/api/show_toast.dart';
 import 'package:great_talk/api/wolfram_api.dart';
 import 'package:great_talk/common/persons.dart';

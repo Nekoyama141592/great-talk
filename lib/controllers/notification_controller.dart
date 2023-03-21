@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:io';
 // flutter
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -39,9 +41,16 @@ class NotificationController extends GetxController with WidgetsBindingObserver 
     await _initializeNotification();
     await cancelNotification();
     await requestPermissions();
-    await registerMessage("今日も偉人のだれかと話してみませんか？");
+    final msg = _createRandomMsg();
+    await registerMessage(msg);
   }
 
+  String _createRandomMsg() {
+    final random = Random(); // ランダムな数値を生成するオブジェクト
+    final randomIndex = random.nextInt(fullPersons.length); // 配列内のランダムなインデックスを取得
+    final randomPerson = fullPersons[randomIndex]; // インデックスに対応する要素を取得
+    return "今日は${randomPerson.lastName!}と話してみませんか？";
+  }
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
     final String timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
@@ -100,8 +109,8 @@ class NotificationController extends GetxController with WidgetsBindingObserver 
         android: AndroidNotificationDetails(
           'periodicNotification',
           '定期的な通知',
-          importance: Importance.low,
-          priority: Priority.low,
+          importance: Importance.high,
+          priority: Priority.high,
           ongoing: true,
           largeIcon: const DrawableResourceAndroidBitmap('ic_notification'),
           styleInformation: BigTextStyleInformation(message),

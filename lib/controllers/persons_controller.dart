@@ -11,6 +11,7 @@ abstract class PersonsController extends GetxController{
   final RxList<types.User> results;
   final String personsPrefsKey;
   final List<types.User> initialPersons;
+  final RxBool isSearching = false.obs;
 
   PersonsController(this.results,this.personsPrefsKey,this.initialPersons) {
     init();
@@ -43,7 +44,7 @@ abstract class PersonsController extends GetxController{
     await prefs.setString(personsPrefsKey, jsonString);
   }
 
-  // search_controllerのoverrideを消して、privateにする
+  // search_controllerのoverrideを消して、privateにする。
   void getLatestPersons(SharedPreferences prefs) {
     final String jsonString = prefs.getString(personsPrefsKey) ?? "";
     if (jsonString.isNotEmpty) {

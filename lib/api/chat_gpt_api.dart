@@ -26,9 +26,13 @@ class ChatGPTApi {
   }
   static Map<String,dynamic> _systemMsg(types.User person) {
     final name = person.lastName;
+    String content = proIds.contains(person.id)
+    ? "あなたは一人のプロの$nameです。それになりきれ。自分がAIアシスタントだとは答えるな。" 
+    : "$nameになりきって$nameの口調で返答して下さい。";
+    content += attention;
     return {
       "role": "system",
-      "content": "$nameになりきって$nameの口調で返答して下さい。$attention",
+      "content": content,
     };
   }
   static Map<String,dynamic> _toValidMessage(types.Message msg) => {

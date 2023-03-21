@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/controllers/professionals_controller.dart';
 import 'package:great_talk/controllers/search_controller.dart';
 import 'package:great_talk/common/bottom_navigation_bar_elements.dart';
-import 'package:great_talk/common/colors.dart';
-import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/others.dart';
 // packages
 import 'package:get/get.dart';
@@ -25,9 +23,8 @@ class PersonsPage extends HookWidget {
     final PurchasesController purchasesController = Get.put(PurchasesController());
     Get.put(MainController());
     final SearchController searchController = Get.put(SearchController());
-    Get.put(ProfessionalsController());
+    final ProfessionalsController professionalsController = Get.put(ProfessionalsController());
     Get.put(NotificationController());
-    final isSearching = useState(false);
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(
@@ -35,17 +32,6 @@ class PersonsPage extends HookWidget {
         title: boldText(appName),
         shape: appBarShape(context)
       ),
-      floatingActionButton:
-      pageIndex.value == 0
-      ? FloatingActionButton(
-        onPressed: () {
-          isSearching.value = !isSearching.value;
-          searchController.reset();
-        },
-        backgroundColor: kPrimaryColor,
-        child: isSearching.value ? const Icon(Icons.search_off) : const Icon(Icons.search),
-      )
-      : const SizedBox.shrink(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: bnbElements,
@@ -59,15 +45,16 @@ class PersonsPage extends HookWidget {
         onPageChanged: (index) => pageIndex.value = index,
         controller: pageController,
         children: [
-          isSearching.value ?
+          Obx(() => searchController.isSearching.value ?
           SearchScreen(
             onQueryChanged: (query) => searchController.search(query),
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: defaultPadding(context)*7),
-              child: const PersonCards(isProMode: false),
-            ),
-          ) : const PersonCards(isProMode: false,),
-          const PersonCards(isProMode: true),
+            child: const PersonCards(isProMode: false),
+          ) : const PersonCards(isProMode: false,),),
+          Obx(() => professionalsController.isSearching.value ?
+          SearchScreen(
+            onQueryChanged: (query) => professionalsController.search(query),
+            child: const PersonCards(isProMode: true),
+          ) : const PersonCards(isProMode: true,),),
           SubscribeView()
         ],
       )

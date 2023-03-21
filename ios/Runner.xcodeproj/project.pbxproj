@@ -67,7 +67,7 @@
 		8BDB27C3CA26D371C9393A94 /* testingRelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = testingRelease.xcconfig; path = Flutter/testingRelease.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
-		97C146EE1CF9000F007C117D /* すごいAIあぷり.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "すごいAIあぷり.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		97C146EE1CF9000F007C117D /* great_talk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = great_talk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97C146FB1CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 		97C146EF1CF9000F007C117D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				97C146EE1CF9000F007C117D /* すごいAIあぷり.app */,
+				97C146EE1CF9000F007C117D /* great_talk.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,7 +214,7 @@
 			);
 			name = Runner;
 			productName = Runner;
-			productReference = 97C146EE1CF9000F007C117D /* すごいAIあぷり.app */;
+			productReference = 97C146EE1CF9000F007C117D /* great_talk.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -521,7 +521,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1010,7 +1010,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1037,7 +1037,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1404,7 +1404,7 @@
 			baseConfigurationReference = BF0281532B800D732B22E9EA /* Pods-Runner.debug-testing.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 			};
 			name = "Debug-testing";
 		};
@@ -1413,7 +1413,7 @@
 			baseConfigurationReference = 9D1862030B7D933D1EB0FE6F /* Pods-Runner.profile-testing.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 			};
 			name = "Profile-testing";
 		};
@@ -1422,7 +1422,7 @@
 			baseConfigurationReference = B3351FDE351558067AD5E7F5 /* Pods-Runner.release-testing.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 			};
 			name = "Release-testing";
 		};
@@ -1431,7 +1431,7 @@
 			baseConfigurationReference = 4F1AA57C78E513CFBEB9201A /* Pods-Runner.debug-verification.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 			};
 			name = "Debug-verification";
 		};
@@ -1440,7 +1440,7 @@
 			baseConfigurationReference = 22B423482F85C37C851EDC11 /* Pods-Runner.profile-verification.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 			};
 			name = "Profile-verification";
 		};
@@ -1449,7 +1449,7 @@
 			baseConfigurationReference = 005B6ACB265E70B738725EF1 /* Pods-Runner.release-verification.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 			};
 			name = "Release-verification";
 		};
@@ -1458,7 +1458,7 @@
 			baseConfigurationReference = E97A2E39EBFC3E01C06E6A48 /* Pods-Runner.debug-dev.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Debug-dev";
@@ -1469,7 +1469,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Profile-dev";
@@ -1479,7 +1479,7 @@
 			baseConfigurationReference = F59BCF81F0A0697BD90E28AA /* Pods-Runner.release-dev.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Release-dev";
@@ -1491,7 +1491,7 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Debug-prod";
@@ -1504,7 +1504,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Profile-prod";
@@ -1516,7 +1516,7 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_NAME = "すごいAIあぷり";
+				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 			};
 			name = "Release-prod";

@@ -12,15 +12,16 @@ class CircleImage extends StatelessWidget {
   final types.User person;
   @override 
   Widget build(BuildContext context) {
-    final imageUrl = person.imageUrl!;
-    final image = NetworkImage(imageUrl);
+    final imageUrl = person.imageUrl;
     final length = userImageSize(context);
-    return Container(
+    return imageUrl == null || imageUrl.isEmpty
+    ? const Icon(Icons.person)
+    : Container(
       width: length,
       height: length,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        image: person.id == chatGPTId || person.id == wolframId ? DecorationImage(image: image,fit: BoxFit.fill) : DecorationImage(image: image),
+        image: person.id == chatGPTId || person.id == wolframId ? DecorationImage(image: NetworkImage(imageUrl),fit: BoxFit.fill) : DecorationImage(image: NetworkImage(imageUrl)),
       ),
     );
   }
