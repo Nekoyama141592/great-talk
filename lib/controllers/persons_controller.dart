@@ -24,8 +24,8 @@ abstract class PersonsController extends GetxController{
   Future<void> setLatestPersons(SharedPreferences prefs,types.User person,String lastAnswer) async {
     // 新たにmetadataを設定する.
     final int lastSeen = DateConverter.nowDateTime();
-    final Map<String,dynamic> metadata = ChatUserMetadata(lastAnswer: lastAnswer, lastSeen: lastSeen).toJson();
-    final newPerson = person.copyWith(metadata: metadata);
+    final Map<String,dynamic> metadata = ChatUserMetadata(lastAnswer: lastAnswer).toJson();
+    final newPerson = person.copyWith(metadata: metadata,lastSeen: lastSeen);
     // チャットした人物を上に持ってくる.
     final List<types.User> latestPersons = List.from(results);
     latestPersons.removeWhere((element) => element.id == person.id);

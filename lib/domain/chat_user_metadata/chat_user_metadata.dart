@@ -7,7 +7,7 @@ part 'chat_user_metadata.g.dart';
 abstract class ChatUserMetadata with _$ChatUserMetadata {
  const factory ChatUserMetadata({
    required String lastAnswer,
-   required int lastSeen
+   String? description
   }) = _ChatUserMetadata;
  factory ChatUserMetadata.fromJson(Map<String, dynamic> json) => _$ChatUserMetadataFromJson(json);
 }

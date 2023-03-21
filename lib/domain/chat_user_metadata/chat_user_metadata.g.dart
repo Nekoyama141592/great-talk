@@ -9,11 +9,11 @@ part of 'chat_user_metadata.dart';
 _$_ChatUserMetadata _$$_ChatUserMetadataFromJson(Map<String, dynamic> json) =>
     _$_ChatUserMetadata(
       lastAnswer: json['lastAnswer'] as String,
-      lastSeen: json['lastSeen'] as int,
+      description: json['description'] as String?,
     );
 
 Map<String, dynamic> _$$_ChatUserMetadataToJson(_$_ChatUserMetadata instance) =>
     <String, dynamic>{
       'lastAnswer': instance.lastAnswer,
-      'lastSeen': instance.lastSeen,
+      'description': instance.description,
     };

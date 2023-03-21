@@ -21,7 +21,7 @@ ChatUserMetadata _$ChatUserMetadataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ChatUserMetadata {
   String get lastAnswer => throw _privateConstructorUsedError;
-  int get lastSeen => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $ChatUserMetadataCopyWith<$Res> {
           ChatUserMetadata value, $Res Function(ChatUserMetadata) then) =
       _$ChatUserMetadataCopyWithImpl<$Res, ChatUserMetadata>;
   @useResult
-  $Res call({String lastAnswer, int lastSeen});
+  $Res call({String lastAnswer, String? description});
 }
 
 /// @nodoc
@@ -52,17 +52,17 @@ class _$ChatUserMetadataCopyWithImpl<$Res, $Val extends ChatUserMetadata>
   @override
   $Res call({
     Object? lastAnswer = null,
-    Object? lastSeen = null,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
       lastAnswer: null == lastAnswer
           ? _value.lastAnswer
           : lastAnswer // ignore: cast_nullable_to_non_nullable
               as String,
-      lastSeen: null == lastSeen
-          ? _value.lastSeen
-          : lastSeen // ignore: cast_nullable_to_non_nullable
-              as int,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -75,7 +75,7 @@ abstract class _$$_ChatUserMetadataCopyWith<$Res>
       __$$_ChatUserMetadataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String lastAnswer, int lastSeen});
+  $Res call({String lastAnswer, String? description});
 }
 
 /// @nodoc
@@ -90,17 +90,17 @@ class __$$_ChatUserMetadataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? lastAnswer = null,
-    Object? lastSeen = null,
+    Object? description = freezed,
   }) {
     return _then(_$_ChatUserMetadata(
       lastAnswer: null == lastAnswer
           ? _value.lastAnswer
           : lastAnswer // ignore: cast_nullable_to_non_nullable
               as String,
-      lastSeen: null == lastSeen
-          ? _value.lastSeen
-          : lastSeen // ignore: cast_nullable_to_non_nullable
-              as int,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -108,7 +108,7 @@ class __$$_ChatUserMetadataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ChatUserMetadata implements _ChatUserMetadata {
-  const _$_ChatUserMetadata({required this.lastAnswer, required this.lastSeen});
+  const _$_ChatUserMetadata({required this.lastAnswer, this.description});
 
   factory _$_ChatUserMetadata.fromJson(Map<String, dynamic> json) =>
       _$$_ChatUserMetadataFromJson(json);
@@ -116,11 +116,11 @@ class _$_ChatUserMetadata implements _ChatUserMetadata {
   @override
   final String lastAnswer;
   @override
-  final int lastSeen;
+  final String? description;
 
   @override
   String toString() {
-    return 'ChatUserMetadata(lastAnswer: $lastAnswer, lastSeen: $lastSeen)';
+    return 'ChatUserMetadata(lastAnswer: $lastAnswer, description: $description)';
   }
 
   @override
@@ -130,13 +130,13 @@ class _$_ChatUserMetadata implements _ChatUserMetadata {
             other is _$_ChatUserMetadata &&
             (identical(other.lastAnswer, lastAnswer) ||
                 other.lastAnswer == lastAnswer) &&
-            (identical(other.lastSeen, lastSeen) ||
-                other.lastSeen == lastSeen));
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, lastAnswer, lastSeen);
+  int get hashCode => Object.hash(runtimeType, lastAnswer, description);
 
   @JsonKey(ignore: true)
   @override
@@ -155,7 +155,7 @@ class _$_ChatUserMetadata implements _ChatUserMetadata {
 abstract class _ChatUserMetadata implements ChatUserMetadata {
   const factory _ChatUserMetadata(
       {required final String lastAnswer,
-      required final int lastSeen}) = _$_ChatUserMetadata;
+      final String? description}) = _$_ChatUserMetadata;
 
   factory _ChatUserMetadata.fromJson(Map<String, dynamic> json) =
       _$_ChatUserMetadata.fromJson;
@@ -163,7 +163,7 @@ abstract class _ChatUserMetadata implements ChatUserMetadata {
   @override
   String get lastAnswer;
   @override
-  int get lastSeen;
+  String? get description;
   @override
   @JsonKey(ignore: true)
   _$$_ChatUserMetadataCopyWith<_$_ChatUserMetadata> get copyWith =>
