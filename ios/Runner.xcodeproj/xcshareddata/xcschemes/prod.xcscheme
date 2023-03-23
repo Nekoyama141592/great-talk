@@ -15,7 +15,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97C146ED1CF9000F007C117D"
-            BuildableName = "&#x3059;&#x3053;&#x3099;&#x3044;AI&#x3042;&#x3075;&#x309a;&#x308a;.app"
+            BuildableName = "great_talk.app"
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
@@ -38,7 +38,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97C146ED1CF9000F007C117D"
-            BuildableName = "&#x3059;&#x3053;&#x3099;&#x3044;AI&#x3042;&#x3075;&#x309a;&#x308a;.app"
+            BuildableName = "great_talk.app"
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
@@ -55,7 +55,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97C146ED1CF9000F007C117D"
-            BuildableName = "&#x3059;&#x3053;&#x3099;&#x3044;AI&#x3042;&#x3075;&#x309a;&#x308a;.app"
+            BuildableName = "great_talk.app"
             BlueprintName = "Runner"
             ReferencedContainer = "container:Runner.xcodeproj">
          </BuildableReference>
