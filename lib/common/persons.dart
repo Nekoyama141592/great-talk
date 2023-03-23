@@ -99,6 +99,7 @@ const proPersons = [
   types.User(id: 'webMarketer', lastName: 'ウェブマーケター', metadata: {'description': 'ウェブサイトやソーシャルメディアを活用したマーケティングに関する専門家',},imageUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNTgwfDB8MXxzZWFyY2h8MXx8d2ViJTIwbWFya2V0ZXJ8ZW58MHx8fHwxNjc5NDA2NDU1&ixlib=rb-4.0.3&q=80&w=400'),
   types.User(id: 'beautician', lastName: '美容師', metadata: {'description': '髪型やメイクなどの美容に特化した専門家',},imageUrl: 'https://pixabay.com/get/ged73ddfd1c0c3f55f66238a02de410d1b7381ceefe0add6273764c002e368ea7e806df3b984545b4c84ed0c0d97f7c1f476a0141e607c9615eb37b3f7e66bb53_640.jpg'),
   types.User(id: 'robot designer', lastName: 'ロボットデザイナー', metadata: {'description': '色彩を利用して心理的な問題を解決する専門職',},imageUrl: 'https://pixabay.com/get/gaee6b96bd8d915fa9b83bc7b97a93578578c2846257ef5a042a8aa4cea733144b236e88bafa9e81b4a2b0dded6ea7f3869a6547f4e35ced1927cf4cf2e64057b_640.jpg'),
+  types.User(id: 'human resources', lastName: '人事の専門家', metadata: {'description': '組織の人的資源を最大限に活用するための戦略を策定することを専門とする人',},imageUrl: 'https://cdn.pixabay.com/photo/2017/11/02/14/27/model-2911332__480.jpg'),
 ];
 const fullPersons = [
   types.User(id: 'Albert Einstein.', lastName: 'アルベルト・アインシュタイン', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Einstein1921_by_F_Schmutzer_2.jpg/225px-Einstein1921_by_F_Schmutzer_2.jpg' ),
