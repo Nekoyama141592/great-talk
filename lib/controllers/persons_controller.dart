@@ -6,14 +6,14 @@ import 'package:get/get.dart';
 import 'package:great_talk/domain/chat_user_metadata/chat_user_metadata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class PersonsController extends GetxController{
+abstract class PersonsController extends GetxController {
   late SharedPreferences prefs;
   final RxList<types.User> results;
   final String personsPrefsKey;
   final List<types.User> initialPersons;
   final RxBool isSearching = false.obs;
 
-  PersonsController(this.results,this.personsPrefsKey,this.initialPersons) {
+  PersonsController(this.results, this.personsPrefsKey, this.initialPersons) {
     init();
   }
 
@@ -22,11 +22,13 @@ abstract class PersonsController extends GetxController{
     getLatestPersons(prefs);
   }
 
-  Future<void> setLatestPersons(SharedPreferences prefs,types.User person,String lastAnswer) async {
+  Future<void> setLatestPersons(
+      SharedPreferences prefs, types.User person, String lastAnswer) async {
     // 新たにmetadataを設定する.
     final int lastSeen = DateConverter.nowDateTime();
-    final Map<String,dynamic> metadata = ChatUserMetadata(lastAnswer: lastAnswer).toJson();
-    final newPerson = person.copyWith(metadata: metadata,lastSeen: lastSeen);
+    final Map<String, dynamic> metadata =
+        ChatUserMetadata(lastAnswer: lastAnswer).toJson();
+    final newPerson = person.copyWith(metadata: metadata, lastSeen: lastSeen);
     // チャットした人物を上に持ってくる.
     final List<types.User> latestPersons = List.from(results);
     latestPersons.removeWhere((element) => element.id == person.id);
@@ -49,11 +51,11 @@ abstract class PersonsController extends GetxController{
     final String jsonString = prefs.getString(personsPrefsKey) ?? "";
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
-      List<types.User> latestPersons = decodedJson.map((e) => types.User.fromJson(e) ).toList();
+      List<types.User> latestPersons =
+          decodedJson.map((e) => types.User.fromJson(e)).toList();
       results(latestPersons);
     }
   }
-
 
   void search(String query) {
     if (query.isNotEmpty) {
@@ -66,6 +68,4 @@ abstract class PersonsController extends GetxController{
   }
 
   void reset() => results(initialPersons);
-
-
 }

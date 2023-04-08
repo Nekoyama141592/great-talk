@@ -19,18 +19,18 @@ const chatCountPrefsKey = "chatCount";
 const isAgreedToTermsPrefsKey = "isAgreedToTerms";
 const localPersonsPrefsKey = "localPersons";
 const professionalsPrefsKey = "professionals";
-String getPlanDescription(String productID,String price) {
+String getPlanDescription(String productID, String price) {
   String msg = "";
-  switch(productID) {
-    case(kAnnualSubscriptionId):
-    msg = "1年";
-    break;
-    case(kMonthSubscriptionId):
-    msg = "1ヶ月";
-    break;
-    case(kWeekSubscriptionId):
-    msg = "1週間";
-    break;
+  switch (productID) {
+    case (kAnnualSubscriptionId):
+      msg = "1年";
+      break;
+    case (kMonthSubscriptionId):
+      msg = "1ヶ月";
+      break;
+    case (kWeekSubscriptionId):
+      msg = "1週間";
+      break;
   }
   msg += "あたり$priceです。";
   return msg;
@@ -38,21 +38,25 @@ String getPlanDescription(String productID,String price) {
 
 String getPlanName(ProductDetails productDetails) {
   String msg = "";
-  switch(productDetails.id) {
-    case(kAnnualSubscriptionId):
-    msg = "年額";
-    break;
-    case(kMonthSubscriptionId):
-    msg = "月額";
-    break;
-    case(kWeekSubscriptionId):
-    msg = "週額";
-    break;
+  switch (productDetails.id) {
+    case (kAnnualSubscriptionId):
+      msg = "年額";
+      break;
+    case (kMonthSubscriptionId):
+      msg = "月額";
+      break;
+    case (kWeekSubscriptionId):
+      msg = "週額";
+      break;
   }
   msg += "プラン";
   return msg;
 }
-String? mapMetadataToLastAnswer(Map<String,dynamic>? mapMetadata) => mapMetadata == null ? null : ChatUserMetadata.fromJson(mapMetadata).lastAnswer;
+
+String? mapMetadataToLastAnswer(Map<String, dynamic>? mapMetadata) =>
+    mapMetadata == null
+        ? null
+        : ChatUserMetadata.fromJson(mapMetadata).lastAnswer;
 const String appName = "すごいAIあぷり";
 // msg
 const String clearChatMsg = "チャット履歴を全て削除しました";

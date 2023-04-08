@@ -5,9 +5,8 @@ part 'chat_user_metadata.g.dart';
 
 @freezed
 abstract class ChatUserMetadata with _$ChatUserMetadata {
- const factory ChatUserMetadata({
-   String? lastAnswer,
-   String? description
-  }) = _ChatUserMetadata;
- factory ChatUserMetadata.fromJson(Map<String, dynamic> json) => _$ChatUserMetadataFromJson(json);
+  const factory ChatUserMetadata({String? lastAnswer, String? description}) =
+      _ChatUserMetadata;
+  factory ChatUserMetadata.fromJson(Map<String, dynamic> json) =>
+      _$ChatUserMetadataFromJson(json);
 }

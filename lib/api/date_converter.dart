@@ -1,5 +1,4 @@
 class DateConverter {
-  
   static DateTime intToDateTime(int date) {
     var year = date ~/ 10000;
     var month = (date % 10000) ~/ 100;

@@ -20,44 +20,54 @@ class PersonsPage extends HookWidget {
   const PersonsPage({Key? key}) : super(key: key);
   @override
   Widget build(context) {
-    final PurchasesController purchasesController = Get.put(PurchasesController());
+    final PurchasesController purchasesController =
+        Get.put(PurchasesController());
     Get.put(MainController());
     final SearchController searchController = Get.put(SearchController());
-    final ProfessionalsController professionalsController = Get.put(ProfessionalsController());
+    final ProfessionalsController professionalsController =
+        Get.put(ProfessionalsController());
     Get.put(NotificationController());
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(
-      appBar: AppBar(
-        title: boldText(appName),
-        shape: appBarShape(context)
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: bnbElements,
-        currentIndex: pageIndex.value,
-        onTap: (index) async {
-          pageController.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.fastLinearToSlowEaseIn);
-          if (index == 1) await purchasesController.restorePurchases();
-        }
-      ),
-      body: PageView(
-        onPageChanged: (index) => pageIndex.value = index,
-        controller: pageController,
-        children: [
-          Obx(() => searchController.isSearching.value ?
-          SearchScreen(
-            onQueryChanged: (query) => searchController.search(query),
-            child: const PersonCards(isProMode: false),
-          ) : const PersonCards(isProMode: false,),),
-          Obx(() => professionalsController.isSearching.value ?
-          SearchScreen(
-            onQueryChanged: (query) => professionalsController.search(query),
-            child: const PersonCards(isProMode: true),
-          ) : const PersonCards(isProMode: true,),),
-          SubscribeView()
-        ],
-      )
-    );
+        appBar: AppBar(title: boldText(appName), shape: appBarShape(context)),
+        bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            items: bnbElements,
+            currentIndex: pageIndex.value,
+            onTap: (index) async {
+              pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.fastLinearToSlowEaseIn);
+              if (index == 1) await purchasesController.restorePurchases();
+            }),
+        body: PageView(
+          onPageChanged: (index) => pageIndex.value = index,
+          controller: pageController,
+          children: [
+            Obx(
+              () => searchController.isSearching.value
+                  ? SearchScreen(
+                      onQueryChanged: (query) => searchController.search(query),
+                      child: const PersonCards(isProMode: false),
+                    )
+                  : const PersonCards(
+                      isProMode: false,
+                    ),
+            ),
+            Obx(
+              () => professionalsController.isSearching.value
+                  ? SearchScreen(
+                      onQueryChanged: (query) =>
+                          professionalsController.search(query),
+                      child: const PersonCards(isProMode: true),
+                    )
+                  : const PersonCards(
+                      isProMode: true,
+                    ),
+            ),
+            SubscribeView()
+          ],
+        ));
   }
 }

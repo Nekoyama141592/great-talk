@@ -12,7 +12,8 @@ import 'package:great_talk/common/strings.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-class NotificationController extends GetxController with WidgetsBindingObserver {
+class NotificationController extends GetxController
+    with WidgetsBindingObserver {
   final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -47,10 +48,12 @@ class NotificationController extends GetxController with WidgetsBindingObserver 
 
   String _createRandomMsg() {
     final random = Random(); // ランダムな数値を生成するオブジェクト
-    final randomIndex = random.nextInt(fullPersons.length); // 配列内のランダムなインデックスを取得
+    final randomIndex =
+        random.nextInt(fullPersons.length); // 配列内のランダムなインデックスを取得
     final randomPerson = fullPersons[randomIndex]; // インデックスに対応する要素を取得
     return "今日は${randomPerson.lastName!}と話してみませんか？";
   }
+
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
     final String timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
@@ -82,24 +85,25 @@ class NotificationController extends GetxController with WidgetsBindingObserver 
   Future<void> requestPermissions() async {
     if (Platform.isIOS) {
       await _flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin>()
-      ?.requestPermissions(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
+          .resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin>()
+          ?.requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          );
     }
     if (Platform.isAndroid) {
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
-      await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()?.requestPermission();
+          FlutterLocalNotificationsPlugin();
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.requestPermission();
     }
   }
 
   Future<void> registerMessage(String message) async {
-
     await _flutterLocalNotificationsPlugin.periodicallyShow(
       0,
       appName,

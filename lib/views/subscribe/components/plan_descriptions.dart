@@ -12,27 +12,34 @@ class PlanDescriptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final storeStr = Platform.isIOS ? "App Store" : "Google Play Store";
-      final children = [
-        ListTile(
+    final children = [
+      ListTile(
           leading: const Icon(Icons.check),
-          title: boldText('無料プランではチャットは1日${ChatApi.chatLimitPerDay}回!')
-        ),
-        const Divider(),
-        ListTile(
-          leading: const Icon(Icons.check,color: kSecondaryColor,),
-          title: boldText('登録するとチャット回数が無制限！')
-        ),
-        const Divider(),
-        ListTile(
-          leading: const Icon(Icons.check,color: kSecondaryColor,),
-          title: boldText("$storeStr からいつでもキャンセルできます")
-        ),
-        const Divider(),
-        ListTile(
-          leading: const Icon(Icons.check,color: kSecondaryColor,),
-          title: boldText("購入したその日に課金されます")
-        ),
-      ];
-    return Obx((() => PurchasesController.to.loading.value ? const Card(child: ListTile(title: Text('情報を取得しています'))) : Card(child: Column(children: children))));
+          title: boldText('無料プランではチャットは1日${ChatApi.chatLimitPerDay}回!')),
+      const Divider(),
+      ListTile(
+          leading: const Icon(
+            Icons.check,
+            color: kSecondaryColor,
+          ),
+          title: boldText('登録するとチャット回数が無制限！')),
+      const Divider(),
+      ListTile(
+          leading: const Icon(
+            Icons.check,
+            color: kSecondaryColor,
+          ),
+          title: boldText("$storeStr からいつでもキャンセルできます")),
+      const Divider(),
+      ListTile(
+          leading: const Icon(
+            Icons.check,
+            color: kSecondaryColor,
+          ),
+          title: boldText("購入したその日に課金されます")),
+    ];
+    return Obx((() => PurchasesController.to.loading.value
+        ? const Card(child: ListTile(title: Text('情報を取得しています')))
+        : Card(child: Column(children: children))));
   }
 }

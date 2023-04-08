@@ -5,21 +5,20 @@ import 'package:great_talk/controllers/purchases_controller.dart';
 
 class RestoreButton extends StatelessWidget {
   const RestoreButton({Key? key}) : super(key: key);
-  @override 
+  @override
   Widget build(BuildContext context) {
     final controller = PurchasesController.to;
     return Obx((() {
       return controller.loading.value
-      ? Container()
-      : Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Container(
-          alignment: Alignment.bottomRight,
-          child: TextButton(
-          onPressed: () async => await controller.restorePurchases(),
-          child: blackText('購入を復元')
-        ),)
-      );
+          ? Container()
+          : Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Container(
+                alignment: Alignment.bottomRight,
+                child: TextButton(
+                    onPressed: () async => await controller.restorePurchases(),
+                    child: blackText('購入を復元')),
+              ));
     }));
   }
 }

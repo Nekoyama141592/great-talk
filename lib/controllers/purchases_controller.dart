@@ -22,34 +22,42 @@ class PurchasesController extends GetxController {
   final loading = true.obs;
   final queryProductError = "".obs; // 使われていない.
 
-  void _addPurchase(PurchaseDetails purchaseDetails) => purchases(List.from(purchases)..add(purchaseDetails));
-  void _setProducts(List<ProductDetails> productList) => isProd() ? products(productList) : products(myProductList);
+  void _addPurchase(PurchaseDetails purchaseDetails) =>
+      purchases(List.from(purchases)..add(purchaseDetails));
+  void _setProducts(List<ProductDetails> productList) =>
+      isProd() ? products(productList) : products(myProductList);
 
   bool hasProductBeenPurchased(ProductDetails productDetails) {
     bool result;
     if (Platform.isAndroid) {
-      result = purchases.isNotEmpty ? purchases.last.productID == productDetails.id : false;
+      result = purchases.isNotEmpty
+          ? purchases.last.productID == productDetails.id
+          : false;
     } else {
-      result = purchases.map((element) => element.productID).toList().contains(productDetails.id);
+      result = purchases
+          .map((element) => element.productID)
+          .toList()
+          .contains(productDetails.id);
     }
     return result;
   }
 
-
   Future<void> restorePurchases() async {
-    if(purchases.isEmpty && isProd()) await inAppPurchase.restorePurchases();
+    if (purchases.isEmpty && isProd()) await inAppPurchase.restorePurchases();
   }
 
   @override
   void onInit() {
-    final Stream<List<PurchaseDetails>> purchaseUpdated = inAppPurchase.purchaseStream;
-    subscription = purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
-        _listenToPurchaseUpdated(purchaseDetailsList); // 成功
-      }, onDone: () {
-       
-      }, onError: (Object error) {
-        // handle error here.
-    });
+    final Stream<List<PurchaseDetails>> purchaseUpdated =
+        inAppPurchase.purchaseStream;
+    subscription = purchaseUpdated.listen(
+        (List<PurchaseDetails> purchaseDetailsList) {
+          _listenToPurchaseUpdated(purchaseDetailsList); // 成功
+        },
+        onDone: () {},
+        onError: (Object error) {
+          // handle error here.
+        });
     initStoreInfo();
     super.onInit();
   }
@@ -57,12 +65,15 @@ class PurchasesController extends GetxController {
   @override
   void onClose() {
     if (Platform.isIOS) {
-      final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition = inAppPurchase.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+      final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
+          inAppPurchase
+              .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       iosPlatformAddition.setDelegate(null);
     }
     subscription.cancel();
     super.onClose();
   }
+
   Future<void> initStoreInfo() async {
     final bool storeConnected = await inAppPurchase.isAvailable();
     if (!storeConnected) {
@@ -75,13 +86,16 @@ class PurchasesController extends GetxController {
     }
 
     if (Platform.isIOS) {
-      final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =inAppPurchase.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+      final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
+          inAppPurchase
+              .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
     }
 
-    final ProductDetailsResponse productDetailResponse = await inAppPurchase.queryProductDetails(kProductIds.toSet());
+    final ProductDetailsResponse productDetailResponse =
+        await inAppPurchase.queryProductDetails(kProductIds.toSet());
     if (productDetailResponse.error != null) {
-      queryProductError (productDetailResponse.error!.message);
+      queryProductError(productDetailResponse.error!.message);
       isAvailable(storeConnected);
       _setProducts(productDetailResponse.productDetails);
       purchases(<PurchaseDetails>[]);
@@ -119,18 +133,21 @@ class PurchasesController extends GetxController {
     purchasePending(false);
   }
 
-  Future<void> _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async {
+  Future<void> _listenToPurchaseUpdated(
+      List<PurchaseDetails> purchaseDetailsList) async {
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
       if (purchaseDetails.status == PurchaseStatus.pending) {
         showPendingUI();
       } else {
         if (purchaseDetails.status == PurchaseStatus.error) {
           handleError(purchaseDetails.error!);
-        } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
+        } else if (purchaseDetails.status == PurchaseStatus.purchased ||
+            purchaseDetails.status == PurchaseStatus.restored) {
           deliverProduct(purchaseDetails);
           return;
         }
-        if (purchaseDetails.pendingCompletePurchase) await inAppPurchase.completePurchase(purchaseDetails);
+        if (purchaseDetails.pendingCompletePurchase)
+          await inAppPurchase.completePurchase(purchaseDetails);
       }
     }
   }

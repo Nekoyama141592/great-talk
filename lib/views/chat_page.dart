@@ -16,11 +16,8 @@ import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/domain/chat_l10n_ja/chat_l10n_ja.dart';
 
 class ChatPage extends HookWidget {
-  const ChatPage({
-    Key? key,
-    required this.person,
-    required this.controller
-  }) : super(key: key);
+  const ChatPage({Key? key, required this.person, required this.controller})
+      : super(key: key);
   final types.User person;
   final PersonsController controller;
   @override
@@ -29,10 +26,10 @@ class ChatPage extends HookWidget {
     final String name = getName(person);
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-      	messages.value = await ChatApi.getChatLog(person);
+        messages.value = await ChatApi.getChatLog(person);
       });
       return;
-    },[]);
+    }, []);
     return Scaffold(
       appBar: AppBar(
         title: boldText(name),
@@ -42,9 +39,10 @@ class ChatPage extends HookWidget {
         theme: const DefaultChatTheme(primaryColor: kPrimaryColor),
         avatarBuilder: (text) => UserAvatar(author: person),
         showUserAvatars: true,
-        messages: messages.value, 
+        messages: messages.value,
         onSendPressed: (partialText) async {
-          await ChatApi.onSendPressed(context,partialText, messages, person,controller);
+          await ChatApi.onSendPressed(
+              context, partialText, messages, person, controller);
         },
         user: chatUiCurrrentUser,
         l10n: const ChatL10nJa(),

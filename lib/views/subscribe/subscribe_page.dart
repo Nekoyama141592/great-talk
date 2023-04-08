@@ -17,12 +17,13 @@ class SubscribePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('サブスクリプション'),shape: appBarShape(context),),
-      body: SubscribeView()
-    );
+        appBar: AppBar(
+          title: const Text('サブスクリプション'),
+          shape: appBarShape(context),
+        ),
+        body: SubscribeView());
   }
 }
-
 
 class SubscribeView extends StatelessWidget {
   SubscribeView({Key? key}) : super(key: key);
@@ -40,8 +41,13 @@ class SubscribeView extends StatelessWidget {
             if (purchasesController.purchasePending.value) {
               return Stack(
                 children: const <Widget>[
-                  Opacity(opacity: 0.3, child: ModalBarrier(dismissible: false, color: Colors.grey),),
-                  Center(child: CircularProgressIndicator(),),
+                  Opacity(
+                    opacity: 0.3,
+                    child: ModalBarrier(dismissible: false, color: Colors.grey),
+                  ),
+                  Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 ],
               );
             } else {
@@ -52,7 +58,4 @@ class SubscribeView extends StatelessWidget {
       ),
     );
   }
-
-
-  
 }

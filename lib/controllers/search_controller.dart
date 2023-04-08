@@ -8,7 +8,8 @@ import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchController extends PersonsController {
-  SearchController() : super(fullPersons.obs,localPersonsPrefsKey,fullPersons);
+  SearchController()
+      : super(fullPersons.obs, localPersonsPrefsKey, fullPersons);
   static SearchController get to => Get.find<SearchController>();
   // このoverrideはある程度経過すれば消す。
   @override
@@ -16,8 +17,11 @@ class SearchController extends PersonsController {
     final String jsonString = prefs.getString(personsPrefsKey) ?? "";
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
-      List<types.User> latestPersons = decodedJson.map((e) => types.User.fromJson(e) ).toList();
-      latestPersons.removeWhere((element) => proPersons.map((e) => e.id).contains(element.id),);
+      List<types.User> latestPersons =
+          decodedJson.map((e) => types.User.fromJson(e)).toList();
+      latestPersons.removeWhere(
+        (element) => proPersons.map((e) => e.id).contains(element.id),
+      );
       results(latestPersons);
     }
   }
