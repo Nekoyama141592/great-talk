@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/api/url_api.dart';
 import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainController extends GetxController {

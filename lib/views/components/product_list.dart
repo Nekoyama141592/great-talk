@@ -18,11 +18,13 @@ class ProductList extends StatelessWidget {
     final controller = PurchasesController.to;
     final inAppPurchase = controller.inAppPurchase;
     return Obx((() {
-      if (controller.loading.value)
+      if (controller.loading.value) {
         return const Card(
             child: ListTile(
                 leading: CircularProgressIndicator(),
                 title: Text('情報を取得しています')));
+      }
+        
       if (!controller.isAvailable.value) return const Card();
       final ListTile productHeader = ListTile(title: boldText("プラン一覧"));
       final List<Widget> productList = controller.products.map(

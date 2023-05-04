@@ -71,7 +71,6 @@ class ChatGpt {
   final String apiKey;
 
   ChatGpt({required this.apiKey});
-  // TODO: Map<String,dynamic>から変更する.
   Future<Map<String, dynamic>> createCompletion(
       CompletionRequest completionRequest) async {
     try {
@@ -166,7 +165,7 @@ abstract class ApiClient {
 class _ApiClient implements ApiClient {
   _ApiClient(
     this._dio, {
-    this.baseUrl,
+     this.baseUrl,
   });
 
   final Dio _dio;
@@ -175,25 +174,25 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<CompleteResponse> createCompletion(request) async {
-    const _extra = <String, dynamic>{};
+    const extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
-    final _result = await _dio
+    final headers = <String, dynamic>{};
+    final data = <String, dynamic>{};
+    data.addAll(request.toJson());
+    final result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<CompleteResponse>(Options(
       method: 'POST',
-      headers: _headers,
-      extra: _extra,
+      headers: headers,
+      extra: extra,
     )
             .compose(
               _dio.options,
               '/completions',
               queryParameters: queryParameters,
-              data: _data,
+              data: data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CompleteResponse.fromJson(_result.data!);
+    final value = CompleteResponse.fromJson(result.data!);
     return value;
   }
 

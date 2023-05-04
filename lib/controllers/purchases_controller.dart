@@ -9,7 +9,6 @@ import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
-import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
 class PurchasesController extends GetxController {
   static PurchasesController get to => Get.find<PurchasesController>();
@@ -146,8 +145,10 @@ class PurchasesController extends GetxController {
           deliverProduct(purchaseDetails);
           return;
         }
-        if (purchaseDetails.pendingCompletePurchase)
+        if (purchaseDetails.pendingCompletePurchase) {
           await inAppPurchase.completePurchase(purchaseDetails);
+        }
+          
       }
     }
   }

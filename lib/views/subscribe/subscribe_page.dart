@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:great_talk/common/bools.dart';
 import 'package:great_talk/common/others.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
-import 'package:great_talk/views/components/policy_buttons.dart';
 import 'package:great_talk/views/components/price_list.dart';
 
 import 'package:great_talk/views/components/product_list.dart';

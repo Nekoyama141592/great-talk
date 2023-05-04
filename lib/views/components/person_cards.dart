@@ -11,7 +11,6 @@ import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
 // packages
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/views/chat_page.dart';
 // components
 import 'package:great_talk/views/components/circle_image.dart';

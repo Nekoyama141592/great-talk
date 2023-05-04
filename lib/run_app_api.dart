@@ -21,11 +21,11 @@ class RunAppApi {
 
   static FirebaseOptions _getFirebaseOption(Flavor flavor) {
     switch (flavor) {
-      case Flavor.DEV:
+      case Flavor.dev:
         return dev.DefaultFirebaseOptions.currentPlatform;
-      case Flavor.PROD:
+      case Flavor.prod:
         return prod.DefaultFirebaseOptions.currentPlatform;
-      case Flavor.VERIFICATION:
+      case Flavor.verification:
         return verification.DefaultFirebaseOptions.currentPlatform;
     }
   }

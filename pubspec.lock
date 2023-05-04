@@ -391,7 +391,7 @@ packages:
     source: hosted
     version: "1.5.0"
   flutter_chat_types:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_chat_types
       sha256: "34d1d61e46d5ca15f3b46e72d0a9ac98da72edc5eb5bf644a26e27351c9e15ba"
@@ -545,7 +545,7 @@ packages:
     source: hosted
     version: "2.3.2"
   freezed_annotation:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: freezed_annotation
       sha256: aeac15850ef1b38ee368d4c53ba9a847e900bb2c53a4db3f6881cbb3cb684338
@@ -681,13 +681,13 @@ packages:
     source: hosted
     version: "3.1.5"
   in_app_purchase_android:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: in_app_purchase_android
-      sha256: "7c4a99a1d44c0ba7514ae4490654405931afb221466677bb63f6bac51e5f4f61"
+      sha256: "8d24e7141d5da4e239045438cb990b98fe8fd3e8de6884fbc76ff4ecec30caf5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.4+3"
+    version: "0.2.5+4"
   in_app_purchase_platform_interface:
     dependency: transitive
     description:
@@ -697,13 +697,13 @@ packages:
     source: hosted
     version: "1.3.3"
   in_app_purchase_storekit:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: in_app_purchase_storekit
-      sha256: b639ff9482ba43a0c6d9b3f4a741c174034a052779a41c0cbc6e485e13ac2a9a
+      sha256: "3c73cbebff4365fbb0bef182f35b07e45087f598378f5b676f5825145d5bdbdb"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.6+2"
+    version: "0.3.6+3"
   in_app_review:
     dependency: "direct main"
     description:
@@ -1142,13 +1142,13 @@ packages:
     source: hosted
     version: "0.4.16"
   timezone:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: timezone
-      sha256: "24c8fcdd49a805d95777a39064862133ff816ebfffe0ceff110fb5960e557964"
+      sha256: "1cfd8ddc2d1cfd836bc93e67b9be88c3adaeca6f40a00ca999104c30693cdca0"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.1"
+    version: "0.9.2"
   timing:
     dependency: transitive
     description:
