@@ -1,5 +1,11 @@
 # great_talk
 
+## iOS
+https://apps.apple.com/us/app/great-talk/id1667705303
+
+## Android
+https://play.google.com/store/apps/details?id=com.firebaseapp.great_talk&pli=1
+
 ## 実行コード
 
 ### dev
