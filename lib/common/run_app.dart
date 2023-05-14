@@ -11,7 +11,7 @@ import 'package:great_talk/gen/firebase_options_prod.dart' as prod;
 import 'package:great_talk/gen/firebase_options_verification.dart'
     as verification;
 
-class RunAppApi {
+class RunApp {
   static Future<void> runGreatTalk(Flavor flavor) async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(options: _getFirebaseOption(flavor));

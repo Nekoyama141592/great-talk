@@ -23,7 +23,8 @@ class PersonsPage extends HookWidget {
     final PurchasesController purchasesController =
         Get.put(PurchasesController());
     Get.put(MainController());
-    final OriginalSearchController searchController = Get.put(OriginalSearchController());
+    final OriginalSearchController searchController =
+        Get.put(OriginalSearchController());
     final ProfessionalsController professionalsController =
         Get.put(ProfessionalsController());
     Get.put(NotificationController());

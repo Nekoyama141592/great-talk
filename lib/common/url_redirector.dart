@@ -1,6 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
 
-class UrlApi {
+class UrlRedirector {
   static const String _privacy =
       "https://impartial-literature-dfb.notion.site/2b71dbec76c64d80b16baefc8fc8485b";
   static final privacyPolicyUri = Uri.parse(_privacy);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/api/url_api.dart';
+import 'package:great_talk/common/url_redirector.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,7 +25,7 @@ class MainController extends GetxController {
                 ),
                 const Divider(),
                 TextButton(
-                    onPressed: () async => await UrlApi.toTosPage(),
+                    onPressed: () async => await UrlRedirector.toTosPage(),
                     child: const Text(
                       tosText,
                       style: style,

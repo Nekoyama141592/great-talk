@@ -148,7 +148,6 @@ class PurchasesController extends GetxController {
         if (purchaseDetails.pendingCompletePurchase) {
           await inAppPurchase.completePurchase(purchaseDetails);
         }
-          
       }
     }
   }

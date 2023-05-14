@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 // packages
 import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:great_talk/api/chat_gpt_api.dart';
+import 'package:great_talk/repository/chat_gpt_repository.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
-import 'package:great_talk/api/show_toast.dart';
-import 'package:great_talk/api/wolfram_api.dart';
+import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/views/subscribe/subscribe_page.dart';
@@ -18,9 +18,9 @@ import 'package:in_app_review/in_app_review.dart';
 // common
 import 'package:great_talk/common/strings.dart';
 // api
-import 'package:great_talk/api/date_converter.dart';
+import 'package:great_talk/common/date_converter.dart';
 
-class ChatApi {
+class ChatRepository {
   static const chatLimitPerDay = 5;
 
   // 与えられたpersonとのチャット履歴を取得
@@ -58,16 +58,16 @@ class ChatApi {
       switch (person.id) {
         case wolframId:
           // wolframの場合
-          await WolframApi.fetchApi(msg).then((en) async {
+          await WolframRepository.fetchApi(msg).then((en) async {
             if (en == calculateFailedMsg) {
-              final reqBody = ChatGPTApi.createBasicQuery(msg);
-              await ChatGPTApi.fetchApi(reqBody).then((value) {
+              final reqBody = ChatGPTRepository.createBasicQuery(msg);
+              await ChatGPTRepository.fetchApi(reqBody).then((value) {
                 answerText = "計算AIから結果が得られなかったので普通のAIが対応します。\n\n$value";
                 _addMessageAndPop(answerText, messages, person);
               });
             } else {
-              final reqBody = WolframApi.createChatGPTJaReqBody(en);
-              await ChatGPTApi.fetchApi(reqBody).then((value) {
+              final reqBody = WolframRepository.createChatGPTJaReqBody(en);
+              await ChatGPTRepository.fetchApi(reqBody).then((value) {
                 answerText = value;
                 _addMessageAndPop(answerText, messages, person);
               });
@@ -75,9 +75,9 @@ class ChatApi {
           });
           break;
         default:
-          final reqBody =
-              ChatGPTApi.createGreatPeopleReqBody(messages.value, person);
-          await ChatGPTApi.fetchApi(reqBody).then((value) {
+          final reqBody = ChatGPTRepository.createGreatPeopleReqBody(
+              messages.value, person);
+          await ChatGPTRepository.fetchApi(reqBody).then((value) {
             answerText = value;
             _addMessageAndPop(answerText, messages, person);
           });
@@ -178,7 +178,7 @@ class ChatApi {
     final prefs = await SharedPreferences.getInstance();
     await controller.cleanMetadata(person);
     await prefs.remove(person.id);
-    await ShowToast.showFlutterToast(clearChatMsg);
+    await UIHelper.showFlutterToast(clearChatMsg);
   }
 
   static bool _is24HoursFromLast(SharedPreferences prefs) {

@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:great_talk/api/chat_gpt_api.dart';
+import 'package:great_talk/repository/chat_gpt_repository.dart';
 import 'package:great_talk/common/strings.dart';
 
-class WolframApi {
+class WolframRepository {
   static Future<String> fetchApi(String msg) async {
-    final query = await ChatGPTApi.createWolframQuery(msg);
+    final query = await ChatGPTRepository.createWolframQuery(msg);
     final String wolframAppId =
         dotenv.get("WOLFRAM_APP_ID"); // Wolfram API App IDを設定する
     String wolframApiUrl =

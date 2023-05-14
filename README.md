@@ -9,10 +9,10 @@ https://play.google.com/store/apps/details?id=com.firebaseapp.great_talk&pli=1
 ## 実行コード
 
 ### dev
-flutter run --flavor dev -t lib/main_dev.dart --no-sound-null-safety
+flutter run --flavor dev -t lib/main_dev.dart
 
 ### prod
-flutter run --flavor prod -t lib/main_prod.dart --no-sound-null-safety
+flutter run --flavor prod -t lib/main_prod.dart
 
 ## Build
 

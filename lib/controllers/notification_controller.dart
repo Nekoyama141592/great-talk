@@ -123,7 +123,6 @@ class NotificationController extends GetxController
           badgeNumber: 1,
         ),
       ),
-      androidAllowWhileIdle: true,
     );
   }
 }

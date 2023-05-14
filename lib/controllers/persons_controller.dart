@@ -1,7 +1,7 @@
 // dart
 import 'dart:convert';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:great_talk/api/date_converter.dart';
+import 'package:great_talk/common/date_converter.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/model/chat_user_metadata/chat_user_metadata.dart';
 import 'package:shared_preferences/shared_preferences.dart';

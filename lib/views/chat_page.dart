@@ -5,7 +5,7 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 // api
-import 'package:great_talk/api/chat_api.dart';
+import 'package:great_talk/repository/chat_repository.dart';
 import 'package:great_talk/common/colors.dart';
 // common
 import 'package:great_talk/common/persons.dart';
@@ -26,7 +26,7 @@ class ChatPage extends HookWidget {
     final String name = getName(person);
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        messages.value = await ChatApi.getChatLog(person);
+        messages.value = await ChatRepository.getChatLog(person);
       });
       return;
     }, []);
@@ -41,7 +41,7 @@ class ChatPage extends HookWidget {
         showUserAvatars: true,
         messages: messages.value,
         onSendPressed: (partialText) async {
-          await ChatApi.onSendPressed(
+          await ChatRepository.onSendPressed(
               context, partialText, messages, person, controller);
         },
         user: chatUiCurrrentUser,

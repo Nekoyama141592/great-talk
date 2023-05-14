@@ -9,7 +9,7 @@ import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 
-class InAppPurchaseApi {
+class InAppPurchaseRepository {
   static Future<void> onPurchaseButtonPressed(
       InAppPurchase inAppPurchase, ProductDetails productDetails) async {
     final GooglePlayPurchaseDetails? oldSubscription =
