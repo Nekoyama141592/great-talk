@@ -1,5 +1,5 @@
 // packages
-import 'package:great_talk/domain/chat_user_metadata/chat_user_metadata.dart';
+import 'package:great_talk/model/chat_user_metadata/chat_user_metadata.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:uuid/uuid.dart';

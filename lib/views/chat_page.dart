@@ -13,7 +13,7 @@ import 'package:great_talk/common/others.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
-import 'package:great_talk/domain/chat_l10n_ja/chat_l10n_ja.dart';
+import 'package:great_talk/model/chat_l10n_ja/chat_l10n_ja.dart';
 
 class ChatPage extends HookWidget {
   const ChatPage({Key? key, required this.person, required this.controller})
