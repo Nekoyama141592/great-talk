@@ -57,7 +57,7 @@ String? mapMetadataToLastAnswer(Map<String, dynamic>? mapMetadata) =>
     mapMetadata == null
         ? null
         : ChatUserMetadata.fromJson(mapMetadata).lastAnswer;
-const String appName = "すごいAIあぷり";
+const String appName = "すごいAI";
 // msg
 const String clearChatMsg = "チャット履歴を全て削除しました";
 const String calculateFailedMsg = '計算結果が取得できませんでした';

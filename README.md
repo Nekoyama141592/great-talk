@@ -20,7 +20,7 @@ flutter run --flavor prod -t lib/main_prod.dart --no-sound-null-safety
 flutter build ios --flavor prod -t lib/main_prod.dart --release
 
 ### Android
-flutter build appbundle --flavor prod -t lib/main_prod.dart --no-sound-null-safety
+flutter build appbundle --flavor prod -t lib/main_prod.dart
 
 ## デザイン
 
@@ -34,5 +34,6 @@ flutter analyze .
 
 ## 自動生成
 flutter pub run build_runner build --delete-conflicting-outputs  
-
+## 一括アップデート
+flutter pub upgrade --major-versions
 # frontend

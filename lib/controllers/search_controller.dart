@@ -7,10 +7,10 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SearchController extends PersonsController {
-  SearchController()
+class OriginalSearchController extends PersonsController {
+  OriginalSearchController()
       : super(fullPersons.obs, localPersonsPrefsKey, fullPersons);
-  static SearchController get to => Get.find<SearchController>();
+  static OriginalSearchController get to => Get.find<OriginalSearchController>();
   // このoverrideはある程度経過すれば消す。
   @override
   void getLatestPersons(SharedPreferences prefs) {

@@ -37,8 +37,8 @@ class SubscribeView extends StatelessWidget {
           if (Platform.isAndroid) const PriceList(),
           Obx((() {
             if (purchasesController.purchasePending.value) {
-              return Stack(
-                children: const <Widget>[
+              return const Stack(
+                children: <Widget>[
                   Opacity(
                     opacity: 0.3,
                     child: ModalBarrier(dismissible: false, color: Colors.grey),

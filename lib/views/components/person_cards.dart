@@ -21,7 +21,7 @@ class PersonCards extends StatelessWidget {
   @override
   Widget build(context) {
     final PersonsController controller =
-        isProMode ? ProfessionalsController.to : SearchController.to;
+        isProMode ? ProfessionalsController.to : OriginalSearchController.to;
     return Scaffold(
         floatingActionButton: Obx(
           () => FloatingActionButton(
