@@ -1,7 +1,8 @@
 // packages
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:dio/dio.dart';
+import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -11,7 +12,7 @@ class ChatGPTRepository {
   static Future<String> fetchApi(List<Map<String, dynamic>> reqBody) async {
     final chatGpt = ChatGpt(apiKey: dotenv.get("OPEN_AI_API_KEY"));
     final request = CompletionRequest(
-        model: "gpt-3.5-turbo", messages: reqBody, maxTokens: 255);
+        model: "gpt-3.5-turbo", messages: reqBody, maxTokens: maxTokens);
     try {
       final Map<String, dynamic> res = await chatGpt.createCompletion(request);
       return res["choices"][0]["message"]["content"].toString().trim();
@@ -21,14 +22,22 @@ class ChatGPTRepository {
   }
 
   static List<Map<String, dynamic>> createGreatPeopleReqBody(
-      List<types.Message> messages, types.User person) {
+      List<Message> messages, User person) {
+    // メッセージからリクエストを送るJsonを生成.
+    // メッセージ数を制限する。
+    final reversed = messages.reversed.toList();
+    final requestMessages = reversed.length > maxRequestLength
+        ? reversed.sublist(reversed.length - maxRequestLength)
+        : [...reversed];
+
     final List<Map<String, dynamic>> result =
-        messages.map((e) => _toValidMessage(e)).toList().reversed.toList();
+        requestMessages.map((e) => _toValidMessage(e)).toList();
+    // システムプロンプトを追加.
     if (person.id != chatGPTId) result.insert(0, _systemMsg(person));
     return result;
   }
 
-  static Map<String, dynamic> _systemMsg(types.User person) {
+  static Map<String, dynamic> _systemMsg(User person) {
     final name = person.lastName;
     String content = proIds.contains(person.id)
         ? "あなたは一人のプロの$nameです。それになりきって以下の問いに答えろ。自分がAIアシスタントだとは答えるな。"
@@ -40,7 +49,7 @@ class ChatGPTRepository {
     };
   }
 
-  static Map<String, dynamic> _toValidMessage(types.Message msg) => {
+  static Map<String, dynamic> _toValidMessage(Message msg) => {
         "role": msg.author.id == chatUiCurrrentUser.id ? "user" : "assistant",
         "content": msg.toJson()["text"],
       };
