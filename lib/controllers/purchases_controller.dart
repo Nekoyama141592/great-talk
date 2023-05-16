@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/bools.dart';
+import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/iap_constants/my_product_list.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -9,6 +13,7 @@ import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
+import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 
 class PurchasesController extends GetxController {
   static PurchasesController get to => Get.find<PurchasesController>();
@@ -75,12 +80,8 @@ class PurchasesController extends GetxController {
 
   Future<void> initStoreInfo() async {
     final bool storeConnected = await inAppPurchase.isAvailable();
+    isAvailable(storeConnected);
     if (!storeConnected) {
-      isAvailable(storeConnected);
-      _setProducts(<ProductDetails>[]);
-      purchases(<PurchaseDetails>[]);
-      purchasePending(false);
-      loading(false);
       return;
     }
 
@@ -95,25 +96,19 @@ class PurchasesController extends GetxController {
         await inAppPurchase.queryProductDetails(kProductIds.toSet());
     if (productDetailResponse.error != null) {
       queryProductError(productDetailResponse.error!.message);
-      isAvailable(storeConnected);
       _setProducts(productDetailResponse.productDetails);
-      purchases(<PurchaseDetails>[]);
       purchasePending(false);
       loading(false);
       return;
     }
 
     if (productDetailResponse.productDetails.isEmpty) {
-      queryProductError('');
-      isAvailable(storeConnected);
       _setProducts(productDetailResponse.productDetails);
-      purchases(<PurchaseDetails>[]);
-      purchasePending(false);
       loading(false);
+      purchasePending(false);
       return;
     }
 
-    isAvailable(storeConnected);
     _setProducts(productDetailResponse.productDetails);
     purchasePending(false);
     loading(false);
@@ -128,27 +123,43 @@ class PurchasesController extends GetxController {
     purchasePending(false);
   }
 
-  void handleError(IAPError error) {
+  void handleError(IAPError error) async {
     purchasePending(false);
+    await UIHelper.showFlutterToast("購入されたアイテムが取得できませんでした");
   }
 
   Future<void> _listenToPurchaseUpdated(
       List<PurchaseDetails> purchaseDetailsList) async {
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
-      if (purchaseDetails.status == PurchaseStatus.pending) {
-        showPendingUI();
-      } else {
-        if (purchaseDetails.status == PurchaseStatus.error) {
-          handleError(purchaseDetails.error!);
-        } else if (purchaseDetails.status == PurchaseStatus.purchased ||
-            purchaseDetails.status == PurchaseStatus.restored) {
-          deliverProduct(purchaseDetails);
-          return;
-        }
-        if (purchaseDetails.pendingCompletePurchase) {
-          await inAppPurchase.completePurchase(purchaseDetails);
+      _createRecept(purchaseDetails);
+      if (purchaseDetails.pendingCompletePurchase ||
+          purchaseDetails.status == PurchaseStatus.pending) {
+        await inAppPurchase.completePurchase(purchaseDetails);
+        if (Platform.isAndroid) {
+          // 承認を行う.行わないと払い戻しが行われる.
+          BillingClient client = BillingClient((_) {});
+          await client.acknowledgePurchase(
+              purchaseDetails.verificationData.serverVerificationData);
         }
       }
+      if (purchaseDetails.status == PurchaseStatus.error) {
+        handleError(purchaseDetails.error!);
+      } else if (purchaseDetails.status == PurchaseStatus.purchased ||
+          purchaseDetails.status == PurchaseStatus.restored) {
+        deliverProduct(purchaseDetails);
+        return;
+      }
+    }
+  }
+
+  Future<void> _createRecept(PurchaseDetails purchaseDetails) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("purchaseReceipts")
+          .doc()
+          .set(purchaseDetails.toJson());
+    } catch (e) {
+      debugPrint("$e");
     }
   }
 }
