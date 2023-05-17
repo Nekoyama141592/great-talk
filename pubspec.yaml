@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' 
 
-version: 1.0.35+81
+version: 1.0.35+83
 
 environment:
   sdk: ">=2.18.2 <3.0.0"
@@ -56,7 +56,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - .env
+    - dev.env
+    - prod.env
 flutter_icons:
   android: true
   ios: true
