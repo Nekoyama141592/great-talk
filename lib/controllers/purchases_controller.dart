@@ -14,6 +14,12 @@ import 'package:great_talk/iap_constants/subscription_constants.dart';
 
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
+// receipt
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:great_talk/consts/env_keys.dart';
+import 'package:great_talk/model/ios_receipt_response/ios_receipt_response.dart';
+import 'package:dio/dio.dart' as dio;
 
 class PurchasesController extends GetxController {
   static PurchasesController get to => Get.find<PurchasesController>();
@@ -25,7 +31,6 @@ class PurchasesController extends GetxController {
   final purchasePending = false.obs;
   final loading = true.obs;
   final queryProductError = "".obs; // 使われていない.
-
   void _addPurchase(PurchaseDetails purchaseDetails) =>
       purchases(List.from(purchases)..add(purchaseDetails));
   void _setProducts(List<ProductDetails> productList) =>
@@ -123,9 +128,28 @@ class PurchasesController extends GetxController {
     purchasePending(false);
   }
 
+  Future<bool> verifyPurchase(PurchaseDetails purchaseDetails) async {
+    if (Platform.isAndroid) {
+      return true;
+    }
+    if (Platform.isIOS) {
+      final result = await getIOSResult(
+          purchaseDetails.verificationData.localVerificationData);
+          await UIHelper.showFlutterToast(result?.message ?? "NULLです！");
+          if (result == null) {
+            await UIHelper.showFlutterToast("サーバーエラーにより、購入アイテムが検証できません");
+            return false;
+          } else {
+            if (result.responseCode == 200) {
+              return true;
+            }
+          }
+    }
+    return false;
+  }
+
   void handleError(IAPError error) async {
     purchasePending(false);
-    await UIHelper.showFlutterToast("購入されたアイテムが取得できませんでした");
   }
 
   Future<void> _listenToPurchaseUpdated(
@@ -146,7 +170,10 @@ class PurchasesController extends GetxController {
         handleError(purchaseDetails.error!);
       } else if (purchaseDetails.status == PurchaseStatus.purchased ||
           purchaseDetails.status == PurchaseStatus.restored) {
-        deliverProduct(purchaseDetails);
+        final isValid = await verifyPurchase(purchaseDetails);
+        if (isValid) {
+          deliverProduct(purchaseDetails);
+        }
         return;
       }
     }
@@ -160,6 +187,23 @@ class PurchasesController extends GetxController {
           .set(purchaseDetails.toJson());
     } catch (e) {
       debugPrint("$e");
+    }
+  }
+
+  Future<IOSReceiptResponse?> getIOSResult(String token) async {
+    final instance = dio.Dio();
+    try {
+      final dio.Response<Map<String, dynamic>> res =
+          await instance.post(dotenv.get(EnvKeys.VERIFY_IOS_ENDPOINT.name),
+              data: {
+                "data": token,
+              },
+              options: dio.Options(method: "POST"));
+      final result = IOSReceiptResponse.fromJson(res.data!);
+      return result;
+    } catch (e) {
+      debugPrint("$e");
+      return null;
     }
   }
 }

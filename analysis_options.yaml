@@ -8,7 +8,6 @@ analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
-    - "lib/l10n/l10n_en.dart"
-    - "lib/l10n/l10n_ja.dart"
+    - "lib/consts/env_keys.dart"
   errors:
     invalid_annotation_target: ignore
