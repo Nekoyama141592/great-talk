@@ -6,6 +6,8 @@ extension PurchaseDetailsExtension on PurchaseDetails {
       "productID": productID,
       "purchaseID": purchaseID,
       "verificationData": {
+        "localVerificationData": verificationData.localVerificationData,
+        "serverVerificationData": verificationData.serverVerificationData,
         "source ": verificationData.source,
       },
       "transactionDate": transactionDate ?? "",
