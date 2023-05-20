@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/bools.dart';
@@ -130,12 +129,12 @@ class PurchasesController extends GetxController {
 
   Future<bool> verifyPurchase(PurchaseDetails purchaseDetails) async {
     if (Platform.isAndroid) {
+      _postAndroidPurchase(purchaseDetails);
       return true;
     }
     if (Platform.isIOS) {
       final result = await getIOSResult(
           purchaseDetails.verificationData.localVerificationData);
-          await UIHelper.showFlutterToast(result?.message ?? "NULLです！");
           if (result == null) {
             await UIHelper.showFlutterToast("サーバーエラーにより、購入アイテムが検証できません");
             return false;
@@ -155,7 +154,6 @@ class PurchasesController extends GetxController {
   Future<void> _listenToPurchaseUpdated(
       List<PurchaseDetails> purchaseDetailsList) async {
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
-      _createRecept(purchaseDetails);
       if (purchaseDetails.pendingCompletePurchase ||
           purchaseDetails.status == PurchaseStatus.pending) {
         await inAppPurchase.completePurchase(purchaseDetails);
@@ -179,12 +177,14 @@ class PurchasesController extends GetxController {
     }
   }
 
-  Future<void> _createRecept(PurchaseDetails purchaseDetails) async {
+  Future<void> _postAndroidPurchase(PurchaseDetails purchaseDetails) async {
+    final instance = dio.Dio();
     try {
-      await FirebaseFirestore.instance
-          .collection("purchaseReceipts")
-          .doc()
-          .set(purchaseDetails.toJson());
+          await instance.post(dotenv.get(EnvKeys.VERIFY_ANDROID_ENDPOINT.name),
+              data: {
+                "data": purchaseDetails.toJson(),
+              },
+              options: dio.Options(method: "POST"));
     } catch (e) {
       debugPrint("$e");
     }
