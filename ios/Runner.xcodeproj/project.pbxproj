@@ -515,6 +515,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -524,6 +525,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1004,6 +1006,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1013,6 +1016,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1031,6 +1035,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1040,6 +1045,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1459,8 +1465,9 @@
 			baseConfigurationReference = E97A2E39EBFC3E01C06E6A48 /* Pods-Runner.debug-dev.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_dev;
 			};
 			name = "Debug-dev";
 		};
@@ -1471,7 +1478,7 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_dev;
 			};
 			name = "Profile-dev";
 		};
@@ -1480,8 +1487,9 @@
 			baseConfigurationReference = F59BCF81F0A0697BD90E28AA /* Pods-Runner.release-dev.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_dev;
 			};
 			name = "Release-dev";
 		};
@@ -1492,8 +1500,10 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Debug-prod";
 		};
@@ -1505,8 +1515,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Profile-prod";
 		};
@@ -1517,8 +1529,10 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Release-prod";
 		};

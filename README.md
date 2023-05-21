@@ -17,7 +17,6 @@ flutter run --flavor prod -t lib/main_prod.dart
 ## Build
 
 ### iOS
-flutter build ios --flavor dev -t lib/main_dev.dart --release
 flutter build ios --flavor prod -t lib/main_prod.dart --release
 
 ### Android
