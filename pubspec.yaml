@@ -72,21 +72,21 @@ flavorizr:
   flavors:
     dev:
       app:
-        name: "Great Talk Dev"
+        name: "すごいAI Dev"
       android:
         applicationId: "com.firebaseapp.great_talk_dev"
       ios:
         bundleId: "com.firebaseapp.greatTalkDev"
     verification:
       app:
-        name: "Great Talk Verification"
+        name: "すごいAI Verification"
       android:
         applicationId: "com.firebaseapp.great_talk_verification"
       ios:
         bundleId: "com.firebaseapp.greatTalkVerification"
     prod:
       app:
-        name: "Great Talk"
+        name: "すごいAI"
       android:
         applicationId: "com.firebaseapp.great_talk"
       ios:
