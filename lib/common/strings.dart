@@ -1,4 +1,5 @@
 // packages
+import 'package:great_talk/flavors.dart';
 import 'package:great_talk/model/chat_user_metadata/chat_user_metadata.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -11,7 +12,7 @@ String randomString() {
 }
 
 String getName(types.User person) => person.lastName ?? 'UNKNOWN';
-
+final appName = F.title;
 // prefs_key
 // personIdで各々のChat履歴
 const lastChatDatePrefsKey = "lastChatDate";
@@ -57,7 +58,6 @@ String? mapMetadataToLastAnswer(Map<String, dynamic>? mapMetadata) =>
     mapMetadata == null
         ? null
         : ChatUserMetadata.fromJson(mapMetadata).lastAnswer;
-const String appName = "すごいAI";
 // msg
 const String clearChatMsg = "チャット履歴を全て削除しました";
 const String calculateFailedMsg = '計算結果が取得できませんでした';
