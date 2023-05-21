@@ -62,8 +62,8 @@ class PolicyButtons extends StatelessWidget {
           SecondaryColorButton(
               onPressed: () async {
                 await InAppPurchaseRepository.onPurchaseButtonPressed(
-                          inAppPurchase, productDetails)
-                      .then((value) => Navigator.pop(innerContext));
+                        inAppPurchase, productDetails)
+                    .then((value) => Navigator.pop(innerContext));
               },
               child: Container(
                 padding: const EdgeInsets.all(8.0),

@@ -135,14 +135,14 @@ class PurchasesController extends GetxController {
     if (Platform.isIOS) {
       final result = await getIOSResult(
           purchaseDetails.verificationData.localVerificationData);
-          if (result == null) {
-            await UIHelper.showFlutterToast("サーバーエラーにより、購入アイテムが検証できません");
-            return false;
-          } else {
-            if (result.responseCode == 200) {
-              return true;
-            }
-          }
+      if (result == null) {
+        await UIHelper.showFlutterToast("サーバーエラーにより、購入アイテムが検証できません");
+        return false;
+      } else {
+        if (result.responseCode == 200) {
+          return true;
+        }
+      }
     }
     return false;
   }
@@ -180,11 +180,11 @@ class PurchasesController extends GetxController {
   Future<void> _postAndroidPurchase(PurchaseDetails purchaseDetails) async {
     final instance = dio.Dio();
     try {
-          await instance.post(dotenv.get(EnvKeys.VERIFY_ANDROID_ENDPOINT.name),
-              data: {
-                "data": purchaseDetails.toJson(),
-              },
-              options: dio.Options(method: "POST"));
+      await instance.post(dotenv.get(EnvKeys.VERIFY_ANDROID_ENDPOINT.name),
+          data: {
+            "data": purchaseDetails.toJson(),
+          },
+          options: dio.Options(method: "POST"));
     } catch (e) {
       debugPrint("$e");
     }

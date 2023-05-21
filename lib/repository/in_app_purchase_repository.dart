@@ -18,7 +18,8 @@ class InAppPurchaseRepository {
     if (Platform.isAndroid) {
       purchaseParam = GooglePlayPurchaseParam(
           productDetails: productDetails,
-          changeSubscriptionParam: _getChangeSubscriptionParam(oldSubscription));
+          changeSubscriptionParam:
+              _getChangeSubscriptionParam(oldSubscription));
     } else {
       purchaseParam = PurchaseParam(productDetails: productDetails);
     }
@@ -31,12 +32,14 @@ class InAppPurchaseRepository {
           .set({"error": e.toString()});
     }
   }
-  static ChangeSubscriptionParam? _getChangeSubscriptionParam(GooglePlayPurchaseDetails? oldSubscription) {
+
+  static ChangeSubscriptionParam? _getChangeSubscriptionParam(
+      GooglePlayPurchaseDetails? oldSubscription) {
     return (oldSubscription != null)
-              ? ChangeSubscriptionParam(
-                  oldPurchaseDetails: oldSubscription,
-                  prorationMode: ProrationMode.immediateWithTimeProration)
-              : null;
+        ? ChangeSubscriptionParam(
+            oldPurchaseDetails: oldSubscription,
+            prorationMode: ProrationMode.immediateWithTimeProration)
+        : null;
   }
 
   static GooglePlayPurchaseDetails? _getOldSubscription(
