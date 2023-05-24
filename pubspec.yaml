@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' 
 
-version: 1.0.42+87
+version: 1.0.42+89
 
 environment:
   sdk: ">=2.18.2 <3.0.0"
@@ -19,7 +19,7 @@ dependencies:
   get: ^4.6.5
   firebase_core: ^2.4.1
   shared_preferences: ^2.0.16
-  intl: ^0.17.0
+  intl: ^0.18.1
   fluttertoast: ^8.1.2
   flutter_dotenv: ^5.0.2
   flutter_flavor: ^3.1.1
