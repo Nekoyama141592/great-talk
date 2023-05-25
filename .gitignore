@@ -20,6 +20,7 @@ cloud_functions/
 firestore_rules/
 storage_rules/
 txts/
+firebase_private_key/
 # IntelliJ related
 *.iml
 *.ipr

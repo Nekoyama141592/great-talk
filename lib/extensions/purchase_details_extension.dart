@@ -22,7 +22,7 @@ extension PurchaseDetailsExtension on PurchaseDetails {
     }
     final x = int.parse(transactionDate!);
     final date = DateTime.fromMillisecondsSinceEpoch(x);
-    final formattedDate = DateFormat('yyyy-MM-dd').format(date);
+    final formattedDate = DateFormat('yyyy-MM-dd HH:mm').format(date);
     return formattedDate;
   }
 }
