@@ -1,5 +1,6 @@
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:intl/intl.dart';
+
 extension PurchaseDetailsExtension on PurchaseDetails {
   Map<String, dynamic> toJson() {
     return {
@@ -16,6 +17,7 @@ extension PurchaseDetailsExtension on PurchaseDetails {
       "pendingCompletePurchase": pendingCompletePurchase,
     };
   }
+
   String convertUnixTimeToDate() {
     if (transactionDate == null) {
       return "";
