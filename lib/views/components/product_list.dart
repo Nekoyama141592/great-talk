@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/common/strings.dart';
@@ -6,7 +5,6 @@ import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/repository/in_app_purchase_repository.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
-import 'package:great_talk/views/components/policy_buttons.dart';
 import 'package:great_talk/views/components/secondary_color_button.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -34,7 +32,7 @@ class ProductList extends StatelessWidget {
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               title: productDetails.id == kMonthSubscriptionId
-                  ? boldSecondaryColorText("${productDetails.title} おすすめ！")
+                  ? boldSecondaryColorText("$planName おすすめ！")
                   : boldText(planName),
               trailing:
                   PurchasesController.to.hasProductBeenPurchased(productDetails)
@@ -44,23 +42,11 @@ class ProductList extends StatelessWidget {
                                   context, inAppPurchase),
                           icon: const Icon(Icons.upgrade))
                       : SecondaryColorButton(
-                          onPressed: Platform.isAndroid
-                              ? () async => await InAppPurchaseRepository
+                          onPressed: () async => await InAppPurchaseRepository
                                   .onPurchaseButtonPressed(
                                       inAppPurchase, productDetails)
-                              : () {
-                                  showDialog(
-                                      context: context,
-                                      barrierColor: Colors.black,
-                                      builder: (innerContext) {
-                                        return PolicyButtons(
-                                            innerContext: innerContext,
-                                            inAppPurchase: inAppPurchase,
-                                            planName: planName,
-                                            productDetails: productDetails);
-                                      });
-                                },
-                          child: boldText(productDetails.price)))));
+                              ,
+                          child: boldText("契約する")))));
         },
       ).toList();
 

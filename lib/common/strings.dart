@@ -41,16 +41,15 @@ String getPlanName(ProductDetails productDetails) {
   String msg = "";
   switch (productDetails.id) {
     case (kAnnualSubscriptionId):
-      msg = "年額";
+      msg = "年間プラン | 1年あたり${productDetails.price}";
       break;
     case (kMonthSubscriptionId):
-      msg = "月額";
+      msg = "月間プラン | 1ヶ月あたり${productDetails.price}";
       break;
     case (kWeekSubscriptionId):
-      msg = "週額";
+      msg = "週間プラン | 1週間あたり${productDetails.price}";
       break;
   }
-  msg += "プラン";
   return msg;
 }
 
