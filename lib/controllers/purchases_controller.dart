@@ -25,7 +25,7 @@ class PurchasesController extends GetxController {
   final purchases = <PurchaseDetails>[].obs;
   final InAppPurchase inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> subscription;
-  final products = isProd() ? <ProductDetails>[].obs : myProductList.obs;
+  final products = <ProductDetails>[].obs;
   final isAvailable = false.obs;
   final purchasePending = false.obs;
   final loading = true.obs;
@@ -100,16 +100,15 @@ class PurchasesController extends GetxController {
         await inAppPurchase.queryProductDetails(kProductIds.toSet());
     if (productDetailResponse.error != null) {
       queryProductError(productDetailResponse.error!.message);
-      _setProducts(productDetailResponse.productDetails);
       purchasePending(false);
       loading(false);
       return;
     }
 
     if (productDetailResponse.productDetails.isEmpty) {
-      _setProducts(productDetailResponse.productDetails);
-      loading(false);
+      _setProducts(myProductList);
       purchasePending(false);
+      loading(false);
       return;
     }
 
