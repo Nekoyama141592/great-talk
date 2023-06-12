@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/common/doubles.dart';
 // packages
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:great_talk/common/persons.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class CircleImage extends StatelessWidget {
   const CircleImage({Key? key, required this.person}) : super(key: key);
@@ -16,13 +16,16 @@ class CircleImage extends StatelessWidget {
         : Container(
             width: length,
             height: length,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              image: person.id == chatGPTId || person.id == wolframId
-                  ? DecorationImage(
-                      image: NetworkImage(imageUrl), fit: BoxFit.fill)
-                  : DecorationImage(image: NetworkImage(imageUrl)),
             ),
+            child: CachedNetworkImage(
+              fit: BoxFit.fill,
+       imageUrl: imageUrl,
+       progressIndicatorBuilder: (context, url, downloadProgress) => 
+               CircularProgressIndicator(value: downloadProgress.progress),
+       errorWidget: (context, url, error) => const Icon(Icons.person),
+    ),
           );
   }
 }
