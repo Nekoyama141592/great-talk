@@ -222,6 +222,7 @@ class PurchasesController extends GetxController {
     } else {
       purchaseParam = PurchaseParam(productDetails: productDetails);
     }
+    loading(true);
     try {
       await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
     } catch (e) {
@@ -229,6 +230,8 @@ class PurchasesController extends GetxController {
           .collection("purchaseErrors")
           .doc()
           .set({"error": e.toString()});
+    } finally {
+      loading(false);
     }
   }
 
