@@ -22,6 +22,7 @@ import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
 class PurchasesController extends GetxController {
   static PurchasesController get to => Get.find<PurchasesController>();
@@ -58,7 +59,8 @@ class PurchasesController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
+    await cancelTransction();
     final Stream<List<PurchaseDetails>> purchaseUpdated =
         inAppPurchase.purchaseStream;
     subscription = purchaseUpdated.listen(
@@ -156,15 +158,19 @@ class PurchasesController extends GetxController {
   Future<void> _listenToPurchaseUpdated(
       List<PurchaseDetails> purchaseDetailsList) async {
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
+      await inAppPurchase.completePurchase(purchaseDetails);
       if (purchaseDetails.pendingCompletePurchase ||
           purchaseDetails.status == PurchaseStatus.pending) {
-        await inAppPurchase.completePurchase(purchaseDetails);
         if (Platform.isAndroid) {
           // 承認を行う.行わないと払い戻しが行われる.
           BillingClient client = BillingClient((_) {});
           await client.acknowledgePurchase(
               purchaseDetails.verificationData.serverVerificationData);
         }
+      }
+      // 登録しているサブスクが一つでも認証していれば、もう検証しなくて良い
+      if (purchases.isNotEmpty) {
+        return;
       }
       if (purchaseDetails.status == PurchaseStatus.error) {
         handleError(purchaseDetails.error!);
@@ -222,7 +228,7 @@ class PurchasesController extends GetxController {
     } else {
       purchaseParam = PurchaseParam(productDetails: productDetails);
     }
-    loading(true);
+    await UIHelper.showFlutterToast("情報を取得しています。 \nしばらくお待ちください。");
     try {
       await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
     } catch (e) {
@@ -231,7 +237,6 @@ class PurchasesController extends GetxController {
           .doc()
           .set({"error": e.toString()});
     } finally {
-      loading(false);
     }
   }
 
@@ -261,6 +266,15 @@ class PurchasesController extends GetxController {
           inAppPurchase
               .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       await platformAddition.showPriceConsentIfNeeded();
+    }
+  }
+  Future<void> cancelTransction() async{
+    if (Platform.isIOS) {
+      final paymentWrapper = SKPaymentQueueWrapper();
+      final transactions = await paymentWrapper.transactions();
+      for (final tx in transactions) {
+        await paymentWrapper.finishTransaction(tx);
+      }
     }
   }
 }
