@@ -21,11 +21,11 @@ class CircleImage extends StatelessWidget {
             ),
             child: CachedNetworkImage(
               fit: BoxFit.fill,
-       imageUrl: imageUrl,
-       progressIndicatorBuilder: (context, url, downloadProgress) => 
-               CircularProgressIndicator(value: downloadProgress.progress),
-       errorWidget: (context, url, error) => const Icon(Icons.person),
-    ),
+              imageUrl: imageUrl,
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  CircularProgressIndicator(value: downloadProgress.progress),
+              errorWidget: (context, url, error) => const Icon(Icons.person),
+            ),
           );
   }
 }

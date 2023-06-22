@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/repository/in_app_purchase_repository.dart';
 import 'package:great_talk/common/url_redirector.dart';
 import 'package:great_talk/common/bools.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
-import 'package:great_talk/views/components/secondary_color_button.dart';
 import 'package:great_talk/views/subscribe/components/plan_descriptions.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
+// 未使用
 class PolicyButtons extends StatelessWidget {
   const PolicyButtons(
       {Key? key,
@@ -59,21 +58,6 @@ class PolicyButtons extends StatelessWidget {
                 onPressed: () async => await UrlRedirector.toEULAPage(),
                 child: whiteText('使用許諾契約(EULA)')),
           const Divider(),
-          SecondaryColorButton(
-              onPressed: () async {
-                await InAppPurchaseRepository.onPurchaseButtonPressed(
-                        inAppPurchase, productDetails)
-                    .then((value) => Navigator.pop(innerContext));
-              },
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                margin: const EdgeInsets.all(8.0),
-                child: Text("$planNameを始める",
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    )),
-              ))
         ],
       ),
     );

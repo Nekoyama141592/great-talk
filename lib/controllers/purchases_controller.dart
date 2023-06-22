@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/bools.dart';
 import 'package:great_talk/common/ui_helper.dart';
@@ -19,6 +18,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:great_talk/consts/env_keys.dart';
 import 'package:great_talk/model/ios_receipt_response/ios_receipt_response.dart';
 import 'package:dio/dio.dart' as dio;
+
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
 class PurchasesController extends GetxController {
   static PurchasesController get to => Get.find<PurchasesController>();
@@ -203,6 +206,58 @@ class PurchasesController extends GetxController {
     } catch (e) {
       debugPrint("$e");
       return null;
+    }
+  }
+
+  Future<void> onPurchaseButtonPressed(
+      InAppPurchase inAppPurchase, ProductDetails productDetails) async {
+    final GooglePlayPurchaseDetails? oldSubscription =
+        _getOldSubscription(productDetails);
+    late PurchaseParam purchaseParam;
+    if (Platform.isAndroid) {
+      purchaseParam = GooglePlayPurchaseParam(
+          productDetails: productDetails,
+          changeSubscriptionParam:
+              _getChangeSubscriptionParam(oldSubscription));
+    } else {
+      purchaseParam = PurchaseParam(productDetails: productDetails);
+    }
+    try {
+      await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+    } catch (e) {
+      await FirebaseFirestore.instance
+          .collection("purchaseErrors")
+          .doc()
+          .set({"error": e.toString()});
+    }
+  }
+
+  ChangeSubscriptionParam? _getChangeSubscriptionParam(
+      GooglePlayPurchaseDetails? oldSubscription) {
+    return (oldSubscription != null)
+        ? ChangeSubscriptionParam(
+            oldPurchaseDetails: oldSubscription,
+            prorationMode: ProrationMode.immediateWithTimeProration)
+        : null;
+  }
+
+  GooglePlayPurchaseDetails? _getOldSubscription(
+      ProductDetails productDetails) {
+    GooglePlayPurchaseDetails? oldSubscription;
+    final purchases = PurchasesController.to.purchases;
+    if (purchases.isNotEmpty && purchases.last.productID != productDetails.id) {
+      oldSubscription = purchases.last as GooglePlayPurchaseDetails;
+    }
+    return oldSubscription;
+  }
+
+  Future<void> confirmPriceChange(
+      BuildContext context, InAppPurchase inAppPurchase) async {
+    if (Platform.isIOS) {
+      final InAppPurchaseStoreKitPlatformAddition iapStoreKitPlatformAddition =
+          inAppPurchase
+              .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+      await iapStoreKitPlatformAddition.showPriceConsentIfNeeded();
     }
   }
 }

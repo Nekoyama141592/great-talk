@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
-import 'package:great_talk/repository/in_app_purchase_repository.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:great_talk/views/components/secondary_color_button.dart';
@@ -34,19 +33,17 @@ class ProductList extends StatelessWidget {
               title: productDetails.id == kMonthSubscriptionId
                   ? boldSecondaryColorText("$planName おすすめ！")
                   : boldText(planName),
-              trailing:
-                  PurchasesController.to.hasProductBeenPurchased(productDetails)
-                      ? IconButton(
-                          onPressed: () =>
-                              InAppPurchaseRepository.confirmPriceChange(
-                                  context, inAppPurchase),
-                          icon: const Icon(Icons.upgrade))
-                      : SecondaryColorButton(
-                          onPressed: () async => await InAppPurchaseRepository
-                                  .onPurchaseButtonPressed(
-                                      inAppPurchase, productDetails)
-                              ,
-                          child: boldText("契約する")))));
+              trailing: PurchasesController.to
+                      .hasProductBeenPurchased(productDetails)
+                  ? IconButton(
+                      onPressed: () =>
+                          controller.confirmPriceChange(context, inAppPurchase),
+                      icon: const Icon(Icons.upgrade))
+                  : SecondaryColorButton(
+                      onPressed: () async =>
+                          await controller.onPurchaseButtonPressed(
+                              inAppPurchase, productDetails),
+                      child: boldText("契約する")))));
         },
       ).toList();
 
