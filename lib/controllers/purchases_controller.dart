@@ -78,9 +78,8 @@ class PurchasesController extends GetxController {
   @override
   void onClose() {
     if (Platform.isIOS) {
-      final iosPlatformAddition =
-          inAppPurchase
-              .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+      final iosPlatformAddition = inAppPurchase
+          .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       iosPlatformAddition.setDelegate(null);
     }
     subscription.cancel();
@@ -217,18 +216,23 @@ class PurchasesController extends GetxController {
 
   Future<void> onPurchaseButtonPressed(
       InAppPurchase inAppPurchase, ProductDetails productDetails) async {
+    if (loading.value) {
+      return;
+    }
     final GooglePlayPurchaseDetails? oldSubscription =
         _getOldSubscription(productDetails);
     late PurchaseParam purchaseParam;
     if (Platform.isAndroid) {
       purchaseParam = GooglePlayPurchaseParam(
           productDetails: productDetails,
-          changeSubscriptionParam: Platform.isAndroid ?
-              _getChangeSubscriptionParam(oldSubscription) : null);
+          changeSubscriptionParam: Platform.isAndroid
+              ? _getChangeSubscriptionParam(oldSubscription)
+              : null);
     } else {
       purchaseParam = PurchaseParam(productDetails: productDetails);
     }
     await UIHelper.showFlutterToast("情報を取得しています。 \nしばらくお待ちください。");
+    loading(true);
     try {
       await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
     } catch (e) {
@@ -237,6 +241,7 @@ class PurchasesController extends GetxController {
           .doc()
           .set({"error": e.toString()});
     } finally {
+      loading(false);
     }
   }
 
@@ -262,13 +267,13 @@ class PurchasesController extends GetxController {
   Future<void> confirmPriceChange(
       BuildContext context, InAppPurchase inAppPurchase) async {
     if (Platform.isIOS) {
-      final platformAddition =
-          inAppPurchase
-              .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+      final platformAddition = inAppPurchase
+          .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       await platformAddition.showPriceConsentIfNeeded();
     }
   }
-  Future<void> cancelTransction() async{
+
+  Future<void> cancelTransction() async {
     if (Platform.isIOS) {
       final paymentWrapper = SKPaymentQueueWrapper();
       final transactions = await paymentWrapper.transactions();
