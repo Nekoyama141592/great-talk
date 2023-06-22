@@ -54,7 +54,7 @@ class PurchasesController extends GetxController {
   }
 
   Future<void> restorePurchases() async {
-    if (purchases.isEmpty && isProd()) await inAppPurchase.restorePurchases();
+    if (purchases.isEmpty) await inAppPurchase.restorePurchases();
   }
 
   @override
@@ -76,7 +76,7 @@ class PurchasesController extends GetxController {
   @override
   void onClose() {
     if (Platform.isIOS) {
-      final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
+      final iosPlatformAddition =
           inAppPurchase
               .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
       iosPlatformAddition.setDelegate(null);
@@ -217,8 +217,8 @@ class PurchasesController extends GetxController {
     if (Platform.isAndroid) {
       purchaseParam = GooglePlayPurchaseParam(
           productDetails: productDetails,
-          changeSubscriptionParam:
-              _getChangeSubscriptionParam(oldSubscription));
+          changeSubscriptionParam: Platform.isAndroid ?
+              _getChangeSubscriptionParam(oldSubscription) : null);
     } else {
       purchaseParam = PurchaseParam(productDetails: productDetails);
     }
@@ -257,10 +257,10 @@ class PurchasesController extends GetxController {
   Future<void> confirmPriceChange(
       BuildContext context, InAppPurchase inAppPurchase) async {
     if (Platform.isIOS) {
-      final InAppPurchaseStoreKitPlatformAddition iapStoreKitPlatformAddition =
+      final platformAddition =
           inAppPurchase
               .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
-      await iapStoreKitPlatformAddition.showPriceConsentIfNeeded();
+      await platformAddition.showPriceConsentIfNeeded();
     }
   }
 }
