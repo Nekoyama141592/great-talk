@@ -12,6 +12,7 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/consts/env_keys.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
+import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:great_talk/views/subscribe/subscribe_page.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -64,10 +65,6 @@ class RealtimeResController extends GetxController {
   Future<void> execute(types.User interlocutor, PersonsController controller,
       String content) async {
     final model = GptTurboChatModel();
-    final request = ChatCompleteText(
-        messages: [Messages(role: Role.user, content: content)],
-        maxToken: 200,
-        model: model);
     _addMessage(content, chatUiCurrrentUser);
     prefs = await SharedPreferences.getInstance();
     chatCount = _getChatCount(prefs); // 端末から今日のチャット回数を取得
@@ -80,6 +77,12 @@ class RealtimeResController extends GetxController {
     _addEmptyMessage(interlocutor); // Viewで表示できる要素数を一つ増やす
     realtimeRes(""); // realtimeResを初期化
     messages([...messages]); // messageを再代入して変更をViewに反映
+    // リクエストを作成
+    final requestMessages = await _createRequestMessages(interlocutor, content);
+    final request = ChatCompleteText(
+        messages: requestMessages,
+        maxToken: maxToken,
+        model: model);
     _listenToChatCompletionSSE(
         request, interlocutor, controller); // ChatGPTのリアルタイム出力
   }
@@ -176,5 +179,56 @@ class RealtimeResController extends GetxController {
     );
     messages.add(textMessage);
     messages([...messages]);
+  }
+  Future<List<Messages>> _createRequestMessages(types.User interlocutor,String content) async {
+    final id = interlocutor.id;
+    switch(id) {
+      case wolframId:
+      final wolframRes = await WolframRepository.fetchApi(content);
+      List<Messages> requestMessages = [];
+      wolframRes.when(
+        success: (res) {
+          requestMessages = [
+            Messages(role: Role.assistant,content: "わかりやすい日本語にして"),
+            Messages(role: Role.user,content: res)
+          ];
+        }, 
+        failure: () {
+          realtimeRes("計算AIから結果が得られなかったので普通のAIが対応します。\n\n");
+          requestMessages = [
+            Messages(role: Role.user,content: content)
+          ];
+        }
+      );
+      return requestMessages;
+      case chatGPTId:
+      return _toRequestMessages();
+      default:
+      final requestMessages = _toRequestMessages();
+      requestMessages.insert(0, _systemMsg(interlocutor));
+      return requestMessages;
+    }
+  }
+  Messages _toRequestMessage(types.Message msg) {
+    return Messages(role: msg.author.id == chatUiCurrrentUser.id ? Role.user : Role.assistant,content: msg.toJson()["text"]);
+  }
+
+  List<Messages> _toRequestMessages() {
+    // メッセージからリクエストを送るJsonを生成.
+    // メッセージ数を制限する。
+    final requestMessages = messages.length > maxRequestLength
+        ? messages.sublist(messages.length - maxRequestLength)
+        : [...messages];
+    final List<Messages> result =
+      requestMessages.map((e) => _toRequestMessage(e)).toList();
+    return result;
+  }
+  Messages _systemMsg(types.User interlocutor) {
+    final name = interlocutor.lastName;
+    String content = proIds.contains(interlocutor.id)
+        ? "あなたは一人のプロの$nameです。それになりきって以下の問いに答えろ。自分がAIアシスタントだとは答えるな。"
+        : "$nameになりきって$nameの口調で以下の問いに答えろ";
+    content += attention;
+    return Messages(role: Role.system,content: content);
   }
 }

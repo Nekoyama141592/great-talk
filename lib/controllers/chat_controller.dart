@@ -54,19 +54,22 @@ class ChatController {
         case wolframId:
           // wolframの場合
           await WolframRepository.fetchApi(msg).then((en) async {
-            if (en == calculateFailedMsg) {
-              final reqBody = ChatGPTRepository.createBasicQuery(msg);
-              await ChatGPTRepository.fetchApi(reqBody).then((value) {
-                answerText = "計算AIから結果が得られなかったので普通のAIが対応します。\n\n$value";
-                _addMessageAndPop(answerText, messages, person);
-              });
-            } else {
-              final reqBody = WolframRepository.createChatGPTJaReqBody(en);
-              await ChatGPTRepository.fetchApi(reqBody).then((value) {
-                answerText = value;
-                _addMessageAndPop(answerText, messages, person);
-              });
-            }
+            en.when(
+              success: (res) async {
+                final reqBody = WolframRepository.createChatGPTJaReqBody(res);
+                await ChatGPTRepository.fetchApi(reqBody).then((value) {
+                  answerText = value;
+                  _addMessageAndPop(answerText, messages, person);
+                });
+              }, 
+              failure: () async {
+                final reqBody = ChatGPTRepository.createBasicQuery(msg);
+                await ChatGPTRepository.fetchApi(reqBody).then((value) {
+                  answerText = "計算AIから結果が得られなかったので普通のAIが対応します。\n\n$value";
+                  _addMessageAndPop(answerText, messages, person);
+                });
+              }
+            );
           });
           break;
         default:
@@ -198,4 +201,5 @@ class ChatController {
     );
     messages.value = List.from(messages.value)..insert(0, textMessage);
   }
+  
 }
