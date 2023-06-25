@@ -1,11 +1,15 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/common/date_converter.dart';
+import 'package:great_talk/common/persons.dart';
+import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/consts/env_keys.dart';
 
 class RealtimeResController extends GetxController {
-  final messages = [].obs;
+  final messages = <types.Message>[].obs;
   final realtimeRes = "".obs;
   late OpenAI openAI;
   @override
@@ -25,7 +29,12 @@ class RealtimeResController extends GetxController {
       Messages(
           role: Role.user, content: '二週間後に数学のテストがあります。どのようにして勉強をすすめればいいですか？')
     ], maxToken: 200, model: model);
-    messages.add("");
+    messages.add(types.TextMessage(
+      author: chatUiCurrrentUser,
+      createdAt: DateConverter.nowDateTime(),
+      id: randomString(),
+      text: "",
+    ));
     realtimeRes("");
     messages([...messages]);
     openAI.onChatCompletionSSE(request: request).listen((it) {
@@ -34,8 +43,13 @@ class RealtimeResController extends GetxController {
         realtimeRes(realtimeRes.value + content);
         debugPrint(content);
       }
-    },onDone: () {
-      messages.last = realtimeRes.value;
+    }, onDone: () {
+      messages.last = types.TextMessage(
+        author: chatUiCurrrentUser,
+        createdAt: DateConverter.nowDateTime(),
+        id: randomString(),
+        text: realtimeRes.value,
+      );
       messages([...messages]);
     });
   }
