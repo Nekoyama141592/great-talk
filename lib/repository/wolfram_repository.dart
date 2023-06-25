@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:great_talk/repository/chat_gpt_repository.dart';
-import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/repository/result.dart';
 
 class WolframRepository {
@@ -21,15 +20,4 @@ class WolframRepository {
       return const Result.failure();
     }
   }
-
-  static List<Map<String, dynamic>> createChatGPTJaReqBody(String en) => [
-        {
-          "role": "system",
-          "content": "わかりやすい日本語にして",
-        },
-        {
-          "role": "user",
-          "content": en,
-        }
-      ];
 }

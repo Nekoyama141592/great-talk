@@ -3,15 +3,14 @@ import 'dart:convert';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/date_converter.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/consts/env_keys.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
+import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
 import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:great_talk/views/subscribe/subscribe_page.dart';
 import 'package:in_app_review/in_app_review.dart';
@@ -21,18 +20,18 @@ class RealtimeResController extends GetxController {
   final messages = <types.Message>[].obs;
   final realtimeRes = "".obs;
   int chatCount = 0;
-  late OpenAI openAI;
+  // late OpenAI openAI;
   late SharedPreferences prefs;
-  @override
-  void onInit() {
-    openAI = OpenAI.instance.build(
-        token: dotenv.get(EnvKeys.OPEN_AI_API_KEY.name),
-        baseOption: HttpSetup(
-            receiveTimeout: const Duration(seconds: 20),
-            connectTimeout: const Duration(seconds: 20)),
-        enableLog: true);
-    super.onInit();
-  }
+  // @override
+  // void onInit() {
+  //   openAI = OpenAI.instance.build(
+  //       token: dotenv.get(EnvKeys.OPEN_AI_API_KEY.name),
+  //       baseOption: HttpSetup(
+  //           receiveTimeout: const Duration(seconds: 20),
+  //           connectTimeout: const Duration(seconds: 20)),
+  //       enableLog: true);
+  //   super.onInit();
+  // }
 
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> getChatLog(types.User interlocutor) async {
@@ -80,9 +79,7 @@ class RealtimeResController extends GetxController {
     // リクエストを作成
     final requestMessages = await _createRequestMessages(interlocutor, content);
     final request = ChatCompleteText(
-        messages: requestMessages,
-        maxToken: maxToken,
-        model: model);
+        messages: requestMessages, maxToken: maxToken, model: model);
     _listenToChatCompletionSSE(
         request, interlocutor, controller); // ChatGPTのリアルタイム出力
   }
@@ -98,7 +95,8 @@ class RealtimeResController extends GetxController {
 
   void _listenToChatCompletionSSE(ChatCompleteText request,
       types.User interlocutor, PersonsController controller) {
-    openAI.onChatCompletionSSE(request: request).listen((it) {
+        final client = ChatGptApiClient();
+    client.openAI.onChatCompletionSSE(request: request).listen((it) {
       final content = it.choices?.last.message?.content;
       if (content != null && content.isNotEmpty) {
         realtimeRes(realtimeRes.value + content);
@@ -180,37 +178,38 @@ class RealtimeResController extends GetxController {
     messages.add(textMessage);
     messages([...messages]);
   }
-  Future<List<Messages>> _createRequestMessages(types.User interlocutor,String content) async {
+
+  Future<List<Messages>> _createRequestMessages(
+      types.User interlocutor, String content) async {
     final id = interlocutor.id;
-    switch(id) {
+    switch (id) {
       case wolframId:
-      final wolframRes = await WolframRepository.fetchApi(content);
-      List<Messages> requestMessages = [];
-      wolframRes.when(
-        success: (res) {
+        final wolframRes = await WolframRepository.fetchApi(content);
+        List<Messages> requestMessages = [];
+        wolframRes.when(success: (res) {
           requestMessages = [
-            Messages(role: Role.assistant,content: "わかりやすい日本語にして"),
-            Messages(role: Role.user,content: res)
+            Messages(role: Role.assistant, content: "わかりやすい日本語にして"),
+            Messages(role: Role.user, content: res)
           ];
-        }, 
-        failure: () {
+        }, failure: () {
           realtimeRes("計算AIから結果が得られなかったので普通のAIが対応します。\n\n");
-          requestMessages = [
-            Messages(role: Role.user,content: content)
-          ];
-        }
-      );
-      return requestMessages;
+          requestMessages = [Messages(role: Role.user, content: content)];
+        });
+        return requestMessages;
       case chatGPTId:
-      return _toRequestMessages();
+        return _toRequestMessages();
       default:
-      final requestMessages = _toRequestMessages();
-      requestMessages.insert(0, _systemMsg(interlocutor));
-      return requestMessages;
+        final requestMessages = _toRequestMessages();
+        requestMessages.insert(0, _systemMsg(interlocutor));
+        return requestMessages;
     }
   }
+
   Messages _toRequestMessage(types.Message msg) {
-    return Messages(role: msg.author.id == chatUiCurrrentUser.id ? Role.user : Role.assistant,content: msg.toJson()["text"]);
+    return Messages(
+        role:
+            msg.author.id == chatUiCurrrentUser.id ? Role.user : Role.assistant,
+        content: msg.toJson()["text"]);
   }
 
   List<Messages> _toRequestMessages() {
@@ -220,15 +219,16 @@ class RealtimeResController extends GetxController {
         ? messages.sublist(messages.length - maxRequestLength)
         : [...messages];
     final List<Messages> result =
-      requestMessages.map((e) => _toRequestMessage(e)).toList();
+        requestMessages.map((e) => _toRequestMessage(e)).toList();
     return result;
   }
+
   Messages _systemMsg(types.User interlocutor) {
     final name = interlocutor.lastName;
     String content = proIds.contains(interlocutor.id)
         ? "あなたは一人のプロの$nameです。それになりきって以下の問いに答えろ。自分がAIアシスタントだとは答えるな。"
         : "$nameになりきって$nameの口調で以下の問いに答えろ";
     content += attention;
-    return Messages(role: Role.system,content: content);
+    return Messages(role: Role.system, content: content);
   }
 }

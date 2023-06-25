@@ -1,18 +1,13 @@
-// flutter
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/controllers/chat_controller.dart';
+import 'package:great_talk/common/colors.dart';
+import 'package:great_talk/common/doubles.dart';
+import 'package:great_talk/common/strings.dart';
+import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/professionals_controller.dart';
 import 'package:great_talk/controllers/search_controller.dart';
-import 'package:great_talk/common/doubles.dart';
-import 'package:great_talk/common/colors.dart';
-// common
-import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/widgets.dart';
-// packages
-import 'package:great_talk/views/chat_page.dart';
-// components
+import 'package:great_talk/utility/chat_utility.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/realtime_res_page/realtime_res_page.dart';
 
@@ -60,16 +55,12 @@ class PersonCards extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             )
                           : null,
-                      // onTap: () => Get.to(ChatPage(
-                      //   person: person,
-                      //   controller: controller,
-                      // )),
                       onTap: () => Get.to(RealtimeResPage(
                         interlocutor: person,
                         personsController: controller,
                       )),
-                      // onLongPress: () => ChatController.showCleanLocalMsgDialog(
-                      //     person, controller),
+                      onLongPress: () => ChatUtility.showCleanLocalMsgDialog(
+                          person, controller),
                     ),
                   );
                 }))),

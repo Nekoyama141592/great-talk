@@ -1,9 +1,6 @@
-// packages
-import 'package:flutter_chat_types/flutter_chat_types.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:dio/dio.dart';
 import 'package:great_talk/common/ints.dart';
-import 'package:great_talk/common/persons.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -21,39 +18,6 @@ class ChatGPTRepository {
     }
   }
 
-  static List<Map<String, dynamic>> createGreatPeopleReqBody(
-      List<Message> messages, User person) {
-    // メッセージからリクエストを送るJsonを生成.
-    // メッセージ数を制限する。
-    final reversed = messages.reversed.toList();
-    final requestMessages = reversed.length > maxRequestLength
-        ? reversed.sublist(reversed.length - maxRequestLength)
-        : [...reversed];
-
-    final List<Map<String, dynamic>> result =
-        requestMessages.map((e) => _toValidMessage(e)).toList();
-    // システムプロンプトを追加.
-    if (person.id != chatGPTId) result.insert(0, _systemMsg(person));
-    return result;
-  }
-
-  static Map<String, dynamic> _systemMsg(User person) {
-    final name = person.lastName;
-    String content = proIds.contains(person.id)
-        ? "あなたは一人のプロの$nameです。それになりきって以下の問いに答えろ。自分がAIアシスタントだとは答えるな。"
-        : "$nameになりきって$nameの口調で以下の問いに答えろ";
-    content += attention;
-    return {
-      "role": "system",
-      "content": content,
-    };
-  }
-
-  static Map<String, dynamic> _toValidMessage(Message msg) => {
-        "role": msg.author.id == chatUiCurrrentUser.id ? "user" : "assistant",
-        "content": msg.toJson()["text"],
-      };
-
   static Future<String> createWolframQuery(String msg) async {
     final reqBody = [
       {"role": "system", "content": "以下の文をWolframの指示文にして。余分な文字はいらない"},
@@ -65,13 +29,6 @@ class ChatGPTRepository {
     final String query = await fetchApi(reqBody);
     return query;
   }
-
-  static List<Map<String, dynamic>> createBasicQuery(String msg) => [
-        {
-          "role": "user",
-          "content": msg,
-        }
-      ];
 }
 
 const openAiBaseUrl = 'https://api.openai.com/v1/chat';
