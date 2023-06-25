@@ -161,6 +161,7 @@ class RealtimeResController extends GetxController {
 
   Future<void> _setChatCount() async {
     // 24時間経過していたらchatCountには0がくる
-    await prefs.setInt(chatCountPrefsKey, chatCount + 1);
+    chatCount++;
+    await prefs.setInt(chatCountPrefsKey, chatCount);
   }
 }
