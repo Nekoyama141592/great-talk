@@ -95,7 +95,7 @@ class RealtimeResController extends GetxController {
 
   void _listenToChatCompletionSSE(ChatCompleteText request,
       types.User interlocutor, PersonsController controller) {
-        final client = ChatGptApiClient();
+    final client = ChatGptApiClient();
     client.openAI.onChatCompletionSSE(request: request).listen((it) {
       final content = it.choices?.last.message?.content;
       if (content != null && content.isNotEmpty) {
