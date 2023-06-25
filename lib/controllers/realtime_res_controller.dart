@@ -7,6 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/date_converter.dart';
 import 'package:great_talk/common/ints.dart';
+import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/consts/env_keys.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
@@ -67,6 +68,7 @@ class RealtimeResController extends GetxController {
         messages: [Messages(role: Role.user, content: content)],
         maxToken: 200,
         model: model);
+        _addMessage(content, chatUiCurrrentUser);
     prefs = await SharedPreferences.getInstance();
     chatCount = _getChatCount(prefs); // 端末から今日のチャット回数を取得
     if (!_allowChat()) {
@@ -163,5 +165,16 @@ class RealtimeResController extends GetxController {
     // 24時間経過していたらchatCountには0がくる
     chatCount++;
     await prefs.setInt(chatCountPrefsKey, chatCount);
+  }
+
+  void _addMessage(String content,types.User author) {
+    final textMessage = types.TextMessage(
+      author: author,
+      createdAt: DateConverter.nowDateTime(),
+      id: randomString(),
+      text: content,
+    );
+    messages.add(textMessage);
+    messages([...messages]);
   }
 }

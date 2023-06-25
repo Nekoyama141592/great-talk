@@ -38,9 +38,9 @@ class RealtimeResPage extends HookWidget {
                           itemCount: controller.messages.length,
                           itemBuilder: ((context, index) {
                             final messages =
-                                controller.messages.reversed.toList();
-                            if (index == messages.indexOf(messages.first) &&
-                                messages.first.toJson()["text"].isEmpty) {
+                                controller.messages.toList();
+                            if (index == messages.indexOf(messages.last) &&
+                                messages.last.toJson()["text"].isEmpty) {
                               return Obx(() => ListTile(
                                     leading: interlocutor.imageUrl != null ?CachedNetworkImage(
                                         imageUrl: interlocutor.imageUrl!): null,
