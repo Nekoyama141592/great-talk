@@ -8,6 +8,7 @@ import 'package:great_talk/common/date_converter.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
+import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
@@ -111,6 +112,8 @@ class RealtimeResController extends GetxController {
       );
       messages([...messages]);
       _setValues(interlocutor, controller);
+    },onError: (_) {
+      UIHelper.showFlutterToast("エラーが発生し、値を取得できませんでした。");
     });
   }
 
