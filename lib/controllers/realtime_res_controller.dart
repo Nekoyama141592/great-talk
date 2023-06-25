@@ -112,7 +112,7 @@ class RealtimeResController extends GetxController {
       );
       messages([...messages]);
       _setValues(interlocutor, controller);
-    },onError: (_) {
+    }, onError: (_) {
       UIHelper.showFlutterToast("エラーが発生し、値を取得できませんでした。");
     });
   }

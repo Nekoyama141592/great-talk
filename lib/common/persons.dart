@@ -2040,11 +2040,6 @@ const fullPersons = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Engelbert_Kaempfer.jpg/115px-Engelbert_Kaempfer.jpg'),
   types.User(
-      id: 'Adolf Hitler.',
-      lastName: 'アドルフ・ヒトラー',
-      imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Hitler_portrait_crop.jpg/220px-Hitler_portrait_crop.jpg'),
-  types.User(
       id: 'Anne Frank',
       lastName: 'アンネ・フランク',
       imageUrl:
