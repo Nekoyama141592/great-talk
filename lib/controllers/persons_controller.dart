@@ -22,8 +22,8 @@ abstract class PersonsController extends GetxController {
     getLatestPersons(prefs);
   }
 
-  Future<void> setLatestPersons(
-      SharedPreferences prefs, types.User person, String lastAnswer) async {
+  Future<void> setLatestPersons(types.User person, String lastAnswer) async {
+    final prefs = await SharedPreferences.getInstance();
     // 新たにmetadataを設定する.
     final int lastSeen = DateConverter.nowDateTime();
     final Map<String, dynamic> metadata =

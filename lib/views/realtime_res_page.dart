@@ -4,12 +4,15 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/persons.dart';
+import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
 
 class RealtimeResPage extends HookWidget {
-  const RealtimeResPage({Key? key, required this.interlocutor})
+  const RealtimeResPage(
+      {Key? key, required this.interlocutor, required this.personsController})
       : super(key: key);
   final types.User interlocutor;
+  final PersonsController personsController;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RealtimeResController());
@@ -30,8 +33,10 @@ class RealtimeResPage extends HookWidget {
                       itemBuilder: ((context, index) {
                         final messages = controller.messages.reversed.toList();
                         if (index == messages.indexOf(messages.first) &&
-                            messages.last.toJson()["text"].isEmpty) {
+                            messages.first.toJson()["text"].isEmpty) {
                           return Obx(() => ListTile(
+                                leading: CachedNetworkImage(
+                                    imageUrl: interlocutor.imageUrl ?? ""),
                                 title: Text(controller.realtimeRes.value),
                               ));
                         } else {
@@ -41,14 +46,18 @@ class RealtimeResPage extends HookWidget {
                                     ? CachedNetworkImage(
                                         imageUrl: interlocutor.imageUrl ?? "")
                                     : null,
-                                title: Text(messages[index].toJson()["text"]),
+                                title: Text(controller.messages[index]
+                                    .toJson()["text"]),
                               ));
                         }
                       }),
                     ),
                   )),
               ElevatedButton(
-                  onPressed: controller.execute, child: const Text("実行"))
+                  onPressed: () {
+                    controller.execute(interlocutor, personsController);
+                  },
+                  child: const Text("実行"))
             ],
           )),
     );

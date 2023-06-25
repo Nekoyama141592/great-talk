@@ -119,7 +119,7 @@ class ChatController {
     await _setLocalMessage(prefs, messages, personId);
     await _setLocalDate(prefs);
     await _setChatCount(prefs, chatCount);
-    await controller.setLatestPersons(prefs, person, lastAnswer);
+    await controller.setLatestPersons(person, lastAnswer);
   }
 
   static Future<void> _setLocalMessage(SharedPreferences prefs,
