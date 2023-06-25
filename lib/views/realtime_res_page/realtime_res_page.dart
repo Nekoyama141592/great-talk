@@ -42,8 +42,8 @@ class RealtimeResPage extends HookWidget {
                             if (index == messages.indexOf(messages.first) &&
                                 messages.first.toJson()["text"].isEmpty) {
                               return Obx(() => ListTile(
-                                    leading: CachedNetworkImage(
-                                        imageUrl: interlocutor.imageUrl ?? ""),
+                                    leading: interlocutor.imageUrl != null ?CachedNetworkImage(
+                                        imageUrl: interlocutor.imageUrl!): null,
                                     title: SelectableText(
                                         controller.realtimeRes.value),
                                   ));
