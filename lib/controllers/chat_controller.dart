@@ -1,24 +1,19 @@
-// dart
 import 'dart:convert';
-// flutter
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// packages
-import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:great_talk/repository/chat_gpt_repository.dart';
-import 'package:great_talk/controllers/persons_controller.dart';
-import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/repository/wolfram_repository.dart';
-import 'package:great_talk/common/persons.dart';
-import 'package:great_talk/controllers/purchases_controller.dart';
-import 'package:great_talk/views/subscribe/subscribe_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:in_app_review/in_app_review.dart';
-// common
-import 'package:great_talk/common/strings.dart';
-// api
+import 'package:get/get.dart';
 import 'package:great_talk/common/date_converter.dart';
+import 'package:great_talk/common/persons.dart';
+import 'package:great_talk/common/strings.dart';
+import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/controllers/persons_controller.dart';
+import 'package:great_talk/controllers/purchases_controller.dart';
+import 'package:great_talk/repository/chat_gpt_repository.dart';
+import 'package:great_talk/repository/wolfram_repository.dart';
+import 'package:great_talk/views/subscribe/subscribe_page.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatController {
   static const chatLimitPerDay = 5;

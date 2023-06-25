@@ -1,4 +1,3 @@
-// flutter
 import 'package:fluttertoast/fluttertoast.dart' as fluttertoast;
 import 'package:great_talk/common/ints.dart';
 

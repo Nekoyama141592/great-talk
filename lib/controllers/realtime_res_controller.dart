@@ -53,12 +53,20 @@ class RealtimeResController extends GetxController {
     return messages;
   }
 
-  void execute(types.User interlocutor, PersonsController controller) async {
+  void onSendPressed(BuildContext context, types.User interlocutor,
+      PersonsController controller, TextEditingController inputController) {
+    FocusScope.of(context).unfocus();
+    execute(interlocutor, controller, inputController.text);
+    inputController.text = "";
+  }
+
+  Future<void> execute(types.User interlocutor, PersonsController controller,
+      String content) async {
     final model = GptTurboChatModel();
-    final request = ChatCompleteText(messages: [
-      Messages(
-          role: Role.user, content: '二週間後に数学のテストがあります。どのようにして勉強をすすめればいいですか？')
-    ], maxToken: 200, model: model);
+    final request = ChatCompleteText(
+        messages: [Messages(role: Role.user, content: content)],
+        maxToken: 200,
+        model: model);
     prefs = await SharedPreferences.getInstance();
     chatCount = _getChatCount(prefs); // 端末から今日のチャット回数を取得
     if (!_allowChat()) {

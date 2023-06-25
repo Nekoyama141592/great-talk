@@ -14,7 +14,7 @@ import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/views/chat_page.dart';
 // components
 import 'package:great_talk/views/components/circle_image.dart';
-import 'package:great_talk/views/realtime_res_page.dart';
+import 'package:great_talk/views/realtime_res_page/realtime_res_page.dart';
 
 class PersonCards extends StatelessWidget {
   const PersonCards({Key? key, required this.isProMode}) : super(key: key);
