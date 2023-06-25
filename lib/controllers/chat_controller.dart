@@ -20,7 +20,7 @@ import 'package:great_talk/common/strings.dart';
 // api
 import 'package:great_talk/common/date_converter.dart';
 
-class ChatRepository {
+class ChatController {
   static const chatLimitPerDay = 5;
 
   // 与えられたpersonとのチャット履歴を取得

@@ -1,7 +1,7 @@
 // flutter
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/repository/chat_repository.dart';
+import 'package:great_talk/controllers/chat_controller.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/professionals_controller.dart';
 import 'package:great_talk/controllers/search_controller.dart';
@@ -63,7 +63,7 @@ class PersonCards extends StatelessWidget {
                         person: person,
                         controller: controller,
                       )),
-                      onLongPress: () => ChatRepository.showCleanLocalMsgDialog(
+                      onLongPress: () => ChatController.showCleanLocalMsgDialog(
                           person, controller),
                     ),
                   );
