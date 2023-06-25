@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
@@ -7,6 +9,8 @@ import 'package:great_talk/common/date_converter.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/consts/env_keys.dart';
+import 'package:great_talk/controllers/purchases_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RealtimeResController extends GetxController {
   final messages = <types.Message>[].obs;
@@ -21,6 +25,27 @@ class RealtimeResController extends GetxController {
             connectTimeout: const Duration(seconds: 20)),
         enableLog: true);
     super.onInit();
+  }
+
+  // 与えられたinterlocutorとのチャット履歴を取得
+  Future<void> getChatLog(types.User interlocutor) async {
+    List<types.Message> a = await _getLocalMessages(interlocutor.id);
+    await PurchasesController.to.restorePurchases(); // 購入内容を復元
+    debugPrint("==========取得されました==========");
+    messages(a);
+  }
+
+  Future<List<types.Message>> _getLocalMessages(String interlocutorId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final jsonString = prefs.getString(interlocutorId) ?? "";
+    List<types.Message> messages = [];
+    if (jsonString.isNotEmpty) {
+      final List<dynamic> decodedJson = jsonDecode(jsonString);
+      messages = decodedJson.map((e) => types.Message.fromJson(e)).toList();
+    } else {
+      messages = [];
+    }
+    return messages;
   }
 
   void execute() async {

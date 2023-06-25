@@ -64,7 +64,9 @@ class PersonCards extends StatelessWidget {
                       //   person: person,
                       //   controller: controller,
                       // )),
-                      onTap: () => Get.to(const RealtimeResPage()),
+                      onTap: () => Get.to(RealtimeResPage(
+                        interlocutor: person,
+                      )),
                       onLongPress: () => ChatController.showCleanLocalMsgDialog(
                           person, controller),
                     ),
