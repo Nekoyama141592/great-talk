@@ -68,7 +68,7 @@ class RealtimeResController extends GetxController {
         messages: [Messages(role: Role.user, content: content)],
         maxToken: 200,
         model: model);
-        _addMessage(content, chatUiCurrrentUser);
+    _addMessage(content, chatUiCurrrentUser);
     prefs = await SharedPreferences.getInstance();
     chatCount = _getChatCount(prefs); // 端末から今日のチャット回数を取得
     if (!_allowChat()) {
@@ -167,7 +167,7 @@ class RealtimeResController extends GetxController {
     await prefs.setInt(chatCountPrefsKey, chatCount);
   }
 
-  void _addMessage(String content,types.User author) {
+  void _addMessage(String content, types.User author) {
     final textMessage = types.TextMessage(
       author: author,
       createdAt: DateConverter.nowDateTime(),

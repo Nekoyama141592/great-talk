@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
@@ -22,33 +23,41 @@ class RealtimeResPage extends HookWidget {
     useEffect(() {
       controller.getChatLog(interlocutor);
       return;
-    }, []);
+    }, [interlocutor]);
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(),
           body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(defaultPadding(context)),
-              child: Column(
-                children: [
-                  SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.8,
-                      child: Obx(
-                        () => ListView.builder(
-                          itemCount: controller.messages.length,
-                          itemBuilder: ((context, index) {
-                            final messages =
-                                controller.messages.toList();
-                            if (index == messages.indexOf(messages.last) &&
-                                messages.last.toJson()["text"].isEmpty) {
-                              return Obx(() => ListTile(
-                                    leading: interlocutor.imageUrl != null ?CachedNetworkImage(
-                                        imageUrl: interlocutor.imageUrl!): null,
+            child: Column(
+              children: [
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child: Obx(
+                      () => ListView.builder(
+                        itemCount: controller.messages.length,
+                        itemBuilder: ((context, index) {
+                          final messages = controller.messages.toList();
+                          if (index == messages.indexOf(messages.last) &&
+                              messages.last.toJson()["text"].isEmpty) {
+                            return Padding(
+                              padding: EdgeInsets.all(defaultPadding(context)),
+                              child: Obx(() => ListTile(
+                                    leading: interlocutor.imageUrl != null
+                                        ? CachedNetworkImage(
+                                            imageUrl: interlocutor.imageUrl!)
+                                        : null,
                                     title: SelectableText(
                                         controller.realtimeRes.value),
-                                  ));
-                            } else {
-                              return Obx(() => ListTile(
+                                  )),
+                            );
+                          } else {
+                            return Padding(
+                              padding: EdgeInsets.all(defaultPadding(context)),
+                              child: Obx(() => ListTile(
+                                    tileColor: messages[index].author ==
+                                            chatUiCurrrentUser
+                                        ? kSecondaryColor.withOpacity(0.3)
+                                        : null,
                                     leading: messages[index].author !=
                                             chatUiCurrrentUser
                                         ? CachedNetworkImage(
@@ -58,18 +67,18 @@ class RealtimeResPage extends HookWidget {
                                     title: SelectableText(controller
                                         .messages[index]
                                         .toJson()["text"]),
-                                  ));
-                            }
-                          }),
-                        ),
-                      )),
-                  RoundedInputField(
-                      controller: inputController,
-                      onCloseButtonPressed: () => inputController.text = "",
-                      send: () => controller.onSendPressed(context,
-                          interlocutor, personsController, inputController))
-                ],
-              ),
+                                  )),
+                            );
+                          }
+                        }),
+                      ),
+                    )),
+                RoundedInputField(
+                    controller: inputController,
+                    onCloseButtonPressed: () => inputController.text = "",
+                    send: () => controller.onSendPressed(context, interlocutor,
+                        personsController, inputController))
+              ],
             ),
           )),
     );
