@@ -36,10 +36,11 @@ class RealtimeResPage extends HookWidget {
                 )
               : SingleChildScrollView(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       const BasicHeightBox(),
                       SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.8,
+                          height: chatScreenHeight(context),
                           child: Obx(
                             () => ListView.builder(
                               itemCount: controller.messages.length,
@@ -83,13 +84,12 @@ class RealtimeResPage extends HookWidget {
                             ),
                           )),
                       RoundedInputField(
-                          controller: inputController,
-                          send: () => controller.onSendPressed(
-                              context,
-                              interlocutor,
-                              personsController,
-                              inputController)),
-                      const BasicHeightBox()
+                        controller: inputController,
+                        send: () => controller.onSendPressed(
+                            context,
+                            interlocutor,
+                            personsController,
+                            inputController))
                     ],
                   ),
                 ))),
