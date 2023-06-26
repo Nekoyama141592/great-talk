@@ -12,7 +12,6 @@ import 'package:great_talk/iap_constants/subscription_constants.dart';
 
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
-// receipt
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:great_talk/consts/env_keys.dart';
@@ -38,6 +37,10 @@ class PurchasesController extends GetxController {
       purchases(List.from(purchases)..add(purchaseDetails));
   void _setProducts(List<ProductDetails> productList) =>
       isProd() ? products(productList) : products(myProductList);
+
+  bool isSubscribing() {
+    return purchases.isEmpty;
+  }
 
   bool hasProductBeenPurchased(ProductDetails productDetails) {
     bool result;

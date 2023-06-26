@@ -23,7 +23,6 @@ class ProductList extends StatelessWidget {
       }
 
       if (!controller.isAvailable.value) return const Card();
-      final ListTile productHeader = ListTile(title: boldText("プラン一覧"));
       final List<Widget> productList = controller.products.map(
         (ProductDetails productDetails) {
           final String planName = getPlanName(productDetails);
@@ -48,9 +47,7 @@ class ProductList extends StatelessWidget {
       ).toList();
 
       return Card(
-          child: Column(
-              children:
-                  <Widget>[productHeader, const Divider()] + productList));
+          child: Column(children: <Widget>[const Divider()] + productList));
     }));
   }
 }

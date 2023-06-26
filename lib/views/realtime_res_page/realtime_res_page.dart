@@ -6,6 +6,7 @@ import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
+import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/circle_image.dart';
@@ -20,6 +21,7 @@ class RealtimeResPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RealtimeResController());
+    final purchaseController = PurchasesController.to;
     final inputController = useTextEditingController();
     useEffect(() {
       controller.getChatLog(interlocutor);
@@ -51,45 +53,61 @@ class RealtimeResPage extends HookWidget {
                                   return Padding(
                                     padding:
                                         EdgeInsets.all(defaultPadding(context)),
-                                    child: Obx(() => ListTile(
-                                          leading: interlocutor.imageUrl != null
-                                              ? CircleImage(
-                                                  interlocutor: interlocutor)
-                                              : null,
-                                          title: SelectableText(
-                                              controller.realtimeRes.value),
-                                        )),
+                                    child: Obx(() {
+                                      final text = controller.realtimeRes.value;
+                                      return ListTile(
+                                        onTap:
+                                            purchaseController.isSubscribing()
+                                                ? null
+                                                : controller.onCardLongTap,
+                                        leading: interlocutor.imageUrl != null
+                                            ? CircleImage(
+                                                interlocutor: interlocutor)
+                                            : null,
+                                        title:
+                                            purchaseController.isSubscribing()
+                                                ? SelectableText(text)
+                                                : Text(text),
+                                      );
+                                    }),
                                   );
                                 } else {
                                   return Padding(
                                     padding:
                                         EdgeInsets.all(defaultPadding(context)),
-                                    child: Obx(() => ListTile(
-                                          tileColor: messages[index].author ==
-                                                  chatUiCurrrentUser
-                                              ? kSecondaryColor.withOpacity(0.3)
-                                              : null,
-                                          leading: messages[index].author !=
-                                                  chatUiCurrrentUser
-                                              ? CircleImage(
-                                                  interlocutor: interlocutor)
-                                              : null,
-                                          title: SelectableText(controller
-                                              .messages[index]
-                                              .toJson()["text"]),
-                                        )),
+                                    child: Obx(() {
+                                      final String text = controller
+                                          .messages[index]
+                                          .toJson()["text"];
+                                      return ListTile(
+                                        onTap:
+                                            purchaseController.isSubscribing()
+                                                ? null
+                                                : controller.onCardLongTap,
+                                        tileColor: messages[index].author ==
+                                                chatUiCurrrentUser
+                                            ? kSecondaryColor.withOpacity(0.3)
+                                            : null,
+                                        leading: messages[index].author !=
+                                                chatUiCurrrentUser
+                                            ? CircleImage(
+                                                interlocutor: interlocutor)
+                                            : null,
+                                        title:
+                                            purchaseController.isSubscribing()
+                                                ? SelectableText(text)
+                                                : Text(text),
+                                      );
+                                    }),
                                   );
                                 }
                               }),
                             ),
                           )),
                       RoundedInputField(
-                        controller: inputController,
-                        send: () => controller.onSendPressed(
-                            context,
-                            interlocutor,
-                            personsController,
-                            inputController))
+                          controller: inputController,
+                          send: () => controller.onSendPressed(context,
+                              interlocutor, personsController, inputController))
                     ],
                   ),
                 ))),

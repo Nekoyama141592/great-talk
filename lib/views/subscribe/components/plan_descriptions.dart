@@ -29,6 +29,13 @@ class PlanDescriptions extends StatelessWidget {
             Icons.check,
             color: kSecondaryColor,
           ),
+          title: boldText('テキストがコピー可能に！!')),
+      const Divider(),
+      ListTile(
+          leading: const Icon(
+            Icons.check,
+            color: kSecondaryColor,
+          ),
           title: boldText("$storeStr からいつでもキャンセルできます")),
       const Divider(),
       ListTile(

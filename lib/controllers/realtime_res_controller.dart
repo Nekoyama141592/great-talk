@@ -226,4 +226,13 @@ class RealtimeResController extends GetxController {
     content += attention;
     return Messages(role: Role.system, content: content);
   }
+
+  void onCardLongTap() {
+    if (PurchasesController.to.isSubscribing()) {
+      return;
+    } else {
+      UIHelper.showFlutterToast("テキストをコピーするには有料プランを登録する必要があります");
+      return;
+    }
+  }
 }
