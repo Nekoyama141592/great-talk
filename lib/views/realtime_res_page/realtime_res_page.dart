@@ -78,7 +78,6 @@ class RealtimeResPage extends HookWidget {
                     )),
                 RoundedInputField(
                     controller: inputController,
-                    onCloseButtonPressed: () => inputController.text = "",
                     send: () => controller.onSendPressed(context, interlocutor,
                         personsController, inputController)),
                 const BasicHeightBox()

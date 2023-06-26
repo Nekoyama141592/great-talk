@@ -6,12 +6,10 @@ class RoundedInputField extends StatelessWidget {
   const RoundedInputField(
       {Key? key,
       required this.controller,
-      required this.onCloseButtonPressed,
       required this.send})
       : super(key: key);
 
   final TextEditingController controller;
-  final void Function()? onCloseButtonPressed;
   final void Function()? send;
 
   @override
@@ -24,12 +22,6 @@ class RoundedInputField extends StatelessWidget {
           controller: controller,
           cursorColor: Theme.of(context).highlightColor.withOpacity(0.7),
           decoration: InputDecoration(
-              icon: InkWell(
-                onTap: onCloseButtonPressed,
-                child: const Icon(
-                  Icons.close,
-                ),
-              ),
               suffixIcon: InkWell(
                 onTap: send,
                 child: const Icon(
