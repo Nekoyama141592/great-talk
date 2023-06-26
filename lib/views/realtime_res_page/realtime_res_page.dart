@@ -8,6 +8,7 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
+import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 
 class RealtimeResPage extends HookWidget {
@@ -26,10 +27,13 @@ class RealtimeResPage extends HookWidget {
     }, [interlocutor]);
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: Text(interlocutor.lastName ?? ""),
+          ),
           body: SingleChildScrollView(
             child: Column(
               children: [
+                const BasicHeightBox(),
                 SizedBox(
                     height: MediaQuery.of(context).size.height * 0.8,
                     child: Obx(
@@ -77,7 +81,8 @@ class RealtimeResPage extends HookWidget {
                     controller: inputController,
                     onCloseButtonPressed: () => inputController.text = "",
                     send: () => controller.onSendPressed(context, interlocutor,
-                        personsController, inputController))
+                        personsController, inputController)),
+                const BasicHeightBox()
               ],
             ),
           )),
