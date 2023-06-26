@@ -17,6 +17,14 @@ const proPersons = [
       imageUrl:
           'https://cdn.pixabay.com/photo/2016/10/29/14/49/cube-1780775__480.jpg'),
   types.User(
+      id: 'human resources',
+      lastName: '人事の専門家',
+      metadata: {
+        'description': '組織の人的資源を最大限に活用するための戦略を策定することを専門とする人',
+      },
+      imageUrl:
+          'https://cdn.pixabay.com/photo/2017/11/02/14/27/model-2911332__480.jpg'),
+  types.User(
       id: 'chef',
       lastName: 'シェフ',
       metadata: {'description': '料理の専門家'},
@@ -69,61 +77,61 @@ const proPersons = [
       lastName: '園芸家',
       metadata: {'description': '植物の栽培や育成についての専門家'},
       imageUrl:
-          'https://pixabay.com/get/ga53727cd76ee6bff3c2de441a24694e07de9a594fc99167470cb11f3769c313ec7ff926bbbd5d5abc708afa987f0a68e_640.jpg'),
+          'https://pbs.twimg.com/media/FziARbQaUAARgsn?format=jpg&name=small'),
   types.User(
       id: 'architect',
       lastName: '建築家',
       metadata: {'description': '建築物の設計や監修をする専門家'},
       imageUrl:
-          'https://pixabay.com/get/g5821bb4a229195ef625232ffe2af0624084602e3f90d0ceecf59ff9d43488ebf2aeccbdb76ccc23db96fc4f12bf8fbc37a3fcf3c8d2fad232bc7dafe5efbcefd_640.jpg'),
+          'https://pbs.twimg.com/media/FziASQfaIAEIYkQ?format=jpg&name=small'),
   types.User(
       id: 'furnitureDesigner',
       lastName: '家具デザイナー',
       metadata: {'description': '家具のデザインに特化した専門家'},
       imageUrl:
-          'https://pixabay.com/get/g0c10614522d56fccab09afe7fa51d25e02026ee8d7042dd68d4815c9e1a8a5188c2d97981261dcc34c60a3ea4cdda5657e4e03f2c03404c11205f7699294ffdd_640.jpg'),
+          'https://pbs.twimg.com/media/FziATCzaMAEacn2?format=jpg&name=small'),
   types.User(
       id: 'filmDirector',
       lastName: '映画監督',
       metadata: {'description': '映画製作において指導・監督を行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g59e2b4d43055c287eb7f9394c947313898b36d5b8464f1aa4117289f433e836325a70506eb554c6e40d2f7a59bee64d970731db548c6bf2ab570002d2c13bf35_640.jpg'),
+          'https://pbs.twimg.com/media/FziAT-NaIAAARTe?format=jpg&name=small'),
   types.User(
       id: 'painter',
       lastName: '画家',
       metadata: {'description': '絵画を描く専門家'},
       imageUrl:
-          'https://pixabay.com/get/g2c6d9cf5268a379dd76480f368c2bb067f7b55cbc7b538af79c6248dc03b689c55aabf707263e9056923a033f89bb3af1c7894ee1de96cb82a58b2080c7d5526_640.jpg'),
+          'https://pbs.twimg.com/media/FziBZLVaUAAwlMN?format=jpg&name=small'),
   types.User(
       id: 'interiorDesigner',
       lastName: 'インテリアデザイナー',
       metadata: {'description': '家具、カーテン、照明などのインテリアデザインに特化した専門家'},
       imageUrl:
-          'https://pixabay.com/get/g8ca69c0ba79918dbd644e1fe35fd8a992796f7581a716ed3df79deba840e67c5d42e0c6d720321319a461002c0491b6a_640.jpg'),
+          'https://pbs.twimg.com/media/FziBaJeaAAAketb?format=jpg&name=small'),
   types.User(
       id: 'fashionDesigner',
       lastName: 'ファッションデザイナー',
       metadata: {'description': '衣服やアクセサリーのデザインに特化した専門家'},
       imageUrl:
-          'https://pixabay.com/get/gd09b4cec0ff53e9ba02fd1099142b49f75516b012354895ff1821fed359aff35074c0966ae18d49ccffb793f96cbbe96_640.jpg'),
+          'https://pbs.twimg.com/media/FziBbgCakAAhPGT?format=jpg&name=small'),
   types.User(
       id: 'photographer',
       lastName: '写真家',
       metadata: {'description': '写真を撮影する専門家'},
       imageUrl:
-          'https://pixabay.com/get/gbfc7181ecd071ab8dab17d210708b72f6c2861b93ba73e82a3cb81fb7b6a196ecf597e861ebcb11fd750d035927f5b73_640.jpg'),
+          'https://pbs.twimg.com/media/FziBdzBaQAAQmNO?format=jpg&name=small'),
   types.User(
       id: 'geologist',
       lastName: '地質学者',
       metadata: {'description': '地球の地質や地形を研究する専門家'},
       imageUrl:
-          'https://pixabay.com/get/g4c3d875d24a918011f9dd4fa6e7deabc5e3ccef3a52f1b614517e6961a76ad414b9c4baa3cefd0f40bfca6814cfb9ee583f7faaa80b252f737569c71720f5bb3_640.jpg'),
+          'https://pbs.twimg.com/media/FziCGhCaQAMw1WL?format=jpg&name=small'),
   types.User(
       id: 'linguist',
       lastName: '言語学者',
       metadata: {'description': '言語や言語現象を研究する専門家'},
       imageUrl:
-          'https://pixabay.com/get/g9c15be46f4e2f476cb9ace97de37f9fc7f7e5cbb37e6121171aaf0197ef40e41ab04afaa81ba25beaffd178d9d45954b_640.jpg'),
+          'https://pbs.twimg.com/media/FziCIMqaEAE8zF3?format=jpg&name=small'),
   types.User(
       id: 'statistician',
       lastName: '統計学者',
@@ -141,37 +149,37 @@ const proPersons = [
       lastName: 'データサイエンティスト',
       metadata: {'description': '大量のデータを収集・分析して、ビジネスの意思決定をサポートする専門家'},
       imageUrl:
-          'https://pixabay.com/get/ged9ff1a42421965597de6477b15a18b7ee198e3fd275ebd8a057d3d72c6a896c0001dc9aa12c3762173c8e5dade5f76f4291f8d5335daa6d4875b0e3d84c94a0_640.jpg'),
+          'https://cdn.pixabay.com/photo/2015/12/03/22/15/tablet-1075790_1280.jpg'),
   types.User(
       id: 'cartographer',
       lastName: '地図学者',
       metadata: {'description': '地図を作成し、地理情報の収集・管理に従事する専門家'},
       imageUrl:
-          'https://pixabay.com/get/g2252795b353fe145a214f348f547aec5e0d53a53426c183efee3ac09d9258e548c821d322e8798daea705d4621fb46aa_640.jpg'),
+          'https://pbs.twimg.com/media/FziCJqxaEAAfalH?format=jpg&name=small'),
   types.User(
       id: 'biologist',
       lastName: '生物学者',
       metadata: {'description': '生物についての研究を行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/gb29b3aeeb4a5f33dff81a8d2708a4f4f7286d27524e4df96d1633efc539db35be424eba296d0cc73817445410377610454b6558504c2d677ed19491abf93d7c9_640.jpg'),
+          'https://pbs.twimg.com/media/FziCLN0agAArXn7?format=jpg&name=small'),
   types.User(
       id: 'marketer',
       lastName: 'マーケター',
       metadata: {'description': '商品やサービスの販売促進に特化した専門家'},
       imageUrl:
-          'https://pixabay.com/get/gbcd992796509f3e25bbb8d5d7c566137e539f83e8db243a33560f11d5223eebbfcf48335780b15c3c6c48517da3004a64f322595c399a2c9422e56c80871f4a3_640.jpg'),
+          'https://pbs.twimg.com/media/FziC593agAEbVER?format=jpg&name=small'),
   types.User(
       id: 'entertainment-producer',
       lastName: '芸能プロデューサー',
       metadata: {'description': '芸能活動においてタレントのマネジメントやイベントの企画・運営に従事する専門家'},
       imageUrl:
-          'https://pixabay.com/get/gf55928400f1aa260146c8fe43f27050110e01a78d8a55efe7011afd4fe2190c9b65e1cac9258d4225b17048d4c6980e8_640.jpg'),
+          'https://pbs.twimg.com/media/FziC75magAE9lYC?format=jpg&name=small'),
   types.User(
       id: 'tv-director',
       lastName: 'テレビディレクター',
       metadata: {'description': 'テレビ番組の制作において指揮をとる専門家'},
       imageUrl:
-          'https://pixabay.com/get/gaf69940ddedb166d6999a4e9ced1ac7eff0918abd38728d441c4814884a03ecc5cae3e21d2ee071a0895de8bac9bbfd3_640.jpg'),
+          'https://pbs.twimg.com/media/FziC_H9aAAAn6fK?format=jpg&name=small'),
   types.User(
       id: 'veterinarian',
       lastName: '獣医師',
@@ -183,13 +191,13 @@ const proPersons = [
       lastName: 'マッサージ師',
       metadata: {'description': '身体のストレスや痛みの緩和を目的とした施術を行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g2d8d73d302528b3ee10ea11a7f9e9758442000fa4e474e9e9bdddb428003186f624a38825e711c5359181ccbc597867e_640.jpg'),
+          'https://pbs.twimg.com/media/FziDBfVaUAAW0bP?format=jpg&name=small'),
   types.User(
       id: 'researcher',
       lastName: '研究者',
       metadata: {'description': 'あるテーマについて研究を行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g41d487c9e0b9d06aa22e4884128e8b73232dc0c5315c4f8ddbe7246f51eb1154d979ca519792468724f58cf08d27473057ad46d9f3b998000e3823f95d899d4b_640.jpg'),
+          'https://pbs.twimg.com/media/FziDeYaaQAMamTq?format=jpg&name=small'),
   types.User(
       id: 'sportsTrainer',
       lastName: 'スポーツトレーナー',
@@ -207,13 +215,13 @@ const proPersons = [
       lastName: 'ソーシャルワーカー',
       metadata: {'description': '社会福祉や保健の問題に対して支援を行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g76e24452de65419ef0c505d0e982d764ceb4671850ead4c240ade3cb508e3a01f796865e29d20216c1de814803e412ff_640.jpg'),
+          'https://pbs.twimg.com/media/FziDfkfaIAATDZE?format=jpg&name=small'),
   types.User(
       id: 'consultant',
       lastName: 'コンサルタント',
       metadata: {'description': '企業や組織の業務改善や問題解決のためのアドバイスを行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/gd04dbe8d6234ced9b02938069ca933a3b26d3db79adc60e63205eb569d62a28566b1db21d0614cdf9229e2fe3b33bf47_640.jpg'),
+          'https://pbs.twimg.com/media/FziDgdyaYAAlnac?format=jpg&name=small'),
   types.User(
       id: 'nurse',
       lastName: '看護師',
@@ -225,13 +233,13 @@ const proPersons = [
       lastName: '社会学者',
       metadata: {'description': '社会の構造や社会問題を研究する専門家'},
       imageUrl:
-          'https://pixabay.com/get/g8b5cfbc59eed207ffed4d1e33de750cdcc1b66aae1efd46b7e85127ef2c19bbfb61d798ac675b309c01a50ed85107314_640.jpg'),
+          'https://pbs.twimg.com/media/FziDiMfaMAIFMpK?format=jpg&name=small'),
   types.User(
       id: 'illustrator',
       lastName: 'イラストレーター',
       metadata: {'description': '絵を描くことに特化した専門家'},
       imageUrl:
-          'https://pixabay.com/get/g7fae816f8f7053d9f3ae8ded2cc26b8ce7b95eacf74359c3bf42debf4ccfb5f1df1eca63a38e10203e7c4de516ea7dc6e2c98950efa76f303b9369735be89450_640.jpg'),
+          'https://pbs.twimg.com/media/FziEILGaAAUCtws?format=jpg&name=small'),
   types.User(
       id: 'soundEngineer',
       lastName: 'サウンドエンジニア',
@@ -243,43 +251,43 @@ const proPersons = [
       lastName: '地震学者',
       metadata: {'description': '地震や地殻変動を研究する専門家'},
       imageUrl:
-          'https://pixabay.com/get/g9412b933e36472daf21260feb60958eeee73cd37e19430c7eb26e118efa960b82f745cc1f1ad71c11f11cc7ded8fe755252fd4ff8d180939a96074eba3d45281_640.jpg'),
+          'https://pbs.twimg.com/media/FziEJWUaIAE1ypl?format=jpg&name=small'),
   types.User(
       id: 'foodsanitation',
       lastName: '食品衛生士',
       metadata: {'description': '食品の衛生管理に特化した専門家'},
       imageUrl:
-          'https://pixabay.com/get/g9daec0d110da98f2c96f6c0733893c60449cad7d3385a1e49f906491a88f18141a26aa5722b99d92a091e7b03cfd9905429daaf3a0ab65eaca2f45aaa4c86090_640.jpg'),
+          'https://pbs.twimg.com/media/FziEKTZakAEOvOz?format=jpg&name=small'),
   types.User(
       id: 'webdesigner',
       lastName: 'ウェブデザイナー',
       metadata: {'description': 'ウェブサイトのデザインに特化した専門家'},
       imageUrl:
-          'https://pixabay.com/get/g00372e7376ca169d163ef48bbad519a9edffb7e875ffedeb69ae0df329aba577358796f9d484b21ea0aeab356dd787c801ee1454fa1ef2523d94807c30c60d67_640.jpg'),
+          'https://pbs.twimg.com/media/FziEL96aMAESS47?format=jpg&name=small'),
   types.User(
       id: 'environmentalist',
       lastName: '環境保護活動家',
       metadata: {'description': '環境問題に関する啓発活動や対策の提言を行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g8bc6298dcaddb46ebbc1ca73752c606eb9ed9dae7c946269e8c761c12c1c2012f61f60e26cc4d4059c2589a2366802cb_640.jpg'),
+          'https://cdn.pixabay.com/photo/2023/02/14/04/39/volunteer-7788809_1280.jpg'),
   types.User(
       id: 'copywriter',
       lastName: 'コピーライター',
       metadata: {'description': '広告や宣伝のためのキャッチコピーを考える専門家'},
       imageUrl:
-          'https://pixabay.com/get/g7935878781bb891476d10c88522e3124421f035c7ae7044806c2dd06e612f0f4c4c094c0fab493dda25888782b51636685647a5fb4b484c8e1a622d8d1b58b2e_640.jpg'),
+          'https://pbs.twimg.com/media/FziE1QcaUAAKMsQ?format=jpg&name=small'),
   types.User(
       id: 'manager',
       lastName: 'マネージャー',
       metadata: {'description': 'アーティストやスポーツ選手、企業などのマネジメントを行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g8409a1b0c51d1ad071462fd3f309b3ca30cae14991ca7d5c9e0330f7efe00cbdf435bf536368235656c9aa73b55023bbfd81b44cb1e96b00bb7d9698a34c0bf7_640.jpg'),
+          'https://pbs.twimg.com/media/FziE23XaUAIwcjP?format=jpg&name=360x360'),
   types.User(
       id: 'educationalist',
       lastName: '教育学者',
       metadata: {'description': '教育に関する研究や分析を行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g4643cfa498daff9c1c6998a418563915d3a2ac004259a07edee7f51497477ddd1e38ad72827371775545a8d2d2aec3a9_640.jpg'),
+          'https://pbs.twimg.com/media/FziE4BZakAEek-e?format=jpg&name=small'),
   types.User(
       id: 'foodStylist',
       lastName: 'フードスタイリスト',
@@ -291,31 +299,25 @@ const proPersons = [
       lastName: 'フィットネスインストラクター',
       metadata: {'description': '健康やフィットネスに関する指導を行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g4095332d5137f957a3000b3da8477d18d4f40b1df103fddfe1e339c933199dd50030b4f5bc220fc44d060b7cecebc7cb_640.jpg'),
-  types.User(
-      id: 'publicRelations',
-      lastName: 'パブリックリレーションズ',
-      metadata: {'description': '企業や組織のプレスリリースやイベントのプランニングを行う専門家'},
-      imageUrl:
-          'https://pixabay.com/get/g9038a7116746f58402092ae47e342336c02858ffc85448fc2c8330ac660fb4bf5f6391f5e9005a02cb5e574e64d68e11_640.jpg'),
+          'https://pbs.twimg.com/media/FziE5FxaMAAcHHv?format=jpg&name=small'),
   types.User(
       id: 'civilEngineer',
       lastName: '土木技術者',
       metadata: {'description': '道路や橋などの土木工事に関する技術的なアドバイスを行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g2b27d86c0458ed9ee086acf2fb589d55057fa64f8077473ebf74c6a73b6bf59bd626b6232d9b7fb59842734a8475fff4_640.jpg'),
+          'https://pbs.twimg.com/media/FziF7B8aUAAh4KK?format=jpg&name=small'),
   types.User(
       id: 'technicalWriter',
       lastName: 'テクニカルライター',
       metadata: {'description': '科学技術や医学などの専門的な知識を持ったライター'},
       imageUrl:
-          'https://pixabay.com/get/gb1b358282b460bb55f39bbacbaa5e547fd2b08baa85f6bc9a8461fbe59d4896706ddf6c23ba8506114b0e3afad2a4786_640.jpg'),
+          'https://pbs.twimg.com/media/FziF8d_agAAiQGv?format=jpg&name=small'),
   types.User(
       id: 'freelanceWriter',
-      lastName: 'フリーランスライター',
+      lastName: 'ジャーナリスト',
       metadata: {'description': '作家やジャーナリストなど、フリーランスで執筆活動を行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g1ae468a6827d9ca0fc7846093160a74e416351d16a7f16136760a8d9397ac566c26dda0ca1b31ea49523c48281c55365_640.jpg'),
+          'https://pbs.twimg.com/media/FziF-UIaYAIhzfC?format=jpg&name=small'),
   types.User(
       id: 'itConsultant',
       lastName: 'ITコンサルタント',
@@ -333,7 +335,7 @@ const proPersons = [
       lastName: 'ファイナンシャルプランナー',
       metadata: {'description': '資産運用やライフプランに関するアドバイスを行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/gd14bc46cc1f55ea731fd5de678c28acdc5b474be15edba550a0d563e0df014ed597530149a452fb8c303de066f7171b4_640.jpg'),
+          'https://pbs.twimg.com/media/FziF_kcakAEmvuZ?format=jpg&name=small'),
   types.User(
       id: 'aromatherapist',
       lastName: 'アロマセラピスト',
@@ -345,7 +347,7 @@ const proPersons = [
       lastName: 'スタイリスト',
       metadata: {'description': '衣服やメイクアップのスタイリングに特化した専門家'},
       imageUrl:
-          'https://pixabay.com/get/gbfc961923c1531451dff5a3076244b8db87e6064b090afb42d0958520256c589e2b7d79182e287035ac6109ac6384b4082f46e7adcaf87fb163efc7aa20985e8_640.jpg'),
+          'https://pbs.twimg.com/media/FziGejJaQAAPKip?format=jpg&name=small'),
   types.User(
       id: 'homeStager',
       lastName: 'ホームステージャー',
@@ -363,7 +365,7 @@ const proPersons = [
       lastName: '薬剤師',
       metadata: {'description': '薬剤や薬の効果・副作用に関する専門家'},
       imageUrl:
-          'https://pixabay.com/get/g9deea53ad96577678b8e31cb3cd00817f4f3a87d3c7a7e0d2456b32119be72e6d19eb9b711f4caf9a14fc95032ca0542ca714d8ef9187d58ac0f6fd8e894b228_640.png'),
+          'https://pbs.twimg.com/media/FziGgGWagAEygJm?format=jpg&name=small'),
   types.User(
       id: 'sportsTrainer',
       lastName: 'スポーツトレーナー',
@@ -387,7 +389,7 @@ const proPersons = [
       lastName: 'ラジオDJ',
       metadata: {'description': 'ラジオ番組のパーソナリティとして、音楽やトークを担当する専門家'},
       imageUrl:
-          'https://pixabay.com/get/gf3aee07615f703032857bf6dae19e8756bd0844495abd5c57c629601222fae514f96d70a6bd861a832a7f0ab20c99fa1_640.jpg'),
+          'https://pbs.twimg.com/media/FziGhc-aMAISHzt?format=jpg&name=small'),
   types.User(
       id: 'projectManager',
       lastName: 'プロジェクトマネージャー',
@@ -417,7 +419,7 @@ const proPersons = [
       lastName: 'ホテルマネージャー',
       metadata: {'description': 'ホテル運営に関する全般的なマネジメントを行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g9ead90244de7c22ab19cbebfe91121504403f431f3d344f324b71ff26bf32f632a2bbf68eb2933ae870fbada94321e58079449f9f06cc4ef81a6761604504e05_640.jpg'),
+          'https://pbs.twimg.com/media/FziGkveaEAAGHIy?format=jpg&name=small'),
   types.User(
       id: 'personalTrainer',
       lastName: 'パーソナルトレーナー',
@@ -435,25 +437,13 @@ const proPersons = [
       lastName: '音響エンジニア',
       metadata: {'description': '音楽や映画、テレビ番組などの音響に特化した専門家'},
       imageUrl:
-          'https://pixabay.com/get/g410b1c2eceeaeaf927561d039a422645036a8e91055e171629605831ec9e8ef035d907fc62c43ecbf6e3c495f3a4879b776c9cc84fc4f1007871c13ff88a887a_640.jpg'),
+          'https://pbs.twimg.com/media/FziHTC8aEAA5y1t?format=jpg&name=small'),
   types.User(
       id: 'producer',
       lastName: 'プロデューサー',
       metadata: {'description': 'テレビ番組、映画、音楽などの制作に関わる専門家'},
       imageUrl:
           'https://images.unsplash.com/photo-1516223725307-6f76b9ec8742?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNTgwfDB8MXxzZWFyY2h8Nnx8cHJvZHVjZXJ8ZW58MHx8fHwxNjc5NDAzNTQ5&ixlib=rb-4.0.3&q=80&w=400'),
-  types.User(
-      id: 'forensicScientist',
-      lastName: 'フォレンジックサイエンティスト',
-      metadata: {'description': '犯罪現場の証拠の解析や検証を行う専門家'},
-      imageUrl:
-          'https://pixabay.com/get/g620d7e3577b22de71422697e365b1a88c31ded56a7659d4184c2bc9088ea8422b01a57ff5690bb987f5407bfad526503_640.jpg'),
-  types.User(
-      id: 'interiorDesigner',
-      lastName: 'インテリアデザイナー',
-      metadata: {'description': '住宅や店舗、オフィスなどのインテリアデザインに特化した専門家'},
-      imageUrl:
-          'https://pixabay.com/get/gc71f665e7f098d1cbef1bc13508e7673625cd580bb131eb5b6a0f41d28c7140562dcb90eee9f948668d9c5fcd42c666b_640.jpg'),
   types.User(
       id: 'marketingSpecialist',
       lastName: 'マーケティング担当者',
@@ -465,13 +455,13 @@ const proPersons = [
       lastName: 'メンタルヘルスカウンセラー',
       metadata: {'description': '心理学やカウンセリングの知識を持ち、メンタルヘルスに関する相談やアドバイスを行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g3a70faac130798a64e8ef11f2770be1ffe391202bd53d5211f66d4966b50503d8614aaf11210e6e0f02627b187b81c1719248880ddac8d3de01370550544c566_640.jpg'),
+          'https://pbs.twimg.com/media/FziHUbzaMAEJocZ?format=jpg&name=small'),
   types.User(
       id: 'animator',
       lastName: 'アニメーター',
       metadata: {'description': 'アニメーション映画やテレビ番組の制作に携わる専門家'},
       imageUrl:
-          'https://pixabay.com/get/gc4581ab2dfba49c55429ac54d5376dad8e3d40b2a1a51220d6a45495c2a4a881ec16ce8e4d29e88130b5f23197959a65_640.jpg'),
+          'https://pbs.twimg.com/media/FziHWC8aQAAcpuO?format=jpg&name=small'),
   types.User(
       id: 'businessConsultant',
       lastName: 'ビジネスコンサルタント',
@@ -483,13 +473,7 @@ const proPersons = [
       lastName: '警察官',
       metadata: {'description': '治安維持や交通規制、犯罪の捜査や防止などを行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g495e92e084ff9c4ef2be908188cbeb8c765565405ddb32f3d60dcdb9fd40841393f64c5ae3c0f69db5248fc23905481e_640.jpg'),
-  types.User(
-      id: 'webDesigner',
-      lastName: 'ウェブデザイナー',
-      metadata: {'description': 'ウェブサイトのデザインや構築に特化した専門家'},
-      imageUrl:
-          'https://pixabay.com/get/g11bbe6d01068cae871caa0415ab6e2f4e25e088b17c63217ba54cdfedf28b89b68f6b7f0f375db5fb616179a79932df8_640.jpg'),
+          'https://pbs.twimg.com/media/FziHW6DacAIh63y?format=jpg&name=small'),
   types.User(
       id: 'photographer',
       lastName: 'フォトグラファー',
@@ -507,19 +491,19 @@ const proPersons = [
       lastName: 'レストランオーナー',
       metadata: {'description': '飲食店の経営を行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g87cd3753a26fc712a76610373b36295190c2e7f0a80c0ea229b90771aa26f5ef878b155a0846336539a0521c7a6a8a8c77adabbb59666f1f7decbc47f260b6a0_640.jpg'),
+          'https://pbs.twimg.com/media/FziH0lJaUAANQ9S?format=jpg&name=small'),
   types.User(
       id: 'securityConsultant',
       lastName: 'セキュリティコンサルタント',
       metadata: {'description': '防犯対策や情報セキュリティに関するアドバイスを行う専門家'},
       imageUrl:
-          'https://pixabay.com/get/g70da5e4a2f5d837cfda48c0ee83a1b7993eddc8b906110a4935ba386fda15b0102024cb9dac2b1563f8e58b17950e4bf_640.jpg'),
+          'https://pbs.twimg.com/media/FziH1l2aIAUYUrK?format=jpg&name=small'),
   types.User(
       id: 'programmer',
       lastName: 'プログラマー',
       metadata: {'description': 'コンピュータプログラムの開発や保守に関する専門家'},
       imageUrl:
-          'https://pixabay.com/get/g249a5dccc8002d4246265aa303b0c5ff2d3bb59fba76e100eabd12d1777367b01d53ab4e6354e887a0371e0216d4dd753f8f7c006ff8fe2a88cf012475db266f_640.jpg'),
+          'https://pbs.twimg.com/media/FziH3ktagAIaL9f?format=jpg&name=small'),
   types.User(
       id: 'aircraftPilot',
       lastName: '航空機パイロット',
@@ -527,7 +511,7 @@ const proPersons = [
         'description': '航空機の操縦や運航に関する専門家',
       },
       imageUrl:
-          'https://pixabay.com/get/g128a9d94c5e663c9a72c200acd9f6987691b0105b2c576a0d90caa734eb183fb3bf91683abefcded098bd2731809ed77_640.jpg'),
+          'https://pbs.twimg.com/media/FziH5NDaYAQFy97?format=jpg&name=small'),
   types.User(
       id: 'logoDesigner',
       lastName: 'ロゴデザイナー',
@@ -551,7 +535,7 @@ const proPersons = [
         'description': '文章の執筆や編集に特化した専門家',
       },
       imageUrl:
-          'https://pixabay.com/get/g8433152e9fa85716b538eaa2b84198538bae0b0a9e6779151ecd701fdce345d361955a6e70455b6f695e0103c34b40f9_640.jpg'),
+          'https://pbs.twimg.com/media/FziIQbvakAYjf_-?format=jpg&name=small'),
   types.User(
       id: 'securitiesAnalyst',
       lastName: '証券アナリスト',
@@ -559,7 +543,7 @@ const proPersons = [
         'description': '株式や債券などの投資商品の分析や予測に関する専門家',
       },
       imageUrl:
-          'https://pixabay.com/get/g0eda3863903cca100b7fc322d31e98947f8e5f99b5826cadb4ddf29ea3cdfbc98301e36e661416e5dc873ea697d04c518f8cad7fc88c0cd936bd7892345c8c7a_640.jpg'),
+          'https://pbs.twimg.com/media/FziIScWaAAAngrt?format=jpg&name=small'),
   types.User(
       id: 'webMarketer',
       lastName: 'ウェブマーケター',
@@ -575,7 +559,7 @@ const proPersons = [
         'description': '髪型やメイクなどの美容に特化した専門家',
       },
       imageUrl:
-          'https://pixabay.com/get/ged73ddfd1c0c3f55f66238a02de410d1b7381ceefe0add6273764c002e368ea7e806df3b984545b4c84ed0c0d97f7c1f476a0141e607c9615eb37b3f7e66bb53_640.jpg'),
+          'https://pbs.twimg.com/media/FziITdwaEDML9jT?format=jpg&name=small'),
   types.User(
       id: 'robot designer',
       lastName: 'ロボットデザイナー',
@@ -583,15 +567,7 @@ const proPersons = [
         'description': '色彩を利用して心理的な問題を解決する専門職',
       },
       imageUrl:
-          'https://pixabay.com/get/gaee6b96bd8d915fa9b83bc7b97a93578578c2846257ef5a042a8aa4cea733144b236e88bafa9e81b4a2b0dded6ea7f3869a6547f4e35ced1927cf4cf2e64057b_640.jpg'),
-  types.User(
-      id: 'human resources',
-      lastName: '人事の専門家',
-      metadata: {
-        'description': '組織の人的資源を最大限に活用するための戦略を策定することを専門とする人',
-      },
-      imageUrl:
-          'https://cdn.pixabay.com/photo/2017/11/02/14/27/model-2911332__480.jpg'),
+          'https://pbs.twimg.com/media/FziIU20aQAEziVA?format=jpg&name=small'),
 ];
 const fullPersons = [
   types.User(
