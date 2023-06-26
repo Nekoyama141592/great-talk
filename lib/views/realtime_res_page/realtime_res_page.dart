@@ -30,60 +30,69 @@ class RealtimeResPage extends HookWidget {
           appBar: AppBar(
             title: Text(interlocutor.lastName ?? ""),
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                const BasicHeightBox(),
-                SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    child: Obx(
-                      () => ListView.builder(
-                        itemCount: controller.messages.length,
-                        itemBuilder: ((context, index) {
-                          final messages = controller.messages.toList();
-                          if (index == messages.indexOf(messages.last) &&
-                              messages.last.toJson()["text"].isEmpty) {
-                            return Padding(
-                              padding: EdgeInsets.all(defaultPadding(context)),
-                              child: Obx(() => ListTile(
-                                    leading: interlocutor.imageUrl != null
-                                        ? CircleImage(
-                                            interlocutor: interlocutor)
-                                        : null,
-                                    title: SelectableText(
-                                        controller.realtimeRes.value),
-                                  )),
-                            );
-                          } else {
-                            return Padding(
-                              padding: EdgeInsets.all(defaultPadding(context)),
-                              child: Obx(() => ListTile(
-                                    tileColor: messages[index].author ==
-                                            chatUiCurrrentUser
-                                        ? kSecondaryColor.withOpacity(0.3)
-                                        : null,
-                                    leading: messages[index].author !=
-                                            chatUiCurrrentUser
-                                        ? CircleImage(
-                                            interlocutor: interlocutor)
-                                        : null,
-                                    title: SelectableText(controller
-                                        .messages[index]
-                                        .toJson()["text"]),
-                                  )),
-                            );
-                          }
-                        }),
-                      ),
-                    )),
-                RoundedInputField(
-                    controller: inputController,
-                    send: () => controller.onSendPressed(context, interlocutor,
-                        personsController, inputController)),
-                const BasicHeightBox()
-              ],
-            ),
-          )),
+          body: Obx(() => controller.isLoading.value
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const BasicHeightBox(),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.8,
+                          child: Obx(
+                            () => ListView.builder(
+                              itemCount: controller.messages.length,
+                              itemBuilder: ((context, index) {
+                                final messages = controller.messages.toList();
+                                if (index == messages.indexOf(messages.last) &&
+                                    messages.last.toJson()["text"].isEmpty) {
+                                  return Padding(
+                                    padding:
+                                        EdgeInsets.all(defaultPadding(context)),
+                                    child: Obx(() => ListTile(
+                                          leading: interlocutor.imageUrl != null
+                                              ? CircleImage(
+                                                  interlocutor: interlocutor)
+                                              : null,
+                                          title: SelectableText(
+                                              controller.realtimeRes.value),
+                                        )),
+                                  );
+                                } else {
+                                  return Padding(
+                                    padding:
+                                        EdgeInsets.all(defaultPadding(context)),
+                                    child: Obx(() => ListTile(
+                                          tileColor: messages[index].author ==
+                                                  chatUiCurrrentUser
+                                              ? kSecondaryColor.withOpacity(0.3)
+                                              : null,
+                                          leading: messages[index].author !=
+                                                  chatUiCurrrentUser
+                                              ? CircleImage(
+                                                  interlocutor: interlocutor)
+                                              : null,
+                                          title: SelectableText(controller
+                                              .messages[index]
+                                              .toJson()["text"]),
+                                        )),
+                                  );
+                                }
+                              }),
+                            ),
+                          )),
+                      RoundedInputField(
+                          controller: inputController,
+                          send: () => controller.onSendPressed(
+                              context,
+                              interlocutor,
+                              personsController,
+                              inputController)),
+                      const BasicHeightBox()
+                    ],
+                  ),
+                ))),
     );
   }
 }

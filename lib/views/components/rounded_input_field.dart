@@ -4,9 +4,7 @@ import 'package:great_talk/views/components/text_field_container.dart';
 
 class RoundedInputField extends StatelessWidget {
   const RoundedInputField(
-      {Key? key,
-      required this.controller,
-      required this.send})
+      {Key? key, required this.controller, required this.send})
       : super(key: key);
 
   final TextEditingController controller;

@@ -20,19 +20,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class RealtimeResController extends GetxController {
   final messages = <types.Message>[].obs;
   final realtimeRes = "".obs;
+  final isLoading = true.obs;
   int chatCount = 0;
-  // late OpenAI openAI;
   late SharedPreferences prefs;
-  // @override
-  // void onInit() {
-  //   openAI = OpenAI.instance.build(
-  //       token: dotenv.get(EnvKeys.OPEN_AI_API_KEY.name),
-  //       baseOption: HttpSetup(
-  //           receiveTimeout: const Duration(seconds: 20),
-  //           connectTimeout: const Duration(seconds: 20)),
-  //       enableLog: true);
-  //   super.onInit();
-  // }
 
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> getChatLog(types.User interlocutor) async {
@@ -43,6 +33,7 @@ class RealtimeResController extends GetxController {
   }
 
   Future<List<types.Message>> _getLocalMessages(String interlocutorId) async {
+    isLoading(true);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final jsonString = prefs.getString(interlocutorId) ?? "";
     List<types.Message> messages = [];
@@ -52,6 +43,7 @@ class RealtimeResController extends GetxController {
     } else {
       messages = [];
     }
+    isLoading(false);
     return messages;
   }
 
