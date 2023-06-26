@@ -23,6 +23,10 @@ abstract class PersonsController extends GetxController {
   }
 
   Future<void> setLatestPersons(types.User person, String lastAnswer) async {
+    // 検索からチャットした場合は保存しない.
+    if (isSearching.value) {
+      return;
+    }
     final prefs = await SharedPreferences.getInstance();
     // 新たにmetadataを設定する.
     final int lastSeen = DateConverter.nowDateTime();

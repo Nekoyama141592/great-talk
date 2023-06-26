@@ -1,11 +1,9 @@
-// flutter
 import 'package:flutter/material.dart';
 import 'package:great_talk/common/strings.dart';
+import 'package:great_talk/controllers/great_persons_controller.dart';
 import 'package:great_talk/controllers/professionals_controller.dart';
-import 'package:great_talk/controllers/search_controller.dart';
 import 'package:great_talk/common/bottom_navigation_bar_elements.dart';
 import 'package:great_talk/common/others.dart';
-// packages
 import 'package:get/get.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/common/widgets.dart';
@@ -23,8 +21,8 @@ class PersonsPage extends HookWidget {
     final PurchasesController purchasesController =
         Get.put(PurchasesController());
     Get.put(MainController());
-    final OriginalSearchController searchController =
-        Get.put(OriginalSearchController());
+    final GreatPersonsController searchController =
+        Get.put(GreatPersonsController());
     final ProfessionalsController professionalsController =
         Get.put(ProfessionalsController());
     Get.put(NotificationController());

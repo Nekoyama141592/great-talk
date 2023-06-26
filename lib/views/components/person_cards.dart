@@ -4,9 +4,9 @@ import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
+import 'package:great_talk/controllers/great_persons_controller.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/professionals_controller.dart';
-import 'package:great_talk/controllers/search_controller.dart';
 import 'package:great_talk/utility/chat_utility.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/realtime_res_page/realtime_res_page.dart';
@@ -17,7 +17,7 @@ class PersonCards extends StatelessWidget {
   @override
   Widget build(context) {
     final PersonsController controller =
-        isProMode ? ProfessionalsController.to : OriginalSearchController.to;
+        isProMode ? ProfessionalsController.to : GreatPersonsController.to;
     return Scaffold(
         floatingActionButton: Obx(
           () => FloatingActionButton(

@@ -569,7 +569,7 @@ const proPersons = [
       imageUrl:
           'https://pbs.twimg.com/media/FziIU20aQAEziVA?format=jpg&name=small'),
 ];
-const fullPersons = [
+const greatPersons = [
   types.User(
       id: 'Albert Einstein.',
       lastName: 'アルベルト・アインシュタイン',

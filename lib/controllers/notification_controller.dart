@@ -49,8 +49,8 @@ class NotificationController extends GetxController
   String _createRandomMsg() {
     final random = Random(); // ランダムな数値を生成するオブジェクト
     final randomIndex =
-        random.nextInt(fullPersons.length); // 配列内のランダムなインデックスを取得
-    final randomPerson = fullPersons[randomIndex]; // インデックスに対応する要素を取得
+        random.nextInt(greatPersons.length); // 配列内のランダムなインデックスを取得
+    final randomPerson = greatPersons[randomIndex]; // インデックスに対応する要素を取得
     return "今日は${randomPerson.lastName!}と話してみませんか？";
   }
 
