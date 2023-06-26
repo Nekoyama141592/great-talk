@@ -5,11 +5,11 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:cached_network_image/cached_network_image.dart';
 
 class CircleImage extends StatelessWidget {
-  const CircleImage({Key? key, required this.person}) : super(key: key);
-  final types.User person;
+  const CircleImage({Key? key, required this.interlocutor}) : super(key: key);
+  final types.User interlocutor;
   @override
   Widget build(BuildContext context) {
-    final imageUrl = person.imageUrl;
+    final imageUrl = interlocutor.imageUrl;
     final length = userImageSize(context);
     return imageUrl == null || imageUrl.isEmpty
         ? const Icon(Icons.person)

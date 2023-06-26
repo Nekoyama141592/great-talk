@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -9,6 +8,7 @@ import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
+import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 
 class RealtimeResPage extends HookWidget {
@@ -47,8 +47,8 @@ class RealtimeResPage extends HookWidget {
                               padding: EdgeInsets.all(defaultPadding(context)),
                               child: Obx(() => ListTile(
                                     leading: interlocutor.imageUrl != null
-                                        ? CachedNetworkImage(
-                                            imageUrl: interlocutor.imageUrl!)
+                                        ? CircleImage(
+                                            interlocutor: interlocutor)
                                         : null,
                                     title: SelectableText(
                                         controller.realtimeRes.value),
@@ -64,9 +64,8 @@ class RealtimeResPage extends HookWidget {
                                         : null,
                                     leading: messages[index].author !=
                                             chatUiCurrrentUser
-                                        ? CachedNetworkImage(
-                                            imageUrl:
-                                                interlocutor.imageUrl ?? "")
+                                        ? CircleImage(
+                                            interlocutor: interlocutor)
                                         : null,
                                     title: SelectableText(controller
                                         .messages[index]

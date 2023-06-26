@@ -47,7 +47,7 @@ class PersonCards extends StatelessWidget {
                     padding:
                         EdgeInsets.symmetric(vertical: defaultPadding(context)),
                     child: ListTile(
-                      leading: CircleImage(person: person),
+                      leading: CircleImage(interlocutor: person),
                       title: boldText(name),
                       subtitle: lastAnswer != null
                           ? Text(
