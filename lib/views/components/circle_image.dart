@@ -17,11 +17,12 @@ class CircleImage extends StatelessWidget {
             width: length,
             height: length,
             child: CachedNetworkImage(
-              imageBuilder: (context,image) {
-                return Container(decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(image: image,fit: BoxFit.fill)
-                ),);
+              imageBuilder: (context, image) {
+                return Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(image: image, fit: BoxFit.fill)),
+                );
               },
               imageUrl: imageUrl,
               progressIndicatorBuilder: (context, url, downloadProgress) =>
