@@ -13,14 +13,16 @@ class CircleImage extends StatelessWidget {
     final length = userImageSize(context);
     return imageUrl == null || imageUrl.isEmpty
         ? const Icon(Icons.person)
-        : Container(
+        : SizedBox(
             width: length,
             height: length,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-            ),
             child: CachedNetworkImage(
-              fit: BoxFit.fill,
+              imageBuilder: (context,image) {
+                return Container(decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(image: image,fit: BoxFit.fill)
+                ),);
+              },
               imageUrl: imageUrl,
               progressIndicatorBuilder: (context, url, downloadProgress) =>
                   CircularProgressIndicator(value: downloadProgress.progress),
