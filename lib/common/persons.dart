@@ -1063,7 +1063,7 @@ const greatPersons = [
       id: 'Himiko (Japanese goddess of war)',
       lastName: '卑弥呼',
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Queen-Himiko-Museum-Yayoi-Culture.png/200px-Queen-Himiko-Museum-Yayoi-Culture.png'),
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Himiko_Queen_of_Yamataikoku.jpg/400px-Himiko_Queen_of_Yamataikoku.jpg'),
   User(
       id: 'Yamato Takel (god of war)',
       lastName: 'ヤマトタケル',
@@ -1648,7 +1648,7 @@ const greatPersons = [
       id: 'Winston Churchill',
       lastName: 'ウィンストン・チャーチル',
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Disambig_gray.svg/25px-Disambig_gray.svg.png'),
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sir_Winston_Churchill_-_19086236948.jpg/400px-Sir_Winston_Churchill_-_19086236948.jpg'),
   User(
       id: 'Charles Chaplin.',
       lastName: 'チャールズ・チャップリン',
@@ -1693,7 +1693,7 @@ const greatPersons = [
       id: 'Lorenzo de Medici',
       lastName: 'ロレンツォ・デ・メディチ',
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Confusion_grey.svg/25px-Confusion_grey.svg.png'),
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Lorenzo_de%27_Medici-ritratto.jpg/400px-Lorenzo_de%27_Medici-ritratto.jpg'),
   User(
       id: 'Pietro Mascagni',
       lastName: 'ピエトロ・マスカーニ',
@@ -1871,9 +1871,9 @@ const greatPersons = [
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/230px-Pablo_picasso_1.jpg'),
   User(
       id: 'Christina.',
-      lastName: 'クリスティーナ',
+      lastName: 'クリスティーナ (スウェーデン女王)',
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Disambig_gray.svg/30px-Disambig_gray.svg.png'),
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/David_Beck_-_Christina%2C_Queen_of_Sweden_1644-1654_-_Google_Art_Project.jpg/400px-David_Beck_-_Christina%2C_Queen_of_Sweden_1644-1654_-_Google_Art_Project.jpg'),
   User(
       id: 'Carl Zumberg.',
       lastName: 'カール・ツンベルク',
@@ -1957,9 +1957,9 @@ const greatPersons = [
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Du_Fu.jpg/250px-Du_Fu.jpg'),
   User(
       id: 'Sun Yat-sen',
-      lastName: '孫中山',
+      lastName: '孫文',
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Confusion_grey.svg/25px-Confusion_grey.svg.png'),
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Sun_Yat-sen_2.jpg/400px-Sun_Yat-sen_2.jpg'),
   User(
       id: 'Mao Zedong',
       lastName: '毛沢東',
@@ -2274,7 +2274,7 @@ const greatPersons = [
       id: 'seven mansions (Chinese constellations) of the eastern heavens',
       lastName: '玄宗',
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Disambig_gray.svg/30px-Disambig_gray.svg.png'),
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Tang_XianZong.jpg/340px-Tang_XianZong.jpg'),
   User(
       id: 'HanXin era (1177.8.4-1181.7.14)',
       lastName: '韓信',
