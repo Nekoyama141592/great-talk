@@ -120,7 +120,11 @@ class RealtimeResController extends GetxController {
       messages([...messages]);
       _setValues(interlocutor, controller);
     }, onError: (e) {
-      messages.remove(messages.last); // うまく生成できなかったメッセージを削除
+      chatCount--; // チャット数を一つ減らす
+      _setChatCount(); // チャット数を保存
+      messages.removeRange(
+          messages.length - 2, messages.length); // うまく生成できなかったメッセージを削除
+      messages([...messages]);
       UIHelper.showFlutterToast("エラーが発生し、値を取得できませんでした。");
       debugPrint("メッセージ生成時のエラー $e");
     });
