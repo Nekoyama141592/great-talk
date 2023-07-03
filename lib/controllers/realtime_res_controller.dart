@@ -26,14 +26,15 @@ class RealtimeResController extends GetxController {
 
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> getChatLog(types.User interlocutor) async {
+    isLoading(true);
     List<types.Message> a = await _getLocalMessages(interlocutor.id);
     await PurchasesController.to.restorePurchases(); // 購入内容を復元
     debugPrint("==========取得されました==========");
     messages(a);
+    isLoading(false);
   }
 
   Future<List<types.Message>> _getLocalMessages(String interlocutorId) async {
-    isLoading(true);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final jsonString = prefs.getString(interlocutorId) ?? "";
     List<types.Message> messages = [];
@@ -43,7 +44,6 @@ class RealtimeResController extends GetxController {
     } else {
       messages = [];
     }
-    isLoading(false);
     return messages;
   }
 
@@ -119,8 +119,10 @@ class RealtimeResController extends GetxController {
       );
       messages([...messages]);
       _setValues(interlocutor, controller);
-    }, onError: (_) {
+    }, onError: (e) {
+      messages.remove(messages.last); // うまく生成できなかったメッセージを削除
       UIHelper.showFlutterToast("エラーが発生し、値を取得できませんでした。");
+      debugPrint("メッセージ生成時のエラー $e");
     });
   }
 
