@@ -23,6 +23,7 @@ class RealtimeResPage extends HookWidget {
     final controller = Get.put(RealtimeResController());
     final purchaseController = PurchasesController.to;
     final inputController = useTextEditingController();
+    final scrollCotroller = useScrollController();
     useEffect(() {
       controller.getChatLog(interlocutor);
       return;
@@ -45,6 +46,7 @@ class RealtimeResPage extends HookWidget {
                           height: chatScreenHeight(context),
                           child: Obx(
                             () => ListView.builder(
+                              controller: scrollCotroller,
                               itemCount: controller.messages.length,
                               itemBuilder: ((context, index) {
                                 final messages = controller.messages.toList();
@@ -106,8 +108,12 @@ class RealtimeResPage extends HookWidget {
                           )),
                       RoundedInputField(
                           controller: inputController,
-                          send: () => controller.onSendPressed(context,
-                              interlocutor, personsController, inputController))
+                          send: () => controller.onSendPressed(
+                              context,
+                              interlocutor,
+                              personsController,
+                              inputController,
+                              scrollCotroller))
                     ],
                   ),
                 ))),

@@ -47,15 +47,19 @@ class RealtimeResController extends GetxController {
     return messages;
   }
 
-  void onSendPressed(BuildContext context, types.User interlocutor,
-      PersonsController controller, TextEditingController inputController) {
+  void onSendPressed(
+      BuildContext context,
+      types.User interlocutor,
+      PersonsController controller,
+      TextEditingController inputController,
+      ScrollController scrollController) {
     FocusScope.of(context).unfocus();
-    execute(interlocutor, controller, inputController.text);
+    execute(interlocutor, controller, scrollController, inputController.text);
     inputController.text = "";
   }
 
   Future<void> execute(types.User interlocutor, PersonsController controller,
-      String content) async {
+      ScrollController scrollController, String content) async {
     final model = GptTurboChatModel();
     _addMessage(content, chatUiCurrrentUser);
     prefs = await SharedPreferences.getInstance();
@@ -73,8 +77,8 @@ class RealtimeResController extends GetxController {
     final requestMessages = await _createRequestMessages(interlocutor, content);
     final request = ChatCompleteText(
         messages: requestMessages, maxToken: maxToken, model: model);
-    _listenToChatCompletionSSE(
-        request, interlocutor, controller); // ChatGPTのリアルタイム出力
+    _listenToChatCompletionSSE(request, interlocutor, controller,
+        scrollController); // ChatGPTのリアルタイム出力
   }
 
   void _addEmptyMessage(types.User interlocutor) {
@@ -86,14 +90,25 @@ class RealtimeResController extends GetxController {
     ));
   }
 
-  void _listenToChatCompletionSSE(ChatCompleteText request,
-      types.User interlocutor, PersonsController controller) {
+  void _scrollToBottom(ScrollController scrollController) {
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.easeOut,
+    );
+  }
+
+  void _listenToChatCompletionSSE(
+      ChatCompleteText request,
+      types.User interlocutor,
+      PersonsController controller,
+      ScrollController scrollController) {
     final client = ChatGptApiClient();
     client.openAI.onChatCompletionSSE(request: request).listen((it) {
       final content = it.choices?.last.message?.content;
       if (content != null && content.isNotEmpty) {
         realtimeRes(realtimeRes.value + content);
-        debugPrint(content);
+        _scrollToBottom(scrollController);
       }
     }, onDone: () {
       messages.last = types.TextMessage(
