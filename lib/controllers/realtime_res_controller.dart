@@ -13,7 +13,6 @@ import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
 import 'package:great_talk/repository/wolfram_repository.dart';
-import 'package:great_talk/views/subscribe/subscribe_page.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -61,15 +60,16 @@ class RealtimeResController extends GetxController {
   Future<void> execute(types.User interlocutor, PersonsController controller,
       ScrollController scrollController, String content) async {
     final model = GptTurboChatModel();
-    _addMessage(content, chatUiCurrrentUser);
     prefs = await SharedPreferences.getInstance();
     chatCount = _getChatCount(prefs); // 端末から今日のチャット回数を取得
     if (!_allowChat()) {
       // チャットが許されていない場合
+      await UIHelper.showFlutterToast(
+          "チャットは1日$chatLimitPerDay回まで！\nサブスクに加入してください。");
       await _requestReview(); // レビューをリクエスト
-      Get.to(const SubscribePage()); // サブスクのページに飛ばす
       return;
     }
+    _addMessage(content, chatUiCurrrentUser);
     _addEmptyMessage(interlocutor); // Viewで表示できる要素数を一つ増やす
     realtimeRes(""); // realtimeResを初期化
     messages([...messages]); // messageを再代入して変更をViewに反映
@@ -125,7 +125,7 @@ class RealtimeResController extends GetxController {
       messages.removeRange(
           messages.length - 2, messages.length); // うまく生成できなかったメッセージを削除
       messages([...messages]);
-      UIHelper.showFlutterToast("エラーが発生し、値を取得できませんでした。");
+      UIHelper.showFlutterToast("文字数オーバーもしくはサーバーエラーで、値を取得できませんでした。");
       debugPrint("メッセージ生成時のエラー $e");
     });
   }
