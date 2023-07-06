@@ -39,7 +39,7 @@ class PurchasesController extends GetxController {
       isProd() ? products(productList) : products(myProductList);
 
   bool isSubscribing() {
-    return purchases.isEmpty;
+    return purchases.isNotEmpty;
   }
 
   bool hasProductBeenPurchased(ProductDetails productDetails) {
