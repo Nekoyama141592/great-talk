@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/common/others.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
-import 'package:great_talk/views/components/price_list.dart';
 
 import 'package:great_talk/views/components/product_list.dart';
 import 'package:great_talk/views/subscribe/components/plan_descriptions.dart';
@@ -38,7 +35,6 @@ class SubscribeView extends StatelessWidget {
           const RestoreButton(),
           const BasicHeightBox(),
           const PrivacyPolicyButton(),
-          if (Platform.isAndroid) const PriceList(),
           Obx((() {
             if (purchasesController.purchasePending.value) {
               return const Stack(
