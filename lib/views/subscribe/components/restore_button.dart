@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 
 class RestoreButton extends StatelessWidget {
@@ -17,7 +16,12 @@ class RestoreButton extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: TextButton(
                     onPressed: () async => await controller.restorePurchases(),
-                    child: blackText('購入を復元')),
+                    child: Text(
+                      '購入を復元',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).focusColor),
+                    )),
               ));
     }));
   }

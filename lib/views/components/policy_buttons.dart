@@ -49,14 +49,14 @@ class PolicyButtons extends StatelessWidget {
           const Expanded(child: SizedBox()),
           TextButton(
               onPressed: () async => await UrlRedirector.toPrivacyPage(),
-              child: whiteText('プライバシーポリシー')),
+              child: const Text('プライバシーポリシー')),
           TextButton(
               onPressed: () async => await UrlRedirector.toTosPage(),
-              child: whiteText(tosText)),
+              child: const Text(tosText)),
           if (isIOS())
             TextButton(
                 onPressed: () async => await UrlRedirector.toEULAPage(),
-                child: whiteText('使用許諾契約(EULA)')),
+                child: const Text('使用許諾契約(EULA)')),
           const Divider(),
         ],
       ),

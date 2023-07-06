@@ -3,14 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/common/others.dart';
-import 'package:great_talk/common/url_redirector.dart';
-import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/price_list.dart';
 
 import 'package:great_talk/views/components/product_list.dart';
 import 'package:great_talk/views/subscribe/components/plan_descriptions.dart';
+import 'package:great_talk/views/subscribe/components/privacy_policy_button.dart';
 import 'package:great_talk/views/subscribe/components/restore_button.dart';
 
 class SubscribePage extends StatelessWidget {
@@ -38,9 +37,7 @@ class SubscribeView extends StatelessWidget {
           const ProductList(),
           const RestoreButton(),
           const BasicHeightBox(),
-          TextButton(
-              onPressed: () async => await UrlRedirector.toPrivacyPage(),
-              child: whiteText('プライバシーポリシー')),
+          const PrivacyPolicyButton(),
           if (Platform.isAndroid) const PriceList(),
           Obx((() {
             if (purchasesController.purchasePending.value) {
