@@ -20,7 +20,7 @@ class RealtimeResController extends GetxController {
   final messages = <types.Message>[].obs;
   final realtimeRes = "".obs;
   final isLoading = false.obs;
-  bool isGenerating = false;
+  final isGenerating = false.obs;
   int chatCount = 0;
   late SharedPreferences prefs;
 
@@ -112,10 +112,10 @@ class RealtimeResController extends GetxController {
       PersonsController controller,
       ScrollController scrollController) {
     // 生成中なら何もしない
-    if (isGenerating) {
+    if (isGenerating.value) {
       return;
     }
-    isGenerating = true;
+    isGenerating(true);
     final client = ChatGptApiClient();
     client.openAI.onChatCompletionSSE(request: request).listen((it) {
       final content = it.choices?.last.message?.content;
@@ -132,7 +132,7 @@ class RealtimeResController extends GetxController {
       );
       messages([...messages]);
       _setValues(interlocutor, controller);
-      isGenerating = false;
+      isGenerating(false);
     }, onError: (e) {
       chatCount--; // チャット数を一つ減らす
       _setChatCount(); // チャット数を保存
@@ -141,7 +141,7 @@ class RealtimeResController extends GetxController {
       messages([...messages]);
       UIHelper.showFlutterToast("文字数オーバーもしくはサーバーエラーで、値を取得できませんでした。");
       debugPrint("メッセージ生成時のエラー $e");
-      isGenerating = false;
+      isGenerating(false);
     });
   }
 

@@ -106,14 +106,19 @@ class RealtimeResPage extends HookWidget {
                               }),
                             ),
                           )),
-                      RoundedInputField(
-                          controller: inputController,
-                          send: () => controller.onSendPressed(
-                              context,
-                              interlocutor,
-                              personsController,
-                              inputController,
-                              scrollCotroller))
+                      Obx(() {
+                        if (controller.isGenerating.value) {
+                          return const SizedBox.shrink();
+                        }
+                        return RoundedInputField(
+                            controller: inputController,
+                            send: () => controller.onSendPressed(
+                                context,
+                                interlocutor,
+                                personsController,
+                                inputController,
+                                scrollCotroller));
+                      })
                     ],
                   ),
                 ))),
