@@ -19,7 +19,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class RealtimeResController extends GetxController {
   final messages = <types.Message>[].obs;
   final realtimeRes = "".obs;
-  final isLoading = true.obs;
+  final isLoading = false.obs;
+  bool isGenerating = false;
   int chatCount = 0;
   late SharedPreferences prefs;
 
@@ -76,9 +77,16 @@ class RealtimeResController extends GetxController {
     // リクエストを作成
     final requestMessages = await _createRequestMessages(interlocutor, content);
     final request = ChatCompleteText(
-        messages: requestMessages, maxToken: maxToken, model: model);
+        messages: requestMessages, maxToken: _adjustMaxToken(), model: model);
     _listenToChatCompletionSSE(request, interlocutor, controller,
         scrollController); // ChatGPTのリアルタイム出力
+  }
+
+  int _adjustMaxToken() {
+    final x = messages.length < 3 ? maxToken ~/ 2 : maxToken;
+    debugPrint("最大トークン数は$x !!!!!!!!!!!!!");
+    debugPrint("長さは${messages.length} !!!!!!!!!!!!!");
+    return x;
   }
 
   void _addEmptyMessage(types.User interlocutor) {
@@ -103,6 +111,11 @@ class RealtimeResController extends GetxController {
       types.User interlocutor,
       PersonsController controller,
       ScrollController scrollController) {
+    // 生成中なら何もしない
+    if (isGenerating) {
+      return;
+    }
+    isGenerating = true;
     final client = ChatGptApiClient();
     client.openAI.onChatCompletionSSE(request: request).listen((it) {
       final content = it.choices?.last.message?.content;
@@ -119,6 +132,7 @@ class RealtimeResController extends GetxController {
       );
       messages([...messages]);
       _setValues(interlocutor, controller);
+      isGenerating = false;
     }, onError: (e) {
       chatCount--; // チャット数を一つ減らす
       _setChatCount(); // チャット数を保存
@@ -127,6 +141,7 @@ class RealtimeResController extends GetxController {
       messages([...messages]);
       UIHelper.showFlutterToast("文字数オーバーもしくはサーバーエラーで、値を取得できませんでした。");
       debugPrint("メッセージ生成時のエラー $e");
+      isGenerating = false;
     });
   }
 
