@@ -62,7 +62,7 @@ class RealtimeResController extends GetxController {
       ScrollController scrollController, String content) async {
     final model = GptTurboChatModel();
     prefs = await SharedPreferences.getInstance();
-    chatCount = _getChatCount(prefs); // 端末から今日のチャット回数を取得
+    chatCount = _getChatCount(); // 端末から今日のチャット回数を取得
     if (!_allowChat()) {
       // チャットが許されていない場合
       await UIHelper.showFlutterToast(
@@ -145,16 +145,16 @@ class RealtimeResController extends GetxController {
     });
   }
 
-  int _getChatCount(SharedPreferences prefs) {
+  int _getChatCount() {
     int count = prefs.getInt(chatCountPrefsKey) ?? 0;
     // もし、最後のチャットから24時間経過していたらchatCountを0にして送信を許可
-    if (_is24HoursFromLast(prefs)) {
+    if (_is24HoursFromLast()) {
       count = 0;
     }
     return count;
   }
 
-  bool _is24HoursFromLast(SharedPreferences prefs) {
+  bool _is24HoursFromLast() {
     final int last = prefs.getInt(lastChatDatePrefsKey) ?? 0;
     final lastDay = DateConverter.intToDateTime(last);
     final now = DateTime.now();
