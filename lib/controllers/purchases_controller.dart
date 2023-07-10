@@ -1,26 +1,20 @@
 import 'dart:async';
 import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/bools.dart';
 import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/extensions/purchase_details_extension.dart';
-import 'package:great_talk/iap_constants/my_product_list.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
-
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
+import 'package:great_talk/iap_constants/my_product_list.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
-
-import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
-import 'package:in_app_purchase_android/billing_client_wrappers.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:great_talk/consts/env_keys.dart';
 import 'package:great_talk/model/ios_receipt_response/ios_receipt_response.dart';
-import 'package:dio/dio.dart' as dio;
-
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:great_talk/repository/purchases_repository.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
 class PurchasesController extends GetxController {
@@ -28,6 +22,7 @@ class PurchasesController extends GetxController {
   final purchases = <PurchaseDetails>[].obs;
   final InAppPurchase inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> subscription;
+  final repository = PurchasesRepository();
   final products = <ProductDetails>[].obs;
   final isAvailable = false.obs;
   final purchasePending = false.obs;
@@ -58,7 +53,9 @@ class PurchasesController extends GetxController {
   }
 
   Future<void> restorePurchases() async {
-    if (purchases.isEmpty) await inAppPurchase.restorePurchases();
+    if (purchases.isEmpty) {
+      await repository.restorePurchases(inAppPurchase);
+    }
   }
 
   @override
@@ -188,33 +185,18 @@ class PurchasesController extends GetxController {
   }
 
   Future<void> _postAndroidPurchase(PurchaseDetails purchaseDetails) async {
-    final instance = dio.Dio();
-    try {
-      await instance.post(dotenv.get(EnvKeys.VERIFY_ANDROID_ENDPOINT.name),
-          data: {
-            "data": purchaseDetails.toJson(),
-          },
-          options: dio.Options(method: "POST"));
-    } catch (e) {
-      debugPrint("$e");
-    }
+    await repository.postAndroidPurchase(purchaseDetails);
   }
 
   Future<IOSReceiptResponse?> getIOSResult(String token) async {
-    final instance = dio.Dio();
-    try {
-      final dio.Response<Map<String, dynamic>> res =
-          await instance.post(dotenv.get(EnvKeys.VERIFY_IOS_ENDPOINT.name),
-              data: {
-                "data": token,
-              },
-              options: dio.Options(method: "POST"));
-      final result = IOSReceiptResponse.fromJson(res.data!);
-      return result;
-    } catch (e) {
-      debugPrint("$e");
-      return null;
-    }
+    IOSReceiptResponse? iosReceiptResponse;
+    final res = await repository.getIOSResult(token);
+    res.when(success: (result) {
+      iosReceiptResponse = result;
+    }, failure: () {
+      iosReceiptResponse = null;
+    });
+    return iosReceiptResponse;
   }
 
   Future<void> onPurchaseButtonPressed(
@@ -236,16 +218,8 @@ class PurchasesController extends GetxController {
     }
     await UIHelper.showFlutterToast("情報を取得しています。 \nしばらくお待ちください。");
     loading(true);
-    try {
-      await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
-    } catch (e) {
-      await FirebaseFirestore.instance
-          .collection("purchaseErrors")
-          .doc()
-          .set({"error": e.toString()});
-    } finally {
-      loading(false);
-    }
+    await repository.buyNonConsumable(inAppPurchase, purchaseParam);
+    loading(false);
   }
 
   ChangeSubscriptionParam? _getChangeSubscriptionParam(
