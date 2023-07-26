@@ -32,8 +32,7 @@ final List<OriginalUser> mockOriginalUsers = [
       userName: "佐藤 めぐみ",
       userNameLanguageCode: '',
       userNameNegativeScore: 0.0,
-      walletAddresses: [],
-      walletConnected: false),
+      walletAddresses: [],),
   OriginalUser(
       accountName: "b",
       createdAt: Timestamp.now(),
@@ -63,8 +62,7 @@ final List<OriginalUser> mockOriginalUsers = [
       userName: "田中 久美",
       userNameLanguageCode: '',
       userNameNegativeScore: 0.0,
-      walletAddresses: [],
-      walletConnected: false),
+      walletAddresses: [],),
   OriginalUser(
       accountName: "c",
       createdAt: Timestamp.now(),
@@ -94,8 +92,7 @@ final List<OriginalUser> mockOriginalUsers = [
       userName: "山岸 愛",
       userNameLanguageCode: '',
       userNameNegativeScore: 0.0,
-      walletAddresses: [],
-      walletConnected: false),
+      walletAddresses: [],),
   OriginalUser(
       accountName: "d",
       createdAt: Timestamp.now(),
@@ -125,8 +122,7 @@ final List<OriginalUser> mockOriginalUsers = [
       userName: "森 遥",
       userNameLanguageCode: '',
       userNameNegativeScore: 0.0,
-      walletAddresses: [],
-      walletConnected: false),
+      walletAddresses: [],),
   OriginalUser(
       accountName: "e",
       createdAt: Timestamp.now(),
@@ -156,8 +152,7 @@ final List<OriginalUser> mockOriginalUsers = [
       userName: "橋本 美奈",
       userNameLanguageCode: '',
       userNameNegativeScore: 0.0,
-      walletAddresses: [],
-      walletConnected: false),
+      walletAddresses: [],),
   OriginalUser(
       accountName: "f",
       createdAt: Timestamp.now(),
@@ -187,8 +182,7 @@ final List<OriginalUser> mockOriginalUsers = [
       userName: "遠藤 俊夫",
       userNameLanguageCode: '',
       userNameNegativeScore: 0.0,
-      walletAddresses: [],
-      walletConnected: false),
+      walletAddresses: [],),
   OriginalUser(
       accountName: "g",
       createdAt: Timestamp.now(),
@@ -220,8 +214,7 @@ final List<OriginalUser> mockOriginalUsers = [
       userName: "井上 清",
       userNameLanguageCode: '',
       userNameNegativeScore: 0.0,
-      walletAddresses: [],
-      walletConnected: false),
+      walletAddresses: [],),
   OriginalUser(
       accountName: "h",
       createdAt: Timestamp.now(),
@@ -253,8 +246,7 @@ final List<OriginalUser> mockOriginalUsers = [
       userName: "森田 敦",
       userNameLanguageCode: '',
       userNameNegativeScore: 0.0,
-      walletAddresses: [],
-      walletConnected: false),
+      walletAddresses: [],),
   OriginalUser(
       accountName: "i",
       createdAt: Timestamp.now(),
@@ -286,8 +278,7 @@ final List<OriginalUser> mockOriginalUsers = [
       userName: "山田 剛史",
       userNameLanguageCode: '',
       userNameNegativeScore: 0.0,
-      walletAddresses: [],
-      walletConnected: false),
+      walletAddresses: [],),
   OriginalUser(
       accountName: "j",
       createdAt: Timestamp.now(),
@@ -319,6 +310,5 @@ final List<OriginalUser> mockOriginalUsers = [
       userName: "中川 裕",
       userNameLanguageCode: '',
       userNameNegativeScore: 0.0,
-      walletAddresses: [],
-      walletConnected: false),
+      walletAddresses: [],),
 ];

@@ -33,9 +33,11 @@ mixin _$OriginalUser {
   bool get isNFTicon => throw _privateConstructorUsedError;
   bool get isOfficial => throw _privateConstructorUsedError;
   bool get isSuspended => throw _privateConstructorUsedError;
-  List<Map<String, dynamic>> get links => throw _privateConstructorUsedError;
+  List<Map<String, dynamic>> get links =>
+      throw _privateConstructorUsedError; // TODO: クラスにしろ
   int get muteCount => throw _privateConstructorUsedError;
-  Map<String, dynamic> get nftIconInfo => throw _privateConstructorUsedError;
+  Map<String, dynamic> get nftIconInfo =>
+      throw _privateConstructorUsedError; // TODO: クラスにしろ
   int get postCount => throw _privateConstructorUsedError;
   int get reportCount => throw _privateConstructorUsedError;
   double get score => throw _privateConstructorUsedError;
@@ -49,7 +51,6 @@ mixin _$OriginalUser {
   double get userNameNegativeScore => throw _privateConstructorUsedError;
   List<Map<String, dynamic>> get walletAddresses =>
       throw _privateConstructorUsedError;
-  bool get walletConnected => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -91,8 +92,7 @@ abstract class $OriginalUserCopyWith<$Res> {
       String userName,
       String userNameLanguageCode,
       double userNameNegativeScore,
-      List<Map<String, dynamic>> walletAddresses,
-      bool walletConnected});
+      List<Map<String, dynamic>> walletAddresses});
 }
 
 /// @nodoc
@@ -136,7 +136,6 @@ class _$OriginalUserCopyWithImpl<$Res, $Val extends OriginalUser>
     Object? userNameLanguageCode = null,
     Object? userNameNegativeScore = null,
     Object? walletAddresses = null,
-    Object? walletConnected = null,
   }) {
     return _then(_value.copyWith(
       accountName: null == accountName
@@ -251,10 +250,6 @@ class _$OriginalUserCopyWithImpl<$Res, $Val extends OriginalUser>
           ? _value.walletAddresses
           : walletAddresses // ignore: cast_nullable_to_non_nullable
               as List<Map<String, dynamic>>,
-      walletConnected: null == walletConnected
-          ? _value.walletConnected
-          : walletConnected // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -295,8 +290,7 @@ abstract class _$$_OriginalUserCopyWith<$Res>
       String userName,
       String userNameLanguageCode,
       double userNameNegativeScore,
-      List<Map<String, dynamic>> walletAddresses,
-      bool walletConnected});
+      List<Map<String, dynamic>> walletAddresses});
 }
 
 /// @nodoc
@@ -338,7 +332,6 @@ class __$$_OriginalUserCopyWithImpl<$Res>
     Object? userNameLanguageCode = null,
     Object? userNameNegativeScore = null,
     Object? walletAddresses = null,
-    Object? walletConnected = null,
   }) {
     return _then(_$_OriginalUser(
       accountName: null == accountName
@@ -453,10 +446,6 @@ class __$$_OriginalUserCopyWithImpl<$Res>
           ? _value._walletAddresses
           : walletAddresses // ignore: cast_nullable_to_non_nullable
               as List<Map<String, dynamic>>,
-      walletConnected: null == walletConnected
-          ? _value.walletConnected
-          : walletConnected // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -492,8 +481,7 @@ class _$_OriginalUser implements _OriginalUser {
       required this.userName,
       required this.userNameLanguageCode,
       required this.userNameNegativeScore,
-      required final List<Map<String, dynamic>> walletAddresses,
-      required this.walletConnected})
+      required final List<Map<String, dynamic>> walletAddresses})
       : _links = links,
         _nftIconInfo = nftIconInfo,
         _searchToken = searchToken,
@@ -536,6 +524,7 @@ class _$_OriginalUser implements _OriginalUser {
     return EqualUnmodifiableListView(_links);
   }
 
+// TODO: クラスにしろ
   @override
   final int muteCount;
   final Map<String, dynamic> _nftIconInfo;
@@ -546,6 +535,7 @@ class _$_OriginalUser implements _OriginalUser {
     return EqualUnmodifiableMapView(_nftIconInfo);
   }
 
+// TODO: クラスにしろ
   @override
   final int postCount;
   @override
@@ -583,11 +573,8 @@ class _$_OriginalUser implements _OriginalUser {
   }
 
   @override
-  final bool walletConnected;
-
-  @override
   String toString() {
-    return 'OriginalUser(accountName: $accountName, bio: $bio, bioLanguageCode: $bioLanguageCode, bioNegativeScore: $bioNegativeScore, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isAdmin: $isAdmin, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, nftIconInfo: $nftIconInfo, postCount: $postCount, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImageURL: $userImageURL, userImageNegativeScore: $userImageNegativeScore, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, walletAddresses: $walletAddresses, walletConnected: $walletConnected)';
+    return 'OriginalUser(accountName: $accountName, bio: $bio, bioLanguageCode: $bioLanguageCode, bioNegativeScore: $bioNegativeScore, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isAdmin: $isAdmin, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, nftIconInfo: $nftIconInfo, postCount: $postCount, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImageURL: $userImageURL, userImageNegativeScore: $userImageNegativeScore, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, walletAddresses: $walletAddresses)';
   }
 
   @override
@@ -643,9 +630,7 @@ class _$_OriginalUser implements _OriginalUser {
             (identical(other.userNameNegativeScore, userNameNegativeScore) ||
                 other.userNameNegativeScore == userNameNegativeScore) &&
             const DeepCollectionEquality()
-                .equals(other._walletAddresses, _walletAddresses) &&
-            (identical(other.walletConnected, walletConnected) ||
-                other.walletConnected == walletConnected));
+                .equals(other._walletAddresses, _walletAddresses));
   }
 
   @JsonKey(ignore: true)
@@ -679,8 +664,7 @@ class _$_OriginalUser implements _OriginalUser {
         userName,
         userNameLanguageCode,
         userNameNegativeScore,
-        const DeepCollectionEquality().hash(_walletAddresses),
-        walletConnected
+        const DeepCollectionEquality().hash(_walletAddresses)
       ]);
 
   @JsonKey(ignore: true)
@@ -699,35 +683,35 @@ class _$_OriginalUser implements _OriginalUser {
 
 abstract class _OriginalUser implements OriginalUser {
   factory _OriginalUser(
-      {required final String accountName,
-      required final String bio,
-      required final String bioLanguageCode,
-      required final double bioNegativeScore,
-      required final int blockCount,
-      required final dynamic createdAt,
-      required final String ethAddress,
-      required final int followerCount,
-      required final int followingCount,
-      required final bool isAdmin,
-      required final bool isNFTicon,
-      required final bool isOfficial,
-      required final bool isSuspended,
-      required final List<Map<String, dynamic>> links,
-      required final int muteCount,
-      required final Map<String, dynamic> nftIconInfo,
-      required final int postCount,
-      required final int reportCount,
-      required final double score,
-      required final Map<String, dynamic> searchToken,
-      required final String uid,
-      required final dynamic updatedAt,
-      required final String userImageURL,
-      required final double userImageNegativeScore,
-      required final String userName,
-      required final String userNameLanguageCode,
-      required final double userNameNegativeScore,
-      required final List<Map<String, dynamic>> walletAddresses,
-      required final bool walletConnected}) = _$_OriginalUser;
+          {required final String accountName,
+          required final String bio,
+          required final String bioLanguageCode,
+          required final double bioNegativeScore,
+          required final int blockCount,
+          required final dynamic createdAt,
+          required final String ethAddress,
+          required final int followerCount,
+          required final int followingCount,
+          required final bool isAdmin,
+          required final bool isNFTicon,
+          required final bool isOfficial,
+          required final bool isSuspended,
+          required final List<Map<String, dynamic>> links,
+          required final int muteCount,
+          required final Map<String, dynamic> nftIconInfo,
+          required final int postCount,
+          required final int reportCount,
+          required final double score,
+          required final Map<String, dynamic> searchToken,
+          required final String uid,
+          required final dynamic updatedAt,
+          required final String userImageURL,
+          required final double userImageNegativeScore,
+          required final String userName,
+          required final String userNameLanguageCode,
+          required final double userNameNegativeScore,
+          required final List<Map<String, dynamic>> walletAddresses}) =
+      _$_OriginalUser;
 
   factory _OriginalUser.fromJson(Map<String, dynamic> json) =
       _$_OriginalUser.fromJson;
@@ -760,11 +744,11 @@ abstract class _OriginalUser implements OriginalUser {
   bool get isSuspended;
   @override
   List<Map<String, dynamic>> get links;
-  @override
+  @override // TODO: クラスにしろ
   int get muteCount;
   @override
   Map<String, dynamic> get nftIconInfo;
-  @override
+  @override // TODO: クラスにしろ
   int get postCount;
   @override
   int get reportCount;
@@ -788,8 +772,6 @@ abstract class _OriginalUser implements OriginalUser {
   double get userNameNegativeScore;
   @override
   List<Map<String, dynamic>> get walletAddresses;
-  @override
-  bool get walletConnected;
   @override
   @JsonKey(ignore: true)
   _$$_OriginalUserCopyWith<_$_OriginalUser> get copyWith =>
