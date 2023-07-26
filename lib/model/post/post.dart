@@ -11,19 +11,17 @@ abstract class Post with _$Post {
     required String description,
     required String descriptionLanguageCode,
     required double descriptionNegativeScore,
-    required Map<String,dynamic> exampleTexts,// TODO: クラスにしろ
+    required List<Map<String, dynamic>> exampleTexts, // TODO: クラスにしろ
     required String genre,
     required List<String> hashTags,
     required int impressionCount,
     required int likeCount,
-    required List<Map<String, dynamic>> links,// TODO: クラスにしろ,
+    required List<Map<String, dynamic>> links, // TODO: クラスにしろ,
     required int msgCount,
     required OriginalUser poster,
-    required String postState,
     required String postId,
     required int reportCount,
     required double score,
-    required String storagePostName,
     required Map<String, dynamic> searchToken,
     required String title,
     required String titleLanguageCode,
@@ -31,6 +29,5 @@ abstract class Post with _$Post {
     required dynamic updatedAt,
     required int userCount,
   }) = _Post;
-  factory Post.fromJson(Map<String, dynamic> json) =>
-      _$PostFromJson(json);
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 }

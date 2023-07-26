@@ -24,7 +24,7 @@ mixin _$Post {
   String get description => throw _privateConstructorUsedError;
   String get descriptionLanguageCode => throw _privateConstructorUsedError;
   double get descriptionNegativeScore => throw _privateConstructorUsedError;
-  Map<String, dynamic> get exampleTexts =>
+  List<Map<String, dynamic>> get exampleTexts =>
       throw _privateConstructorUsedError; // TODO: クラスにしろ
   String get genre => throw _privateConstructorUsedError;
   List<String> get hashTags => throw _privateConstructorUsedError;
@@ -34,11 +34,9 @@ mixin _$Post {
       throw _privateConstructorUsedError; // TODO: クラスにしろ,
   int get msgCount => throw _privateConstructorUsedError;
   OriginalUser get poster => throw _privateConstructorUsedError;
-  String get postState => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
   int get reportCount => throw _privateConstructorUsedError;
   double get score => throw _privateConstructorUsedError;
-  String get storagePostName => throw _privateConstructorUsedError;
   Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get titleLanguageCode => throw _privateConstructorUsedError;
@@ -61,7 +59,7 @@ abstract class $PostCopyWith<$Res> {
       String description,
       String descriptionLanguageCode,
       double descriptionNegativeScore,
-      Map<String, dynamic> exampleTexts,
+      List<Map<String, dynamic>> exampleTexts,
       String genre,
       List<String> hashTags,
       int impressionCount,
@@ -69,11 +67,9 @@ abstract class $PostCopyWith<$Res> {
       List<Map<String, dynamic>> links,
       int msgCount,
       OriginalUser poster,
-      String postState,
       String postId,
       int reportCount,
       double score,
-      String storagePostName,
       Map<String, dynamic> searchToken,
       String title,
       String titleLanguageCode,
@@ -109,11 +105,9 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? links = null,
     Object? msgCount = null,
     Object? poster = null,
-    Object? postState = null,
     Object? postId = null,
     Object? reportCount = null,
     Object? score = null,
-    Object? storagePostName = null,
     Object? searchToken = null,
     Object? title = null,
     Object? titleLanguageCode = null,
@@ -141,7 +135,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       exampleTexts: null == exampleTexts
           ? _value.exampleTexts
           : exampleTexts // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as List<Map<String, dynamic>>,
       genre: null == genre
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
@@ -170,10 +164,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.poster
           : poster // ignore: cast_nullable_to_non_nullable
               as OriginalUser,
-      postState: null == postState
-          ? _value.postState
-          : postState // ignore: cast_nullable_to_non_nullable
-              as String,
       postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
@@ -186,10 +176,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double,
-      storagePostName: null == storagePostName
-          ? _value.storagePostName
-          : storagePostName // ignore: cast_nullable_to_non_nullable
-              as String,
       searchToken: null == searchToken
           ? _value.searchToken
           : searchToken // ignore: cast_nullable_to_non_nullable
@@ -237,7 +223,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       String description,
       String descriptionLanguageCode,
       double descriptionNegativeScore,
-      Map<String, dynamic> exampleTexts,
+      List<Map<String, dynamic>> exampleTexts,
       String genre,
       List<String> hashTags,
       int impressionCount,
@@ -245,11 +231,9 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       List<Map<String, dynamic>> links,
       int msgCount,
       OriginalUser poster,
-      String postState,
       String postId,
       int reportCount,
       double score,
-      String storagePostName,
       Map<String, dynamic> searchToken,
       String title,
       String titleLanguageCode,
@@ -282,11 +266,9 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? links = null,
     Object? msgCount = null,
     Object? poster = null,
-    Object? postState = null,
     Object? postId = null,
     Object? reportCount = null,
     Object? score = null,
-    Object? storagePostName = null,
     Object? searchToken = null,
     Object? title = null,
     Object? titleLanguageCode = null,
@@ -314,7 +296,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
       exampleTexts: null == exampleTexts
           ? _value._exampleTexts
           : exampleTexts // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as List<Map<String, dynamic>>,
       genre: null == genre
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
@@ -343,10 +325,6 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.poster
           : poster // ignore: cast_nullable_to_non_nullable
               as OriginalUser,
-      postState: null == postState
-          ? _value.postState
-          : postState // ignore: cast_nullable_to_non_nullable
-              as String,
       postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
@@ -359,10 +337,6 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
               as double,
-      storagePostName: null == storagePostName
-          ? _value.storagePostName
-          : storagePostName // ignore: cast_nullable_to_non_nullable
-              as String,
       searchToken: null == searchToken
           ? _value._searchToken
           : searchToken // ignore: cast_nullable_to_non_nullable
@@ -399,7 +373,7 @@ class _$_Post implements _Post {
       required this.description,
       required this.descriptionLanguageCode,
       required this.descriptionNegativeScore,
-      required final Map<String, dynamic> exampleTexts,
+      required final List<Map<String, dynamic>> exampleTexts,
       required this.genre,
       required final List<String> hashTags,
       required this.impressionCount,
@@ -407,11 +381,9 @@ class _$_Post implements _Post {
       required final List<Map<String, dynamic>> links,
       required this.msgCount,
       required this.poster,
-      required this.postState,
       required this.postId,
       required this.reportCount,
       required this.score,
-      required this.storagePostName,
       required final Map<String, dynamic> searchToken,
       required this.title,
       required this.titleLanguageCode,
@@ -433,12 +405,12 @@ class _$_Post implements _Post {
   final String descriptionLanguageCode;
   @override
   final double descriptionNegativeScore;
-  final Map<String, dynamic> _exampleTexts;
+  final List<Map<String, dynamic>> _exampleTexts;
   @override
-  Map<String, dynamic> get exampleTexts {
-    if (_exampleTexts is EqualUnmodifiableMapView) return _exampleTexts;
+  List<Map<String, dynamic>> get exampleTexts {
+    if (_exampleTexts is EqualUnmodifiableListView) return _exampleTexts;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_exampleTexts);
+    return EqualUnmodifiableListView(_exampleTexts);
   }
 
 // TODO: クラスにしろ
@@ -470,15 +442,11 @@ class _$_Post implements _Post {
   @override
   final OriginalUser poster;
   @override
-  final String postState;
-  @override
   final String postId;
   @override
   final int reportCount;
   @override
   final double score;
-  @override
-  final String storagePostName;
   final Map<String, dynamic> _searchToken;
   @override
   Map<String, dynamic> get searchToken {
@@ -500,7 +468,7 @@ class _$_Post implements _Post {
 
   @override
   String toString() {
-    return 'Post(createdAt: $createdAt, description: $description, descriptionLanguageCode: $descriptionLanguageCode, descriptionNegativeScore: $descriptionNegativeScore, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, poster: $poster, postState: $postState, postId: $postId, reportCount: $reportCount, score: $score, storagePostName: $storagePostName, searchToken: $searchToken, title: $title, titleLanguageCode: $titleLanguageCode, titleNegativeScore: $titleNegativeScore, updatedAt: $updatedAt, userCount: $userCount)';
+    return 'Post(createdAt: $createdAt, description: $description, descriptionLanguageCode: $descriptionLanguageCode, descriptionNegativeScore: $descriptionNegativeScore, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, poster: $poster, postId: $postId, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, titleLanguageCode: $titleLanguageCode, titleNegativeScore: $titleNegativeScore, updatedAt: $updatedAt, userCount: $userCount)';
   }
 
   @override
@@ -529,14 +497,10 @@ class _$_Post implements _Post {
             (identical(other.msgCount, msgCount) ||
                 other.msgCount == msgCount) &&
             (identical(other.poster, poster) || other.poster == poster) &&
-            (identical(other.postState, postState) ||
-                other.postState == postState) &&
             (identical(other.postId, postId) || other.postId == postId) &&
             (identical(other.reportCount, reportCount) ||
                 other.reportCount == reportCount) &&
             (identical(other.score, score) || other.score == score) &&
-            (identical(other.storagePostName, storagePostName) ||
-                other.storagePostName == storagePostName) &&
             const DeepCollectionEquality()
                 .equals(other._searchToken, _searchToken) &&
             (identical(other.title, title) || other.title == title) &&
@@ -565,11 +529,9 @@ class _$_Post implements _Post {
         const DeepCollectionEquality().hash(_links),
         msgCount,
         poster,
-        postState,
         postId,
         reportCount,
         score,
-        storagePostName,
         const DeepCollectionEquality().hash(_searchToken),
         title,
         titleLanguageCode,
@@ -598,7 +560,7 @@ abstract class _Post implements Post {
       required final String description,
       required final String descriptionLanguageCode,
       required final double descriptionNegativeScore,
-      required final Map<String, dynamic> exampleTexts,
+      required final List<Map<String, dynamic>> exampleTexts,
       required final String genre,
       required final List<String> hashTags,
       required final int impressionCount,
@@ -606,11 +568,9 @@ abstract class _Post implements Post {
       required final List<Map<String, dynamic>> links,
       required final int msgCount,
       required final OriginalUser poster,
-      required final String postState,
       required final String postId,
       required final int reportCount,
       required final double score,
-      required final String storagePostName,
       required final Map<String, dynamic> searchToken,
       required final String title,
       required final String titleLanguageCode,
@@ -629,7 +589,7 @@ abstract class _Post implements Post {
   @override
   double get descriptionNegativeScore;
   @override
-  Map<String, dynamic> get exampleTexts;
+  List<Map<String, dynamic>> get exampleTexts;
   @override // TODO: クラスにしろ
   String get genre;
   @override
@@ -645,15 +605,11 @@ abstract class _Post implements Post {
   @override
   OriginalUser get poster;
   @override
-  String get postState;
-  @override
   String get postId;
   @override
   int get reportCount;
   @override
   double get score;
-  @override
-  String get storagePostName;
   @override
   Map<String, dynamic> get searchToken;
   @override

@@ -18,9 +18,9 @@ class OriginalUser with _$OriginalUser {
     required bool isNFTicon,
     required bool isOfficial,
     required bool isSuspended,
-    required List<Map<String, dynamic>> links,// TODO: クラスにしろ
+    required List<Map<String, dynamic>> links, // TODO: クラスにしろ
     required int muteCount,
-    required Map<String, dynamic> nftIconInfo,// TODO: クラスにしろ
+    required Map<String, dynamic> nftIconInfo, // TODO: クラスにしろ
     required int postCount,
     required int reportCount,
     required double score,
@@ -32,7 +32,7 @@ class OriginalUser with _$OriginalUser {
     required String userName,
     required String userNameLanguageCode,
     required double userNameNegativeScore,
-    required List<Map<String, dynamic>> walletAddresses,// TODO: クラスにしろ
+    required List<Map<String, dynamic>> walletAddresses, // TODO: クラスにしろ
   }) = _OriginalUser;
 
   factory OriginalUser.fromJson(Map<String, dynamic> json) =>

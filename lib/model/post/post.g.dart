@@ -12,7 +12,9 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       descriptionLanguageCode: json['descriptionLanguageCode'] as String,
       descriptionNegativeScore:
           (json['descriptionNegativeScore'] as num).toDouble(),
-      exampleTexts: json['exampleTexts'] as Map<String, dynamic>,
+      exampleTexts: (json['exampleTexts'] as List<dynamic>)
+          .map((e) => e as Map<String, dynamic>)
+          .toList(),
       genre: json['genre'] as String,
       hashTags:
           (json['hashTags'] as List<dynamic>).map((e) => e as String).toList(),
@@ -23,11 +25,9 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
           .toList(),
       msgCount: json['msgCount'] as int,
       poster: OriginalUser.fromJson(json['poster'] as Map<String, dynamic>),
-      postState: json['postState'] as String,
       postId: json['postId'] as String,
       reportCount: json['reportCount'] as int,
       score: (json['score'] as num).toDouble(),
-      storagePostName: json['storagePostName'] as String,
       searchToken: json['searchToken'] as Map<String, dynamic>,
       title: json['title'] as String,
       titleLanguageCode: json['titleLanguageCode'] as String,
@@ -49,11 +49,9 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'links': instance.links,
       'msgCount': instance.msgCount,
       'poster': instance.poster,
-      'postState': instance.postState,
       'postId': instance.postId,
       'reportCount': instance.reportCount,
       'score': instance.score,
-      'storagePostName': instance.storagePostName,
       'searchToken': instance.searchToken,
       'title': instance.title,
       'titleLanguageCode': instance.titleLanguageCode,
