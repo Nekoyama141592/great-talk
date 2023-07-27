@@ -6,10 +6,45 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class MockFirestoreClient implements FirestoreClient {
   @override
-  FutureQSnapshot getUsers() async {
-    final data = mockOriginalUsers.map((e) => MockQDoc(e.toJson())).toList();
+  FutureQSnapshot getPostsByLikeCount() async {
+    final posts = [...mockPosts];
+    posts.sort((a, b) => b.likeCount.compareTo(a.likeCount));
+    final data = posts.map((e) => MockQDoc(e.toJson())).toList();
     return MockQSnapshot(data);
   }
+
+  @override
+  FutureQSnapshot getMorePostsByLikeCount(Doc moreDoc) => getPostsByLikeCount();
+
+  @override
+  FutureQSnapshot getTimelines(DocRef userRef) async {
+    final timelines = mockTimelines();
+    final data = timelines.map((e) => MockQDoc(e.toJson())).toList();
+    return MockQSnapshot(data);
+  }
+
+  @override
+  FutureQSnapshot getNewTimelines(DocRef userRef, Doc newDoc) =>
+      getTimelines(userRef);
+  @override
+  FutureQSnapshot getMoreTimelines(DocRef userRef, Doc moreDoc) =>
+      getTimelines(userRef);
+
+  @override
+  FutureQSnapshot getTimelinePosts(List<String> timelinePostIds) async {
+    final posts = [...mockPosts];
+    final data = posts.map((e) => MockQDoc(e.toJson())).toList();
+    return MockQSnapshot(data);
+  }
+
+  @override
+  FutureQSnapshot getNewTimelinePosts(
+          List<String> timelinePostIds, Doc newDoc) =>
+      getTimelinePosts(timelinePostIds);
+  @override
+  FutureQSnapshot getMoreTimelinePosts(
+          List<String> timelinePostIds, Doc moreDoc) =>
+      getTimelinePosts(timelinePostIds);
 
   @override
   FutureQSnapshot getUsersByFollowerCount() async {
@@ -20,16 +55,6 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
-  FutureQSnapshot getPosts() async {
-    final data = mockPosts.map((e) => MockQDoc(e.toJson())).toList();
-    return MockQSnapshot(data);
-  }
-
-  @override
-  FutureQSnapshot getPostsgetUsersByLikeCount() async {
-    final posts = [...mockPosts];
-    posts.sort((a, b) => b.likeCount.compareTo(a.likeCount));
-    final data = posts.map((e) => MockQDoc(e.toJson())).toList();
-    return MockQSnapshot(data);
-  }
+  FutureQSnapshot getMoreUsersByFollowerCount(Doc moreDoc) =>
+      getUsersByFollowerCount();
 }

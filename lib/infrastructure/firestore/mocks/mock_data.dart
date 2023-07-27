@@ -2,11 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/maps.dart';
 import 'package:great_talk/model/original_user/original_user.dart';
 import 'package:great_talk/model/post/post.dart';
+import 'package:great_talk/model/timeline/timeline.dart';
 
 final List<OriginalUser> mockOriginalUsers = [
   OriginalUser(
     accountName: "a",
-    createdAt: Timestamp.now(),
+    createdAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
     bio: '',
     bioLanguageCode: '',
     bioNegativeScore: 0.0,
@@ -26,7 +27,7 @@ final List<OriginalUser> mockOriginalUsers = [
     score: 0,
     searchToken: returnSearchToken("佐藤 めぐみ"),
     uid: "a",
-    updatedAt: Timestamp.now(),
+    updatedAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
     userImageURL:
         "https://jp.static.photo-ac.com/assets/img/models/f4f368ea0e6fed24cc298b53199291ab50789.jpg",
     userImageNegativeScore: 0.0,
@@ -37,7 +38,7 @@ final List<OriginalUser> mockOriginalUsers = [
   ),
   OriginalUser(
     accountName: "b",
-    createdAt: Timestamp.now(),
+    createdAt: Timestamp.fromDate(DateTime(2023, 9, 28)),
     bio: '',
     bioLanguageCode: '',
     bioNegativeScore: 0.0,
@@ -57,7 +58,7 @@ final List<OriginalUser> mockOriginalUsers = [
     score: 0,
     searchToken: returnSearchToken("田中 久美"),
     uid: "b",
-    updatedAt: Timestamp.now(),
+    updatedAt: Timestamp.fromDate(DateTime(2023, 9, 28)),
     userImageURL:
         "https://pakutaso.cdn.rabify.me/shared/img/thumb/yuka16011215IMG_5574.jpg.webp?d=350",
     userImageNegativeScore: 0.0,
@@ -68,7 +69,7 @@ final List<OriginalUser> mockOriginalUsers = [
   ),
   OriginalUser(
     accountName: "c",
-    createdAt: Timestamp.now(),
+    createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     bio: '',
     bioLanguageCode: '',
     bioNegativeScore: 0.0,
@@ -88,7 +89,7 @@ final List<OriginalUser> mockOriginalUsers = [
     score: 0,
     searchToken: returnSearchToken("山岸 愛"),
     uid: "c",
-    updatedAt: Timestamp.now(),
+    updatedAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     userImageURL:
         "https://jp.static.photo-ac.com/assets/img/models/1796ee45a8c7c3e2be04c508f26afa3352857.jpg",
     userImageNegativeScore: 0.0,
@@ -99,7 +100,7 @@ final List<OriginalUser> mockOriginalUsers = [
   ),
   OriginalUser(
     accountName: "d",
-    createdAt: Timestamp.now(),
+    createdAt: Timestamp.fromDate(DateTime(2023, 2, 18)),
     bio: '',
     bioLanguageCode: '',
     bioNegativeScore: 0.0,
@@ -119,7 +120,7 @@ final List<OriginalUser> mockOriginalUsers = [
     score: 0,
     searchToken: returnSearchToken("森 遥"),
     uid: "d",
-    updatedAt: Timestamp.now(),
+    updatedAt: Timestamp.fromDate(DateTime(2023, 2, 18)),
     userImageURL:
         "https://jp.static.photo-ac.com/assets/img/models/125b35eae7888d2c9047da770aebabd796386.jpg",
     userImageNegativeScore: 0.0,
@@ -130,7 +131,7 @@ final List<OriginalUser> mockOriginalUsers = [
   ),
   OriginalUser(
     accountName: "e",
-    createdAt: Timestamp.now(),
+    createdAt: Timestamp.fromDate(DateTime(2023, 6, 1)),
     bio: '',
     bioLanguageCode: '',
     bioNegativeScore: 0.0,
@@ -150,7 +151,7 @@ final List<OriginalUser> mockOriginalUsers = [
     score: 0,
     searchToken: returnSearchToken("橋本 美奈"),
     uid: "e",
-    updatedAt: Timestamp.now(),
+    updatedAt: Timestamp.fromDate(DateTime(2023, 6, 1)),
     userImageURL:
         "https://pakutaso.cdn.rabify.me/shared/img/thumb/02AMEMAN8752.jpg.webp?d=350",
     userImageNegativeScore: 0.0,
@@ -161,7 +162,7 @@ final List<OriginalUser> mockOriginalUsers = [
   ),
   OriginalUser(
     accountName: "f",
-    createdAt: Timestamp.now(),
+    createdAt: Timestamp.fromDate(DateTime(2023, 2, 23)),
     bio: '',
     bioLanguageCode: '',
     bioNegativeScore: 0.0,
@@ -181,7 +182,7 @@ final List<OriginalUser> mockOriginalUsers = [
     score: 0,
     searchToken: returnSearchToken("遠藤 俊夫"),
     uid: "f",
-    updatedAt: Timestamp.now(),
+    updatedAt: Timestamp.fromDate(DateTime(2023, 2, 23)),
     userImageURL:
         "https://pbs.twimg.com/media/FxY4Yb2aYAATYpt?format=jpg&name=medium",
     userImageNegativeScore: 0.0,
@@ -192,7 +193,7 @@ final List<OriginalUser> mockOriginalUsers = [
   ),
   OriginalUser(
     accountName: "g",
-    createdAt: Timestamp.now(),
+    createdAt: Timestamp.fromDate(DateTime(2023, 1, 8)),
     bio: '',
     bioLanguageCode: '',
     bioNegativeScore: 0.0,
@@ -214,7 +215,7 @@ final List<OriginalUser> mockOriginalUsers = [
       "井上 清",
     ),
     uid: "g",
-    updatedAt: Timestamp.now(),
+    updatedAt: Timestamp.fromDate(DateTime(2023, 1, 8)),
     userImageURL:
         "https://pbs.twimg.com/media/FxY4qXTacAAoN8p?format=jpg&name=medium",
     userImageNegativeScore: 0.0,
@@ -225,7 +226,7 @@ final List<OriginalUser> mockOriginalUsers = [
   ),
   OriginalUser(
     accountName: "h",
-    createdAt: Timestamp.now(),
+    createdAt: Timestamp.fromDate(DateTime(2023, 10, 14)),
     bio: '',
     bioLanguageCode: '',
     bioNegativeScore: 0.0,
@@ -247,7 +248,7 @@ final List<OriginalUser> mockOriginalUsers = [
       "森田 敦",
     ),
     uid: "h",
-    updatedAt: Timestamp.now(),
+    updatedAt: Timestamp.fromDate(DateTime(2023, 10, 14)),
     userImageURL:
         "https://pbs.twimg.com/media/FxY3qI2aAAAckt6?format=jpg&name=medium",
     userImageNegativeScore: 0.0,
@@ -258,7 +259,7 @@ final List<OriginalUser> mockOriginalUsers = [
   ),
   OriginalUser(
     accountName: "i",
-    createdAt: Timestamp.now(),
+    createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     bio: '',
     bioLanguageCode: '',
     bioNegativeScore: 0.0,
@@ -280,7 +281,7 @@ final List<OriginalUser> mockOriginalUsers = [
       "山田 剛史",
     ),
     uid: "i",
-    updatedAt: Timestamp.now(),
+    updatedAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     userImageURL:
         "https://pbs.twimg.com/media/FxY2djfaAAYSrjW?format=jpg&name=medium",
     userImageNegativeScore: 0.0,
@@ -291,7 +292,7 @@ final List<OriginalUser> mockOriginalUsers = [
   ),
   OriginalUser(
     accountName: "j",
-    createdAt: Timestamp.now(),
+    createdAt: Timestamp.fromDate(DateTime(2023, 4, 28)),
     bio: '',
     bioLanguageCode: '',
     bioNegativeScore: 0.0,
@@ -313,7 +314,7 @@ final List<OriginalUser> mockOriginalUsers = [
       "中川 裕",
     ),
     uid: "j",
-    updatedAt: Timestamp.now(),
+    updatedAt: Timestamp.fromDate(DateTime(2023, 4, 28)),
     userImageURL:
         "https://pbs.twimg.com/media/FxY2_ZGaAAE2pBk?format=jpg&name=medium",
     userImageNegativeScore: 0.0,
@@ -325,7 +326,7 @@ final List<OriginalUser> mockOriginalUsers = [
 ];
 final List<Post> mockPosts = [
   Post(
-      createdAt: Timestamp.now(),
+      createdAt: Timestamp.fromDate(DateTime(2023, 5, 25)),
       description: '',
       descriptionLanguageCode: '',
       descriptionNegativeScore: 0.0,
@@ -344,10 +345,10 @@ final List<Post> mockPosts = [
       title: "猫GPT",
       titleLanguageCode: '',
       titleNegativeScore: 0.0,
-      updatedAt: Timestamp.now(),
+      updatedAt: Timestamp.fromDate(DateTime(2023, 5, 25)),
       userCount: 0),
   Post(
-      createdAt: Timestamp.now(),
+      createdAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
       description: '',
       descriptionLanguageCode: '',
       descriptionNegativeScore: 0.0,
@@ -366,10 +367,10 @@ final List<Post> mockPosts = [
       title: "原稿作成くん",
       titleLanguageCode: '',
       titleNegativeScore: 0.0,
-      updatedAt: Timestamp.now(),
+      updatedAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
       userCount: 0),
   Post(
-      createdAt: Timestamp.now(),
+      createdAt: Timestamp.fromDate(DateTime(2023, 2, 22)),
       description: '',
       descriptionLanguageCode: '',
       descriptionNegativeScore: 0.0,
@@ -388,10 +389,10 @@ final List<Post> mockPosts = [
       title: "アイデア出しまくりAI",
       titleLanguageCode: '',
       titleNegativeScore: 0.0,
-      updatedAt: Timestamp.now(),
+      updatedAt: Timestamp.fromDate(DateTime(2023, 2, 22)),
       userCount: 0),
   Post(
-      createdAt: Timestamp.now(),
+      createdAt: Timestamp.fromDate(DateTime(2023, 7, 19)),
       description: '',
       descriptionLanguageCode: '',
       descriptionNegativeScore: 0.0,
@@ -410,10 +411,10 @@ final List<Post> mockPosts = [
       title: "エンジニアAIくん",
       titleLanguageCode: '',
       titleNegativeScore: 0.0,
-      updatedAt: Timestamp.now(),
+      updatedAt: Timestamp.fromDate(DateTime(2023, 7, 19)),
       userCount: 0),
   Post(
-      createdAt: Timestamp.now(),
+      createdAt: Timestamp.fromDate(DateTime(2023, 4, 7)),
       description: '',
       descriptionLanguageCode: '',
       descriptionNegativeScore: 0.0,
@@ -432,6 +433,20 @@ final List<Post> mockPosts = [
       title: "なんでも相談AI",
       titleLanguageCode: '',
       titleNegativeScore: 0.0,
-      updatedAt: Timestamp.now(),
+      updatedAt: Timestamp.fromDate(DateTime(2023, 4, 7)),
       userCount: 0),
 ];
+List<Timeline> mockTimelines() {
+  final List<Timeline> result = [];
+  for (int i = 0; i < 5; i++) {
+    final post = mockPosts[i];
+    result.add(
+      Timeline(
+          createdAt: post.createdAt,
+          isRead: false,
+          posterUid: post.poster.uid,
+          postId: post.postId),
+    );
+  }
+  return result;
+}

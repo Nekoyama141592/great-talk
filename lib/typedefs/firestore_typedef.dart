@@ -6,3 +6,8 @@ typedef Doc = DocumentSnapshot<Map<String, dynamic>>;
 
 typedef FutureQSnapshot = Future<QSnapshot>;
 typedef FutureDoc = Future<Doc>;
+
+typedef DocRef = DocumentReference<Map<String, dynamic>>;
+typedef ColRef = CollectionReference<Map<String, dynamic>>;
+
+typedef MapQuery = Query<Map<String, dynamic>>;

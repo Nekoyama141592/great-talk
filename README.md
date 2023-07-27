@@ -34,7 +34,7 @@ dart format --set-exit-if-changed .
 flutter analyze .
 
 ## 自動生成
-flutter pub run build_runner build --delete-conflicting-outputs  
+flutter pub run build_runner build --delete-conflicting-outputs
 ## 一括アップデート
 flutter pub upgrade --major-versions
 # frontend
