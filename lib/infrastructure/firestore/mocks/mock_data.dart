@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/maps.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
-import 'package:great_talk/model/original_user/original_user.dart';
+import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
 
-final List<OriginalUser> mockOriginalUsers = [
-  OriginalUser(
+final List<FirestoreUser> mockOriginalUsers = [
+  FirestoreUser(
     accountName: "a",
     createdAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
     bio: const DetectedText(
@@ -28,6 +28,7 @@ final List<OriginalUser> mockOriginalUsers = [
     postCount: 0,
     links: [],
     nftIconInfo: {},
+    ref: FirebaseFirestore.instance.collection("users").doc("a"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("佐藤 めぐみ"),
@@ -46,7 +47,7 @@ final List<OriginalUser> mockOriginalUsers = [
         value: '佐藤めぐみ'),
     walletAddresses: [],
   ),
-  OriginalUser(
+  FirestoreUser(
     accountName: "b",
     createdAt: Timestamp.fromDate(DateTime(2023, 9, 28)),
     bio: const DetectedText(
@@ -67,6 +68,7 @@ final List<OriginalUser> mockOriginalUsers = [
     postCount: 0,
     links: [],
     nftIconInfo: {},
+    ref: FirebaseFirestore.instance.collection("users").doc("b"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("田中 久美"),
@@ -85,7 +87,7 @@ final List<OriginalUser> mockOriginalUsers = [
         value: '田中 久美'),
     walletAddresses: [],
   ),
-  OriginalUser(
+  FirestoreUser(
     accountName: "c",
     createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     bio: const DetectedText(
@@ -106,6 +108,7 @@ final List<OriginalUser> mockOriginalUsers = [
     postCount: 0,
     links: [],
     nftIconInfo: {},
+    ref: FirebaseFirestore.instance.collection("users").doc("c"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("山岸 愛"),
@@ -124,7 +127,7 @@ final List<OriginalUser> mockOriginalUsers = [
         value: '山岸 愛'),
     walletAddresses: [],
   ),
-  OriginalUser(
+  FirestoreUser(
     accountName: "d",
     createdAt: Timestamp.fromDate(DateTime(2023, 2, 18)),
     bio: const DetectedText(
@@ -145,6 +148,7 @@ final List<OriginalUser> mockOriginalUsers = [
     postCount: 0,
     links: [],
     nftIconInfo: {},
+    ref: FirebaseFirestore.instance.collection("users").doc("d"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("森 遥"),
@@ -163,7 +167,7 @@ final List<OriginalUser> mockOriginalUsers = [
         value: '森 遥'),
     walletAddresses: [],
   ),
-  OriginalUser(
+  FirestoreUser(
     accountName: "e",
     createdAt: Timestamp.fromDate(DateTime(2023, 6, 1)),
     bio: const DetectedText(
@@ -184,6 +188,7 @@ final List<OriginalUser> mockOriginalUsers = [
     postCount: 0,
     links: [],
     nftIconInfo: {},
+    ref: FirebaseFirestore.instance.collection("users").doc("e"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("橋本 美奈"),
@@ -202,7 +207,7 @@ final List<OriginalUser> mockOriginalUsers = [
         value: '橋本 美奈'),
     walletAddresses: [],
   ),
-  OriginalUser(
+  FirestoreUser(
     accountName: "f",
     createdAt: Timestamp.fromDate(DateTime(2023, 2, 23)),
     bio: const DetectedText(
@@ -223,6 +228,7 @@ final List<OriginalUser> mockOriginalUsers = [
     postCount: 0,
     links: [],
     nftIconInfo: {},
+    ref: FirebaseFirestore.instance.collection("users").doc("f"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("遠藤 俊夫"),
@@ -241,7 +247,7 @@ final List<OriginalUser> mockOriginalUsers = [
         value: '遠藤 俊夫"'),
     walletAddresses: [],
   ),
-  OriginalUser(
+  FirestoreUser(
     accountName: "g",
     createdAt: Timestamp.fromDate(DateTime(2023, 1, 8)),
     bio: const DetectedText(
@@ -262,6 +268,7 @@ final List<OriginalUser> mockOriginalUsers = [
     postCount: 0,
     links: [],
     nftIconInfo: {},
+    ref: FirebaseFirestore.instance.collection("users").doc("g"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken(
@@ -282,7 +289,7 @@ final List<OriginalUser> mockOriginalUsers = [
         value: '井上 清'),
     walletAddresses: [],
   ),
-  OriginalUser(
+  FirestoreUser(
     accountName: "h",
     createdAt: Timestamp.fromDate(DateTime(2023, 10, 14)),
     bio: const DetectedText(
@@ -303,6 +310,7 @@ final List<OriginalUser> mockOriginalUsers = [
     postCount: 0,
     links: [],
     nftIconInfo: {},
+    ref: FirebaseFirestore.instance.collection("users").doc("h"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken(
@@ -323,7 +331,7 @@ final List<OriginalUser> mockOriginalUsers = [
         value: '森田 敦'),
     walletAddresses: [],
   ),
-  OriginalUser(
+  FirestoreUser(
     accountName: "i",
     createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     bio: const DetectedText(
@@ -344,6 +352,7 @@ final List<OriginalUser> mockOriginalUsers = [
     postCount: 0,
     links: [],
     nftIconInfo: {},
+    ref: FirebaseFirestore.instance.collection("users").doc("i"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken(
@@ -364,7 +373,7 @@ final List<OriginalUser> mockOriginalUsers = [
         value: '山田 剛史'),
     walletAddresses: [],
   ),
-  OriginalUser(
+  FirestoreUser(
     accountName: "j",
     createdAt: Timestamp.fromDate(DateTime(2023, 4, 28)),
     bio: const DetectedText(
@@ -385,6 +394,7 @@ final List<OriginalUser> mockOriginalUsers = [
     postCount: 0,
     links: [],
     nftIconInfo: {},
+    ref: FirebaseFirestore.instance.collection("users").doc("j"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken(
@@ -429,6 +439,7 @@ final List<Post> mockPosts = [
       msgCount: 0,
       poster: mockOriginalUsers[0],
       postId: "post-a",
+      ref: mockOriginalUsers[0].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("猫GPT"),
@@ -460,8 +471,9 @@ final List<Post> mockPosts = [
       likeCount: 10,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[0],
+      poster: mockOriginalUsers[1],
       postId: "post-b",
+      ref: mockOriginalUsers[1].typedRef().collection("posts").doc("post-b"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("原稿作成くん"),
@@ -493,8 +505,9 @@ final List<Post> mockPosts = [
       likeCount: 20,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[0],
+      poster: mockOriginalUsers[2],
       postId: "post-c",
+      ref: mockOriginalUsers[2].typedRef().collection("posts").doc("post-c"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("アイデア出しまくりAI"),
@@ -526,8 +539,9 @@ final List<Post> mockPosts = [
       likeCount: 30,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[0],
+      poster: mockOriginalUsers[3],
       postId: "post-d",
+      ref: mockOriginalUsers[3].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("エンジニアAIくん"),
@@ -559,8 +573,9 @@ final List<Post> mockPosts = [
       likeCount: 40,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[0],
+      poster: mockOriginalUsers[4],
       postId: "post-e",
+      ref: mockOriginalUsers[4].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("なんでも相談AI"),

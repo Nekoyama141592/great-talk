@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'original_user.dart';
+part of 'firestore_user.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-OriginalUser _$OriginalUserFromJson(Map<String, dynamic> json) {
-  return _OriginalUser.fromJson(json);
+FirestoreUser _$FirestoreUserFromJson(Map<String, dynamic> json) {
+  return _FirestoreUser.fromJson(json);
 }
 
 /// @nodoc
-mixin _$OriginalUser {
+mixin _$FirestoreUser {
   String get accountName => throw _privateConstructorUsedError;
   DetectedText get bio => throw _privateConstructorUsedError;
   int get blockCount => throw _privateConstructorUsedError;
@@ -37,6 +37,7 @@ mixin _$OriginalUser {
   Map<String, dynamic> get nftIconInfo =>
       throw _privateConstructorUsedError; // TODO: クラスにしろ
   int get postCount => throw _privateConstructorUsedError;
+  dynamic get ref => throw _privateConstructorUsedError;
   int get reportCount => throw _privateConstructorUsedError;
   double get score => throw _privateConstructorUsedError;
   Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
@@ -49,15 +50,15 @@ mixin _$OriginalUser {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $OriginalUserCopyWith<OriginalUser> get copyWith =>
+  $FirestoreUserCopyWith<FirestoreUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OriginalUserCopyWith<$Res> {
-  factory $OriginalUserCopyWith(
-          OriginalUser value, $Res Function(OriginalUser) then) =
-      _$OriginalUserCopyWithImpl<$Res, OriginalUser>;
+abstract class $FirestoreUserCopyWith<$Res> {
+  factory $FirestoreUserCopyWith(
+          FirestoreUser value, $Res Function(FirestoreUser) then) =
+      _$FirestoreUserCopyWithImpl<$Res, FirestoreUser>;
   @useResult
   $Res call(
       {String accountName,
@@ -75,6 +76,7 @@ abstract class $OriginalUserCopyWith<$Res> {
       int muteCount,
       Map<String, dynamic> nftIconInfo,
       int postCount,
+      dynamic ref,
       int reportCount,
       double score,
       Map<String, dynamic> searchToken,
@@ -90,9 +92,9 @@ abstract class $OriginalUserCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$OriginalUserCopyWithImpl<$Res, $Val extends OriginalUser>
-    implements $OriginalUserCopyWith<$Res> {
-  _$OriginalUserCopyWithImpl(this._value, this._then);
+class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
+    implements $FirestoreUserCopyWith<$Res> {
+  _$FirestoreUserCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -117,6 +119,7 @@ class _$OriginalUserCopyWithImpl<$Res, $Val extends OriginalUser>
     Object? muteCount = null,
     Object? nftIconInfo = null,
     Object? postCount = null,
+    Object? ref = freezed,
     Object? reportCount = null,
     Object? score = null,
     Object? searchToken = null,
@@ -187,6 +190,10 @@ class _$OriginalUserCopyWithImpl<$Res, $Val extends OriginalUser>
           ? _value.postCount
           : postCount // ignore: cast_nullable_to_non_nullable
               as int,
+      ref: freezed == ref
+          ? _value.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       reportCount: null == reportCount
           ? _value.reportCount
           : reportCount // ignore: cast_nullable_to_non_nullable
@@ -248,11 +255,11 @@ class _$OriginalUserCopyWithImpl<$Res, $Val extends OriginalUser>
 }
 
 /// @nodoc
-abstract class _$$_OriginalUserCopyWith<$Res>
-    implements $OriginalUserCopyWith<$Res> {
-  factory _$$_OriginalUserCopyWith(
-          _$_OriginalUser value, $Res Function(_$_OriginalUser) then) =
-      __$$_OriginalUserCopyWithImpl<$Res>;
+abstract class _$$_FirestoreUserCopyWith<$Res>
+    implements $FirestoreUserCopyWith<$Res> {
+  factory _$$_FirestoreUserCopyWith(
+          _$_FirestoreUser value, $Res Function(_$_FirestoreUser) then) =
+      __$$_FirestoreUserCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -271,6 +278,7 @@ abstract class _$$_OriginalUserCopyWith<$Res>
       int muteCount,
       Map<String, dynamic> nftIconInfo,
       int postCount,
+      dynamic ref,
       int reportCount,
       double score,
       Map<String, dynamic> searchToken,
@@ -289,11 +297,11 @@ abstract class _$$_OriginalUserCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OriginalUserCopyWithImpl<$Res>
-    extends _$OriginalUserCopyWithImpl<$Res, _$_OriginalUser>
-    implements _$$_OriginalUserCopyWith<$Res> {
-  __$$_OriginalUserCopyWithImpl(
-      _$_OriginalUser _value, $Res Function(_$_OriginalUser) _then)
+class __$$_FirestoreUserCopyWithImpl<$Res>
+    extends _$FirestoreUserCopyWithImpl<$Res, _$_FirestoreUser>
+    implements _$$_FirestoreUserCopyWith<$Res> {
+  __$$_FirestoreUserCopyWithImpl(
+      _$_FirestoreUser _value, $Res Function(_$_FirestoreUser) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -314,6 +322,7 @@ class __$$_OriginalUserCopyWithImpl<$Res>
     Object? muteCount = null,
     Object? nftIconInfo = null,
     Object? postCount = null,
+    Object? ref = freezed,
     Object? reportCount = null,
     Object? score = null,
     Object? searchToken = null,
@@ -323,7 +332,7 @@ class __$$_OriginalUserCopyWithImpl<$Res>
     Object? userName = null,
     Object? walletAddresses = null,
   }) {
-    return _then(_$_OriginalUser(
+    return _then(_$_FirestoreUser(
       accountName: null == accountName
           ? _value.accountName
           : accountName // ignore: cast_nullable_to_non_nullable
@@ -384,6 +393,10 @@ class __$$_OriginalUserCopyWithImpl<$Res>
           ? _value.postCount
           : postCount // ignore: cast_nullable_to_non_nullable
               as int,
+      ref: freezed == ref
+          ? _value.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       reportCount: null == reportCount
           ? _value.reportCount
           : reportCount // ignore: cast_nullable_to_non_nullable
@@ -422,8 +435,8 @@ class __$$_OriginalUserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OriginalUser implements _OriginalUser {
-  _$_OriginalUser(
+class _$_FirestoreUser extends _FirestoreUser {
+  _$_FirestoreUser(
       {required this.accountName,
       required this.bio,
       required this.blockCount,
@@ -439,6 +452,7 @@ class _$_OriginalUser implements _OriginalUser {
       required this.muteCount,
       required final Map<String, dynamic> nftIconInfo,
       required this.postCount,
+      required this.ref,
       required this.reportCount,
       required this.score,
       required final Map<String, dynamic> searchToken,
@@ -450,10 +464,11 @@ class _$_OriginalUser implements _OriginalUser {
       : _links = links,
         _nftIconInfo = nftIconInfo,
         _searchToken = searchToken,
-        _walletAddresses = walletAddresses;
+        _walletAddresses = walletAddresses,
+        super._();
 
-  factory _$_OriginalUser.fromJson(Map<String, dynamic> json) =>
-      _$$_OriginalUserFromJson(json);
+  factory _$_FirestoreUser.fromJson(Map<String, dynamic> json) =>
+      _$$_FirestoreUserFromJson(json);
 
   @override
   final String accountName;
@@ -500,6 +515,8 @@ class _$_OriginalUser implements _OriginalUser {
   @override
   final int postCount;
   @override
+  final dynamic ref;
+  @override
   final int reportCount;
   @override
   final double score;
@@ -529,14 +546,14 @@ class _$_OriginalUser implements _OriginalUser {
 
   @override
   String toString() {
-    return 'OriginalUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isAdmin: $isAdmin, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, nftIconInfo: $nftIconInfo, postCount: $postCount, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImage: $userImage, userName: $userName, walletAddresses: $walletAddresses)';
+    return 'FirestoreUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isAdmin: $isAdmin, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, nftIconInfo: $nftIconInfo, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImage: $userImage, userName: $userName, walletAddresses: $walletAddresses)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OriginalUser &&
+            other is _$_FirestoreUser &&
             (identical(other.accountName, accountName) ||
                 other.accountName == accountName) &&
             (identical(other.bio, bio) || other.bio == bio) &&
@@ -563,6 +580,7 @@ class _$_OriginalUser implements _OriginalUser {
                 .equals(other._nftIconInfo, _nftIconInfo) &&
             (identical(other.postCount, postCount) ||
                 other.postCount == postCount) &&
+            const DeepCollectionEquality().equals(other.ref, ref) &&
             (identical(other.reportCount, reportCount) ||
                 other.reportCount == reportCount) &&
             (identical(other.score, score) || other.score == score) &&
@@ -597,6 +615,7 @@ class _$_OriginalUser implements _OriginalUser {
         muteCount,
         const DeepCollectionEquality().hash(_nftIconInfo),
         postCount,
+        const DeepCollectionEquality().hash(ref),
         reportCount,
         score,
         const DeepCollectionEquality().hash(_searchToken),
@@ -610,19 +629,19 @@ class _$_OriginalUser implements _OriginalUser {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OriginalUserCopyWith<_$_OriginalUser> get copyWith =>
-      __$$_OriginalUserCopyWithImpl<_$_OriginalUser>(this, _$identity);
+  _$$_FirestoreUserCopyWith<_$_FirestoreUser> get copyWith =>
+      __$$_FirestoreUserCopyWithImpl<_$_FirestoreUser>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OriginalUserToJson(
+    return _$$_FirestoreUserToJson(
       this,
     );
   }
 }
 
-abstract class _OriginalUser implements OriginalUser {
-  factory _OriginalUser(
+abstract class _FirestoreUser extends FirestoreUser {
+  factory _FirestoreUser(
           {required final String accountName,
           required final DetectedText bio,
           required final int blockCount,
@@ -638,6 +657,7 @@ abstract class _OriginalUser implements OriginalUser {
           required final int muteCount,
           required final Map<String, dynamic> nftIconInfo,
           required final int postCount,
+          required final dynamic ref,
           required final int reportCount,
           required final double score,
           required final Map<String, dynamic> searchToken,
@@ -646,10 +666,11 @@ abstract class _OriginalUser implements OriginalUser {
           required final DetectedImage userImage,
           required final DetectedText userName,
           required final List<Map<String, dynamic>> walletAddresses}) =
-      _$_OriginalUser;
+      _$_FirestoreUser;
+  _FirestoreUser._() : super._();
 
-  factory _OriginalUser.fromJson(Map<String, dynamic> json) =
-      _$_OriginalUser.fromJson;
+  factory _FirestoreUser.fromJson(Map<String, dynamic> json) =
+      _$_FirestoreUser.fromJson;
 
   @override
   String get accountName;
@@ -682,6 +703,8 @@ abstract class _OriginalUser implements OriginalUser {
   @override // TODO: クラスにしろ
   int get postCount;
   @override
+  dynamic get ref;
+  @override
   int get reportCount;
   @override
   double get score;
@@ -699,6 +722,6 @@ abstract class _OriginalUser implements OriginalUser {
   List<Map<String, dynamic>> get walletAddresses;
   @override
   @JsonKey(ignore: true)
-  _$$_OriginalUserCopyWith<_$_OriginalUser> get copyWith =>
+  _$$_FirestoreUserCopyWith<_$_FirestoreUser> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -24,8 +24,9 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
           .map((e) => e as Map<String, dynamic>)
           .toList(),
       msgCount: json['msgCount'] as int,
-      poster: OriginalUser.fromJson(json['poster'] as Map<String, dynamic>),
+      poster: FirestoreUser.fromJson(json['poster'] as Map<String, dynamic>),
       postId: json['postId'] as String,
+      ref: json['ref'],
       reportCount: json['reportCount'] as int,
       score: (json['score'] as num).toDouble(),
       searchToken: json['searchToken'] as Map<String, dynamic>,
@@ -47,6 +48,7 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'msgCount': instance.msgCount,
       'poster': instance.poster,
       'postId': instance.postId,
+      'ref': instance.ref,
       'reportCount': instance.reportCount,
       'score': instance.score,
       'searchToken': instance.searchToken,

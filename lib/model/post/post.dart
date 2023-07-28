@@ -1,13 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
-import 'package:great_talk/model/original_user/original_user.dart';
+import 'package:great_talk/model/firestore_user/firestore_user.dart';
+import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'post.freezed.dart';
 part 'post.g.dart';
 
 @freezed
-abstract class Post with _$Post {
+abstract class Post implements _$Post {
+  const Post._();
   const factory Post({
     required dynamic createdAt,
     required DetectedText description,
@@ -19,8 +21,9 @@ abstract class Post with _$Post {
     required int likeCount,
     required List<Map<String, dynamic>> links, // TODO: クラスにしろ,
     required int msgCount,
-    required OriginalUser poster,
+    required FirestoreUser poster,
     required String postId,
+    required dynamic ref,
     required int reportCount,
     required double score,
     required Map<String, dynamic> searchToken,
@@ -29,4 +32,5 @@ abstract class Post with _$Post {
     required int userCount,
   }) = _Post;
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+  DocRef typedRef() => ref as DocRef;
 }

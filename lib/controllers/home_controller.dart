@@ -1,4 +1,5 @@
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/interfaces/more_docs_interface.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
@@ -9,7 +10,7 @@ class HomeController extends DocsController implements MoreDocsInterface {
   final _repository = FirestoreRepository();
   List<QDoc> _timelineDocs = [];
 
-  Future<void> fetchPosts(List<QDoc> fetchedTimelines) async {
+  Future<void> _fetchPosts(List<QDoc> fetchedTimelines) async {
     final postIds = fetchedTimelines
         .map(
           (e) => Timeline.fromJson(e.data()).postId,
@@ -21,7 +22,7 @@ class HomeController extends DocsController implements MoreDocsInterface {
         failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
   }
 
-  Future<void> fetchNewPosts(List<QDoc> fetchedTimelines) async {
+  Future<void> _fetchNewPosts(List<QDoc> fetchedTimelines) async {
     final postIds = fetchedTimelines
         .map(
           (e) => Timeline.fromJson(e.data()).postId,
@@ -33,7 +34,7 @@ class HomeController extends DocsController implements MoreDocsInterface {
         failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
   }
 
-  Future<void> fetchMorePosts(List<QDoc> fetchedTimelines) async {
+  Future<void> _fetchMorePosts(List<QDoc> fetchedTimelines) async {
     final postIds = fetchedTimelines
         .map(
           (e) => Timeline.fromJson(e.data()).postId,
@@ -47,11 +48,11 @@ class HomeController extends DocsController implements MoreDocsInterface {
 
   @override
   Future<void> fetchDocs() async {
-    final result = await _repository.getTimelines(userRef);
+    final result = await _repository.getTimelines(_userRef());
     result.when(
         success: (res) async {
           _timelineDocs = res;
-          await fetchPosts(res);
+          await _fetchPosts(res);
         },
         failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
   }
@@ -59,11 +60,11 @@ class HomeController extends DocsController implements MoreDocsInterface {
   @override
   Future<void> onLoading() async {
     final result =
-        await _repository.getMoreTimelines(userRef, _timelineDocs.last);
+        await _repository.getMoreTimelines(_userRef(), _timelineDocs.last);
     result.when(
         success: (res) async {
           _timelineDocs.addAll(res);
-          await fetchNewPosts(res);
+          await _fetchNewPosts(res);
         },
         failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
   }
@@ -71,14 +72,16 @@ class HomeController extends DocsController implements MoreDocsInterface {
   @override
   Future<void> onRefresh() async {
     final result =
-        await _repository.getNewTimelines(userRef, _timelineDocs.first);
+        await _repository.getNewTimelines(_userRef(), _timelineDocs.first);
     result.when(
         success: (res) async {
           for (final timeline in res.reversed.toList()) {
             _timelineDocs.insert(0, timeline);
           }
-          await fetchMorePosts(res);
+          await _fetchMorePosts(res);
         },
         failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
   }
+
+  DocRef _userRef() => CurrentUserController.to.firestoreUser.value!.typedRef();
 }

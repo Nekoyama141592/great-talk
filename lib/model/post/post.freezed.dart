@@ -32,8 +32,9 @@ mixin _$Post {
   List<Map<String, dynamic>> get links =>
       throw _privateConstructorUsedError; // TODO: クラスにしろ,
   int get msgCount => throw _privateConstructorUsedError;
-  OriginalUser get poster => throw _privateConstructorUsedError;
+  FirestoreUser get poster => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
+  dynamic get ref => throw _privateConstructorUsedError;
   int get reportCount => throw _privateConstructorUsedError;
   double get score => throw _privateConstructorUsedError;
   Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
@@ -62,8 +63,9 @@ abstract class $PostCopyWith<$Res> {
       int likeCount,
       List<Map<String, dynamic>> links,
       int msgCount,
-      OriginalUser poster,
+      FirestoreUser poster,
       String postId,
+      dynamic ref,
       int reportCount,
       double score,
       Map<String, dynamic> searchToken,
@@ -73,7 +75,7 @@ abstract class $PostCopyWith<$Res> {
 
   $DetectedTextCopyWith<$Res> get description;
   $DetectedImageCopyWith<$Res> get iconImage;
-  $OriginalUserCopyWith<$Res> get poster;
+  $FirestoreUserCopyWith<$Res> get poster;
   $DetectedTextCopyWith<$Res> get title;
 }
 
@@ -102,6 +104,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? msgCount = null,
     Object? poster = null,
     Object? postId = null,
+    Object? ref = freezed,
     Object? reportCount = null,
     Object? score = null,
     Object? searchToken = null,
@@ -153,11 +156,15 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       poster: null == poster
           ? _value.poster
           : poster // ignore: cast_nullable_to_non_nullable
-              as OriginalUser,
+              as FirestoreUser,
       postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
               as String,
+      ref: freezed == ref
+          ? _value.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       reportCount: null == reportCount
           ? _value.reportCount
           : reportCount // ignore: cast_nullable_to_non_nullable
@@ -203,8 +210,8 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
 
   @override
   @pragma('vm:prefer-inline')
-  $OriginalUserCopyWith<$Res> get poster {
-    return $OriginalUserCopyWith<$Res>(_value.poster, (value) {
+  $FirestoreUserCopyWith<$Res> get poster {
+    return $FirestoreUserCopyWith<$Res>(_value.poster, (value) {
       return _then(_value.copyWith(poster: value) as $Val);
     });
   }
@@ -235,8 +242,9 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       int likeCount,
       List<Map<String, dynamic>> links,
       int msgCount,
-      OriginalUser poster,
+      FirestoreUser poster,
       String postId,
+      dynamic ref,
       int reportCount,
       double score,
       Map<String, dynamic> searchToken,
@@ -249,7 +257,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @override
   $DetectedImageCopyWith<$Res> get iconImage;
   @override
-  $OriginalUserCopyWith<$Res> get poster;
+  $FirestoreUserCopyWith<$Res> get poster;
   @override
   $DetectedTextCopyWith<$Res> get title;
 }
@@ -275,6 +283,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? msgCount = null,
     Object? poster = null,
     Object? postId = null,
+    Object? ref = freezed,
     Object? reportCount = null,
     Object? score = null,
     Object? searchToken = null,
@@ -326,11 +335,15 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
       poster: null == poster
           ? _value.poster
           : poster // ignore: cast_nullable_to_non_nullable
-              as OriginalUser,
+              as FirestoreUser,
       postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
               as String,
+      ref: freezed == ref
+          ? _value.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       reportCount: null == reportCount
           ? _value.reportCount
           : reportCount // ignore: cast_nullable_to_non_nullable
@@ -361,7 +374,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Post implements _Post {
+class _$_Post extends _Post {
   const _$_Post(
       {required this.createdAt,
       required this.description,
@@ -375,6 +388,7 @@ class _$_Post implements _Post {
       required this.msgCount,
       required this.poster,
       required this.postId,
+      required this.ref,
       required this.reportCount,
       required this.score,
       required final Map<String, dynamic> searchToken,
@@ -384,7 +398,8 @@ class _$_Post implements _Post {
       : _exampleTexts = exampleTexts,
         _hashTags = hashTags,
         _links = links,
-        _searchToken = searchToken;
+        _searchToken = searchToken,
+        super._();
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
@@ -429,9 +444,11 @@ class _$_Post implements _Post {
   @override
   final int msgCount;
   @override
-  final OriginalUser poster;
+  final FirestoreUser poster;
   @override
   final String postId;
+  @override
+  final dynamic ref;
   @override
   final int reportCount;
   @override
@@ -453,7 +470,7 @@ class _$_Post implements _Post {
 
   @override
   String toString() {
-    return 'Post(createdAt: $createdAt, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, iconImage: $iconImage, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, poster: $poster, postId: $postId, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
+    return 'Post(createdAt: $createdAt, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, iconImage: $iconImage, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, poster: $poster, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
   }
 
   @override
@@ -479,6 +496,7 @@ class _$_Post implements _Post {
                 other.msgCount == msgCount) &&
             (identical(other.poster, poster) || other.poster == poster) &&
             (identical(other.postId, postId) || other.postId == postId) &&
+            const DeepCollectionEquality().equals(other.ref, ref) &&
             (identical(other.reportCount, reportCount) ||
                 other.reportCount == reportCount) &&
             (identical(other.score, score) || other.score == score) &&
@@ -492,26 +510,28 @@ class _$_Post implements _Post {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(createdAt),
-      description,
-      const DeepCollectionEquality().hash(_exampleTexts),
-      genre,
-      const DeepCollectionEquality().hash(_hashTags),
-      iconImage,
-      impressionCount,
-      likeCount,
-      const DeepCollectionEquality().hash(_links),
-      msgCount,
-      poster,
-      postId,
-      reportCount,
-      score,
-      const DeepCollectionEquality().hash(_searchToken),
-      title,
-      const DeepCollectionEquality().hash(updatedAt),
-      userCount);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(createdAt),
+        description,
+        const DeepCollectionEquality().hash(_exampleTexts),
+        genre,
+        const DeepCollectionEquality().hash(_hashTags),
+        iconImage,
+        impressionCount,
+        likeCount,
+        const DeepCollectionEquality().hash(_links),
+        msgCount,
+        poster,
+        postId,
+        const DeepCollectionEquality().hash(ref),
+        reportCount,
+        score,
+        const DeepCollectionEquality().hash(_searchToken),
+        title,
+        const DeepCollectionEquality().hash(updatedAt),
+        userCount
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -527,7 +547,7 @@ class _$_Post implements _Post {
   }
 }
 
-abstract class _Post implements Post {
+abstract class _Post extends Post {
   const factory _Post(
       {required final dynamic createdAt,
       required final DetectedText description,
@@ -539,14 +559,16 @@ abstract class _Post implements Post {
       required final int likeCount,
       required final List<Map<String, dynamic>> links,
       required final int msgCount,
-      required final OriginalUser poster,
+      required final FirestoreUser poster,
       required final String postId,
+      required final dynamic ref,
       required final int reportCount,
       required final double score,
       required final Map<String, dynamic> searchToken,
       required final DetectedText title,
       required final dynamic updatedAt,
       required final int userCount}) = _$_Post;
+  const _Post._() : super._();
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
@@ -571,9 +593,11 @@ abstract class _Post implements Post {
   @override // TODO: クラスにしろ,
   int get msgCount;
   @override
-  OriginalUser get poster;
+  FirestoreUser get poster;
   @override
   String get postId;
+  @override
+  dynamic get ref;
   @override
   int get reportCount;
   @override
