@@ -7,8 +7,20 @@ abstract class DocsController extends GetxController {
 
   void startLoading() => isLoading(true);
   void endLoading() => isLoading(false);
+  void addAllDocs(List<QDoc> elements) {
+    docs.addAll(elements);
+    docs([...docs]);
+  }
 
-  Future<void> init();
+  void insertAllDocs(List<QDoc> elements) {
+    for (final element in elements.reversed.toList()) {
+      docs.insert(0, element);
+    }
+    docs([...docs]);
+  }
+
+  Future<void> init() => fetchDocs();
   Future<void> fetchDocs();
   Future<void> onReload() => fetchDocs();
+  Future<void> onLoading();
 }

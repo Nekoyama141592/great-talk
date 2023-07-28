@@ -19,9 +19,9 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<List<QDoc>> getMorePostsByLikeCount(Doc moreDoc) async {
+  FutureResult<List<QDoc>> getMorePostsByLikeCount(Doc lastDoc) async {
     try {
-      final res = await client.getMorePostsByLikeCount(moreDoc);
+      final res = await client.getMorePostsByLikeCount(lastDoc);
       final docs = res.docs;
       return Result.success(docs);
     } catch (e) {
@@ -42,30 +42,6 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<List<QDoc>> getNewTimelinePosts(
-      List<String> timelinePostIds, Doc newDoc) async {
-    try {
-      final res = await client.getNewTimelinePosts(timelinePostIds, newDoc);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getMoreTimelinePosts(
-      List<String> timelinePostIds, Doc moreDoc) async {
-    try {
-      final res = await client.getMoreTimelinePosts(timelinePostIds, moreDoc);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
   FutureResult<List<QDoc>> getTimelines(DocRef userRef) async {
     try {
       final res = await client.getTimelines(userRef);
@@ -77,9 +53,9 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<List<QDoc>> getNewTimelines(DocRef userRef, Doc newDoc) async {
+  FutureResult<List<QDoc>> getNewTimelines(DocRef userRef, Doc firstDoc) async {
     try {
-      final res = await client.getNewTimelines(userRef, newDoc);
+      final res = await client.getNewTimelines(userRef, firstDoc);
       final docs = res.docs;
       return Result.success(docs);
     } catch (e) {
@@ -88,9 +64,9 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<List<QDoc>> getMoreTimelines(DocRef userRef, Doc moreDoc) async {
+  FutureResult<List<QDoc>> getMoreTimelines(DocRef userRef, Doc lastDoc) async {
     try {
-      final res = await client.getMoreTimelines(userRef, moreDoc);
+      final res = await client.getMoreTimelines(userRef, lastDoc);
       final docs = res.docs;
       return Result.success(docs);
     } catch (e) {
@@ -110,9 +86,9 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<List<QDoc>> getMoreUsersByFollowerCount(Doc moreDoc) async {
+  FutureResult<List<QDoc>> getMoreUsersByFollowerCount(Doc lastDoc) async {
     try {
-      final res = await client.getMoreUsersByFollowerCount(moreDoc);
+      final res = await client.getMoreUsersByFollowerCount(lastDoc);
       final docs = res.docs;
       return Result.success(docs);
     } catch (e) {

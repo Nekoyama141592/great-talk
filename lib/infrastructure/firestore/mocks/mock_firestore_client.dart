@@ -14,7 +14,7 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
-  FutureQSnapshot getMorePostsByLikeCount(Doc moreDoc) => getPostsByLikeCount();
+  FutureQSnapshot getMorePostsByLikeCount(Doc lastDoc) => getPostsByLikeCount();
 
   @override
   FutureQSnapshot getTimelines(DocRef userRef) async {
@@ -24,10 +24,10 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
-  FutureQSnapshot getNewTimelines(DocRef userRef, Doc newDoc) =>
+  FutureQSnapshot getNewTimelines(DocRef userRef, Doc firstDoc) =>
       getTimelines(userRef);
   @override
-  FutureQSnapshot getMoreTimelines(DocRef userRef, Doc moreDoc) =>
+  FutureQSnapshot getMoreTimelines(DocRef userRef, Doc lastDoc) =>
       getTimelines(userRef);
 
   @override
@@ -38,15 +38,6 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
-  FutureQSnapshot getNewTimelinePosts(
-          List<String> timelinePostIds, Doc newDoc) =>
-      getTimelinePosts(timelinePostIds);
-  @override
-  FutureQSnapshot getMoreTimelinePosts(
-          List<String> timelinePostIds, Doc moreDoc) =>
-      getTimelinePosts(timelinePostIds);
-
-  @override
   FutureQSnapshot getUsersByFollowerCount() async {
     final users = [...mockOriginalUsers];
     users.sort((a, b) => b.followerCount.compareTo(a.followingCount));
@@ -55,6 +46,6 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
-  FutureQSnapshot getMoreUsersByFollowerCount(Doc moreDoc) =>
+  FutureQSnapshot getMoreUsersByFollowerCount(Doc lastDoc) =>
       getUsersByFollowerCount();
 }
