@@ -8,16 +8,16 @@ part of 'post.dart';
 
 _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       createdAt: json['createdAt'],
-      description: json['description'] as String,
-      descriptionLanguageCode: json['descriptionLanguageCode'] as String,
-      descriptionNegativeScore:
-          (json['descriptionNegativeScore'] as num).toDouble(),
+      description:
+          DetectedText.fromJson(json['description'] as Map<String, dynamic>),
       exampleTexts: (json['exampleTexts'] as List<dynamic>)
           .map((e) => e as Map<String, dynamic>)
           .toList(),
       genre: json['genre'] as String,
       hashTags:
           (json['hashTags'] as List<dynamic>).map((e) => e as String).toList(),
+      iconImage:
+          DetectedImage.fromJson(json['iconImage'] as Map<String, dynamic>),
       impressionCount: json['impressionCount'] as int,
       likeCount: json['likeCount'] as int,
       links: (json['links'] as List<dynamic>)
@@ -29,9 +29,7 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       reportCount: json['reportCount'] as int,
       score: (json['score'] as num).toDouble(),
       searchToken: json['searchToken'] as Map<String, dynamic>,
-      title: json['title'] as String,
-      titleLanguageCode: json['titleLanguageCode'] as String,
-      titleNegativeScore: (json['titleNegativeScore'] as num).toDouble(),
+      title: DetectedText.fromJson(json['title'] as Map<String, dynamic>),
       updatedAt: json['updatedAt'],
       userCount: json['userCount'] as int,
     );
@@ -39,11 +37,10 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
 Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'createdAt': instance.createdAt,
       'description': instance.description,
-      'descriptionLanguageCode': instance.descriptionLanguageCode,
-      'descriptionNegativeScore': instance.descriptionNegativeScore,
       'exampleTexts': instance.exampleTexts,
       'genre': instance.genre,
       'hashTags': instance.hashTags,
+      'iconImage': instance.iconImage,
       'impressionCount': instance.impressionCount,
       'likeCount': instance.likeCount,
       'links': instance.links,
@@ -54,8 +51,6 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'score': instance.score,
       'searchToken': instance.searchToken,
       'title': instance.title,
-      'titleLanguageCode': instance.titleLanguageCode,
-      'titleNegativeScore': instance.titleNegativeScore,
       'updatedAt': instance.updatedAt,
       'userCount': instance.userCount,
     };

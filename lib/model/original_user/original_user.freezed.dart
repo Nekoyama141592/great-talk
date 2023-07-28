@@ -21,9 +21,7 @@ OriginalUser _$OriginalUserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OriginalUser {
   String get accountName => throw _privateConstructorUsedError;
-  String get bio => throw _privateConstructorUsedError;
-  String get bioLanguageCode => throw _privateConstructorUsedError;
-  double get bioNegativeScore => throw _privateConstructorUsedError;
+  DetectedText get bio => throw _privateConstructorUsedError;
   int get blockCount => throw _privateConstructorUsedError;
   dynamic get createdAt => throw _privateConstructorUsedError;
   String get ethAddress => throw _privateConstructorUsedError;
@@ -44,11 +42,8 @@ mixin _$OriginalUser {
   Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
-  String get userImageURL => throw _privateConstructorUsedError;
-  double get userImageNegativeScore => throw _privateConstructorUsedError;
-  String get userName => throw _privateConstructorUsedError;
-  String get userNameLanguageCode => throw _privateConstructorUsedError;
-  double get userNameNegativeScore => throw _privateConstructorUsedError;
+  DetectedImage get userImage => throw _privateConstructorUsedError;
+  DetectedText get userName => throw _privateConstructorUsedError;
   List<Map<String, dynamic>> get walletAddresses =>
       throw _privateConstructorUsedError;
 
@@ -66,9 +61,7 @@ abstract class $OriginalUserCopyWith<$Res> {
   @useResult
   $Res call(
       {String accountName,
-      String bio,
-      String bioLanguageCode,
-      double bioNegativeScore,
+      DetectedText bio,
       int blockCount,
       dynamic createdAt,
       String ethAddress,
@@ -87,12 +80,13 @@ abstract class $OriginalUserCopyWith<$Res> {
       Map<String, dynamic> searchToken,
       String uid,
       dynamic updatedAt,
-      String userImageURL,
-      double userImageNegativeScore,
-      String userName,
-      String userNameLanguageCode,
-      double userNameNegativeScore,
+      DetectedImage userImage,
+      DetectedText userName,
       List<Map<String, dynamic>> walletAddresses});
+
+  $DetectedTextCopyWith<$Res> get bio;
+  $DetectedImageCopyWith<$Res> get userImage;
+  $DetectedTextCopyWith<$Res> get userName;
 }
 
 /// @nodoc
@@ -110,8 +104,6 @@ class _$OriginalUserCopyWithImpl<$Res, $Val extends OriginalUser>
   $Res call({
     Object? accountName = null,
     Object? bio = null,
-    Object? bioLanguageCode = null,
-    Object? bioNegativeScore = null,
     Object? blockCount = null,
     Object? createdAt = freezed,
     Object? ethAddress = null,
@@ -130,11 +122,8 @@ class _$OriginalUserCopyWithImpl<$Res, $Val extends OriginalUser>
     Object? searchToken = null,
     Object? uid = null,
     Object? updatedAt = freezed,
-    Object? userImageURL = null,
-    Object? userImageNegativeScore = null,
+    Object? userImage = null,
     Object? userName = null,
-    Object? userNameLanguageCode = null,
-    Object? userNameNegativeScore = null,
     Object? walletAddresses = null,
   }) {
     return _then(_value.copyWith(
@@ -145,15 +134,7 @@ class _$OriginalUserCopyWithImpl<$Res, $Val extends OriginalUser>
       bio: null == bio
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
-              as String,
-      bioLanguageCode: null == bioLanguageCode
-          ? _value.bioLanguageCode
-          : bioLanguageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      bioNegativeScore: null == bioNegativeScore
-          ? _value.bioNegativeScore
-          : bioNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as DetectedText,
       blockCount: null == blockCount
           ? _value.blockCount
           : blockCount // ignore: cast_nullable_to_non_nullable
@@ -226,31 +207,43 @@ class _$OriginalUserCopyWithImpl<$Res, $Val extends OriginalUser>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      userImageURL: null == userImageURL
-          ? _value.userImageURL
-          : userImageURL // ignore: cast_nullable_to_non_nullable
-              as String,
-      userImageNegativeScore: null == userImageNegativeScore
-          ? _value.userImageNegativeScore
-          : userImageNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+      userImage: null == userImage
+          ? _value.userImage
+          : userImage // ignore: cast_nullable_to_non_nullable
+              as DetectedImage,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      userNameLanguageCode: null == userNameLanguageCode
-          ? _value.userNameLanguageCode
-          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      userNameNegativeScore: null == userNameNegativeScore
-          ? _value.userNameNegativeScore
-          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as DetectedText,
       walletAddresses: null == walletAddresses
           ? _value.walletAddresses
           : walletAddresses // ignore: cast_nullable_to_non_nullable
               as List<Map<String, dynamic>>,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DetectedTextCopyWith<$Res> get bio {
+    return $DetectedTextCopyWith<$Res>(_value.bio, (value) {
+      return _then(_value.copyWith(bio: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DetectedImageCopyWith<$Res> get userImage {
+    return $DetectedImageCopyWith<$Res>(_value.userImage, (value) {
+      return _then(_value.copyWith(userImage: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DetectedTextCopyWith<$Res> get userName {
+    return $DetectedTextCopyWith<$Res>(_value.userName, (value) {
+      return _then(_value.copyWith(userName: value) as $Val);
+    });
   }
 }
 
@@ -264,9 +257,7 @@ abstract class _$$_OriginalUserCopyWith<$Res>
   @useResult
   $Res call(
       {String accountName,
-      String bio,
-      String bioLanguageCode,
-      double bioNegativeScore,
+      DetectedText bio,
       int blockCount,
       dynamic createdAt,
       String ethAddress,
@@ -285,12 +276,16 @@ abstract class _$$_OriginalUserCopyWith<$Res>
       Map<String, dynamic> searchToken,
       String uid,
       dynamic updatedAt,
-      String userImageURL,
-      double userImageNegativeScore,
-      String userName,
-      String userNameLanguageCode,
-      double userNameNegativeScore,
+      DetectedImage userImage,
+      DetectedText userName,
       List<Map<String, dynamic>> walletAddresses});
+
+  @override
+  $DetectedTextCopyWith<$Res> get bio;
+  @override
+  $DetectedImageCopyWith<$Res> get userImage;
+  @override
+  $DetectedTextCopyWith<$Res> get userName;
 }
 
 /// @nodoc
@@ -306,8 +301,6 @@ class __$$_OriginalUserCopyWithImpl<$Res>
   $Res call({
     Object? accountName = null,
     Object? bio = null,
-    Object? bioLanguageCode = null,
-    Object? bioNegativeScore = null,
     Object? blockCount = null,
     Object? createdAt = freezed,
     Object? ethAddress = null,
@@ -326,11 +319,8 @@ class __$$_OriginalUserCopyWithImpl<$Res>
     Object? searchToken = null,
     Object? uid = null,
     Object? updatedAt = freezed,
-    Object? userImageURL = null,
-    Object? userImageNegativeScore = null,
+    Object? userImage = null,
     Object? userName = null,
-    Object? userNameLanguageCode = null,
-    Object? userNameNegativeScore = null,
     Object? walletAddresses = null,
   }) {
     return _then(_$_OriginalUser(
@@ -341,15 +331,7 @@ class __$$_OriginalUserCopyWithImpl<$Res>
       bio: null == bio
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
-              as String,
-      bioLanguageCode: null == bioLanguageCode
-          ? _value.bioLanguageCode
-          : bioLanguageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      bioNegativeScore: null == bioNegativeScore
-          ? _value.bioNegativeScore
-          : bioNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as DetectedText,
       blockCount: null == blockCount
           ? _value.blockCount
           : blockCount // ignore: cast_nullable_to_non_nullable
@@ -422,26 +404,14 @@ class __$$_OriginalUserCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      userImageURL: null == userImageURL
-          ? _value.userImageURL
-          : userImageURL // ignore: cast_nullable_to_non_nullable
-              as String,
-      userImageNegativeScore: null == userImageNegativeScore
-          ? _value.userImageNegativeScore
-          : userImageNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+      userImage: null == userImage
+          ? _value.userImage
+          : userImage // ignore: cast_nullable_to_non_nullable
+              as DetectedImage,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as String,
-      userNameLanguageCode: null == userNameLanguageCode
-          ? _value.userNameLanguageCode
-          : userNameLanguageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      userNameNegativeScore: null == userNameNegativeScore
-          ? _value.userNameNegativeScore
-          : userNameNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as DetectedText,
       walletAddresses: null == walletAddresses
           ? _value._walletAddresses
           : walletAddresses // ignore: cast_nullable_to_non_nullable
@@ -456,8 +426,6 @@ class _$_OriginalUser implements _OriginalUser {
   _$_OriginalUser(
       {required this.accountName,
       required this.bio,
-      required this.bioLanguageCode,
-      required this.bioNegativeScore,
       required this.blockCount,
       required this.createdAt,
       required this.ethAddress,
@@ -476,11 +444,8 @@ class _$_OriginalUser implements _OriginalUser {
       required final Map<String, dynamic> searchToken,
       required this.uid,
       required this.updatedAt,
-      required this.userImageURL,
-      required this.userImageNegativeScore,
+      required this.userImage,
       required this.userName,
-      required this.userNameLanguageCode,
-      required this.userNameNegativeScore,
       required final List<Map<String, dynamic>> walletAddresses})
       : _links = links,
         _nftIconInfo = nftIconInfo,
@@ -493,11 +458,7 @@ class _$_OriginalUser implements _OriginalUser {
   @override
   final String accountName;
   @override
-  final String bio;
-  @override
-  final String bioLanguageCode;
-  @override
-  final double bioNegativeScore;
+  final DetectedText bio;
   @override
   final int blockCount;
   @override
@@ -555,15 +516,9 @@ class _$_OriginalUser implements _OriginalUser {
   @override
   final dynamic updatedAt;
   @override
-  final String userImageURL;
+  final DetectedImage userImage;
   @override
-  final double userImageNegativeScore;
-  @override
-  final String userName;
-  @override
-  final String userNameLanguageCode;
-  @override
-  final double userNameNegativeScore;
+  final DetectedText userName;
   final List<Map<String, dynamic>> _walletAddresses;
   @override
   List<Map<String, dynamic>> get walletAddresses {
@@ -574,7 +529,7 @@ class _$_OriginalUser implements _OriginalUser {
 
   @override
   String toString() {
-    return 'OriginalUser(accountName: $accountName, bio: $bio, bioLanguageCode: $bioLanguageCode, bioNegativeScore: $bioNegativeScore, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isAdmin: $isAdmin, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, nftIconInfo: $nftIconInfo, postCount: $postCount, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImageURL: $userImageURL, userImageNegativeScore: $userImageNegativeScore, userName: $userName, userNameLanguageCode: $userNameLanguageCode, userNameNegativeScore: $userNameNegativeScore, walletAddresses: $walletAddresses)';
+    return 'OriginalUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isAdmin: $isAdmin, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, nftIconInfo: $nftIconInfo, postCount: $postCount, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImage: $userImage, userName: $userName, walletAddresses: $walletAddresses)';
   }
 
   @override
@@ -585,10 +540,6 @@ class _$_OriginalUser implements _OriginalUser {
             (identical(other.accountName, accountName) ||
                 other.accountName == accountName) &&
             (identical(other.bio, bio) || other.bio == bio) &&
-            (identical(other.bioLanguageCode, bioLanguageCode) ||
-                other.bioLanguageCode == bioLanguageCode) &&
-            (identical(other.bioNegativeScore, bioNegativeScore) ||
-                other.bioNegativeScore == bioNegativeScore) &&
             (identical(other.blockCount, blockCount) ||
                 other.blockCount == blockCount) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -619,16 +570,10 @@ class _$_OriginalUser implements _OriginalUser {
                 .equals(other._searchToken, _searchToken) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
-            (identical(other.userImageURL, userImageURL) ||
-                other.userImageURL == userImageURL) &&
-            (identical(other.userImageNegativeScore, userImageNegativeScore) ||
-                other.userImageNegativeScore == userImageNegativeScore) &&
+            (identical(other.userImage, userImage) ||
+                other.userImage == userImage) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
-            (identical(other.userNameLanguageCode, userNameLanguageCode) ||
-                other.userNameLanguageCode == userNameLanguageCode) &&
-            (identical(other.userNameNegativeScore, userNameNegativeScore) ||
-                other.userNameNegativeScore == userNameNegativeScore) &&
             const DeepCollectionEquality()
                 .equals(other._walletAddresses, _walletAddresses));
   }
@@ -639,8 +584,6 @@ class _$_OriginalUser implements _OriginalUser {
         runtimeType,
         accountName,
         bio,
-        bioLanguageCode,
-        bioNegativeScore,
         blockCount,
         const DeepCollectionEquality().hash(createdAt),
         ethAddress,
@@ -659,11 +602,8 @@ class _$_OriginalUser implements _OriginalUser {
         const DeepCollectionEquality().hash(_searchToken),
         uid,
         const DeepCollectionEquality().hash(updatedAt),
-        userImageURL,
-        userImageNegativeScore,
+        userImage,
         userName,
-        userNameLanguageCode,
-        userNameNegativeScore,
         const DeepCollectionEquality().hash(_walletAddresses)
       ]);
 
@@ -684,9 +624,7 @@ class _$_OriginalUser implements _OriginalUser {
 abstract class _OriginalUser implements OriginalUser {
   factory _OriginalUser(
           {required final String accountName,
-          required final String bio,
-          required final String bioLanguageCode,
-          required final double bioNegativeScore,
+          required final DetectedText bio,
           required final int blockCount,
           required final dynamic createdAt,
           required final String ethAddress,
@@ -705,11 +643,8 @@ abstract class _OriginalUser implements OriginalUser {
           required final Map<String, dynamic> searchToken,
           required final String uid,
           required final dynamic updatedAt,
-          required final String userImageURL,
-          required final double userImageNegativeScore,
-          required final String userName,
-          required final String userNameLanguageCode,
-          required final double userNameNegativeScore,
+          required final DetectedImage userImage,
+          required final DetectedText userName,
           required final List<Map<String, dynamic>> walletAddresses}) =
       _$_OriginalUser;
 
@@ -719,11 +654,7 @@ abstract class _OriginalUser implements OriginalUser {
   @override
   String get accountName;
   @override
-  String get bio;
-  @override
-  String get bioLanguageCode;
-  @override
-  double get bioNegativeScore;
+  DetectedText get bio;
   @override
   int get blockCount;
   @override
@@ -761,15 +692,9 @@ abstract class _OriginalUser implements OriginalUser {
   @override
   dynamic get updatedAt;
   @override
-  String get userImageURL;
+  DetectedImage get userImage;
   @override
-  double get userImageNegativeScore;
-  @override
-  String get userName;
-  @override
-  String get userNameLanguageCode;
-  @override
-  double get userNameNegativeScore;
+  DetectedText get userName;
   @override
   List<Map<String, dynamic>> get walletAddresses;
   @override

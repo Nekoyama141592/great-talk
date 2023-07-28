@@ -21,13 +21,12 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Post {
   dynamic get createdAt => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  String get descriptionLanguageCode => throw _privateConstructorUsedError;
-  double get descriptionNegativeScore => throw _privateConstructorUsedError;
+  DetectedText get description => throw _privateConstructorUsedError;
   List<Map<String, dynamic>> get exampleTexts =>
       throw _privateConstructorUsedError; // TODO: クラスにしろ
   String get genre => throw _privateConstructorUsedError;
   List<String> get hashTags => throw _privateConstructorUsedError;
+  DetectedImage get iconImage => throw _privateConstructorUsedError;
   int get impressionCount => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
   List<Map<String, dynamic>> get links =>
@@ -38,9 +37,7 @@ mixin _$Post {
   int get reportCount => throw _privateConstructorUsedError;
   double get score => throw _privateConstructorUsedError;
   Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  String get titleLanguageCode => throw _privateConstructorUsedError;
-  double get titleNegativeScore => throw _privateConstructorUsedError;
+  DetectedText get title => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
   int get userCount => throw _privateConstructorUsedError;
 
@@ -56,12 +53,11 @@ abstract class $PostCopyWith<$Res> {
   @useResult
   $Res call(
       {dynamic createdAt,
-      String description,
-      String descriptionLanguageCode,
-      double descriptionNegativeScore,
+      DetectedText description,
       List<Map<String, dynamic>> exampleTexts,
       String genre,
       List<String> hashTags,
+      DetectedImage iconImage,
       int impressionCount,
       int likeCount,
       List<Map<String, dynamic>> links,
@@ -71,13 +67,14 @@ abstract class $PostCopyWith<$Res> {
       int reportCount,
       double score,
       Map<String, dynamic> searchToken,
-      String title,
-      String titleLanguageCode,
-      double titleNegativeScore,
+      DetectedText title,
       dynamic updatedAt,
       int userCount});
 
+  $DetectedTextCopyWith<$Res> get description;
+  $DetectedImageCopyWith<$Res> get iconImage;
   $OriginalUserCopyWith<$Res> get poster;
+  $DetectedTextCopyWith<$Res> get title;
 }
 
 /// @nodoc
@@ -95,11 +92,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   $Res call({
     Object? createdAt = freezed,
     Object? description = null,
-    Object? descriptionLanguageCode = null,
-    Object? descriptionNegativeScore = null,
     Object? exampleTexts = null,
     Object? genre = null,
     Object? hashTags = null,
+    Object? iconImage = null,
     Object? impressionCount = null,
     Object? likeCount = null,
     Object? links = null,
@@ -110,8 +106,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? score = null,
     Object? searchToken = null,
     Object? title = null,
-    Object? titleLanguageCode = null,
-    Object? titleNegativeScore = null,
     Object? updatedAt = freezed,
     Object? userCount = null,
   }) {
@@ -123,15 +117,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      descriptionLanguageCode: null == descriptionLanguageCode
-          ? _value.descriptionLanguageCode
-          : descriptionLanguageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      descriptionNegativeScore: null == descriptionNegativeScore
-          ? _value.descriptionNegativeScore
-          : descriptionNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as DetectedText,
       exampleTexts: null == exampleTexts
           ? _value.exampleTexts
           : exampleTexts // ignore: cast_nullable_to_non_nullable
@@ -144,6 +130,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.hashTags
           : hashTags // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      iconImage: null == iconImage
+          ? _value.iconImage
+          : iconImage // ignore: cast_nullable_to_non_nullable
+              as DetectedImage,
       impressionCount: null == impressionCount
           ? _value.impressionCount
           : impressionCount // ignore: cast_nullable_to_non_nullable
@@ -183,15 +173,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      titleLanguageCode: null == titleLanguageCode
-          ? _value.titleLanguageCode
-          : titleLanguageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      titleNegativeScore: null == titleNegativeScore
-          ? _value.titleNegativeScore
-          : titleNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as DetectedText,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -205,9 +187,33 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
 
   @override
   @pragma('vm:prefer-inline')
+  $DetectedTextCopyWith<$Res> get description {
+    return $DetectedTextCopyWith<$Res>(_value.description, (value) {
+      return _then(_value.copyWith(description: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DetectedImageCopyWith<$Res> get iconImage {
+    return $DetectedImageCopyWith<$Res>(_value.iconImage, (value) {
+      return _then(_value.copyWith(iconImage: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $OriginalUserCopyWith<$Res> get poster {
     return $OriginalUserCopyWith<$Res>(_value.poster, (value) {
       return _then(_value.copyWith(poster: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DetectedTextCopyWith<$Res> get title {
+    return $DetectedTextCopyWith<$Res>(_value.title, (value) {
+      return _then(_value.copyWith(title: value) as $Val);
     });
   }
 }
@@ -220,12 +226,11 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @useResult
   $Res call(
       {dynamic createdAt,
-      String description,
-      String descriptionLanguageCode,
-      double descriptionNegativeScore,
+      DetectedText description,
       List<Map<String, dynamic>> exampleTexts,
       String genre,
       List<String> hashTags,
+      DetectedImage iconImage,
       int impressionCount,
       int likeCount,
       List<Map<String, dynamic>> links,
@@ -235,14 +240,18 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       int reportCount,
       double score,
       Map<String, dynamic> searchToken,
-      String title,
-      String titleLanguageCode,
-      double titleNegativeScore,
+      DetectedText title,
       dynamic updatedAt,
       int userCount});
 
   @override
+  $DetectedTextCopyWith<$Res> get description;
+  @override
+  $DetectedImageCopyWith<$Res> get iconImage;
+  @override
   $OriginalUserCopyWith<$Res> get poster;
+  @override
+  $DetectedTextCopyWith<$Res> get title;
 }
 
 /// @nodoc
@@ -256,11 +265,10 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
   $Res call({
     Object? createdAt = freezed,
     Object? description = null,
-    Object? descriptionLanguageCode = null,
-    Object? descriptionNegativeScore = null,
     Object? exampleTexts = null,
     Object? genre = null,
     Object? hashTags = null,
+    Object? iconImage = null,
     Object? impressionCount = null,
     Object? likeCount = null,
     Object? links = null,
@@ -271,8 +279,6 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? score = null,
     Object? searchToken = null,
     Object? title = null,
-    Object? titleLanguageCode = null,
-    Object? titleNegativeScore = null,
     Object? updatedAt = freezed,
     Object? userCount = null,
   }) {
@@ -284,15 +290,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      descriptionLanguageCode: null == descriptionLanguageCode
-          ? _value.descriptionLanguageCode
-          : descriptionLanguageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      descriptionNegativeScore: null == descriptionNegativeScore
-          ? _value.descriptionNegativeScore
-          : descriptionNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as DetectedText,
       exampleTexts: null == exampleTexts
           ? _value._exampleTexts
           : exampleTexts // ignore: cast_nullable_to_non_nullable
@@ -305,6 +303,10 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value._hashTags
           : hashTags // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      iconImage: null == iconImage
+          ? _value.iconImage
+          : iconImage // ignore: cast_nullable_to_non_nullable
+              as DetectedImage,
       impressionCount: null == impressionCount
           ? _value.impressionCount
           : impressionCount // ignore: cast_nullable_to_non_nullable
@@ -344,15 +346,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      titleLanguageCode: null == titleLanguageCode
-          ? _value.titleLanguageCode
-          : titleLanguageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      titleNegativeScore: null == titleNegativeScore
-          ? _value.titleNegativeScore
-          : titleNegativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as DetectedText,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -371,11 +365,10 @@ class _$_Post implements _Post {
   const _$_Post(
       {required this.createdAt,
       required this.description,
-      required this.descriptionLanguageCode,
-      required this.descriptionNegativeScore,
       required final List<Map<String, dynamic>> exampleTexts,
       required this.genre,
       required final List<String> hashTags,
+      required this.iconImage,
       required this.impressionCount,
       required this.likeCount,
       required final List<Map<String, dynamic>> links,
@@ -386,8 +379,6 @@ class _$_Post implements _Post {
       required this.score,
       required final Map<String, dynamic> searchToken,
       required this.title,
-      required this.titleLanguageCode,
-      required this.titleNegativeScore,
       required this.updatedAt,
       required this.userCount})
       : _exampleTexts = exampleTexts,
@@ -400,11 +391,7 @@ class _$_Post implements _Post {
   @override
   final dynamic createdAt;
   @override
-  final String description;
-  @override
-  final String descriptionLanguageCode;
-  @override
-  final double descriptionNegativeScore;
+  final DetectedText description;
   final List<Map<String, dynamic>> _exampleTexts;
   @override
   List<Map<String, dynamic>> get exampleTexts {
@@ -424,6 +411,8 @@ class _$_Post implements _Post {
     return EqualUnmodifiableListView(_hashTags);
   }
 
+  @override
+  final DetectedImage iconImage;
   @override
   final int impressionCount;
   @override
@@ -456,11 +445,7 @@ class _$_Post implements _Post {
   }
 
   @override
-  final String title;
-  @override
-  final String titleLanguageCode;
-  @override
-  final double titleNegativeScore;
+  final DetectedText title;
   @override
   final dynamic updatedAt;
   @override
@@ -468,7 +453,7 @@ class _$_Post implements _Post {
 
   @override
   String toString() {
-    return 'Post(createdAt: $createdAt, description: $description, descriptionLanguageCode: $descriptionLanguageCode, descriptionNegativeScore: $descriptionNegativeScore, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, poster: $poster, postId: $postId, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, titleLanguageCode: $titleLanguageCode, titleNegativeScore: $titleNegativeScore, updatedAt: $updatedAt, userCount: $userCount)';
+    return 'Post(createdAt: $createdAt, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, iconImage: $iconImage, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, poster: $poster, postId: $postId, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
   }
 
   @override
@@ -479,16 +464,12 @@ class _$_Post implements _Post {
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(
-                    other.descriptionLanguageCode, descriptionLanguageCode) ||
-                other.descriptionLanguageCode == descriptionLanguageCode) &&
-            (identical(
-                    other.descriptionNegativeScore, descriptionNegativeScore) ||
-                other.descriptionNegativeScore == descriptionNegativeScore) &&
             const DeepCollectionEquality()
                 .equals(other._exampleTexts, _exampleTexts) &&
             (identical(other.genre, genre) || other.genre == genre) &&
             const DeepCollectionEquality().equals(other._hashTags, _hashTags) &&
+            (identical(other.iconImage, iconImage) ||
+                other.iconImage == iconImage) &&
             (identical(other.impressionCount, impressionCount) ||
                 other.impressionCount == impressionCount) &&
             (identical(other.likeCount, likeCount) ||
@@ -504,10 +485,6 @@ class _$_Post implements _Post {
             const DeepCollectionEquality()
                 .equals(other._searchToken, _searchToken) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.titleLanguageCode, titleLanguageCode) ||
-                other.titleLanguageCode == titleLanguageCode) &&
-            (identical(other.titleNegativeScore, titleNegativeScore) ||
-                other.titleNegativeScore == titleNegativeScore) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             (identical(other.userCount, userCount) ||
                 other.userCount == userCount));
@@ -515,30 +492,26 @@ class _$_Post implements _Post {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        const DeepCollectionEquality().hash(createdAt),
-        description,
-        descriptionLanguageCode,
-        descriptionNegativeScore,
-        const DeepCollectionEquality().hash(_exampleTexts),
-        genre,
-        const DeepCollectionEquality().hash(_hashTags),
-        impressionCount,
-        likeCount,
-        const DeepCollectionEquality().hash(_links),
-        msgCount,
-        poster,
-        postId,
-        reportCount,
-        score,
-        const DeepCollectionEquality().hash(_searchToken),
-        title,
-        titleLanguageCode,
-        titleNegativeScore,
-        const DeepCollectionEquality().hash(updatedAt),
-        userCount
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(createdAt),
+      description,
+      const DeepCollectionEquality().hash(_exampleTexts),
+      genre,
+      const DeepCollectionEquality().hash(_hashTags),
+      iconImage,
+      impressionCount,
+      likeCount,
+      const DeepCollectionEquality().hash(_links),
+      msgCount,
+      poster,
+      postId,
+      reportCount,
+      score,
+      const DeepCollectionEquality().hash(_searchToken),
+      title,
+      const DeepCollectionEquality().hash(updatedAt),
+      userCount);
 
   @JsonKey(ignore: true)
   @override
@@ -557,12 +530,11 @@ class _$_Post implements _Post {
 abstract class _Post implements Post {
   const factory _Post(
       {required final dynamic createdAt,
-      required final String description,
-      required final String descriptionLanguageCode,
-      required final double descriptionNegativeScore,
+      required final DetectedText description,
       required final List<Map<String, dynamic>> exampleTexts,
       required final String genre,
       required final List<String> hashTags,
+      required final DetectedImage iconImage,
       required final int impressionCount,
       required final int likeCount,
       required final List<Map<String, dynamic>> links,
@@ -572,9 +544,7 @@ abstract class _Post implements Post {
       required final int reportCount,
       required final double score,
       required final Map<String, dynamic> searchToken,
-      required final String title,
-      required final String titleLanguageCode,
-      required final double titleNegativeScore,
+      required final DetectedText title,
       required final dynamic updatedAt,
       required final int userCount}) = _$_Post;
 
@@ -583,17 +553,15 @@ abstract class _Post implements Post {
   @override
   dynamic get createdAt;
   @override
-  String get description;
-  @override
-  String get descriptionLanguageCode;
-  @override
-  double get descriptionNegativeScore;
+  DetectedText get description;
   @override
   List<Map<String, dynamic>> get exampleTexts;
   @override // TODO: クラスにしろ
   String get genre;
   @override
   List<String> get hashTags;
+  @override
+  DetectedImage get iconImage;
   @override
   int get impressionCount;
   @override
@@ -613,11 +581,7 @@ abstract class _Post implements Post {
   @override
   Map<String, dynamic> get searchToken;
   @override
-  String get title;
-  @override
-  String get titleLanguageCode;
-  @override
-  double get titleNegativeScore;
+  DetectedText get title;
   @override
   dynamic get updatedAt;
   @override

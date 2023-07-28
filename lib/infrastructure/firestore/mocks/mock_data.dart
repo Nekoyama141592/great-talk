@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/maps.dart';
+import 'package:great_talk/model/detected_image/detected_image.dart';
+import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/original_user/original_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
@@ -8,9 +10,12 @@ final List<OriginalUser> mockOriginalUsers = [
   OriginalUser(
     accountName: "a",
     createdAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
-    bio: '',
-    bioLanguageCode: '',
-    bioNegativeScore: 0.0,
+    bio: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: ''),
     blockCount: 0,
     ethAddress: '',
     followerCount: 0,
@@ -28,20 +33,28 @@ final List<OriginalUser> mockOriginalUsers = [
     searchToken: returnSearchToken("佐藤 めぐみ"),
     uid: "a",
     updatedAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
-    userImageURL:
-        "https://jp.static.photo-ac.com/assets/img/models/f4f368ea0e6fed24cc298b53199291ab50789.jpg",
-    userImageNegativeScore: 0.0,
-    userName: "佐藤 めぐみ",
-    userNameLanguageCode: '',
-    userNameNegativeScore: 0.0,
+    userImage: const DetectedImage(
+        moderationLabels: [],
+        moderationModelVersion: '',
+        url:
+            'https://jp.static.photo-ac.com/assets/img/models/f4f368ea0e6fed24cc298b53199291ab50789.jpg'),
+    userName: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: '佐藤めぐみ'),
     walletAddresses: [],
   ),
   OriginalUser(
     accountName: "b",
     createdAt: Timestamp.fromDate(DateTime(2023, 9, 28)),
-    bio: '',
-    bioLanguageCode: '',
-    bioNegativeScore: 0.0,
+    bio: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: ''),
     blockCount: 0,
     ethAddress: '',
     followerCount: 10,
@@ -59,20 +72,28 @@ final List<OriginalUser> mockOriginalUsers = [
     searchToken: returnSearchToken("田中 久美"),
     uid: "b",
     updatedAt: Timestamp.fromDate(DateTime(2023, 9, 28)),
-    userImageURL:
-        "https://pakutaso.cdn.rabify.me/shared/img/thumb/yuka16011215IMG_5574.jpg.webp?d=350",
-    userImageNegativeScore: 0.0,
-    userName: "田中 久美",
-    userNameLanguageCode: '',
-    userNameNegativeScore: 0.0,
+    userImage: const DetectedImage(
+        moderationLabels: [],
+        moderationModelVersion: '',
+        url:
+            'https://pakutaso.cdn.rabify.me/shared/img/thumb/yuka16011215IMG_5574.jpg.webp?d=350'),
+    userName: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: '田中 久美'),
     walletAddresses: [],
   ),
   OriginalUser(
     accountName: "c",
     createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
-    bio: '',
-    bioLanguageCode: '',
-    bioNegativeScore: 0.0,
+    bio: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: ''),
     blockCount: 0,
     ethAddress: '',
     followerCount: 20,
@@ -90,20 +111,28 @@ final List<OriginalUser> mockOriginalUsers = [
     searchToken: returnSearchToken("山岸 愛"),
     uid: "c",
     updatedAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
-    userImageURL:
-        "https://jp.static.photo-ac.com/assets/img/models/1796ee45a8c7c3e2be04c508f26afa3352857.jpg",
-    userImageNegativeScore: 0.0,
-    userName: "山岸 愛",
-    userNameLanguageCode: '',
-    userNameNegativeScore: 0.0,
+    userImage: const DetectedImage(
+        moderationLabels: [],
+        moderationModelVersion: '',
+        url:
+            'https://jp.static.photo-ac.com/assets/img/models/1796ee45a8c7c3e2be04c508f26afa3352857.jpg'),
+    userName: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: '山岸 愛'),
     walletAddresses: [],
   ),
   OriginalUser(
     accountName: "d",
     createdAt: Timestamp.fromDate(DateTime(2023, 2, 18)),
-    bio: '',
-    bioLanguageCode: '',
-    bioNegativeScore: 0.0,
+    bio: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: ''),
     blockCount: 0,
     ethAddress: '',
     followerCount: 30,
@@ -121,20 +150,28 @@ final List<OriginalUser> mockOriginalUsers = [
     searchToken: returnSearchToken("森 遥"),
     uid: "d",
     updatedAt: Timestamp.fromDate(DateTime(2023, 2, 18)),
-    userImageURL:
-        "https://jp.static.photo-ac.com/assets/img/models/125b35eae7888d2c9047da770aebabd796386.jpg",
-    userImageNegativeScore: 0.0,
-    userName: "森 遥",
-    userNameLanguageCode: '',
-    userNameNegativeScore: 0.0,
+    userImage: const DetectedImage(
+        moderationLabels: [],
+        moderationModelVersion: '',
+        url:
+            'https://jp.static.photo-ac.com/assets/img/models/125b35eae7888d2c9047da770aebabd796386.jpg'),
+    userName: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: '森 遥'),
     walletAddresses: [],
   ),
   OriginalUser(
     accountName: "e",
     createdAt: Timestamp.fromDate(DateTime(2023, 6, 1)),
-    bio: '',
-    bioLanguageCode: '',
-    bioNegativeScore: 0.0,
+    bio: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: ''),
     blockCount: 0,
     ethAddress: '',
     followerCount: 40,
@@ -152,20 +189,28 @@ final List<OriginalUser> mockOriginalUsers = [
     searchToken: returnSearchToken("橋本 美奈"),
     uid: "e",
     updatedAt: Timestamp.fromDate(DateTime(2023, 6, 1)),
-    userImageURL:
-        "https://pakutaso.cdn.rabify.me/shared/img/thumb/02AMEMAN8752.jpg.webp?d=350",
-    userImageNegativeScore: 0.0,
-    userName: "橋本 美奈",
-    userNameLanguageCode: '',
-    userNameNegativeScore: 0.0,
+    userImage: const DetectedImage(
+        moderationLabels: [],
+        moderationModelVersion: '',
+        url:
+            'https://pakutaso.cdn.rabify.me/shared/img/thumb/02AMEMAN8752.jpg.webp?d=350'),
+    userName: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: '橋本 美奈'),
     walletAddresses: [],
   ),
   OriginalUser(
     accountName: "f",
     createdAt: Timestamp.fromDate(DateTime(2023, 2, 23)),
-    bio: '',
-    bioLanguageCode: '',
-    bioNegativeScore: 0.0,
+    bio: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: ''),
     blockCount: 0,
     ethAddress: '',
     followerCount: 50,
@@ -183,20 +228,28 @@ final List<OriginalUser> mockOriginalUsers = [
     searchToken: returnSearchToken("遠藤 俊夫"),
     uid: "f",
     updatedAt: Timestamp.fromDate(DateTime(2023, 2, 23)),
-    userImageURL:
-        "https://pbs.twimg.com/media/FxY4Yb2aYAATYpt?format=jpg&name=medium",
-    userImageNegativeScore: 0.0,
-    userName: "遠藤 俊夫",
-    userNameLanguageCode: '',
-    userNameNegativeScore: 0.0,
+    userImage: const DetectedImage(
+        moderationLabels: [],
+        moderationModelVersion: '',
+        url:
+            'https://pbs.twimg.com/media/FxY4Yb2aYAATYpt?format=jpg&name=medium'),
+    userName: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: '遠藤 俊夫"'),
     walletAddresses: [],
   ),
   OriginalUser(
     accountName: "g",
     createdAt: Timestamp.fromDate(DateTime(2023, 1, 8)),
-    bio: '',
-    bioLanguageCode: '',
-    bioNegativeScore: 0.0,
+    bio: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: ''),
     blockCount: 0,
     ethAddress: '',
     followerCount: 60,
@@ -216,20 +269,28 @@ final List<OriginalUser> mockOriginalUsers = [
     ),
     uid: "g",
     updatedAt: Timestamp.fromDate(DateTime(2023, 1, 8)),
-    userImageURL:
-        "https://pbs.twimg.com/media/FxY4qXTacAAoN8p?format=jpg&name=medium",
-    userImageNegativeScore: 0.0,
-    userName: "井上 清",
-    userNameLanguageCode: '',
-    userNameNegativeScore: 0.0,
+    userImage: const DetectedImage(
+        moderationLabels: [],
+        moderationModelVersion: '',
+        url:
+            'https://pbs.twimg.com/media/FxY4qXTacAAoN8p?format=jpg&name=medium'),
+    userName: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: '井上 清'),
     walletAddresses: [],
   ),
   OriginalUser(
     accountName: "h",
     createdAt: Timestamp.fromDate(DateTime(2023, 10, 14)),
-    bio: '',
-    bioLanguageCode: '',
-    bioNegativeScore: 0.0,
+    bio: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: ''),
     blockCount: 0,
     ethAddress: '',
     followerCount: 70,
@@ -249,20 +310,28 @@ final List<OriginalUser> mockOriginalUsers = [
     ),
     uid: "h",
     updatedAt: Timestamp.fromDate(DateTime(2023, 10, 14)),
-    userImageURL:
-        "https://pbs.twimg.com/media/FxY3qI2aAAAckt6?format=jpg&name=medium",
-    userImageNegativeScore: 0.0,
-    userName: "森田 敦",
-    userNameLanguageCode: '',
-    userNameNegativeScore: 0.0,
+    userImage: const DetectedImage(
+        moderationLabels: [],
+        moderationModelVersion: '',
+        url:
+            'https://pbs.twimg.com/media/FxY3qI2aAAAckt6?format=jpg&name=medium'),
+    userName: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: '森田 敦'),
     walletAddresses: [],
   ),
   OriginalUser(
     accountName: "i",
     createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
-    bio: '',
-    bioLanguageCode: '',
-    bioNegativeScore: 0.0,
+    bio: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: ''),
     blockCount: 0,
     ethAddress: '',
     followerCount: 80,
@@ -282,20 +351,28 @@ final List<OriginalUser> mockOriginalUsers = [
     ),
     uid: "i",
     updatedAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
-    userImageURL:
-        "https://pbs.twimg.com/media/FxY2djfaAAYSrjW?format=jpg&name=medium",
-    userImageNegativeScore: 0.0,
-    userName: "山田 剛史",
-    userNameLanguageCode: '',
-    userNameNegativeScore: 0.0,
+    userImage: const DetectedImage(
+        moderationLabels: [],
+        moderationModelVersion: '',
+        url:
+            'https://pbs.twimg.com/media/FxY2djfaAAYSrjW?format=jpg&name=medium'),
+    userName: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: '山田 剛史'),
     walletAddresses: [],
   ),
   OriginalUser(
     accountName: "j",
     createdAt: Timestamp.fromDate(DateTime(2023, 4, 28)),
-    bio: '',
-    bioLanguageCode: '',
-    bioNegativeScore: 0.0,
+    bio: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: ''),
     blockCount: 0,
     ethAddress: '',
     followerCount: 90,
@@ -315,24 +392,37 @@ final List<OriginalUser> mockOriginalUsers = [
     ),
     uid: "j",
     updatedAt: Timestamp.fromDate(DateTime(2023, 4, 28)),
-    userImageURL:
-        "https://pbs.twimg.com/media/FxY2_ZGaAAE2pBk?format=jpg&name=medium",
-    userImageNegativeScore: 0.0,
-    userName: "中川 裕",
-    userNameLanguageCode: '',
-    userNameNegativeScore: 0.0,
+    userImage: const DetectedImage(
+        moderationLabels: [],
+        moderationModelVersion: '',
+        url:
+            'https://pbs.twimg.com/media/FxY2_ZGaAAE2pBk?format=jpg&name=medium'),
+    userName: const DetectedText(
+        languageCode: '',
+        negativeScore: 0.0,
+        positiveScore: 0.0,
+        sentiment: '',
+        value: '中川 裕'),
     walletAddresses: [],
   ),
 ];
 final List<Post> mockPosts = [
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 5, 25)),
-      description: '',
-      descriptionLanguageCode: '',
-      descriptionNegativeScore: 0.0,
+      description: const DetectedText(
+          languageCode: '',
+          negativeScore: 0.0,
+          positiveScore: 0.0,
+          sentiment: '',
+          value: ''),
       exampleTexts: [],
       genre: '',
       hashTags: [],
+      iconImage: const DetectedImage(
+          moderationLabels: [],
+          moderationModelVersion: '',
+          url:
+              'https://pbs.twimg.com/media/F2F7Fn8bwAABjvr?format=webp&name=small'),
       impressionCount: 0,
       likeCount: 0,
       links: [],
@@ -342,19 +432,30 @@ final List<Post> mockPosts = [
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("猫GPT"),
-      title: "猫GPT",
-      titleLanguageCode: '',
-      titleNegativeScore: 0.0,
+      title: const DetectedText(
+          languageCode: '',
+          negativeScore: 0.0,
+          positiveScore: 0.0,
+          sentiment: '',
+          value: '猫GPT'),
       updatedAt: Timestamp.fromDate(DateTime(2023, 5, 25)),
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
-      description: '',
-      descriptionLanguageCode: '',
-      descriptionNegativeScore: 0.0,
+      description: const DetectedText(
+          languageCode: '',
+          negativeScore: 0.0,
+          positiveScore: 0.0,
+          sentiment: '',
+          value: ''),
       exampleTexts: [],
       genre: '',
       hashTags: [],
+      iconImage: const DetectedImage(
+          moderationLabels: [],
+          moderationModelVersion: '',
+          url:
+              'https://pbs.twimg.com/media/F2F7Gzea4AAaCIv?format=webp&name=small'),
       impressionCount: 0,
       likeCount: 10,
       links: [],
@@ -364,19 +465,30 @@ final List<Post> mockPosts = [
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("原稿作成くん"),
-      title: "原稿作成くん",
-      titleLanguageCode: '',
-      titleNegativeScore: 0.0,
+      title: const DetectedText(
+          languageCode: '',
+          negativeScore: 0.0,
+          positiveScore: 0.0,
+          sentiment: '',
+          value: '原稿作成くん"'),
       updatedAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 2, 22)),
-      description: '',
-      descriptionLanguageCode: '',
-      descriptionNegativeScore: 0.0,
+      description: const DetectedText(
+          languageCode: '',
+          negativeScore: 0.0,
+          positiveScore: 0.0,
+          sentiment: '',
+          value: ''),
       exampleTexts: [],
       genre: '',
       hashTags: [],
+      iconImage: const DetectedImage(
+          moderationLabels: [],
+          moderationModelVersion: '',
+          url:
+              'https://pbs.twimg.com/media/F2F7H45bEAEtd9j?format=webp&name=small'),
       impressionCount: 0,
       likeCount: 20,
       links: [],
@@ -386,19 +498,30 @@ final List<Post> mockPosts = [
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("アイデア出しまくりAI"),
-      title: "アイデア出しまくりAI",
-      titleLanguageCode: '',
-      titleNegativeScore: 0.0,
+      title: const DetectedText(
+          languageCode: '',
+          negativeScore: 0.0,
+          positiveScore: 0.0,
+          sentiment: '',
+          value: 'アイデア出しまくりAI'),
       updatedAt: Timestamp.fromDate(DateTime(2023, 2, 22)),
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 7, 19)),
-      description: '',
-      descriptionLanguageCode: '',
-      descriptionNegativeScore: 0.0,
+      description: const DetectedText(
+          languageCode: '',
+          negativeScore: 0.0,
+          positiveScore: 0.0,
+          sentiment: '',
+          value: ''),
       exampleTexts: [],
       genre: '',
       hashTags: [],
+      iconImage: const DetectedImage(
+          moderationLabels: [],
+          moderationModelVersion: '',
+          url:
+              'https://pbs.twimg.com/media/F2F7I73aAAAqdlz?format=webp&name=small'),
       impressionCount: 0,
       likeCount: 30,
       links: [],
@@ -408,19 +531,30 @@ final List<Post> mockPosts = [
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("エンジニアAIくん"),
-      title: "エンジニアAIくん",
-      titleLanguageCode: '',
-      titleNegativeScore: 0.0,
+      title: const DetectedText(
+          languageCode: '',
+          negativeScore: 0.0,
+          positiveScore: 0.0,
+          sentiment: '',
+          value: 'エンジニアAIくん'),
       updatedAt: Timestamp.fromDate(DateTime(2023, 7, 19)),
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 4, 7)),
-      description: '',
-      descriptionLanguageCode: '',
-      descriptionNegativeScore: 0.0,
+      description: const DetectedText(
+          languageCode: '',
+          negativeScore: 0.0,
+          positiveScore: 0.0,
+          sentiment: '',
+          value: ''),
       exampleTexts: [],
       genre: '',
       hashTags: [],
+      iconImage: const DetectedImage(
+          moderationLabels: [],
+          moderationModelVersion: '',
+          url:
+              'https://pbs.twimg.com/media/F2F7M7naMAA5_PJ?format=webp&name=900x900'),
       impressionCount: 0,
       likeCount: 40,
       links: [],
@@ -430,16 +564,18 @@ final List<Post> mockPosts = [
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("なんでも相談AI"),
-      title: "なんでも相談AI",
-      titleLanguageCode: '',
-      titleNegativeScore: 0.0,
+      title: const DetectedText(
+          languageCode: '',
+          negativeScore: 0.0,
+          positiveScore: 0.0,
+          sentiment: '',
+          value: 'なんでも相談AI'),
       updatedAt: Timestamp.fromDate(DateTime(2023, 4, 7)),
       userCount: 0),
 ];
 List<Timeline> mockTimelines() {
   final List<Timeline> result = [];
-  for (int i = 0; i < 5; i++) {
-    final post = mockPosts[i];
+  for (final post in mockPosts) {
     result.add(
       Timeline(
           createdAt: post.createdAt,

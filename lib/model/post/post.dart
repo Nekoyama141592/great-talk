@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/model/detected_image/detected_image.dart';
+import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/original_user/original_user.dart';
 
 part 'post.freezed.dart';
@@ -8,12 +10,11 @@ part 'post.g.dart';
 abstract class Post with _$Post {
   const factory Post({
     required dynamic createdAt,
-    required String description,
-    required String descriptionLanguageCode,
-    required double descriptionNegativeScore,
+    required DetectedText description,
     required List<Map<String, dynamic>> exampleTexts, // TODO: クラスにしろ
     required String genre,
     required List<String> hashTags,
+    required DetectedImage iconImage,
     required int impressionCount,
     required int likeCount,
     required List<Map<String, dynamic>> links, // TODO: クラスにしろ,
@@ -23,9 +24,7 @@ abstract class Post with _$Post {
     required int reportCount,
     required double score,
     required Map<String, dynamic> searchToken,
-    required String title,
-    required String titleLanguageCode,
-    required double titleNegativeScore,
+    required DetectedText title,
     required dynamic updatedAt,
     required int userCount,
   }) = _Post;
