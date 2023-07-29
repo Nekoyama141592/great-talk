@@ -52,7 +52,6 @@ class PersonCards extends StatelessWidget {
                             : null,
                         onTap: () => Get.to(RealtimeResPage(
                           interlocutor: person,
-                          personsController: controller,
                         )),
                         onLongPress: () => ChatUtility.showCleanLocalMsgDialog(
                             person, controller),

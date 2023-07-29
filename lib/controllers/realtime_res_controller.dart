@@ -59,15 +59,14 @@ class RealtimeResController extends GetxController with CurrentUidMixin {
 
   void onSendPressed(
       BuildContext context,
-      PersonsController controller,
       TextEditingController inputController,
       ScrollController scrollController) {
     FocusScope.of(context).unfocus();
-    execute(controller, scrollController, inputController.text);
+    execute(scrollController, inputController.text);
     inputController.text = "";
   }
 
-  Future<void> execute(PersonsController controller,
+  Future<void> execute(
       ScrollController scrollController, String content) async {
     final model = GptTurboChatModel();
     prefs = await SharedPreferences.getInstance();
@@ -87,8 +86,7 @@ class RealtimeResController extends GetxController with CurrentUidMixin {
     final requestMessages = await _createRequestMessages(content);
     final request = ChatCompleteText(
         messages: requestMessages, maxToken: _adjustMaxToken(), model: model);
-    _listenToChatCompletionSSE(
-        request, controller, scrollController); // ChatGPTのリアルタイム出力
+    _listenToChatCompletionSSE(request, scrollController); // ChatGPTのリアルタイム出力
   }
 
   int _adjustMaxToken() => messages.length < 3 ? maxToken ~/ 2 : maxToken;
@@ -119,8 +117,8 @@ class RealtimeResController extends GetxController with CurrentUidMixin {
     );
   }
 
-  void _listenToChatCompletionSSE(ChatCompleteText request,
-      PersonsController controller, ScrollController scrollController) {
+  void _listenToChatCompletionSSE(
+      ChatCompleteText request, ScrollController scrollController) {
     // 生成中なら何もしない
     if (isGenerating.value) {
       return;
@@ -150,7 +148,7 @@ class RealtimeResController extends GetxController with CurrentUidMixin {
         updatedAt: now,
       );
       messages([...messages]);
-      _setValues(controller);
+      _setValues();
       isGenerating(false);
     }, onError: (e) {
       chatCount--; // チャット数を一つ減らす
@@ -193,11 +191,12 @@ class RealtimeResController extends GetxController with CurrentUidMixin {
     }
   }
 
-  Future<void> _setValues(PersonsController controller) async {
+  Future<void> _setValues() async {
     await _setLocalMessage();
     await _setLocalDate();
     await _setChatCount();
-    await controller.setLatestPersons(interlocutor, realtimeRes.value);
+    await PersonsController.to
+        .setLatestPersons(interlocutor, realtimeRes.value);
   }
 
   Future<void> _setLocalMessage() async {

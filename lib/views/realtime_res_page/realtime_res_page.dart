@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/model/chat_user/chat_user.dart';
@@ -13,11 +12,9 @@ import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 
 class RealtimeResPage extends HookWidget {
-  const RealtimeResPage(
-      {Key? key, required this.interlocutor, required this.personsController})
+  const RealtimeResPage({Key? key, required this.interlocutor})
       : super(key: key);
   final ChatUser interlocutor;
-  final PersonsController personsController;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RealtimeResController());
@@ -112,10 +109,7 @@ class RealtimeResPage extends HookWidget {
                         return RoundedInputField(
                             controller: inputController,
                             send: () => controller.onSendPressed(
-                                context,
-                                personsController,
-                                inputController,
-                                scrollCotroller));
+                                context, inputController, scrollCotroller));
                       })
                     ],
                   ),
