@@ -132,4 +132,39 @@ class FirestoreRepository {
       return const Result.failure();
     }
   }
+
+  FutureResult<List<QDoc>> getUserPostsByNewest(String uid) async {
+    try {
+      final res = await client.getUserPostsByNewest(uid);
+      final docs = res.docs;
+      return Result.success(docs);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<List<QDoc>> getMoreUserPostsByNewest(
+      String uid, Doc lastDoc) async {
+    try {
+      final res = await client.getMoreUserPostsByNewest(uid, lastDoc);
+      final docs = res.docs;
+      return Result.success(docs);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<List<QDoc>> getNewUserPostsByNewest(
+      String uid, Doc firstDoc) async {
+    try {
+      final res = await client.getNewUserPostsByNewest(uid, firstDoc);
+      final docs = res.docs;
+      return Result.success(docs);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
 }

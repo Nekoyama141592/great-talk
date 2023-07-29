@@ -2,12 +2,12 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
-import 'package:great_talk/interfaces/more_docs_interface.dart';
+import 'package:great_talk/interfaces/new_docs_interface.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
-class HomeController extends DocsController implements MoreDocsInterface {
+class HomeController extends DocsController implements NewDocsInterface {
   final _repository = FirestoreRepository();
   List<QDoc> _timelineDocs = [];
 

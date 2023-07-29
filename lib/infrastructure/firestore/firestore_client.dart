@@ -2,11 +2,6 @@ import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreClient {
-  FutureQSnapshot getPostsByLikeCount() async =>
-      await FirestoreQueries.postsQueryByLikeCount.get();
-  FutureQSnapshot getMorePostsByLikeCount(Doc lastDoc) async =>
-      await FirestoreQueries.morePostsQueryByLikeCount(lastDoc).get();
-
   FutureQSnapshot getPostsByFollowing(List<String> followingUids) async =>
       await FirestoreQueries.postsQueryByFollowing(followingUids).get();
   FutureQSnapshot getNewPostsByFollowing(
@@ -17,6 +12,11 @@ class FirestoreClient {
           List<String> followingUids, Doc lastDoc) async =>
       await FirestoreQueries.morePostsQueryByFollowing(followingUids, lastDoc)
           .get();
+
+  FutureQSnapshot getPostsByLikeCount() async =>
+      await FirestoreQueries.postsQueryByLikeCount.get();
+  FutureQSnapshot getMorePostsByLikeCount(Doc lastDoc) async =>
+      await FirestoreQueries.morePostsQueryByLikeCount(lastDoc).get();
 
   FutureQSnapshot getTimelinePosts(List<String> timelinePostIds) async =>
       await FirestoreQueries.timelinePostsQuery(timelinePostIds).get();
@@ -32,4 +32,11 @@ class FirestoreClient {
       await FirestoreQueries.usersQueryByLikeCount.get();
   FutureQSnapshot getMoreUsersByFollowerCount(Doc lastDoc) async =>
       await FirestoreQueries.moreUsersQueryByLikeCount(lastDoc).get();
+
+  FutureQSnapshot getUserPostsByNewest(String uid) async =>
+      await FirestoreQueries.userPostsQueryByNewest(uid).get();
+  FutureQSnapshot getMoreUserPostsByNewest(String uid, Doc lastDoc) async =>
+      await FirestoreQueries.moreUserPostsQueryByNewest(uid, lastDoc).get();
+  FutureQSnapshot getNewUserPostsByNewest(String uid, Doc firstDoc) async =>
+      await FirestoreQueries.newUserPostsQueryByNewest(uid, firstDoc).get();
 }

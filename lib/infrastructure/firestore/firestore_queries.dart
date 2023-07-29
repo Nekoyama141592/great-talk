@@ -21,6 +21,17 @@ class FirestoreQueries {
         .orderBy('createdAt', descending: true);
   }
 
+  static MapQuery userPostsQueryByNewest(String uid) =>
+      FirebaseFirestore.instance
+          .collection("users")
+          .doc(uid)
+          .collection('posts')
+          .orderBy("createdAt", descending: true);
+  static MapQuery moreUserPostsQueryByNewest(String uid, Doc lastDoc) =>
+      moreQuery(userPostsQueryByNewest(uid), lastDoc);
+  static MapQuery newUserPostsQueryByNewest(String uid, Doc firstDoc) =>
+      newQuery(userPostsQueryByNewest(uid), firstDoc);
+
   static MapQuery newPostsQueryByFollowing(
           List<String> followingUids, Doc firstDoc) =>
       newQuery(postsQueryByFollowing(followingUids), firstDoc);
