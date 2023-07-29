@@ -5,6 +5,7 @@ import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'firestore_user.freezed.dart';
+part 'firestore_user.g.dart';
 
 @freezed
 abstract class FirestoreUser implements _$FirestoreUser {

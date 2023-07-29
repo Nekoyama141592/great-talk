@@ -18,6 +18,7 @@ final appName = F.title;
 const lastChatDatePrefsKey = "lastChatDate";
 const chatCountPrefsKey = "chatCount";
 const isAgreedToTermsPrefsKey = "isAgreedToTerms";
+const isV3initializedPrefsKey = "isV3initialized";
 const localPersonsPrefsKey = "localPersons";
 const professionalsPrefsKey = "professionals";
 String getPlanDescription(String productID, String price) {
