@@ -12,20 +12,43 @@ class FirestoreQueries {
       .collectionGroup('posts')
       .limit(oneTimeReadCount);
 
+  static MapQuery postsQueryByFollowing(List<String> followingUids) {
+    if (followingUids.isEmpty) {
+      followingUids.add("");
+    }
+    return postsQuery
+        .where('poster.uid', whereIn: followingUids)
+        .orderBy('createdAt', descending: true);
+  }
+
+  static MapQuery newPostsQueryByFollowing(
+          List<String> followingUids, Doc firstDoc) =>
+      newQuery(postsQueryByFollowing(followingUids), firstDoc);
+  static MapQuery morePostsQueryByFollowing(
+          List<String> followingUids, Doc lastDoc) =>
+      moreQuery(postsQueryByFollowing(followingUids), lastDoc);
+
   static final postsQueryByLikeCount =
       postsQuery.orderBy('likeCount', descending: true);
   static MapQuery morePostsQueryByLikeCount(Doc lastDoc) =>
       moreQuery(postsQueryByLikeCount, lastDoc);
 
-  static MapQuery timelinesQuery(DocRef userRef) =>
-      userRef.collection('timelines').orderBy('createdAt', descending: true);
+  static MapQuery timelinesQuery(DocRef userRef) => userRef
+      .collection('timelines')
+      .orderBy('createdAt', descending: true)
+      .limit(whereInLimit);
   static MapQuery newTimelinesQuery(DocRef userRef, Doc firstDoc) =>
       newQuery(timelinesQuery(userRef), firstDoc);
   static MapQuery moreTimelinesQuery(DocRef userRef, Doc lastDoc) =>
       moreQuery(timelinesQuery(userRef), lastDoc);
 
-  static MapQuery timelinePostsQuery(List<String> timelinePostIds) =>
-      postsQuery.where('postId', whereIn: timelinePostIds);
+  static MapQuery timelinePostsQuery(List<String> timelinePostIds) {
+    if (timelinePostIds.isEmpty) {
+      timelinePostIds.add('');
+    }
+    return postsQuery.where('postId', whereIn: timelinePostIds);
+  }
+
   static MapQuery newTimelinePostsQuery(
           List<String> timelinePostIds, Doc firstDoc) =>
       newQuery(timelinePostsQuery(timelinePostIds), firstDoc);

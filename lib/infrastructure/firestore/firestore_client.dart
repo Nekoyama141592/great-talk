@@ -7,6 +7,17 @@ class FirestoreClient {
   FutureQSnapshot getMorePostsByLikeCount(Doc lastDoc) async =>
       await FirestoreQueries.morePostsQueryByLikeCount(lastDoc).get();
 
+  FutureQSnapshot getPostsByFollowing(List<String> followingUids) async =>
+      await FirestoreQueries.postsQueryByFollowing(followingUids).get();
+  FutureQSnapshot getNewPostsByFollowing(
+          List<String> followingUids, Doc firstDoc) async =>
+      await FirestoreQueries.newPostsQueryByFollowing(followingUids, firstDoc)
+          .get();
+  FutureQSnapshot getMorePostsByFollowing(
+          List<String> followingUids, Doc lastDoc) async =>
+      await FirestoreQueries.morePostsQueryByFollowing(followingUids, lastDoc)
+          .get();
+
   FutureQSnapshot getTimelinePosts(List<String> timelinePostIds) async =>
       await FirestoreQueries.timelinePostsQuery(timelinePostIds).get();
 

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
@@ -37,5 +38,7 @@ abstract class FirestoreUser implements _$FirestoreUser {
 
   factory FirestoreUser.fromJson(Map<String, dynamic> json) =>
       _$FirestoreUserFromJson(json);
+  Timestamp typedCreatedAt() => createdAt as Timestamp;
   DocRef typedRef() => ref as DocRef;
+  Timestamp typedUpdatedAtAt() => createdAt as Timestamp;
 }
