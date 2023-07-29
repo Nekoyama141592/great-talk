@@ -11,6 +11,29 @@ class MockFirestoreClient implements FirestoreClient {
   Future<void> createUser(String uid) async {
     return;
   }
+
+  @override
+  Future<void> createFollower(
+      String currentUid, String passiveUid, SDMap json) async {
+    return;
+  }
+
+  @override
+  Future<void> deleteFollower(String currentUid, String passiveUid) async {
+    return;
+  }
+
+  @override
+  Future<void> createToken(
+      String currentUid, String tokenId, SDMap json) async {
+    return;
+  }
+
+  @override
+  Future<void> deleteToken(String currentUid, String tokenId) async {
+    return;
+  }
+
   @override
   FutureQSnapshot getPostsByLikeCount() async {
     final posts = [...mockPosts];

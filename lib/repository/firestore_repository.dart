@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_firestore_client.dart';
 import 'package:great_talk/repository/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
@@ -21,7 +20,7 @@ class FirestoreRepository {
   FutureResult<bool> createFollower(
       String currentUid, String passiveUid, SDMap json) async {
     try {
-      await FirestoreQueries.followerQuery(currentUid, passiveUid).set(json);
+      await client.createFollower(currentUid, passiveUid, json);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
@@ -32,7 +31,7 @@ class FirestoreRepository {
   FutureResult<bool> deleteFollower(
       String currentUid, String passiveUid) async {
     try {
-      await FirestoreQueries.followerQuery(currentUid, passiveUid).delete();
+      await client.deleteFollower(currentUid, passiveUid);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
@@ -43,7 +42,7 @@ class FirestoreRepository {
   FutureResult<bool> createToken(
       String currentUid, String tokenId, SDMap json) async {
     try {
-      await FirestoreQueries.tokenQuery(currentUid, tokenId).set(json);
+      await client.createToken(currentUid, tokenId, json);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
@@ -53,7 +52,7 @@ class FirestoreRepository {
 
   FutureResult<bool> deleteToken(String currentUid, String tokenId) async {
     try {
-      await FirestoreQueries.tokenQuery(currentUid, tokenId).delete();
+      await client.deleteToken(currentUid, tokenId);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
