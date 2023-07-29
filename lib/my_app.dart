@@ -7,7 +7,7 @@ import 'package:great_talk/flavors.dart';
 import 'package:great_talk/themes/themes.dart';
 import 'package:great_talk/views/loading_page.dart';
 // components
-import 'package:great_talk/views/persons_page.dart';
+import 'package:great_talk/views/main/my_home_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         title: F.title,
         theme: lightThemeData(context),
         home: Obx(() => currentUserController.currentUser.value != null
-            ? const PersonsPage()
+            ? const MyHomePage()
             : const LoadingPage()));
   }
 }

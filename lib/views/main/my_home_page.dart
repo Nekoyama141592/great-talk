@@ -10,11 +10,14 @@ import 'package:great_talk/controllers/notification_controller.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/views/components/person_cards.dart';
 import 'package:great_talk/views/components/search_screen.dart';
-import 'package:great_talk/views/subscribe/subscribe_page.dart';
+import 'package:great_talk/views/main/feeds/feeds_screen.dart';
+import 'package:great_talk/views/main/my_profile/my_profile_screen.dart';
+import 'package:great_talk/views/main/ranking/ranking_screen.dart';
+import 'package:great_talk/views/main/subscribe/subscribe_screen.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 
-class PersonsPage extends HookWidget {
-  const PersonsPage({Key? key}) : super(key: key);
+class MyHomePage extends HookWidget {
+  const MyHomePage({Key? key}) : super(key: key);
   @override
   Widget build(context) {
     final purchasesController = Get.put(PurchasesController());
@@ -39,8 +42,8 @@ class PersonsPage extends HookWidget {
           onPageChanged: (index) => pageIndex.value = index,
           controller: pageController,
           children: [
-            Container(),
-            Container(),
+            const FeedsScreen(),
+            const RankingScreen(),
             Obx(
               () => controller.isSearching.value
                   ? SearchScreen(
@@ -49,8 +52,8 @@ class PersonsPage extends HookWidget {
                     )
                   : const PersonCards(),
             ),
-            SubscribeView(),
-            Container(),
+            SubscribeScreen(),
+            const MyProfileScreen()
           ],
         ));
   }
