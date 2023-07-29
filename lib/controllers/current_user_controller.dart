@@ -8,4 +8,13 @@ class CurrentUserController extends GetxController {
   final Rx<FirestoreUser?> firestoreUser = Rx(null);
 
   final followingUids = <String>[].obs;
+
+  @override
+  void onInit() async {
+    if (currentUser.value == null) {
+      final credential = await FirebaseAuth.instance.signInAnonymously();
+      currentUser(credential.user);
+    }
+    super.onInit();
+  }
 }
