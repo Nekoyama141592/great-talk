@@ -1,16 +1,16 @@
 // dart
 import 'dart:convert';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:great_talk/common/date_converter.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/model/chat_user/chat_user.dart';
 import 'package:great_talk/model/chat_user_metadata/chat_user_metadata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class PersonsController extends GetxController {
   late SharedPreferences prefs;
-  final RxList<types.User> results;
+  final RxList<ChatUser> results;
   final String personsPrefsKey;
-  final List<types.User> initialPersons;
+  final List<ChatUser> initialPersons;
   final RxBool isSearching = false.obs;
 
   PersonsController(this.results, this.personsPrefsKey, this.initialPersons) {
@@ -22,7 +22,7 @@ abstract class PersonsController extends GetxController {
     getLatestPersons(prefs);
   }
 
-  Future<void> setLatestPersons(types.User person, String lastAnswer) async {
+  Future<void> setLatestPersons(ChatUser person, String lastAnswer) async {
     // 検索からチャットした場合は保存しない.
     if (isSearching.value) {
       return;
@@ -34,16 +34,16 @@ abstract class PersonsController extends GetxController {
         ChatUserMetadata(lastAnswer: lastAnswer).toJson();
     final newPerson = person.copyWith(metadata: metadata, lastSeen: lastSeen);
     // チャットした人物を上に持ってくる.
-    final List<types.User> latestPersons = List.from(results);
-    latestPersons.removeWhere((element) => element.id == person.id);
+    final List<ChatUser> latestPersons = List.from(results);
+    latestPersons.removeWhere((element) => element.uid == person.uid);
     latestPersons.insert(0, newPerson);
     results(latestPersons);
     final jsonString = jsonEncode(latestPersons).toString();
     await prefs.setString(personsPrefsKey, jsonString);
   }
 
-  Future<void> cleanMetadata(types.User person) async {
-    final List<types.User> x = List.from(results);
+  Future<void> cleanMetadata(ChatUser person) async {
+    final List<ChatUser> x = List.from(results);
     x[x.indexOf(person)] = person.copyWith(metadata: null);
     results(x);
     final jsonString = jsonEncode(x).toString();
@@ -55,8 +55,8 @@ abstract class PersonsController extends GetxController {
     final String jsonString = prefs.getString(personsPrefsKey) ?? "";
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
-      List<types.User> latestPersons =
-          decodedJson.map((e) => types.User.fromJson(e)).toList();
+      List<ChatUser> latestPersons =
+          decodedJson.map((e) => ChatUser.fromJson(e)).toList();
       results(latestPersons);
     }
   }
@@ -64,8 +64,8 @@ abstract class PersonsController extends GetxController {
   void search(String query) {
     if (query.isNotEmpty) {
       results.value = initialPersons.where((element) {
-        final name = element.lastName!.toLowerCase();
-        final id = element.id.toLowerCase().replaceAll(" ", "");
+        final name = element.userName.toLowerCase();
+        final id = element.uid.toLowerCase().replaceAll(" ", "");
         return name.contains(query) || id.contains(query);
       }).toList();
     }

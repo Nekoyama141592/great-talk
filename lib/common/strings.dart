@@ -1,17 +1,17 @@
 // packages
 import 'package:great_talk/flavors.dart';
+import 'package:great_talk/model/chat_user/chat_user.dart';
 import 'package:great_talk/model/chat_user_metadata/chat_user_metadata.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:uuid/uuid.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 String randomString() {
   const uuid = Uuid();
   return uuid.v4();
 }
 
-String getName(types.User person) => person.lastName ?? 'UNKNOWN';
+String getName(ChatUser person) => person.userName;
 final appName = F.title;
 // prefs_key
 // personIdで各々のChat履歴

@@ -2,16 +2,17 @@ import 'dart:convert';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:get/get.dart';
 import 'package:great_talk/common/date_converter.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
+import 'package:great_talk/model/chat_user/chat_user.dart';
 import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +26,7 @@ class RealtimeResController extends GetxController {
   late SharedPreferences prefs;
 
   // 与えられたinterlocutorとのチャット履歴を取得
-  Future<void> getChatLog(types.User interlocutor) async {
+  Future<void> getChatLog(ChatUser interlocutor) async {
     isLoading(true);
     List<types.Message> a = await _getLocalMessages(interlocutor.id);
     await PurchasesController.to.restorePurchases(); // 購入内容を復元
@@ -49,7 +50,7 @@ class RealtimeResController extends GetxController {
 
   void onSendPressed(
       BuildContext context,
-      types.User interlocutor,
+      ChatUser interlocutor,
       PersonsController controller,
       TextEditingController inputController,
       ScrollController scrollController) {
@@ -58,7 +59,7 @@ class RealtimeResController extends GetxController {
     inputController.text = "";
   }
 
-  Future<void> execute(types.User interlocutor, PersonsController controller,
+  Future<void> execute(ChatUser interlocutor, PersonsController controller,
       ScrollController scrollController, String content) async {
     final model = GptTurboChatModel();
     prefs = await SharedPreferences.getInstance();
@@ -70,8 +71,8 @@ class RealtimeResController extends GetxController {
       await _requestReview(); // レビューをリクエスト
       return;
     }
-    _addMessage(content, chatUiCurrrentUser);
-    _addEmptyMessage(interlocutor); // Viewで表示できる要素数を一つ増やす
+    _addMessage(content);
+    _addEmptyMessage(); // Viewで表示できる要素数を一つ増やす
     realtimeRes(""); // realtimeResを初期化
     messages([...messages]); // messageを再代入して変更をViewに反映
     // リクエストを作成
@@ -89,12 +90,12 @@ class RealtimeResController extends GetxController {
     return x;
   }
 
-  void _addEmptyMessage(types.User interlocutor) {
+  void _addEmptyMessage() {
     messages.add(types.TextMessage(
-      author: interlocutor,
       createdAt: DateConverter.nowDateTime(),
       id: randomString(),
       text: "",
+      uid: _currentUid(),
     ));
   }
 
@@ -108,7 +109,7 @@ class RealtimeResController extends GetxController {
 
   void _listenToChatCompletionSSE(
       ChatCompleteText request,
-      types.User interlocutor,
+      ChatUser interlocutor,
       PersonsController controller,
       ScrollController scrollController) {
     // 生成中なら何もしない
@@ -175,8 +176,8 @@ class RealtimeResController extends GetxController {
   }
 
   Future<void> _setValues(
-      types.User interlocutor, PersonsController controller) async {
-    final String interlocutorId = interlocutor.id;
+      ChatUser interlocutor, PersonsController controller) async {
+    final String interlocutorId = interlocutor.uid;
     await _setLocalMessage(interlocutorId);
     await _setLocalDate();
     await _setChatCount();
@@ -199,20 +200,20 @@ class RealtimeResController extends GetxController {
     await prefs.setInt(chatCountPrefsKey, chatCount);
   }
 
-  void _addMessage(String content, types.User author) {
+  void _addMessage(String content) {
     final textMessage = types.TextMessage(
-      author: author,
       createdAt: DateConverter.nowDateTime(),
       id: randomString(),
       text: content,
+      uid: _currentUid(),
     );
     messages.add(textMessage);
     messages([...messages]);
   }
 
   Future<List<Messages>> _createRequestMessages(
-      types.User interlocutor, String content) async {
-    final id = interlocutor.id;
+      ChatUser interlocutor, String content) async {
+    final id = interlocutor.uid;
     switch (id) {
       case wolframId:
         final wolframRes = await WolframRepository.fetchApi(content);
@@ -238,8 +239,7 @@ class RealtimeResController extends GetxController {
 
   Messages _toRequestMessage(types.Message msg) {
     return Messages(
-        role:
-            msg.author.id == chatUiCurrrentUser.id ? Role.user : Role.assistant,
+        role: msg.uid == _currentUid() ? Role.user : Role.assistant,
         content: msg.toJson()["text"]);
   }
 
@@ -254,9 +254,9 @@ class RealtimeResController extends GetxController {
     return result;
   }
 
-  Messages _systemMsg(types.User interlocutor) {
-    final name = interlocutor.lastName;
-    String content = proIds.contains(interlocutor.id)
+  Messages _systemMsg(ChatUser interlocutor) {
+    final name = interlocutor.userName;
+    String content = proIds.contains(interlocutor.uid)
         ? "あなたは一人のプロの$nameです。それになりきって以下の問いに答えろ。自分がAIアシスタントだとは答えるな。"
         : "$nameになりきって$nameの口調で以下の問いに答えろ";
     content += attention;
@@ -271,4 +271,6 @@ class RealtimeResController extends GetxController {
       return;
     }
   }
+
+  String _currentUid() => CurrentUserController.to.currentUser.value!.uid;
 }

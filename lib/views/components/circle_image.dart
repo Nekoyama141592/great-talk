@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/common/doubles.dart';
 // packages
-import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:great_talk/model/chat_user/chat_user.dart';
 
 class CircleImage extends StatelessWidget {
   const CircleImage({Key? key, required this.interlocutor}) : super(key: key);
-  final types.User interlocutor;
+  final ChatUser interlocutor;
   @override
   Widget build(BuildContext context) {
     final imageUrl = interlocutor.imageUrl;
     final length = userImageSize(context);
-    return imageUrl == null || imageUrl.isEmpty
+    return imageUrl.isEmpty
         ? const Icon(Icons.person)
         : SizedBox(
             width: length,
