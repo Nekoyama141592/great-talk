@@ -33,4 +33,7 @@ class CurrentUserController extends GetxController {
   }
 
   String currentUid() => currentUser.value!.uid;
+
+  bool isNotLoggedIn() =>
+      currentUser.value == null || currentUser.value!.isAnonymous;
 }

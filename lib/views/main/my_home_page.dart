@@ -5,9 +5,11 @@ import 'package:great_talk/common/others.dart';
 import 'package:get/get.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/common/widgets.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/notification_controller.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
+import 'package:great_talk/views/auth/login_page.dart';
 import 'package:great_talk/views/components/person_cards.dart';
 import 'package:great_talk/views/components/search_screen.dart';
 import 'package:great_talk/views/main/feeds/feeds_screen.dart';
@@ -55,7 +57,9 @@ class MyHomePage extends HookWidget {
                   : const PersonCards(),
             ),
             SubscribeScreen(),
-            const MyProfileScreen()
+            Obx(() => CurrentUserController.to.isNotLoggedIn()
+                ? const LoginPage()
+                : const MyProfileScreen())
           ],
         ));
   }
