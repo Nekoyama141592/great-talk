@@ -3,7 +3,7 @@ class RankingTabBarElements {
   final String title;
 }
 
-final List<RankingTabBarElements> tabBarElements = [
+final List<RankingTabBarElements> rankingTBE = [
   RankingTabBarElements('Posts'),
   RankingTabBarElements('Users'),
 ];

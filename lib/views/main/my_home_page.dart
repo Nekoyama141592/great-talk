@@ -27,7 +27,9 @@ class MyHomePage extends HookWidget {
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(
-        appBar: AppBar(title: boldText(appName), shape: appBarShape(context)),
+        appBar: pageIndex.value != 1
+            ? AppBar(title: boldText(appName), shape: appBarShape(context))
+            : null,
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             items: bnbElements,
