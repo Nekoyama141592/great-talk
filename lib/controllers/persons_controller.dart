@@ -2,18 +2,19 @@
 import 'dart:convert';
 import 'package:great_talk/common/date_converter.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/common/persons.dart';
+import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/model/chat_user/chat_user.dart';
 import 'package:great_talk/model/chat_user_metadata/chat_user_metadata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class PersonsController extends GetxController {
+class PersonsController extends GetxController {
+  static PersonsController get to => Get.find<PersonsController>();
   late SharedPreferences prefs;
-  final RxList<ChatUser> results;
-  final String personsPrefsKey;
-  final List<ChatUser> initialPersons;
+  final RxList<ChatUser> results = initialPeople.obs;
   final RxBool isSearching = false.obs;
 
-  PersonsController(this.results, this.personsPrefsKey, this.initialPersons) {
+  PersonsController() {
     init();
   }
 
@@ -39,7 +40,7 @@ abstract class PersonsController extends GetxController {
     latestPersons.insert(0, newPerson);
     results(latestPersons);
     final jsonString = jsonEncode(latestPersons).toString();
-    await prefs.setString(personsPrefsKey, jsonString);
+    await prefs.setString(initialPeoplePrefsKey, jsonString);
   }
 
   Future<void> cleanMetadata(ChatUser person) async {
@@ -47,12 +48,12 @@ abstract class PersonsController extends GetxController {
     x[x.indexOf(person)] = person.copyWith(metadata: null);
     results(x);
     final jsonString = jsonEncode(x).toString();
-    await prefs.setString(personsPrefsKey, jsonString);
+    await prefs.setString(initialPeoplePrefsKey, jsonString);
   }
 
   // search_controllerのoverrideを消して、privateにする。
   void getLatestPersons(SharedPreferences prefs) {
-    final String jsonString = prefs.getString(personsPrefsKey) ?? "";
+    final String jsonString = prefs.getString(initialPeoplePrefsKey) ?? "";
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
       List<ChatUser> latestPersons =
@@ -63,7 +64,7 @@ abstract class PersonsController extends GetxController {
 
   void search(String query) {
     if (query.isNotEmpty) {
-      results.value = initialPersons.where((element) {
+      results.value = initialPeople.where((element) {
         final name = element.userName.toLowerCase();
         final id = element.uid.toLowerCase().replaceAll(" ", "");
         return name.contains(query) || id.contains(query);
@@ -71,5 +72,5 @@ abstract class PersonsController extends GetxController {
     }
   }
 
-  void reset() => results(initialPersons);
+  void reset() => results(initialPeople);
 }

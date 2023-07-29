@@ -4,21 +4,33 @@ import 'package:great_talk/common/colors.dart';
 
 final List<BottomNavigationBarItem> bnbElements = [
   const BottomNavigationBarItem(
-      label: 'Person',
+      label: 'Home',
       icon: Icon(
-        Icons.chat,
+        Icons.home,
         color: kSecondaryColor,
       )),
   const BottomNavigationBarItem(
-      label: 'Professional',
+      label: 'Search',
       icon: Icon(
-        Icons.psychology,
+        Icons.search,
+        color: kSecondaryColor,
+      )),
+  const BottomNavigationBarItem(
+      label: 'People',
+      icon: Icon(
+        Icons.chat,
         color: kSecondaryColor,
       )),
   const BottomNavigationBarItem(
       label: 'Plans',
       icon: Icon(
         Icons.subscriptions,
+        color: kSecondaryColor,
+      )),
+  const BottomNavigationBarItem(
+      label: 'Account',
+      icon: Icon(
+        Icons.settings,
         color: kSecondaryColor,
       )),
 ];

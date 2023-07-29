@@ -3,8 +3,13 @@ import 'package:great_talk/model/chat_user/chat_user.dart';
 const String chatGPTId = "chatGPT";
 const String wolframId = "wolfram";
 // 現在のユーザーを定義.
-final proIds = proPersons.map((e) => e.uid).toList();
-const proPersons = [
+final proIds = proPeople.map((e) => e.uid).toList();
+final List<ChatUser> initialPeople = [
+  ...ai,
+  ...greatPeople,
+  ...proPeople,
+];
+const ai = [
   ChatUser(
       uid: chatGPTId,
       userName: 'なんでもAI',
@@ -15,6 +20,8 @@ const proPersons = [
       userName: '数学の先生',
       imageUrl:
           'https://cdn.pixabay.com/photo/2016/10/29/14/49/cube-1780775__480.jpg'),
+];
+const proPeople = [
   ChatUser(
       uid: 'human resources',
       userName: '人事の専門家',
@@ -568,7 +575,7 @@ const proPersons = [
       imageUrl:
           'https://pbs.twimg.com/media/FziIU20aQAEziVA?format=jpg&name=small'),
 ];
-const greatPersons = [
+const greatPeople = [
   ChatUser(
       uid: 'Albert Einstein.',
       userName: 'アルベルト・アインシュタイン',
