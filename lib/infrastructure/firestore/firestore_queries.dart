@@ -3,14 +3,20 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreQueries {
+  static final instance = FirebaseFirestore.instance;
   static MapQuery newQuery(MapQuery query, Doc firstDoc) =>
       query.endAtDocument(firstDoc);
   static MapQuery moreQuery(MapQuery query, Doc lastDoc) =>
       query.startAtDocument(lastDoc);
 
-  static final postsQuery = FirebaseFirestore.instance
-      .collectionGroup('posts')
-      .limit(oneTimeReadCount);
+  static DocRef followerQuery(String currentUid, String passiveUid) => instance
+      .collection('users')
+      .doc(currentUid)
+      .collection("followers")
+      .doc(passiveUid);
+
+  static final postsQuery =
+      instance.collectionGroup('posts').limit(oneTimeReadCount);
 
   static MapQuery postsQueryByFollowing(List<String> followingUids) {
     if (followingUids.isEmpty) {
@@ -21,12 +27,11 @@ class FirestoreQueries {
         .orderBy('createdAt', descending: true);
   }
 
-  static MapQuery userPostsQueryByNewest(String uid) =>
-      FirebaseFirestore.instance
-          .collection("users")
-          .doc(uid)
-          .collection('posts')
-          .orderBy("createdAt", descending: true);
+  static MapQuery userPostsQueryByNewest(String uid) => instance
+      .collection("users")
+      .doc(uid)
+      .collection('posts')
+      .orderBy("createdAt", descending: true);
   static MapQuery moreUserPostsQueryByNewest(String uid, Doc lastDoc) =>
       moreQuery(userPostsQueryByNewest(uid), lastDoc);
   static MapQuery newUserPostsQueryByNewest(String uid, Doc firstDoc) =>
@@ -67,8 +72,13 @@ class FirestoreQueries {
           List<String> timelinePostIds, Doc lastDoc) =>
       moreQuery(timelinePostsQuery(timelinePostIds), lastDoc);
 
+  static DocRef tokenQuery(String currentUid, String tokenId) =>
+      tokensQuery(currentUid).doc(tokenId);
+  static ColRef tokensQuery(String currentUid) =>
+      instance.collection('users').doc(currentUid).collection("tokens");
+
   static final usersQuery =
-      FirebaseFirestore.instance.collection('users').limit(oneTimeReadCount);
+      instance.collection('users').limit(oneTimeReadCount);
 
   static final usersQueryByLikeCount =
       usersQuery.orderBy('followerCount', descending: true);

@@ -1,12 +1,56 @@
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
+import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_firestore_client.dart';
 import 'package:great_talk/repository/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreRepository {
   final client = isUseMockData ? MockFirestoreClient() : FirestoreClient();
+
+  FutureResult<bool> createFollower(
+      String currentUid, String passiveUid, SDMap json) async {
+    try {
+      await FirestoreQueries.followerQuery(currentUid, passiveUid).set(json);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<bool> deleteFollower(
+      String currentUid, String passiveUid) async {
+    try {
+      await FirestoreQueries.followerQuery(currentUid, passiveUid).delete();
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<bool> createToken(
+      String currentUid, String tokenId, SDMap json) async {
+    try {
+      await FirestoreQueries.tokenQuery(currentUid, tokenId).set(json);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<bool> deleteToken(String currentUid, String tokenId) async {
+    try {
+      await FirestoreQueries.tokenQuery(currentUid, tokenId).delete();
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
 
   FutureResult<List<QDoc>> getPostsByLikeCount() async {
     try {

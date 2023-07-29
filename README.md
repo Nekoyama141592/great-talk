@@ -32,9 +32,8 @@ https://www.figma.com/file/qs4GuQPJS4Xn7GrpkYtwQv/Gemukura?node-id=0%3A1&t=OkCbE
 dart format --set-exit-if-changed .
 
 flutter analyze .
-
 ## 自動生成
 flutter pub run build_runner build --delete-conflicting-outputs
-## 一括アップデート
+## 一括アップデートf
 flutter pub upgrade --major-versions
 # frontend

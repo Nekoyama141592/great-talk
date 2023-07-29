@@ -8,3 +8,5 @@ enum PrefsKey {
   isV3initialized,
   lastChatDate,
 }
+
+enum TokenType { following }

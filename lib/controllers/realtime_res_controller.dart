@@ -10,10 +10,10 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
+import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/chat_user/chat_user.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
@@ -22,7 +22,7 @@ import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class RealtimeResController extends GetxController {
+class RealtimeResController extends GetxController with CurrentUidMixin {
   final messages = <TextMessage>[].obs;
   final realtimeRes = "".obs;
   final isLoading = false.obs;
@@ -106,7 +106,7 @@ class RealtimeResController extends GetxController {
           positiveScore: 0.0,
           sentiment: '',
           value: ''),
-      uid: _currentUid(),
+      uid: currentUid(),
       updatedAt: now,
     ));
   }
@@ -232,7 +232,7 @@ class RealtimeResController extends GetxController {
           positiveScore: 0.0,
           sentiment: '',
           value: content),
-      uid: _currentUid(),
+      uid: currentUid(),
       updatedAt: now,
     );
     messages.add(textMessage);
@@ -266,7 +266,7 @@ class RealtimeResController extends GetxController {
 
   Messages _toRequestMessage(TextMessage msg) {
     return Messages(
-        role: msg.uid == _currentUid() ? Role.user : Role.assistant,
+        role: msg.uid == currentUid() ? Role.user : Role.assistant,
         content: msg.text.value);
   }
 
@@ -298,6 +298,4 @@ class RealtimeResController extends GetxController {
       return;
     }
   }
-
-  String _currentUid() => CurrentUserController.to.currentUser.value!.uid;
 }
