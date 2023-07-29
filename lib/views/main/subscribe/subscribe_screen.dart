@@ -24,7 +24,7 @@ class SubscribeScreen extends StatelessWidget {
           const RestoreButton(),
           const BasicHeightBox(),
           const PrivacyPolicyButton(),
-          if (Platform.isAndroid) const PriceList(),
+          if (Platform.isAndroid && PurchasesController.to.products.isEmpty) const PriceList(),
           Obx((() {
             if (purchasesController.purchasePending.value) {
               return const Stack(
