@@ -220,7 +220,7 @@ class RealtimeResController extends GetxController {
         List<Messages> requestMessages = [];
         wolframRes.when(success: (res) {
           requestMessages = [
-            Messages(role: Role.assistant, content: "わかりやすい日本語にして"),
+            Messages(role: Role.system, content: "わかりやすい日本語にして下さい。"),
             Messages(role: Role.user, content: res)
           ];
         }, failure: () {
