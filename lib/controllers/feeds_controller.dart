@@ -5,6 +5,7 @@ import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class FeedsController extends DocsController {
   FeedsController() : super(enablePullDown: true);
@@ -66,7 +67,7 @@ class FeedsController extends DocsController {
   }
 
   @override
-  Future<void> onLoading() async {
+  Future<void> onLoading(RefreshController refreshController) async {
     if (_isWhereInQuery()) {
       final posts = await _repository.getMorePostsByFollowing(
           _followingUids(), docs.last);
@@ -83,10 +84,11 @@ class FeedsController extends DocsController {
           },
           failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
     }
+    refreshController.loadComplete();
   }
 
   @override
-  Future<void> onRefresh() async {
+  Future<void> onRefresh(RefreshController refreshController) async {
     if (_isWhereInQuery()) {
       final posts = await _repository.getNewPostsByFollowing(
           _followingUids(), docs.first);
@@ -105,6 +107,7 @@ class FeedsController extends DocsController {
           },
           failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
     }
+    refreshController.refreshCompleted();
   }
 
   DocRef _userRef() => CurrentUserController.to.firestoreUser.value!.typedRef();

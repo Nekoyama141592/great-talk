@@ -8,6 +8,7 @@ import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/follower/follower.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class UserProfileController extends DocsController with CurrentUidMixin {
   UserProfileController() : super(enablePullDown: true);
@@ -24,7 +25,7 @@ class UserProfileController extends DocsController with CurrentUidMixin {
   }
 
   @override
-  Future<void> onLoading() async {
+  Future<void> onLoading(RefreshController refreshController) async {
     final result =
         await _repository.getMoreUserPostsByNewest(passiveUid, docs.last);
     result.when(success: (res) {
@@ -32,10 +33,11 @@ class UserProfileController extends DocsController with CurrentUidMixin {
     }, failure: () {
       UIHelper.showFlutterToast("データの取得に失敗しました");
     });
+    refreshController.loadComplete();
   }
 
   @override
-  Future<void> onRefresh() async {
+  Future<void> onRefresh(RefreshController refreshController) async {
     final result =
         await _repository.getNewUserPostsByNewest(passiveUid, docs.first);
     result.when(success: (res) {
@@ -43,6 +45,7 @@ class UserProfileController extends DocsController with CurrentUidMixin {
     }, failure: () {
       UIHelper.showFlutterToast("データの取得に失敗しました");
     });
+    refreshController.refreshCompleted();
   }
 
   Future<void> follow() async {

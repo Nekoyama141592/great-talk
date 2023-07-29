@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/feeds_controller.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/refresh_screen.dart';
@@ -15,15 +14,13 @@ class FeedsScreen extends HookWidget {
       controller.init();
       return;
     }, []);
-    return RefreshScreen(
+    return Obx(() => RefreshScreen(
         docsController: controller,
-        child: Obx(() => ListView(
-              children: controller.docs.map((element) {
-                final post = Post.fromJson(element.data());
-                return ListTile(
-                  title: boldText(post.postId),
-                );
-              }).toList(),
-            )));
+        child: ListView.builder(
+            itemCount: controller.docs.length,
+            itemBuilder: (c, i) {
+              final post = Post.fromJson(controller.docs[i].data());
+              return Text(post.postId);
+            })));
   }
 }

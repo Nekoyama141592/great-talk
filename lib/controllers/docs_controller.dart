@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class DocsController extends GetxController {
   DocsController({required this.enablePullDown});
@@ -24,7 +25,7 @@ abstract class DocsController extends GetxController {
 
   Future<void> init() => fetchDocs();
   Future<void> fetchDocs();
-  Future<void> onRefresh();
+  Future<void> onRefresh(RefreshController refreshController);
   Future<void> onReload() => fetchDocs();
-  Future<void> onLoading();
+  Future<void> onLoading(RefreshController refreshController);
 }
