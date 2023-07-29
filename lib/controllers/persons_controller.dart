@@ -2,8 +2,8 @@
 import 'dart:convert';
 import 'package:great_talk/common/date_converter.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/persons.dart';
-import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/model/chat_user/chat_user.dart';
 import 'package:great_talk/model/chat_user_metadata/chat_user_metadata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,7 +40,7 @@ class PersonsController extends GetxController {
     latestPersons.insert(0, newPerson);
     results(latestPersons);
     final jsonString = jsonEncode(latestPersons).toString();
-    await prefs.setString(initialPeoplePrefsKey, jsonString);
+    await prefs.setString(PrefsKey.initialPeople.name, jsonString);
   }
 
   Future<void> cleanMetadata(ChatUser person) async {
@@ -48,12 +48,13 @@ class PersonsController extends GetxController {
     x[x.indexOf(person)] = person.copyWith(metadata: null);
     results(x);
     final jsonString = jsonEncode(x).toString();
-    await prefs.setString(initialPeoplePrefsKey, jsonString);
+    await prefs.setString(PrefsKey.initialPeople.name, jsonString);
   }
 
   // search_controllerのoverrideを消して、privateにする。
   void getLatestPersons(SharedPreferences prefs) {
-    final String jsonString = prefs.getString(initialPeoplePrefsKey) ?? "";
+    final String jsonString =
+        prefs.getString(PrefsKey.initialPeople.name) ?? "";
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
       List<ChatUser> latestPersons =

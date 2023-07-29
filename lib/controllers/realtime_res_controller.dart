@@ -165,7 +165,7 @@ class RealtimeResController extends GetxController {
   }
 
   int _getChatCount() {
-    int count = prefs.getInt(chatCountPrefsKey) ?? 0;
+    int count = prefs.getInt(PrefsKey.chatCount.name) ?? 0;
     // もし、最後のチャットから24時間経過していたらchatCountを0にして送信を許可
     if (_is24HoursFromLast()) {
       count = 0;
@@ -174,7 +174,7 @@ class RealtimeResController extends GetxController {
   }
 
   bool _is24HoursFromLast() {
-    final int last = prefs.getInt(lastChatDatePrefsKey) ?? 0;
+    final int last = prefs.getInt(PrefsKey.lastChatDate.name) ?? 0;
     final lastDay = DateConverter.intToDateTime(last);
     final now = DateTime.now();
     return last == 0 ? true : DateConverter.isCrossingDate(lastDay, now);
@@ -210,13 +210,13 @@ class RealtimeResController extends GetxController {
 
   Future<void> _setLocalDate() async {
     final dateInt = DateConverter.dateTimeToInt(DateTime.now());
-    await prefs.setInt(lastChatDatePrefsKey, dateInt);
+    await prefs.setInt(PrefsKey.lastChatDate.name, dateInt);
   }
 
   Future<void> _setChatCount() async {
     // 24時間経過していたらchatCountには0がくる
     chatCount++;
-    await prefs.setInt(chatCountPrefsKey, chatCount);
+    await prefs.setInt(PrefsKey.chatCount.name, chatCount);
   }
 
   void _addMessage(String content) {

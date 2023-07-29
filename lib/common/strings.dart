@@ -13,13 +13,6 @@ String randomString() {
 
 String getName(ChatUser person) => person.userName;
 final appName = F.title;
-// prefs_key
-// personIdで各々のChat履歴
-const lastChatDatePrefsKey = "lastChatDate";
-const chatCountPrefsKey = "chatCount";
-const isAgreedToTermsPrefsKey = "isAgreedToTerms";
-const isV3initializedPrefsKey = "isV3initialized";
-const initialPeoplePrefsKey = "initialPeople";
 String getPlanDescription(String productID, String price) {
   String msg = "";
   switch (productID) {
