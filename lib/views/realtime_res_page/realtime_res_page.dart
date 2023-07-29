@@ -51,7 +51,7 @@ class RealtimeResPage extends HookWidget {
                               itemBuilder: ((context, index) {
                                 final messages = controller.messages.toList();
                                 if (index == messages.indexOf(messages.last) &&
-                                    messages.last.toJson()["text"].isEmpty) {
+                                    messages.last.text.value.isEmpty) {
                                   return Padding(
                                     padding:
                                         EdgeInsets.all(defaultPadding(context)),
@@ -76,9 +76,8 @@ class RealtimeResPage extends HookWidget {
                                     padding:
                                         EdgeInsets.all(defaultPadding(context)),
                                     child: Obx(() {
-                                      final String text = controller
-                                          .messages[index]
-                                          .toJson()["text"];
+                                      final String text =
+                                          controller.messages[index].text.value;
                                       return ListTile(
                                         onTap:
                                             purchaseController.isSubscribing()
@@ -114,7 +113,6 @@ class RealtimeResPage extends HookWidget {
                             controller: inputController,
                             send: () => controller.onSendPressed(
                                 context,
-                                interlocutor,
                                 personsController,
                                 inputController,
                                 scrollCotroller));
