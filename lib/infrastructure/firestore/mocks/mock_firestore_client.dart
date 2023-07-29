@@ -1,3 +1,4 @@
+import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_data.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_doc.dart';
@@ -9,7 +10,7 @@ class MockFirestoreClient implements FirestoreClient {
   FutureQSnapshot getPostsByLikeCount() async {
     final posts = [...mockPosts];
     posts.sort((a, b) => b.likeCount.compareTo(a.likeCount));
-    final data = posts.map((e) => MockQDoc(e.toJson())).toList();
+    final data = posts.map((e) => MockQDoc(e.toJson(), e.poster.uid)).toList();
     return MockQSnapshot(data);
   }
 
@@ -19,7 +20,7 @@ class MockFirestoreClient implements FirestoreClient {
   FutureQSnapshot getPostsByFollowing(List<String> followingUids) async {
     final posts = [...mockPosts];
     posts.sort((a, b) => b.typedCreatedAt().compareTo(a.typedCreatedAt()));
-    final data = posts.map((e) => MockQDoc(e.toJson())).toList();
+    final data = posts.map((e) => MockQDoc(e.toJson(), e.poster.uid)).toList();
     return MockQSnapshot(data);
   }
 
@@ -35,7 +36,8 @@ class MockFirestoreClient implements FirestoreClient {
   @override
   FutureQSnapshot getTimelines(DocRef userRef) async {
     final timelines = mockTimelines();
-    final data = timelines.map((e) => MockQDoc(e.toJson())).toList();
+    final data =
+        timelines.map((e) => MockQDoc(e.toJson(), randomString())).toList();
     return MockQSnapshot(data);
   }
 
@@ -49,7 +51,7 @@ class MockFirestoreClient implements FirestoreClient {
   @override
   FutureQSnapshot getTimelinePosts(List<String> timelinePostIds) async {
     final posts = [...mockPosts];
-    final data = posts.map((e) => MockQDoc(e.toJson())).toList();
+    final data = posts.map((e) => MockQDoc(e.toJson(), e.poster.uid)).toList();
     return MockQSnapshot(data);
   }
 
@@ -57,7 +59,7 @@ class MockFirestoreClient implements FirestoreClient {
   FutureQSnapshot getUsersByFollowerCount() async {
     final users = [...mockOriginalUsers];
     users.sort((a, b) => b.followerCount.compareTo(a.followingCount));
-    final data = users.map((e) => MockQDoc(e.toJson())).toList();
+    final data = users.map((e) => MockQDoc(e.toJson(), e.uid)).toList();
     return MockQSnapshot(data);
   }
 
@@ -75,7 +77,7 @@ class MockFirestoreClient implements FirestoreClient {
   FutureQSnapshot getUserPostsByNewest(String uid) async {
     final posts =
         [...mockPosts].where((element) => element.poster.uid == uid).toList();
-    final data = posts.map((e) => MockQDoc(e.toJson())).toList();
+    final data = posts.map((e) => MockQDoc(e.toJson(), e.poster.uid)).toList();
     return MockQSnapshot(data);
   }
 }

@@ -4,15 +4,13 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
-import 'package:great_talk/interfaces/new_docs_interface.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/follower/follower.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 
-class UserProfileController extends DocsController
-    with CurrentUidMixin
-    implements NewDocsInterface {
+class UserProfileController extends DocsController with CurrentUidMixin {
+  UserProfileController() : super(enablePullDown: true);
   final _repository = FirestoreRepository();
   String passiveUid = "";
   @override

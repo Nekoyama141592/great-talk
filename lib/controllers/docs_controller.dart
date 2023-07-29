@@ -2,6 +2,9 @@ import 'package:get/get.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 abstract class DocsController extends GetxController {
+  DocsController({required this.enablePullDown});
+
+  final bool enablePullDown;
   final docs = <QDoc>[].obs;
   final isLoading = false.obs;
 
@@ -21,6 +24,7 @@ abstract class DocsController extends GetxController {
 
   Future<void> init() => fetchDocs();
   Future<void> fetchDocs();
+  Future<void> onRefresh();
   Future<void> onReload() => fetchDocs();
   Future<void> onLoading();
 }

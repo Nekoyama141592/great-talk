@@ -4,6 +4,12 @@ import 'package:great_talk/repository/firestore_repository.dart';
 
 class UserRankingController extends DocsController {
   final _repository = FirestoreRepository();
+  UserRankingController() : super(enablePullDown: false);
+  @override
+  Future<void> onRefresh() async {
+    return;
+  }
+
   @override
   Future<void> fetchDocs() async {
     final result = await _repository.getUsersByFollowerCount();

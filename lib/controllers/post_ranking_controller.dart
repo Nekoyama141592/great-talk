@@ -3,7 +3,13 @@ import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 
 class PostRankingController extends DocsController {
+  PostRankingController() : super(enablePullDown: false);
   final _repository = FirestoreRepository();
+  @override
+  Future<void> onRefresh() async {
+    return;
+  }
+
   @override
   Future<void> fetchDocs() async {
     final result = await _repository.getPostsByLikeCount();

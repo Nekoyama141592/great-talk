@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/strings.dart';
 
 class MockQDoc implements QueryDocumentSnapshot<Map<String, dynamic>> {
-  MockQDoc(this._data);
+  MockQDoc(this._data, this._id);
   final Map<String, dynamic> _data;
+  final String _id;
   @override
   get(Object field) {
     // TODO: implement get
@@ -16,7 +17,7 @@ class MockQDoc implements QueryDocumentSnapshot<Map<String, dynamic>> {
   // TODO: implement exists
   bool get exists => throw UnimplementedError();
   @override
-  String get id => _data["uid"];
+  String get id => _id;
   @override
   // TODO: implement metadata
   SnapshotMetadata get metadata => throw UnimplementedError();

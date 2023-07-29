@@ -42,7 +42,7 @@ _$_FirestoreUser _$$_FirestoreUserFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_FirestoreUserToJson(_$_FirestoreUser instance) =>
     <String, dynamic>{
       'accountName': instance.accountName,
-      'bio': instance.bio,
+      'bio': instance.bio.toJson(),
       'blockCount': instance.blockCount,
       'createdAt': instance.createdAt,
       'ethAddress': instance.ethAddress,
@@ -62,7 +62,7 @@ Map<String, dynamic> _$$_FirestoreUserToJson(_$_FirestoreUser instance) =>
       'searchToken': instance.searchToken,
       'uid': instance.uid,
       'updatedAt': instance.updatedAt,
-      'userImage': instance.userImage,
-      'userName': instance.userName,
+      'userImage': instance.userImage.toJson(),
+      'userName': instance.userName.toJson(),
       'walletAddresses': instance.walletAddresses,
     };
