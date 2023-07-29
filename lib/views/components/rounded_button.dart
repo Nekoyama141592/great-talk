@@ -29,18 +29,20 @@ class RoundedButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(defaultPadding(context)),
         child: ElevatedButton(
           style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(buttonColor ?? Theme.of(context).primaryColor),
+            backgroundColor: MaterialStateProperty.all<Color>(
+                buttonColor ?? Theme.of(context).primaryColor),
           ),
           onPressed: press,
           child: Row(
             children: [
               if (icon != null) icon!,
-              const SizedBox(width: 20.0,),
+              const SizedBox(
+                width: 20.0,
+              ),
               BasicBoldText(
-            text,
-            textColor: textColor,
-          )
+                text,
+                textColor: textColor,
+              )
             ],
           ),
         ),

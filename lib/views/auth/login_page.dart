@@ -34,9 +34,28 @@ class LoginPage extends StatelessWidget {
                   height: fullHeight(context) * 0.30,
                 ),
                 // with custom text
-                const RoundedButton(text: 'Googleで続ける', textColor: Colors.white,buttonColor: kSecondaryColor,press: null, icon: Icon(FontAwesomeIcons.google,color: Colors.black,),),
+                const RoundedButton(
+                  text: 'Googleで続ける',
+                  textColor: Colors.white,
+                  buttonColor: kSecondaryColor,
+                  press: null,
+                  icon: Icon(
+                    FontAwesomeIcons.google,
+                    color: Colors.black,
+                  ),
+                ),
                 const BasicHeightBox(),
-                if(Platform.isIOS) const RoundedButton(text: 'Appleで続ける', textColor: Colors.white,buttonColor: Colors.black,press: null, icon: Icon(FontAwesomeIcons.apple,color: Colors.white,),),
+                if (Platform.isIOS)
+                  const RoundedButton(
+                    text: 'Appleで続ける',
+                    textColor: Colors.white,
+                    buttonColor: Colors.black,
+                    press: null,
+                    icon: Icon(
+                      FontAwesomeIcons.apple,
+                      color: Colors.white,
+                    ),
+                  ),
               ],
             ),
           ),
