@@ -20,7 +20,7 @@ class RefreshScreen extends HookWidget {
     }, []);
     return SmartRefresher(
       controller: refreshController,
-      enablePullDown: false, // TODO: iosならOKか確かめる
+      enablePullDown: false, // trueだとiosもAndroidも反応しなくなる
       enablePullUp: true,
       header: const WaterDropHeader(),
       onLoading: () => docsController.onLoading(refreshController),
