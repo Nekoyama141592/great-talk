@@ -21,7 +21,7 @@ FirestoreUser _$FirestoreUserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$FirestoreUser {
   String get accountName => throw _privateConstructorUsedError;
-  DetectedText get bio => throw _privateConstructorUsedError;
+  Map<String, dynamic> get bio => throw _privateConstructorUsedError;
   int get blockCount => throw _privateConstructorUsedError;
   dynamic get createdAt => throw _privateConstructorUsedError;
   String get ethAddress => throw _privateConstructorUsedError;
@@ -31,11 +31,9 @@ mixin _$FirestoreUser {
   bool get isNFTicon => throw _privateConstructorUsedError;
   bool get isOfficial => throw _privateConstructorUsedError;
   bool get isSuspended => throw _privateConstructorUsedError;
-  List<Map<String, dynamic>> get links =>
-      throw _privateConstructorUsedError; // TODO: クラスにしろ
+  List<SDMap> get links => throw _privateConstructorUsedError;
   int get muteCount => throw _privateConstructorUsedError;
-  Map<String, dynamic> get nftIconInfo =>
-      throw _privateConstructorUsedError; // TODO: クラスにしろ
+  Map<String, dynamic> get nftIconInfo => throw _privateConstructorUsedError;
   int get postCount => throw _privateConstructorUsedError;
   dynamic get ref => throw _privateConstructorUsedError;
   int get reportCount => throw _privateConstructorUsedError;
@@ -43,10 +41,9 @@ mixin _$FirestoreUser {
   Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
-  DetectedImage get userImage => throw _privateConstructorUsedError;
-  DetectedText get userName => throw _privateConstructorUsedError;
-  List<Map<String, dynamic>> get walletAddresses =>
-      throw _privateConstructorUsedError;
+  Map<String, dynamic> get userImage => throw _privateConstructorUsedError;
+  Map<String, dynamic> get userName => throw _privateConstructorUsedError;
+  List<SDMap> get walletAddresses => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -62,7 +59,7 @@ abstract class $FirestoreUserCopyWith<$Res> {
   @useResult
   $Res call(
       {String accountName,
-      DetectedText bio,
+      Map<String, dynamic> bio,
       int blockCount,
       dynamic createdAt,
       String ethAddress,
@@ -72,7 +69,7 @@ abstract class $FirestoreUserCopyWith<$Res> {
       bool isNFTicon,
       bool isOfficial,
       bool isSuspended,
-      List<Map<String, dynamic>> links,
+      List<SDMap> links,
       int muteCount,
       Map<String, dynamic> nftIconInfo,
       int postCount,
@@ -82,13 +79,9 @@ abstract class $FirestoreUserCopyWith<$Res> {
       Map<String, dynamic> searchToken,
       String uid,
       dynamic updatedAt,
-      DetectedImage userImage,
-      DetectedText userName,
-      List<Map<String, dynamic>> walletAddresses});
-
-  $DetectedTextCopyWith<$Res> get bio;
-  $DetectedImageCopyWith<$Res> get userImage;
-  $DetectedTextCopyWith<$Res> get userName;
+      Map<String, dynamic> userImage,
+      Map<String, dynamic> userName,
+      List<SDMap> walletAddresses});
 }
 
 /// @nodoc
@@ -137,7 +130,7 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
       bio: null == bio
           ? _value.bio
           : bio // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
       blockCount: null == blockCount
           ? _value.blockCount
           : blockCount // ignore: cast_nullable_to_non_nullable
@@ -177,7 +170,7 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
       links: null == links
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<SDMap>,
       muteCount: null == muteCount
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
@@ -217,40 +210,16 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
       userImage: null == userImage
           ? _value.userImage
           : userImage // ignore: cast_nullable_to_non_nullable
-              as DetectedImage,
+              as Map<String, dynamic>,
       userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
       walletAddresses: null == walletAddresses
           ? _value.walletAddresses
           : walletAddresses // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<SDMap>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DetectedTextCopyWith<$Res> get bio {
-    return $DetectedTextCopyWith<$Res>(_value.bio, (value) {
-      return _then(_value.copyWith(bio: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DetectedImageCopyWith<$Res> get userImage {
-    return $DetectedImageCopyWith<$Res>(_value.userImage, (value) {
-      return _then(_value.copyWith(userImage: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DetectedTextCopyWith<$Res> get userName {
-    return $DetectedTextCopyWith<$Res>(_value.userName, (value) {
-      return _then(_value.copyWith(userName: value) as $Val);
-    });
   }
 }
 
@@ -264,7 +233,7 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
   @useResult
   $Res call(
       {String accountName,
-      DetectedText bio,
+      Map<String, dynamic> bio,
       int blockCount,
       dynamic createdAt,
       String ethAddress,
@@ -274,7 +243,7 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
       bool isNFTicon,
       bool isOfficial,
       bool isSuspended,
-      List<Map<String, dynamic>> links,
+      List<SDMap> links,
       int muteCount,
       Map<String, dynamic> nftIconInfo,
       int postCount,
@@ -284,16 +253,9 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
       Map<String, dynamic> searchToken,
       String uid,
       dynamic updatedAt,
-      DetectedImage userImage,
-      DetectedText userName,
-      List<Map<String, dynamic>> walletAddresses});
-
-  @override
-  $DetectedTextCopyWith<$Res> get bio;
-  @override
-  $DetectedImageCopyWith<$Res> get userImage;
-  @override
-  $DetectedTextCopyWith<$Res> get userName;
+      Map<String, dynamic> userImage,
+      Map<String, dynamic> userName,
+      List<SDMap> walletAddresses});
 }
 
 /// @nodoc
@@ -338,9 +300,9 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
           : accountName // ignore: cast_nullable_to_non_nullable
               as String,
       bio: null == bio
-          ? _value.bio
+          ? _value._bio
           : bio // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
       blockCount: null == blockCount
           ? _value.blockCount
           : blockCount // ignore: cast_nullable_to_non_nullable
@@ -380,7 +342,7 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
       links: null == links
           ? _value._links
           : links // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<SDMap>,
       muteCount: null == muteCount
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
@@ -418,17 +380,17 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
       userImage: null == userImage
-          ? _value.userImage
+          ? _value._userImage
           : userImage // ignore: cast_nullable_to_non_nullable
-              as DetectedImage,
+              as Map<String, dynamic>,
       userName: null == userName
-          ? _value.userName
+          ? _value._userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
       walletAddresses: null == walletAddresses
           ? _value._walletAddresses
           : walletAddresses // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<SDMap>,
     ));
   }
 }
@@ -438,7 +400,7 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
 class _$_FirestoreUser extends _FirestoreUser {
   _$_FirestoreUser(
       {required this.accountName,
-      required this.bio,
+      required final Map<String, dynamic> bio,
       required this.blockCount,
       required this.createdAt,
       required this.ethAddress,
@@ -448,7 +410,7 @@ class _$_FirestoreUser extends _FirestoreUser {
       required this.isNFTicon,
       required this.isOfficial,
       required this.isSuspended,
-      required final List<Map<String, dynamic>> links,
+      required final List<SDMap> links,
       required this.muteCount,
       required final Map<String, dynamic> nftIconInfo,
       required this.postCount,
@@ -458,12 +420,15 @@ class _$_FirestoreUser extends _FirestoreUser {
       required final Map<String, dynamic> searchToken,
       required this.uid,
       required this.updatedAt,
-      required this.userImage,
-      required this.userName,
-      required final List<Map<String, dynamic>> walletAddresses})
-      : _links = links,
+      required final Map<String, dynamic> userImage,
+      required final Map<String, dynamic> userName,
+      required final List<SDMap> walletAddresses})
+      : _bio = bio,
+        _links = links,
         _nftIconInfo = nftIconInfo,
         _searchToken = searchToken,
+        _userImage = userImage,
+        _userName = userName,
         _walletAddresses = walletAddresses,
         super._();
 
@@ -472,8 +437,14 @@ class _$_FirestoreUser extends _FirestoreUser {
 
   @override
   final String accountName;
+  final Map<String, dynamic> _bio;
   @override
-  final DetectedText bio;
+  Map<String, dynamic> get bio {
+    if (_bio is EqualUnmodifiableMapView) return _bio;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_bio);
+  }
+
   @override
   final int blockCount;
   @override
@@ -492,15 +463,14 @@ class _$_FirestoreUser extends _FirestoreUser {
   final bool isOfficial;
   @override
   final bool isSuspended;
-  final List<Map<String, dynamic>> _links;
+  final List<SDMap> _links;
   @override
-  List<Map<String, dynamic>> get links {
+  List<SDMap> get links {
     if (_links is EqualUnmodifiableListView) return _links;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_links);
   }
 
-// TODO: クラスにしろ
   @override
   final int muteCount;
   final Map<String, dynamic> _nftIconInfo;
@@ -511,7 +481,6 @@ class _$_FirestoreUser extends _FirestoreUser {
     return EqualUnmodifiableMapView(_nftIconInfo);
   }
 
-// TODO: クラスにしろ
   @override
   final int postCount;
   @override
@@ -532,13 +501,25 @@ class _$_FirestoreUser extends _FirestoreUser {
   final String uid;
   @override
   final dynamic updatedAt;
+  final Map<String, dynamic> _userImage;
   @override
-  final DetectedImage userImage;
+  Map<String, dynamic> get userImage {
+    if (_userImage is EqualUnmodifiableMapView) return _userImage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_userImage);
+  }
+
+  final Map<String, dynamic> _userName;
   @override
-  final DetectedText userName;
-  final List<Map<String, dynamic>> _walletAddresses;
+  Map<String, dynamic> get userName {
+    if (_userName is EqualUnmodifiableMapView) return _userName;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_userName);
+  }
+
+  final List<SDMap> _walletAddresses;
   @override
-  List<Map<String, dynamic>> get walletAddresses {
+  List<SDMap> get walletAddresses {
     if (_walletAddresses is EqualUnmodifiableListView) return _walletAddresses;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_walletAddresses);
@@ -556,7 +537,7 @@ class _$_FirestoreUser extends _FirestoreUser {
             other is _$_FirestoreUser &&
             (identical(other.accountName, accountName) ||
                 other.accountName == accountName) &&
-            (identical(other.bio, bio) || other.bio == bio) &&
+            const DeepCollectionEquality().equals(other._bio, _bio) &&
             (identical(other.blockCount, blockCount) ||
                 other.blockCount == blockCount) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -588,10 +569,9 @@ class _$_FirestoreUser extends _FirestoreUser {
                 .equals(other._searchToken, _searchToken) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
-            (identical(other.userImage, userImage) ||
-                other.userImage == userImage) &&
-            (identical(other.userName, userName) ||
-                other.userName == userName) &&
+            const DeepCollectionEquality()
+                .equals(other._userImage, _userImage) &&
+            const DeepCollectionEquality().equals(other._userName, _userName) &&
             const DeepCollectionEquality()
                 .equals(other._walletAddresses, _walletAddresses));
   }
@@ -601,7 +581,7 @@ class _$_FirestoreUser extends _FirestoreUser {
   int get hashCode => Object.hashAll([
         runtimeType,
         accountName,
-        bio,
+        const DeepCollectionEquality().hash(_bio),
         blockCount,
         const DeepCollectionEquality().hash(createdAt),
         ethAddress,
@@ -621,8 +601,8 @@ class _$_FirestoreUser extends _FirestoreUser {
         const DeepCollectionEquality().hash(_searchToken),
         uid,
         const DeepCollectionEquality().hash(updatedAt),
-        userImage,
-        userName,
+        const DeepCollectionEquality().hash(_userImage),
+        const DeepCollectionEquality().hash(_userName),
         const DeepCollectionEquality().hash(_walletAddresses)
       ]);
 
@@ -642,31 +622,30 @@ class _$_FirestoreUser extends _FirestoreUser {
 
 abstract class _FirestoreUser extends FirestoreUser {
   factory _FirestoreUser(
-          {required final String accountName,
-          required final DetectedText bio,
-          required final int blockCount,
-          required final dynamic createdAt,
-          required final String ethAddress,
-          required final int followerCount,
-          required final int followingCount,
-          required final bool isAdmin,
-          required final bool isNFTicon,
-          required final bool isOfficial,
-          required final bool isSuspended,
-          required final List<Map<String, dynamic>> links,
-          required final int muteCount,
-          required final Map<String, dynamic> nftIconInfo,
-          required final int postCount,
-          required final dynamic ref,
-          required final int reportCount,
-          required final double score,
-          required final Map<String, dynamic> searchToken,
-          required final String uid,
-          required final dynamic updatedAt,
-          required final DetectedImage userImage,
-          required final DetectedText userName,
-          required final List<Map<String, dynamic>> walletAddresses}) =
-      _$_FirestoreUser;
+      {required final String accountName,
+      required final Map<String, dynamic> bio,
+      required final int blockCount,
+      required final dynamic createdAt,
+      required final String ethAddress,
+      required final int followerCount,
+      required final int followingCount,
+      required final bool isAdmin,
+      required final bool isNFTicon,
+      required final bool isOfficial,
+      required final bool isSuspended,
+      required final List<SDMap> links,
+      required final int muteCount,
+      required final Map<String, dynamic> nftIconInfo,
+      required final int postCount,
+      required final dynamic ref,
+      required final int reportCount,
+      required final double score,
+      required final Map<String, dynamic> searchToken,
+      required final String uid,
+      required final dynamic updatedAt,
+      required final Map<String, dynamic> userImage,
+      required final Map<String, dynamic> userName,
+      required final List<SDMap> walletAddresses}) = _$_FirestoreUser;
   _FirestoreUser._() : super._();
 
   factory _FirestoreUser.fromJson(Map<String, dynamic> json) =
@@ -675,7 +654,7 @@ abstract class _FirestoreUser extends FirestoreUser {
   @override
   String get accountName;
   @override
-  DetectedText get bio;
+  Map<String, dynamic> get bio;
   @override
   int get blockCount;
   @override
@@ -695,12 +674,12 @@ abstract class _FirestoreUser extends FirestoreUser {
   @override
   bool get isSuspended;
   @override
-  List<Map<String, dynamic>> get links;
-  @override // TODO: クラスにしろ
+  List<SDMap> get links;
+  @override
   int get muteCount;
   @override
   Map<String, dynamic> get nftIconInfo;
-  @override // TODO: クラスにしろ
+  @override
   int get postCount;
   @override
   dynamic get ref;
@@ -715,11 +694,11 @@ abstract class _FirestoreUser extends FirestoreUser {
   @override
   dynamic get updatedAt;
   @override
-  DetectedImage get userImage;
+  Map<String, dynamic> get userImage;
   @override
-  DetectedText get userName;
+  Map<String, dynamic> get userName;
   @override
-  List<Map<String, dynamic>> get walletAddresses;
+  List<SDMap> get walletAddresses;
   @override
   @JsonKey(ignore: true)
   _$$_FirestoreUserCopyWith<_$_FirestoreUser> get copyWith =>

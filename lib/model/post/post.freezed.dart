@@ -21,24 +21,22 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Post {
   dynamic get createdAt => throw _privateConstructorUsedError;
-  DetectedText get description => throw _privateConstructorUsedError;
-  List<Map<String, dynamic>> get exampleTexts =>
-      throw _privateConstructorUsedError; // TODO: クラスにしろ
+  Map<String, dynamic> get description => throw _privateConstructorUsedError;
+  List<SDMap> get exampleTexts => throw _privateConstructorUsedError;
   String get genre => throw _privateConstructorUsedError;
   List<String> get hashTags => throw _privateConstructorUsedError;
-  DetectedImage get iconImage => throw _privateConstructorUsedError;
+  Map<String, dynamic> get iconImage => throw _privateConstructorUsedError;
   int get impressionCount => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
-  List<Map<String, dynamic>> get links =>
-      throw _privateConstructorUsedError; // TODO: クラスにしろ,
+  List<SDMap> get links => throw _privateConstructorUsedError;
   int get msgCount => throw _privateConstructorUsedError;
-  FirestoreUser get poster => throw _privateConstructorUsedError;
+  Map<String, dynamic> get poster => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
   dynamic get ref => throw _privateConstructorUsedError;
   int get reportCount => throw _privateConstructorUsedError;
   double get score => throw _privateConstructorUsedError;
   Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
-  DetectedText get title => throw _privateConstructorUsedError;
+  Map<String, dynamic> get title => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
   int get userCount => throw _privateConstructorUsedError;
 
@@ -54,29 +52,24 @@ abstract class $PostCopyWith<$Res> {
   @useResult
   $Res call(
       {dynamic createdAt,
-      DetectedText description,
-      List<Map<String, dynamic>> exampleTexts,
+      Map<String, dynamic> description,
+      List<SDMap> exampleTexts,
       String genre,
       List<String> hashTags,
-      DetectedImage iconImage,
+      Map<String, dynamic> iconImage,
       int impressionCount,
       int likeCount,
-      List<Map<String, dynamic>> links,
+      List<SDMap> links,
       int msgCount,
-      FirestoreUser poster,
+      Map<String, dynamic> poster,
       String postId,
       dynamic ref,
       int reportCount,
       double score,
       Map<String, dynamic> searchToken,
-      DetectedText title,
+      Map<String, dynamic> title,
       dynamic updatedAt,
       int userCount});
-
-  $DetectedTextCopyWith<$Res> get description;
-  $DetectedImageCopyWith<$Res> get iconImage;
-  $FirestoreUserCopyWith<$Res> get poster;
-  $DetectedTextCopyWith<$Res> get title;
 }
 
 /// @nodoc
@@ -120,11 +113,11 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
       exampleTexts: null == exampleTexts
           ? _value.exampleTexts
           : exampleTexts // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<SDMap>,
       genre: null == genre
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
@@ -136,7 +129,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       iconImage: null == iconImage
           ? _value.iconImage
           : iconImage // ignore: cast_nullable_to_non_nullable
-              as DetectedImage,
+              as Map<String, dynamic>,
       impressionCount: null == impressionCount
           ? _value.impressionCount
           : impressionCount // ignore: cast_nullable_to_non_nullable
@@ -148,7 +141,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       links: null == links
           ? _value.links
           : links // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<SDMap>,
       msgCount: null == msgCount
           ? _value.msgCount
           : msgCount // ignore: cast_nullable_to_non_nullable
@@ -156,7 +149,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       poster: null == poster
           ? _value.poster
           : poster // ignore: cast_nullable_to_non_nullable
-              as FirestoreUser,
+              as Map<String, dynamic>,
       postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
@@ -180,7 +173,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -190,38 +183,6 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           : userCount // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DetectedTextCopyWith<$Res> get description {
-    return $DetectedTextCopyWith<$Res>(_value.description, (value) {
-      return _then(_value.copyWith(description: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DetectedImageCopyWith<$Res> get iconImage {
-    return $DetectedImageCopyWith<$Res>(_value.iconImage, (value) {
-      return _then(_value.copyWith(iconImage: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $FirestoreUserCopyWith<$Res> get poster {
-    return $FirestoreUserCopyWith<$Res>(_value.poster, (value) {
-      return _then(_value.copyWith(poster: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DetectedTextCopyWith<$Res> get title {
-    return $DetectedTextCopyWith<$Res>(_value.title, (value) {
-      return _then(_value.copyWith(title: value) as $Val);
-    });
   }
 }
 
@@ -233,33 +194,24 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @useResult
   $Res call(
       {dynamic createdAt,
-      DetectedText description,
-      List<Map<String, dynamic>> exampleTexts,
+      Map<String, dynamic> description,
+      List<SDMap> exampleTexts,
       String genre,
       List<String> hashTags,
-      DetectedImage iconImage,
+      Map<String, dynamic> iconImage,
       int impressionCount,
       int likeCount,
-      List<Map<String, dynamic>> links,
+      List<SDMap> links,
       int msgCount,
-      FirestoreUser poster,
+      Map<String, dynamic> poster,
       String postId,
       dynamic ref,
       int reportCount,
       double score,
       Map<String, dynamic> searchToken,
-      DetectedText title,
+      Map<String, dynamic> title,
       dynamic updatedAt,
       int userCount});
-
-  @override
-  $DetectedTextCopyWith<$Res> get description;
-  @override
-  $DetectedImageCopyWith<$Res> get iconImage;
-  @override
-  $FirestoreUserCopyWith<$Res> get poster;
-  @override
-  $DetectedTextCopyWith<$Res> get title;
 }
 
 /// @nodoc
@@ -297,13 +249,13 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
       description: null == description
-          ? _value.description
+          ? _value._description
           : description // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
       exampleTexts: null == exampleTexts
           ? _value._exampleTexts
           : exampleTexts // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<SDMap>,
       genre: null == genre
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
@@ -313,9 +265,9 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           : hashTags // ignore: cast_nullable_to_non_nullable
               as List<String>,
       iconImage: null == iconImage
-          ? _value.iconImage
+          ? _value._iconImage
           : iconImage // ignore: cast_nullable_to_non_nullable
-              as DetectedImage,
+              as Map<String, dynamic>,
       impressionCount: null == impressionCount
           ? _value.impressionCount
           : impressionCount // ignore: cast_nullable_to_non_nullable
@@ -327,15 +279,15 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
       links: null == links
           ? _value._links
           : links // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
+              as List<SDMap>,
       msgCount: null == msgCount
           ? _value.msgCount
           : msgCount // ignore: cast_nullable_to_non_nullable
               as int,
       poster: null == poster
-          ? _value.poster
+          ? _value._poster
           : poster // ignore: cast_nullable_to_non_nullable
-              as FirestoreUser,
+              as Map<String, dynamic>,
       postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
@@ -357,9 +309,9 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           : searchToken // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       title: null == title
-          ? _value.title
+          ? _value._title
           : title // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -377,45 +329,54 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 class _$_Post extends _Post {
   const _$_Post(
       {required this.createdAt,
-      required this.description,
-      required final List<Map<String, dynamic>> exampleTexts,
+      required final Map<String, dynamic> description,
+      required final List<SDMap> exampleTexts,
       required this.genre,
       required final List<String> hashTags,
-      required this.iconImage,
+      required final Map<String, dynamic> iconImage,
       required this.impressionCount,
       required this.likeCount,
-      required final List<Map<String, dynamic>> links,
+      required final List<SDMap> links,
       required this.msgCount,
-      required this.poster,
+      required final Map<String, dynamic> poster,
       required this.postId,
       required this.ref,
       required this.reportCount,
       required this.score,
       required final Map<String, dynamic> searchToken,
-      required this.title,
+      required final Map<String, dynamic> title,
       required this.updatedAt,
       required this.userCount})
-      : _exampleTexts = exampleTexts,
+      : _description = description,
+        _exampleTexts = exampleTexts,
         _hashTags = hashTags,
+        _iconImage = iconImage,
         _links = links,
+        _poster = poster,
         _searchToken = searchToken,
+        _title = title,
         super._();
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
   @override
   final dynamic createdAt;
+  final Map<String, dynamic> _description;
   @override
-  final DetectedText description;
-  final List<Map<String, dynamic>> _exampleTexts;
+  Map<String, dynamic> get description {
+    if (_description is EqualUnmodifiableMapView) return _description;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_description);
+  }
+
+  final List<SDMap> _exampleTexts;
   @override
-  List<Map<String, dynamic>> get exampleTexts {
+  List<SDMap> get exampleTexts {
     if (_exampleTexts is EqualUnmodifiableListView) return _exampleTexts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_exampleTexts);
   }
 
-// TODO: クラスにしろ
   @override
   final String genre;
   final List<String> _hashTags;
@@ -426,25 +387,36 @@ class _$_Post extends _Post {
     return EqualUnmodifiableListView(_hashTags);
   }
 
+  final Map<String, dynamic> _iconImage;
   @override
-  final DetectedImage iconImage;
+  Map<String, dynamic> get iconImage {
+    if (_iconImage is EqualUnmodifiableMapView) return _iconImage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_iconImage);
+  }
+
   @override
   final int impressionCount;
   @override
   final int likeCount;
-  final List<Map<String, dynamic>> _links;
+  final List<SDMap> _links;
   @override
-  List<Map<String, dynamic>> get links {
+  List<SDMap> get links {
     if (_links is EqualUnmodifiableListView) return _links;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_links);
   }
 
-// TODO: クラスにしろ,
   @override
   final int msgCount;
+  final Map<String, dynamic> _poster;
   @override
-  final FirestoreUser poster;
+  Map<String, dynamic> get poster {
+    if (_poster is EqualUnmodifiableMapView) return _poster;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_poster);
+  }
+
   @override
   final String postId;
   @override
@@ -461,8 +433,14 @@ class _$_Post extends _Post {
     return EqualUnmodifiableMapView(_searchToken);
   }
 
+  final Map<String, dynamic> _title;
   @override
-  final DetectedText title;
+  Map<String, dynamic> get title {
+    if (_title is EqualUnmodifiableMapView) return _title;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_title);
+  }
+
   @override
   final dynamic updatedAt;
   @override
@@ -479,14 +457,14 @@ class _$_Post extends _Post {
         (other.runtimeType == runtimeType &&
             other is _$_Post &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
+            const DeepCollectionEquality()
+                .equals(other._description, _description) &&
             const DeepCollectionEquality()
                 .equals(other._exampleTexts, _exampleTexts) &&
             (identical(other.genre, genre) || other.genre == genre) &&
             const DeepCollectionEquality().equals(other._hashTags, _hashTags) &&
-            (identical(other.iconImage, iconImage) ||
-                other.iconImage == iconImage) &&
+            const DeepCollectionEquality()
+                .equals(other._iconImage, _iconImage) &&
             (identical(other.impressionCount, impressionCount) ||
                 other.impressionCount == impressionCount) &&
             (identical(other.likeCount, likeCount) ||
@@ -494,7 +472,7 @@ class _$_Post extends _Post {
             const DeepCollectionEquality().equals(other._links, _links) &&
             (identical(other.msgCount, msgCount) ||
                 other.msgCount == msgCount) &&
-            (identical(other.poster, poster) || other.poster == poster) &&
+            const DeepCollectionEquality().equals(other._poster, _poster) &&
             (identical(other.postId, postId) || other.postId == postId) &&
             const DeepCollectionEquality().equals(other.ref, ref) &&
             (identical(other.reportCount, reportCount) ||
@@ -502,7 +480,7 @@ class _$_Post extends _Post {
             (identical(other.score, score) || other.score == score) &&
             const DeepCollectionEquality()
                 .equals(other._searchToken, _searchToken) &&
-            (identical(other.title, title) || other.title == title) &&
+            const DeepCollectionEquality().equals(other._title, _title) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             (identical(other.userCount, userCount) ||
                 other.userCount == userCount));
@@ -513,22 +491,22 @@ class _$_Post extends _Post {
   int get hashCode => Object.hashAll([
         runtimeType,
         const DeepCollectionEquality().hash(createdAt),
-        description,
+        const DeepCollectionEquality().hash(_description),
         const DeepCollectionEquality().hash(_exampleTexts),
         genre,
         const DeepCollectionEquality().hash(_hashTags),
-        iconImage,
+        const DeepCollectionEquality().hash(_iconImage),
         impressionCount,
         likeCount,
         const DeepCollectionEquality().hash(_links),
         msgCount,
-        poster,
+        const DeepCollectionEquality().hash(_poster),
         postId,
         const DeepCollectionEquality().hash(ref),
         reportCount,
         score,
         const DeepCollectionEquality().hash(_searchToken),
-        title,
+        const DeepCollectionEquality().hash(_title),
         const DeepCollectionEquality().hash(updatedAt),
         userCount
       ]);
@@ -550,22 +528,22 @@ class _$_Post extends _Post {
 abstract class _Post extends Post {
   const factory _Post(
       {required final dynamic createdAt,
-      required final DetectedText description,
-      required final List<Map<String, dynamic>> exampleTexts,
+      required final Map<String, dynamic> description,
+      required final List<SDMap> exampleTexts,
       required final String genre,
       required final List<String> hashTags,
-      required final DetectedImage iconImage,
+      required final Map<String, dynamic> iconImage,
       required final int impressionCount,
       required final int likeCount,
-      required final List<Map<String, dynamic>> links,
+      required final List<SDMap> links,
       required final int msgCount,
-      required final FirestoreUser poster,
+      required final Map<String, dynamic> poster,
       required final String postId,
       required final dynamic ref,
       required final int reportCount,
       required final double score,
       required final Map<String, dynamic> searchToken,
-      required final DetectedText title,
+      required final Map<String, dynamic> title,
       required final dynamic updatedAt,
       required final int userCount}) = _$_Post;
   const _Post._() : super._();
@@ -575,25 +553,25 @@ abstract class _Post extends Post {
   @override
   dynamic get createdAt;
   @override
-  DetectedText get description;
+  Map<String, dynamic> get description;
   @override
-  List<Map<String, dynamic>> get exampleTexts;
-  @override // TODO: クラスにしろ
+  List<SDMap> get exampleTexts;
+  @override
   String get genre;
   @override
   List<String> get hashTags;
   @override
-  DetectedImage get iconImage;
+  Map<String, dynamic> get iconImage;
   @override
   int get impressionCount;
   @override
   int get likeCount;
   @override
-  List<Map<String, dynamic>> get links;
-  @override // TODO: クラスにしろ,
+  List<SDMap> get links;
+  @override
   int get msgCount;
   @override
-  FirestoreUser get poster;
+  Map<String, dynamic> get poster;
   @override
   String get postId;
   @override
@@ -605,7 +583,7 @@ abstract class _Post extends Post {
   @override
   Map<String, dynamic> get searchToken;
   @override
-  DetectedText get title;
+  Map<String, dynamic> get title;
   @override
   dynamic get updatedAt;
   @override

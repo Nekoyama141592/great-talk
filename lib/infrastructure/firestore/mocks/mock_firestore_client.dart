@@ -3,6 +3,7 @@ import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_data.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_doc.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_snapshot.dart';
+import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class MockFirestoreClient implements FirestoreClient {
@@ -10,7 +11,7 @@ class MockFirestoreClient implements FirestoreClient {
   FutureQSnapshot getPostsByLikeCount() async {
     final posts = [...mockPosts];
     posts.sort((a, b) => b.likeCount.compareTo(a.likeCount));
-    final data = posts.map((e) => MockQDoc(e.toJson(), e.poster.uid)).toList();
+    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
     return MockQSnapshot(data);
   }
 
@@ -20,7 +21,7 @@ class MockFirestoreClient implements FirestoreClient {
   FutureQSnapshot getPostsByFollowing(List<String> followingUids) async {
     final posts = [...mockPosts];
     posts.sort((a, b) => b.typedCreatedAt().compareTo(a.typedCreatedAt()));
-    final data = posts.map((e) => MockQDoc(e.toJson(), e.poster.uid)).toList();
+    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
     return MockQSnapshot(data);
   }
 
@@ -51,7 +52,7 @@ class MockFirestoreClient implements FirestoreClient {
   @override
   FutureQSnapshot getTimelinePosts(List<String> timelinePostIds) async {
     final posts = [...mockPosts];
-    final data = posts.map((e) => MockQDoc(e.toJson(), e.poster.uid)).toList();
+    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
     return MockQSnapshot(data);
   }
 
@@ -75,9 +76,10 @@ class MockFirestoreClient implements FirestoreClient {
       getUserPostsByNewest(uid);
   @override
   FutureQSnapshot getUserPostsByNewest(String uid) async {
-    final posts =
-        [...mockPosts].where((element) => element.poster.uid == uid).toList();
-    final data = posts.map((e) => MockQDoc(e.toJson(), e.poster.uid)).toList();
+    final posts = [...mockPosts]
+        .where((e) => FirestoreUser.fromJson(e.poster).uid == uid)
+        .toList();
+    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
     return MockQSnapshot(data);
   }
 }

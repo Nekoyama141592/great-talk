@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/user_ranking_controller.dart';
+import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/views/components/refresh_screen.dart';
 
@@ -20,7 +21,7 @@ class UserRankingScreen extends HookWidget {
             itemCount: controller.docs.length,
             itemBuilder: (c, i) {
               final user = FirestoreUser.fromJson(controller.docs[i].data());
-              return Text(user.userName.value);
+              return Text(DetectedText.fromJson(user.userName).value);
             })));
   }
 }

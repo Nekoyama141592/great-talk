@@ -9,7 +9,7 @@ part of 'firestore_user.dart';
 _$_FirestoreUser _$$_FirestoreUserFromJson(Map<String, dynamic> json) =>
     _$_FirestoreUser(
       accountName: json['accountName'] as String,
-      bio: DetectedText.fromJson(json['bio'] as Map<String, dynamic>),
+      bio: json['bio'] as Map<String, dynamic>,
       blockCount: json['blockCount'] as int,
       createdAt: json['createdAt'],
       ethAddress: json['ethAddress'] as String,
@@ -31,9 +31,8 @@ _$_FirestoreUser _$$_FirestoreUserFromJson(Map<String, dynamic> json) =>
       searchToken: json['searchToken'] as Map<String, dynamic>,
       uid: json['uid'] as String,
       updatedAt: json['updatedAt'],
-      userImage:
-          DetectedImage.fromJson(json['userImage'] as Map<String, dynamic>),
-      userName: DetectedText.fromJson(json['userName'] as Map<String, dynamic>),
+      userImage: json['userImage'] as Map<String, dynamic>,
+      userName: json['userName'] as Map<String, dynamic>,
       walletAddresses: (json['walletAddresses'] as List<dynamic>)
           .map((e) => e as Map<String, dynamic>)
           .toList(),
@@ -42,7 +41,7 @@ _$_FirestoreUser _$$_FirestoreUserFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_FirestoreUserToJson(_$_FirestoreUser instance) =>
     <String, dynamic>{
       'accountName': instance.accountName,
-      'bio': instance.bio.toJson(),
+      'bio': instance.bio,
       'blockCount': instance.blockCount,
       'createdAt': instance.createdAt,
       'ethAddress': instance.ethAddress,
@@ -62,7 +61,7 @@ Map<String, dynamic> _$$_FirestoreUserToJson(_$_FirestoreUser instance) =>
       'searchToken': instance.searchToken,
       'uid': instance.uid,
       'updatedAt': instance.updatedAt,
-      'userImage': instance.userImage.toJson(),
-      'userName': instance.userName.toJson(),
+      'userImage': instance.userImage,
+      'userName': instance.userName,
       'walletAddresses': instance.walletAddresses,
     };

@@ -11,11 +11,12 @@ final List<FirestoreUser> mockOriginalUsers = [
     accountName: "a",
     createdAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
     bio: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: ''),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '')
+        .toJson(),
     blockCount: 0,
     ethAddress: '',
     followerCount: 0,
@@ -35,27 +36,30 @@ final List<FirestoreUser> mockOriginalUsers = [
     uid: "a",
     updatedAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
     userImage: const DetectedImage(
-        moderationLabels: [],
-        moderationModelVersion: '',
-        url:
-            'https://jp.static.photo-ac.com/assets/img/models/f4f368ea0e6fed24cc298b53199291ab50789.jpg'),
+            moderationLabels: [],
+            moderationModelVersion: '',
+            url:
+                'https://jp.static.photo-ac.com/assets/img/models/f4f368ea0e6fed24cc298b53199291ab50789.jpg')
+        .toJson(),
     userName: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: '佐藤めぐみ'),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '佐藤めぐみ')
+        .toJson(),
     walletAddresses: [],
   ),
   FirestoreUser(
     accountName: "b",
     createdAt: Timestamp.fromDate(DateTime(2023, 9, 28)),
     bio: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: ''),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '')
+        .toJson(),
     blockCount: 0,
     ethAddress: '',
     followerCount: 10,
@@ -75,27 +79,30 @@ final List<FirestoreUser> mockOriginalUsers = [
     uid: "b",
     updatedAt: Timestamp.fromDate(DateTime(2023, 9, 28)),
     userImage: const DetectedImage(
-        moderationLabels: [],
-        moderationModelVersion: '',
-        url:
-            'https://pakutaso.cdn.rabify.me/shared/img/thumb/yuka16011215IMG_5574.jpg.webp?d=350'),
+            moderationLabels: [],
+            moderationModelVersion: '',
+            url:
+                'https://pakutaso.cdn.rabify.me/shared/img/thumb/yuka16011215IMG_5574.jpg.webp?d=350')
+        .toJson(),
     userName: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: '田中 久美'),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '田中 久美')
+        .toJson(),
     walletAddresses: [],
   ),
   FirestoreUser(
     accountName: "c",
     createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     bio: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: ''),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '')
+        .toJson(),
     blockCount: 0,
     ethAddress: '',
     followerCount: 20,
@@ -115,27 +122,30 @@ final List<FirestoreUser> mockOriginalUsers = [
     uid: "c",
     updatedAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     userImage: const DetectedImage(
-        moderationLabels: [],
-        moderationModelVersion: '',
-        url:
-            'https://jp.static.photo-ac.com/assets/img/models/1796ee45a8c7c3e2be04c508f26afa3352857.jpg'),
+            moderationLabels: [],
+            moderationModelVersion: '',
+            url:
+                'https://jp.static.photo-ac.com/assets/img/models/1796ee45a8c7c3e2be04c508f26afa3352857.jpg')
+        .toJson(),
     userName: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: '山岸 愛'),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '山岸 愛')
+        .toJson(),
     walletAddresses: [],
   ),
   FirestoreUser(
     accountName: "d",
     createdAt: Timestamp.fromDate(DateTime(2023, 2, 18)),
     bio: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: ''),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '')
+        .toJson(),
     blockCount: 0,
     ethAddress: '',
     followerCount: 30,
@@ -155,27 +165,30 @@ final List<FirestoreUser> mockOriginalUsers = [
     uid: "d",
     updatedAt: Timestamp.fromDate(DateTime(2023, 2, 18)),
     userImage: const DetectedImage(
-        moderationLabels: [],
-        moderationModelVersion: '',
-        url:
-            'https://jp.static.photo-ac.com/assets/img/models/125b35eae7888d2c9047da770aebabd796386.jpg'),
+            moderationLabels: [],
+            moderationModelVersion: '',
+            url:
+                'https://jp.static.photo-ac.com/assets/img/models/125b35eae7888d2c9047da770aebabd796386.jpg')
+        .toJson(),
     userName: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: '森 遥'),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '森 遥')
+        .toJson(),
     walletAddresses: [],
   ),
   FirestoreUser(
     accountName: "e",
     createdAt: Timestamp.fromDate(DateTime(2023, 6, 1)),
     bio: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: ''),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '')
+        .toJson(),
     blockCount: 0,
     ethAddress: '',
     followerCount: 40,
@@ -195,27 +208,30 @@ final List<FirestoreUser> mockOriginalUsers = [
     uid: "e",
     updatedAt: Timestamp.fromDate(DateTime(2023, 6, 1)),
     userImage: const DetectedImage(
-        moderationLabels: [],
-        moderationModelVersion: '',
-        url:
-            'https://pakutaso.cdn.rabify.me/shared/img/thumb/02AMEMAN8752.jpg.webp?d=350'),
+            moderationLabels: [],
+            moderationModelVersion: '',
+            url:
+                'https://pakutaso.cdn.rabify.me/shared/img/thumb/02AMEMAN8752.jpg.webp?d=350')
+        .toJson(),
     userName: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: '橋本 美奈'),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '橋本 美奈')
+        .toJson(),
     walletAddresses: [],
   ),
   FirestoreUser(
     accountName: "f",
     createdAt: Timestamp.fromDate(DateTime(2023, 2, 23)),
     bio: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: ''),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '')
+        .toJson(),
     blockCount: 0,
     ethAddress: '',
     followerCount: 50,
@@ -235,27 +251,30 @@ final List<FirestoreUser> mockOriginalUsers = [
     uid: "f",
     updatedAt: Timestamp.fromDate(DateTime(2023, 2, 23)),
     userImage: const DetectedImage(
-        moderationLabels: [],
-        moderationModelVersion: '',
-        url:
-            'https://pbs.twimg.com/media/FxY4Yb2aYAATYpt?format=jpg&name=medium'),
+            moderationLabels: [],
+            moderationModelVersion: '',
+            url:
+                'https://pbs.twimg.com/media/FxY4Yb2aYAATYpt?format=jpg&name=medium')
+        .toJson(),
     userName: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: '遠藤 俊夫"'),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '遠藤 俊夫"')
+        .toJson(),
     walletAddresses: [],
   ),
   FirestoreUser(
     accountName: "g",
     createdAt: Timestamp.fromDate(DateTime(2023, 1, 8)),
     bio: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: ''),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '')
+        .toJson(),
     blockCount: 0,
     ethAddress: '',
     followerCount: 60,
@@ -277,27 +296,30 @@ final List<FirestoreUser> mockOriginalUsers = [
     uid: "g",
     updatedAt: Timestamp.fromDate(DateTime(2023, 1, 8)),
     userImage: const DetectedImage(
-        moderationLabels: [],
-        moderationModelVersion: '',
-        url:
-            'https://pbs.twimg.com/media/FxY4qXTacAAoN8p?format=jpg&name=medium'),
+            moderationLabels: [],
+            moderationModelVersion: '',
+            url:
+                'https://pbs.twimg.com/media/FxY4qXTacAAoN8p?format=jpg&name=medium')
+        .toJson(),
     userName: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: '井上 清'),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '井上 清')
+        .toJson(),
     walletAddresses: [],
   ),
   FirestoreUser(
     accountName: "h",
     createdAt: Timestamp.fromDate(DateTime(2023, 10, 14)),
     bio: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: ''),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '')
+        .toJson(),
     blockCount: 0,
     ethAddress: '',
     followerCount: 70,
@@ -319,27 +341,30 @@ final List<FirestoreUser> mockOriginalUsers = [
     uid: "h",
     updatedAt: Timestamp.fromDate(DateTime(2023, 10, 14)),
     userImage: const DetectedImage(
-        moderationLabels: [],
-        moderationModelVersion: '',
-        url:
-            'https://pbs.twimg.com/media/FxY3qI2aAAAckt6?format=jpg&name=medium'),
+            moderationLabels: [],
+            moderationModelVersion: '',
+            url:
+                'https://pbs.twimg.com/media/FxY3qI2aAAAckt6?format=jpg&name=medium')
+        .toJson(),
     userName: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: '森田 敦'),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '森田 敦')
+        .toJson(),
     walletAddresses: [],
   ),
   FirestoreUser(
     accountName: "i",
     createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     bio: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: ''),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '')
+        .toJson(),
     blockCount: 0,
     ethAddress: '',
     followerCount: 80,
@@ -361,27 +386,30 @@ final List<FirestoreUser> mockOriginalUsers = [
     uid: "i",
     updatedAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     userImage: const DetectedImage(
-        moderationLabels: [],
-        moderationModelVersion: '',
-        url:
-            'https://pbs.twimg.com/media/FxY2djfaAAYSrjW?format=jpg&name=medium'),
+            moderationLabels: [],
+            moderationModelVersion: '',
+            url:
+                'https://pbs.twimg.com/media/FxY2djfaAAYSrjW?format=jpg&name=medium')
+        .toJson(),
     userName: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: '山田 剛史'),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '山田 剛史')
+        .toJson(),
     walletAddresses: [],
   ),
   FirestoreUser(
     accountName: "j",
     createdAt: Timestamp.fromDate(DateTime(2023, 4, 28)),
     bio: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: ''),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '')
+        .toJson(),
     blockCount: 0,
     ethAddress: '',
     followerCount: 90,
@@ -403,16 +431,18 @@ final List<FirestoreUser> mockOriginalUsers = [
     uid: "j",
     updatedAt: Timestamp.fromDate(DateTime(2023, 4, 28)),
     userImage: const DetectedImage(
-        moderationLabels: [],
-        moderationModelVersion: '',
-        url:
-            'https://pbs.twimg.com/media/FxY2_ZGaAAE2pBk?format=jpg&name=medium'),
+            moderationLabels: [],
+            moderationModelVersion: '',
+            url:
+                'https://pbs.twimg.com/media/FxY2_ZGaAAE2pBk?format=jpg&name=medium')
+        .toJson(),
     userName: const DetectedText(
-        languageCode: '',
-        negativeScore: 0.0,
-        positiveScore: 0.0,
-        sentiment: '',
-        value: '中川 裕'),
+            languageCode: '',
+            negativeScore: 0.0,
+            positiveScore: 0.0,
+            sentiment: '',
+            value: '中川 裕')
+        .toJson(),
     walletAddresses: [],
   ),
 ];
@@ -420,171 +450,186 @@ final List<Post> mockPosts = [
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 5, 25)),
       description: const DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: ''),
+              languageCode: '',
+              negativeScore: 0.0,
+              positiveScore: 0.0,
+              sentiment: '',
+              value: '')
+          .toJson(),
       exampleTexts: [],
       genre: '',
       hashTags: [],
       iconImage: const DetectedImage(
-          moderationLabels: [],
-          moderationModelVersion: '',
-          url:
-              'https://pbs.twimg.com/media/F2F7Fn8bwAABjvr?format=webp&name=small'),
+              moderationLabels: [],
+              moderationModelVersion: '',
+              url:
+                  'https://pbs.twimg.com/media/F2F7Fn8bwAABjvr?format=webp&name=small')
+          .toJson(),
       impressionCount: 0,
       likeCount: 0,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[0],
+      poster: mockOriginalUsers[0].toJson(),
       postId: "post-a",
       ref: mockOriginalUsers[0].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("猫GPT"),
       title: const DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: '猫GPT'),
+              languageCode: '',
+              negativeScore: 0.0,
+              positiveScore: 0.0,
+              sentiment: '',
+              value: '猫GPT')
+          .toJson(),
       updatedAt: Timestamp.fromDate(DateTime(2023, 5, 25)),
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
       description: const DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: ''),
+              languageCode: '',
+              negativeScore: 0.0,
+              positiveScore: 0.0,
+              sentiment: '',
+              value: '')
+          .toJson(),
       exampleTexts: [],
       genre: '',
       hashTags: [],
       iconImage: const DetectedImage(
-          moderationLabels: [],
-          moderationModelVersion: '',
-          url:
-              'https://pbs.twimg.com/media/F2F7Gzea4AAaCIv?format=webp&name=small'),
+              moderationLabels: [],
+              moderationModelVersion: '',
+              url:
+                  'https://pbs.twimg.com/media/F2F7Gzea4AAaCIv?format=webp&name=small')
+          .toJson(),
       impressionCount: 0,
       likeCount: 10,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[1],
+      poster: mockOriginalUsers[1].toJson(),
       postId: "post-b",
       ref: mockOriginalUsers[1].typedRef().collection("posts").doc("post-b"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("原稿作成くん"),
       title: const DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: '原稿作成くん"'),
+              languageCode: '',
+              negativeScore: 0.0,
+              positiveScore: 0.0,
+              sentiment: '',
+              value: '原稿作成くん"')
+          .toJson(),
       updatedAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 2, 22)),
       description: const DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: ''),
+              languageCode: '',
+              negativeScore: 0.0,
+              positiveScore: 0.0,
+              sentiment: '',
+              value: '')
+          .toJson(),
       exampleTexts: [],
       genre: '',
       hashTags: [],
       iconImage: const DetectedImage(
-          moderationLabels: [],
-          moderationModelVersion: '',
-          url:
-              'https://pbs.twimg.com/media/F2F7H45bEAEtd9j?format=webp&name=small'),
+              moderationLabels: [],
+              moderationModelVersion: '',
+              url:
+                  'https://pbs.twimg.com/media/F2F7H45bEAEtd9j?format=webp&name=small')
+          .toJson(),
       impressionCount: 0,
       likeCount: 20,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[2],
+      poster: mockOriginalUsers[2].toJson(),
       postId: "post-c",
       ref: mockOriginalUsers[2].typedRef().collection("posts").doc("post-c"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("アイデア出しまくりAI"),
       title: const DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: 'アイデア出しまくりAI'),
+              languageCode: '',
+              negativeScore: 0.0,
+              positiveScore: 0.0,
+              sentiment: '',
+              value: 'アイデア出しまくりAI')
+          .toJson(),
       updatedAt: Timestamp.fromDate(DateTime(2023, 2, 22)),
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 7, 19)),
       description: const DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: ''),
+              languageCode: '',
+              negativeScore: 0.0,
+              positiveScore: 0.0,
+              sentiment: '',
+              value: '')
+          .toJson(),
       exampleTexts: [],
       genre: '',
       hashTags: [],
       iconImage: const DetectedImage(
-          moderationLabels: [],
-          moderationModelVersion: '',
-          url:
-              'https://pbs.twimg.com/media/F2F7I73aAAAqdlz?format=webp&name=small'),
+              moderationLabels: [],
+              moderationModelVersion: '',
+              url:
+                  'https://pbs.twimg.com/media/F2F7I73aAAAqdlz?format=webp&name=small')
+          .toJson(),
       impressionCount: 0,
       likeCount: 30,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[3],
+      poster: mockOriginalUsers[3].toJson(),
       postId: "post-d",
       ref: mockOriginalUsers[3].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("エンジニアAIくん"),
       title: const DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: 'エンジニアAIくん'),
+              languageCode: '',
+              negativeScore: 0.0,
+              positiveScore: 0.0,
+              sentiment: '',
+              value: 'エンジニアAIくん')
+          .toJson(),
       updatedAt: Timestamp.fromDate(DateTime(2023, 7, 19)),
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 4, 7)),
       description: const DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: ''),
+              languageCode: '',
+              negativeScore: 0.0,
+              positiveScore: 0.0,
+              sentiment: '',
+              value: '')
+          .toJson(),
       exampleTexts: [],
       genre: '',
       hashTags: [],
       iconImage: const DetectedImage(
-          moderationLabels: [],
-          moderationModelVersion: '',
-          url:
-              'https://pbs.twimg.com/media/F2F7M7naMAA5_PJ?format=webp&name=900x900'),
+              moderationLabels: [],
+              moderationModelVersion: '',
+              url:
+                  'https://pbs.twimg.com/media/F2F7M7naMAA5_PJ?format=webp&name=900x900')
+          .toJson(),
       impressionCount: 0,
       likeCount: 40,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[4],
+      poster: mockOriginalUsers[4].toJson(),
       postId: "post-e",
       ref: mockOriginalUsers[4].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("なんでも相談AI"),
       title: const DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: 'なんでも相談AI'),
+              languageCode: '',
+              negativeScore: 0.0,
+              positiveScore: 0.0,
+              sentiment: '',
+              value: 'なんでも相談AI')
+          .toJson(),
       updatedAt: Timestamp.fromDate(DateTime(2023, 4, 7)),
       userCount: 0),
 ];
@@ -595,7 +640,7 @@ List<Timeline> mockTimelines() {
       Timeline(
           createdAt: post.createdAt,
           isRead: false,
-          posterUid: post.poster.uid,
+          posterUid: FirestoreUser.fromJson(post.poster).uid,
           postId: post.postId),
     );
   }
