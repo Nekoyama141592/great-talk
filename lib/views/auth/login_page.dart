@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 
@@ -13,6 +14,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = CurrentUserController.to;
     return Scaffold(
       body: SafeArea(
           child: Container(
@@ -34,24 +36,24 @@ class LoginPage extends StatelessWidget {
                   height: fullHeight(context) * 0.30,
                 ),
                 // with custom text
-                const RoundedButton(
+                RoundedButton(
                   text: 'Googleで続ける',
                   textColor: Colors.white,
                   buttonColor: kSecondaryColor,
-                  press: null,
-                  icon: Icon(
+                  press: controller.onGoogleButtonPressed,
+                  icon: const Icon(
                     FontAwesomeIcons.google,
                     color: Colors.black,
                   ),
                 ),
                 const BasicHeightBox(),
                 if (Platform.isIOS)
-                  const RoundedButton(
+                  RoundedButton(
                     text: 'Appleで続ける',
                     textColor: Colors.white,
                     buttonColor: Colors.black,
-                    press: null,
-                    icon: Icon(
+                    press: controller.onAppleButtonPressed,
+                    icon: const Icon(
                       FontAwesomeIcons.apple,
                       color: Colors.white,
                     ),

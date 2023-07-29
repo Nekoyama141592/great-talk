@@ -2,8 +2,8 @@ import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreClient {
-  Future<void> createUser(String uid) async =>
-      await FirestoreQueries.userQuery(uid).get();
+  Future<void> createUser(String uid,SDMap json) async =>
+      await FirestoreQueries.userQuery(uid).set(json);
 
   Future<void> createFollower(
           String currentUid, String passiveUid, SDMap json) async =>

@@ -8,9 +8,9 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 class FirestoreRepository {
   final client = isUseMockData ? MockFirestoreClient() : FirestoreClient();
 
-  FutureResult<bool> createUser(String uid) async {
+  FutureResult<bool> createUser(String uid,SDMap json) async {
     try {
-      await client.createUser(uid);
+      await client.createUser(uid,json);
       return const Result.success(true);
     } catch (e) {
       return const Result.failure();
