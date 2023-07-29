@@ -42,25 +42,29 @@ class CurrentUserController extends GetxController {
   bool isAnonymous() => currentUser.value!.isAnonymous;
   bool isNotLoggedIn() =>
       currentUser.value == null || currentUser.value!.isAnonymous;
-  
+
   Future<void> onAppleButtonPressed() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInWithApple();
-    result.when(success: (res) async {
-      await res.reload();
-      currentUser(FirebaseAuth.instance.currentUser);
-      await _createFirestoreUserWithUser(res);
-    }, failure: () {});
+    result.when(
+        success: (res) async {
+          await res.reload();
+          currentUser(FirebaseAuth.instance.currentUser);
+          await _createFirestoreUserWithUser(res);
+        },
+        failure: () {});
   }
 
   Future<void> onGoogleButtonPressed() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInWithGoogle();
-    result.when(success: (res) async {
-      await res.reload();
-      currentUser(FirebaseAuth.instance.currentUser);
-      await _createFirestoreUserWithUser(res);
-    }, failure: () {});
+    result.when(
+        success: (res) async {
+          await res.reload();
+          currentUser(FirebaseAuth.instance.currentUser);
+          await _createFirestoreUserWithUser(res);
+        },
+        failure: () {});
   }
 
   Future<void> _createFirestoreUserWithUser(User user) async {
@@ -92,7 +96,7 @@ class CurrentUserController extends GetxController {
       userName: {},
       walletAddresses: [],
     );
-    final result = await repository.createUser(user.uid,newUser.toJson());
+    final result = await repository.createUser(user.uid, newUser.toJson());
     result.when(success: (_) {
       firestoreUser(newUser);
       UIHelper.showFlutterToast("ユーザーが作成されました");

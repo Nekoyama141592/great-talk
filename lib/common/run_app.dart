@@ -13,11 +13,11 @@ import 'package:great_talk/gen/firebase_options_verification.dart'
 class RunApp {
   static Future<void> runGreatTalk(Flavor flavor) async {
     WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp(options: _getFirebaseOption(flavor));
+    await Firebase.initializeApp(options: getFirebaseOption(flavor));
     runApp(const App());
   }
 
-  static FirebaseOptions _getFirebaseOption(Flavor flavor) {
+  static FirebaseOptions getFirebaseOption(Flavor flavor) {
     switch (flavor) {
       case Flavor.dev:
         return dev.DefaultFirebaseOptions.currentPlatform;

@@ -36,4 +36,7 @@ flutter analyze .
 flutter pub run build_runner build --delete-conflicting-outputs
 ## 一括アップデートf
 flutter pub upgrade --major-versions
-# frontend
+
+## SHA1の署名鍵
+keytool -list -v \-alias androiddebugkey -keystore ~/.android/debug.keystore
+# fronten

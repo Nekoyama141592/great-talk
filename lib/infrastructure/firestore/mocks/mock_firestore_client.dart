@@ -8,7 +8,7 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class MockFirestoreClient implements FirestoreClient {
   @override
-  Future<void> createUser(String uid,SDMap json) async {
+  Future<void> createUser(String uid, SDMap json) async {
     return;
   }
 
