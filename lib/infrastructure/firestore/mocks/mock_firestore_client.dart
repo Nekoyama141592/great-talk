@@ -8,6 +8,10 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class MockFirestoreClient implements FirestoreClient {
   @override
+  Future<void> createUser(String uid) async {
+    return;
+  }
+  @override
   FutureQSnapshot getPostsByLikeCount() async {
     final posts = [...mockPosts];
     posts.sort((a, b) => b.likeCount.compareTo(a.likeCount));

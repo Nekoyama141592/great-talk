@@ -77,6 +77,7 @@ class FirestoreQueries {
   static ColRef tokensQuery(String currentUid) =>
       instance.collection('users').doc(currentUid).collection("tokens");
 
+  static DocRef userQuery(String uid) => instance.collection('users').doc(uid);
   static final usersQuery =
       instance.collection('users').limit(oneTimeReadCount);
 

@@ -2,6 +2,8 @@ import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreClient {
+  Future<void> createUser(String uid) async =>
+      await FirestoreQueries.userQuery(uid).get();
   FutureQSnapshot getPostsByFollowing(List<String> followingUids) async =>
       await FirestoreQueries.postsQueryByFollowing(followingUids).get();
   FutureQSnapshot getNewPostsByFollowing(
