@@ -88,7 +88,7 @@ class RealtimeResPage extends HookWidget {
                                                     .to.currentUser.value!.uid
                                             ? kSecondaryColor.withOpacity(0.3)
                                             : null,
-                                        leading: messages[index].uid ==
+                                        leading: messages[index].uid !=
                                                 CurrentUserController
                                                     .to.currentUser.value!.uid
                                             ? CircleImage(
