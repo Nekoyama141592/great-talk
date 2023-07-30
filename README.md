@@ -39,4 +39,4 @@ flutter pub upgrade --major-versions
 
 ## SHA1の署名鍵
 keytool -list -v \-alias androiddebugkey -keystore ~/.android/debug.keystore
-# fronten
+# frontend
