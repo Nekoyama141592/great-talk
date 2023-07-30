@@ -1,6 +1,7 @@
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_data.dart';
+import 'package:great_talk/infrastructure/firestore/mocks/mock_doc.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_doc.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_snapshot.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
@@ -81,6 +82,13 @@ class MockFirestoreClient implements FirestoreClient {
     final posts = [...mockPosts];
     final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
     return MockQSnapshot(data);
+  }
+
+  @override
+  FutureDoc getUser(String uid) async {
+    final user = mockOriginalUsers.firstWhere((element) => element.uid == uid);
+    final data = user.toJson();
+    return MockDoc(data);
   }
 
   @override

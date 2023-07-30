@@ -43,6 +43,9 @@ class FirestoreClient {
   FutureQSnapshot getMoreTimelines(DocRef userRef, Doc lastDoc) async =>
       await FirestoreQueries.moreTimelinesQuery(userRef, lastDoc).get();
 
+  FutureDoc getUser(String uid) async =>
+      await FirestoreQueries.userQuery(uid).get();
+
   FutureQSnapshot getUsersByFollowerCount() async =>
       await FirestoreQueries.usersQueryByLikeCount.get();
   FutureQSnapshot getMoreUsersByFollowerCount(Doc lastDoc) async =>

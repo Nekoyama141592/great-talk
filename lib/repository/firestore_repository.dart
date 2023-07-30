@@ -163,6 +163,16 @@ class FirestoreRepository {
     }
   }
 
+  FutureResult<Doc> getUser(String uid) async {
+    try {
+      final res = await client.getUser(uid);
+      return Result.success(res);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
   FutureResult<List<QDoc>> getUsersByFollowerCount() async {
     try {
       final res = await client.getUsersByFollowerCount();

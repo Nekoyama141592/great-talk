@@ -40,8 +40,8 @@ class CurrentUserController extends GetxController {
   String currentUid() => currentUser.value!.uid;
 
   bool isAnonymous() => currentUser.value!.isAnonymous;
-  bool isNotLoggedIn() =>
-      currentUser.value == null || currentUser.value!.isAnonymous;
+
+  bool isNotLoggedIn() => currentUser.value == null || isAnonymous();
 
   Future<void> onAppleButtonPressed() async {
     final repository = FirebaseAuthRepository();
@@ -50,7 +50,7 @@ class CurrentUserController extends GetxController {
         success: (res) async {
           await res.reload();
           currentUser(FirebaseAuth.instance.currentUser);
-          await _createFirestoreUserWithUser(res);
+          await _manageFirestoreUser(res);
         },
         failure: () {});
   }
@@ -62,7 +62,7 @@ class CurrentUserController extends GetxController {
         success: (res) async {
           await res.reload();
           currentUser(FirebaseAuth.instance.currentUser);
-          await _createFirestoreUserWithUser(res);
+          await _manageFirestoreUser(res);
         },
         failure: () {});
   }
@@ -102,6 +102,22 @@ class CurrentUserController extends GetxController {
       UIHelper.showFlutterToast("ユーザーが作成されました");
     }, failure: () {
       UIHelper.showFlutterToast("データベースにユーザーを作成できませんでした");
+    });
+  }
+
+  Future<void> _manageFirestoreUser(User user) async {
+    final repository = FirestoreRepository();
+    final result = await repository.getUser(user.uid);
+    result.when(success: (res) async {
+      if (res.exists) {
+        // アカウントが存在するなら代入する
+        firestoreUser(FirestoreUser.fromJson(res.data()!));
+      } else {
+        // アカウントが存在しないなら作成する
+        await _createFirestoreUserWithUser(user);
+      }
+    }, failure: () {
+      UIHelper.showFlutterToast("データの取得に失敗しました");
     });
   }
 }
