@@ -6,6 +6,11 @@ import 'package:great_talk/flavors.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class FirebaseAuthClient {
+  Future<UserCredential> signInAnonymously() async {
+    final credential = await FirebaseAuth.instance.signInAnonymously();
+    return credential;
+  }
+
   Future<UserCredential?> signinWithApple() async {
     if (!CurrentUserController.to.isAnonymous()) {
       return null;

@@ -5,6 +5,22 @@ import 'package:great_talk/repository/result.dart';
 
 class FirebaseAuthRepository {
   final client = FirebaseAuthClient();
+
+  FutureResult<User> signInAnonymously() async {
+    late Result<User> result;
+    try {
+      final res = await client.signInAnonymously();
+      if (res.user == null) {
+        result = const Result.failure();
+      }
+      result = Result.success(res.user!);
+    } catch (e) {
+      debugPrint(e.toString());
+      result = const Result.failure();
+    }
+    return result;
+  }
+
   FutureResult<User> signInWithApple() async {
     late Result<User> result;
     try {

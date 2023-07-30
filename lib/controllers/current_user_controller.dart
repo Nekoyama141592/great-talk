@@ -18,10 +18,7 @@ class CurrentUserController extends GetxController {
 
   @override
   void onInit() async {
-    if (currentUser.value == null) {
-      final credential = await FirebaseAuth.instance.signInAnonymously();
-      currentUser(credential.user);
-    }
+    await _createAnonymousUser();
     super.onInit();
   }
 
@@ -35,6 +32,18 @@ class CurrentUserController extends GetxController {
     followingTokens.remove(followingToken);
     followingUids.remove(followingToken.passiveUid);
     followingUids([...followingUids]);
+  }
+
+  Future<void> _createAnonymousUser() async {
+    if (currentUser.value == null) {
+      final repository = FirebaseAuthRepository();
+      final result = await repository.signInAnonymously();
+      result.when(success: (res) {
+        currentUser(res);
+      }, failure: () {
+        UIHelper.showFlutterToast("通信が失敗しました");
+      });
+    }
   }
 
   String currentUid() => currentUser.value!.uid;
