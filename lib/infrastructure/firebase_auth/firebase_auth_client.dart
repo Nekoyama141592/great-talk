@@ -22,8 +22,7 @@ class FirebaseAuthClient {
       idToken: appleCredential.identityToken,
       accessToken: appleCredential.authorizationCode,
     );
-    final result = await CurrentUserController.to.currentUser.value!
-        .linkWithCredential(credential);
+    final result = await FirebaseAuth.instance.signInWithCredential(credential);
     return result;
   }
 
@@ -42,8 +41,7 @@ class FirebaseAuthClient {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    final result = await CurrentUserController.to.currentUser.value!
-        .linkWithCredential(credential);
+    final result = await FirebaseAuth.instance.signInWithCredential(credential);
     return result;
   }
 }
