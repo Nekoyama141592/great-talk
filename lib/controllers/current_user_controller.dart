@@ -1,12 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/utility/new_content.dart';
 
 class CurrentUserController extends GetxController {
   static CurrentUserController get to => Get.find<CurrentUserController>();
@@ -78,33 +77,7 @@ class CurrentUserController extends GetxController {
 
   Future<void> _createFirestoreUserWithUser(User user) async {
     final repository = FirestoreRepository();
-    final now = Timestamp.now();
-    final newUser = FirestoreUser(
-      accountName: "",
-      createdAt: now,
-      bio: {},
-      blockCount: 0,
-      ethAddress: '',
-      followerCount: 0,
-      followingCount: 0,
-      isAdmin: false,
-      isNFTicon: false,
-      isOfficial: false,
-      isSuspended: false,
-      muteCount: 0,
-      postCount: 0,
-      links: [],
-      nftIconInfo: {},
-      ref: FirestoreQueries.userQuery(user.uid),
-      reportCount: 0,
-      score: 0,
-      searchToken: {},
-      uid: user.uid,
-      updatedAt: now,
-      userImage: {},
-      userName: {},
-      walletAddresses: [],
-    );
+    final newUser = NewContent.newUser(user.uid);
     final result = await repository.createUser(user.uid, newUser.toJson());
     result.when(success: (_) {
       firestoreUser(newUser);
