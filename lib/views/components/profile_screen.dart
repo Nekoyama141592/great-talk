@@ -7,7 +7,7 @@ class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(UserProfileController(false));
+    final controller = Get.put(UserProfileController());
     return Obx(() => RefreshScreen(
         docsController: controller,
         child: controller.passiveUser.value == null
