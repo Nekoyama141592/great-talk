@@ -6,15 +6,12 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
-import 'package:great_talk/model/chat_user/chat_user.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 
 class RealtimeResPage extends HookWidget {
-  const RealtimeResPage({Key? key, required this.interlocutor})
-      : super(key: key);
-  final ChatUser interlocutor;
+  const RealtimeResPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(RealtimeResController());
@@ -22,14 +19,15 @@ class RealtimeResPage extends HookWidget {
     final inputController = useTextEditingController();
     final scrollCotroller = useScrollController();
     useEffect(() {
-      controller.getChatLog(interlocutor);
+      controller.getChatLog();
       return;
-    }, [interlocutor]);
+    }, []);
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text(interlocutor.userName),
-          ),
+              title: Obx(
+            () => Text(controller.interlocutor.userName),
+          )),
           body: Obx(() => controller.isLoading.value
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -60,7 +58,8 @@ class RealtimeResPage extends HookWidget {
                                                 ? null
                                                 : controller.onCardLongTap,
                                         leading: CircleImage(
-                                            interlocutor: interlocutor),
+                                            interlocutor:
+                                                controller.interlocutor),
                                         title:
                                             purchaseController.isSubscribing()
                                                 ? SelectableText(text)
@@ -89,7 +88,8 @@ class RealtimeResPage extends HookWidget {
                                                 CurrentUserController
                                                     .to.currentUser.value!.uid
                                             ? CircleImage(
-                                                interlocutor: interlocutor)
+                                                interlocutor:
+                                                    controller.interlocutor)
                                             : null,
                                         title:
                                             purchaseController.isSubscribing()

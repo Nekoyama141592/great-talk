@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
+import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/utility/chat_utility.dart';
 import 'package:great_talk/views/components/circle_image.dart';
-import 'package:great_talk/views/realtime_res_page/realtime_res_page.dart';
 
 class PersonCards extends StatelessWidget {
   const PersonCards({Key? key}) : super(key: key);
@@ -50,9 +50,8 @@ class PersonCards extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               )
                             : null,
-                        onTap: () => Get.to(RealtimeResPage(
-                          interlocutor: person,
-                        )),
+                        onTap: () => Get.toNamed(
+                            '/chat/${person.uid}?type=${InterlocutorType.originalContent.name}'),
                         onLongPress: () => ChatUtility.showCleanLocalMsgDialog(
                             person, controller),
                       ),

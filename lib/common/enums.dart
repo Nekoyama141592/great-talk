@@ -1,3 +1,5 @@
+enum InterlocutorType { userContent, originalContent }
+
 enum MessageType { text }
 
 enum PrefsKey {

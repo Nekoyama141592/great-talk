@@ -1,4 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/model/detected_image/detected_image.dart';
+import 'package:great_talk/model/detected_text/detected_text.dart';
+import 'package:great_talk/model/firestore_user/firestore_user.dart';
+import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'chat_user.freezed.dart';
 part 'chat_user.g.dart';
@@ -12,6 +16,12 @@ abstract class ChatUser with _$ChatUser {
     required String uid,
     required String userName,
   }) = _ChatUser;
-  factory ChatUser.fromJson(Map<String, dynamic> json) =>
-      _$ChatUserFromJson(json);
+  factory ChatUser.fromJson(SDMap json) => _$ChatUserFromJson(json);
+  factory ChatUser.fromFirestoreUserMap(SDMap json) {
+    final user = FirestoreUser.fromJson(json);
+    return ChatUser(
+        imageUrl: DetectedImage.fromJson(user.userImage).url,
+        uid: user.uid,
+        userName: DetectedText.fromJson(user.userName).value);
+  }
 }

@@ -18,6 +18,7 @@ import 'package:great_talk/model/chat_user/chat_user.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/text_message/text_message.dart';
+import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,14 +31,32 @@ class RealtimeResController extends GetxController with CurrentUidMixin {
   int chatCount = 0;
   late SharedPreferences prefs;
   late ChatUser interlocutor;
+  final repository = FirestoreRepository();
   // 与えられたinterlocutorとのチャット履歴を取得
-  Future<void> getChatLog(ChatUser value) async {
-    interlocutor = value;
+  Future<void> getChatLog() async {
     isLoading(true);
-    List<TextMessage> a = await _getLocalMessages();
-    await PurchasesController.to.restorePurchases(); // 購入内容を復元
-    debugPrint("==========取得されました==========");
-    messages(a);
+    // final type = InterlocutorType.values.byName(Get.parameters['type']!);
+    const type = InterlocutorType.originalContent;
+    final uid = Get.parameters['uid']!;
+    if (type == InterlocutorType.originalContent) {
+      final res = initialPeople.firstWhere((element) => element.uid == uid);
+      interlocutor = res;
+    } else {
+      final result = await repository.getUser(uid);
+      result.when(success: (res) async {
+        if (!res.exists) {
+          UIHelper.showFlutterToast("ユーザーが存在しません");
+          return;
+        } else {
+          interlocutor = ChatUser.fromFirestoreUserMap(res.data()!);
+          List<TextMessage> a = await _getLocalMessages();
+          await PurchasesController.to.restorePurchases(); // 購入内容を復元
+          messages(a);
+        }
+      }, failure: () {
+        UIHelper.showFlutterToast("データの取得に失敗しました");
+      });
+    }
     isLoading(false);
   }
 
