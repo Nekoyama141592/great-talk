@@ -17,7 +17,7 @@ class CurrentUserController extends GetxController {
 
   @override
   void onInit() async {
-    await _createAnonymousUser();
+    await _manageFirestoreUser();
     super.onInit();
   }
 
@@ -34,15 +34,13 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> _createAnonymousUser() async {
-    if (currentUser.value == null) {
-      final repository = FirebaseAuthRepository();
-      final result = await repository.signInAnonymously();
-      result.when(success: (res) {
-        currentUser(res);
-      }, failure: () {
-        UIHelper.showFlutterToast("通信が失敗しました");
-      });
-    }
+    final repository = FirebaseAuthRepository();
+    final result = await repository.signInAnonymously();
+    result.when(success: (res) {
+      currentUser(res);
+    }, failure: () {
+      UIHelper.showFlutterToast("通信が失敗しました");
+    });
   }
 
   String currentUid() => currentUser.value!.uid;
@@ -58,7 +56,7 @@ class CurrentUserController extends GetxController {
         success: (res) async {
           await res.reload();
           currentUser(FirebaseAuth.instance.currentUser);
-          await _manageFirestoreUser(res);
+          await _manageFirestoreUser();
         },
         failure: () {});
   }
@@ -69,16 +67,16 @@ class CurrentUserController extends GetxController {
     result.when(
         success: (res) async {
           await res.reload();
-          currentUser(FirebaseAuth.instance.currentUser);
-          await _manageFirestoreUser(res);
+          currentUser(res);
+          await _manageFirestoreUser();
         },
         failure: () {});
   }
 
-  Future<void> _createFirestoreUserWithUser(User user) async {
+  Future<void> _createFirestoreUserWithUser() async {
     final repository = FirestoreRepository();
-    final newUser = NewContent.newUser(user.uid);
-    final result = await repository.createUser(user.uid, newUser.toJson());
+    final newUser = NewContent.newUser(currentUid());
+    final result = await repository.createUser(currentUid(), newUser.toJson());
     result.when(success: (_) {
       firestoreUser(newUser);
       UIHelper.showFlutterToast("ユーザーが作成されました");
@@ -87,16 +85,23 @@ class CurrentUserController extends GetxController {
     });
   }
 
-  Future<void> _manageFirestoreUser(User user) async {
+  Future<void> _manageFirestoreUser() async {
+    if (currentUser.value == null) {
+      await _createAnonymousUser();
+      return;
+    }
+    if (currentUser.value!.isAnonymous) {
+      return;
+    }
     final repository = FirestoreRepository();
-    final result = await repository.getUser(user.uid);
+    final result = await repository.getCurrentUser(currentUid());
     result.when(success: (res) async {
-      if (res.exists) {
+      if (res.exists && firestoreUser.value == null) {
         // アカウントが存在するなら代入する
         firestoreUser(FirestoreUser.fromJson(res.data()!));
       } else {
         // アカウントが存在しないなら作成する
-        await _createFirestoreUserWithUser(user);
+        await _createFirestoreUserWithUser();
       }
     }, failure: () {
       UIHelper.showFlutterToast("データの取得に失敗しました");

@@ -45,6 +45,7 @@ class FirestoreClient {
 
   FutureDoc getUser(String uid) async =>
       await FirestoreQueries.userQuery(uid).get();
+  FutureDoc getCurrentUser(String uid) async => getUser(uid);
 
   FutureQSnapshot getUsersByFollowerCount() async =>
       await FirestoreQueries.usersQueryByLikeCount.get();

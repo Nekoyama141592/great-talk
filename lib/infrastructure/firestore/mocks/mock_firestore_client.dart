@@ -88,7 +88,13 @@ class MockFirestoreClient implements FirestoreClient {
   FutureDoc getUser(String uid) async {
     final user = mockOriginalUsers.firstWhere((element) => element.uid == uid);
     final data = user.toJson();
-    return MockDoc(data);
+    return MockDoc(data, mockCurrentUid);
+  }
+
+  @override
+  FutureDoc getCurrentUser(String uid) async {
+    final data = currentUser.toJson();
+    return MockDoc(data, mockCurrentUid);
   }
 
   @override

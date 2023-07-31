@@ -5,7 +5,10 @@ import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
+import 'package:great_talk/utility/new_content.dart';
 
+const String mockCurrentUid = "current-user";
+final currentUser = NewContent.newUser(mockCurrentUid);
 final List<FirestoreUser> mockOriginalUsers = [
   FirestoreUser(
     accountName: "a",
