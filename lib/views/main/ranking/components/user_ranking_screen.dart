@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/user_ranking_controller.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
-import 'package:great_talk/views/components/refresh_screen.dart';
+import 'package:great_talk/views/screen/refresh_screen.dart';
 
 class UserRankingScreen extends StatelessWidget {
   const UserRankingScreen({Key? key}) : super(key: key);

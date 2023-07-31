@@ -4,7 +4,7 @@ import 'package:great_talk/controllers/feeds_controller.dart';
 import 'package:great_talk/model/chat_user/chat_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/circle_image.dart';
-import 'package:great_talk/views/components/refresh_screen.dart';
+import 'package:great_talk/views/screen/refresh_screen.dart';
 
 class FeedsScreen extends StatelessWidget {
   const FeedsScreen({Key? key}) : super(key: key);

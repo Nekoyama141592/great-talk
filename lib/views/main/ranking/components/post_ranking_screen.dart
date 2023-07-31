@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/post_ranking_controller.dart';
 import 'package:great_talk/model/post/post.dart';
-import 'package:great_talk/views/components/refresh_screen.dart';
+import 'package:great_talk/views/screen/refresh_screen.dart';
 
 class PostRankingScreen extends StatelessWidget {
   const PostRankingScreen({Key? key}) : super(key: key);

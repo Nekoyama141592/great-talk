@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
-import 'package:great_talk/views/components/profile_screen.dart';
+import 'package:great_talk/views/screen/profile_screen/profile_screen.dart';
 
 class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({Key? key}) : super(key: key);

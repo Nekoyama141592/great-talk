@@ -33,18 +33,23 @@ class RoundedButton extends StatelessWidget {
                 buttonColor ?? Theme.of(context).primaryColor),
           ),
           onPressed: press,
-          child: Row(
-            children: [
-              if (icon != null) icon!,
-              const SizedBox(
-                width: 20.0,
-              ),
-              BasicBoldText(
-                text,
-                textColor: textColor,
-              )
-            ],
-          ),
+          child: icon != null
+              ? Row(
+                  children: [
+                    icon!,
+                    const SizedBox(
+                      width: 20.0,
+                    ),
+                    BasicBoldText(
+                      text,
+                      textColor: textColor,
+                    )
+                  ],
+                )
+              : BasicBoldText(
+                  text,
+                  textColor: textColor,
+                ),
         ),
       ),
     );
