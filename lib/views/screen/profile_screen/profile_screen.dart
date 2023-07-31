@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/profile_controller.dart';
+import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/screen/profile_screen/components/edit_button.dart';
 import 'package:great_talk/views/screen/profile_screen/components/follow_button.dart';
 import 'package:great_talk/views/screen/refresh_screen.dart';
@@ -13,6 +14,9 @@ class ProfileScreen extends StatelessWidget {
     return Column(
       children: [
         controller.isMyProfile ? const EditButton() : const FollowButton(),
+        Obx(() => controller.passiveUser.value == null
+            ? const Text('')
+            : Text(controller.passiveUser.value!.typedUserName().value)),
         Expanded(
             child: RefreshScreen(
                 docsController: controller,
@@ -20,8 +24,12 @@ class ProfileScreen extends StatelessWidget {
                   if (controller.passiveUser.value == null) {
                     return const Text('');
                   } else {
-                    return Text(
-                        controller.passiveUser.value!.typedUserName().value);
+                    return ListView.builder(
+                        itemCount: controller.docs.length,
+                        itemBuilder: (c, i) {
+                          final post = Post.fromJson(controller.docs[i].data());
+                          return Text(post.postId);
+                        });
                   }
                 })))
       ],
