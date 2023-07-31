@@ -15,6 +15,7 @@ class RefreshScreen extends HookWidget {
   Widget build(BuildContext context) {
     RefreshController refreshController = RefreshController();
     useEffect(() {
+      docsController.init();
       refreshController = RefreshController();
       return refreshController.dispose;
     }, []);
