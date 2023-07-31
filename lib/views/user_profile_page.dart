@@ -5,8 +5,9 @@ class UserProfilePage extends StatelessWidget {
   const UserProfilePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: ProfileScreen(),
+    return Scaffold(
+      appBar: AppBar(),
+      body: const ProfileScreen(),
     );
   }
 }

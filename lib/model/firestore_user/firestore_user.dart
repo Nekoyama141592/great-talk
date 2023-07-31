@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'firestore_user.freezed.dart';
@@ -39,4 +40,5 @@ abstract class FirestoreUser implements _$FirestoreUser {
   Timestamp typedCreatedAt() => createdAt as Timestamp;
   DocRef typedRef() => ref as DocRef;
   Timestamp typedUpdatedAtAt() => createdAt as Timestamp;
+  DetectedText typedDetectedText() => DetectedText.fromJson(userName);
 }

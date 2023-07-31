@@ -1,24 +1,42 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
+import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/follower/follower.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class UserProfileController extends DocsController with CurrentUidMixin {
-  UserProfileController() : super(enablePullDown: true);
+  UserProfileController(this.isMyProfile) : super(enablePullDown: true);
+  final bool isMyProfile;
   final _repository = FirestoreRepository();
-  String passiveUid = "";
+  final Rx<FirestoreUser?> passiveUser = Rx(null);
+  String passiveUid() => passiveUser.value!.uid;
   @override
   Future<void> fetchDocs() async {
-    final result = await _repository.getUserPostsByNewest(passiveUid);
+    if (isMyProfile) {
+      passiveUser(CurrentUserController.to.firestoreUser.value);
+    } else {
+      await _getPassiveUser();
+    }
+    final result = await _repository.getUserPostsByNewest(passiveUid());
     result.when(success: (res) {
       docs(res);
+    }, failure: () {
+      UIHelper.showFlutterToast("データの取得に失敗しました");
+    });
+  }
+
+  Future<void> _getPassiveUser() async {
+    final result = await _repository.getUser(Get.parameters['uid']!);
+    result.when(success: (res) {
+      passiveUser(FirestoreUser.fromJson(res.data()!)); // TODO: ハンドリング
     }, failure: () {
       UIHelper.showFlutterToast("データの取得に失敗しました");
     });
@@ -27,7 +45,7 @@ class UserProfileController extends DocsController with CurrentUidMixin {
   @override
   Future<void> onLoading(RefreshController refreshController) async {
     final result =
-        await _repository.getMoreUserPostsByNewest(passiveUid, docs.last);
+        await _repository.getMoreUserPostsByNewest(passiveUid(), docs.last);
     result.when(success: (res) {
       addAllDocs(res);
     }, failure: () {
@@ -39,7 +57,7 @@ class UserProfileController extends DocsController with CurrentUidMixin {
   @override
   Future<void> onRefresh(RefreshController refreshController) async {
     final result =
-        await _repository.getNewUserPostsByNewest(passiveUid, docs.first);
+        await _repository.getNewUserPostsByNewest(passiveUid(), docs.first);
     result.when(success: (res) {
       insertAllDocs(res);
     }, failure: () {
@@ -53,7 +71,7 @@ class UserProfileController extends DocsController with CurrentUidMixin {
     final Timestamp now = Timestamp.now();
     final followingToken = FollowingToken(
         createdAt: now,
-        passiveUid: passiveUid,
+        passiveUid: passiveUid(),
         tokenId: tokenId,
         tokenType: TokenType.following.name);
     CurrentUserController.to.addFollowingUid(followingToken);
@@ -61,16 +79,16 @@ class UserProfileController extends DocsController with CurrentUidMixin {
         currentUid(), tokenId, followingToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
     final follower = Follower(
-        createdAt: now, followedUid: passiveUid, followerUid: currentUid());
+        createdAt: now, followedUid: passiveUid(), followerUid: currentUid());
     await _repository.createFollower(
-        currentUid(), passiveUid, follower.toJson());
+        currentUid(), passiveUid(), follower.toJson());
   }
 
   Future<void> unfollow() async {
     final deleteToken = CurrentUserController.to.followingTokens
-        .firstWhere((element) => element.passiveUid == passiveUid);
+        .firstWhere((element) => element.passiveUid == passiveUid());
     CurrentUserController.to.removeFollowingUid(deleteToken);
     await _repository.deleteToken(currentUid(), deleteToken.tokenId);
-    await _repository.deleteFollower(currentUid(), passiveUid);
+    await _repository.deleteFollower(currentUid(), passiveUid());
   }
 }

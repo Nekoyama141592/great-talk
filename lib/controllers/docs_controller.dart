@@ -9,8 +9,8 @@ abstract class DocsController extends GetxController {
   final docs = <QDoc>[].obs;
   final isLoading = false.obs;
 
-  void startLoading() => isLoading(true);
-  void endLoading() => isLoading(false);
+  void _startLoading() => isLoading(true);
+  void _endLoading() => isLoading(false);
   void addAllDocs(List<QDoc> elements) {
     docs.addAll(elements);
     docs([...docs]);
@@ -23,9 +23,14 @@ abstract class DocsController extends GetxController {
     docs([...docs]);
   }
 
-  Future<void> init() => fetchDocs();
+  Future<void> init() => onReload();
   Future<void> fetchDocs();
   Future<void> onRefresh(RefreshController refreshController);
-  Future<void> onReload() => fetchDocs();
+  Future<void> onReload() async {
+    _startLoading();
+    await fetchDocs();
+    _endLoading();
+  }
+
   Future<void> onLoading(RefreshController refreshController);
 }
