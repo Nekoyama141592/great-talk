@@ -1,10 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:great_talk/views/components/profile_screen.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const SizedBox();
+    return const Scaffold(
+      body: ProfileScreen(),
+    );
   }
 }

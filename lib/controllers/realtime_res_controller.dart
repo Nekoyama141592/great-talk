@@ -36,7 +36,7 @@ class RealtimeResController extends GetxController with CurrentUidMixin {
   Future<void> getChatLog() async {
     isLoading(true);
     final uid = Get.parameters['uid']!;
-    final type = personIds.contains(uid)
+    final type = returnIsOriginalContents(uid)
         ? InterlocutorType.originalContent
         : InterlocutorType.userContent;
     if (type == InterlocutorType.originalContent) {
