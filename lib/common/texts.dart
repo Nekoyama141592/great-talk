@@ -17,6 +17,21 @@ class BasicBoldText extends StatelessWidget {
   }
 }
 
+class BoldWhiteText extends StatelessWidget {
+  const BoldWhiteText(this.text, {Key? key}) : super(key: key);
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: const TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+}
+
 class TabText extends StatelessWidget {
   const TabText(this.text, {Key? key}) : super(key: key);
   final String text;

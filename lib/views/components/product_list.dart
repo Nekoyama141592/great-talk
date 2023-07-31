@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/common/strings.dart';
+import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
@@ -42,7 +43,7 @@ class ProductList extends StatelessWidget {
                       onPressed: () async =>
                           await controller.onPurchaseButtonPressed(
                               inAppPurchase, productDetails),
-                      child: boldText("契約する")))));
+                      child: const BoldWhiteText("契約する")))));
         },
       ).toList();
 
