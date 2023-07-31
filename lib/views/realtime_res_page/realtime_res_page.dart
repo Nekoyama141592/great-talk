@@ -24,10 +24,7 @@ class RealtimeResPage extends HookWidget {
     }, []);
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-              title: Obx(
-            () => Text(controller.interlocutor.userName),
-          )),
+          appBar: AppBar(title: Text(controller.interlocutor.userName)),
           body: Obx(() => controller.isLoading.value
               ? const Center(
                   child: CircularProgressIndicator(),

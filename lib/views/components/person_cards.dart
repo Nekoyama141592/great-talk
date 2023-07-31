@@ -10,7 +10,8 @@ import 'package:great_talk/utility/chat_utility.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 
 class PersonCards extends StatelessWidget {
-  const PersonCards({Key? key}) : super(key: key);
+  const PersonCards({Key? key, required this.type}) : super(key: key);
+  final InterlocutorType type;
   @override
   Widget build(context) {
     final PersonsController controller = PersonsController.to;
@@ -51,7 +52,7 @@ class PersonCards extends StatelessWidget {
                               )
                             : null,
                         onTap: () => Get.toNamed(
-                            '/chat/${person.uid}?type=${InterlocutorType.originalContent.name}'),
+                            '/chat/${person.uid}?type=${type.name}'),
                         onLongPress: () => ChatUtility.showCleanLocalMsgDialog(
                             person, controller),
                       ),

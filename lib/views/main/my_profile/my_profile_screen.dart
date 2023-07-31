@@ -5,11 +5,11 @@ class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       floatingActionButton: FloatingActionButton(
           backgroundColor: kPrimaryColor,
-          onPressed: null,
-          child: Icon(Icons.new_label)),
+          onPressed: () {},
+          child: const Icon(Icons.new_label)),
     );
   }
 }

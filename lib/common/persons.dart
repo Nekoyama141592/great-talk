@@ -23,7 +23,7 @@ const ai = [
 ];
 const proPeople = [
   ChatUser(
-      uid: 'human resources',
+      uid: 'human-resources',
       userName: '人事の専門家',
       metadata: {
         'description': '組織の人的資源を最大限に活用するための戦略を策定することを専門とする人',
@@ -567,7 +567,7 @@ const proPeople = [
       imageUrl:
           'https://pbs.twimg.com/media/FziITdwaEDML9jT?format=jpg&name=small'),
   ChatUser(
-      uid: 'robot designer',
+      uid: 'robot-designer',
       userName: 'ロボットデザイナー',
       metadata: {
         'description': '色彩を利用して心理的な問題を解決する専門職',
@@ -577,27 +577,27 @@ const proPeople = [
 ];
 const greatPeople = [
   ChatUser(
-      uid: 'Albert Einstein.',
+      uid: 'Albert-Einstein.',
       userName: 'アルベルト・アインシュタイン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Einstein1921_by_F_Schmutzer_2.jpg/225px-Einstein1921_by_F_Schmutzer_2.jpg'),
   ChatUser(
-      uid: 'Isaac Newton',
+      uid: 'Isaac-Newton',
       userName: 'アイザック・ニュートン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/GodfreyKneller-IsaacNewton-1689.jpg/225px-GodfreyKneller-IsaacNewton-1689.jpg'),
   ChatUser(
-      uid: 'Charles Darwin',
+      uid: 'Charles-Darwin',
       userName: 'チャールズ・ダーウィン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Hw-darwin.jpg/225px-Hw-darwin.jpg'),
   ChatUser(
-      uid: 'Galileo Galilei',
+      uid: 'Galileo-Galilei',
       userName: 'ガリレオ・ガリレイ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Galileo-sustermans2.jpg/225px-Galileo-sustermans2.jpg'),
   ChatUser(
-      uid: 'Leonardo da Vinci',
+      uid: 'Leonardo-da-Vinci',
       userName: 'レオナルド・ダ・ヴィンチ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Leonardo_da_Vinci_-_presumed_self-portrait_-_WGA12798.jpg/220px-Leonardo_da_Vinci_-_presumed_self-portrait_-_WGA12798.jpg'),
@@ -607,132 +607,132 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Kapitolinischer_Pythagoras_adjusted.jpg/200px-Kapitolinischer_Pythagoras_adjusted.jpg'),
   ChatUser(
-      uid: 'Carl Friedrich Gauss',
+      uid: 'Carl-Friedrich-Gauss',
       userName: 'カール・フリードリヒ・ガウス',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Carl_Friedrich_Gauss.jpg/225px-Carl_Friedrich_Gauss.jpg'),
   ChatUser(
-      uid: 'Nikola Tesla',
+      uid: 'Nikola-Tesla',
       userName: 'ニコラ・テスラ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Tesla_Sarony.jpg/225px-Tesla_Sarony.jpg'),
   ChatUser(
-      uid: 'Michael Faraday',
+      uid: 'Michael-Faraday',
       userName: 'マイケル・ファラデー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Michael_Faraday_001.jpg/200px-Michael_Faraday_001.jpg'),
   ChatUser(
-      uid: 'Srinivasa Ramanujan',
+      uid: 'Srinivasa-Ramanujan',
       userName: 'シュリニヴァーサ・ラマヌジャン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Srinivasa_Ramanujan_-_OPC_-_1.jpg/450px-Srinivasa_Ramanujan_-_OPC_-_1.jpg'),
   ChatUser(
-      uid: "Yosano Akiko",
+      uid: "Yosa-no-Akiko",
       userName: "与謝野晶子",
       imageUrl:
           "https://upload.wikimedia.org/wikipedia/commons/7/72/Akiko_Yosano_younger.jpg"),
   ChatUser(
-      uid: 'Jean-Henri Fabre.',
+      uid: 'Jean-Henri-Fabre.',
       userName: 'ジャン・アンリ・ファーブル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Jean-henri_fabre.jpg/225px-Jean-henri_fabre.jpg'),
   ChatUser(
-      uid: 'Louis Pasteur',
+      uid: 'Louis-Pasteur',
       userName: 'ルイ・パスツール',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Louis_Pasteur.jpg/225px-Louis_Pasteur.jpg'),
   ChatUser(
-      uid: 'Ukichiro Nakatani',
+      uid: 'Ukichiro-Nakatani',
       userName: '中谷宇吉郎',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nakaya_Ukichiro_in_1946.jpg/250px-Nakaya_Ukichiro_in_1946.jpg'),
   ChatUser(
-      uid: 'Shibasaburo Kitasato',
+      uid: 'Shibasaburo-Kitasato',
       userName: '北里柴三郎',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Kitasato_Shibasaburo.jpg/250px-Kitasato_Shibasaburo.jpg'),
   ChatUser(
-      uid: 'Antoine Lavoisier',
+      uid: 'Antoine-Lavoisier',
       userName: 'アントワーヌ・ラヴォアジエ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/David_-_Portrait_of_Monsieur_Lavoisier_%28cropped%29.jpg/225px-David_-_Portrait_of_Monsieur_Lavoisier_%28cropped%29.jpg'),
   ChatUser(
-      uid: 'the Wright brothers',
+      uid: 'the-Wright-brothers',
       userName: 'ライト兄弟',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Wilbur_Wright.jpg/150px-Wilbur_Wright.jpg'),
   ChatUser(
-      uid: 'Marie Curie.',
+      uid: 'Marie-Curie.',
       userName: 'マリ・キュリー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Marie_Curie_1903.jpg/225px-Marie_Curie_1903.jpg'),
   ChatUser(
-      uid: 'Alfred Wegener',
+      uid: 'Alfred-Wegener',
       userName: 'アルフレート・ヴェーゲナー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Alfred_Wegener_ca.1924-30.jpg/250px-Alfred_Wegener_ca.1924-30.jpg'),
   ChatUser(
-      uid: 'Ino Tadataka',
+      uid: 'I-no-Tadataka',
       userName: '伊能忠敬',
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Ino-tadataka%2Csawara%2Ckatori-city%2Cjapan.JPG/200px-Ino-tadataka%2Csawara%2Ckatori-city%2Cjapan.JPG'),
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/I-no-tadataka%2Csawara%2Ckatori-city%2Cjapan.JPG/200px-I-no-tadataka%2Csawara%2Ckatori-city%2Cjapan.JPG'),
   ChatUser(
-      uid: 'James Watt',
+      uid: 'James-Watt',
       userName: 'ジェームズ・ワット',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Watt_James_von_Breda.jpg/250px-Watt_James_von_Breda.jpg'),
   ChatUser(
-      uid: 'Dmitri Mendeleyev',
+      uid: 'Dmitri-Mendeleyev',
       userName: 'ドミトリ・メンデレーエフ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/DIMendeleevCab.jpg/225px-DIMendeleevCab.jpg'),
   ChatUser(
-      uid: 'Tomitaro Makino',
+      uid: 'Tomitaro-Makino',
       userName: '牧野富太郎',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Makino_Tomitaro.jpg/200px-Makino_Tomitaro.jpg'),
   ChatUser(
-      uid: 'Gregor Johan Mendel.',
+      uid: 'Gregor-Johan-Mendel.',
       userName: 'グレゴール・ヨハン・メンデル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Gregor_Mendel.png/225px-Gregor_Mendel.png'),
   ChatUser(
-      uid: 'Fritjof Nansen.',
+      uid: 'Fritjof-Nansen.',
       userName: 'フリチョフ・ナンセン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Bundesarchiv_Bild_102-09772%2C_Fridjof_Nansen.jpg/200px-Bundesarchiv_Bild_102-09772%2C_Fridjof_Nansen.jpg'),
   ChatUser(
-      uid: 'Sugita Genpaku era (1644.2.15-1648.2.15)',
+      uid: 'Sugita-Genpaku',
       userName: '杉田玄白',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sugita_Genpaku.jpg/220px-Sugita_Genpaku.jpg'),
   ChatUser(
-      uid: 'Jean-François Champollion',
+      uid: 'Jean-François-Champollion',
       userName: 'ジャン＝フランソワ・シャンポリオン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Jean-Francois_Champollion_2.jpg/250px-Jean-Francois_Champollion_2.jpg'),
   ChatUser(
-      uid: 'Nagaoka Hantaro',
+      uid: 'Nagaoka-Hantaro',
       userName: '長岡半太郎',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Hantaro_Nagaoka.jpg/225px-Hantaro_Nagaoka.jpg'),
   ChatUser(
-      uid: 'James Clark Maxwell.',
+      uid: 'James-Clark-Maxwell.',
       userName: 'ジェームズ・クラーク・マクスウェル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/James_Clerk_Maxwell.png/225px-James_Clerk_Maxwell.png'),
   ChatUser(
-      uid: 'Kotaro Honda',
+      uid: 'Kotaro-Honda',
       userName: '本多光太郎',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Kotaro_Honda.jpg/200px-Kotaro_Honda.jpg'),
   ChatUser(
-      uid: 'Paul Ehrlich',
+      uid: 'Paul-Ehrlich',
       userName: 'パウル・エールリヒ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Paul_Ehrlich_1915.jpg/200px-Paul_Ehrlich_1915.jpg'),
   ChatUser(
-      uid: 'Niels Bohr.',
+      uid: 'Niels-Bohr.',
       userName: 'ニールス・ボーア',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Niels_Bohr.jpg/225px-Niels_Bohr.jpg'),
@@ -742,560 +742,546 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Retrato_de_un_erudito_%28%C2%BFArqu%C3%ADmedes%3F%29%2C_por_Domenico_Fetti.jpg/225px-Retrato_de_un_erudito_%28%C2%BFArqu%C3%ADmedes%3F%29%2C_por_Domenico_Fetti.jpg'),
   ChatUser(
-      uid: 'John Dalton',
+      uid: 'John-Dalton',
       userName: 'ジョン・ドルトン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Dalton_John_desk.jpg/240px-Dalton_John_desk.jpg'),
   ChatUser(
-      uid: 'William Ramsey',
+      uid: 'William-Ramsey',
       userName: 'ウィリアム・ラムゼー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/William_Ramsay.jpg/180px-William_Ramsay.jpg'),
   ChatUser(
-      uid: 'Hideki Yukawa',
+      uid: 'Hideki-Yukawa',
       userName: '湯川秀樹',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Yukawa.jpg/225px-Yukawa.jpg'),
   ChatUser(
-      uid: 'Konstantin Tsiolkovsky.',
+      uid: 'Konstantin-Tsiolkovsky.',
       userName: 'コンスタンチン・ツィオルコフスキー',
       imageUrl: 'https://weblio.hs.llnwd.net/e7/img/dict/spchk/207.jpg'),
   ChatUser(
-      uid: 'Justus von Liebig',
+      uid: 'Justus-von-Liebig',
       userName: 'ユストゥス・フォン・リービッヒ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/b/b2/Justus_von_Liebig.jpg'),
   ChatUser(
-      uid: 'Antoni van Leeuwenhoek.',
+      uid: 'Antoni-van-Leeuwenhoek.',
       userName: 'アントニ・ファン・レーウェンフック',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Jan_Verkolje_-_Antonie_van_Leeuwenhoek.jpg/225px-Jan_Verkolje_-_Antonie_van_Leeuwenhoek.jpg'),
   ChatUser(
-      uid: 'Hiraga Gennai',
+      uid: 'Hiraga-Gennai',
       userName: '平賀源内',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/A_Portrait_of_Ky%C5%ABkei_Hiraga_cropped.jpg/250px-A_Portrait_of_Ky%C5%ABkei_Hiraga_cropped.jpg'),
   ChatUser(
-      uid: 'Alexander Graham Bell.',
+      uid: 'Alexander-Graham-Bell.',
       userName: 'アレクサンダー・グラハム・ベル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Alexander_Graham_Bell.jpg/225px-Alexander_Graham_Bell.jpg'),
   ChatUser(
-      uid: 'Ernest Rutherford.',
+      uid: 'Ernest-Rutherford.',
       userName: 'アーネスト・ラザフォード',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Ernest_Rutherford_LOC.jpg/250px-Ernest_Rutherford_LOC.jpg'),
   ChatUser(
-      uid: 'Alexander Fleming.',
+      uid: 'Alexander-Fleming.',
       userName: 'アレクサンダー・フレミング',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Synthetic_Production_of_Penicillin_TR1468.jpg/200px-Synthetic_Production_of_Penicillin_TR1468.jpg'),
   ChatUser(
-      uid: 'Guglielmo Marconi',
+      uid: 'Guglielmo-Marconi',
       userName: 'グリエルモ・マルコーニ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Guglielmo_Marconi.jpg/225px-Guglielmo_Marconi.jpg'),
   ChatUser(
-      uid: 'James Hutton',
+      uid: 'James-Hutton',
       userName: 'ジェームズ・ハットン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Hutton_James_portrait_Raeburn.jpg/225px-Hutton_James_portrait_Raeburn.jpg'),
   ChatUser(
-      uid: 'Max Delbrück.',
+      uid: 'Max-Delbrück.',
       userName: 'マックス・デルブリュック',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Maxdelbr%C3%BCck.jpg/225px-Maxdelbr%C3%BCck.jpg'),
   ChatUser(
-      uid: 'Walt Disney',
+      uid: 'Walt-Disney',
       userName: 'ウォルト・ディズニー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Walt_disney_portrait.jpg/250px-Walt_disney_portrait.jpg'),
   ChatUser(
-      uid: 'Edmund Halley',
+      uid: 'Edmund-Halley',
       userName: 'エドモンド・ハレー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Edmund_Halley.gif/225px-Edmund_Halley.gif'),
   ChatUser(
-      uid: 'Georges Cuvier',
+      uid: 'Georges-Cuvier',
       userName: 'ジョルジュ・キュヴィエ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Bolton-cuvier.jpg/225px-Bolton-cuvier.jpg'),
   ChatUser(
-      uid: 'Aristotle.',
+      uid: 'Aristotle',
       userName: 'アリストテレス',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Aristotle_Altemps_Inv8575.jpg/200px-Aristotle_Altemps_Inv8575.jpg'),
   ChatUser(
-      uid: 'Roar Amundsen.',
+      uid: 'Roar-Amundsen.',
       userName: 'ロアール・アムンセン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Nlc_amundsen.jpg/200px-Nlc_amundsen.jpg'),
   ChatUser(
-      uid: 'Heinrich Schliemann.',
+      uid: 'Heinrich-Schliemann.',
       userName: 'ハインリヒ・シュリーマン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Heinrich_Schliemann.jpg/220px-Heinrich_Schliemann.jpg'),
   ChatUser(
-      uid: 'Takakazu Seki',
+      uid: 'Takakazu-Seki',
       userName: '関孝和',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Seki.jpeg/220px-Seki.jpeg'),
   ChatUser(
-      uid: 'Max Planck.',
+      uid: 'Max-Planck.',
       userName: 'マックス・プランク',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Max_Planck_1933.jpg/225px-Max_Planck_1933.jpg'),
   ChatUser(
-      uid: 'Howard Carter',
+      uid: 'Howard-Carter',
       userName: 'ハワード・カーター',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Howard_carter.jpg/173px-Howard_carter.jpg'),
   ChatUser(
-      uid: 'Roberto Bunsen',
+      uid: 'Roberto-Bunsen',
       userName: 'ロベルト・ブンゼン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Robert_Bunsen_02.jpg/200px-Robert_Bunsen_02.jpg'),
   ChatUser(
-      uid: 'Niels Abel.',
+      uid: 'Niels-Abel',
       userName: 'ニールス・アーベル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Niels_Henrik_Abel.jpg/180px-Niels_Henrik_Abel.jpg'),
   ChatUser(
-      uid: 'Auguste Picard',
+      uid: 'Auguste-Picard',
       userName: 'オーギュスト・ピカール',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bundesarchiv_Bild_102-13738%2C_Auguste_Piccard.jpg/220px-Bundesarchiv_Bild_102-13738%2C_Auguste_Piccard.jpg'),
   ChatUser(
-      uid: 'Christopher Columbus',
+      uid: 'Christopher-Columbus',
       userName: 'クリストファー・コロンブス',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Ridolfo_Ghirlandaio_Columbus.jpg/200px-Ridolfo_Ghirlandaio_Columbus.jpg'),
   ChatUser(
-      uid: 'George Stevenson.',
+      uid: 'George-Stevenson.',
       userName: 'ジョージ・スチーブンソン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/GeorgeStephenson.PNG/220px-GeorgeStephenson.PNG'),
   ChatUser(
-      uid: 'Umetaro Suzuki',
-      userName: '鈴木梅太郎',
-      imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/1/15/Suzukiumetaro.jpg'),
-  ChatUser(
-      uid: 'Charles Lindbergh',
+      uid: 'Charles-Lindbergh',
       userName: 'チャールズ・リンドバーグ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Col_Charles_Lindbergh.jpg/200px-Col_Charles_Lindbergh.jpg'),
   ChatUser(
-      uid: 'Johannes Kepler',
+      uid: 'Johannes-Kepler',
       userName: 'ヨハネス・ケプラー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Kepler.png/225px-Kepler.png'),
   ChatUser(
-      uid: 'Ferdinand Magellan',
+      uid: 'Ferdinand-Magellan',
       userName: 'フェルディナンド・マゼラン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Ferdinand_Magellan.jpg/180px-Ferdinand_Magellan.jpg'),
   ChatUser(
-      uid: 'Fusayoshi Omori',
-      userName: '大森房吉',
-      imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Omori_Fusakichi.jpg/225px-Omori_Fusakichi.jpg'),
-  ChatUser(
-      uid: 'Robert Boyle',
+      uid: 'Robert-Boyle',
       userName: 'ロバート・ボイル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Robert_Boyle_0001.jpg/250px-Robert_Boyle_0001.jpg'),
   ChatUser(
-      uid: 'Sven Hedin.',
+      uid: 'Sven-Hedin.',
       userName: 'スヴェン・ヘディン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Sven_Hedin_01.jpg/250px-Sven_Hedin_01.jpg'),
   ChatUser(
-      uid: 'Heike Kammerling Onnes.',
+      uid: 'Heike-Kammerling-Onnes.',
       userName: 'ヘイケ・カメルリング・オネス',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Kamerlingh_portret.jpg/200px-Kamerlingh_portret.jpg'),
   ChatUser(
-      uid: 'Johannes Gutenberg.',
+      uid: 'Johannes-Gutenberg.',
       userName: 'ヨハネス・グーテンベルク',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Gutenberg.jpg/220px-Gutenberg.jpg'),
   ChatUser(
-      uid: 'Masatoshi Okochi',
+      uid: 'Masatoshi-Okochi',
       userName: '大河内正敏',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Masatoshi_Okochi.JPG/200px-Masatoshi_Okochi.JPG'),
   ChatUser(
-      uid: 'Erwin Schrodinger.',
+      uid: 'Erwin-Schrodinger.',
       userName: 'エルヴィン・シュレーディンガー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Erwin_Schr%C3%B6dinger_%281933%29.jpg/225px-Erwin_Schr%C3%B6dinger_%281933%29.jpg'),
   ChatUser(
-      uid: 'Blaise Pascal',
+      uid: 'Blaise-Pascal',
       userName: 'ブレーズ・パスカル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Blaise_pascal.jpg/200px-Blaise_pascal.jpg'),
   ChatUser(
-      uid: 'Wendell Stanley.',
+      uid: 'Wendell-Stanley.',
       userName: 'ウェンデル・スタンリー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wendell_Meredith_Stanley.jpg/200px-Wendell_Meredith_Stanley.jpg'),
   ChatUser(
-      uid: 'Robert Peary.',
+      uid: 'Robert-Peary.',
       userName: 'ロバート・ピアリー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/RobertPeary.jpg/200px-RobertPeary.jpg'),
   ChatUser(
-      uid: 'Werner Heisenberg',
+      uid: 'Werner-Heisenberg',
       userName: 'ヴェルナー・ハイゼンベルク',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Bundesarchiv_Bild183-R57262%2C_Werner_Heisenberg.jpg/225px-Bundesarchiv_Bild183-R57262%2C_Werner_Heisenberg.jpg'),
   ChatUser(
-      uid: 'Amedeo Avogadro.',
+      uid: 'Amedeo-Avogadro.',
       userName: 'アメデオ・アヴォガドロ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Amadeo_Avogadro.png/225px-Amadeo_Avogadro.png'),
   ChatUser(
-      uid: 'Karl Benz',
+      uid: 'Karl-Benz',
       userName: 'カール・ベンツ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Karl_Benz.jpg/220px-Karl_Benz.jpg'),
   ChatUser(
-      uid: 'Edward Jenner.',
+      uid: 'Edward-Jenner.',
       userName: 'エドワード・ジェンナー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Edward_Jenner.jpg/225px-Edward_Jenner.jpg'),
   ChatUser(
-      uid: 'Alessandro Volta',
+      uid: 'Alessandro-Volta',
       userName: 'アレッサンドロ・ボルタ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Alessandro_Volta.jpeg/225px-Alessandro_Volta.jpeg'),
   ChatUser(
-      uid: 'Hata Sahachiro',
+      uid: 'Hata-Sahachiro',
       userName: '秦佐八郎',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Sahachiro_Hata.jpg/180px-Sahachiro_Hata.jpg'),
   ChatUser(
-      uid: 'Philipp Franz von Siebold',
+      uid: 'Philipp-Franz-von-Siebold',
       userName: 'フィリップ・フランツ・フォン・シーボルト',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/%E3%82%B7%E3%83%BC%E3%83%9C%E3%83%AB%E3%83%88_%E5%B7%9D%E5%8E%9F%E6%85%B6%E8%B3%80%E7%AD%86.jpg/250px-%E3%82%B7%E3%83%BC%E3%83%9C%E3%83%AB%E3%83%88_%E5%B7%9D%E5%8E%9F%E6%85%B6%E8%B3%80%E7%AD%86.jpg'),
   ChatUser(
-      uid: 'John von Neumann',
+      uid: 'John-von-Neumann',
       userName: 'ジョン・フォン・ノイマン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/JohnvonNeumann-LosAlamos.gif/225px-JohnvonNeumann-LosAlamos.gif'),
   ChatUser(
-      uid: 'Robert Fulton',
+      uid: 'Robert-Fulton',
       userName: 'ロバート・フルトン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Fulton.jpg/200px-Fulton.jpg'),
   ChatUser(
-      uid: 'Edmund Hillary',
+      uid: 'Edmund-Hillary',
       userName: 'エドモンド・ヒラリー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Edmundhillarycropped.jpg/200px-Edmundhillarycropped.jpg'),
   ChatUser(
-      uid: 'Hugo de Vries',
+      uid: 'Hugo-de-Vries',
       userName: 'ユーゴー・ド・フリース',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Hugo_de_Vries_2.jpg/200px-Hugo_de_Vries_2.jpg'),
   ChatUser(
-      uid: 'Wallace Carothers.',
+      uid: 'Wallace-Carothers.',
       userName: 'ウォーレス・カロザース',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Wallace_Carothers%2C_in_the_lab.jpg/225px-Wallace_Carothers%2C_in_the_lab.jpg'),
   ChatUser(
-      uid: 'Thomas Edison.',
+      uid: 'Thomas-Edison.',
       userName: 'トーマス・エジソン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Thomas_Edison2.jpg/250px-Thomas_Edison2.jpg'),
   ChatUser(
-      uid: 'Carl von Rinne',
+      uid: 'Carl-von-Rinne',
       userName: 'カール・フォン・リンネ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Carl_von_Linn%C3%A9.jpg/180px-Carl_von_Linn%C3%A9.jpg'),
   ChatUser(
-      uid: 'Henry Cavendish',
+      uid: 'Henry-Cavendish',
       userName: 'ヘンリー・キャヴェンディッシュ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Cavendish_Henry_signature.jpg/225px-Cavendish_Henry_signature.jpg'),
   ChatUser(
-      uid: 'Louis Jacques Mande Daguerre',
+      uid: 'Louis-Jacques-Mande-Daguerre',
       userName: 'ルイ・ジャック・マンデ・ダゲール',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Louis_Daguerre.jpg/220px-Louis_Daguerre.jpg'),
   ChatUser(
-      uid: 'Robert Koch',
+      uid: 'Robert-Koch',
       userName: 'ローベルト・コッホ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Robert_Koch.jpg/225px-Robert_Koch.jpg'),
   ChatUser(
-      uid: 'Nicolaus Copernicus',
+      uid: 'Nicolaus-Copernicus',
       userName: 'ニコラウス・コペルニクス',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Nikolaus_Kopernikus.jpg/225px-Nikolaus_Kopernikus.jpg'),
   ChatUser(
-      uid: 'Alfred Nobel',
+      uid: 'Alfred-Nobel',
       userName: 'アルフレッド・ノーベル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/AlfredNobel2.jpg/200px-AlfredNobel2.jpg'),
   ChatUser(
-      uid: 'Albert Michelson',
+      uid: 'Albert-Michelson',
       userName: 'アルバート・マイケルソン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Albert_Abraham_Michelson2.jpg/225px-Albert_Abraham_Michelson2.jpg'),
   ChatUser(
-      uid: 'George Gamow.',
+      uid: 'George-Gamow',
       userName: 'ジョージ・ガモフ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/1/1d/Bragg_lab1_1930_%28cropped%29.jpg'),
   ChatUser(
-      uid: 'Alexander von Humboldt',
+      uid: 'Alexander-von-Humboldt',
       userName: 'アレクサンダー・フォン・フンボルト',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/AvHumboldt.jpg/225px-AvHumboldt.jpg'),
   ChatUser(
-      uid: 'René Descartes',
+      uid: 'René-Descartes',
       userName: 'ルネ・デカルト',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg/200px-Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg'),
   ChatUser(
-      uid: 'James Prescott Jules',
+      uid: 'James-Prescott-Jules',
       userName: 'ジェームズ・プレスコット・ジュール',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Joule_James_sitting.jpg/250px-Joule_James_sitting.jpg'),
   ChatUser(
-      uid: 'Himiko (Japanese goddess of war)',
+      uid: 'Himiko',
       userName: '卑弥呼',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Himiko_Queen_of_Yamataikoku.jpg/400px-Himiko_Queen_of_Yamataikoku.jpg'),
   ChatUser(
-      uid: 'Yamato Takel (god of war)',
+      uid: 'Yamato-Takel',
       userName: 'ヤマトタケル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Yamato_Takeru%28bronze_statue%2COsaka%2901.jpg/250px-Yamato_Takeru%28bronze_statue%2COsaka%2901.jpg'),
   ChatUser(
-      uid:
-          'Ninoku no Tenno (the eight hereditary titles; one of the three Imperial regents and four highest-ranking noblemen)',
+      uid: 'Jintoku-tenno',
       userName: '仁徳天皇',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Nintoku-tenn%C5%8D_detail.jpg/190px-Nintoku-tenn%C5%8D_detail.jpg'),
   ChatUser(
-      uid: 'lesser cuckoo (Cuculus poliocephalus)',
+      uid: 'soga-no-umako',
       userName: '蘇我馬子',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Soga_no_Umako.jpg/240px-Soga_no_Umako.jpg'),
   ChatUser(
-      uid: 'Prince Shotoku Taishi',
+      uid: 'Shotoku-Taishi',
       userName: '聖徳太子',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Umayado_Miko.jpg/220px-Umayado_Miko.jpg'),
   ChatUser(
-      uid: 'Ono no Imoko (fourth highest of the eight hereditary titles)',
+      uid: 'Ono-no-Imoko',
       userName: '小野妹子',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Grave_of_Onono_Imoko1.jpg/220px-Grave_of_Onono_Imoko1.jpg'),
   ChatUser(
-      uid:
-          'Suoga Iruka (member of a pre-WWII body that informally advised the emperor)',
+      uid: 'Suoga-Iruka',
       userName: '蘇我入鹿',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Kamatari_and_Prince_Oe_Killing_the_Usurper_Iruka_LACMA_M.84.31.251.jpg/200px-Kamatari_and_Prince_Oe_Killing_the_Usurper_Iruka_LACMA_M.84.31.251.jpg'),
   ChatUser(
-      uid: 'middle-sized and high-ranking Imperial prince',
+      uid: 'Nakanoooe-no-oji',
       userName: '中大兄皇子',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Emperor_Tenji.jpg/250px-Emperor_Tenji.jpg'),
   ChatUser(
-      uid: 'Leoš Janacek',
+      uid: 'Leoš-Janacek',
       userName: 'レオシュ・ヤナーチェク',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Leos_Janacek_relief.jpg/135px-Leos_Janacek_relief.jpg'),
   ChatUser(
-      uid:
-          'Emperor Temmu (hereditary title; orig. one of the two highest such titles, later demoted to sixth highest of eight)',
+      uid: 'Emperor-Temmu',
       userName: '天武天皇',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Emperor_Tenmu.jpg/300px-Emperor_Tenmu.jpg'),
   ChatUser(
-      uid: 'Fujiwara Fuhito (third highest of the eight hereditary titles)',
+      uid: 'Fujiwara-no-Fuhito',
       userName: '藤原不比等',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Fujiwara-Fuhito.jpg/230px-Fujiwara-Fuhito.jpg'),
   ChatUser(
-      uid:
-          'Emperor Shomu (hereditary title; orig. one of the two highest such titles, later demoted to sixth highest of eight)',
+      uid: 'Emperor-Shomu',
       userName: '聖武天皇',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Emperor_Shomu.jpg/250px-Emperor_Shomu.jpg'),
   ChatUser(
-      uid: 'religious service (usu. Buddhist)',
+      uid: 'gyo-ki',
       userName: '行基',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Gyouki_1.jpg/260px-Gyouki_1.jpg'),
   ChatUser(
-      uid: 'Amitabha Buddha in a pre-enlightenment incarnation',
+      uid: 'ganjin',
       userName: '鑑真',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Ganjin_wajyo_portrait.JPG/220px-Ganjin_wajyo_portrait.JPG'),
   ChatUser(
-      uid: 'tiger beetle (esp. the Japanese tiger beetle, Cicindela japonica)',
+      uid: 'dokyo',
       userName: '道鏡',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Signature_Manuscript_Dokyo_ACE763.JPG/120px-Signature_Manuscript_Dokyo_ACE763.JPG'),
   ChatUser(
-      uid: 'Emperor Kammu (formerly Kammu Emperor Kammu)',
+      uid: 'Emperor-Kammu',
       userName: '桓武天皇',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Emperor_Kammu_large.jpg/225px-Emperor_Kammu_large.jpg'),
   ChatUser(
-      uid: 'Sakagami Tamuramaro',
+      uid: 'Sakagami-Tamuramaro',
       userName: '坂上田村麻呂',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sakanoue_Tamuramaro_sw.jpg/250px-Sakanoue_Tamuramaro_sw.jpg'),
   ChatUser(
-      uid: 'the most obvious',
+      uid: 'saityo',
       userName: '最澄',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/%E6%9C%80%E6%BE%84%E5%83%8F_%E4%B8%80%E4%B9%97%E5%AF%BA%E8%94%B5_%E5%B9%B3%E5%AE%89%E6%99%82%E4%BB%A3.jpg/250px-%E6%9C%80%E6%BE%84%E5%83%8F_%E4%B8%80%E4%B9%97%E5%AF%BA%E8%94%B5_%E5%B9%B3%E5%AE%89%E6%99%82%E4%BB%A3.jpg'),
   ChatUser(
-      uid: 'Kukai (name of a Buddhist priest)',
+      uid: 'Kukai',
       userName: '空海',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/9/98/Kobo_Daishi_%28Taisanji_Matsuyama%29.jpg'),
   ChatUser(
-      uid: 'Fujiwara no Yoshifusa',
+      uid: 'Fujiwara-no-Yoshifusa',
       userName: '藤原良房',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Fujiwara_no_Yoshifusa.jpg/220px-Fujiwara_no_Yoshifusa.jpg'),
   ChatUser(
-      uid: 'Sugawara no Michizane',
+      uid: 'Sugawara-no-Michizane',
       userName: '菅原道真',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Sugawara_Michizane.jpg/200px-Sugawara_Michizane.jpg'),
   ChatUser(
-      uid: 'Taira-no-Masakado',
+      uid: 'Taira--no-Masakado',
       userName: '平将門',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Taira_no_Masakado_01.jpg/250px-Taira_no_Masakado_01.jpg'),
   ChatUser(
-      uid: 'Fujiwara Junyu',
+      uid: 'Fujiwara-Junyu',
       userName: '藤原純友',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Fujiwara_no_Sumitomo.jpg/200px-Fujiwara_no_Sumitomo.jpg'),
   ChatUser(
-      uid: 'medium-ranked councillor in the Department of State',
+      uid: 'seisyo-nagon',
       userName: '清少納言',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/6/6f/Sei_Shonagon2.jpg'),
   ChatUser(
-      uid: 'Japanese beautyberry (Callicarpa japonica)',
+      uid: 'murasaki-shikibu',
       userName: '紫式部',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Murasaki-Shikibu-composing-Genji-Monogatari.png/200px-Murasaki-Shikibu-composing-Genji-Monogatari.png'),
   ChatUser(
-      uid: 'Fujiwara no Michinaga',
+      uid: 'Fujiwara-no-Michinaga',
       userName: '藤原道長',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/f/f3/Fujiwaranomichinaga.jpg'),
   ChatUser(
-      uid: 'Fujiwara no Yorimichi',
+      uid: 'Fujiwara-no-Yorimichi',
       userName: '藤原頼通',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Fujiwara_Yorimichi.JPG/200px-Fujiwara_Yorimichi.JPG'),
   ChatUser(
-      uid: 'Later Three Emperors (mythological, legendary, or legendary)',
+      uid: 'gosanjo-tenno',
       userName: '後三条天皇',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Emperor_Gosanj%C5%8D.jpg/225px-Emperor_Gosanj%C5%8D.jpg'),
   ChatUser(
-      uid: 'Shirakawa Emperor',
+      uid: 'Shirakawa-Emperor',
       userName: '白河天皇',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Emperor_Shirakawa.jpg/250px-Emperor_Shirakawa.jpg'),
   ChatUser(
-      uid: 'Minamoto no Yoshie',
+      uid: 'Minamoto-no-Yoshie',
       userName: '源義家',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Minamoto_no_Yoshiie.jpg/250px-Minamoto_no_Yoshiie.jpg'),
   ChatUser(
-      uid: 'Kiyomori (shogun)',
+      uid: 'Taira-no-Kiyomori',
       userName: '平清盛',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Taira_no_Kiyomori%2CTenshiSekkanMiei.jpg/270px-Taira_no_Kiyomori%2CTenshiSekkanMiei.jpg'),
   ChatUser(
-      uid: 'Minamoto no Yoshitomo',
+      uid: 'Minamoto-no-Yoshitomo',
       userName: '源義朝',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/%E5%85%83%E5%B9%B3%E6%B2%BB%E5%90%88%E6%88%A6%E6%BA%90%E7%BE%A9%E6%9C%9D%E7%99%BD%E6%B2%B3%E6%AE%BF%E5%A4%9C%E8%A8%8E%E4%B9%8B%E5%9B%B3.jpg/200px-%E5%85%83%E5%B9%B3%E6%B2%BB%E5%90%88%E6%88%A6%E6%BA%90%E7%BE%A9%E6%9C%9D%E7%99%BD%E6%B2%B3%E6%AE%BF%E5%A4%9C%E8%A8%8E%E4%B9%8B%E5%9B%B3.jpg'),
   ChatUser(
-      uid: 'Later Hakugawa Emperor (1868-1868 CE)',
+      uid: 'goshirakawa-tenno',
       userName: '後白河天皇',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Emperor_Go-Shirakawa2.jpg/270px-Emperor_Go-Shirakawa2.jpg'),
   ChatUser(
-      uid: 'Minamoto Yoshitsune',
+      uid: 'Minamoto-Yoshitsune',
       userName: '源義経',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Minamoto_no_Yoshitsune.jpg/250px-Minamoto_no_Yoshitsune.jpg'),
   ChatUser(
-      uid: 'Minamoto no Yoritomo',
+      uid: 'Minamoto-no-Yoritomo',
       userName: '源頼朝',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Minamoto_no_Yoritomo.jpg/250px-Minamoto_no_Yoritomo.jpg'),
   ChatUser(
-      uid: 'Hojo Masako',
+      uid: 'Hojo-Masako',
       userName: '北条政子',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Hojo_Masako.jpg/200px-Hojo_Masako.jpg'),
   ChatUser(
-      uid: 'Later Toba Emperor (Emperor Go-Toba)',
+      uid: 'gotoba-tenno',
       userName: '後鳥羽天皇',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Emperor_Go-Toba.jpg/250px-Emperor_Go-Toba.jpg'),
   ChatUser(
-      uid: 'Hojo Yasuji',
+      uid: 'Hojo-Yasuji',
       userName: '北条泰時',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/YASUTOKI_NISHIKI.PNG/250px-YASUTOKI_NISHIKI.PNG'),
   ChatUser(
-      uid: 'Hojo Tokiyori',
+      uid: 'Hojo-Tokiyori',
       userName: '北条時頼',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/H%C5%8Dj%C5%8D_Tokiyori.jpg/170px-H%C5%8Dj%C5%8D_Tokiyori.jpg'),
   ChatUser(
-      uid: 'Hojo Tokimune',
+      uid: 'Hojo-Tokimune',
       userName: '北条時宗',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/H%C5%8Dj%C5%8D_Tokimune.jpg/200px-H%C5%8Dj%C5%8D_Tokimune.jpg'),
   ChatUser(
-      uid: 'kubilai (variety of Jewish music)',
+      uid: 'kubilai',
       userName: 'クビライ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/YuanEmperorAlbumKhubilaiPortrait.jpg/250px-YuanEmperorAlbumKhubilaiPortrait.jpg'),
   ChatUser(
-      uid: 'Later Daigo Tenno',
+      uid: 'godaigo-tenno',
       userName: '後醍醐天皇',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Emperor_Godaigo.jpg/250px-Emperor_Godaigo.jpg'),
   ChatUser(
-      uid: 'Kusunoki Masanari',
+      uid: 'Kusunoki-Masanari',
       userName: '楠木正成',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Kusunoki_Masashige.jpg/230px-Kusunoki_Masashige.jpg'),
   ChatUser(
-      uid: 'Nitta Yoshisada',
+      uid: 'Nitta-Yoshisada',
       userName: '新田義貞',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/%E6%96%B0%E7%94%B0%E7%BE%A9%E8%B2%9E%E5%85%AC%E8%82%96%E5%83%8F.jpg/250px-%E6%96%B0%E7%94%B0%E7%BE%A9%E8%B2%9E%E5%85%AC%E8%82%96%E5%83%8F.jpg'),
   ChatUser(
-      uid: 'Ashikaga Takauji (second highest of the eight hereditary titles)',
+      uid: 'Ashikaga-Takauji',
       userName: '足利尊氏',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Ashikaga_Takauji_J%C5%8Ddo-ji.jpg/250px-Ashikaga_Takauji_J%C5%8Ddo-ji.jpg'),
   ChatUser(
-      uid: 'Ashikaga Yoshimitsu',
+      uid: 'Ashikaga-Yoshimitsu',
       userName: '足利義満',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Yoshimitsu_Ashikaga_cropped.jpg/250px-Yoshimitsu_Ashikaga_cropped.jpg'),
@@ -1305,433 +1291,427 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/2/28/Zo%27onna_Noh_Mask%2C_Edo_period%2C_18th_century%2C_wood_with_polychromy_-_Tokyo_National_Museum_-_DSC06166.JPG'),
   ChatUser(
-      uid: 'Ashikaga Yoshimasa (i.e. the Muromachi shogun, 1336-1573 CE)',
+      uid: 'Ashikaga-Yoshimasa',
       userName: '足利義政',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Ashikaga_Yoshimasa.jpg/260px-Ashikaga_Yoshimasa.jpg'),
   ChatUser(
-      uid: 'skipper of a snow boat',
+      uid: 'sessyu',
       userName: '雪舟',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Portrait_of_Sesshu.jpg/220px-Portrait_of_Sesshu.jpg'),
   ChatUser(
-      uid: 'Ikkyu Soujun',
+      uid: 'Ikkyu-Soujun',
       userName: '一休宗純',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/4/40/Portrait_of_Ikky%C5%AB_by_Bokusai.jpg'),
   ChatUser(
-      uid: 'Francisco Xavier',
+      uid: 'Francisco-Xavier',
       userName: 'フランシスコ・ザビエル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Franciscus_de_Xabier.jpg/250px-Franciscus_de_Xabier.jpg'),
   ChatUser(
-      uid: 'Houjou Soun',
+      uid: 'Houjou-Soun',
       userName: '北条早雲',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Soun_Hojo_portrait.jpg/250px-Soun_Hojo_portrait.jpg'),
   ChatUser(
-      uid: 'Doso Saito',
+      uid: 'Doso-Saito',
       userName: '斎藤道三',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Saito-Dozan-2.jpg/230px-Saito-Dozan-2.jpg'),
   ChatUser(
-      uid: 'Mori Motoki (second highest of the eight hereditary titles)',
+      uid: 'Mori-Motoki',
       userName: '毛利元就',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Mori_Motonari.jpg/250px-Mori_Motonari.jpg'),
   ChatUser(
-      uid: 'Takeda Shingen',
+      uid: 'Takeda-Shingen',
       userName: '武田信玄',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Takeda_Harunobu.jpg/250px-Takeda_Harunobu.jpg'),
   ChatUser(
-      uid: 'Kenshin Uesugi (guardian deity of women)',
+      uid: 'Kenshin-Uesugi',
       userName: '上杉謙信',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Uesugi_Kenshin_Portrait_from_Uesugi_Shrine.png/250px-Uesugi_Kenshin_Portrait_from_Uesugi_Shrine.png'),
   ChatUser(
-      uid: 'Oda Nobunaga',
+      uid: 'Oda-Nobunaga',
       userName: '織田信長',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Oda-Nobunaga.jpg/250px-Oda-Nobunaga.jpg'),
   ChatUser(
-      uid: 'Ashikaga Yoshiaki',
+      uid: 'Ashikaga-Yoshiaki',
       userName: '足利義昭',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Ashikaga_Yoshiaki.jpg/260px-Ashikaga_Yoshiaki.jpg'),
   ChatUser(
-      uid: 'Akechi Mitsuhide (famous for his works)',
+      uid: 'Akechi-Mitsuhide',
       userName: '明智光秀',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Akechi_Mitsuhide2.jpg/250px-Akechi_Mitsuhide2.jpg'),
   ChatUser(
-      uid: 'Toyotomi Hideyoshi',
+      uid: 'Toyotomi-Hideyoshi',
       userName: '豊臣秀吉',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Toyotomi_Hideyoshi_c1598_Kodai-ji_Temple.png/250px-Toyotomi_Hideyoshi_c1598_Kodai-ji_Temple.png'),
   ChatUser(
-      uid: 'Senriku Rikyuu era (1455.7.13-1457.9.28)',
+      uid: 'Senriku-Rikyuu',
       userName: '千利休',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Sen_no_Rikyu_JPN.jpg/200px-Sen_no_Rikyu_JPN.jpg'),
   ChatUser(
-      uid:
-          'Ishida Mitsunari (Ichida Mitsunari, the grand master of the game of go)',
+      uid: 'Ishida-Mitsunari',
       userName: '石田三成',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Ishida_Mitsunari.jpg/250px-Ishida_Mitsunari.jpg'),
   ChatUser(
-      uid: 'lord of stagnation',
-      userName: '淀君',
-      imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Yodo-dono_cropped.jpg/250px-Yodo-dono_cropped.jpg'),
-  ChatUser(
-      uid: 'Hideyori Toyotomi Hideyori (1582-1582)',
+      uid: 'Hideyori-Toyotomi-Hideyori',
       userName: '豊臣秀頼',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Hideyori_Toyotomi.jpg/250px-Hideyori_Toyotomi.jpg'),
   ChatUser(
-      uid: 'Date Masamune',
+      uid: 'Date-Masamune',
       userName: '伊達政宗',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Date_Masamune02.jpg/280px-Date_Masamune02.jpg'),
   ChatUser(
-      uid: 'Tokugawa Ieyasu (lords of the Tokugawa shogunate)',
+      uid: 'Tokugawa-Ieyasu',
       userName: '徳川家康',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Tokugawa_Ieyasu2.JPG/270px-Tokugawa_Ieyasu2.JPG'),
   ChatUser(
-      uid: 'Tokugawa Iemitsu',
+      uid: 'Tokugawa-Iemitsu',
       userName: '徳川家光',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Iemitu.jpg/250px-Iemitu.jpg'),
   ChatUser(
-      uid: 'Shiro Amakusa',
+      uid: 'Shiro-Amakusa',
       userName: '天草四郎',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Amakusa_Shiro.jpg/220px-Amakusa_Shiro.jpg'),
   ChatUser(
-      uid: 'Tsunayoshi Tokugawa',
+      uid: 'Tsunayoshi-Tokugawa',
       userName: '徳川綱吉',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Tsunyaoshi.jpg/250px-Tsunyaoshi.jpg'),
   ChatUser(
-      uid: 'Arai white stone',
+      uid: 'Arai-Hakuseki',
       userName: '新井白石',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Arai_Hakuseki_-_Japanischer_Gelehrter.jpg/250px-Arai_Hakuseki_-_Japanischer_Gelehrter.jpg'),
   ChatUser(
-      uid: 'Yoshimune Tokugawa',
+      uid: 'Yoshimune-Tokugawa',
       userName: '徳川吉宗',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Tokugawa_Yoshimune.jpg/260px-Tokugawa_Yoshimune.jpg'),
   ChatUser(
-      uid: 'Ooka Tadasama',
+      uid: 'Ooka-Tadasama',
       userName: '大岡忠相',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Oooka_tadasuke.jpg/250px-Oooka_tadasuke.jpg'),
   ChatUser(
-      uid: 'Honii Nobunaga',
+      uid: 'Motoori-Nobunaga',
       userName: '本居宣長',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Motoori_Norinaga_self_portrait.jpg/230px-Motoori_Norinaga_self_portrait.jpg'),
   ChatUser(
-      uid: 'Tanuma Iiji',
+      uid: 'Tanuma-Okitsugu',
       userName: '田沼意次',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Tanuma_Okitsugu2.jpg/250px-Tanuma_Okitsugu2.jpg'),
   ChatUser(
-      uid: 'Matsudaira Sadanobu',
+      uid: 'Matsudaira-Sadanobu',
       userName: '松平定信',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Matsudaira_Sadanobu.jpg/250px-Matsudaira_Sadanobu.jpg'),
   ChatUser(
-      uid: 'Heihachiro Oshio',
+      uid: 'Heihachiro-Oshio',
       userName: '大塩平八郎',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Oshio_Heihachiro.jpg/250px-Oshio_Heihachiro.jpg'),
   ChatUser(
-      uid: 'Tadakuni Mizuno',
+      uid: 'Tadakuni-Mizuno',
       userName: '水野忠邦',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Mizuno_Tadakuni.jpg/300px-Mizuno_Tadakuni.jpg'),
   ChatUser(
-      uid: 'Matthew Perry',
+      uid: 'Matthew-Perry',
       userName: 'マシュー・ペリー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Commodore_Matthew_Calbraith_Perry.png/250px-Commodore_Matthew_Calbraith_Perry.png'),
   ChatUser(
-      uid: 'Ii Naosuke',
+      uid: 'Ii-Naosuke',
       userName: '井伊直弼',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Ii_Naosuke.jpg/250px-Ii_Naosuke.jpg'),
   ChatUser(
-      uid: 'Yoshida Shoin era (1624.2.30-1644.12.16)',
+      uid: 'Yoshida-Shoi',
       userName: '吉田松陰',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Yoshida_Shoin2.jpg/250px-Yoshida_Shoin2.jpg'),
   ChatUser(
-      uid: 'Tokachi Kaisyu',
+      uid: 'Tokachi-Kaisyu',
       userName: '勝海舟',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Kaishu_Katsu_2.jpg/200px-Kaishu_Katsu_2.jpg'),
   ChatUser(
-      uid: 'Shimazu Nariakira',
+      uid: 'Shimazu-Nariakira',
       userName: '島津斉彬',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Nariakira_Shimazu.png/200px-Nariakira_Shimazu.png'),
   ChatUser(
-      uid: 'Sakamoto Ryoma',
+      uid: 'Sakamoto-Ryoma',
       userName: '坂本龍馬',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Sakamoto_Ryoma.jpg/250px-Sakamoto_Ryoma.jpg'),
   ChatUser(
-      uid: 'Keiki Tokugawa',
+      uid: 'Keiki-Tokugawa',
       userName: '徳川慶喜',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/YoshinobuTokugawa.jpg/200px-YoshinobuTokugawa.jpg'),
   ChatUser(
-      uid: 'Emperor Meiji',
+      uid: 'Emperor-Meiji',
       userName: '明治天皇',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Emperor_Meiji_in_1873.jpg/230px-Emperor_Meiji_in_1873.jpg'),
   ChatUser(
-      uid: 'Okubo Toshimichi',
+      uid: 'Okubo-Toshimichi',
       userName: '大久保利通',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Toshimichi_Okubo_4.jpg/200px-Toshimichi_Okubo_4.jpg'),
   ChatUser(
-      uid: 'Kido Kouyoshi',
+      uid: 'Kido-Kouyoshi',
       userName: '木戸孝允',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Takayoshi_Kido_suit.jpg/500px-Takayoshi_Kido_suit.jpg'),
   ChatUser(
-      uid: 'Saigo Takamori',
+      uid: 'Saigo-Takamori',
       userName: '西郷隆盛',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Saigo_Takamori_Portrait_by_Ishikawa_Shizumasa.jpg/250px-Saigo_Takamori_Portrait_by_Ishikawa_Shizumasa.jpg'),
   ChatUser(
-      uid: 'Gusaku Iwakura (god of wealth, music, eloquence and water)',
+      uid: 'Tomomi-Iwakura',
       userName: '岩倉具視',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Tomomi_Iwakura_3.jpg/220px-Tomomi_Iwakura_3.jpg'),
   ChatUser(
-      uid: 'Hirobumi Ito',
+      uid: 'Hirobumi-Ito',
       userName: '伊藤博文',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/IT%C5%8C_Hirobumi.jpg/220px-IT%C5%8C_Hirobumi.jpg'),
   ChatUser(
-      uid: 'Fukuzawa Yukichi',
+      uid: 'Fukuzawa-Yukichi',
       userName: '福沢諭吉',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Yukichi_Fukuzawa_1891.jpg/200px-Yukichi_Fukuzawa_1891.jpg'),
   ChatUser(
-      uid: 'Itagaki Tasuke',
+      uid: 'Itagaki-Tasuke',
       userName: '板垣退助',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/ITAGAKI_Taisuke.jpg/220px-ITAGAKI_Taisuke.jpg'),
   ChatUser(
-      uid: 'Shigenobu Okuma',
+      uid: 'Shigenobu-Okuma',
       userName: '大隈重信',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Shigenobu_Okuma_5.jpg/220px-Shigenobu_Okuma_5.jpg'),
   ChatUser(
-      uid: 'Mutsu Munemitsu',
+      uid: 'Mutsu-Munemitsu',
       userName: '陸奥宗光',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Mutsu_Munemitsu.jpg/200px-Mutsu_Munemitsu.jpg'),
   ChatUser(
-      uid: 'Kotaro Komura',
+      uid: 'Kotaro-Komura',
       userName: '小村寿太郎',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Komura_Jutaro.jpg/200px-Komura_Jutaro.jpg'),
   ChatUser(
-      uid: 'Heihachiro Togo',
+      uid: 'Heihachiro-Togo',
       userName: '東郷平八郎',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/T%C5%8Dg%C5%8D_Heihachir%C5%8D.jpg/260px-T%C5%8Dg%C5%8D_Heihachir%C5%8D.jpg'),
   ChatUser(
-      uid: 'Kiyoshi Shiga',
+      uid: 'Kiyoshi-Shiga',
       userName: '志賀潔',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Kiyoshi_Shiga.jpg/220px-Kiyoshi_Shiga.jpg'),
   ChatUser(
-      uid: 'Tanaka Shozo',
+      uid: 'Tanaka-Shozo',
       userName: '田中正造',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tanaka_Shozo.jpg/200px-Tanaka_Shozo.jpg'),
   ChatUser(
-      uid: 'Saionji Koumou era (1257.3.14-1259.3.26)',
+      uid: 'Saionji-Kinmoti',
       userName: '西園寺公望',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Kinmochi_Saionji_2.jpg/220px-Kinmochi_Saionji_2.jpg'),
   ChatUser(
-      uid: 'Hideyo Noguchi',
+      uid: 'Hideyo-Noguchi',
       userName: '野口英世',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Noguchi_Hideyo.jpg/225px-Noguchi_Hideyo.jpg'),
   ChatUser(
-      uid: 'Yukio Ozaki',
+      uid: 'Yukio-Ozaki',
       userName: '尾崎行雄',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Yukio_Ozaki.jpg/250px-Yukio_Ozaki.jpg'),
   ChatUser(
-      uid: 'original salutation',
+      uid: 'original-salutation',
       userName: '原敬',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Takashi_Hara_formal.jpg/220px-Takashi_Hara_formal.jpg'),
   ChatUser(
-      uid: 'Takeshi Inuyo (second highest of the eight hereditary titles)',
+      uid: 'Takeshi-Inuyo',
       userName: '犬養毅',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Inukai_Tsuyoshi.jpg/220px-Inukai_Tsuyoshi.jpg'),
   ChatUser(
-      uid: 'Isoroku Yamamoto',
+      uid: 'Isoroku-Yamamoto',
       userName: '山本五十六',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Portrait_of_Yamamoto_Isoroku.jpg/255px-Portrait_of_Yamamoto_Isoroku.jpg'),
   ChatUser(
-      uid: 'Douglas MacArthur.',
+      uid: 'Douglas-MacArthur.',
       userName: 'ダグラス・マッカーサー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/MacArthur_Manila.jpg/240px-MacArthur_Manila.jpg'),
   ChatUser(
-      uid: 'Shigeru Yoshida',
+      uid: 'Shigeru-Yoshida',
       userName: '吉田茂',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Shigeru_Yoshida_suit.jpg/200px-Shigeru_Yoshida_suit.jpg'),
   ChatUser(
-      uid: 'George Barkley.',
+      uid: 'George-Barkley.',
       userName: 'ジョージ・バークリー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/George_Berkeley_by_John_Smibert.jpg/200px-George_Berkeley_by_John_Smibert.jpg'),
   ChatUser(
-      uid: 'Benjamin Franklin.',
+      uid: 'Benjamin-Franklin.',
       userName: 'ベンジャミン・フランクリン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/BenFranklinDuplessis.jpg/200px-BenFranklinDuplessis.jpg'),
   ChatUser(
-      uid: 'Helen Keller.',
+      uid: 'Helen-Keller.',
       userName: 'ヘレン・ケラー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Helen_KellerA.jpg/220px-Helen_KellerA.jpg'),
   ChatUser(
-      uid: 'John F. Kennedy',
+      uid: 'John-F-Kennedy',
       userName: 'ジョン・F・ケネディ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/John_F._Kennedy%2C_White_House_color_photo_portrait.jpg/220px-John_F._Kennedy%2C_White_House_color_photo_portrait.jpg'),
   ChatUser(
-      uid: 'Martin Luther King Jr.',
+      uid: 'Martin-Luther-King-Jr',
       userName: 'マーティン・ルーサー・キング・ジュニア',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Martin_Luther_King_Jr_NYWTS.jpg/300px-Martin_Luther_King_Jr_NYWTS.jpg'),
   ChatUser(
-      uid: 'Franklin D. Roosevelt.',
+      uid: 'Franklin-D-Roosevelt.',
       userName: 'フランクリン・ルーズベルト',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/FDR_1944_Color_Portrait.jpg/250px-FDR_1944_Color_Portrait.jpg'),
   ChatUser(
-      uid: 'Che Guevara',
+      uid: 'Che-Guevara',
       userName: 'チェ・ゲバラ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/CheHigh.jpg/200px-CheHigh.jpg'),
   ChatUser(
-      uid: 'Victoria (Queen of England)',
+      uid: 'Victoria',
       userName: 'ヴィクトリア (イギリス女王)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Queen_Victoria_-Golden_Jubilee_-3a_cropped.JPG/200px-Queen_Victoria_-Golden_Jubilee_-3a_cropped.JPG'),
   ChatUser(
-      uid: 'Florence Nightingale.',
+      uid: 'Florence-Nightingale',
       userName: 'フローレンス・ナイチンゲール',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Florence_Nightingale_CDV_by_H_Lenthall.jpg/220px-Florence_Nightingale_CDV_by_H_Lenthall.jpg'),
   ChatUser(
-      uid: 'William Shakespeare.',
+      uid: 'William-Shakespeare.',
       userName: 'ウィリアム・シェイクスピア',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/CHANDOS3.jpg/200px-CHANDOS3.jpg'),
   ChatUser(
-      uid: 'Winston Churchill',
+      uid: 'Winston-Churchill',
       userName: 'ウィンストン・チャーチル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Sir_Winston_Churchill_-_19086236948.jpg/400px-Sir_Winston_Churchill_-_19086236948.jpg'),
   ChatUser(
-      uid: 'Charles Chaplin.',
+      uid: 'Charles-Chaplin.',
       userName: 'チャールズ・チャップリン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Charlie_Chaplin_portrait.jpg/220px-Charlie_Chaplin_portrait.jpg'),
   ChatUser(
-      uid: 'Arthur Conan Doyle',
+      uid: 'Arthur-Conan-Doyle',
       userName: 'アーサー・コナン・ドイル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Conan_doyle.jpg/250px-Conan_doyle.jpg'),
   ChatUser(
-      uid: 'Adam Smith',
+      uid: 'Adam-Smith',
       userName: 'アダム・スミス',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/AdamSmith.jpg/200px-AdamSmith.jpg'),
   ChatUser(
-      uid: 'Michelangelo Buonarroti',
+      uid: 'Michelangelo-Buonarroti',
       userName: 'ミケランジェロ・ブオナローティ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Miguel_%C3%81ngel%2C_por_Daniele_da_Volterra_%28detalle%29.jpg/220px-Miguel_%C3%81ngel%2C_por_Daniele_da_Volterra_%28detalle%29.jpg'),
   ChatUser(
-      uid: 'Raffaello Santi',
+      uid: 'Raffaello-Santi',
       userName: 'ラファエロ・サンティ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Raffaello_Sanzio.jpg/220px-Raffaello_Sanzio.jpg'),
   ChatUser(
-      uid: 'Sandro Botticelli',
+      uid: 'Sandro-Botticelli',
       userName: 'サンドロ・ボッティチェッリ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Sandro_Botticelli_083.jpg/220px-Sandro_Botticelli_083.jpg'),
   ChatUser(
-      uid: 'Benito Mussolini',
+      uid: 'Benito-Mussolini',
       userName: 'ベニート・ムッソリーニ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Mussolini_biografia.jpg/220px-Mussolini_biografia.jpg'),
   ChatUser(
-      uid: 'Dante Alighieri.',
+      uid: 'Dante-Alighieri.',
       userName: 'ダンテ・アリギエーリ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Portrait_de_Dante.jpg/200px-Portrait_de_Dante.jpg'),
   ChatUser(
-      uid: 'Lorenzo de Medici',
+      uid: 'Lorenzo-de-Medici',
       userName: 'ロレンツォ・デ・メディチ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Lorenzo_de%27_Medici-ritratto.jpg/400px-Lorenzo_de%27_Medici-ritratto.jpg'),
   ChatUser(
-      uid: 'Pietro Mascagni',
+      uid: 'Pietro-Mascagni',
       userName: 'ピエトロ・マスカーニ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Pietro_Mascagni_2.jpg/220px-Pietro_Mascagni_2.jpg'),
   ChatUser(
-      uid: 'Tintoretto.',
+      uid: 'Tintoretto',
       userName: 'ティントレット',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Tintorettoselfportrait.jpg/250px-Tintorettoselfportrait.jpg'),
   ChatUser(
-      uid: 'Michelangelo Merisi da Caravaggio',
+      uid: 'Michelangelo-Merisi-da-Caravaggio',
       userName: 'ミケランジェロ・メリージ・ダ・カラヴァッジオ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Bild-Ottavio_Leoni%2C_Caravaggio.jpg/200px-Bild-Ottavio_Leoni%2C_Caravaggio.jpg'),
   ChatUser(
-      uid: 'Filippo Lippi',
+      uid: 'Filippo-Lippi',
       userName: 'フィリッポ・リッピ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Fra_Filippo_Lippi_007.1.jpg/220px-Fra_Filippo_Lippi_007.1.jpg'),
   ChatUser(
-      uid: 'Girolamo Savonarola',
+      uid: 'Girolamo-Savonarola',
       userName: 'ジロラモ・サヴォナローラ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/GirolamoSavonarola.jpg/200px-GirolamoSavonarola.jpg'),
   ChatUser(
-      uid: 'Paolo Veronese',
+      uid: 'Paolo-Veronese',
       userName: 'パオロ・ヴェロネーゼ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Paolo_Veronese%2C_avtoportret.jpg/220px-Paolo_Veronese%2C_avtoportret.jpg'),
   ChatUser(
-      uid: 'Giorgio Vasari',
+      uid: 'Giorgio-Vasari',
       userName: 'ジョルジョ・ヴァザーリ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Giorgio_Vasari_Selbstportr%C3%A4t.jpg/220px-Giorgio_Vasari_Selbstportr%C3%A4t.jpg'),
@@ -1741,27 +1721,27 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Moses_%28Michaelangelo_-_San_Pietro_in_Vincoli_-_Rome%29.jpg/250px-Moses_%28Michaelangelo_-_San_Pietro_in_Vincoli_-_Rome%29.jpg'),
   ChatUser(
-      uid: 'Richard I (King of England)',
+      uid: 'Richard-I',
       userName: 'リチャード1世 (イングランド王)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/4/49/Richard_coeurdelion_g.jpg'),
   ChatUser(
-      uid: 'Elizabeth I (Queen of England)',
+      uid: 'Elizabeth-I',
       userName: 'エリザベス1世 (イングランド女王)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Elizabeth1England.jpg/250px-Elizabeth1England.jpg'),
   ChatUser(
-      uid: 'Oliver Cromwell.',
+      uid: 'Oliver-Cromwell',
       userName: 'オリバー・クロムウェル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Oliver_Cromwell_by_Samuel_Cooper.jpg/220px-Oliver_Cromwell_by_Samuel_Cooper.jpg'),
   ChatUser(
-      uid: 'King Ashoka',
+      uid: 'King-Ashoka',
       userName: 'アショーカ王',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Indian_relief_from_Amaravati%2C_Guntur._Preserved_in_Guimet_Museum.jpg/200px-Indian_relief_from_Amaravati%2C_Guntur._Preserved_in_Guimet_Museum.jpg'),
   ChatUser(
-      uid: 'Mahatma Gandhi',
+      uid: 'Mahatma-Gandhi',
       userName: 'マハトマ・ガンディー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Portrait_Gandhi.jpg/250px-Portrait_Gandhi.jpg'),
@@ -1771,17 +1751,17 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Buddha_in_Sarnath_Museum_%28Dhammajak_Mutra%29.jpg/240px-Buddha_in_Sarnath_Museum_%28Dhammajak_Mutra%29.jpg'),
   ChatUser(
-      uid: 'Marco Polo',
+      uid: 'Marco-Polo',
       userName: 'マルコ・ポーロ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Marco_Polo_portrait.jpg/220px-Marco_Polo_portrait.jpg'),
   ChatUser(
-      uid: 'Ramses II',
+      uid: 'Ramses-II',
       userName: 'ラムセス2世',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/RamsesIIEgypt.jpg/220px-RamsesIIEgypt.jpg'),
   ChatUser(
-      uid: 'Salahuddin.',
+      uid: 'Salahuddin',
       userName: 'サラーフッディーン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Portrait_of_Saladin_%28before_A.D._1185%3B_short%29.jpg/225px-Portrait_of_Saladin_%28before_A.D._1185%3B_short%29.jpg'),
@@ -1791,52 +1771,52 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Kairo_Museum_Statuette_Cheops_03_%28cropped%29.jpg/220px-Kairo_Museum_Statuette_Cheops_03_%28cropped%29.jpg'),
   ChatUser(
-      uid: 'Eliezabeth (Empress of Austria)',
+      uid: 'Eliezabeth',
       userName: 'エリーザベト (オーストリア皇后)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Erzsebet_kiralyne_photo_1867.jpg/200px-Erzsebet_kiralyne_photo_1867.jpg'),
   ChatUser(
-      uid: 'Sigmund Freud.',
+      uid: 'Sigmund-Freud.',
       userName: 'ジークムント・フロイト',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Sigmund_Freud_LIFE.jpg/225px-Sigmund_Freud_LIFE.jpg'),
   ChatUser(
-      uid: 'Maria Theresa',
+      uid: 'Maria-Theresa',
       userName: 'マリア・テレジア',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kaiserin_Maria_Theresia_%28HRR%29.jpg/220px-Kaiserin_Maria_Theresia_%28HRR%29.jpg'),
   ChatUser(
-      uid: 'Franz Joseph Haydn',
+      uid: 'Franz-Joseph-Haydn',
       userName: 'フランツ・ヨーゼフ・ハイドン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Haydn_portrait_by_Thomas_Hardy_%28small%29.jpg/220px-Haydn_portrait_by_Thomas_Hardy_%28small%29.jpg'),
   ChatUser(
-      uid: 'Wolfgang Amadeus Mozart',
+      uid: 'Wolfgang-Amadeus-Mozart',
       userName: 'ヴォルフガング・アマデウス・モーツァルト',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Wolfgang-amadeus-mozart_1.jpg/200px-Wolfgang-amadeus-mozart_1.jpg'),
   ChatUser(
-      uid: 'Anton Bruckner.',
+      uid: 'Anton-Bruckner.',
       userName: 'アントン・ブルックナー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Bruckner_final_years.jpg/220px-Bruckner_final_years.jpg'),
   ChatUser(
-      uid: 'Johann Strauss II',
+      uid: 'Johann-Strauss-II',
       userName: 'ヨハン・シュトラウス2世',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Johann_Strauss_II_1890.jpg/220px-Johann_Strauss_II_1890.jpg'),
   ChatUser(
-      uid: 'Vincent van Gogh',
+      uid: 'Vincent-van-Gogh',
       userName: 'フィンセント・ファン・ゴッホ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/VanGogh_1887_Selbstbildnis.jpg/250px-VanGogh_1887_Selbstbildnis.jpg'),
   ChatUser(
-      uid: 'Barouf de Spinoza.',
+      uid: 'Barouf-de-Spinoza.',
       userName: 'バールーフ・デ・スピノザ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Spinoza.jpg/200px-Spinoza.jpg'),
   ChatUser(
-      uid: 'Suleiman I.',
+      uid: 'Suleiman-I',
       userName: 'スレイマン1世',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/EmperorSuleiman.jpg/200px-EmperorSuleiman.jpg'),
@@ -1846,98 +1826,97 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Hannibal_Slodtz_Louvre_MR2093.jpg/200px-Hannibal_Slodtz_Louvre_MR2093.jpg'),
   ChatUser(
-      uid: 'Alexander III',
+      uid: 'Alexander-III',
       userName: 'アレクサンドロス3世',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Istanbul_-_Museo_archeol._-_Alessandro_Magno_%28firmata_Menas%29_-_sec._III_a.C._-_da_Magnesia_-_Foto_G._Dall%27Orto_28-5-2006_b-n.jpg/200px-Istanbul_-_Museo_archeol._-_Alessandro_Magno_%28firmata_Menas%29_-_sec._III_a.C._-_da_Magnesia_-_Foto_G._Dall%27Orto_28-5-2006_b-n.jpg'),
   ChatUser(
-      uid: 'Felipe II (King of Spain)',
+      uid: 'Felipe-II',
       userName: 'フェリペ2世 (スペイン王)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/King_PhilipII_of_Spain.jpg/200px-King_PhilipII_of_Spain.jpg'),
   ChatUser(
-      uid: 'Francisco Pizarro',
+      uid: 'Francisco-Pizarro',
       userName: 'フランシスコ・ピサロ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Pizarro.jpg/250px-Pizarro.jpg'),
   ChatUser(
-      uid: 'Hernan Cortez.',
+      uid: 'Hernan-Cortez.',
       userName: 'エルナン・コルテス',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Retrato_de_Hern%C3%A1n_Cort%C3%A9s.jpg/220px-Retrato_de_Hern%C3%A1n_Cort%C3%A9s.jpg'),
   ChatUser(
-      uid: 'Francisco de Goya',
+      uid: 'Francisco-de-Goya',
       userName: 'フランシスコ・デ・ゴヤ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Vicente_L%C3%B3pez_Porta%C3%B1a_-_el_pintor_Francisco_de_Goya.jpg/220px-Vicente_L%C3%B3pez_Porta%C3%B1a_-_el_pintor_Francisco_de_Goya.jpg'),
   ChatUser(
-      uid: 'Pablo Picasso',
+      uid: 'Pablo-Picasso',
       userName: 'パブロ・ピカソ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/230px-Pablo_picasso_1.jpg'),
   ChatUser(
-      uid: 'Christina.',
+      uid: 'Christina',
       userName: 'クリスティーナ (スウェーデン女王)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/David_Beck_-_Christina%2C_Queen_of_Sweden_1644-1654_-_Google_Art_Project.jpg/400px-David_Beck_-_Christina%2C_Queen_of_Sweden_1644-1654_-_Google_Art_Project.jpg'),
   ChatUser(
-      uid: 'Carl Zumberg.',
+      uid: 'Carl-Zumberg',
       userName: 'カール・ツンベルク',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/f/f5/Carl_Peter_Thunberg.jpg'),
   ChatUser(
-      uid: 'Vladimir Lenin',
+      uid: 'Vladimir-Lenin',
       userName: 'ウラジーミル・レーニン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Vladimir_Lenin.jpg/200px-Vladimir_Lenin.jpg'),
   ChatUser(
-      uid: 'Joseph Stalin',
+      uid: 'Joseph-Stalin',
       userName: 'ヨシフ・スターリン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Josef_Stalin_-_NARA_-_198797.jpg/220px-Josef_Stalin_-_NARA_-_198797.jpg'),
   ChatUser(
-      uid: 'Yuriy Gagarin.',
+      uid: 'Yuriy-Gagarin',
       userName: 'ユーリイ・ガガーリン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/c/cc/Gagarin_in_Sweden.jpg'),
   ChatUser(
-      uid: 'Sekifu (lowest of the eight hereditary titles)',
+      uid: 'Kanu',
       userName: '関羽',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Guanyu.jpg/200px-Guanyu.jpg'),
   ChatUser(
-      uid: 'Zhang Liang',
+      uid: 'Zhang-Liang',
       userName: '張良',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Zhang_Liang.jpg/220px-Zhang_Liang.jpg'),
   ChatUser(
-      uid: 'Cao Cao',
+      uid: 'Cao-Cao',
       userName: '曹操',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Cao_Cao_scth.jpg/220px-Cao_Cao_scth.jpg'),
   ChatUser(
-      uid: 'Liu Bei',
+      uid: 'Liu-Bei',
       userName: '劉備',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Liu_Bei_Tang.jpg/170px-Liu_Bei_Tang.jpg'),
   ChatUser(
-      uid: 'Sun Quan (dynasty of China; 386-534 CE)',
+      uid: 'Sun-Quan',
       userName: '孫権',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Sun_Quan_Tang.jpg/240px-Sun_Quan_Tang.jpg'),
   ChatUser(
-      uid: 'Genjo (era 1688.9.30-1704.3.13)',
+      uid: 'Genjo',
       userName: '玄奘',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Xuanzang_w.jpg/150px-Xuanzang_w.jpg'),
   ChatUser(
-      uid: 'Yi Paikou era (1113.7.13-1118.4.3)',
+      uid: 'Yi-Paikou',
       userName: '李白',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Libai_touxiang.jpg/200px-Libai_touxiang.jpg'),
   ChatUser(
-      uid:
-          'Shiba Sangon (Sino-Japanese esoteric Buddhism, originating in the eighth century)',
+      uid: 'Shiba-Sangon',
       userName: '司馬遷',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Si_maqian.jpg/220px-Si_maqian.jpg'),
@@ -1947,262 +1926,262 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/2/2d/Confucius_02.png'),
   ChatUser(
-      uid: 'Qin Shi Huang ("the First Qin Emperor")',
+      uid: 'Qin-Shi-Huang',
       userName: '秦始皇',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Qinshihuang.jpg/320px-Qinshihuang.jpg'),
   ChatUser(
-      uid: 'Zhu Yuanzhang.',
+      uid: 'Zhu-Yuanzhang.',
       userName: '朱元璋',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/%E6%98%8E%E5%A4%AA%E7%A5%96%E7%94%BB%E5%83%8F.jpg/200px-%E6%98%8E%E5%A4%AA%E7%A5%96%E7%94%BB%E5%83%8F.jpg'),
   ChatUser(
-      uid: 'To Fu Fu',
+      uid: 'To-Fu',
       userName: '杜甫',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Du_Fu.jpg/250px-Du_Fu.jpg'),
   ChatUser(
-      uid: 'Sun Yat-sen',
+      uid: 'Sun-Yat-sen',
       userName: '孫文',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Sun_Yat-sen_2.jpg/400px-Sun_Yat-sen_2.jpg'),
   ChatUser(
-      uid: 'Mao Zedong',
+      uid: 'Mao-Zedong',
       userName: '毛沢東',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mao_Zedong_1959.jpg/220px-Mao_Zedong_1959.jpg'),
   ChatUser(
-      uid: 'Richard Wagner',
+      uid: 'Richard-Wagner',
       userName: 'リヒャルト・ワーグナー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/RichardWagner.jpg/220px-RichardWagner.jpg'),
   ChatUser(
-      uid: 'Martin Luther',
+      uid: 'Martin-Luther',
       userName: 'マルティン・ルター',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Lucas_Cranach_%28I%29_workshop_-_Martin_Luther_%28Uffizi%29.jpg/200px-Lucas_Cranach_%28I%29_workshop_-_Martin_Luther_%28Uffizi%29.jpg'),
   ChatUser(
-      uid: 'Johann Sebastian Bach',
+      uid: 'Johann-Sebastian-Bach',
       userName: 'ヨハン・ゼバスティアン・バッハ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Johann_Sebastian_Bach.png/200px-Johann_Sebastian_Bach.png'),
   ChatUser(
-      uid: 'Ludwig van Beethoven',
+      uid: 'Ludwig-van-Beethoven',
       userName: 'ルートヴィヒ・ヴァン・ベートーヴェン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/200px-Beethoven.jpg'),
   ChatUser(
-      uid: 'Karl Marx',
+      uid: 'Karl-Marx',
       userName: 'カール・マルクス',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Marx7.jpg/200px-Marx7.jpg'),
   ChatUser(
-      uid: 'Immanuel Canto.',
+      uid: 'Immanuel-Canto.',
       userName: 'イマヌエル・カント',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Kant_gemaelde_1.jpg/250px-Kant_gemaelde_1.jpg'),
   ChatUser(
-      uid: 'Georg Wilhelm Friedrich Hegel',
+      uid: 'Georg-Wilhelm-Friedrich-Hegel',
       userName: 'ゲオルク・ヴィルヘルム・フリードリヒ・ヘーゲル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Hegel_portrait_by_Schlesinger_1831.jpg/200px-Hegel_portrait_by_Schlesinger_1831.jpg'),
   ChatUser(
-      uid: 'Friedrich Nietzsche',
+      uid: 'Friedrich-Nietzsche',
       userName: 'フリードリヒ・ニーチェ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Nietzsche1882.jpg/200px-Nietzsche1882.jpg'),
   ChatUser(
-      uid: 'Artur Schopenhauer',
+      uid: 'Artur-Schopenhauer',
       userName: 'アルトゥル・ショーペンハウアー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Arthur_Schopenhauer_Portrait_by_Ludwig_Sigismund_Ruhl_1815.jpeg/240px-Arthur_Schopenhauer_Portrait_by_Ludwig_Sigismund_Ruhl_1815.jpeg'),
   ChatUser(
-      uid: 'Engelbert Kempel',
+      uid: 'Engelbert-Kempel',
       userName: 'エンゲルベルト・ケンペル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Engelbert_Kaempfer.jpg/115px-Engelbert_Kaempfer.jpg'),
   ChatUser(
-      uid: 'Anne Frank',
+      uid: 'Anne-Frank',
       userName: 'アンネ・フランク',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/AnneFrankSchoolPhoto.jpg/220px-AnneFrankSchoolPhoto.jpg'),
   ChatUser(
-      uid: 'Felix Mendelssohn',
+      uid: 'Felix-Mendelssohn',
       userName: 'フェリックス・メンデルスゾーン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Mendelssohn_Bartholdy.jpg/220px-Mendelssohn_Bartholdy.jpg'),
   ChatUser(
-      uid: 'Carl Maria von Weber',
+      uid: 'Carl-Maria-von-Weber',
       userName: 'カール・マリア・フォン・ウェーバー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Carl_Maria_von_Weber.jpg/220px-Carl_Maria_von_Weber.jpg'),
   ChatUser(
-      uid: 'Justinian I',
+      uid: 'Justinian-I',
       userName: 'ユスティニアヌス1世',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Meister_von_San_Vitale_in_Ravenna.jpg/200px-Meister_von_San_Vitale_in_Ravenna.jpg'),
   ChatUser(
-      uid: 'Gaius Julius Caesar',
+      uid: 'Gaius-Julius-Caesar',
       userName: 'ガイウス・ユリウス・カエサル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Julius_Caesar_Coustou_Louvre_MR1798.jpg/500px-Julius_Caesar_Coustou_Louvre_MR1798.jpg'),
   ChatUser(
-      uid: 'Jean Sibelius',
+      uid: 'Jean-Sibelius',
       userName: 'ジャン・シベリウス',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jean_Sibelius%2C_1913.jpg/220px-Jean_Sibelius%2C_1913.jpg'),
   ChatUser(
-      uid: "Jeanne d'Arc (Cypripedium janum d'Arc)",
+      uid: "Jeanne-d-Arc",
       userName: 'ジャンヌ・ダルク',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Joan_of_Arc_miniature_graded.jpg/250px-Joan_of_Arc_miniature_graded.jpg'),
   ChatUser(
-      uid: 'Charles VII (King of France)',
+      uid: 'Charles-VII',
       userName: 'シャルル7世 (フランス王)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/KarlVII.jpg/200px-KarlVII.jpg'),
   ChatUser(
-      uid: 'Louis XIV (King of France)',
+      uid: 'Louis-XIV',
       userName: 'ルイ14世 (フランス王)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Louis_XIV_of_France.jpg/200px-Louis_XIV_of_France.jpg'),
   ChatUser(
-      uid: 'Marie Antoinette.',
+      uid: 'Marie-Antoinette.',
       userName: 'マリー・アントワネット',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Vig%C3%A9e-Lebrun_Marie_Antoinette_1783.jpg/200px-Vig%C3%A9e-Lebrun_Marie_Antoinette_1783.jpg'),
   ChatUser(
-      uid: 'Napoleon Bonaparte.',
+      uid: 'Napoleon-Bonaparte.',
       userName: 'ナポレオン・ボナパルト',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Fran%C3%A7ois_G%C3%A9rard_-_Napoleon_I_001.JPG/200px-Fran%C3%A7ois_G%C3%A9rard_-_Napoleon_I_001.JPG'),
   ChatUser(
-      uid: 'Jean-Jacques Rousseau',
+      uid: 'Jean-Jacques-Rousseau',
       userName: 'ジャン＝ジャック・ルソー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Jean-Jacques_Rousseau_%28painted_portrait%29.jpg/200px-Jean-Jacques_Rousseau_%28painted_portrait%29.jpg'),
   ChatUser(
-      uid: 'Coco Chanel',
+      uid: 'Coco-Chanel',
       userName: 'ココ・シャネル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Coco_Chanel_in_Los_Angeles%2C_1931_%28cropped%29.jpg/180px-Coco_Chanel_in_Los_Angeles%2C_1931_%28cropped%29.jpg'),
   ChatUser(
-      uid: 'Claude Debussy',
+      uid: 'Claude-Debussy',
       userName: 'クロード・ドビュッシー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Claude_Debussy_ca_1908%2C_foto_av_F%C3%A9lix_Nadar.jpg/220px-Claude_Debussy_ca_1908%2C_foto_av_F%C3%A9lix_Nadar.jpg'),
   ChatUser(
-      uid: 'Georges Bizet',
+      uid: 'Georges-Bizet',
       userName: 'ジョルジュ・ビゼー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Georges_bizet.jpg/220px-Georges_bizet.jpg'),
   ChatUser(
-      uid: 'Ector Berlioz.',
+      uid: 'Ector-Berlioz.',
       userName: 'エクトル・ベルリオーズ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Hector_berlioz.jpg/220px-Hector_berlioz.jpg'),
   ChatUser(
-      uid: 'Jules Massenet',
+      uid: 'Jules-Massenet',
       userName: 'ジュール・マスネ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Jules_massenet.jpg/220px-Jules_massenet.jpg'),
   ChatUser(
-      uid: 'Eric Satie',
+      uid: 'Eric-Satie',
       userName: 'エリック・サティ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Ericsatie.jpg/220px-Ericsatie.jpg'),
   ChatUser(
-      uid: 'Gabriel Foret',
+      uid: 'Gabriel-Foret',
       userName: 'ガブリエル・フォーレ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Gabriel_Faur%C3%A9_Paul_Nadar_1905.JPG/220px-Gabriel_Faur%C3%A9_Paul_Nadar_1905.JPG'),
   ChatUser(
-      uid: 'Henri Bergson',
+      uid: 'Henri-Bergson',
       userName: 'アンリ・ベルクソン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Henri_Bergson.jpg/200px-Henri_Bergson.jpg'),
   ChatUser(
-      uid: 'Maximilian Robespierre',
+      uid: 'Maximilian-Robespierre',
       userName: 'マクシミリアン・ロベスピエール',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Robespierre.jpg/400px-Robespierre.jpg'),
   ChatUser(
-      uid: 'Maurice Ravel',
+      uid: 'Maurice-Ravel',
       userName: 'モーリス・ラヴェル',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Maurice_Ravel_1925.jpg/220px-Maurice_Ravel_1925.jpg'),
   ChatUser(
-      uid: 'Frederic Chopin',
+      uid: 'Frederic-Chopin',
       userName: 'フレデリック・ショパン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Frederic_Chopin_photo.jpeg/200px-Frederic_Chopin_photo.jpeg'),
   ChatUser(
-      uid: 'Tekla Badajewska',
+      uid: 'Tekla-Badajewska',
       userName: 'テクラ・バダジェフスカ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/B%C4%85darzewska_Gebet_einer_Jungfrau.jpg/440px-B%C4%85darzewska_Gebet_einer_Jungfrau.jpg'),
   ChatUser(
-      uid: 'Prince Enrique Voyage',
+      uid: 'Prince-Enrique-Voyage',
       userName: 'エンリケ航海王子',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Henry_the_Navigator1.jpg/200px-Henry_the_Navigator1.jpg'),
   ChatUser(
-      uid: 'Friedrich II (Holy Roman Emperor)',
+      uid: 'Friedrich-II',
       userName: 'フリードリヒ2世 (神聖ローマ皇帝)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Frederick_II_and_eagle.jpg/200px-Frederick_II_and_eagle.jpg'),
   ChatUser(
-      uid: 'Mother Teresa',
+      uid: 'Mother-Teresa',
       userName: 'マザー・テレサ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/MotherTeresa_090.jpg/200px-MotherTeresa_090.jpg'),
   ChatUser(
-      uid: 'Fyodor Dostoevsky.',
+      uid: 'Fyodor-Dostoevsky.',
       userName: 'フョードル・ドストエフスキー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Dostoevsky.jpg/200px-Dostoevsky.jpg'),
   ChatUser(
-      uid: 'Lev Tolstoy.',
+      uid: 'Lev-Tolstoy.',
       userName: 'レフ・トルストイ',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/LNTolstoy.jpg/200px-LNTolstoy.jpg'),
   ChatUser(
-      uid: 'Yekaterina II (Tsar of Russia)',
+      uid: 'Yekaterina-II',
       userName: 'エカチェリーナ2世 (ロシア皇帝)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Catherine_II_by_J.B.Lampi_%281780s%2C_Kunsthistorisches_Museum%29.jpg/200px-Catherine_II_by_J.B.Lampi_%281780s%2C_Kunsthistorisches_Museum%29.jpg'),
   ChatUser(
-      uid: 'Ivan IV',
+      uid: 'Ivan-IV',
       userName: 'イヴァン4世',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Ivan_grozny_frame.jpg/200px-Ivan_grozny_frame.jpg'),
   ChatUser(
-      uid: 'Peter I (Tsar of Russia)',
+      uid: 'Peter-I',
       userName: 'ピョートル1世 (ロシア皇帝)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Peter_der-Grosse_1838.jpg/250px-Peter_der-Grosse_1838.jpg'),
   ChatUser(
-      uid: 'Pyotr Tchaikovsky',
+      uid: 'Pyotr-Tchaikovsky',
       userName: 'ピョートル・チャイコフスキー',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Tchaikowsky.jpg/200px-Tchaikowsky.jpg'),
   ChatUser(
-      uid: 'Karl the Great',
+      uid: 'Karl-the-Great',
       userName: 'カール大帝',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/D%C3%BCrer_karl_der_grosse.jpg/200px-D%C3%BCrer_karl_der_grosse.jpg'),
   ChatUser(
-      uid: 'Friedrich II (King of Prussia)',
+      uid: 'Friedrich-II',
       userName: 'フリードリヒ2世 (プロイセン王)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Friedrich2_jung.jpg/200px-Friedrich2_jung.jpg'),
   ChatUser(
-      uid: 'Heinrich IV (Holy Roman Emperor)',
+      uid: 'Heinrich-IV',
       userName: 'ハインリヒ4世 (神聖ローマ皇帝)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Heinrich_4_g.jpg/225px-Heinrich_4_g.jpg'),
   ChatUser(
-      uid: 'Innocentius III (Pope)',
+      uid: 'Innocentius-III',
       userName: 'インノケンティウス3世 (ローマ教皇)',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Innozenz3.jpg/150px-Innozenz3.jpg'),
@@ -2212,7 +2191,7 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Statue-Augustus.jpg/200px-Statue-Augustus.jpg'),
   ChatUser(
-      uid: 'Claudius Ptolemy.',
+      uid: 'Claudius-Ptolemy.',
       userName: 'クラウディオス・プトレマイオス',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/PSM_V78_D326_Ptolemy.png/220px-PSM_V78_D326_Ptolemy.png'),
@@ -2232,7 +2211,7 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Eratosthenes.jpg/200px-Eratosthenes.jpg'),
   ChatUser(
-      uid: 'Pericles (star in the constellation Pericles)',
+      uid: 'Pericles',
       userName: 'ペリクレス',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Pericles_Pio-Clementino_Inv269_n2.jpg/200px-Pericles_Pio-Clementino_Inv269_n2.jpg'),
@@ -2257,47 +2236,47 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Milkau_Oberer_Teil_der_Stele_mit_dem_Text_von_Hammurapis_Gesetzescode_369-2.jpg/200px-Milkau_Oberer_Teil_der_Stele_mit_dem_Text_von_Hammurapis_Gesetzescode_369-2.jpg'),
   ChatUser(
-      uid: 'Shah Jahan.',
+      uid: 'Shah-Jahan',
       userName: 'シャー・ジャハーン',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Shah_Jahan_of_Mughal_empire.jpg/200px-Shah_Jahan_of_Mughal_empire.jpg'),
   ChatUser(
-      uid: 'Cleopatra VII',
+      uid: 'Cleopatra-VII',
       userName: 'クレオパトラ7世',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Kleopatra-VII.-Altes-Museum-Berlin1.jpg/220px-Kleopatra-VII.-Altes-Museum-Berlin1.jpg'),
   ChatUser(
-      uid: 'Zhang Fei (Chinese deity said to be able to cure all ills)',
+      uid: 'Zhang-Fei',
       userName: '張飛',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/ZhangFei.jpg/180px-ZhangFei.jpg'),
   ChatUser(
-      uid: 'Zhao Yun',
+      uid: 'Zhao-Yun',
       userName: '趙雲',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/ZhaoYun.jpg/200px-ZhaoYun.jpg'),
   ChatUser(
-      uid: 'seven mansions (Chinese constellations) of the eastern heavens',
+      uid: 'genso',
       userName: '玄宗',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Tang_XianZong.jpg/340px-Tang_XianZong.jpg'),
   ChatUser(
-      uid: 'HanXin era (1177.8.4-1181.7.14)',
+      uid: 'HanXin',
       userName: '韓信',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/H%C3%A1n_X%C3%ACn.jpg/200px-H%C3%A1n_X%C3%ACn.jpg'),
   ChatUser(
-      uid: 'emperor Koumu (third highest of the eight hereditary titles)',
+      uid: 'Kobu-tei',
       userName: '光武帝',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Han_Guangwu_Di.jpg/200px-Han_Guangwu_Di.jpg'),
   ChatUser(
-      uid: 'group of 3rd-century Qingtan scholars, writers, and musicians',
+      uid: 'kouu',
       userName: '項羽',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Xiang_Yu.jpg/220px-Xiang_Yu.jpg'),
   ChatUser(
-      uid: 'Liu Bang',
+      uid: 'Liu-hou',
       userName: '劉邦',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Hangaozu.jpg/170px-Hangaozu.jpg'),
@@ -2307,32 +2286,32 @@ const greatPeople = [
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Xiao_he.jpg/200px-Xiao_he.jpg'),
   ChatUser(
-      uid: 'scarlet kadsura (Kadsura japonica)',
+      uid: 'syokaturyo',
       userName: '諸葛亮',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/%E8%9C%80%E6%B1%89%E4%B8%9E%E7%9B%B8%E5%BF%A0%E6%AD%A6%E4%BE%AF%E8%AF%B8%E8%91%9B%E4%BA%AE.jpg/220px-%E8%9C%80%E6%B1%89%E4%B8%9E%E7%9B%B8%E5%BF%A0%E6%AD%A6%E4%BE%AF%E8%AF%B8%E8%91%9B%E4%BA%AE.jpg'),
   ChatUser(
-      uid: 'Queen Mother of Goddess of Mercy',
+      uid: 'Sokuten-bukou',
       userName: '則天武后',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/%E6%AD%A6%E5%88%99%E5%A4%A9%E7%94%BB%E5%83%8F.jpg/170px-%E6%AD%A6%E5%88%99%E5%A4%A9%E7%94%BB%E5%83%8F.jpg'),
   ChatUser(
-      uid: "Sukhavati (Amitabha's Pure Land)",
+      uid: "youte",
       userName: '煬帝',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sui_Yangdi_Tang.jpg/170px-Sui_Yangdi_Tang.jpg'),
   ChatUser(
-      uid: 'Yang Kuei Queen',
+      uid: 'youkihi',
       userName: '楊貴妃',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/%E4%B8%8A%E9%A9%AC%E5%9B%BE.jpg/200px-%E4%B8%8A%E9%A9%AC%E5%9B%BE.jpg'),
   ChatUser(
-      uid: 'Puyi (Chinese puppet theatre)',
+      uid: 'hugi',
       userName: '溥儀',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Xuantong.jpg/300px-Xuantong.jpg'),
   ChatUser(
-      uid: 'Otto von Bismarck.',
+      uid: 'Otto-von-Bismarck',
       userName: 'オットー・フォン・ビスマルク',
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Bundesarchiv_Bild_146-2005-0057%2C_Otto_von_Bismarck.jpg/400px-Bundesarchiv_Bild_146-2005-0057%2C_Otto_von_Bismarck.jpg'),
