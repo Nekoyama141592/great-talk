@@ -18,6 +18,7 @@ class UserProfileController extends DocsController with CurrentUidMixin {
   final _repository = FirestoreRepository();
   final Rx<FirestoreUser?> passiveUser = Rx(null);
   String passiveUid() => passiveUser.value!.uid;
+
   @override
   Future<void> fetchDocs() async {
     if (isMyProfile) {

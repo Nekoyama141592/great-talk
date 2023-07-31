@@ -8,9 +8,10 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserProfileController(false));
-    return Obx(() => controller.isLoading.value ||
-            controller.passiveUser.value == null
-        ? const CircularProgressIndicator()
-        : Obx(() => RefreshScreen(docsController: controller, child: Text(controller.passiveUser.value!.typedUserName().value))));
+    return Obx(() => RefreshScreen(
+        docsController: controller,
+        child: controller.passiveUser.value == null
+            ? const Text('')
+            : Text(controller.passiveUser.value!.typedUserName().value)));
   }
 }

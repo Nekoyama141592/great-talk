@@ -9,6 +9,7 @@ abstract class DocsController extends GetxController {
   final docs = <QDoc>[].obs;
   final isLoading = false.obs;
 
+  bool cannotShow() => isLoading.value;
   void _startLoading() => isLoading(true);
   void _endLoading() => isLoading(false);
   void addAllDocs(List<QDoc> elements) {
