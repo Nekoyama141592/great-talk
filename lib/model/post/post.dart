@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/model/detected_image/detected_image.dart';
+import 'package:great_talk/model/detected_text/detected_text.dart';
+import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'post.freezed.dart';
@@ -31,6 +34,10 @@ abstract class Post implements _$Post {
   }) = _Post;
   factory Post.fromJson(SDMap json) => _$PostFromJson(json);
   Timestamp typedCreatedAt() => createdAt as Timestamp;
+  DetectedText typedDescription() => DetectedText.fromJson(description);
+  DetectedImage typedIconImage() => DetectedImage.fromJson(iconImage);
+  FirestoreUser typedPoster() => FirestoreUser.fromJson(poster);
   DocRef typedRef() => ref as DocRef;
-  Timestamp typedUpdatedAtAt() => createdAt as Timestamp;
+  DetectedText typedTitle() => DetectedText.fromJson(title);
+  Timestamp typedUpdatedAtAt() => updatedAt as Timestamp;
 }

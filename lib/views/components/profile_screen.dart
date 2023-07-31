@@ -12,10 +12,9 @@ class ProfileScreen extends HookWidget {
       controller.init();
       return;
     }, []);
-    return Obx(() =>
-        controller.isLoading.value || controller.passiveUser.value == null
-            ? const CircularProgressIndicator()
-            : Obx(() =>
-                Text(controller.passiveUser.value!.typedDetectedText().value)));
+    return Obx(() => controller.isLoading.value ||
+            controller.passiveUser.value == null
+        ? const CircularProgressIndicator()
+        : Obx(() => Text(controller.passiveUser.value!.typedUserName().value)));
   }
 }

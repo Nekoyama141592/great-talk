@@ -17,6 +17,12 @@ abstract class ChatUser with _$ChatUser {
     required String userName,
   }) = _ChatUser;
   factory ChatUser.fromJson(SDMap json) => _$ChatUserFromJson(json);
+  factory ChatUser.fromFirestoreUser(FirestoreUser user) {
+    return ChatUser(
+        imageUrl: DetectedImage.fromJson(user.userImage).url,
+        uid: user.uid,
+        userName: DetectedText.fromJson(user.userName).value);
+  }
   factory ChatUser.fromFirestoreUserMap(SDMap json) {
     final user = FirestoreUser.fromJson(json);
     return ChatUser(

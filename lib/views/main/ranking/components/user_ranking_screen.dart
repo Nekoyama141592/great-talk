@@ -20,7 +20,7 @@ class UserRankingScreen extends HookWidget {
             itemCount: controller.docs.length,
             itemBuilder: (c, i) {
               final user = FirestoreUser.fromJson(controller.docs[i].data());
-              return Text(user.typedDetectedText().value);
+              return Text(user.typedUserName().value);
             })));
   }
 }

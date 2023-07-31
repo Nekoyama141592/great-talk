@@ -22,7 +22,8 @@ class FeedsScreen extends HookWidget {
             itemCount: controller.docs.length,
             itemBuilder: (c, i) {
               final post = Post.fromJson(controller.docs[i].data());
-              final interlocutor = ChatUser.fromFirestoreUserMap(post.poster);
+              final interlocutor =
+                  ChatUser.fromFirestoreUser(post.typedPoster());
               return ListTile(
                 leading: CircleImage(interlocutor: interlocutor),
                 title: Text(post.postId),
