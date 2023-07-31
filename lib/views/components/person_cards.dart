@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
-import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
@@ -10,8 +9,7 @@ import 'package:great_talk/utility/chat_utility.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 
 class PersonCards extends StatelessWidget {
-  const PersonCards({Key? key, required this.type}) : super(key: key);
-  final InterlocutorType type;
+  const PersonCards({Key? key}) : super(key: key);
   @override
   Widget build(context) {
     final PersonsController controller = PersonsController.to;
@@ -51,8 +49,7 @@ class PersonCards extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               )
                             : null,
-                        onTap: () => Get.toNamed(
-                            '/chat/${person.uid}?type=${type.name}'),
+                        onTap: () => Get.toNamed('/chat/${person.uid}'),
                         onLongPress: () => ChatUtility.showCleanLocalMsgDialog(
                             person, controller),
                       ),

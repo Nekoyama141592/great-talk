@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/bottom_navigation_bar_elements.dart';
 import 'package:great_talk/common/others.dart';
@@ -53,13 +52,9 @@ class MyHomePage extends HookWidget {
               () => controller.isSearching.value
                   ? SearchScreen(
                       onQueryChanged: (query) => controller.search(query),
-                      child: const PersonCards(
-                        type: InterlocutorType.originalContent,
-                      ),
+                      child: const PersonCards(),
                     )
-                  : const PersonCards(
-                      type: InterlocutorType.originalContent,
-                    ),
+                  : const PersonCards(),
             ),
             SubscribeScreen(),
             Obx(() => CurrentUserController.to.isNotLoggedIn()

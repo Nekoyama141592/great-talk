@@ -35,8 +35,10 @@ class RealtimeResController extends GetxController with CurrentUidMixin {
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> getChatLog() async {
     isLoading(true);
-    final type = InterlocutorType.values.byName(Get.parameters['type']!);
     final uid = Get.parameters['uid']!;
+    final type = personIds.contains(uid)
+        ? InterlocutorType.originalContent
+        : InterlocutorType.userContent;
     if (type == InterlocutorType.originalContent) {
       final res = initialPeople.firstWhere((element) => element.uid == uid);
       interlocutor = res;
