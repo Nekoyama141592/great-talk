@@ -5,6 +5,7 @@ import 'package:great_talk/infrastructure/firestore/mocks/mock_doc.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_doc.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_snapshot.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
+import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class MockFirestoreClient implements FirestoreClient {
@@ -123,4 +124,38 @@ class MockFirestoreClient implements FirestoreClient {
     final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
     return MockQSnapshot(data);
   }
+
+  @override
+  FutureQSnapshot searchUsers(String searchTerm) async {
+    List<FirestoreUser> users = [];
+    if (searchTerm.isNotEmpty) {
+      users = mockOriginalUsers.where((element) {
+        final name = element.typedUserName().value.toLowerCase();
+        return name.contains(searchTerm);
+      }).toList();
+    }
+    final data = users.map((e) => MockQDoc(e.toJson(), e.uid)).toList();
+    return MockQSnapshot(data);
+  }
+
+  @override
+  FutureQSnapshot searchMoreUsers(String searchTerm, Doc lastDoc) =>
+      searchUsers(searchTerm);
+  @override
+  FutureQSnapshot searchUserPosts(String uid, String searchTerm) async {
+    List<Post> posts = [];
+    if (searchTerm.isNotEmpty) {
+      posts = mockPosts.where((element) {
+        final name = element.typedTitle().value.toLowerCase();
+        return name.contains(searchTerm);
+      }).toList();
+    }
+    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
+    return MockQSnapshot(data);
+  }
+
+  @override
+  FutureQSnapshot searchMoreUserPosts(
+          String uid, String searchTerm, Doc lastDoc) =>
+      searchUserPosts(uid, searchTerm);
 }

@@ -3,13 +3,12 @@ import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
-import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class FeedsController extends DocsController {
   FeedsController() : super(enablePullDown: true);
-  final _repository = FirestoreRepository();
+
   List<QDoc> _timelineDocs = [];
 
   Future<void> _fetchPosts(List<QDoc> fetchedTimelines) async {
@@ -18,7 +17,7 @@ class FeedsController extends DocsController {
           (e) => Timeline.fromJson(e.data()).postId,
         )
         .toList();
-    final posts = await _repository.getTimelinePosts(postIds);
+    final posts = await repository.getTimelinePosts(postIds);
     posts.when(
         success: (res) => docs(res),
         failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
@@ -30,7 +29,7 @@ class FeedsController extends DocsController {
           (e) => Timeline.fromJson(e.data()).postId,
         )
         .toList();
-    final posts = await _repository.getTimelinePosts(postIds);
+    final posts = await repository.getTimelinePosts(postIds);
     posts.when(
         success: (res) => insertAllDocs(res),
         failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
@@ -42,7 +41,7 @@ class FeedsController extends DocsController {
           (e) => Timeline.fromJson(e.data()).postId,
         )
         .toList();
-    final posts = await _repository.getTimelinePosts(postIds);
+    final posts = await repository.getTimelinePosts(postIds);
     posts.when(
         success: (res) => addAllDocs(res),
         failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
@@ -51,12 +50,12 @@ class FeedsController extends DocsController {
   @override
   Future<void> fetchDocs() async {
     if (_isWhereInQuery()) {
-      final posts = await _repository.getPostsByFollowing(_followingUids());
+      final posts = await repository.getPostsByFollowing(_followingUids());
       posts.when(
           success: (res) => docs(res),
           failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
     } else {
-      final timelines = await _repository.getTimelines(_userRef());
+      final timelines = await repository.getTimelines(_userRef());
       timelines.when(
           success: (res) async {
             _timelineDocs = res;
@@ -69,14 +68,14 @@ class FeedsController extends DocsController {
   @override
   Future<void> onLoading(RefreshController refreshController) async {
     if (_isWhereInQuery()) {
-      final posts = await _repository.getMorePostsByFollowing(
-          _followingUids(), docs.last);
+      final posts =
+          await repository.getMorePostsByFollowing(_followingUids(), docs.last);
       posts.when(
           success: (res) => addAllDocs(res),
           failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
     } else {
       final timelines =
-          await _repository.getMoreTimelines(_userRef(), _timelineDocs.last);
+          await repository.getMoreTimelines(_userRef(), _timelineDocs.last);
       timelines.when(
           success: (res) async {
             _timelineDocs.addAll(res);
@@ -90,14 +89,14 @@ class FeedsController extends DocsController {
   @override
   Future<void> onRefresh(RefreshController refreshController) async {
     if (_isWhereInQuery()) {
-      final posts = await _repository.getNewPostsByFollowing(
-          _followingUids(), docs.first);
+      final posts =
+          await repository.getNewPostsByFollowing(_followingUids(), docs.first);
       posts.when(
           success: (res) => insertAllDocs(res),
           failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
     } else {
       final timelines =
-          await _repository.getNewTimelines(_userRef(), _timelineDocs.first);
+          await repository.getNewTimelines(_userRef(), _timelineDocs.first);
       timelines.when(
           success: (res) async {
             for (final timeline in res.reversed.toList()) {

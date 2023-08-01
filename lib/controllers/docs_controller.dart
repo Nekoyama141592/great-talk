@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
+import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class DocsController extends GetxController {
   DocsController({required this.enablePullDown});
-
+  final FirestoreRepository repository = FirestoreRepository();
   final bool enablePullDown;
   final docs = <QDoc>[].obs;
   final isLoading = false.obs;

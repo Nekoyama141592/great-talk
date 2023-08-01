@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/ints.dart';
+import 'package:great_talk/common/lists.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreQueries {
@@ -78,6 +79,8 @@ class FirestoreQueries {
       instance.collection('users').doc(currentUid).collection("tokens");
 
   static DocRef userQuery(String uid) => instance.collection('users').doc(uid);
+  static ColRef userPostsQuery(String uid) =>
+      instance.collection('users').doc(uid).collection('posts');
   static final usersQuery =
       instance.collection('users').limit(oneTimeReadCount);
 
@@ -85,4 +88,23 @@ class FirestoreQueries {
       usersQuery.orderBy('followerCount', descending: true);
   static MapQuery moreUsersQueryByLikeCount(Doc lastDoc) =>
       moreQuery(usersQueryByLikeCount, lastDoc);
+  static MapQuery userSearchQuery(String searchTerm) =>
+      searchQuery(usersQuery, searchTerm);
+  static MapQuery moreUserSearchQuery(String searchTerm, Doc lastDoc) =>
+      moreQuery(userSearchQuery(searchTerm), lastDoc);
+  static MapQuery userPostsSearchQuery(String uid, String searchTerm) =>
+      searchQuery(userPostsQuery(uid), searchTerm);
+  static MapQuery moreUserPostsSearchQuery(
+          String uid, String searchTerm, Doc lastDoc) =>
+      moreQuery(searchQuery(userPostsQuery(uid), searchTerm), lastDoc);
+
+  static MapQuery searchQuery(MapQuery query, String searchTerm) {
+    final searchWords = returnSearchWords(searchTerm);
+    MapQuery searchQuery = query;
+    for (final searchWord in searchWords) {
+      searchQuery =
+          searchQuery.where("searchToken.$searchWord", isEqualTo: true);
+    }
+    return query;
+  }
 }

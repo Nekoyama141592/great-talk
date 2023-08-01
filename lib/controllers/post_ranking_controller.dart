@@ -1,11 +1,10 @@
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
-import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class PostRankingController extends DocsController {
   PostRankingController() : super(enablePullDown: false);
-  final _repository = FirestoreRepository();
+
   @override
   Future<void> onRefresh(RefreshController refreshController) async {
     refreshController.refreshCompleted();
@@ -14,7 +13,7 @@ class PostRankingController extends DocsController {
 
   @override
   Future<void> fetchDocs() async {
-    final result = await _repository.getPostsByLikeCount();
+    final result = await repository.getPostsByLikeCount();
     result.when(success: (res) {
       docs(res);
     }, failure: () {
@@ -24,7 +23,7 @@ class PostRankingController extends DocsController {
 
   @override
   Future<void> onLoading(RefreshController refreshController) async {
-    final result = await _repository.getMorePostsByLikeCount(docs.last);
+    final result = await repository.getMorePostsByLikeCount(docs.last);
     result.when(success: (res) {
       addAllDocs(res);
     }, failure: () {
