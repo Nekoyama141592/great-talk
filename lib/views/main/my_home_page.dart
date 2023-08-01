@@ -12,6 +12,7 @@ import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/views/auth/login_page.dart';
 import 'package:great_talk/views/components/original_content_cards.dart';
+import 'package:great_talk/views/components/original_drawer.dart';
 import 'package:great_talk/views/screen/search_screen.dart';
 import 'package:great_talk/views/main/feeds/feeds_screen.dart';
 import 'package:great_talk/views/main/my_profile/my_profile_screen.dart';
@@ -34,6 +35,7 @@ class MyHomePage extends HookWidget {
         appBar: pageIndex.value != 1
             ? AppBar(title: boldText(appName), shape: appBarShape(context))
             : null,
+        drawer: const OriginalDrawer(),
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             items: bnbElements,

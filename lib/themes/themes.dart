@@ -10,6 +10,7 @@ ThemeData lightThemeData(BuildContext context) {
   return ThemeData.light().copyWith(
       primaryColor: kPrimaryColor,
       appBarTheme: const AppBarTheme(color: kPrimaryColor),
+      scaffoldBackgroundColor: Colors.white,
       focusColor: Colors.black,
       colorScheme:
           const ColorScheme.dark().copyWith(secondary: kSecondaryColor),
