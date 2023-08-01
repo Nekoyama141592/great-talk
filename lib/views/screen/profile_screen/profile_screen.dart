@@ -14,24 +14,29 @@ class ProfileScreen extends StatelessWidget {
     return Column(
       children: [
         controller.isMyProfile ? const EditButton() : const FollowButton(),
-        Obx(() => controller.passiveUser.value == null
-            ? const Text('')
-            : Text(controller.passiveUser.value!.typedUserName().value)),
+        Row(
+          children: [
+            Obx(() => controller.passiveUser.value == null
+                ? const Text('')
+                : Text(controller.passiveUser.value!.typedUserName().value)),
+            InkWell(
+              onTap: () =>
+                  Get.toNamed("/users/${controller.passiveUid()}/posts/search"),
+              child: const Icon(Icons.search),
+            )
+          ],
+        ),
         Expanded(
             child: RefreshScreen(
                 docsController: controller,
-                child: Obx(() {
-                  if (controller.passiveUser.value == null) {
-                    return const Text('');
-                  } else {
-                    return ListView.builder(
+                child: Obx(() => controller.passiveUser.value == null
+                    ? const SizedBox.shrink()
+                    : ListView.builder(
                         itemCount: controller.docs.length,
                         itemBuilder: (c, i) {
                           final post = Post.fromJson(controller.docs[i].data());
                           return Text(post.postId);
-                        });
-                  }
-                })))
+                        }))))
       ],
     );
   }
