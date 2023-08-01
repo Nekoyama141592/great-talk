@@ -4,6 +4,7 @@ class RankingTabBarElements {
 }
 
 final List<RankingTabBarElements> rankingTBE = [
-  RankingTabBarElements('Posts'),
-  RankingTabBarElements('Users'),
+  RankingTabBarElements('投稿'),
+  RankingTabBarElements('ユーザー'),
+  RankingTabBarElements("ユーザーを検索")
 ];
