@@ -23,7 +23,7 @@ class MyProfileController extends ProfileController with CurrentUserMixin {
     result.when(success: (_) {
       UIHelper.showFlutterToast("情報が更新されました");
     }, failure: () {
-      UIHelper.showFlutterToast("情報が更新できませんでした");
+      UIHelper.showErrorFlutterToast("情報が更新できませんでした");
     });
   }
 }

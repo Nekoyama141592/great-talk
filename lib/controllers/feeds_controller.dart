@@ -20,7 +20,7 @@ class FeedsController extends DocsController {
     final posts = await repository.getTimelinePosts(postIds);
     posts.when(
         success: (res) => docs(res),
-        failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
+        failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 
   Future<void> _fetchNewPosts(List<QDoc> fetchedTimelines) async {
@@ -32,7 +32,7 @@ class FeedsController extends DocsController {
     final posts = await repository.getTimelinePosts(postIds);
     posts.when(
         success: (res) => insertAllDocs(res),
-        failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
+        failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 
   Future<void> _fetchMorePosts(List<QDoc> fetchedTimelines) async {
@@ -44,7 +44,7 @@ class FeedsController extends DocsController {
     final posts = await repository.getTimelinePosts(postIds);
     posts.when(
         success: (res) => addAllDocs(res),
-        failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
+        failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 
   @override
@@ -53,7 +53,7 @@ class FeedsController extends DocsController {
       final posts = await repository.getPostsByFollowing(_followingUids());
       posts.when(
           success: (res) => docs(res),
-          failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
+          failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
     } else {
       final timelines = await repository.getTimelines(_userRef());
       timelines.when(
@@ -61,7 +61,7 @@ class FeedsController extends DocsController {
             _timelineDocs = res;
             await _fetchPosts(res);
           },
-          failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
+          failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
     }
   }
 
@@ -72,7 +72,7 @@ class FeedsController extends DocsController {
           await repository.getMorePostsByFollowing(_followingUids(), docs.last);
       posts.when(
           success: (res) => addAllDocs(res),
-          failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
+          failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
     } else {
       final timelines =
           await repository.getMoreTimelines(_userRef(), _timelineDocs.last);
@@ -81,7 +81,7 @@ class FeedsController extends DocsController {
             _timelineDocs.addAll(res);
             await _fetchMorePosts(res);
           },
-          failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
+          failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
     }
     refreshController.loadComplete();
   }

@@ -17,7 +17,7 @@ class PostRankingController extends DocsController {
     result.when(success: (res) {
       docs(res);
     }, failure: () {
-      UIHelper.showFlutterToast("データの取得に失敗しました");
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
   }
 
@@ -27,7 +27,7 @@ class PostRankingController extends DocsController {
     result.when(success: (res) {
       addAllDocs(res);
     }, failure: () {
-      UIHelper.showFlutterToast("データの取得に失敗しました");
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
     refreshController.loadComplete();
   }
