@@ -29,14 +29,12 @@ class ProfileScreen extends StatelessWidget {
         Expanded(
             child: RefreshScreen(
                 docsController: controller,
-                child: Obx(() => controller.passiveUser.value == null
-                    ? const SizedBox.shrink()
-                    : ListView.builder(
-                        itemCount: controller.docs.length,
-                        itemBuilder: (c, i) {
-                          final post = Post.fromJson(controller.docs[i].data());
-                          return Text(post.postId);
-                        }))))
+                child: Obx(() => ListView.builder(
+                    itemCount: controller.docs.length,
+                    itemBuilder: (c, i) {
+                      final post = Post.fromJson(controller.docs[i].data());
+                      return Text(post.postId);
+                    }))))
       ],
     );
   }
