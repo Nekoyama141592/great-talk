@@ -4,13 +4,13 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class MuteUsersController extends DocsController {
-  MuteUsersController() : super(enablePullDown: true, isUserDocs: true);
+class MutePostsController extends DocsController {
+  MutePostsController() : super(enablePullDown: true, isUserDocs: false);
   @override
   Future<void> fetchDocs() async {
-    final requestUids = _createRequestUids();
-    if (requestUids.isNotEmpty) {
-      final result = await repository.getUsersByWhereIn(requestUids);
+    final requestPostIds = _createRequestPostIds();
+    if (requestPostIds.isNotEmpty) {
+      final result = await repository.getPostsByWhereIn(requestPostIds);
       result.when(success: (res) {
         docs(res);
       }, failure: () {
@@ -21,9 +21,9 @@ class MuteUsersController extends DocsController {
 
   @override
   Future<void> onLoading(RefreshController refreshController) async {
-    final requestUids = _createRequestUids();
-    if (requestUids.isNotEmpty) {
-      final result = await repository.getUsersByWhereIn(requestUids);
+    final requestPostIds = _createRequestPostIds();
+    if (requestPostIds.isNotEmpty) {
+      final result = await repository.getPostsByWhereIn(requestPostIds);
       result.when(success: (res) {
         addAllDocs(res);
       }, failure: () {
@@ -39,9 +39,9 @@ class MuteUsersController extends DocsController {
     return;
   }
 
-  List<String> _createRequestUids() {
+  List<String> _createRequestPostIds() {
     final int userDocsLength = docs.length;
-    final muteUids = CurrentUserController.to.muteUids;
+    final muteUids = CurrentUserController.to.mutePostIds;
     if (muteUids.length > docs.length) {
       final List<String> requestUids =
           (muteUids.length - docs.length) >= whereInLimit

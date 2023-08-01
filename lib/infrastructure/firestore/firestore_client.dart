@@ -35,10 +35,6 @@ class FirestoreClient {
 
   FutureQSnapshot getUsersByWhereIn(List<String> uids) async =>
       await FirestoreQueries.usersQueryByWhereIn(uids).get();
-  FutureQSnapshot getMoreUsersByWhereIn(List<String> uids, Doc lastDoc) async =>
-      await FirestoreQueries.moreUsersQueryByWhereIn(uids, lastDoc).get();
-  FutureQSnapshot getNewUsersByWhereIn(List<String> uids, Doc firstDoc) async =>
-      await FirestoreQueries.newUsersQueryByWhereIn(uids, firstDoc).get();
 
   FutureDoc getPost(String uid, String postId) async =>
       await FirestoreQueries.postDocRef(uid, postId).get();
@@ -52,6 +48,8 @@ class FirestoreClient {
           List<String> followingUids, Doc lastDoc) async =>
       await FirestoreQueries.morePostsQueryByFollowing(followingUids, lastDoc)
           .get();
+  FutureQSnapshot getPostsByWhereIn(List<String> postIds) async =>
+      await FirestoreQueries.postsQueryByWhereIn(postIds).get();
 
   FutureQSnapshot getPostsByLikeCount() async =>
       await FirestoreQueries.postsQueryByLikeCount.get();

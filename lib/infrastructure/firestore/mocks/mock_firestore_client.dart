@@ -87,6 +87,15 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
+  FutureQSnapshot getPostsByWhereIn(List<String> postIds) async {
+    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
+    final posts =
+        mockPosts.where((element) => postIds.contains(element.postId));
+    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
+    return MockQSnapshot(data);
+  }
+
+  @override
   FutureQSnapshot getPostsByLikeCount() async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     final posts = [...mockPosts];
@@ -156,12 +165,6 @@ class MockFirestoreClient implements FirestoreClient {
     return MockQSnapshot(data);
   }
 
-  @override
-  FutureQSnapshot getMoreUsersByWhereIn(List<String> uids, Doc lastDoc) =>
-      getUsersByWhereIn(uids);
-  @override
-  FutureQSnapshot getNewUsersByWhereIn(List<String> uids, Doc firstDoc) =>
-      getUsersByWhereIn(uids);
   @override
   FutureDoc getCurrentUser(String uid) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));

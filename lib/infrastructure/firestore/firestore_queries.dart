@@ -33,6 +33,9 @@ class FirestoreQueries {
         .orderBy('createdAt', descending: true);
   }
 
+  static MapQuery postsQueryByWhereIn(List<String> postIds) =>
+      postsQuery.where('postId', whereIn: postIds);
+
   static DocRef postReportDocRefFromPostRef(DocRef postRef) =>
       postRef.collection('postReports').doc();
   static DocRef postMuteDocRefFromPostRef(DocRef postRef) =>
@@ -101,10 +104,6 @@ class FirestoreQueries {
 
   static MapQuery usersQueryByWhereIn(List<String> uids) =>
       usersQuery.where('uid', whereIn: uids);
-  static MapQuery moreUsersQueryByWhereIn(List<String> uids, Doc lastDoc) =>
-      moreQuery(usersQueryByWhereIn(uids), lastDoc);
-  static MapQuery newUsersQueryByWhereIn(List<String> uids, Doc firstDoc) =>
-      newQuery(usersQueryByWhereIn(uids), firstDoc);
 
   static final usersQueryByLikeCount =
       usersQuery.orderBy('followerCount', descending: true);
