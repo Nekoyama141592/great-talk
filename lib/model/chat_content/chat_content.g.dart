@@ -1,24 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chat_user.dart';
+part of 'chat_content.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ChatUser _$$_ChatUserFromJson(Map<String, dynamic> json) => _$_ChatUser(
+_$_ChatContent _$$_ChatContentFromJson(Map<String, dynamic> json) =>
+    _$_ChatContent(
+      contentId: json['contentId'] as String,
       imageUrl: json['imageUrl'] as String,
       lastSeen: json['lastSeen'] as int?,
       metadata: json['metadata'] as Map<String, dynamic>?,
-      uid: json['uid'] as String,
+      posterUid: json['posterUid'] as String,
       userName: json['userName'] as String,
     );
 
-Map<String, dynamic> _$$_ChatUserToJson(_$_ChatUser instance) =>
+Map<String, dynamic> _$$_ChatContentToJson(_$_ChatContent instance) =>
     <String, dynamic>{
+      'contentId': instance.contentId,
       'imageUrl': instance.imageUrl,
       'lastSeen': instance.lastSeen,
       'metadata': instance.metadata,
-      'uid': instance.uid,
+      'posterUid': instance.posterUid,
       'userName': instance.userName,
     };

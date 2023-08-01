@@ -62,6 +62,13 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
+  FutureDoc getPost(String uid, String postId) async {
+    final data = mockPosts.firstWhere((element) =>
+        element.typedPoster().uid == uid && element.postId == postId);
+    return MockDoc(data.toJson(), data.postId);
+  }
+
+  @override
   FutureQSnapshot getPostsByLikeCount() async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     final posts = [...mockPosts];

@@ -8,7 +8,7 @@ import 'package:great_talk/views/user_profile_page.dart';
 final getPages = [
   GetPage(name: "/", page: () => const MyApp()),
   GetPage(
-    name: "/chat/:uid",
+    name: "/chat/users/:uid/posts/:postId",
     page: () => const RealtimeResPage(),
   ),
   GetPage(

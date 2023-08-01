@@ -4,22 +4,22 @@ import 'package:great_talk/common/doubles.dart';
 // packages
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:great_talk/common/persons.dart';
-import 'package:great_talk/model/chat_user/chat_user.dart';
+import 'package:great_talk/model/chat_content/chat_content.dart';
 
 class CircleImage extends StatelessWidget {
-  const CircleImage({Key? key, required this.interlocutor}) : super(key: key);
-  final ChatUser interlocutor;
+  const CircleImage({Key? key, required this.chatUser}) : super(key: key);
+  final ChatContent chatUser;
   @override
   Widget build(BuildContext context) {
-    final imageUrl = interlocutor.imageUrl;
+    final imageUrl = chatUser.imageUrl;
     final length = userImageSize(context);
-    final isOriginalContent = returnIsOriginalContents(interlocutor.uid);
+    final isOriginalContent = returnIsOriginalContents(chatUser.posterUid);
     return imageUrl.isEmpty
         ? const Icon(Icons.person)
         : InkWell(
             onTap: () {
               if (!isOriginalContent) {
-                Get.toNamed('/users/${interlocutor.uid}');
+                Get.toNamed('/users/${chatUser.posterUid}');
               }
             },
             child: SizedBox(

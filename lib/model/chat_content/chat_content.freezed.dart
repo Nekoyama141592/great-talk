@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'chat_user.dart';
+part of 'chat_content.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,41 +14,44 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ChatUser _$ChatUserFromJson(Map<String, dynamic> json) {
-  return _ChatUser.fromJson(json);
+ChatContent _$ChatContentFromJson(Map<String, dynamic> json) {
+  return _ChatContent.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ChatUser {
+mixin _$ChatContent {
+  String get contentId => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
   int? get lastSeen => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
-  String get uid => throw _privateConstructorUsedError;
+  String get posterUid => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ChatUserCopyWith<ChatUser> get copyWith =>
+  $ChatContentCopyWith<ChatContent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ChatUserCopyWith<$Res> {
-  factory $ChatUserCopyWith(ChatUser value, $Res Function(ChatUser) then) =
-      _$ChatUserCopyWithImpl<$Res, ChatUser>;
+abstract class $ChatContentCopyWith<$Res> {
+  factory $ChatContentCopyWith(
+          ChatContent value, $Res Function(ChatContent) then) =
+      _$ChatContentCopyWithImpl<$Res, ChatContent>;
   @useResult
   $Res call(
-      {String imageUrl,
+      {String contentId,
+      String imageUrl,
       int? lastSeen,
       Map<String, dynamic>? metadata,
-      String uid,
+      String posterUid,
       String userName});
 }
 
 /// @nodoc
-class _$ChatUserCopyWithImpl<$Res, $Val extends ChatUser>
-    implements $ChatUserCopyWith<$Res> {
-  _$ChatUserCopyWithImpl(this._value, this._then);
+class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
+    implements $ChatContentCopyWith<$Res> {
+  _$ChatContentCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -58,13 +61,18 @@ class _$ChatUserCopyWithImpl<$Res, $Val extends ChatUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
     Object? imageUrl = null,
     Object? lastSeen = freezed,
     Object? metadata = freezed,
-    Object? uid = null,
+    Object? posterUid = null,
     Object? userName = null,
   }) {
     return _then(_value.copyWith(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -77,9 +85,9 @@ class _$ChatUserCopyWithImpl<$Res, $Val extends ChatUser>
           ? _value.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      posterUid: null == posterUid
+          ? _value.posterUid
+          : posterUid // ignore: cast_nullable_to_non_nullable
               as String,
       userName: null == userName
           ? _value.userName
@@ -90,38 +98,45 @@ class _$ChatUserCopyWithImpl<$Res, $Val extends ChatUser>
 }
 
 /// @nodoc
-abstract class _$$_ChatUserCopyWith<$Res> implements $ChatUserCopyWith<$Res> {
-  factory _$$_ChatUserCopyWith(
-          _$_ChatUser value, $Res Function(_$_ChatUser) then) =
-      __$$_ChatUserCopyWithImpl<$Res>;
+abstract class _$$_ChatContentCopyWith<$Res>
+    implements $ChatContentCopyWith<$Res> {
+  factory _$$_ChatContentCopyWith(
+          _$_ChatContent value, $Res Function(_$_ChatContent) then) =
+      __$$_ChatContentCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String imageUrl,
+      {String contentId,
+      String imageUrl,
       int? lastSeen,
       Map<String, dynamic>? metadata,
-      String uid,
+      String posterUid,
       String userName});
 }
 
 /// @nodoc
-class __$$_ChatUserCopyWithImpl<$Res>
-    extends _$ChatUserCopyWithImpl<$Res, _$_ChatUser>
-    implements _$$_ChatUserCopyWith<$Res> {
-  __$$_ChatUserCopyWithImpl(
-      _$_ChatUser _value, $Res Function(_$_ChatUser) _then)
+class __$$_ChatContentCopyWithImpl<$Res>
+    extends _$ChatContentCopyWithImpl<$Res, _$_ChatContent>
+    implements _$$_ChatContentCopyWith<$Res> {
+  __$$_ChatContentCopyWithImpl(
+      _$_ChatContent _value, $Res Function(_$_ChatContent) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? contentId = null,
     Object? imageUrl = null,
     Object? lastSeen = freezed,
     Object? metadata = freezed,
-    Object? uid = null,
+    Object? posterUid = null,
     Object? userName = null,
   }) {
-    return _then(_$_ChatUser(
+    return _then(_$_ChatContent(
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -134,9 +149,9 @@ class __$$_ChatUserCopyWithImpl<$Res>
           ? _value._metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      posterUid: null == posterUid
+          ? _value.posterUid
+          : posterUid // ignore: cast_nullable_to_non_nullable
               as String,
       userName: null == userName
           ? _value.userName
@@ -148,18 +163,21 @@ class __$$_ChatUserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ChatUser implements _ChatUser {
-  const _$_ChatUser(
-      {required this.imageUrl,
+class _$_ChatContent implements _ChatContent {
+  const _$_ChatContent(
+      {required this.contentId,
+      required this.imageUrl,
       this.lastSeen,
       final Map<String, dynamic>? metadata,
-      required this.uid,
+      required this.posterUid,
       required this.userName})
       : _metadata = metadata;
 
-  factory _$_ChatUser.fromJson(Map<String, dynamic> json) =>
-      _$$_ChatUserFromJson(json);
+  factory _$_ChatContent.fromJson(Map<String, dynamic> json) =>
+      _$$_ChatContentFromJson(json);
 
+  @override
+  final String contentId;
   @override
   final String imageUrl;
   @override
@@ -175,59 +193,66 @@ class _$_ChatUser implements _ChatUser {
   }
 
   @override
-  final String uid;
+  final String posterUid;
   @override
   final String userName;
 
   @override
   String toString() {
-    return 'ChatUser(imageUrl: $imageUrl, lastSeen: $lastSeen, metadata: $metadata, uid: $uid, userName: $userName)';
+    return 'ChatContent(contentId: $contentId, imageUrl: $imageUrl, lastSeen: $lastSeen, metadata: $metadata, posterUid: $posterUid, userName: $userName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChatUser &&
+            other is _$_ChatContent &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             (identical(other.lastSeen, lastSeen) ||
                 other.lastSeen == lastSeen) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata) &&
-            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.posterUid, posterUid) ||
+                other.posterUid == posterUid) &&
             (identical(other.userName, userName) ||
                 other.userName == userName));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, imageUrl, lastSeen,
-      const DeepCollectionEquality().hash(_metadata), uid, userName);
+  int get hashCode => Object.hash(runtimeType, contentId, imageUrl, lastSeen,
+      const DeepCollectionEquality().hash(_metadata), posterUid, userName);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChatUserCopyWith<_$_ChatUser> get copyWith =>
-      __$$_ChatUserCopyWithImpl<_$_ChatUser>(this, _$identity);
+  _$$_ChatContentCopyWith<_$_ChatContent> get copyWith =>
+      __$$_ChatContentCopyWithImpl<_$_ChatContent>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ChatUserToJson(
+    return _$$_ChatContentToJson(
       this,
     );
   }
 }
 
-abstract class _ChatUser implements ChatUser {
-  const factory _ChatUser(
-      {required final String imageUrl,
+abstract class _ChatContent implements ChatContent {
+  const factory _ChatContent(
+      {required final String contentId,
+      required final String imageUrl,
       final int? lastSeen,
       final Map<String, dynamic>? metadata,
-      required final String uid,
-      required final String userName}) = _$_ChatUser;
+      required final String posterUid,
+      required final String userName}) = _$_ChatContent;
 
-  factory _ChatUser.fromJson(Map<String, dynamic> json) = _$_ChatUser.fromJson;
+  factory _ChatContent.fromJson(Map<String, dynamic> json) =
+      _$_ChatContent.fromJson;
 
+  @override
+  String get contentId;
   @override
   String get imageUrl;
   @override
@@ -235,11 +260,11 @@ abstract class _ChatUser implements ChatUser {
   @override
   Map<String, dynamic>? get metadata;
   @override
-  String get uid;
+  String get posterUid;
   @override
   String get userName;
   @override
   @JsonKey(ignore: true)
-  _$$_ChatUserCopyWith<_$_ChatUser> get copyWith =>
+  _$$_ChatContentCopyWith<_$_ChatContent> get copyWith =>
       throw _privateConstructorUsedError;
 }

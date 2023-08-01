@@ -1,6 +1,6 @@
 // packages
 import 'package:great_talk/flavors.dart';
-import 'package:great_talk/model/chat_user/chat_user.dart';
+import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/chat_user_metadata/chat_user_metadata.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -11,7 +11,7 @@ String randomString() {
   return uuid.v4();
 }
 
-String getName(ChatUser person) => person.userName;
+String getName(ChatContent person) => person.userName;
 final appName = F.title;
 String getPlanDescription(String productID, String price) {
   String msg = "";

@@ -55,8 +55,7 @@ class RealtimeResPage extends HookWidget {
                                                 ? null
                                                 : controller.onCardLongTap,
                                         leading: CircleImage(
-                                            interlocutor:
-                                                controller.interlocutor),
+                                            chatUser: controller.interlocutor),
                                         title:
                                             purchaseController.isSubscribing()
                                                 ? SelectableText(text)
@@ -85,7 +84,7 @@ class RealtimeResPage extends HookWidget {
                                                 CurrentUserController
                                                     .to.currentUser.value!.uid
                                             ? CircleImage(
-                                                interlocutor:
+                                                chatUser:
                                                     controller.interlocutor)
                                             : null,
                                         title:

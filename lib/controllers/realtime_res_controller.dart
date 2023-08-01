@@ -14,8 +14,9 @@ import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
-import 'package:great_talk/model/chat_user/chat_user.dart';
+import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
+import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/text_message/text_message.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
@@ -30,26 +31,29 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   final isGenerating = false.obs;
   int chatCount = 0;
   late SharedPreferences prefs;
-  late ChatUser interlocutor;
+  late ChatContent interlocutor;
   final repository = FirestoreRepository();
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> getChatLog() async {
     isLoading(true);
     final uid = Get.parameters['uid']!;
+    final postId = Get.parameters['postId']!;
     final type = returnIsOriginalContents(uid)
         ? InterlocutorType.originalContent
         : InterlocutorType.userContent;
     if (type == InterlocutorType.originalContent) {
-      final res = originalContents.firstWhere((element) => element.uid == uid);
+      final res =
+          originalContents.firstWhere((element) => element.contentId == postId);
       interlocutor = res;
     } else {
-      final result = await repository.getUser(uid);
+      final result = await repository.getPost(uid, postId);
       result.when(success: (res) async {
         if (!res.exists) {
           UIHelper.showFlutterToast("ユーザーが存在しません");
           return;
         } else {
-          interlocutor = ChatUser.fromFirestoreUserMap(res.data()!);
+          final post = Post.fromJson(res.data()!);
+          interlocutor = ChatContent.fromPost(post);
           List<TextMessage> a = await _getLocalMessages();
           await PurchasesController.to.restorePurchases(); // 購入内容を復元
           messages(a);
@@ -63,7 +67,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
 
   Future<List<TextMessage>> _getLocalMessages() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final jsonString = prefs.getString(interlocutor.uid) ?? "";
+    final jsonString = prefs.getString(interlocutor.contentId) ?? "";
     List<TextMessage> messages = [];
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
@@ -164,7 +168,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
             positiveScore: 0.0,
             sentiment: '',
             value: realtimeRes.value),
-        uid: interlocutor.uid,
+        uid: interlocutor.contentId,
         updatedAt: now,
       );
       messages([...messages]);
@@ -220,7 +224,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _setLocalMessage() async {
-    final String interlocutorId = interlocutor.uid;
+    final String interlocutorId = interlocutor.contentId;
     final objectList =
         messages.map((e) => SaveTextMsg.fromTextMessage(e)).toList();
     final jsonString = jsonEncode(objectList);
@@ -259,7 +263,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Future<List<Messages>> _createRequestMessages(String content) async {
-    final id = interlocutor.uid;
+    final id = interlocutor.contentId;
     switch (id) {
       case wolframId:
         final wolframRes = await WolframRepository.fetchApi(content);
@@ -302,7 +306,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
 
   Messages _systemMsg() {
     final name = interlocutor.userName;
-    String content = proIds.contains(interlocutor.uid)
+    String content = proIds.contains(interlocutor.contentId)
         ? "あなたは一人のプロの$nameです。それになりきって以下の問いに答えて下さい。自分がAIアシスタントだとは答えないで下さい。"
         : "$nameになりきって$nameの口調で以下の問いに答えてください。";
     content += attention;

@@ -26,6 +26,8 @@ class FirestoreClient {
   Future<void> deleteToken(String currentUid, String tokenId) async =>
       await FirestoreQueries.tokenQuery(currentUid, tokenId).delete();
 
+  FutureDoc getPost(String uid, String postId) async =>
+      await FirestoreQueries.postDocRef(uid, postId).get();
   FutureQSnapshot getPostsByFollowing(List<String> followingUids) async =>
       await FirestoreQueries.postsQueryByFollowing(followingUids).get();
   FutureQSnapshot getNewPostsByFollowing(

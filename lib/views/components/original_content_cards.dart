@@ -8,8 +8,8 @@ import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/utility/chat_utility.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 
-class PersonCards extends StatelessWidget {
-  const PersonCards({Key? key}) : super(key: key);
+class OriginalContentCards extends StatelessWidget {
+  const OriginalContentCards({Key? key}) : super(key: key);
   @override
   Widget build(context) {
     final PersonsController controller = PersonsController.to;
@@ -33,15 +33,15 @@ class PersonCards extends StatelessWidget {
               child: Obx(() => ListView.builder(
                   itemCount: controller.results.length,
                   itemBuilder: ((context, index) {
-                    final person = controller.results[index];
-                    final String name = getName(person);
+                    final content = controller.results[index];
+                    final String name = getName(content);
                     final String? lastAnswer =
-                        mapMetadataToLastAnswer(person.metadata);
+                        mapMetadataToLastAnswer(content.metadata);
                     return Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: defaultPadding(context)),
                       child: ListTile(
-                        leading: CircleImage(interlocutor: person),
+                        leading: CircleImage(chatUser: content),
                         title: boldText(name),
                         subtitle: lastAnswer != null
                             ? Text(
@@ -49,9 +49,10 @@ class PersonCards extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               )
                             : null,
-                        onTap: () => Get.toNamed('/chat/${person.uid}'),
+                        onTap: () => Get.toNamed(
+                            '/chat/users/${content.posterUid}/posts/${content.contentId}'),
                         onLongPress: () => ChatUtility.showCleanLocalMsgDialog(
-                            person, controller),
+                            content, controller),
                       ),
                     );
                   }))),

@@ -10,7 +10,7 @@ import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/notification_controller.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/views/auth/login_page.dart';
-import 'package:great_talk/views/components/person_cards.dart';
+import 'package:great_talk/views/components/original_content_cards.dart';
 import 'package:great_talk/views/screen/search_screen.dart';
 import 'package:great_talk/views/main/feeds/feeds_screen.dart';
 import 'package:great_talk/views/main/my_profile/my_profile_screen.dart';
@@ -52,9 +52,9 @@ class MyHomePage extends HookWidget {
               () => controller.isSearching.value
                   ? SearchScreen(
                       onQueryChanged: (query) => controller.search(query),
-                      child: const PersonCards(),
+                      child: const OriginalContentCards(),
                     )
-                  : const PersonCards(),
+                  : const OriginalContentCards(),
             ),
             SubscribeScreen(),
             Obx(() => CurrentUserController.to.isNotLoggedIn()

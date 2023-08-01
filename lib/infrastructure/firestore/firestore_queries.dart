@@ -18,6 +18,9 @@ class FirestoreQueries {
   static DocRef postLikeDocRef(DocRef postRef, String tokenId) =>
       postRef.collection('postLikes').doc(tokenId);
 
+  static DocRef postDocRef(String uid, String postId) =>
+      userQuery(uid).collection('posts').doc(postId);
+
   static final postsQuery =
       instance.collectionGroup('posts').limit(oneTimeReadCount);
 

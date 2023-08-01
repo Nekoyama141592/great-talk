@@ -89,6 +89,16 @@ class FirestoreRepository {
     }
   }
 
+  FutureResult<Doc> getPost(String uid, String postId) async {
+    try {
+      final res = await client.getPost(uid, postId);
+      return Result.success(res);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
   FutureResult<List<QDoc>> getPostsByLikeCount() async {
     try {
       final res = await client.getPostsByLikeCount();

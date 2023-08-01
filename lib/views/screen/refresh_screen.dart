@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
-import 'package:great_talk/model/chat_user/chat_user.dart';
+import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/circle_image.dart';
@@ -47,10 +47,9 @@ class RefreshScreen extends HookWidget {
                     itemCount: docsController.docs.length,
                     itemBuilder: (c, i) {
                       final post = Post.fromJson(docsController.docs[i].data());
-                      final interlocutor =
-                          ChatUser.fromFirestoreUser(post.typedPoster());
+                      final interlocutor = ChatContent.fromPost(post);
                       return ListTile(
-                        leading: CircleImage(interlocutor: interlocutor),
+                        leading: CircleImage(chatUser: interlocutor),
                         title: Text(post.postId),
                       );
                     })));
