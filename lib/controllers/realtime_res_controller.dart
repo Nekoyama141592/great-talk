@@ -40,7 +40,7 @@ class RealtimeResController extends GetxController with CurrentUidMixin {
         ? InterlocutorType.originalContent
         : InterlocutorType.userContent;
     if (type == InterlocutorType.originalContent) {
-      final res = initialPeople.firstWhere((element) => element.uid == uid);
+      final res = originalContents.firstWhere((element) => element.uid == uid);
       interlocutor = res;
     } else {
       final result = await repository.getUser(uid);

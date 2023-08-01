@@ -3,11 +3,11 @@ import 'package:great_talk/model/chat_user/chat_user.dart';
 const String chatGPTId = "chatGPT";
 const String wolframId = "wolfram";
 // 現在のユーザーを定義.
-bool returnIsOriginalContents(String uid) => personIds.contains(uid);
+bool returnIsOriginalContents(String uid) => originalContentIds.contains(uid);
 
-final personIds = initialPeople.map((e) => e.uid).toList();
+final originalContentIds = originalContents.map((e) => e.uid).toList();
 final proIds = proPeople.map((e) => e.uid).toList();
-final List<ChatUser> initialPeople = [
+final List<ChatUser> originalContents = [
   ...ai,
   ...greatPeople,
   ...proPeople,

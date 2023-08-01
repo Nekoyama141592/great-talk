@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class PersonsController extends GetxController {
   static PersonsController get to => Get.find<PersonsController>();
   late SharedPreferences prefs;
-  final RxList<ChatUser> results = initialPeople.obs;
+  final RxList<ChatUser> results = originalContents.obs;
   final RxBool isSearching = false.obs;
 
   PersonsController() {
@@ -65,7 +65,7 @@ class PersonsController extends GetxController {
 
   void search(String query) {
     if (query.isNotEmpty) {
-      results.value = initialPeople.where((element) {
+      results.value = originalContents.where((element) {
         final name = element.userName.toLowerCase();
         final id = element.uid.toLowerCase().replaceAll(" ", "");
         return name.contains(query) || id.contains(query);
@@ -73,5 +73,5 @@ class PersonsController extends GetxController {
     }
   }
 
-  void reset() => results(initialPeople);
+  void reset() => results(originalContents);
 }
