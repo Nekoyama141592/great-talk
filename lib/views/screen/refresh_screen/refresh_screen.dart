@@ -14,10 +14,10 @@ class RefreshScreen extends HookWidget {
   const RefreshScreen({
     Key? key,
     required this.docsController,
-    // required this.child,
+    this.child,
   }) : super(key: key);
   final DocsController docsController;
-  // final Widget child;
+  final Widget? child;
   @override
   Widget build(BuildContext context) {
     RefreshController refreshController = RefreshController();
@@ -37,7 +37,7 @@ class RefreshScreen extends HookWidget {
             header: const WaterDropHeader(),
             onLoading: () => docsController.onLoading(refreshController),
             onRefresh: () => docsController.onRefresh(refreshController),
-            child: docsController.isUserDocs
+            child: child ?? Container(child: docsController.isUserDocs
                 ? ListView.builder(
                     itemCount: docsController.docs.length,
                     itemBuilder: (c, i) {
@@ -62,6 +62,7 @@ class RefreshScreen extends HookWidget {
                           PostReportButton(post: post)
                         ],
                       );
-                    })));
+                    }),)
+            ));
   }
 }
