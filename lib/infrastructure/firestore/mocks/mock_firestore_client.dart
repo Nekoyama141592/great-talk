@@ -72,13 +72,21 @@ class MockFirestoreClient implements FirestoreClient {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     return;
   }
-
+  @override
+  Future<void> deletePostMute(DocRef postRef) async {
+    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
+    return;
+  }
   @override
   Future<void> createUserMute(String uid, SDMap json) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     return;
   }
-
+  @override
+  Future<void> deleteUserMute(String passiveUid) async {
+    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
+    return;
+  }
   @override
   FutureDoc getPost(String uid, String postId) async {
     final data = mockPosts.firstWhere((element) =>

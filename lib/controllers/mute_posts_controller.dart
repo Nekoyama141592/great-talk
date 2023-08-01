@@ -2,6 +2,7 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
+import 'package:great_talk/model/post/post.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MutePostsController extends DocsController {
@@ -51,5 +52,17 @@ class MutePostsController extends DocsController {
     } else {
       return [];
     }
+  }
+
+  Future<void> unMutePost(Post post) async {
+    final postId = post.postId;
+    final deleteToken = CurrentUserController.to.mutePostTokens
+        .firstWhere((element) => element.postId == postId);
+    CurrentUserController.to.removeMutePost(deleteToken);
+    docs.removeWhere(
+        (element) => Post.fromJson(element.data()).postId == postId);
+    docs([...docs]);
+    await repository.deleteToken(currentUid(), deleteToken.tokenId);
+    await repository.deletePostMute(post.typedRef());
   }
 }

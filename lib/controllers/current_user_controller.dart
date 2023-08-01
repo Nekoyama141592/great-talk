@@ -69,13 +69,13 @@ class CurrentUserController extends GetxController {
     mutePostIds([...mutePostIds]);
   }
 
-  void addMuteUid(MuteUserToken muteUserToken) {
+  void addMuteUser(MuteUserToken muteUserToken) {
     muteUserTokens.add(muteUserToken);
     muteUids.add(muteUserToken.passiveUid);
     muteUids([...muteUids]);
   }
 
-  void removeMuteUid(MuteUserToken muteUserToken) {
+  void removeMuteUer(MuteUserToken muteUserToken) {
     muteUserTokens.remove(muteUserToken);
     muteUids.remove(muteUserToken.passiveUid);
     muteUids([...muteUids]);

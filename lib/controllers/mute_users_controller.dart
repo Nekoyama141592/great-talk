@@ -2,6 +2,7 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
+import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MuteUsersController extends DocsController {
@@ -51,5 +52,16 @@ class MuteUsersController extends DocsController {
     } else {
       return [];
     }
+  }
+
+  Future<void> unMuteUser(String passiveUid) async {
+    final deleteToken = CurrentUserController.to.muteUserTokens
+        .firstWhere((element) => element.passiveUid == passiveUid);
+    CurrentUserController.to.removeMuteUer(deleteToken);
+    docs.removeWhere(
+        (element) => FirestoreUser.fromJson(element.data()).uid == passiveUid);
+    docs([...docs]);
+    await repository.deleteToken(currentUid(), deleteToken.tokenId);
+    await repository.deleteUserMute(passiveUid);
   }
 }

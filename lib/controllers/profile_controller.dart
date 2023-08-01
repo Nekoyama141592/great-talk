@@ -2,11 +2,10 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-abstract class ProfileController extends DocsController with CurrentUserMixin {
+abstract class ProfileController extends DocsController {
   ProfileController(this.isMyProfile)
       : super(enablePullDown: true, isUserDocs: false);
   final bool isMyProfile;

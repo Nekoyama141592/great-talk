@@ -109,9 +109,29 @@ class FirestoreRepository {
     }
   }
 
+  FutureResult<bool> deletePostMute(DocRef postRef) async {
+    try {
+      await client.deletePostMute(postRef);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
   FutureResult<bool> createUserMute(String uid, SDMap json) async {
     try {
       await client.createUserMute(uid, json);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<bool> deleteUserMute(String uid) async {
+    try {
+      await client.deleteUserMute(uid);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
