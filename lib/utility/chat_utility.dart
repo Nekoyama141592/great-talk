@@ -12,7 +12,8 @@ class ChatUtility {
     Get.dialog(CupertinoAlertDialog(
       content: const Text("履歴を全て削除しますがよろしいですか？"),
       actions: [
-        CupertinoDialogAction(onPressed: Get.back, child: const Text(cancelText)),
+        CupertinoDialogAction(
+            onPressed: Get.back, child: const Text(cancelText)),
         CupertinoDialogAction(
             isDestructiveAction: true,
             onPressed: () async {

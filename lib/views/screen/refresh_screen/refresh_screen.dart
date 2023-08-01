@@ -5,9 +5,7 @@ import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/post/post.dart';
-import 'package:great_talk/views/components/circle_image.dart';
-import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
-import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
+import 'package:great_talk/views/screen/refresh_screen/components/post_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RefreshScreen extends HookWidget {
@@ -37,32 +35,27 @@ class RefreshScreen extends HookWidget {
             header: const WaterDropHeader(),
             onLoading: () => docsController.onLoading(refreshController),
             onRefresh: () => docsController.onRefresh(refreshController),
-            child: child ?? Container(child: docsController.isUserDocs
-                ? ListView.builder(
-                    itemCount: docsController.docs.length,
-                    itemBuilder: (c, i) {
-                      final user =
-                          FirestoreUser.fromJson(docsController.docs[i].data());
-                      return Text(user.typedUserName().value);
-                    })
-                : ListView.builder(
-                    itemCount: docsController.docs.length,
-                    itemBuilder: (c, i) {
-                      final post = Post.fromJson(docsController.docs[i].data());
-                      final interlocutor = ChatContent.fromPost(post);
-                      return Row(
-                        children: [
-                          CircleImage(chatUser: interlocutor),
-                          const Spacer(),
-                          Text(post.postId),
-                          const Spacer(),
-                          PostLikeButton(
-                            post: post,
-                          ),
-                          PostReportButton(post: post)
-                        ],
-                      );
-                    }),)
-            ));
+            child: child ??
+                Container(
+                  child: docsController.isUserDocs
+                      ? ListView.builder(
+                          itemCount: docsController.docs.length,
+                          itemBuilder: (c, i) {
+                            final user = FirestoreUser.fromJson(
+                                docsController.docs[i].data());
+                            return Text(user.typedUserName().value);
+                          })
+                      : ListView.builder(
+                          itemCount: docsController.docs.length,
+                          itemBuilder: (c, i) {
+                            final post =
+                                Post.fromJson(docsController.docs[i].data());
+                            final chatContent = ChatContent.fromPost(post);
+                            return PostCard(
+                                chatContent: chatContent,
+                                post: post,
+                                onTap: null);
+                          }),
+                )));
   }
 }

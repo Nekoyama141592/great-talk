@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/mute_posts_controller.dart';
+import 'package:great_talk/model/chat_content/chat_content.dart';
+import 'package:great_talk/model/post/post.dart';
+import 'package:great_talk/views/screen/refresh_screen/components/post_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 
 class MutePostsPage extends StatelessWidget {
@@ -12,7 +16,21 @@ class MutePostsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("ミュートしている投稿一覧"),
       ),
-      body: RefreshScreen(docsController: controller),
+      body: RefreshScreen(
+        docsController: controller,
+        child: Obx(() => ListView.builder(
+            itemCount: controller.docs.length,
+            itemBuilder: (c, i) {
+              final post = Post.fromJson(controller.docs[i].data());
+              final chatContent = ChatContent.fromPost(post);
+              return Obx(() => CurrentUserController.to.isValidPost(post.postId)
+                  ? PostCard(
+                      chatContent: chatContent,
+                      post: post,
+                      onTap: () => controller.unMutePost(post))
+                  : const SizedBox.shrink());
+            })),
+      ),
     );
   }
 }

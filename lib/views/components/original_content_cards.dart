@@ -41,7 +41,7 @@ class OriginalContentCards extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           vertical: defaultPadding(context)),
                       child: ListTile(
-                        leading: CircleImage(chatUser: content),
+                        leading: CircleImage(chatContent: content),
                         title: boldText(name),
                         subtitle: lastAnswer != null
                             ? Text(

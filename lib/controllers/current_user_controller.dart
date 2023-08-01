@@ -97,6 +97,9 @@ class CurrentUserController extends GetxController {
 
   bool isNotLoggedIn() => currentUser.value == null || isAnonymous();
 
+  bool isValidPost(String postId) => !mutePostIds.contains(postId);
+  bool isValidUser(String uid) => !muteUids.contains(uid);
+
   Future<void> onAppleButtonPressed() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInWithApple();
