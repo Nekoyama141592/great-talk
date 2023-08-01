@@ -24,7 +24,6 @@ abstract class FirestoreUser implements _$FirestoreUser {
     required bool isSuspended,
     required List<SDMap> links,
     required int muteCount,
-    required SDMap nftIconInfo,
     required int postCount,
     required dynamic ref,
     required int reportCount,

@@ -23,7 +23,6 @@ _$_FirestoreUser _$$_FirestoreUserFromJson(Map<String, dynamic> json) =>
           .map((e) => e as Map<String, dynamic>)
           .toList(),
       muteCount: json['muteCount'] as int,
-      nftIconInfo: json['nftIconInfo'] as Map<String, dynamic>,
       postCount: json['postCount'] as int,
       ref: json['ref'],
       reportCount: json['reportCount'] as int,
@@ -53,7 +52,6 @@ Map<String, dynamic> _$$_FirestoreUserToJson(_$_FirestoreUser instance) =>
       'isSuspended': instance.isSuspended,
       'links': instance.links,
       'muteCount': instance.muteCount,
-      'nftIconInfo': instance.nftIconInfo,
       'postCount': instance.postCount,
       'ref': instance.ref,
       'reportCount': instance.reportCount,

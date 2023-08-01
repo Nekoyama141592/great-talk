@@ -33,7 +33,6 @@ mixin _$FirestoreUser {
   bool get isSuspended => throw _privateConstructorUsedError;
   List<SDMap> get links => throw _privateConstructorUsedError;
   int get muteCount => throw _privateConstructorUsedError;
-  Map<String, dynamic> get nftIconInfo => throw _privateConstructorUsedError;
   int get postCount => throw _privateConstructorUsedError;
   dynamic get ref => throw _privateConstructorUsedError;
   int get reportCount => throw _privateConstructorUsedError;
@@ -71,7 +70,6 @@ abstract class $FirestoreUserCopyWith<$Res> {
       bool isSuspended,
       List<SDMap> links,
       int muteCount,
-      Map<String, dynamic> nftIconInfo,
       int postCount,
       dynamic ref,
       int reportCount,
@@ -110,7 +108,6 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
     Object? isSuspended = null,
     Object? links = null,
     Object? muteCount = null,
-    Object? nftIconInfo = null,
     Object? postCount = null,
     Object? ref = freezed,
     Object? reportCount = null,
@@ -175,10 +172,6 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      nftIconInfo: null == nftIconInfo
-          ? _value.nftIconInfo
-          : nftIconInfo // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
       postCount: null == postCount
           ? _value.postCount
           : postCount // ignore: cast_nullable_to_non_nullable
@@ -245,7 +238,6 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
       bool isSuspended,
       List<SDMap> links,
       int muteCount,
-      Map<String, dynamic> nftIconInfo,
       int postCount,
       dynamic ref,
       int reportCount,
@@ -282,7 +274,6 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
     Object? isSuspended = null,
     Object? links = null,
     Object? muteCount = null,
-    Object? nftIconInfo = null,
     Object? postCount = null,
     Object? ref = freezed,
     Object? reportCount = null,
@@ -347,10 +338,6 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
           ? _value.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
               as int,
-      nftIconInfo: null == nftIconInfo
-          ? _value._nftIconInfo
-          : nftIconInfo // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
       postCount: null == postCount
           ? _value.postCount
           : postCount // ignore: cast_nullable_to_non_nullable
@@ -412,7 +399,6 @@ class _$_FirestoreUser extends _FirestoreUser {
       required this.isSuspended,
       required final List<SDMap> links,
       required this.muteCount,
-      required final Map<String, dynamic> nftIconInfo,
       required this.postCount,
       required this.ref,
       required this.reportCount,
@@ -425,7 +411,6 @@ class _$_FirestoreUser extends _FirestoreUser {
       required final List<SDMap> walletAddresses})
       : _bio = bio,
         _links = links,
-        _nftIconInfo = nftIconInfo,
         _searchToken = searchToken,
         _userImage = userImage,
         _userName = userName,
@@ -473,14 +458,6 @@ class _$_FirestoreUser extends _FirestoreUser {
 
   @override
   final int muteCount;
-  final Map<String, dynamic> _nftIconInfo;
-  @override
-  Map<String, dynamic> get nftIconInfo {
-    if (_nftIconInfo is EqualUnmodifiableMapView) return _nftIconInfo;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_nftIconInfo);
-  }
-
   @override
   final int postCount;
   @override
@@ -527,7 +504,7 @@ class _$_FirestoreUser extends _FirestoreUser {
 
   @override
   String toString() {
-    return 'FirestoreUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isAdmin: $isAdmin, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, nftIconInfo: $nftIconInfo, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImage: $userImage, userName: $userName, walletAddresses: $walletAddresses)';
+    return 'FirestoreUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isAdmin: $isAdmin, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImage: $userImage, userName: $userName, walletAddresses: $walletAddresses)';
   }
 
   @override
@@ -557,8 +534,6 @@ class _$_FirestoreUser extends _FirestoreUser {
             const DeepCollectionEquality().equals(other._links, _links) &&
             (identical(other.muteCount, muteCount) ||
                 other.muteCount == muteCount) &&
-            const DeepCollectionEquality()
-                .equals(other._nftIconInfo, _nftIconInfo) &&
             (identical(other.postCount, postCount) ||
                 other.postCount == postCount) &&
             const DeepCollectionEquality().equals(other.ref, ref) &&
@@ -593,7 +568,6 @@ class _$_FirestoreUser extends _FirestoreUser {
         isSuspended,
         const DeepCollectionEquality().hash(_links),
         muteCount,
-        const DeepCollectionEquality().hash(_nftIconInfo),
         postCount,
         const DeepCollectionEquality().hash(ref),
         reportCount,
@@ -635,7 +609,6 @@ abstract class _FirestoreUser extends FirestoreUser {
       required final bool isSuspended,
       required final List<SDMap> links,
       required final int muteCount,
-      required final Map<String, dynamic> nftIconInfo,
       required final int postCount,
       required final dynamic ref,
       required final int reportCount,
@@ -677,8 +650,6 @@ abstract class _FirestoreUser extends FirestoreUser {
   List<SDMap> get links;
   @override
   int get muteCount;
-  @override
-  Map<String, dynamic> get nftIconInfo;
   @override
   int get postCount;
   @override

@@ -58,7 +58,6 @@ class NewContent {
       muteCount: 0,
       postCount: 0,
       links: [],
-      nftIconInfo: {},
       ref: FirestoreQueries.userQuery(uid),
       reportCount: 0,
       score: 0,
