@@ -4,6 +4,7 @@ import 'package:great_talk/controllers/search_docs_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SearchUserPostsController extends SearchDocsController {
+  SearchUserPostsController() : super(isSearchUser: false);
   String _passiveUid() => Get.parameters['uid']!;
   @override
   Future<void> fetchDocs() async {

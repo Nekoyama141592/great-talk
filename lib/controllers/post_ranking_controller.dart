@@ -3,7 +3,7 @@ import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class PostRankingController extends DocsController {
-  PostRankingController() : super(enablePullDown: false);
+  PostRankingController() : super(enablePullDown: false, isUserDocs: false);
 
   @override
   Future<void> onRefresh(RefreshController refreshController) async {

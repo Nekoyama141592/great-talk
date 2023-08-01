@@ -7,7 +7,7 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class FeedsController extends DocsController {
-  FeedsController() : super(enablePullDown: true);
+  FeedsController() : super(enablePullDown: true, isUserDocs: false);
 
   List<QDoc> _timelineDocs = [];
 
