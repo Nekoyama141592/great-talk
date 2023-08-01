@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/mute_users_controller.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
@@ -20,12 +19,10 @@ class MuteUsersPage extends StatelessWidget {
             itemCount: controller.docs.length,
             itemBuilder: (c, i) {
               final user = FirestoreUser.fromJson(controller.docs[i].data());
-              return Obx(() => CurrentUserController.to.isValidUser(user.uid)
-                  ? InkWell(
-                      onTap: () => controller.unMuteUser(user.uid),
-                      child: Text(user.typedUserName().value),
-                    )
-                  : const SizedBox.shrink());
+              return InkWell(
+                onTap: () => controller.unMuteUser(user.uid),
+                child: Text(user.typedUserName().value),
+              );
             })),
       ),
     );

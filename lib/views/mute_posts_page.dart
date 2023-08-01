@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/mute_posts_controller.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/post/post.dart';
@@ -23,12 +22,10 @@ class MutePostsPage extends StatelessWidget {
             itemBuilder: (c, i) {
               final post = Post.fromJson(controller.docs[i].data());
               final chatContent = ChatContent.fromPost(post);
-              return Obx(() => CurrentUserController.to.isValidPost(post.postId)
-                  ? PostCard(
-                      chatContent: chatContent,
-                      post: post,
-                      onTap: () => controller.unMutePost(post))
-                  : const SizedBox.shrink());
+              return PostCard(
+                  chatContent: chatContent,
+                  post: post,
+                  onTap: () => controller.unMutePost(post));
             })),
       ),
     );

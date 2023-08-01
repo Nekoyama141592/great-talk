@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
@@ -43,7 +44,10 @@ class RefreshScreen extends HookWidget {
                           itemBuilder: (c, i) {
                             final user = FirestoreUser.fromJson(
                                 docsController.docs[i].data());
-                            return Text(user.typedUserName().value);
+                            return Obx(() =>
+                                CurrentUserController.to.isValidUser(user.uid)
+                                    ? Text(user.typedUserName().value)
+                                    : const SizedBox.shrink());
                           })
                       : ListView.builder(
                           itemCount: docsController.docs.length,
@@ -51,10 +55,13 @@ class RefreshScreen extends HookWidget {
                             final post =
                                 Post.fromJson(docsController.docs[i].data());
                             final chatContent = ChatContent.fromPost(post);
-                            return PostCard(
-                                chatContent: chatContent,
-                                post: post,
-                                onTap: null);
+                            return Obx(() => CurrentUserController.to
+                                    .isValidPost(post.postId)
+                                ? PostCard(
+                                    chatContent: chatContent,
+                                    post: post,
+                                    onTap: null)
+                                : const SizedBox.shrink());
                           }),
                 )));
   }
