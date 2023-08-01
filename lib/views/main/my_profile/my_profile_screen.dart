@@ -12,7 +12,7 @@ class MyProfileScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           backgroundColor: kPrimaryColor,
-          onPressed: () {},
+          onPressed: () => Get.toNamed("/createPost"),
           child: const Icon(Icons.new_label)),
       body: ProfileScreen(
         controller: controller,

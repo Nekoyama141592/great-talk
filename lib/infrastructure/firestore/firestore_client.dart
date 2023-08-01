@@ -2,6 +2,9 @@ import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreClient {
+  Future<void> createPost(DocRef postRef, SDMap json) async =>
+      await postRef.set(json);
+
   Future<void> createUser(String uid, SDMap json) async =>
       await FirestoreQueries.userQuery(uid).set(json);
 

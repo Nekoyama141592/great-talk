@@ -28,6 +28,9 @@ class FirestoreQueries {
         .orderBy('createdAt', descending: true);
   }
 
+  static DocRef userPostRef(String uid, String postId) =>
+      userQuery(uid).collection('posts').doc(postId);
+
   static MapQuery userPostsQueryByNewest(String uid) => instance
       .collection("users")
       .doc(uid)
