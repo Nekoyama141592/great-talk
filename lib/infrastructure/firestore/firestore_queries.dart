@@ -33,6 +33,9 @@ class FirestoreQueries {
         .orderBy('createdAt', descending: true);
   }
 
+  static DocRef postReportDocRefFromPostRef(DocRef postRef) =>
+      postRef.collection('postReports').doc();
+
   static DocRef userPostRef(String uid, String postId) =>
       userQuery(uid).collection('posts').doc(postId);
 

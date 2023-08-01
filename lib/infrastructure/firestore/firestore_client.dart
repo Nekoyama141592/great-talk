@@ -20,6 +20,8 @@ class FirestoreClient {
   Future<void> deleteFollower(String currentUid, String passiveUid) async =>
       await FirestoreQueries.followerQuery(currentUid, passiveUid).delete();
 
+  Future<void> createPostReport(DocRef postRef, SDMap json) async =>
+      await FirestoreQueries.postReportDocRefFromPostRef(postRef).get();
   Future<void> createToken(
           String currentUid, String tokenId, SDMap json) async =>
       await FirestoreQueries.tokenQuery(currentUid, tokenId).set(json);
