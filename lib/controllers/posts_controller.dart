@@ -28,7 +28,7 @@ class PostsController extends GetxController with CurrentUserMixin {
     result.when(success: (res) {
       UIHelper.showFlutterToast("報告が完了しました！");
     }, failure: () {
-      UIHelper.showFlutterToast("報告を完了できませんでした！");
+      UIHelper.showErrorFlutterToast("報告を完了できませんでした！");
     });
   }
 

@@ -11,7 +11,7 @@ class SearchUsersController extends SearchDocsController {
     result.when(success: (res) {
       docs(res);
     }, failure: () {
-      UIHelper.showFlutterToast("データの取得に失敗しました");
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
   }
 
@@ -22,7 +22,7 @@ class SearchUsersController extends SearchDocsController {
       result.when(success: (res) {
         docs(res);
       }, failure: () {
-        UIHelper.showFlutterToast("データの取得に失敗しました");
+        UIHelper.showErrorFlutterToast("データの取得に失敗しました");
       });
     } else {
       UIHelper.showFlutterToast("再検索を行ってください");

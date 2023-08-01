@@ -59,7 +59,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
           messages(a);
         }
       }, failure: () {
-        UIHelper.showFlutterToast("データの取得に失敗しました");
+        UIHelper.showErrorFlutterToast("データの取得に失敗しました");
       });
     }
     isLoading(false);

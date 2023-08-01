@@ -19,7 +19,7 @@ class CreatePostController extends GetxController with CurrentUserMixin {
     result.when(success: (_) {
       UIHelper.showFlutterToast("投稿が作成できました！");
     }, failure: () {
-      UIHelper.showFlutterToast("投稿が作成できませんでした");
+      UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
     });
   }
 }

@@ -54,7 +54,7 @@ class CurrentUserController extends GetxController {
     result.when(success: (res) {
       currentUser(res);
     }, failure: () {
-      UIHelper.showFlutterToast("通信が失敗しました");
+      UIHelper.showErrorFlutterToast("通信が失敗しました");
     });
   }
 
@@ -96,7 +96,7 @@ class CurrentUserController extends GetxController {
       firestoreUser(newUser);
       UIHelper.showFlutterToast("ユーザーが作成されました");
     }, failure: () {
-      UIHelper.showFlutterToast("データベースにユーザーを作成できませんでした");
+      UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
     });
   }
 
@@ -119,7 +119,7 @@ class CurrentUserController extends GetxController {
         await _createFirestoreUserWithUser();
       }
     }, failure: () {
-      UIHelper.showFlutterToast("データの取得に失敗しました");
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
   }
 }
