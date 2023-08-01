@@ -22,6 +22,11 @@ class FirestoreClient {
 
   Future<void> createPostReport(DocRef postRef, SDMap json) async =>
       await FirestoreQueries.postReportDocRefFromPostRef(postRef).get();
+  Future<void> createPostMute(DocRef postRef, SDMap json) async =>
+      await FirestoreQueries.postMuteDocRefFromPostRef(postRef).get();
+  Future<void> createUserMute(String uid, SDMap json) async =>
+      await FirestoreQueries.userMuteDocRef(uid).get();
+
   Future<void> createToken(
           String currentUid, String tokenId, SDMap json) async =>
       await FirestoreQueries.tokenQuery(currentUid, tokenId).set(json);

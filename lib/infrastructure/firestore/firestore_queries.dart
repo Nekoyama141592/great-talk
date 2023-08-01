@@ -35,6 +35,10 @@ class FirestoreQueries {
 
   static DocRef postReportDocRefFromPostRef(DocRef postRef) =>
       postRef.collection('postReports').doc();
+  static DocRef postMuteDocRefFromPostRef(DocRef postRef) =>
+      postRef.collection('postMutes').doc();
+  static DocRef userMuteDocRef(String uid) =>
+      userQuery(uid).collection('userMutes').doc();
 
   static DocRef userPostRef(String uid, String postId) =>
       userQuery(uid).collection('posts').doc(postId);

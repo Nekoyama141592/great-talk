@@ -7,6 +7,7 @@ import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
+import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RefreshScreen extends HookWidget {
@@ -57,7 +58,8 @@ class RefreshScreen extends HookWidget {
                           const Spacer(),
                           PostLikeButton(
                             post: post,
-                          )
+                          ),
+                          PostReportButton(post: post)
                         ],
                       );
                     })));

@@ -11,4 +11,9 @@ enum PrefsKey {
   lastChatDate,
 }
 
-enum TokenType { following, likePost }
+enum TokenType {
+  following,
+  likePost,
+  mutePost,
+  muteUser
+} // TODO: distributeTokens

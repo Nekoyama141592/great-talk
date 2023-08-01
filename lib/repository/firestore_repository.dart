@@ -99,6 +99,26 @@ class FirestoreRepository {
     }
   }
 
+  FutureResult<bool> createPostMute(DocRef postRef, SDMap json) async {
+    try {
+      await client.createPostMute(postRef, json);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<bool> createUserMute(String uid, SDMap json) async {
+    try {
+      await client.createUserMute(uid, json);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
   FutureResult<Doc> getPost(String uid, String postId) async {
     try {
       final res = await client.getPost(uid, postId);

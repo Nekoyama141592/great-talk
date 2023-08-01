@@ -4,6 +4,8 @@ import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/model/tokens/mute_post_token/mute_post_token.dart';
+import 'package:great_talk/model/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/new_content.dart';
@@ -15,8 +17,15 @@ class CurrentUserController extends GetxController {
 
   final followingTokens = <FollowingToken>[];
   final followingUids = <String>[].obs;
+
   final likePostTokens = <LikePostToken>[];
   final likePostIds = <String>[].obs;
+
+  final mutePostTokens = <MutePostToken>[];
+  final mutePostIds = <String>[].obs;
+
+  final muteUserTokens = <MuteUserToken>[];
+  final muteUids = <String>[].obs;
 
   @override
   void onInit() async {
@@ -46,6 +55,30 @@ class CurrentUserController extends GetxController {
     likePostTokens.remove(likePostToken);
     likePostIds.remove(likePostToken.postId);
     likePostIds([...likePostIds]);
+  }
+
+  void addMutePost(MutePostToken mutePostToken) {
+    mutePostTokens.add(mutePostToken);
+    mutePostIds.add(mutePostToken.postId);
+    mutePostIds([...mutePostIds]);
+  }
+
+  void removeMutePost(MutePostToken mutePostToken) {
+    mutePostTokens.remove(mutePostToken);
+    mutePostIds.remove(mutePostToken.postId);
+    mutePostIds([...mutePostIds]);
+  }
+
+  void addMuteUid(MuteUserToken muteUserToken) {
+    muteUserTokens.add(muteUserToken);
+    muteUids.add(muteUserToken.passiveUid);
+    muteUids([...muteUids]);
+  }
+
+  void removeMuteUid(MuteUserToken muteUserToken) {
+    muteUserTokens.remove(muteUserToken);
+    muteUids.remove(muteUserToken.passiveUid);
+    muteUids([...muteUids]);
   }
 
   Future<void> _createAnonymousUser() async {
