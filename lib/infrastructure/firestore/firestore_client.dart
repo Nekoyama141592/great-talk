@@ -33,6 +33,13 @@ class FirestoreClient {
   Future<void> deleteToken(String currentUid, String tokenId) async =>
       await FirestoreQueries.tokenQuery(currentUid, tokenId).delete();
 
+  FutureQSnapshot getUsersByWhereIn(List<String> uids) async =>
+      await FirestoreQueries.usersQueryByWhereIn(uids).get();
+  FutureQSnapshot getMoreUsersByWhereIn(List<String> uids, Doc lastDoc) async =>
+      await FirestoreQueries.moreUsersQueryByWhereIn(uids, lastDoc).get();
+  FutureQSnapshot getNewUsersByWhereIn(List<String> uids, Doc firstDoc) async =>
+      await FirestoreQueries.newUsersQueryByWhereIn(uids, firstDoc).get();
+
   FutureDoc getPost(String uid, String postId) async =>
       await FirestoreQueries.postDocRef(uid, postId).get();
   FutureQSnapshot getPostsByFollowing(List<String> followingUids) async =>

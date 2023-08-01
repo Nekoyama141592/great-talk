@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 
 class OriginalDrawer extends StatelessWidget {
   const OriginalDrawer({Key? key}) : super(key: key);
@@ -13,9 +14,8 @@ class OriginalDrawer extends StatelessWidget {
             onTap: () {},
           ),
           ListTile(
-            title: const Text("ミュートしているユーザー"),
-            onTap: () {},
-          ),
+              title: const Text("ミュートしているユーザー"),
+              onTap: () => Get.toNamed('/muteUsers')),
           ListTile(
             title: const Text("ミュートしている投稿"),
             onTap: () {},

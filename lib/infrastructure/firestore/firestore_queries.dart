@@ -99,6 +99,13 @@ class FirestoreQueries {
   static final usersQuery =
       instance.collection('users').limit(oneTimeReadCount);
 
+  static MapQuery usersQueryByWhereIn(List<String> uids) =>
+      usersQuery.where('uid', whereIn: uids);
+  static MapQuery moreUsersQueryByWhereIn(List<String> uids, Doc lastDoc) =>
+      moreQuery(usersQueryByWhereIn(uids), lastDoc);
+  static MapQuery newUsersQueryByWhereIn(List<String> uids, Doc firstDoc) =>
+      newQuery(usersQueryByWhereIn(uids), firstDoc);
+
   static final usersQueryByLikeCount =
       usersQuery.orderBy('followerCount', descending: true);
   static MapQuery moreUsersQueryByLikeCount(Doc lastDoc) =>

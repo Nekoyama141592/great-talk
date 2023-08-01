@@ -252,6 +252,41 @@ class FirestoreRepository {
     }
   }
 
+  FutureResult<List<QDoc>> getUsersByWhereIn(List<String> uids) async {
+    try {
+      final res = await client.getUsersByWhereIn(uids);
+      final docs = res.docs;
+      return Result.success(docs);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<List<QDoc>> getMoreUsersByWhereIn(
+      List<String> uids, Doc lastDoc) async {
+    try {
+      final res = await client.getMoreUsersByWhereIn(uids, lastDoc);
+      final docs = res.docs;
+      return Result.success(docs);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<List<QDoc>> getNewUsersByWhereIn(
+      List<String> uids, Doc firstDoc) async {
+    try {
+      final res = await client.getNewUsersByWhereIn(uids, firstDoc);
+      final docs = res.docs;
+      return Result.success(docs);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
   FutureResult<List<QDoc>> getUsersByFollowerCount() async {
     try {
       final res = await client.getUsersByFollowerCount();
