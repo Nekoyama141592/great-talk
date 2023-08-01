@@ -6,7 +6,7 @@ import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-abstract class ProfileController extends DocsController with CurrentUidMixin {
+abstract class ProfileController extends DocsController with CurrentUserMixin {
   ProfileController(this.isMyProfile) : super(enablePullDown: true);
   final bool isMyProfile;
   final Rx<FirestoreUser?> passiveUser = Rx(null);

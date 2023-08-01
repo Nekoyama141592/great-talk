@@ -18,7 +18,7 @@ class UserProfileController extends ProfileController {
         passiveUid: passiveUid(),
         tokenId: tokenId,
         tokenType: TokenType.following.name);
-    CurrentUserController.to.addFollowingUid(followingToken);
+    CurrentUserController.to.addFollowing(followingToken);
     await repository.createToken(
         currentUid(), tokenId, followingToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
@@ -31,7 +31,7 @@ class UserProfileController extends ProfileController {
   Future<void> unfollow() async {
     final deleteToken = CurrentUserController.to.followingTokens
         .firstWhere((element) => element.passiveUid == passiveUid());
-    CurrentUserController.to.removeFollowingUid(deleteToken);
+    CurrentUserController.to.removeFollowing(deleteToken);
     await repository.deleteToken(currentUid(), deleteToken.tokenId);
     await repository.deleteFollower(currentUid(), passiveUid());
   }

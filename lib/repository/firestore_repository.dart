@@ -18,9 +18,28 @@ class FirestoreRepository {
     }
   }
 
+  FutureResult<bool> createPostLike(
+      DocRef postRef, String tokenId, SDMap json) async {
+    try {
+      await client.createPostLike(postRef, tokenId, json);
+      return const Result.success(true);
+    } catch (e) {
+      return const Result.failure();
+    }
+  }
+
   FutureResult<bool> createUser(String uid, SDMap json) async {
     try {
       await client.createUser(uid, json);
+      return const Result.success(true);
+    } catch (e) {
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<bool> createUserUpdateLog(String uid, SDMap json) async {
+    try {
+      await client.createUserUpdateLog(uid, json);
       return const Result.success(true);
     } catch (e) {
       return const Result.failure();

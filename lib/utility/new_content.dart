@@ -5,6 +5,7 @@ import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/post/post.dart';
+import 'package:great_talk/model/user_update_log/user_update_log.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class NewContent {
@@ -69,4 +70,15 @@ class NewContent {
       walletAddresses: [],
     );
   }
+
+  static UserUpdateLog newUserUpdateLog(String stringBio, String stringUserName,
+          String uid, String userImageUrl, DocRef userRef) =>
+      UserUpdateLog(
+          logCreatedAt: Timestamp.now(),
+          searchToken: returnSearchToken(stringUserName),
+          stringBio: stringBio,
+          stringUserName: stringUserName,
+          uid: uid,
+          userImageUrl: userImageUrl,
+          userRef: userRef);
 }

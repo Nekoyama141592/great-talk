@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
+import 'package:great_talk/model/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/new_content.dart';
@@ -12,8 +13,10 @@ class CurrentUserController extends GetxController {
   final Rx<User?> currentUser = Rx(FirebaseAuth.instance.currentUser);
   final Rx<FirestoreUser?> firestoreUser = Rx(null);
 
-  final followingTokens = <FollowingToken>[]; // Viewの変更には関与しないので観測しない.
+  final followingTokens = <FollowingToken>[];
   final followingUids = <String>[].obs;
+  final likePostTokens = <LikePostToken>[];
+  final likePostUids = <String>[].obs;
 
   @override
   void onInit() async {
@@ -21,16 +24,28 @@ class CurrentUserController extends GetxController {
     super.onInit();
   }
 
-  void addFollowingUid(FollowingToken followingToken) {
+  void addFollowing(FollowingToken followingToken) {
     followingTokens.add(followingToken);
     followingUids.add(followingToken.passiveUid);
     followingUids([...followingUids]);
   }
 
-  void removeFollowingUid(FollowingToken followingToken) {
+  void removeFollowing(FollowingToken followingToken) {
     followingTokens.remove(followingToken);
     followingUids.remove(followingToken.passiveUid);
     followingUids([...followingUids]);
+  }
+
+  void addLikePost(LikePostToken likePostToken) {
+    likePostTokens.add(likePostToken);
+    likePostUids.add(likePostToken.passiveUid);
+    likePostUids([...likePostUids]);
+  }
+
+  void removeLikePost(LikePostToken likePostToken) {
+    likePostTokens.remove(likePostToken);
+    likePostUids.remove(likePostToken.passiveUid);
+    likePostUids([...likePostUids]);
   }
 
   Future<void> _createAnonymousUser() async {

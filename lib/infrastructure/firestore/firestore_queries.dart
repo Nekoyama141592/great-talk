@@ -15,6 +15,8 @@ class FirestoreQueries {
       .doc(currentUid)
       .collection("followers")
       .doc(passiveUid);
+  static DocRef postLikeDocRef(DocRef postRef, String tokenId) =>
+      postRef.collection('postLikes').doc(tokenId);
 
   static final postsQuery =
       instance.collectionGroup('posts').limit(oneTimeReadCount);
@@ -100,6 +102,9 @@ class FirestoreQueries {
   static MapQuery moreUserPostsSearchQuery(
           String uid, String searchTerm, Doc lastDoc) =>
       moreQuery(searchQuery(userPostsQuery(uid), searchTerm), lastDoc);
+
+  static DocRef userUpdateLogDocRef(String uid) =>
+      userQuery(uid).collection('userUpdateLogs').doc();
 
   static MapQuery searchQuery(MapQuery query, String searchTerm) {
     final searchWords = returnSearchWords(searchTerm);

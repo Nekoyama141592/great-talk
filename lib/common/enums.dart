@@ -11,4 +11,4 @@ enum PrefsKey {
   lastChatDate,
 }
 
-enum TokenType { following }
+enum TokenType { following, likePost }

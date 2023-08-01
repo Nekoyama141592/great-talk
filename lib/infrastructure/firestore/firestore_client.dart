@@ -4,9 +4,15 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 class FirestoreClient {
   Future<void> createPost(DocRef postRef, SDMap json) async =>
       await postRef.set(json);
+  Future<void> createPostLike(
+          DocRef postRef, String tokenId, SDMap json) async =>
+      await FirestoreQueries.postLikeDocRef(postRef, tokenId).set(json);
 
   Future<void> createUser(String uid, SDMap json) async =>
       await FirestoreQueries.userQuery(uid).set(json);
+
+  Future<void> createUserUpdateLog(String uid, SDMap json) async =>
+      await FirestoreQueries.userUpdateLogDocRef(uid).set(json);
 
   Future<void> createFollower(
           String currentUid, String passiveUid, SDMap json) async =>

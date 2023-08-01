@@ -7,7 +7,7 @@ import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/new_content.dart';
 
-class CreatePostController extends GetxController with CurrentUidMixin {
+class CreatePostController extends GetxController with CurrentUserMixin {
   String title = "";
   Future<void> onCreateButtonPressed() async {
     final repository = FirestoreRepository();
