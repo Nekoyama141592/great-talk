@@ -16,7 +16,7 @@ class CurrentUserController extends GetxController {
   final followingTokens = <FollowingToken>[];
   final followingUids = <String>[].obs;
   final likePostTokens = <LikePostToken>[];
-  final likePostUids = <String>[].obs;
+  final likePostIds = <String>[].obs;
 
   @override
   void onInit() async {
@@ -38,14 +38,14 @@ class CurrentUserController extends GetxController {
 
   void addLikePost(LikePostToken likePostToken) {
     likePostTokens.add(likePostToken);
-    likePostUids.add(likePostToken.passiveUid);
-    likePostUids([...likePostUids]);
+    likePostIds.add(likePostToken.postId);
+    likePostIds([...likePostIds]);
   }
 
   void removeLikePost(LikePostToken likePostToken) {
     likePostTokens.remove(likePostToken);
-    likePostUids.remove(likePostToken.passiveUid);
-    likePostUids([...likePostUids]);
+    likePostIds.remove(likePostToken.postId);
+    likePostIds([...likePostIds]);
   }
 
   Future<void> _createAnonymousUser() async {

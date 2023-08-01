@@ -6,6 +6,7 @@ import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/circle_image.dart';
+import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RefreshScreen extends HookWidget {
@@ -48,9 +49,16 @@ class RefreshScreen extends HookWidget {
                     itemBuilder: (c, i) {
                       final post = Post.fromJson(docsController.docs[i].data());
                       final interlocutor = ChatContent.fromPost(post);
-                      return ListTile(
-                        leading: CircleImage(chatUser: interlocutor),
-                        title: Text(post.postId),
+                      return Row(
+                        children: [
+                          CircleImage(chatUser: interlocutor),
+                          const Spacer(),
+                          Text(post.postId),
+                          const Spacer(),
+                          PostLikeButton(
+                            post: post,
+                          )
+                        ],
                       );
                     })));
   }
