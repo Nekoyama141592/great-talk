@@ -19,7 +19,7 @@ class CircleImage extends StatelessWidget {
         : InkWell(
             onTap: () {
               if (!isOriginalContent) {
-                Get.toNamed('/user/${interlocutor.uid}');
+                Get.toNamed('/users/${interlocutor.uid}');
               }
             },
             child: SizedBox(

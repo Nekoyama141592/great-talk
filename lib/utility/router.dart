@@ -9,6 +9,6 @@ final getPages = [
     name: "/chat/:uid",
     page: () => const RealtimeResPage(),
   ),
-  GetPage(name: "/user/:uid", page: () => const UserProfilePage()),
-  GetPage(name: "/user/:uid/posts/search", page: () => const UserProfilePage())
+  GetPage(name: "/users/:uid", page: () => const UserProfilePage()),
+  GetPage(name: "/users/:uid/posts/search", page: () => const UserProfilePage())
 ];
