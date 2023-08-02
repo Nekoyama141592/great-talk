@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/enums.dart';
+import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
@@ -185,6 +187,20 @@ class CurrentUserController extends GetxController {
   }
 
   void onLogoutButtonPressed() async {
+    Get.dialog(CupertinoAlertDialog(
+      content: const Text("ログアウトしますが本当によろしいですか？"),
+      actions: [
+        CupertinoDialogAction(
+            onPressed: Get.back, child: const Text(cancelText)),
+        CupertinoDialogAction(
+            isDestructiveAction: true,
+            onPressed: _signOut,
+            child: const Text(okText))
+      ],
+    ));
+  }
+
+  Future<void> _signOut() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signOut();
     result.when(success: (_) async {
@@ -208,11 +224,25 @@ class CurrentUserController extends GetxController {
     final repository = FirebaseAuthRepository();
     final result = await repository.reauthenticateWithCredential(
         currentUser.value!, credential);
-    result.when(success: (_) async {
-      await _deleteUser();
+    result.when(success: (_) {
+      _showDeleteUserDialog();
     }, failure: () {
       UIHelper.showErrorFlutterToast("再認証ができませんでした");
     });
+  }
+
+  void _showDeleteUserDialog() {
+    Get.dialog(CupertinoAlertDialog(
+      content: const Text("ユーザーを削除しますが本当によろしいですか？"),
+      actions: [
+        CupertinoDialogAction(
+            onPressed: Get.back, child: const Text(cancelText)),
+        CupertinoDialogAction(
+            isDestructiveAction: true,
+            onPressed: _deleteUser,
+            child: const Text(okText))
+      ],
+    ));
   }
 
   Future<void> _deleteUser() async {
