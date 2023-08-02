@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/enums.dart';
+import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/profile_controller.dart';
@@ -11,8 +12,13 @@ class UserProfileController extends ProfileController {
   UserProfileController() : super(false);
   static UserProfileController get to => Get.find<UserProfileController>();
   Future<void> follow() async {
+    if (passiveUser.value == null) {
+      return;
+    }
     final String tokenId = randomString();
     final Timestamp now = Timestamp.now();
+    passiveUser(passiveUser.value!
+        .copyWith(followerCount: passiveUser.value!.followerCount + plusOne));
     final followingToken = FollowingToken(
         createdAt: now,
         passiveUid: passiveUid(),
@@ -29,6 +35,11 @@ class UserProfileController extends ProfileController {
   }
 
   Future<void> unfollow() async {
+    if (passiveUser.value == null) {
+      return;
+    }
+    passiveUser(passiveUser.value!
+        .copyWith(followerCount: passiveUser.value!.followerCount + minusOne));
     final deleteToken = CurrentUserController.to.followingTokens
         .firstWhere((element) => element.passiveUid == passiveUid());
     CurrentUserController.to.removeFollowing(deleteToken);
