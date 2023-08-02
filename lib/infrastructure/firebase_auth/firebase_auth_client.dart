@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:great_talk/common/run_app.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/flavors.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:great_talk/infrastructure/credential_composer.dart';
 
 class FirebaseAuthClient {
   Future<UserCredential> signInAnonymously() async {
@@ -15,18 +12,7 @@ class FirebaseAuthClient {
     if (!CurrentUserController.to.isAnonymous()) {
       return null;
     }
-    final appleCredential = await SignInWithApple.getAppleIDCredential(
-      scopes: [
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-    );
-
-    OAuthProvider oauthProvider = OAuthProvider('apple.com');
-    final credential = oauthProvider.credential(
-      idToken: appleCredential.identityToken,
-      accessToken: appleCredential.authorizationCode,
-    );
+    final credential = await CredentialComposer.appleCredential();
     final result = await FirebaseAuth.instance.signInWithCredential(credential);
     return result;
   }
@@ -35,18 +21,21 @@ class FirebaseAuthClient {
     if (!CurrentUserController.to.isAnonymous()) {
       return null;
     }
-    final clientId = RunApp.getFirebaseOption(F.appFlavor!).iosClientId;
-    final GoogleSignInAccount? googleUser =
-        await GoogleSignIn(clientId: clientId).signIn();
-
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
-
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+    final credential = await CredentialComposer.googleCredential();
     final result = await FirebaseAuth.instance.signInWithCredential(credential);
     return result;
+  }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
+  Future<void> reauthenticateWithCredential(
+      User user, AuthCredential credential) async {
+    await user.reauthenticateWithCredential(credential);
+  }
+
+  Future<void> deleteUser(User user) async {
+    await user.delete();
   }
 }

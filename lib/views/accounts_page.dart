@@ -28,8 +28,7 @@ class AccountPage extends StatelessWidget {
           Obx(() => controller.isLoggedIn()
               ? ListTile(
                   title: const Text("ユーザーを消去する"),
-                  onTap: controller.onDeleteUserButtonPressed,
-                )
+                  onTap: () => Get.toNamed("reauthenticate/delete"))
               : const SizedBox.shrink())
         ],
       ),

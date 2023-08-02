@@ -50,4 +50,35 @@ class FirebaseAuthRepository {
     }
     return result;
   }
+
+  FutureResult<bool> signOut() async {
+    try {
+      await client.signOut();
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<bool> reauthenticateWithCredential(
+      User user, AuthCredential credential) async {
+    try {
+      await client.reauthenticateWithCredential(user, credential);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<bool> deleteUser(User user) async {
+    try {
+      await client.deleteUser(user);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
 }

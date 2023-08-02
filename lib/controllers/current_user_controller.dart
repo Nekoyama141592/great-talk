@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/infrastructure/credential_composer.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/tokens/like_post_token/like_post_token.dart';
@@ -183,11 +184,44 @@ class CurrentUserController extends GetxController {
     }
   }
 
-  void onLogoutButtonPressed() {
-    Get.toNamed('/logouted');
+  void onLogoutButtonPressed() async {
+    final repository = FirebaseAuthRepository();
+    final result = await repository.signOut();
+    result.when(success: (_) async {
+      Get.toNamed('/logouted');
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("ログアウトできませんでした");
+    });
   }
 
-  void onDeleteUserButtonPressed() {
-    Get.toNamed('/userDeleted');
+  Future<void> reauthenticateWithAppleToDelete() async {
+    final credential = await CredentialComposer.appleCredential();
+    await _reauthenticateToDelete(credential);
+  }
+
+  Future<void> reauthenticateWithGoogleToDelete() async {
+    final credential = await CredentialComposer.googleCredential();
+    await _reauthenticateToDelete(credential);
+  }
+
+  Future<void> _reauthenticateToDelete(AuthCredential credential) async {
+    final repository = FirebaseAuthRepository();
+    final result = await repository.reauthenticateWithCredential(
+        currentUser.value!, credential);
+    result.when(success: (_) async {
+      await _deleteUser();
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("再認証ができませんでした");
+    });
+  }
+
+  Future<void> _deleteUser() async {
+    final repository = FirebaseAuthRepository();
+    final result = await repository.deleteUser(currentUser.value!);
+    result.when(success: (_) async {
+      Get.toNamed('/userDeleted');
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした");
+    });
   }
 }
