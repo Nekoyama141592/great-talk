@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
@@ -96,6 +97,7 @@ class CurrentUserController extends GetxController {
   bool isAnonymous() => currentUser.value!.isAnonymous;
 
   bool isNotLoggedIn() => currentUser.value == null || isAnonymous();
+  bool isLoggedIn() => !isNotLoggedIn();
 
   bool isValidPost(String postId) => !mutePostIds.contains(postId);
   bool isValidUser(String uid) => !muteUids.contains(uid);
@@ -157,5 +159,27 @@ class CurrentUserController extends GetxController {
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
+  }
+
+  String currentAuthStateString() {
+    final state = currentAuthState();
+    switch (state) {
+      case CurrentAuthState.isAnonymous:
+        return "匿名ログイン中";
+      case CurrentAuthState.loggedIn:
+        return "ログイン中";
+      case CurrentAuthState.notLoggedIn:
+        return "ログイン中";
+    }
+  }
+
+  CurrentAuthState currentAuthState() {
+    if (currentUser.value == null) {
+      return CurrentAuthState.notLoggedIn;
+    } else if (currentUser.value!.isAnonymous) {
+      return CurrentAuthState.isAnonymous;
+    } else {
+      return CurrentAuthState.notLoggedIn;
+    }
   }
 }

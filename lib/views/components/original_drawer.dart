@@ -10,9 +10,8 @@ class OriginalDrawer extends StatelessWidget {
       child: ListView(
         children: [
           ListTile(
-            title: const Text("アカウント情報"),
-            onTap: () {},
-          ),
+              title: const Text("アカウント情報"),
+              onTap: () => Get.toNamed('/account')),
           ListTile(
               title: const Text("ミュートしているユーザー"),
               onTap: () => Get.toNamed('/muteUsers')),

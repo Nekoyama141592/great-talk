@@ -1,3 +1,5 @@
+enum CurrentAuthState { notLoggedIn, isAnonymous, loggedIn }
+
 enum InterlocutorType { userContent, originalContent }
 
 enum MessageType { text }
