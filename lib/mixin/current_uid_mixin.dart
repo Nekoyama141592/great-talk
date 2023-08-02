@@ -4,5 +4,5 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 mixin CurrentUserMixin {
   String currentUid() => CurrentUserController.to.currentUid();
-  DocRef currentUserRef() => FirestoreQueries.userQuery(currentUid());
+  DocRef currentUserRef() => FirestoreQueries.userDocRef(currentUid());
 }

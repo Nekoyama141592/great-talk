@@ -59,7 +59,7 @@ class NewContent {
       muteCount: 0,
       postCount: 0,
       links: [],
-      ref: FirestoreQueries.userQuery(uid),
+      ref: FirestoreQueries.userDocRef(uid),
       reportCount: 0,
       score: 0,
       searchToken: {},
