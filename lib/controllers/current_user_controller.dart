@@ -10,6 +10,7 @@ import 'package:great_talk/model/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/model/user_meta/private_user.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/new_content.dart';
@@ -18,6 +19,7 @@ class CurrentUserController extends GetxController {
   static CurrentUserController get to => Get.find<CurrentUserController>();
   final Rx<User?> currentUser = Rx(FirebaseAuth.instance.currentUser);
   final Rx<FirestoreUser?> firestoreUser = Rx(null);
+  final Rx<PrivateUser?> privateUser = Rx(null);
 
   final followingTokens = <FollowingToken>[];
   final followingUids = <String>[].obs;
@@ -33,7 +35,7 @@ class CurrentUserController extends GetxController {
 
   @override
   void onInit() async {
-    await _manageFirestoreUser();
+    await _manageUserInfo();
     super.onInit();
   }
 
@@ -112,7 +114,7 @@ class CurrentUserController extends GetxController {
         success: (res) async {
           await res.reload();
           currentUser(FirebaseAuth.instance.currentUser);
-          await _manageFirestoreUser();
+          await _manageUserInfo();
         },
         failure: () {});
   }
@@ -124,7 +126,7 @@ class CurrentUserController extends GetxController {
         success: (res) async {
           await res.reload();
           currentUser(res);
-          await _manageFirestoreUser();
+          await _manageUserInfo();
         },
         failure: () {});
   }
@@ -141,7 +143,20 @@ class CurrentUserController extends GetxController {
     });
   }
 
-  Future<void> _manageFirestoreUser() async {
+  Future<void> _createPrivateUserWithUser() async {
+    final repository = FirestoreRepository();
+    final newPrivateUser = NewContent.newPrivateUser(currentUid());
+    final result = await repository.createPrivateUser(
+        currentUid(), newPrivateUser.toJson());
+    result.when(success: (_) {
+      privateUser(newPrivateUser);
+      UIHelper.showFlutterToast("ユーザーが作成されました");
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
+    });
+  }
+
+  Future<void> _manageUserInfo() async {
     if (currentUser.value == null) {
       await _createAnonymousUser();
       return;
@@ -149,6 +164,11 @@ class CurrentUserController extends GetxController {
     if (currentUser.value!.isAnonymous) {
       return;
     }
+    await _getFirestoreUser();
+    await _getPrivateUser();
+  }
+
+  Future<void> _getFirestoreUser() async {
     final repository = FirestoreRepository();
     final result = await repository.getCurrentUser(currentUid());
     result.when(success: (res) async {
@@ -158,6 +178,22 @@ class CurrentUserController extends GetxController {
       } else {
         // アカウントが存在しないなら作成する
         await _createFirestoreUserWithUser();
+      }
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+    });
+  }
+
+  Future<void> _getPrivateUser() async {
+    final repository = FirestoreRepository();
+    final result = await repository.getPrivateUser(currentUid());
+    result.when(success: (res) async {
+      if (res.exists && privateUser.value == null) {
+        // アカウントが存在するなら代入する
+        privateUser(PrivateUser.fromJson(res.data()!));
+      } else {
+        // アカウントが存在しないなら作成する
+        await _createPrivateUserWithUser();
       }
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");

@@ -37,6 +37,15 @@ class FirestoreRepository {
     }
   }
 
+  FutureResult<bool> createPrivateUser(String uid, SDMap json) async {
+    try {
+      await client.createPrivateUser(uid, json);
+      return const Result.success(true);
+    } catch (e) {
+      return const Result.failure();
+    }
+  }
+
   FutureResult<bool> createUserUpdateLog(String uid, SDMap json) async {
     try {
       await client.createUserUpdateLog(uid, json);
@@ -266,6 +275,16 @@ class FirestoreRepository {
   FutureResult<Doc> getUser(String uid) async {
     try {
       final res = await client.getUser(uid);
+      return Result.success(res);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<Doc> getPrivateUser(String uid) async {
+    try {
+      final res = await client.getPrivateUser(uid);
       return Result.success(res);
     } catch (e) {
       debugPrint(e.toString());

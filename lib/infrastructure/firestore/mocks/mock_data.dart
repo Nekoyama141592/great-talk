@@ -5,11 +5,12 @@ import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
+import 'package:great_talk/model/user_meta/private_user.dart';
 import 'package:great_talk/utility/new_content.dart';
 
 const String mockCurrentUid = "current-user";
 final currentUser = NewContent.newUser(mockCurrentUid);
-final List<FirestoreUser> mockOriginalUsers = [
+final List<FirestoreUser> mockUsers = [
   FirestoreUser(
     accountName: "a",
     createdAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
@@ -462,9 +463,9 @@ final List<Post> mockPosts = [
       likeCount: 0,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[0].toJson(),
+      poster: mockUsers[0].toJson(),
       postId: "post-a",
-      ref: mockOriginalUsers[0].typedRef().collection("posts").doc("post-a"),
+      ref: mockUsers[0].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("猫GPT"),
@@ -499,9 +500,9 @@ final List<Post> mockPosts = [
       likeCount: 10,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[1].toJson(),
+      poster: mockUsers[1].toJson(),
       postId: "post-b",
-      ref: mockOriginalUsers[1].typedRef().collection("posts").doc("post-b"),
+      ref: mockUsers[1].typedRef().collection("posts").doc("post-b"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("原稿作成くん"),
@@ -536,9 +537,9 @@ final List<Post> mockPosts = [
       likeCount: 20,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[2].toJson(),
+      poster: mockUsers[2].toJson(),
       postId: "post-c",
-      ref: mockOriginalUsers[2].typedRef().collection("posts").doc("post-c"),
+      ref: mockUsers[2].typedRef().collection("posts").doc("post-c"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("アイデア出しまくりAI"),
@@ -573,9 +574,9 @@ final List<Post> mockPosts = [
       likeCount: 30,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[3].toJson(),
+      poster: mockUsers[3].toJson(),
       postId: "post-d",
-      ref: mockOriginalUsers[3].typedRef().collection("posts").doc("post-a"),
+      ref: mockUsers[3].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("エンジニアAIくん"),
@@ -610,9 +611,9 @@ final List<Post> mockPosts = [
       likeCount: 40,
       links: [],
       msgCount: 0,
-      poster: mockOriginalUsers[4].toJson(),
+      poster: mockUsers[4].toJson(),
       postId: "post-e",
-      ref: mockOriginalUsers[4].typedRef().collection("posts").doc("post-a"),
+      ref: mockUsers[4].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
       score: 0.0,
       searchToken: returnSearchToken("なんでも相談AI"),
@@ -626,6 +627,8 @@ final List<Post> mockPosts = [
       updatedAt: Timestamp.fromDate(DateTime(2023, 4, 7)),
       userCount: 0),
 ];
+List<PrivateUser> mockPrivateUsers() =>
+    mockUsers.map((e) => NewContent.newPrivateUser(e.uid)).toList();
 List<Timeline> mockTimelines() {
   final List<Timeline> result = [];
   for (final post in mockPosts) {

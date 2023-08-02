@@ -30,6 +30,12 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
+  Future<void> createPrivateUser(String uid, SDMap json) async {
+    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
+    return;
+  }
+
+  @override
   Future<void> createUserUpdateLog(String uid, SDMap json) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     return;
@@ -163,7 +169,15 @@ class MockFirestoreClient implements FirestoreClient {
   @override
   FutureDoc getUser(String uid) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final user = mockOriginalUsers.firstWhere((element) => element.uid == uid);
+    final user = mockUsers.firstWhere((element) => element.uid == uid);
+    final data = user.toJson();
+    return MockDoc(data, mockCurrentUid);
+  }
+
+  @override
+  FutureDoc getPrivateUser(String uid) async {
+    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
+    final user = mockPrivateUsers().firstWhere((element) => element.uid == uid);
     final data = user.toJson();
     return MockDoc(data, mockCurrentUid);
   }
@@ -171,8 +185,7 @@ class MockFirestoreClient implements FirestoreClient {
   @override
   FutureQSnapshot getUsersByWhereIn(List<String> uids) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final users =
-        mockOriginalUsers.where((element) => uids.contains(element.uid));
+    final users = mockUsers.where((element) => uids.contains(element.uid));
     final data = users.map((e) => MockQDoc(e.toJson(), e.uid)).toList();
     return MockQSnapshot(data);
   }
@@ -187,7 +200,7 @@ class MockFirestoreClient implements FirestoreClient {
   @override
   FutureQSnapshot getUsersByFollowerCount() async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final users = [...mockOriginalUsers];
+    final users = [...mockUsers];
     users.sort((a, b) => b.followerCount.compareTo(a.followingCount));
     final data = users.map((e) => MockQDoc(e.toJson(), e.uid)).toList();
     return MockQSnapshot(data);
@@ -218,7 +231,7 @@ class MockFirestoreClient implements FirestoreClient {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     List<FirestoreUser> users = [];
     if (searchTerm.isNotEmpty) {
-      users = mockOriginalUsers.where((element) {
+      users = mockUsers.where((element) {
         final name = element.typedUserName().value.toLowerCase();
         return name.contains(searchTerm);
       }).toList();

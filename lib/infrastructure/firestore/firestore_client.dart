@@ -10,6 +10,8 @@ class FirestoreClient {
 
   Future<void> createUser(String uid, SDMap json) async =>
       await FirestoreQueries.userDocRef(uid).set(json);
+  Future<void> createPrivateUser(String uid, SDMap json) async =>
+      await FirestoreQueries.privateUserDocRef(uid).set(json);
 
   Future<void> createUserUpdateLog(String uid, SDMap json) async =>
       await FirestoreQueries.userUpdateLogDocRef(uid).set(json);
@@ -75,6 +77,8 @@ class FirestoreClient {
   FutureDoc getUser(String uid) async =>
       await FirestoreQueries.userDocRef(uid).get();
   FutureDoc getCurrentUser(String uid) async => getUser(uid);
+  FutureDoc getPrivateUser(String uid) async =>
+      await FirestoreQueries.privateUserDocRef(uid).get();
 
   FutureQSnapshot getUsersByFollowerCount() async =>
       await FirestoreQueries.usersQueryByLikeCount.get();
