@@ -5,11 +5,11 @@ import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/firestore_user/firestore_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
-import 'package:great_talk/model/user_meta/private_user.dart';
 import 'package:great_talk/utility/new_content.dart';
 
 const String mockCurrentUid = "current-user";
 final currentUser = NewContent.newUser(mockCurrentUid);
+final privatetUser = NewContent.newPrivateUser(mockCurrentUid);
 final List<FirestoreUser> mockUsers = [
   FirestoreUser(
     accountName: "a",
@@ -627,8 +627,6 @@ final List<Post> mockPosts = [
       updatedAt: Timestamp.fromDate(DateTime(2023, 4, 7)),
       userCount: 0),
 ];
-List<PrivateUser> mockPrivateUsers() =>
-    mockUsers.map((e) => NewContent.newPrivateUser(e.uid)).toList();
 List<Timeline> mockTimelines() {
   final List<Timeline> result = [];
   for (final post in mockPosts) {
