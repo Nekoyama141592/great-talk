@@ -182,4 +182,12 @@ class CurrentUserController extends GetxController {
       return CurrentAuthState.notLoggedIn;
     }
   }
+
+  void onLogoutButtonPressed() {
+    Get.toNamed('/logouted');
+  }
+
+  void onDeleteUserButtonPressed() {
+    Get.toNamed('/userDeleted');
+  }
 }

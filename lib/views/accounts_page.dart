@@ -20,14 +20,15 @@ class AccountPage extends StatelessWidget {
               title: Obx(
                   () => Text("認証情報: ${controller.currentAuthStateString()}"))),
           Obx(() => controller.isLoggedIn()
-              ? const ListTile(
-                  title: Text("ログアウトする"),
+              ? ListTile(
+                  title: const Text("ログアウトする"),
+                  onTap: controller.onLogoutButtonPressed,
                 )
               : const SizedBox.shrink()),
           Obx(() => controller.isLoggedIn()
-              ? const ListTile(
-                  title: Text("ユーザーを消去する"),
-                  trailing: Icon(Icons.arrow_forward_ios),
+              ? ListTile(
+                  title: const Text("ユーザーを消去する"),
+                  onTap: controller.onDeleteUserButtonPressed,
                 )
               : const SizedBox.shrink())
         ],
