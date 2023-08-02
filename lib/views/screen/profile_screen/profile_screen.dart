@@ -15,6 +15,14 @@ class ProfileScreen extends StatelessWidget {
         controller.isMyProfile ? const EditButton() : const FollowButton(),
         Row(
           children: [
+            Obx(() => Text(
+                "フォロー ${controller.passiveUser.value?.followingCount ?? 0}")),
+            Obx(() => Text(
+                "フォロワー ${controller.passiveUser.value?.followerCount ?? 0}"))
+          ],
+        ),
+        Row(
+          children: [
             Obx(() => controller.passiveUser.value == null
                 ? const Text('')
                 : Text(controller.passiveUser.value!.typedUserName().value)),
