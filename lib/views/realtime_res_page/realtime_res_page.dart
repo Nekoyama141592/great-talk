@@ -24,7 +24,9 @@ class RealtimeResPage extends HookWidget {
     }, []);
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(title: Text(controller.interlocutor.userName)),
+          appBar: AppBar(
+              title: Obx(
+                  () => Text(controller.interlocutor.value?.userName ?? ""))),
           body: Obx(() => controller.isLoading.value
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -54,9 +56,14 @@ class RealtimeResPage extends HookWidget {
                                             purchaseController.isSubscribing()
                                                 ? null
                                                 : controller.onCardLongTap,
-                                        leading: CircleImage(
-                                            chatContent:
-                                                controller.interlocutor),
+                                        leading: Obx(
+                                          () => controller.interlocutor.value !=
+                                                  null
+                                              ? CircleImage(
+                                                  chatContent: controller
+                                                      .interlocutor.value!)
+                                              : const SizedBox.shrink(),
+                                        ),
                                         title:
                                             purchaseController.isSubscribing()
                                                 ? SelectableText(text)
@@ -81,13 +88,23 @@ class RealtimeResPage extends HookWidget {
                                                     .to.currentUser.value!.uid
                                             ? kSecondaryColor.withOpacity(0.3)
                                             : null,
-                                        leading: messages[index].uid !=
-                                                CurrentUserController
-                                                    .to.currentUser.value!.uid
-                                            ? CircleImage(
-                                                chatContent:
-                                                    controller.interlocutor)
-                                            : null,
+                                        leading: Obx(() => controller
+                                                    .interlocutor.value !=
+                                                null
+                                            ? Container(
+                                                child: messages[index].uid !=
+                                                        CurrentUserController
+                                                            .to
+                                                            .currentUser
+                                                            .value!
+                                                            .uid
+                                                    ? CircleImage(
+                                                        chatContent: controller
+                                                            .interlocutor
+                                                            .value!)
+                                                    : null,
+                                              )
+                                            : const SizedBox.shrink()),
                                         title:
                                             purchaseController.isSubscribing()
                                                 ? SelectableText(text)

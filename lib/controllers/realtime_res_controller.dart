@@ -31,7 +31,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   final isGenerating = false.obs;
   int chatCount = 0;
   late SharedPreferences prefs;
-  late ChatContent interlocutor;
+  final Rx<ChatContent?> interlocutor = Rx(null);
   final repository = FirestoreRepository();
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> getChatLog() async {
@@ -44,19 +44,19 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     if (type == InterlocutorType.originalContent) {
       final res =
           originalContents.firstWhere((element) => element.contentId == postId);
-      interlocutor = res;
+      interlocutor(res);
     } else {
       final result = await repository.getPost(uid, postId);
       result.when(success: (res) async {
-        if (!res.exists) {
-          UIHelper.showFlutterToast("ユーザーが存在しません");
-          return;
-        } else {
+        if (res.exists) {
           final post = Post.fromJson(res.data()!);
-          interlocutor = ChatContent.fromPost(post);
+          interlocutor(ChatContent.fromPost(post));
           List<TextMessage> a = await _getLocalMessages();
           await PurchasesController.to.restorePurchases(); // 購入内容を復元
           messages(a);
+          return;
+        } else {
+          UIHelper.showFlutterToast("投稿が存在しません");
         }
       }, failure: () {
         UIHelper.showErrorFlutterToast("データの取得に失敗しました");
@@ -66,8 +66,11 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Future<List<TextMessage>> _getLocalMessages() async {
+    if (interlocutor.value == null) {
+      return [];
+    }
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final jsonString = prefs.getString(interlocutor.contentId) ?? "";
+    final jsonString = prefs.getString(interlocutor.value!.contentId) ?? "";
     List<TextMessage> messages = [];
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
@@ -143,7 +146,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   void _listenToChatCompletionSSE(
       ChatCompleteText request, ScrollController scrollController) {
     // 生成中なら何もしない
-    if (isGenerating.value) {
+    if (isGenerating.value || interlocutor.value == null) {
       return;
     }
     isGenerating(true);
@@ -167,7 +170,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
             positiveScore: 0.0,
             sentiment: '',
             value: realtimeRes.value),
-        uid: interlocutor.contentId,
+        uid: interlocutor.value!.contentId,
         updatedAt: now,
       );
       messages([...messages]);
@@ -215,15 +218,21 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _setValues() async {
+    if (interlocutor.value == null) {
+      return;
+    }
     await _setLocalMessage();
     await _setLocalDate();
     await _setChatCount();
     await PersonsController.to
-        .setLatestPersons(interlocutor, realtimeRes.value);
+        .setLatestPersons(interlocutor.value!, realtimeRes.value);
   }
 
   Future<void> _setLocalMessage() async {
-    final String interlocutorId = interlocutor.contentId;
+    if (interlocutor.value == null) {
+      return;
+    }
+    final String interlocutorId = interlocutor.value!.contentId;
     final objectList =
         messages.map((e) => SaveTextMsg.fromTextMessage(e)).toList();
     final jsonString = jsonEncode(objectList);
@@ -262,7 +271,10 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Future<List<Messages>> _createRequestMessages(String content) async {
-    final id = interlocutor.contentId;
+    if (interlocutor.value == null) {
+      return [];
+    }
+    final id = interlocutor.value!.contentId;
     switch (id) {
       case wolframId:
         final wolframRes = await WolframRepository.fetchApi(content);
@@ -304,8 +316,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Messages _systemMsg() {
-    final name = interlocutor.userName;
-    String content = proIds.contains(interlocutor.contentId)
+    final name = interlocutor.value!.userName;
+    String content = proIds.contains(interlocutor.value!.contentId)
         ? "あなたは一人のプロの$nameです。それになりきって以下の問いに答えて下さい。自分がAIアシスタントだとは答えないで下さい。"
         : "$nameになりきって$nameの口調で以下の問いに答えてください。";
     content += attention;
