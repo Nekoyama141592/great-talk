@@ -97,7 +97,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
 
   Future<void> execute(
       ScrollController scrollController, String content) async {
-    final model = GptTurboChatModel();
+    final model = GptTurbo0631Model();
     chatCount = _getChatCount(); // 端末から今日のチャット回数を取得
     if (!_allowChat()) {
       // チャットが許されていない場合
