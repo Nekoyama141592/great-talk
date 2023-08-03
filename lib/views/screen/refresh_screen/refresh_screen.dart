@@ -54,13 +54,15 @@ class RefreshScreen extends HookWidget {
                           itemBuilder: (c, i) {
                             final post =
                                 Post.fromJson(docsController.docs[i].data());
-                            final chatContent = ChatContent.fromPost(post);
+                            final content = ChatContent.fromPost(post);
                             return Obx(() => CurrentUserController.to
                                     .isValidPost(post.postId)
                                 ? PostCard(
-                                    chatContent: chatContent,
+                                    chatContent: content,
                                     post: post,
-                                    onTap: null)
+                                    onTap: () => Get.toNamed(
+                                        '/chat/users/${content.posterUid}/posts/${content.contentId}'),
+                                  )
                                 : const SizedBox.shrink());
                           }),
                 )));

@@ -24,7 +24,7 @@ class PostCard extends StatelessWidget {
         children: [
           CircleImage(chatContent: chatContent),
           const Spacer(),
-          Text(post.postId),
+          Text(post.typedTitle().value),
           const Spacer(),
           PostLikeButton(
             post: post,
