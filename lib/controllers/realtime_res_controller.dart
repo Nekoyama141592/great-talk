@@ -16,6 +16,7 @@ import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
+import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
@@ -111,8 +112,22 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     messages([...messages]); // messageを再代入して変更をViewに反映
     // リクエストを作成
     final requestMessages = await _createRequestMessages(content);
+    final CustomCompleteText completeText =
+        interlocutor.value!.managedCustomCompleteText();
     final request = ChatCompleteText(
-        messages: requestMessages, maxToken: _adjustMaxToken(), model: model);
+      model: model,
+      messages: requestMessages,
+      temperature: completeText.temperature,
+      topP: completeText.topP,
+      n: completeText.n,
+      stop: completeText.stop,
+      maxToken: _adjustMaxToken(),
+      presencePenalty: completeText.presencePenalty ?? 0.0,
+      frequencyPenalty: completeText.frequencyPenalty ?? 0.0,
+      user: currentUid(),
+      functions: completeText.typedFunctions(),
+      functionCall: completeText.typedFunctionCall(),
+    );
     _listenToChatCompletionSSE(request, scrollController); // ChatGPTのリアルタイム出力
   }
 
