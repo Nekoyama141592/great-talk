@@ -6,11 +6,12 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
+import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 
-class RealtimeResPage extends HookWidget {
+class RealtimeResPage extends HookWidget with CurrentUserMixin {
   const RealtimeResPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,8 @@ class RealtimeResPage extends HookWidget {
           appBar: AppBar(
               title:
                   Obx(() => Text(controller.interlocutor.value?.title ?? ""))),
-          body: Obx(() => controller.isLoading.value
+          body: Obx(() => controller.isLoading.value ||
+                  controller.interlocutor.value == null
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
@@ -56,14 +58,9 @@ class RealtimeResPage extends HookWidget {
                                             purchaseController.isSubscribing()
                                                 ? null
                                                 : controller.onCardLongTap,
-                                        leading: Obx(
-                                          () => controller.interlocutor.value !=
-                                                  null
-                                              ? CircleImage(
-                                                  chatContent: controller
-                                                      .interlocutor.value!)
-                                              : const SizedBox.shrink(),
-                                        ),
+                                        leading: Obx(() => CircleImage(
+                                            chatContent: controller
+                                                .interlocutor.value!)),
                                         title:
                                             purchaseController.isSubscribing()
                                                 ? SelectableText(text)
@@ -88,23 +85,12 @@ class RealtimeResPage extends HookWidget {
                                                     .to.currentUser.value!.uid
                                             ? kSecondaryColor.withOpacity(0.3)
                                             : null,
-                                        leading: Obx(() => controller
-                                                    .interlocutor.value !=
-                                                null
-                                            ? Container(
-                                                child: messages[index].uid !=
-                                                        CurrentUserController
-                                                            .to
-                                                            .currentUser
-                                                            .value!
-                                                            .uid
-                                                    ? CircleImage(
-                                                        chatContent: controller
-                                                            .interlocutor
-                                                            .value!)
-                                                    : null,
-                                              )
-                                            : const SizedBox.shrink()),
+                                        leading:
+                                            messages[index].uid != currentUid()
+                                                ? Obx(() => CircleImage(
+                                                    chatContent: controller
+                                                        .interlocutor.value!))
+                                                : null,
                                         title:
                                             purchaseController.isSubscribing()
                                                 ? SelectableText(text)

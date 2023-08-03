@@ -53,17 +53,17 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
         if (res.exists) {
           final post = Post.fromJson(res.data()!);
           interlocutor(ChatContent.fromPost(post));
-          List<TextMessage> a = _getLocalMessages();
-          await PurchasesController.to.restorePurchases(); // 購入内容を復元
-          messages(a);
-          return;
         } else {
           UIHelper.showFlutterToast("投稿が存在しません");
+          return;
         }
       }, failure: () {
         UIHelper.showErrorFlutterToast("データの取得に失敗しました");
       });
     }
+    List<TextMessage> a = _getLocalMessages();
+    await PurchasesController.to.restorePurchases(); // 購入内容を復元
+    messages(a);
     isLoading(false);
   }
 
