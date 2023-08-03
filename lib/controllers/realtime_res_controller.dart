@@ -316,7 +316,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Messages _systemMsg() {
-    final name = interlocutor.value!.userName;
+    final name = interlocutor.value!.title;
     String content = proIds.contains(interlocutor.value!.contentId)
         ? "あなたは一人のプロの$nameです。それになりきって以下の問いに答えて下さい。自分がAIアシスタントだとは答えないで下さい。"
         : "$nameになりきって$nameの口調で以下の問いに答えてください。";

@@ -51,7 +51,7 @@ class NotificationController extends GetxController
     final randomIndex =
         random.nextInt(greatPeople.length); // 配列内のランダムなインデックスを取得
     final randomPerson = greatPeople[randomIndex]; // インデックスに対応する要素を取得
-    return "今日は${randomPerson.userName}と話してみませんか？";
+    return "今日は${randomPerson.title}と話してみませんか？";
   }
 
   Future<void> _configureLocalTimeZone() async {

@@ -11,7 +11,7 @@ String randomString() {
   return uuid.v4();
 }
 
-String getName(ChatContent person) => person.userName;
+String getName(ChatContent person) => person.title;
 final appName = F.title;
 String getPlanDescription(String productID, String price) {
   String msg = "";

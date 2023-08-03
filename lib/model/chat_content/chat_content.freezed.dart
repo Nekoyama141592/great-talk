@@ -25,7 +25,7 @@ mixin _$ChatContent {
   int? get lastSeen => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
   String get posterUid => throw _privateConstructorUsedError;
-  String get userName => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,7 +45,7 @@ abstract class $ChatContentCopyWith<$Res> {
       int? lastSeen,
       Map<String, dynamic>? metadata,
       String posterUid,
-      String userName});
+      String title});
 }
 
 /// @nodoc
@@ -66,7 +66,7 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
     Object? lastSeen = freezed,
     Object? metadata = freezed,
     Object? posterUid = null,
-    Object? userName = null,
+    Object? title = null,
   }) {
     return _then(_value.copyWith(
       contentId: null == contentId
@@ -89,9 +89,9 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
           ? _value.posterUid
           : posterUid // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -111,7 +111,7 @@ abstract class _$$_ChatContentCopyWith<$Res>
       int? lastSeen,
       Map<String, dynamic>? metadata,
       String posterUid,
-      String userName});
+      String title});
 }
 
 /// @nodoc
@@ -130,7 +130,7 @@ class __$$_ChatContentCopyWithImpl<$Res>
     Object? lastSeen = freezed,
     Object? metadata = freezed,
     Object? posterUid = null,
-    Object? userName = null,
+    Object? title = null,
   }) {
     return _then(_$_ChatContent(
       contentId: null == contentId
@@ -153,9 +153,9 @@ class __$$_ChatContentCopyWithImpl<$Res>
           ? _value.posterUid
           : posterUid // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -170,7 +170,7 @@ class _$_ChatContent implements _ChatContent {
       this.lastSeen,
       final Map<String, dynamic>? metadata,
       required this.posterUid,
-      required this.userName})
+      required this.title})
       : _metadata = metadata;
 
   factory _$_ChatContent.fromJson(Map<String, dynamic> json) =>
@@ -195,11 +195,11 @@ class _$_ChatContent implements _ChatContent {
   @override
   final String posterUid;
   @override
-  final String userName;
+  final String title;
 
   @override
   String toString() {
-    return 'ChatContent(contentId: $contentId, imageUrl: $imageUrl, lastSeen: $lastSeen, metadata: $metadata, posterUid: $posterUid, userName: $userName)';
+    return 'ChatContent(contentId: $contentId, imageUrl: $imageUrl, lastSeen: $lastSeen, metadata: $metadata, posterUid: $posterUid, title: $title)';
   }
 
   @override
@@ -216,14 +216,13 @@ class _$_ChatContent implements _ChatContent {
             const DeepCollectionEquality().equals(other._metadata, _metadata) &&
             (identical(other.posterUid, posterUid) ||
                 other.posterUid == posterUid) &&
-            (identical(other.userName, userName) ||
-                other.userName == userName));
+            (identical(other.title, title) || other.title == title));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, contentId, imageUrl, lastSeen,
-      const DeepCollectionEquality().hash(_metadata), posterUid, userName);
+      const DeepCollectionEquality().hash(_metadata), posterUid, title);
 
   @JsonKey(ignore: true)
   @override
@@ -246,7 +245,7 @@ abstract class _ChatContent implements ChatContent {
       final int? lastSeen,
       final Map<String, dynamic>? metadata,
       required final String posterUid,
-      required final String userName}) = _$_ChatContent;
+      required final String title}) = _$_ChatContent;
 
   factory _ChatContent.fromJson(Map<String, dynamic> json) =
       _$_ChatContent.fromJson;
@@ -262,7 +261,7 @@ abstract class _ChatContent implements ChatContent {
   @override
   String get posterUid;
   @override
-  String get userName;
+  String get title;
   @override
   @JsonKey(ignore: true)
   _$$_ChatContentCopyWith<_$_ChatContent> get copyWith =>

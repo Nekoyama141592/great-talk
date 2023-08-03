@@ -13,7 +13,7 @@ _$_ChatContent _$$_ChatContentFromJson(Map<String, dynamic> json) =>
       lastSeen: json['lastSeen'] as int?,
       metadata: json['metadata'] as Map<String, dynamic>?,
       posterUid: json['posterUid'] as String,
-      userName: json['userName'] as String,
+      title: json['title'] as String,
     );
 
 Map<String, dynamic> _$$_ChatContentToJson(_$_ChatContent instance) =>
@@ -23,5 +23,5 @@ Map<String, dynamic> _$$_ChatContentToJson(_$_ChatContent instance) =>
       'lastSeen': instance.lastSeen,
       'metadata': instance.metadata,
       'posterUid': instance.posterUid,
-      'userName': instance.userName,
+      'title': instance.title,
     };

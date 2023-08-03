@@ -13,7 +13,7 @@ abstract class ChatContent with _$ChatContent {
     int? lastSeen,
     Map<String, dynamic>? metadata,
     required String posterUid,
-    required String userName,
+    required String title,
   }) = _ChatContent;
   factory ChatContent.fromJson(SDMap json) => _$ChatContentFromJson(json);
   factory ChatContent.fromPost(Post post) {
@@ -21,6 +21,6 @@ abstract class ChatContent with _$ChatContent {
         imageUrl: post.typedIconImage().url,
         contentId: post.postId,
         posterUid: post.typedPoster().uid,
-        userName: post.typedTitle().value);
+        title: post.typedTitle().value);
   }
 }
