@@ -228,7 +228,7 @@ class __$$_CustomCompleteTextCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CustomCompleteText implements _CustomCompleteText {
+class _$_CustomCompleteText extends _CustomCompleteText {
   const _$_CustomCompleteText(
       {required this.systemPrompt,
       this.temperature,
@@ -242,7 +242,8 @@ class _$_CustomCompleteText implements _CustomCompleteText {
       final List<SDMap>? functions,
       this.functionCall})
       : _stop = stop,
-        _functions = functions;
+        _functions = functions,
+        super._();
 
   factory _$_CustomCompleteText.fromJson(Map<String, dynamic> json) =>
       _$$_CustomCompleteTextFromJson(json);
@@ -347,7 +348,7 @@ class _$_CustomCompleteText implements _CustomCompleteText {
   }
 }
 
-abstract class _CustomCompleteText implements CustomCompleteText {
+abstract class _CustomCompleteText extends CustomCompleteText {
   const factory _CustomCompleteText(
       {required final String systemPrompt,
       final double? temperature,
@@ -360,6 +361,7 @@ abstract class _CustomCompleteText implements CustomCompleteText {
       final double? frequencyPenalty,
       final List<SDMap>? functions,
       final String? functionCall}) = _$_CustomCompleteText;
+  const _CustomCompleteText._() : super._();
 
   factory _CustomCompleteText.fromJson(Map<String, dynamic> json) =
       _$_CustomCompleteText.fromJson;
