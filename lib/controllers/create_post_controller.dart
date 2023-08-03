@@ -9,12 +9,16 @@ import 'package:great_talk/utility/new_content.dart';
 
 class CreatePostController extends GetxController with CurrentUserMixin {
   String title = "";
+  String systemPrompt = "";
   Future<void> onCreateButtonPressed() async {
+    if (title.isEmpty || systemPrompt.isEmpty) {
+      return;
+    }
     final repository = FirestoreRepository();
     final postId = randomString();
     final postRef = FirestoreQueries.userPostRef(currentUid(), postId);
-    final newPost = NewContent.newPost(
-        title, CurrentUserController.to.firestoreUser.value!, postId, postRef);
+    final newPost = NewContent.newPost(systemPrompt, title,
+        CurrentUserController.to.firestoreUser.value!, postId, postRef);
     final result = await repository.createPost(postRef, newPost.toJson());
     result.when(success: (_) {
       UIHelper.showFlutterToast("投稿が作成できました！");

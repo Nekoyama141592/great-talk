@@ -8,6 +8,7 @@ part of 'post.dart';
 
 _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       createdAt: json['createdAt'],
+      customCompleteText: json['customCompleteText'] as Map<String, dynamic>,
       description: json['description'] as Map<String, dynamic>,
       exampleTexts: (json['exampleTexts'] as List<dynamic>)
           .map((e) => e as Map<String, dynamic>)
@@ -35,6 +36,7 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
 
 Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'createdAt': instance.createdAt,
+      'customCompleteText': instance.customCompleteText,
       'description': instance.description,
       'exampleTexts': instance.exampleTexts,
       'genre': instance.genre,

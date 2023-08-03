@@ -13,6 +13,7 @@ abstract class Post implements _$Post {
   const Post._();
   const factory Post({
     required dynamic createdAt,
+    required SDMap customCompleteText,
     required SDMap description,
     required List<SDMap> exampleTexts,
     required String genre,

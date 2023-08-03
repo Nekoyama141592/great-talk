@@ -8,6 +8,7 @@ bool returnIsOriginalContents(String uid) => uid == officialId;
 
 final originalContentIds = originalContents.map((e) => e.contentId).toList();
 final proIds = proPeople.map((e) => e.contentId).toList();
+final greatIds = greatPeople.map((e) => e.contentId).toList();
 final List<ChatContent> originalContents = [
   ...ai,
   ...greatPeople,

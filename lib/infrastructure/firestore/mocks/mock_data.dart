@@ -443,6 +443,8 @@ final List<FirestoreUser> mockUsers = [
 final List<Post> mockPosts = [
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 5, 25)),
+      customCompleteText:
+          NewContent.newCustomCompleteText("語尾に必ず「にゃん」をつけて返答してください。").toJson(),
       description: const DetectedText(
               languageCode: '',
               negativeScore: 0.0,
@@ -480,6 +482,9 @@ final List<Post> mockPosts = [
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
+      customCompleteText:
+          NewContent.newCustomCompleteText("「序論」、「本論」、「結論」に分けて返答してください。")
+              .toJson(),
       description: const DetectedText(
               languageCode: '',
               negativeScore: 0.0,
@@ -517,6 +522,8 @@ final List<Post> mockPosts = [
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 2, 22)),
+      customCompleteText:
+          NewContent.newCustomCompleteText("画期的なアイデアを出しながら返答してください。").toJson(),
       description: const DetectedText(
               languageCode: '',
               negativeScore: 0.0,
@@ -554,6 +561,8 @@ final List<Post> mockPosts = [
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 7, 19)),
+      customCompleteText:
+          NewContent.newCustomCompleteText("以下の質問をソースコードで返答してください。").toJson(),
       description: const DetectedText(
               languageCode: '',
               negativeScore: 0.0,
@@ -591,6 +600,9 @@ final List<Post> mockPosts = [
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 4, 7)),
+      customCompleteText:
+          NewContent.newCustomCompleteText("まず、相手に寄り添うようなことを言ってから、返答を続けてください。")
+              .toJson(),
       description: const DetectedText(
               languageCode: '',
               negativeScore: 0.0,

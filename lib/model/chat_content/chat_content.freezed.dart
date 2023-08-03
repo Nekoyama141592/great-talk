@@ -21,6 +21,8 @@ ChatContent _$ChatContentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ChatContent {
   String get contentId => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get customCompleteText =>
+      throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
   int? get lastSeen => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
@@ -41,6 +43,7 @@ abstract class $ChatContentCopyWith<$Res> {
   @useResult
   $Res call(
       {String contentId,
+      Map<String, dynamic>? customCompleteText,
       String imageUrl,
       int? lastSeen,
       Map<String, dynamic>? metadata,
@@ -62,6 +65,7 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
   @override
   $Res call({
     Object? contentId = null,
+    Object? customCompleteText = freezed,
     Object? imageUrl = null,
     Object? lastSeen = freezed,
     Object? metadata = freezed,
@@ -73,6 +77,10 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as String,
+      customCompleteText: freezed == customCompleteText
+          ? _value.customCompleteText
+          : customCompleteText // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -107,6 +115,7 @@ abstract class _$$_ChatContentCopyWith<$Res>
   @useResult
   $Res call(
       {String contentId,
+      Map<String, dynamic>? customCompleteText,
       String imageUrl,
       int? lastSeen,
       Map<String, dynamic>? metadata,
@@ -126,6 +135,7 @@ class __$$_ChatContentCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contentId = null,
+    Object? customCompleteText = freezed,
     Object? imageUrl = null,
     Object? lastSeen = freezed,
     Object? metadata = freezed,
@@ -137,6 +147,10 @@ class __$$_ChatContentCopyWithImpl<$Res>
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
               as String,
+      customCompleteText: freezed == customCompleteText
+          ? _value._customCompleteText
+          : customCompleteText // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -163,21 +177,35 @@ class __$$_ChatContentCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ChatContent implements _ChatContent {
+class _$_ChatContent extends _ChatContent {
   const _$_ChatContent(
       {required this.contentId,
+      final Map<String, dynamic>? customCompleteText,
       required this.imageUrl,
       this.lastSeen,
       final Map<String, dynamic>? metadata,
       required this.posterUid,
       required this.title})
-      : _metadata = metadata;
+      : _customCompleteText = customCompleteText,
+        _metadata = metadata,
+        super._();
 
   factory _$_ChatContent.fromJson(Map<String, dynamic> json) =>
       _$$_ChatContentFromJson(json);
 
   @override
   final String contentId;
+  final Map<String, dynamic>? _customCompleteText;
+  @override
+  Map<String, dynamic>? get customCompleteText {
+    final value = _customCompleteText;
+    if (value == null) return null;
+    if (_customCompleteText is EqualUnmodifiableMapView)
+      return _customCompleteText;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
   @override
   final String imageUrl;
   @override
@@ -199,7 +227,7 @@ class _$_ChatContent implements _ChatContent {
 
   @override
   String toString() {
-    return 'ChatContent(contentId: $contentId, imageUrl: $imageUrl, lastSeen: $lastSeen, metadata: $metadata, posterUid: $posterUid, title: $title)';
+    return 'ChatContent(contentId: $contentId, customCompleteText: $customCompleteText, imageUrl: $imageUrl, lastSeen: $lastSeen, metadata: $metadata, posterUid: $posterUid, title: $title)';
   }
 
   @override
@@ -209,6 +237,8 @@ class _$_ChatContent implements _ChatContent {
             other is _$_ChatContent &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
+            const DeepCollectionEquality()
+                .equals(other._customCompleteText, _customCompleteText) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             (identical(other.lastSeen, lastSeen) ||
@@ -221,8 +251,15 @@ class _$_ChatContent implements _ChatContent {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, contentId, imageUrl, lastSeen,
-      const DeepCollectionEquality().hash(_metadata), posterUid, title);
+  int get hashCode => Object.hash(
+      runtimeType,
+      contentId,
+      const DeepCollectionEquality().hash(_customCompleteText),
+      imageUrl,
+      lastSeen,
+      const DeepCollectionEquality().hash(_metadata),
+      posterUid,
+      title);
 
   @JsonKey(ignore: true)
   @override
@@ -238,20 +275,24 @@ class _$_ChatContent implements _ChatContent {
   }
 }
 
-abstract class _ChatContent implements ChatContent {
+abstract class _ChatContent extends ChatContent {
   const factory _ChatContent(
       {required final String contentId,
+      final Map<String, dynamic>? customCompleteText,
       required final String imageUrl,
       final int? lastSeen,
       final Map<String, dynamic>? metadata,
       required final String posterUid,
       required final String title}) = _$_ChatContent;
+  const _ChatContent._() : super._();
 
   factory _ChatContent.fromJson(Map<String, dynamic> json) =
       _$_ChatContent.fromJson;
 
   @override
   String get contentId;
+  @override
+  Map<String, dynamic>? get customCompleteText;
   @override
   String get imageUrl;
   @override

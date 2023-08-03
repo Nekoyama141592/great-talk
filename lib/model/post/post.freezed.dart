@@ -21,6 +21,8 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Post {
   dynamic get createdAt => throw _privateConstructorUsedError;
+  Map<String, dynamic> get customCompleteText =>
+      throw _privateConstructorUsedError;
   Map<String, dynamic> get description => throw _privateConstructorUsedError;
   List<SDMap> get exampleTexts => throw _privateConstructorUsedError;
   String get genre => throw _privateConstructorUsedError;
@@ -52,6 +54,7 @@ abstract class $PostCopyWith<$Res> {
   @useResult
   $Res call(
       {dynamic createdAt,
+      Map<String, dynamic> customCompleteText,
       Map<String, dynamic> description,
       List<SDMap> exampleTexts,
       String genre,
@@ -86,6 +89,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @override
   $Res call({
     Object? createdAt = freezed,
+    Object? customCompleteText = null,
     Object? description = null,
     Object? exampleTexts = null,
     Object? genre = null,
@@ -110,6 +114,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      customCompleteText: null == customCompleteText
+          ? _value.customCompleteText
+          : customCompleteText // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -194,6 +202,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @useResult
   $Res call(
       {dynamic createdAt,
+      Map<String, dynamic> customCompleteText,
       Map<String, dynamic> description,
       List<SDMap> exampleTexts,
       String genre,
@@ -224,6 +233,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
   @override
   $Res call({
     Object? createdAt = freezed,
+    Object? customCompleteText = null,
     Object? description = null,
     Object? exampleTexts = null,
     Object? genre = null,
@@ -248,6 +258,10 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      customCompleteText: null == customCompleteText
+          ? _value._customCompleteText
+          : customCompleteText // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
       description: null == description
           ? _value._description
           : description // ignore: cast_nullable_to_non_nullable
@@ -329,6 +343,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 class _$_Post extends _Post {
   const _$_Post(
       {required this.createdAt,
+      required final Map<String, dynamic> customCompleteText,
       required final Map<String, dynamic> description,
       required final List<SDMap> exampleTexts,
       required this.genre,
@@ -347,7 +362,8 @@ class _$_Post extends _Post {
       required final Map<String, dynamic> title,
       required this.updatedAt,
       required this.userCount})
-      : _description = description,
+      : _customCompleteText = customCompleteText,
+        _description = description,
         _exampleTexts = exampleTexts,
         _hashTags = hashTags,
         _iconImage = iconImage,
@@ -361,6 +377,15 @@ class _$_Post extends _Post {
 
   @override
   final dynamic createdAt;
+  final Map<String, dynamic> _customCompleteText;
+  @override
+  Map<String, dynamic> get customCompleteText {
+    if (_customCompleteText is EqualUnmodifiableMapView)
+      return _customCompleteText;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_customCompleteText);
+  }
+
   final Map<String, dynamic> _description;
   @override
   Map<String, dynamic> get description {
@@ -448,7 +473,7 @@ class _$_Post extends _Post {
 
   @override
   String toString() {
-    return 'Post(createdAt: $createdAt, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, iconImage: $iconImage, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, poster: $poster, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
+    return 'Post(createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, iconImage: $iconImage, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, poster: $poster, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
   }
 
   @override
@@ -457,6 +482,8 @@ class _$_Post extends _Post {
         (other.runtimeType == runtimeType &&
             other is _$_Post &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality()
+                .equals(other._customCompleteText, _customCompleteText) &&
             const DeepCollectionEquality()
                 .equals(other._description, _description) &&
             const DeepCollectionEquality()
@@ -491,6 +518,7 @@ class _$_Post extends _Post {
   int get hashCode => Object.hashAll([
         runtimeType,
         const DeepCollectionEquality().hash(createdAt),
+        const DeepCollectionEquality().hash(_customCompleteText),
         const DeepCollectionEquality().hash(_description),
         const DeepCollectionEquality().hash(_exampleTexts),
         genre,
@@ -528,6 +556,7 @@ class _$_Post extends _Post {
 abstract class _Post extends Post {
   const factory _Post(
       {required final dynamic createdAt,
+      required final Map<String, dynamic> customCompleteText,
       required final Map<String, dynamic> description,
       required final List<SDMap> exampleTexts,
       required final String genre,
@@ -552,6 +581,8 @@ abstract class _Post extends Post {
 
   @override
   dynamic get createdAt;
+  @override
+  Map<String, dynamic> get customCompleteText;
   @override
   Map<String, dynamic> get description;
   @override
