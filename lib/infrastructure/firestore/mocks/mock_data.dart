@@ -8,7 +8,7 @@ import 'package:great_talk/model/timeline/timeline.dart';
 import 'package:great_talk/utility/new_content.dart';
 
 const String mockCurrentUid = "current-user";
-final currentUser = NewContent.newUser(mockCurrentUid);
+final currentUser = NewContent.newUser(mockCurrentUid, userName: "M.LO");
 final privatetUser = NewContent.newPrivateUser(mockCurrentUid);
 final List<FirestoreUser> mockUsers = [
   FirestoreUser(

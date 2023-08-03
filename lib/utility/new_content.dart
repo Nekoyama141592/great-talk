@@ -47,7 +47,7 @@ class NewContent {
         userCount: 0);
   }
 
-  static FirestoreUser newUser(String uid) {
+  static FirestoreUser newUser(String uid, {String? userName}) {
     final now = Timestamp.now();
     return FirestoreUser(
       accountName: "",
@@ -71,7 +71,9 @@ class NewContent {
       uid: uid,
       updatedAt: now,
       userImage: newDetectedImage('').toJson(),
-      userName: newDetectedText('Unknown').toJson(),
+      userName: userName != null
+          ? newDetectedText(userName).toJson()
+          : newDetectedText('Unknown').toJson(),
       walletAddresses: [],
     );
   }

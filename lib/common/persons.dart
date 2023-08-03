@@ -677,7 +677,7 @@ const greatPeople = [
       contentId: 'Albert-Einstein.',
       title: 'アルベルト・アインシュタイン',
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Einstein1921_by_F_Schmutzer_2.jpg/225px-Einstein1921_by_F_Schmutzer_2.jpg'),
+          'https://pbs.twimg.com/media/F2lU4WiakAANIPS?format=png&name=small'),
   ChatContent(
       posterUid: officialId,
       contentId: 'Isaac-Newton',
