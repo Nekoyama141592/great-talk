@@ -9,7 +9,7 @@ part 'chat_content.g.dart';
 
 @freezed
 abstract class ChatContent implements _$ChatContent {
-  ChatContent._();
+  const ChatContent._();
   const factory ChatContent({
     required String contentId,
     SDMap? customCompleteText,
@@ -37,7 +37,8 @@ abstract class ChatContent implements _$ChatContent {
       systemPrompt =
           "あなたは一人のプロの$titleです。それになりきって以下の問いに答えて下さい。自分がAIアシスタントだとは答えないで下さい。";
     } else if (greatIds.contains(contentId)) {
-      "$titleになりきって$titleの口調で以下の問いに答えてください。自分がAIアシスタントだとは答えないで下さい。";
+      systemPrompt =
+          "$titleになりきって$titleの口調で以下の問いに答えてください。自分がAIアシスタントだとは答えないで下さい。";
     }
     return CustomCompleteText(systemPrompt: systemPrompt);
   }

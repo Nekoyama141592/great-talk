@@ -10,6 +10,7 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
@@ -35,6 +36,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   final repository = FirestoreRepository();
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> getChatLog() async {
+    prefs = MainController.to.prefs;
     isLoading(true);
     final uid = Get.parameters['uid']!;
     final postId = Get.parameters['postId']!;
@@ -51,7 +53,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
         if (res.exists) {
           final post = Post.fromJson(res.data()!);
           interlocutor(ChatContent.fromPost(post));
-          List<TextMessage> a = await _getLocalMessages();
+          List<TextMessage> a = _getLocalMessages();
           await PurchasesController.to.restorePurchases(); // 購入内容を復元
           messages(a);
           return;
@@ -65,11 +67,10 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     isLoading(false);
   }
 
-  Future<List<TextMessage>> _getLocalMessages() async {
+  List<TextMessage> _getLocalMessages() {
     if (interlocutor.value == null) {
       return [];
     }
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     final jsonString = prefs.getString(interlocutor.value!.contentId) ?? "";
     List<TextMessage> messages = [];
     if (jsonString.isNotEmpty) {
@@ -316,10 +317,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Messages _systemMsg() {
-    final name = interlocutor.value!.title;
-    String content = proIds.contains(interlocutor.value!.contentId)
-        ? "あなたは一人のプロの$nameです。それになりきって以下の問いに答えて下さい。自分がAIアシスタントだとは答えないで下さい。"
-        : "$nameになりきって$nameの口調で以下の問いに答えてください。自分がAIアシスタントだとは答えないで下さい。";
+    String content =
+        interlocutor.value!.managedCustomCompleteText().systemPrompt;
     content += attention;
     return Messages(role: Role.system, content: content);
   }

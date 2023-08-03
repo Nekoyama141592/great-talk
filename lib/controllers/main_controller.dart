@@ -6,6 +6,7 @@ import 'package:great_talk/common/strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainController extends GetxController {
+  static MainController get to => Get.find<MainController>();
   late SharedPreferences prefs;
   @override
   void onReady() async {
