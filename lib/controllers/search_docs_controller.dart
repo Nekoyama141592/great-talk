@@ -6,4 +6,8 @@ abstract class SearchDocsController extends DocsController {
   final bool isSearchUser;
   String searchTerm = "";
   String firestoreSearchTerm = "";
+  void search(String value) async {
+    searchTerm = value;
+    await fetchDocs();
+  }
 }

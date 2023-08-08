@@ -4,6 +4,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SearchUsersController extends SearchDocsController {
   SearchUsersController() : super(isSearchUser: true);
+
   @override
   Future<void> fetchDocs() async {
     firestoreSearchTerm = searchTerm;
