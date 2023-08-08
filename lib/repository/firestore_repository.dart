@@ -272,10 +272,10 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<Doc> getUser(String uid) async {
+  FutureResult<Doc> getPublicUser(String uid) async {
     try {
-      final res = await client.getUser(uid);
-      return Result.success(res);
+      final res = await client.getPublicUser(uid);
+      return res.exists ? Result.success(res) : const Result.failure();
     } catch (e) {
       debugPrint(e.toString());
       return const Result.failure();

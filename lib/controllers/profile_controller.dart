@@ -28,9 +28,9 @@ abstract class ProfileController extends DocsController {
   }
 
   Future<void> _getPassiveUser() async {
-    final result = await repository.getUser(Get.parameters['uid']!);
+    final result = await repository.getPublicUser(Get.parameters['uid']!);
     result.when(success: (res) {
-      passiveUser(PublicUser.fromJson(res.data()!)); // TODO: ハンドリング
+      passiveUser(PublicUser.fromJson(res.data()!));
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });

@@ -164,11 +164,11 @@ class CurrentUserController extends GetxController {
     if (currentUser.value!.isAnonymous) {
       return;
     }
-    await _getPublicUser();
+    await _getCurrentUser();
     await _getPrivateUser();
   }
 
-  Future<void> _getPublicUser() async {
+  Future<void> _getCurrentUser() async {
     final repository = FirestoreRepository();
     final result = await repository.getCurrentUser(currentUid());
     result.when(success: (res) async {

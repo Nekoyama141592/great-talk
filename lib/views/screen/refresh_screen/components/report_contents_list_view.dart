@@ -12,7 +12,6 @@ class ReportContentsListView extends StatelessWidget {
   final Post post;
   @override
   Widget build(BuildContext context) {
-    // TODO: 綺麗にしろ
     const List<String> reportContents = ["暴力的なコンテンツ", "性的なコンテンツ", "不快なコンテンツ"];
     final controller = PostsController.to;
     // dialogで表示するので高さが必要
