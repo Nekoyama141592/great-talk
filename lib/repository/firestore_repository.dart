@@ -19,9 +19,9 @@ class FirestoreRepository {
   }
 
   FutureResult<bool> createPostLike(
-      DocRef postRef, String tokenId, SDMap json) async {
+      DocRef postRef, String activeUid, SDMap json) async {
     try {
-      await client.createPostLike(postRef, tokenId, json);
+      await client.createPostLike(postRef, activeUid, json);
       return const Result.success(true);
     } catch (e) {
       return const Result.failure();
@@ -108,9 +108,10 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<bool> createPostMute(DocRef postRef, SDMap json) async {
+  FutureResult<bool> createPostMute(
+      DocRef postRef, String activeUid, SDMap json) async {
     try {
-      await client.createPostMute(postRef, json);
+      await client.createPostMute(postRef, activeUid, json);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
@@ -118,9 +119,9 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<bool> deletePostMute(DocRef postRef) async {
+  FutureResult<bool> deletePostMute(DocRef postRef, String activeUid) async {
     try {
-      await client.deletePostMute(postRef);
+      await client.deletePostMute(postRef, activeUid);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
@@ -128,9 +129,10 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<bool> createUserMute(String uid, SDMap json) async {
+  FutureResult<bool> createUserMute(
+      String uid, String activeUid, SDMap json) async {
     try {
-      await client.createUserMute(uid, json);
+      await client.createUserMute(uid, activeUid, json);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
@@ -138,9 +140,9 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<bool> deleteUserMute(String uid) async {
+  FutureResult<bool> deleteUserMute(String uid, String activeUid) async {
     try {
-      await client.deleteUserMute(uid);
+      await client.deleteUserMute(uid, activeUid);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());

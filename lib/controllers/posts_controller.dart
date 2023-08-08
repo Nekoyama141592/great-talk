@@ -88,7 +88,8 @@ class PostsController extends GetxController with CurrentUserMixin {
         createdAt: now,
         postId: postId,
         postRef: postRef);
-    await repository.createPostMute(post.typedRef(), postMute.toJson());
+    await repository.createPostMute(
+        post.typedRef(), currentUid(), postMute.toJson());
     if (innerContext.mounted) {
       Navigator.pop(innerContext);
     }
@@ -110,7 +111,8 @@ class PostsController extends GetxController with CurrentUserMixin {
         createdAt: now,
         passiveUid: passiveUid,
         passiveUserRef: passiveUser.typedRef());
-    await repository.createUserMute(passiveUid, userMute.toJson());
+    await repository.createUserMute(
+        passiveUid, currentUid(), userMute.toJson());
     if (innerContext.mounted) {
       Navigator.pop(innerContext);
     }
@@ -155,7 +157,7 @@ class PostsController extends GetxController with CurrentUserMixin {
         passiveUid: passiveUid,
         postRef: postRef,
         postId: postId);
-    await repository.createPostLike(postRef, tokenId, postLike.toJson());
+    await repository.createPostLike(postRef, currentUid(), postLike.toJson());
   }
 
   Future<void> unLikePost(Post post) async {

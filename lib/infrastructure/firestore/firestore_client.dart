@@ -5,8 +5,8 @@ class FirestoreClient {
   Future<void> createPost(DocRef postRef, SDMap json) async =>
       await postRef.set(json);
   Future<void> createPostLike(
-          DocRef postRef, String tokenId, SDMap json) async =>
-      await FirestoreQueries.postLikeDocRef(postRef, tokenId).set(json);
+          DocRef postRef, String activeUid, SDMap json) async =>
+      await FirestoreQueries.postLikeDocRef(postRef, activeUid).set(json);
 
   Future<void> createUser(String uid, SDMap json) async =>
       await FirestoreQueries.userDocRef(uid).set(json);
@@ -25,15 +25,19 @@ class FirestoreClient {
   Future<void> createPostReport(DocRef postRef, SDMap json) async =>
       await FirestoreQueries.postReportDocRefFromPostRef(postRef).get();
 
-  Future<void> createPostMute(DocRef postRef, SDMap json) async =>
-      await FirestoreQueries.postMuteDocRefFromPostRef(postRef).get();
-  Future<void> deletePostMute(DocRef postRef) async =>
-      await FirestoreQueries.postMuteDocRefFromPostRef(postRef).delete();
+  Future<void> createPostMute(
+          DocRef postRef, String activeUid, SDMap json) async =>
+      await FirestoreQueries.postMuteDocRefFromPostRef(postRef, activeUid)
+          .get();
+  Future<void> deletePostMute(DocRef postRef, String activeUid) async =>
+      await FirestoreQueries.postMuteDocRefFromPostRef(postRef, activeUid)
+          .delete();
 
-  Future<void> createUserMute(String passiveUid, SDMap json) async =>
-      await FirestoreQueries.userMuteDocRef(passiveUid).get();
-  Future<void> deleteUserMute(String passiveUid) async =>
-      await FirestoreQueries.userMuteDocRef(passiveUid).delete();
+  Future<void> createUserMute(
+          String passiveUid, String activeUid, SDMap json) async =>
+      await FirestoreQueries.userMuteDocRef(passiveUid, activeUid).get();
+  Future<void> deleteUserMute(String passiveUid, String activeUid) async =>
+      await FirestoreQueries.userMuteDocRef(passiveUid, activeUid).delete();
 
   Future<void> createToken(
           String currentUid, String tokenId, SDMap json) async =>

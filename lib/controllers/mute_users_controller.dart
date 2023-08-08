@@ -79,6 +79,6 @@ class MuteUsersController extends DocsController {
         (element) => PublicUser.fromJson(element.data()).uid == passiveUid);
     docs([...docs]);
     await repository.deleteToken(currentUid(), deleteToken.tokenId);
-    await repository.deleteUserMute(passiveUid);
+    await repository.deleteUserMute(passiveUid, currentUid());
   }
 }

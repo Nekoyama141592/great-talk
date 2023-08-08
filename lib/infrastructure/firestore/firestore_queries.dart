@@ -14,9 +14,9 @@ class FirestoreQueries {
       query.startAtDocument(lastDoc);
 
   static DocRef followerQuery(String currentUid, String passiveUid) =>
-      _usersColRef.doc(currentUid).collection("followers").doc(passiveUid);
-  static DocRef postLikeDocRef(DocRef postRef, String tokenId) =>
-      postRef.collection('postLikes').doc(tokenId);
+      _usersColRef.doc(passiveUid).collection("followers").doc(currentUid);
+  static DocRef postLikeDocRef(DocRef postRef, String activeUid) =>
+      postRef.collection('postLikes').doc(activeUid);
 
   static DocRef postDocRef(String uid, String postId) =>
       _userPostsColRef(uid).doc(postId);
@@ -38,10 +38,10 @@ class FirestoreQueries {
 
   static DocRef postReportDocRefFromPostRef(DocRef postRef) =>
       postRef.collection('postReports').doc();
-  static DocRef postMuteDocRefFromPostRef(DocRef postRef) =>
-      postRef.collection('postMutes').doc();
-  static DocRef userMuteDocRef(String uid) =>
-      userDocRef(uid).collection('userMutes').doc();
+  static DocRef postMuteDocRefFromPostRef(DocRef postRef, String currentUid) =>
+      postRef.collection('postMutes').doc(currentUid);
+  static DocRef userMuteDocRef(String uid, String currentUid) =>
+      userDocRef(uid).collection('userMutes').doc(currentUid);
 
   static DocRef userPostRef(String uid, String postId) =>
       _userPostsColRef(uid).doc(postId);

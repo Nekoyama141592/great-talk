@@ -80,6 +80,6 @@ class MutePostsController extends DocsController {
         (element) => Post.fromJson(element.data()).postId == postId);
     docs([...docs]);
     await repository.deleteToken(currentUid(), deleteToken.tokenId);
-    await repository.deletePostMute(post.typedRef());
+    await repository.deletePostMute(post.typedRef(), currentUid());
   }
 }
