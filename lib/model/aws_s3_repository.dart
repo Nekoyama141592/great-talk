@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/infrastructure/aws_s3/aws_s3_client.dart';
 import 'package:great_talk/repository/result.dart';
@@ -21,9 +19,10 @@ class AWSS3Repository {
     }
   }
 
-  FutureResult<bool> uploadImage(File file, String newFileName) async {
+  FutureResult<bool> uploadImage(
+      Uint8List uint8list, String newFileName) async {
     try {
-      await client.uploadImage(file, newFileName);
+      await client.uploadImage(uint8list, newFileName);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/consts/env_keys.dart';
@@ -19,9 +18,8 @@ class AWSS3Client {
     return stream;
   }
 
-  Future<void> uploadImage(File file, String newFileName) async {
+  Future<void> uploadImage(Uint8List uint8List, String newFileName) async {
     final backetName = dotenv.get(EnvKeys.AWS_S3_POST_IMAGES_BUCKET.name);
-    Uint8List uint8List = await file.readAsBytes();
     Stream<Uint8List> imageBytes = Stream.value(uint8List);
     await minio.putObject(
       backetName,

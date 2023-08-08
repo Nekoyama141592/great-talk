@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:get/get.dart';
 import 'package:great_talk/common/strings.dart';
@@ -8,10 +8,11 @@ import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 
 class CreatePostController extends GetxController with CurrentUserMixin {
-  Rx<File?> file = Rx(null);
+  Rx<Uint8List?> uint8List = Rx(null);
   String title = "";
   String systemPrompt = "";
   Future<void> onCreateButtonPressed() async {
@@ -31,12 +32,22 @@ class CreatePostController extends GetxController with CurrentUserMixin {
     });
   }
 
-  Future<void> uploadImage(String newFileName) async {
-    if (file.value == null) {
+  void onImagePickButtonPressed() async {
+    final result = await FileUtility.getCompressedImage();
+    uint8List(result);
+  }
+
+  void onUploadButtonPressed() async {
+    final newFileName = s3FileName();
+    await _uploadImage(newFileName);
+  }
+
+  Future<void> _uploadImage(String newFileName) async {
+    if (uint8List.value == null) {
       return;
     }
     final repository = AWSS3Repository();
-    final result = await repository.uploadImage(file.value!, newFileName);
+    final result = await repository.uploadImage(uint8List.value!, newFileName);
     result.when(
         success: (res) {},
         failure: () {

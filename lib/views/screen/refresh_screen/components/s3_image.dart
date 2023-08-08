@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/utility/file_utility.dart';
 
-class PostImage extends HookWidget {
-  const PostImage({Key? key, required this.fileName}) : super(key: key);
+class S3Image extends HookWidget {
+  const S3Image({Key? key, required this.fileName}) : super(key: key);
   final String fileName;
   @override
   Widget build(BuildContext context) {

@@ -68,3 +68,4 @@ const String cancelText = "キャンセル";
 // AWS
 const String s3Endpoint = 's3-ap-northeast-1.amazonaws.com';
 const String s3Region = 'ap-northeast-1';
+String s3FileName() => "${randomString()}.jpg";
