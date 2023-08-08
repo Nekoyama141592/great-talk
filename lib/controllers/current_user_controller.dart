@@ -10,7 +10,7 @@ import 'package:great_talk/model/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/tokens/mute_user_token/mute_user_token.dart';
-import 'package:great_talk/model/user_meta/private_user.dart';
+import 'package:great_talk/model/private_user/private_user.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/new_content.dart';
