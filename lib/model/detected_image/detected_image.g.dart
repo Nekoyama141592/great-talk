@@ -12,12 +12,12 @@ _$_DetectedImage _$$_DetectedImageFromJson(Map<String, dynamic> json) =>
           .map((e) => e as Map<String, dynamic>)
           .toList(),
       moderationModelVersion: json['moderationModelVersion'] as String,
-      url: json['url'] as String,
+      value: json['value'] as String,
     );
 
 Map<String, dynamic> _$$_DetectedImageToJson(_$_DetectedImage instance) =>
     <String, dynamic>{
       'moderationLabels': instance.moderationLabels,
       'moderationModelVersion': instance.moderationModelVersion,
-      'url': instance.url,
+      'value': instance.value,
     };

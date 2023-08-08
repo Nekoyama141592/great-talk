@@ -23,7 +23,7 @@ abstract class ChatContent implements _$ChatContent {
   factory ChatContent.fromPost(Post post) {
     return ChatContent(
         customCompleteText: post.customCompleteText,
-        imageUrl: post.typedIconImage().url,
+        imageUrl: post.typedIconImage().value,
         contentId: post.postId,
         posterUid: post.typedPoster().uid,
         title: post.typedTitle().value);

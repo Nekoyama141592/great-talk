@@ -19,8 +19,8 @@ class NewContent {
       positiveScore: 0.0,
       sentiment: "",
       value: value);
-  static DetectedImage newDetectedImage(String url) =>
-      DetectedImage(moderationLabels: [], moderationModelVersion: "", url: url);
+  static DetectedImage newDetectedImage(String url) => DetectedImage(
+      moderationLabels: [], moderationModelVersion: "", value: url);
   static Post newPost(String systemPrompt, String title, PublicUser poster,
       String postId, DocRef postRef) {
     final now = Timestamp.now();

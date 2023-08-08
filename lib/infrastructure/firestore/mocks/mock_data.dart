@@ -40,7 +40,7 @@ final List<PublicUser> mockUsers = [
     userImage: const DetectedImage(
             moderationLabels: [],
             moderationModelVersion: '',
-            url:
+            value:
                 'https://jp.static.photo-ac.com/assets/img/models/f4f368ea0e6fed24cc298b53199291ab50789.jpg')
         .toJson(),
     userName: const DetectedText(
@@ -81,7 +81,7 @@ final List<PublicUser> mockUsers = [
     userImage: const DetectedImage(
             moderationLabels: [],
             moderationModelVersion: '',
-            url:
+            value:
                 'https://pakutaso.cdn.rabify.me/shared/img/thumb/yuka16011215IMG_5574.jpg.webp?d=350')
         .toJson(),
     userName: const DetectedText(
@@ -122,7 +122,7 @@ final List<PublicUser> mockUsers = [
     userImage: const DetectedImage(
             moderationLabels: [],
             moderationModelVersion: '',
-            url:
+            value:
                 'https://jp.static.photo-ac.com/assets/img/models/1796ee45a8c7c3e2be04c508f26afa3352857.jpg')
         .toJson(),
     userName: const DetectedText(
@@ -163,7 +163,7 @@ final List<PublicUser> mockUsers = [
     userImage: const DetectedImage(
             moderationLabels: [],
             moderationModelVersion: '',
-            url:
+            value:
                 'https://jp.static.photo-ac.com/assets/img/models/125b35eae7888d2c9047da770aebabd796386.jpg')
         .toJson(),
     userName: const DetectedText(
@@ -204,7 +204,7 @@ final List<PublicUser> mockUsers = [
     userImage: const DetectedImage(
             moderationLabels: [],
             moderationModelVersion: '',
-            url:
+            value:
                 'https://pakutaso.cdn.rabify.me/shared/img/thumb/02AMEMAN8752.jpg.webp?d=350')
         .toJson(),
     userName: const DetectedText(
@@ -245,7 +245,7 @@ final List<PublicUser> mockUsers = [
     userImage: const DetectedImage(
             moderationLabels: [],
             moderationModelVersion: '',
-            url:
+            value:
                 'https://pbs.twimg.com/media/FxY4Yb2aYAATYpt?format=jpg&name=medium')
         .toJson(),
     userName: const DetectedText(
@@ -288,7 +288,7 @@ final List<PublicUser> mockUsers = [
     userImage: const DetectedImage(
             moderationLabels: [],
             moderationModelVersion: '',
-            url:
+            value:
                 'https://pbs.twimg.com/media/FxY4qXTacAAoN8p?format=jpg&name=medium')
         .toJson(),
     userName: const DetectedText(
@@ -331,7 +331,7 @@ final List<PublicUser> mockUsers = [
     userImage: const DetectedImage(
             moderationLabels: [],
             moderationModelVersion: '',
-            url:
+            value:
                 'https://pbs.twimg.com/media/FxY3qI2aAAAckt6?format=jpg&name=medium')
         .toJson(),
     userName: const DetectedText(
@@ -374,7 +374,7 @@ final List<PublicUser> mockUsers = [
     userImage: const DetectedImage(
             moderationLabels: [],
             moderationModelVersion: '',
-            url:
+            value:
                 'https://pbs.twimg.com/media/FxY2djfaAAYSrjW?format=jpg&name=medium')
         .toJson(),
     userName: const DetectedText(
@@ -417,7 +417,7 @@ final List<PublicUser> mockUsers = [
     userImage: const DetectedImage(
             moderationLabels: [],
             moderationModelVersion: '',
-            url:
+            value:
                 'https://pbs.twimg.com/media/FxY2_ZGaAAE2pBk?format=jpg&name=medium')
         .toJson(),
     userName: const DetectedText(
@@ -448,7 +448,7 @@ final List<Post> mockPosts = [
       iconImage: const DetectedImage(
               moderationLabels: [],
               moderationModelVersion: '',
-              url:
+              value:
                   'https://pbs.twimg.com/media/F2F7Fn8bwAABjvr?format=webp&name=small')
           .toJson(),
       impressionCount: 0,
@@ -488,7 +488,7 @@ final List<Post> mockPosts = [
       iconImage: const DetectedImage(
               moderationLabels: [],
               moderationModelVersion: '',
-              url:
+              value:
                   'https://pbs.twimg.com/media/F2F7Gzea4AAaCIv?format=webp&name=small')
           .toJson(),
       impressionCount: 0,
@@ -527,7 +527,7 @@ final List<Post> mockPosts = [
       iconImage: const DetectedImage(
               moderationLabels: [],
               moderationModelVersion: '',
-              url:
+              value:
                   'https://pbs.twimg.com/media/F2F7H45bEAEtd9j?format=webp&name=small')
           .toJson(),
       impressionCount: 0,
@@ -566,7 +566,7 @@ final List<Post> mockPosts = [
       iconImage: const DetectedImage(
               moderationLabels: [],
               moderationModelVersion: '',
-              url:
+              value:
                   'https://pbs.twimg.com/media/F2F7I73aAAAqdlz?format=webp&name=small')
           .toJson(),
       impressionCount: 0,
@@ -606,7 +606,7 @@ final List<Post> mockPosts = [
       iconImage: const DetectedImage(
               moderationLabels: [],
               moderationModelVersion: '',
-              url:
+              value:
                   'https://pbs.twimg.com/media/F2F7M7naMAA5_PJ?format=webp&name=900x900')
           .toJson(),
       impressionCount: 0,
