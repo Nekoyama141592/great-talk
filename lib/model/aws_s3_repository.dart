@@ -6,9 +6,9 @@ import 'package:great_talk/repository/result.dart';
 
 class AWSS3Repository {
   final client = AWSS3Client();
-  FutureResult<Uint8List> getImage() async {
+  FutureResult<Uint8List> getImage(String fileName) async {
     try {
-      final stream = await client.getImage('logo2.png');
+      final stream = await client.getImage(fileName);
       List<int> memory = [];
       await for (var value in stream) {
         memory.addAll(value);

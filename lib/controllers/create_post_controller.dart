@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:get/get.dart';
 import 'package:great_talk/common/strings.dart';
@@ -12,7 +11,6 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/new_content.dart';
 
 class CreatePostController extends GetxController with CurrentUserMixin {
-  Rx<Uint8List?> uint8List = Rx(null);
   Rx<File?> file = Rx(null);
   String title = "";
   String systemPrompt = "";
@@ -30,16 +28,6 @@ class CreatePostController extends GetxController with CurrentUserMixin {
       UIHelper.showFlutterToast("投稿が作成できました！");
     }, failure: () {
       UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
-    });
-  }
-
-  Future<void> getImage() async {
-    final repository = AWSS3Repository();
-    final result = await repository.getImage();
-    result.when(success: (res) {
-      uint8List(res);
-    }, failure: () {
-      UIHelper.showErrorFlutterToast("画像の取得が失敗しました");
     });
   }
 
