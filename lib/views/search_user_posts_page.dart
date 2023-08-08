@@ -10,8 +10,8 @@ class SearchUserPostsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(SearchUserPostsController());
     return Scaffold(
-        appBar: AppBar(title: const Text("ユーザーの投稿を検索")),
         body: SearchScreen(
+            hint: "投稿を検索...",
             onQueryChanged: controller.search,
             child: RefreshScreen(docsController: controller)));
   }

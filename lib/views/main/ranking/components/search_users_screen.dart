@@ -10,6 +10,7 @@ class SearchUsersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(SearchUsersController());
     return SearchScreen(
+        hint: "例:数学を愛する会",
         onQueryChanged: controller.search,
         child: RefreshScreen(docsController: controller));
   }

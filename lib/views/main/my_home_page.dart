@@ -55,6 +55,7 @@ class MyHomePage extends HookWidget {
             Obx(
               () => controller.isSearching.value
                   ? SearchScreen(
+                      hint: "例: 織田信長",
                       onQueryChanged: (query) => controller.search(query),
                       child: const OriginalContentCards(),
                     )
