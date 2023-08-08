@@ -57,7 +57,6 @@ class NewContent {
       ethAddress: '',
       followerCount: 0,
       followingCount: 0,
-      isAdmin: false,
       isNFTicon: false,
       isOfficial: false,
       isSuspended: false,
@@ -85,6 +84,7 @@ class NewContent {
         ethAddress: '',
         gender: '',
         ipAddress: '',
+        isAdmin: false,
         uid: uid,
         updatedAt: now);
   }

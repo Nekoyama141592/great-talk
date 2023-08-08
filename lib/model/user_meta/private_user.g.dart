@@ -12,6 +12,7 @@ _$_PrivateUser _$$_PrivateUserFromJson(Map<String, dynamic> json) =>
       ethAddress: json['ethAddress'] as String,
       gender: json['gender'] as String,
       ipAddress: json['ipAddress'] as String,
+      isAdmin: json['isAdmin'] as bool,
       uid: json['uid'] as String,
       updatedAt: json['updatedAt'],
     );
@@ -22,6 +23,7 @@ Map<String, dynamic> _$$_PrivateUserToJson(_$_PrivateUser instance) =>
       'ethAddress': instance.ethAddress,
       'gender': instance.gender,
       'ipAddress': instance.ipAddress,
+      'isAdmin': instance.isAdmin,
       'uid': instance.uid,
       'updatedAt': instance.updatedAt,
     };

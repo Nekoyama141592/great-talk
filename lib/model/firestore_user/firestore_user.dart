@@ -18,7 +18,6 @@ abstract class FirestoreUser implements _$FirestoreUser {
     required String ethAddress,
     required int followerCount,
     required int followingCount,
-    required bool isAdmin,
     required bool isNFTicon,
     required bool isOfficial,
     required bool isSuspended,

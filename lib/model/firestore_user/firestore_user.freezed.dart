@@ -27,7 +27,6 @@ mixin _$FirestoreUser {
   String get ethAddress => throw _privateConstructorUsedError;
   int get followerCount => throw _privateConstructorUsedError;
   int get followingCount => throw _privateConstructorUsedError;
-  bool get isAdmin => throw _privateConstructorUsedError;
   bool get isNFTicon => throw _privateConstructorUsedError;
   bool get isOfficial => throw _privateConstructorUsedError;
   bool get isSuspended => throw _privateConstructorUsedError;
@@ -64,7 +63,6 @@ abstract class $FirestoreUserCopyWith<$Res> {
       String ethAddress,
       int followerCount,
       int followingCount,
-      bool isAdmin,
       bool isNFTicon,
       bool isOfficial,
       bool isSuspended,
@@ -102,7 +100,6 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
     Object? ethAddress = null,
     Object? followerCount = null,
     Object? followingCount = null,
-    Object? isAdmin = null,
     Object? isNFTicon = null,
     Object? isOfficial = null,
     Object? isSuspended = null,
@@ -148,10 +145,6 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
           ? _value.followingCount
           : followingCount // ignore: cast_nullable_to_non_nullable
               as int,
-      isAdmin: null == isAdmin
-          ? _value.isAdmin
-          : isAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
       isNFTicon: null == isNFTicon
           ? _value.isNFTicon
           : isNFTicon // ignore: cast_nullable_to_non_nullable
@@ -232,7 +225,6 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
       String ethAddress,
       int followerCount,
       int followingCount,
-      bool isAdmin,
       bool isNFTicon,
       bool isOfficial,
       bool isSuspended,
@@ -268,7 +260,6 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
     Object? ethAddress = null,
     Object? followerCount = null,
     Object? followingCount = null,
-    Object? isAdmin = null,
     Object? isNFTicon = null,
     Object? isOfficial = null,
     Object? isSuspended = null,
@@ -314,10 +305,6 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
           ? _value.followingCount
           : followingCount // ignore: cast_nullable_to_non_nullable
               as int,
-      isAdmin: null == isAdmin
-          ? _value.isAdmin
-          : isAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
       isNFTicon: null == isNFTicon
           ? _value.isNFTicon
           : isNFTicon // ignore: cast_nullable_to_non_nullable
@@ -393,7 +380,6 @@ class _$_FirestoreUser extends _FirestoreUser {
       required this.ethAddress,
       required this.followerCount,
       required this.followingCount,
-      required this.isAdmin,
       required this.isNFTicon,
       required this.isOfficial,
       required this.isSuspended,
@@ -440,8 +426,6 @@ class _$_FirestoreUser extends _FirestoreUser {
   final int followerCount;
   @override
   final int followingCount;
-  @override
-  final bool isAdmin;
   @override
   final bool isNFTicon;
   @override
@@ -504,7 +488,7 @@ class _$_FirestoreUser extends _FirestoreUser {
 
   @override
   String toString() {
-    return 'FirestoreUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isAdmin: $isAdmin, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImage: $userImage, userName: $userName, walletAddresses: $walletAddresses)';
+    return 'FirestoreUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImage: $userImage, userName: $userName, walletAddresses: $walletAddresses)';
   }
 
   @override
@@ -524,7 +508,6 @@ class _$_FirestoreUser extends _FirestoreUser {
                 other.followerCount == followerCount) &&
             (identical(other.followingCount, followingCount) ||
                 other.followingCount == followingCount) &&
-            (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
             (identical(other.isNFTicon, isNFTicon) ||
                 other.isNFTicon == isNFTicon) &&
             (identical(other.isOfficial, isOfficial) ||
@@ -562,7 +545,6 @@ class _$_FirestoreUser extends _FirestoreUser {
         ethAddress,
         followerCount,
         followingCount,
-        isAdmin,
         isNFTicon,
         isOfficial,
         isSuspended,
@@ -603,7 +585,6 @@ abstract class _FirestoreUser extends FirestoreUser {
       required final String ethAddress,
       required final int followerCount,
       required final int followingCount,
-      required final bool isAdmin,
       required final bool isNFTicon,
       required final bool isOfficial,
       required final bool isSuspended,
@@ -638,8 +619,6 @@ abstract class _FirestoreUser extends FirestoreUser {
   int get followerCount;
   @override
   int get followingCount;
-  @override
-  bool get isAdmin;
   @override
   bool get isNFTicon;
   @override

@@ -24,6 +24,7 @@ mixin _$PrivateUser {
   String get ethAddress => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   String get ipAddress => throw _privateConstructorUsedError;
+  bool get isAdmin => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
 
@@ -44,6 +45,7 @@ abstract class $PrivateUserCopyWith<$Res> {
       String ethAddress,
       String gender,
       String ipAddress,
+      bool isAdmin,
       String uid,
       dynamic updatedAt});
 }
@@ -65,6 +67,7 @@ class _$PrivateUserCopyWithImpl<$Res, $Val extends PrivateUser>
     Object? ethAddress = null,
     Object? gender = null,
     Object? ipAddress = null,
+    Object? isAdmin = null,
     Object? uid = null,
     Object? updatedAt = freezed,
   }) {
@@ -85,6 +88,10 @@ class _$PrivateUserCopyWithImpl<$Res, $Val extends PrivateUser>
           ? _value.ipAddress
           : ipAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      isAdmin: null == isAdmin
+          ? _value.isAdmin
+          : isAdmin // ignore: cast_nullable_to_non_nullable
+              as bool,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -110,6 +117,7 @@ abstract class _$$_PrivateUserCopyWith<$Res>
       String ethAddress,
       String gender,
       String ipAddress,
+      bool isAdmin,
       String uid,
       dynamic updatedAt});
 }
@@ -129,6 +137,7 @@ class __$$_PrivateUserCopyWithImpl<$Res>
     Object? ethAddress = null,
     Object? gender = null,
     Object? ipAddress = null,
+    Object? isAdmin = null,
     Object? uid = null,
     Object? updatedAt = freezed,
   }) {
@@ -149,6 +158,10 @@ class __$$_PrivateUserCopyWithImpl<$Res>
           ? _value.ipAddress
           : ipAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      isAdmin: null == isAdmin
+          ? _value.isAdmin
+          : isAdmin // ignore: cast_nullable_to_non_nullable
+              as bool,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -169,6 +182,7 @@ class _$_PrivateUser implements _PrivateUser {
       required this.ethAddress,
       required this.gender,
       required this.ipAddress,
+      required this.isAdmin,
       required this.uid,
       required this.updatedAt});
 
@@ -184,13 +198,15 @@ class _$_PrivateUser implements _PrivateUser {
   @override
   final String ipAddress;
   @override
+  final bool isAdmin;
+  @override
   final String uid;
   @override
   final dynamic updatedAt;
 
   @override
   String toString() {
-    return 'PrivateUser(createdAt: $createdAt, ethAddress: $ethAddress, gender: $gender, ipAddress: $ipAddress, uid: $uid, updatedAt: $updatedAt)';
+    return 'PrivateUser(createdAt: $createdAt, ethAddress: $ethAddress, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, uid: $uid, updatedAt: $updatedAt)';
   }
 
   @override
@@ -204,6 +220,7 @@ class _$_PrivateUser implements _PrivateUser {
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.ipAddress, ipAddress) ||
                 other.ipAddress == ipAddress) &&
+            (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
@@ -216,6 +233,7 @@ class _$_PrivateUser implements _PrivateUser {
       ethAddress,
       gender,
       ipAddress,
+      isAdmin,
       uid,
       const DeepCollectionEquality().hash(updatedAt));
 
@@ -239,6 +257,7 @@ abstract class _PrivateUser implements PrivateUser {
       required final String ethAddress,
       required final String gender,
       required final String ipAddress,
+      required final bool isAdmin,
       required final String uid,
       required final dynamic updatedAt}) = _$_PrivateUser;
 
@@ -253,6 +272,8 @@ abstract class _PrivateUser implements PrivateUser {
   String get gender;
   @override
   String get ipAddress;
+  @override
+  bool get isAdmin;
   @override
   String get uid;
   @override
