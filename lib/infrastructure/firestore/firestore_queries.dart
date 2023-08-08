@@ -10,16 +10,13 @@ class FirestoreQueries {
   static MapQuery moreQuery(MapQuery query, Doc lastDoc) =>
       query.startAtDocument(lastDoc);
 
-  static DocRef followerQuery(String currentUid, String passiveUid) => instance
-      .collection('users')
-      .doc(currentUid)
-      .collection("followers")
-      .doc(passiveUid);
+  static DocRef followerQuery(String currentUid, String passiveUid) =>
+      _usersColRef.doc(currentUid).collection("followers").doc(passiveUid);
   static DocRef postLikeDocRef(DocRef postRef, String tokenId) =>
       postRef.collection('postLikes').doc(tokenId);
 
   static DocRef postDocRef(String uid, String postId) =>
-      userDocRef(uid).collection('posts').doc(postId);
+      _userPostsColRef(uid).doc(postId);
 
   static final postsQuery =
       instance.collectionGroup('posts').limit(oneTimeReadCount);
@@ -44,13 +41,11 @@ class FirestoreQueries {
       userDocRef(uid).collection('userMutes').doc();
 
   static DocRef userPostRef(String uid, String postId) =>
-      userDocRef(uid).collection('posts').doc(postId);
-
-  static MapQuery userPostsQueryByNewest(String uid) => instance
-      .collection("users")
-      .doc(uid)
-      .collection('posts')
-      .orderBy("createdAt", descending: true);
+      _userPostsColRef(uid).doc(postId);
+  static ColRef _userPostsColRef(String uid) =>
+      _usersColRef.doc(uid).collection('posts');
+  static MapQuery userPostsQueryByNewest(String uid) =>
+      _userPostsColRef(uid).orderBy("createdAt", descending: true);
   static MapQuery moreUserPostsQueryByNewest(String uid, Doc lastDoc) =>
       moreQuery(userPostsQueryByNewest(uid), lastDoc);
   static MapQuery newUserPostsQueryByNewest(String uid, Doc firstDoc) =>
@@ -94,16 +89,14 @@ class FirestoreQueries {
   static DocRef tokenQuery(String currentUid, String tokenId) =>
       tokensQuery(currentUid).doc(tokenId);
   static ColRef tokensQuery(String currentUid) =>
-      instance.collection('users').doc(currentUid).collection("tokens");
+      _usersColRef.doc(currentUid).collection("tokens");
 
-  static DocRef userDocRef(String uid) => instance.collection('users').doc(uid);
+  static DocRef userDocRef(String uid) => _usersColRef.doc(uid);
+  static final ColRef _usersColRef = instance.collection('users');
   static DocRef privateUserDocRef(String uid) =>
       instance.collection('privateUsers').doc(uid);
 
-  static ColRef userPostsQuery(String uid) =>
-      instance.collection('users').doc(uid).collection('posts');
-  static final usersQuery =
-      instance.collection('users').limit(oneTimeReadCount);
+  static final usersQuery = _usersColRef.limit(oneTimeReadCount);
 
   static MapQuery usersQueryByWhereIn(List<String> uids) =>
       usersQuery.where('uid', whereIn: uids);
@@ -117,10 +110,10 @@ class FirestoreQueries {
   static MapQuery moreUserSearchQuery(String searchTerm, Doc lastDoc) =>
       moreQuery(userSearchQuery(searchTerm), lastDoc);
   static MapQuery userPostsSearchQuery(String uid, String searchTerm) =>
-      searchQuery(userPostsQuery(uid), searchTerm);
+      searchQuery(_userPostsColRef(uid), searchTerm);
   static MapQuery moreUserPostsSearchQuery(
           String uid, String searchTerm, Doc lastDoc) =>
-      moreQuery(searchQuery(userPostsQuery(uid), searchTerm), lastDoc);
+      moreQuery(searchQuery(_userPostsColRef(uid), searchTerm), lastDoc);
 
   static DocRef userUpdateLogDocRef(String uid) =>
       userDocRef(uid).collection('userUpdateLogs').doc();
