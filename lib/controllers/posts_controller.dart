@@ -7,7 +7,7 @@ import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
-import 'package:great_talk/model/firestore_user/firestore_user.dart';
+import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/post_like/post_like.dart';
 import 'package:great_talk/model/post_mute/post_mute.dart';
@@ -94,7 +94,7 @@ class PostsController extends GetxController with CurrentUserMixin {
     }
   }
 
-  void muteUser(BuildContext innerContext, FirestoreUser passiveUser) async {
+  void muteUser(BuildContext innerContext, PublicUser passiveUser) async {
     final tokenId = randomString();
     final now = Timestamp.now();
     final passiveUid = passiveUser.uid;

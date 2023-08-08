@@ -18,7 +18,7 @@ class CreatePostController extends GetxController with CurrentUserMixin {
     final postId = randomString();
     final postRef = FirestoreQueries.userPostRef(currentUid(), postId);
     final newPost = NewContent.newPost(systemPrompt, title,
-        CurrentUserController.to.firestoreUser.value!, postId, postRef);
+        CurrentUserController.to.publicUser.value!, postId, postRef);
     final result = await repository.createPost(postRef, newPost.toJson());
     result.when(success: (_) {
       UIHelper.showFlutterToast("投稿が作成できました！");

@@ -4,13 +4,13 @@ import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
-part 'firestore_user.freezed.dart';
-part 'firestore_user.g.dart';
+part 'public_user.freezed.dart';
+part 'public_user.g.dart';
 
 @freezed
-abstract class FirestoreUser implements _$FirestoreUser {
-  const FirestoreUser._();
-  factory FirestoreUser({
+abstract class PublicUser implements _$PublicUser {
+  const PublicUser._();
+  factory PublicUser({
     required String accountName,
     required SDMap bio,
     required int blockCount,
@@ -33,9 +33,9 @@ abstract class FirestoreUser implements _$FirestoreUser {
     required SDMap userImage,
     required SDMap userName,
     required List<SDMap> walletAddresses,
-  }) = _FirestoreUser;
+  }) = _PublicUser;
 
-  factory FirestoreUser.fromJson(SDMap json) => _$FirestoreUserFromJson(json);
+  factory PublicUser.fromJson(SDMap json) => _$PublicUserFromJson(json);
   DetectedText typedBio() => DetectedText.fromJson(bio);
   Timestamp typedCreatedAt() => createdAt as Timestamp;
   DocRef typedRef() => ref as DocRef;

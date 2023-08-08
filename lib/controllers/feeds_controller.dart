@@ -109,7 +109,7 @@ class FeedsController extends DocsController {
     refreshController.refreshCompleted();
   }
 
-  DocRef _userRef() => CurrentUserController.to.firestoreUser.value!.typedRef();
+  DocRef _userRef() => CurrentUserController.to.publicUser.value!.typedRef();
   List<String> _followingUids() => CurrentUserController.to.followingUids;
   bool _isWhereInQuery() => _followingUids().length <= whereInLimit;
 }

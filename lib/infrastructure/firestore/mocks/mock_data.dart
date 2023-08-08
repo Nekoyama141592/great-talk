@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/maps.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
-import 'package:great_talk/model/firestore_user/firestore_user.dart';
+import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
 import 'package:great_talk/utility/new_content.dart';
@@ -10,8 +10,8 @@ import 'package:great_talk/utility/new_content.dart';
 const String mockCurrentUid = "current-user";
 final currentUser = NewContent.newUser(mockCurrentUid, userName: "M.LO");
 final privatetUser = NewContent.newPrivateUser(mockCurrentUid);
-final List<FirestoreUser> mockUsers = [
-  FirestoreUser(
+final List<PublicUser> mockUsers = [
+  PublicUser(
     accountName: "a",
     createdAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
     bio: const DetectedText(
@@ -52,7 +52,7 @@ final List<FirestoreUser> mockUsers = [
         .toJson(),
     walletAddresses: [],
   ),
-  FirestoreUser(
+  PublicUser(
     accountName: "b",
     createdAt: Timestamp.fromDate(DateTime(2023, 9, 28)),
     bio: const DetectedText(
@@ -93,7 +93,7 @@ final List<FirestoreUser> mockUsers = [
         .toJson(),
     walletAddresses: [],
   ),
-  FirestoreUser(
+  PublicUser(
     accountName: "c",
     createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     bio: const DetectedText(
@@ -134,7 +134,7 @@ final List<FirestoreUser> mockUsers = [
         .toJson(),
     walletAddresses: [],
   ),
-  FirestoreUser(
+  PublicUser(
     accountName: "d",
     createdAt: Timestamp.fromDate(DateTime(2023, 2, 18)),
     bio: const DetectedText(
@@ -175,7 +175,7 @@ final List<FirestoreUser> mockUsers = [
         .toJson(),
     walletAddresses: [],
   ),
-  FirestoreUser(
+  PublicUser(
     accountName: "e",
     createdAt: Timestamp.fromDate(DateTime(2023, 6, 1)),
     bio: const DetectedText(
@@ -216,7 +216,7 @@ final List<FirestoreUser> mockUsers = [
         .toJson(),
     walletAddresses: [],
   ),
-  FirestoreUser(
+  PublicUser(
     accountName: "f",
     createdAt: Timestamp.fromDate(DateTime(2023, 2, 23)),
     bio: const DetectedText(
@@ -257,7 +257,7 @@ final List<FirestoreUser> mockUsers = [
         .toJson(),
     walletAddresses: [],
   ),
-  FirestoreUser(
+  PublicUser(
     accountName: "g",
     createdAt: Timestamp.fromDate(DateTime(2023, 1, 8)),
     bio: const DetectedText(
@@ -300,7 +300,7 @@ final List<FirestoreUser> mockUsers = [
         .toJson(),
     walletAddresses: [],
   ),
-  FirestoreUser(
+  PublicUser(
     accountName: "h",
     createdAt: Timestamp.fromDate(DateTime(2023, 10, 14)),
     bio: const DetectedText(
@@ -343,7 +343,7 @@ final List<FirestoreUser> mockUsers = [
         .toJson(),
     walletAddresses: [],
   ),
-  FirestoreUser(
+  PublicUser(
     accountName: "i",
     createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     bio: const DetectedText(
@@ -386,7 +386,7 @@ final List<FirestoreUser> mockUsers = [
         .toJson(),
     walletAddresses: [],
   ),
-  FirestoreUser(
+  PublicUser(
     accountName: "j",
     createdAt: Timestamp.fromDate(DateTime(2023, 4, 28)),
     bio: const DetectedText(
@@ -636,7 +636,7 @@ List<Timeline> mockTimelines() {
       Timeline(
           createdAt: post.createdAt,
           isRead: false,
-          posterUid: FirestoreUser.fromJson(post.poster).uid,
+          posterUid: PublicUser.fromJson(post.poster).uid,
           postId: post.postId),
     );
   }

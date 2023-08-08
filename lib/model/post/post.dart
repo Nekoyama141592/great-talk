@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
-import 'package:great_talk/model/firestore_user/firestore_user.dart';
+import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'post.freezed.dart';
@@ -37,7 +37,7 @@ abstract class Post implements _$Post {
   Timestamp typedCreatedAt() => createdAt as Timestamp;
   DetectedText typedDescription() => DetectedText.fromJson(description);
   DetectedImage typedIconImage() => DetectedImage.fromJson(iconImage);
-  FirestoreUser typedPoster() => FirestoreUser.fromJson(poster);
+  PublicUser typedPoster() => PublicUser.fromJson(poster);
   DocRef typedRef() => ref as DocRef;
   DetectedText typedTitle() => DetectedText.fromJson(title);
   Timestamp typedUpdatedAtAt() => updatedAt as Timestamp;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/mute_users_controller.dart';
-import 'package:great_talk/model/firestore_user/firestore_user.dart';
+import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 
 class MuteUsersPage extends StatelessWidget {
@@ -18,7 +18,7 @@ class MuteUsersPage extends StatelessWidget {
         child: Obx(() => ListView.builder(
             itemCount: controller.docs.length,
             itemBuilder: (c, i) {
-              final user = FirestoreUser.fromJson(controller.docs[i].data());
+              final user = PublicUser.fromJson(controller.docs[i].data());
               return InkWell(
                 onTap: () => controller.unMuteUser(user.uid),
                 child: Text(user.typedUserName().value),

@@ -5,7 +5,7 @@ import 'package:great_talk/infrastructure/firestore/mocks/mock_data.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_doc.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_doc.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_snapshot.dart';
-import 'package:great_talk/model/firestore_user/firestore_user.dart';
+import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
@@ -219,7 +219,7 @@ class MockFirestoreClient implements FirestoreClient {
   FutureQSnapshot getUserPostsByNewest(String uid) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     final posts = [...mockPosts]
-        .where((e) => FirestoreUser.fromJson(e.poster).uid == uid)
+        .where((e) => PublicUser.fromJson(e.poster).uid == uid)
         .toList();
     final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
     return MockQSnapshot(data);
@@ -228,7 +228,7 @@ class MockFirestoreClient implements FirestoreClient {
   @override
   FutureQSnapshot searchUsers(String searchTerm) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    List<FirestoreUser> users = [];
+    List<PublicUser> users = [];
     if (searchTerm.isNotEmpty) {
       users = mockUsers.where((element) {
         final name = element.typedUserName().value.toLowerCase();

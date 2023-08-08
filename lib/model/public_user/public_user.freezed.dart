@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'firestore_user.dart';
+part of 'public_user.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-FirestoreUser _$FirestoreUserFromJson(Map<String, dynamic> json) {
-  return _FirestoreUser.fromJson(json);
+PublicUser _$PublicUserFromJson(Map<String, dynamic> json) {
+  return _PublicUser.fromJson(json);
 }
 
 /// @nodoc
-mixin _$FirestoreUser {
+mixin _$PublicUser {
   String get accountName => throw _privateConstructorUsedError;
   Map<String, dynamic> get bio => throw _privateConstructorUsedError;
   int get blockCount => throw _privateConstructorUsedError;
@@ -45,15 +45,15 @@ mixin _$FirestoreUser {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $FirestoreUserCopyWith<FirestoreUser> get copyWith =>
+  $PublicUserCopyWith<PublicUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FirestoreUserCopyWith<$Res> {
-  factory $FirestoreUserCopyWith(
-          FirestoreUser value, $Res Function(FirestoreUser) then) =
-      _$FirestoreUserCopyWithImpl<$Res, FirestoreUser>;
+abstract class $PublicUserCopyWith<$Res> {
+  factory $PublicUserCopyWith(
+          PublicUser value, $Res Function(PublicUser) then) =
+      _$PublicUserCopyWithImpl<$Res, PublicUser>;
   @useResult
   $Res call(
       {String accountName,
@@ -81,9 +81,9 @@ abstract class $FirestoreUserCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
-    implements $FirestoreUserCopyWith<$Res> {
-  _$FirestoreUserCopyWithImpl(this._value, this._then);
+class _$PublicUserCopyWithImpl<$Res, $Val extends PublicUser>
+    implements $PublicUserCopyWith<$Res> {
+  _$PublicUserCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -210,11 +210,11 @@ class _$FirestoreUserCopyWithImpl<$Res, $Val extends FirestoreUser>
 }
 
 /// @nodoc
-abstract class _$$_FirestoreUserCopyWith<$Res>
-    implements $FirestoreUserCopyWith<$Res> {
-  factory _$$_FirestoreUserCopyWith(
-          _$_FirestoreUser value, $Res Function(_$_FirestoreUser) then) =
-      __$$_FirestoreUserCopyWithImpl<$Res>;
+abstract class _$$_PublicUserCopyWith<$Res>
+    implements $PublicUserCopyWith<$Res> {
+  factory _$$_PublicUserCopyWith(
+          _$_PublicUser value, $Res Function(_$_PublicUser) then) =
+      __$$_PublicUserCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -243,11 +243,11 @@ abstract class _$$_FirestoreUserCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_FirestoreUserCopyWithImpl<$Res>
-    extends _$FirestoreUserCopyWithImpl<$Res, _$_FirestoreUser>
-    implements _$$_FirestoreUserCopyWith<$Res> {
-  __$$_FirestoreUserCopyWithImpl(
-      _$_FirestoreUser _value, $Res Function(_$_FirestoreUser) _then)
+class __$$_PublicUserCopyWithImpl<$Res>
+    extends _$PublicUserCopyWithImpl<$Res, _$_PublicUser>
+    implements _$$_PublicUserCopyWith<$Res> {
+  __$$_PublicUserCopyWithImpl(
+      _$_PublicUser _value, $Res Function(_$_PublicUser) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -276,7 +276,7 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
     Object? userName = null,
     Object? walletAddresses = null,
   }) {
-    return _then(_$_FirestoreUser(
+    return _then(_$_PublicUser(
       accountName: null == accountName
           ? _value.accountName
           : accountName // ignore: cast_nullable_to_non_nullable
@@ -371,8 +371,8 @@ class __$$_FirestoreUserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_FirestoreUser extends _FirestoreUser {
-  _$_FirestoreUser(
+class _$_PublicUser extends _PublicUser {
+  _$_PublicUser(
       {required this.accountName,
       required final Map<String, dynamic> bio,
       required this.blockCount,
@@ -403,8 +403,8 @@ class _$_FirestoreUser extends _FirestoreUser {
         _walletAddresses = walletAddresses,
         super._();
 
-  factory _$_FirestoreUser.fromJson(Map<String, dynamic> json) =>
-      _$$_FirestoreUserFromJson(json);
+  factory _$_PublicUser.fromJson(Map<String, dynamic> json) =>
+      _$$_PublicUserFromJson(json);
 
   @override
   final String accountName;
@@ -488,14 +488,14 @@ class _$_FirestoreUser extends _FirestoreUser {
 
   @override
   String toString() {
-    return 'FirestoreUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImage: $userImage, userName: $userName, walletAddresses: $walletAddresses)';
+    return 'PublicUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImage: $userImage, userName: $userName, walletAddresses: $walletAddresses)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FirestoreUser &&
+            other is _$_PublicUser &&
             (identical(other.accountName, accountName) ||
                 other.accountName == accountName) &&
             const DeepCollectionEquality().equals(other._bio, _bio) &&
@@ -565,19 +565,19 @@ class _$_FirestoreUser extends _FirestoreUser {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FirestoreUserCopyWith<_$_FirestoreUser> get copyWith =>
-      __$$_FirestoreUserCopyWithImpl<_$_FirestoreUser>(this, _$identity);
+  _$$_PublicUserCopyWith<_$_PublicUser> get copyWith =>
+      __$$_PublicUserCopyWithImpl<_$_PublicUser>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_FirestoreUserToJson(
+    return _$$_PublicUserToJson(
       this,
     );
   }
 }
 
-abstract class _FirestoreUser extends FirestoreUser {
-  factory _FirestoreUser(
+abstract class _PublicUser extends PublicUser {
+  factory _PublicUser(
       {required final String accountName,
       required final Map<String, dynamic> bio,
       required final int blockCount,
@@ -599,11 +599,11 @@ abstract class _FirestoreUser extends FirestoreUser {
       required final dynamic updatedAt,
       required final Map<String, dynamic> userImage,
       required final Map<String, dynamic> userName,
-      required final List<SDMap> walletAddresses}) = _$_FirestoreUser;
-  _FirestoreUser._() : super._();
+      required final List<SDMap> walletAddresses}) = _$_PublicUser;
+  _PublicUser._() : super._();
 
-  factory _FirestoreUser.fromJson(Map<String, dynamic> json) =
-      _$_FirestoreUser.fromJson;
+  factory _PublicUser.fromJson(Map<String, dynamic> json) =
+      _$_PublicUser.fromJson;
 
   @override
   String get accountName;
@@ -651,6 +651,6 @@ abstract class _FirestoreUser extends FirestoreUser {
   List<SDMap> get walletAddresses;
   @override
   @JsonKey(ignore: true)
-  _$$_FirestoreUserCopyWith<_$_FirestoreUser> get copyWith =>
+  _$$_PublicUserCopyWith<_$_PublicUser> get copyWith =>
       throw _privateConstructorUsedError;
 }

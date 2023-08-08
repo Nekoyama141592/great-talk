@@ -5,7 +5,7 @@ import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
-import 'package:great_talk/model/firestore_user/firestore_user.dart';
+import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/tokens/mute_post_token/mute_post_token.dart';
@@ -18,7 +18,7 @@ import 'package:great_talk/utility/new_content.dart';
 class CurrentUserController extends GetxController {
   static CurrentUserController get to => Get.find<CurrentUserController>();
   final Rx<User?> currentUser = Rx(FirebaseAuth.instance.currentUser);
-  final Rx<FirestoreUser?> firestoreUser = Rx(null);
+  final Rx<PublicUser?> publicUser = Rx(null);
   final Rx<PrivateUser?> privateUser = Rx(null);
 
   final followingTokens = <FollowingToken>[];
@@ -131,12 +131,12 @@ class CurrentUserController extends GetxController {
         failure: () {});
   }
 
-  Future<void> _createFirestoreUserWithUser() async {
+  Future<void> _createPublicUserWithUser() async {
     final repository = FirestoreRepository();
     final newUser = NewContent.newUser(currentUid());
     final result = await repository.createUser(currentUid(), newUser.toJson());
     result.when(success: (_) {
-      firestoreUser(newUser);
+      publicUser(newUser);
       UIHelper.showFlutterToast("ユーザーが作成されました");
     }, failure: () {
       UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
@@ -164,20 +164,20 @@ class CurrentUserController extends GetxController {
     if (currentUser.value!.isAnonymous) {
       return;
     }
-    await _getFirestoreUser();
+    await _getPublicUser();
     await _getPrivateUser();
   }
 
-  Future<void> _getFirestoreUser() async {
+  Future<void> _getPublicUser() async {
     final repository = FirestoreRepository();
     final result = await repository.getCurrentUser(currentUid());
     result.when(success: (res) async {
-      if (res.exists && firestoreUser.value == null) {
+      if (res.exists && publicUser.value == null) {
         // アカウントが存在するなら代入する
-        firestoreUser(FirestoreUser.fromJson(res.data()!));
+        publicUser(PublicUser.fromJson(res.data()!));
       } else {
         // アカウントが存在しないなら作成する
-        await _createFirestoreUserWithUser();
+        await _createPublicUserWithUser();
       }
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");

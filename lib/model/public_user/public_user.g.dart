@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'firestore_user.dart';
+part of 'public_user.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FirestoreUser _$$_FirestoreUserFromJson(Map<String, dynamic> json) =>
-    _$_FirestoreUser(
+_$_PublicUser _$$_PublicUserFromJson(Map<String, dynamic> json) =>
+    _$_PublicUser(
       accountName: json['accountName'] as String,
       bio: json['bio'] as Map<String, dynamic>,
       blockCount: json['blockCount'] as int,
@@ -36,7 +36,7 @@ _$_FirestoreUser _$$_FirestoreUserFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_FirestoreUserToJson(_$_FirestoreUser instance) =>
+Map<String, dynamic> _$$_PublicUserToJson(_$_PublicUser instance) =>
     <String, dynamic>{
       'accountName': instance.accountName,
       'bio': instance.bio,

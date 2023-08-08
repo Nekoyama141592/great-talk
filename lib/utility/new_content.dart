@@ -4,7 +4,7 @@ import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
-import 'package:great_talk/model/firestore_user/firestore_user.dart';
+import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/private_user/private_user.dart';
 import 'package:great_talk/model/user_update_log/user_update_log.dart';
@@ -21,7 +21,7 @@ class NewContent {
       value: value);
   static DetectedImage newDetectedImage(String url) =>
       DetectedImage(moderationLabels: [], moderationModelVersion: "", url: url);
-  static Post newPost(String systemPrompt, String title, FirestoreUser poster,
+  static Post newPost(String systemPrompt, String title, PublicUser poster,
       String postId, DocRef postRef) {
     final now = Timestamp.now();
     return Post(
@@ -47,9 +47,9 @@ class NewContent {
         userCount: 0);
   }
 
-  static FirestoreUser newUser(String uid, {String? userName}) {
+  static PublicUser newUser(String uid, {String? userName}) {
     final now = Timestamp.now();
-    return FirestoreUser(
+    return PublicUser(
       accountName: "",
       createdAt: now,
       bio: newDetectedText("").toJson(),
