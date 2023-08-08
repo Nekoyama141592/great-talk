@@ -40,5 +40,7 @@ flutter pub upgrade --major-versions
 
 ## SHA1の署名鍵
 keytool -list -v \-alias androiddebugkey -keystore ~/.android/debug.keystore
+keytool -list -v -keystore key.jks -alias key
+Play Console -> アプリ -> 設定 -> アプリの署名 -> アプリ署名鍵の証明書 -> SHA1
 ## イラスト素材
 https://storyset.com/
