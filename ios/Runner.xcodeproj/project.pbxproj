@@ -23,6 +23,7 @@
 		9D4366BAF3077D0DBB0B6378 /* devLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 358AB851DFE2B3112C17D215 /* devLaunchScreen.storyboard */; };
 		CBDB42210151FB7AFA4E77D8 /* verificationProfile.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1F88F939529D2594EF73051C /* verificationProfile.xcconfig */; };
 		D3F8F44CACFA2D53A1714457 /* verificationDebug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2FB69B6E2D863B9A8E91C918 /* verificationDebug.xcconfig */; };
+		D85920FF2A8156C90011BB43 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85920FE2A8156C90011BB43 /* StoreKit.framework */; };
 		DDB13A420F84F1926A182F34 /* verificationLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DA10EA018B1321D54BF16E1 /* verificationLaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		B3351FDE351558067AD5E7F5 /* Pods-Runner.release-testing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-testing.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-testing.xcconfig"; sourceTree = "<group>"; };
 		BE846390E58859ABB86B1B7D /* Pods-Runner.release-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release-prod.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release-prod.xcconfig"; sourceTree = "<group>"; };
 		BF0281532B800D732B22E9EA /* Pods-Runner.debug-testing.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-testing.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-testing.xcconfig"; sourceTree = "<group>"; };
+		D85920FE2A8156C90011BB43 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D8596B7629C4283800D12F74 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		E2E2B4970F6702F634D8EDEB /* Pods-Runner.debug-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-prod.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-prod.xcconfig"; sourceTree = "<group>"; };
 		E97A2E39EBFC3E01C06E6A48 /* Pods-Runner.debug-dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-dev.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-dev.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C30AECAF319CD6E47D7AC65 /* Pods_Runner.framework in Frameworks */,
+				D85920FF2A8156C90011BB43 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +106,7 @@
 		720F9CF03A1A23C29FFBD1E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D85920FE2A8156C90011BB43 /* StoreKit.framework */,
 				9A27F32423391441B03EB166 /* Pods_Runner.framework */,
 			);
 			name = Frameworks;
@@ -1411,7 +1415,12 @@
 			baseConfigurationReference = BF0281532B800D732B22E9EA /* Pods-Runner.debug-testing.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Debug-testing";
 		};
@@ -1420,7 +1429,12 @@
 			baseConfigurationReference = 9D1862030B7D933D1EB0FE6F /* Pods-Runner.profile-testing.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Profile-testing";
 		};
@@ -1429,7 +1443,12 @@
 			baseConfigurationReference = B3351FDE351558067AD5E7F5 /* Pods-Runner.release-testing.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Release-testing";
 		};
@@ -1438,7 +1457,12 @@
 			baseConfigurationReference = 4F1AA57C78E513CFBEB9201A /* Pods-Runner.debug-verification.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Debug-verification";
 		};
@@ -1447,7 +1471,12 @@
 			baseConfigurationReference = 22B423482F85C37C851EDC11 /* Pods-Runner.profile-verification.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Profile-verification";
 		};
@@ -1456,7 +1485,12 @@
 			baseConfigurationReference = 005B6ACB265E70B738725EF1 /* Pods-Runner.release-verification.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Release-verification";
 		};
@@ -1466,8 +1500,12 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = great_talk_dev;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Debug-dev";
 		};
@@ -1477,8 +1515,11 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = great_talk_dev;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Profile-dev";
 		};
@@ -1488,8 +1529,11 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = great_talk_dev;
+				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
 			};
 			name = "Release-dev";
 		};
@@ -1501,6 +1545,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
@@ -1516,6 +1561,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
@@ -1530,6 +1576,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
