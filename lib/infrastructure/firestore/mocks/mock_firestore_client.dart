@@ -158,6 +158,12 @@ class MockFirestoreClient implements FirestoreClient {
   @override
   FutureQSnapshot getMoreTimelines(DocRef userRef, Doc lastDoc) =>
       getTimelines(userRef);
+  @override
+  FutureQSnapshot getTokens(String currentUid) async {
+    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
+    final data = <QDoc>[];
+    return MockQSnapshot(data);
+  }
 
   @override
   FutureQSnapshot getTimelinePosts(List<String> timelinePostIds) async {

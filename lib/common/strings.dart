@@ -15,34 +15,28 @@ String getName(ChatContent person) => person.title;
 final appName = F.title;
 String getPlanDescription(String productID, String price) {
   String msg = "";
-  switch (productID) {
-    case (kAnnualSubscriptionId):
-      msg = "1年";
-      break;
-    case (kMonthSubscriptionId):
-      msg = "1ヶ月";
-      break;
-    case (kWeekSubscriptionId):
-      msg = "1週間";
-      break;
+  if (productID == kAnnualSubscriptionId) {
+    msg = "1年";
+  } else if (productID == kMonthSubscriptionId) {
+    msg = "1ヶ月";
+  } else if (productID == kWeekSubscriptionId) {
+    msg = "1週間";
   }
+
   msg += "あたり$priceです。";
   return msg;
 }
 
 String getPlanName(ProductDetails productDetails) {
   String msg = "";
-  switch (productDetails.id) {
-    case (kAnnualSubscriptionId):
-      msg = "年間プラン | 1年あたり${productDetails.price}";
-      break;
-    case (kMonthSubscriptionId):
-      msg = "月間プラン | 1ヶ月あたり${productDetails.price}";
-      break;
-    case (kWeekSubscriptionId):
-      msg = "週間プラン | 1週間あたり${productDetails.price}";
-      break;
+  if (productDetails.id == kAnnualSubscriptionId) {
+    msg = '年間プラン | 1年あたり${productDetails.price}';
+  } else if (productDetails.id == kMonthSubscriptionId) {
+    msg = '月間プラン | 1ヶ月あたり${productDetails.price}';
+  } else if (productDetails.id == kWeekSubscriptionId) {
+    msg = '週間プラン | 1週間あたり${productDetails.price}';
   }
+
   return msg;
 }
 

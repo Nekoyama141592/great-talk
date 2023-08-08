@@ -252,6 +252,17 @@ class FirestoreRepository {
     }
   }
 
+  FutureResult<List<QDoc>> getTokens(String currentUid) async {
+    try {
+      final res = await client.getTokens(currentUid);
+      final docs = res.docs;
+      return Result.success(docs);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
   FutureResult<List<QDoc>> getNewTimelines(DocRef userRef, Doc firstDoc) async {
     try {
       final res = await client.getNewTimelines(userRef, firstDoc);

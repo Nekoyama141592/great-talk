@@ -36,7 +36,47 @@ class CurrentUserController extends GetxController {
   @override
   void onInit() async {
     await _manageUserInfo();
+    await _distributeTokens();
     super.onInit();
+  }
+
+  Future<void> _distributeTokens() async {
+    if (currentUser.value == null) {
+      return;
+    }
+    final repository = FirestoreRepository();
+    final result = await repository.getTokens(currentUid());
+    result.when(
+        success: (res) {
+          for (final token in res) {
+            final Map<String, dynamic> tokenMap = token.data();
+            final TokenType tokenType =
+                TokenType.values.byName(tokenMap['tokenType']);
+            switch (tokenType) {
+              case TokenType.following:
+                final FollowingToken followingToken =
+                    FollowingToken.fromJson(tokenMap);
+                addFollowing(followingToken);
+                break;
+              case TokenType.likePost:
+                final LikePostToken likePostToken =
+                    LikePostToken.fromJson(tokenMap);
+                addLikePost(likePostToken);
+                break;
+              case TokenType.muteUser:
+                final MuteUserToken muteUserToken =
+                    MuteUserToken.fromJson(tokenMap);
+                addMuteUser(muteUserToken);
+                break;
+              case TokenType.mutePost:
+                final MutePostToken mutePostToken =
+                    MutePostToken.fromJson(tokenMap);
+                addMutePost(mutePostToken);
+                break;
+            }
+          }
+        },
+        failure: () {});
   }
 
   void addFollowing(FollowingToken followingToken) {
