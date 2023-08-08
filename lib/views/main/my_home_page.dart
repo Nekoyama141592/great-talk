@@ -32,9 +32,9 @@ class MyHomePage extends HookWidget {
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(
-        appBar: pageIndex.value != 1
-            ? AppBar(title: boldText(appName), shape: appBarShape(context))
-            : null,
+        appBar: pageIndex.value == 1
+            ? null
+            : AppBar(title: boldText(appName), shape: appBarShape(context)),
         drawer: const OriginalDrawer(),
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
