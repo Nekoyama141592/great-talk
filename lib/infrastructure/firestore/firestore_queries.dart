@@ -4,7 +4,10 @@ import 'package:great_talk/common/lists.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreQueries {
-  static final instance = FirebaseFirestore.instance;
+  static final _instance = FirebaseFirestore.instance;
+  static final DocRef _publicV1 = _instance.collection('public').doc('v1');
+  static final DocRef _privateV1 = _instance.collection('private').doc('v1');
+
   static MapQuery newQuery(MapQuery query, Doc firstDoc) =>
       query.endAtDocument(firstDoc);
   static MapQuery moreQuery(MapQuery query, Doc lastDoc) =>
@@ -19,7 +22,7 @@ class FirestoreQueries {
       _userPostsColRef(uid).doc(postId);
 
   static final postsQuery =
-      instance.collectionGroup('posts').limit(oneTimeReadCount);
+      _instance.collectionGroup('posts').limit(oneTimeReadCount);
 
   static MapQuery postsQueryByFollowing(List<String> followingUids) {
     if (followingUids.isEmpty) {
@@ -92,9 +95,9 @@ class FirestoreQueries {
       _usersColRef.doc(currentUid).collection("tokens");
 
   static DocRef userDocRef(String uid) => _usersColRef.doc(uid);
-  static final ColRef _usersColRef = instance.collection('users');
+  static final ColRef _usersColRef = _publicV1.collection('users');
   static DocRef privateUserDocRef(String uid) =>
-      instance.collection('privateUsers').doc(uid);
+      _privateV1.collection('users').doc(uid);
 
   static final usersQuery = _usersColRef.limit(oneTimeReadCount);
 
