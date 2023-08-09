@@ -57,7 +57,7 @@ class PostCard extends StatelessWidget {
                               '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),
                           child: const Icon(Icons.message),
                         ),
-                        Text(post.msgCount.toString())
+                        const Text("")
                       ],
                     ),
                   ],
