@@ -13,7 +13,7 @@ _$_UserUpdateLog _$$_UserUpdateLogFromJson(Map<String, dynamic> json) =>
       stringBio: json['stringBio'] as String,
       stringUserName: json['stringUserName'] as String,
       uid: json['uid'] as String,
-      userImageUrl: json['userImageUrl'] as String,
+      userImageFileName: json['userImageFileName'] as String,
       userRef: json['userRef'],
     );
 
@@ -24,6 +24,6 @@ Map<String, dynamic> _$$_UserUpdateLogToJson(_$_UserUpdateLog instance) =>
       'stringBio': instance.stringBio,
       'stringUserName': instance.stringUserName,
       'uid': instance.uid,
-      'userImageUrl': instance.userImageUrl,
+      'userImageFileName': instance.userImageFileName,
       'userRef': instance.userRef,
     };

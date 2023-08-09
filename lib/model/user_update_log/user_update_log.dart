@@ -12,7 +12,7 @@ abstract class UserUpdateLog implements _$UserUpdateLog {
     required String stringBio,
     required String stringUserName,
     required String uid,
-    required String userImageUrl,
+    required String userImageFileName,
     required dynamic userRef,
   }) = _UserUpdateLog;
   factory UserUpdateLog.fromJson(SDMap json) => _$UserUpdateLogFromJson(json);

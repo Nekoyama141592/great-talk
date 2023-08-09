@@ -7,7 +7,7 @@ const admin = require("firebase-admin");
 const config = functions.config();
 admin.initializeApp();
 const fHttps = functions.https;
-const userPath = "${userRef}";
+const userPath = "public/{version}/users/{uid}";
 const postPath = `${userPath}/public/{version}/posts/{postId}`;
 // reciept
 const axios_1 = require("axios");
@@ -15,6 +15,21 @@ const RECEIPT_VERIFICATION_ENDPOINT_SANDBOX = "https://sandbox.itunes.apple.com/
 const RECEIPT_VERIFICATION_ENDPOINT_FOR_IOS_PROD = "https://buy.itunes.apple.com/verifyReceipt";
 const appStoreConfig = config.appstore;
 const IOS_PKG_NAME = appStoreConfig.ios_pkg_name;
+// AWS
+const AWS = require('aws-sdk');
+const aws_config = config.aws;
+const AWS_ACCESS_KEY = aws_config.access_key;
+const AWS_SECRET_ACCESS_KEY = aws_config.secret_access_key;
+const AWS_REGION = aws_config.region;
+// IAM設定
+AWS.config.update({
+    accessKeyId: AWS_ACCESS_KEY,
+    secretAccessKey: AWS_SECRET_ACCESS_KEY,
+    region: AWS_REGION,
+});
+const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
+const rekognition = new AWS.Rekognition();
+const postImagesBucket = aws_config.s3.post_images; // s3バケット
 
 function saveDataToFirestore(json, path,id) {
     const db = admin.firestore();
@@ -29,24 +44,98 @@ function mul100AndRoundingDown(num) {
     const result = Math.floor(mul100); // 数字を丸める
     return result;
 }
-function detectDominantLanguage(text) {
-    return '';
-}
-function detectText(text,languageCode) {
-    return {};
-}
-function detectImage(fileName) {
-    return {};
-}
-
-exports.onUserCreate = functions.firestore.document(userPath).onCreate(
-    async (snap,_) => {
-        const newValue = snap.data();
+  
+async function detectDominantLanguage(text) {
+    let lCode = '';
+    if (!text || text.trim() === "") {
+        return lCode;
     }
-);
+    const dDparams = {
+        Text: text
+    };
+    comprehend.detectDominantLanguage(
+        dDparams,
+        async (dDerr,dDdata) => {
+            if (dDerr) {
+                console.log(dDerr); // もし、エラーがあれば
+            } else {
+                lCode = dDdata.Languages[0]["LanguageCode"]; // 一番確率の高いLanguageCode
+            }
+        }
+    );
+    return lCode;
+}
+async function detectText(text) {
+    let detectedText = {
+        "languageCode": "",
+        "negativeScore": 0.0,
+        "positiveScore": 0.0,
+        "sentiment": "",
+        "value": text,
+    };
+    if (!text || text.trim() === "") {
+        return detectedText;
+    }
+    const lCode = await detectDominantLanguage(text);
+    if (lCode) {
+        // lCodeが空欄でなければ
+        const dSparams = {
+            LanguageCode: lCode,
+            Text: text,
+        };
+        comprehend.detectSentiment(
+            dSparams,
+            async (dSerr, dSdata) => {
+                if (dSerr) {
+                    console.log(dSerr);
+                } else {
+                    detectedText = {
+                        "languageCode": lCode,
+                        "negativeScore": mul100AndRoundingDown(dSdata.SentimentScore.Negative),
+                        "positiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
+                        "sentiment": dSdata.Sentiment,
+                        "value": text,
+                    };
+                }
+            }
+        );
+    }
+    return detectedText;
+}
+async function detectModerationLabels(fileName) {
+    let detectedImage = {
+        "moderationLabels": [],
+        "moderationModelVersion": '',
+        "value": fileName,
+    };
+    if (!text || text.trim() === "") {
+        return detectedImage;
+    }
+    try {
+      const params = {
+        Image: {
+          S3Object: {
+            Bucket: postImagesBucket,
+            Name: fileName,
+          },
+        },
+      };
+      const moderationLabelsResponse = await rekognition.detectModerationLabels(params).promise();
+      detectedImage = {
+          "moderationLabels": moderationLabelsResponse.ModerationLabels,
+          "moderationModelVersion": moderationLabelsResponse.moderationModelVersion,
+          "value": fileName,
+      };
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    return detectedImage;
+  }
+
 exports.onUserDelete = functions.firestore.document(userPath).onDelete(
     async (snap,_) => {
         const newValue = snap.data();
+        // TODO: 投稿を削除
     }
 );
 exports.onFollowerCreate = functions.firestore.document(`${userPath}/followers/{followerUid}`).onCreate(
@@ -90,19 +179,32 @@ exports.onUserMutesDelete = functions.firestore.document(`${userPath}/UserMutes/
     }
 );
 
-exports.onUserMutesCreate = functions.firestore.document(`${userPath}/userUpdateLog/{id}`).onCreate(
+exports.onUserUpdateLogCreate = functions.firestore.document(`${userPath}/userUpdateLogs/{id}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
+        const detectedUserName = await detectText(newValue.stringUserName);
+        const detectedBio = await detectText(newValue.stringBio);
+        const detectedImage = await detectModerationLabels(newValue.userImageFileName);
+        await newValue.userRef.update({
+            'bio': detectedBio,
+            'userName': detectedUserName,
+            'userImage': detectedImage,
+        });
+        // TODO: 投稿のuserを全てUpdate
     }
 );
+
 exports.onPostCreate = functions.firestore.document(postPath).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
-    }
-);
-exports.onPostDelete = functions.firestore.document(postPath).onDelete(
-    async (snap,_) => {
-        const newValue = snap.data();
+        const detectedDescription = await detectText(newValue.description['value']);
+        const detectedTitle = await detectText(newValue.title['value']);
+        const detectedIconImage = await detectModerationLabels(newValue.iconImage['value']);
+        await snap.ref.update({
+            'description': detectedDescription,
+            'title': detectedTitle,
+            'iconImage': detectedIconImage,
+        });
     }
 );
 exports.onPostLikeCreate = functions.firestore.document(`${postPath}/{postId}/postLikes/{activeUid}`).onCreate(

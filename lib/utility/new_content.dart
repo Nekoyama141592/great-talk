@@ -98,6 +98,6 @@ class NewContent {
           stringBio: stringBio,
           stringUserName: stringUserName,
           uid: uid,
-          userImageUrl: userImageUrl,
+          userImageFileName: userImageUrl,
           userRef: userRef);
 }
