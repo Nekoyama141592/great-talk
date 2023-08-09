@@ -9,7 +9,7 @@ import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MuteUsersController extends DocsController {
-  MuteUsersController() : super(enablePullDown: true, isUserDocs: true);
+  MuteUsersController() : super(enablePullDown: true);
   @override
   Future<void> fetchDocs() async {
     final requestUids = _createRequestUids();

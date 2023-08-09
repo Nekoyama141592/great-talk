@@ -5,10 +5,9 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class DocsController extends GetxController with CurrentUserMixin {
-  DocsController({required this.enablePullDown, required this.isUserDocs});
+  DocsController({required this.enablePullDown});
   final FirestoreRepository repository = FirestoreRepository();
   final bool enablePullDown;
-  final bool isUserDocs;
   final docs = <QDoc>[].obs;
   final isLoading = false.obs;
 

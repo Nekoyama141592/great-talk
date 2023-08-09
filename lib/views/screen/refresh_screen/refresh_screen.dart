@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
-import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -40,27 +39,17 @@ class RefreshScreen extends HookWidget {
                 ListView.builder(
                     itemCount: docsController.docs.length,
                     itemBuilder: (c, i) {
-                      if (docsController.isUserDocs) {
-                        final user =
-                            PublicUser.fromJson(docsController.docs[i].data());
-                        return Obx(() =>
-                            CurrentUserController.to.isValidUser(user.uid)
-                                ? Text(user.typedUserName().value)
-                                : const SizedBox.shrink());
-                      } else {
-                        final post =
-                            Post.fromJson(docsController.docs[i].data());
-                        final content = ChatContent.fromPost(post);
-                        return Obx(() =>
-                            CurrentUserController.to.isValidPost(post.postId)
-                                ? PostCard(
-                                    chatContent: content,
-                                    post: post,
-                                    onTap: () => Get.toNamed(
-                                        '/chat/users/${content.posterUid}/posts/${content.contentId}'),
-                                  )
-                                : const SizedBox.shrink());
-                      }
+                      final post = Post.fromJson(docsController.docs[i].data());
+                      final content = ChatContent.fromPost(post);
+                      return Obx(() =>
+                          CurrentUserController.to.isValidPost(post.postId)
+                              ? PostCard(
+                                  chatContent: content,
+                                  post: post,
+                                  onTap: () => Get.toNamed(
+                                      '/chat/users/${content.posterUid}/posts/${content.contentId}'),
+                                )
+                              : const SizedBox.shrink());
                     })));
   }
 }
