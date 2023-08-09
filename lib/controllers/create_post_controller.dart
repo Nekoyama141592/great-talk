@@ -15,10 +15,21 @@ class CreatePostController extends GetxController with CurrentUserMixin {
   Rx<Uint8List?> uint8List = Rx(null);
   String title = "";
   String systemPrompt = "";
-  Future<void> onCreateButtonPressed() async {
+  void onCreateButtonPressed() async {
     if (title.isEmpty || systemPrompt.isEmpty || uint8List.value == null) {
       return;
     }
+    final newFileName = s3FileName();
+    final repository = AWSS3Repository();
+    final result = await repository.uploadImage(uint8List.value!, newFileName);
+    result.when(
+        success: (_) => _createPost(),
+        failure: () {
+          UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
+        });
+  }
+
+  Future<void> _createPost() async {
     final repository = FirestoreRepository();
     final postId = randomString();
     final postRef = FirestoreQueries.userPostRef(currentUid(), postId);
@@ -35,23 +46,5 @@ class CreatePostController extends GetxController with CurrentUserMixin {
   void onImagePickButtonPressed() async {
     final result = await FileUtility.getCompressedImage();
     uint8List(result);
-  }
-
-  void onUploadButtonPressed() async {
-    final newFileName = s3FileName();
-    await _uploadImage(newFileName);
-  }
-
-  Future<void> _uploadImage(String newFileName) async {
-    if (uint8List.value == null) {
-      return;
-    }
-    final repository = AWSS3Repository();
-    final result = await repository.uploadImage(uint8List.value!, newFileName);
-    result.when(
-        success: (res) {},
-        failure: () {
-          UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
-        });
   }
 }
