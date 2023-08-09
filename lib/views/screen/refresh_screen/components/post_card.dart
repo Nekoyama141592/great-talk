@@ -22,7 +22,7 @@ class PostCard extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          CircleImage(chatContent: chatContent),
+          CircleImage(imageValue: chatContent.imageValue),
           const Spacer(),
           Text(post.typedTitle().value),
           const Spacer(),

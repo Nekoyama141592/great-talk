@@ -59,8 +59,8 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                                 ? null
                                                 : controller.onCardLongTap,
                                         leading: Obx(() => CircleImage(
-                                            chatContent: controller
-                                                .interlocutor.value!)),
+                                            imageValue: controller.interlocutor
+                                                .value!.imageValue)),
                                         title:
                                             purchaseController.isSubscribing()
                                                 ? SelectableText(text)
@@ -88,8 +88,10 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                         leading:
                                             messages[index].uid != currentUid()
                                                 ? Obx(() => CircleImage(
-                                                    chatContent: controller
-                                                        .interlocutor.value!))
+                                                    imageValue: controller
+                                                        .interlocutor
+                                                        .value!
+                                                        .imageValue))
                                                 : null,
                                         title:
                                             purchaseController.isSubscribing()

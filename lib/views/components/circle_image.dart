@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:great_talk/common/persons.dart';
-import 'package:great_talk/consts/debug_constants.dart';
-import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/s3_image.dart';
 
 class CircleImage extends StatelessWidget {
-  const CircleImage({Key? key, required this.chatContent, this.onTap})
+  const CircleImage({Key? key, required this.imageValue, this.onTap})
       : super(key: key);
-  final ChatContent chatContent;
+  final String imageValue;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    final imageValue =
-        chatContent.imageValue; // オリジナルコンテンツかモックデータならURL.その他ならS3のファイル名
+    // オリジナルコンテンツかモックデータならURL.その他ならS3のファイル名
     final length = userImageSize(context);
-    final isOriginalContent = returnIsOriginalContents(chatContent.posterUid);
-    return isOriginalContent || isUseMockData
+    return imageValue.startsWith("https://")
         ? InkWell(
             onTap: onTap,
             child: SizedBox(

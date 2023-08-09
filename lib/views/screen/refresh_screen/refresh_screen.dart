@@ -49,7 +49,7 @@ class RefreshScreen extends HookWidget {
                               ? Column(
                                   children: [
                                     CircleImage(
-                                      chatContent: content,
+                                      imageValue: content.imageValue,
                                       onTap: () => Get.toNamed(
                                           '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),
                                     ),
