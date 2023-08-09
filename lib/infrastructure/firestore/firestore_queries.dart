@@ -46,7 +46,7 @@ class FirestoreQueries {
   static DocRef userPostRef(String uid, String postId) =>
       _userPostsColRef(uid).doc(postId);
   static ColRef _userPostsColRef(String uid) =>
-      _usersColRef.doc(uid).collection('posts');
+      userDocRef(uid).collection('public').doc('v1').collection('posts');
   static MapQuery userPostsQueryByNewest(String uid) =>
       _userPostsColRef(uid).orderBy("createdAt", descending: true);
   static MapQuery moreUserPostsQueryByNewest(String uid, Doc lastDoc) =>
