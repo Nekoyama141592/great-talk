@@ -11,19 +11,13 @@ abstract class CustomCompleteText implements _$CustomCompleteText {
     required String systemPrompt,
     double? temperature,
     double? topP,
-    int? n,
-    bool? stream,
     List<String>? stop,
-    int? maxToken,
     double? presencePenalty,
     double? frequencyPenalty,
     List<SDMap>? functions,
-    String? functionCall,
   }) = _CustomCompleteText;
   factory CustomCompleteText.fromJson(SDMap json) =>
       _$CustomCompleteTextFromJson(json);
-  FunctionCall? typedFunctionCall() =>
-      functionCall != null ? FunctionCall.values.byName(functionCall!) : null;
   List<FunctionData>? typedFunctions() => functions
       ?.map((e) => FunctionData(
           name: e['name'],

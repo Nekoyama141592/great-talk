@@ -126,7 +126,6 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       frequencyPenalty: completeText.frequencyPenalty ?? 0.0,
       user: currentUid(),
       functions: completeText.typedFunctions(),
-      functionCall: completeText.typedFunctionCall(),
     );
     _listenToChatCompletionSSE(request, scrollController); // ChatGPTのリアルタイム出力
   }
