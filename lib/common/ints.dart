@@ -17,3 +17,6 @@ const int whereInLimit = 30;
 const int maxTitleLimit = 32;
 const int maxDescriptionLimit = 200;
 const int maxSystemPromptLimit = 1000;
+// prifile
+const int maxUserNameLimit = 32;
+const int maxBioLimit = 200;

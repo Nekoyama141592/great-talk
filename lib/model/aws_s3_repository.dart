@@ -19,11 +19,11 @@ class AWSS3Repository {
     }
   }
 
-  FutureResult<bool> uploadImage(
+  FutureResult<String> uploadImage(
       Uint8List uint8list, String newFileName) async {
     try {
       await client.uploadImage(uint8list, newFileName);
-      return const Result.success(true);
+      return Result.success(newFileName);
     } catch (e) {
       debugPrint(e.toString());
       return const Result.failure();

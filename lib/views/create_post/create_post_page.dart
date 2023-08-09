@@ -331,7 +331,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
     final repository = AWSS3Repository();
     final result = await repository.uploadImage(uint8list!, newFileName);
     result.when(
-        success: (_) => _createPost(),
+        success: (res) => _createPost(res),
         failure: () {
           UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
         });
@@ -344,12 +344,12 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
     });
   }
 
-  Future<void> _createPost() async {
+  Future<void> _createPost(String fileName) async {
     final repository = FirestoreRepository();
     final postId = randomString();
     final postRef = FirestoreQueries.userPostRef(currentUid(), postId);
-    final newPost = NewContent.newPost(systemPrompt!, title!,
-        CurrentUserController.to.publicUser.value!, postId, postRef);
+    final newPost = NewContent.newPost(systemPrompt!, title!, description!,
+        fileName, CurrentUserController.to.publicUser.value!, postId, postRef);
     final result = await repository.createPost(postRef, newPost.toJson());
     result.when(success: (_) {
       UIHelper.showFlutterToast("投稿が作成できました！");

@@ -21,17 +21,17 @@ class NewContent {
       value: value);
   static DetectedImage newDetectedImage(String url) => DetectedImage(
       moderationLabels: [], moderationModelVersion: "", value: url);
-  static Post newPost(String systemPrompt, String title, PublicUser poster,
-      String postId, DocRef postRef) {
+  static Post newPost(String systemPrompt, String title, String description,
+      String fileName, PublicUser poster, String postId, DocRef postRef) {
     final now = Timestamp.now();
     return Post(
         createdAt: now,
         customCompleteText: newCustomCompleteText(systemPrompt).toJson(),
-        description: newDetectedText("").toJson(),
+        description: newDetectedText(description).toJson(),
         exampleTexts: [],
         genre: '',
         hashTags: [],
-        iconImage: newDetectedImage('').toJson(),
+        iconImage: newDetectedImage(fileName).toJson(),
         impressionCount: 0,
         likeCount: 40,
         links: [],
