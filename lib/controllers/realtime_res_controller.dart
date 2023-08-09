@@ -14,6 +14,7 @@ import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
+import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
@@ -138,6 +139,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       createdAt: now,
       id: id,
       messageType: MessageType.text.name,
+      messageRef: FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
       text: const DetectedText(
           languageCode: '',
           negativeScore: 0.0,
@@ -178,6 +180,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
         createdAt: now,
         id: id,
         messageType: MessageType.text.name,
+        messageRef: FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
         text: DetectedText(
             languageCode: '',
             negativeScore: 0.0,
@@ -271,6 +274,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       createdAt: now,
       id: id,
       messageType: MessageType.text.name,
+      messageRef: FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
       text: DetectedText(
           languageCode: '',
           negativeScore: 0.0,

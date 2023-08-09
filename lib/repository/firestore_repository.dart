@@ -9,6 +9,14 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 class FirestoreRepository {
   final client = isUseMockData ? MockFirestoreClient() : FirestoreClient();
 
+  FutureResult<bool> createMessage(DocRef messageRef, SDMap json) async {
+    try {
+      await client.createMessage(messageRef, json);
+      return const Result.success(true);
+    } catch (e) {
+      return const Result.failure();
+    }
+  }
   FutureResult<bool> createPost(DocRef postRef, SDMap json) async {
     try {
       await client.createPost(postRef, json);

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
+import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'text_message.freezed.dart';
 part 'text_message.g.dart';
@@ -13,6 +14,7 @@ abstract class TextMessage implements _$TextMessage {
       {required dynamic createdAt,
       required String id,
       required String messageType,
+      required dynamic messageRef,
       required String uid,
       required dynamic updatedAt,
       required DetectedText text}) = _TextMessage;
@@ -22,9 +24,11 @@ abstract class TextMessage implements _$TextMessage {
       createdAt: Timestamp.fromDate(stm.createdAt),
       id: stm.id,
       messageType: stm.messageType,
+      messageRef: stm.messageRef,
       uid: stm.uid,
       updatedAt: Timestamp.fromDate(stm.updatedAt),
       text: stm.text);
   Timestamp typedCreatedAt() => createdAt as Timestamp;
+  DocRef typedMessageRef() => messageRef as DocRef;
   Timestamp typedUpdatedAtAt() => createdAt as Timestamp;
 }

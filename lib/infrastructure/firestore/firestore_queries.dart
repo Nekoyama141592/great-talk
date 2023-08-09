@@ -64,6 +64,9 @@ class FirestoreQueries {
   static MapQuery morePostsQueryByLikeCount(Doc lastDoc) =>
       moreQuery(postsQueryByLikeCount, lastDoc);
 
+  static ColRef postMessagesColRef(String uid,String postId) => postDocRef(uid, postId).collection('messages');
+  static DocRef postMessageDocRef(String uid,String postId,String messageId) => postDocRef(uid, postId).collection('messages').doc(messageId);
+
   static MapQuery timelinesQuery(DocRef userRef) => userRef
       .collection('timelines')
       .orderBy('createdAt', descending: true)

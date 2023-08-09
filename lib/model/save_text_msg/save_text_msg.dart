@@ -12,6 +12,7 @@ abstract class SaveTextMsg implements _$SaveTextMsg {
       {required DateTime createdAt,
       required String id,
       required String messageType,
+      required dynamic messageRef,
       required String uid,
       required DateTime updatedAt,
       required DetectedText text}) = _SaveTextMsg;
@@ -21,6 +22,7 @@ abstract class SaveTextMsg implements _$SaveTextMsg {
       createdAt: textMessage.typedCreatedAt().toDate(),
       id: textMessage.id,
       messageType: textMessage.messageType,
+      messageRef: textMessage.messageRef,
       uid: textMessage.uid,
       updatedAt: textMessage.typedUpdatedAtAt().toDate(),
       text: textMessage.text);
