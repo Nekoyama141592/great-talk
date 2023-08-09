@@ -16,7 +16,7 @@ class CreatePostController extends GetxController with CurrentUserMixin {
   String title = "";
   String systemPrompt = "";
   Future<void> onCreateButtonPressed() async {
-    if (title.isEmpty || systemPrompt.isEmpty) {
+    if (title.isEmpty || systemPrompt.isEmpty || uint8List.value == null) {
       return;
     }
     final repository = FirestoreRepository();
