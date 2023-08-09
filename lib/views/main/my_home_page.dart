@@ -62,7 +62,7 @@ class MyHomePage extends HookWidget {
                   : const OriginalContentCards(),
             ),
             SubscribeScreen(),
-            Obx(() => CurrentUserController.to.isNotLoggedIn()
+            Obx(() => !CurrentUserController.to.isNotLoggedIn()
                 ? const LoginPage()
                 : const MyProfileScreen())
           ],

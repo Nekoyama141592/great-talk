@@ -4,7 +4,7 @@ import 'package:great_talk/views/accounts_page.dart';
 import 'package:great_talk/views/auth/logouted_page.dart';
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
 import 'package:great_talk/views/auth/user_deleted_page.dart';
-import 'package:great_talk/views/create_post_page.dart';
+import 'package:great_talk/views/create_post/create_post_page.dart';
 import 'package:great_talk/views/mute_posts_page.dart';
 import 'package:great_talk/views/mute_users_page.dart';
 import 'package:great_talk/views/realtime_res_page/realtime_res_page.dart';

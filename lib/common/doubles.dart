@@ -12,3 +12,9 @@ double chatScreenHeight(BuildContext context) {
   final x = fullHeight(context);
   return x > 800 && x < 1000 ? x * 0.7 : x * 0.8;
 }
+
+// chatGPT request
+const double defaultTemperature = 0.3;
+const double defaultTopP = 1.0;
+const double defaultPresencePenalty = 0.0;
+const double defaultFrequencyPenalty = 0.0;

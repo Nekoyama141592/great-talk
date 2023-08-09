@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
@@ -11,6 +12,8 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
+import 'package:great_talk/views/create_post/components/form_label.dart';
+import 'package:great_talk/views/create_post/components/original_form.dart';
 
 class CreatePostPage extends StatefulWidget {
   const CreatePostPage({Key? key}) : super(key: key);
@@ -82,13 +85,13 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _systemPromptTextField(),
-                _titleTextField(),
-                _descriptionTextField(),
-                _temperatureNumberField(),
-                _topPNumberField(),
-                _presencePenaltyNumberField(),
-                _frequencyPenaltyNumberField()
+                ..._systemPromptTextField(),
+                ..._titleTextField(),
+                ..._descriptionTextField(),
+                ..._temperatureNumberField(),
+                ..._topPNumberField(),
+                ..._presencePenaltyNumberField(),
+                ..._frequencyPenaltyNumberField()
               ],
             ),
           )),
@@ -96,106 +99,127 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
   }
 
   // title入力をする関数
-  Widget _titleTextField() {
-    return TextFormField(
-      decoration: const InputDecoration(hintText: "タイトル"),
-      onSaved: (value) {
-        setState(() {
-          title = value;
-        });
-      },
-      validator: (value) => value!.isEmpty ? "入力を行ってください" : null,
-    );
+  List<Widget> _titleTextField() {
+    return [
+      const FormLabel(title: "タイトル"),
+      OriginalForm(
+        decoration: const InputDecoration(hintText: "例: 猫GPT"),
+        onSaved: (value) {
+          setState(() {
+            title = value;
+          });
+        },
+        validator: (value) => value!.isEmpty ? "入力を行ってください" : null,
+      )
+    ];
   }
 
   // description入力をする関数
-  Widget _descriptionTextField() {
-    return TextFormField(
-      // minLines: 3,
-      keyboardType: TextInputType.multiline,
-      decoration: const InputDecoration(hintText: "説明/使い方"),
-      onSaved: (value) {
-        setState(() {
-          title = value;
-        });
-      },
-      validator: (value) => value!.isEmpty ? "入力を行ってください" : null,
-    );
+  List<Widget> _descriptionTextField() {
+    return [
+      const FormLabel(title: "説明/使い方"),
+      OriginalForm(
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+        decoration: const InputDecoration(hintText: "例: 語尾に「にゃん」をつけて話してくれます！"),
+        onSaved: (value) {
+          setState(() {
+            title = value;
+          });
+        },
+        validator: (value) => value!.isEmpty ? "入力を行ってください" : null,
+      )
+    ];
   }
 
   // systemPrompt入力をする関数
-  Widget _systemPromptTextField() {
-    return TextFormField(
-      // minLines: 3,
-      keyboardType: TextInputType.multiline,
-      decoration: const InputDecoration(hintText: "システムプロンプト"),
-      onSaved: (value) {
-        setState(() {
-          systemPrompt = value;
-        });
-      },
-      validator: (value) => value!.isEmpty ? "入力を行ってください" : null,
-    );
+  List<Widget> _systemPromptTextField() {
+    return [
+      const FormLabel(title: "システムプロンプト"),
+      OriginalForm(
+        keyboardType: TextInputType.multiline,
+        maxLines: null,
+        decoration: const InputDecoration(hintText: "例: 語尾に必ず「にゃん」をつけて返答して！"),
+        onSaved: (value) {
+          setState(() {
+            systemPrompt = value;
+          });
+        },
+        validator: (value) => value!.isEmpty ? "入力を行ってください" : null,
+      )
+    ];
   }
 
   // temperature入力をする関数
-  Widget _temperatureNumberField() {
-    return TextFormField(
-      keyboardType: TextInputType.number,
-      decoration: const InputDecoration(hintText: "temperature(任意)"),
-      onSaved: (value) {
-        setState(() {
-          temperature = value;
-        });
-      },
-      validator: (value) =>
-          double.tryParse(value!) == null ? "数字を入力してください" : null,
-    );
+  List<Widget> _temperatureNumberField() {
+    return [
+      const FormLabel(title: "temperature"),
+      OriginalForm(
+        initialValue: defaultTemperature.toString(),
+        keyboardType: TextInputType.number,
+        onSaved: (value) {
+          setState(() {
+            temperature = value;
+          });
+        },
+        validator: (value) =>
+            double.tryParse(value!) == null ? "数字を入力してください" : null,
+      )
+    ];
   }
 
   // topP入力をする関数
-  Widget _topPNumberField() {
-    return TextFormField(
-      keyboardType: TextInputType.number,
-      decoration: const InputDecoration(hintText: "topP(任意)"),
-      onSaved: (value) {
-        setState(() {
-          topP = value;
-        });
-      },
-      validator: (value) =>
-          double.tryParse(value!) == null ? "数字を入力してください" : null,
-    );
+  List<Widget> _topPNumberField() {
+    return [
+      const FormLabel(title: "topP"),
+      OriginalForm(
+        initialValue: defaultTopP.toString(),
+        keyboardType: TextInputType.number,
+        onSaved: (value) {
+          setState(() {
+            topP = value;
+          });
+        },
+        validator: (value) =>
+            double.tryParse(value!) == null ? "数字を入力してください" : null,
+      )
+    ];
+  }
+
+  // presencePenalty入力をする関数
+  List<Widget> _presencePenaltyNumberField() {
+    return [
+      const FormLabel(title: "PresencePenalty"),
+      OriginalForm(
+        initialValue: defaultPresencePenalty.toString(),
+        keyboardType: TextInputType.number,
+        onSaved: (value) {
+          setState(() {
+            presencePenalty = value;
+          });
+        },
+        validator: (value) =>
+            double.tryParse(value!) == null ? "数字を入力してください" : null,
+      )
+    ];
   }
 
   // topP入力をする関数
-  Widget _presencePenaltyNumberField() {
-    return TextFormField(
-      keyboardType: TextInputType.number,
-      decoration: const InputDecoration(hintText: "presencePenalty(任意)"),
-      onSaved: (value) {
-        setState(() {
-          presencePenalty = value;
-        });
-      },
-      validator: (value) =>
-          double.tryParse(value!) == null ? "数字を入力してください" : null,
-    );
-  }
-
-  // topP入力をする関数
-  Widget _frequencyPenaltyNumberField() {
-    return TextFormField(
-      keyboardType: TextInputType.number,
-      decoration: const InputDecoration(hintText: "frequencyPenalty(任意)"),
-      onSaved: (value) {
-        setState(() {
-          topP = value;
-        });
-      },
-      validator: (value) =>
-          double.tryParse(value!) == null ? "数字を入力してください" : null,
-    );
+  List<Widget> _frequencyPenaltyNumberField() {
+    return [
+      const FormLabel(title: "FrequencyPenalty"),
+      OriginalForm(
+        initialValue: defaultFrequencyPenalty.toString(),
+        keyboardType: TextInputType.number,
+        onSaved: (value) {
+          setState(() {
+            topP = value;
+          });
+        },
+        validator: (value) =>
+            double.tryParse(value!) == null ? "数字を入力してください" : null,
+      )
+    ];
   }
 
   // ログインボタン関数
@@ -209,17 +233,25 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
 
   Widget _image() {
     return uint8list == null
-        ? InkWell(
-            onTap: _onImagePickButtonPressed,
-            child: const Icon(
-              Icons.image,
-              size: 100.0,
-            ),
+        ? Row(
+            children: [
+              InkWell(
+                onTap: _onImagePickButtonPressed,
+                child: const Icon(
+                  Icons.image,
+                  size: 100.0,
+                ),
+              ),
+              const Text("画像を選択")
+            ],
           )
-        : SizedBox(
-            width: 100.0,
-            height: 100.0,
-            child: Image.memory(uint8list!),
+        : InkWell(
+            onTap: _onImagePickButtonPressed,
+            child: SizedBox(
+              width: 100.0,
+              height: 100.0,
+              child: Image.memory(uint8list!),
+            ),
           );
   }
 
@@ -229,11 +261,13 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
       // フォームフィールドの情報を変数に保存
       _formKey.currentState!.save();
     }
+    if (uint8list == null) {
+      await UIHelper.showErrorFlutterToast("アイコンをタップして画像をアップロードしてください");
+    }
     if (title == null ||
         systemPrompt == null ||
         title!.isEmpty ||
-        systemPrompt!.isEmpty ||
-        uint8list == null) {
+        systemPrompt!.isEmpty) {
       return;
     }
     final newFileName = s3FileName();
