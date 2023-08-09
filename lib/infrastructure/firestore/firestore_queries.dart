@@ -29,8 +29,7 @@ class FirestoreQueries {
       followingUids.add("");
     }
     return postsQuery
-        .where('poster.uid', whereIn: followingUids)
-        .orderBy('createdAt', descending: true);
+        .where('poster.uid', whereIn: followingUids);
   }
 
   static MapQuery postsQueryByWhereIn(List<String> postIds) =>
