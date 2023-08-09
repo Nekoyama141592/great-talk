@@ -13,7 +13,7 @@ abstract class ChatContent implements _$ChatContent {
   const factory ChatContent({
     required String contentId,
     SDMap? customCompleteText,
-    required String imageUrl,
+    required String imageValue,
     int? lastSeen,
     Map<String, dynamic>? metadata,
     required String posterUid,
@@ -23,7 +23,7 @@ abstract class ChatContent implements _$ChatContent {
   factory ChatContent.fromPost(Post post) {
     return ChatContent(
         customCompleteText: post.customCompleteText,
-        imageUrl: post.typedIconImage().value,
+        imageValue: post.typedIconImage().value,
         contentId: post.postId,
         posterUid: post.typedPoster().uid,
         title: post.typedTitle().value);
