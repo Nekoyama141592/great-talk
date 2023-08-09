@@ -6,9 +6,14 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 const config = functions.config();
 admin.initializeApp();
+const fireStore = admin.firestore();
 const fHttps = functions.https;
+// firestore
 const userPath = "public/{version}/users/{uid}";
 const postPath = `${userPath}/public/{version}/posts/{postId}`;
+const batchLimit = 500;
+const plusOne = 1;
+const minusOne = -1;
 // reciept
 const axios_1 = require("axios");
 const RECEIPT_VERIFICATION_ENDPOINT_SANDBOX = "https://sandbox.itunes.apple.com/verifyReceipt";
@@ -44,7 +49,23 @@ function mul100AndRoundingDown(num) {
     const result = Math.floor(mul100); // 数字を丸める
     return result;
 }
-  
+async function deleteFromColRef(colRef) {
+    const qshot = await colRef.get();
+    let count = 0;
+    let batch = fireStore.batch();
+    for (const doc of qshot.docs) {
+        batch.delete(doc.ref);
+        count++;
+        if (count == batchLimit) {
+            await batch.commit();
+            batch = fireStore.batch();
+            count = 0;
+        }
+    }
+    if (count > 0) {
+        await batch.commit();
+    }
+} 
 async function detectDominantLanguage(text) {
     let lCode = '';
     if (!text || text.trim() === "") {
@@ -134,8 +155,18 @@ async function detectModerationLabels(fileName) {
 
 exports.onUserDelete = functions.firestore.document(userPath).onDelete(
     async (snap,_) => {
-        const newValue = snap.data();
-        // TODO: 投稿を削除
+        const uid = snap.id;
+        const myRef = snap.ref;
+        // 自分をPostを消す
+        await deleteFromColRef(myRef.collection('public').doc('v1').collection('posts'));
+        // 自分のtimelineを消す
+        await deleteFromColRef(myRef.collection('timelines'));
+        // 自分のtokenを消す
+        await deleteFromColRef(myRef.collection('tokens'));
+        // 自分のuserUpdateLogsを消す
+        await deleteFromColRef(myRef.collection('userUpdateLogs'));
+        // privateUserを削除
+        await fireStore.collection('private').doc('v1').collection('privateUsers').doc(uid).delete();
     }
 );
 exports.onFollowerCreate = functions.firestore.document(`${userPath}/followers/{followerUid}`).onCreate(
@@ -182,15 +213,33 @@ exports.onUserMutesDelete = functions.firestore.document(`${userPath}/UserMutes/
 exports.onUserUpdateLogCreate = functions.firestore.document(`${userPath}/userUpdateLogs/{id}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
+        const userRef = newValue.userRef;
         const detectedUserName = await detectText(newValue.stringUserName);
         const detectedBio = await detectText(newValue.stringBio);
         const detectedImage = await detectModerationLabels(newValue.userImageFileName);
-        await newValue.userRef.update({
+        await userRef.update({
             'bio': detectedBio,
             'userName': detectedUserName,
             'userImage': detectedImage,
         });
-        // TODO: 投稿のuserを全てUpdate
+        const user = await userRef.get();
+        const posts = await userRef.collection('public').doc('v1').collection('posts').get();
+        let postCount = 0;
+        let postBatch = fireStore.batch();
+        for (const post of posts.docs) {
+            postBatch.update({
+                "poster": user.data(),
+            })
+            postCount++;
+            if (postCount == batchLimit) {
+                await postBatch.commit();
+                postBatch = fireStore.batch();
+                postCount = 0;
+            }
+        }
+        if (postCount > 0) {
+            await postBatch.commit();
+        }
     }
 );
 
@@ -205,7 +254,34 @@ exports.onPostCreate = functions.firestore.document(postPath).onCreate(
             'title': detectedTitle,
             'iconImage': detectedIconImage,
         });
-        // TODO: タイムラインの作成
+        const posterRef = newValue.poster.ref;
+         // timelineを作成
+         const timeline = {
+            "createdAt": newValue.createdAt,
+            "isRead": false,
+            "posterUid": newValue.poster.uid,
+            "postId": newValue.postId,
+        };
+        await posterRef.collection('timelines').set(timeline);
+        // followersをget
+        const followers = await posterRef.collection("followers").get();
+        let count = 0;
+        let batch = fireStore.batch();
+        for (const follower of followers.docs) {
+            const data = follower.data();
+            // followerのtimelineを作成
+            const ref = follower.passiveUserRef.collection("timelines").doc(newValue.postId);
+            batch.set(ref,timeline);
+            count++;
+            if (count == batchLimit) {
+                await batch.commit();
+                batch = fireStore.batch();
+                count = 0;
+            }
+        }
+        if (count > 0) {
+            await batch.commit();
+        }
     }
 );
 exports.onPostLikeCreate = functions.firestore.document(`${postPath}/{postId}/postLikes/{activeUid}`).onCreate(
