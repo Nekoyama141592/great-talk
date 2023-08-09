@@ -177,7 +177,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     }, onDone: () {
       final now = Timestamp.now();
       final id = randomString();
-      messages.last = TextMessage(
+      final completedMsg = TextMessage(
         createdAt: now,
         id: id,
         messageType: MessageType.text.name,
@@ -192,9 +192,11 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
         uid: interlocutor.value!.contentId,
         updatedAt: now,
       );
+      messages.last = completedMsg;
       messages([...messages]);
-      _setValues();
       isGenerating(false);
+      _setValues();
+      _createTextMsgDoc(completedMsg); // firestoreにメッセージを追加
     }, onError: (e) {
       chatCount--; // チャット数を一つ減らす
       _setChatCount(); // チャット数を保存
@@ -206,7 +208,13 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       isGenerating(false);
     });
   }
-
+  Future<void> _createTextMsgDoc(TextMessage message) async {
+    // オリジナルコンテンツなら保存はしない
+    if (!returnIsOriginalContents(post!.typedPoster().uid)) {
+      final repository = FirestoreRepository();
+      await repository.createMessage(message.typedMessageRef(), message.toJson());
+    }
+  }
   int _getChatCount() {
     int count = prefs.getInt(PrefsKey.chatCount.name) ?? 0;
     // もし、最後のチャットから24時間経過していたらchatCountを0にして送信を許可
