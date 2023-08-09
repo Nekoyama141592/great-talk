@@ -15,5 +15,5 @@ const int oneTimeReadCount = 30;
 const int whereInLimit = 30;
 // create post
 const int maxTitleLimit = 32;
-const int maxDescriptionLimit = 2000;
+const int maxDescriptionLimit = 200;
 const int maxSystemPromptLimit = 1000;
