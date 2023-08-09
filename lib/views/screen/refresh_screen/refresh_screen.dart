@@ -37,26 +37,22 @@ class RefreshScreen extends HookWidget {
             onLoading: () => docsController.onLoading(refreshController),
             onRefresh: () => docsController.onRefresh(refreshController),
             child: child ??
-                Container(
-                  child: docsController.isUserDocs
-                      ? ListView.builder(
-                          itemCount: docsController.docs.length,
-                          itemBuilder: (c, i) {
-                            final user = PublicUser.fromJson(
-                                docsController.docs[i].data());
-                            return Obx(() =>
-                                CurrentUserController.to.isValidUser(user.uid)
-                                    ? Text(user.typedUserName().value)
-                                    : const SizedBox.shrink());
-                          })
-                      : ListView.builder(
-                          itemCount: docsController.docs.length,
-                          itemBuilder: (c, i) {
-                            final post =
-                                Post.fromJson(docsController.docs[i].data());
-                            final content = ChatContent.fromPost(post);
-                            return Obx(() => CurrentUserController.to
-                                    .isValidPost(post.postId)
+                ListView.builder(
+                    itemCount: docsController.docs.length,
+                    itemBuilder: (c, i) {
+                      if (docsController.isUserDocs) {
+                        final user =
+                            PublicUser.fromJson(docsController.docs[i].data());
+                        return Obx(() =>
+                            CurrentUserController.to.isValidUser(user.uid)
+                                ? Text(user.typedUserName().value)
+                                : const SizedBox.shrink());
+                      } else {
+                        final post =
+                            Post.fromJson(docsController.docs[i].data());
+                        final content = ChatContent.fromPost(post);
+                        return Obx(() =>
+                            CurrentUserController.to.isValidPost(post.postId)
                                 ? PostCard(
                                     chatContent: content,
                                     post: post,
@@ -64,7 +60,7 @@ class RefreshScreen extends HookWidget {
                                         '/chat/users/${content.posterUid}/posts/${content.contentId}'),
                                   )
                                 : const SizedBox.shrink());
-                          }),
-                )));
+                      }
+                    })));
   }
 }
