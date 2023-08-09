@@ -26,12 +26,23 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
 
   String? title; // titleの変数
   String? systemPrompt; // systemPromptの変数
+  String? description;
+  String? temperature;
+  String? topP;
+  String? presencePenalty;
+  String? frequencyPenalty;
+
   Uint8List? uint8list;
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height; // 高さを設定
     _deviceWidth = MediaQuery.of(context).size.width; // 幅を設定
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "投稿を作成",
+        ),
+      ),
       body: SafeArea(
           child: Container(
         padding: EdgeInsets.symmetric(horizontal: _deviceWidth! * 0.05),
@@ -43,7 +54,6 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _titleWidget(),
                 _createPostForm(),
                 _image(),
                 _createPostButton(),
@@ -55,28 +65,27 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
     );
   }
 
-  // タイトル関数
-  Widget _titleWidget() {
-    return const Text(
-      "投稿を作成",
-      style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
-    );
-  }
-
   // 入力フォーム関数
   Widget _createPostForm() {
     return SizedBox(
-      height: _deviceHeight! * 0.30,
+      height: _deviceHeight! * 0.50,
       child: Form(
           key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _titleTextField(),
-              _systemPromptTextField(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _systemPromptTextField(),
+                _titleTextField(),
+                _descriptionTextField(),
+                _temperatureNumberField(),
+                _topPNumberField(),
+                _presencePenaltyNumberField(),
+                _frequencyPenaltyNumberField()
+              ],
+            ),
           )),
     );
   }
@@ -94,10 +103,26 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
     );
   }
 
+  // description入力をする関数
+  Widget _descriptionTextField() {
+    return TextFormField(
+      // minLines: 3,
+      keyboardType: TextInputType.multiline,
+      decoration: const InputDecoration(hintText: "説明/使い方"),
+      onSaved: (value) {
+        setState(() {
+          title = value;
+        });
+      },
+      validator: (value) => value!.isEmpty ? "入力を行ってください" : null,
+    );
+  }
+
   // systemPrompt入力をする関数
   Widget _systemPromptTextField() {
     return TextFormField(
-      obscureText: true, // パスワードを隠す
+      // minLines: 3,
+      keyboardType: TextInputType.multiline,
       decoration: const InputDecoration(hintText: "システムプロンプト"),
       onSaved: (value) {
         setState(() {
@@ -105,6 +130,66 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
         });
       },
       validator: (value) => value!.isEmpty ? "入力を行ってください" : null,
+    );
+  }
+
+  // temperature入力をする関数
+  Widget _temperatureNumberField() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      decoration: const InputDecoration(hintText: "temperature(任意)"),
+      onSaved: (value) {
+        setState(() {
+          temperature = value;
+        });
+      },
+      validator: (value) =>
+          double.tryParse(value!) == null ? "数字を入力してください" : null,
+    );
+  }
+
+  // topP入力をする関数
+  Widget _topPNumberField() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      decoration: const InputDecoration(hintText: "topP(任意)"),
+      onSaved: (value) {
+        setState(() {
+          topP = value;
+        });
+      },
+      validator: (value) =>
+          double.tryParse(value!) == null ? "数字を入力してください" : null,
+    );
+  }
+
+  // topP入力をする関数
+  Widget _presencePenaltyNumberField() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      decoration: const InputDecoration(hintText: "presencePenalty(任意)"),
+      onSaved: (value) {
+        setState(() {
+          presencePenalty = value;
+        });
+      },
+      validator: (value) =>
+          double.tryParse(value!) == null ? "数字を入力してください" : null,
+    );
+  }
+
+  // topP入力をする関数
+  Widget _frequencyPenaltyNumberField() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      decoration: const InputDecoration(hintText: "frequencyPenalty(任意)"),
+      onSaved: (value) {
+        setState(() {
+          topP = value;
+        });
+      },
+      validator: (value) =>
+          double.tryParse(value!) == null ? "数字を入力してください" : null,
     );
   }
 

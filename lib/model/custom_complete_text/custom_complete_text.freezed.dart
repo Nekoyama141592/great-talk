@@ -23,14 +23,9 @@ mixin _$CustomCompleteText {
   String get systemPrompt => throw _privateConstructorUsedError;
   double? get temperature => throw _privateConstructorUsedError;
   double? get topP => throw _privateConstructorUsedError;
-  int? get n => throw _privateConstructorUsedError;
-  bool? get stream => throw _privateConstructorUsedError;
-  List<String>? get stop => throw _privateConstructorUsedError;
-  int? get maxToken => throw _privateConstructorUsedError;
   double? get presencePenalty => throw _privateConstructorUsedError;
   double? get frequencyPenalty => throw _privateConstructorUsedError;
   List<SDMap>? get functions => throw _privateConstructorUsedError;
-  String? get functionCall => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,14 +43,9 @@ abstract class $CustomCompleteTextCopyWith<$Res> {
       {String systemPrompt,
       double? temperature,
       double? topP,
-      int? n,
-      bool? stream,
-      List<String>? stop,
-      int? maxToken,
       double? presencePenalty,
       double? frequencyPenalty,
-      List<SDMap>? functions,
-      String? functionCall});
+      List<SDMap>? functions});
 }
 
 /// @nodoc
@@ -74,14 +64,9 @@ class _$CustomCompleteTextCopyWithImpl<$Res, $Val extends CustomCompleteText>
     Object? systemPrompt = null,
     Object? temperature = freezed,
     Object? topP = freezed,
-    Object? n = freezed,
-    Object? stream = freezed,
-    Object? stop = freezed,
-    Object? maxToken = freezed,
     Object? presencePenalty = freezed,
     Object? frequencyPenalty = freezed,
     Object? functions = freezed,
-    Object? functionCall = freezed,
   }) {
     return _then(_value.copyWith(
       systemPrompt: null == systemPrompt
@@ -96,22 +81,6 @@ class _$CustomCompleteTextCopyWithImpl<$Res, $Val extends CustomCompleteText>
           ? _value.topP
           : topP // ignore: cast_nullable_to_non_nullable
               as double?,
-      n: freezed == n
-          ? _value.n
-          : n // ignore: cast_nullable_to_non_nullable
-              as int?,
-      stream: freezed == stream
-          ? _value.stream
-          : stream // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      stop: freezed == stop
-          ? _value.stop
-          : stop // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      maxToken: freezed == maxToken
-          ? _value.maxToken
-          : maxToken // ignore: cast_nullable_to_non_nullable
-              as int?,
       presencePenalty: freezed == presencePenalty
           ? _value.presencePenalty
           : presencePenalty // ignore: cast_nullable_to_non_nullable
@@ -124,10 +93,6 @@ class _$CustomCompleteTextCopyWithImpl<$Res, $Val extends CustomCompleteText>
           ? _value.functions
           : functions // ignore: cast_nullable_to_non_nullable
               as List<SDMap>?,
-      functionCall: freezed == functionCall
-          ? _value.functionCall
-          : functionCall // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -144,14 +109,9 @@ abstract class _$$_CustomCompleteTextCopyWith<$Res>
       {String systemPrompt,
       double? temperature,
       double? topP,
-      int? n,
-      bool? stream,
-      List<String>? stop,
-      int? maxToken,
       double? presencePenalty,
       double? frequencyPenalty,
-      List<SDMap>? functions,
-      String? functionCall});
+      List<SDMap>? functions});
 }
 
 /// @nodoc
@@ -168,14 +128,9 @@ class __$$_CustomCompleteTextCopyWithImpl<$Res>
     Object? systemPrompt = null,
     Object? temperature = freezed,
     Object? topP = freezed,
-    Object? n = freezed,
-    Object? stream = freezed,
-    Object? stop = freezed,
-    Object? maxToken = freezed,
     Object? presencePenalty = freezed,
     Object? frequencyPenalty = freezed,
     Object? functions = freezed,
-    Object? functionCall = freezed,
   }) {
     return _then(_$_CustomCompleteText(
       systemPrompt: null == systemPrompt
@@ -190,22 +145,6 @@ class __$$_CustomCompleteTextCopyWithImpl<$Res>
           ? _value.topP
           : topP // ignore: cast_nullable_to_non_nullable
               as double?,
-      n: freezed == n
-          ? _value.n
-          : n // ignore: cast_nullable_to_non_nullable
-              as int?,
-      stream: freezed == stream
-          ? _value.stream
-          : stream // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      stop: freezed == stop
-          ? _value._stop
-          : stop // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      maxToken: freezed == maxToken
-          ? _value.maxToken
-          : maxToken // ignore: cast_nullable_to_non_nullable
-              as int?,
       presencePenalty: freezed == presencePenalty
           ? _value.presencePenalty
           : presencePenalty // ignore: cast_nullable_to_non_nullable
@@ -218,10 +157,6 @@ class __$$_CustomCompleteTextCopyWithImpl<$Res>
           ? _value._functions
           : functions // ignore: cast_nullable_to_non_nullable
               as List<SDMap>?,
-      functionCall: freezed == functionCall
-          ? _value.functionCall
-          : functionCall // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -233,16 +168,10 @@ class _$_CustomCompleteText extends _CustomCompleteText {
       {required this.systemPrompt,
       this.temperature,
       this.topP,
-      this.n,
-      this.stream,
-      final List<String>? stop,
-      this.maxToken,
       this.presencePenalty,
       this.frequencyPenalty,
-      final List<SDMap>? functions,
-      this.functionCall})
-      : _stop = stop,
-        _functions = functions,
+      final List<SDMap>? functions})
+      : _functions = functions,
         super._();
 
   factory _$_CustomCompleteText.fromJson(Map<String, dynamic> json) =>
@@ -254,22 +183,6 @@ class _$_CustomCompleteText extends _CustomCompleteText {
   final double? temperature;
   @override
   final double? topP;
-  @override
-  final int? n;
-  @override
-  final bool? stream;
-  final List<String>? _stop;
-  @override
-  List<String>? get stop {
-    final value = _stop;
-    if (value == null) return null;
-    if (_stop is EqualUnmodifiableListView) return _stop;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  @override
-  final int? maxToken;
   @override
   final double? presencePenalty;
   @override
@@ -285,11 +198,8 @@ class _$_CustomCompleteText extends _CustomCompleteText {
   }
 
   @override
-  final String? functionCall;
-
-  @override
   String toString() {
-    return 'CustomCompleteText(systemPrompt: $systemPrompt, temperature: $temperature, topP: $topP, n: $n, stream: $stream, stop: $stop, maxToken: $maxToken, presencePenalty: $presencePenalty, frequencyPenalty: $frequencyPenalty, functions: $functions, functionCall: $functionCall)';
+    return 'CustomCompleteText(systemPrompt: $systemPrompt, temperature: $temperature, topP: $topP, presencePenalty: $presencePenalty, frequencyPenalty: $frequencyPenalty, functions: $functions)';
   }
 
   @override
@@ -302,19 +212,12 @@ class _$_CustomCompleteText extends _CustomCompleteText {
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
             (identical(other.topP, topP) || other.topP == topP) &&
-            (identical(other.n, n) || other.n == n) &&
-            (identical(other.stream, stream) || other.stream == stream) &&
-            const DeepCollectionEquality().equals(other._stop, _stop) &&
-            (identical(other.maxToken, maxToken) ||
-                other.maxToken == maxToken) &&
             (identical(other.presencePenalty, presencePenalty) ||
                 other.presencePenalty == presencePenalty) &&
             (identical(other.frequencyPenalty, frequencyPenalty) ||
                 other.frequencyPenalty == frequencyPenalty) &&
             const DeepCollectionEquality()
-                .equals(other._functions, _functions) &&
-            (identical(other.functionCall, functionCall) ||
-                other.functionCall == functionCall));
+                .equals(other._functions, _functions));
   }
 
   @JsonKey(ignore: true)
@@ -324,14 +227,9 @@ class _$_CustomCompleteText extends _CustomCompleteText {
       systemPrompt,
       temperature,
       topP,
-      n,
-      stream,
-      const DeepCollectionEquality().hash(_stop),
-      maxToken,
       presencePenalty,
       frequencyPenalty,
-      const DeepCollectionEquality().hash(_functions),
-      functionCall);
+      const DeepCollectionEquality().hash(_functions));
 
   @JsonKey(ignore: true)
   @override
@@ -353,14 +251,9 @@ abstract class _CustomCompleteText extends CustomCompleteText {
       {required final String systemPrompt,
       final double? temperature,
       final double? topP,
-      final int? n,
-      final bool? stream,
-      final List<String>? stop,
-      final int? maxToken,
       final double? presencePenalty,
       final double? frequencyPenalty,
-      final List<SDMap>? functions,
-      final String? functionCall}) = _$_CustomCompleteText;
+      final List<SDMap>? functions}) = _$_CustomCompleteText;
   const _CustomCompleteText._() : super._();
 
   factory _CustomCompleteText.fromJson(Map<String, dynamic> json) =
@@ -373,21 +266,11 @@ abstract class _CustomCompleteText extends CustomCompleteText {
   @override
   double? get topP;
   @override
-  int? get n;
-  @override
-  bool? get stream;
-  @override
-  List<String>? get stop;
-  @override
-  int? get maxToken;
-  @override
   double? get presencePenalty;
   @override
   double? get frequencyPenalty;
   @override
   List<SDMap>? get functions;
-  @override
-  String? get functionCall;
   @override
   @JsonKey(ignore: true)
   _$$_CustomCompleteTextCopyWith<_$_CustomCompleteText> get copyWith =>

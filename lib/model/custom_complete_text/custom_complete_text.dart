@@ -11,7 +11,6 @@ abstract class CustomCompleteText implements _$CustomCompleteText {
     required String systemPrompt,
     double? temperature,
     double? topP,
-    List<String>? stop,
     double? presencePenalty,
     double? frequencyPenalty,
     List<SDMap>? functions,
