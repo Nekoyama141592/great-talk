@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/maps.dart';
+import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
@@ -31,7 +32,7 @@ final List<PublicUser> mockUsers = [
     muteCount: 0,
     postCount: 0,
     links: [],
-    ref: FirebaseFirestore.instance.collection("users").doc("a"),
+    ref: FirestoreQueries.userDocRef("a"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("佐藤 めぐみ"),
@@ -72,7 +73,7 @@ final List<PublicUser> mockUsers = [
     muteCount: 0,
     postCount: 0,
     links: [],
-    ref: FirebaseFirestore.instance.collection("users").doc("b"),
+    ref: FirestoreQueries.userDocRef("b"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("田中 久美"),
@@ -113,7 +114,7 @@ final List<PublicUser> mockUsers = [
     muteCount: 0,
     postCount: 0,
     links: [],
-    ref: FirebaseFirestore.instance.collection("users").doc("c"),
+    ref: FirestoreQueries.userDocRef("c"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("山岸 愛"),
@@ -154,7 +155,7 @@ final List<PublicUser> mockUsers = [
     muteCount: 0,
     postCount: 0,
     links: [],
-    ref: FirebaseFirestore.instance.collection("users").doc("d"),
+    ref: FirestoreQueries.userDocRef("d"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("森 遥"),
@@ -195,7 +196,7 @@ final List<PublicUser> mockUsers = [
     muteCount: 0,
     postCount: 0,
     links: [],
-    ref: FirebaseFirestore.instance.collection("users").doc("e"),
+    ref: FirestoreQueries.userDocRef("e"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("橋本 美奈"),
@@ -236,7 +237,7 @@ final List<PublicUser> mockUsers = [
     muteCount: 0,
     postCount: 0,
     links: [],
-    ref: FirebaseFirestore.instance.collection("users").doc("f"),
+    ref: FirestoreQueries.userDocRef("f"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken("遠藤 俊夫"),
@@ -277,7 +278,7 @@ final List<PublicUser> mockUsers = [
     muteCount: 0,
     postCount: 0,
     links: [],
-    ref: FirebaseFirestore.instance.collection("users").doc("g"),
+    ref: FirestoreQueries.userDocRef("g"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken(
@@ -320,7 +321,7 @@ final List<PublicUser> mockUsers = [
     muteCount: 0,
     postCount: 0,
     links: [],
-    ref: FirebaseFirestore.instance.collection("users").doc("h"),
+    ref: FirestoreQueries.userDocRef("h"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken(
@@ -363,7 +364,7 @@ final List<PublicUser> mockUsers = [
     muteCount: 0,
     postCount: 0,
     links: [],
-    ref: FirebaseFirestore.instance.collection("users").doc("i"),
+    ref: FirestoreQueries.userDocRef("i"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken(
@@ -406,7 +407,7 @@ final List<PublicUser> mockUsers = [
     muteCount: 0,
     postCount: 0,
     links: [],
-    ref: FirebaseFirestore.instance.collection("users").doc("j"),
+    ref: FirestoreQueries.userDocRef("j"),
     reportCount: 0,
     score: 0,
     searchToken: returnSearchToken(
@@ -506,7 +507,7 @@ final List<Post> mockPosts = [
               negativeScore: 0.0,
               positiveScore: 0.0,
               sentiment: '',
-              value: '原稿作成くん')
+              value: '原稿作成くん"')
           .toJson(),
       updatedAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
       userCount: 0),

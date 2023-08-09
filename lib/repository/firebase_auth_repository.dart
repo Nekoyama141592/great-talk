@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/infrastructure/firebase_auth/firebase_auth_client.dart';
@@ -48,9 +47,6 @@ class FirebaseAuthRepository {
     } catch (e) {
       debugPrint(e.toString());
       result = const Result.failure();
-      FirebaseFirestore.instance.collection('googleSigninErrors').doc().set({
-        "error": e.toString(),
-      });
     }
     return result;
   }

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -16,10 +15,6 @@ class PurchasesRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
-      FirebaseFirestore.instance
-          .collection("purchaseErrors")
-          .doc()
-          .set({"error": e.toString()});
       return const Result.failure();
     }
   }
