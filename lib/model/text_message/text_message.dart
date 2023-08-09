@@ -15,6 +15,7 @@ abstract class TextMessage implements _$TextMessage {
       required String id,
       required String messageType,
       required dynamic messageRef,
+      required dynamic postRef,
       required String uid,
       required dynamic updatedAt,
       required DetectedText text}) = _TextMessage;
@@ -25,6 +26,7 @@ abstract class TextMessage implements _$TextMessage {
       id: stm.id,
       messageType: stm.messageType,
       messageRef: stm.messageRef,
+      postRef: stm.postRef,
       uid: stm.uid,
       updatedAt: Timestamp.fromDate(stm.updatedAt),
       text: stm.text);

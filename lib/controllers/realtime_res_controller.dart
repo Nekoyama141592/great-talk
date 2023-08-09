@@ -140,6 +140,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       id: id,
       messageType: MessageType.text.name,
       messageRef: FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
+      postRef: FirestoreQueries.userPostRef(currentUid(), post!.postId),
       text: const DetectedText(
           languageCode: '',
           negativeScore: 0.0,
@@ -181,6 +182,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
         id: id,
         messageType: MessageType.text.name,
         messageRef: FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
+        postRef: FirestoreQueries.userPostRef(currentUid(), post!.postId),
         text: DetectedText(
             languageCode: '',
             negativeScore: 0.0,
@@ -275,6 +277,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       id: id,
       messageType: MessageType.text.name,
       messageRef: FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
+      postRef: FirestoreQueries.userPostRef(currentUid(), post!.postId),
       text: DetectedText(
           languageCode: '',
           negativeScore: 0.0,

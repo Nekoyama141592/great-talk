@@ -24,6 +24,7 @@ mixin _$SaveTextMsg {
   String get id => throw _privateConstructorUsedError;
   String get messageType => throw _privateConstructorUsedError;
   dynamic get messageRef => throw _privateConstructorUsedError;
+  dynamic get postRef => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
   DetectedText get text => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $SaveTextMsgCopyWith<$Res> {
       String id,
       String messageType,
       dynamic messageRef,
+      dynamic postRef,
       String uid,
       DateTime updatedAt,
       DetectedText text});
@@ -69,6 +71,7 @@ class _$SaveTextMsgCopyWithImpl<$Res, $Val extends SaveTextMsg>
     Object? id = null,
     Object? messageType = null,
     Object? messageRef = freezed,
+    Object? postRef = freezed,
     Object? uid = null,
     Object? updatedAt = null,
     Object? text = null,
@@ -89,6 +92,10 @@ class _$SaveTextMsgCopyWithImpl<$Res, $Val extends SaveTextMsg>
       messageRef: freezed == messageRef
           ? _value.messageRef
           : messageRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      postRef: freezed == postRef
+          ? _value.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
       uid: null == uid
           ? _value.uid
@@ -127,6 +134,7 @@ abstract class _$$_SaveTextMsgCopyWith<$Res>
       String id,
       String messageType,
       dynamic messageRef,
+      dynamic postRef,
       String uid,
       DateTime updatedAt,
       DetectedText text});
@@ -150,6 +158,7 @@ class __$$_SaveTextMsgCopyWithImpl<$Res>
     Object? id = null,
     Object? messageType = null,
     Object? messageRef = freezed,
+    Object? postRef = freezed,
     Object? uid = null,
     Object? updatedAt = null,
     Object? text = null,
@@ -170,6 +179,10 @@ class __$$_SaveTextMsgCopyWithImpl<$Res>
       messageRef: freezed == messageRef
           ? _value.messageRef
           : messageRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      postRef: freezed == postRef
+          ? _value.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
       uid: null == uid
           ? _value.uid
@@ -195,6 +208,7 @@ class _$_SaveTextMsg extends _SaveTextMsg {
       required this.id,
       required this.messageType,
       required this.messageRef,
+      required this.postRef,
       required this.uid,
       required this.updatedAt,
       required this.text})
@@ -212,6 +226,8 @@ class _$_SaveTextMsg extends _SaveTextMsg {
   @override
   final dynamic messageRef;
   @override
+  final dynamic postRef;
+  @override
   final String uid;
   @override
   final DateTime updatedAt;
@@ -220,7 +236,7 @@ class _$_SaveTextMsg extends _SaveTextMsg {
 
   @override
   String toString() {
-    return 'SaveTextMsg(createdAt: $createdAt, id: $id, messageType: $messageType, messageRef: $messageRef, uid: $uid, updatedAt: $updatedAt, text: $text)';
+    return 'SaveTextMsg(createdAt: $createdAt, id: $id, messageType: $messageType, messageRef: $messageRef, postRef: $postRef, uid: $uid, updatedAt: $updatedAt, text: $text)';
   }
 
   @override
@@ -235,6 +251,7 @@ class _$_SaveTextMsg extends _SaveTextMsg {
                 other.messageType == messageType) &&
             const DeepCollectionEquality()
                 .equals(other.messageRef, messageRef) &&
+            const DeepCollectionEquality().equals(other.postRef, postRef) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
@@ -243,8 +260,16 @@ class _$_SaveTextMsg extends _SaveTextMsg {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, createdAt, id, messageType,
-      const DeepCollectionEquality().hash(messageRef), uid, updatedAt, text);
+  int get hashCode => Object.hash(
+      runtimeType,
+      createdAt,
+      id,
+      messageType,
+      const DeepCollectionEquality().hash(messageRef),
+      const DeepCollectionEquality().hash(postRef),
+      uid,
+      updatedAt,
+      text);
 
   @JsonKey(ignore: true)
   @override
@@ -266,6 +291,7 @@ abstract class _SaveTextMsg extends SaveTextMsg {
       required final String id,
       required final String messageType,
       required final dynamic messageRef,
+      required final dynamic postRef,
       required final String uid,
       required final DateTime updatedAt,
       required final DetectedText text}) = _$_SaveTextMsg;
@@ -282,6 +308,8 @@ abstract class _SaveTextMsg extends SaveTextMsg {
   String get messageType;
   @override
   dynamic get messageRef;
+  @override
+  dynamic get postRef;
   @override
   String get uid;
   @override
