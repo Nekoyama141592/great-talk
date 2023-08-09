@@ -7,6 +7,7 @@ part 'user_mute.g.dart';
 abstract class UserMute implements _$UserMute {
   const factory UserMute(
       {required String activeUid,
+      required dynamic activeUserRef,
       required dynamic createdAt,
       required String passiveUid,
       required dynamic passiveUserRef}) = _UserMute;

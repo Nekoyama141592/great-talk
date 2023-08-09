@@ -21,6 +21,7 @@ UserMute _$UserMuteFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserMute {
   String get activeUid => throw _privateConstructorUsedError;
+  dynamic get activeUserRef => throw _privateConstructorUsedError;
   dynamic get createdAt => throw _privateConstructorUsedError;
   String get passiveUid => throw _privateConstructorUsedError;
   dynamic get passiveUserRef => throw _privateConstructorUsedError;
@@ -38,6 +39,7 @@ abstract class $UserMuteCopyWith<$Res> {
   @useResult
   $Res call(
       {String activeUid,
+      dynamic activeUserRef,
       dynamic createdAt,
       String passiveUid,
       dynamic passiveUserRef});
@@ -57,6 +59,7 @@ class _$UserMuteCopyWithImpl<$Res, $Val extends UserMute>
   @override
   $Res call({
     Object? activeUid = null,
+    Object? activeUserRef = freezed,
     Object? createdAt = freezed,
     Object? passiveUid = null,
     Object? passiveUserRef = freezed,
@@ -66,6 +69,10 @@ class _$UserMuteCopyWithImpl<$Res, $Val extends UserMute>
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
+      activeUserRef: freezed == activeUserRef
+          ? _value.activeUserRef
+          : activeUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -91,6 +98,7 @@ abstract class _$$_UserMuteCopyWith<$Res> implements $UserMuteCopyWith<$Res> {
   @useResult
   $Res call(
       {String activeUid,
+      dynamic activeUserRef,
       dynamic createdAt,
       String passiveUid,
       dynamic passiveUserRef});
@@ -108,6 +116,7 @@ class __$$_UserMuteCopyWithImpl<$Res>
   @override
   $Res call({
     Object? activeUid = null,
+    Object? activeUserRef = freezed,
     Object? createdAt = freezed,
     Object? passiveUid = null,
     Object? passiveUserRef = freezed,
@@ -117,6 +126,10 @@ class __$$_UserMuteCopyWithImpl<$Res>
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
+      activeUserRef: freezed == activeUserRef
+          ? _value.activeUserRef
+          : activeUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -138,6 +151,7 @@ class __$$_UserMuteCopyWithImpl<$Res>
 class _$_UserMute implements _UserMute {
   const _$_UserMute(
       {required this.activeUid,
+      required this.activeUserRef,
       required this.createdAt,
       required this.passiveUid,
       required this.passiveUserRef});
@@ -148,6 +162,8 @@ class _$_UserMute implements _UserMute {
   @override
   final String activeUid;
   @override
+  final dynamic activeUserRef;
+  @override
   final dynamic createdAt;
   @override
   final String passiveUid;
@@ -156,7 +172,7 @@ class _$_UserMute implements _UserMute {
 
   @override
   String toString() {
-    return 'UserMute(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef)';
+    return 'UserMute(activeUid: $activeUid, activeUserRef: $activeUserRef, createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef)';
   }
 
   @override
@@ -166,6 +182,8 @@ class _$_UserMute implements _UserMute {
             other is _$_UserMute &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
+            const DeepCollectionEquality()
+                .equals(other.activeUserRef, activeUserRef) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.passiveUid, passiveUid) ||
                 other.passiveUid == passiveUid) &&
@@ -178,6 +196,7 @@ class _$_UserMute implements _UserMute {
   int get hashCode => Object.hash(
       runtimeType,
       activeUid,
+      const DeepCollectionEquality().hash(activeUserRef),
       const DeepCollectionEquality().hash(createdAt),
       passiveUid,
       const DeepCollectionEquality().hash(passiveUserRef));
@@ -199,6 +218,7 @@ class _$_UserMute implements _UserMute {
 abstract class _UserMute implements UserMute {
   const factory _UserMute(
       {required final String activeUid,
+      required final dynamic activeUserRef,
       required final dynamic createdAt,
       required final String passiveUid,
       required final dynamic passiveUserRef}) = _$_UserMute;
@@ -207,6 +227,8 @@ abstract class _UserMute implements UserMute {
 
   @override
   String get activeUid;
+  @override
+  dynamic get activeUserRef;
   @override
   dynamic get createdAt;
   @override

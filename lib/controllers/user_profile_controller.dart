@@ -29,7 +29,9 @@ class UserProfileController extends ProfileController {
         currentUid(), tokenId, followingToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
     final follower = Follower(
-        createdAt: now, followedUid: passiveUid(), followerUid: currentUid());
+        activeUserRef: CurrentUserController.to.publicUser.value!.typedRef(),
+        createdAt: now,
+        passiveUserRef: passiveUser.value!.typedRef());
     await repository.createFollower(
         currentUid(), passiveUid(), follower.toJson());
   }

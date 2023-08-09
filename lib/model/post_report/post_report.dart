@@ -8,8 +8,10 @@ part 'post_report.g.dart';
 abstract class PostReport implements _$PostReport {
   const factory PostReport(
       {required String activeUid,
+      required dynamic activeUserRef,
       required dynamic createdAt,
       required String others,
+      required dynamic postRef,
       required List<String> reportContents,
       required Post post}) = _PostReport;
   factory PostReport.fromJson(Map<String, dynamic> json) =>

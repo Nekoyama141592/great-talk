@@ -28,8 +28,7 @@ class FirestoreQueries {
     if (followingUids.isEmpty) {
       followingUids.add("");
     }
-    return postsQuery
-        .where('poster.uid', whereIn: followingUids);
+    return postsQuery.where('poster.uid', whereIn: followingUids);
   }
 
   static MapQuery postsQueryByWhereIn(List<String> postIds) =>

@@ -107,6 +107,7 @@ class PostsController extends GetxController with CurrentUserMixin {
         tokenType: TokenType.muteUser.name);
     await repository.createToken(currentUid(), tokenId, muteUserToken.toJson());
     final UserMute userMute = UserMute(
+        activeUserRef: CurrentUserController.to.publicUser.value!.typedRef(),
         activeUid: currentUid(),
         createdAt: now,
         passiveUid: passiveUid,
@@ -120,9 +121,11 @@ class PostsController extends GetxController with CurrentUserMixin {
 
   Future<void> createPostReport(Post post) async {
     final PostReport postReport = PostReport(
+        activeUserRef: CurrentUserController.to.publicUser.value!.typedRef(),
         activeUid: currentUid(),
         createdAt: Timestamp.now(),
         others: others.value,
+        postRef: post.typedRef(),
         reportContents: reportContents,
         post: post);
     final result =

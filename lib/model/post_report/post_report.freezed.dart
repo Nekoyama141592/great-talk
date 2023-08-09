@@ -21,8 +21,10 @@ PostReport _$PostReportFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PostReport {
   String get activeUid => throw _privateConstructorUsedError;
+  dynamic get activeUserRef => throw _privateConstructorUsedError;
   dynamic get createdAt => throw _privateConstructorUsedError;
   String get others => throw _privateConstructorUsedError;
+  dynamic get postRef => throw _privateConstructorUsedError;
   List<String> get reportContents => throw _privateConstructorUsedError;
   Post get post => throw _privateConstructorUsedError;
 
@@ -40,8 +42,10 @@ abstract class $PostReportCopyWith<$Res> {
   @useResult
   $Res call(
       {String activeUid,
+      dynamic activeUserRef,
       dynamic createdAt,
       String others,
+      dynamic postRef,
       List<String> reportContents,
       Post post});
 
@@ -62,8 +66,10 @@ class _$PostReportCopyWithImpl<$Res, $Val extends PostReport>
   @override
   $Res call({
     Object? activeUid = null,
+    Object? activeUserRef = freezed,
     Object? createdAt = freezed,
     Object? others = null,
+    Object? postRef = freezed,
     Object? reportContents = null,
     Object? post = null,
   }) {
@@ -72,6 +78,10 @@ class _$PostReportCopyWithImpl<$Res, $Val extends PostReport>
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
+      activeUserRef: freezed == activeUserRef
+          ? _value.activeUserRef
+          : activeUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -80,6 +90,10 @@ class _$PostReportCopyWithImpl<$Res, $Val extends PostReport>
           ? _value.others
           : others // ignore: cast_nullable_to_non_nullable
               as String,
+      postRef: freezed == postRef
+          ? _value.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       reportContents: null == reportContents
           ? _value.reportContents
           : reportContents // ignore: cast_nullable_to_non_nullable
@@ -110,8 +124,10 @@ abstract class _$$_PostReportCopyWith<$Res>
   @useResult
   $Res call(
       {String activeUid,
+      dynamic activeUserRef,
       dynamic createdAt,
       String others,
+      dynamic postRef,
       List<String> reportContents,
       Post post});
 
@@ -131,8 +147,10 @@ class __$$_PostReportCopyWithImpl<$Res>
   @override
   $Res call({
     Object? activeUid = null,
+    Object? activeUserRef = freezed,
     Object? createdAt = freezed,
     Object? others = null,
+    Object? postRef = freezed,
     Object? reportContents = null,
     Object? post = null,
   }) {
@@ -141,6 +159,10 @@ class __$$_PostReportCopyWithImpl<$Res>
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
+      activeUserRef: freezed == activeUserRef
+          ? _value.activeUserRef
+          : activeUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -149,6 +171,10 @@ class __$$_PostReportCopyWithImpl<$Res>
           ? _value.others
           : others // ignore: cast_nullable_to_non_nullable
               as String,
+      postRef: freezed == postRef
+          ? _value.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       reportContents: null == reportContents
           ? _value._reportContents
           : reportContents // ignore: cast_nullable_to_non_nullable
@@ -166,8 +192,10 @@ class __$$_PostReportCopyWithImpl<$Res>
 class _$_PostReport implements _PostReport {
   const _$_PostReport(
       {required this.activeUid,
+      required this.activeUserRef,
       required this.createdAt,
       required this.others,
+      required this.postRef,
       required final List<String> reportContents,
       required this.post})
       : _reportContents = reportContents;
@@ -178,9 +206,13 @@ class _$_PostReport implements _PostReport {
   @override
   final String activeUid;
   @override
+  final dynamic activeUserRef;
+  @override
   final dynamic createdAt;
   @override
   final String others;
+  @override
+  final dynamic postRef;
   final List<String> _reportContents;
   @override
   List<String> get reportContents {
@@ -194,7 +226,7 @@ class _$_PostReport implements _PostReport {
 
   @override
   String toString() {
-    return 'PostReport(activeUid: $activeUid, createdAt: $createdAt, others: $others, reportContents: $reportContents, post: $post)';
+    return 'PostReport(activeUid: $activeUid, activeUserRef: $activeUserRef, createdAt: $createdAt, others: $others, postRef: $postRef, reportContents: $reportContents, post: $post)';
   }
 
   @override
@@ -204,8 +236,11 @@ class _$_PostReport implements _PostReport {
             other is _$_PostReport &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
+            const DeepCollectionEquality()
+                .equals(other.activeUserRef, activeUserRef) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.others, others) || other.others == others) &&
+            const DeepCollectionEquality().equals(other.postRef, postRef) &&
             const DeepCollectionEquality()
                 .equals(other._reportContents, _reportContents) &&
             (identical(other.post, post) || other.post == post));
@@ -216,8 +251,10 @@ class _$_PostReport implements _PostReport {
   int get hashCode => Object.hash(
       runtimeType,
       activeUid,
+      const DeepCollectionEquality().hash(activeUserRef),
       const DeepCollectionEquality().hash(createdAt),
       others,
+      const DeepCollectionEquality().hash(postRef),
       const DeepCollectionEquality().hash(_reportContents),
       post);
 
@@ -238,8 +275,10 @@ class _$_PostReport implements _PostReport {
 abstract class _PostReport implements PostReport {
   const factory _PostReport(
       {required final String activeUid,
+      required final dynamic activeUserRef,
       required final dynamic createdAt,
       required final String others,
+      required final dynamic postRef,
       required final List<String> reportContents,
       required final Post post}) = _$_PostReport;
 
@@ -249,9 +288,13 @@ abstract class _PostReport implements PostReport {
   @override
   String get activeUid;
   @override
+  dynamic get activeUserRef;
+  @override
   dynamic get createdAt;
   @override
   String get others;
+  @override
+  dynamic get postRef;
   @override
   List<String> get reportContents;
   @override

@@ -20,9 +20,9 @@ Follower _$FollowerFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Follower {
+  dynamic get activeUserRef => throw _privateConstructorUsedError;
   dynamic get createdAt => throw _privateConstructorUsedError;
-  String get followedUid => throw _privateConstructorUsedError;
-  String get followerUid => throw _privateConstructorUsedError;
+  dynamic get passiveUserRef => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $FollowerCopyWith<$Res> {
   factory $FollowerCopyWith(Follower value, $Res Function(Follower) then) =
       _$FollowerCopyWithImpl<$Res, Follower>;
   @useResult
-  $Res call({dynamic createdAt, String followedUid, String followerUid});
+  $Res call({dynamic activeUserRef, dynamic createdAt, dynamic passiveUserRef});
 }
 
 /// @nodoc
@@ -51,23 +51,23 @@ class _$FollowerCopyWithImpl<$Res, $Val extends Follower>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? activeUserRef = freezed,
     Object? createdAt = freezed,
-    Object? followedUid = null,
-    Object? followerUid = null,
+    Object? passiveUserRef = freezed,
   }) {
     return _then(_value.copyWith(
+      activeUserRef: freezed == activeUserRef
+          ? _value.activeUserRef
+          : activeUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      followedUid: null == followedUid
-          ? _value.followedUid
-          : followedUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      followerUid: null == followerUid
-          ? _value.followerUid
-          : followerUid // ignore: cast_nullable_to_non_nullable
-              as String,
+      passiveUserRef: freezed == passiveUserRef
+          ? _value.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -79,7 +79,7 @@ abstract class _$$_FollowerCopyWith<$Res> implements $FollowerCopyWith<$Res> {
       __$$_FollowerCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({dynamic createdAt, String followedUid, String followerUid});
+  $Res call({dynamic activeUserRef, dynamic createdAt, dynamic passiveUserRef});
 }
 
 /// @nodoc
@@ -93,23 +93,23 @@ class __$$_FollowerCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? activeUserRef = freezed,
     Object? createdAt = freezed,
-    Object? followedUid = null,
-    Object? followerUid = null,
+    Object? passiveUserRef = freezed,
   }) {
     return _then(_$_Follower(
+      activeUserRef: freezed == activeUserRef
+          ? _value.activeUserRef
+          : activeUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      followedUid: null == followedUid
-          ? _value.followedUid
-          : followedUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      followerUid: null == followerUid
-          ? _value.followerUid
-          : followerUid // ignore: cast_nullable_to_non_nullable
-              as String,
+      passiveUserRef: freezed == passiveUserRef
+          ? _value.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -118,24 +118,24 @@ class __$$_FollowerCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Follower extends _Follower {
   const _$_Follower(
-      {required this.createdAt,
-      required this.followedUid,
-      required this.followerUid})
+      {required this.activeUserRef,
+      required this.createdAt,
+      required this.passiveUserRef})
       : super._();
 
   factory _$_Follower.fromJson(Map<String, dynamic> json) =>
       _$$_FollowerFromJson(json);
 
   @override
+  final dynamic activeUserRef;
+  @override
   final dynamic createdAt;
   @override
-  final String followedUid;
-  @override
-  final String followerUid;
+  final dynamic passiveUserRef;
 
   @override
   String toString() {
-    return 'Follower(createdAt: $createdAt, followedUid: $followedUid, followerUid: $followerUid)';
+    return 'Follower(activeUserRef: $activeUserRef, createdAt: $createdAt, passiveUserRef: $passiveUserRef)';
   }
 
   @override
@@ -143,17 +143,20 @@ class _$_Follower extends _Follower {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Follower &&
+            const DeepCollectionEquality()
+                .equals(other.activeUserRef, activeUserRef) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            (identical(other.followedUid, followedUid) ||
-                other.followedUid == followedUid) &&
-            (identical(other.followerUid, followerUid) ||
-                other.followerUid == followerUid));
+            const DeepCollectionEquality()
+                .equals(other.passiveUserRef, passiveUserRef));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(createdAt), followedUid, followerUid);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(activeUserRef),
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(passiveUserRef));
 
   @JsonKey(ignore: true)
   @override
@@ -171,19 +174,19 @@ class _$_Follower extends _Follower {
 
 abstract class _Follower extends Follower {
   const factory _Follower(
-      {required final dynamic createdAt,
-      required final String followedUid,
-      required final String followerUid}) = _$_Follower;
+      {required final dynamic activeUserRef,
+      required final dynamic createdAt,
+      required final dynamic passiveUserRef}) = _$_Follower;
   const _Follower._() : super._();
 
   factory _Follower.fromJson(Map<String, dynamic> json) = _$_Follower.fromJson;
 
   @override
+  dynamic get activeUserRef;
+  @override
   dynamic get createdAt;
   @override
-  String get followedUid;
-  @override
-  String get followerUid;
+  dynamic get passiveUserRef;
   @override
   @JsonKey(ignore: true)
   _$$_FollowerCopyWith<_$_Follower> get copyWith =>
