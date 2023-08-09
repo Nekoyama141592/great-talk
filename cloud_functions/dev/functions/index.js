@@ -205,6 +205,7 @@ exports.onPostCreate = functions.firestore.document(postPath).onCreate(
             'title': detectedTitle,
             'iconImage': detectedIconImage,
         });
+        // TODO: タイムラインの作成
     }
 );
 exports.onPostLikeCreate = functions.firestore.document(`${postPath}/{postId}/postLikes/{activeUid}`).onCreate(
