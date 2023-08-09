@@ -13,3 +13,7 @@ const int plusOne = 1;
 const int minusOne = -1;
 const int oneTimeReadCount = 30;
 const int whereInLimit = 30;
+// create post
+const int maxTitleLimit = 32;
+const int maxDescriptionLimit = 2000;
+const int maxSystemPromptLimit = 1000;

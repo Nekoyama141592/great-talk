@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:great_talk/common/doubles.dart';
+import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
@@ -109,7 +110,15 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
             title = value;
           });
         },
-        validator: (value) => value!.isEmpty ? "入力を行ってください" : null,
+        validator: (value) {
+          if (value!.length < nGramIndex) {
+            return "$nGramIndex文字以上の入力をしてください";
+          } else if (value.length > maxTitleLimit) {
+            return "$maxTitleLimit文字までです";
+          } else {
+            return null;
+          }
+        },
       )
     ];
   }
@@ -127,7 +136,15 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
             title = value;
           });
         },
-        validator: (value) => value!.isEmpty ? "入力を行ってください" : null,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "入力をしてください";
+          } else if (value.length > maxDescriptionLimit) {
+            return "$maxDescriptionLimit文字までです";
+          } else {
+            return null;
+          }
+        },
       )
     ];
   }
@@ -145,7 +162,15 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
             systemPrompt = value;
           });
         },
-        validator: (value) => value!.isEmpty ? "入力を行ってください" : null,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "入力をしてください";
+          } else if (value.length > maxSystemPromptLimit) {
+            return "$maxSystemPromptLimit文字までです";
+          } else {
+            return null;
+          }
+        },
       )
     ];
   }
@@ -162,8 +187,16 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
             temperature = value;
           });
         },
-        validator: (value) =>
-            double.tryParse(value!) == null ? "数字を入力してください" : null,
+        validator: (value) {
+          final result = double.tryParse(value!);
+          if (result == null) {
+            return "数字を入力してください";
+          } else if (result < 0.0 && result > 2.0) {
+            return "0.0以上2.0以下の値が必要がです";
+          } else {
+            return null;
+          }
+        },
       )
     ];
   }
@@ -180,8 +213,16 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
             topP = value;
           });
         },
-        validator: (value) =>
-            double.tryParse(value!) == null ? "数字を入力してください" : null,
+        validator: (value) {
+          final result = double.tryParse(value!);
+          if (result == null) {
+            return "数字を入力してください";
+          } else if (result < 0.0 && result > 1.0) {
+            return "0.0以上1.0以下の値が必要がです";
+          } else {
+            return null;
+          }
+        },
       )
     ];
   }
@@ -198,8 +239,16 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
             presencePenalty = value;
           });
         },
-        validator: (value) =>
-            double.tryParse(value!) == null ? "数字を入力してください" : null,
+        validator: (value) {
+          final result = double.tryParse(value!);
+          if (result == null) {
+            return "数字を入力してください";
+          } else if (result < -2.0 && result > 2.0) {
+            return "-2.0以上2.0以下の値が必要がです";
+          } else {
+            return null;
+          }
+        },
       )
     ];
   }
@@ -216,8 +265,16 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
             topP = value;
           });
         },
-        validator: (value) =>
-            double.tryParse(value!) == null ? "数字を入力してください" : null,
+        validator: (value) {
+          final result = double.tryParse(value!);
+          if (result == null) {
+            return "数字を入力してください";
+          } else if (result < -2.0 && result > 2.0) {
+            return "-2.0以上2.0以下の値が必要がです";
+          } else {
+            return null;
+          }
+        },
       )
     ];
   }
