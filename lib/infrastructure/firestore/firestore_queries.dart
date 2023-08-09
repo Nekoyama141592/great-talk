@@ -97,7 +97,7 @@ class FirestoreQueries {
   static DocRef userDocRef(String uid) => _usersColRef.doc(uid);
   static final ColRef _usersColRef = _publicV1.collection('users');
   static DocRef privateUserDocRef(String uid) =>
-      _privateV1.collection('users').doc(uid);
+      _privateV1.collection('privateUsers').doc(uid);
 
   static final usersQuery = _usersColRef.limit(oneTimeReadCount);
 
