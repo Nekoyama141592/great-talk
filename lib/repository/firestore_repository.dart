@@ -17,6 +17,7 @@ class FirestoreRepository {
       return const Result.failure();
     }
   }
+
   FutureResult<bool> createPost(DocRef postRef, SDMap json) async {
     try {
       await client.createPost(postRef, json);

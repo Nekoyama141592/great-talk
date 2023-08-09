@@ -139,8 +139,9 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       createdAt: now,
       id: id,
       messageType: MessageType.text.name,
-      messageRef: FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
-      postRef: FirestoreQueries.userPostRef(currentUid(), post!.postId),
+      messageRef:
+          FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
+      postRef: post!.typedRef(),
       text: const DetectedText(
           languageCode: '',
           negativeScore: 0.0,
@@ -181,8 +182,9 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
         createdAt: now,
         id: id,
         messageType: MessageType.text.name,
-        messageRef: FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
-        postRef: FirestoreQueries.userPostRef(currentUid(), post!.postId),
+        messageRef:
+            FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
+        postRef: post!.typedRef(),
         text: DetectedText(
             languageCode: '',
             negativeScore: 0.0,
@@ -208,13 +210,16 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       isGenerating(false);
     });
   }
+
   Future<void> _createTextMsgDoc(TextMessage message) async {
     // オリジナルコンテンツなら保存はしない
     if (!returnIsOriginalContents(post!.typedPoster().uid)) {
       final repository = FirestoreRepository();
-      await repository.createMessage(message.typedMessageRef(), message.toJson());
+      await repository.createMessage(
+          message.typedMessageRef(), message.toJson());
     }
   }
+
   int _getChatCount() {
     int count = prefs.getInt(PrefsKey.chatCount.name) ?? 0;
     // もし、最後のチャットから24時間経過していたらchatCountを0にして送信を許可
@@ -284,8 +289,9 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       createdAt: now,
       id: id,
       messageType: MessageType.text.name,
-      messageRef: FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
-      postRef: FirestoreQueries.userPostRef(currentUid(), post!.postId),
+      messageRef:
+          FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
+      postRef: post!.typedRef(),
       text: DetectedText(
           languageCode: '',
           negativeScore: 0.0,

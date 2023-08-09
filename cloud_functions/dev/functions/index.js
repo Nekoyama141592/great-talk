@@ -234,11 +234,19 @@ exports.onPostMuteCreate = functions.firestore.document(`${postPath}/postMutes/{
     }
 );
 
-exports.onPostMuteDelete = functions.firestore.document(`${postPath}/postMutes/{activeUid}`).onDelete(
+exports.onPostMuteDelete = functions.firestore.document(`${postPath}/messages/{activeUid}`).onDelete(
     async (snap,_) => {
         const newValue = snap.data();
         await newValue.postRef.update({
             "muteCount": admin.firestore.FieldValue.increment(minusOne),
+        });
+    }
+);
+exports.onPostMessageCreate = functions.firestore.document(`${postPath}/messages/{activeUid}`).onCreate(
+    async (snap,_) => {
+        const newValue = snap.data();
+        await newValue.postRef.update({
+            "msgCount": admin.firestore.FieldValue.increment(plusOne),
         });
     }
 );
