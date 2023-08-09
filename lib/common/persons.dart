@@ -4,7 +4,7 @@ const String officialId = "sugoi-ai-official";
 const String chatGPTId = "chatGPT";
 const String wolframId = "wolfram";
 // 現在のユーザーを定義.
-bool returnIsOriginalContents(String uid) => uid == officialId;
+bool returnIsOriginalContents(String posterUid) => posterUid == officialId;
 
 final originalContentIds = originalContents.map((e) => e.contentId).toList();
 final proIds = proPeople.map((e) => e.contentId).toList();
