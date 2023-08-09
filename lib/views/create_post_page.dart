@@ -44,20 +44,25 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
         ),
       ),
       body: SafeArea(
-          child: Container(
-        padding: EdgeInsets.symmetric(horizontal: _deviceWidth! * 0.05),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              // 水平パディング
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _createPostForm(),
-                _image(),
-                _createPostButton(),
-              ],
+          child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: _deviceWidth! * 0.05),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                // 水平パディング
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _createPostForm(),
+                  _image(),
+                  _createPostButton(),
+                ],
+              ),
             ),
           ),
         ),
