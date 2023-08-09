@@ -18,19 +18,25 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Row(
-        children: [
-          CircleImage(imageValue: chatContent.imageValue),
-          const Spacer(),
-          Text(post.typedTitle().value),
-          const Spacer(),
-          PostLikeButton(
-            post: post,
-          ),
-          PostReportButton(post: post)
-        ],
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(),
+          borderRadius: BorderRadius.circular(8),
+          color: Theme.of(context).primaryColor),
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          children: [
+            CircleImage(imageValue: chatContent.imageValue),
+            const Spacer(),
+            Text(post.typedTitle().value),
+            const Spacer(),
+            PostLikeButton(
+              post: post,
+            ),
+            PostReportButton(post: post)
+          ],
+        ),
       ),
     );
   }

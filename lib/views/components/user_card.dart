@@ -10,20 +10,26 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(defaultPadding(context)),
-      child: InkWell(
-        onTap: () => Get.toNamed("/users/${publicUser.uid}"),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            CircleImage(imageValue: publicUser.typedUserImage().value),
-            const Spacer(),
-            Text(publicUser.typedUserName().value),
-            const Spacer(),
-            const Icon(Icons.people),
-            Text(publicUser.followerCount.toString())
-          ],
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(),
+          borderRadius: BorderRadius.circular(8),
+          color: Theme.of(context).primaryColor),
+      child: Padding(
+        padding: EdgeInsets.all(defaultPadding(context)),
+        child: InkWell(
+          onTap: () => Get.toNamed("/users/${publicUser.uid}"),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              CircleImage(imageValue: publicUser.typedUserImage().value),
+              const Spacer(),
+              Text(publicUser.typedUserName().value),
+              const Spacer(),
+              const Icon(Icons.people),
+              Text(publicUser.followerCount.toString())
+            ],
+          ),
         ),
       ),
     );
