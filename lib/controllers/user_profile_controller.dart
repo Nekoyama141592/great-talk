@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
+import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/profile_controller.dart';
 import 'package:great_talk/model/follower/follower.dart';
@@ -13,6 +14,10 @@ class UserProfileController extends ProfileController {
   static UserProfileController get to => Get.find<UserProfileController>();
   Future<void> follow() async {
     if (passiveUser.value == null) {
+      return;
+    }
+    if (CurrentUserController.to.publicUser.value == null) {
+      await UIHelper.showFlutterToast("ログインをしてください！");
       return;
     }
     final String tokenId = randomString();
