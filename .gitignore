@@ -20,6 +20,8 @@ firestore_rules/
 storage_rules/
 txts/
 firebase_private_key/
+cloud_functions/dev/functions/package-lock.json
+cloud_functions/prod/functions/package-lock.json
 # IntelliJ related
 *.iml
 *.ipr
