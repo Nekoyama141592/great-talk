@@ -11,19 +11,16 @@ class UserRankingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserRankingController());
-    return RefreshScreen(
+    return Obx(() => RefreshScreen(
         docsController: controller,
-        child: Obx(
-          () => ListView.builder(
-              itemCount: controller.docs.length,
-              itemBuilder: (c, i) {
-                final publicUser =
-                    PublicUser.fromJson(controller.docs[i].data());
-                return Obx(() =>
-                    CurrentUserController.to.isValidUser(publicUser.uid)
-                        ? UserCard(publicUser: publicUser)
-                        : const SizedBox.shrink());
-              }),
-        ));
+        child: ListView.builder(
+            itemCount: controller.docs.length,
+            itemBuilder: (c, i) {
+              final publicUser = PublicUser.fromJson(controller.docs[i].data());
+              return Obx(() =>
+                  CurrentUserController.to.isValidUser(publicUser.uid)
+                      ? UserCard(publicUser: publicUser)
+                      : const SizedBox.shrink());
+            })));
   }
 }

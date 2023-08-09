@@ -15,19 +15,17 @@ class SearchUsersScreen extends StatelessWidget {
     return SearchScreen(
         hint: "例: M.LO",
         onQueryChanged: controller.search,
-        child: RefreshScreen(
+        child: Obx(() => RefreshScreen(
             docsController: controller,
-            child: Obx(
-              () => ListView.builder(
-                  itemCount: controller.docs.length,
-                  itemBuilder: (c, i) {
-                    final publicUser =
-                        PublicUser.fromJson(controller.docs[i].data());
-                    return Obx(() =>
-                        CurrentUserController.to.isValidUser(publicUser.uid)
-                            ? UserCard(publicUser: publicUser)
-                            : const SizedBox.shrink());
-                  }),
-            )));
+            child: ListView.builder(
+                itemCount: controller.docs.length,
+                itemBuilder: (c, i) {
+                  final publicUser =
+                      PublicUser.fromJson(controller.docs[i].data());
+                  return Obx(() =>
+                      CurrentUserController.to.isValidUser(publicUser.uid)
+                          ? UserCard(publicUser: publicUser)
+                          : const SizedBox.shrink());
+                }))));
   }
 }
