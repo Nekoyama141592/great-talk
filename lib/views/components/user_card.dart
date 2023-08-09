@@ -10,13 +10,13 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(),
+    return Padding(
+      padding: EdgeInsets.all(defaultPadding(context)),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Theme.of(context).primaryColor),
           borderRadius: BorderRadius.circular(8),
-          color: Theme.of(context).primaryColor),
-      child: Padding(
-        padding: EdgeInsets.all(defaultPadding(context)),
+        ),
         child: InkWell(
           onTap: () => Get.toNamed("/users/${publicUser.uid}"),
           child: Row(

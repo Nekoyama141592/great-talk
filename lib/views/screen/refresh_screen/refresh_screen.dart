@@ -8,7 +8,6 @@ import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
-import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RefreshScreen extends HookWidget {
@@ -51,36 +50,46 @@ class RefreshScreen extends HookWidget {
                               .isValidPost(post.postId)
                           ? Padding(
                               padding: EdgeInsets.all(defaultPadding(context)),
-                              child: Column(
-                                children: [
-                                  CircleImage(
-                                    imageValue: content.imageValue,
-                                    onTap: () => Get.toNamed(
-                                        '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),
-                                  ),
-                                  Text(
-                                    post.typedTitle().value,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Text(
-                                    "by ${post.typedPoster().typedUserName().value}",
-                                    style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .secondary),
-                                  ),
-                                  Center(
-                                    child: Row(
-                                      children: [
-                                        PostLikeButton(
-                                          post: post,
-                                        ),
-                                        const Spacer(),
-                                        PostReportButton(post: post)
-                                      ],
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Theme.of(context).primaryColor),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Column(
+                                  children: [
+                                    CircleImage(
+                                      imageValue: content.imageValue,
+                                      onTap: () => Get.toNamed(
+                                          '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),
                                     ),
-                                  )
-                                ],
+                                    Text(
+                                      post.typedTitle().value,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      "by ${post.typedPoster().typedUserName().value}",
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary),
+                                    ),
+                                    Center(
+                                      child: Row(
+                                        children: [
+                                          PostLikeButton(
+                                            post: post,
+                                          ),
+                                          InkWell(
+                                            onTap: () => Get.toNamed(
+                                                '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),
+                                            child: const Icon(Icons.message),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             )
                           : const Text("不適切"));

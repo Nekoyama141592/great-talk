@@ -16,7 +16,7 @@ class PostLikeButton extends HookWidget {
     final int plusOneCount = post.likeCount + 1;
     final controller = PostsController.to;
     final isLiked = useState(false);
-    return Row(
+    return Column(
       children: [
         Obx(
           () => CurrentUserController.to.likePostIds.contains(post.postId)

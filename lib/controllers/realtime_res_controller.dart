@@ -27,12 +27,14 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RealtimeResController extends GetxController with CurrentUserMixin {
+  static RealtimeResController get to => Get.find<RealtimeResController>();
   final messages = <TextMessage>[].obs;
   final realtimeRes = "".obs;
   final isLoading = false.obs;
   final isGenerating = false.obs;
   int chatCount = 0;
   late SharedPreferences prefs;
+  Post? post;
   final Rx<ChatContent?> interlocutor = Rx(null);
   final repository = FirestoreRepository();
   // 与えられたinterlocutorとのチャット履歴を取得
@@ -52,8 +54,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       final result = await repository.getPost(uid, postId);
       result.when(success: (res) async {
         if (res.exists) {
-          final post = Post.fromJson(res.data()!);
-          interlocutor(ChatContent.fromPost(post));
+          post = Post.fromJson(res.data()!);
+          interlocutor(ChatContent.fromPost(post!));
         } else {
           UIHelper.showFlutterToast("投稿が存在しません");
           return;

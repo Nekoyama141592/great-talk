@@ -10,6 +10,7 @@ import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/notification_controller.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
+import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/views/auth/login_page.dart';
 import 'package:great_talk/views/components/original_content_cards.dart';
 import 'package:great_talk/views/components/original_drawer.dart';
@@ -29,6 +30,7 @@ class MyHomePage extends HookWidget {
     Get.put(MainController());
     Get.put(NotificationController());
     Get.put(PostsController());
+    Get.put(RealtimeResController());
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(

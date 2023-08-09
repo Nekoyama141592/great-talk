@@ -6,6 +6,7 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/post/post.dart';
@@ -25,7 +26,11 @@ class PostsController extends GetxController with CurrentUserMixin {
   final others = "".obs;
   final reportContents = <String>[].obs;
 
-  void onReportButtonPressed(BuildContext context, Post post) {
+  void onReportButtonPressed(BuildContext context) {
+    final post = RealtimeResController.to.post;
+    if (post == null) {
+      return;
+    }
     showCupertinoModalPopup(
         context: context,
         builder: (innerContext) => CupertinoActionSheet(
