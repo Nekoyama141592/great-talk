@@ -11,6 +11,7 @@ abstract class PrivateUser implements _$PrivateUser {
     required String gender,
     required String ipAddress,
     required bool isAdmin,
+    required dynamic ref,
     required String uid,
     required dynamic updatedAt,
   }) = _PrivateUser;
