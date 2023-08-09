@@ -40,22 +40,30 @@ class RefreshScreen extends HookWidget {
                     itemCount: docsController.docs.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,childAspectRatio: 0.7),
+                            crossAxisCount: 3, childAspectRatio: 0.7),
                     itemBuilder: (c, i) {
                       final post = Post.fromJson(docsController.docs[i].data());
                       final content = ChatContent.fromPost(post);
-                      return Obx(() => CurrentUserController.to
-                              .isValidPost(post.postId)
-                          ? Column(
-                            children: [
-                              CircleImage(chatContent: content),
-                              TextButton(
-                                  onPressed: () => Get.toNamed(
-                                      '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),
-                                  child: Text(post.typedTitle().value,style: TextStyle(color: Theme.of(context).colorScheme.secondary),)),
-                            ],
-                          )
-                          : const Text("不適切"));
+                      return Obx(() =>
+                          CurrentUserController.to.isValidPost(post.postId)
+                              ? Column(
+                                  children: [
+                                    CircleImage(
+                                      chatContent: content,
+                                      onTap: () => Get.toNamed(
+                                          '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),
+                                    ),
+                                    Text(post.typedTitle().value),
+                                    Text(
+                                      "by ${post.typedPoster().typedUserName().value}",
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary),
+                                    ),
+                                  ],
+                                )
+                              : const Text("不適切"));
                     })));
   }
 }

@@ -7,8 +7,10 @@ import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/s3_image.dart';
 
 class CircleImage extends StatelessWidget {
-  const CircleImage({Key? key, required this.chatContent}) : super(key: key);
+  const CircleImage({Key? key, required this.chatContent, this.onTap})
+      : super(key: key);
   final ChatContent chatContent;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     final imageValue =
@@ -16,21 +18,24 @@ class CircleImage extends StatelessWidget {
     final length = userImageSize(context);
     final isOriginalContent = returnIsOriginalContents(chatContent.posterUid);
     return isOriginalContent || isUseMockData
-        ? SizedBox(
-            width: length,
-            height: length,
-            child: CachedNetworkImage(
-              imageBuilder: (context, image) {
-                return Container(
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(image: image, fit: BoxFit.fill)),
-                );
-              },
-              imageUrl: imageValue,
-              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  CircularProgressIndicator(value: downloadProgress.progress),
-              errorWidget: (context, url, error) => const Icon(Icons.person),
+        ? InkWell(
+            onTap: onTap,
+            child: SizedBox(
+              width: length,
+              height: length,
+              child: CachedNetworkImage(
+                imageBuilder: (context, image) {
+                  return Container(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(image: image, fit: BoxFit.fill)),
+                  );
+                },
+                imageUrl: imageValue,
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    CircularProgressIndicator(value: downloadProgress.progress),
+                errorWidget: (context, url, error) => const Icon(Icons.person),
+              ),
             ),
           )
         : S3Image(fileName: imageValue);

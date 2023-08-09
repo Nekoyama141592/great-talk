@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
-import 'package:great_talk/views/screen/refresh_screen/components/s3_image.dart';
 
 class PostCard extends StatelessWidget {
   const PostCard(
@@ -24,9 +22,7 @@ class PostCard extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          isUseMockData
-              ? CircleImage(chatContent: chatContent)
-              : S3Image(fileName: post.typedIconImage().value),
+          CircleImage(chatContent: chatContent),
           const Spacer(),
           Text(post.typedTitle().value),
           const Spacer(),
