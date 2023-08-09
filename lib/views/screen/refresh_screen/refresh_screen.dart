@@ -3,9 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
-import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/post/post.dart';
-import 'package:great_talk/views/screen/refresh_screen/components/post_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RefreshScreen extends HookWidget {
@@ -36,20 +34,20 @@ class RefreshScreen extends HookWidget {
             onLoading: () => docsController.onLoading(refreshController),
             onRefresh: () => docsController.onRefresh(refreshController),
             child: child ??
-                ListView.builder(
+                GridView.builder(
                     itemCount: docsController.docs.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3),
                     itemBuilder: (c, i) {
                       final post = Post.fromJson(docsController.docs[i].data());
-                      final content = ChatContent.fromPost(post);
-                      return Obx(() =>
-                          CurrentUserController.to.isValidPost(post.postId)
-                              ? PostCard(
-                                  chatContent: content,
-                                  post: post,
-                                  onTap: () => Get.toNamed(
-                                      '/chat/users/${content.posterUid}/posts/${content.contentId}'),
-                                )
-                              : const SizedBox.shrink());
+                      return Obx(() => CurrentUserController.to
+                              .isValidPost(post.postId)
+                          ? TextButton(
+                              onPressed: () => Get.toNamed(
+                                  '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),
+                              child: Text(post.typedTitle().value))
+                          : const Text("不適切"));
                     })));
   }
 }
