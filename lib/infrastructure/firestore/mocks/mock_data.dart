@@ -520,7 +520,7 @@ final List<Post> mockPosts = [
               negativeScore: 0.0,
               positiveScore: 0.0,
               sentiment: '',
-              value: '原稿作成くん"')
+              value: '原稿作成くん')
           .toJson(),
       updatedAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
       userCount: 0),
