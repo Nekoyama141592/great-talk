@@ -137,7 +137,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
       OriginalForm(
         keyboardType: TextInputType.multiline,
         maxLines: null,
-        decoration: const InputDecoration(hintText: "例: 語尾に「にゃん」をつけて話してくれます！"),
+        decoration: const InputDecoration(hintText: "例: かわいい猫のAIです！"),
         onSaved: (value) {
           setState(() {
             description = value;
