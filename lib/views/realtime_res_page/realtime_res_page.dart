@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
+import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
@@ -29,8 +30,8 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
       child: Scaffold(
           appBar: AppBar(
               actions: const [DescriptionButton(), PostReportButton()],
-              title:
-                  Obx(() => Text(controller.interlocutor.value?.title ?? ""))),
+              title: Obx(() =>
+                  EllipsisText(controller.interlocutor.value?.title ?? ""))),
           body: Obx(() => controller.isLoading.value ||
                   controller.interlocutor.value == null
               ? const Center(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
+import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/post/post.dart';
@@ -31,14 +32,13 @@ class PostCard extends StatelessWidget {
                 imageValue: content.imageValue,
                 onTap: () => controller.onPostCardPressed(post),
               ),
-              Text(
+              EllipsisText(
                 post.typedTitle().value,
-                overflow: TextOverflow.ellipsis,
               ),
               TextButton(
                 onPressed: () =>
                     Get.toNamed("/users/${post.typedPoster().uid}"),
-                child: Text(
+                child: EllipsisText(
                   "by ${post.typedPoster().typedUserName().value}",
                   style:
                       TextStyle(color: Theme.of(context).colorScheme.secondary),

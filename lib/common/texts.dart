@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/common/doubles.dart';
 
+class EllipsisText extends Text {
+  final String text;
+  const EllipsisText(this.text, {Key? key, TextStyle? style})
+      : super(
+          text,
+          key: key,
+          style: style,
+          overflow: TextOverflow.ellipsis,
+        );
+}
+
 class BasicBoldText extends StatelessWidget {
   const BasicBoldText(this.text, {Key? key, this.textColor}) : super(key: key);
   final String text;
