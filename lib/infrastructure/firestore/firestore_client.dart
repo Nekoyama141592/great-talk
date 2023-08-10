@@ -47,6 +47,8 @@ class FirestoreClient {
       await FirestoreQueries.tokenQuery(currentUid, tokenId).set(json);
   Future<void> deleteToken(String currentUid, String tokenId) async =>
       await FirestoreQueries.tokenQuery(currentUid, tokenId).delete();
+  Future<void> deleteUser(String uid) async =>
+      FirestoreQueries.userDocRef(uid).delete();
 
   FutureQSnapshot getUsersByWhereIn(List<String> uids) async =>
       await FirestoreQueries.usersQueryByWhereIn(uids).get();

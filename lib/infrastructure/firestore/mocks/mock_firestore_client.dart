@@ -93,6 +93,12 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
+  Future<void> deleteUser(String uid) async {
+    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
+    return;
+  }
+
+  @override
   Future<void> createUserMute(String uid, String activeUid, SDMap json) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     return;

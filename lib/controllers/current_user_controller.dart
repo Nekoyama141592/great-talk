@@ -315,13 +315,23 @@ class CurrentUserController extends GetxController {
             onPressed: Get.back, child: const Text(cancelText)),
         CupertinoDialogAction(
             isDestructiveAction: true,
-            onPressed: _deleteUser,
+            onPressed: _deletePublicUser,
             child: const Text(okText))
       ],
     ));
   }
 
-  Future<void> _deleteUser() async {
+  Future<void> _deletePublicUser() async {
+    final repository = FirestoreRepository();
+    final result = await repository.deleteUser(currentUid());
+    result.when(success: (_) async {
+      await _deleteAuthUser();
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("データベースからユーザーを削除できませんでした");
+    });
+  }
+
+  Future<void> _deleteAuthUser() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.deleteUser(currentUser.value!);
     result.when(success: (_) async {

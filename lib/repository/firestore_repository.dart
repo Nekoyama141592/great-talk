@@ -138,6 +138,16 @@ class FirestoreRepository {
     }
   }
 
+  FutureResult<bool> deleteUser(String uid) async {
+    try {
+      await client.deleteUser(uid);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
   FutureResult<bool> createUserMute(
       String uid, String activeUid, SDMap json) async {
     try {
