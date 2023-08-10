@@ -18,9 +18,10 @@ class MainController extends GetxController {
     if (isAgreedToTerms == false) {
       Get.dialog(AlertDialog(
         content: SizedBox(
-          height: Get.height * 0.75,
+          height: Get.height * 0.8,
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
                   wrongInfoMsg,
