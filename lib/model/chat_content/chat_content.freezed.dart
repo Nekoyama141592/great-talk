@@ -23,10 +23,13 @@ mixin _$ChatContent {
   String get contentId => throw _privateConstructorUsedError;
   Map<String, dynamic>? get customCompleteText =>
       throw _privateConstructorUsedError;
+  Map<String, dynamic>? get description => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get iconImage => throw _privateConstructorUsedError;
   String get imageValue => throw _privateConstructorUsedError;
   int? get lastSeen => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
   String get posterUid => throw _privateConstructorUsedError;
+  dynamic get ref => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,10 +47,13 @@ abstract class $ChatContentCopyWith<$Res> {
   $Res call(
       {String contentId,
       Map<String, dynamic>? customCompleteText,
+      Map<String, dynamic>? description,
+      Map<String, dynamic>? iconImage,
       String imageValue,
       int? lastSeen,
       Map<String, dynamic>? metadata,
       String posterUid,
+      dynamic ref,
       String title});
 }
 
@@ -66,10 +72,13 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
   $Res call({
     Object? contentId = null,
     Object? customCompleteText = freezed,
+    Object? description = freezed,
+    Object? iconImage = freezed,
     Object? imageValue = null,
     Object? lastSeen = freezed,
     Object? metadata = freezed,
     Object? posterUid = null,
+    Object? ref = freezed,
     Object? title = null,
   }) {
     return _then(_value.copyWith(
@@ -80,6 +89,14 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
       customCompleteText: freezed == customCompleteText
           ? _value.customCompleteText
           : customCompleteText // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      iconImage: freezed == iconImage
+          ? _value.iconImage
+          : iconImage // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
       imageValue: null == imageValue
           ? _value.imageValue
@@ -97,6 +114,10 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
           ? _value.posterUid
           : posterUid // ignore: cast_nullable_to_non_nullable
               as String,
+      ref: freezed == ref
+          ? _value.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -116,10 +137,13 @@ abstract class _$$_ChatContentCopyWith<$Res>
   $Res call(
       {String contentId,
       Map<String, dynamic>? customCompleteText,
+      Map<String, dynamic>? description,
+      Map<String, dynamic>? iconImage,
       String imageValue,
       int? lastSeen,
       Map<String, dynamic>? metadata,
       String posterUid,
+      dynamic ref,
       String title});
 }
 
@@ -136,10 +160,13 @@ class __$$_ChatContentCopyWithImpl<$Res>
   $Res call({
     Object? contentId = null,
     Object? customCompleteText = freezed,
+    Object? description = freezed,
+    Object? iconImage = freezed,
     Object? imageValue = null,
     Object? lastSeen = freezed,
     Object? metadata = freezed,
     Object? posterUid = null,
+    Object? ref = freezed,
     Object? title = null,
   }) {
     return _then(_$_ChatContent(
@@ -150,6 +177,14 @@ class __$$_ChatContentCopyWithImpl<$Res>
       customCompleteText: freezed == customCompleteText
           ? _value._customCompleteText
           : customCompleteText // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      description: freezed == description
+          ? _value._description
+          : description // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      iconImage: freezed == iconImage
+          ? _value._iconImage
+          : iconImage // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
       imageValue: null == imageValue
           ? _value.imageValue
@@ -167,6 +202,10 @@ class __$$_ChatContentCopyWithImpl<$Res>
           ? _value.posterUid
           : posterUid // ignore: cast_nullable_to_non_nullable
               as String,
+      ref: freezed == ref
+          ? _value.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -181,12 +220,17 @@ class _$_ChatContent extends _ChatContent {
   const _$_ChatContent(
       {required this.contentId,
       final Map<String, dynamic>? customCompleteText,
+      final Map<String, dynamic>? description,
+      final Map<String, dynamic>? iconImage,
       required this.imageValue,
       this.lastSeen,
       final Map<String, dynamic>? metadata,
       required this.posterUid,
+      this.ref,
       required this.title})
       : _customCompleteText = customCompleteText,
+        _description = description,
+        _iconImage = iconImage,
         _metadata = metadata,
         super._();
 
@@ -202,6 +246,26 @@ class _$_ChatContent extends _ChatContent {
     if (value == null) return null;
     if (_customCompleteText is EqualUnmodifiableMapView)
       return _customCompleteText;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final Map<String, dynamic>? _description;
+  @override
+  Map<String, dynamic>? get description {
+    final value = _description;
+    if (value == null) return null;
+    if (_description is EqualUnmodifiableMapView) return _description;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  final Map<String, dynamic>? _iconImage;
+  @override
+  Map<String, dynamic>? get iconImage {
+    final value = _iconImage;
+    if (value == null) return null;
+    if (_iconImage is EqualUnmodifiableMapView) return _iconImage;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(value);
   }
@@ -223,11 +287,13 @@ class _$_ChatContent extends _ChatContent {
   @override
   final String posterUid;
   @override
+  final dynamic ref;
+  @override
   final String title;
 
   @override
   String toString() {
-    return 'ChatContent(contentId: $contentId, customCompleteText: $customCompleteText, imageValue: $imageValue, lastSeen: $lastSeen, metadata: $metadata, posterUid: $posterUid, title: $title)';
+    return 'ChatContent(contentId: $contentId, customCompleteText: $customCompleteText, description: $description, iconImage: $iconImage, imageValue: $imageValue, lastSeen: $lastSeen, metadata: $metadata, posterUid: $posterUid, ref: $ref, title: $title)';
   }
 
   @override
@@ -239,6 +305,10 @@ class _$_ChatContent extends _ChatContent {
                 other.contentId == contentId) &&
             const DeepCollectionEquality()
                 .equals(other._customCompleteText, _customCompleteText) &&
+            const DeepCollectionEquality()
+                .equals(other._description, _description) &&
+            const DeepCollectionEquality()
+                .equals(other._iconImage, _iconImage) &&
             (identical(other.imageValue, imageValue) ||
                 other.imageValue == imageValue) &&
             (identical(other.lastSeen, lastSeen) ||
@@ -246,6 +316,7 @@ class _$_ChatContent extends _ChatContent {
             const DeepCollectionEquality().equals(other._metadata, _metadata) &&
             (identical(other.posterUid, posterUid) ||
                 other.posterUid == posterUid) &&
+            const DeepCollectionEquality().equals(other.ref, ref) &&
             (identical(other.title, title) || other.title == title));
   }
 
@@ -255,10 +326,13 @@ class _$_ChatContent extends _ChatContent {
       runtimeType,
       contentId,
       const DeepCollectionEquality().hash(_customCompleteText),
+      const DeepCollectionEquality().hash(_description),
+      const DeepCollectionEquality().hash(_iconImage),
       imageValue,
       lastSeen,
       const DeepCollectionEquality().hash(_metadata),
       posterUid,
+      const DeepCollectionEquality().hash(ref),
       title);
 
   @JsonKey(ignore: true)
@@ -279,10 +353,13 @@ abstract class _ChatContent extends ChatContent {
   const factory _ChatContent(
       {required final String contentId,
       final Map<String, dynamic>? customCompleteText,
+      final Map<String, dynamic>? description,
+      final Map<String, dynamic>? iconImage,
       required final String imageValue,
       final int? lastSeen,
       final Map<String, dynamic>? metadata,
       required final String posterUid,
+      final dynamic ref,
       required final String title}) = _$_ChatContent;
   const _ChatContent._() : super._();
 
@@ -294,6 +371,10 @@ abstract class _ChatContent extends ChatContent {
   @override
   Map<String, dynamic>? get customCompleteText;
   @override
+  Map<String, dynamic>? get description;
+  @override
+  Map<String, dynamic>? get iconImage;
+  @override
   String get imageValue;
   @override
   int? get lastSeen;
@@ -301,6 +382,8 @@ abstract class _ChatContent extends ChatContent {
   Map<String, dynamic>? get metadata;
   @override
   String get posterUid;
+  @override
+  dynamic get ref;
   @override
   String get title;
   @override

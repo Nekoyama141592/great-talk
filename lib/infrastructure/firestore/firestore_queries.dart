@@ -125,6 +125,10 @@ class FirestoreQueries {
   static DocRef userUpdateLogDocRef(String uid) =>
       userDocRef(uid).collection('userUpdateLogs').doc();
 
+  // 実際は使わない
+  static DocRef originalContentDocRef(String contentId) =>
+      _instance.collection('originalContents').doc(contentId);
+
   static MapQuery searchQuery(MapQuery query, String searchTerm) {
     final searchWords = returnSearchWords(searchTerm);
     MapQuery searchQuery = query;

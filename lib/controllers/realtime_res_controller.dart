@@ -35,7 +35,6 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   final isGenerating = false.obs;
   int chatCount = 0;
   late SharedPreferences prefs;
-  Post? post;
   final Rx<ChatContent?> interlocutor = Rx(null);
   final repository = FirestoreRepository();
   // 与えられたinterlocutorとのチャット履歴を取得
@@ -55,8 +54,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       final result = await repository.getPost(uid, postId);
       result.when(success: (res) async {
         if (res.exists) {
-          post = Post.fromJson(res.data()!);
-          interlocutor(ChatContent.fromPost(post!));
+          final post = Post.fromJson(res.data()!);
+          interlocutor(ChatContent.fromPost(post));
         } else {
           UIHelper.showFlutterToast("投稿が存在しません");
           return;
@@ -139,9 +138,9 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       createdAt: now,
       id: id,
       messageType: MessageType.text.name,
-      messageRef:
-          FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
-      postRef: post!.typedRef(),
+      messageRef: FirestoreQueries.postMessageDocRef(
+          currentUid(), interlocutor.value!.contentId, id),
+      postRef: interlocutor.value!.typedRef(),
       text: const DetectedText(
           languageCode: '',
           negativeScore: 0.0,
@@ -182,9 +181,9 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
         createdAt: now,
         id: id,
         messageType: MessageType.text.name,
-        messageRef:
-            FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
-        postRef: post!.typedRef(),
+        messageRef: FirestoreQueries.postMessageDocRef(
+            currentUid(), interlocutor.value!.contentId, id),
+        postRef: interlocutor.value!.typedRef(),
         text: DetectedText(
             languageCode: '',
             negativeScore: 0.0,
@@ -213,7 +212,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
 
   Future<void> _createTextMsgDoc(TextMessage message) async {
     // オリジナルコンテンツなら保存はしない
-    if (!returnIsOriginalContents(post!.typedPoster().uid)) {
+    if (!returnIsOriginalContents(interlocutor.value!.posterUid)) {
       final repository = FirestoreRepository();
       await repository.createMessage(
           message.typedMessageRef(), message.toJson());
@@ -289,9 +288,9 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       createdAt: now,
       id: id,
       messageType: MessageType.text.name,
-      messageRef:
-          FirestoreQueries.postMessageDocRef(currentUid(), post!.postId, id),
-      postRef: post!.typedRef(),
+      messageRef: FirestoreQueries.postMessageDocRef(
+          currentUid(), interlocutor.value!.contentId, id),
+      postRef: interlocutor.value!.typedRef(),
       text: DetectedText(
           languageCode: '',
           negativeScore: 0.0,
@@ -364,5 +363,37 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       UIHelper.showFlutterToast("テキストをコピーするには有料プランを登録する必要があります");
       return;
     }
+  }
+
+  void onDescriptionButtonPressed() {
+    if (interlocutor.value == null) {
+      return;
+    }
+    const style = TextStyle(fontSize: 20, color: Colors.black);
+    Get.dialog(AlertDialog(
+      content: SizedBox(
+        height: Get.height * 0.8,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                interlocutor.value!.typedDescription().value,
+                style: style,
+              ),
+              const Divider(),
+              TextButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text(
+                    okText,
+                    style: style,
+                  )),
+            ],
+          ),
+        ),
+      ),
+    ));
   }
 }

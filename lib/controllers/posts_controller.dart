@@ -2,13 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/enums.dart';
+import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
-import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/post_like/post_like.dart';
 import 'package:great_talk/model/post_mute/post_mute.dart';
@@ -25,10 +24,15 @@ class PostsController extends GetxController with CurrentUserMixin {
   final repository = FirestoreRepository();
   final others = "".obs;
   final reportContents = <String>[].obs;
+  final Rx<Post?> rxPost = Rx(null);
+
+  void onPostCardPressed(Post post) {
+    rxPost(post);
+    Get.toNamed('/chat/users/${post.typedPoster().uid}/posts/${post.postId}');
+  }
 
   void onReportButtonPressed(BuildContext context) {
-    final post = RealtimeResController.to.post;
-    if (post == null) {
+    if (returnIsOriginalContents(Get.parameters['uid']!)) {
       return;
     }
     showCupertinoModalPopup(
@@ -36,13 +40,13 @@ class PostsController extends GetxController with CurrentUserMixin {
         builder: (innerContext) => CupertinoActionSheet(
               actions: [
                 CupertinoActionSheetAction(
-                    onPressed: () => reportPost(innerContext, post),
+                    onPressed: () => reportPost(innerContext),
                     child: const BasicBoldText("投稿を報告")),
                 CupertinoActionSheetAction(
-                    onPressed: () => mutePost(innerContext, post),
+                    onPressed: () => mutePost(innerContext),
                     child: const BasicBoldText("投稿をミュート")),
                 CupertinoActionSheetAction(
-                    onPressed: () => muteUser(innerContext, post.typedPoster()),
+                    onPressed: () => muteUser(innerContext),
                     child: const BasicBoldText("ユーザーをミュート")),
                 CupertinoActionSheetAction(
                     onPressed: () => Navigator.pop(innerContext),
@@ -51,16 +55,14 @@ class PostsController extends GetxController with CurrentUserMixin {
             ));
   }
 
-  void reportPost(BuildContext innerContext, Post post) {
+  void reportPost(BuildContext innerContext) {
     Navigator.pop(innerContext);
-    showReportContentDialog(innerContext, post);
+    showReportContentDialog(innerContext);
   }
 
-  void showReportContentDialog(BuildContext context, Post post) {
+  void showReportContentDialog(BuildContext context) {
     Get.dialog(
-      ReportContentsListView(
-        post: post,
-      ),
+      const ReportContentsListView(),
     );
   }
 
@@ -74,9 +76,13 @@ class PostsController extends GetxController with CurrentUserMixin {
     }
   }
 
-  void mutePost(BuildContext innerContext, Post post) async {
+  void mutePost(BuildContext innerContext) async {
     final tokenId = randomString();
     final now = Timestamp.now();
+    if (rxPost.value == null) {
+      return;
+    }
+    final post = rxPost.value!;
     final postId = post.postId;
     final postRef = post.typedRef();
     final MutePostToken mutePostToken = MutePostToken(
@@ -100,7 +106,11 @@ class PostsController extends GetxController with CurrentUserMixin {
     }
   }
 
-  void muteUser(BuildContext innerContext, PublicUser passiveUser) async {
+  void muteUser(BuildContext innerContext) async {
+    if (rxPost.value == null) {
+      return;
+    }
+    final passiveUser = rxPost.value!.typedPoster();
     final tokenId = randomString();
     final now = Timestamp.now();
     final passiveUid = passiveUser.uid;
@@ -124,7 +134,11 @@ class PostsController extends GetxController with CurrentUserMixin {
     }
   }
 
-  Future<void> createPostReport(Post post) async {
+  Future<void> createPostReport() async {
+    if (rxPost.value == null) {
+      return;
+    }
+    final post = rxPost.value!;
     final PostReport postReport = PostReport(
         activeUserRef: CurrentUserController.to.publicUser.value!.typedRef(),
         activeUid: currentUid(),
@@ -142,7 +156,11 @@ class PostsController extends GetxController with CurrentUserMixin {
     });
   }
 
-  Future<void> likePost(Post post) async {
+  Future<void> likePost() async {
+    if (rxPost.value == null) {
+      return;
+    }
+    final post = rxPost.value!;
     final String tokenId = randomString();
     final Timestamp now = Timestamp.now();
     final String passiveUid = post.typedPoster().uid;
@@ -168,7 +186,11 @@ class PostsController extends GetxController with CurrentUserMixin {
     await repository.createPostLike(postRef, currentUid(), postLike.toJson());
   }
 
-  Future<void> unLikePost(Post post) async {
+  Future<void> unLikePost() async {
+    if (rxPost.value == null) {
+      return;
+    }
+    final post = rxPost.value!;
     final String passiveUid = post.typedPoster().uid;
     final deleteToken = CurrentUserController.to.likePostTokens
         .firstWhere((element) => element.passiveUid == passiveUid);

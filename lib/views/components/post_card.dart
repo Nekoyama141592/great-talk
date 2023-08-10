@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
+import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/circle_image.dart';
@@ -13,11 +14,11 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final content = ChatContent.fromPost(post);
+    final controller = PostsController.to;
     return Padding(
       padding: EdgeInsets.all(defaultPadding(context)),
       child: GestureDetector(
-        onTap: () => Get.toNamed(
-            '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),
+        onTap: () => controller.onPostCardPressed(post),
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: Theme.of(context).primaryColor),
@@ -28,8 +29,7 @@ class PostCard extends StatelessWidget {
               CircleImage(
                 bucketName: post.typedIconImage().bucketName,
                 imageValue: content.imageValue,
-                onTap: () => Get.toNamed(
-                    '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),
+                onTap: () => controller.onPostCardPressed(post),
               ),
               Text(
                 post.typedTitle().value,
@@ -54,8 +54,7 @@ class PostCard extends StatelessWidget {
                     Column(
                       children: [
                         InkWell(
-                          onTap: () => Get.toNamed(
-                              '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),
+                          onTap: () => controller.onPostCardPressed(post),
                           child: const Icon(Icons.message),
                         ),
                         const Text("")

@@ -3,13 +3,10 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
-import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 
 class ReportContentsListView extends StatelessWidget {
-  const ReportContentsListView({Key? key, required this.post})
-      : super(key: key);
-  final Post post;
+  const ReportContentsListView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     const List<String> reportContents = ["暴力的なコンテンツ", "性的なコンテンツ", "不快なコンテンツ"];
@@ -72,7 +69,7 @@ class ReportContentsListView extends StatelessWidget {
                           if (controller.reportContents.isEmpty) {
                             return;
                           }
-                          await controller.createPostReport(post).then((value) {
+                          await controller.createPostReport().then((value) {
                             if (Get.isDialogOpen ?? false) {
                               Get.back();
                             }
