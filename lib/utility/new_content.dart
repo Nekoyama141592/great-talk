@@ -84,7 +84,8 @@ class NewContent {
         userCount: 0);
   }
 
-  static PublicUser newUser(String uid, {String? userName, String? bio}) {
+  static PublicUser newUser(String uid,
+      {String? userName, String? bio, String? imageValue}) {
     final now = Timestamp.now();
     return PublicUser(
       accountName: "",
@@ -108,8 +109,10 @@ class NewContent {
       searchToken: {},
       uid: uid,
       updatedAt: now,
-      userImage:
-          newDetectedImage(AWSS3Utility.userImagesBucketName(), '').toJson(),
+      userImage: imageValue != null
+          ? newDetectedImage(AWSS3Utility.userImagesBucketName(), imageValue)
+              .toJson()
+          : newDetectedImage(AWSS3Utility.userImagesBucketName(), '').toJson(),
       userName: userName != null
           ? newDetectedText(userName).toJson()
           : newDetectedText('Unknown').toJson(),

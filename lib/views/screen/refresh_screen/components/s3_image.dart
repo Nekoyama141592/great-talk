@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/utility/file_utility.dart';
 
 class S3Image extends HookWidget {
@@ -20,9 +21,15 @@ class S3Image extends HookWidget {
     }, []);
     return uint8List.value == null
         ? const CircularProgressIndicator()
-        : Align(
-            alignment: Alignment.center,
-            child: Image.memory(uint8List.value!),
+        : ClipOval(
+            child: SizedBox(
+              width: userImageSize(context),
+              height: userImageSize(context),
+              child: Align(
+                alignment: Alignment.center,
+                child: Image.memory(uint8List.value!),
+              ),
+            ),
           );
   }
 }

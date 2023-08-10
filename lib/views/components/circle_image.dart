@@ -18,9 +18,9 @@ class CircleImage extends StatelessWidget {
     // オリジナルコンテンツかモックデータならURL.その他ならS3のファイル名
     final length = userImageSize(context);
     if (imageValue.isEmpty) {
-      return const Icon(
+      return Icon(
         Icons.person,
-        size: 100.0,
+        size: length,
       );
     }
     return imageValue.startsWith("https://")
