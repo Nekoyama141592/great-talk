@@ -25,7 +25,7 @@ const AWS = require('aws-sdk');
 const aws_config = config.aws;
 const AWS_ACCESS_KEY = aws_config.access_key;
 const AWS_SECRET_ACCESS_KEY = aws_config.secret_access_key;
-const AWS_REGION = aws_config.region;
+const AWS_REGION = "ap-northeast-1";
 // IAM設定
 AWS.config.update({
     accessKeyId: AWS_ACCESS_KEY,
@@ -35,6 +35,7 @@ AWS.config.update({
 const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
 const rekognition = new AWS.Rekognition();
 const postImagesBucket = aws_config.s3.post_images; // s3バケット
+const userImagesBucket = aws_config.s3.user_images; // s3バケット
 
 function saveDataToFirestore(json, path,id) {
     const db = admin.firestore();
@@ -123,8 +124,9 @@ async function detectText(text) {
     }
     return detectedText;
 }
-async function detectModerationLabels(fileName) {
+async function detectModerationLabels(bucketName,fileName) {
     let detectedImage = {
+        "bucketName": bucketName,
         "moderationLabels": [],
         "moderationModelVersion": '',
         "value": fileName,
@@ -143,6 +145,7 @@ async function detectModerationLabels(fileName) {
       };
       const moderationLabelsResponse = await rekognition.detectModerationLabels(params).promise();
       detectedImage = {
+          "bucketName": bucketName,
           "moderationLabels": moderationLabelsResponse.ModerationLabels,
           "moderationModelVersion": moderationLabelsResponse.moderationModelVersion,
           "value": fileName,
@@ -216,7 +219,7 @@ exports.onUserUpdateLogCreate = functions.firestore.document(`${userPath}/userUp
         const userRef = newValue.userRef;
         const detectedUserName = await detectText(newValue.stringUserName);
         const detectedBio = await detectText(newValue.stringBio);
-        const detectedImage = await detectModerationLabels(newValue.userImageFileName);
+        const detectedImage = await detectModerationLabels(userImagesBucket,newValue.userImageFileName);
         await userRef.update({
             'bio': detectedBio,
             'userName': detectedUserName,
@@ -248,7 +251,7 @@ exports.onPostCreate = functions.firestore.document(postPath).onCreate(
         const newValue = snap.data();
         const detectedDescription = await detectText(newValue.description['value']);
         const detectedTitle = await detectText(newValue.title['value']);
-        const detectedIconImage = await detectModerationLabels(newValue.iconImage['value']);
+        const detectedIconImage = await detectModerationLabels(postImagesBucket,newValue.iconImage['value']);
         await snap.ref.update({
             'description': detectedDescription,
             'title': detectedTitle,

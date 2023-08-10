@@ -6,6 +6,7 @@ part 'detected_image.g.dart';
 @freezed
 abstract class DetectedImage with _$DetectedImage {
   const factory DetectedImage({
+    required String bucketName,
     required List<Map<String, dynamic>> moderationLabels,
     required String moderationModelVersion,
     required String value, // オリジナルコンテンツならURL、ユーザーの投稿ならS3のファイル名

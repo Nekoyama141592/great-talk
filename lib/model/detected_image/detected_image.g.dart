@@ -8,6 +8,7 @@ part of 'detected_image.dart';
 
 _$_DetectedImage _$$_DetectedImageFromJson(Map<String, dynamic> json) =>
     _$_DetectedImage(
+      bucketName: json['bucketName'] as String,
       moderationLabels: (json['moderationLabels'] as List<dynamic>)
           .map((e) => e as Map<String, dynamic>)
           .toList(),
@@ -17,6 +18,7 @@ _$_DetectedImage _$$_DetectedImageFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_DetectedImageToJson(_$_DetectedImage instance) =>
     <String, dynamic>{
+      'bucketName': instance.bucketName,
       'moderationLabels': instance.moderationLabels,
       'moderationModelVersion': instance.moderationModelVersion,
       'value': instance.value,

@@ -6,6 +6,7 @@ import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
+import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 
 const String mockCurrentUid = "current-user";
@@ -38,7 +39,8 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("佐藤 めぐみ"),
     uid: "a",
     updatedAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
-    userImage: const DetectedImage(
+    userImage: DetectedImage(
+            bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
             value:
@@ -79,7 +81,8 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("田中 久美"),
     uid: "b",
     updatedAt: Timestamp.fromDate(DateTime(2023, 9, 28)),
-    userImage: const DetectedImage(
+    userImage: DetectedImage(
+            bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
             value:
@@ -120,7 +123,8 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("山岸 愛"),
     uid: "c",
     updatedAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
-    userImage: const DetectedImage(
+    userImage: DetectedImage(
+            bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
             value:
@@ -161,7 +165,8 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("森 遥"),
     uid: "d",
     updatedAt: Timestamp.fromDate(DateTime(2023, 2, 18)),
-    userImage: const DetectedImage(
+    userImage: DetectedImage(
+            bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
             value:
@@ -202,7 +207,8 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("橋本 美奈"),
     uid: "e",
     updatedAt: Timestamp.fromDate(DateTime(2023, 6, 1)),
-    userImage: const DetectedImage(
+    userImage: DetectedImage(
+            bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
             value:
@@ -243,7 +249,8 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("遠藤 俊夫"),
     uid: "f",
     updatedAt: Timestamp.fromDate(DateTime(2023, 2, 23)),
-    userImage: const DetectedImage(
+    userImage: DetectedImage(
+            bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
             value:
@@ -286,7 +293,8 @@ final List<PublicUser> mockUsers = [
     ),
     uid: "g",
     updatedAt: Timestamp.fromDate(DateTime(2023, 1, 8)),
-    userImage: const DetectedImage(
+    userImage: DetectedImage(
+            bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
             value:
@@ -329,7 +337,8 @@ final List<PublicUser> mockUsers = [
     ),
     uid: "h",
     updatedAt: Timestamp.fromDate(DateTime(2023, 10, 14)),
-    userImage: const DetectedImage(
+    userImage: DetectedImage(
+            bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
             value:
@@ -372,7 +381,8 @@ final List<PublicUser> mockUsers = [
     ),
     uid: "i",
     updatedAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
-    userImage: const DetectedImage(
+    userImage: DetectedImage(
+            bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
             value:
@@ -415,7 +425,8 @@ final List<PublicUser> mockUsers = [
     ),
     uid: "j",
     updatedAt: Timestamp.fromDate(DateTime(2023, 4, 28)),
-    userImage: const DetectedImage(
+    userImage: DetectedImage(
+            bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
             value:
@@ -446,7 +457,8 @@ final List<Post> mockPosts = [
       exampleTexts: [],
       genre: '',
       hashTags: [],
-      iconImage: const DetectedImage(
+      iconImage: DetectedImage(
+              bucketName: AWSS3Utility.postImagesBucketName(),
               moderationLabels: [],
               moderationModelVersion: '',
               value:
@@ -486,7 +498,8 @@ final List<Post> mockPosts = [
       exampleTexts: [],
       genre: '',
       hashTags: [],
-      iconImage: const DetectedImage(
+      iconImage: DetectedImage(
+              bucketName: AWSS3Utility.postImagesBucketName(),
               moderationLabels: [],
               moderationModelVersion: '',
               value:
@@ -525,7 +538,8 @@ final List<Post> mockPosts = [
       exampleTexts: [],
       genre: '',
       hashTags: [],
-      iconImage: const DetectedImage(
+      iconImage: DetectedImage(
+              bucketName: AWSS3Utility.postImagesBucketName(),
               moderationLabels: [],
               moderationModelVersion: '',
               value:
@@ -564,7 +578,8 @@ final List<Post> mockPosts = [
       exampleTexts: [],
       genre: '',
       hashTags: [],
-      iconImage: const DetectedImage(
+      iconImage: DetectedImage(
+              bucketName: AWSS3Utility.postImagesBucketName(),
               moderationLabels: [],
               moderationModelVersion: '',
               value:
@@ -604,7 +619,8 @@ final List<Post> mockPosts = [
       exampleTexts: [],
       genre: '',
       hashTags: [],
-      iconImage: const DetectedImage(
+      iconImage: DetectedImage(
+              bucketName: AWSS3Utility.postImagesBucketName(),
               moderationLabels: [],
               moderationModelVersion: '',
               value:

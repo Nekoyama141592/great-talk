@@ -20,6 +20,7 @@ DetectedImage _$DetectedImageFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DetectedImage {
+  String get bucketName => throw _privateConstructorUsedError;
   List<Map<String, dynamic>> get moderationLabels =>
       throw _privateConstructorUsedError;
   String get moderationModelVersion => throw _privateConstructorUsedError;
@@ -38,7 +39,8 @@ abstract class $DetectedImageCopyWith<$Res> {
       _$DetectedImageCopyWithImpl<$Res, DetectedImage>;
   @useResult
   $Res call(
-      {List<Map<String, dynamic>> moderationLabels,
+      {String bucketName,
+      List<Map<String, dynamic>> moderationLabels,
       String moderationModelVersion,
       String value});
 }
@@ -56,11 +58,16 @@ class _$DetectedImageCopyWithImpl<$Res, $Val extends DetectedImage>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? bucketName = null,
     Object? moderationLabels = null,
     Object? moderationModelVersion = null,
     Object? value = null,
   }) {
     return _then(_value.copyWith(
+      bucketName: null == bucketName
+          ? _value.bucketName
+          : bucketName // ignore: cast_nullable_to_non_nullable
+              as String,
       moderationLabels: null == moderationLabels
           ? _value.moderationLabels
           : moderationLabels // ignore: cast_nullable_to_non_nullable
@@ -86,7 +93,8 @@ abstract class _$$_DetectedImageCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Map<String, dynamic>> moderationLabels,
+      {String bucketName,
+      List<Map<String, dynamic>> moderationLabels,
       String moderationModelVersion,
       String value});
 }
@@ -102,11 +110,16 @@ class __$$_DetectedImageCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? bucketName = null,
     Object? moderationLabels = null,
     Object? moderationModelVersion = null,
     Object? value = null,
   }) {
     return _then(_$_DetectedImage(
+      bucketName: null == bucketName
+          ? _value.bucketName
+          : bucketName // ignore: cast_nullable_to_non_nullable
+              as String,
       moderationLabels: null == moderationLabels
           ? _value._moderationLabels
           : moderationLabels // ignore: cast_nullable_to_non_nullable
@@ -127,7 +140,8 @@ class __$$_DetectedImageCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_DetectedImage implements _DetectedImage {
   const _$_DetectedImage(
-      {required final List<Map<String, dynamic>> moderationLabels,
+      {required this.bucketName,
+      required final List<Map<String, dynamic>> moderationLabels,
       required this.moderationModelVersion,
       required this.value})
       : _moderationLabels = moderationLabels;
@@ -135,6 +149,8 @@ class _$_DetectedImage implements _DetectedImage {
   factory _$_DetectedImage.fromJson(Map<String, dynamic> json) =>
       _$$_DetectedImageFromJson(json);
 
+  @override
+  final String bucketName;
   final List<Map<String, dynamic>> _moderationLabels;
   @override
   List<Map<String, dynamic>> get moderationLabels {
@@ -151,7 +167,7 @@ class _$_DetectedImage implements _DetectedImage {
 
   @override
   String toString() {
-    return 'DetectedImage(moderationLabels: $moderationLabels, moderationModelVersion: $moderationModelVersion, value: $value)';
+    return 'DetectedImage(bucketName: $bucketName, moderationLabels: $moderationLabels, moderationModelVersion: $moderationModelVersion, value: $value)';
   }
 
   @override
@@ -159,6 +175,8 @@ class _$_DetectedImage implements _DetectedImage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DetectedImage &&
+            (identical(other.bucketName, bucketName) ||
+                other.bucketName == bucketName) &&
             const DeepCollectionEquality()
                 .equals(other._moderationLabels, _moderationLabels) &&
             (identical(other.moderationModelVersion, moderationModelVersion) ||
@@ -170,6 +188,7 @@ class _$_DetectedImage implements _DetectedImage {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      bucketName,
       const DeepCollectionEquality().hash(_moderationLabels),
       moderationModelVersion,
       value);
@@ -190,13 +209,16 @@ class _$_DetectedImage implements _DetectedImage {
 
 abstract class _DetectedImage implements DetectedImage {
   const factory _DetectedImage(
-      {required final List<Map<String, dynamic>> moderationLabels,
+      {required final String bucketName,
+      required final List<Map<String, dynamic>> moderationLabels,
       required final String moderationModelVersion,
       required final String value}) = _$_DetectedImage;
 
   factory _DetectedImage.fromJson(Map<String, dynamic> json) =
       _$_DetectedImage.fromJson;
 
+  @override
+  String get bucketName;
   @override
   List<Map<String, dynamic>> get moderationLabels;
   @override

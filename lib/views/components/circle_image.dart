@@ -12,6 +12,12 @@ class CircleImage extends StatelessWidget {
   Widget build(BuildContext context) {
     // オリジナルコンテンツかモックデータならURL.その他ならS3のファイル名
     final length = userImageSize(context);
+    if (imageValue.isEmpty) {
+      return const Icon(
+        Icons.person,
+        size: 100.0,
+      );
+    }
     return imageValue.startsWith("https://")
         ? InkWell(
             onTap: onTap,

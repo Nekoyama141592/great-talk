@@ -9,6 +9,7 @@ import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/private_user/private_user.dart';
 import 'package:great_talk/model/user_update_log/user_update_log.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
+import 'package:great_talk/utility/aws_s3_utility.dart';
 
 class NewContent {
   static CustomCompleteText newCustomCompleteText(String systemPrompt) =>
@@ -19,8 +20,12 @@ class NewContent {
       positiveScore: 0.0,
       sentiment: "",
       value: value);
-  static DetectedImage newDetectedImage(String url) => DetectedImage(
-      moderationLabels: [], moderationModelVersion: "", value: url);
+  static DetectedImage newDetectedImage(String bucketName, String value) =>
+      DetectedImage(
+          bucketName: bucketName,
+          moderationLabels: [],
+          moderationModelVersion: "",
+          value: value);
   static Post newPost(String systemPrompt, String title, String description,
       String fileName, PublicUser poster, String postId, DocRef postRef) {
     final now = Timestamp.now();
@@ -31,7 +36,9 @@ class NewContent {
         exampleTexts: [],
         genre: '',
         hashTags: [],
-        iconImage: newDetectedImage(fileName).toJson(),
+        iconImage:
+            newDetectedImage(AWSS3Utility.postImagesBucketName(), fileName)
+                .toJson(),
         impressionCount: 0,
         likeCount: 40,
         links: [],
@@ -69,7 +76,8 @@ class NewContent {
       searchToken: {},
       uid: uid,
       updatedAt: now,
-      userImage: newDetectedImage('').toJson(),
+      userImage:
+          newDetectedImage(AWSS3Utility.userImagesBucketName(), '').toJson(),
       userName: userName != null
           ? newDetectedText(userName).toJson()
           : newDetectedText('Unknown').toJson(),
