@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/maps.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
+import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
@@ -447,7 +448,8 @@ final List<Post> mockPosts = [
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 5, 25)),
       customCompleteText:
-          NewContent.newCustomCompleteText("語尾に必ず「にゃん」をつけて返答してください。").toJson(),
+          const CustomCompleteText(systemPrompt: "語尾に必ず「にゃん」をつけて返答してください。")
+              .toJson(),
       description: const DetectedText(
               languageCode: '',
               negativeScore: 0.0,
@@ -487,7 +489,7 @@ final List<Post> mockPosts = [
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
       customCompleteText:
-          NewContent.newCustomCompleteText("「序論」、「本論」、「結論」に分けて返答してください。")
+          const CustomCompleteText(systemPrompt: "「序論」、「本論」、「結論」に分けて返答してください。")
               .toJson(),
       description: const DetectedText(
               languageCode: '',
@@ -528,7 +530,8 @@ final List<Post> mockPosts = [
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 2, 22)),
       customCompleteText:
-          NewContent.newCustomCompleteText("画期的なアイデアを出しながら返答してください。").toJson(),
+          const CustomCompleteText(systemPrompt: "画期的なアイデアを出しながら返答してください。")
+              .toJson(),
       description: const DetectedText(
               languageCode: '',
               negativeScore: 0.0,
@@ -568,7 +571,8 @@ final List<Post> mockPosts = [
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 7, 19)),
       customCompleteText:
-          NewContent.newCustomCompleteText("以下の質問をソースコードで返答してください。").toJson(),
+          const CustomCompleteText(systemPrompt: "以下の質問をソースコードで返答してください。")
+              .toJson(),
       description: const DetectedText(
               languageCode: '',
               negativeScore: 0.0,
@@ -607,9 +611,9 @@ final List<Post> mockPosts = [
       userCount: 0),
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 4, 7)),
-      customCompleteText:
-          NewContent.newCustomCompleteText("まず、相手に寄り添うようなことを言ってから、返答を続けてください。")
-              .toJson(),
+      customCompleteText: const CustomCompleteText(
+              systemPrompt: "まず、相手に寄り添うようなことを言ってから、返答を続けてください。")
+          .toJson(),
       description: const DetectedText(
               languageCode: '',
               negativeScore: 0.0,

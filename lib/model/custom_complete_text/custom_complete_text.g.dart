@@ -14,9 +14,6 @@ _$_CustomCompleteText _$$_CustomCompleteTextFromJson(
       topP: (json['topP'] as num?)?.toDouble(),
       presencePenalty: (json['presencePenalty'] as num?)?.toDouble(),
       frequencyPenalty: (json['frequencyPenalty'] as num?)?.toDouble(),
-      functions: (json['functions'] as List<dynamic>?)
-          ?.map((e) => e as Map<String, dynamic>)
-          .toList(),
     );
 
 Map<String, dynamic> _$$_CustomCompleteTextToJson(
@@ -27,5 +24,4 @@ Map<String, dynamic> _$$_CustomCompleteTextToJson(
       'topP': instance.topP,
       'presencePenalty': instance.presencePenalty,
       'frequencyPenalty': instance.frequencyPenalty,
-      'functions': instance.functions,
     };

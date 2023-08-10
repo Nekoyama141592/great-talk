@@ -25,7 +25,6 @@ mixin _$CustomCompleteText {
   double? get topP => throw _privateConstructorUsedError;
   double? get presencePenalty => throw _privateConstructorUsedError;
   double? get frequencyPenalty => throw _privateConstructorUsedError;
-  List<SDMap>? get functions => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,8 +43,7 @@ abstract class $CustomCompleteTextCopyWith<$Res> {
       double? temperature,
       double? topP,
       double? presencePenalty,
-      double? frequencyPenalty,
-      List<SDMap>? functions});
+      double? frequencyPenalty});
 }
 
 /// @nodoc
@@ -66,7 +64,6 @@ class _$CustomCompleteTextCopyWithImpl<$Res, $Val extends CustomCompleteText>
     Object? topP = freezed,
     Object? presencePenalty = freezed,
     Object? frequencyPenalty = freezed,
-    Object? functions = freezed,
   }) {
     return _then(_value.copyWith(
       systemPrompt: null == systemPrompt
@@ -89,10 +86,6 @@ class _$CustomCompleteTextCopyWithImpl<$Res, $Val extends CustomCompleteText>
           ? _value.frequencyPenalty
           : frequencyPenalty // ignore: cast_nullable_to_non_nullable
               as double?,
-      functions: freezed == functions
-          ? _value.functions
-          : functions // ignore: cast_nullable_to_non_nullable
-              as List<SDMap>?,
     ) as $Val);
   }
 }
@@ -110,8 +103,7 @@ abstract class _$$_CustomCompleteTextCopyWith<$Res>
       double? temperature,
       double? topP,
       double? presencePenalty,
-      double? frequencyPenalty,
-      List<SDMap>? functions});
+      double? frequencyPenalty});
 }
 
 /// @nodoc
@@ -130,7 +122,6 @@ class __$$_CustomCompleteTextCopyWithImpl<$Res>
     Object? topP = freezed,
     Object? presencePenalty = freezed,
     Object? frequencyPenalty = freezed,
-    Object? functions = freezed,
   }) {
     return _then(_$_CustomCompleteText(
       systemPrompt: null == systemPrompt
@@ -153,10 +144,6 @@ class __$$_CustomCompleteTextCopyWithImpl<$Res>
           ? _value.frequencyPenalty
           : frequencyPenalty // ignore: cast_nullable_to_non_nullable
               as double?,
-      functions: freezed == functions
-          ? _value._functions
-          : functions // ignore: cast_nullable_to_non_nullable
-              as List<SDMap>?,
     ));
   }
 }
@@ -169,10 +156,8 @@ class _$_CustomCompleteText extends _CustomCompleteText {
       this.temperature,
       this.topP,
       this.presencePenalty,
-      this.frequencyPenalty,
-      final List<SDMap>? functions})
-      : _functions = functions,
-        super._();
+      this.frequencyPenalty})
+      : super._();
 
   factory _$_CustomCompleteText.fromJson(Map<String, dynamic> json) =>
       _$$_CustomCompleteTextFromJson(json);
@@ -187,19 +172,10 @@ class _$_CustomCompleteText extends _CustomCompleteText {
   final double? presencePenalty;
   @override
   final double? frequencyPenalty;
-  final List<SDMap>? _functions;
-  @override
-  List<SDMap>? get functions {
-    final value = _functions;
-    if (value == null) return null;
-    if (_functions is EqualUnmodifiableListView) return _functions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @override
   String toString() {
-    return 'CustomCompleteText(systemPrompt: $systemPrompt, temperature: $temperature, topP: $topP, presencePenalty: $presencePenalty, frequencyPenalty: $frequencyPenalty, functions: $functions)';
+    return 'CustomCompleteText(systemPrompt: $systemPrompt, temperature: $temperature, topP: $topP, presencePenalty: $presencePenalty, frequencyPenalty: $frequencyPenalty)';
   }
 
   @override
@@ -215,21 +191,13 @@ class _$_CustomCompleteText extends _CustomCompleteText {
             (identical(other.presencePenalty, presencePenalty) ||
                 other.presencePenalty == presencePenalty) &&
             (identical(other.frequencyPenalty, frequencyPenalty) ||
-                other.frequencyPenalty == frequencyPenalty) &&
-            const DeepCollectionEquality()
-                .equals(other._functions, _functions));
+                other.frequencyPenalty == frequencyPenalty));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      systemPrompt,
-      temperature,
-      topP,
-      presencePenalty,
-      frequencyPenalty,
-      const DeepCollectionEquality().hash(_functions));
+  int get hashCode => Object.hash(runtimeType, systemPrompt, temperature, topP,
+      presencePenalty, frequencyPenalty);
 
   @JsonKey(ignore: true)
   @override
@@ -252,8 +220,7 @@ abstract class _CustomCompleteText extends CustomCompleteText {
       final double? temperature,
       final double? topP,
       final double? presencePenalty,
-      final double? frequencyPenalty,
-      final List<SDMap>? functions}) = _$_CustomCompleteText;
+      final double? frequencyPenalty}) = _$_CustomCompleteText;
   const _CustomCompleteText._() : super._();
 
   factory _CustomCompleteText.fromJson(Map<String, dynamic> json) =
@@ -269,8 +236,6 @@ abstract class _CustomCompleteText extends CustomCompleteText {
   double? get presencePenalty;
   @override
   double? get frequencyPenalty;
-  @override
-  List<SDMap>? get functions;
   @override
   @JsonKey(ignore: true)
   _$$_CustomCompleteTextCopyWith<_$_CustomCompleteText> get copyWith =>

@@ -6,6 +6,7 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/aws_s3_repository.dart';
@@ -13,6 +14,7 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
+import 'package:great_talk/validator/post_validator.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 import 'package:great_talk/views/create_post/components/form_label.dart';
 import 'package:great_talk/views/create_post/components/original_form.dart';
@@ -318,7 +320,6 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
           );
   }
 
-  // ユーザーログイン関数
   void _onCreateButtonPressed() async {
     if (_formKey.currentState!.validate()) {
       // フォームフィールドの情報を変数に保存
@@ -326,11 +327,15 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
     }
     if (uint8list == null) {
       await UIHelper.showErrorFlutterToast("アイコンをタップして画像をアップロードしてください");
+      return;
     }
-    if (title == null ||
-        systemPrompt == null ||
-        title!.isEmpty ||
-        systemPrompt!.isEmpty) {
+    if (PostValidator.isInValidPost(description, systemPrompt, title,
+        temperature, topP, presencePenalty, frequencyPenalty)) {
+      return;
+    }
+    if ((temperature!.toDouble() != defaultTemperature) &&
+        (topP!.toDouble() != defaultTopP)) {
+      await UIHelper.showErrorFlutterToast("temperatureとtopPはどちらか一方しか変更できません");
       return;
     }
     final newFileName = s3FileName();
@@ -356,8 +361,17 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
     final repository = FirestoreRepository();
     final postId = randomString();
     final postRef = FirestoreQueries.userPostRef(currentUid(), postId);
-    final newPost = NewContent.newPost(systemPrompt!, title!, description!,
-        fileName, CurrentUserController.to.publicUser.value!, postId, postRef);
+    final customCompleteText = NewContent.newCustomCompleteText(systemPrompt!,
+        temperature!, topP!, presencePenalty!, frequencyPenalty!);
+    final newPost = NewContent.newPost(
+        systemPrompt!,
+        title!,
+        description!,
+        fileName,
+        CurrentUserController.to.publicUser.value!,
+        postId,
+        postRef,
+        customCompleteText.toJson());
     final result = await repository.createPost(postRef, newPost.toJson());
     result.when(success: (_) {
       UIHelper.showFlutterToast("投稿が作成できました！");
