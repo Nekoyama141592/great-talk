@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/common/texts.dart';
 
 class MosaicCard extends StatelessWidget {
-  const MosaicCard({Key? key}) : super(key: key);
+  const MosaicCard({Key? key, required this.child}) : super(key: key);
+  final Widget child;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,8 +18,7 @@ class MosaicCard extends StatelessWidget {
           ),
         ],
       ),
-      child: const Align(
-          alignment: Alignment.center, child: BoldWhiteText("不適切なコンテンツ")),
+      child: child,
     );
   }
 }

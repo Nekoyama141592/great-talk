@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
@@ -42,4 +43,22 @@ abstract class PublicUser implements _$PublicUser {
   Timestamp typedUpdatedAtAt() => updatedAt as Timestamp;
   DetectedImage typedUserImage() => DetectedImage.fromJson(userImage);
   DetectedText typedUserName() => DetectedText.fromJson(userName);
+
+  bool isInappropriate() =>
+      typedUserImage().moderationLabels.isNotEmpty ||
+      typedBio().negativeScore > negativeLimit ||
+      typedUserName().negativeScore > negativeLimit;
+  String inappropriateReason() {
+    String reason = "";
+    if (typedUserImage().moderationLabels.isNotEmpty) {
+      reason += "・写真が不適切です。\n";
+    }
+    if (typedBio().negativeScore > negativeLimit) {
+      reason += "・紹介文がネガティブです。\n";
+    }
+    if (typedUserName().negativeScore > negativeLimit) {
+      reason += "・ユーザー名がネガティブです。\n";
+    }
+    return reason;
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
@@ -75,5 +76,19 @@ abstract class ChatContent implements _$ChatContent {
     } else {
       return ref as DocRef;
     }
+  }
+
+  bool isInappropriate() =>
+      typedIconImage().moderationLabels.isNotEmpty ||
+      typedDescription().negativeScore > negativeLimit;
+  String inappropriateReason() {
+    String reason = "";
+    if (typedIconImage().moderationLabels.isNotEmpty) {
+      reason += "・写真が不適切です。\n";
+    }
+    if (typedDescription().negativeScore > negativeLimit) {
+      reason += "・説明文がネガティブです。\n";
+    }
+    return reason;
   }
 }
