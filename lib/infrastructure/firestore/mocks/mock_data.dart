@@ -10,7 +10,8 @@ import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 
 const String mockCurrentUid = "current-user";
-final currentUser = NewContent.newUser(mockCurrentUid, userName: "M.LO");
+final currentUser =
+    NewContent.newUser(mockCurrentUid, userName: "M.LO", bio: "すごいAIの開発者です");
 final privatetUser = NewContent.newPrivateUser(mockCurrentUid);
 final List<PublicUser> mockUsers = [
   PublicUser(

@@ -12,35 +12,41 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
   final ProfileController controller;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        controller.isMyProfile ? const EditButton() : const FollowButton(),
-        Row(
+    final children = [
+      Row(
+        children: [
+          Obx(() => Text(controller.passiveUid() == currentUid()
+              ? "フォロー ${CurrentUserController.to.followingUids.length}"
+              : "フォロー ${controller.passiveUser.value?.followingCount ?? 0}")),
+          Obx(() =>
+              Text("フォロワー ${controller.passiveUser.value?.followerCount ?? 0}"))
+        ],
+      ),
+      Row(
+        children: [
+          Obx(() => Text(controller.passiveUser.value!.typedUserName().value)),
+          InkWell(
+            onTap: () =>
+                Get.toNamed("/users/${controller.passiveUid()}/posts/search"),
+            child: const Icon(Icons.search),
+          )
+        ],
+      ),
+      Obx(() => Align(
+            alignment: Alignment.centerLeft,
+            child: Text(controller.passiveUser.value!.typedBio().value),
+          )),
+    ];
+    return Obx(() => Column(
           children: [
-            Obx(() => Text(controller.passiveUid() == currentUid()
-                ? "フォロー ${CurrentUserController.to.followingUids.length}"
-                : "フォロー ${controller.passiveUser.value?.followingCount ?? 0}")),
-            Obx(() => Text(
-                "フォロワー ${controller.passiveUser.value?.followerCount ?? 0}"))
+            controller.isMyProfile ? const EditButton() : const FollowButton(),
+            if (controller.passiveUser.value != null) ...children,
+            Expanded(
+                // ここで初期化している
+                child: RefreshScreen(
+              docsController: controller,
+            ))
           ],
-        ),
-        Row(
-          children: [
-            Obx(() => controller.passiveUser.value == null
-                ? const Text('')
-                : Text(controller.passiveUser.value!.typedUserName().value)),
-            InkWell(
-              onTap: () =>
-                  Get.toNamed("/users/${controller.passiveUid()}/posts/search"),
-              child: const Icon(Icons.search),
-            )
-          ],
-        ),
-        Expanded(
-            child: RefreshScreen(
-          docsController: controller,
-        ))
-      ],
-    );
+        ));
   }
 }

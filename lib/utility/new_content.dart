@@ -54,12 +54,14 @@ class NewContent {
         userCount: 0);
   }
 
-  static PublicUser newUser(String uid, {String? userName}) {
+  static PublicUser newUser(String uid, {String? userName, String? bio}) {
     final now = Timestamp.now();
     return PublicUser(
       accountName: "",
       createdAt: now,
-      bio: newDetectedText("").toJson(),
+      bio: bio != null
+          ? newDetectedText(bio).toJson()
+          : newDetectedText("").toJson(),
       blockCount: 0,
       ethAddress: '',
       followerCount: 0,
