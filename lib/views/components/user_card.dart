@@ -11,30 +11,34 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(defaultPadding(context)),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Theme.of(context).primaryColor),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: InkWell(
-          onTap: () => Get.toNamed("/users/${publicUser.uid}"),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              CircleImage(
-                  bucketName: publicUser.typedUserImage().bucketName,
-                  imageValue: publicUser.typedUserImage().value),
-              const Spacer(),
-              EllipsisText(publicUser.typedUserName().value),
-              const Spacer(),
-              const Icon(Icons.people),
-              Text(publicUser.followerCount.toString())
-            ],
-          ),
-        ),
-      ),
-    );
+    return publicUser.typedUserImage().moderationLabels.isNotEmpty ||
+            publicUser.typedBio().negativeScore > negativeLimit ||
+            publicUser.typedUserName().negativeScore > negativeLimit
+        ? const SizedBox.shrink()
+        : Padding(
+            padding: EdgeInsets.all(defaultPadding(context)),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(context).primaryColor),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: InkWell(
+                onTap: () => Get.toNamed("/users/${publicUser.uid}"),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CircleImage(
+                        bucketName: publicUser.typedUserImage().bucketName,
+                        imageValue: publicUser.typedUserImage().value),
+                    const Spacer(),
+                    EllipsisText(publicUser.typedUserName().value),
+                    const Spacer(),
+                    const Icon(Icons.people),
+                    Text(publicUser.followerCount.toString())
+                  ],
+                ),
+              ),
+            ),
+          );
   }
 }

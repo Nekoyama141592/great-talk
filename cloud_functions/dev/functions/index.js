@@ -14,6 +14,7 @@ const IOS_PKG_NAME = appStoreConfig.ios_pkg_name;
 const fHttps = functions.https;
 // firestore
 const userPath = "public/{version}/users/{uid}";
+const postPath = `${userPath}/posts/{postId}`;
 const batchLimit = 500;
 // AWS
 const AWS = require('aws-sdk');
@@ -158,7 +159,20 @@ async function detectModerationLabels(bucketName, fileName) {
     return detectedImage;
 }
 
+exports.onPostCreate = functions.firestore.document(postPath).onCreate(
+    async (snap,_) => {
+        const newValue = snap.data();
+        const detectedDescription = await detectText(newValue.description.value);
+        const detectedTitle = await detectText(newValue.title.value);
+        const detectedIconImage = await detectModerationLabels(postImagesBucket,newValue.iconImage.value);
+        await snap.ref.update({
+            'description': detectedDescription,
+            'title': detectedTitle,
+            'iconImage': detectedIconImage,
+        });
 
+    }
+);
 exports.onUserUpdateLogCreate = functions.firestore.document(`${userPath}/userUpdateLogs/{id}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
