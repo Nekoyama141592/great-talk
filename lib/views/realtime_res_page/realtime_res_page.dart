@@ -29,7 +29,16 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-              actions: const [DescriptionButton(), PostReportButton()],
+              actions: const [
+                DescriptionButton(),
+                SizedBox(
+                  width: 20.0,
+                ),
+                PostReportButton(),
+                SizedBox(
+                  width: 20.0,
+                )
+              ],
               title: Obx(() =>
                   EllipsisText(controller.interlocutor.value?.title ?? ""))),
           body: Obx(() => controller.isLoading.value ||

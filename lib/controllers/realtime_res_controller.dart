@@ -11,7 +11,6 @@ import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/main_controller.dart';
-import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
@@ -255,8 +254,6 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     await _setLocalMessage();
     await _setLocalDate();
     await _setChatCount();
-    await PersonsController.to
-        .setLatestPersons(interlocutor.value!, realtimeRes.value);
   }
 
   Future<void> _setLocalMessage() async {

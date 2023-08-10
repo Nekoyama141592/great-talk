@@ -39,7 +39,7 @@ class RefreshScreen extends HookWidget {
                     itemCount: docsController.docs.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3, childAspectRatio: 0.6),
+                            crossAxisCount: 3, childAspectRatio: 0.5),
                     itemBuilder: (c, i) {
                       final post = Post.fromJson(docsController.docs[i].data());
                       return Obx(() =>

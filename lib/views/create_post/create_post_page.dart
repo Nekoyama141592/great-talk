@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
@@ -139,7 +140,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
         decoration: const InputDecoration(hintText: "例: 語尾に「にゃん」をつけて話してくれます！"),
         onSaved: (value) {
           setState(() {
-            title = value;
+            description = value;
           });
         },
         validator: (value) {
@@ -363,7 +364,9 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
     final postId = randomString();
     final postRef = FirestoreQueries.userPostRef(currentUid(), postId);
     final customCompleteText = NewContent.newCustomCompleteText(systemPrompt!,
-        temperature!, topP!, presencePenalty!, frequencyPenalty!);
+            temperature!, topP!, presencePenalty!, frequencyPenalty!)
+        .toJson()
+      ..removeWhere((key, value) => value == null);
     final newPost = NewContent.newPost(
         systemPrompt!,
         title!,
@@ -372,9 +375,10 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
         CurrentUserController.to.publicUser.value!,
         postId,
         postRef,
-        customCompleteText.toJson());
+        customCompleteText);
     final result = await repository.createPost(postRef, newPost.toJson());
     result.when(success: (_) {
+      Get.back();
       UIHelper.showFlutterToast("投稿が作成できました！");
     }, failure: () {
       UIHelper.showErrorFlutterToast("投稿が作成できませんでした");

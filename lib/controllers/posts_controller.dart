@@ -32,7 +32,8 @@ class PostsController extends GetxController with CurrentUserMixin {
   }
 
   void onReportButtonPressed(BuildContext context) {
-    if (returnIsOriginalContents(Get.parameters['uid']!)) {
+    final posterUid = Get.parameters['uid']!;
+    if (returnIsOriginalContents(posterUid) || currentUid() == posterUid) {
       return;
     }
     showCupertinoModalPopup(

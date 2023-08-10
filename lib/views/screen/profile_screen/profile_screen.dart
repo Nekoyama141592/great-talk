@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/profile_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/utility/style_utility.dart';
@@ -57,9 +56,7 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
               Row(
                 children: [
                   Obx(() => Text(
-                        controller.passiveUid() == currentUid()
-                            ? "フォロー ${CurrentUserController.to.followingUids.length}"
-                            : "フォロー ${controller.passiveUser.value?.followingCount ?? 0}",
+                        "フォロー ${controller.passiveUser.value?.followingCount ?? 0}",
                         style: StyleUtility.basic20(),
                       )),
                   const SizedBox(
