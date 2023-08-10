@@ -22,7 +22,9 @@ class UserCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              CircleImage(imageValue: publicUser.typedUserImage().value),
+              CircleImage(
+                  bucketName: publicUser.typedUserImage().bucketName,
+                  imageValue: publicUser.typedUserImage().value),
               const Spacer(),
               Text(publicUser.typedUserName().value),
               const Spacer(),

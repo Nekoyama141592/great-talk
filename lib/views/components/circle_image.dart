@@ -4,8 +4,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/s3_image.dart';
 
 class CircleImage extends StatelessWidget {
-  const CircleImage({Key? key, required this.imageValue, this.onTap})
+  const CircleImage(
+      {Key? key,
+      required this.bucketName,
+      required this.imageValue,
+      this.onTap})
       : super(key: key);
+  final String bucketName;
   final String imageValue;
   final void Function()? onTap;
   @override
@@ -39,6 +44,6 @@ class CircleImage extends StatelessWidget {
               ),
             ),
           )
-        : S3Image(fileName: imageValue);
+        : S3Image(bucketName: bucketName, fileName: imageValue);
   }
 }

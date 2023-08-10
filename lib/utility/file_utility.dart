@@ -17,9 +17,10 @@ class FileUtility {
     return compressedImage;
   }
 
-  static Future<Uint8List?> getS3Image(String fileName) async {
+  static Future<Uint8List?> getS3Image(
+      String bucketName, String fileName) async {
     final repository = AWSS3Repository();
-    final result = await repository.getImage(fileName);
+    final result = await repository.getImage(bucketName, fileName);
     Uint8List? uint8List;
     result.when(success: (res) {
       uint8List = res;

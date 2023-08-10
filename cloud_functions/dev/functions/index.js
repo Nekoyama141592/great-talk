@@ -131,7 +131,7 @@ async function detectModerationLabels(bucketName,fileName) {
         "moderationModelVersion": '',
         "value": fileName,
     };
-    if (!text || text.trim() === "") {
+    if (!bucketName || bucketName.trim() === "" || !fileName || fileName.trim() === "") {
         return detectedImage;
     }
     try {

@@ -41,7 +41,8 @@ class OriginalContentCards extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           vertical: defaultPadding(context)),
                       child: ListTile(
-                        leading: CircleImage(imageValue: content.imageValue),
+                        leading: CircleImage(
+                            bucketName: "", imageValue: content.imageValue),
                         title: boldText(name),
                         subtitle: lastAnswer != null
                             ? Text(

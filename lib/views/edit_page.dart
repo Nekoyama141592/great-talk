@@ -11,6 +11,7 @@ import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/aws_s3_repository.dart';
 import 'package:great_talk/model/user_update_log/user_update_log.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 import 'package:great_talk/views/create_post/components/form_label.dart';
@@ -182,8 +183,9 @@ class _CreatePostPageState extends State<EditProfilePage>
     }
     final newFileName = s3FileName();
     final repository = AWSS3Repository();
+    final bucketName = AWSS3Utility.userImagesBucketName();
     final result =
-        await repository.uploadImage(uint8list!, newFileName); // TODO: バケットを分けろ
+        await repository.uploadImage(uint8list!, bucketName, newFileName);
     result.when(
         success: (res) => _createUserUpdateLog(res),
         failure: () {

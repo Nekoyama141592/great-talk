@@ -4,9 +4,9 @@ import 'package:great_talk/repository/result.dart';
 
 class AWSS3Repository {
   final client = AWSS3Client();
-  FutureResult<Uint8List> getImage(String fileName) async {
+  FutureResult<Uint8List> getImage(String bucketName, String fileName) async {
     try {
-      final stream = await client.getImage(fileName);
+      final stream = await client.getImage(bucketName, fileName);
       List<int> memory = [];
       await for (var value in stream) {
         memory.addAll(value);
@@ -20,9 +20,9 @@ class AWSS3Repository {
   }
 
   FutureResult<String> uploadImage(
-      Uint8List uint8list, String newFileName) async {
+      Uint8List uint8list, String bucketName, String newFileName) async {
     try {
-      await client.uploadImage(uint8list, newFileName);
+      await client.uploadImage(uint8list, bucketName, newFileName);
       return Result.success(newFileName);
     } catch (e) {
       debugPrint(e.toString());

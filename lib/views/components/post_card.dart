@@ -26,6 +26,7 @@ class PostCard extends StatelessWidget {
           child: Column(
             children: [
               CircleImage(
+                bucketName: post.typedIconImage().bucketName,
                 imageValue: content.imageValue,
                 onTap: () => Get.toNamed(
                     '/chat/users/${post.typedPoster().uid}/posts/${post.postId}'),

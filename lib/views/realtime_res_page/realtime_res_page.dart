@@ -61,6 +61,9 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                                 ? null
                                                 : controller.onCardLongTap,
                                         leading: Obx(() => CircleImage(
+                                            bucketName: controller.post!
+                                                .typedIconImage()
+                                                .bucketName,
                                             imageValue: controller.interlocutor
                                                 .value!.imageValue)),
                                         title:
@@ -87,14 +90,17 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                                     .to.currentUser.value!.uid
                                             ? kSecondaryColor.withOpacity(0.3)
                                             : null,
-                                        leading:
-                                            messages[index].uid != currentUid()
-                                                ? Obx(() => CircleImage(
-                                                    imageValue: controller
-                                                        .interlocutor
-                                                        .value!
-                                                        .imageValue))
-                                                : null,
+                                        leading: messages[index].uid !=
+                                                currentUid()
+                                            ? Obx(() => CircleImage(
+                                                bucketName: controller.post!
+                                                    .typedIconImage()
+                                                    .bucketName,
+                                                imageValue: controller
+                                                    .interlocutor
+                                                    .value!
+                                                    .imageValue))
+                                            : null,
                                         title:
                                             purchaseController.isSubscribing()
                                                 ? SelectableText(text)

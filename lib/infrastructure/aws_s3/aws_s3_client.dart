@@ -12,17 +12,16 @@ final minio = Minio(
 );
 
 class AWSS3Client {
-  Future<MinioByteStream> getImage(String fileName) async {
-    final backetName = dotenv.get(EnvKeys.AWS_S3_POST_IMAGES_BUCKET.name);
-    final stream = await minio.getObject(backetName, fileName);
+  Future<MinioByteStream> getImage(String bucketName, String fileName) async {
+    final stream = await minio.getObject(bucketName, fileName);
     return stream;
   }
 
-  Future<void> uploadImage(Uint8List uint8List, String newFileName) async {
-    final backetName = dotenv.get(EnvKeys.AWS_S3_POST_IMAGES_BUCKET.name);
+  Future<void> uploadImage(
+      Uint8List uint8List, String bucketName, String newFileName) async {
     Stream<Uint8List> imageBytes = Stream.value(uint8List);
     await minio.putObject(
-      backetName,
+      bucketName,
       newFileName,
       imageBytes,
     );

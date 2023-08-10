@@ -10,6 +10,7 @@ import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
@@ -328,8 +329,10 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
       return;
     }
     final newFileName = s3FileName();
+    final bucketName = AWSS3Utility.postImagesBucketName();
     final repository = AWSS3Repository();
-    final result = await repository.uploadImage(uint8list!, newFileName);
+    final result =
+        await repository.uploadImage(uint8list!, bucketName, newFileName);
     result.when(
         success: (res) => _createPost(res),
         failure: () {
