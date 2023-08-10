@@ -341,11 +341,12 @@ class CurrentUserController extends GetxController {
     });
   }
 
-  void updateUser(String userName, String bio) {
+  void updateUser(String userName, String bio,String fileName) {
     final user = publicUser.value!;
     final result = user.copyWith(
       bio: user.typedBio().copyWith(value: bio).toJson(),
       userName: user.typedUserName().copyWith(value: userName).toJson(),
+      userImage: user.typedUserImage().copyWith(value: fileName).toJson()
     );
     CurrentUserController.to.publicUser(result);
   }
