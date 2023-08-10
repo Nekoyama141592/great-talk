@@ -15,6 +15,21 @@ const fHttps = functions.https;
 // firestore
 const userPath = "public/{version}/users/{uid}";
 const batchLimit = 500;
+// AWS
+const AWS = require('aws-sdk');
+const aws_config = config.aws;
+const AWS_ACCESS_KEY = aws_config.access_key;
+const AWS_SECRET_ACCESS_KEY = aws_config.secret_access_key;
+const AWS_REGION = "ap-northeast-1";
+AWS.config.update({
+    accessKeyId: AWS_ACCESS_KEY,
+    secretAccessKey: AWS_SECRET_ACCESS_KEY,
+    region: AWS_REGION,
+});
+const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
+const rekognition = new AWS.Rekognition();
+const postImagesBucket = aws_config.s3.post_images; // s3バケット
+const userImagesBucket = aws_config.s3.user_images; // s3バケット
 
 function saveDataToFirestore(json, path,id) {
     const db = admin.firestore();
@@ -24,18 +39,138 @@ function getDataFromFirestore(path,id) {
     const db = admin.firestore();
     return db.collection(path).doc(id).get();
 }
+function mul100AndRoundingDown(num) {
+    const mul100 = num * 100; // ex) 0.9988を99.88にする
+    const result = Math.floor(mul100); // 数字を丸める
+    return result;
+}
+async function detectDominantLanguage(text) {
+    let lCode = '';
+    
+    if (!text || text.trim() === "") {
+        return lCode;
+    }
+    
+    const dDparams = {
+        Text: text
+    };
+
+    try {
+        const dDdata = await new Promise((resolve, reject) => {
+            comprehend.detectDominantLanguage(dDparams, (dDerr, dDdata) => {
+                if (dDerr) {
+                    reject(dDerr);
+                } else {
+                    resolve(dDdata);
+                }
+            });
+        });
+
+        lCode = dDdata.Languages[0]["LanguageCode"];
+        return lCode;
+    } catch (error) {
+        console.log(error);
+        return lCode;
+    }
+}
+// この関数が原因?
+async function detectText(text) {
+    let detectedText = {
+        "languageCode": "",
+        "negativeScore": 0.0,
+        "positiveScore": 0.0,
+        "sentiment": "",
+        "value": text,
+    };
+
+    if (!text || text.trim() === "") {
+        return detectedText;
+    }
+
+    try {
+        const lCode = await detectDominantLanguage(text);
+        if (lCode) {
+            const dSparams = {
+                LanguageCode: lCode,
+                Text: text,
+            };
+
+            const dSdata = await new Promise((resolve, reject) => {
+                comprehend.detectSentiment(dSparams, (dSerr, dSdata) => {
+                    if (dSerr) {
+                        reject(dSerr);
+                    } else {
+                        resolve(dSdata);
+                    }
+                });
+            });
+
+            detectedText = {
+                "languageCode": lCode,
+                "negativeScore": mul100AndRoundingDown(dSdata.SentimentScore.Negative),
+                "positiveScore": mul100AndRoundingDown(dSdata.SentimentScore.Positive),
+                "sentiment": dSdata.Sentiment,
+                "value": text,
+            };
+        }
+
+        return detectedText;
+    } catch (error) {
+        console.log(error);
+        return detectedText;
+    }
+}
+async function detectModerationLabels(bucketName, fileName) {
+    let detectedImage = {
+        "bucketName": bucketName,
+        "moderationLabels": [],
+        "moderationModelVersion": '',
+        "value": fileName,
+    };
+
+    if (!bucketName || bucketName.trim() === "" || !fileName || fileName.trim() === "") {
+        return detectedImage;
+    }
+
+    try {
+        const params = {
+            Image: {
+                S3Object: {
+                    Bucket: bucketName,
+                    Name: fileName,
+                },
+            },
+            MinConfidence: 60,
+        };
+
+        const moderationLabelsResponse = await rekognition.detectModerationLabels(params).promise();
+
+        detectedImage = {
+            "bucketName": bucketName,
+            "moderationLabels": moderationLabelsResponse.ModerationLabels,
+            "moderationModelVersion": moderationLabelsResponse.ModerationModelVersion,
+            "value": fileName,
+        };
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
+    return detectedImage;
+}
+
+
 exports.onUserUpdateLogCreate = functions.firestore.document(`${userPath}/userUpdateLogs/{id}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
         const userRef = newValue.userRef;
-        // const detectedUserName = await detectText(newValue.stringUserName);
-        // const detectedBio = await detectText(newValue.stringBio);
-        // const detectedImage = await detectModerationLabels(userImagesBucket,newValue.userImageFileName);
-        // await userRef.update({
-        //     'bio': detectedBio,
-        //     'userName': detectedUserName,
-        //     'userImage': detectedImage,
-        // });
+        const detectedUserName = await detectText(newValue.stringUserName);
+        const detectedBio = await detectText(newValue.stringBio);
+        const detectedImage = await detectModerationLabels(userImagesBucket,newValue.userImageFileName);
+        await userRef.update({
+            'bio': detectedBio,
+            'userName': detectedUserName,
+            'userImage': detectedImage,
+        });
         const user = await userRef.get();
         const posts = await userRef.collection('public').doc('v1').collection('posts').get();
         let postCount = 0;
