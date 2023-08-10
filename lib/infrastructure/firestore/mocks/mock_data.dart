@@ -448,7 +448,7 @@ final List<Post> mockPosts = [
   Post(
       createdAt: Timestamp.fromDate(DateTime(2023, 5, 25)),
       customCompleteText:
-          const CustomCompleteText(systemPrompt: "語尾に必ず「にゃん」をつけて返答してください。")
+          const CustomCompleteText(systemPrompt: "語尾に必ず「にゃん」をつけて返答して！")
               .toJson(),
       description: const DetectedText(
               languageCode: '',

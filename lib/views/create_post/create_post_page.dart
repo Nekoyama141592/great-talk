@@ -31,13 +31,13 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
   // ログとフォームキーをとる
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String? title; // titleの変数
-  String? systemPrompt; // systemPromptの変数
-  String? description;
-  String? temperature;
-  String? topP;
-  String? presencePenalty;
-  String? frequencyPenalty;
+  String? title = ""; // titleの変数
+  String? systemPrompt = ""; // systemPromptの変数
+  String? description = "";
+  String? temperature = defaultTemperature.toString();
+  String? topP = defaultTopP.toString();
+  String? presencePenalty = defaultPresencePenalty.toString();
+  String? frequencyPenalty = defaultFrequencyPenalty.toString();
 
   Uint8List? uint8list;
   @override
@@ -331,6 +331,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
     }
     if (PostValidator.isInValidPost(description, systemPrompt, title,
         temperature, topP, presencePenalty, frequencyPenalty)) {
+      await UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
       return;
     }
     if ((temperature!.toDouble() != defaultTemperature) &&

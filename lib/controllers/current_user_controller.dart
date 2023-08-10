@@ -340,4 +340,13 @@ class CurrentUserController extends GetxController {
       UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした");
     });
   }
+
+  void updateUser(String userName, String bio) {
+    final user = publicUser.value!;
+    final result = user.copyWith(
+      bio: user.typedBio().copyWith(value: bio).toJson(),
+      userName: user.typedUserName().copyWith(value: userName).toJson(),
+    );
+    CurrentUserController.to.publicUser(result);
+  }
 }

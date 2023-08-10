@@ -23,23 +23,25 @@ class UIHelper {
     Get.dialog(AlertDialog(
       content: SizedBox(
         height: Get.height * 0.8,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SelectableText(
-              msg,
-              style: style,
-            ),
-            const Divider(),
-            TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: const Text(
-                  okText,
-                  style: style,
-                )),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SelectableText(
+                msg,
+                style: style,
+              ),
+              const Divider(),
+              TextButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text(
+                    okText,
+                    style: style,
+                  )),
+            ],
+          ),
         ),
       ),
     ));
