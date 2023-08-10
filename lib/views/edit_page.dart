@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/maps.dart';
 import 'package:great_talk/common/strings.dart';
@@ -224,6 +225,7 @@ class _CreatePostPageState extends State<EditProfilePage>
         currentUid(), newUpdateLog.toJson());
     result.when(success: (_) {
       CurrentUserController.to.updateUser(userName!, bio!);
+      Get.back();
       UIHelper.showFlutterToast("プロフィールを更新できました！");
     }, failure: () {
       UIHelper.showErrorFlutterToast("プロフィールを更新できませんでした");
