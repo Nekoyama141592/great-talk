@@ -12,8 +12,8 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 
 class NewContent {
-  static CustomCompleteText newCustomCompleteText(String systemPrompt) =>
-      CustomCompleteText(systemPrompt: systemPrompt);
+  static CustomCompleteText newCustomCompleteText(String systemPrompt,{double? temperature,double? topP,double? presencePenalty,double? frequencyPenalty}) =>
+      CustomCompleteText(systemPrompt: systemPrompt,temperature: temperature,topP: topP,presencePenalty: presencePenalty,frequencyPenalty: frequencyPenalty);
   static DetectedText newDetectedText(String value) => DetectedText(
       languageCode: "",
       negativeScore: 0.0,
@@ -27,11 +27,11 @@ class NewContent {
           moderationModelVersion: "",
           value: value);
   static Post newPost(String systemPrompt, String title, String description,
-      String fileName, PublicUser poster, String postId, DocRef postRef) {
+      String fileName, PublicUser poster, String postId, DocRef postRef,double? temperature,double? topP,double? presencePenalty,double? frequencyPenalty) {
     final now = Timestamp.now();
     return Post(
         createdAt: now,
-        customCompleteText: newCustomCompleteText(systemPrompt).toJson(),
+        customCompleteText: newCustomCompleteText(systemPrompt,temperature: temperature,topP: topP,presencePenalty: presencePenalty,frequencyPenalty: frequencyPenalty).toJson(),
         description: newDetectedText(description).toJson(),
         exampleTexts: [],
         genre: '',

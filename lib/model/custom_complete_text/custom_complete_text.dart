@@ -1,4 +1,3 @@
-import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 part 'custom_complete_text.freezed.dart';
@@ -13,14 +12,7 @@ abstract class CustomCompleteText implements _$CustomCompleteText {
     double? topP,
     double? presencePenalty,
     double? frequencyPenalty,
-    List<SDMap>? functions,
   }) = _CustomCompleteText;
   factory CustomCompleteText.fromJson(SDMap json) =>
       _$CustomCompleteTextFromJson(json);
-  List<FunctionData>? typedFunctions() => functions
-      ?.map((e) => FunctionData(
-          name: e['name'],
-          description: e['description'],
-          parameters: e['parameters']))
-      .toList();
 }
