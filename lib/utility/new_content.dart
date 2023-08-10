@@ -115,7 +115,7 @@ class NewContent {
           : newDetectedImage(AWSS3Utility.userImagesBucketName(), '').toJson(),
       userName: userName != null
           ? newDetectedText(userName).toJson()
-          : newDetectedText('Unknown').toJson(),
+          : newDetectedText('名無し').toJson(),
       walletAddresses: [],
     );
   }
