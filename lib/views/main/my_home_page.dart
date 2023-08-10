@@ -34,7 +34,7 @@ class MyHomePage extends HookWidget {
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(
-        appBar: pageIndex.value == 1
+        appBar: pageIndex.value == 1 || pageIndex.value == 4
             ? null
             : AppBar(title: boldText(appName), shape: appBarShape(context)),
         drawer: const OriginalDrawer(),

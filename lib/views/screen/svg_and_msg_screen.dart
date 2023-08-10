@@ -28,7 +28,6 @@ class SvgAndMsgScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        circular: defaultPadding(context),
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Padding(

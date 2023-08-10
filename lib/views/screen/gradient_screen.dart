@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:great_talk/common/doubles.dart';
 
 class GradientScreen extends StatelessWidget {
-  const GradientScreen(
-      {Key? key,
-      required this.top,
-      required this.header,
-      required this.child,
-      required this.circular})
-      : super(key: key);
+  const GradientScreen({
+    Key? key,
+    this.top,
+    this.header,
+    required this.child,
+  }) : super(key: key);
 
-  final Widget top;
-  final Widget header;
+  final Widget? top;
+  final Widget? header;
   final Widget child;
-  final double circular;
 
   @override
   Widget build(BuildContext context) {
+    final circular = defaultPadding(context) * 2;
     return SafeArea(
         child: Container(
       width: double.infinity,
@@ -26,8 +26,8 @@ class GradientScreen extends StatelessWidget {
         Theme.of(context).primaryColor.withOpacity(0.1),
       ])),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        top,
-        header,
+        if (top != null) top!,
+        if (header != null) header!,
         const SizedBox(height: 5.0),
         Expanded(
             child: Container(
