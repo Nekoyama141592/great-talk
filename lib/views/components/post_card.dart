@@ -6,6 +6,7 @@ import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/circle_image.dart';
+import 'package:great_talk/views/components/mosaic_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 
 class PostCard extends StatelessWidget {
@@ -17,9 +18,9 @@ class PostCard extends StatelessWidget {
     final content = ChatContent.fromPost(post);
     final controller = PostsController.to;
     // 不適切なら弾く
-    return content.typedIconImage().moderationLabels.isNotEmpty ||
-            content.typedDescription().negativeScore > negativeLimit
-        ? const SizedBox.shrink()
+    return (content.typedIconImage().moderationLabels.isNotEmpty ||
+            content.typedDescription().negativeScore > negativeLimit)
+        ? const MosaicCard()
         : Padding(
             padding: EdgeInsets.all(defaultPadding(context)),
             child: GestureDetector(

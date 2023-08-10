@@ -4,6 +4,7 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/views/components/circle_image.dart';
+import 'package:great_talk/views/components/mosaic_card.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({Key? key, required this.publicUser}) : super(key: key);
@@ -11,13 +12,13 @@ class UserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return publicUser.typedUserImage().moderationLabels.isNotEmpty ||
-            publicUser.typedBio().negativeScore > negativeLimit ||
-            publicUser.typedUserName().negativeScore > negativeLimit
-        ? const SizedBox.shrink()
-        : Padding(
-            padding: EdgeInsets.all(defaultPadding(context)),
-            child: Container(
+    return Padding(
+      padding: EdgeInsets.all(defaultPadding(context)),
+      child: (publicUser.typedUserImage().moderationLabels.isNotEmpty ||
+              publicUser.typedBio().negativeScore > negativeLimit ||
+              publicUser.typedUserName().negativeScore > negativeLimit)
+          ? SizedBox(height: userImageSize(context), child: const MosaicCard())
+          : Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Theme.of(context).primaryColor),
                 borderRadius: BorderRadius.circular(8),
@@ -39,6 +40,6 @@ class UserCard extends StatelessWidget {
                 ),
               ),
             ),
-          );
+    );
   }
 }
