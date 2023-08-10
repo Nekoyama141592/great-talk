@@ -93,6 +93,8 @@ class _CreatePostPageState extends State<EditProfilePage>
     return [
       const FormLabel(title: "ユーザー名"),
       OriginalForm(
+        initialValue:
+            CurrentUserController.to.publicUser.value!.typedUserName().value,
         decoration: const InputDecoration(hintText: "例: M.LO"),
         onSaved: (value) {
           setState(() {
@@ -117,6 +119,8 @@ class _CreatePostPageState extends State<EditProfilePage>
     return [
       const FormLabel(title: "紹介文"),
       OriginalForm(
+        initialValue:
+            CurrentUserController.to.publicUser.value!.typedBio().value,
         keyboardType: TextInputType.multiline,
         maxLines: null,
         onSaved: (value) {
