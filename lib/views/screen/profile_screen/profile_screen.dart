@@ -50,7 +50,14 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
                       Icons.search,
                       size: 40.0,
                     ),
-                  )
+                  ),
+                  Obx(() => controller.passiveUser.value!.isOfficial
+                      ? Icon(
+                          Icons.verified,
+                          size: 40.0,
+                          color: Theme.of(context).colorScheme.secondary,
+                        )
+                      : const SizedBox.shrink())
                 ],
               ),
               Row(

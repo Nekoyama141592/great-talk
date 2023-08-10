@@ -6,6 +6,9 @@ class EditButton extends StatelessWidget {
   const EditButton({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return RoundedButton(text: "編集する", press: () => Get.toNamed('/edit'));
+    return RoundedButton(
+        text: "編集する",
+        textColor: Colors.white,
+        press: () => Get.toNamed('/edit'));
   }
 }
