@@ -4,11 +4,13 @@ import 'package:great_talk/common/doubles.dart';
 class GradientScreen extends StatelessWidget {
   const GradientScreen({
     Key? key,
+    this.baseColor,
     this.top,
     this.header,
     required this.child,
   }) : super(key: key);
 
+  final Color? baseColor;
   final Widget? top;
   final Widget? header;
   final Widget child;
@@ -16,14 +18,15 @@ class GradientScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final circular = defaultPadding(context) * 2;
+    final color = baseColor ?? Theme.of(context).primaryColor;
     return SafeArea(
         child: Container(
       width: double.infinity,
       decoration: BoxDecoration(
           gradient: LinearGradient(begin: Alignment.topLeft, colors: [
-        Theme.of(context).primaryColor.withOpacity(0.9),
-        Theme.of(context).primaryColor.withOpacity(0.4),
-        Theme.of(context).primaryColor.withOpacity(0.1),
+        color.withOpacity(0.9),
+        color.withOpacity(0.4),
+        color.withOpacity(0.1),
       ])),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         if (top != null) top!,

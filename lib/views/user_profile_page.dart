@@ -9,9 +9,6 @@ class UserProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(UserProfileController());
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("プロフィール"),
-      ),
       body: ProfileScreen(
         controller: controller,
       ),

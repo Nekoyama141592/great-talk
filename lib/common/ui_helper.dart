@@ -26,7 +26,7 @@ class UIHelper {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            SelectableText(
               msg,
               style: style,
             ),

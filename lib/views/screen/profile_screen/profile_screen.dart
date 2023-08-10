@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/profile_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
+import 'package:great_talk/utility/style_utility.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/screen/gradient_screen.dart';
 import 'package:great_talk/views/screen/profile_screen/components/edit_button.dart';
@@ -17,6 +18,14 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
     final children = <Widget>[
       Row(
         children: [
+          if (!controller.isMyProfile)
+            InkWell(
+              onTap: Get.back,
+              child: const Icon(
+                Icons.arrow_back,
+                size: 40.0,
+              ),
+            ),
           Obx(
             () => controller.passiveUser.value == null
                 ? const SizedBox.shrink()
@@ -32,21 +41,34 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
               Row(
                 children: [
                   Obx(() => Text(
-                      controller.passiveUser.value!.typedUserName().value)),
+                        controller.passiveUser.value!.typedUserName().value,
+                        style: StyleUtility.bold40(),
+                      )),
                   InkWell(
                     onTap: () => Get.toNamed(
                         "/users/${controller.passiveUid()}/posts/search"),
-                    child: const Icon(Icons.search),
+                    child: const Icon(
+                      Icons.search,
+                      size: 40.0,
+                    ),
                   )
                 ],
               ),
               Row(
                 children: [
-                  Obx(() => Text(controller.passiveUid() == currentUid()
-                      ? "フォロー ${CurrentUserController.to.followingUids.length}"
-                      : "フォロー ${controller.passiveUser.value?.followingCount ?? 0}")),
                   Obx(() => Text(
-                      "フォロワー ${controller.passiveUser.value?.followerCount ?? 0}"))
+                        controller.passiveUid() == currentUid()
+                            ? "フォロー ${CurrentUserController.to.followingUids.length}"
+                            : "フォロー ${controller.passiveUser.value?.followingCount ?? 0}",
+                        style: StyleUtility.basic20(),
+                      )),
+                  const SizedBox(
+                    width: 20.0,
+                  ),
+                  Obx(() => Text(
+                        "フォロワー ${controller.passiveUser.value?.followerCount ?? 0}",
+                        style: StyleUtility.basic20(),
+                      ))
                 ],
               ),
             ],
@@ -59,6 +81,7 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
           )),
     ];
     return Obx(() => GradientScreen(
+          baseColor: Theme.of(context).colorScheme.secondary,
           header: Column(
             children: [
               if (controller.passiveUser.value != null) ...children,
