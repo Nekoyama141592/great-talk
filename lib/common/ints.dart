@@ -21,4 +21,4 @@ const int maxSystemPromptLimit = 1000;
 const int maxUserNameLimit = 32;
 const int maxBioLimit = 200;
 // post
-const int negativeLimit = 85;
+const int negativeLimit = 90;

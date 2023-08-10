@@ -19,12 +19,12 @@ class PostCard extends StatelessWidget {
     final content = ChatContent.fromPost(post);
     final controller = PostsController.to;
     // 不適切なら弾く
-    return (content.typedIconImage().moderationLabels.isNotEmpty ||
-            content.typedDescription().negativeScore > negativeLimit)
-        ? const MosaicCard()
-        : Padding(
-            padding: EdgeInsets.all(defaultPadding(context)),
-            child: GestureDetector(
+    return Padding(
+      padding: EdgeInsets.all(defaultPadding(context)),
+      child: (content.typedIconImage().moderationLabels.isNotEmpty ||
+              content.typedDescription().negativeScore > negativeLimit)
+          ? const MosaicCard()
+          : GestureDetector(
               onTap: () => controller.onPostCardPressed(post),
               child: Container(
                 decoration: BoxDecoration(
@@ -73,6 +73,6 @@ class PostCard extends StatelessWidget {
                 ),
               ),
             ),
-          );
+    );
   }
 }
