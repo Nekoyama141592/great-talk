@@ -15,7 +15,7 @@ const int oneTimeReadCount = 30;
 const int whereInLimit = 30;
 // create post
 const int maxTitleLimit = 32;
-const int maxDescriptionLimit = 200;
+const int maxDescriptionLimit = 1000;
 const int maxSystemPromptLimit = 1000;
 // prifile
 const int maxUserNameLimit = 32;

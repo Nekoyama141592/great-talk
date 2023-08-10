@@ -369,31 +369,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     if (interlocutor.value == null) {
       return;
     }
-    const style = TextStyle(fontSize: 20, color: Colors.black);
-    Get.dialog(AlertDialog(
-      content: SizedBox(
-        height: Get.height * 0.8,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                interlocutor.value!.typedDescription().value,
-                style: style,
-              ),
-              const Divider(),
-              TextButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  child: const Text(
-                    okText,
-                    style: style,
-                  )),
-            ],
-          ),
-        ),
-      ),
-    ));
+    UIHelper.simpleAlertDialog(
+      interlocutor.value!.typedDescription().value,
+    );
   }
 }

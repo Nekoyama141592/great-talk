@@ -103,7 +103,10 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
   // title入力をする関数
   List<Widget> _titleTextField() {
     return [
-      const FormLabel(title: "タイトル"),
+      const FormLabel(
+        title: "タイトル",
+        helpMsg: titleHelpMsg,
+      ),
       OriginalForm(
         decoration: const InputDecoration(hintText: "例: 猫GPT"),
         onSaved: (value) {
@@ -127,7 +130,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
   // description入力をする関数
   List<Widget> _descriptionTextField() {
     return [
-      const FormLabel(title: "説明/使い方"),
+      const FormLabel(title: "説明/使い方", helpMsg: descriptionHelpMsg),
       OriginalForm(
         keyboardType: TextInputType.multiline,
         maxLines: null,
@@ -153,7 +156,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
   // systemPrompt入力をする関数
   List<Widget> _systemPromptTextField() {
     return [
-      const FormLabel(title: "システムプロンプト"),
+      const FormLabel(title: "システムプロンプト", helpMsg: systemPromptHelpMsg),
       OriginalForm(
         keyboardType: TextInputType.multiline,
         maxLines: null,
@@ -179,7 +182,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
   // temperature入力をする関数
   List<Widget> _temperatureNumberField() {
     return [
-      const FormLabel(title: "temperature"),
+      const FormLabel(title: "temperature", helpMsg: temperatureHelpMsg),
       OriginalForm(
         initialValue: defaultTemperature.toString(),
         keyboardType: TextInputType.number,
@@ -205,7 +208,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
   // topP入力をする関数
   List<Widget> _topPNumberField() {
     return [
-      const FormLabel(title: "topP"),
+      const FormLabel(title: "topP", helpMsg: topPHelpMsg),
       OriginalForm(
         initialValue: defaultTopP.toString(),
         keyboardType: TextInputType.number,
@@ -231,7 +234,8 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
   // presencePenalty入力をする関数
   List<Widget> _presencePenaltyNumberField() {
     return [
-      const FormLabel(title: "PresencePenalty"),
+      const FormLabel(
+          title: "PresencePenalty", helpMsg: presencePenaltyHelpMsg),
       OriginalForm(
         initialValue: defaultPresencePenalty.toString(),
         keyboardType: TextInputType.number,
@@ -257,7 +261,8 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
   // topP入力をする関数
   List<Widget> _frequencyPenaltyNumberField() {
     return [
-      const FormLabel(title: "FrequencyPenalty"),
+      const FormLabel(
+          title: "FrequencyPenalty", helpMsg: frequencyPenaltyHelpMsg),
       OriginalForm(
         initialValue: defaultFrequencyPenalty.toString(),
         keyboardType: TextInputType.number,

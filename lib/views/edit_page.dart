@@ -91,7 +91,10 @@ class _CreatePostPageState extends State<EditProfilePage>
   // userName入力をする関数
   List<Widget> _userNameTextField() {
     return [
-      const FormLabel(title: "ユーザー名"),
+      const FormLabel(
+        title: "ユーザー名",
+        helpMsg: userNameHelpMsg,
+      ),
       OriginalForm(
         initialValue:
             CurrentUserController.to.publicUser.value!.typedUserName().value,
@@ -117,7 +120,10 @@ class _CreatePostPageState extends State<EditProfilePage>
   // description入力をする関数
   List<Widget> _bioTextField() {
     return [
-      const FormLabel(title: "紹介文"),
+      const FormLabel(
+        title: "紹介文",
+        helpMsg: bioHelpMsg,
+      ),
       OriginalForm(
         initialValue:
             CurrentUserController.to.publicUser.value!.typedBio().value,
