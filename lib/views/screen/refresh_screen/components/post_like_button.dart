@@ -24,7 +24,7 @@ class PostLikeButton extends HookWidget {
                   child: const Icon(Icons.favorite, color: Colors.red),
                   onTap: () async {
                     isLiked.value = false;
-                    await controller.unLikePost();
+                    await controller.unLikePost(post);
                   })
               : InkWell(
                   child: const Icon(
@@ -32,7 +32,7 @@ class PostLikeButton extends HookWidget {
                   ),
                   onTap: () async {
                     isLiked.value = true;
-                    await controller.likePost();
+                    await controller.likePost(post);
                   }),
         ),
         Padding(

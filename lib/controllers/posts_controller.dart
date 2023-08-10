@@ -156,11 +156,7 @@ class PostsController extends GetxController with CurrentUserMixin {
     });
   }
 
-  Future<void> likePost() async {
-    if (rxPost.value == null) {
-      return;
-    }
-    final post = rxPost.value!;
+  Future<void> likePost(Post post) async {
     final String tokenId = randomString();
     final Timestamp now = Timestamp.now();
     final String passiveUid = post.typedPoster().uid;
@@ -186,11 +182,7 @@ class PostsController extends GetxController with CurrentUserMixin {
     await repository.createPostLike(postRef, currentUid(), postLike.toJson());
   }
 
-  Future<void> unLikePost() async {
-    if (rxPost.value == null) {
-      return;
-    }
-    final post = rxPost.value!;
+  Future<void> unLikePost(Post post) async {
     final String passiveUid = post.typedPoster().uid;
     final deleteToken = CurrentUserController.to.likePostTokens
         .firstWhere((element) => element.passiveUid == passiveUid);
