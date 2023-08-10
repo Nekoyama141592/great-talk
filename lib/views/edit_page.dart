@@ -224,7 +224,7 @@ class _CreatePostPageState extends State<EditProfilePage>
     final result = await repository.createUserUpdateLog(
         currentUid(), newUpdateLog.toJson());
     result.when(success: (_) {
-      CurrentUserController.to.updateUser(userName!, bio!,fileName);
+      CurrentUserController.to.updateUser(userName!, bio!, fileName);
       Get.back();
       UIHelper.showFlutterToast("プロフィールを更新できました！");
     }, failure: () {
