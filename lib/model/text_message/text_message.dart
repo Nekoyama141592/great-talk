@@ -14,8 +14,8 @@ abstract class TextMessage implements _$TextMessage {
       {required dynamic createdAt,
       required String id,
       required String messageType,
-      required dynamic messageRef,
-      required dynamic postRef,
+      dynamic messageRef,
+      dynamic postRef,
       required String uid,
       required dynamic updatedAt,
       required DetectedText text}) = _TextMessage;
@@ -25,11 +25,9 @@ abstract class TextMessage implements _$TextMessage {
       createdAt: Timestamp.fromDate(stm.createdAt),
       id: stm.id,
       messageType: stm.messageType,
-      messageRef: stm.messageRef,
-      postRef: stm.postRef,
       uid: stm.uid,
       updatedAt: Timestamp.fromDate(stm.updatedAt),
-      text: stm.text);
+      text: DetectedText.fromJson(stm.text));
   Timestamp typedCreatedAt() => createdAt as Timestamp;
   DocRef typedMessageRef() => messageRef as DocRef;
   Timestamp typedUpdatedAtAt() => createdAt as Timestamp;

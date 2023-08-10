@@ -207,8 +207,8 @@ class _$_TextMessage extends _TextMessage {
       {required this.createdAt,
       required this.id,
       required this.messageType,
-      required this.messageRef,
-      required this.postRef,
+      this.messageRef,
+      this.postRef,
       required this.uid,
       required this.updatedAt,
       required this.text})
@@ -288,8 +288,8 @@ abstract class _TextMessage extends TextMessage {
       {required final dynamic createdAt,
       required final String id,
       required final String messageType,
-      required final dynamic messageRef,
-      required final dynamic postRef,
+      final dynamic messageRef,
+      final dynamic postRef,
       required final String uid,
       required final dynamic updatedAt,
       required final DetectedText text}) = _$_TextMessage;

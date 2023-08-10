@@ -23,11 +23,9 @@ mixin _$SaveTextMsg {
   DateTime get createdAt => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String get messageType => throw _privateConstructorUsedError;
-  dynamic get messageRef => throw _privateConstructorUsedError;
-  dynamic get postRef => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  DetectedText get text => throw _privateConstructorUsedError;
+  Map<String, dynamic> get text => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,13 +43,9 @@ abstract class $SaveTextMsgCopyWith<$Res> {
       {DateTime createdAt,
       String id,
       String messageType,
-      dynamic messageRef,
-      dynamic postRef,
       String uid,
       DateTime updatedAt,
-      DetectedText text});
-
-  $DetectedTextCopyWith<$Res> get text;
+      Map<String, dynamic> text});
 }
 
 /// @nodoc
@@ -70,8 +64,6 @@ class _$SaveTextMsgCopyWithImpl<$Res, $Val extends SaveTextMsg>
     Object? createdAt = null,
     Object? id = null,
     Object? messageType = null,
-    Object? messageRef = freezed,
-    Object? postRef = freezed,
     Object? uid = null,
     Object? updatedAt = null,
     Object? text = null,
@@ -89,14 +81,6 @@ class _$SaveTextMsgCopyWithImpl<$Res, $Val extends SaveTextMsg>
           ? _value.messageType
           : messageType // ignore: cast_nullable_to_non_nullable
               as String,
-      messageRef: freezed == messageRef
-          ? _value.messageRef
-          : messageRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      postRef: freezed == postRef
-          ? _value.postRef
-          : postRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -108,16 +92,8 @@ class _$SaveTextMsgCopyWithImpl<$Res, $Val extends SaveTextMsg>
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DetectedTextCopyWith<$Res> get text {
-    return $DetectedTextCopyWith<$Res>(_value.text, (value) {
-      return _then(_value.copyWith(text: value) as $Val);
-    });
   }
 }
 
@@ -133,14 +109,9 @@ abstract class _$$_SaveTextMsgCopyWith<$Res>
       {DateTime createdAt,
       String id,
       String messageType,
-      dynamic messageRef,
-      dynamic postRef,
       String uid,
       DateTime updatedAt,
-      DetectedText text});
-
-  @override
-  $DetectedTextCopyWith<$Res> get text;
+      Map<String, dynamic> text});
 }
 
 /// @nodoc
@@ -157,8 +128,6 @@ class __$$_SaveTextMsgCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? id = null,
     Object? messageType = null,
-    Object? messageRef = freezed,
-    Object? postRef = freezed,
     Object? uid = null,
     Object? updatedAt = null,
     Object? text = null,
@@ -176,14 +145,6 @@ class __$$_SaveTextMsgCopyWithImpl<$Res>
           ? _value.messageType
           : messageType // ignore: cast_nullable_to_non_nullable
               as String,
-      messageRef: freezed == messageRef
-          ? _value.messageRef
-          : messageRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      postRef: freezed == postRef
-          ? _value.postRef
-          : postRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       uid: null == uid
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
@@ -193,9 +154,9 @@ class __$$_SaveTextMsgCopyWithImpl<$Res>
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       text: null == text
-          ? _value.text
+          ? _value._text
           : text // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
     ));
   }
 }
@@ -207,12 +168,11 @@ class _$_SaveTextMsg extends _SaveTextMsg {
       {required this.createdAt,
       required this.id,
       required this.messageType,
-      required this.messageRef,
-      required this.postRef,
       required this.uid,
       required this.updatedAt,
-      required this.text})
-      : super._();
+      required final Map<String, dynamic> text})
+      : _text = text,
+        super._();
 
   factory _$_SaveTextMsg.fromJson(Map<String, dynamic> json) =>
       _$$_SaveTextMsgFromJson(json);
@@ -224,19 +184,20 @@ class _$_SaveTextMsg extends _SaveTextMsg {
   @override
   final String messageType;
   @override
-  final dynamic messageRef;
-  @override
-  final dynamic postRef;
-  @override
   final String uid;
   @override
   final DateTime updatedAt;
+  final Map<String, dynamic> _text;
   @override
-  final DetectedText text;
+  Map<String, dynamic> get text {
+    if (_text is EqualUnmodifiableMapView) return _text;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_text);
+  }
 
   @override
   String toString() {
-    return 'SaveTextMsg(createdAt: $createdAt, id: $id, messageType: $messageType, messageRef: $messageRef, postRef: $postRef, uid: $uid, updatedAt: $updatedAt, text: $text)';
+    return 'SaveTextMsg(createdAt: $createdAt, id: $id, messageType: $messageType, uid: $uid, updatedAt: $updatedAt, text: $text)';
   }
 
   @override
@@ -249,27 +210,16 @@ class _$_SaveTextMsg extends _SaveTextMsg {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.messageType, messageType) ||
                 other.messageType == messageType) &&
-            const DeepCollectionEquality()
-                .equals(other.messageRef, messageRef) &&
-            const DeepCollectionEquality().equals(other.postRef, postRef) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.text, text) || other.text == text));
+            const DeepCollectionEquality().equals(other._text, _text));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      createdAt,
-      id,
-      messageType,
-      const DeepCollectionEquality().hash(messageRef),
-      const DeepCollectionEquality().hash(postRef),
-      uid,
-      updatedAt,
-      text);
+  int get hashCode => Object.hash(runtimeType, createdAt, id, messageType, uid,
+      updatedAt, const DeepCollectionEquality().hash(_text));
 
   @JsonKey(ignore: true)
   @override
@@ -290,11 +240,9 @@ abstract class _SaveTextMsg extends SaveTextMsg {
       {required final DateTime createdAt,
       required final String id,
       required final String messageType,
-      required final dynamic messageRef,
-      required final dynamic postRef,
       required final String uid,
       required final DateTime updatedAt,
-      required final DetectedText text}) = _$_SaveTextMsg;
+      required final Map<String, dynamic> text}) = _$_SaveTextMsg;
   const _SaveTextMsg._() : super._();
 
   factory _SaveTextMsg.fromJson(Map<String, dynamic> json) =
@@ -307,15 +255,11 @@ abstract class _SaveTextMsg extends SaveTextMsg {
   @override
   String get messageType;
   @override
-  dynamic get messageRef;
-  @override
-  dynamic get postRef;
-  @override
   String get uid;
   @override
   DateTime get updatedAt;
   @override
-  DetectedText get text;
+  Map<String, dynamic> get text;
   @override
   @JsonKey(ignore: true)
   _$$_SaveTextMsgCopyWith<_$_SaveTextMsg> get copyWith =>
