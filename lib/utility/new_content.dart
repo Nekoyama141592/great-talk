@@ -21,10 +21,10 @@ class NewContent {
       String presencePenalty,
       String frequencyPenalty) {
     // doubleにparse
-    final pTemperature = temperature.toDouble();
-    final pTopP = topP.toDouble();
-    final pPresencePenalty = presencePenalty.toDouble();
-    final pFrequencyPenalty = frequencyPenalty.toDouble();
+    final pTemperature = temperature.trim().toDouble();
+    final pTopP = topP.trim().toDouble();
+    final pPresencePenalty = presencePenalty.trim().toDouble();
+    final pFrequencyPenalty = frequencyPenalty.trim().toDouble();
     return CustomCompleteText(
       systemPrompt: systemPrompt,
       temperature: pTemperature != defaultTemperature ? pTemperature : null,

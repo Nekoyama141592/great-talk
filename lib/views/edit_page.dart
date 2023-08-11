@@ -216,8 +216,8 @@ class _CreatePostPageState extends State<EditProfilePage>
     final newUpdateLog = UserUpdateLog(
         logCreatedAt: Timestamp.now(),
         searchToken: returnSearchToken(userName!),
-        stringBio: bio!,
-        stringUserName: userName!,
+        stringBio: bio!.trim(),
+        stringUserName: userName!.trim(),
         uid: currentUid(),
         imageFileName: fileName,
         userRef: CurrentUserController.to.publicUser.value!.ref);

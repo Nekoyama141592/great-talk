@@ -368,9 +368,9 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
         .toJson()
       ..removeWhere((key, value) => value == null);
     final newPost = NewContent.newPost(
-        systemPrompt!,
-        title!,
-        description!,
+        systemPrompt!.trim(),
+        title!.trim(),
+        description!.trim(),
         fileName,
         CurrentUserController.to.publicUser.value!,
         postId,
