@@ -15,7 +15,7 @@ _$_TextMessage _$$_TextMessageFromJson(Map<String, dynamic> json) =>
       postRef: json['postRef'],
       uid: json['uid'] as String,
       updatedAt: json['updatedAt'],
-      text: DetectedText.fromJson(json['text'] as Map<String, dynamic>),
+      text: json['text'] as Map<String, dynamic>,
     );
 
 Map<String, dynamic> _$$_TextMessageToJson(_$_TextMessage instance) =>

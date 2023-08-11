@@ -27,7 +27,7 @@ mixin _$TextMessage {
   dynamic get postRef => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
-  DetectedText get text => throw _privateConstructorUsedError;
+  Map<String, dynamic> get text => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,9 +49,7 @@ abstract class $TextMessageCopyWith<$Res> {
       dynamic postRef,
       String uid,
       dynamic updatedAt,
-      DetectedText text});
-
-  $DetectedTextCopyWith<$Res> get text;
+      Map<String, dynamic> text});
 }
 
 /// @nodoc
@@ -108,16 +106,8 @@ class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DetectedTextCopyWith<$Res> get text {
-    return $DetectedTextCopyWith<$Res>(_value.text, (value) {
-      return _then(_value.copyWith(text: value) as $Val);
-    });
   }
 }
 
@@ -137,10 +127,7 @@ abstract class _$$_TextMessageCopyWith<$Res>
       dynamic postRef,
       String uid,
       dynamic updatedAt,
-      DetectedText text});
-
-  @override
-  $DetectedTextCopyWith<$Res> get text;
+      Map<String, dynamic> text});
 }
 
 /// @nodoc
@@ -193,9 +180,9 @@ class __$$_TextMessageCopyWithImpl<$Res>
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
       text: null == text
-          ? _value.text
+          ? _value._text
           : text // ignore: cast_nullable_to_non_nullable
-              as DetectedText,
+              as Map<String, dynamic>,
     ));
   }
 }
@@ -211,8 +198,9 @@ class _$_TextMessage extends _TextMessage {
       this.postRef,
       required this.uid,
       required this.updatedAt,
-      required this.text})
-      : super._();
+      required final Map<String, dynamic> text})
+      : _text = text,
+        super._();
 
   factory _$_TextMessage.fromJson(Map<String, dynamic> json) =>
       _$$_TextMessageFromJson(json);
@@ -231,8 +219,13 @@ class _$_TextMessage extends _TextMessage {
   final String uid;
   @override
   final dynamic updatedAt;
+  final Map<String, dynamic> _text;
   @override
-  final DetectedText text;
+  Map<String, dynamic> get text {
+    if (_text is EqualUnmodifiableMapView) return _text;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_text);
+  }
 
   @override
   String toString() {
@@ -253,7 +246,7 @@ class _$_TextMessage extends _TextMessage {
             const DeepCollectionEquality().equals(other.postRef, postRef) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
-            (identical(other.text, text) || other.text == text));
+            const DeepCollectionEquality().equals(other._text, _text));
   }
 
   @JsonKey(ignore: true)
@@ -267,7 +260,7 @@ class _$_TextMessage extends _TextMessage {
       const DeepCollectionEquality().hash(postRef),
       uid,
       const DeepCollectionEquality().hash(updatedAt),
-      text);
+      const DeepCollectionEquality().hash(_text));
 
   @JsonKey(ignore: true)
   @override
@@ -292,7 +285,7 @@ abstract class _TextMessage extends TextMessage {
       final dynamic postRef,
       required final String uid,
       required final dynamic updatedAt,
-      required final DetectedText text}) = _$_TextMessage;
+      required final Map<String, dynamic> text}) = _$_TextMessage;
   const _TextMessage._() : super._();
 
   factory _TextMessage.fromJson(Map<String, dynamic> json) =
@@ -313,7 +306,7 @@ abstract class _TextMessage extends TextMessage {
   @override
   dynamic get updatedAt;
   @override
-  DetectedText get text;
+  Map<String, dynamic> get text;
   @override
   @JsonKey(ignore: true)
   _$$_TextMessageCopyWith<_$_TextMessage> get copyWith =>

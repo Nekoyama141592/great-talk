@@ -3,7 +3,7 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreClient {
   Future<void> createMessage(DocRef messageRef, SDMap json) async =>
-      await messageRef.get();
+      await messageRef.set(json);
 
   Future<void> createPost(DocRef postRef, SDMap json) async =>
       await postRef.set(json);

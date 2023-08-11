@@ -23,5 +23,5 @@ abstract class SaveTextMsg implements _$SaveTextMsg {
       messageType: textMessage.messageType,
       uid: textMessage.uid,
       updatedAt: textMessage.typedUpdatedAtAt().toDate(),
-      text: textMessage.text.toJson());
+      text: textMessage.typedText().toJson());
 }

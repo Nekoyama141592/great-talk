@@ -23,6 +23,7 @@ class FirestoreRepository {
       await client.createPost(postRef, json);
       return const Result.success(true);
     } catch (e) {
+      debugPrint(e.toString());
       return const Result.failure();
     }
   }
@@ -33,6 +34,7 @@ class FirestoreRepository {
       await client.createPostLike(postRef, activeUid, json);
       return const Result.success(true);
     } catch (e) {
+      debugPrint(e.toString());
       return const Result.failure();
     }
   }
@@ -42,6 +44,7 @@ class FirestoreRepository {
       await client.deletePostLike(postRef, activeUid);
       return const Result.success(true);
     } catch (e) {
+      debugPrint(e.toString());
       return const Result.failure();
     }
   }
@@ -51,6 +54,7 @@ class FirestoreRepository {
       await client.createUser(uid, json);
       return const Result.success(true);
     } catch (e) {
+      debugPrint(e.toString());
       return const Result.failure();
     }
   }
@@ -60,6 +64,7 @@ class FirestoreRepository {
       await client.createPrivateUser(uid, json);
       return const Result.success(true);
     } catch (e) {
+      debugPrint(e.toString());
       return const Result.failure();
     }
   }
@@ -69,6 +74,7 @@ class FirestoreRepository {
       await client.createUserUpdateLog(uid, json);
       return const Result.success(true);
     } catch (e) {
+      debugPrint(e.toString());
       return const Result.failure();
     }
   }

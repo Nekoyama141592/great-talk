@@ -60,7 +60,7 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                               itemBuilder: ((context, index) {
                                 final messages = controller.messages.toList();
                                 if (index == messages.indexOf(messages.last) &&
-                                    messages.last.text.value.isEmpty) {
+                                    messages.last.typedText().value.isEmpty) {
                                   return Padding(
                                     padding:
                                         EdgeInsets.all(defaultPadding(context)),
@@ -90,8 +90,10 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                     padding:
                                         EdgeInsets.all(defaultPadding(context)),
                                     child: Obx(() {
-                                      final String text =
-                                          controller.messages[index].text.value;
+                                      final String text = controller
+                                          .messages[index]
+                                          .typedText()
+                                          .value;
                                       return ListTile(
                                         onTap:
                                             purchaseController.isSubscribing()

@@ -256,11 +256,12 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
           currentUid(), interlocutor.value!.contentId, id),
       postRef: interlocutor.value!.typedRef(),
       text: DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: content),
+              languageCode: '',
+              negativeScore: 0.0,
+              positiveScore: 0.0,
+              sentiment: '',
+              value: content)
+          .toJson(),
       uid: uid,
       updatedAt: now,
     );
@@ -304,7 +305,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   Messages _toRequestMessage(TextMessage msg) {
     return Messages(
         role: msg.uid == currentUid() ? Role.user : Role.assistant,
-        content: msg.text.value);
+        content: msg.typedText().value);
   }
 
   List<Messages> _toRequestMessages() {

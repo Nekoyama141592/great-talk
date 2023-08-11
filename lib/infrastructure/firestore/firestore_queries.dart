@@ -54,7 +54,7 @@ class FirestoreQueries {
       postDocRef(uid, postId).collection('messages');
   static DocRef postMessageDocRef(
           String uid, String postId, String messageId) =>
-      postDocRef(uid, postId).collection('messages').doc(messageId);
+      postMessagesColRef(uid, postId).doc(messageId);
 
   static MapQuery timelinesQuery(DocRef userRef) => userRef
       .collection('timelines')
