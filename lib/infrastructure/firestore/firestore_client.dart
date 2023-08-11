@@ -10,6 +10,8 @@ class FirestoreClient {
   Future<void> createPostLike(
           DocRef postRef, String activeUid, SDMap json) async =>
       await FirestoreQueries.postLikeDocRef(postRef, activeUid).set(json);
+  Future<void> deletePostLike(DocRef postRef, String activeUid) async =>
+      await FirestoreQueries.postLikeDocRef(postRef, activeUid).delete();
 
   Future<void> createUser(String uid, SDMap json) async =>
       await FirestoreQueries.userDocRef(uid).set(json);
