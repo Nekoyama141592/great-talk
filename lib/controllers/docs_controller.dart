@@ -15,13 +15,21 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   void _startLoading() => isLoading(true);
   void _endLoading() => isLoading(false);
   void addAllDocs(List<QDoc> elements) {
-    docs.addAll(elements);
+    final docIds = elements.map((e) => e.id).toList();
+    for (final element in elements) {
+      if (!docIds.contains(element.id)) {
+        docs.add(element);
+      }
+    }
     docs([...docs]);
   }
 
   void insertAllDocs(List<QDoc> elements) {
+    final docIds = elements.map((e) => e.id).toList();
     for (final element in elements.reversed.toList()) {
-      docs.insert(0, element);
+      if (!docIds.contains(element.id)) {
+        docs.insert(0, element);
+      }
     }
     docs([...docs]);
   }
