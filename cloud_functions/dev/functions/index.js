@@ -197,6 +197,40 @@ exports.onPostCreate = functions.firestore.document(postPath).onCreate(
 
     }
 );
+exports.onPostMuteCreate = functions.firestore.document(`${postPath}/postMutes/{activeUid}`).onCreate(
+    async (snap,_) => {
+        const newValue = snap.data();
+        await newValue.postRef.update({
+            "muteCount": admin.firestore.FieldValue.increment(plusOne),
+        });
+    }
+);
+
+exports.onPostMuteDelete = functions.firestore.document(`${postPath}/postMutes/{activeUid}`).onDelete(
+    async (snap,_) => {
+        const newValue = snap.data();
+        await newValue.postRef.update({
+            "muteCount": admin.firestore.FieldValue.increment(minusOne),
+        });
+    }
+);
+exports.onUserMutesCreate = functions.firestore.document(`${userPath}/userMutes/{activeUid}`).onCreate(
+    async (snap,_) => {
+        const newValue = snap.data();
+        await newValue.passiveUserRef.update({
+            'muteCount': admin.firestore.FieldValue.increment(plusOne),
+        });
+    }
+);
+
+exports.onUserMutesDelete = functions.firestore.document(`${userPath}/userMutes/{activeUid}`).onDelete(
+    async (snap,_) => {
+        const newValue = snap.data();
+        await newValue.passiveUserRef.update({
+            'muteCount': admin.firestore.FieldValue.increment(minusOne),
+        });
+    }
+);
 exports.onUserUpdateLogCreate = functions.firestore.document(`${userPath}/userUpdateLogs/{id}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
