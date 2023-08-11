@@ -188,7 +188,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
       const FormLabel(title: "temperature", helpMsg: temperatureHelpMsg),
       OriginalForm(
         initialValue: defaultTemperature.toString(),
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         onSaved: (value) {
           setState(() {
             temperature = value;
@@ -214,7 +214,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
       const FormLabel(title: "topP", helpMsg: topPHelpMsg),
       OriginalForm(
         initialValue: defaultTopP.toString(),
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         onSaved: (value) {
           setState(() {
             topP = value;
@@ -241,7 +241,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
           title: "PresencePenalty", helpMsg: presencePenaltyHelpMsg),
       OriginalForm(
         initialValue: defaultPresencePenalty.toString(),
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         onSaved: (value) {
           setState(() {
             presencePenalty = value;
@@ -268,7 +268,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
           title: "FrequencyPenalty", helpMsg: frequencyPenaltyHelpMsg),
       OriginalForm(
         initialValue: defaultFrequencyPenalty.toString(),
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         onSaved: (value) {
           setState(() {
             frequencyPenalty = value;
