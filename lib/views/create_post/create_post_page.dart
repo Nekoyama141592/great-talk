@@ -271,7 +271,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
         keyboardType: TextInputType.number,
         onSaved: (value) {
           setState(() {
-            topP = value;
+            frequencyPenalty = value;
           });
         },
         validator: (value) {
