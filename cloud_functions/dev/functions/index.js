@@ -214,6 +214,16 @@ exports.onPostLikeDelete = functions.firestore.document(`${postPath}/postLikes/{
         });
     }
 );
+exports.onPostMessageCreate = functions.firestore.document(`${postPath}/messages/{activeUid}`).onCreate(
+    async (snap,_) => {
+        const newValue = snap.data();
+        await newValue.postRef.update({
+            "msgCount": admin.firestore.FieldValue.increment(plusOne),
+        });
+    }
+);
+
+
 exports.onPostMuteCreate = functions.firestore.document(`${postPath}/postMutes/{activeUid}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
@@ -228,6 +238,14 @@ exports.onPostMuteDelete = functions.firestore.document(`${postPath}/postMutes/{
         const newValue = snap.data();
         await newValue.postRef.update({
             "muteCount": admin.firestore.FieldValue.increment(minusOne),
+        });
+    }
+);
+exports.onPostReportCreate = functions.firestore.document(`${postPath}/postReports/{postReport}`).onCreate(
+    async (snap,_) => {
+        const newValue = snap.data();
+        await newValue.postRef.update({
+            "reportCount": admin.firestore.FieldValue.increment(plusOne),
         });
     }
 );
