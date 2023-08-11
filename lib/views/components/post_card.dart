@@ -30,7 +30,9 @@ class PostCard extends StatelessWidget {
                   title: "不適切なコンテンツ",
                 ),
               )
-            : Obx(() => CurrentUserController.to.isMutingPost(content.contentId)
+            : Obx(() => CurrentUserController.to
+                        .isMutingPost(content.contentId) ||
+                    CurrentUserController.to.isMutingUser(content.posterUid)
                 ? MosaicCard(
                     child: MosaicPostChild(
                         content: content,

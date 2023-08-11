@@ -66,7 +66,9 @@ class MuteUsersController extends DocsController {
             onPressed: Get.back, child: const Text(cancelText)),
         CupertinoDialogAction(
             isDestructiveAction: true,
-            onPressed: () async => await unMuteUser(passiveUid),
+            onPressed: () async {
+              await unMuteUser(passiveUid).then((value) => Get.back());
+            },
             child: const Text(okText))
       ],
     ));

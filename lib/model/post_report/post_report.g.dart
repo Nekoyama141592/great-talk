@@ -16,7 +16,6 @@ _$_PostReport _$$_PostReportFromJson(Map<String, dynamic> json) =>
       reportContents: (json['reportContents'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      post: Post.fromJson(json['post'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_PostReportToJson(_$_PostReport instance) =>
@@ -27,5 +26,4 @@ Map<String, dynamic> _$$_PostReportToJson(_$_PostReport instance) =>
       'others': instance.others,
       'postRef': instance.postRef,
       'reportContents': instance.reportContents,
-      'post': instance.post,
     };

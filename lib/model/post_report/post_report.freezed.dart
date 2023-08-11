@@ -26,7 +26,6 @@ mixin _$PostReport {
   String get others => throw _privateConstructorUsedError;
   dynamic get postRef => throw _privateConstructorUsedError;
   List<String> get reportContents => throw _privateConstructorUsedError;
-  Post get post => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,10 +45,7 @@ abstract class $PostReportCopyWith<$Res> {
       dynamic createdAt,
       String others,
       dynamic postRef,
-      List<String> reportContents,
-      Post post});
-
-  $PostCopyWith<$Res> get post;
+      List<String> reportContents});
 }
 
 /// @nodoc
@@ -71,7 +67,6 @@ class _$PostReportCopyWithImpl<$Res, $Val extends PostReport>
     Object? others = null,
     Object? postRef = freezed,
     Object? reportContents = null,
-    Object? post = null,
   }) {
     return _then(_value.copyWith(
       activeUid: null == activeUid
@@ -98,19 +93,7 @@ class _$PostReportCopyWithImpl<$Res, $Val extends PostReport>
           ? _value.reportContents
           : reportContents // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      post: null == post
-          ? _value.post
-          : post // ignore: cast_nullable_to_non_nullable
-              as Post,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PostCopyWith<$Res> get post {
-    return $PostCopyWith<$Res>(_value.post, (value) {
-      return _then(_value.copyWith(post: value) as $Val);
-    });
   }
 }
 
@@ -128,11 +111,7 @@ abstract class _$$_PostReportCopyWith<$Res>
       dynamic createdAt,
       String others,
       dynamic postRef,
-      List<String> reportContents,
-      Post post});
-
-  @override
-  $PostCopyWith<$Res> get post;
+      List<String> reportContents});
 }
 
 /// @nodoc
@@ -152,7 +131,6 @@ class __$$_PostReportCopyWithImpl<$Res>
     Object? others = null,
     Object? postRef = freezed,
     Object? reportContents = null,
-    Object? post = null,
   }) {
     return _then(_$_PostReport(
       activeUid: null == activeUid
@@ -179,10 +157,6 @@ class __$$_PostReportCopyWithImpl<$Res>
           ? _value._reportContents
           : reportContents // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      post: null == post
-          ? _value.post
-          : post // ignore: cast_nullable_to_non_nullable
-              as Post,
     ));
   }
 }
@@ -196,8 +170,7 @@ class _$_PostReport implements _PostReport {
       required this.createdAt,
       required this.others,
       required this.postRef,
-      required final List<String> reportContents,
-      required this.post})
+      required final List<String> reportContents})
       : _reportContents = reportContents;
 
   factory _$_PostReport.fromJson(Map<String, dynamic> json) =>
@@ -222,11 +195,8 @@ class _$_PostReport implements _PostReport {
   }
 
   @override
-  final Post post;
-
-  @override
   String toString() {
-    return 'PostReport(activeUid: $activeUid, activeUserRef: $activeUserRef, createdAt: $createdAt, others: $others, postRef: $postRef, reportContents: $reportContents, post: $post)';
+    return 'PostReport(activeUid: $activeUid, activeUserRef: $activeUserRef, createdAt: $createdAt, others: $others, postRef: $postRef, reportContents: $reportContents)';
   }
 
   @override
@@ -242,8 +212,7 @@ class _$_PostReport implements _PostReport {
             (identical(other.others, others) || other.others == others) &&
             const DeepCollectionEquality().equals(other.postRef, postRef) &&
             const DeepCollectionEquality()
-                .equals(other._reportContents, _reportContents) &&
-            (identical(other.post, post) || other.post == post));
+                .equals(other._reportContents, _reportContents));
   }
 
   @JsonKey(ignore: true)
@@ -255,8 +224,7 @@ class _$_PostReport implements _PostReport {
       const DeepCollectionEquality().hash(createdAt),
       others,
       const DeepCollectionEquality().hash(postRef),
-      const DeepCollectionEquality().hash(_reportContents),
-      post);
+      const DeepCollectionEquality().hash(_reportContents));
 
   @JsonKey(ignore: true)
   @override
@@ -279,8 +247,7 @@ abstract class _PostReport implements PostReport {
       required final dynamic createdAt,
       required final String others,
       required final dynamic postRef,
-      required final List<String> reportContents,
-      required final Post post}) = _$_PostReport;
+      required final List<String> reportContents}) = _$_PostReport;
 
   factory _PostReport.fromJson(Map<String, dynamic> json) =
       _$_PostReport.fromJson;
@@ -297,8 +264,6 @@ abstract class _PostReport implements PostReport {
   dynamic get postRef;
   @override
   List<String> get reportContents;
-  @override
-  Post get post;
   @override
   @JsonKey(ignore: true)
   _$$_PostReportCopyWith<_$_PostReport> get copyWith =>

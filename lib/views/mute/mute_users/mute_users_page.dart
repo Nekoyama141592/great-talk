@@ -9,7 +9,7 @@ class MuteUsersPage extends StatelessWidget {
   const MuteUsersPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final controller = MuteUsersController.to;
+    final controller = Get.put(MuteUsersController());
     return Scaffold(
       appBar: AppBar(
         title: const Text("ミュートしているユーザー一覧"),

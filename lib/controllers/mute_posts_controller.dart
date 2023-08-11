@@ -66,7 +66,9 @@ class MutePostsController extends DocsController {
             onPressed: Get.back, child: const Text(cancelText)),
         CupertinoDialogAction(
             isDestructiveAction: true,
-            onPressed: () async => await unMutePost(post),
+            onPressed: () async {
+              await unMutePost(post).then((value) => Get.back());
+            },
             child: const Text(okText))
       ],
     ));

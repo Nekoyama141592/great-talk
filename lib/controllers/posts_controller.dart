@@ -104,6 +104,7 @@ class PostsController extends GetxController with CurrentUserMixin {
         post.typedRef(), currentUid(), postMute.toJson());
     if (innerContext.mounted) {
       Navigator.pop(innerContext);
+      Get.back();
     }
   }
 
@@ -121,6 +122,7 @@ class PostsController extends GetxController with CurrentUserMixin {
         passiveUid: passiveUid,
         tokenId: tokenId,
         tokenType: TokenType.muteUser.name);
+    CurrentUserController.to.addMuteUser(muteUserToken);
     await repository.createToken(currentUid(), tokenId, muteUserToken.toJson());
     final UserMute userMute = UserMute(
         activeUserRef: CurrentUserController.to.publicUser.value!.typedRef(),
@@ -132,6 +134,7 @@ class PostsController extends GetxController with CurrentUserMixin {
         passiveUid, currentUid(), userMute.toJson());
     if (innerContext.mounted) {
       Navigator.pop(innerContext);
+      Get.back();
     }
   }
 
@@ -141,13 +144,13 @@ class PostsController extends GetxController with CurrentUserMixin {
     }
     final post = rxPost.value!;
     final PostReport postReport = PostReport(
-        activeUserRef: CurrentUserController.to.publicUser.value!.typedRef(),
-        activeUid: currentUid(),
-        createdAt: Timestamp.now(),
-        others: others.value,
-        postRef: post.typedRef(),
-        reportContents: reportContents,
-        post: post);
+      activeUserRef: CurrentUserController.to.publicUser.value!.typedRef(),
+      activeUid: currentUid(),
+      createdAt: Timestamp.now(),
+      others: others.value,
+      postRef: post.typedRef(),
+      reportContents: reportContents,
+    );
     final result =
         await repository.createPostReport(post.typedRef(), postReport.toJson());
     result.when(success: (res) {
