@@ -24,6 +24,7 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
           .map((e) => e as Map<String, dynamic>)
           .toList(),
       msgCount: json['msgCount'] as int,
+      muteCount: json['muteCount'] as int,
       poster: json['poster'] as Map<String, dynamic>,
       postId: json['postId'] as String,
       ref: json['ref'],
@@ -48,6 +49,7 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'likeCount': instance.likeCount,
       'links': instance.links,
       'msgCount': instance.msgCount,
+      'muteCount': instance.muteCount,
       'poster': instance.poster,
       'postId': instance.postId,
       'ref': instance.ref,

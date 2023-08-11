@@ -33,6 +33,7 @@ mixin _$Post {
   int get likeCount => throw _privateConstructorUsedError;
   List<SDMap> get links => throw _privateConstructorUsedError;
   int get msgCount => throw _privateConstructorUsedError;
+  int get muteCount => throw _privateConstructorUsedError;
   Map<String, dynamic> get poster => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
   dynamic get ref => throw _privateConstructorUsedError;
@@ -66,6 +67,7 @@ abstract class $PostCopyWith<$Res> {
       int likeCount,
       List<SDMap> links,
       int msgCount,
+      int muteCount,
       Map<String, dynamic> poster,
       String postId,
       dynamic ref,
@@ -102,6 +104,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? likeCount = null,
     Object? links = null,
     Object? msgCount = null,
+    Object? muteCount = null,
     Object? poster = null,
     Object? postId = null,
     Object? ref = freezed,
@@ -160,6 +163,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
       msgCount: null == msgCount
           ? _value.msgCount
           : msgCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      muteCount: null == muteCount
+          ? _value.muteCount
+          : muteCount // ignore: cast_nullable_to_non_nullable
               as int,
       poster: null == poster
           ? _value.poster
@@ -220,6 +227,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       int likeCount,
       List<SDMap> links,
       int msgCount,
+      int muteCount,
       Map<String, dynamic> poster,
       String postId,
       dynamic ref,
@@ -252,6 +260,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? likeCount = null,
     Object? links = null,
     Object? msgCount = null,
+    Object? muteCount = null,
     Object? poster = null,
     Object? postId = null,
     Object? ref = freezed,
@@ -311,6 +320,10 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value.msgCount
           : msgCount // ignore: cast_nullable_to_non_nullable
               as int,
+      muteCount: null == muteCount
+          ? _value.muteCount
+          : muteCount // ignore: cast_nullable_to_non_nullable
+              as int,
       poster: null == poster
           ? _value._poster
           : poster // ignore: cast_nullable_to_non_nullable
@@ -367,6 +380,7 @@ class _$_Post extends _Post {
       required this.likeCount,
       required final List<SDMap> links,
       required this.msgCount,
+      required this.muteCount,
       required final Map<String, dynamic> poster,
       required this.postId,
       required this.ref,
@@ -450,6 +464,8 @@ class _$_Post extends _Post {
 
   @override
   final int msgCount;
+  @override
+  final int muteCount;
   final Map<String, dynamic> _poster;
   @override
   Map<String, dynamic> get poster {
@@ -489,7 +505,7 @@ class _$_Post extends _Post {
 
   @override
   String toString() {
-    return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, iconImage: $iconImage, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, poster: $poster, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
+    return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, iconImage: $iconImage, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, poster: $poster, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
   }
 
   @override
@@ -517,6 +533,8 @@ class _$_Post extends _Post {
             const DeepCollectionEquality().equals(other._links, _links) &&
             (identical(other.msgCount, msgCount) ||
                 other.msgCount == msgCount) &&
+            (identical(other.muteCount, muteCount) ||
+                other.muteCount == muteCount) &&
             const DeepCollectionEquality().equals(other._poster, _poster) &&
             (identical(other.postId, postId) || other.postId == postId) &&
             const DeepCollectionEquality().equals(other.ref, ref) &&
@@ -547,6 +565,7 @@ class _$_Post extends _Post {
         likeCount,
         const DeepCollectionEquality().hash(_links),
         msgCount,
+        muteCount,
         const DeepCollectionEquality().hash(_poster),
         postId,
         const DeepCollectionEquality().hash(ref),
@@ -586,6 +605,7 @@ abstract class _Post extends Post {
       required final int likeCount,
       required final List<SDMap> links,
       required final int msgCount,
+      required final int muteCount,
       required final Map<String, dynamic> poster,
       required final String postId,
       required final dynamic ref,
@@ -623,6 +643,8 @@ abstract class _Post extends Post {
   List<SDMap> get links;
   @override
   int get msgCount;
+  @override
+  int get muteCount;
   @override
   Map<String, dynamic> get poster;
   @override

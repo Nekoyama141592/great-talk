@@ -24,6 +24,7 @@ abstract class Post implements _$Post {
     required int likeCount,
     required List<SDMap> links,
     required int msgCount,
+    required int muteCount,
     required SDMap poster,
     required String postId,
     required dynamic ref,

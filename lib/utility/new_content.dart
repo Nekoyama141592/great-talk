@@ -74,6 +74,7 @@ class NewContent {
         likeCount: 0,
         links: [],
         msgCount: 0,
+        muteCount: 0,
         poster: poster.toJson(),
         postId: postId,
         ref: postRef,
