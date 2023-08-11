@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/search_users_controller.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/views/components/user_card.dart';
@@ -22,10 +21,7 @@ class SearchUsersScreen extends StatelessWidget {
                 itemBuilder: (c, i) {
                   final publicUser =
                       PublicUser.fromJson(controller.docs[i].data());
-                  return Obx(() =>
-                      CurrentUserController.to.isValidUser(publicUser.uid)
-                          ? UserCard(publicUser: publicUser)
-                          : const SizedBox.shrink());
+                  return UserCard(publicUser: publicUser);
                 }))));
   }
 }
