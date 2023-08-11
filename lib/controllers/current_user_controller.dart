@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
@@ -341,12 +342,17 @@ class CurrentUserController extends GetxController {
     });
   }
 
-  void updateUser(String userName, String bio, String fileName) {
+  void updateUser(
+    String userName,
+    String bio,
+    String fileName,
+  ) {
     final user = publicUser.value!;
     final result = user.copyWith(
         bio: user.typedBio().copyWith(value: bio).toJson(),
         userName: user.typedUserName().copyWith(value: userName).toJson(),
         userImage: user.typedUserImage().copyWith(value: fileName).toJson());
     CurrentUserController.to.publicUser(result);
+    MyProfileController.to.passiveUser(result);
   }
 }

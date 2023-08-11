@@ -16,6 +16,8 @@ const fHttps = functions.https;
 const userPath = "public/{version}/users/{uid}";
 const postPath = `${userPath}/posts/{postId}`;
 const batchLimit = 500;
+const plusOne = 1;
+const minusOne = -1;
 // AWS
 const AWS = require('aws-sdk');
 const aws_config = config.aws;
@@ -158,7 +160,29 @@ async function detectModerationLabels(bucketName, fileName) {
 
     return detectedImage;
 }
+exports.onFollowerCreate = functions.firestore.document(`${userPath}/followers/{followerUid}`).onCreate(
+    async (snap,_) => {
+        const newValue = snap.data();
+        await newValue.activeUserRef.update({
+            'followingCount': admin.firestore.FieldValue.increment(plusOne),
+        });
+        await newValue.passiveUserRef.update({
+            'followerCount': admin.firestore.FieldValue.increment(plusOne),
+        });
+    }
+);
 
+exports.onFollowerDelete = functions.firestore.document(`${userPath}/followers/{followerUid}`).onDelete(
+    async (snap,_) => {
+        const newValue = snap.data();
+        await newValue.activeUserRef.update({
+            'followingCount': admin.firestore.FieldValue.increment(minusOne),
+        });
+        await newValue.passiveUserRef.update({
+            'followerCount': admin.firestore.FieldValue.increment(minusOne),
+        });
+    }
+);
 exports.onPostCreate = functions.firestore.document(postPath).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
