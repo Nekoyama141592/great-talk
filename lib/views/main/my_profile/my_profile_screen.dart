@@ -8,7 +8,7 @@ class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(MyProfileController());
+    final controller = MyProfileController.to;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           backgroundColor: kPrimaryColor,

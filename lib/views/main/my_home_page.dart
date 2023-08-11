@@ -7,6 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/main_controller.dart';
+import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/controllers/notification_controller.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
@@ -31,6 +32,7 @@ class MyHomePage extends HookWidget {
     Get.put(NotificationController());
     Get.put(PostsController());
     Get.put(RealtimeResController());
+    Get.put(MyProfileController());
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(

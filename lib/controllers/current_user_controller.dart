@@ -178,6 +178,7 @@ class CurrentUserController extends GetxController {
     final result = await repository.createUser(currentUid(), newUser.toJson());
     result.when(success: (_) {
       publicUser(newUser);
+      MyProfileController.to.passiveUser(newUser);
       UIHelper.showFlutterToast("ユーザーが作成されました");
     }, failure: () {
       UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
