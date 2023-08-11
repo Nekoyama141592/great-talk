@@ -194,7 +194,34 @@ exports.onPostCreate = functions.firestore.document(postPath).onCreate(
             'title': detectedTitle,
             'iconImage': detectedIconImage,
         });
-
+        // timelineを作成
+        const timeline = {
+            "createdAt": newValue.createdAt,
+            "isRead": false,
+            "posterUid": newValue.poster.uid,
+            "postId": newValue.postId,
+        };
+        const posterRef = newValue.poster.ref;
+        await posterRef.collection('timelines').doc(newValue.postId).set(timeline); // 投稿者にもSet
+        // followersをget
+        const followers = await posterRef.collection("followers").get();
+        let count = 0;
+        let batch = fireStore.batch();
+        for (const follower of followers.docs) {
+            const data = follower.data();
+            // followerのtimelineを作成
+            const ref = data.activeUserRef.collection("timelines").doc(newValue.postId);
+            batch.set(ref,timeline);
+            count++;
+            if (count == batchLimit) {
+                await batch.commit();
+                batch = fireStore.batch();
+                count = 0;
+            }
+        }
+        if (count > 0) {
+            await batch.commit();
+        }
     }
 );
 exports.onPostLikeCreate = functions.firestore.document(`${postPath}/postLikes/{activeUid}`).onCreate(
