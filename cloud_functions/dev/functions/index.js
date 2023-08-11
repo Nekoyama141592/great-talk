@@ -197,6 +197,23 @@ exports.onPostCreate = functions.firestore.document(postPath).onCreate(
 
     }
 );
+exports.onPostLikeCreate = functions.firestore.document(`${postPath}/postLikes/{activeUid}`).onCreate(
+    async (snap,_) => {
+        const newValue = snap.data();
+        await newValue.postRef.update({
+            "likeCount": admin.firestore.FieldValue.increment(plusOne),
+        });
+    }
+);
+
+exports.onPostLikeDelete = functions.firestore.document(`${postPath}/postLikes/{activeUid}`).onDelete(
+    async (snap,_) => {
+        const newValue = snap.data();
+        await newValue.postRef.update({
+            "likeCount": admin.firestore.FieldValue.increment(minusOne),
+        });
+    }
+);
 exports.onPostMuteCreate = functions.firestore.document(`${postPath}/postMutes/{activeUid}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
