@@ -24,13 +24,6 @@ class FirestoreQueries {
   static final postsQuery =
       _instance.collectionGroup('posts').limit(oneTimeReadCount);
 
-  static MapQuery postsQueryByFollowing(List<String> followingUids) {
-    if (followingUids.isEmpty) {
-      followingUids.add("");
-    }
-    return postsQuery.where('poster.uid', whereIn: followingUids);
-  }
-
   static MapQuery postsQueryByWhereIn(List<String> postIds) =>
       postsQuery.where('postId', whereIn: postIds);
 
@@ -51,13 +44,6 @@ class FirestoreQueries {
       moreQuery(userPostsQueryByNewest(uid), lastDoc);
   static MapQuery newUserPostsQueryByNewest(String uid, Doc firstDoc) =>
       newQuery(userPostsQueryByNewest(uid), firstDoc);
-
-  static MapQuery newPostsQueryByFollowing(
-          List<String> followingUids, Doc firstDoc) =>
-      newQuery(postsQueryByFollowing(followingUids), firstDoc);
-  static MapQuery morePostsQueryByFollowing(
-          List<String> followingUids, Doc lastDoc) =>
-      moreQuery(postsQueryByFollowing(followingUids), lastDoc);
 
   static final postsQueryByLikeCount =
       postsQuery.orderBy('likeCount', descending: true);

@@ -221,45 +221,12 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<List<QDoc>> getPostsByFollowing(
-      List<String> followingUids) async {
-    try {
-      final res = await client.getPostsByFollowing(followingUids);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getNewPostsByFollowing(
-      List<String> followingUids, Doc firstDoc) async {
-    try {
-      final res = await client.getNewPostsByFollowing(followingUids, firstDoc);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getMorePostsByFollowing(
-      List<String> followingUids, Doc lastDoc) async {
-    try {
-      final res = await client.getMorePostsByFollowing(followingUids, lastDoc);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
   FutureResult<List<QDoc>> getTimelinePosts(
       List<String> timelinePostIds) async {
     try {
+      if (timelinePostIds.isEmpty) {
+        return const Result.success([]);
+      }
       final res = await client.getTimelinePosts(timelinePostIds);
       final docs = res.docs;
       return Result.success(docs);

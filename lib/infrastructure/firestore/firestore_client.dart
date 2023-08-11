@@ -57,16 +57,7 @@ class FirestoreClient {
 
   FutureDoc getPost(String uid, String postId) async =>
       await FirestoreQueries.postDocRef(uid, postId).get();
-  FutureQSnapshot getPostsByFollowing(List<String> followingUids) async =>
-      await FirestoreQueries.postsQueryByFollowing(followingUids).get();
-  FutureQSnapshot getNewPostsByFollowing(
-          List<String> followingUids, Doc firstDoc) async =>
-      await FirestoreQueries.newPostsQueryByFollowing(followingUids, firstDoc)
-          .get();
-  FutureQSnapshot getMorePostsByFollowing(
-          List<String> followingUids, Doc lastDoc) async =>
-      await FirestoreQueries.morePostsQueryByFollowing(followingUids, lastDoc)
-          .get();
+
   FutureQSnapshot getPostsByWhereIn(List<String> postIds) async =>
       await FirestoreQueries.postsQueryByWhereIn(postIds).get();
 

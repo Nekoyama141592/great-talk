@@ -143,23 +143,6 @@ class MockFirestoreClient implements FirestoreClient {
 
   @override
   FutureQSnapshot getMorePostsByLikeCount(Doc lastDoc) => getPostsByLikeCount();
-  @override
-  FutureQSnapshot getPostsByFollowing(List<String> followingUids) async {
-    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final posts = [...mockPosts];
-    posts.sort((a, b) => b.typedCreatedAt().compareTo(a.typedCreatedAt()));
-    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
-    return MockQSnapshot(data);
-  }
-
-  @override
-  FutureQSnapshot getNewPostsByFollowing(
-          List<String> followingUids, Doc firstDoc) =>
-      getPostsByFollowing(followingUids);
-  @override
-  FutureQSnapshot getMorePostsByFollowing(
-          List<String> followingUids, Doc lastDoc) =>
-      getPostsByFollowing(followingUids);
 
   @override
   FutureQSnapshot getTimelines(DocRef userRef) async {
