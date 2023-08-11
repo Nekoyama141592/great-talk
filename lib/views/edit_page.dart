@@ -42,7 +42,7 @@ class _CreatePostPageState extends State<EditProfilePage>
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "投稿を作成",
+          "ユーザー情報を編集",
         ),
       ),
       body: SafeArea(
