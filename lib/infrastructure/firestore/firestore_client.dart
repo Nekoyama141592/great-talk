@@ -28,19 +28,19 @@ class FirestoreClient {
       await FirestoreQueries.followerQuery(currentUid, passiveUid).delete();
 
   Future<void> createPostReport(DocRef postRef, SDMap json) async =>
-      await FirestoreQueries.postReportDocRefFromPostRef(postRef).get();
+      await FirestoreQueries.postReportDocRefFromPostRef(postRef).set(json);
 
   Future<void> createPostMute(
           DocRef postRef, String activeUid, SDMap json) async =>
       await FirestoreQueries.postMuteDocRefFromPostRef(postRef, activeUid)
-          .get();
+          .set(json);
   Future<void> deletePostMute(DocRef postRef, String activeUid) async =>
       await FirestoreQueries.postMuteDocRefFromPostRef(postRef, activeUid)
           .delete();
 
   Future<void> createUserMute(
           String passiveUid, String activeUid, SDMap json) async =>
-      await FirestoreQueries.userMuteDocRef(passiveUid, activeUid).get();
+      await FirestoreQueries.userMuteDocRef(passiveUid, activeUid).set(json);
   Future<void> deleteUserMute(String passiveUid, String activeUid) async =>
       await FirestoreQueries.userMuteDocRef(passiveUid, activeUid).delete();
 
