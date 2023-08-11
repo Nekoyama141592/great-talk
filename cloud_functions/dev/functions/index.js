@@ -34,6 +34,27 @@ const rekognition = new AWS.Rekognition();
 const postImagesBucket = aws_config.s3.post_images; // s3バケット
 const userImagesBucket = aws_config.s3.user_images; // s3バケット
 
+async function deleteFromColRef(colRef) {
+    const qshot = await colRef.get();
+    let count = 0;
+    let batch = fireStore.batch();
+
+    for (const doc of qshot.docs) {
+        batch.delete(doc.ref);
+        count++;
+
+        if (count === batchLimit) {
+            await batch.commit();
+            batch = fireStore.batch();
+            count = 0;
+        }
+    }
+
+    if (count > 0) {
+        await batch.commit();
+    }
+}
+
 function saveDataToFirestore(json, path,id) {
     const db = admin.firestore();
     return db.collection(path).doc(id).set(json);
@@ -274,6 +295,22 @@ exports.onPostReportCreate = functions.firestore.document(`${postPath}/postRepor
         await newValue.postRef.update({
             "reportCount": admin.firestore.FieldValue.increment(plusOne),
         });
+    }
+);
+exports.onUserDelete = functions.firestore.document(userPath).onDelete(
+    async (snap,_) => {
+        const uid = snap.id;
+        const myRef = snap.ref;
+        // 自分をPostを消す
+        await deleteFromColRef(myRef.collection('posts'));
+        // 自分のtimelineを消す
+        await deleteFromColRef(myRef.collection('timelines'));
+        // 自分のtokenを消す
+        await deleteFromColRef(myRef.collection('tokens'));
+        // 自分のuserUpdateLogsを消す
+        await deleteFromColRef(myRef.collection('userUpdateLogs'));
+        // privateUserを削除
+        await fireStore.collection('private').doc('v1').collection('privateUsers').doc(uid).delete();
     }
 );
 exports.onUserMutesCreate = functions.firestore.document(`${userPath}/userMutes/{activeUid}`).onCreate(
