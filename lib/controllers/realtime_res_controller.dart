@@ -163,7 +163,6 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       messages([...messages]);
       isGenerating(false);
       _setValues();
-      _createTextMsgDoc(completedMsg); // firestoreにメッセージを追加
     }, onError: (e) {
       chatCount--; // チャット数を一つ減らす
       _setChatCount(); // チャット数を保存
@@ -274,6 +273,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     final textMessage = _newtTextMessage(content, currentUid());
     messages.add(textMessage);
     messages([...messages]);
+    _createTextMsgDoc(textMessage); // firestoreにメッセージを追加
   }
 
   Future<List<Messages>> _createRequestMessages(String content) async {
