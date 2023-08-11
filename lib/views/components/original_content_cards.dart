@@ -26,37 +26,32 @@ class OriginalContentCards extends StatelessWidget {
                 : const Icon(Icons.search),
           ),
         ),
-        body: Obx(() => Container(
-              padding: controller.isSearching.value
-                  ? EdgeInsets.symmetric(vertical: defaultPadding(context) * 7)
-                  : null,
-              child: Obx(() => ListView.builder(
-                  itemCount: controller.results.length,
-                  itemBuilder: ((context, index) {
-                    final content = controller.results[index];
-                    final String name = getName(content);
-                    final String? lastAnswer =
-                        mapMetadataToLastAnswer(content.metadata);
-                    return Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: defaultPadding(context)),
-                      child: ListTile(
-                        leading: CircleImage(
-                            bucketName: "", imageValue: content.imageValue),
-                        title: boldText(name),
-                        subtitle: lastAnswer != null
-                            ? Text(
-                                lastAnswer,
-                                overflow: TextOverflow.ellipsis,
-                              )
-                            : null,
-                        onTap: () => Get.toNamed(
-                            '/chat/users/${content.posterUid}/posts/${content.contentId}'),
-                        onLongPress: () => ChatUtility.showCleanLocalMsgDialog(
-                            content, controller),
-                      ),
-                    );
-                  }))),
-            )));
+        body: Obx(() => ListView.builder(
+            itemCount: controller.results.length,
+            itemBuilder: ((context, index) {
+              final content = controller.results[index];
+              final String name = getName(content);
+              final String? lastAnswer =
+                  mapMetadataToLastAnswer(content.metadata);
+              return Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: defaultPadding(context)),
+                child: ListTile(
+                  leading: CircleImage(
+                      bucketName: "", imageValue: content.imageValue),
+                  title: boldText(name),
+                  subtitle: lastAnswer != null
+                      ? Text(
+                          lastAnswer,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      : null,
+                  onTap: () => Get.toNamed(
+                      '/chat/users/${content.posterUid}/posts/${content.contentId}'),
+                  onLongPress: () =>
+                      ChatUtility.showCleanLocalMsgDialog(content, controller),
+                ),
+              );
+            }))));
   }
 }

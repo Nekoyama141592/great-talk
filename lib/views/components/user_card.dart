@@ -4,6 +4,7 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
+import 'package:great_talk/utility/style_utility.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/components/mosaic_card.dart';
@@ -50,10 +51,13 @@ class UserCard extends StatelessWidget {
                         bucketName: publicUser.typedUserImage().bucketName,
                         imageValue: publicUser.typedUserImage().value),
                     const Spacer(),
-                    EllipsisText(publicUser.typedUserName().value),
+                    EllipsisText(
+                      publicUser.typedUserName().value,
+                      style: StyleUtility.bold25(),
+                    ),
                     const Spacer(),
                     const Icon(Icons.people),
-                    Text(publicUser.followerCount.toString())
+                    BasicBoldText(publicUser.followerCount.toString())
                   ],
                 ),
               ),

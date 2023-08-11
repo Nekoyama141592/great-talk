@@ -1,5 +1,6 @@
 // flutter
 import 'package:flutter/material.dart';
+import 'package:great_talk/common/doubles.dart';
 // packages
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 
@@ -19,8 +20,13 @@ class SearchScreen extends StatelessWidget {
         hint: hint,
         onQueryChanged: onQueryChanged,
         clearQueryOnClose: true,
-        body: IndexedStack(
-            children: [FloatingSearchBarScrollNotifier(child: child)]),
+        body: IndexedStack(children: [
+          FloatingSearchBarScrollNotifier(
+              child: Padding(
+            padding: EdgeInsets.only(top: searchScreenTopPadding(context)),
+            child: child,
+          ))
+        ]),
         builder: (context, transition) => const SizedBox.shrink());
   }
 }
