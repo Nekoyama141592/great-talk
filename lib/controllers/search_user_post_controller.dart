@@ -8,8 +8,12 @@ class SearchUserPostsController extends SearchDocsController {
   String _passiveUid() => Get.parameters['uid']!;
   @override
   Future<void> fetchDocs() async {
-    firestoreSearchTerm = searchTerm;
-    final result = await repository.searchUserPosts(_passiveUid(), searchTerm);
+    if (searchTerm.isEmpty) {
+      return;
+    }
+    firestoreSearchTerm = searchTerm; // フォームのSearchTermは空になるので格納する
+    final result =
+        await repository.searchUserPosts(_passiveUid(), firestoreSearchTerm);
     result.when(success: (res) {
       docs(res);
     }, failure: () {
@@ -19,9 +23,10 @@ class SearchUserPostsController extends SearchDocsController {
 
   @override
   Future<void> onLoading(RefreshController refreshController) async {
-    if (searchTerm == firestoreSearchTerm) {
+    // Loadingの際はフォームのSearchTermは空になる
+    if (searchTerm.isEmpty && docs.isNotEmpty) {
       final result = await repository.searchMoreUserPosts(
-          _passiveUid(), searchTerm, docs.last);
+          _passiveUid(), firestoreSearchTerm, docs.last);
       result.when(success: (res) {
         docs(res);
       }, failure: () {

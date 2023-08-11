@@ -7,7 +7,10 @@ class SearchUsersController extends SearchDocsController {
 
   @override
   Future<void> fetchDocs() async {
-    firestoreSearchTerm = searchTerm;
+    if (searchTerm.isEmpty) {
+      return;
+    }
+    firestoreSearchTerm = searchTerm; // フォームのSearchTermは空になるので格納する
     final result = await repository.searchUsers(firestoreSearchTerm);
     result.when(success: (res) {
       docs(res);
@@ -18,8 +21,10 @@ class SearchUsersController extends SearchDocsController {
 
   @override
   Future<void> onLoading(RefreshController refreshController) async {
-    if (searchTerm == firestoreSearchTerm) {
-      final result = await repository.searchMoreUsers(searchTerm, docs.last);
+    // Loadingの際はフォームのSearchTermは空になる
+    if (searchTerm.isEmpty && docs.isNotEmpty) {
+      final result =
+          await repository.searchMoreUsers(firestoreSearchTerm, docs.last);
       result.when(success: (res) {
         docs(res);
       }, failure: () {

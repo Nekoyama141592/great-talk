@@ -63,13 +63,14 @@ class PersonsController extends GetxController {
   }
 
   void search(String searchTerm) {
-    if (searchTerm.isNotEmpty) {
-      results.value = originalContents.where((element) {
-        final name = element.title.toLowerCase();
-        final id = element.contentId.toLowerCase();
-        return name.contains(searchTerm) || id.contains(searchTerm);
-      }).toList();
+    if (searchTerm.isEmpty) {
+      return;
     }
+    results.value = originalContents.where((element) {
+      final name = element.title.toLowerCase();
+      final id = element.contentId.toLowerCase();
+      return name.contains(searchTerm) || id.contains(searchTerm);
+    }).toList();
   }
 
   void reset() => results(originalContents);

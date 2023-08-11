@@ -526,10 +526,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1017,10 +1017,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1046,10 +1046,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1417,10 +1417,10 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Debug-testing";
 		};
@@ -1431,10 +1431,10 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Profile-testing";
 		};
@@ -1445,10 +1445,10 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Release-testing";
 		};
@@ -1459,10 +1459,10 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Debug-verification";
 		};
@@ -1473,10 +1473,10 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Profile-verification";
 		};
@@ -1487,10 +1487,10 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Release-verification";
 		};
@@ -1502,10 +1502,10 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Debug-dev";
 		};
@@ -1516,10 +1516,10 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Profile-dev";
 		};
@@ -1530,10 +1530,10 @@
 				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Release-dev";
 		};
@@ -1545,10 +1545,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Debug-prod";
 		};
@@ -1561,10 +1561,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Profile-prod";
 		};
@@ -1576,10 +1576,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = great_talk_notification_auth;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_notification_auth;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = great_talk_dev;
 			};
 			name = "Release-prod";
 		};
