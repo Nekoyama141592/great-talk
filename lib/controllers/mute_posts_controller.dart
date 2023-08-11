@@ -10,6 +10,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MutePostsController extends DocsController {
   MutePostsController() : super(enablePullDown: true);
+  static MutePostsController get to => Get.find<MutePostsController>();
   @override
   Future<void> fetchDocs() async {
     final requestPostIds = _createRequestPostIds();

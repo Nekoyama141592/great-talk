@@ -10,6 +10,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MuteUsersController extends DocsController {
   MuteUsersController() : super(enablePullDown: true);
+  static MuteUsersController get to => Get.find<MuteUsersController>();
   @override
   Future<void> fetchDocs() async {
     final requestUids = _createRequestUids();
