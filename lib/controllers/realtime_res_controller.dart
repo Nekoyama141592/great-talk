@@ -248,7 +248,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   TextMessage _newtTextMessage(String content, String senderUid) {
     final now = Timestamp.now();
     final id = randomString();
-    final posterUid = interlocutor.value!.contentId;
+    final posterUid = interlocutor.value!.posterUid;
     final textMessage = TextMessage(
       createdAt: now,
       id: id,
