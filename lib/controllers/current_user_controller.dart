@@ -191,7 +191,6 @@ class CurrentUserController extends GetxController {
         currentUid(), newPrivateUser.toJson());
     result.when(success: (_) {
       privateUser(newPrivateUser);
-      UIHelper.showFlutterToast("ユーザーが作成されました");
     }, failure: () {
       UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
     });
