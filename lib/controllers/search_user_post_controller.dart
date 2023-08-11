@@ -24,7 +24,9 @@ class SearchUserPostsController extends SearchDocsController {
   @override
   Future<void> onLoading(RefreshController refreshController) async {
     // Loadingの際はフォームのSearchTermは空になる
-    if (searchTerm.isEmpty && docs.isNotEmpty) {
+    if (searchTerm.isEmpty &&
+        docs.isNotEmpty &&
+        firestoreSearchTerm.isNotEmpty) {
       final result = await repository.searchMoreUserPosts(
           _passiveUid(), firestoreSearchTerm, docs.last);
       result.when(success: (res) {
