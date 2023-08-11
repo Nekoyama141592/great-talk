@@ -1,6 +1,6 @@
 import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
+import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
 import 'package:great_talk/repository/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
@@ -80,5 +80,5 @@ class FeedsController extends DocsController {
     refreshController.refreshCompleted();
   }
 
-  DocRef _userRef() => CurrentUserController.to.publicUser.value!.typedRef();
+  DocRef _userRef() => FirestoreQueries.userDocRef(currentUid());
 }

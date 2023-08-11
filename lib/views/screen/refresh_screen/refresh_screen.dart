@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/post_card.dart';
+import 'package:great_talk/views/screen/loading_screen.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RefreshScreen extends HookWidget {
@@ -25,7 +26,7 @@ class RefreshScreen extends HookWidget {
       return refreshController.dispose;
     }, []);
     return Obx(() => docsController.cannotShow()
-        ? const CircularProgressIndicator()
+        ? const LoadingScreen()
         : SmartRefresher(
             controller: refreshController,
             enablePullDown: false, // trueだとiosもAndroidも反応しなくなる
