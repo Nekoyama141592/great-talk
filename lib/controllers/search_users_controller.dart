@@ -28,7 +28,7 @@ class SearchUsersController extends SearchDocsController {
       final result =
           await repository.searchMoreUsers(firestoreSearchTerm, docs.last);
       result.when(success: (res) {
-        docs(res);
+        addAllDocs(res);
       }, failure: () {
         UIHelper.showErrorFlutterToast("データの取得に失敗しました");
       });

@@ -30,7 +30,7 @@ class SearchUserPostsController extends SearchDocsController {
       final result = await repository.searchMoreUserPosts(
           _passiveUid(), firestoreSearchTerm, docs.last);
       result.when(success: (res) {
-        docs(res);
+        addAllDocs(res);
       }, failure: () {
         UIHelper.showErrorFlutterToast("データの取得に失敗しました");
       });
