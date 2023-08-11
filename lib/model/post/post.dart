@@ -12,6 +12,7 @@ part 'post.g.dart';
 abstract class Post implements _$Post {
   const Post._();
   const factory Post({
+    required int bookmarkCount,
     required dynamic createdAt,
     required SDMap customCompleteText,
     required SDMap description,

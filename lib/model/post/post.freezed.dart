@@ -20,6 +20,7 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Post {
+  int get bookmarkCount => throw _privateConstructorUsedError;
   dynamic get createdAt => throw _privateConstructorUsedError;
   Map<String, dynamic> get customCompleteText =>
       throw _privateConstructorUsedError;
@@ -53,7 +54,8 @@ abstract class $PostCopyWith<$Res> {
       _$PostCopyWithImpl<$Res, Post>;
   @useResult
   $Res call(
-      {dynamic createdAt,
+      {int bookmarkCount,
+      dynamic createdAt,
       Map<String, dynamic> customCompleteText,
       Map<String, dynamic> description,
       List<SDMap> exampleTexts,
@@ -88,6 +90,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? bookmarkCount = null,
     Object? createdAt = freezed,
     Object? customCompleteText = null,
     Object? description = null,
@@ -110,6 +113,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? userCount = null,
   }) {
     return _then(_value.copyWith(
+      bookmarkCount: null == bookmarkCount
+          ? _value.bookmarkCount
+          : bookmarkCount // ignore: cast_nullable_to_non_nullable
+              as int,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -201,7 +208,8 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {dynamic createdAt,
+      {int bookmarkCount,
+      dynamic createdAt,
       Map<String, dynamic> customCompleteText,
       Map<String, dynamic> description,
       List<SDMap> exampleTexts,
@@ -232,6 +240,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? bookmarkCount = null,
     Object? createdAt = freezed,
     Object? customCompleteText = null,
     Object? description = null,
@@ -254,6 +263,10 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? userCount = null,
   }) {
     return _then(_$_Post(
+      bookmarkCount: null == bookmarkCount
+          ? _value.bookmarkCount
+          : bookmarkCount // ignore: cast_nullable_to_non_nullable
+              as int,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -342,7 +355,8 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
 @JsonSerializable()
 class _$_Post extends _Post {
   const _$_Post(
-      {required this.createdAt,
+      {required this.bookmarkCount,
+      required this.createdAt,
       required final Map<String, dynamic> customCompleteText,
       required final Map<String, dynamic> description,
       required final List<SDMap> exampleTexts,
@@ -375,6 +389,8 @@ class _$_Post extends _Post {
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
+  @override
+  final int bookmarkCount;
   @override
   final dynamic createdAt;
   final Map<String, dynamic> _customCompleteText;
@@ -473,7 +489,7 @@ class _$_Post extends _Post {
 
   @override
   String toString() {
-    return 'Post(createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, iconImage: $iconImage, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, poster: $poster, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
+    return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, iconImage: $iconImage, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, poster: $poster, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
   }
 
   @override
@@ -481,6 +497,8 @@ class _$_Post extends _Post {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Post &&
+            (identical(other.bookmarkCount, bookmarkCount) ||
+                other.bookmarkCount == bookmarkCount) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality()
                 .equals(other._customCompleteText, _customCompleteText) &&
@@ -517,6 +535,7 @@ class _$_Post extends _Post {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        bookmarkCount,
         const DeepCollectionEquality().hash(createdAt),
         const DeepCollectionEquality().hash(_customCompleteText),
         const DeepCollectionEquality().hash(_description),
@@ -555,7 +574,8 @@ class _$_Post extends _Post {
 
 abstract class _Post extends Post {
   const factory _Post(
-      {required final dynamic createdAt,
+      {required final int bookmarkCount,
+      required final dynamic createdAt,
       required final Map<String, dynamic> customCompleteText,
       required final Map<String, dynamic> description,
       required final List<SDMap> exampleTexts,
@@ -579,6 +599,8 @@ abstract class _Post extends Post {
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
+  @override
+  int get bookmarkCount;
   @override
   dynamic get createdAt;
   @override

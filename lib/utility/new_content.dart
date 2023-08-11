@@ -60,6 +60,7 @@ class NewContent {
       SDMap customCompleteText) {
     final now = Timestamp.now();
     return Post(
+        bookmarkCount: 0,
         createdAt: now,
         customCompleteText: customCompleteText,
         description: newDetectedText(description).toJson(),

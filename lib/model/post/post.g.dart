@@ -7,6 +7,7 @@ part of 'post.dart';
 // **************************************************************************
 
 _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
+      bookmarkCount: json['bookmarkCount'] as int,
       createdAt: json['createdAt'],
       customCompleteText: json['customCompleteText'] as Map<String, dynamic>,
       description: json['description'] as Map<String, dynamic>,
@@ -35,6 +36,7 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
     );
 
 Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
+      'bookmarkCount': instance.bookmarkCount,
       'createdAt': instance.createdAt,
       'customCompleteText': instance.customCompleteText,
       'description': instance.description,

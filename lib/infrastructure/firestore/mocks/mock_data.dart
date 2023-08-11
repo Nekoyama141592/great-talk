@@ -446,6 +446,7 @@ final List<PublicUser> mockUsers = [
 ];
 final List<Post> mockPosts = [
   Post(
+      bookmarkCount: 0,
       createdAt: Timestamp.fromDate(DateTime(2023, 5, 25)),
       customCompleteText:
           const CustomCompleteText(systemPrompt: "語尾に必ず「にゃん」をつけて返答して！")
@@ -487,6 +488,7 @@ final List<Post> mockPosts = [
       updatedAt: Timestamp.fromDate(DateTime(2023, 5, 25)),
       userCount: 0),
   Post(
+      bookmarkCount: 0,
       createdAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
       customCompleteText:
           const CustomCompleteText(systemPrompt: "「序論」、「本論」、「結論」に分けて返答してください。")
@@ -528,6 +530,7 @@ final List<Post> mockPosts = [
       updatedAt: Timestamp.fromDate(DateTime(2023, 5, 9)),
       userCount: 0),
   Post(
+      bookmarkCount: 0,
       createdAt: Timestamp.fromDate(DateTime(2023, 2, 22)),
       customCompleteText:
           const CustomCompleteText(systemPrompt: "画期的なアイデアを出しながら返答してください。")
@@ -569,6 +572,7 @@ final List<Post> mockPosts = [
       updatedAt: Timestamp.fromDate(DateTime(2023, 2, 22)),
       userCount: 0),
   Post(
+      bookmarkCount: 0,
       createdAt: Timestamp.fromDate(DateTime(2023, 7, 19)),
       customCompleteText:
           const CustomCompleteText(systemPrompt: "以下の質問をソースコードで返答してください。")
@@ -610,6 +614,7 @@ final List<Post> mockPosts = [
       updatedAt: Timestamp.fromDate(DateTime(2023, 7, 19)),
       userCount: 0),
   Post(
+      bookmarkCount: 0,
       createdAt: Timestamp.fromDate(DateTime(2023, 4, 7)),
       customCompleteText: const CustomCompleteText(
               systemPrompt: "まず、相手に寄り添うようなことを言ってから、返答を続けてください。")
