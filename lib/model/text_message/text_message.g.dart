@@ -13,7 +13,8 @@ _$_TextMessage _$$_TextMessageFromJson(Map<String, dynamic> json) =>
       messageType: json['messageType'] as String,
       messageRef: json['messageRef'],
       postRef: json['postRef'],
-      uid: json['uid'] as String,
+      posterUid: json['posterUid'] as String,
+      senderUid: json['senderUid'] as String,
       updatedAt: json['updatedAt'],
       text: json['text'] as Map<String, dynamic>,
     );
@@ -25,7 +26,8 @@ Map<String, dynamic> _$$_TextMessageToJson(_$_TextMessage instance) =>
       'messageType': instance.messageType,
       'messageRef': instance.messageRef,
       'postRef': instance.postRef,
-      'uid': instance.uid,
+      'posterUid': instance.posterUid,
+      'senderUid': instance.senderUid,
       'updatedAt': instance.updatedAt,
       'text': instance.text,
     };

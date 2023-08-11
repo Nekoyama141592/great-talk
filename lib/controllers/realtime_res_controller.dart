@@ -131,7 +131,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   int _adjustMaxToken() => messages.length < 3 ? maxToken ~/ 2 : maxToken;
 
   void _addEmptyMessage() {
-    messages.add(_newtTextMessage('', interlocutor.value!.posterUid));
+    messages.add(_newtTextMessage('', interlocutor.value!.contentId));
   }
 
   void _scrollToBottom(ScrollController scrollController) {
@@ -158,7 +158,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       }
     }, onDone: () {
       final completedMsg =
-          _newtTextMessage(realtimeRes.value, interlocutor.value!.posterUid);
+          _newtTextMessage(realtimeRes.value, interlocutor.value!.contentId);
       messages.last = completedMsg;
       messages([...messages]);
       isGenerating(false);
@@ -245,9 +245,10 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     await prefs.setInt(PrefsKey.chatCount.name, chatCount);
   }
 
-  TextMessage _newtTextMessage(String content, String posterUid) {
+  TextMessage _newtTextMessage(String content, String senderUid) {
     final now = Timestamp.now();
     final id = randomString();
+    final posterUid = interlocutor.value!.contentId;
     final textMessage = TextMessage(
       createdAt: now,
       id: id,
@@ -262,7 +263,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
               sentiment: '',
               value: content)
           .toJson(),
-      uid: posterUid,
+      posterUid: posterUid,
+      senderUid: senderUid,
       updatedAt: now,
     );
     return textMessage;
@@ -304,7 +306,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
 
   Messages _toRequestMessage(TextMessage msg) {
     return Messages(
-        role: msg.uid == currentUid() ? Role.user : Role.assistant,
+        role: msg.senderUid == currentUid() ? Role.user : Role.assistant,
         content: msg.typedText().value);
   }
 

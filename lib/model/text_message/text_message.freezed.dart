@@ -25,7 +25,8 @@ mixin _$TextMessage {
   String get messageType => throw _privateConstructorUsedError;
   dynamic get messageRef => throw _privateConstructorUsedError;
   dynamic get postRef => throw _privateConstructorUsedError;
-  String get uid => throw _privateConstructorUsedError;
+  String get posterUid => throw _privateConstructorUsedError;
+  String get senderUid => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
   Map<String, dynamic> get text => throw _privateConstructorUsedError;
 
@@ -47,7 +48,8 @@ abstract class $TextMessageCopyWith<$Res> {
       String messageType,
       dynamic messageRef,
       dynamic postRef,
-      String uid,
+      String posterUid,
+      String senderUid,
       dynamic updatedAt,
       Map<String, dynamic> text});
 }
@@ -70,7 +72,8 @@ class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
     Object? messageType = null,
     Object? messageRef = freezed,
     Object? postRef = freezed,
-    Object? uid = null,
+    Object? posterUid = null,
+    Object? senderUid = null,
     Object? updatedAt = freezed,
     Object? text = null,
   }) {
@@ -95,9 +98,13 @@ class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
           ? _value.postRef
           : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      posterUid: null == posterUid
+          ? _value.posterUid
+          : posterUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      senderUid: null == senderUid
+          ? _value.senderUid
+          : senderUid // ignore: cast_nullable_to_non_nullable
               as String,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -125,7 +132,8 @@ abstract class _$$_TextMessageCopyWith<$Res>
       String messageType,
       dynamic messageRef,
       dynamic postRef,
-      String uid,
+      String posterUid,
+      String senderUid,
       dynamic updatedAt,
       Map<String, dynamic> text});
 }
@@ -146,7 +154,8 @@ class __$$_TextMessageCopyWithImpl<$Res>
     Object? messageType = null,
     Object? messageRef = freezed,
     Object? postRef = freezed,
-    Object? uid = null,
+    Object? posterUid = null,
+    Object? senderUid = null,
     Object? updatedAt = freezed,
     Object? text = null,
   }) {
@@ -171,9 +180,13 @@ class __$$_TextMessageCopyWithImpl<$Res>
           ? _value.postRef
           : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      posterUid: null == posterUid
+          ? _value.posterUid
+          : posterUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      senderUid: null == senderUid
+          ? _value.senderUid
+          : senderUid // ignore: cast_nullable_to_non_nullable
               as String,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -196,7 +209,8 @@ class _$_TextMessage extends _TextMessage {
       required this.messageType,
       this.messageRef,
       this.postRef,
-      required this.uid,
+      required this.posterUid,
+      required this.senderUid,
       required this.updatedAt,
       required final Map<String, dynamic> text})
       : _text = text,
@@ -216,7 +230,9 @@ class _$_TextMessage extends _TextMessage {
   @override
   final dynamic postRef;
   @override
-  final String uid;
+  final String posterUid;
+  @override
+  final String senderUid;
   @override
   final dynamic updatedAt;
   final Map<String, dynamic> _text;
@@ -229,7 +245,7 @@ class _$_TextMessage extends _TextMessage {
 
   @override
   String toString() {
-    return 'TextMessage(createdAt: $createdAt, id: $id, messageType: $messageType, messageRef: $messageRef, postRef: $postRef, uid: $uid, updatedAt: $updatedAt, text: $text)';
+    return 'TextMessage(createdAt: $createdAt, id: $id, messageType: $messageType, messageRef: $messageRef, postRef: $postRef, posterUid: $posterUid, senderUid: $senderUid, updatedAt: $updatedAt, text: $text)';
   }
 
   @override
@@ -244,7 +260,10 @@ class _$_TextMessage extends _TextMessage {
             const DeepCollectionEquality()
                 .equals(other.messageRef, messageRef) &&
             const DeepCollectionEquality().equals(other.postRef, postRef) &&
-            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.posterUid, posterUid) ||
+                other.posterUid == posterUid) &&
+            (identical(other.senderUid, senderUid) ||
+                other.senderUid == senderUid) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             const DeepCollectionEquality().equals(other._text, _text));
   }
@@ -258,7 +277,8 @@ class _$_TextMessage extends _TextMessage {
       messageType,
       const DeepCollectionEquality().hash(messageRef),
       const DeepCollectionEquality().hash(postRef),
-      uid,
+      posterUid,
+      senderUid,
       const DeepCollectionEquality().hash(updatedAt),
       const DeepCollectionEquality().hash(_text));
 
@@ -283,7 +303,8 @@ abstract class _TextMessage extends TextMessage {
       required final String messageType,
       final dynamic messageRef,
       final dynamic postRef,
-      required final String uid,
+      required final String posterUid,
+      required final String senderUid,
       required final dynamic updatedAt,
       required final Map<String, dynamic> text}) = _$_TextMessage;
   const _TextMessage._() : super._();
@@ -302,7 +323,9 @@ abstract class _TextMessage extends TextMessage {
   @override
   dynamic get postRef;
   @override
-  String get uid;
+  String get posterUid;
+  @override
+  String get senderUid;
   @override
   dynamic get updatedAt;
   @override

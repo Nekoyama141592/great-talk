@@ -99,12 +99,12 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                             purchaseController.isSubscribing()
                                                 ? null
                                                 : controller.onCardLongTap,
-                                        tileColor: messages[index].uid ==
+                                        tileColor: messages[index].senderUid ==
                                                 CurrentUserController
                                                     .to.currentUser.value!.uid
                                             ? kSecondaryColor.withOpacity(0.3)
                                             : null,
-                                        leading: messages[index].uid !=
+                                        leading: messages[index].senderUid !=
                                                 currentUid()
                                             ? Obx(() => CircleImage(
                                                 bucketName: controller
