@@ -262,7 +262,7 @@ exports.onPostLikeDelete = functions.firestore.document(`${postPath}/postLikes/{
         });
     }
 );
-exports.onPostMessageCreate = functions.firestore.document(`${postPath}/messages/{activeUid}`).onCreate(
+exports.onPostMessageCreate = functions.firestore.document(`${postPath}/senders/{senderUid}/messages/{activeUid}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
         await newValue.postRef.update({

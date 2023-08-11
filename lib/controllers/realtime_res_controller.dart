@@ -131,7 +131,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   int _adjustMaxToken() => messages.length < 3 ? maxToken ~/ 2 : maxToken;
 
   void _addEmptyMessage() {
-    messages.add(_newtTextMessage('', interlocutor.value!.contentId));
+    messages.add(_newtTextMessage('', interlocutor.value!.posterUid));
   }
 
   void _scrollToBottom(ScrollController scrollController) {
@@ -158,7 +158,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       }
     }, onDone: () {
       final completedMsg =
-          _newtTextMessage(realtimeRes.value, interlocutor.value!.contentId);
+          _newtTextMessage(realtimeRes.value, interlocutor.value!.posterUid);
       messages.last = completedMsg;
       messages([...messages]);
       isGenerating(false);
@@ -245,7 +245,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     await prefs.setInt(PrefsKey.chatCount.name, chatCount);
   }
 
-  TextMessage _newtTextMessage(String content, String uid) {
+  TextMessage _newtTextMessage(String content, String posterUid) {
     final now = Timestamp.now();
     final id = randomString();
     final textMessage = TextMessage(
@@ -253,7 +253,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       id: id,
       messageType: MessageType.text.name,
       messageRef: FirestoreQueries.postMessageDocRef(
-          currentUid(), interlocutor.value!.contentId, id),
+          posterUid, interlocutor.value!.contentId, currentUid(), id),
       postRef: interlocutor.value!.typedRef(),
       text: DetectedText(
               languageCode: '',
@@ -262,7 +262,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
               sentiment: '',
               value: content)
           .toJson(),
-      uid: uid,
+      uid: posterUid,
       updatedAt: now,
     );
     return textMessage;
