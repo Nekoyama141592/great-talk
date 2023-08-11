@@ -209,11 +209,11 @@ exports.onPostCreate = functions.firestore.document(postPath).onCreate(
         const newValue = snap.data();
         const detectedDescription = await detectText(newValue.description.value);
         const detectedTitle = await detectText(newValue.title.value);
-        const detectedIconImage = await detectModerationLabels(postImagesBucket,newValue.iconImage.value);
+        const detectedImage = await detectModerationLabels(postImagesBucket,newValue.image.value);
         await snap.ref.update({
             'description': detectedDescription,
             'title': detectedTitle,
-            'iconImage': detectedIconImage,
+            'image': detectedImage,
         });
         // timelineを作成
         const timeline = {
@@ -336,11 +336,11 @@ exports.onUserUpdateLogCreate = functions.firestore.document(`${userPath}/userUp
         const userRef = newValue.userRef;
         const detectedUserName = await detectText(newValue.stringUserName);
         const detectedBio = await detectText(newValue.stringBio);
-        const detectedImage = await detectModerationLabels(userImagesBucket,newValue.userImageFileName);
+        const detectedImage = await detectModerationLabels(userImagesBucket,newValue.imageFileName);
         await userRef.update({
             'bio': detectedBio,
             'userName': detectedUserName,
-            'userImage': detectedImage,
+            'image': detectedImage,
         });
         const user = await userRef.get();
         const posts = await userRef.collection('public').doc('v1').collection('posts').get();

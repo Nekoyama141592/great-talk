@@ -74,7 +74,7 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                         leading: Obx(() => CircleImage(
                                             bucketName: controller
                                                 .interlocutor.value!
-                                                .typedIconImage()
+                                                .typedImage()
                                                 .bucketName,
                                             imageValue: controller.interlocutor
                                                 .value!.imageValue)),
@@ -109,7 +109,7 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                             ? Obx(() => CircleImage(
                                                 bucketName: controller
                                                     .interlocutor.value!
-                                                    .typedIconImage()
+                                                    .typedImage()
                                                     .bucketName,
                                                 imageValue: controller
                                                     .interlocutor

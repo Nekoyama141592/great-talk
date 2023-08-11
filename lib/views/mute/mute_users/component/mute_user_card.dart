@@ -13,8 +13,8 @@ class MuteUserCard extends StatelessWidget {
     final controller = Get.put(MuteUsersController());
     return ListTile(
       leading: CircleImage(
-          bucketName: passiveUser.typedUserImage().bucketName,
-          imageValue: passiveUser.typedUserImage().value),
+          bucketName: passiveUser.typedImage().bucketName,
+          imageValue: passiveUser.typedImage().value),
       title: BasicBoldText(passiveUser.typedUserName().value),
       onTap: () => controller.onTap(passiveUser.uid),
     );

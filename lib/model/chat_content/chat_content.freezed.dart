@@ -24,7 +24,7 @@ mixin _$ChatContent {
   Map<String, dynamic>? get customCompleteText =>
       throw _privateConstructorUsedError;
   Map<String, dynamic>? get description => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get iconImage => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get image => throw _privateConstructorUsedError;
   String get imageValue => throw _privateConstructorUsedError;
   int? get lastSeen => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $ChatContentCopyWith<$Res> {
       {String contentId,
       Map<String, dynamic>? customCompleteText,
       Map<String, dynamic>? description,
-      Map<String, dynamic>? iconImage,
+      Map<String, dynamic>? image,
       String imageValue,
       int? lastSeen,
       Map<String, dynamic>? metadata,
@@ -73,7 +73,7 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
     Object? contentId = null,
     Object? customCompleteText = freezed,
     Object? description = freezed,
-    Object? iconImage = freezed,
+    Object? image = freezed,
     Object? imageValue = null,
     Object? lastSeen = freezed,
     Object? metadata = freezed,
@@ -94,9 +94,9 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
-      iconImage: freezed == iconImage
-          ? _value.iconImage
-          : iconImage // ignore: cast_nullable_to_non_nullable
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
       imageValue: null == imageValue
           ? _value.imageValue
@@ -138,7 +138,7 @@ abstract class _$$_ChatContentCopyWith<$Res>
       {String contentId,
       Map<String, dynamic>? customCompleteText,
       Map<String, dynamic>? description,
-      Map<String, dynamic>? iconImage,
+      Map<String, dynamic>? image,
       String imageValue,
       int? lastSeen,
       Map<String, dynamic>? metadata,
@@ -161,7 +161,7 @@ class __$$_ChatContentCopyWithImpl<$Res>
     Object? contentId = null,
     Object? customCompleteText = freezed,
     Object? description = freezed,
-    Object? iconImage = freezed,
+    Object? image = freezed,
     Object? imageValue = null,
     Object? lastSeen = freezed,
     Object? metadata = freezed,
@@ -182,9 +182,9 @@ class __$$_ChatContentCopyWithImpl<$Res>
           ? _value._description
           : description // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
-      iconImage: freezed == iconImage
-          ? _value._iconImage
-          : iconImage // ignore: cast_nullable_to_non_nullable
+      image: freezed == image
+          ? _value._image
+          : image // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
       imageValue: null == imageValue
           ? _value.imageValue
@@ -221,7 +221,7 @@ class _$_ChatContent extends _ChatContent {
       {required this.contentId,
       final Map<String, dynamic>? customCompleteText,
       final Map<String, dynamic>? description,
-      final Map<String, dynamic>? iconImage,
+      final Map<String, dynamic>? image,
       required this.imageValue,
       this.lastSeen,
       final Map<String, dynamic>? metadata,
@@ -230,7 +230,7 @@ class _$_ChatContent extends _ChatContent {
       required this.title})
       : _customCompleteText = customCompleteText,
         _description = description,
-        _iconImage = iconImage,
+        _image = image,
         _metadata = metadata,
         super._();
 
@@ -260,12 +260,12 @@ class _$_ChatContent extends _ChatContent {
     return EqualUnmodifiableMapView(value);
   }
 
-  final Map<String, dynamic>? _iconImage;
+  final Map<String, dynamic>? _image;
   @override
-  Map<String, dynamic>? get iconImage {
-    final value = _iconImage;
+  Map<String, dynamic>? get image {
+    final value = _image;
     if (value == null) return null;
-    if (_iconImage is EqualUnmodifiableMapView) return _iconImage;
+    if (_image is EqualUnmodifiableMapView) return _image;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(value);
   }
@@ -293,7 +293,7 @@ class _$_ChatContent extends _ChatContent {
 
   @override
   String toString() {
-    return 'ChatContent(contentId: $contentId, customCompleteText: $customCompleteText, description: $description, iconImage: $iconImage, imageValue: $imageValue, lastSeen: $lastSeen, metadata: $metadata, posterUid: $posterUid, ref: $ref, title: $title)';
+    return 'ChatContent(contentId: $contentId, customCompleteText: $customCompleteText, description: $description, image: $image, imageValue: $imageValue, lastSeen: $lastSeen, metadata: $metadata, posterUid: $posterUid, ref: $ref, title: $title)';
   }
 
   @override
@@ -307,8 +307,7 @@ class _$_ChatContent extends _ChatContent {
                 .equals(other._customCompleteText, _customCompleteText) &&
             const DeepCollectionEquality()
                 .equals(other._description, _description) &&
-            const DeepCollectionEquality()
-                .equals(other._iconImage, _iconImage) &&
+            const DeepCollectionEquality().equals(other._image, _image) &&
             (identical(other.imageValue, imageValue) ||
                 other.imageValue == imageValue) &&
             (identical(other.lastSeen, lastSeen) ||
@@ -327,7 +326,7 @@ class _$_ChatContent extends _ChatContent {
       contentId,
       const DeepCollectionEquality().hash(_customCompleteText),
       const DeepCollectionEquality().hash(_description),
-      const DeepCollectionEquality().hash(_iconImage),
+      const DeepCollectionEquality().hash(_image),
       imageValue,
       lastSeen,
       const DeepCollectionEquality().hash(_metadata),
@@ -354,7 +353,7 @@ abstract class _ChatContent extends ChatContent {
       {required final String contentId,
       final Map<String, dynamic>? customCompleteText,
       final Map<String, dynamic>? description,
-      final Map<String, dynamic>? iconImage,
+      final Map<String, dynamic>? image,
       required final String imageValue,
       final int? lastSeen,
       final Map<String, dynamic>? metadata,
@@ -373,7 +372,7 @@ abstract class _ChatContent extends ChatContent {
   @override
   Map<String, dynamic>? get description;
   @override
-  Map<String, dynamic>? get iconImage;
+  Map<String, dynamic>? get image;
   @override
   String get imageValue;
   @override

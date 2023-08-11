@@ -29,7 +29,7 @@ _$_PublicUser _$$_PublicUserFromJson(Map<String, dynamic> json) =>
       searchToken: json['searchToken'] as Map<String, dynamic>,
       uid: json['uid'] as String,
       updatedAt: json['updatedAt'],
-      userImage: json['userImage'] as Map<String, dynamic>,
+      image: json['image'] as Map<String, dynamic>,
       userName: json['userName'] as Map<String, dynamic>,
       walletAddresses: (json['walletAddresses'] as List<dynamic>)
           .map((e) => e as Map<String, dynamic>)
@@ -57,7 +57,7 @@ Map<String, dynamic> _$$_PublicUserToJson(_$_PublicUser instance) =>
       'searchToken': instance.searchToken,
       'uid': instance.uid,
       'updatedAt': instance.updatedAt,
-      'userImage': instance.userImage,
+      'image': instance.image,
       'userName': instance.userName,
       'walletAddresses': instance.walletAddresses,
     };

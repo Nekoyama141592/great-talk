@@ -28,7 +28,7 @@ mixin _$Post {
   List<SDMap> get exampleTexts => throw _privateConstructorUsedError;
   String get genre => throw _privateConstructorUsedError;
   List<String> get hashTags => throw _privateConstructorUsedError;
-  Map<String, dynamic> get iconImage => throw _privateConstructorUsedError;
+  Map<String, dynamic> get image => throw _privateConstructorUsedError;
   int get impressionCount => throw _privateConstructorUsedError;
   int get likeCount => throw _privateConstructorUsedError;
   List<SDMap> get links => throw _privateConstructorUsedError;
@@ -62,7 +62,7 @@ abstract class $PostCopyWith<$Res> {
       List<SDMap> exampleTexts,
       String genre,
       List<String> hashTags,
-      Map<String, dynamic> iconImage,
+      Map<String, dynamic> image,
       int impressionCount,
       int likeCount,
       List<SDMap> links,
@@ -99,7 +99,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? exampleTexts = null,
     Object? genre = null,
     Object? hashTags = null,
-    Object? iconImage = null,
+    Object? image = null,
     Object? impressionCount = null,
     Object? likeCount = null,
     Object? links = null,
@@ -144,9 +144,9 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.hashTags
           : hashTags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      iconImage: null == iconImage
-          ? _value.iconImage
-          : iconImage // ignore: cast_nullable_to_non_nullable
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       impressionCount: null == impressionCount
           ? _value.impressionCount
@@ -222,7 +222,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       List<SDMap> exampleTexts,
       String genre,
       List<String> hashTags,
-      Map<String, dynamic> iconImage,
+      Map<String, dynamic> image,
       int impressionCount,
       int likeCount,
       List<SDMap> links,
@@ -255,7 +255,7 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
     Object? exampleTexts = null,
     Object? genre = null,
     Object? hashTags = null,
-    Object? iconImage = null,
+    Object? image = null,
     Object? impressionCount = null,
     Object? likeCount = null,
     Object? links = null,
@@ -300,9 +300,9 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res, _$_Post>
           ? _value._hashTags
           : hashTags // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      iconImage: null == iconImage
-          ? _value._iconImage
-          : iconImage // ignore: cast_nullable_to_non_nullable
+      image: null == image
+          ? _value._image
+          : image // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       impressionCount: null == impressionCount
           ? _value.impressionCount
@@ -375,7 +375,7 @@ class _$_Post extends _Post {
       required final List<SDMap> exampleTexts,
       required this.genre,
       required final List<String> hashTags,
-      required final Map<String, dynamic> iconImage,
+      required final Map<String, dynamic> image,
       required this.impressionCount,
       required this.likeCount,
       required final List<SDMap> links,
@@ -394,7 +394,7 @@ class _$_Post extends _Post {
         _description = description,
         _exampleTexts = exampleTexts,
         _hashTags = hashTags,
-        _iconImage = iconImage,
+        _image = image,
         _links = links,
         _poster = poster,
         _searchToken = searchToken,
@@ -442,12 +442,12 @@ class _$_Post extends _Post {
     return EqualUnmodifiableListView(_hashTags);
   }
 
-  final Map<String, dynamic> _iconImage;
+  final Map<String, dynamic> _image;
   @override
-  Map<String, dynamic> get iconImage {
-    if (_iconImage is EqualUnmodifiableMapView) return _iconImage;
+  Map<String, dynamic> get image {
+    if (_image is EqualUnmodifiableMapView) return _image;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_iconImage);
+    return EqualUnmodifiableMapView(_image);
   }
 
   @override
@@ -505,7 +505,7 @@ class _$_Post extends _Post {
 
   @override
   String toString() {
-    return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, iconImage: $iconImage, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, poster: $poster, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
+    return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, image: $image, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, poster: $poster, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
   }
 
   @override
@@ -524,8 +524,7 @@ class _$_Post extends _Post {
                 .equals(other._exampleTexts, _exampleTexts) &&
             (identical(other.genre, genre) || other.genre == genre) &&
             const DeepCollectionEquality().equals(other._hashTags, _hashTags) &&
-            const DeepCollectionEquality()
-                .equals(other._iconImage, _iconImage) &&
+            const DeepCollectionEquality().equals(other._image, _image) &&
             (identical(other.impressionCount, impressionCount) ||
                 other.impressionCount == impressionCount) &&
             (identical(other.likeCount, likeCount) ||
@@ -560,7 +559,7 @@ class _$_Post extends _Post {
         const DeepCollectionEquality().hash(_exampleTexts),
         genre,
         const DeepCollectionEquality().hash(_hashTags),
-        const DeepCollectionEquality().hash(_iconImage),
+        const DeepCollectionEquality().hash(_image),
         impressionCount,
         likeCount,
         const DeepCollectionEquality().hash(_links),
@@ -600,7 +599,7 @@ abstract class _Post extends Post {
       required final List<SDMap> exampleTexts,
       required final String genre,
       required final List<String> hashTags,
-      required final Map<String, dynamic> iconImage,
+      required final Map<String, dynamic> image,
       required final int impressionCount,
       required final int likeCount,
       required final List<SDMap> links,
@@ -634,7 +633,7 @@ abstract class _Post extends Post {
   @override
   List<String> get hashTags;
   @override
-  Map<String, dynamic> get iconImage;
+  Map<String, dynamic> get image;
   @override
   int get impressionCount;
   @override

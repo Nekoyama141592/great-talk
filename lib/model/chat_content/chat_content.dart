@@ -19,7 +19,7 @@ abstract class ChatContent implements _$ChatContent {
     required String contentId,
     SDMap? customCompleteText,
     SDMap? description,
-    SDMap? iconImage,
+    SDMap? image,
     required String imageValue,
     int? lastSeen,
     Map<String, dynamic>? metadata,
@@ -32,8 +32,8 @@ abstract class ChatContent implements _$ChatContent {
     return ChatContent(
         customCompleteText: post.customCompleteText,
         description: post.description,
-        iconImage: post.iconImage,
-        imageValue: post.typedIconImage().value,
+        image: post.image,
+        imageValue: post.typedImage().value,
         contentId: post.postId,
         posterUid: post.typedPoster().uid,
         ref: post.ref,
@@ -50,11 +50,11 @@ abstract class ChatContent implements _$ChatContent {
     }
   }
 
-  DetectedImage typedIconImage() {
+  DetectedImage typedImage() {
     if (returnIsOriginalContents(posterUid)) {
       return NewContent.newDetectedImage('', imageValue);
     } else {
-      return DetectedImage.fromJson(iconImage!);
+      return DetectedImage.fromJson(image!);
     }
   }
 
@@ -79,11 +79,11 @@ abstract class ChatContent implements _$ChatContent {
   }
 
   bool isInappropriate() =>
-      typedIconImage().moderationLabels.isNotEmpty ||
+      typedImage().moderationLabels.isNotEmpty ||
       typedDescription().negativeScore > negativeLimit;
   String inappropriateReason() {
     String reason = "";
-    if (typedIconImage().moderationLabels.isNotEmpty) {
+    if (typedImage().moderationLabels.isNotEmpty) {
       reason += "・写真が不適切です。\n";
     }
     if (typedDescription().negativeScore > negativeLimit) {

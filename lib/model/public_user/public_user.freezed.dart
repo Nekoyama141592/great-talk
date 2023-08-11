@@ -39,7 +39,7 @@ mixin _$PublicUser {
   Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
-  Map<String, dynamic> get userImage => throw _privateConstructorUsedError;
+  Map<String, dynamic> get image => throw _privateConstructorUsedError;
   Map<String, dynamic> get userName => throw _privateConstructorUsedError;
   List<SDMap> get walletAddresses => throw _privateConstructorUsedError;
 
@@ -75,7 +75,7 @@ abstract class $PublicUserCopyWith<$Res> {
       Map<String, dynamic> searchToken,
       String uid,
       dynamic updatedAt,
-      Map<String, dynamic> userImage,
+      Map<String, dynamic> image,
       Map<String, dynamic> userName,
       List<SDMap> walletAddresses});
 }
@@ -112,7 +112,7 @@ class _$PublicUserCopyWithImpl<$Res, $Val extends PublicUser>
     Object? searchToken = null,
     Object? uid = null,
     Object? updatedAt = freezed,
-    Object? userImage = null,
+    Object? image = null,
     Object? userName = null,
     Object? walletAddresses = null,
   }) {
@@ -193,9 +193,9 @@ class _$PublicUserCopyWithImpl<$Res, $Val extends PublicUser>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      userImage: null == userImage
-          ? _value.userImage
-          : userImage // ignore: cast_nullable_to_non_nullable
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       userName: null == userName
           ? _value.userName
@@ -237,7 +237,7 @@ abstract class _$$_PublicUserCopyWith<$Res>
       Map<String, dynamic> searchToken,
       String uid,
       dynamic updatedAt,
-      Map<String, dynamic> userImage,
+      Map<String, dynamic> image,
       Map<String, dynamic> userName,
       List<SDMap> walletAddresses});
 }
@@ -272,7 +272,7 @@ class __$$_PublicUserCopyWithImpl<$Res>
     Object? searchToken = null,
     Object? uid = null,
     Object? updatedAt = freezed,
-    Object? userImage = null,
+    Object? image = null,
     Object? userName = null,
     Object? walletAddresses = null,
   }) {
@@ -353,9 +353,9 @@ class __$$_PublicUserCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      userImage: null == userImage
-          ? _value._userImage
-          : userImage // ignore: cast_nullable_to_non_nullable
+      image: null == image
+          ? _value._image
+          : image // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       userName: null == userName
           ? _value._userName
@@ -392,13 +392,13 @@ class _$_PublicUser extends _PublicUser {
       required final Map<String, dynamic> searchToken,
       required this.uid,
       required this.updatedAt,
-      required final Map<String, dynamic> userImage,
+      required final Map<String, dynamic> image,
       required final Map<String, dynamic> userName,
       required final List<SDMap> walletAddresses})
       : _bio = bio,
         _links = links,
         _searchToken = searchToken,
-        _userImage = userImage,
+        _image = image,
         _userName = userName,
         _walletAddresses = walletAddresses,
         super._();
@@ -462,12 +462,12 @@ class _$_PublicUser extends _PublicUser {
   final String uid;
   @override
   final dynamic updatedAt;
-  final Map<String, dynamic> _userImage;
+  final Map<String, dynamic> _image;
   @override
-  Map<String, dynamic> get userImage {
-    if (_userImage is EqualUnmodifiableMapView) return _userImage;
+  Map<String, dynamic> get image {
+    if (_image is EqualUnmodifiableMapView) return _image;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_userImage);
+    return EqualUnmodifiableMapView(_image);
   }
 
   final Map<String, dynamic> _userName;
@@ -488,7 +488,7 @@ class _$_PublicUser extends _PublicUser {
 
   @override
   String toString() {
-    return 'PublicUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, userImage: $userImage, userName: $userName, walletAddresses: $walletAddresses)';
+    return 'PublicUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, image: $image, userName: $userName, walletAddresses: $walletAddresses)';
   }
 
   @override
@@ -527,8 +527,7 @@ class _$_PublicUser extends _PublicUser {
                 .equals(other._searchToken, _searchToken) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
-            const DeepCollectionEquality()
-                .equals(other._userImage, _userImage) &&
+            const DeepCollectionEquality().equals(other._image, _image) &&
             const DeepCollectionEquality().equals(other._userName, _userName) &&
             const DeepCollectionEquality()
                 .equals(other._walletAddresses, _walletAddresses));
@@ -557,7 +556,7 @@ class _$_PublicUser extends _PublicUser {
         const DeepCollectionEquality().hash(_searchToken),
         uid,
         const DeepCollectionEquality().hash(updatedAt),
-        const DeepCollectionEquality().hash(_userImage),
+        const DeepCollectionEquality().hash(_image),
         const DeepCollectionEquality().hash(_userName),
         const DeepCollectionEquality().hash(_walletAddresses)
       ]);
@@ -597,7 +596,7 @@ abstract class _PublicUser extends PublicUser {
       required final Map<String, dynamic> searchToken,
       required final String uid,
       required final dynamic updatedAt,
-      required final Map<String, dynamic> userImage,
+      required final Map<String, dynamic> image,
       required final Map<String, dynamic> userName,
       required final List<SDMap> walletAddresses}) = _$_PublicUser;
   _PublicUser._() : super._();
@@ -644,7 +643,7 @@ abstract class _PublicUser extends PublicUser {
   @override
   dynamic get updatedAt;
   @override
-  Map<String, dynamic> get userImage;
+  Map<String, dynamic> get image;
   @override
   Map<String, dynamic> get userName;
   @override

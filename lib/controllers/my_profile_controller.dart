@@ -14,10 +14,10 @@ class MyProfileController extends ProfileController with CurrentUserMixin {
 
   Future<void> onEditButtonPressed() async {}
 
-  Future<void> createUserUpdateLog(String userImageUrl) async {
+  Future<void> createUserUpdateLog(String imageUrl) async {
     final uid = currentUid();
     final newUserUpdateLog = NewContent.newUserUpdateLog(
-        bio, userName, uid, userImageUrl, currentUserRef());
+        bio, userName, uid, imageUrl, currentUserRef());
     final result =
         await repository.createUserUpdateLog(uid, newUserUpdateLog.toJson());
     result.when(success: (_) {

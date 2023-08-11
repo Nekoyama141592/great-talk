@@ -67,9 +67,8 @@ class NewContent {
         exampleTexts: [],
         genre: '',
         hashTags: [],
-        iconImage:
-            newDetectedImage(AWSS3Utility.postImagesBucketName(), fileName)
-                .toJson(),
+        image: newDetectedImage(AWSS3Utility.postImagesBucketName(), fileName)
+            .toJson(),
         impressionCount: 0,
         likeCount: 0,
         links: [],
@@ -111,7 +110,7 @@ class NewContent {
       searchToken: {},
       uid: uid,
       updatedAt: now,
-      userImage: imageValue != null
+      image: imageValue != null
           ? newDetectedImage(AWSS3Utility.userImagesBucketName(), imageValue)
               .toJson()
           : newDetectedImage(AWSS3Utility.userImagesBucketName(), '').toJson(),
@@ -143,6 +142,6 @@ class NewContent {
           stringBio: stringBio,
           stringUserName: stringUserName,
           uid: uid,
-          userImageFileName: userImageUrl,
+          imageFileName: userImageUrl,
           userRef: userRef);
 }

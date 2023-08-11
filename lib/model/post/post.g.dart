@@ -17,7 +17,7 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       genre: json['genre'] as String,
       hashTags:
           (json['hashTags'] as List<dynamic>).map((e) => e as String).toList(),
-      iconImage: json['iconImage'] as Map<String, dynamic>,
+      image: json['image'] as Map<String, dynamic>,
       impressionCount: json['impressionCount'] as int,
       likeCount: json['likeCount'] as int,
       links: (json['links'] as List<dynamic>)
@@ -44,7 +44,7 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
       'exampleTexts': instance.exampleTexts,
       'genre': instance.genre,
       'hashTags': instance.hashTags,
-      'iconImage': instance.iconImage,
+      'image': instance.image,
       'impressionCount': instance.impressionCount,
       'likeCount': instance.likeCount,
       'links': instance.links,

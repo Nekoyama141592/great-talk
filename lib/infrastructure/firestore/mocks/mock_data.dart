@@ -41,7 +41,7 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("佐藤 めぐみ"),
     uid: "a",
     updatedAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
-    userImage: DetectedImage(
+    image: DetectedImage(
             bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
@@ -83,7 +83,7 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("田中 久美"),
     uid: "b",
     updatedAt: Timestamp.fromDate(DateTime(2023, 9, 28)),
-    userImage: DetectedImage(
+    image: DetectedImage(
             bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
@@ -125,7 +125,7 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("山岸 愛"),
     uid: "c",
     updatedAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
-    userImage: DetectedImage(
+    image: DetectedImage(
             bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
@@ -167,7 +167,7 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("森 遥"),
     uid: "d",
     updatedAt: Timestamp.fromDate(DateTime(2023, 2, 18)),
-    userImage: DetectedImage(
+    image: DetectedImage(
             bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
@@ -209,7 +209,7 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("橋本 美奈"),
     uid: "e",
     updatedAt: Timestamp.fromDate(DateTime(2023, 6, 1)),
-    userImage: DetectedImage(
+    image: DetectedImage(
             bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
@@ -251,7 +251,7 @@ final List<PublicUser> mockUsers = [
     searchToken: returnSearchToken("遠藤 俊夫"),
     uid: "f",
     updatedAt: Timestamp.fromDate(DateTime(2023, 2, 23)),
-    userImage: DetectedImage(
+    image: DetectedImage(
             bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
@@ -295,7 +295,7 @@ final List<PublicUser> mockUsers = [
     ),
     uid: "g",
     updatedAt: Timestamp.fromDate(DateTime(2023, 1, 8)),
-    userImage: DetectedImage(
+    image: DetectedImage(
             bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
@@ -339,7 +339,7 @@ final List<PublicUser> mockUsers = [
     ),
     uid: "h",
     updatedAt: Timestamp.fromDate(DateTime(2023, 10, 14)),
-    userImage: DetectedImage(
+    image: DetectedImage(
             bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
@@ -383,7 +383,7 @@ final List<PublicUser> mockUsers = [
     ),
     uid: "i",
     updatedAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
-    userImage: DetectedImage(
+    image: DetectedImage(
             bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
@@ -427,7 +427,7 @@ final List<PublicUser> mockUsers = [
     ),
     uid: "j",
     updatedAt: Timestamp.fromDate(DateTime(2023, 4, 28)),
-    userImage: DetectedImage(
+    image: DetectedImage(
             bucketName: AWSS3Utility.userImagesBucketName(),
             moderationLabels: [],
             moderationModelVersion: '',
@@ -461,7 +461,7 @@ final List<Post> mockPosts = [
       exampleTexts: [],
       genre: '',
       hashTags: [],
-      iconImage: DetectedImage(
+      image: DetectedImage(
               bucketName: AWSS3Utility.postImagesBucketName(),
               moderationLabels: [],
               moderationModelVersion: '',
@@ -504,7 +504,7 @@ final List<Post> mockPosts = [
       exampleTexts: [],
       genre: '',
       hashTags: [],
-      iconImage: DetectedImage(
+      image: DetectedImage(
               bucketName: AWSS3Utility.postImagesBucketName(),
               moderationLabels: [],
               moderationModelVersion: '',
@@ -547,7 +547,7 @@ final List<Post> mockPosts = [
       exampleTexts: [],
       genre: '',
       hashTags: [],
-      iconImage: DetectedImage(
+      image: DetectedImage(
               bucketName: AWSS3Utility.postImagesBucketName(),
               moderationLabels: [],
               moderationModelVersion: '',
@@ -590,7 +590,7 @@ final List<Post> mockPosts = [
       exampleTexts: [],
       genre: '',
       hashTags: [],
-      iconImage: DetectedImage(
+      image: DetectedImage(
               bucketName: AWSS3Utility.postImagesBucketName(),
               moderationLabels: [],
               moderationModelVersion: '',
@@ -633,7 +633,7 @@ final List<Post> mockPosts = [
       exampleTexts: [],
       genre: '',
       hashTags: [],
-      iconImage: DetectedImage(
+      image: DetectedImage(
               bucketName: AWSS3Utility.postImagesBucketName(),
               moderationLabels: [],
               moderationModelVersion: '',

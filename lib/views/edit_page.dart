@@ -219,7 +219,7 @@ class _CreatePostPageState extends State<EditProfilePage>
         stringBio: bio!,
         stringUserName: userName!,
         uid: currentUid(),
-        userImageFileName: fileName,
+        imageFileName: fileName,
         userRef: CurrentUserController.to.publicUser.value!.ref);
     final result = await repository.createUserUpdateLog(
         currentUid(), newUpdateLog.toJson());

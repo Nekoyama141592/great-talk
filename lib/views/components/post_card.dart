@@ -49,7 +49,7 @@ class PostCard extends StatelessWidget {
                       child: Column(
                         children: [
                           CircleImage(
-                            bucketName: post.typedIconImage().bucketName,
+                            bucketName: post.typedImage().bucketName,
                             imageValue: content.imageValue,
                             onTap: () => controller.onPostCardPressed(post),
                           ),

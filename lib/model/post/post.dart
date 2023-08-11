@@ -19,7 +19,7 @@ abstract class Post implements _$Post {
     required List<SDMap> exampleTexts,
     required String genre,
     required List<String> hashTags,
-    required SDMap iconImage,
+    required SDMap image,
     required int impressionCount,
     required int likeCount,
     required List<SDMap> links,
@@ -38,7 +38,7 @@ abstract class Post implements _$Post {
   factory Post.fromJson(SDMap json) => _$PostFromJson(json);
   Timestamp typedCreatedAt() => createdAt as Timestamp;
   DetectedText typedDescription() => DetectedText.fromJson(description);
-  DetectedImage typedIconImage() => DetectedImage.fromJson(iconImage);
+  DetectedImage typedImage() => DetectedImage.fromJson(image);
   PublicUser typedPoster() => PublicUser.fromJson(poster);
   DocRef typedRef() => ref as DocRef;
   DetectedText typedTitle() => DetectedText.fromJson(title);

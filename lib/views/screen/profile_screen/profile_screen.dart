@@ -29,11 +29,10 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
             () => controller.passiveUser.value == null
                 ? const SizedBox.shrink()
                 : CircleImage(
-                    bucketName: controller.passiveUser.value!
-                        .typedUserImage()
-                        .bucketName,
+                    bucketName:
+                        controller.passiveUser.value!.typedImage().bucketName,
                     imageValue:
-                        controller.passiveUser.value!.typedUserImage().value),
+                        controller.passiveUser.value!.typedImage().value),
           ),
           Column(
             children: [

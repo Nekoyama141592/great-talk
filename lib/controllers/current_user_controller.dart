@@ -351,7 +351,7 @@ class CurrentUserController extends GetxController {
     final result = user.copyWith(
         bio: user.typedBio().copyWith(value: bio).toJson(),
         userName: user.typedUserName().copyWith(value: userName).toJson(),
-        userImage: user.typedUserImage().copyWith(value: fileName).toJson());
+        image: user.typedImage().copyWith(value: fileName).toJson());
     CurrentUserController.to.publicUser(result);
     MyProfileController.to.passiveUser(result);
   }

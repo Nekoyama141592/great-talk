@@ -46,9 +46,8 @@ class UserCard extends StatelessWidget {
                             children: [
                               CircleImage(
                                   bucketName:
-                                      publicUser.typedUserImage().bucketName,
-                                  imageValue:
-                                      publicUser.typedUserImage().value),
+                                      publicUser.typedImage().bucketName,
+                                  imageValue: publicUser.typedImage().value),
                               const Spacer(),
                               EllipsisText(
                                 publicUser.typedUserName().value,

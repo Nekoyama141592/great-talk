@@ -12,8 +12,8 @@ class MutePostCard extends StatelessWidget {
     final controller = MutePostsController.to;
     return ListTile(
       leading: CircleImage(
-          bucketName: post.typedIconImage().bucketName,
-          imageValue: post.typedIconImage().value),
+          bucketName: post.typedImage().bucketName,
+          imageValue: post.typedImage().value),
       title: BasicBoldText(post.typedTitle().value),
       onTap: () => controller.onTap(post),
     );
