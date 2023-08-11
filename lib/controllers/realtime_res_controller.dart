@@ -131,24 +131,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   int _adjustMaxToken() => messages.length < 3 ? maxToken ~/ 2 : maxToken;
 
   void _addEmptyMessage() {
-    final now = Timestamp.now();
-    final id = randomString();
-    messages.add(TextMessage(
-      createdAt: now,
-      id: id,
-      messageType: MessageType.text.name,
-      messageRef: FirestoreQueries.postMessageDocRef(
-          currentUid(), interlocutor.value!.contentId, id),
-      postRef: interlocutor.value!.typedRef(),
-      text: const DetectedText(
-          languageCode: '',
-          negativeScore: 0.0,
-          positiveScore: 0.0,
-          sentiment: '',
-          value: ''),
-      uid: currentUid(),
-      updatedAt: now,
-    ));
+    messages.add(_newtTextMessage('', interlocutor.value!.contentId));
   }
 
   void _scrollToBottom(ScrollController scrollController) {
@@ -174,24 +157,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
         _scrollToBottom(scrollController);
       }
     }, onDone: () {
-      final now = Timestamp.now();
-      final id = randomString();
-      final completedMsg = TextMessage(
-        createdAt: now,
-        id: id,
-        messageType: MessageType.text.name,
-        messageRef: FirestoreQueries.postMessageDocRef(
-            currentUid(), interlocutor.value!.contentId, id),
-        postRef: interlocutor.value!.typedRef(),
-        text: DetectedText(
-            languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
-            sentiment: '',
-            value: realtimeRes.value),
-        uid: interlocutor.value!.contentId,
-        updatedAt: now,
-      );
+      final completedMsg =
+          _newtTextMessage(realtimeRes.value, interlocutor.value!.contentId);
       messages.last = completedMsg;
       messages([...messages]);
       isGenerating(false);
@@ -278,7 +245,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     await prefs.setInt(PrefsKey.chatCount.name, chatCount);
   }
 
-  void _addMessage(String content) {
+  TextMessage _newtTextMessage(String content, String uid) {
     final now = Timestamp.now();
     final id = randomString();
     final textMessage = TextMessage(
@@ -294,9 +261,14 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
           positiveScore: 0.0,
           sentiment: '',
           value: content),
-      uid: currentUid(),
+      uid: uid,
       updatedAt: now,
     );
+    return textMessage;
+  }
+
+  void _addMessage(String content) {
+    final textMessage = _newtTextMessage(content, currentUid());
     messages.add(textMessage);
     messages([...messages]);
   }
