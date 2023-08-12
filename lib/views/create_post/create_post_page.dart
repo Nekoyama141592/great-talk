@@ -335,8 +335,8 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
       await UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
       return;
     }
-    if ((temperature!.toDouble() != defaultTemperature) &&
-        (topP!.toDouble() != defaultTopP)) {
+    if ((temperature!.toRoundToSecondDecimalPlace() != defaultTemperature) &&
+        (topP!.toRoundToSecondDecimalPlace() != defaultTopP)) {
       await UIHelper.showErrorFlutterToast("temperatureとtopPはどちらか一方しか変更できません");
       return;
     }

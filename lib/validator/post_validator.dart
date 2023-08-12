@@ -44,8 +44,8 @@ class PostValidator {
     final result = temperature == null ||
         temperature.isEmpty ||
         double.tryParse(temperature) == null ||
-        temperature.toDouble() < 0.0 ||
-        temperature.toDouble() > 2.0;
+        temperature.toRoundToSecondDecimalPlace() < 0.0 ||
+        temperature.toRoundToSecondDecimalPlace() > 2.0;
     return result;
   }
 
@@ -53,8 +53,8 @@ class PostValidator {
     final result = topP == null ||
         topP.isEmpty ||
         double.tryParse(topP) == null ||
-        topP.toDouble() < 0.0 ||
-        topP.toDouble() > 1.0;
+        topP.toRoundToSecondDecimalPlace() < 0.0 ||
+        topP.toRoundToSecondDecimalPlace() > 1.0;
     return result;
   }
 
@@ -62,8 +62,8 @@ class PostValidator {
     final result = presencePenalty == null ||
         presencePenalty.isEmpty ||
         double.tryParse(presencePenalty) == null ||
-        presencePenalty.toDouble() < -2.0 ||
-        presencePenalty.toDouble() > 2.0;
+        presencePenalty.toRoundToSecondDecimalPlace() < -2.0 ||
+        presencePenalty.toRoundToSecondDecimalPlace() > 2.0;
     return result;
   }
 
@@ -71,8 +71,8 @@ class PostValidator {
     final result = frequencyPenalty == null ||
         frequencyPenalty.isEmpty ||
         double.tryParse(frequencyPenalty) == null ||
-        frequencyPenalty.toDouble() < -2.0 ||
-        frequencyPenalty.toDouble() > 2.0;
+        frequencyPenalty.toRoundToSecondDecimalPlace() < -2.0 ||
+        frequencyPenalty.toRoundToSecondDecimalPlace() > 2.0;
     return result;
   }
 }
