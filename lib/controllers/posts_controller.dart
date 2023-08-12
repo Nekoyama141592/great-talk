@@ -151,7 +151,18 @@ class PostsController extends GetxController with CurrentUserMixin {
     }
   }
 
-  Future<void> createPostReport() async {
+  void onOkCreatePostReportButtonPressed() async {
+    if (reportContents.isEmpty) {
+      return;
+    }
+    await _createPostReport().then((value) {
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
+    });
+  }
+
+  Future<void> _createPostReport() async {
     if (rxPost.value == null) {
       return;
     }

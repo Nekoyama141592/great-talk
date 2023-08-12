@@ -68,16 +68,7 @@ class ReportContentsListView extends StatelessWidget {
                           buttonColor: controller.reportContents.isNotEmpty
                               ? Theme.of(context).primaryColor
                               : Colors.grey,
-                          press: () async {
-                            if (controller.reportContents.isEmpty) {
-                              return;
-                            }
-                            await controller.createPostReport().then((value) {
-                              if (Get.isDialogOpen ?? false) {
-                                Get.back();
-                              }
-                            });
-                          },
+                          press: controller.onOkCreatePostReportButtonPressed,
                           text: okText),
                     )
                   ],
