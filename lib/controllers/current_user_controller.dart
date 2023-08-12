@@ -42,7 +42,7 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> _distributeTokens() async {
-    if (currentUser.value == null) {
+    if (isNotVerified()) {
       return;
     }
     final repository = FirestoreRepository();

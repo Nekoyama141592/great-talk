@@ -18,4 +18,4 @@ enum TokenType {
   likePost,
   mutePost,
   muteUser
-} // TODO: distributeTokens
+}
