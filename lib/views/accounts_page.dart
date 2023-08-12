@@ -19,6 +19,9 @@ class AccountPage extends StatelessWidget {
           ListTile(
               title: Obx(
                   () => Text("認証情報: ${controller.currentAuthStateString()}"))),
+          ListTile(
+              title: Obx(
+                  () => SelectableText("ユーザーID: ${controller.currentUid()}"))),
           Obx(() => controller.isLoggedIn()
               ? ListTile(
                   title: const Text("ログアウトする"),

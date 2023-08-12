@@ -320,11 +320,11 @@ class CurrentUserController extends GetxController {
     final repository = FirebaseAuthRepository();
     final result = await repository.reauthenticateWithCredential(
         currentUser.value!, credential);
-    result.when(success: (_) {
-      _showDeleteUserDialog();
-    }, failure: () {
-      UIHelper.showErrorFlutterToast("再認証ができませんでした");
-    });
+    result.when(
+        success: (_) {
+          _showDeleteUserDialog();
+        },
+        failure: () {});
   }
 
   void _showDeleteUserDialog() {
@@ -354,11 +354,11 @@ class CurrentUserController extends GetxController {
   Future<void> _deleteAuthUser() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.deleteUser(currentUser.value!);
-    result.when(success: (_) async {
-      Get.toNamed('/userDeleted');
-    }, failure: () {
-      UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした");
-    });
+    result.when(
+        success: (_) async {
+          Get.toNamed('/userDeleted');
+        },
+        failure: () {});
   }
 
   void updateUser(
