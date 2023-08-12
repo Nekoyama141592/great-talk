@@ -7,36 +7,36 @@ service cloud.firestore {
     }
     match /public/{version}/users/{uid} {
       allow read: if isAuthenticated();
-      allow create: if isTheSameUserAndVerified(uid);
+      allow create: if isTheSameUserAndVerified(uid) && isValidPublicUser(request.resource.data);
       allow delete: if isTheSameUserAndVerified(uid);
       match /posts/{postId} {
         allow read: if isAuthenticated();
-        allow create: if isTheSameUserAndVerified(uid);
+        allow create: if isTheSameUserAndVerified(uid) && isValidPost(request.resource.data);
         match /senders/{senderUid}/messages/{id} {
-          allow create: if isTheSameUser(senderUid); //認証されている必要はない.
+          allow create: if isTheSameUser(senderUid) && isValidMessage(request.resource.data);
         }
         match /postLikes/{activeUid} {
-          allow create: if isTheSameUserAndVerified(activeUid);
+          allow create: if isTheSameUserAndVerified(activeUid) && isValidPostLike(request.resource.data);
           allow delete: if isTheSameUserAndVerified(activeUid);
         }
         match /postReports/{activeUid} {
-          allow create: if isTheSameUserAndVerified(activeUid);
+          allow create: if isTheSameUserAndVerified(activeUid) && isValidPostReport(request.resource.data);
         }
         match /postMutes/{activeUid} {
-          allow create: if isTheSameUserAndVerified(activeUid);
+          allow create: if isTheSameUserAndVerified(activeUid) && isValidPostMute(request.resource.data);
           allow delete: if isTheSameUserAndVerified(activeUid);
         }
       }
       match /followers/{activeUid} {
-        allow create: if isTheSameUserAndVerified(activeUid);
+        allow create: if isTheSameUserAndVerified(activeUid) && isValidFollower(request.resource.data);
         allow delete: if isTheSameUserAndVerified(activeUid);
       }
       match /userMutes/{activeUid} {
-        allow create: if isTheSameUserAndVerified(activeUid);
+        allow create: if isTheSameUserAndVerified(activeUid) && isValidUserMute(request.resource.data);
         allow delete: if isTheSameUserAndVerified(activeUid);
       }
       match /userUpdateLogs/{id} {
-        allow create: if isTheSameUserAndVerified(uid);
+        allow create: if isTheSameUserAndVerified(uid) && isValidUserUpdateLog(request.resource.data);
       }
       match /timelines/{postId} {
         allow read: if isAuthenticated();
@@ -45,13 +45,258 @@ service cloud.firestore {
     // Private data
     match /private/{version}/privateUsers/{uid} {
       allow read: if isTheSameUserAndVerified(uid);
-      allow create: if isTheSameUserAndVerified(uid);
+      allow create: if isTheSameUserAndVerified(uid) && isValidPrivateUser(request.resource.data);
       match /tokens/{tokenId} {
         allow read, delete: if isTheSameUserAndVerified(uid);
-        allow create: if isTheSameUserAndVerified(uid);
+        allow create: if isTheSameUserAndVerified(uid) && isValidToken(request.resource.data);
       }
     }
   }
+  function isValidPublicUser(user) {
+    return user.size() == 22 &&
+      user.keys().hasAll([
+        'accountName',
+        'bio',
+        'blockCount',
+        'createdAt',
+        'ethAddress',
+        'followerCount',
+        'followingCount',
+        'isNFTicon',
+        'isOfficial',
+        'isSuspended',
+        'links',
+        'muteCount',
+        'postCount',
+        'ref',
+        'reportCount',
+        'score',
+        'searchToken',
+        'uid',
+        'updatedAt',
+        'image',
+        'userName',
+        'walletAddresses'
+      ]) &&
+      user.accountName is string &&
+      user.bio is map &&
+      user.blockCount is number &&
+      user.createdAt is timestamp &&
+      user.ethAddress is string &&
+      user.followerCount is number &&
+      user.followingCount is number &&
+      user.isNFTicon is bool &&
+      user.isOfficial is bool &&
+      user.isSuspended is bool &&
+      user.links is list &&
+      user.muteCount is number &&
+      user.postCount is number &&
+      user.ref is path &&
+      user.reportCount is number &&
+      user.score is number &&
+      user.searchToken is map &&
+      user.uid is string &&
+      user.updatedAt is dynamic &&
+      user.image is map &&
+      user.userName is map &&
+      user.walletAddresses is list;
+  }
+  function isValidPost(post) {
+    return post.size() == 22
+      && post.keys().hasAll([
+        'bookmarkCount',
+        'createdAt',
+        'customCompleteText',
+        'description',
+        'exampleTexts',
+        'genre',
+        'hashTags',
+        'image',
+        'impressionCount',
+        'likeCount',
+        'links',
+        'msgCount',
+        'muteCount',
+        'poster',
+        'postId',
+        'ref',
+        'reportCount',
+        'score',
+        'searchToken',
+        'title',
+        'updatedAt',
+        'userCount'
+      ])
+      && post.bookmarkCount is number
+      && post.createdAt is timestamp
+      && post.customCompleteText is map
+      && post.description is map
+      && post.exampleTexts is list
+      && post.genre is string
+      && post.hashTags is list
+      && post.image is map
+      && post.impressionCount is number
+      && post.likeCount is number
+      && post.links is list
+      && post.msgCount is number
+      && post.muteCount is number
+      && post.poster is map
+      && post.postId is string
+      && post.ref is path
+      && post.reportCount is number
+      && post.score is number
+      && post.searchToken is map
+      && post.title is map
+      && post.updatedAt is timestamp
+      && post.userCount is number;
+  }
+  function isValidMessage(message) {
+    return message.size() == 9
+      && message.keys().hasAll([
+        'createdAt',
+        'id',
+        'messageType',
+        'messageRef',
+        'postRef',
+        'posterUid',
+        'senderUid',
+        'updatedAt',
+        'text'
+      ])
+      && message.createdAt is timestamp
+      && message.id is string
+      && message.messageType is string
+      && message.messageRef is path
+      && message.postRef is path
+      && message.posterUid is string
+      && message.senderUid is string
+      && message.updatedAt is timestamp
+      && message.text is map;
+  }
+  function isValidPostLike(postLike) {
+    return postLike.size() == 5
+      && postLike.keys().hasAll([
+        'activeUid',
+        'createdAt',
+        'passiveUid',
+        'postRef',
+        'postId'
+      ])
+      && postLike.activeUid is string
+      && postLike.createdAt is timestamp
+      && postLike.passiveUid is string
+      && postLike.postRef is path
+      && postLike.postId is string;
+  }
+  function isValidPostReport(postReport) {
+    return postReport.size() == 6
+      && postReport.keys().hasAll([
+        'activeUid',
+        'activeUserRef',
+        'createdAt',
+        'others',
+        'postRef',
+        'reportContents'
+      ])
+      && postReport.activeUid is string
+      && postReport.activeUserRef is path
+      && postReport.createdAt is timestamp
+      && postReport.others is string
+      && postReport.postRef is path
+      && postReport.reportContents is list;
+  }
+  function isValidPostMute(postMute) {
+    return postMute.size() == 4
+      && postMute.keys().hasAll([
+        'activeUid',
+        'createdAt',
+        'postId',
+        'postRef'
+      ])
+      && postMute.activeUid is string
+      && postMute.createdAt is timestamp
+      && postMute.postId is string
+      && postMute.postRef is path;
+  }
+  function isValidFollower(follower) {
+    return follower.size() == 3
+      && follower.keys().hasAll([
+        'activeUserRef',
+        'createdAt',
+        'passiveUserRef'
+      ])
+      && follower.activeUserRef is path
+      && follower.createdAt is timestamp
+      && follower.passiveUserRef is path;
+  }
+  function isValidUserMute(userMute) {
+    return userMute.size() == 5
+      && userMute.keys().hasAll([
+        'activeUid',
+        'activeUserRef',
+        'createdAt',
+        'passiveUid',
+        'passiveUserRef'
+      ])
+      && userMute.activeUid is string
+      && userMute.activeUserRef is path
+      && userMute.createdAt is timestamp
+      && userMute.passiveUid is string
+      && userMute.passiveUserRef is path;
+  }
+  function isValidUserUpdateLog(userUpdateLog) {
+    return userUpdateLog.size() == 7
+      && userUpdateLog.keys().hasAll([
+        'logCreatedAt',
+        'searchToken',
+        'stringBio',
+        'stringUserName',
+        'uid',
+        'imageFileName',
+        'userRef'
+      ])
+      && userUpdateLog.logCreatedAt is timestamp
+      && userUpdateLog.searchToken is map
+      && userUpdateLog.stringBio is string
+      && userUpdateLog.stringUserName is string
+      && userUpdateLog.uid is string
+      && userUpdateLog.imageFileName is string
+      && userUpdateLog.userRef is path;
+  }
+  function isValidPrivateUser(user) {
+    return user.size() == 9
+      && user.keys().hasAll([
+        'createdAt',
+        'ethAddress',
+        'gender',
+        'ipAddress',
+        'isAdmin',
+        'purchasedPoints',
+        'ref',
+        'uid',
+        'updatedAt'
+      ])
+      && user.createdAt is timestamp
+      && user.ethAddress is string
+      && user.gender is string
+      && user.ipAddress is string
+      && user.isAdmin is bool
+      && user.purchasedPoints is number
+      && user.ref is path
+      && user.uid is string
+      && user.updatedAt is timestamp;
+  }
+  function isValidToken(token) {
+  return token.keys().hasAll([
+      'createdAt',
+      'tokenId',
+      'tokenType'
+    ])
+    && token.createdAt is timestamp
+    && token.tokenId is string
+    && token.tokenType is string;
+}
+
   function isAuthenticated() {
   	return request.auth != null;
   }
