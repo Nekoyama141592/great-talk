@@ -214,6 +214,6 @@ class PostsController extends GetxController with CurrentUserMixin {
         .firstWhere((element) => element.passiveUid == passiveUid);
     CurrentUserController.to.removeLikePost(deleteToken);
     await repository.deleteToken(currentUid(), deleteToken.tokenId);
-    await repository.deletePostLike(post.typedRef(), passiveUid);
+    await repository.deletePostLike(post.typedRef(), deleteToken.activeUid);
   }
 }
