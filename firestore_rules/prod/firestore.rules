@@ -36,13 +36,13 @@ service cloud.firestore {
       match /timelines/{postId} {
         allow read: if isAuthenticated();
       }
-      match /tokens/{tokenId} {
-        allow read, create, delete: if isTheSameUserAndVerified(uid);
-      }
     }
     // Private data
     match /private/{version}/privateUsers/{uid} {
       allow read, create: if isTheSameUserAndVerified(uid);
+      match /tokens/{tokenId} {
+        allow read, create, delete: if isTheSameUserAndVerified(uid);
+      }
     }
   }
   function isAuthenticated() {
