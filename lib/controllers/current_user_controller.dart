@@ -131,11 +131,11 @@ class CurrentUserController extends GetxController {
   Future<void> _createAnonymousUser() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInAnonymously();
-    result.when(success: (res) {
-      currentUser(res);
-    }, failure: () {
-      UIHelper.showErrorFlutterToast("通信が失敗しました");
-    });
+    result.when(
+        success: (res) {
+          currentUser(res);
+        },
+        failure: () {});
   }
 
   String currentUid() => currentUser.value!.uid;
