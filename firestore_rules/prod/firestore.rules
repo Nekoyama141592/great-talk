@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+        // collectionGroupのルール
+    match /{path=**}/posts/{postId} {
+      allow read: if isAuthenticated();
+    }
+    match /public/{version}/users/{uid} {
+      allow read: if isAuthenticated();
+      allow create, delete: if isTheSameUserAndVerified(uid);
+      match /posts/{postId} {
+        allow read: if isAuthenticated();
+        allow create: if isTheSameUserAndVerified(uid);
+        match /senders/{senderUid}/messages/{id} {
+          allow create: if isTheSameUser(senderUid); //認証されている必要はない.
+        }
+        match /postLikes/{activeUid} {
+          allow create, delete: if isTheSameUserAndVerified(activeUid);
+        }
+        match /postReports/{activeUid} {
+          allow create: if isTheSameUserAndVerified(activeUid);
+        }
+        match /postMutes/{activeUid} {
+          allow create, delete: if isTheSameUserAndVerified(activeUid);
+        }
+      }
+      match /followers/{activeUid} {
+        allow create, delete: if isTheSameUserAndVerified(activeUid);
+      }
+      match /userMutes/{activeUid} {
+        allow create, delete: if isTheSameUserAndVerified(activeUid);
+      }
+      match /userUpdateLogs/{id} {
+        allow create: if isTheSameUserAndVerified(uid);
+      }
+      match /timelines/{postId} {
+        allow read: if isAuthenticated();
+      }
+      match /tokens/{tokenId} {
+        allow read, create, delete: if isTheSameUserAndVerified(uid);
+      }
+    }
+    // Private data
+    match /private/{version}/privateUsers/{uid} {
+      allow read, create: if isTheSameUserAndVerified(uid);
+    }
+  }
+  function isAuthenticated() {
+  	return request.auth != null;
+  }
+  function isTheSameUser(uid) {
+    return request.auth.uid == uid;
+  }
+  function isEmailVerifed() {
+    return request.auth.token.email_verified;
+  }
+  function isTheSameUserAndVerified(uid) {
+    return isTheSameUser(uid) && isEmailVerifed();
+  }
+}
