@@ -145,6 +145,10 @@ class CurrentUserController extends GetxController {
   bool isNotLoggedIn() => currentUser.value == null || isAnonymous();
   bool isLoggedIn() => !isNotLoggedIn();
 
+  bool _isVerified() =>
+      currentUser.value!.emailVerified && publicUser.value != null;
+  bool isNotVerified() => !_isVerified();
+
   bool isMutingPost(String postId) => mutePostIds.contains(postId);
   bool isMutingUser(String uid) => muteUids.contains(uid);
 

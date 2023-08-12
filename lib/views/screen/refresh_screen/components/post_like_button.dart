@@ -18,23 +18,15 @@ class PostLikeButton extends HookWidget {
     final isLiked = useState(false);
     return Column(
       children: [
-        Obx(
-          () => CurrentUserController.to.likePostIds.contains(post.postId)
-              ? InkWell(
-                  child: const Icon(Icons.favorite, color: Colors.red),
-                  onTap: () async {
-                    isLiked.value = false;
-                    await controller.unLikePost(post);
-                  })
-              : InkWell(
-                  child: const Icon(
-                    Icons.favorite,
-                  ),
-                  onTap: () async {
-                    isLiked.value = true;
-                    await controller.likePost(post);
-                  }),
-        ),
+        Obx(() => CurrentUserController.to.likePostIds.contains(post.postId)
+            ? InkWell(
+                child: const Icon(Icons.favorite, color: Colors.red),
+                onTap: () => controller.onUnLikeButtonPressed(isLiked, post))
+            : InkWell(
+                child: const Icon(
+                  Icons.favorite,
+                ),
+                onTap: () => controller.onLikeButtonPressed(isLiked, post))),
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(isLiked.value

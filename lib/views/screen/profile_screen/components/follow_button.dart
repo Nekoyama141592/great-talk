@@ -12,10 +12,12 @@ class FollowButton extends StatelessWidget {
     return Obx(() => !CurrentUserController.to.followingUids
             .contains(controller.passiveUid())
         ? RoundedButton(
-            text: "フォロー", textColor: Colors.white, press: controller.follow)
+            text: "フォロー",
+            textColor: Colors.white,
+            press: controller.onFollowPressed)
         : RoundedButton(
             text: "アンフォロー",
-            press: controller.unfollow,
+            press: controller.onUnFollowPressed,
             buttonColor: Colors.grey,
           ));
   }

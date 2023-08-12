@@ -12,14 +12,18 @@ import 'package:great_talk/model/tokens/following_token/following_token.dart';
 class UserProfileController extends ProfileController {
   UserProfileController() : super(false);
   static UserProfileController get to => Get.find<UserProfileController>();
-  Future<void> follow() async {
+  void onFollowPressed() async {
     if (passiveUser.value == null) {
       return;
     }
-    if (CurrentUserController.to.publicUser.value == null) {
-      await UIHelper.showFlutterToast("ログインをしてください！");
+    if (CurrentUserController.to.isNotVerified()) {
+      UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
+    await _follow();
+  }
+
+  Future<void> _follow() async {
     final String tokenId = randomString();
     final Timestamp now = Timestamp.now();
     passiveUser(passiveUser.value!
@@ -41,10 +45,18 @@ class UserProfileController extends ProfileController {
         currentUid(), passiveUid(), follower.toJson());
   }
 
-  Future<void> unfollow() async {
+  void onUnFollowPressed() async {
     if (passiveUser.value == null) {
       return;
     }
+    if (CurrentUserController.to.isNotVerified()) {
+      UIHelper.showFlutterToast("ログインが必要です");
+      return;
+    }
+    await _unfollow();
+  }
+
+  Future<void> _unfollow() async {
     passiveUser(passiveUser.value!
         .copyWith(followerCount: passiveUser.value!.followerCount + minusOne));
     final deleteToken = CurrentUserController.to.followingTokens

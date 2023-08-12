@@ -36,6 +36,10 @@ class PostsController extends GetxController with CurrentUserMixin {
     if (returnIsOriginalContents(posterUid) || currentUid() == posterUid) {
       return;
     }
+    if (CurrentUserController.to.isNotVerified()) {
+      UIHelper.showFlutterToast("ログインが必要です");
+      return;
+    }
     showCupertinoModalPopup(
         context: context,
         builder: (innerContext) => CupertinoActionSheet(
@@ -160,7 +164,16 @@ class PostsController extends GetxController with CurrentUserMixin {
     });
   }
 
-  Future<void> likePost(Post post) async {
+  void onLikeButtonPressed(ValueNotifier<bool> isLiked, Post post) async {
+    if (CurrentUserController.to.isNotVerified()) {
+      UIHelper.showFlutterToast("ログインが必要です");
+      return;
+    }
+    isLiked.value = true;
+    await _likePost(post);
+  }
+
+  Future<void> _likePost(Post post) async {
     final String tokenId = randomString();
     final Timestamp now = Timestamp.now();
     final String passiveUid = post.typedPoster().uid;
@@ -186,7 +199,16 @@ class PostsController extends GetxController with CurrentUserMixin {
     await repository.createPostLike(postRef, currentUid(), postLike.toJson());
   }
 
-  Future<void> unLikePost(Post post) async {
+  void onUnLikeButtonPressed(ValueNotifier<bool> isLiked, Post post) async {
+    if (CurrentUserController.to.isNotVerified()) {
+      UIHelper.showFlutterToast("ログインが必要です");
+      return;
+    }
+    isLiked.value = false;
+    await _unLikePost(post);
+  }
+
+  Future<void> _unLikePost(Post post) async {
     final String passiveUid = post.typedPoster().uid;
     final deleteToken = CurrentUserController.to.likePostTokens
         .firstWhere((element) => element.passiveUid == passiveUid);
