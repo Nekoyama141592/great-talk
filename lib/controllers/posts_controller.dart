@@ -45,13 +45,13 @@ class PostsController extends GetxController with CurrentUserMixin {
         builder: (innerContext) => CupertinoActionSheet(
               actions: [
                 CupertinoActionSheetAction(
-                    onPressed: () => reportPost(innerContext),
+                    onPressed: () => _reportPost(innerContext),
                     child: const BasicBoldText("投稿を報告")),
                 CupertinoActionSheetAction(
-                    onPressed: () => mutePost(innerContext),
+                    onPressed: () => _mutePost(innerContext),
                     child: const BasicBoldText("投稿をミュート")),
                 CupertinoActionSheetAction(
-                    onPressed: () => muteUser(innerContext),
+                    onPressed: () => _muteUser(innerContext),
                     child: const BasicBoldText("ユーザーをミュート")),
                 CupertinoActionSheetAction(
                     onPressed: () => Navigator.pop(innerContext),
@@ -60,7 +60,7 @@ class PostsController extends GetxController with CurrentUserMixin {
             ));
   }
 
-  void reportPost(BuildContext innerContext) {
+  void _reportPost(BuildContext innerContext) {
     Navigator.pop(innerContext);
     showReportContentDialog(innerContext);
   }
@@ -81,7 +81,7 @@ class PostsController extends GetxController with CurrentUserMixin {
     }
   }
 
-  void mutePost(BuildContext innerContext) async {
+  void _mutePost(BuildContext innerContext) async {
     final tokenId = randomString();
     final now = Timestamp.now();
     if (rxPost.value == null) {
@@ -112,7 +112,7 @@ class PostsController extends GetxController with CurrentUserMixin {
     }
   }
 
-  void muteUser(BuildContext innerContext) async {
+  void _muteUser(BuildContext innerContext) async {
     if (rxPost.value == null) {
       return;
     }
