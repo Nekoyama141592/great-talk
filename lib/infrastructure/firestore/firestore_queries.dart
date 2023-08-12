@@ -87,12 +87,12 @@ class FirestoreQueries {
   static DocRef tokenQuery(String currentUid, String tokenId) =>
       tokensQuery(currentUid).doc(tokenId);
   static ColRef tokensQuery(String currentUid) =>
-      userDocRef(currentUid).collection("tokens");
+      privateUserDocRef(currentUid).collection("tokens");
 
   static DocRef userDocRef(String uid) => _usersColRef.doc(uid);
   static final ColRef _usersColRef = _publicV1.collection('users');
-  static DocRef privateUserDocRef(String uid) =>
-      _privateV1.collection('privateUsers').doc(uid);
+  static DocRef privateUserDocRef(String currentUid) =>
+      _privateV1.collection('privateUsers').doc(currentUid);
 
   static final usersQuery = _usersColRef.limit(oneTimeReadCount);
 
