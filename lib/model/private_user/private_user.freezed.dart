@@ -25,6 +25,7 @@ mixin _$PrivateUser {
   String get gender => throw _privateConstructorUsedError;
   String get ipAddress => throw _privateConstructorUsedError;
   bool get isAdmin => throw _privateConstructorUsedError;
+  int get purchasedPoints => throw _privateConstructorUsedError;
   dynamic get ref => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
@@ -47,6 +48,7 @@ abstract class $PrivateUserCopyWith<$Res> {
       String gender,
       String ipAddress,
       bool isAdmin,
+      int purchasedPoints,
       dynamic ref,
       String uid,
       dynamic updatedAt});
@@ -70,6 +72,7 @@ class _$PrivateUserCopyWithImpl<$Res, $Val extends PrivateUser>
     Object? gender = null,
     Object? ipAddress = null,
     Object? isAdmin = null,
+    Object? purchasedPoints = null,
     Object? ref = freezed,
     Object? uid = null,
     Object? updatedAt = freezed,
@@ -95,6 +98,10 @@ class _$PrivateUserCopyWithImpl<$Res, $Val extends PrivateUser>
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
               as bool,
+      purchasedPoints: null == purchasedPoints
+          ? _value.purchasedPoints
+          : purchasedPoints // ignore: cast_nullable_to_non_nullable
+              as int,
       ref: freezed == ref
           ? _value.ref
           : ref // ignore: cast_nullable_to_non_nullable
@@ -125,6 +132,7 @@ abstract class _$$_PrivateUserCopyWith<$Res>
       String gender,
       String ipAddress,
       bool isAdmin,
+      int purchasedPoints,
       dynamic ref,
       String uid,
       dynamic updatedAt});
@@ -146,6 +154,7 @@ class __$$_PrivateUserCopyWithImpl<$Res>
     Object? gender = null,
     Object? ipAddress = null,
     Object? isAdmin = null,
+    Object? purchasedPoints = null,
     Object? ref = freezed,
     Object? uid = null,
     Object? updatedAt = freezed,
@@ -171,6 +180,10 @@ class __$$_PrivateUserCopyWithImpl<$Res>
           ? _value.isAdmin
           : isAdmin // ignore: cast_nullable_to_non_nullable
               as bool,
+      purchasedPoints: null == purchasedPoints
+          ? _value.purchasedPoints
+          : purchasedPoints // ignore: cast_nullable_to_non_nullable
+              as int,
       ref: freezed == ref
           ? _value.ref
           : ref // ignore: cast_nullable_to_non_nullable
@@ -196,6 +209,7 @@ class _$_PrivateUser implements _PrivateUser {
       required this.gender,
       required this.ipAddress,
       required this.isAdmin,
+      required this.purchasedPoints,
       required this.ref,
       required this.uid,
       required this.updatedAt});
@@ -214,6 +228,8 @@ class _$_PrivateUser implements _PrivateUser {
   @override
   final bool isAdmin;
   @override
+  final int purchasedPoints;
+  @override
   final dynamic ref;
   @override
   final String uid;
@@ -222,7 +238,7 @@ class _$_PrivateUser implements _PrivateUser {
 
   @override
   String toString() {
-    return 'PrivateUser(createdAt: $createdAt, ethAddress: $ethAddress, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, ref: $ref, uid: $uid, updatedAt: $updatedAt)';
+    return 'PrivateUser(createdAt: $createdAt, ethAddress: $ethAddress, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, purchasedPoints: $purchasedPoints, ref: $ref, uid: $uid, updatedAt: $updatedAt)';
   }
 
   @override
@@ -237,6 +253,8 @@ class _$_PrivateUser implements _PrivateUser {
             (identical(other.ipAddress, ipAddress) ||
                 other.ipAddress == ipAddress) &&
             (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
+            (identical(other.purchasedPoints, purchasedPoints) ||
+                other.purchasedPoints == purchasedPoints) &&
             const DeepCollectionEquality().equals(other.ref, ref) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
@@ -251,6 +269,7 @@ class _$_PrivateUser implements _PrivateUser {
       gender,
       ipAddress,
       isAdmin,
+      purchasedPoints,
       const DeepCollectionEquality().hash(ref),
       uid,
       const DeepCollectionEquality().hash(updatedAt));
@@ -276,6 +295,7 @@ abstract class _PrivateUser implements PrivateUser {
       required final String gender,
       required final String ipAddress,
       required final bool isAdmin,
+      required final int purchasedPoints,
       required final dynamic ref,
       required final String uid,
       required final dynamic updatedAt}) = _$_PrivateUser;
@@ -293,6 +313,8 @@ abstract class _PrivateUser implements PrivateUser {
   String get ipAddress;
   @override
   bool get isAdmin;
+  @override
+  int get purchasedPoints;
   @override
   dynamic get ref;
   @override
