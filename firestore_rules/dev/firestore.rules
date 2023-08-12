@@ -7,7 +7,8 @@ service cloud.firestore {
     }
     match /public/{version}/users/{uid} {
       allow read: if isAuthenticated();
-      allow create, delete: if isTheSameUserAndVerified(uid);
+      allow create: if isTheSameUserAndVerified(uid);
+      allow delete: if isTheSameUserAndVerified(uid);
       match /posts/{postId} {
         allow read: if isAuthenticated();
         allow create: if isTheSameUserAndVerified(uid);
@@ -15,20 +16,24 @@ service cloud.firestore {
           allow create: if isTheSameUser(senderUid); //認証されている必要はない.
         }
         match /postLikes/{activeUid} {
-          allow create, delete: if isTheSameUserAndVerified(activeUid);
+          allow create: if isTheSameUserAndVerified(activeUid);
+          allow delete: if isTheSameUserAndVerified(activeUid);
         }
         match /postReports/{activeUid} {
           allow create: if isTheSameUserAndVerified(activeUid);
         }
         match /postMutes/{activeUid} {
-          allow create, delete: if isTheSameUserAndVerified(activeUid);
+          allow create: if isTheSameUserAndVerified(activeUid);
+          allow delete: if isTheSameUserAndVerified(activeUid);
         }
       }
       match /followers/{activeUid} {
-        allow create, delete: if isTheSameUserAndVerified(activeUid);
+        allow create: if isTheSameUserAndVerified(activeUid);
+        allow delete: if isTheSameUserAndVerified(activeUid);
       }
       match /userMutes/{activeUid} {
-        allow create, delete: if isTheSameUserAndVerified(activeUid);
+        allow create: if isTheSameUserAndVerified(activeUid);
+        allow delete: if isTheSameUserAndVerified(activeUid);
       }
       match /userUpdateLogs/{id} {
         allow create: if isTheSameUserAndVerified(uid);
@@ -39,9 +44,11 @@ service cloud.firestore {
     }
     // Private data
     match /private/{version}/privateUsers/{uid} {
-      allow read, create: if isTheSameUserAndVerified(uid);
+      allow read: if isTheSameUserAndVerified(uid);
+      allow create: if isTheSameUserAndVerified(uid);
       match /tokens/{tokenId} {
-        allow read, create, delete: if isTheSameUserAndVerified(uid);
+        allow read, delete: if isTheSameUserAndVerified(uid);
+        allow create: if isTheSameUserAndVerified(uid);
       }
     }
   }
