@@ -14,7 +14,7 @@ class FirestoreQueries {
       query.startAtDocument(lastDoc);
 
   static DocRef followerQuery(String currentUid, String passiveUid) =>
-      _usersColRef.doc(passiveUid).collection("followers").doc(currentUid);
+      _usersColRef.doc(passiveUid).collection('followers').doc(currentUid);
   static DocRef postLikeDocRef(DocRef postRef, String activeUid) =>
       postRef.collection('postLikes').doc(activeUid);
 
