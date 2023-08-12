@@ -13,9 +13,4 @@ enum PrefsKey {
   lastChatDate,
 }
 
-enum TokenType {
-  following,
-  likePost,
-  mutePost,
-  muteUser
-}
+enum TokenType { following, likePost, mutePost, muteUser }
