@@ -15,6 +15,7 @@ import 'package:great_talk/model/post_report/post_report.dart';
 import 'package:great_talk/model/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/model/tokens/report_post_token/report_post_token.dart';
 import 'package:great_talk/model/user_mute/user_mute.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/report_contents_list_view.dart';
@@ -82,12 +83,16 @@ class PostsController extends GetxController with CurrentUserMixin {
   }
 
   void _mutePost(BuildContext innerContext) async {
-    final tokenId = randomString();
-    final now = Timestamp.now();
     if (rxPost.value == null) {
       return;
     }
     final post = rxPost.value!;
+    if (CurrentUserController.to.mutePostIds.contains(post.postId)) {
+      UIHelper.showFlutterToast("すでにこの投稿をミュートしています");
+      return;
+    }
+    final tokenId = randomString();
+    final now = Timestamp.now();
     final postId = post.postId;
     final postRef = post.typedRef();
     final MutePostToken mutePostToken = MutePostToken(
@@ -117,6 +122,10 @@ class PostsController extends GetxController with CurrentUserMixin {
       return;
     }
     final passiveUser = rxPost.value!.typedPoster();
+    if (CurrentUserController.to.muteUids.contains(passiveUser.uid)) {
+      UIHelper.showFlutterToast("すでにこのユーザーをミュート報告しています");
+      return;
+    }
     final tokenId = randomString();
     final now = Timestamp.now();
     final passiveUid = passiveUser.uid;
@@ -147,6 +156,24 @@ class PostsController extends GetxController with CurrentUserMixin {
       return;
     }
     final post = rxPost.value!;
+    if (CurrentUserController.to.reportPostIds.contains(post.postId)) {
+      UIHelper.showFlutterToast("すでにこの投稿を報告しています");
+      return;
+    }
+    final tokenId = randomString();
+    final now = Timestamp.now();
+    final postId = post.postId;
+    final postRef = post.typedRef();
+    final ReportPostToken reportPostToken = ReportPostToken(
+        activeUid: currentUid(),
+        createdAt: now,
+        postId: postId,
+        postRef: postRef,
+        tokenId: tokenId,
+        tokenType: TokenType.reportPost.name);
+    CurrentUserController.to.addReportPost(reportPostToken);
+    await repository.createToken(
+        currentUid(), tokenId, reportPostToken.toJson());
     final PostReport postReport = PostReport(
       activeUserRef: CurrentUserController.to.publicUser.value!.typedRef(),
       activeUid: currentUid(),
@@ -155,8 +182,8 @@ class PostsController extends GetxController with CurrentUserMixin {
       postRef: post.typedRef(),
       reportContents: reportContents,
     );
-    final result =
-        await repository.createPostReport(post.typedRef(), postReport.toJson());
+    final result = await repository.createPostReport(
+        post.typedRef(), currentUid(), postReport.toJson());
     result.when(success: (res) {
       UIHelper.showFlutterToast("報告が完了しました！");
     }, failure: () {

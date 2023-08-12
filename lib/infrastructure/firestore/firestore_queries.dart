@@ -27,8 +27,9 @@ class FirestoreQueries {
   static MapQuery postsQueryByWhereIn(List<String> postIds) =>
       postsQuery.where('postId', whereIn: postIds);
 
-  static DocRef postReportDocRefFromPostRef(DocRef postRef) =>
-      postRef.collection('postReports').doc();
+  static DocRef postReportDocRefFromPostRef(
+          DocRef postRef, String currentUid) =>
+      postRef.collection('postReports').doc(currentUid);
   static DocRef postMuteDocRefFromPostRef(DocRef postRef, String currentUid) =>
       postRef.collection('postMutes').doc(currentUid);
   static DocRef userMuteDocRef(String uid, String currentUid) =>

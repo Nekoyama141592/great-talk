@@ -122,9 +122,10 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<bool> createPostReport(DocRef postRef, SDMap json) async {
+  FutureResult<bool> createPostReport(
+      DocRef postRef, String currentUid, SDMap json) async {
     try {
-      await client.createPostReport(postRef, json);
+      await client.createPostReport(postRef, currentUid, json);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());

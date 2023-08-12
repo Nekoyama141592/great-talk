@@ -80,7 +80,8 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
-  Future<void> createPostReport(DocRef postRef, SDMap json) async {
+  Future<void> createPostReport(
+      DocRef postRef, String currentUid, SDMap json) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     return;
   }

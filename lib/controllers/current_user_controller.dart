@@ -12,6 +12,7 @@ import 'package:great_talk/model/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/model/private_user/private_user.dart';
+import 'package:great_talk/model/tokens/report_post_token/report_post_token.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/new_content.dart';
@@ -33,6 +34,9 @@ class CurrentUserController extends GetxController {
 
   final muteUserTokens = <MuteUserToken>[];
   final muteUids = <String>[].obs;
+
+  final reportPostTokens = <ReportPostToken>[];
+  final reportPostIds = <String>[].obs;
 
   @override
   void onInit() async {
@@ -73,6 +77,11 @@ class CurrentUserController extends GetxController {
                 final MutePostToken mutePostToken =
                     MutePostToken.fromJson(tokenMap);
                 addMutePost(mutePostToken);
+                break;
+              case TokenType.reportPost:
+                final ReportPostToken reportPostToken =
+                    ReportPostToken.fromJson(tokenMap);
+                addReportPost(reportPostToken);
                 break;
             }
           }
@@ -126,6 +135,12 @@ class CurrentUserController extends GetxController {
     muteUserTokens.remove(muteUserToken);
     muteUids.remove(muteUserToken.passiveUid);
     muteUids([...muteUids]);
+  }
+
+  void addReportPost(ReportPostToken reportPostToken) {
+    reportPostTokens.add(reportPostToken);
+    reportPostIds.add(reportPostToken.postId);
+    reportPostIds([...reportPostIds]);
   }
 
   Future<void> _createAnonymousUser() async {
