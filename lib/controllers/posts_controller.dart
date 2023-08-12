@@ -62,6 +62,15 @@ class PostsController extends GetxController with CurrentUserMixin {
   }
 
   void _reportPost(BuildContext innerContext) {
+    if (rxPost.value == null) {
+      return;
+    }
+    final post = rxPost.value!;
+    if (CurrentUserController.to.reportPostIds.contains(post.postId)) {
+      UIHelper.showFlutterToast("すでにこの投稿を報告しています");
+      Navigator.pop(innerContext);
+      return;
+    }
     Navigator.pop(innerContext);
     showReportContentDialog(innerContext);
   }
@@ -89,6 +98,7 @@ class PostsController extends GetxController with CurrentUserMixin {
     final post = rxPost.value!;
     if (CurrentUserController.to.mutePostIds.contains(post.postId)) {
       UIHelper.showFlutterToast("すでにこの投稿をミュートしています");
+      Navigator.pop(innerContext);
       return;
     }
     final tokenId = randomString();
@@ -123,7 +133,8 @@ class PostsController extends GetxController with CurrentUserMixin {
     }
     final passiveUser = rxPost.value!.typedPoster();
     if (CurrentUserController.to.muteUids.contains(passiveUser.uid)) {
-      UIHelper.showFlutterToast("すでにこのユーザーをミュート報告しています");
+      UIHelper.showFlutterToast("すでにこのユーザーをミュートしています");
+      Navigator.pop(innerContext);
       return;
     }
     final tokenId = randomString();
@@ -163,14 +174,7 @@ class PostsController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _createPostReport() async {
-    if (rxPost.value == null) {
-      return;
-    }
     final post = rxPost.value!;
-    if (CurrentUserController.to.reportPostIds.contains(post.postId)) {
-      UIHelper.showFlutterToast("すでにこの投稿を報告しています");
-      return;
-    }
     final tokenId = randomString();
     final now = Timestamp.now();
     final postId = post.postId;
