@@ -82,7 +82,7 @@ service cloud.firestore {
     return post.size() == 22 &&
       "bookmarkCount" in post && post.bookmarkCount is number &&
       "createdAt" in post && post.createdAt is timestamp &&
-      "customCompleteText" in post && post.customCompleteText is map &&
+      "customCompleteText" in post && isValidCustomCompleteText(post.customCompleteText) &&
       "description" in post && isValidDetectedText(post.description) &&
       "exampleTexts" in post && post.exampleTexts is list &&
       "genre" in post && post.genre is string &&
@@ -203,7 +203,9 @@ service cloud.firestore {
     && "moderationModelVersion" in detectedImage && detectedImage.moderationModelVersion is string
     && "value" in detectedImage && detectedImage.value is string;
   }
-
+  function isValidCustomCompleteText(customCompleteText) {
+    return "systemPrompt" in customCompleteText && customCompleteText.systemPrompt is string;
+  }
 
   function isAuthenticated() {
   	return request.auth != null;
