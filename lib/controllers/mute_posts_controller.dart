@@ -9,7 +9,7 @@ import 'package:great_talk/model/post/post.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MutePostsController extends DocsController {
-  MutePostsController() : super(enablePullDown: true);
+  MutePostsController() : super(enablePullDown: true, requiresValueReset: true);
   static MutePostsController get to => Get.find<MutePostsController>();
   @override
   Future<void> fetchDocs() async {

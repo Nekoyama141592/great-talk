@@ -6,7 +6,8 @@ import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class ProfileController extends DocsController {
-  ProfileController(this.isMyProfile) : super(enablePullDown: true);
+  ProfileController(this.isMyProfile)
+      : super(enablePullDown: true, requiresValueReset: !isMyProfile);
   final bool isMyProfile;
   final Rx<PublicUser?> passiveUser = Rx(null);
   String passiveUid() => isMyProfile ? currentUid() : Get.parameters['uid']!;

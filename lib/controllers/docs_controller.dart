@@ -5,12 +5,14 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class DocsController extends GetxController with CurrentUserMixin {
-  DocsController({required this.enablePullDown});
+  DocsController(
+      {required this.enablePullDown, required this.requiresValueReset});
   final FirestoreRepository repository = FirestoreRepository();
   final bool enablePullDown;
+  final bool requiresValueReset;
   final docs = <QDoc>[].obs;
   final isLoading = false.obs;
-
+  final isInit = false.obs;
   bool cannotShow() => isLoading.value;
   void _startLoading() => isLoading(true);
   void _endLoading() => isLoading(false);
@@ -34,7 +36,17 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
     docs([...docs]);
   }
 
-  Future<void> init() => onReload();
+  Future<void> init() async {
+    if (requiresValueReset) {
+      isInit(false);
+    }
+    if (isInit.value) {
+      return;
+    }
+    await onReload();
+    isInit(true);
+  }
+
   Future<void> fetchDocs();
   Future<void> onRefresh(RefreshController refreshController);
   Future<void> onReload() async {
