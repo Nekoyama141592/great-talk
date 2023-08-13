@@ -55,7 +55,8 @@ class RefreshScreen extends HookWidget {
                         itemBuilder: (c, i) {
                           final post =
                               Post.fromJson(docsController.docs[i].data());
-                          return PostCard(post: post);
+                          final uint8list = docsController.images[i];
+                          return PostCard(post: post, uint8list: uint8list);
                         })));
   }
 }

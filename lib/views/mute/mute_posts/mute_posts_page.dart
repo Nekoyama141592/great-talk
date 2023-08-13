@@ -20,7 +20,8 @@ class MutePostsPage extends StatelessWidget {
             itemCount: controller.docs.length,
             itemBuilder: (c, i) {
               final post = Post.fromJson(controller.docs[i].data());
-              return MutePostCard(post: post);
+              final uint8list = controller.images[i];
+              return MutePostCard(post: post, uint8list: uint8list);
             })),
       ),
     );

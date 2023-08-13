@@ -16,7 +16,8 @@ class UserRankingScreen extends StatelessWidget {
             itemCount: controller.docs.length,
             itemBuilder: (c, i) {
               final publicUser = PublicUser.fromJson(controller.docs[i].data());
-              return UserCard(publicUser: publicUser);
+              final uint8list = controller.images[i];
+              return UserCard(publicUser: publicUser, uint8list: uint8list);
             })));
   }
 }

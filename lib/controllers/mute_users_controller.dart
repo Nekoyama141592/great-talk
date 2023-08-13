@@ -17,7 +17,7 @@ class MuteUsersController extends DocsController {
     if (requestUids.isNotEmpty) {
       final result = await repository.getUsersByWhereIn(requestUids);
       result.when(success: (res) {
-        docs(res);
+        setAllDocs(res);
       }, failure: () {
         UIHelper.showErrorFlutterToast("データの取得に失敗しました");
       });

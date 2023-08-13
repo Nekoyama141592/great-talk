@@ -72,12 +72,17 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                                 ? null
                                                 : controller.onCardLongTap,
                                         leading: Obx(() => CircleImage(
-                                            bucketName: controller
-                                                .interlocutor.value!
-                                                .typedImage()
-                                                .bucketName,
-                                            imageValue: controller.interlocutor
-                                                .value!.imageValue)),
+                                              bucketName: controller
+                                                  .interlocutor.value!
+                                                  .typedImage()
+                                                  .bucketName,
+                                              imageValue: controller
+                                                  .interlocutor
+                                                  .value!
+                                                  .imageValue,
+                                              uint8list:
+                                                  controller.uint8list.value,
+                                            )),
                                         title:
                                             purchaseController.isSubscribing()
                                                 ? SelectableText(text)
@@ -107,14 +112,17 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                         leading: messages[index].senderUid !=
                                                 currentUid()
                                             ? Obx(() => CircleImage(
-                                                bucketName: controller
-                                                    .interlocutor.value!
-                                                    .typedImage()
-                                                    .bucketName,
-                                                imageValue: controller
-                                                    .interlocutor
-                                                    .value!
-                                                    .imageValue))
+                                                  bucketName: controller
+                                                      .interlocutor.value!
+                                                      .typedImage()
+                                                      .bucketName,
+                                                  imageValue: controller
+                                                      .interlocutor
+                                                      .value!
+                                                      .imageValue,
+                                                  uint8list: controller
+                                                      .uint8list.value,
+                                                ))
                                             : null,
                                         title:
                                             purchaseController.isSubscribing()

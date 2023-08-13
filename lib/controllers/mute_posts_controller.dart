@@ -17,7 +17,7 @@ class MutePostsController extends DocsController {
     if (requestPostIds.isNotEmpty) {
       final result = await repository.getPostsByWhereIn(requestPostIds);
       result.when(success: (res) {
-        docs(res);
+        setAllDocs(res);
       }, failure: () {
         UIHelper.showErrorFlutterToast("データの取得に失敗しました");
       });

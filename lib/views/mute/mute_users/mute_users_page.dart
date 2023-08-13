@@ -21,7 +21,9 @@ class MuteUsersPage extends StatelessWidget {
             itemBuilder: (c, i) {
               final passiveUser =
                   PublicUser.fromJson(controller.docs[i].data());
-              return MuteUserCard(passiveUser: passiveUser);
+              final uint8list = controller.images[i];
+              return MuteUserCard(
+                  passiveUser: passiveUser, uint8list: uint8list);
             })),
       ),
     );

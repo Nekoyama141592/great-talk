@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,6 +24,7 @@ import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/text_message/text_message.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/repository/wolfram_repository.dart';
+import 'package:great_talk/utility/file_utility.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,6 +37,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   int chatCount = 0;
   late SharedPreferences prefs;
   final Rx<ChatContent?> interlocutor = Rx(null);
+  final Rx<Uint8List?> uint8list = Rx(null);
   final repository = FirestoreRepository();
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> getChatLog() async {
@@ -55,6 +58,10 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
         if (res.exists) {
           final post = Post.fromJson(res.data()!);
           interlocutor(ChatContent.fromPost(post));
+          final detectedImage = post.typedImage();
+          final s3Image = await FileUtility.getS3Image(
+              detectedImage.bucketName, detectedImage.value);
+          uint8list(s3Image);
         } else {
           UIHelper.showFlutterToast("投稿が存在しません");
           return;

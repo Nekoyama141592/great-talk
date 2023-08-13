@@ -1,14 +1,18 @@
+import 'dart:typed_data';
+
 import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
+import 'package:great_talk/utility/file_utility.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class ProfileController extends DocsController {
   ProfileController(this.isMyProfile) : super(enablePullDown: true);
   final bool isMyProfile;
   final Rx<PublicUser?> passiveUser = Rx(null);
+  final Rx<Uint8List?> uint8list = Rx(null);
   String passiveUid() => isMyProfile ? currentUid() : Get.parameters['uid']!;
 
   @override
@@ -20,10 +24,17 @@ abstract class ProfileController extends DocsController {
     }
     final result = await repository.getUserPostsByNewest(passiveUid());
     result.when(success: (res) {
-      docs(res);
+      setAllDocs(res);
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
+    if (passiveUser.value == null) {
+      return;
+    }
+    final detectedImage = passiveUser.value!.typedImage();
+    final s3Image = await FileUtility.getS3Image(
+        detectedImage.bucketName, detectedImage.value);
+    uint8list(s3Image);
   }
 
   Future<void> _getPassiveUser() async {

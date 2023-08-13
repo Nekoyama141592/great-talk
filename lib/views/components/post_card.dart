@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
@@ -12,9 +14,10 @@ import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({Key? key, required this.post}) : super(key: key);
+  const PostCard({Key? key, required this.post, required this.uint8list})
+      : super(key: key);
   final Post post;
-
+  final Uint8List? uint8list;
   @override
   Widget build(BuildContext context) {
     final content = ChatContent.fromPost(post);
@@ -52,6 +55,7 @@ class PostCard extends StatelessWidget {
                             bucketName: post.typedImage().bucketName,
                             imageValue: content.imageValue,
                             onTap: () => controller.onPostCardPressed(post),
+                            uint8list: uint8list,
                           ),
                           EllipsisText(
                             post.typedTitle().value,
