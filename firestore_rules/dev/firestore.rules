@@ -62,20 +62,20 @@ service cloud.firestore {
     return user.size() == 22 &&
       "accountName" in user && user.accountName is string &&
       "bio" in user && isValidDetectedText(user.bio) &&
-      "blockCount" in user && user.blockCount is number &&
+      "blockCount" in user && user.blockCount == 0 &&
       "createdAt" in user && user.createdAt is timestamp &&
       "ethAddress" in user && user.ethAddress is string &&
-      "followerCount" in user && user.followerCount is number &&
-      "followingCount" in user && user.followingCount is number &&
+      "followerCount" in user && user.followerCount == 0 &&
+      "followingCount" in user && user.followingCount == 0 &&
       "isNFTicon" in user && user.isNFTicon is bool &&
       "isOfficial" in user && user.isOfficial is bool &&
       "isSuspended" in user && user.isSuspended is bool &&
       "links" in user && user.links is list &&
-      "muteCount" in user && user.muteCount is number &&
-      "postCount" in user && user.postCount is number &&
+      "muteCount" in user && user.muteCount == 0 &&
+      "postCount" in user && user.postCount == 0 &&
       "ref" in user && user.ref is path &&
-      "reportCount" in user && user.reportCount is number &&
-      "score" in user && user.score is number &&
+      "reportCount" in user && user.reportCount == 0 &&
+      "score" in user && user.score == 0 &&
       "searchToken" in user && user.searchToken is map &&
       "uid" in user && user.uid is string &&
       "updatedAt" in user && user.updatedAt is timestamp &&
@@ -183,7 +183,7 @@ service cloud.firestore {
       "gender" in user && user.gender is string &&
       "ipAddress" in user && user.ipAddress is string &&
       "isAdmin" in user && user.isAdmin is bool &&
-      "purchasedPoints" in user && user.purchasedPoints is number &&
+      "purchasedPoints" in user && user.purchasedPoints == 0 &&
       "ref" in user && user.ref is path &&
       "uid" in user && user.uid is string &&
       "updatedAt" in user && user.updatedAt is timestamp;
@@ -194,14 +194,16 @@ service cloud.firestore {
       "tokenId" in token && token.tokenId is string &&
       "tokenType" in token && token.tokenType is string;
   }
+  
   function isValidDetectedText(detectedText) {
     return detectedText.size() == 5
     && "languageCode" in detectedText && detectedText.languageCode is string
-    && "negativeScore" in detectedText && detectedText.negativeScore is number
-    && "positiveScore" in detectedText && detectedText.positiveScore is number
+    && "negativeScore" in detectedText && detectedText.negativeScore is number // == 0にするとエラー
+    && "positiveScore" in detectedText && detectedText.positiveScore is number // == 0にするとエラー
     && "sentiment" in detectedText && detectedText.sentiment is string
     && "value" in detectedText && detectedText.value is string;
   }
+  
   function isValidDetectedImage(detectedImage) {
     return detectedImage.size() == 4
     && "bucketName" in detectedImage && detectedImage.bucketName is string
