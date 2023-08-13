@@ -4,6 +4,7 @@ exports.verifyIOSReceipt = exports.verifyAndroidReceipt = void 0;
 const functions = require("firebase-functions");
 const axios_1 = require("axios");
 const admin = require("firebase-admin");
+
 admin.initializeApp();
 const fireStore = admin.firestore();
 const RECEIPT_VERIFICATION_ENDPOINT_SANDBOX = "https://sandbox.itunes.apple.com/verifyReceipt";
