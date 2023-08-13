@@ -71,7 +71,7 @@ const String userNameHelpMsg =
     "ユーザーから検索される名前です。$nGramIndex文字以上、$maxUserNameLimit文字以下である必要があります。";
 // 投稿ページ
 const String systemPromptHelpMsg =
-    "キャラクターの特徴を決めるテキストです。AIの返答に大きく影響します。最大$maxSystemPromptLimit文字までです。";
+    "キャラクターの特徴を決めるテキストです。AIの返答に大きく影響します。最大$maxSystemPromptLimit文字までです。プロンプトインジェクションはすでに対策されていますが、完全にプロンプトの流出を防ぎ切れるわけではないことをご了承下さい。";
 const String titleHelpMsg = "投稿のタイトルです。AIの返答には全く影響しません。最大$maxTitleLimit文字までです。";
 const String descriptionHelpMsg =
     "投稿の説明や使い方です。AIの返答には全く影響しません。最大$maxDescriptionLimit文字までです。";

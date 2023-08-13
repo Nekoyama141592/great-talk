@@ -121,8 +121,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       temperature: completeText.temperature,
       topP: completeText.topP,
       maxToken: _adjustMaxToken(),
-      presencePenalty: completeText.presencePenalty ?? 0.0,
-      frequencyPenalty: completeText.frequencyPenalty ?? 0.0,
+      presencePenalty: completeText.presencePenalty,
+      frequencyPenalty: completeText.frequencyPenalty,
       user: currentUid(),
     );
     _listenToChatCompletionSSE(request, scrollController); // ChatGPTのリアルタイム出力

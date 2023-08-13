@@ -59,7 +59,8 @@ abstract class ChatContent implements _$ChatContent {
   }
 
   CustomCompleteText managedCustomCompleteText() {
-    String systemPrompt = typedCustomCompleteText()?.systemPrompt ?? "";
+    final completeText = typedCustomCompleteText();
+    String systemPrompt = completeText?.systemPrompt ?? "";
     if (proIds.contains(contentId)) {
       systemPrompt =
           "あなたは一人のプロの$titleです。それになりきって以下の問いに答えて下さい。自分がAIアシスタントだとは答えないで下さい。";
@@ -67,7 +68,12 @@ abstract class ChatContent implements _$ChatContent {
       systemPrompt =
           "$titleになりきって$titleの口調で以下の問いに答えてください。自分がAIアシスタントだとは答えないで下さい。";
     }
-    return CustomCompleteText(systemPrompt: systemPrompt);
+    return CustomCompleteText(
+        systemPrompt: systemPrompt,
+        temperature: completeText?.temperature,
+        topP: completeText?.topP,
+        presencePenalty: completeText?.presencePenalty ?? 0.0,
+        frequencyPenalty: completeText?.frequencyPenalty ?? 0.0);
   }
 
   DocRef typedRef() {
