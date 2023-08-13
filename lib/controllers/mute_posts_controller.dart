@@ -80,7 +80,7 @@ class MutePostsController extends DocsController {
         .firstWhere((element) => element.postId == postId);
     CurrentUserController.to.removeMutePost(deleteToken);
     docs.removeWhere(
-        (element) => Post.fromJson(element.data()).postId == postId);
+        (element) => Post.fromJson(element.doc.data()).postId == postId);
     docs([...docs]);
     await repository.deleteToken(currentUid(), deleteToken.tokenId);
     await repository.deletePostMute(post.typedRef(), currentUid());

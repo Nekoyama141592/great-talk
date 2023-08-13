@@ -26,7 +26,7 @@ class SearchUsersController extends SearchDocsController {
         docs.isNotEmpty &&
         firestoreSearchTerm.isNotEmpty) {
       final result =
-          await repository.searchMoreUsers(firestoreSearchTerm, docs.last);
+          await repository.searchMoreUsers(firestoreSearchTerm, docs.last.doc);
       result.when(success: (res) {
         addAllDocs(res);
       }, failure: () {

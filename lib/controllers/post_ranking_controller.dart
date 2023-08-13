@@ -23,7 +23,7 @@ class PostRankingController extends DocsController {
 
   @override
   Future<void> onLoading(RefreshController refreshController) async {
-    final result = await repository.getMorePostsByLikeCount(docs.last);
+    final result = await repository.getMorePostsByLikeCount(docs.last.doc);
     result.when(success: (res) {
       addAllDocs(res);
     }, failure: () {

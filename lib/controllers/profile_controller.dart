@@ -49,7 +49,7 @@ abstract class ProfileController extends DocsController {
   @override
   Future<void> onLoading(RefreshController refreshController) async {
     final result =
-        await repository.getMoreUserPostsByNewest(passiveUid(), docs.last);
+        await repository.getMoreUserPostsByNewest(passiveUid(), docs.last.doc);
     result.when(success: (res) {
       addAllDocs(res);
     }, failure: () {
@@ -61,7 +61,7 @@ abstract class ProfileController extends DocsController {
   @override
   Future<void> onRefresh(RefreshController refreshController) async {
     final result =
-        await repository.getNewUserPostsByNewest(passiveUid(), docs.first);
+        await repository.getNewUserPostsByNewest(passiveUid(), docs.first.doc);
     result.when(success: (res) {
       insertAllDocs(res);
     }, failure: () {
