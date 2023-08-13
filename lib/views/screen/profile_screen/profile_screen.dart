@@ -32,7 +32,9 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
                     bucketName:
                         controller.passiveUser.value!.typedImage().bucketName,
                     imageValue:
-                        controller.passiveUser.value!.typedImage().value),
+                        controller.passiveUser.value!.typedImage().value,
+                    uint8list: controller.uint8list.value,
+                  ),
           ),
           Column(
             children: [

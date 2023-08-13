@@ -20,8 +20,9 @@ class SearchUsersScreen extends StatelessWidget {
                 itemCount: controller.docs.length,
                 itemBuilder: (c, i) {
                   final publicUser =
-                      PublicUser.fromJson(controller.docs[i].data());
-                  return UserCard(publicUser: publicUser);
+                      PublicUser.fromJson(controller.docs[i].doc.data());
+                  final uint8list = controller.docs[i].uint8list;
+                  return UserCard(publicUser: publicUser, uint8list: uint8list);
                 }))));
   }
 }

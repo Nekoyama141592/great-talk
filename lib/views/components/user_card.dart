@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
@@ -10,8 +12,10 @@ import 'package:great_talk/views/components/mosaic_card/components/mosaic_user_c
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
 
 class UserCard extends StatelessWidget {
-  const UserCard({Key? key, required this.publicUser}) : super(key: key);
+  const UserCard({Key? key, required this.publicUser, required this.uint8list})
+      : super(key: key);
   final PublicUser publicUser;
+  final Uint8List? uint8list;
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +49,10 @@ class UserCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               CircleImage(
-                                  bucketName:
-                                      publicUser.typedImage().bucketName,
-                                  imageValue: publicUser.typedImage().value),
+                                bucketName: publicUser.typedImage().bucketName,
+                                imageValue: publicUser.typedImage().value,
+                                uint8list: uint8list,
+                              ),
                               const Spacer(),
                               EllipsisText(
                                 publicUser.typedUserName().value,

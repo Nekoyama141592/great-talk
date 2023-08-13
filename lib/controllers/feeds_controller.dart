@@ -23,7 +23,7 @@ class FeedsController extends DocsController {
   Future<void> _fetchPosts(List<QDoc> fetchedTimelines) async {
     final posts = await _timelinesToPostsResult(fetchedTimelines);
     posts.when(
-        success: (res) => docs(res),
+        success: (res) => addAllDocs(res),
         failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 

@@ -1,7 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:get/get.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
+import 'package:great_talk/model/detected_image/detected_image.dart';
+import 'package:great_talk/model/image_doc_wraper/image_q_doc_wraper.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
+import 'package:great_talk/utility/file_utility.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class DocsController extends GetxController with CurrentUserMixin {
@@ -10,27 +15,35 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   final FirestoreRepository repository = FirestoreRepository();
   final bool enablePullDown;
   final bool requiresValueReset;
-  final docs = <QDoc>[].obs;
+  final docs = <ImageQDocWraper>[].obs;
   final isLoading = false.obs;
   final isInit = false.obs;
   bool cannotShow() => isLoading.value;
   void _startLoading() => isLoading(true);
   void _endLoading() => isLoading(false);
-  void addAllDocs(List<QDoc> elements) {
-    final docIds = elements.map((e) => e.id).toList();
+
+  void setAllDocs(List<QDoc> elements) {
+    docs([]); // 配列を初期化
+    addAllDocs(elements);
+  }
+
+  void addAllDocs(List<QDoc> elements) async {
+    final docIds = docs.map((e) => e.doc.id).toList();
     for (final element in elements) {
       if (!docIds.contains(element.id)) {
-        docs.add(element);
+        final image = await _getImageFromDoc(element);
+        docs.add(ImageQDocWraper(element, image));
       }
     }
     docs([...docs]);
   }
 
-  void insertAllDocs(List<QDoc> elements) {
-    final docIds = elements.map((e) => e.id).toList();
+  void insertAllDocs(List<QDoc> elements) async {
+    final docIds = docs.map((e) => e.doc.id).toList();
     for (final element in elements.reversed.toList()) {
       if (!docIds.contains(element.id)) {
-        docs.insert(0, element);
+        final image = await _getImageFromDoc(element);
+        docs.insert(0, ImageQDocWraper(element, image));
       }
     }
     docs([...docs]);
@@ -45,6 +58,13 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
     }
     await onReload();
     isInit(true);
+  }
+
+  Future<Uint8List?> _getImageFromDoc(Doc doc) async {
+    final detectedImage = DetectedImage.fromJson(doc['image']);
+    final image = await FileUtility.getS3Image(
+        detectedImage.bucketName, detectedImage.value);
+    return image;
   }
 
   Future<void> fetchDocs();

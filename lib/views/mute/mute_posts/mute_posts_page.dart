@@ -19,8 +19,9 @@ class MutePostsPage extends StatelessWidget {
         child: Obx(() => ListView.builder(
             itemCount: controller.docs.length,
             itemBuilder: (c, i) {
-              final post = Post.fromJson(controller.docs[i].data());
-              return MutePostCard(post: post);
+              final post = Post.fromJson(controller.docs[i].doc.data());
+              final uint8list = controller.docs[i].uint8list;
+              return MutePostCard(post: post, uint8list: uint8list);
             })),
       ),
     );

@@ -54,8 +54,9 @@ class RefreshScreen extends HookWidget {
                                 crossAxisCount: 3, childAspectRatio: 0.5),
                         itemBuilder: (c, i) {
                           final post =
-                              Post.fromJson(docsController.docs[i].data());
-                          return PostCard(post: post);
+                              Post.fromJson(docsController.docs[i].doc.data());
+                          final uint8list = docsController.docs[i].uint8list;
+                          return PostCard(post: post, uint8list: uint8list);
                         })));
   }
 }

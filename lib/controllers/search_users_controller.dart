@@ -13,7 +13,7 @@ class SearchUsersController extends SearchDocsController {
     firestoreSearchTerm = searchTerm; // フォームのSearchTermは空になるので格納する
     final result = await repository.searchUsers(firestoreSearchTerm);
     result.when(success: (res) {
-      docs(res);
+      setAllDocs(res);
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
@@ -26,7 +26,7 @@ class SearchUsersController extends SearchDocsController {
         docs.isNotEmpty &&
         firestoreSearchTerm.isNotEmpty) {
       final result =
-          await repository.searchMoreUsers(firestoreSearchTerm, docs.last);
+          await repository.searchMoreUsers(firestoreSearchTerm, docs.last.doc);
       result.when(success: (res) {
         addAllDocs(res);
       }, failure: () {

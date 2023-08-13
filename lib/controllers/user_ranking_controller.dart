@@ -15,7 +15,7 @@ class UserRankingController extends DocsController {
   Future<void> fetchDocs() async {
     final result = await repository.getUsersByFollowerCount();
     result.when(success: (res) {
-      docs(res);
+      setAllDocs(res);
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
@@ -23,7 +23,7 @@ class UserRankingController extends DocsController {
 
   @override
   Future<void> onLoading(RefreshController refreshController) async {
-    final result = await repository.getMoreUsersByFollowerCount(docs.last);
+    final result = await repository.getMoreUsersByFollowerCount(docs.last.doc);
     result.when(success: (res) {
       addAllDocs(res);
     }, failure: () {

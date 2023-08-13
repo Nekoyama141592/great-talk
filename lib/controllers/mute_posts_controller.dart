@@ -17,7 +17,7 @@ class MutePostsController extends DocsController {
     if (requestPostIds.isNotEmpty) {
       final result = await repository.getPostsByWhereIn(requestPostIds);
       result.when(success: (res) {
-        docs(res);
+        setAllDocs(res);
       }, failure: () {
         UIHelper.showErrorFlutterToast("データの取得に失敗しました");
       });
@@ -80,7 +80,7 @@ class MutePostsController extends DocsController {
         .firstWhere((element) => element.postId == postId);
     CurrentUserController.to.removeMutePost(deleteToken);
     docs.removeWhere(
-        (element) => Post.fromJson(element.data()).postId == postId);
+        (element) => Post.fromJson(element.doc.data()).postId == postId);
     docs([...docs]);
     await repository.deleteToken(currentUid(), deleteToken.tokenId);
     await repository.deletePostMute(post.typedRef(), currentUid());
