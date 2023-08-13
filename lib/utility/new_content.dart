@@ -41,8 +41,8 @@ class NewContent {
 
   static DetectedText newDetectedText(String value) => DetectedText(
       languageCode: "",
-      negativeScore: 0.0,
-      positiveScore: 0.0,
+      negativeScore: 0,
+      positiveScore: 0,
       sentiment: "",
       value: value);
   static DetectedImage newDetectedImage(String bucketName, String value) =>

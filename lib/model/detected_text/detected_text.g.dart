@@ -9,8 +9,8 @@ part of 'detected_text.dart';
 _$_DetectedText _$$_DetectedTextFromJson(Map<String, dynamic> json) =>
     _$_DetectedText(
       languageCode: json['languageCode'] as String,
-      negativeScore: (json['negativeScore'] as num).toDouble(),
-      positiveScore: (json['positiveScore'] as num).toDouble(),
+      negativeScore: json['negativeScore'] as int,
+      positiveScore: json['positiveScore'] as int,
       sentiment: json['sentiment'] as String,
       value: json['value'] as String,
     );

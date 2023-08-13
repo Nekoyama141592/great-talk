@@ -20,8 +20,8 @@ final List<PublicUser> mockUsers = [
     createdAt: Timestamp.fromDate(DateTime(2023, 7, 12)),
     bio: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '')
         .toJson(),
@@ -50,8 +50,8 @@ final List<PublicUser> mockUsers = [
         .toJson(),
     userName: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '佐藤めぐみ')
         .toJson(),
@@ -62,8 +62,8 @@ final List<PublicUser> mockUsers = [
     createdAt: Timestamp.fromDate(DateTime(2023, 9, 28)),
     bio: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '')
         .toJson(),
@@ -92,8 +92,8 @@ final List<PublicUser> mockUsers = [
         .toJson(),
     userName: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '田中 久美')
         .toJson(),
@@ -104,8 +104,8 @@ final List<PublicUser> mockUsers = [
     createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     bio: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '')
         .toJson(),
@@ -134,8 +134,8 @@ final List<PublicUser> mockUsers = [
         .toJson(),
     userName: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '山岸 愛')
         .toJson(),
@@ -146,8 +146,8 @@ final List<PublicUser> mockUsers = [
     createdAt: Timestamp.fromDate(DateTime(2023, 2, 18)),
     bio: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '')
         .toJson(),
@@ -176,8 +176,8 @@ final List<PublicUser> mockUsers = [
         .toJson(),
     userName: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '森 遥')
         .toJson(),
@@ -188,8 +188,8 @@ final List<PublicUser> mockUsers = [
     createdAt: Timestamp.fromDate(DateTime(2023, 6, 1)),
     bio: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '')
         .toJson(),
@@ -218,8 +218,8 @@ final List<PublicUser> mockUsers = [
         .toJson(),
     userName: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '橋本 美奈')
         .toJson(),
@@ -230,8 +230,8 @@ final List<PublicUser> mockUsers = [
     createdAt: Timestamp.fromDate(DateTime(2023, 2, 23)),
     bio: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '')
         .toJson(),
@@ -260,8 +260,8 @@ final List<PublicUser> mockUsers = [
         .toJson(),
     userName: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '遠藤 俊夫"')
         .toJson(),
@@ -272,8 +272,8 @@ final List<PublicUser> mockUsers = [
     createdAt: Timestamp.fromDate(DateTime(2023, 1, 8)),
     bio: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '')
         .toJson(),
@@ -304,8 +304,8 @@ final List<PublicUser> mockUsers = [
         .toJson(),
     userName: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '井上 清')
         .toJson(),
@@ -316,8 +316,8 @@ final List<PublicUser> mockUsers = [
     createdAt: Timestamp.fromDate(DateTime(2023, 10, 14)),
     bio: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '')
         .toJson(),
@@ -348,8 +348,8 @@ final List<PublicUser> mockUsers = [
         .toJson(),
     userName: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '森田 敦')
         .toJson(),
@@ -360,8 +360,8 @@ final List<PublicUser> mockUsers = [
     createdAt: Timestamp.fromDate(DateTime(2023, 3, 13)),
     bio: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '')
         .toJson(),
@@ -392,8 +392,8 @@ final List<PublicUser> mockUsers = [
         .toJson(),
     userName: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '山田 剛史')
         .toJson(),
@@ -404,8 +404,8 @@ final List<PublicUser> mockUsers = [
     createdAt: Timestamp.fromDate(DateTime(2023, 4, 28)),
     bio: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '')
         .toJson(),
@@ -436,8 +436,8 @@ final List<PublicUser> mockUsers = [
         .toJson(),
     userName: const DetectedText(
             languageCode: '',
-            negativeScore: 0.0,
-            positiveScore: 0.0,
+            negativeScore: 0,
+            positiveScore: 0,
             sentiment: '',
             value: '中川 裕')
         .toJson(),
@@ -453,8 +453,8 @@ final List<Post> mockPosts = [
               .toJson(),
       description: const DetectedText(
               languageCode: '',
-              negativeScore: 0.0,
-              positiveScore: 0.0,
+              negativeScore: 0,
+              positiveScore: 0,
               sentiment: '',
               value: '')
           .toJson(),
@@ -477,12 +477,12 @@ final List<Post> mockPosts = [
       postId: "post-a",
       ref: mockUsers[0].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
-      score: 0.0,
+      score: 0,
       searchToken: returnSearchToken("猫GPT"),
       title: const DetectedText(
               languageCode: '',
-              negativeScore: 0.0,
-              positiveScore: 0.0,
+              negativeScore: 0,
+              positiveScore: 0,
               sentiment: '',
               value: '猫GPT')
           .toJson(),
@@ -496,8 +496,8 @@ final List<Post> mockPosts = [
               .toJson(),
       description: const DetectedText(
               languageCode: '',
-              negativeScore: 0.0,
-              positiveScore: 0.0,
+              negativeScore: 0,
+              positiveScore: 0,
               sentiment: '',
               value: '')
           .toJson(),
@@ -520,12 +520,12 @@ final List<Post> mockPosts = [
       postId: "post-b",
       ref: mockUsers[1].typedRef().collection("posts").doc("post-b"),
       reportCount: 0,
-      score: 0.0,
+      score: 0,
       searchToken: returnSearchToken("原稿作成くん"),
       title: const DetectedText(
               languageCode: '',
-              negativeScore: 0.0,
-              positiveScore: 0.0,
+              negativeScore: 0,
+              positiveScore: 0,
               sentiment: '',
               value: '原稿作成くん')
           .toJson(),
@@ -539,8 +539,8 @@ final List<Post> mockPosts = [
               .toJson(),
       description: const DetectedText(
               languageCode: '',
-              negativeScore: 0.0,
-              positiveScore: 0.0,
+              negativeScore: 0,
+              positiveScore: 0,
               sentiment: '',
               value: '')
           .toJson(),
@@ -563,12 +563,12 @@ final List<Post> mockPosts = [
       postId: "post-c",
       ref: mockUsers[2].typedRef().collection("posts").doc("post-c"),
       reportCount: 0,
-      score: 0.0,
+      score: 0,
       searchToken: returnSearchToken("アイデア出しまくりAI"),
       title: const DetectedText(
               languageCode: '',
-              negativeScore: 0.0,
-              positiveScore: 0.0,
+              negativeScore: 0,
+              positiveScore: 0,
               sentiment: '',
               value: 'アイデア出しまくりAI')
           .toJson(),
@@ -582,8 +582,8 @@ final List<Post> mockPosts = [
               .toJson(),
       description: const DetectedText(
               languageCode: '',
-              negativeScore: 0.0,
-              positiveScore: 0.0,
+              negativeScore: 0,
+              positiveScore: 0,
               sentiment: '',
               value: '')
           .toJson(),
@@ -606,12 +606,12 @@ final List<Post> mockPosts = [
       postId: "post-d",
       ref: mockUsers[3].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
-      score: 0.0,
+      score: 0,
       searchToken: returnSearchToken("エンジニアAIくん"),
       title: const DetectedText(
               languageCode: '',
-              negativeScore: 0.0,
-              positiveScore: 0.0,
+              negativeScore: 0,
+              positiveScore: 0,
               sentiment: '',
               value: 'エンジニアAIくん')
           .toJson(),
@@ -625,8 +625,8 @@ final List<Post> mockPosts = [
           .toJson(),
       description: const DetectedText(
               languageCode: '',
-              negativeScore: 0.0,
-              positiveScore: 0.0,
+              negativeScore: 0,
+              positiveScore: 0,
               sentiment: '',
               value: '')
           .toJson(),
@@ -649,12 +649,12 @@ final List<Post> mockPosts = [
       postId: "post-e",
       ref: mockUsers[4].typedRef().collection("posts").doc("post-a"),
       reportCount: 0,
-      score: 0.0,
+      score: 0,
       searchToken: returnSearchToken("なんでも相談AI"),
       title: const DetectedText(
               languageCode: '',
-              negativeScore: 0.0,
-              positiveScore: 0.0,
+              negativeScore: 0,
+              positiveScore: 0,
               sentiment: '',
               value: 'なんでも相談AI')
           .toJson(),

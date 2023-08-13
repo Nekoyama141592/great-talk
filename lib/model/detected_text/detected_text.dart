@@ -11,8 +11,8 @@ Firestoreで使用する際の名前は
 abstract class DetectedText with _$DetectedText {
   const factory DetectedText(
       {required String languageCode,
-      required double negativeScore,
-      required double positiveScore,
+      required int negativeScore,
+      required int positiveScore,
       required String sentiment,
       required String value}) = _DetectedText;
   factory DetectedText.fromJson(Map<String, dynamic> json) =>

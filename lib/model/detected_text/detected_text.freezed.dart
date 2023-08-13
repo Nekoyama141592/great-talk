@@ -21,8 +21,8 @@ DetectedText _$DetectedTextFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DetectedText {
   String get languageCode => throw _privateConstructorUsedError;
-  double get negativeScore => throw _privateConstructorUsedError;
-  double get positiveScore => throw _privateConstructorUsedError;
+  int get negativeScore => throw _privateConstructorUsedError;
+  int get positiveScore => throw _privateConstructorUsedError;
   String get sentiment => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
 
@@ -40,8 +40,8 @@ abstract class $DetectedTextCopyWith<$Res> {
   @useResult
   $Res call(
       {String languageCode,
-      double negativeScore,
-      double positiveScore,
+      int negativeScore,
+      int positiveScore,
       String sentiment,
       String value});
 }
@@ -73,11 +73,11 @@ class _$DetectedTextCopyWithImpl<$Res, $Val extends DetectedText>
       negativeScore: null == negativeScore
           ? _value.negativeScore
           : negativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
       positiveScore: null == positiveScore
           ? _value.positiveScore
           : positiveScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
       sentiment: null == sentiment
           ? _value.sentiment
           : sentiment // ignore: cast_nullable_to_non_nullable
@@ -100,8 +100,8 @@ abstract class _$$_DetectedTextCopyWith<$Res>
   @useResult
   $Res call(
       {String languageCode,
-      double negativeScore,
-      double positiveScore,
+      int negativeScore,
+      int positiveScore,
       String sentiment,
       String value});
 }
@@ -131,11 +131,11 @@ class __$$_DetectedTextCopyWithImpl<$Res>
       negativeScore: null == negativeScore
           ? _value.negativeScore
           : negativeScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
       positiveScore: null == positiveScore
           ? _value.positiveScore
           : positiveScore // ignore: cast_nullable_to_non_nullable
-              as double,
+              as int,
       sentiment: null == sentiment
           ? _value.sentiment
           : sentiment // ignore: cast_nullable_to_non_nullable
@@ -164,9 +164,9 @@ class _$_DetectedText implements _DetectedText {
   @override
   final String languageCode;
   @override
-  final double negativeScore;
+  final int negativeScore;
   @override
-  final double positiveScore;
+  final int positiveScore;
   @override
   final String sentiment;
   @override
@@ -215,8 +215,8 @@ class _$_DetectedText implements _DetectedText {
 abstract class _DetectedText implements DetectedText {
   const factory _DetectedText(
       {required final String languageCode,
-      required final double negativeScore,
-      required final double positiveScore,
+      required final int negativeScore,
+      required final int positiveScore,
       required final String sentiment,
       required final String value}) = _$_DetectedText;
 
@@ -226,9 +226,9 @@ abstract class _DetectedText implements DetectedText {
   @override
   String get languageCode;
   @override
-  double get negativeScore;
+  int get negativeScore;
   @override
-  double get positiveScore;
+  int get positiveScore;
   @override
   String get sentiment;
   @override

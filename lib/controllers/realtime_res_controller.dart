@@ -18,13 +18,13 @@ import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
-import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/text_message/text_message.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:great_talk/utility/file_utility.dart';
+import 'package:great_talk/utility/new_content.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -262,13 +262,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       messageRef: FirestoreQueries.postMessageDocRef(
           posterUid, interlocutor.value!.contentId, currentUid(), id),
       postRef: interlocutor.value!.typedRef(),
-      text: DetectedText(
-              languageCode: '',
-              negativeScore: 0.0,
-              positiveScore: 0.0,
-              sentiment: '',
-              value: content)
-          .toJson(),
+      text: NewContent.newDetectedText(content).toJson(),
       posterUid: posterUid,
       senderUid: senderUid,
     );
