@@ -11,6 +11,7 @@ abstract class FollowingToken implements _$FollowingToken {
   const factory FollowingToken({
     required dynamic createdAt,
     required String passiveUid,
+    required dynamic passiveUserRef,
     required String tokenId,
     required String tokenType,
   }) = _FollowingToken;

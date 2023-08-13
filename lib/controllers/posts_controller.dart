@@ -144,6 +144,7 @@ class PostsController extends GetxController with CurrentUserMixin {
         activeUid: currentUid(),
         createdAt: now,
         passiveUid: passiveUid,
+        passiveUserRef: passiveUser.ref,
         tokenId: tokenId,
         tokenType: TokenType.muteUser.name);
     CurrentUserController.to.addMuteUser(muteUserToken);

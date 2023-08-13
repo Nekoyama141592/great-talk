@@ -23,6 +23,7 @@ mixin _$MuteUserToken {
   String get activeUid => throw _privateConstructorUsedError;
   dynamic get createdAt => throw _privateConstructorUsedError;
   String get passiveUid => throw _privateConstructorUsedError;
+  dynamic get passiveUserRef => throw _privateConstructorUsedError;
   String get tokenId => throw _privateConstructorUsedError;
   String get tokenType => throw _privateConstructorUsedError;
 
@@ -42,6 +43,7 @@ abstract class $MuteUserTokenCopyWith<$Res> {
       {String activeUid,
       dynamic createdAt,
       String passiveUid,
+      dynamic passiveUserRef,
       String tokenId,
       String tokenType});
 }
@@ -62,6 +64,7 @@ class _$MuteUserTokenCopyWithImpl<$Res, $Val extends MuteUserToken>
     Object? activeUid = null,
     Object? createdAt = freezed,
     Object? passiveUid = null,
+    Object? passiveUserRef = freezed,
     Object? tokenId = null,
     Object? tokenType = null,
   }) {
@@ -78,6 +81,10 @@ class _$MuteUserTokenCopyWithImpl<$Res, $Val extends MuteUserToken>
           ? _value.passiveUid
           : passiveUid // ignore: cast_nullable_to_non_nullable
               as String,
+      passiveUserRef: freezed == passiveUserRef
+          ? _value.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       tokenId: null == tokenId
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -102,6 +109,7 @@ abstract class _$$_MuteUserTokenCopyWith<$Res>
       {String activeUid,
       dynamic createdAt,
       String passiveUid,
+      dynamic passiveUserRef,
       String tokenId,
       String tokenType});
 }
@@ -120,6 +128,7 @@ class __$$_MuteUserTokenCopyWithImpl<$Res>
     Object? activeUid = null,
     Object? createdAt = freezed,
     Object? passiveUid = null,
+    Object? passiveUserRef = freezed,
     Object? tokenId = null,
     Object? tokenType = null,
   }) {
@@ -136,6 +145,10 @@ class __$$_MuteUserTokenCopyWithImpl<$Res>
           ? _value.passiveUid
           : passiveUid // ignore: cast_nullable_to_non_nullable
               as String,
+      passiveUserRef: freezed == passiveUserRef
+          ? _value.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       tokenId: null == tokenId
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -155,6 +168,7 @@ class _$_MuteUserToken implements _MuteUserToken {
       {required this.activeUid,
       required this.createdAt,
       required this.passiveUid,
+      required this.passiveUserRef,
       required this.tokenId,
       required this.tokenType});
 
@@ -168,13 +182,15 @@ class _$_MuteUserToken implements _MuteUserToken {
   @override
   final String passiveUid;
   @override
+  final dynamic passiveUserRef;
+  @override
   final String tokenId;
   @override
   final String tokenType;
 
   @override
   String toString() {
-    return 'MuteUserToken(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, tokenId: $tokenId, tokenType: $tokenType)';
+    return 'MuteUserToken(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
   }
 
   @override
@@ -187,6 +203,8 @@ class _$_MuteUserToken implements _MuteUserToken {
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.passiveUid, passiveUid) ||
                 other.passiveUid == passiveUid) &&
+            const DeepCollectionEquality()
+                .equals(other.passiveUserRef, passiveUserRef) &&
             (identical(other.tokenId, tokenId) || other.tokenId == tokenId) &&
             (identical(other.tokenType, tokenType) ||
                 other.tokenType == tokenType));
@@ -199,6 +217,7 @@ class _$_MuteUserToken implements _MuteUserToken {
       activeUid,
       const DeepCollectionEquality().hash(createdAt),
       passiveUid,
+      const DeepCollectionEquality().hash(passiveUserRef),
       tokenId,
       tokenType);
 
@@ -221,6 +240,7 @@ abstract class _MuteUserToken implements MuteUserToken {
       {required final String activeUid,
       required final dynamic createdAt,
       required final String passiveUid,
+      required final dynamic passiveUserRef,
       required final String tokenId,
       required final String tokenType}) = _$_MuteUserToken;
 
@@ -233,6 +253,8 @@ abstract class _MuteUserToken implements MuteUserToken {
   dynamic get createdAt;
   @override
   String get passiveUid;
+  @override
+  dynamic get passiveUserRef;
   @override
   String get tokenId;
   @override

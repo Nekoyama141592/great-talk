@@ -22,6 +22,7 @@ FollowingToken _$FollowingTokenFromJson(Map<String, dynamic> json) {
 mixin _$FollowingToken {
   dynamic get createdAt => throw _privateConstructorUsedError;
   String get passiveUid => throw _privateConstructorUsedError;
+  dynamic get passiveUserRef => throw _privateConstructorUsedError;
   String get tokenId => throw _privateConstructorUsedError;
   String get tokenType => throw _privateConstructorUsedError;
 
@@ -38,7 +39,11 @@ abstract class $FollowingTokenCopyWith<$Res> {
       _$FollowingTokenCopyWithImpl<$Res, FollowingToken>;
   @useResult
   $Res call(
-      {dynamic createdAt, String passiveUid, String tokenId, String tokenType});
+      {dynamic createdAt,
+      String passiveUid,
+      dynamic passiveUserRef,
+      String tokenId,
+      String tokenType});
 }
 
 /// @nodoc
@@ -56,6 +61,7 @@ class _$FollowingTokenCopyWithImpl<$Res, $Val extends FollowingToken>
   $Res call({
     Object? createdAt = freezed,
     Object? passiveUid = null,
+    Object? passiveUserRef = freezed,
     Object? tokenId = null,
     Object? tokenType = null,
   }) {
@@ -68,6 +74,10 @@ class _$FollowingTokenCopyWithImpl<$Res, $Val extends FollowingToken>
           ? _value.passiveUid
           : passiveUid // ignore: cast_nullable_to_non_nullable
               as String,
+      passiveUserRef: freezed == passiveUserRef
+          ? _value.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       tokenId: null == tokenId
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -89,7 +99,11 @@ abstract class _$$_FollowingTokenCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {dynamic createdAt, String passiveUid, String tokenId, String tokenType});
+      {dynamic createdAt,
+      String passiveUid,
+      dynamic passiveUserRef,
+      String tokenId,
+      String tokenType});
 }
 
 /// @nodoc
@@ -105,6 +119,7 @@ class __$$_FollowingTokenCopyWithImpl<$Res>
   $Res call({
     Object? createdAt = freezed,
     Object? passiveUid = null,
+    Object? passiveUserRef = freezed,
     Object? tokenId = null,
     Object? tokenType = null,
   }) {
@@ -117,6 +132,10 @@ class __$$_FollowingTokenCopyWithImpl<$Res>
           ? _value.passiveUid
           : passiveUid // ignore: cast_nullable_to_non_nullable
               as String,
+      passiveUserRef: freezed == passiveUserRef
+          ? _value.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       tokenId: null == tokenId
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -135,6 +154,7 @@ class _$_FollowingToken extends _FollowingToken with DiagnosticableTreeMixin {
   const _$_FollowingToken(
       {required this.createdAt,
       required this.passiveUid,
+      required this.passiveUserRef,
       required this.tokenId,
       required this.tokenType})
       : super._();
@@ -147,13 +167,15 @@ class _$_FollowingToken extends _FollowingToken with DiagnosticableTreeMixin {
   @override
   final String passiveUid;
   @override
+  final dynamic passiveUserRef;
+  @override
   final String tokenId;
   @override
   final String tokenType;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FollowingToken(createdAt: $createdAt, passiveUid: $passiveUid, tokenId: $tokenId, tokenType: $tokenType)';
+    return 'FollowingToken(createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
   }
 
   @override
@@ -163,6 +185,7 @@ class _$_FollowingToken extends _FollowingToken with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'FollowingToken'))
       ..add(DiagnosticsProperty('createdAt', createdAt))
       ..add(DiagnosticsProperty('passiveUid', passiveUid))
+      ..add(DiagnosticsProperty('passiveUserRef', passiveUserRef))
       ..add(DiagnosticsProperty('tokenId', tokenId))
       ..add(DiagnosticsProperty('tokenType', tokenType));
   }
@@ -175,6 +198,8 @@ class _$_FollowingToken extends _FollowingToken with DiagnosticableTreeMixin {
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.passiveUid, passiveUid) ||
                 other.passiveUid == passiveUid) &&
+            const DeepCollectionEquality()
+                .equals(other.passiveUserRef, passiveUserRef) &&
             (identical(other.tokenId, tokenId) || other.tokenId == tokenId) &&
             (identical(other.tokenType, tokenType) ||
                 other.tokenType == tokenType));
@@ -186,6 +211,7 @@ class _$_FollowingToken extends _FollowingToken with DiagnosticableTreeMixin {
       runtimeType,
       const DeepCollectionEquality().hash(createdAt),
       passiveUid,
+      const DeepCollectionEquality().hash(passiveUserRef),
       tokenId,
       tokenType);
 
@@ -207,6 +233,7 @@ abstract class _FollowingToken extends FollowingToken {
   const factory _FollowingToken(
       {required final dynamic createdAt,
       required final String passiveUid,
+      required final dynamic passiveUserRef,
       required final String tokenId,
       required final String tokenType}) = _$_FollowingToken;
   const _FollowingToken._() : super._();
@@ -218,6 +245,8 @@ abstract class _FollowingToken extends FollowingToken {
   dynamic get createdAt;
   @override
   String get passiveUid;
+  @override
+  dynamic get passiveUserRef;
   @override
   String get tokenId;
   @override

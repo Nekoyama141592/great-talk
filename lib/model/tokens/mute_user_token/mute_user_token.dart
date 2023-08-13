@@ -5,11 +5,11 @@ part 'mute_user_token.g.dart';
 
 @freezed
 abstract class MuteUserToken implements _$MuteUserToken {
-  // 自分が投稿にいいねしたことの印
   const factory MuteUserToken({
     required String activeUid,
     required dynamic createdAt,
     required String passiveUid,
+    required dynamic passiveUserRef,
     required String tokenId,
     required String tokenType,
   }) = _MuteUserToken;

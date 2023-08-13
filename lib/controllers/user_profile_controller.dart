@@ -32,6 +32,7 @@ class UserProfileController extends ProfileController {
         createdAt: now,
         passiveUid: passiveUid(),
         tokenId: tokenId,
+        passiveUserRef: passiveUser.value!.ref,
         tokenType: TokenType.following.name);
     CurrentUserController.to.addFollowing(followingToken);
     await repository.createToken(
