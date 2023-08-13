@@ -86,7 +86,7 @@ service cloud.firestore {
 
   function isValidPost(post) {
     return post.size() == 22 &&
-      "bookmarkCount" in post && post.bookmarkCount is number &&
+      "bookmarkCount" in post && post.bookmarkCount == 0 &&
       "createdAt" in post && post.createdAt is timestamp &&
       "customCompleteText" in post && isValidCustomCompleteText(post.customCompleteText) &&
       "description" in post && isValidDetectedText(post.description) &&
@@ -94,20 +94,20 @@ service cloud.firestore {
       "genre" in post && post.genre is string &&
       "hashTags" in post && post.hashTags is list &&
       "image" in post && isValidDetectedImage(post.image) &&
-      "impressionCount" in post && post.impressionCount is number &&
-      "likeCount" in post && post.likeCount is number &&
+      "impressionCount" in post && post.impressionCount == 0 &&
+      "likeCount" in post && post.likeCount == 0 &&
       "links" in post && post.links is list &&
-      "msgCount" in post && post.msgCount is number &&
-      "muteCount" in post && post.muteCount is number &&
+      "msgCount" in post && post.msgCount == 0 &&
+      "muteCount" in post && post.muteCount == 0 &&
       "poster" in post && isValidPublicUser(post.poster) &&
       "postId" in post && post.postId is string &&
       "ref" in post && post.ref is path &&
-      "reportCount" in post && post.reportCount is number &&
-      "score" in post && post.score is number &&
+      "reportCount" in post && post.reportCount == 0 &&
+      "score" in post && post.score == 0 &&
       "searchToken" in post && post.searchToken is map &&
       "title" in post && isValidDetectedText(post.title) &&
       "updatedAt" in post && post.updatedAt is timestamp &&
-      "userCount" in post && post.userCount is number;
+      "userCount" in post && post.userCount == 0;
   }
 
   function isValidMessage(message) {
