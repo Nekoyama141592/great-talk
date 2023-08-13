@@ -5,6 +5,9 @@ service cloud.firestore {
     match /{path=**}/posts/{postId} {
       allow read: if isAuthenticated();
     }
+    match /{path=**}/messages/{postId} {
+      allow read: if isAdmin();
+    }
     match /public/{version}/users/{uid} {
       allow read: if isAuthenticated();
       allow create: if isTheSameUserAndVerified(uid) && isValidPublicUser(request.resource.data);
@@ -218,5 +221,8 @@ service cloud.firestore {
   }
   function isTheSameUserAndVerified(uid) {
     return isTheSameUser(uid) && isEmailVerifed();
+  }
+  function isAdmin() {
+    return request.auth.uid == "PNVConr4DffKMPD3vJOYhj0M1OB2";
   }
 }
