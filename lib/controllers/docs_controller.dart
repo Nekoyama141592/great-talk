@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:get/get.dart';
+import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/image_doc_wraper/image_q_doc_wraper.dart';
@@ -9,18 +10,14 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-abstract class DocsController extends GetxController with CurrentUserMixin {
+abstract class DocsController extends LoadingController with CurrentUserMixin {
   DocsController(
       {required this.enablePullDown, required this.requiresValueReset});
   final FirestoreRepository repository = FirestoreRepository();
   final bool enablePullDown;
   final bool requiresValueReset;
   final docs = <ImageQDocWraper>[].obs;
-  final isLoading = false.obs;
   final isInit = false.obs;
-  bool cannotShow() => isLoading.value;
-  void _startLoading() => isLoading(true);
-  void _endLoading() => isLoading(false);
 
   void setAllDocs(List<QDoc> elements) {
     docs([]); // 配列を初期化
@@ -70,9 +67,9 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   Future<void> fetchDocs();
   Future<void> onRefresh(RefreshController refreshController);
   Future<void> onReload() async {
-    _startLoading();
+    startLoading();
     await fetchDocs();
-    _endLoading();
+    endLoading();
   }
 
   Future<void> onLoading(RefreshController refreshController);

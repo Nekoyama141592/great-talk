@@ -10,6 +10,26 @@ import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class MockFirestoreClient implements FirestoreClient {
+  // count
+  @override
+  Future<int> countMessages() async {
+    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
+    return 100;
+  }
+
+  @override
+  Future<int> countPosts() async {
+    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
+    return mockPosts.length;
+  }
+
+  @override
+  Future<int> countUsers() async {
+    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
+    return mockUsers.length;
+  }
+
+  // write
   @override
   Future<void> createMessage(DocRef messageRef, SDMap json) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
@@ -117,6 +137,7 @@ class MockFirestoreClient implements FirestoreClient {
     return;
   }
 
+  // read
   @override
   FutureDoc getPost(String uid, String postId) async {
     final data = mockPosts.firstWhere((element) =>

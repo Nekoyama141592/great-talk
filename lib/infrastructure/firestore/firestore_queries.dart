@@ -7,7 +7,13 @@ class FirestoreQueries {
   static final _instance = FirebaseFirestore.instance;
   static final DocRef _publicV1 = _instance.collection('public').doc('v1');
   static final DocRef _privateV1 = _instance.collection('private').doc('v1');
-
+  // collectionGroup
+  static final usersCollectionGroup = _instance.collectionGroup('users');
+  static final postsCollectionGroup = _instance.collectionGroup('posts');
+  static final _postsLimitedCollectionGroupQuery =
+      postsCollectionGroup.limit(oneTimeReadCount);
+  static final messagesCollectionGroup = _instance.collectionGroup('messages');
+  // collection
   static MapQuery newQuery(MapQuery query, Doc firstDoc) =>
       query.endAtDocument(firstDoc);
   static MapQuery moreQuery(MapQuery query, Doc lastDoc) =>
@@ -21,11 +27,8 @@ class FirestoreQueries {
   static DocRef postDocRef(String uid, String postId) =>
       _userPostsColRef(uid).doc(postId);
 
-  static final postsQuery =
-      _instance.collectionGroup('posts').limit(oneTimeReadCount);
-
   static MapQuery postsQueryByWhereIn(List<String> postIds) =>
-      postsQuery.where('postId', whereIn: postIds);
+      _postsLimitedCollectionGroupQuery.where('postId', whereIn: postIds);
 
   static DocRef postReportDocRefFromPostRef(
           DocRef postRef, String currentUid) =>
@@ -47,7 +50,7 @@ class FirestoreQueries {
       newQuery(userPostsQueryByNewest(uid), firstDoc);
 
   static final postsQueryByLikeCount =
-      postsQuery.orderBy('likeCount', descending: true);
+      _postsLimitedCollectionGroupQuery.orderBy('likeCount', descending: true);
   static MapQuery morePostsQueryByLikeCount(Doc lastDoc) =>
       moreQuery(postsQueryByLikeCount, lastDoc);
 
@@ -74,7 +77,8 @@ class FirestoreQueries {
     if (timelinePostIds.isEmpty) {
       timelinePostIds.add('');
     }
-    return postsQuery.where('postId', whereIn: timelinePostIds);
+    return _postsLimitedCollectionGroupQuery.where('postId',
+        whereIn: timelinePostIds);
   }
 
   static MapQuery newTimelinePostsQuery(

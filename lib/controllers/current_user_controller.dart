@@ -155,6 +155,8 @@ class CurrentUserController extends GetxController {
 
   String currentUid() => currentUser.value!.uid;
 
+  bool isAdmin() => privateUser.value?.isAdmin ?? false;
+
   bool isAnonymous() => currentUser.value!.isAnonymous;
 
   bool isNotLoggedIn() => currentUser.value == null || isAnonymous();

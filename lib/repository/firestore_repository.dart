@@ -8,7 +8,35 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreRepository {
   final client = isUseMockData ? MockFirestoreClient() : FirestoreClient();
+  // count
+  FutureResult<int> countUsers() async {
+    try {
+      final count = await client.countUsers();
+      return Result.success(count);
+    } catch (e) {
+      return const Result.failure();
+    }
+  }
 
+  FutureResult<int> countPosts() async {
+    try {
+      final count = await client.countPosts();
+      return Result.success(count);
+    } catch (e) {
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<int> countMessages() async {
+    try {
+      final count = await client.countMessages();
+      return Result.success(count);
+    } catch (e) {
+      return const Result.failure();
+    }
+  }
+
+  // write
   FutureResult<bool> createMessage(DocRef messageRef, SDMap json) async {
     try {
       await client.createMessage(messageRef, json);
@@ -185,6 +213,7 @@ class FirestoreRepository {
     }
   }
 
+  // read
   FutureResult<Doc> getPost(String uid, String postId) async {
     try {
       final res = await client.getPost(uid, postId);

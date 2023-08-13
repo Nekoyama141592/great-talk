@@ -2,6 +2,24 @@ import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreClient {
+  // count
+  Future<int> countUsers() async {
+    final snapshot = await FirestoreQueries.usersCollectionGroup.count().get();
+    return snapshot.count;
+  }
+
+  Future<int> countPosts() async {
+    final snapshot = await FirestoreQueries.postsCollectionGroup.count().get();
+    return snapshot.count;
+  }
+
+  Future<int> countMessages() async {
+    final snapshot =
+        await FirestoreQueries.messagesCollectionGroup.count().get();
+    return snapshot.count;
+  }
+
+  // write
   Future<void> createMessage(DocRef messageRef, SDMap json) async =>
       await messageRef.set(json);
 
@@ -53,7 +71,7 @@ class FirestoreClient {
       await FirestoreQueries.tokenQuery(currentUid, tokenId).delete();
   Future<void> deleteUser(String uid) async =>
       await FirestoreQueries.userDocRef(uid).delete();
-
+  // read
   FutureQSnapshot getUsersByWhereIn(List<String> uids) async =>
       await FirestoreQueries.usersQueryByWhereIn(uids).get();
 
