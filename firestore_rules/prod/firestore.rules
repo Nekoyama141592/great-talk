@@ -2,36 +2,47 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
         // collectionGroupのルール
+    match /{path=**}/users/{postId} {
+      allow read: if isAdmin();
+    }
     match /{path=**}/posts/{postId} {
       allow read: if isAuthenticated();
     }
+    match /{path=**}/messages/{postId} {
+      allow read: if isAdmin();
+    }
     match /public/{version}/users/{uid} {
       allow read: if isAuthenticated();
-      allow create, delete: if isTheSameUserAndVerified(uid);
+      allow create: if isTheSameUserAndVerified(uid) && isValidPublicUser(request.resource.data);
+      allow delete: if isTheSameUserAndVerified(uid);
       match /posts/{postId} {
         allow read: if isAuthenticated();
-        allow create: if isTheSameUserAndVerified(uid);
+        allow create: if isTheSameUserAndVerified(uid) && isValidPost(request.resource.data);
         match /senders/{senderUid}/messages/{id} {
-          allow create: if isTheSameUser(senderUid); //認証されている必要はない.
+          allow create: if isTheSameUser(senderUid) && isValidMessage(request.resource.data);
         }
         match /postLikes/{activeUid} {
-          allow create, delete: if isTheSameUserAndVerified(activeUid);
+          allow create: if isTheSameUserAndVerified(activeUid) && isValidPostLike(request.resource.data);
+          allow delete: if isTheSameUserAndVerified(activeUid);
         }
         match /postReports/{activeUid} {
-          allow create: if isTheSameUserAndVerified(activeUid);
+          allow create: if isTheSameUserAndVerified(activeUid) && isValidPostReport(request.resource.data);
         }
         match /postMutes/{activeUid} {
-          allow create, delete: if isTheSameUserAndVerified(activeUid);
+          allow create: if isTheSameUserAndVerified(activeUid) && isValidPostMute(request.resource.data);
+          allow delete: if isTheSameUserAndVerified(activeUid);
         }
       }
       match /followers/{activeUid} {
-        allow create, delete: if isTheSameUserAndVerified(activeUid);
+        allow create: if isTheSameUserAndVerified(activeUid) && isValidFollower(request.resource.data);
+        allow delete: if isTheSameUserAndVerified(activeUid);
       }
       match /userMutes/{activeUid} {
-        allow create, delete: if isTheSameUserAndVerified(activeUid);
+        allow create: if isTheSameUserAndVerified(activeUid) && isValidUserMute(request.resource.data);
+        allow delete: if isTheSameUserAndVerified(activeUid);
       }
       match /userUpdateLogs/{id} {
-        allow create: if isTheSameUserAndVerified(uid);
+        allow create: if isTheSameUserAndVerified(uid) && isValidUserUpdateLog(request.resource.data);
       }
       match /timelines/{postId} {
         allow read: if isAuthenticated();
@@ -39,12 +50,171 @@ service cloud.firestore {
     }
     // Private data
     match /private/{version}/privateUsers/{uid} {
-      allow read, create: if isTheSameUserAndVerified(uid);
+      allow read: if isTheSameUserAndVerified(uid);
+      allow create: if isTheSameUserAndVerified(uid) && isValidPrivateUser(request.resource.data);
       match /tokens/{tokenId} {
-        allow read, create, delete: if isTheSameUserAndVerified(uid);
+        allow read, delete: if isTheSameUserAndVerified(uid);
+        allow create: if isTheSameUserAndVerified(uid) && isValidToken(request.resource.data);
       }
     }
   }
+  function isValidPublicUser(user) {
+    return user.size() == 22 &&
+      "accountName" in user && user.accountName is string &&
+      "bio" in user && isValidDetectedText(user.bio) &&
+      "blockCount" in user && user.blockCount == 0 &&
+      "createdAt" in user && user.createdAt is timestamp &&
+      "ethAddress" in user && user.ethAddress is string &&
+      "followerCount" in user && user.followerCount == 0 &&
+      "followingCount" in user && user.followingCount == 0 &&
+      "isNFTicon" in user && user.isNFTicon is bool &&
+      "isOfficial" in user && user.isOfficial is bool &&
+      "isSuspended" in user && user.isSuspended is bool &&
+      "links" in user && user.links is list &&
+      "muteCount" in user && user.muteCount == 0 &&
+      "postCount" in user && user.postCount == 0 &&
+      "ref" in user && user.ref is path &&
+      "reportCount" in user && user.reportCount == 0 &&
+      "score" in user && user.score == 0 &&
+      "searchToken" in user && user.searchToken is map &&
+      "uid" in user && user.uid is string &&
+      "updatedAt" in user && user.updatedAt is timestamp &&
+      "image" in user && isValidDetectedImage(user.image) &&
+      "userName" in user && isValidDetectedText(user.userName) &&
+      "walletAddresses" in user && user.walletAddresses is list;
+  }
+
+  function isValidPost(post) {
+    return post.size() == 22 &&
+      "bookmarkCount" in post && post.bookmarkCount == 0 &&
+      "createdAt" in post && post.createdAt is timestamp &&
+      "customCompleteText" in post && isValidCustomCompleteText(post.customCompleteText) &&
+      "description" in post && isValidDetectedText(post.description) &&
+      "exampleTexts" in post && post.exampleTexts is list &&
+      "genre" in post && post.genre is string &&
+      "hashTags" in post && post.hashTags is list &&
+      "image" in post && isValidDetectedImage(post.image) &&
+      "impressionCount" in post && post.impressionCount == 0 &&
+      "likeCount" in post && post.likeCount == 0 &&
+      "links" in post && post.links is list &&
+      "msgCount" in post && post.msgCount == 0 &&
+      "muteCount" in post && post.muteCount == 0 &&
+      "poster" in post && isValidPublicUser(post.poster) &&
+      "postId" in post && post.postId is string &&
+      "ref" in post && post.ref is path &&
+      "reportCount" in post && post.reportCount == 0 &&
+      "score" in post && post.score == 0 &&
+      "searchToken" in post && post.searchToken is map &&
+      "title" in post && isValidDetectedText(post.title) &&
+      "updatedAt" in post && post.updatedAt is timestamp &&
+      "userCount" in post && post.userCount == 0;
+  }
+
+  function isValidMessage(message) {
+    return message.size() == 8 &&
+      "createdAt" in message && message.createdAt is timestamp &&
+      "id" in message && message.id is string &&
+      "messageType" in message && message.messageType is string &&
+      "messageRef" in message && message.messageRef is path &&
+      "postRef" in message && message.postRef is path &&
+      "posterUid" in message && message.posterUid is string &&
+      "senderUid" in message && message.senderUid is string &&
+      "text" in message && isValidDetectedText(message.text);
+  }
+
+  function isValidPostLike(postLike) {
+    return postLike.size() == 5 &&
+      "activeUid" in postLike && postLike.activeUid is string &&
+      "createdAt" in postLike && postLike.createdAt is timestamp &&
+      "passiveUid" in postLike && postLike.passiveUid is string &&
+      "postRef" in postLike && postLike.postRef is path &&
+      "postId" in postLike && postLike.postId is string;
+  }
+
+  function isValidPostReport(postReport) {
+    return postReport.size() == 6 &&
+      "activeUid" in postReport && postReport.activeUid is string &&
+      "activeUserRef" in postReport && postReport.activeUserRef is path &&
+      "createdAt" in postReport && postReport.createdAt is timestamp &&
+      "others" in postReport && postReport.others is string &&
+      "postRef" in postReport && postReport.postRef is path &&
+      "reportContents" in postReport && postReport.reportContents is list;
+  }
+
+  function isValidPostMute(postMute) {
+    return postMute.size() == 4 &&
+      "activeUid" in postMute && postMute.activeUid is string &&
+      "createdAt" in postMute && postMute.createdAt is timestamp &&
+      "postId" in postMute && postMute.postId is string &&
+      "postRef" in postMute && postMute.postRef is path;
+  }
+
+  function isValidFollower(follower) {
+    return follower.size() == 3
+      && "activeUserRef" in follower && follower.activeUserRef is path &&
+      "createdAt" in follower && follower.createdAt is timestamp &&
+      "passiveUserRef" in follower && follower.passiveUserRef is path;
+  }
+
+  function isValidUserMute(userMute) {
+    return userMute.size() == 5
+      && "activeUid" in userMute && userMute.activeUid is string &&
+      "activeUserRef" in userMute && userMute.activeUserRef is path &&
+      "createdAt" in userMute && userMute.createdAt is timestamp &&
+      "passiveUid" in userMute && userMute.passiveUid is string &&
+      "passiveUserRef" in userMute && userMute.passiveUserRef is path;
+  }
+
+  function isValidUserUpdateLog(userUpdateLog) {
+    return userUpdateLog.size() == 7
+      && "logCreatedAt" in userUpdateLog && userUpdateLog.logCreatedAt is timestamp &&
+      "searchToken" in userUpdateLog && userUpdateLog.searchToken is map &&
+      "stringBio" in userUpdateLog && userUpdateLog.stringBio is string &&
+      "stringUserName" in userUpdateLog && userUpdateLog.stringUserName is string &&
+      "uid" in userUpdateLog && userUpdateLog.uid is string &&
+      "imageFileName" in userUpdateLog && userUpdateLog.imageFileName is string &&
+      "userRef" in userUpdateLog && userUpdateLog.userRef is path;
+  }
+
+  function isValidPrivateUser(user) {
+    return user.size() == 9
+      && "createdAt" in user && user.createdAt is timestamp &&
+      "ethAddress" in user && user.ethAddress is string &&
+      "gender" in user && user.gender is string &&
+      "ipAddress" in user && user.ipAddress is string &&
+      "isAdmin" in user && user.isAdmin is bool &&
+      "purchasedPoints" in user && user.purchasedPoints == 0 &&
+      "ref" in user && user.ref is path &&
+      "uid" in user && user.uid is string &&
+      "updatedAt" in user && user.updatedAt is timestamp;
+  }
+
+  function isValidToken(token) {
+    return "createdAt" in token && token.createdAt is timestamp &&
+      "tokenId" in token && token.tokenId is string &&
+      "tokenType" in token && token.tokenType is string;
+  }
+  
+  function isValidDetectedText(detectedText) {
+    return detectedText.size() == 5
+    && "languageCode" in detectedText && detectedText.languageCode is string
+    && "negativeScore" in detectedText && detectedText.negativeScore is number // == 0にするとエラー
+    && "positiveScore" in detectedText && detectedText.positiveScore is number // == 0にするとエラー
+    && "sentiment" in detectedText && detectedText.sentiment is string
+    && "value" in detectedText && detectedText.value is string;
+  }
+  
+  function isValidDetectedImage(detectedImage) {
+    return detectedImage.size() == 4
+    && "bucketName" in detectedImage && detectedImage.bucketName is string
+    && "moderationLabels" in detectedImage && detectedImage.moderationLabels is list
+    && "moderationModelVersion" in detectedImage && detectedImage.moderationModelVersion is string
+    && "value" in detectedImage && detectedImage.value is string;
+  }
+  function isValidCustomCompleteText(customCompleteText) {
+    return "systemPrompt" in customCompleteText && customCompleteText.systemPrompt is string;
+  }
+
   function isAuthenticated() {
   	return request.auth != null;
   }
@@ -56,5 +226,8 @@ service cloud.firestore {
   }
   function isTheSameUserAndVerified(uid) {
     return isTheSameUser(uid) && isEmailVerifed();
+  }
+  function isAdmin() {
+    return request.auth.uid == ""; // TODO: 記述
   }
 }
