@@ -207,11 +207,14 @@ class PostsController extends GetxController with CurrentUserMixin {
     });
   }
 
-  void onLikeButtonPressed(ValueNotifier<bool> isLiked, Post post) async {
+  void onLikeButtonPressed(ValueNotifier<Post> copyPost,
+      ValueNotifier<bool> isLiked, Post post) async {
     if (CurrentUserController.to.isNotVerified()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
+    copyPost.value =
+        copyPost.value.copyWith(likeCount: copyPost.value.likeCount + 1);
     isLiked.value = true;
     await _likePost(post);
   }
@@ -242,11 +245,14 @@ class PostsController extends GetxController with CurrentUserMixin {
     await repository.createPostLike(postRef, currentUid(), postLike.toJson());
   }
 
-  void onUnLikeButtonPressed(ValueNotifier<bool> isLiked, Post post) async {
+  void onUnLikeButtonPressed(ValueNotifier<Post> copyPost,
+      ValueNotifier<bool> isLiked, Post post) async {
     if (CurrentUserController.to.isNotVerified()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
+    copyPost.value =
+        copyPost.value.copyWith(likeCount: copyPost.value.likeCount - 1);
     isLiked.value = false;
     await _unLikePost(post);
   }

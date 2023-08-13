@@ -236,7 +236,9 @@ class CurrentUserController extends GetxController {
     result.when(success: (res) async {
       if (res.exists && publicUser.value == null) {
         // アカウントが存在するなら代入する
-        publicUser(PublicUser.fromJson(res.data()!));
+        final newUser = PublicUser.fromJson(res.data()!);
+        publicUser(newUser);
+        MyProfileController.to.passiveUser(newUser);
       } else {
         // アカウントが存在しないなら作成する
         await _createPublicUserWithUser();
