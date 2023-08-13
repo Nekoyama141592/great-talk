@@ -54,248 +54,141 @@ service cloud.firestore {
   }
   function isValidPublicUser(user) {
     return user.size() == 22 &&
-      user.keys().hasAll([
-        'accountName',
-        'bio',
-        'blockCount',
-        'createdAt',
-        'ethAddress',
-        'followerCount',
-        'followingCount',
-        'isNFTicon',
-        'isOfficial',
-        'isSuspended',
-        'links',
-        'muteCount',
-        'postCount',
-        'ref',
-        'reportCount',
-        'score',
-        'searchToken',
-        'uid',
-        'updatedAt',
-        'image',
-        'userName',
-        'walletAddresses'
-      ]) &&
-      user.accountName is string &&
-      user.bio is map &&
-      user.blockCount is number &&
-      user.createdAt is timestamp &&
-      user.ethAddress is string &&
-      user.followerCount is number &&
-      user.followingCount is number &&
-      user.isNFTicon is bool &&
-      user.isOfficial is bool &&
-      user.isSuspended is bool &&
-      user.links is list &&
-      user.muteCount is number &&
-      user.postCount is number &&
-      user.ref is path &&
-      user.reportCount is number &&
-      user.score is number &&
-      user.searchToken is map &&
-      user.uid is string &&
-      user.updatedAt is dynamic &&
-      user.image is map &&
-      user.userName is map &&
-      user.walletAddresses is list;
+      "accountName" in user && user.accountName is string &&
+      "bio" in user && user.bio is map &&
+      "blockCount" in user && user.blockCount is number &&
+      "createdAt" in user && user.createdAt is timestamp &&
+      "ethAddress" in user && user.ethAddress is string &&
+      "followerCount" in user && user.followerCount is number &&
+      "followingCount" in user && user.followingCount is number &&
+      "isNFTicon" in user && user.isNFTicon is bool &&
+      "isOfficial" in user && user.isOfficial is bool &&
+      "isSuspended" in user && user.isSuspended is bool &&
+      "links" in user && user.links is list &&
+      "muteCount" in user && user.muteCount is number &&
+      "postCount" in user && user.postCount is number &&
+      "ref" in user && user.ref is path &&
+      "reportCount" in user && user.reportCount is number &&
+      "score" in user && user.score is number &&
+      "searchToken" in user && user.searchToken is map &&
+      "uid" in user && user.uid is string &&
+      "updatedAt" in user && user.updatedAt is timestamp &&
+      "image" in user && user.image is map &&
+      "userName" in user && user.userName is map &&
+      "walletAddresses" in user && user.walletAddresses is list;
   }
+
   function isValidPost(post) {
-    return post.size() == 22
-      && post.keys().hasAll([
-        'bookmarkCount',
-        'createdAt',
-        'customCompleteText',
-        'description',
-        'exampleTexts',
-        'genre',
-        'hashTags',
-        'image',
-        'impressionCount',
-        'likeCount',
-        'links',
-        'msgCount',
-        'muteCount',
-        'poster',
-        'postId',
-        'ref',
-        'reportCount',
-        'score',
-        'searchToken',
-        'title',
-        'updatedAt',
-        'userCount'
-      ])
-      && post.bookmarkCount is number
-      && post.createdAt is timestamp
-      && post.customCompleteText is map
-      && post.description is map
-      && post.exampleTexts is list
-      && post.genre is string
-      && post.hashTags is list
-      && post.image is map
-      && post.impressionCount is number
-      && post.likeCount is number
-      && post.links is list
-      && post.msgCount is number
-      && post.muteCount is number
-      && post.poster is map
-      && post.postId is string
-      && post.ref is path
-      && post.reportCount is number
-      && post.score is number
-      && post.searchToken is map
-      && post.title is map
-      && post.updatedAt is timestamp
-      && post.userCount is number;
+    return post.size() == 22 &&
+      "bookmarkCount" in post && post.bookmarkCount is number &&
+      "createdAt" in post && post.createdAt is timestamp &&
+      "customCompleteText" in post && post.customCompleteText is map &&
+      "description" in post && post.description is map &&
+      "exampleTexts" in post && post.exampleTexts is list &&
+      "genre" in post && post.genre is string &&
+      "hashTags" in post && post.hashTags is list &&
+      "image" in post && post.image is map &&
+      "impressionCount" in post && post.impressionCount is number &&
+      "likeCount" in post && post.likeCount is number &&
+      "links" in post && post.links is list &&
+      "msgCount" in post && post.msgCount is number &&
+      "muteCount" in post && post.muteCount is number &&
+      "poster" in post && post.poster is map &&
+      "postId" in post && post.postId is string &&
+      "ref" in post && post.ref is path &&
+      "reportCount" in post && post.reportCount is number &&
+      "score" in post && post.score is number &&
+      "searchToken" in post && post.searchToken is map &&
+      "title" in post && post.title is map &&
+      "updatedAt" in post && post.updatedAt is timestamp &&
+      "userCount" in post && post.userCount is number;
   }
+
   function isValidMessage(message) {
-    return message.size() == 9
-      && message.keys().hasAll([
-        'createdAt',
-        'id',
-        'messageType',
-        'messageRef',
-        'postRef',
-        'posterUid',
-        'senderUid',
-        'updatedAt',
-        'text'
-      ])
-      && message.createdAt is timestamp
-      && message.id is string
-      && message.messageType is string
-      && message.messageRef is path
-      && message.postRef is path
-      && message.posterUid is string
-      && message.senderUid is string
-      && message.updatedAt is timestamp
-      && message.text is map;
+    return message.size() == 9 &&
+      "createdAt" in message && message.createdAt is timestamp &&
+      "id" in message && message.id is string &&
+      "messageType" in message && message.messageType is string &&
+      "messageRef" in message && message.messageRef is path &&
+      "postRef" in message && message.postRef is path &&
+      "posterUid" in message && message.posterUid is string &&
+      "senderUid" in message && message.senderUid is string &&
+      "text" in message && message.text is map &&
+      "likes" in message && message.likes is number;
   }
+
   function isValidPostLike(postLike) {
-    return postLike.size() == 5
-      && postLike.keys().hasAll([
-        'activeUid',
-        'createdAt',
-        'passiveUid',
-        'postRef',
-        'postId'
-      ])
-      && postLike.activeUid is string
-      && postLike.createdAt is timestamp
-      && postLike.passiveUid is string
-      && postLike.postRef is path
-      && postLike.postId is string;
+    return postLike.size() == 5 &&
+      "activeUid" in postLike && postLike.activeUid is string &&
+      "createdAt" in postLike && postLike.createdAt is timestamp &&
+      "passiveUid" in postLike && postLike.passiveUid is string &&
+      "postRef" in postLike && postLike.postRef is path &&
+      "postId" in postLike && postLike.postId is string;
   }
+
   function isValidPostReport(postReport) {
-    return postReport.size() == 6
-      && postReport.keys().hasAll([
-        'activeUid',
-        'activeUserRef',
-        'createdAt',
-        'others',
-        'postRef',
-        'reportContents'
-      ])
-      && postReport.activeUid is string
-      && postReport.activeUserRef is path
-      && postReport.createdAt is timestamp
-      && postReport.others is string
-      && postReport.postRef is path
-      && postReport.reportContents is list;
+    return postReport.size() == 6 &&
+      "activeUid" in postReport && postReport.activeUid is string &&
+      "activeUserRef" in postReport && postReport.activeUserRef is path &&
+      "createdAt" in postReport && postReport.createdAt is timestamp &&
+      "others" in postReport && postReport.others is string &&
+      "postRef" in postReport && postReport.postRef is path &&
+      "reportContents" in postReport && postReport.reportContents is list;
   }
+
   function isValidPostMute(postMute) {
-    return postMute.size() == 4
-      && postMute.keys().hasAll([
-        'activeUid',
-        'createdAt',
-        'postId',
-        'postRef'
-      ])
-      && postMute.activeUid is string
-      && postMute.createdAt is timestamp
-      && postMute.postId is string
-      && postMute.postRef is path;
+    return postMute.size() == 4 &&
+      "activeUid" in postMute && postMute.activeUid is string &&
+      "createdAt" in postMute && postMute.createdAt is timestamp &&
+      "postId" in postMute && postMute.postId is string &&
+      "postRef" in postMute && postMute.postRef is path;
   }
+
   function isValidFollower(follower) {
     return follower.size() == 3
-      && follower.keys().hasAll([
-        'activeUserRef',
-        'createdAt',
-        'passiveUserRef'
-      ])
-      && follower.activeUserRef is path
-      && follower.createdAt is timestamp
-      && follower.passiveUserRef is path;
+      && "activeUserRef" in follower && follower.activeUserRef is path &&
+      "createdAt" in follower && follower.createdAt is timestamp &&
+      "passiveUserRef" in follower && follower.passiveUserRef is path;
   }
+
   function isValidUserMute(userMute) {
     return userMute.size() == 5
-      && userMute.keys().hasAll([
-        'activeUid',
-        'activeUserRef',
-        'createdAt',
-        'passiveUid',
-        'passiveUserRef'
-      ])
-      && userMute.activeUid is string
-      && userMute.activeUserRef is path
-      && userMute.createdAt is timestamp
-      && userMute.passiveUid is string
-      && userMute.passiveUserRef is path;
+      && "activeUid" in userMute && userMute.activeUid is string &&
+      "activeUserRef" in userMute && userMute.activeUserRef is path &&
+      "createdAt" in userMute && userMute.createdAt is timestamp &&
+      "passiveUid" in userMute && userMute.passiveUid is string &&
+      "passiveUserRef" in userMute && userMute.passiveUserRef is path;
   }
+
   function isValidUserUpdateLog(userUpdateLog) {
     return userUpdateLog.size() == 7
-      && userUpdateLog.keys().hasAll([
-        'logCreatedAt',
-        'searchToken',
-        'stringBio',
-        'stringUserName',
-        'uid',
-        'imageFileName',
-        'userRef'
-      ])
-      && userUpdateLog.logCreatedAt is timestamp
-      && userUpdateLog.searchToken is map
-      && userUpdateLog.stringBio is string
-      && userUpdateLog.stringUserName is string
-      && userUpdateLog.uid is string
-      && userUpdateLog.imageFileName is string
-      && userUpdateLog.userRef is path;
+      && "logCreatedAt" in userUpdateLog && userUpdateLog.logCreatedAt is timestamp &&
+      "searchToken" in userUpdateLog && userUpdateLog.searchToken is map &&
+      "stringBio" in userUpdateLog && userUpdateLog.stringBio is string &&
+      "stringUserName" in userUpdateLog && userUpdateLog.stringUserName is string &&
+      "uid" in userUpdateLog && userUpdateLog.uid is string &&
+      "imageFileName" in userUpdateLog && userUpdateLog.imageFileName is string &&
+      "userRef" in userUpdateLog && userUpdateLog.userRef is path;
   }
+
   function isValidPrivateUser(user) {
     return user.size() == 9
-      && user.keys().hasAll([
-        'createdAt',
-        'ethAddress',
-        'gender',
-        'ipAddress',
-        'isAdmin',
-        'purchasedPoints',
-        'ref',
-        'uid',
-        'updatedAt'
-      ])
-      && user.createdAt is timestamp
-      && user.ethAddress is string
-      && user.gender is string
-      && user.ipAddress is string
-      && user.isAdmin is bool
-      && user.purchasedPoints is number
-      && user.ref is path
-      && user.uid is string
-      && user.updatedAt is timestamp;
+      && "createdAt" in user && user.createdAt is timestamp &&
+      "ethAddress" in user && user.ethAddress is string &&
+      "gender" in user && user.gender is string &&
+      "ipAddress" in user && user.ipAddress is string &&
+      "isAdmin" in user && user.isAdmin is bool &&
+      "purchasedPoints" in user && user.purchasedPoints is number &&
+      "ref" in user && user.ref is path &&
+      "uid" in user && user.uid is string &&
+      "updatedAt" in user && user.updatedAt is timestamp;
   }
+
   function isValidToken(token) {
-  return token.keys().hasAll([
-      'createdAt',
-      'tokenId',
-      'tokenType'
-    ])
-    && token.createdAt is timestamp
-    && token.tokenId is string
-    && token.tokenType is string;
-}
+    return "createdAt" in token && token.createdAt is timestamp &&
+      "tokenId" in token && token.tokenId is string &&
+      "tokenType" in token && token.tokenType is string;
+  }
 
   function isAuthenticated() {
   	return request.auth != null;
