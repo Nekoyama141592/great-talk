@@ -23,21 +23,21 @@ class FeedsController extends DocsController {
   Future<void> _fetchPosts(List<QDoc> fetchedTimelines) async {
     final posts = await _timelinesToPostsResult(fetchedTimelines);
     posts.when(
-        success: (res) => addAllDocs(res),
+        success: (res) => setAllDocs(sortedDocs(res)),
         failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 
   Future<void> _fetchNewPosts(List<QDoc> fetchedTimelines) async {
     final posts = await _timelinesToPostsResult(fetchedTimelines);
     posts.when(
-        success: (res) => insertAllDocs(res),
+        success: (res) => insertAllDocs(sortedDocs(res)),
         failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 
   Future<void> _fetchMorePosts(List<QDoc> fetchedTimelines) async {
     final posts = await _timelinesToPostsResult(fetchedTimelines);
     posts.when(
-        success: (res) => addAllDocs(res),
+        success: (res) => addAllDocs(sortedDocs(res)),
         failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 
