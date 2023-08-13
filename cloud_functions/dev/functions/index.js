@@ -343,7 +343,7 @@ exports.onUserUpdateLogCreate = functions.firestore.document(`${userPath}/userUp
             'image': detectedImage,
         });
         const user = await userRef.get();
-        const posts = await userRef.collection('public').doc('v1').collection('posts').get();
+        const posts = await userRef.collection('posts').get();
         let postCount = 0;
         let postBatch = fireStore.batch();
         for (const post of posts.docs) {
