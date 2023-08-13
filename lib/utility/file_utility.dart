@@ -20,6 +20,9 @@ class FileUtility {
   static Future<Uint8List?> getS3Image(
       String bucketName, String fileName) async {
     final repository = AWSS3Repository();
+    if (fileName.isEmpty) {
+      return null;
+    }
     final result = await repository.getImage(bucketName, fileName);
     Uint8List? uint8List;
     result.when(success: (res) {
