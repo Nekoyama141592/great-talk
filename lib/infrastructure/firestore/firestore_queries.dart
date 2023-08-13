@@ -24,9 +24,6 @@ class FirestoreQueries {
   static DocRef postLikeDocRef(DocRef postRef, String activeUid) =>
       postRef.collection('postLikes').doc(activeUid);
 
-  static DocRef postDocRef(String uid, String postId) =>
-      _userPostsColRef(uid).doc(postId);
-
   static MapQuery postsQueryByWhereIn(List<String> postIds) =>
       _postsLimitedCollectionGroupQuery.where('postId', whereIn: postIds);
 
@@ -42,8 +39,10 @@ class FirestoreQueries {
       _userPostsColRef(uid).doc(postId);
   static ColRef _userPostsColRef(String uid) =>
       userDocRef(uid).collection('posts');
+  static MapQuery _userPostsQuery(String uid) =>
+      _userPostsColRef(uid).limit(oneTimeReadCount);
   static MapQuery userPostsQueryByNewest(String uid) =>
-      _userPostsColRef(uid).orderBy("createdAt", descending: true);
+      _userPostsQuery(uid).orderBy("createdAt", descending: true);
   static MapQuery moreUserPostsQueryByNewest(String uid, Doc lastDoc) =>
       moreQuery(userPostsQueryByNewest(uid), lastDoc);
   static MapQuery newUserPostsQueryByNewest(String uid, Doc firstDoc) =>
@@ -56,7 +55,7 @@ class FirestoreQueries {
 
   static ColRef postMessagesColRef(
           String posterUid, String postId, String currentUid) =>
-      postDocRef(posterUid, postId)
+      userPostRef(posterUid, postId)
           .collection('senders')
           .doc(currentUid)
           .collection('messages');
@@ -112,10 +111,10 @@ class FirestoreQueries {
   static MapQuery moreUserSearchQuery(String searchTerm, Doc lastDoc) =>
       moreQuery(userSearchQuery(searchTerm), lastDoc);
   static MapQuery userPostsSearchQuery(String uid, String searchTerm) =>
-      searchQuery(_userPostsColRef(uid), searchTerm);
+      searchQuery(_userPostsQuery(uid), searchTerm);
   static MapQuery moreUserPostsSearchQuery(
           String uid, String searchTerm, Doc lastDoc) =>
-      moreQuery(searchQuery(_userPostsColRef(uid), searchTerm), lastDoc);
+      moreQuery(searchQuery(_userPostsQuery(uid), searchTerm), lastDoc);
 
   static DocRef userUpdateLogDocRef(String uid) =>
       userDocRef(uid).collection('userUpdateLogs').doc();

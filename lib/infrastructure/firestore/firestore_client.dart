@@ -76,7 +76,7 @@ class FirestoreClient {
       await FirestoreQueries.usersQueryByWhereIn(uids).get();
 
   FutureDoc getPost(String uid, String postId) async =>
-      await FirestoreQueries.postDocRef(uid, postId).get();
+      await FirestoreQueries.userPostRef(uid, postId).get();
 
   FutureQSnapshot getPostsByWhereIn(List<String> postIds) async =>
       await FirestoreQueries.postsQueryByWhereIn(postIds).get();
