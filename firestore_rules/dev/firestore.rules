@@ -55,7 +55,7 @@ service cloud.firestore {
   function isValidPublicUser(user) {
     return user.size() == 22 &&
       "accountName" in user && user.accountName is string &&
-      "bio" in user && user.bio is map &&
+      "bio" in user && isValidDetectedText(user.bio) &&
       "blockCount" in user && user.blockCount is number &&
       "createdAt" in user && user.createdAt is timestamp &&
       "ethAddress" in user && user.ethAddress is string &&
@@ -73,8 +73,8 @@ service cloud.firestore {
       "searchToken" in user && user.searchToken is map &&
       "uid" in user && user.uid is string &&
       "updatedAt" in user && user.updatedAt is timestamp &&
-      "image" in user && user.image is map &&
-      "userName" in user && user.userName is map &&
+      "image" in user && isValidDetectedImage(user.image) &&
+      "userName" in user && isValidDetectedText(user.userName) &&
       "walletAddresses" in user && user.walletAddresses is list;
   }
 
@@ -83,23 +83,23 @@ service cloud.firestore {
       "bookmarkCount" in post && post.bookmarkCount is number &&
       "createdAt" in post && post.createdAt is timestamp &&
       "customCompleteText" in post && post.customCompleteText is map &&
-      "description" in post && post.description is map &&
+      "description" in post && isValidDetectedText(post.description) &&
       "exampleTexts" in post && post.exampleTexts is list &&
       "genre" in post && post.genre is string &&
       "hashTags" in post && post.hashTags is list &&
-      "image" in post && post.image is map &&
+      "image" in post && isValidDetectedImage(post.image) &&
       "impressionCount" in post && post.impressionCount is number &&
       "likeCount" in post && post.likeCount is number &&
       "links" in post && post.links is list &&
       "msgCount" in post && post.msgCount is number &&
       "muteCount" in post && post.muteCount is number &&
-      "poster" in post && post.poster is map &&
+      "poster" in post && isValidPublicUser(post.poster) &&
       "postId" in post && post.postId is string &&
       "ref" in post && post.ref is path &&
       "reportCount" in post && post.reportCount is number &&
       "score" in post && post.score is number &&
       "searchToken" in post && post.searchToken is map &&
-      "title" in post && post.title is map &&
+      "title" in post && isValidDetectedText(post.title) &&
       "updatedAt" in post && post.updatedAt is timestamp &&
       "userCount" in post && post.userCount is number;
   }
@@ -113,7 +113,7 @@ service cloud.firestore {
       "postRef" in message && message.postRef is path &&
       "posterUid" in message && message.posterUid is string &&
       "senderUid" in message && message.senderUid is string &&
-      "text" in message && message.text is map;
+      "text" in message && isValidDetectedText(message.text);
   }
 
   function isValidPostLike(postLike) {
@@ -188,6 +188,22 @@ service cloud.firestore {
       "tokenId" in token && token.tokenId is string &&
       "tokenType" in token && token.tokenType is string;
   }
+  function isValidDetectedText(detectedText) {
+    return detectedText.size() == 5
+    && "languageCode" in detectedText && detectedText.languageCode is string
+    && "negativeScore" in detectedText && detectedText.negativeScore is number
+    && "positiveScore" in detectedText && detectedText.positiveScore is number
+    && "sentiment" in detectedText && detectedText.sentiment is string
+    && "value" in detectedText && detectedText.value is string;
+  }
+  function isValidDetectedImage(detectedImage) {
+    return detectedImage.size() == 4
+    && "bucketName" in detectedImage && detectedImage.bucketName is string
+    && "moderationLabels" in detectedImage && detectedImage.moderationLabels is list
+    && "moderationModelVersion" in detectedImage && detectedImage.moderationModelVersion is string
+    && "value" in detectedImage && detectedImage.value is string;
+  }
+
 
   function isAuthenticated() {
   	return request.auth != null;
