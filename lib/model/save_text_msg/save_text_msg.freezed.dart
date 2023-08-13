@@ -25,7 +25,6 @@ mixin _$SaveTextMsg {
   String get messageType => throw _privateConstructorUsedError;
   String get posterUid => throw _privateConstructorUsedError;
   String get senderUid => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
   Map<String, dynamic> get text => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +45,6 @@ abstract class $SaveTextMsgCopyWith<$Res> {
       String messageType,
       String posterUid,
       String senderUid,
-      DateTime updatedAt,
       Map<String, dynamic> text});
 }
 
@@ -68,7 +66,6 @@ class _$SaveTextMsgCopyWithImpl<$Res, $Val extends SaveTextMsg>
     Object? messageType = null,
     Object? posterUid = null,
     Object? senderUid = null,
-    Object? updatedAt = null,
     Object? text = null,
   }) {
     return _then(_value.copyWith(
@@ -92,10 +89,6 @@ class _$SaveTextMsgCopyWithImpl<$Res, $Val extends SaveTextMsg>
           ? _value.senderUid
           : senderUid // ignore: cast_nullable_to_non_nullable
               as String,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -118,7 +111,6 @@ abstract class _$$_SaveTextMsgCopyWith<$Res>
       String messageType,
       String posterUid,
       String senderUid,
-      DateTime updatedAt,
       Map<String, dynamic> text});
 }
 
@@ -138,7 +130,6 @@ class __$$_SaveTextMsgCopyWithImpl<$Res>
     Object? messageType = null,
     Object? posterUid = null,
     Object? senderUid = null,
-    Object? updatedAt = null,
     Object? text = null,
   }) {
     return _then(_$_SaveTextMsg(
@@ -162,10 +153,6 @@ class __$$_SaveTextMsgCopyWithImpl<$Res>
           ? _value.senderUid
           : senderUid // ignore: cast_nullable_to_non_nullable
               as String,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       text: null == text
           ? _value._text
           : text // ignore: cast_nullable_to_non_nullable
@@ -183,7 +170,6 @@ class _$_SaveTextMsg extends _SaveTextMsg {
       required this.messageType,
       required this.posterUid,
       required this.senderUid,
-      required this.updatedAt,
       required final Map<String, dynamic> text})
       : _text = text,
         super._();
@@ -201,8 +187,6 @@ class _$_SaveTextMsg extends _SaveTextMsg {
   final String posterUid;
   @override
   final String senderUid;
-  @override
-  final DateTime updatedAt;
   final Map<String, dynamic> _text;
   @override
   Map<String, dynamic> get text {
@@ -213,7 +197,7 @@ class _$_SaveTextMsg extends _SaveTextMsg {
 
   @override
   String toString() {
-    return 'SaveTextMsg(createdAt: $createdAt, id: $id, messageType: $messageType, posterUid: $posterUid, senderUid: $senderUid, updatedAt: $updatedAt, text: $text)';
+    return 'SaveTextMsg(createdAt: $createdAt, id: $id, messageType: $messageType, posterUid: $posterUid, senderUid: $senderUid, text: $text)';
   }
 
   @override
@@ -230,22 +214,13 @@ class _$_SaveTextMsg extends _SaveTextMsg {
                 other.posterUid == posterUid) &&
             (identical(other.senderUid, senderUid) ||
                 other.senderUid == senderUid) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
             const DeepCollectionEquality().equals(other._text, _text));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      createdAt,
-      id,
-      messageType,
-      posterUid,
-      senderUid,
-      updatedAt,
-      const DeepCollectionEquality().hash(_text));
+  int get hashCode => Object.hash(runtimeType, createdAt, id, messageType,
+      posterUid, senderUid, const DeepCollectionEquality().hash(_text));
 
   @JsonKey(ignore: true)
   @override
@@ -268,7 +243,6 @@ abstract class _SaveTextMsg extends SaveTextMsg {
       required final String messageType,
       required final String posterUid,
       required final String senderUid,
-      required final DateTime updatedAt,
       required final Map<String, dynamic> text}) = _$_SaveTextMsg;
   const _SaveTextMsg._() : super._();
 
@@ -285,8 +259,6 @@ abstract class _SaveTextMsg extends SaveTextMsg {
   String get posterUid;
   @override
   String get senderUid;
-  @override
-  DateTime get updatedAt;
   @override
   Map<String, dynamic> get text;
   @override

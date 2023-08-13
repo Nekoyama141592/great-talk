@@ -18,7 +18,6 @@ abstract class TextMessage implements _$TextMessage {
       dynamic postRef,
       required String posterUid,
       required String senderUid,
-      required dynamic updatedAt,
       required SDMap text}) = _TextMessage;
   factory TextMessage.fromJson(Map<String, dynamic> json) =>
       _$TextMessageFromJson(json);
@@ -28,7 +27,6 @@ abstract class TextMessage implements _$TextMessage {
       messageType: stm.messageType,
       senderUid: stm.senderUid,
       posterUid: stm.posterUid,
-      updatedAt: Timestamp.fromDate(stm.updatedAt),
       text: DetectedText.fromJson(stm.text).toJson());
 
   Timestamp typedCreatedAt() => createdAt as Timestamp;

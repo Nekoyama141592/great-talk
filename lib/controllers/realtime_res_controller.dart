@@ -264,7 +264,6 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
           .toJson(),
       posterUid: posterUid,
       senderUid: senderUid,
-      updatedAt: now,
     );
     return textMessage;
   }

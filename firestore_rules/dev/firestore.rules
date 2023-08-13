@@ -105,7 +105,7 @@ service cloud.firestore {
   }
 
   function isValidMessage(message) {
-    return message.size() == 9 &&
+    return message.size() == 8 &&
       "createdAt" in message && message.createdAt is timestamp &&
       "id" in message && message.id is string &&
       "messageType" in message && message.messageType is string &&
@@ -113,8 +113,7 @@ service cloud.firestore {
       "postRef" in message && message.postRef is path &&
       "posterUid" in message && message.posterUid is string &&
       "senderUid" in message && message.senderUid is string &&
-      "text" in message && message.text is map &&
-      "likes" in message && message.likes is number;
+      "text" in message && message.text is map;
   }
 
   function isValidPostLike(postLike) {

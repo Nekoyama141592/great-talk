@@ -13,7 +13,6 @@ _$_SaveTextMsg _$$_SaveTextMsgFromJson(Map<String, dynamic> json) =>
       messageType: json['messageType'] as String,
       posterUid: json['posterUid'] as String,
       senderUid: json['senderUid'] as String,
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
       text: json['text'] as Map<String, dynamic>,
     );
 
@@ -24,6 +23,5 @@ Map<String, dynamic> _$$_SaveTextMsgToJson(_$_SaveTextMsg instance) =>
       'messageType': instance.messageType,
       'posterUid': instance.posterUid,
       'senderUid': instance.senderUid,
-      'updatedAt': instance.updatedAt.toIso8601String(),
       'text': instance.text,
     };

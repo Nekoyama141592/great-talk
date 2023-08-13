@@ -14,7 +14,6 @@ abstract class SaveTextMsg implements _$SaveTextMsg {
       required String messageType,
       required String posterUid,
       required String senderUid,
-      required DateTime updatedAt,
       required SDMap text}) = _SaveTextMsg;
   factory SaveTextMsg.fromJson(Map<String, dynamic> json) =>
       _$SaveTextMsgFromJson(json);
@@ -24,6 +23,5 @@ abstract class SaveTextMsg implements _$SaveTextMsg {
       messageType: textMessage.messageType,
       posterUid: textMessage.posterUid,
       senderUid: textMessage.senderUid,
-      updatedAt: textMessage.typedUpdatedAtAt().toDate(),
       text: textMessage.typedText().toJson());
 }

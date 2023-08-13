@@ -15,7 +15,6 @@ _$_TextMessage _$$_TextMessageFromJson(Map<String, dynamic> json) =>
       postRef: json['postRef'],
       posterUid: json['posterUid'] as String,
       senderUid: json['senderUid'] as String,
-      updatedAt: json['updatedAt'],
       text: json['text'] as Map<String, dynamic>,
     );
 
@@ -28,6 +27,5 @@ Map<String, dynamic> _$$_TextMessageToJson(_$_TextMessage instance) =>
       'postRef': instance.postRef,
       'posterUid': instance.posterUid,
       'senderUid': instance.senderUid,
-      'updatedAt': instance.updatedAt,
       'text': instance.text,
     };
