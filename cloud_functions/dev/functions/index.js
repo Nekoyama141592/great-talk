@@ -29,8 +29,7 @@ AWS.config.update({
     secretAccessKey: AWS_SECRET_ACCESS_KEY,
     region: AWS_REGION,
 });
-const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
-const rekognition = new AWS.Rekognition();
+
 const postImagesBucket = aws_config.s3.post_images; // s3バケット
 const userImagesBucket = aws_config.s3.user_images; // s3バケット
 
@@ -69,6 +68,7 @@ function mul100AndRoundingDown(num) {
     return result;
 }
 async function detectDominantLanguage(text) {
+    const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
     let lCode = '';
     
     if (!text || text.trim() === "") {
@@ -97,8 +97,9 @@ async function detectDominantLanguage(text) {
         return lCode;
     }
 }
-// この関数が原因?
+
 async function detectText(text) {
+    const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
     let detectedText = {
         "languageCode": "",
         "negativeScore": 0.0,
@@ -145,6 +146,7 @@ async function detectText(text) {
     }
 }
 async function detectModerationLabels(bucketName, fileName) {
+    const rekognition = new AWS.Rekognition();
     let detectedImage = {
         "bucketName": bucketName,
         "moderationLabels": [],
