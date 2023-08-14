@@ -46,8 +46,13 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
     docs([...docs]);
   }
 
-  List<QDoc> sortedDocs(List<QDoc> elements) =>
-      elements..sort((a, b) => (b["createdAt"]).compareTo(a["createdAt"]));
+  List<QDoc> sortedDocs(List<QDoc> elements) {
+    if (elements.isEmpty) {
+      return [];
+    } else {
+     return elements..sort((a, b) => (b["createdAt"]).compareTo(a["createdAt"]));
+    }
+  }
   Future<void> init() async {
     if (requiresValueReset) {
       isInit(false);
