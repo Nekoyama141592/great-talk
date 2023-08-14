@@ -4,7 +4,6 @@ exports.verifyIOSReceipt = exports.verifyAndroidReceipt = void 0;
 const functions = require("firebase-functions");
 const axios_1 = require("axios");
 const admin = require("firebase-admin");
-
 admin.initializeApp();
 const fireStore = admin.firestore();
 const RECEIPT_VERIFICATION_ENDPOINT_SANDBOX = "https://sandbox.itunes.apple.com/verifyReceipt";
@@ -22,18 +21,18 @@ const minusOne = -1;
 // AWS
 const AWS = require('aws-sdk');
 const aws_config = config.aws;
-const AWS_ACCESS_KEY = aws_config.access_key;
-const AWS_SECRET_ACCESS_KEY = aws_config.secret_access_key;
 const AWS_REGION = "ap-northeast-1";
-AWS.config.update({
-    accessKeyId: AWS_ACCESS_KEY,
-    secretAccessKey: AWS_SECRET_ACCESS_KEY,
-    region: AWS_REGION,
-});
-const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
-const rekognition = new AWS.Rekognition();
+
 const postImagesBucket = aws_config.s3.post_images; // s3バケット
 const userImagesBucket = aws_config.s3.user_images; // s3バケット
+
+function updateAWSConfig() {
+    AWS.config.update({
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        region: AWS_REGION,
+    });
+}
 
 async function deleteFromColRef(colRef) {
     const qshot = await colRef.get();
@@ -70,6 +69,8 @@ function mul100AndRoundingDown(num) {
     return result;
 }
 async function detectDominantLanguage(text) {
+    updateAWSConfig();
+    const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
     let lCode = '';
     
     if (!text || text.trim() === "") {
@@ -98,8 +99,10 @@ async function detectDominantLanguage(text) {
         return lCode;
     }
 }
-// この関数が原因?
+
 async function detectText(text) {
+    updateAWSConfig();
+    const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
     let detectedText = {
         "languageCode": "",
         "negativeScore": 0.0,
@@ -146,6 +149,8 @@ async function detectText(text) {
     }
 }
 async function detectModerationLabels(bucketName, fileName) {
+    updateAWSConfig();
+    const rekognition = new AWS.Rekognition();
     let detectedImage = {
         "bucketName": bucketName,
         "moderationLabels": [],
@@ -205,7 +210,9 @@ exports.onFollowerDelete = functions.firestore.document(`${userPath}/followers/{
         });
     }
 );
-exports.onPostCreate = functions.firestore.document(postPath).onCreate(
+exports.onPostCreate = functions
+.runWith({secrets: ["AWS_ACCESS_KEY","AWS_SECRET_ACCESS_KEY"]})
+.firestore.document(postPath).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
         const detectedDescription = await detectText(newValue.description.value);
@@ -331,7 +338,9 @@ exports.onUserMutesDelete = functions.firestore.document(`${userPath}/userMutes/
         });
     }
 );
-exports.onUserUpdateLogCreate = functions.firestore.document(`${userPath}/userUpdateLogs/{id}`).onCreate(
+exports.onUserUpdateLogCreate = functions
+.runWith({secrets: ["AWS_ACCESS_KEY","AWS_SECRET_ACCESS_KEY"],})
+.firestore.document(`${userPath}/userUpdateLogs/{id}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
         const userRef = newValue.userRef;
