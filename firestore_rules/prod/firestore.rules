@@ -13,7 +13,7 @@ service cloud.firestore {
     }
     match /public/{version}/users/{uid} {
       allow read: if isAuthenticated();
-      allow create: if isTheSameUserAndVerified(uid) && isValidPublicUser(request.resource.data);
+      allow create: if isTheSameUserAndVerified(uid) && isValidInitialPublicUser(request.resource.data);
       allow delete: if isTheSameUserAndVerified(uid);
       match /posts/{postId} {
         allow read: if isAuthenticated();
@@ -58,7 +58,7 @@ service cloud.firestore {
       }
     }
   }
-  function isValidPublicUser(user) {
+  function isValidInitialPublicUser(user) {
     return user.size() == 22 &&
       "accountName" in user && user.accountName is string &&
       "bio" in user && isValidDetectedText(user.bio) &&
@@ -76,6 +76,31 @@ service cloud.firestore {
       "ref" in user && user.ref is path &&
       "reportCount" in user && user.reportCount == 0 &&
       "score" in user && user.score == 0 &&
+      "searchToken" in user && user.searchToken is map &&
+      "uid" in user && user.uid is string &&
+      "updatedAt" in user && user.updatedAt is timestamp &&
+      "image" in user && isValidDetectedImage(user.image) &&
+      "userName" in user && isValidDetectedText(user.userName) &&
+      "walletAddresses" in user && user.walletAddresses is list;
+  }
+  function isValidPublicUser(user) {
+    return user.size() == 22 &&
+      "accountName" in user && user.accountName is string &&
+      "bio" in user && isValidDetectedText(user.bio) &&
+      "blockCount" in user && user.blockCount is number &&
+      "createdAt" in user && user.createdAt is timestamp &&
+      "ethAddress" in user && user.ethAddress is string &&
+      "followerCount" in user && user.followerCount is number &&
+      "followingCount" in user && user.followingCount is number &&
+      "isNFTicon" in user && user.isNFTicon is bool &&
+      "isOfficial" in user && user.isOfficial is bool &&
+      "isSuspended" in user && user.isSuspended is bool &&
+      "links" in user && user.links is list &&
+      "muteCount" in user && user.muteCount is number &&
+      "postCount" in user && user.postCount is number &&
+      "ref" in user && user.ref is path &&
+      "reportCount" in user && user.reportCount is number &&
+      "score" in user && user.score is number &&
       "searchToken" in user && user.searchToken is map &&
       "uid" in user && user.uid is string &&
       "updatedAt" in user && user.updatedAt is timestamp &&
@@ -198,8 +223,8 @@ service cloud.firestore {
   function isValidDetectedText(detectedText) {
     return detectedText.size() == 5
     && "languageCode" in detectedText && detectedText.languageCode is string
-    && "negativeScore" in detectedText && detectedText.negativeScore is number // == 0にするとエラー
-    && "positiveScore" in detectedText && detectedText.positiveScore is number // == 0にするとエラー
+    && "negativeScore" in detectedText && detectedText.negativeScore is number
+    && "positiveScore" in detectedText && detectedText.positiveScore is number
     && "sentiment" in detectedText && detectedText.sentiment is string
     && "value" in detectedText && detectedText.value is string;
   }
