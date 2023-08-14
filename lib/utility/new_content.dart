@@ -131,7 +131,6 @@ class NewContent {
         gender: '',
         ipAddress: '',
         isAdmin: false,
-        purchasedPoints: 0,
         ref: FirestoreQueries.privateUserDocRef(uid),
         uid: uid,
         updatedAt: now);
