@@ -61,7 +61,7 @@ service cloud.firestore {
   function isValidInitialPublicUser(user) {
     return user.size() == 22 &&
       "accountName" in user && user.accountName is string &&
-      "bio" in user && isValidDetectedText(user.bio) &&
+      "bio" in user && isValidDetectedText(user.bio, 200) &&
       "blockCount" in user && user.blockCount == 0 &&
       "createdAt" in user && user.createdAt is timestamp &&
       "ethAddress" in user && user.ethAddress is string &&
@@ -80,13 +80,13 @@ service cloud.firestore {
       "uid" in user && user.uid is string &&
       "updatedAt" in user && user.updatedAt is timestamp &&
       "image" in user && isValidDetectedImage(user.image) &&
-      "userName" in user && isValidDetectedText(user.userName) &&
+      "userName" in user && isValidDetectedText(user.userName, 32) &&
       "walletAddresses" in user && user.walletAddresses is list;
   }
   function isValidPublicUser(user) {
     return user.size() == 22 &&
       "accountName" in user && user.accountName is string &&
-      "bio" in user && isValidDetectedText(user.bio) &&
+      "bio" in user && isValidDetectedText(user.bio,200) &&
       "blockCount" in user && user.blockCount is number &&
       "createdAt" in user && user.createdAt is timestamp &&
       "ethAddress" in user && user.ethAddress is string &&
@@ -105,7 +105,7 @@ service cloud.firestore {
       "uid" in user && user.uid is string &&
       "updatedAt" in user && user.updatedAt is timestamp &&
       "image" in user && isValidDetectedImage(user.image) &&
-      "userName" in user && isValidDetectedText(user.userName) &&
+      "userName" in user && isValidDetectedText(user.userName,32) &&
       "walletAddresses" in user && user.walletAddresses is list;
   }
 
@@ -114,7 +114,7 @@ service cloud.firestore {
       "bookmarkCount" in post && post.bookmarkCount == 0 &&
       "createdAt" in post && post.createdAt is timestamp &&
       "customCompleteText" in post && isValidCustomCompleteText(post.customCompleteText) &&
-      "description" in post && isValidDetectedText(post.description) &&
+      "description" in post && isValidDetectedText(post.description, 1000) &&
       "exampleTexts" in post && post.exampleTexts is list &&
       "genre" in post && post.genre is string &&
       "hashTags" in post && post.hashTags is list &&
@@ -130,7 +130,7 @@ service cloud.firestore {
       "reportCount" in post && post.reportCount == 0 &&
       "score" in post && post.score == 0 &&
       "searchToken" in post && post.searchToken is map &&
-      "title" in post && isValidDetectedText(post.title) &&
+      "title" in post && isValidDetectedText(post.title,32) &&
       "updatedAt" in post && post.updatedAt is timestamp &&
       "userCount" in post && post.userCount == 0;
   }
@@ -144,7 +144,7 @@ service cloud.firestore {
       "postRef" in message && message.postRef is path &&
       "posterUid" in message && message.posterUid is string &&
       "senderUid" in message && message.senderUid is string &&
-      "text" in message && isValidDetectedText(message.text);
+      "text" in message && isValidDetectedText(message.text, 1000);
   }
 
   function isValidPostLike(postLike) {
@@ -220,13 +220,14 @@ service cloud.firestore {
       "tokenType" in token && token.tokenType is string;
   }
   
-  function isValidDetectedText(detectedText) {
+  function isValidDetectedText(detectedText,valueLimit) {
     return detectedText.size() == 5
     && "languageCode" in detectedText && detectedText.languageCode is string
     && "negativeScore" in detectedText && detectedText.negativeScore is number
     && "positiveScore" in detectedText && detectedText.positiveScore is number
     && "sentiment" in detectedText && detectedText.sentiment is string
-    && "value" in detectedText && detectedText.value is string;
+    && "value" in detectedText && detectedText.value is string 
+    && detectedText.value.size() <= valueLimit;
   }
   
   function isValidDetectedImage(detectedImage) {
@@ -237,7 +238,9 @@ service cloud.firestore {
     && "value" in detectedImage && detectedImage.value is string;
   }
   function isValidCustomCompleteText(customCompleteText) {
-    return "systemPrompt" in customCompleteText && customCompleteText.systemPrompt is string;
+    return "systemPrompt" in customCompleteText 
+    && customCompleteText.systemPrompt is string
+    && customCompleteText.systemPrompt.size() <= 1000;
   }
 
   function isAuthenticated() {
