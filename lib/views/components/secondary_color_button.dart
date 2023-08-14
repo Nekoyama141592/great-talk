@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/common/colors.dart';
 
-class SecondaryColorButton extends ElevatedButton {
-  const SecondaryColorButton(
-      {Key? key, required void Function()? onPressed, required Widget child})
+class PurchaseButton extends ElevatedButton {
+  PurchaseButton(
+      {Key? key,
+      required void Function()? onPressed,
+      required Widget child,
+      required Color color})
       : super(
             key: key,
             onPressed: onPressed,
             child: child,
-            style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(kSecondaryColor)));
+            style:
+                ButtonStyle(backgroundColor: MaterialStatePropertyAll(color)));
 }

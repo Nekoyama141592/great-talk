@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/common/widgets.dart';
@@ -23,7 +24,7 @@ class ProductList extends StatelessWidget {
                 title: Text('情報を取得しています')));
       }
 
-      if (!controller.isAvailable.value) return const Card();
+      if (!controller.isAvailable.value) return const SizedBox.shrink();
       final List<Widget> productList = controller.products.map(
         (ProductDetails productDetails) {
           final String planName = getPlanName(productDetails);
@@ -35,11 +36,14 @@ class ProductList extends StatelessWidget {
                   : boldText(planName),
               trailing: PurchasesController.to
                       .hasProductBeenPurchased(productDetails)
-                  ? IconButton(
+                  ? PurchaseButton(
+                      color: Colors.grey.withOpacity(0.8),
                       onPressed: () =>
                           controller.confirmPriceChange(context, inAppPurchase),
-                      icon: const Icon(Icons.upgrade))
-                  : SecondaryColorButton(
+                      child: const BoldWhiteText("契約中"),
+                    )
+                  : PurchaseButton(
+                      color: kSecondaryColor,
                       onPressed: () async =>
                           await controller.onPurchaseButtonPressed(
                               inAppPurchase, productDetails),

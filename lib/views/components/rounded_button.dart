@@ -7,7 +7,7 @@ class RoundedButton extends StatelessWidget {
   const RoundedButton({
     Key? key,
     required this.text,
-    required this.press,
+    this.press,
     this.buttonColor,
     this.textColor,
     this.icon,
@@ -47,7 +47,8 @@ class RoundedButton extends StatelessWidget {
                 )
               : BasicBoldText(
                   text,
-                  textColor: textColor,
+                  textColor:
+                      textColor ?? Theme.of(context).scaffoldBackgroundColor,
                 ),
         ),
       ),
