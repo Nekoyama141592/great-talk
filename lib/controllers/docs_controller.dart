@@ -50,9 +50,11 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
     if (elements.isEmpty) {
       return [];
     } else {
-     return elements..sort((a, b) => (b["createdAt"]).compareTo(a["createdAt"]));
+      return elements
+        ..sort((a, b) => (b["createdAt"]).compareTo(a["createdAt"]));
     }
   }
+
   Future<void> init() async {
     if (requiresValueReset) {
       isInit(false);
