@@ -20,5 +20,7 @@ const int maxSystemPromptLimit = 1000;
 // prifile
 const int maxUserNameLimit = 32;
 const int maxBioLimit = 200;
+// message
+const int maxMessageLimit = 1000;
 // post
 const int negativeLimit = 90;

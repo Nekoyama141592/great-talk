@@ -121,7 +121,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
           if (value!.length < nGramIndex) {
             return "$nGramIndex文字以上の入力をしてください";
           } else if (value.length > maxTitleLimit) {
-            return "$maxTitleLimit文字までです";
+            return textLimitMsg(maxTitleLimit, value);
           } else {
             return null;
           }
@@ -147,7 +147,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
           if (value!.isEmpty) {
             return "入力をしてください";
           } else if (value.length > maxDescriptionLimit) {
-            return "$maxDescriptionLimit文字までです";
+            return textLimitMsg(maxDescriptionLimit, value);
           } else {
             return null;
           }
@@ -173,7 +173,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
           if (value!.isEmpty) {
             return "入力をしてください";
           } else if (value.length > maxSystemPromptLimit) {
-            return "$maxSystemPromptLimit文字までです";
+            return textLimitMsg(maxSystemPromptLimit, value);
           } else {
             return null;
           }

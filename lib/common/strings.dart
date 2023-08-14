@@ -66,13 +66,15 @@ const String s3Endpoint = 's3-ap-northeast-1.amazonaws.com';
 const String s3Region = 'ap-northeast-1';
 String s3FileName() => "${randomString()}.jpg";
 // プロフィール編集
-const String bioHelpMsg = "プロフィールに表示される紹介文です。$maxBioLimit文字以下である必要があります。$negativeAlertMsg";
+const String bioHelpMsg =
+    "プロフィールに表示される紹介文です。$maxBioLimit文字以下である必要があります。$negativeAlertMsg";
 const String userNameHelpMsg =
     "ユーザーから検索される名前です。$nGramIndex文字以上、$maxUserNameLimit文字以下である必要があります。$negativeAlertMsg";
 // 投稿ページ
 const String systemPromptHelpMsg =
     "キャラクターの特徴を決めるテキストです。AIの返答に大きく影響します。最大$maxSystemPromptLimit文字までです。プロンプトインジェクションはすでに対策されていますが、完全にプロンプトの流出を防ぎ切れるわけではないことをご了承下さい。";
-const String titleHelpMsg = "投稿のタイトルです。AIの返答には全く影響しません。最大$maxTitleLimit文字までです。$negativeAlertMsg";
+const String titleHelpMsg =
+    "投稿のタイトルです。AIの返答には全く影響しません。最大$maxTitleLimit文字までです。$negativeAlertMsg";
 const String descriptionHelpMsg =
     "投稿の説明や使い方です。AIの返答には全く影響しません。最大$maxDescriptionLimit文字までです。$negativeAlertMsg";
 const String temperatureHelpMsg =
@@ -85,3 +87,6 @@ const String frequencyPenaltyHelpMsg =
     "値は-2.0以上、2.0以下の数を設定できます。初期値は$defaultFrequencyPenaltyです。正の値は、新しいトークンに、これまでのテキストでの頻度に基づいてペナルティを与え、モデルが同じ行を逐語的に繰り返す可能性を減らします。。AIの返答に影響します。$roundMsg";
 const String roundMsg = "また、値は少数第二位で四捨五入されます。";
 const String negativeAlertMsg = "ネガティブな内容を含むと、他のユーザーに表示されなくなる可能性があります。";
+
+String textLimitMsg(int limit, String value) =>
+    "最大$limit文字までです。（現在${value.length}文字)";

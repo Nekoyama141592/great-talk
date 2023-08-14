@@ -107,9 +107,9 @@ class _CreatePostPageState extends State<EditProfilePage>
         },
         validator: (value) {
           if (value!.length < nGramIndex) {
-            return "$nGramIndex文字以上の入力をしてください";
+            return "$nGramIndex文字以上の入力を行なってください";
           } else if (value.length > maxUserNameLimit) {
-            return "$maxUserNameLimit文字までです";
+            return textLimitMsg(maxUserNameLimit, value);
           } else {
             return null;
           }
@@ -137,9 +137,9 @@ class _CreatePostPageState extends State<EditProfilePage>
         },
         validator: (value) {
           if (value!.isEmpty) {
-            return "入力をしてください";
+            return "入力を行なってください";
           } else if (value.length > maxBioLimit) {
-            return "$maxBioLimit文字までです";
+            return textLimitMsg(maxBioLimit, value);
           } else {
             return null;
           }

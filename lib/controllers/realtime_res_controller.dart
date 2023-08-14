@@ -98,8 +98,14 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       BuildContext context,
       TextEditingController inputController,
       ScrollController scrollController) {
+    final text = inputController.text;
+    if (text.length > maxMessageLimit) {
+      UIHelper.showErrorFlutterToast(
+          "メッセージは${textLimitMsg(maxMessageLimit, text)}");
+      return;
+    }
     FocusScope.of(context).unfocus();
-    execute(scrollController, inputController.text);
+    execute(scrollController, text);
     inputController.text = "";
   }
 
