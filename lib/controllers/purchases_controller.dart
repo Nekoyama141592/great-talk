@@ -90,6 +90,7 @@ class PurchasesController extends GetxController {
     final bool storeConnected = await inAppPurchase.isAvailable();
     isAvailable(storeConnected);
     if (!storeConnected) {
+      loading(false);
       return;
     }
 
