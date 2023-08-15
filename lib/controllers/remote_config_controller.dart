@@ -2,10 +2,10 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/controllers/init_controller.dart';
+import 'package:great_talk/controllers/once_init_controller.dart';
 import 'package:great_talk/extensions/remote_config_key_extension.dart';
 
-class RemoteConfigController extends InitController {
+class RemoteConfigController extends OnceInitController {
   static RemoteConfigController get to => Get.find<RemoteConfigController>();
   // iosとAndroidで分ける
   final maintenanceMode = false.obs;

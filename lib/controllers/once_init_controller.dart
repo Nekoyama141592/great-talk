@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
-abstract class InitController extends GetxController {
+abstract class OnceInitController extends GetxController {
   final isInit = false.obs;
-  Future<void> init() async {
+  Future<void> once() async {
     if (isInit.value) {
       return;
     }
