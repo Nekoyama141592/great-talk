@@ -48,7 +48,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> getChatLog() async {
-    _initState()
+    _initState();
     prefs = MainController.to.prefs;
     isLoading(true);
     final uid = Get.parameters['uid']!;
