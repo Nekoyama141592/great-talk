@@ -351,4 +351,12 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       interlocutor.value!.typedDescription().value,
     );
   }
+  bool isMyContent(TextMessage message) {
+    if (message.senderUid == currentUid()) return true;
+    if (message.senderUid != interlocutor.value!.contentId) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

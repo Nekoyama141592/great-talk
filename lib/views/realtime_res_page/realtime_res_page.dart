@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/texts.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
@@ -95,6 +94,7 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                     padding:
                                         EdgeInsets.all(defaultPadding(context)),
                                     child: Obx(() {
+                                      final message = messages[index];
                                       final String text = controller
                                           .messages[index]
                                           .typedText()
@@ -104,14 +104,11 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                             purchaseController.isSubscribing()
                                                 ? null
                                                 : controller.onCardLongTap,
-                                        tileColor: messages[index].senderUid ==
-                                                CurrentUserController
-                                                    .to.currentUser.value!.uid
+                                        tileColor: controller.isMyContent(message)
                                             ? kSecondaryColor.withOpacity(0.3)
                                             : null,
-                                        leading: messages[index].senderUid !=
-                                                currentUid()
-                                            ? Obx(() => CircleImage(
+                                        leading: controller.isMyContent(message)
+                                            ? null :Obx(() => CircleImage(
                                                   bucketName: controller
                                                       .interlocutor.value!
                                                       .typedImage()
@@ -122,8 +119,7 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                                       .imageValue,
                                                   uint8list: controller
                                                       .uint8list.value,
-                                                ))
-                                            : null,
+                                                )),
                                         title:
                                             purchaseController.isSubscribing()
                                                 ? SelectableText(text)
