@@ -6,7 +6,7 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
-import 'package:great_talk/utility/style_utility.dart';
+import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/components/mosaic_card/components/mosaic_user_child.dart';
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
@@ -46,19 +46,19 @@ class UserCard extends StatelessWidget {
                         child: InkWell(
                           onTap: () => Get.toNamed("/users/${publicUser.uid}"),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               CircleImage(
                                 bucketName: publicUser.typedImage().bucketName,
                                 imageValue: publicUser.typedImage().value,
                                 uint8list: uint8list,
                               ),
-                              const Spacer(),
-                              EllipsisText(
-                                publicUser.typedUserName().value,
-                                style: StyleUtility.bold25(),
+                              const BasicWidthBox(),
+                              Expanded(
+                                child: EllipsisText(
+                                  publicUser.typedUserName().value,
+                                ),
                               ),
-                              const Spacer(),
+                              const BasicWidthBox(),
                               const Icon(Icons.people),
                               BasicBoldText(publicUser.followerCount.toString())
                             ],
