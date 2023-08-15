@@ -9,7 +9,7 @@ const int maxRequestLength = 3;
 const int maxToken = 3000;
 
 const int timeInSecForIosWeb = 5; // FlutterToast
-const chatLimitPerDay = 50; // TODO: もどせ
+const chatLimitPerDay = 5;
 
 const int nGramIndex = 2; // 検索に使用
 const int plusOne = 1;
