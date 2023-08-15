@@ -35,6 +35,7 @@ class PostsController extends GetxController with CurrentUserMixin {
   void onReportButtonPressed(BuildContext context) {
     final posterUid = Get.parameters['uid']!;
     if (returnIsOriginalContents(posterUid) || currentUid() == posterUid) {
+      UIHelper.showFlutterToast("自分の投稿を報告したり、ミュートしたりすることはできません。");
       return;
     }
     if (CurrentUserController.to.isNotVerified()) {
