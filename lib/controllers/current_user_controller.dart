@@ -369,13 +369,13 @@ class CurrentUserController extends GetxController {
     String userName,
     String bio,
     String fileName,
-  ) {
+  ) async {
     final user = publicUser.value!;
     final result = user.copyWith(
         bio: user.typedBio().copyWith(value: bio).toJson(),
         userName: user.typedUserName().copyWith(value: userName).toJson(),
         image: user.typedImage().copyWith(value: fileName).toJson());
-    CurrentUserController.to.publicUser(result);
-    MyProfileController.to.passiveUser(result);
+    publicUser(result);
+    MyProfileController.to.updateProfileUserState(result);
   }
 }
