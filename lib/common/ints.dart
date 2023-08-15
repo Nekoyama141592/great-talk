@@ -15,7 +15,7 @@ const int nGramIndex = 2; // 検索に使用
 const int plusOne = 1;
 const int minusOne = -1;
 const int oneTimeReadCount = 30;
-const int whereInLimit = 30;
+const int whereInLimit = 10;
 // create post
 const int maxTitleLimit = 32;
 const int maxDescriptionLimit = 1000;
