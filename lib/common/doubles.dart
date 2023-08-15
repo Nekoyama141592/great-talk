@@ -11,7 +11,7 @@ double searchScreenTopPadding(BuildContext context) =>
     defaultPadding(context) * 7;
 double chatScreenHeight(BuildContext context) {
   final x = fullHeight(context);
-  return x > 800 && x < 1000 ? x * 0.7 : x * 0.8;
+  return x * 0.7;
 }
 
 // chatGPT request
