@@ -255,6 +255,6 @@ service cloud.firestore {
     return isTheSameUser(uid) && isEmailVerifed();
   }
   function isAdmin() {
-    return request.auth.uid == ""; // TODO: 設定
+    return request.auth.uid == "0glEumuKnoc6LfPTbmrXl7EGjX63"; // devと異なるので注意.
   }
 }
