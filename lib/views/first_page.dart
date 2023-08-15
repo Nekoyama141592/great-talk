@@ -16,7 +16,7 @@ class FirstPage extends HookWidget {
     final remoteConfigController = Get.put(RemoteConfigController());
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await remoteConfigController.once();
+        await remoteConfigController.onceInit();
       });
       return;
     }, []);
