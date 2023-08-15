@@ -44,7 +44,8 @@ abstract class ChatContent implements _$ChatContent {
       : null;
   DetectedText typedDescription() {
     if (returnIsOriginalContents(posterUid)) {
-      return NewContent.newDetectedText('$titleのAIです。');
+      final text = contentDescription(contentId, title);
+      return NewContent.newDetectedText(text);
     } else {
       return DetectedText.fromJson(description!);
     }

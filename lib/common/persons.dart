@@ -5,6 +5,16 @@ const String chatGPTId = "chatGPT";
 const String wolframId = "wolfram";
 // 現在のユーザーを定義.
 bool returnIsOriginalContents(String posterUid) => posterUid == officialId;
+String contentDescription(String contentId, String title) {
+  switch (contentId) {
+    case chatGPTId:
+      return "なんでもそつなく返答できるAIです！！";
+    case wolframId:
+      return "正確な計算が得意なAIです！！入力されるテキストはWolfram言語でなければいけません。";
+    default:
+      return "$titleのAIです！！";
+  }
+}
 
 final originalContentIds = originalContents.map((e) => e.contentId).toList();
 final proIds = proPeople.map((e) => e.contentId).toList();

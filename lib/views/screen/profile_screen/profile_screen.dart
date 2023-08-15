@@ -90,9 +90,15 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
           header: Column(
             children: [
               if (controller.passiveUser.value != null) ...children,
-              controller.isMyProfile
-                  ? const EditButton()
-                  : const FollowButton(),
+              Obx(() {
+                final passiveUser = controller.passiveUser.value;
+                if (passiveUser == null) {
+                  return const SizedBox.shrink();
+                }
+                return controller.isMyProfile || passiveUser.uid == currentUid()
+                    ? const EditButton()
+                    : const FollowButton();
+              })
             ],
           ),
           child: RefreshScreen(

@@ -16,6 +16,10 @@ class UserProfileController extends ProfileController {
     if (passiveUser.value == null) {
       return;
     }
+    if (passiveUser.value!.uid == currentUid()) {
+      UIHelper.showFlutterToast("自分をフォローすることはできません。");
+      return;
+    }
     if (CurrentUserController.to.isNotVerified()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
