@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/abstract/profile_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/utility/style_utility.dart';
@@ -15,6 +16,10 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
   @override
   Widget build(BuildContext context) {
     final children = <Widget>[
+      Obx(() => EllipsisText(
+            controller.passiveUser.value!.typedUserName().value,
+            style: StyleUtility.bold25(),
+          )),
       Row(
         children: [
           if (!controller.isMyProfile)
@@ -41,29 +46,6 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
               Row(
                 children: [
                   Obx(() => Text(
-                        controller.passiveUser.value!.typedUserName().value,
-                        style: StyleUtility.bold40(),
-                      )),
-                  InkWell(
-                    onTap: () => Get.toNamed(
-                        "/users/${controller.passiveUid()}/posts/search"),
-                    child: const Icon(
-                      Icons.search,
-                      size: 40.0,
-                    ),
-                  ),
-                  Obx(() => controller.passiveUser.value!.isOfficial
-                      ? Icon(
-                          Icons.verified,
-                          size: 40.0,
-                          color: Theme.of(context).colorScheme.secondary,
-                        )
-                      : const SizedBox.shrink())
-                ],
-              ),
-              Row(
-                children: [
-                  Obx(() => Text(
                         "フォロー ${controller.passiveUser.value?.followingCount ?? 0}",
                         style: StyleUtility.basic20(),
                       )),
@@ -84,22 +66,45 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
             alignment: Alignment.centerLeft,
             child: Text(controller.passiveUser.value!.typedBio().value),
           )),
+      Row(
+        children: [
+          InkWell(
+            onTap: () =>
+                Get.toNamed("/users/${controller.passiveUid()}/posts/search"),
+            child: const Icon(
+              Icons.search,
+              size: 40.0,
+            ),
+          ),
+          Obx(() => controller.passiveUser.value!.isOfficial
+              ? Icon(
+                  Icons.verified,
+                  size: 40.0,
+                  color: Theme.of(context).colorScheme.secondary,
+                )
+              : const SizedBox.shrink())
+        ],
+      ),
     ];
     return Obx(() => GradientScreen(
           baseColor: Theme.of(context).colorScheme.secondary,
-          header: Column(
-            children: [
-              if (controller.passiveUser.value != null) ...children,
-              Obx(() {
-                final passiveUser = controller.passiveUser.value;
-                if (passiveUser == null) {
-                  return const SizedBox.shrink();
-                }
-                return controller.isMyProfile || passiveUser.uid == currentUid()
-                    ? const EditButton()
-                    : const FollowButton();
-              })
-            ],
+          header: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                if (controller.passiveUser.value != null) ...children,
+                Obx(() {
+                  final passiveUser = controller.passiveUser.value;
+                  if (passiveUser == null) {
+                    return const SizedBox.shrink();
+                  }
+                  return controller.isMyProfile ||
+                          passiveUser.uid == currentUid()
+                      ? const EditButton()
+                      : const FollowButton();
+                })
+              ],
+            ),
           ),
           child: RefreshScreen(
             docsController: controller,
