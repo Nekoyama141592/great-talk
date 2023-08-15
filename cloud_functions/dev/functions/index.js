@@ -14,6 +14,7 @@ const IOS_PKG_NAME = appStoreConfig.ios_pkg_name;
 const fHttps = functions.https;
 // firestore
 const userPath = "public/{version}/users/{uid}";
+const privateUserPath = "private/{version}/privateUsers/{uid}";
 const postPath = `${userPath}/posts/{postId}`;
 const batchLimit = 500;
 const plusOne = 1;
@@ -313,12 +314,17 @@ exports.onUserDelete = functions.firestore.document(userPath).onDelete(
         await deleteFromColRef(myRef.collection('posts'));
         // 自分のtimelineを消す
         await deleteFromColRef(myRef.collection('timelines'));
-        // 自分のtokenを消す
-        await deleteFromColRef(myRef.collection('tokens'));
         // 自分のuserUpdateLogsを消す
         await deleteFromColRef(myRef.collection('userUpdateLogs'));
         // privateUserを削除
         await fireStore.collection('private').doc('v1').collection('privateUsers').doc(uid).delete();
+    }
+);
+exports.onPrivateUserDelete = functions.firestore.document(privateUserPath).onDelete(
+    async (snap,_) => {
+        const myRef = snap.ref;
+        // 自分のtokenを消す
+        await deleteFromColRef(myRef.collection('tokens'));
     }
 );
 exports.onUserMutesCreate = functions.firestore.document(`${userPath}/userMutes/{activeUid}`).onCreate(
