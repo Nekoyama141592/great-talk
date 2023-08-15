@@ -28,6 +28,7 @@ mixin _$ChatContent {
   String get imageValue => throw _privateConstructorUsedError;
   int? get lastSeen => throw _privateConstructorUsedError;
   Map<String, dynamic>? get metadata => throw _privateConstructorUsedError;
+  int get msgCount => throw _privateConstructorUsedError;
   String get posterUid => throw _privateConstructorUsedError;
   dynamic get ref => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -52,6 +53,7 @@ abstract class $ChatContentCopyWith<$Res> {
       String imageValue,
       int? lastSeen,
       Map<String, dynamic>? metadata,
+      int msgCount,
       String posterUid,
       dynamic ref,
       String title});
@@ -77,6 +79,7 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
     Object? imageValue = null,
     Object? lastSeen = freezed,
     Object? metadata = freezed,
+    Object? msgCount = null,
     Object? posterUid = null,
     Object? ref = freezed,
     Object? title = null,
@@ -110,6 +113,10 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
           ? _value.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
+      msgCount: null == msgCount
+          ? _value.msgCount
+          : msgCount // ignore: cast_nullable_to_non_nullable
+              as int,
       posterUid: null == posterUid
           ? _value.posterUid
           : posterUid // ignore: cast_nullable_to_non_nullable
@@ -142,6 +149,7 @@ abstract class _$$_ChatContentCopyWith<$Res>
       String imageValue,
       int? lastSeen,
       Map<String, dynamic>? metadata,
+      int msgCount,
       String posterUid,
       dynamic ref,
       String title});
@@ -165,6 +173,7 @@ class __$$_ChatContentCopyWithImpl<$Res>
     Object? imageValue = null,
     Object? lastSeen = freezed,
     Object? metadata = freezed,
+    Object? msgCount = null,
     Object? posterUid = null,
     Object? ref = freezed,
     Object? title = null,
@@ -198,6 +207,10 @@ class __$$_ChatContentCopyWithImpl<$Res>
           ? _value._metadata
           : metadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
+      msgCount: null == msgCount
+          ? _value.msgCount
+          : msgCount // ignore: cast_nullable_to_non_nullable
+              as int,
       posterUid: null == posterUid
           ? _value.posterUid
           : posterUid // ignore: cast_nullable_to_non_nullable
@@ -225,6 +238,7 @@ class _$_ChatContent extends _ChatContent {
       required this.imageValue,
       this.lastSeen,
       final Map<String, dynamic>? metadata,
+      required this.msgCount,
       required this.posterUid,
       this.ref,
       required this.title})
@@ -285,6 +299,8 @@ class _$_ChatContent extends _ChatContent {
   }
 
   @override
+  final int msgCount;
+  @override
   final String posterUid;
   @override
   final dynamic ref;
@@ -293,7 +309,7 @@ class _$_ChatContent extends _ChatContent {
 
   @override
   String toString() {
-    return 'ChatContent(contentId: $contentId, customCompleteText: $customCompleteText, description: $description, image: $image, imageValue: $imageValue, lastSeen: $lastSeen, metadata: $metadata, posterUid: $posterUid, ref: $ref, title: $title)';
+    return 'ChatContent(contentId: $contentId, customCompleteText: $customCompleteText, description: $description, image: $image, imageValue: $imageValue, lastSeen: $lastSeen, metadata: $metadata, msgCount: $msgCount, posterUid: $posterUid, ref: $ref, title: $title)';
   }
 
   @override
@@ -313,6 +329,8 @@ class _$_ChatContent extends _ChatContent {
             (identical(other.lastSeen, lastSeen) ||
                 other.lastSeen == lastSeen) &&
             const DeepCollectionEquality().equals(other._metadata, _metadata) &&
+            (identical(other.msgCount, msgCount) ||
+                other.msgCount == msgCount) &&
             (identical(other.posterUid, posterUid) ||
                 other.posterUid == posterUid) &&
             const DeepCollectionEquality().equals(other.ref, ref) &&
@@ -330,6 +348,7 @@ class _$_ChatContent extends _ChatContent {
       imageValue,
       lastSeen,
       const DeepCollectionEquality().hash(_metadata),
+      msgCount,
       posterUid,
       const DeepCollectionEquality().hash(ref),
       title);
@@ -357,6 +376,7 @@ abstract class _ChatContent extends ChatContent {
       required final String imageValue,
       final int? lastSeen,
       final Map<String, dynamic>? metadata,
+      required final int msgCount,
       required final String posterUid,
       final dynamic ref,
       required final String title}) = _$_ChatContent;
@@ -379,6 +399,8 @@ abstract class _ChatContent extends ChatContent {
   int? get lastSeen;
   @override
   Map<String, dynamic>? get metadata;
+  @override
+  int get msgCount;
   @override
   String get posterUid;
   @override

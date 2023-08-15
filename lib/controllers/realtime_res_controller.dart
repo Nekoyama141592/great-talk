@@ -356,11 +356,17 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   void onDescriptionButtonPressed() {
-    if (interlocutor.value == null) {
+    final content = interlocutor.value;
+    if (content == null) {
       return;
     }
+    final title = content.title;
+    final description = content.typedDescription().value;
+    String msgText = !returnIsOriginalContents(content.posterUid)
+        ? "累計メッセージ数: ${content.msgCount}"
+        : "";
     UIHelper.simpleAlertDialog(
-      "${interlocutor.value!.title}\n\n${interlocutor.value!.typedDescription().value}",
+      "$title\n\n$description\n\n$msgText",
     );
   }
 

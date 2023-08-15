@@ -23,6 +23,7 @@ abstract class ChatContent implements _$ChatContent {
     required String imageValue,
     int? lastSeen,
     Map<String, dynamic>? metadata,
+    required int msgCount,
     required String posterUid,
     dynamic ref,
     required String title,
@@ -35,6 +36,7 @@ abstract class ChatContent implements _$ChatContent {
         image: post.image,
         imageValue: post.typedImage().value,
         contentId: post.postId,
+        msgCount: post.msgCount,
         posterUid: post.typedPoster().uid,
         ref: post.ref,
         title: post.typedTitle().value);
