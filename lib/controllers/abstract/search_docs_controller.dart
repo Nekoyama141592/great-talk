@@ -1,4 +1,4 @@
-import 'package:great_talk/controllers/docs_controller.dart';
+import 'package:great_talk/controllers/abstract/docs_controller.dart';
 
 abstract class SearchDocsController extends DocsController {
   SearchDocsController({required this.isSearchUser})

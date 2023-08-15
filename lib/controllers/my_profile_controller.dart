@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/controllers/profile_controller.dart';
+import 'package:great_talk/controllers/abstract/profile_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/utility/new_content.dart';
 

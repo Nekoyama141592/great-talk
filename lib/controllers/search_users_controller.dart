@@ -1,5 +1,5 @@
 import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/controllers/search_docs_controller.dart';
+import 'package:great_talk/controllers/abstract/search_docs_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SearchUsersController extends SearchDocsController {

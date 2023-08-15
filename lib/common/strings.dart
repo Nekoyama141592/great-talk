@@ -90,3 +90,6 @@ const String negativeAlertMsg = "ネガティブな内容を含むと、他の�
 
 String textLimitMsg(int limit, String value) =>
     "最大$limit文字までです。（現在${value.length}文字)";
+// msg
+const String defaultMaintenanceMsg = "メンテナンス中";
+const String defaultForcedUpdateMsg = "最新バージョンへのアップデートが必要です。";

@@ -4,7 +4,7 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/docs_controller.dart';
+import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
