@@ -39,8 +39,16 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   final Rx<ChatContent?> interlocutor = Rx(null);
   final Rx<Uint8List?> uint8list = Rx(null);
   final repository = FirestoreRepository();
+  void _initState() {
+    messages([]);
+    realtimeRes('');
+    isLoading(false);
+    isGenerating(false);
+    interlocutor(null);
+  }
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> getChatLog() async {
+    _initState()
     prefs = MainController.to.prefs;
     isLoading(true);
     final uid = Get.parameters['uid']!;
