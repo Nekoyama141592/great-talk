@@ -23,7 +23,7 @@ class RemoteConfigController extends InitController {
     // シングルトンオブジェクトの取得
     await remoteConfig.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: const Duration(minutes: 1),
-      minimumFetchInterval: const Duration(seconds: 30),
+      minimumFetchInterval: const Duration(seconds: 15),
     ));
     // keyの設定
     final maintenanceModeKey = "maintenance_mode".toOsSpecificRemoteConfigKey();
