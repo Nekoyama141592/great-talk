@@ -7,8 +7,10 @@ import 'package:great_talk/model/post/post.dart';
 class PostLikeButton extends HookWidget {
   const PostLikeButton({
     Key? key,
+    required this.isHorizontal,
     required this.post,
   }) : super(key: key);
+  final bool isHorizontal;
   final Post post;
   @override
   Widget build(BuildContext context) {
@@ -16,23 +18,28 @@ class PostLikeButton extends HookWidget {
     final copyPost = useState(post);
     final isLiked =
         useState(CurrentUserController.to.likePostIds.contains(post.postId));
-    return Column(
-      children: [
-        isLiked.value
-            ? InkWell(
-                child: const Icon(Icons.favorite, color: Colors.red),
-                onTap: () =>
-                    controller.onUnLikeButtonPressed(copyPost, isLiked, post))
-            : InkWell(
-                child: const Icon(
-                  Icons.favorite,
-                ),
-                onTap: () =>
-                    controller.onLikeButtonPressed(copyPost, isLiked, post)),
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(copyPost.value.likeCount.toString()))
-      ],
-    );
+    final children = [
+      isLiked.value
+          ? InkWell(
+              child: const Icon(Icons.favorite, color: Colors.red),
+              onTap: () =>
+                  controller.onUnLikeButtonPressed(copyPost, isLiked, post))
+          : InkWell(
+              child: const Icon(
+                Icons.favorite,
+              ),
+              onTap: () =>
+                  controller.onLikeButtonPressed(copyPost, isLiked, post)),
+      Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(copyPost.value.likeCount.toString()))
+    ];
+    return isHorizontal
+        ? Row(
+            children: children,
+          )
+        : Column(
+            children: children,
+          );
   }
 }

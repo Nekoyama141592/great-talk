@@ -37,18 +37,21 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   int chatCount = 0;
   late SharedPreferences prefs;
   final Rx<ChatContent?> interlocutor = Rx(null);
+  final Rx<Post?> post = Rx(null);
   final Rx<Uint8List?> uint8list = Rx(null);
   final repository = FirestoreRepository();
-  void _initState() {
+
+  void resetState() {
     messages([]);
     realtimeRes('');
     isLoading(false);
     isGenerating(false);
-    interlocutor(null);
+    interlocutor.value = null;
+    post.value = null;
   }
+
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> getChatLog() async {
-    _initState();
     prefs = MainController.to.prefs;
     isLoading(true);
     final uid = Get.parameters['uid']!;
@@ -64,9 +67,10 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       final result = await repository.getPost(uid, postId);
       result.when(success: (res) async {
         if (res.exists) {
-          final post = Post.fromJson(res.data()!);
-          interlocutor(ChatContent.fromPost(post));
-          final detectedImage = post.typedImage();
+          final fetchedPost = Post.fromJson(res.data()!);
+          post(fetchedPost);
+          interlocutor(ChatContent.fromPost(fetchedPost));
+          final detectedImage = fetchedPost.typedImage();
           final s3Image = await FileUtility.getS3Image(
               detectedImage.bucketName, detectedImage.value);
           uint8list(s3Image);
@@ -356,9 +360,10 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       return;
     }
     UIHelper.simpleAlertDialog(
-      interlocutor.value!.typedDescription().value,
+      "${interlocutor.value!.title}\n\n${interlocutor.value!.typedDescription().value}",
     );
   }
+
   bool isMyContent(TextMessage message) {
     if (message.senderUid == currentUid()) return true;
     if (message.senderUid != interlocutor.value!.contentId) {

@@ -74,6 +74,7 @@ class PostCard extends StatelessWidget {
                             child: Row(
                               children: [
                                 PostLikeButton(
+                                  isHorizontal: false,
                                   post: post,
                                 ),
                                 const Spacer(),

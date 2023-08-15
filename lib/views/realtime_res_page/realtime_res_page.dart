@@ -11,6 +11,7 @@ import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 import 'package:great_talk/views/realtime_res_page/components/description_button.dart';
+import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
 
 class RealtimeResPage extends HookWidget with CurrentUserMixin {
@@ -22,21 +23,27 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
     final inputController = useTextEditingController();
     final scrollCotroller = useScrollController();
     useEffect(() {
-      controller.getChatLog();
-      return;
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await controller.getChatLog();
+      });
+      return controller.resetState;
     }, []);
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-              actions: const [
-                DescriptionButton(),
-                SizedBox(
+              actions: [
+                const DescriptionButton(),
+                const SizedBox(
                   width: 20.0,
                 ),
-                PostReportButton(),
-                SizedBox(
+                const PostReportButton(),
+                const SizedBox(
                   width: 20.0,
-                )
+                ),
+                Obx(() => controller.post.value == null
+                    ? const SizedBox.shrink()
+                    : PostLikeButton(
+                        isHorizontal: true, post: controller.post.value!)),
               ],
               title: Obx(() =>
                   EllipsisText(controller.interlocutor.value?.title ?? ""))),
@@ -104,11 +111,13 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                             purchaseController.isSubscribing()
                                                 ? null
                                                 : controller.onCardLongTap,
-                                        tileColor: controller.isMyContent(message)
+                                        tileColor: controller
+                                                .isMyContent(message)
                                             ? kSecondaryColor.withOpacity(0.3)
                                             : null,
                                         leading: controller.isMyContent(message)
-                                            ? null :Obx(() => CircleImage(
+                                            ? null
+                                            : Obx(() => CircleImage(
                                                   bucketName: controller
                                                       .interlocutor.value!
                                                       .typedImage()
