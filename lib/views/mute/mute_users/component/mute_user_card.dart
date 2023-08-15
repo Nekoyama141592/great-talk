@@ -22,7 +22,9 @@ class MuteUserCard extends StatelessWidget {
         imageValue: passiveUser.typedImage().value,
         uint8list: uint8list,
       ),
-      title: BasicBoldText(passiveUser.typedUserName().value),
+      title: EllipsisText(
+        passiveUser.typedUserName().value,
+      ),
       onTap: () => controller.onTap(passiveUser.uid),
     );
   }

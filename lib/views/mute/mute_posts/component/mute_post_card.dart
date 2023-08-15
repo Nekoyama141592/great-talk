@@ -20,7 +20,9 @@ class MutePostCard extends StatelessWidget {
         imageValue: post.typedImage().value,
         uint8list: uint8list,
       ),
-      title: BasicBoldText(post.typedTitle().value),
+      title:EllipsisText(
+        post.typedTitle().value,
+      ),
       onTap: () => controller.onTap(post),
     );
   }
