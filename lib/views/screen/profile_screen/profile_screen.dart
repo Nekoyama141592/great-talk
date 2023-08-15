@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/abstract/profile_controller.dart';
+import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/utility/style_utility.dart';
 import 'package:great_talk/views/components/circle_image.dart';
@@ -64,7 +65,7 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
       ),
       Obx(() => Align(
             alignment: Alignment.centerLeft,
-            child: Text(controller.passiveUser.value!.typedBio().value),
+            child: Text(controller.passiveUser.value!.typedBio().value.removeNewlinesAndSpaces()),
           )),
       Row(
         children: [
