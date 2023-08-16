@@ -93,13 +93,12 @@ class _CreatePostPageState extends State<EditProfilePage>
   List<Widget> _userNameTextField() {
     return [
       const FormLabel(
-        title: "ユーザー名",
+        title: "ニックネーム",
         helpMsg: userNameHelpMsg,
       ),
       OriginalForm(
         initialValue:
             CurrentUserController.to.publicUser.value!.typedUserName().value,
-        decoration: const InputDecoration(hintText: "例: M.LO"),
         onSaved: (value) {
           setState(() {
             userName = value;
