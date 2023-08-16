@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -18,7 +19,10 @@ abstract class ProfileController extends DocsController {
   @override
   Future<void> fetchDocs() async {
     // MyProfileのpassiveUserの情報はCurrentUserControllerで代入される
-    if (!isMyProfile) {
+    if (isMyProfile && CurrentUserController.to.isNotVerified()) {
+      // 認証していないなら処理を終了させる.
+      return;
+    } else {
       await _getPassiveUser();
     }
     final result = await repository.getUserPostsByNewest(passiveUid());
