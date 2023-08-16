@@ -44,7 +44,7 @@ class FeedsController extends DocsController {
 
   @override
   Future<void> fetchDocs() async {
-    if (CurrentUserController.to.isNotVerified()) return print('取得しないで終了');
+    if (CurrentUserController.to.isNotVerified()) return;
     final timelines = await repository.getTimelines(_userRef());
     timelines.when(
         success: (res) async {
