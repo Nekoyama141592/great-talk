@@ -45,7 +45,7 @@ service cloud.firestore {
         allow create: if isTheSameUserAndVerified(uid) && isValidUserUpdateLog(request.resource.data);
       }
       match /timelines/{postId} {
-        allow read: if isAuthenticated();
+        allow read: if isTheSameUser(uid); // TODO: AndVerifiedにする.
       }
     }
     // Private data
