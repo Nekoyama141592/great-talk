@@ -20,7 +20,7 @@ class UserProfileController extends ProfileController {
       UIHelper.showFlutterToast("自分をフォローすることはできません。");
       return;
     }
-    if (CurrentUserController.to.isNotVerified()) {
+    if (CurrentUserController.to.hasNoPublicUser()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
@@ -54,7 +54,7 @@ class UserProfileController extends ProfileController {
     if (passiveUser.value == null) {
       return;
     }
-    if (CurrentUserController.to.isNotVerified()) {
+    if (CurrentUserController.to.hasNoPublicUser()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }

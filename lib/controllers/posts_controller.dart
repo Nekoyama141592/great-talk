@@ -38,7 +38,7 @@ class PostsController extends GetxController with CurrentUserMixin {
       UIHelper.showFlutterToast("自分の投稿を報告したり、ミュートしたりすることはできません。");
       return;
     }
-    if (CurrentUserController.to.isNotVerified()) {
+    if (CurrentUserController.to.hasNoPublicUser()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
@@ -210,7 +210,7 @@ class PostsController extends GetxController with CurrentUserMixin {
 
   void onLikeButtonPressed(ValueNotifier<Post> copyPost,
       ValueNotifier<bool> isLiked, Post post) async {
-    if (CurrentUserController.to.isNotVerified()) {
+    if (CurrentUserController.to.hasNoPublicUser()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
@@ -248,7 +248,7 @@ class PostsController extends GetxController with CurrentUserMixin {
 
   void onUnLikeButtonPressed(ValueNotifier<Post> copyPost,
       ValueNotifier<bool> isLiked, Post post) async {
-    if (CurrentUserController.to.isNotVerified()) {
+    if (CurrentUserController.to.hasNoPublicUser()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }

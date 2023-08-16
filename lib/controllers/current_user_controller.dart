@@ -46,7 +46,7 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> _distributeTokens() async {
-    if (isNotVerified()) {
+    if (hasNoPublicUser()) {
       return;
     }
     final repository = FirestoreRepository();
@@ -162,9 +162,11 @@ class CurrentUserController extends GetxController {
   bool isNotLoggedIn() => currentUser.value == null || isAnonymous();
   bool isLoggedIn() => !isNotLoggedIn();
 
-  bool _isVerified() =>
+  bool _hasPublicUser() =>
       currentUser.value!.emailVerified && publicUser.value != null;
-  bool isNotVerified() => !_isVerified();
+  bool hasNoPublicUser() => !_hasPublicUser();
+
+  bool isNotVerified() => !currentUser.value!.emailVerified;
 
   bool isMutingPost(String postId) => mutePostIds.contains(postId);
   bool isMutingUser(String uid) => muteUids.contains(uid);
