@@ -1,5 +1,6 @@
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/timeline/timeline.dart';
 import 'package:great_talk/repository/result.dart';
@@ -43,6 +44,7 @@ class FeedsController extends DocsController {
 
   @override
   Future<void> fetchDocs() async {
+    if (CurrentUserController.to.isNotVerified()) return;
     final timelines = await repository.getTimelines(_userRef());
     timelines.when(
         success: (res) async {
@@ -54,6 +56,7 @@ class FeedsController extends DocsController {
 
   @override
   Future<void> onLoading(RefreshController refreshController) async {
+    if (CurrentUserController.to.isNotVerified()) return;
     final timelines =
         await repository.getMoreTimelines(_userRef(), _timelineDocs.last);
     timelines.when(
@@ -67,6 +70,7 @@ class FeedsController extends DocsController {
 
   @override
   Future<void> onRefresh(RefreshController refreshController) async {
+    if (CurrentUserController.to.isNotVerified()) return;
     final timelines =
         await repository.getNewTimelines(_userRef(), _timelineDocs.first);
     timelines.when(
