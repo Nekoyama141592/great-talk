@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/utility/file_utility.dart';
@@ -18,9 +17,8 @@ abstract class ProfileController extends DocsController {
 
   @override
   Future<void> fetchDocs() async {
-    if (isMyProfile) {
-      passiveUser(CurrentUserController.to.publicUser.value);
-    } else {
+    // MyProfileのpassiveUserの情報はCurrentUserControllerで代入される
+    if (!isMyProfile) {
       await _getPassiveUser();
     }
     final result = await repository.getUserPostsByNewest(passiveUid());
@@ -29,13 +27,6 @@ abstract class ProfileController extends DocsController {
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
-    if (passiveUser.value == null) {
-      return;
-    }
-    final detectedImage = passiveUser.value!.typedImage();
-    final s3Image = await FileUtility.getS3Image(
-        detectedImage.bucketName, detectedImage.value);
-    uint8list(s3Image);
   }
 
   Future<void> _getPassiveUser() async {
@@ -45,6 +36,10 @@ abstract class ProfileController extends DocsController {
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
+    final detectedImage = passiveUser.value!.typedImage();
+    final s3Image = await FileUtility.getS3Image(
+        detectedImage.bucketName, detectedImage.value);
+    uint8list(s3Image);
   }
 
   @override

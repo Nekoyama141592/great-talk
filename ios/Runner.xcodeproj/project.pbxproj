@@ -525,7 +525,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1014,7 +1014,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1041,7 +1041,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -1412,7 +1412,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1426,7 +1426,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1440,7 +1440,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1454,7 +1454,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1468,7 +1468,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1482,7 +1482,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1496,7 +1496,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1510,7 +1510,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1524,7 +1524,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1538,7 +1538,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1552,7 +1552,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
@@ -1566,7 +1566,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalkDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
 				PRODUCT_NAME = great_talk;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 			};

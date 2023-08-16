@@ -177,7 +177,7 @@ class CurrentUserController extends GetxController {
     result.when(
         success: (res) async {
           await res.reload();
-          currentUser(FirebaseAuth.instance.currentUser);
+          currentUser(res);
           await _manageUserInfo();
         },
         failure: () {});
@@ -201,7 +201,7 @@ class CurrentUserController extends GetxController {
     final result = await repository.createUser(currentUid(), newUser.toJson());
     result.when(success: (_) {
       publicUser(newUser);
-      MyProfileController.to.passiveUser(newUser);
+      MyProfileController.to.updateProfileUserState(newUser);
       UIHelper.showFlutterToast("ユーザーが作成されました");
     }, failure: () {
       UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
@@ -240,7 +240,7 @@ class CurrentUserController extends GetxController {
         // アカウントが存在するなら代入する
         final newUser = PublicUser.fromJson(res.data()!);
         publicUser(newUser);
-        MyProfileController.to.passiveUser(newUser);
+        MyProfileController.to.updateProfileUserState(newUser);
       } else {
         // アカウントが存在しないなら作成する
         await _createPublicUserWithUser();

@@ -4,8 +4,7 @@ extension StringExtension on String {
   // double toDouble() => double.parse(this);
   double toRoundToSecondDecimalPlace() =>
       double.parse(this).roundToSecondDecimalPlace();
-      String removeNewlinesAndSpaces() {
+  String removeNewlinesAndSpaces() {
     return replaceAll('\n', '').replaceAll(' ', '');
   }
-
 }
