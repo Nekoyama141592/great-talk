@@ -1,4 +1,5 @@
 // flutter
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 // firebase
 import 'package:firebase_core/firebase_core.dart';
@@ -14,6 +15,7 @@ class RunApp {
   static Future<void> runGreatTalk(Flavor flavor) async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(options: getFirebaseOption(flavor));
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     runApp(const App());
   }
 
