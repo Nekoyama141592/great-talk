@@ -42,31 +42,29 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
                     uint8list: controller.uint8list.value,
                   ),
           ),
-          Column(
-            children: [
-              Row(
-                children: [
-                  Obx(() => Text(
-                        "フォロー ${controller.passiveUser.value?.followingCount ?? 0}",
-                        style: StyleUtility.basic20(),
-                      )),
-                  const SizedBox(
-                    width: 20.0,
-                  ),
-                  Obx(() => Text(
-                        "フォロワー ${controller.passiveUser.value?.followerCount ?? 0}",
-                        style: StyleUtility.basic20(),
-                      ))
-                ],
-              ),
-            ],
+          Obx(() => Text(
+                "フォロー ${controller.passiveUser.value?.followingCount ?? 0}",
+                style: StyleUtility.basic20(),
+              )),
+          const SizedBox(
+            width: 20.0,
           ),
+          Obx(() => Text(
+                "フォロワー ${controller.passiveUser.value?.followerCount ?? 0}",
+                style: StyleUtility.basic20(),
+              ))
         ],
       ),
-      Obx(() => Align(
-            alignment: Alignment.centerLeft,
-            child: Text(controller.passiveUser.value!.typedBio().value.removeNewlinesAndSpaces()),
-          )),
+      // 横向きなら、表示崩れを防止するためにbioを表示しない。
+      Obx(() => MediaQuery.of(context).orientation == Orientation.landscape
+          ? const SizedBox.shrink()
+          : Align(
+              alignment: Alignment.centerLeft,
+              child: Text(controller.passiveUser.value!
+                  .typedBio()
+                  .value
+                  .removeNewlinesAndSpaces()),
+            )),
       Row(
         children: [
           InkWell(
@@ -91,20 +89,22 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
           baseColor: Theme.of(context).colorScheme.secondary,
           header: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                if (controller.passiveUser.value != null) ...children,
-                Obx(() {
-                  final passiveUser = controller.passiveUser.value;
-                  if (passiveUser == null) {
-                    return const SizedBox.shrink();
-                  }
-                  return controller.isMyProfile ||
-                          passiveUser.uid == currentUid()
-                      ? const EditButton()
-                      : const FollowButton();
-                })
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  if (controller.passiveUser.value != null) ...children,
+                  Obx(() {
+                    final passiveUser = controller.passiveUser.value;
+                    if (passiveUser == null) {
+                      return const SizedBox.shrink();
+                    }
+                    return controller.isMyProfile ||
+                            passiveUser.uid == currentUid()
+                        ? const EditButton()
+                        : const FollowButton();
+                  })
+                ],
+              ),
             ),
           ),
           child: RefreshScreen(
