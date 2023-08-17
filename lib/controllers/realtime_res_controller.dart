@@ -13,6 +13,7 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
+import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
@@ -363,7 +364,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     final title = content.title;
     final description = content.typedDescription().value;
     String msgText = !returnIsOriginalContents(content.posterUid)
-        ? "累計メッセージ数: ${content.msgCount}"
+        ? "累計メッセージ数: ${content.msgCount.formatNumber()}"
         : "";
     UIHelper.simpleAlertDialog(
       "$title\n\n$description\n\n$msgText",

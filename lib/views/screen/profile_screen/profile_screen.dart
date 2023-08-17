@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/abstract/profile_controller.dart';
+import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/utility/style_utility.dart';
@@ -43,13 +44,13 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
                   ),
           ),
           Obx(() => Text(
-                "フォロー ${controller.passiveUser.value?.followingCount ?? 0}",
+                "フォロー ${controller.passiveUser.value?.followingCount.formatNumber() ?? 0}",
               )),
           const SizedBox(
             width: 20.0,
           ),
           Obx(() => Text(
-                "フォロワー ${controller.passiveUser.value?.followerCount ?? 0}",
+                "フォロワー ${controller.passiveUser.value?.followerCount.formatNumber() ?? 0}",
               ))
         ],
       ),

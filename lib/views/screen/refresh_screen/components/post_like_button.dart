@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
+import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/model/post/post.dart';
 
 class PostLikeButton extends HookWidget {
@@ -32,7 +33,7 @@ class PostLikeButton extends HookWidget {
                   controller.onLikeButtonPressed(copyPost, isLiked, post)),
       Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(copyPost.value.likeCount.toString()))
+          child: Text(copyPost.value.likeCount.formatNumber()))
     ];
     return isHorizontal
         ? Row(
