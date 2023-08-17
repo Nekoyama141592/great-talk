@@ -1,3 +1,5 @@
+import 'package:great_talk/common/enums.dart';
+import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/search_docs_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -7,9 +9,10 @@ class SearchUsersController extends SearchDocsController {
 
   @override
   Future<void> fetchDocs() async {
-    if (searchTerm.isEmpty) {
+    if (searchTerm.length < nGramIndex) {
       return;
     }
+    createSearchLog(SearchTarget.user);
     firestoreSearchTerm = searchTerm; // フォームのSearchTermは空になるので格納する
     final result = await repository.searchUsers(firestoreSearchTerm);
     result.when(success: (res) {

@@ -96,6 +96,15 @@ class FirestoreRepository {
       return const Result.failure();
     }
   }
+  FutureResult<bool> createSearchLog(String uid, SDMap json) async {
+    try {
+      await client.createSearchLog(uid, json);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
 
   FutureResult<bool> createUserUpdateLog(String uid, SDMap json) async {
     try {

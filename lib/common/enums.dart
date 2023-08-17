@@ -12,5 +12,5 @@ enum PrefsKey {
   isV3initialized,
   lastChatDate,
 }
-
+enum SearchTarget { post,user}
 enum TokenType { following, likePost, mutePost, muteUser, reportPost }

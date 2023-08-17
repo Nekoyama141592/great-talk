@@ -35,6 +35,8 @@ class FirestoreClient {
       await FirestoreQueries.userDocRef(uid).set(json);
   Future<void> createPrivateUser(String uid, SDMap json) async =>
       await FirestoreQueries.privateUserDocRef(uid).set(json);
+  Future<void> createSearchLog(String uid, SDMap json) async =>
+      await FirestoreQueries.searchLogDocRef(uid).set(json);
 
   Future<void> createUserUpdateLog(String uid, SDMap json) async =>
       await FirestoreQueries.userUpdateLogDocRef(uid).set(json);

@@ -56,6 +56,9 @@ service cloud.firestore {
         allow read, delete: if isTheSameUserAndVerified(uid);
         allow create: if isTheSameUserAndVerified(uid) && isValidToken(request.resource.data);
       }
+      match /searchLogs/{searchLogId} {
+        allow create: if isTheSameUser(uid) && isValidSearchLog(request.resource.data); // 認証されている必要はない.
+      }
     }
   }
   function isValidInitialPublicUser(user) {
@@ -240,6 +243,14 @@ service cloud.firestore {
     return "systemPrompt" in customCompleteText 
     && customCompleteText.systemPrompt is string
     && customCompleteText.systemPrompt.size() <= 1000;
+  }
+  function isValidSearchLog(searchLog) {
+    return searchLog.size() == 4 
+      && "logCreatedAt" in searchLog && searchLog.logCreatedAt is timestamp 
+      && "searchTarget" in searchLog && searchLog.searchTarget is string 
+      && "searchTerm" in searchLog && searchLog.searchTerm is string
+      &&  searchLog.searchTerm.size() >= 2
+      && "uid" in searchLog && searchLog.uid is string;
   }
 
   function isAuthenticated() {
