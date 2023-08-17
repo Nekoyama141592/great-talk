@@ -44,7 +44,8 @@ abstract class SearchDocsController extends DocsController {
     firestoreSearchTerm = searchTerm; // フォームのSearchTermは空になるので格納する
     final result = await repository.searchDocs(query);
     result.when(success: (res) {
-      setAllDocs(res);
+      final removed = removedMutingDoc(res);
+      setAllDocs(removed);
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
@@ -58,7 +59,8 @@ abstract class SearchDocsController extends DocsController {
         firestoreSearchTerm.isNotEmpty) {
       final result = await repository.searchMoreDocs(query, docs.last.doc);
       result.when(success: (res) {
-        addAllDocs(res);
+        final removed = removedMutingDoc(res);
+        addAllDocs(removed);
       }, failure: () {
         UIHelper.showErrorFlutterToast("データの取得に失敗しました");
       });
@@ -97,4 +99,6 @@ abstract class SearchDocsController extends DocsController {
       query = query.where("searchToken.$searchWord", isEqualTo: true);
     }
   }
+
+  List<QDoc> removedMutingDoc(List<QDoc> res);
 }
