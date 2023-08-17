@@ -39,8 +39,8 @@ abstract class SearchDocsController extends DocsController {
     if (searchTerm.length < nGramIndex) {
       return;
     }
-    setSearchQuery();
-    createSearchLog(searchTarget); // Logをfirestoreに保存
+    _setSearchQuery();
+    _createSearchLog(searchTarget); // Logをfirestoreに保存
     firestoreSearchTerm = searchTerm; // フォームのSearchTermは空になるので格納する
     final result = await repository.searchDocs(query);
     result.when(success: (res) {
@@ -78,7 +78,7 @@ abstract class SearchDocsController extends DocsController {
     await fetchDocs();
   }
 
-  Future<void> createSearchLog(SearchTarget searchTargetEnum) async {
+  Future<void> _createSearchLog(SearchTarget searchTargetEnum) async {
     final searchTarget = searchTargetEnum.name;
     final repository = FirestoreRepository();
     final uid = currentUid();
@@ -90,7 +90,7 @@ abstract class SearchDocsController extends DocsController {
     await repository.createSearchLog(uid, searchLog.toJson());
   }
 
-  void setSearchQuery() {
+  void _setSearchQuery() {
     query = initialQuery;
     final searchWords = returnSearchWords(searchTerm);
     for (final searchWord in searchWords) {
