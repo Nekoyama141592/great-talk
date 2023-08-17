@@ -18,6 +18,10 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
   final bool requiresValueReset;
   final docs = <ImageQDocWraper>[].obs;
   final isInit = false.obs;
+  bool isProcessing = false; // addAllDocsに使用.
+
+  void startProcess() => isProcessing = true;
+  void endProcess() => isProcessing = false;
 
   void setAllDocs(List<QDoc> elements) {
     docs([]); // 配列を初期化
@@ -25,6 +29,8 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
   }
 
   void addAllDocs(List<QDoc> elements) async {
+    if (isProcessing) return;
+    startProcess();
     final docIds = docs.map((e) => e.doc.id).toList();
     for (final element in elements) {
       if (!docIds.contains(element.id)) {
@@ -33,9 +39,12 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
       }
     }
     docs([...docs]);
+    endProcess();
   }
 
   void insertAllDocs(List<QDoc> elements) async {
+    if (isProcessing) return;
+    startProcess();
     final docIds = docs.map((e) => e.doc.id).toList();
     for (final element in elements.reversed.toList()) {
       if (!docIds.contains(element.id)) {
@@ -44,6 +53,7 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
       }
     }
     docs([...docs]);
+    endProcess();
   }
 
   List<QDoc> sortedDocs(List<QDoc> elements) {
