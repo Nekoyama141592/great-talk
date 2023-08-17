@@ -8,6 +8,7 @@ import 'package:great_talk/common/maps.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/aws_s3_repository.dart';
 import 'package:great_talk/model/user_update_log/user_update_log.dart';
@@ -35,6 +36,11 @@ class _CreatePostPageState extends State<EditProfilePage>
   String? bio;
 
   Uint8List? uint8list;
+  @override
+  void initState() {
+    uint8list = MyProfileController.to.uint8list.value;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height; // 高さを設定
@@ -225,7 +231,7 @@ class _CreatePostPageState extends State<EditProfilePage>
     result.when(success: (_) {
       CurrentUserController.to.updateUser(userName!, bio!, fileName);
       Get.back();
-      UIHelper.showFlutterToast("プロフィールを更新できました！");
+      UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
     }, failure: () {
       UIHelper.showErrorFlutterToast("プロフィールを更新できませんでした");
     });
