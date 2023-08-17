@@ -40,7 +40,7 @@ abstract class SearchDocsController extends DocsController {
       return;
     }
     setSearchQuery();
-    // createSearchLog(searchTarget); // Logをfirestoreに保存
+    createSearchLog(searchTarget); // Logをfirestoreに保存
     firestoreSearchTerm = searchTerm; // フォームのSearchTermは空になるので格納する
     final result = await repository.searchDocs(query);
     result.when(success: (res) {
