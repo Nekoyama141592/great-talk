@@ -1,10 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/model/moderation_label/moderation_label.dart';
 
 part 'detected_image.freezed.dart';
 part 'detected_image.g.dart';
 
 @freezed
-abstract class DetectedImage with _$DetectedImage {
+abstract class DetectedImage implements _$DetectedImage {
+  const DetectedImage._();
   const factory DetectedImage({
     required String bucketName,
     required List<Map<String, dynamic>> moderationLabels,
@@ -13,4 +15,6 @@ abstract class DetectedImage with _$DetectedImage {
   }) = _DetectedImage;
   factory DetectedImage.fromJson(Map<String, dynamic> json) =>
       _$DetectedImageFromJson(json);
+  List<ModerationLabel> typedMLs() =>
+      moderationLabels.map((e) => ModerationLabel.fromJson(e)).toList();
 }

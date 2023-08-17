@@ -48,16 +48,30 @@ abstract class PublicUser implements _$PublicUser {
       typedImage().moderationLabels.isNotEmpty ||
       typedBio().negativeScore > negativeLimit ||
       typedUserName().negativeScore > negativeLimit;
-  String inappropriateReason() {
+  String inappropriateReason(String currentUid) {
     String reason = "";
+    final bioNS = typedBio().negativeScore;
+    final userNameNS = typedUserName().negativeScore;
+    final isMe = uid == currentUid;
+    // 不適切なら理由を追加.
     if (typedImage().moderationLabels.isNotEmpty) {
       reason += "・写真が不適切です。\n";
+      if (isMe) {
+        String concatenatedNames =
+            typedImage().typedMLs().map((ml) => ml.Name).join(', ');
+        reason += "(理由: $concatenatedNames)\n";
+      }
     }
-    if (typedBio().negativeScore > negativeLimit) {
+    if (bioNS > negativeLimit) {
       reason += "・紹介文がネガティブです。\n";
+      if (isMe) reason += "(ネガティブスコア: $bioNS)\n(紹介文: ${typedBio().value})\n";
     }
-    if (typedUserName().negativeScore > negativeLimit) {
+    if (userNameNS > negativeLimit) {
       reason += "・ユーザー名がネガティブです。\n";
+      if (isMe) {
+        reason +=
+            "(ネガティブスコア: $userNameNS)\n(ユーザー名: ${typedUserName().value})\n";
+      }
     }
     return reason;
   }

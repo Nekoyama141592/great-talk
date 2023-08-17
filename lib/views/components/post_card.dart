@@ -6,6 +6,7 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
+import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/circle_image.dart';
@@ -13,7 +14,7 @@ import 'package:great_talk/views/components/mosaic_card/components/mosaic_post_c
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 
-class PostCard extends StatelessWidget {
+class PostCard extends StatelessWidget with CurrentUserMixin {
   const PostCard({Key? key, required this.post, required this.uint8list})
       : super(key: key);
   final Post post;
@@ -29,7 +30,7 @@ class PostCard extends StatelessWidget {
             ? MosaicCard(
                 child: MosaicPostChild(
                   content: content,
-                  msg: content.inappropriateReason(),
+                  msg: post.inappropriateReason(currentUid()),
                   title: "不適切なコンテンツ",
                 ),
               )

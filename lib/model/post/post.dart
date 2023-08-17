@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
@@ -43,4 +44,34 @@ abstract class Post implements _$Post {
   DocRef typedRef() => ref as DocRef;
   DetectedText typedTitle() => DetectedText.fromJson(title);
   Timestamp typedUpdatedAtAt() => updatedAt as Timestamp;
+
+  String inappropriateReason(String currentUid) {
+    String reason = "";
+    // 不適切なら理由を追加.
+    final titleNS = typedTitle().negativeScore;
+    final descriptionNS = typedDescription().negativeScore;
+    final isMe = typedPoster().uid == currentUid;
+    if (titleNS > negativeLimit) {
+      reason += "・タイトルがネガティブです。\n";
+      if (isMe) {
+        reason += "(ネガティブスコア: $titleNS)\n(タイトル: ${typedTitle().value})\n";
+      }
+    }
+    if (typedImage().moderationLabels.isNotEmpty) {
+      reason += "・写真が不適切です。\n";
+      if (isMe) {
+        String concatenatedNames =
+            typedImage().typedMLs().map((ml) => ml.Name).join(', ');
+        reason += "(理由: $concatenatedNames)\n";
+      }
+    }
+    if (descriptionNS > negativeLimit) {
+      reason += "・説明文がネガティブです。\n";
+      if (isMe) {
+        reason +=
+            "(ネガティブスコア: $descriptionNS)\n(説明文: ${typedDescription().value})\n";
+      }
+    }
+    return reason;
+  }
 }

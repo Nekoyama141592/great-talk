@@ -11,5 +11,6 @@ analyzer:
     - "lib/consts/env_keys.dart"
     - "lib/infrastructure/firestore/mocks/mock_q_doc.dart"
     - "lib/infrastructure/firestore/mocks/mock_doc.dart"
+    - "lib/model/moderation_label/moderation_label.dart"
   errors:
     invalid_annotation_target: ignore

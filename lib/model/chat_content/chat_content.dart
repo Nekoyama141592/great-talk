@@ -90,14 +90,4 @@ abstract class ChatContent implements _$ChatContent {
   bool isInappropriate() =>
       typedImage().moderationLabels.isNotEmpty ||
       typedDescription().negativeScore > negativeLimit;
-  String inappropriateReason() {
-    String reason = "";
-    if (typedImage().moderationLabels.isNotEmpty) {
-      reason += "・写真が不適切です。\n";
-    }
-    if (typedDescription().negativeScore > negativeLimit) {
-      reason += "・説明文がネガティブです。\n";
-    }
-    return reason;
-  }
 }

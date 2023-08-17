@@ -19,16 +19,16 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
   Widget build(BuildContext context) {
     final children = <Widget>[
       if (!controller.isMyProfile)
-            Align(
-              alignment: Alignment.centerLeft,
-              child: InkWell(
-                onTap: Get.back,
-                child: const Icon(
-                  Icons.arrow_back,
-                  size: 30.0,
-                ),
-              ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: InkWell(
+            onTap: Get.back,
+            child: const Icon(
+              Icons.arrow_back,
+              size: 30.0,
             ),
+          ),
+        ),
       Obx(() => EllipsisText(
             controller.passiveUser.value!.typedUserName().value,
             style: StyleUtility.bold25(),

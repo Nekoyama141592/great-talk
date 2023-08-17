@@ -138,13 +138,14 @@ class __$$_DetectedImageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DetectedImage implements _DetectedImage {
+class _$_DetectedImage extends _DetectedImage {
   const _$_DetectedImage(
       {required this.bucketName,
       required final List<Map<String, dynamic>> moderationLabels,
       required this.moderationModelVersion,
       required this.value})
-      : _moderationLabels = moderationLabels;
+      : _moderationLabels = moderationLabels,
+        super._();
 
   factory _$_DetectedImage.fromJson(Map<String, dynamic> json) =>
       _$$_DetectedImageFromJson(json);
@@ -207,12 +208,13 @@ class _$_DetectedImage implements _DetectedImage {
   }
 }
 
-abstract class _DetectedImage implements DetectedImage {
+abstract class _DetectedImage extends DetectedImage {
   const factory _DetectedImage(
       {required final String bucketName,
       required final List<Map<String, dynamic>> moderationLabels,
       required final String moderationModelVersion,
       required final String value}) = _$_DetectedImage;
+  const _DetectedImage._() : super._();
 
   factory _DetectedImage.fromJson(Map<String, dynamic> json) =
       _$_DetectedImage.fromJson;

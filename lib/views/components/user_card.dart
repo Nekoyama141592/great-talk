@@ -5,13 +5,14 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/components/mosaic_card/components/mosaic_user_child.dart';
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
 
-class UserCard extends StatelessWidget {
+class UserCard extends StatelessWidget with CurrentUserMixin {
   const UserCard({Key? key, required this.publicUser, required this.uint8list})
       : super(key: key);
   final PublicUser publicUser;
@@ -27,7 +28,7 @@ class UserCard extends StatelessWidget {
                 child: MosaicCard(
                     child: MosaicUserChild(
                   publicUser: publicUser,
-                  msg: publicUser.inappropriateReason(),
+                  msg: publicUser.inappropriateReason(currentUid()),
                   title: "不適切なユーザー",
                 )))
             : Obx(
