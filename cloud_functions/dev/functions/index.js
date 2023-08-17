@@ -355,8 +355,9 @@ exports.onUserUpdateLogCreate = functions
         const detectedImage = await detectModerationLabels(userImagesBucket,newValue.imageFileName);
         await userRef.update({
             'bio': detectedBio,
-            'userName': detectedUserName,
             'image': detectedImage,
+            'searchToken': newValue.searchToken,
+            'userName': detectedUserName,
         });
         const user = await userRef.get();
         const posts = await userRef.collection('posts').get();
