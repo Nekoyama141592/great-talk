@@ -18,11 +18,11 @@ abstract class ProfileController extends DocsController {
 
   @override
   Future<void> fetchDocs() async {
-    // MyProfileのpassiveUserの情報はCurrentUserControllerで代入される
     if (isMyProfile && CurrentUserController.to.isNotVerified()) {
-      // 認証していないなら処理を終了させる.
-      return;
-    } else {
+      return; // 認証されていないなら自分の投稿を取得しない.
+    }
+    if (!isMyProfile) {
+      // MyProfileのpassiveUserの情報はCurrentUserControllerで代入されている
       await _getPassiveUser();
     }
     final result = await repository.getUserPostsByNewest(passiveUid());
