@@ -21,7 +21,11 @@ class UserProfileController extends ProfileController {
       return;
     }
     if (CurrentUserController.to.hasNoPublicUser()) {
-      UIHelper.showFlutterToast("ログインが必要です");
+      UIHelper.showFlutterToast("ログインが必要です。");
+      return;
+    }
+    if (CurrentUserController.to.followingUids.length >= followLimit) {
+      UIHelper.showFlutterToast("フォローできるのは$followLimit人までです。");
       return;
     }
     await _follow();
