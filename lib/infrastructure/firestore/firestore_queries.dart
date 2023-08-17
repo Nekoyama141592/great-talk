@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/ints.dart';
-import 'package:great_talk/common/lists.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreQueries {
@@ -39,10 +38,10 @@ class FirestoreQueries {
       _userPostsColRef(uid).doc(postId);
   static ColRef _userPostsColRef(String uid) =>
       userDocRef(uid).collection('posts');
-  static MapQuery _userPostsQuery(String uid) =>
+  static MapQuery userPostsQuery(String uid) =>
       _userPostsColRef(uid).limit(oneTimeReadCount);
   static MapQuery userPostsQueryByNewest(String uid) =>
-      _userPostsQuery(uid).orderBy("createdAt", descending: true);
+      userPostsQuery(uid).orderBy("createdAt", descending: true);
   static MapQuery moreUserPostsQueryByNewest(String uid, Doc lastDoc) =>
       moreQuery(userPostsQueryByNewest(uid), lastDoc);
   static MapQuery newUserPostsQueryByNewest(String uid, Doc firstDoc) =>
@@ -96,7 +95,10 @@ class FirestoreQueries {
   static final ColRef _usersColRef = _publicV1.collection('users');
   static DocRef privateUserDocRef(String currentUid) =>
       _privateV1.collection('privateUsers').doc(currentUid);
-  static DocRef searchLogDocRef(String currentUid) => privateUserDocRef(currentUid).collection('searchLogs').doc(); // privateUserを作成してなくても作成できる
+  static DocRef searchLogDocRef(String currentUid) =>
+      privateUserDocRef(currentUid)
+          .collection('searchLogs')
+          .doc(); // privateUserを作成してなくても作成できる
 
   static final usersQuery = _usersColRef.limit(oneTimeReadCount);
 
@@ -107,15 +109,6 @@ class FirestoreQueries {
       usersQuery.orderBy('followerCount', descending: true);
   static MapQuery moreUsersQueryByLikeCount(Doc lastDoc) =>
       moreQuery(usersQueryByLikeCount, lastDoc);
-  static MapQuery userSearchQuery(String searchTerm) =>
-      searchQuery(usersQuery, searchTerm);
-  static MapQuery moreUserSearchQuery(String searchTerm, Doc lastDoc) =>
-      moreQuery(userSearchQuery(searchTerm), lastDoc);
-  static MapQuery userPostsSearchQuery(String uid, String searchTerm) =>
-      searchQuery(_userPostsQuery(uid), searchTerm);
-  static MapQuery moreUserPostsSearchQuery(
-          String uid, String searchTerm, Doc lastDoc) =>
-      moreQuery(searchQuery(_userPostsQuery(uid), searchTerm), lastDoc);
 
   static DocRef userUpdateLogDocRef(String uid) =>
       userDocRef(uid).collection('userUpdateLogs').doc();
@@ -123,14 +116,4 @@ class FirestoreQueries {
   // 実際は使わない
   static DocRef originalContentDocRef(String contentId) =>
       _instance.collection('originalContents').doc(contentId);
-
-  static MapQuery searchQuery(MapQuery query, String searchTerm) {
-    final searchWords = returnSearchWords(searchTerm);
-    MapQuery searchQuery = query;
-    for (final searchWord in searchWords) {
-      searchQuery =
-          searchQuery.where("searchToken.$searchWord", isEqualTo: true);
-    }
-    return query;
-  }
 }

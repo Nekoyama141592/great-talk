@@ -118,14 +118,7 @@ class FirestoreClient {
   FutureQSnapshot getNewUserPostsByNewest(String uid, Doc firstDoc) async =>
       await FirestoreQueries.newUserPostsQueryByNewest(uid, firstDoc).get();
 
-  FutureQSnapshot searchUsers(String searchTerm) async =>
-      await FirestoreQueries.userSearchQuery(searchTerm).get();
-  FutureQSnapshot searchMoreUsers(String searchTerm, Doc lastDoc) async =>
-      await FirestoreQueries.moreUserSearchQuery(searchTerm, lastDoc).get();
-  FutureQSnapshot searchUserPosts(String uid, String searchTerm) async =>
-      await FirestoreQueries.userPostsSearchQuery(uid, searchTerm).get();
-  FutureQSnapshot searchMoreUserPosts(
-          String uid, String searchTerm, Doc lastDoc) async =>
-      await FirestoreQueries.moreUserPostsSearchQuery(uid, searchTerm, lastDoc)
-          .get();
+  FutureQSnapshot searchDocs(MapQuery query) async => await query.get();
+  FutureQSnapshot searchMoreDocs(MapQuery query, Doc lastDoc) async =>
+      await query.startAfterDocument(lastDoc).get();
 }

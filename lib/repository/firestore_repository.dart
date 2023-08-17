@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_firestore_client.dart';
@@ -96,6 +95,7 @@ class FirestoreRepository {
       return const Result.failure();
     }
   }
+
   FutureResult<bool> createSearchLog(String uid, SDMap json) async {
     try {
       await client.createSearchLog(uid, json);
@@ -423,63 +423,22 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<List<QDoc>> searchUsers(String searchTerm) async {
+  FutureResult<List<QDoc>> searchDocs(MapQuery query) async {
     try {
-      if (searchTerm.length < nGramIndex) {
-        return const Result.success([]);
-      } else {
-        final res = await client.searchUsers(searchTerm);
-        final docs = res.docs;
-        return Result.success(docs);
-      }
+      final res = await client.searchDocs(query);
+      final docs = res.docs;
+      return Result.success(docs);
     } catch (e) {
       debugPrint(e.toString());
       return const Result.failure();
     }
   }
 
-  FutureResult<List<QDoc>> searchMoreUsers(
-      String searchTerm, Doc lastDoc) async {
+  FutureResult<List<QDoc>> searchMoreDocs(MapQuery query, Doc lastDoc) async {
     try {
-      if (searchTerm.length < nGramIndex) {
-        return const Result.success([]);
-      } else {
-        final res = await client.searchMoreUsers(searchTerm, lastDoc);
-        final docs = res.docs;
-        return Result.success(docs);
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> searchUserPosts(
-      String uid, String searchTerm) async {
-    try {
-      if (searchTerm.length < nGramIndex) {
-        return const Result.success([]);
-      } else {
-        final res = await client.searchUserPosts(uid, searchTerm);
-        final docs = res.docs;
-        return Result.success(docs);
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> searchMoreUserPosts(
-      String uid, String searchTerm, Doc lastDoc) async {
-    try {
-      if (searchTerm.length < nGramIndex) {
-        return const Result.success([]);
-      } else {
-        final res = await client.searchMoreUserPosts(uid, searchTerm, lastDoc);
-        final docs = res.docs;
-        return Result.success(docs);
-      }
+      final res = await client.searchMoreDocs(query, lastDoc);
+      final docs = res.docs;
+      return Result.success(docs);
     } catch (e) {
       debugPrint(e.toString());
       return const Result.failure();

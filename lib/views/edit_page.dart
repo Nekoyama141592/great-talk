@@ -41,6 +41,7 @@ class _CreatePostPageState extends State<EditProfilePage>
     uint8list = MyProfileController.to.uint8list.value;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height; // 高さを設定

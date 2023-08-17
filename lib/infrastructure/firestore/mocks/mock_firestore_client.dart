@@ -6,7 +6,6 @@ import 'package:great_talk/infrastructure/firestore/mocks/mock_doc.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_doc.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_snapshot.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
-import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class MockFirestoreClient implements FirestoreClient {
@@ -66,6 +65,7 @@ class MockFirestoreClient implements FirestoreClient {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     return;
   }
+
   @override
   Future<void> createSearchLog(String uid, SDMap json) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
@@ -261,38 +261,16 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
-  FutureQSnapshot searchUsers(String searchTerm) async {
+  FutureQSnapshot searchDocs(MapQuery query) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    List<PublicUser> users = [];
-    if (searchTerm.isNotEmpty) {
-      users = mockUsers.where((element) {
-        final name = element.typedUserName().value.toLowerCase();
-        return name.contains(searchTerm);
-      }).toList();
-    }
-    final data = users.map((e) => MockQDoc(e.toJson(), e.uid)).toList();
+    final data = mockUsers.map((e) => MockQDoc(e.toJson(), e.uid)).toList();
     return MockQSnapshot(data);
   }
 
   @override
-  FutureQSnapshot searchMoreUsers(String searchTerm, Doc lastDoc) =>
-      searchUsers(searchTerm);
-  @override
-  FutureQSnapshot searchUserPosts(String uid, String searchTerm) async {
+  FutureQSnapshot searchMoreDocs(MapQuery query, Doc lastDoc) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    List<Post> posts = [];
-    if (searchTerm.isNotEmpty) {
-      posts = mockPosts.where((element) {
-        final name = element.typedTitle().value.toLowerCase();
-        return name.contains(searchTerm);
-      }).toList();
-    }
-    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
+    final data = mockPosts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
     return MockQSnapshot(data);
   }
-
-  @override
-  FutureQSnapshot searchMoreUserPosts(
-          String uid, String searchTerm, Doc lastDoc) =>
-      searchUserPosts(uid, searchTerm);
 }
