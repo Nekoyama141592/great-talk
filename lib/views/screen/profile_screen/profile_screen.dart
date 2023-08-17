@@ -44,14 +44,12 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
           ),
           Obx(() => Text(
                 "フォロー ${controller.passiveUser.value?.followingCount ?? 0}",
-                style: StyleUtility.basic20(),
               )),
           const SizedBox(
             width: 20.0,
           ),
           Obx(() => Text(
                 "フォロワー ${controller.passiveUser.value?.followerCount ?? 0}",
-                style: StyleUtility.basic20(),
               ))
         ],
       ),
