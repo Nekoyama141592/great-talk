@@ -2,8 +2,8 @@ name: great_talk
 description: A new Flutter project.
 
 publish_to: 'none' 
-
-version: 3.0.6+132 #ints.dartのversionも変更する.
+#ints.dartのversionも変更する.
+version: 3.0.7+133 
 
 environment:
   sdk: ">=2.18.2 <3.0.0"
