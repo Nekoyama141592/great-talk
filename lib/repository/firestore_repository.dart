@@ -35,6 +35,15 @@ class FirestoreRepository {
     }
   }
 
+  FutureResult<int> countSearchLogs() async {
+    try {
+      final count = await client.countSearchLogs();
+      return Result.success(count);
+    } catch (e) {
+      return const Result.failure();
+    }
+  }
+
   // write
   FutureResult<bool> createMessage(DocRef messageRef, SDMap json) async {
     try {

@@ -11,6 +11,9 @@ service cloud.firestore {
     match /{path=**}/messages/{postId} {
       allow read: if isAdmin();
     }
+    match /{path=**}/searchLogs/{postId} {
+      allow read: if isAdmin();
+    }
     match /public/{version}/users/{uid} {
       allow read: if isAuthenticated();
       allow create: if isTheSameUserAndVerified(uid) && isValidInitialPublicUser(request.resource.data);

@@ -44,6 +44,11 @@ class AdminPage extends HookWidget {
                         "累計メッセージ数 ${controller.messageCount}",
                         style: style,
                       )),
+                  const Divider(),
+                  Obx(() => SelectableText(
+                        "累計検索数 ${controller.searchCount}",
+                        style: style,
+                      )),
                 ],
               )),
       ),

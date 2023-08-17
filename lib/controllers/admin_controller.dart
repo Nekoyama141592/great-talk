@@ -7,13 +7,15 @@ class AdminController extends LoadingController {
   final userCount = 0.obs;
   final postCount = 0.obs;
   final messageCount = 0.obs;
+  final searchCount = 0.obs;
   final repository = FirestoreRepository();
 
   Future<void> init() async {
     startLoading();
-    await _countMessages();
-    await _countPosts();
     await _countUsers();
+    await _countPosts();
+    await _countMessages();
+    await _countSearchLogs();
     endLoading();
   }
 
@@ -41,6 +43,15 @@ class AdminController extends LoadingController {
       messageCount(res);
     }, failure: () {
       UIHelper.showErrorFlutterToast("メッセージ数の取得に失敗しました");
+    });
+  }
+
+  Future<void> _countSearchLogs() async {
+    final result = await repository.countSearchLogs();
+    result.when(success: (res) {
+      searchCount(res);
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("検索数の取得に失敗しました");
     });
   }
 }

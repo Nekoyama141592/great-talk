@@ -19,6 +19,12 @@ class FirestoreClient {
     return snapshot.count;
   }
 
+  Future<int> countSearchLogs() async {
+    final snapshot =
+        await FirestoreQueries.searchLogsCollectionGroup.count().get();
+    return snapshot.count;
+  }
+
   // write
   Future<void> createMessage(DocRef messageRef, SDMap json) async =>
       await messageRef.set(json);

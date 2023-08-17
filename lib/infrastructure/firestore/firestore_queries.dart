@@ -12,6 +12,8 @@ class FirestoreQueries {
   static final _postsLimitedCollectionGroupQuery =
       postsCollectionGroup.limit(oneTimeReadCount);
   static final messagesCollectionGroup = _instance.collectionGroup('messages');
+  static final searchLogsCollectionGroup =
+      _instance.collectionGroup('searchLogs');
   // collection
   static MapQuery newQuery(MapQuery query, Doc firstDoc) =>
       query.endAtDocument(firstDoc);
