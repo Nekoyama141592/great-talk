@@ -7,7 +7,7 @@ import 'package:great_talk/utility/file_utility.dart';
 class MyProfileController extends ProfileController with CurrentUserMixin {
   MyProfileController() : super(true);
   static MyProfileController get to => Get.find<MyProfileController>();
-  
+
   // CurrentUserControllerから起動させる.
   Future<void> updateProfileUserState(PublicUser result) async {
     passiveUser(result);

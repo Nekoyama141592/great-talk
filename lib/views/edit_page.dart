@@ -13,6 +13,7 @@ import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/aws_s3_repository.dart';
 import 'package:great_talk/model/user_update_log/user_update_log.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/state/abstract/processing_state.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
@@ -26,7 +27,7 @@ class EditProfilePage extends StatefulWidget {
   State<EditProfilePage> createState() => _CreatePostPageState();
 }
 
-class _CreatePostPageState extends State<EditProfilePage>
+class _CreatePostPageState extends ProcessingState<EditProfilePage>
     with CurrentUserMixin {
   double? _deviceHeight, _deviceWidth;
   // ログとフォームキーをとる
@@ -194,10 +195,14 @@ class _CreatePostPageState extends State<EditProfilePage>
     }
     if (uint8list == null) {
       await UIHelper.showErrorFlutterToast("アイコンをタップしてプロフィール画像をアップロードしてください");
-    }
-    if (userName == null || bio == null || userName!.isEmpty || bio!.isEmpty) {
       return;
     }
+    if (userName == null || bio == null || userName!.isEmpty || bio!.isEmpty) {
+      await UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
+      return;
+    }
+    if (isProcessing) return; // 二重リクエストを防止.
+    startProcess();
     final newFileName = s3FileName();
     final repository = AWSS3Repository();
     final bucketName = AWSS3Utility.userImagesBucketName();
@@ -208,6 +213,7 @@ class _CreatePostPageState extends State<EditProfilePage>
         failure: () {
           UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
         });
+    endProcess();
   }
 
   void _onImagePickButtonPressed() async {

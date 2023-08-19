@@ -12,6 +12,7 @@ import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/state/abstract/processing_state.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
@@ -27,7 +28,8 @@ class CreatePostPage extends StatefulWidget {
   State<CreatePostPage> createState() => _CreatePostPageState();
 }
 
-class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
+class _CreatePostPageState extends ProcessingState<CreatePostPage>
+    with CurrentUserMixin {
   double? _deviceHeight, _deviceWidth;
   // ログとフォームキーをとる
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -340,6 +342,8 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
       await UIHelper.showErrorFlutterToast("temperatureとtopPはどちらか一方しか変更できません");
       return;
     }
+    if (isProcessing) return; // 二重リクエストを防止.
+    startProcess();
     final newFileName = s3FileName();
     final bucketName = AWSS3Utility.postImagesBucketName();
     final repository = AWSS3Repository();
@@ -350,6 +354,7 @@ class _CreatePostPageState extends State<CreatePostPage> with CurrentUserMixin {
         failure: () {
           UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
         });
+    endProcess();
   }
 
   void _onImagePickButtonPressed() async {
