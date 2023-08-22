@@ -5,7 +5,6 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
-import 'package:great_talk/utility/chat_utility.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 
 class OriginalContentCards extends StatelessWidget {
@@ -48,8 +47,6 @@ class OriginalContentCards extends StatelessWidget {
                       : null,
                   onTap: () => Get.toNamed(
                       '/chat/users/${content.posterUid}/posts/${content.contentId}'),
-                  onLongPress: () =>
-                      ChatUtility.showCleanLocalMsgDialog(content, controller),
                 ),
               );
             }))));

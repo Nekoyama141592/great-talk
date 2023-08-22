@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/date_converter.dart';
 import 'package:great_talk/common/enums.dart';
@@ -35,6 +35,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   final realtimeRes = "".obs;
   final isLoading = false.obs;
   final isGenerating = false.obs;
+  String postId = "";
   int chatCount = 0;
   late SharedPreferences prefs;
   final Rx<ChatContent?> interlocutor = Rx(null);
@@ -47,6 +48,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     realtimeRes('');
     isLoading(false);
     isGenerating(false);
+    postId = "";
     interlocutor.value = null;
     post.value = null;
   }
@@ -56,7 +58,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     prefs = MainController.to.prefs;
     isLoading(true);
     final uid = Get.parameters['uid']!;
-    final postId = Get.parameters['postId']!;
+    postId = Get.parameters['postId']!;
     final type = returnIsOriginalContents(uid)
         ? InterlocutorType.originalContent
         : InterlocutorType.userContent;
@@ -378,5 +380,30 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     } else {
       return false;
     }
+  }
+
+  void showCleanLocalMsgDialog() {
+    Get.dialog(CupertinoAlertDialog(
+      content: const Text("履歴を全て削除しますがよろしいですか？"),
+      actions: [
+        CupertinoDialogAction(
+            onPressed: Get.back, child: const Text(cancelText)),
+        CupertinoDialogAction(
+            isDestructiveAction: true,
+            onPressed: () async {
+              await _cleanLocalMessage();
+              Get.back();
+            },
+            child: const Text(okText))
+      ],
+    ));
+  }
+
+  Future<void> _cleanLocalMessage() async {
+    if (messages.isEmpty) return;
+    messages([]); // 初期化.
+    UIHelper.showFlutterToast(clearChatMsg);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(postId);
   }
 }

@@ -10,6 +10,7 @@ import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
+import 'package:great_talk/views/realtime_res_page/components/clear_log_button.dart';
 import 'package:great_talk/views/realtime_res_page/components/description_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
@@ -34,11 +35,15 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
               actions: [
                 const DescriptionButton(),
                 const SizedBox(
-                  width: 20.0,
+                  width: 10.0,
+                ),
+                const ClearLogButton(),
+                const SizedBox(
+                  width: 10.0,
                 ),
                 const PostReportButton(),
                 const SizedBox(
-                  width: 20.0,
+                  width: 10.0,
                 ),
                 Obx(() => controller.post.value == null
                     ? const SizedBox.shrink()
