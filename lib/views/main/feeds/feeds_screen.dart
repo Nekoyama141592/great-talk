@@ -8,6 +8,9 @@ class FeedsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(FeedsController());
-    return RefreshScreen(docsController: controller);
+    return RefreshScreen(
+      docsController: controller,
+      reloadMsg: "まずはランキングページから誰かをフォローしてみましょう！",
+    );
   }
 }

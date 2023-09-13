@@ -5,15 +5,18 @@ import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/post_card.dart';
 import 'package:great_talk/views/screen/loading_screen.dart';
+import 'package:great_talk/views/screen/refresh_screen/components/reload_screen/reload_screen.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RefreshScreen extends HookWidget {
   const RefreshScreen({
     Key? key,
     required this.docsController,
+    this.reloadMsg,
     this.child,
   }) : super(key: key);
   final DocsController docsController;
+  final String? reloadMsg;
   final Widget? child;
   @override
   Widget build(BuildContext context) {
@@ -30,16 +33,9 @@ class RefreshScreen extends HookWidget {
         return const LoadingScreen();
       }
       if (docsController.docs.isEmpty) {
-        return InkWell(
-          onTap: docsController.onReload,
-          child: Align(
-            alignment: Alignment.center,
-            child: Icon(
-              Icons.refresh,
-              size: 100.0,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-          ),
+        return ReloadScreen(
+          onReload: docsController.onReload,
+          reloadMsg: reloadMsg,
         );
       }
       return SmartRefresher(
