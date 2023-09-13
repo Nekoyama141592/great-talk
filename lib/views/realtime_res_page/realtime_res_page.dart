@@ -25,7 +25,7 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
     final scrollCotroller = useScrollController();
     useEffect(() {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await controller.getChatLog();
+        await controller.init();
       });
       return controller.resetState;
     }, []);

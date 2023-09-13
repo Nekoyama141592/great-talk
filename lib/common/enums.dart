@@ -5,7 +5,8 @@ enum InterlocutorType { userContent, originalContent }
 enum MessageType { text }
 
 enum PrefsKey {
-  // personIdで各々のChat履歴
+  // ${contentId}で各々のChat履歴
+  // isExplained_${contentId}でfalseならダイアログを表示
   chatCount,
   initialPeople,
   isAgreedToTerms,

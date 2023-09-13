@@ -53,8 +53,24 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     post.value = null;
   }
 
+  Future<void> init() async {
+    await _getChatLog();
+    _showFirstDialog();
+  }
+
+  void _showFirstDialog() {
+    final content = interlocutor.value;
+    if (content == null) return;
+    final prefKey = "isExplained_${content.contentId}";
+    final isExplained = prefs.getBool(prefKey) ?? false;
+    if (!isExplained) {
+      _showDescriptionDialog();
+      prefs.setBool(prefKey, true);
+    }
+  }
+
   // 与えられたinterlocutorとのチャット履歴を取得
-  Future<void> getChatLog() async {
+  Future<void> _getChatLog() async {
     prefs = MainController.to.prefs;
     isLoading(true);
     final uid = Get.parameters['uid']!;
@@ -358,7 +374,9 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     }
   }
 
-  void onDescriptionButtonPressed() {
+  void onDescriptionButtonPressed() => _showDescriptionDialog();
+
+  void _showDescriptionDialog() {
     final content = interlocutor.value;
     if (content == null) {
       return;
