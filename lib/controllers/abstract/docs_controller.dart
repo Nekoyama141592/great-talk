@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:get/get.dart';
+import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
@@ -19,7 +20,14 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
   final docs = <ImageQDocWraper>[].obs;
   final isInit = false.obs;
   bool isProcessing = false; // addAllDocsに使用.
+  late MapQuery query;
+  @override
+  void onInit() {
+    setQuery();
+    super.onInit();
+  }
 
+  void setQuery();
   void startProcess() => isProcessing = true;
   void endProcess() => isProcessing = false;
 
@@ -83,13 +91,28 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
     return image;
   }
 
-  Future<void> fetchDocs();
-  Future<void> onRefresh(RefreshController refreshController);
+  Future<void> fetchDocs() async {
+    try {
+      final elements = await query.get();
+      setAllDocs(elements.docs);
+    } catch (e) {
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+    }
+  }
+
   Future<void> onReload() async {
     startLoading();
     await fetchDocs();
     endLoading();
   }
 
-  Future<void> onLoading(RefreshController refreshController);
+  Future<void> onLoading(RefreshController refreshController) async {
+    try {
+      final elements = await query.startAtDocument(docs.last.doc).get();
+      addAllDocs(elements.docs);
+    } catch (e) {
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+    }
+    refreshController.loadComplete();
+  }
 }

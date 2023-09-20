@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
+import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -12,36 +12,26 @@ class MutePostsController extends DocsController {
   MutePostsController() : super(enablePullDown: true, requiresValueReset: true);
   static MutePostsController get to => Get.find<MutePostsController>();
   @override
+  void setQuery() {
+    final requestPostIds = _createRequestPostIds();
+    query = FirestoreQueries.postsQueryByWhereIn(requestPostIds);
+  }
+
+  @override
   Future<void> fetchDocs() async {
     final requestPostIds = _createRequestPostIds();
     if (requestPostIds.isNotEmpty) {
-      final result = await repository.getPostsByWhereIn(requestPostIds);
-      result.when(success: (res) {
-        setAllDocs(res);
-      }, failure: () {
-        UIHelper.showErrorFlutterToast("データの取得に失敗しました");
-      });
+      await super.fetchDocs();
     }
   }
 
   @override
   Future<void> onLoading(RefreshController refreshController) async {
+    setQuery();
     final requestPostIds = _createRequestPostIds();
     if (requestPostIds.isNotEmpty) {
-      final result = await repository.getPostsByWhereIn(requestPostIds);
-      result.when(success: (res) {
-        addAllDocs(res);
-      }, failure: () {
-        UIHelper.showErrorFlutterToast("データの取得に失敗しました");
-      });
+      await super.onLoading(refreshController);
     }
-    refreshController.loadComplete();
-  }
-
-  @override
-  Future<void> onRefresh(RefreshController refreshController) async {
-    refreshController.refreshCompleted();
-    return;
   }
 
   List<String> _createRequestPostIds() {

@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
 import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/lists.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/search_log/search_log.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
@@ -16,24 +14,10 @@ abstract class SearchDocsController extends DocsController {
       : super(enablePullDown: false, requiresValueReset: false);
   String searchTerm = "";
   String firestoreSearchTerm = "";
-  late MapQuery query;
   late MapQuery initialQuery;
   final SearchTarget searchTarget;
-  String _passiveUid() => Get.parameters['uid']!;
   @override
-  void onInit() {
-    switch (searchTarget) {
-      case SearchTarget.post:
-        query = FirestoreQueries.userPostsQuery(_passiveUid());
-        initialQuery = query;
-        break;
-      case SearchTarget.user:
-        query = FirestoreQueries.usersQuery;
-        initialQuery = query;
-    }
-    super.onInit();
-  }
-
+  void setQuery();
   @override
   Future<void> fetchDocs() async {
     if (searchTerm.length < nGramIndex) {
@@ -42,13 +26,7 @@ abstract class SearchDocsController extends DocsController {
     _setSearchQuery();
     _createSearchLog(searchTarget); // Logをfirestoreに保存
     firestoreSearchTerm = searchTerm; // フォームのSearchTermは空になるので格納する
-    final result = await repository.searchDocs(query);
-    result.when(success: (res) {
-      final removed = removedMutingDoc(res);
-      setAllDocs(removed);
-    }, failure: () {
-      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
-    });
+    super.fetchDocs();
   }
 
   @override
@@ -57,22 +35,10 @@ abstract class SearchDocsController extends DocsController {
     if (searchTerm.isEmpty &&
         docs.isNotEmpty &&
         firestoreSearchTerm.isNotEmpty) {
-      final result = await repository.searchMoreDocs(query, docs.last.doc);
-      result.when(success: (res) {
-        final removed = removedMutingDoc(res);
-        addAllDocs(removed);
-      }, failure: () {
-        UIHelper.showErrorFlutterToast("データの取得に失敗しました");
-      });
+      super.onLoading(refreshController);
     } else {
       UIHelper.showFlutterToast("再検索を行ってください");
     }
-    refreshController.loadComplete();
-  }
-
-  @override
-  Future<void> onRefresh(RefreshController refreshController) async {
-    refreshController.refreshCompleted();
   }
 
   void search(String value) async {

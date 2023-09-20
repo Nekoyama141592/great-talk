@@ -44,7 +44,6 @@ class RefreshScreen extends HookWidget {
           enablePullUp: true,
           header: const WaterDropHeader(),
           onLoading: () => docsController.onLoading(refreshController),
-          onRefresh: () => docsController.onRefresh(refreshController),
           child: child ??
               GridView.builder(
                   itemCount: docsController.docs.length,

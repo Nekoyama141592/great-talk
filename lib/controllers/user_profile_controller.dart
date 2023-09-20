@@ -6,12 +6,41 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/abstract/profile_controller.dart';
+import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/follower/follower.dart';
+import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
+import 'package:great_talk/utility/file_utility.dart';
 
 class UserProfileController extends ProfileController {
   UserProfileController() : super(false);
   static UserProfileController get to => Get.find<UserProfileController>();
+  @override
+  String passiveUid() => Get.parameters['uid']!;
+  @override
+  void onInit() async {
+    super.onInit();
+    await _getPassiveUser();
+  }
+
+  @override
+  void setQuery() async {
+    query = FirestoreQueries.userPostsQueryByNewest(passiveUid());
+  }
+
+  Future<void> _getPassiveUser() async {
+    final result = await repository.getPublicUser(passiveUid());
+    result.when(success: (res) {
+      passiveUser(PublicUser.fromJson(res.data()!));
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+    });
+    final detectedImage = passiveUser.value!.typedImage();
+    final s3Image = await FileUtility.getS3Image(
+        detectedImage.bucketName, detectedImage.value);
+    uint8list(s3Image);
+  }
+
   void onFollowPressed() async {
     if (passiveUser.value == null) {
       return;

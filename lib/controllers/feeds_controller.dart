@@ -9,8 +9,13 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class FeedsController extends DocsController {
   FeedsController() : super(enablePullDown: true, requiresValueReset: false);
-
   List<QDoc> _timelineDocs = [];
+
+  @override
+  void setQuery() {
+    return;
+  }
+
   FutureResult<List<QDoc>> _timelinesToPostsResult(List<QDoc> timelines) async {
     final postIds = timelines
         .map(
@@ -25,13 +30,6 @@ class FeedsController extends DocsController {
     final posts = await _timelinesToPostsResult(fetchedTimelines);
     posts.when(
         success: (res) => setAllDocs(sortedDocs(res)),
-        failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
-  }
-
-  Future<void> _fetchNewPosts(List<QDoc> fetchedTimelines) async {
-    final posts = await _timelinesToPostsResult(fetchedTimelines);
-    posts.when(
-        success: (res) => insertAllDocs(sortedDocs(res)),
         failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 
@@ -66,22 +64,6 @@ class FeedsController extends DocsController {
         },
         failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
     refreshController.loadComplete();
-  }
-
-  @override
-  Future<void> onRefresh(RefreshController refreshController) async {
-    if (CurrentUserController.to.isNotVerified()) return;
-    final timelines =
-        await repository.getNewTimelines(_userRef(), _timelineDocs.first);
-    timelines.when(
-        success: (res) async {
-          for (final timeline in res.reversed.toList()) {
-            _timelineDocs.insert(0, timeline);
-          }
-          await _fetchNewPosts(res);
-        },
-        failure: () => UIHelper.showFlutterToast("データの取得に失敗しました"));
-    refreshController.refreshCompleted();
   }
 
   DocRef _userRef() => FirestoreQueries.userDocRef(currentUid());

@@ -51,8 +51,6 @@ class FirestoreQueries {
 
   static final postsQueryByLikeCount =
       _postsLimitedCollectionGroupQuery.orderBy('likeCount', descending: true);
-  static MapQuery morePostsQueryByLikeCount(Doc lastDoc) =>
-      moreQuery(postsQueryByLikeCount, lastDoc);
 
   static ColRef postMessagesColRef(
           String posterUid, String postId, String currentUid) =>
@@ -107,10 +105,8 @@ class FirestoreQueries {
   static MapQuery usersQueryByWhereIn(List<String> uids) =>
       usersQuery.where('uid', whereIn: uids);
 
-  static final usersQueryByLikeCount =
+  static final usersQueryByFollowerCount =
       usersQuery.orderBy('followerCount', descending: true);
-  static MapQuery moreUsersQueryByLikeCount(Doc lastDoc) =>
-      moreQuery(usersQueryByLikeCount, lastDoc);
 
   static DocRef userUpdateLogDocRef(String uid) =>
       userDocRef(uid).collection('userUpdateLogs').doc();

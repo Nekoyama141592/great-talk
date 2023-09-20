@@ -5,7 +5,6 @@ import 'package:great_talk/infrastructure/firestore/mocks/mock_data.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_doc.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_doc.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_q_snapshot.dart';
-import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class MockFirestoreClient implements FirestoreClient {
@@ -157,25 +156,11 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
-  FutureQSnapshot getPostsByWhereIn(List<String> postIds) async {
+  FutureQSnapshot getPosts(MapQuery query) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final posts =
-        mockPosts.where((element) => postIds.contains(element.postId));
-    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
+    final data = mockPosts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
     return MockQSnapshot(data);
   }
-
-  @override
-  FutureQSnapshot getPostsByLikeCount() async {
-    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final posts = [...mockPosts];
-    posts.sort((a, b) => b.likeCount.compareTo(a.likeCount));
-    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
-    return MockQSnapshot(data);
-  }
-
-  @override
-  FutureQSnapshot getMorePostsByLikeCount(Doc lastDoc) => getPostsByLikeCount();
 
   @override
   FutureQSnapshot getTimelines(DocRef userRef) async {
@@ -187,23 +172,23 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
-  FutureQSnapshot getNewTimelines(DocRef userRef, Doc firstDoc) =>
-      getTimelines(userRef);
-  @override
   FutureQSnapshot getMoreTimelines(DocRef userRef, Doc lastDoc) =>
       getTimelines(userRef);
   @override
-  FutureQSnapshot getTokens(String currentUid) async {
-    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final data = <QDoc>[];
-    return MockQSnapshot(data);
-  }
+  FutureQSnapshot getNewTimelines(DocRef userRef, Doc firstDoc) =>
+      getTimelines(userRef);
 
   @override
   FutureQSnapshot getTimelinePosts(List<String> timelinePostIds) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final posts = [...mockPosts];
-    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
+    final data = mockPosts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
+    return MockQSnapshot(data);
+  }
+
+  @override
+  FutureQSnapshot getTokens(String currentUid) async {
+    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
+    final data = <QDoc>[];
     return MockQSnapshot(data);
   }
 
@@ -223,14 +208,6 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
-  FutureQSnapshot getUsersByWhereIn(List<String> uids) async {
-    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final users = mockUsers.where((element) => uids.contains(element.uid));
-    final data = users.map((e) => MockQDoc(e.toJson(), e.uid)).toList();
-    return MockQSnapshot(data);
-  }
-
-  @override
   FutureDoc getCurrentUser(String uid) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     final data = currentUser.toJson();
@@ -238,45 +215,9 @@ class MockFirestoreClient implements FirestoreClient {
   }
 
   @override
-  FutureQSnapshot getUsersByFollowerCount() async {
-    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final users = [...mockUsers];
-    users.sort((a, b) => b.followerCount.compareTo(a.followingCount));
-    final data = users.map((e) => MockQDoc(e.toJson(), e.uid)).toList();
-    return MockQSnapshot(data);
-  }
-
-  @override
-  FutureQSnapshot getMoreUsersByFollowerCount(Doc lastDoc) =>
-      getUsersByFollowerCount();
-
-  @override
-  FutureQSnapshot getMoreUserPostsByNewest(String uid, Doc lastDoc) =>
-      getUserPostsByNewest(uid);
-  @override
-  FutureQSnapshot getNewUserPostsByNewest(String uid, Doc firstDoc) =>
-      getUserPostsByNewest(uid);
-  @override
-  FutureQSnapshot getUserPostsByNewest(String uid) async {
-    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final posts = [...mockPosts]
-        .where((e) => PublicUser.fromJson(e.poster).uid == uid)
-        .toList();
-    final data = posts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
-    return MockQSnapshot(data);
-  }
-
-  @override
-  FutureQSnapshot searchDocs(MapQuery query) async {
+  FutureQSnapshot getUsers(MapQuery query) async {
     await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
     final data = mockUsers.map((e) => MockQDoc(e.toJson(), e.uid)).toList();
-    return MockQSnapshot(data);
-  }
-
-  @override
-  FutureQSnapshot searchMoreDocs(MapQuery query, Doc lastDoc) async {
-    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final data = mockPosts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
     return MockQSnapshot(data);
   }
 }

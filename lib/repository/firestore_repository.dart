@@ -242,39 +242,6 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<List<QDoc>> getPostsByWhereIn(List<String> postIds) async {
-    try {
-      final res = await client.getPostsByWhereIn(postIds);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getPostsByLikeCount() async {
-    try {
-      final res = await client.getPostsByLikeCount();
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getMorePostsByLikeCount(Doc lastDoc) async {
-    try {
-      final res = await client.getMorePostsByLikeCount(lastDoc);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
   FutureResult<List<QDoc>> getTimelinePosts(
       List<String> timelinePostIds) async {
     try {
@@ -358,96 +325,6 @@ class FirestoreRepository {
     try {
       final res = await client.getCurrentUser(uid);
       return Result.success(res);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getUsersByWhereIn(List<String> uids) async {
-    try {
-      final res = await client.getUsersByWhereIn(uids);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getUsersByFollowerCount() async {
-    try {
-      final res = await client.getUsersByFollowerCount();
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getMoreUsersByFollowerCount(Doc lastDoc) async {
-    try {
-      final res = await client.getMoreUsersByFollowerCount(lastDoc);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getUserPostsByNewest(String uid) async {
-    try {
-      final res = await client.getUserPostsByNewest(uid);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getMoreUserPostsByNewest(
-      String uid, Doc lastDoc) async {
-    try {
-      final res = await client.getMoreUserPostsByNewest(uid, lastDoc);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getNewUserPostsByNewest(
-      String uid, Doc firstDoc) async {
-    try {
-      final res = await client.getNewUserPostsByNewest(uid, firstDoc);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> searchDocs(MapQuery query) async {
-    try {
-      final res = await client.searchDocs(query);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> searchMoreDocs(MapQuery query, Doc lastDoc) async {
-    try {
-      final res = await client.searchMoreDocs(query, lastDoc);
-      final docs = res.docs;
-      return Result.success(docs);
     } catch (e) {
       debugPrint(e.toString());
       return const Result.failure();
