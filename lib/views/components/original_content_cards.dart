@@ -5,6 +5,7 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
+import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 
 class OriginalContentCards extends StatelessWidget {
@@ -45,8 +46,11 @@ class OriginalContentCards extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         )
                       : null,
-                  onTap: () => Get.toNamed(
-                      '/chat/users/${content.posterUid}/posts/${content.contentId}'),
+                  onTap: () {
+                    PurchasesController.to.restorePurchases();
+                    Get.toNamed(
+                        '/chat/users/${content.posterUid}/posts/${content.contentId}');
+                  },
                 ),
               );
             }))));

@@ -22,8 +22,7 @@ class MyHomePage extends HookWidget {
   const MyHomePage({Key? key}) : super(key: key);
   @override
   Widget build(context) {
-    final purchasesController = Get.put(PurchasesController());
-
+    Get.put(PurchasesController());
     Get.put(NotificationController());
     Get.put(PostsController());
     Get.put(RealtimeResController());
@@ -43,7 +42,6 @@ class MyHomePage extends HookWidget {
               pageController.animateToPage(index,
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.fastLinearToSlowEaseIn);
-              if (index == 1) await purchasesController.restorePurchases();
             }),
         body: PageView(
           onPageChanged: (index) => pageIndex.value = index,
