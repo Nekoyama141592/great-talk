@@ -34,17 +34,12 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
           appBar: AppBar(
               actions: [
                 const DescriptionButton(),
-                const SizedBox(
-                  width: 10.0,
-                ),
                 const ClearLogButton(),
-                const SizedBox(
-                  width: 10.0,
-                ),
-                const PostReportButton(),
-                const SizedBox(
-                  width: 10.0,
-                ),
+                // 自分の投稿ならレポートボタンを表示しない.
+                Obx(() =>
+                    controller.post.value?.typedPoster().uid == currentUid()
+                        ? const SizedBox.shrink()
+                        : const PostReportButton()),
                 Obx(() => controller.post.value == null
                     ? const SizedBox.shrink()
                     : PostLikeButton(
