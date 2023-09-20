@@ -174,9 +174,6 @@ class MockFirestoreClient implements FirestoreClient {
   @override
   FutureQSnapshot getMoreTimelines(DocRef userRef, Doc lastDoc) =>
       getTimelines(userRef);
-  @override
-  FutureQSnapshot getNewTimelines(DocRef userRef, Doc firstDoc) =>
-      getTimelines(userRef);
 
   @override
   FutureQSnapshot getTimelinePosts(List<String> timelinePostIds) async {

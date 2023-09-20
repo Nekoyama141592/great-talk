@@ -279,17 +279,6 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<List<QDoc>> getNewTimelines(DocRef userRef, Doc firstDoc) async {
-    try {
-      final res = await client.getNewTimelines(userRef, firstDoc);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
   FutureResult<List<QDoc>> getMoreTimelines(DocRef userRef, Doc lastDoc) async {
     try {
       final res = await client.getMoreTimelines(userRef, lastDoc);

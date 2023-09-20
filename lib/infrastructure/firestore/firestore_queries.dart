@@ -15,8 +15,6 @@ class FirestoreQueries {
   static final searchLogsCollectionGroup =
       _instance.collectionGroup('searchLogs');
   // collection
-  static MapQuery newQuery(MapQuery query, Doc firstDoc) =>
-      query.endAtDocument(firstDoc);
   static MapQuery moreQuery(MapQuery query, Doc lastDoc) =>
       query.startAtDocument(lastDoc);
 
@@ -46,11 +44,11 @@ class FirestoreQueries {
       userPostsQuery(uid).orderBy("createdAt", descending: true);
   static MapQuery moreUserPostsQueryByNewest(String uid, Doc lastDoc) =>
       moreQuery(userPostsQueryByNewest(uid), lastDoc);
-  static MapQuery newUserPostsQueryByNewest(String uid, Doc firstDoc) =>
-      newQuery(userPostsQueryByNewest(uid), firstDoc);
 
   static final postsQueryByLikeCount =
       _postsLimitedCollectionGroupQuery.orderBy('likeCount', descending: true);
+  static final postsQueryByNewest =
+      _postsLimitedCollectionGroupQuery.orderBy('createdAt', descending: true);
 
   static ColRef postMessagesColRef(
           String posterUid, String postId, String currentUid) =>
@@ -66,8 +64,6 @@ class FirestoreQueries {
       .collection('timelines')
       .orderBy('createdAt', descending: true)
       .limit(whereInLimit);
-  static MapQuery newTimelinesQuery(DocRef userRef, Doc firstDoc) =>
-      newQuery(timelinesQuery(userRef), firstDoc);
   static MapQuery moreTimelinesQuery(DocRef userRef, Doc lastDoc) =>
       moreQuery(timelinesQuery(userRef), lastDoc);
 
@@ -79,9 +75,6 @@ class FirestoreQueries {
         whereIn: timelinePostIds);
   }
 
-  static MapQuery newTimelinePostsQuery(
-          List<String> timelinePostIds, Doc firstDoc) =>
-      newQuery(timelinePostsQuery(timelinePostIds), firstDoc);
   static MapQuery moreTimelinePostsQuery(
           List<String> timelinePostIds, Doc lastDoc) =>
       moreQuery(timelinePostsQuery(timelinePostIds), lastDoc);

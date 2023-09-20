@@ -80,28 +80,17 @@ class FirestoreClient {
   Future<void> deleteUser(String uid) async =>
       await FirestoreQueries.userDocRef(uid).delete();
   // read
-  // FutureQSnapshot getUsersByWhereIn(List<String> uids) async =>
-  //     await FirestoreQueries.usersQueryByWhereIn(uids).get();
 
   FutureDoc getPost(String uid, String postId) async =>
       await FirestoreQueries.userPostRef(uid, postId).get();
 
   FutureQSnapshot getPosts(MapQuery query) async => await query.get();
-  // FutureQSnapshot getPostsByWhereIn(List<String> postIds) async =>
-  //     await FirestoreQueries.postsQueryByWhereIn(postIds).get();
-
-  // FutureQSnapshot getPostsByLikeCount() async =>
-  //     await FirestoreQueries.postsQueryByLikeCount.get();
-  // FutureQSnapshot getMorePostsByLikeCount(Doc lastDoc) async =>
-  //     await FirestoreQueries.morePostsQueryByLikeCount(lastDoc).get();
 
   FutureQSnapshot getTimelinePosts(List<String> timelinePostIds) async =>
       await FirestoreQueries.timelinePostsQuery(timelinePostIds).get();
 
   FutureQSnapshot getTimelines(DocRef userRef) async =>
       await FirestoreQueries.timelinesQuery(userRef).get();
-  FutureQSnapshot getNewTimelines(DocRef userRef, Doc firstDoc) async =>
-      await FirestoreQueries.newTimelinesQuery(userRef, firstDoc).get();
   FutureQSnapshot getMoreTimelines(DocRef userRef, Doc lastDoc) async =>
       await FirestoreQueries.moreTimelinesQuery(userRef, lastDoc).get();
 
@@ -114,19 +103,4 @@ class FirestoreClient {
       await FirestoreQueries.privateUserDocRef(uid).get();
 
   FutureQSnapshot getUsers(MapQuery query) async => await query.get();
-  // FutureQSnapshot getUsersByFollowerCount() async =>
-  //     await FirestoreQueries.usersQueryByLikeCount.get();
-  // FutureQSnapshot getMoreUsersByFollowerCount(Doc lastDoc) async =>
-  //     await FirestoreQueries.moreUsersQueryByLikeCount(lastDoc).get();
-
-  // FutureQSnapshot getUserPostsByNewest(String uid) async =>
-  //     await FirestoreQueries.userPostsQueryByNewest(uid).get();
-  // FutureQSnapshot getMoreUserPostsByNewest(String uid, Doc lastDoc) async =>
-  //     await FirestoreQueries.moreUserPostsQueryByNewest(uid, lastDoc).get();
-  // FutureQSnapshot getNewUserPostsByNewest(String uid, Doc firstDoc) async =>
-  //     await FirestoreQueries.newUserPostsQueryByNewest(uid, firstDoc).get();
-
-  // FutureQSnapshot searchDocs(MapQuery query) async => await query.get();
-  // FutureQSnapshot searchMoreDocs(MapQuery query, Doc lastDoc) async =>
-  //     await query.startAfterDocument(lastDoc).get();
 }
