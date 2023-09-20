@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:io';
 // flutter
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -42,16 +40,7 @@ class NotificationController extends GetxController
     await _initializeNotification();
     await cancelNotification();
     await requestPermissions();
-    final msg = _createRandomMsg();
-    await registerMessage(msg);
-  }
-
-  String _createRandomMsg() {
-    final random = Random(); // ランダムな数値を生成するオブジェクト
-    final randomIndex =
-        random.nextInt(greatPeople.length); // 配列内のランダムなインデックスを取得
-    final randomPerson = greatPeople[randomIndex]; // インデックスに対応する要素を取得
-    return "今日は${randomPerson.title}と話してみませんか？";
+    await registerMessage();
   }
 
   Future<void> _configureLocalTimeZone() async {
@@ -103,23 +92,24 @@ class NotificationController extends GetxController
     }
   }
 
-  Future<void> registerMessage(String message) async {
+  Future<void> registerMessage() async {
+    const message = "今日も面白いAIが投稿されてないか探してみましょう！";
     await _flutterLocalNotificationsPlugin.periodicallyShow(
       0,
       appName,
       message,
       RepeatInterval.daily,
-      NotificationDetails(
+      const NotificationDetails(
         android: AndroidNotificationDetails(
           'periodicNotification',
           '定期的な通知',
           importance: Importance.high,
           priority: Priority.high,
           ongoing: true,
-          largeIcon: const DrawableResourceAndroidBitmap('ic_notification'),
+          largeIcon: DrawableResourceAndroidBitmap('ic_notification'),
           styleInformation: BigTextStyleInformation(message),
         ),
-        iOS: const DarwinNotificationDetails(
+        iOS: DarwinNotificationDetails(
           badgeNumber: 1,
         ),
       ),
