@@ -8,13 +8,10 @@ import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/controllers/notification_controller.dart';
-import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/views/auth/login_page.dart';
-import 'package:great_talk/views/components/original_content_cards.dart';
 import 'package:great_talk/views/components/original_drawer.dart';
-import 'package:great_talk/views/screen/search_screen.dart';
 import 'package:great_talk/views/main/feeds/feeds_screen.dart';
 import 'package:great_talk/views/main/my_profile/my_profile_screen.dart';
 import 'package:great_talk/views/main/ranking/ranking_screen.dart';
@@ -26,7 +23,7 @@ class MyHomePage extends HookWidget {
   @override
   Widget build(context) {
     final purchasesController = Get.put(PurchasesController());
-    final PersonsController controller = Get.put(PersonsController());
+
     Get.put(NotificationController());
     Get.put(PostsController());
     Get.put(RealtimeResController());
@@ -54,15 +51,7 @@ class MyHomePage extends HookWidget {
           children: [
             const FeedsScreen(),
             const RankingScreen(),
-            Obx(
-              () => controller.isSearching.value
-                  ? SearchScreen(
-                      hint: "例: 織田信長",
-                      onQueryChanged: (query) => controller.search(query),
-                      child: const OriginalContentCards(),
-                    )
-                  : const OriginalContentCards(),
-            ),
+            const SizedBox(),
             SubscribeScreen(),
             Obx(() => CurrentUserController.to.isNotLoggedIn()
                 ? const LoginPage()

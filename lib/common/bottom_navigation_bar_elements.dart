@@ -16,9 +16,9 @@ final List<BottomNavigationBarItem> bnbElements = [
         color: kSecondaryColor,
       )),
   const BottomNavigationBarItem(
-      label: 'Contents',
+      label: 'Latest',
       icon: Icon(
-        Icons.people,
+        Icons.update,
         color: kSecondaryColor,
       )),
   const BottomNavigationBarItem(

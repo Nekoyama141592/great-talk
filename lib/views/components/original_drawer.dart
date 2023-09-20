@@ -19,6 +19,12 @@ class OriginalDrawer extends StatelessWidget {
           ListTile(
               title: const Text("ミュートしている投稿"),
               onTap: () => Get.toNamed('/mutePosts')),
+          ListTile(
+              title: const Text("ミュートしている投稿"),
+              onTap: () => Get.toNamed('/mutePosts')),
+          ListTile(
+              title: const Text("公式コンテンツ"),
+              onTap: () => Get.toNamed('/originalContents')),
           Obx(() => CurrentUserController.to.isAdmin()
               ? ListTile(
                   title: const Text("管理者専用ページ"),

@@ -9,6 +9,7 @@ import 'package:great_talk/views/create_post/create_post_page.dart';
 import 'package:great_talk/views/edit_page.dart';
 import 'package:great_talk/views/mute/mute_posts/mute_posts_page.dart';
 import 'package:great_talk/views/mute/mute_users/mute_users_page.dart';
+import 'package:great_talk/views/original_contents_page.dart';
 import 'package:great_talk/views/realtime_res_page/realtime_res_page.dart';
 import 'package:great_talk/views/search_user_posts_page.dart';
 import 'package:great_talk/views/user_profile_page.dart';
@@ -29,6 +30,7 @@ final getPages = [
   GetPage(name: "/logouted", page: () => const LogoutedPage()),
   GetPage(name: "/muteUsers", page: () => const MuteUsersPage()),
   GetPage(name: "/mutePosts", page: () => const MutePostsPage()),
+  GetPage(name: "/originalContents", page: () => const OriginalContentsPage()),
   GetPage(
       name: "/reauthenticate/delete",
       page: () => const ReauthenticateToDeletePage()),
