@@ -12,10 +12,10 @@ import 'package:great_talk/views/main/subscribe/components/privacy_policy_button
 import 'package:great_talk/views/main/subscribe/components/restore_button.dart';
 
 class SubscribeScreen extends StatelessWidget {
-  SubscribeScreen({Key? key}) : super(key: key);
-  final PurchasesController purchasesController = PurchasesController.to;
+  const SubscribeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final PurchasesController purchasesController = PurchasesController.to;
     return SingleChildScrollView(
       child: Column(
         children: [

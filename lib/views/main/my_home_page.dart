@@ -50,7 +50,7 @@ class MyHomePage extends HookWidget {
             const FeedsScreen(),
             const RankingScreen(),
             const SizedBox(),
-            SubscribeScreen(),
+            const SubscribeScreen(),
             Obx(() => CurrentUserController.to.isNotLoggedIn()
                 ? const LoginPage()
                 : const MyProfileScreen())
