@@ -24,11 +24,6 @@ flutter build ios --flavor prod -t lib/main_prod.dart --release
 flutter build appbundle --flavor dev -t lib/main_dev.dart
 flutter build appbundle --flavor prod -t lib/main_prod.dart
 
-## デザイン
-
-### Figma
-https://www.figma.com/file/qs4GuQPJS4Xn7GrpkYtwQv/Gemukura?node-id=0%3A1&t=OkCbEjNeCuO87DGW-1
-
 ## フォーマット
 dart format --set-exit-if-changed .
 

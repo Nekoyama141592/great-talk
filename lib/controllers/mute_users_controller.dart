@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/ints.dart';
-import 'package:great_talk/common/strings.dart';
+import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
@@ -49,19 +48,8 @@ class MuteUsersController extends DocsController {
   }
 
   void onTap(String passiveUid) {
-    Get.dialog(CupertinoAlertDialog(
-      content: const Text("ミュートを解除しますがよろしいですか？"),
-      actions: [
-        CupertinoDialogAction(
-            onPressed: Get.back, child: const Text(cancelText)),
-        CupertinoDialogAction(
-            isDestructiveAction: true,
-            onPressed: () async {
-              await unMuteUser(passiveUid).then((value) => Get.back());
-            },
-            child: const Text(okText))
-      ],
-    ));
+    UIHelper.cupertinoAlertDialog("ミュートを解除しますがよろしいですか？",
+        () => unMuteUser(passiveUid).then((value) => Get.back()));
   }
 
   Future<void> unMuteUser(String passiveUid) async {

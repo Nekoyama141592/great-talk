@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/enums.dart';
-import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
@@ -289,17 +287,7 @@ class CurrentUserController extends GetxController {
   }
 
   void onLogoutButtonPressed() async {
-    Get.dialog(CupertinoAlertDialog(
-      content: const Text("ログアウトしますが本当によろしいですか？"),
-      actions: [
-        CupertinoDialogAction(
-            onPressed: Get.back, child: const Text(cancelText)),
-        CupertinoDialogAction(
-            isDestructiveAction: true,
-            onPressed: _signOut,
-            child: const Text(okText))
-      ],
-    ));
+    UIHelper.cupertinoAlertDialog("ログアウトしますが本当によろしいですか？", _signOut);
   }
 
   Future<void> _signOut() async {
@@ -334,17 +322,7 @@ class CurrentUserController extends GetxController {
   }
 
   void _showDeleteUserDialog() {
-    Get.dialog(CupertinoAlertDialog(
-      content: const Text("ユーザーを削除しますが本当によろしいですか？"),
-      actions: [
-        CupertinoDialogAction(
-            onPressed: Get.back, child: const Text(cancelText)),
-        CupertinoDialogAction(
-            isDestructiveAction: true,
-            onPressed: _deletePublicUser,
-            child: const Text(okText))
-      ],
-    ));
+    UIHelper.cupertinoAlertDialog("ユーザーを削除しますが本当によろしいですか？", _deletePublicUser);
   }
 
   Future<void> _deletePublicUser() async {

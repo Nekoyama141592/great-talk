@@ -401,20 +401,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   void showCleanLocalMsgDialog() {
-    Get.dialog(CupertinoAlertDialog(
-      content: const Text("履歴を全て削除しますがよろしいですか？"),
-      actions: [
-        CupertinoDialogAction(
-            onPressed: Get.back, child: const Text(cancelText)),
-        CupertinoDialogAction(
-            isDestructiveAction: true,
-            onPressed: () async {
-              await _cleanLocalMessage();
-              Get.back();
-            },
-            child: const Text(okText))
-      ],
-    ));
+    UIHelper.cupertinoAlertDialog("履歴を全て削除しますがよろしいですか？",
+        () => _cleanLocalMessage().then((value) => Get.back));
   }
 
   Future<void> _cleanLocalMessage() async {
