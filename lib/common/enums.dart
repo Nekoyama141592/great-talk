@@ -10,6 +10,7 @@ enum PrefsKey {
   chatCount,
   initialPeople,
   isAgreedToTerms,
+  isDarkTheme,
   isV3initialized,
   lastChatDate,
 }

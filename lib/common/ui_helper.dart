@@ -35,7 +35,7 @@ class UIHelper {
   }
 
   static void simpleAlertDialog(String msg) {
-    const style = TextStyle(fontSize: 20, color: Colors.black);
+    const style = TextStyle(fontSize: 20);
     Get.dialog(AlertDialog(
       content: SizedBox(
         height: Get.height * 0.8,

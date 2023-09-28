@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/views/components/circle_image.dart';
@@ -39,7 +38,7 @@ class OriginalContentCards extends StatelessWidget {
                 child: ListTile(
                   leading: CircleImage(
                       bucketName: "", imageValue: content.imageValue),
-                  title: boldText(name),
+                  title: Text(name),
                   subtitle: lastAnswer != null
                       ? Text(
                           lastAnswer,

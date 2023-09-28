@@ -4,7 +4,7 @@ import 'package:great_talk/common/bottom_navigation_bar_elements.dart';
 import 'package:great_talk/common/others.dart';
 import 'package:get/get.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/common/widgets.dart';
+import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/controllers/notification_controller.dart';
@@ -33,7 +33,8 @@ class MyHomePage extends HookWidget {
     return Scaffold(
         appBar: pageIndex.value == 1 || pageIndex.value == 4
             ? null
-            : AppBar(title: boldText(appName), shape: appBarShape(context)),
+            : AppBar(
+                title: BasicBoldText(appName), shape: appBarShape(context)),
         drawer: const OriginalDrawer(),
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,

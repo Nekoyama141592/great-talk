@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
 
 class EllipsisText extends Text {
@@ -21,9 +22,7 @@ class BasicBoldText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-          color: textColor,
-          fontWeight: FontWeight.bold,
-          fontSize: defaultHeaderTextSize(context)),
+          color: textColor, fontWeight: FontWeight.bold, fontSize: 20.0),
     );
   }
 }
@@ -56,4 +55,13 @@ class TabText extends StatelessWidget {
           fontSize: defaultTabTextSize(context)),
     );
   }
+}
+
+class SecondaryColorText extends Text {
+  final String text;
+  const SecondaryColorText(this.text, {Key? key})
+      : super(text,
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: kSecondaryColor),
+            key: key);
 }

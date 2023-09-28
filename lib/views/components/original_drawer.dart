@@ -1,11 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/controllers/theme_controller.dart';
 
 class OriginalDrawer extends StatelessWidget {
   const OriginalDrawer({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final themeController = ThemeController.to;
     return Drawer(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: ListView(
@@ -22,6 +25,15 @@ class OriginalDrawer extends StatelessWidget {
           ListTile(
               title: const Text("公式コンテンツ"),
               onTap: () => Get.toNamed('/originalContents')),
+          Obx(
+            () => ListTile(
+              title: const Text("テーマ切り替え"),
+              trailing: CupertinoSwitch(
+                value: themeController.isDarkTheme.value,
+                onChanged: themeController.onSwichChanged,
+              ),
+            ),
+          ),
           Obx(() => CurrentUserController.to.isAdmin()
               ? ListTile(
                   title: const Text("管理者専用ページ"),

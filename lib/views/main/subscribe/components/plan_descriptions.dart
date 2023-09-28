@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/ints.dart';
-import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 
 class PlanDescriptions extends StatelessWidget {
@@ -13,37 +12,37 @@ class PlanDescriptions extends StatelessWidget {
   Widget build(BuildContext context) {
     final storeStr = Platform.isIOS ? "App Store" : "Google Play Store";
     final children = [
-      ListTile(
-          leading: const Icon(Icons.check),
-          title: boldText('無料プランではチャットは1日$chatLimitPerDay回!')),
+      const ListTile(
+          leading: Icon(Icons.check),
+          title: Text('無料プランではチャットは1日$chatLimitPerDay回!')),
+      const Divider(),
+      const ListTile(
+          leading: Icon(
+            Icons.check,
+            color: kSecondaryColor,
+          ),
+          title: Text('登録するとチャット回数が無制限！')),
+      const Divider(),
+      const ListTile(
+          leading: Icon(
+            Icons.check,
+            color: kSecondaryColor,
+          ),
+          title: Text('テキストがコピー可能に！!')),
       const Divider(),
       ListTile(
           leading: const Icon(
             Icons.check,
             color: kSecondaryColor,
           ),
-          title: boldText('登録するとチャット回数が無制限！')),
+          title: Text("$storeStr からいつでもキャンセルできます")),
       const Divider(),
-      ListTile(
-          leading: const Icon(
+      const ListTile(
+          leading: Icon(
             Icons.check,
             color: kSecondaryColor,
           ),
-          title: boldText('テキストがコピー可能に！!')),
-      const Divider(),
-      ListTile(
-          leading: const Icon(
-            Icons.check,
-            color: kSecondaryColor,
-          ),
-          title: boldText("$storeStr からいつでもキャンセルできます")),
-      const Divider(),
-      ListTile(
-          leading: const Icon(
-            Icons.check,
-            color: kSecondaryColor,
-          ),
-          title: boldText("購入したその日に課金されます")),
+          title: Text("購入したその日に課金されます")),
     ];
     return Obx((() => PurchasesController.to.loading.value
         ? const Card(child: ListTile(title: Text('情報を取得しています')))

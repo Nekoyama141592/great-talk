@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/common/url_redirector.dart';
 import 'package:great_talk/common/bools.dart';
 import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/views/main/subscribe/components/plan_descriptions.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -41,7 +40,7 @@ class PolicyButtons extends StatelessWidget {
           Card(
             child: ListTile(
               leading: const Icon(Icons.money),
-              title: boldText(
+              title: Text(
                   getPlanDescription(productDetails.id, productDetails.price)),
             ),
           ),

@@ -3,7 +3,6 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/texts.dart';
-import 'package:great_talk/common/widgets.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:great_talk/views/components/secondary_color_button.dart';
@@ -32,8 +31,8 @@ class ProductList extends StatelessWidget {
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               title: productDetails.id == kMonthSubscriptionId
-                  ? boldSecondaryColorText("$planName おすすめ！")
-                  : boldText(planName),
+                  ? SecondaryColorText("$planName おすすめ！")
+                  : BasicBoldText(planName),
               trailing: PurchasesController.to
                       .hasProductBeenPurchased(productDetails)
                   ? PurchaseButton(
