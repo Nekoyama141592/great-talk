@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/colors.dart';
+import 'package:great_talk/controllers/create_post_controller.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/views/screen/profile_screen/profile_screen.dart';
 
@@ -9,10 +10,13 @@ class MyProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = MyProfileController.to;
+    Get.put(CreatePostController());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           backgroundColor: kPrimaryColor,
-          onPressed: () => Get.toNamed("/createPost"),
+          onPressed: () {
+            Get.toNamed("/createPost");
+          },
           child: const Icon(Icons.new_label)),
       body: ProfileScreen(
         controller: controller,

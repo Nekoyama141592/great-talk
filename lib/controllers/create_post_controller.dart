@@ -18,35 +18,69 @@ import 'package:great_talk/validator/post_validator.dart';
 
 class CreatePostController extends LoadingController with CurrentUserMixin {
   static CreatePostController get to => Get.find<CreatePostController>();
-  String? title = "";
-  String? systemPrompt = "";
-  String? description = "";
-  String? temperature = defaultTemperature.toString();
-  String? topP = defaultTopP.toString();
-  String? presencePenalty = defaultPresencePenalty.toString();
-  String? frequencyPenalty = defaultFrequencyPenalty.toString();
+  final title = "".obs;
+  final systemPrompt = "".obs;
+  final description = "".obs;
+  final temperature = defaultTemperature.toString().obs;
+  final topP = defaultTopP.toString().obs;
+  final presencePenalty = defaultPresencePenalty.toString().obs;
+  final frequencyPenalty = defaultFrequencyPenalty.toString().obs;
   final Rx<Uint8List?> uint8list = Rx(null);
   // セッターメソッド
-  void setTitle(String? value) => title = value;
-  void setSystemPrompt(String? value) => systemPrompt = value;
-  void setDescription(String? value) => description = value;
-  void setTemperature(String? value) => temperature = value;
-  void setTopP(String? value) => topP = value;
-  void setPresencePenalty(String? value) => presencePenalty = value;
-  void setFrequencyPenalty(String? value) => frequencyPenalty = value;
+  void setTitle(String? value) {
+    if (value == null) return;
+    title.value = value;
+  }
+
+  void setSystemPrompt(String? value) {
+    if (value == null) return;
+    systemPrompt.value = value;
+  }
+
+  void setDescription(String? value) {
+    if (value == null) return;
+    description.value = value;
+  }
+
+  void setTemperature(String? value) {
+    if (value == null) return;
+    temperature.value = value;
+  }
+
+  void setTopP(String? value) {
+    if (value == null) return;
+    topP.value = value;
+  }
+
+  void setPresencePenalty(String? value) {
+    if (value == null) return;
+    presencePenalty.value = value;
+  }
+
+  void setFrequencyPenalty(String? value) {
+    if (value == null) return;
+    frequencyPenalty.value = value;
+  }
 
   Future<void> processCreatePost() async {
     if (uint8list.value == null) {
       await UIHelper.showErrorFlutterToast("アイコンをタップして画像をアップロードしてください");
       return;
     }
-    if (PostValidator.isInValidPost(description, systemPrompt, title,
-        temperature, topP, presencePenalty, frequencyPenalty)) {
+    if (PostValidator.isInValidPost(
+        description.value,
+        systemPrompt.value,
+        title.value,
+        temperature.value,
+        topP.value,
+        presencePenalty.value,
+        frequencyPenalty.value)) {
       await UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
       return;
     }
-    if ((temperature!.toRoundToSecondDecimalPlace() != defaultTemperature) &&
-        (topP!.toRoundToSecondDecimalPlace() != defaultTopP)) {
+    if ((temperature.value.toRoundToSecondDecimalPlace() !=
+            defaultTemperature) &&
+        (topP.value.toRoundToSecondDecimalPlace() != defaultTopP)) {
       await UIHelper.showErrorFlutterToast("temperatureとtopPはどちらか一方しか変更できません");
       return;
     }
@@ -69,14 +103,18 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
     final repository = FirestoreRepository();
     final postId = randomString();
     final postRef = FirestoreQueries.userPostRef(currentUid(), postId);
-    final customCompleteText = NewContent.newCustomCompleteText(systemPrompt!,
-            temperature!, topP!, presencePenalty!, frequencyPenalty!)
+    final customCompleteText = NewContent.newCustomCompleteText(
+            systemPrompt.value,
+            temperature.value,
+            topP.value,
+            presencePenalty.value,
+            frequencyPenalty.value)
         .toJson()
       ..removeWhere((key, value) => value == null);
     final newPost = NewContent.newPost(
-        systemPrompt!.trim(),
-        title!.trim(),
-        description!.trim(),
+        systemPrompt.trim(),
+        title.trim(),
+        description.trim(),
         fileName,
         CurrentUserController.to.publicUser.value!,
         postId,
