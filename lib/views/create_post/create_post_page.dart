@@ -1,22 +1,10 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/extensions/string_extension.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
-import 'package:great_talk/model/aws_s3_repository.dart';
-import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/controllers/create_post_controller.dart';
 import 'package:great_talk/state/abstract/processing_state.dart';
-import 'package:great_talk/utility/aws_s3_utility.dart';
-import 'package:great_talk/utility/file_utility.dart';
-import 'package:great_talk/utility/new_content.dart';
-import 'package:great_talk/validator/post_validator.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 import 'package:great_talk/views/create_post/components/form_label.dart';
 import 'package:great_talk/views/create_post/components/original_form.dart';
@@ -28,25 +16,16 @@ class CreatePostPage extends StatefulWidget {
   State<CreatePostPage> createState() => _CreatePostPageState();
 }
 
-class _CreatePostPageState extends ProcessingState<CreatePostPage>
-    with CurrentUserMixin {
+class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   double? _deviceHeight, _deviceWidth;
   // ログとフォームキーをとる
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String? title = ""; // titleの変数
-  String? systemPrompt = ""; // systemPromptの変数
-  String? description = "";
-  String? temperature = defaultTemperature.toString();
-  String? topP = defaultTopP.toString();
-  String? presencePenalty = defaultPresencePenalty.toString();
-  String? frequencyPenalty = defaultFrequencyPenalty.toString();
-
-  Uint8List? uint8list;
   @override
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height; // 高さを設定
     _deviceWidth = MediaQuery.of(context).size.width; // 幅を設定
+    Get.put(CreatePostController());
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -114,11 +93,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage>
       ),
       OriginalForm(
         decoration: const InputDecoration(hintText: "例: 猫GPT"),
-        onSaved: (value) {
-          setState(() {
-            title = value;
-          });
-        },
+        onSaved: CreatePostController.to.setTitle,
         validator: (value) {
           if (value!.length < nGramIndex) {
             return "$nGramIndex文字以上の入力をしてください";
@@ -140,11 +115,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage>
         keyboardType: TextInputType.multiline,
         maxLines: null,
         decoration: const InputDecoration(hintText: "例: かわいい猫のAIです！"),
-        onSaved: (value) {
-          setState(() {
-            description = value;
-          });
-        },
+        onSaved: CreatePostController.to.setDescription,
         validator: (value) {
           if (value!.isEmpty) {
             return "入力をしてください";
@@ -166,11 +137,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage>
         keyboardType: TextInputType.multiline,
         maxLines: null,
         decoration: const InputDecoration(hintText: "例: 語尾に必ず「にゃん」をつけて返答して！"),
-        onSaved: (value) {
-          setState(() {
-            systemPrompt = value;
-          });
-        },
+        onSaved: CreatePostController.to.setSystemPrompt,
         validator: (value) {
           if (value!.isEmpty) {
             return "入力をしてください";
@@ -191,11 +158,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage>
       OriginalForm(
         initialValue: defaultTemperature.toString(),
         keyboardType: TextInputType.text,
-        onSaved: (value) {
-          setState(() {
-            temperature = value;
-          });
-        },
+        onSaved: CreatePostController.to.setTemperature,
         validator: (value) {
           final result = double.tryParse(value!);
           if (result == null) {
@@ -217,11 +180,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage>
       OriginalForm(
         initialValue: defaultTopP.toString(),
         keyboardType: TextInputType.text,
-        onSaved: (value) {
-          setState(() {
-            topP = value;
-          });
-        },
+        onSaved: CreatePostController.to.setTopP,
         validator: (value) {
           final result = double.tryParse(value!);
           if (result == null) {
@@ -244,11 +203,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage>
       OriginalForm(
         initialValue: defaultPresencePenalty.toString(),
         keyboardType: TextInputType.text,
-        onSaved: (value) {
-          setState(() {
-            presencePenalty = value;
-          });
-        },
+        onSaved: CreatePostController.to.setPresencePenalty,
         validator: (value) {
           final result = double.tryParse(value!);
           if (result == null) {
@@ -271,11 +226,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage>
       OriginalForm(
         initialValue: defaultFrequencyPenalty.toString(),
         keyboardType: TextInputType.text,
-        onSaved: (value) {
-          setState(() {
-            frequencyPenalty = value;
-          });
-        },
+        onSaved: CreatePostController.to.setFrequencyPenalty,
         validator: (value) {
           final result = double.tryParse(value!);
           if (result == null) {
@@ -300,11 +251,12 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage>
   }
 
   Widget _image() {
-    return uint8list == null
+    final controller = CreatePostController.to;
+    return Obx(() => controller.uint8list.value == null
         ? Row(
             children: [
               InkWell(
-                onTap: _onImagePickButtonPressed,
+                onTap: controller.onImagePickButtonPressed,
                 child: const Icon(
                   Icons.image,
                   size: 100.0,
@@ -314,13 +266,14 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage>
             ],
           )
         : InkWell(
-            onTap: _onImagePickButtonPressed,
+            onTap: controller.onImagePickButtonPressed,
             child: SizedBox(
-              width: 100.0,
-              height: 100.0,
-              child: Image.memory(uint8list!),
-            ),
-          );
+                width: 100.0,
+                height: 100.0,
+                child: Obx(
+                  () => Image.memory(controller.uint8list.value!),
+                )),
+          ));
   }
 
   void _onCreateButtonPressed() async {
@@ -328,65 +281,6 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage>
       // フォームフィールドの情報を変数に保存
       _formKey.currentState!.save();
     }
-    if (uint8list == null) {
-      await UIHelper.showErrorFlutterToast("アイコンをタップして画像をアップロードしてください");
-      return;
-    }
-    if (PostValidator.isInValidPost(description, systemPrompt, title,
-        temperature, topP, presencePenalty, frequencyPenalty)) {
-      await UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
-      return;
-    }
-    if ((temperature!.toRoundToSecondDecimalPlace() != defaultTemperature) &&
-        (topP!.toRoundToSecondDecimalPlace() != defaultTopP)) {
-      await UIHelper.showErrorFlutterToast("temperatureとtopPはどちらか一方しか変更できません");
-      return;
-    }
-    if (isProcessing) return; // 二重リクエストを防止.
-    startProcess();
-    final newFileName = s3FileName();
-    final bucketName = AWSS3Utility.postImagesBucketName();
-    final repository = AWSS3Repository();
-    final result =
-        await repository.uploadImage(uint8list!, bucketName, newFileName);
-    result.when(
-        success: (res) => _createPost(res),
-        failure: () {
-          UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
-        });
-    endProcess();
-  }
-
-  void _onImagePickButtonPressed() async {
-    final result = await FileUtility.getCompressedImage();
-    setState(() {
-      uint8list = result;
-    });
-  }
-
-  Future<void> _createPost(String fileName) async {
-    final repository = FirestoreRepository();
-    final postId = randomString();
-    final postRef = FirestoreQueries.userPostRef(currentUid(), postId);
-    final customCompleteText = NewContent.newCustomCompleteText(systemPrompt!,
-            temperature!, topP!, presencePenalty!, frequencyPenalty!)
-        .toJson()
-      ..removeWhere((key, value) => value == null);
-    final newPost = NewContent.newPost(
-        systemPrompt!.trim(),
-        title!.trim(),
-        description!.trim(),
-        fileName,
-        CurrentUserController.to.publicUser.value!,
-        postId,
-        postRef,
-        customCompleteText);
-    final result = await repository.createPost(postRef, newPost.toJson());
-    result.when(success: (_) {
-      Get.back();
-      UIHelper.showFlutterToast("投稿が作成できました！");
-    }, failure: () {
-      UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
-    });
+    await CreatePostController.to.processCreatePost();
   }
 }
