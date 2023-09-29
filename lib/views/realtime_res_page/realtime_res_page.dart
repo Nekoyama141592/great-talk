@@ -11,6 +11,7 @@ import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 import 'package:great_talk/views/realtime_res_page/components/clear_log_button.dart';
+import 'package:great_talk/views/realtime_res_page/components/delete_post_button.dart';
 import 'package:great_talk/views/realtime_res_page/components/description_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
@@ -35,10 +36,10 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
               actions: [
                 const DescriptionButton(),
                 const ClearLogButton(),
-                // 自分の投稿ならレポートボタンを表示しない.
+                // 自分の投稿なら削除ボタン、それ以外ならレポートボタンを表示する.
                 Obx(() =>
                     controller.post.value?.typedPoster().uid == currentUid()
-                        ? const SizedBox.shrink()
+                        ? const DeletePostButton()
                         : const PostReportButton()),
                 Obx(() => controller.post.value == null
                     ? const SizedBox.shrink()

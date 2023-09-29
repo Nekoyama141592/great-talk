@@ -21,6 +21,8 @@ class CurrentUserController extends GetxController {
   final Rx<PublicUser?> publicUser = Rx(null);
   final Rx<PrivateUser?> privateUser = Rx(null);
 
+  final deletePostIds = <String>[].obs; // 投稿の削除時に一時的に保存する.
+
   final followingTokens = <FollowingToken>[];
   final followingUids = <String>[].obs;
 
@@ -85,6 +87,12 @@ class CurrentUserController extends GetxController {
           }
         },
         failure: () {});
+  }
+
+  // 投稿の削除時に外部から呼び出す.
+  void addDeletePostId(String postId) {
+    deletePostIds.add(postId);
+    deletePostIds([...deletePostIds]);
   }
 
   void addFollowing(FollowingToken followingToken) {
@@ -165,7 +173,7 @@ class CurrentUserController extends GetxController {
   bool hasNoPublicUser() => !_hasPublicUser();
 
   bool isNotVerified() => !currentUser.value!.emailVerified;
-
+  bool isDeletedPost(String postId) => deletePostIds.contains(postId);
   bool isMutingPost(String postId) => mutePostIds.contains(postId);
   bool isMutingUser(String uid) => muteUids.contains(uid);
 

@@ -64,6 +64,16 @@ class FirestoreRepository {
     }
   }
 
+  FutureResult<bool> deletePost(DocRef postRef) async {
+    try {
+      await client.deletePost(postRef);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
   FutureResult<bool> createPostLike(
       DocRef postRef, String activeUid, SDMap json) async {
     try {

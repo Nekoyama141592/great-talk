@@ -11,6 +11,7 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
@@ -411,5 +412,22 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     UIHelper.showFlutterToast(clearChatMsg);
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(postId);
+  }
+
+  void onDeleteButtonPressed() {
+    final deletePost = post.value;
+    if (deletePost == null) return;
+    UIHelper.cupertinoAlertDialog("投稿を削除しますが本当によろしいですか?", () async {
+      Get.back();
+      final repository = FirestoreRepository();
+      final result = await repository.deletePost(deletePost.ref);
+      result.when(success: (_) {
+        CurrentUserController.to.addDeletePostId(deletePost.postId);
+        Get.back();
+        UIHelper.showErrorFlutterToast("投稿を削除しました。");
+      }, failure: () {
+        UIHelper.showErrorFlutterToast("投稿を削除することができませんでした。");
+      });
+    });
   }
 }

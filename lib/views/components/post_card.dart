@@ -34,67 +34,74 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
                   title: "不適切なコンテンツ",
                 ),
               )
-            : Obx(() => CurrentUserController.to
-                        .isMutingPost(content.contentId) ||
-                    CurrentUserController.to.isMutingUser(content.posterUid)
-                ? MosaicCard(
-                    child: MosaicPostChild(
-                        content: content,
-                        msg: "あなたはこの投稿、もしくはその投稿者をミュートしています。",
-                        title: "制限されている投稿"))
-                : GestureDetector(
-                    onTap: () => controller.onPostCardPressed(post),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Theme.of(context).primaryColor),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        children: [
-                          CircleImage(
-                            bucketName: post.typedImage().bucketName,
-                            imageValue: content.imageValue,
-                            onTap: () => controller.onPostCardPressed(post),
-                            uint8list: uint8list,
-                          ),
-                          EllipsisText(
-                            post.typedTitle().value,
-                          ),
-                          TextButton(
-                            onPressed: () =>
-                                Get.toNamed("/users/${post.typedPoster().uid}"),
-                            child: EllipsisText(
-                              "by ${post.typedPoster().typedUserName().value}",
-                              style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary),
-                            ),
-                          ),
-                          Center(
-                            child: Row(
-                              children: [
-                                PostLikeButton(
-                                  isHorizontal: false,
-                                  post: post,
-                                ),
-                                const Spacer(),
-                                Column(
-                                  children: [
-                                    InkWell(
-                                      onTap: () =>
-                                          controller.onPostCardPressed(post),
-                                      child: const Icon(Icons.message),
-                                    ),
-                                    const Text("")
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+            : Obx(() {
+                if (CurrentUserController.to.isMutingPost(content.contentId) ||
+                    CurrentUserController.to.isMutingUser(content.posterUid)) {
+                  return MosaicCard(
+                      child: MosaicPostChild(
+                          content: content,
+                          msg: "あなたはこの投稿、もしくはその投稿者をミュートしています。",
+                          title: "制限されている投稿"));
+                }
+                if (CurrentUserController.to.isDeletedPost(content.contentId)) {
+                  return MosaicCard(
+                      child: MosaicPostChild(
+                          content: content,
+                          msg: "この投稿はあなたによって削除されました。",
+                          title: "削除された投稿"));
+                }
+                return GestureDetector(
+                  onTap: () => controller.onPostCardPressed(post),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Theme.of(context).primaryColor),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  )));
+                    child: Column(
+                      children: [
+                        CircleImage(
+                          bucketName: post.typedImage().bucketName,
+                          imageValue: content.imageValue,
+                          onTap: () => controller.onPostCardPressed(post),
+                          uint8list: uint8list,
+                        ),
+                        EllipsisText(
+                          post.typedTitle().value,
+                        ),
+                        TextButton(
+                          onPressed: () =>
+                              Get.toNamed("/users/${post.typedPoster().uid}"),
+                          child: EllipsisText(
+                            "by ${post.typedPoster().typedUserName().value}",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary),
+                          ),
+                        ),
+                        Center(
+                          child: Row(
+                            children: [
+                              PostLikeButton(
+                                isHorizontal: false,
+                                post: post,
+                              ),
+                              const Spacer(),
+                              Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () =>
+                                        controller.onPostCardPressed(post),
+                                    child: const Icon(Icons.message),
+                                  ),
+                                  const Text("")
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }));
   }
 }
