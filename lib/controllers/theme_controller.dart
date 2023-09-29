@@ -8,7 +8,7 @@ class ThemeController extends GetxController {
   @override
   void onInit() async {
     final prefs = await SharedPreferences.getInstance();
-    final result = prefs.getBool(PrefsKey.isDarkTheme.name) ?? false;
+    final result = prefs.getBool(PrefsKey.isDarkTheme.name) ?? true;
     isDarkTheme(result);
     super.onInit();
   }
