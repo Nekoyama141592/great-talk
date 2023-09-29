@@ -4,31 +4,31 @@ import 'package:great_talk/common/colors.dart';
 
 final List<BottomNavigationBarItem> bnbElements = [
   const BottomNavigationBarItem(
-      label: 'Timeline',
+      label: 'ホーム',
       icon: Icon(
         Icons.home,
         color: kSecondaryColor,
       )),
   const BottomNavigationBarItem(
-      label: 'Ranking',
+      label: '人気',
       icon: Icon(
         Icons.stars,
         color: kSecondaryColor,
       )),
   const BottomNavigationBarItem(
-      label: 'Latest',
+      label: '最新',
       icon: Icon(
         Icons.update,
         color: kSecondaryColor,
       )),
   const BottomNavigationBarItem(
-      label: 'Plans',
+      label: '課金',
       icon: Icon(
         Icons.subscriptions,
         color: kSecondaryColor,
       )),
   const BottomNavigationBarItem(
-      label: 'Profile',
+      label: 'マイページ',
       icon: Icon(
         Icons.settings,
         color: kSecondaryColor,
