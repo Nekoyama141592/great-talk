@@ -122,11 +122,23 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
         customCompleteText);
     final result = await repository.createPost(postRef, newPost.toJson());
     result.when(success: (_) {
+      _resetState(); // 初期化を行う
       Get.back();
       UIHelper.showFlutterToast("投稿が作成できました！");
     }, failure: () {
       UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
     });
+  }
+
+  void _resetState() {
+    title.value = "";
+    systemPrompt.value = "";
+    description.value = "";
+    temperature.value = defaultTemperature.toString();
+    topP.value = defaultTopP.toString();
+    presencePenalty.value = defaultPresencePenalty.toString();
+    frequencyPenalty.value = defaultFrequencyPenalty.toString();
+    uint8list.value = null;
   }
 
   void onImagePickButtonPressed() async {
