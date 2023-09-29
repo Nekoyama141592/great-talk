@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 
 class AccountPage extends StatelessWidget {
@@ -23,28 +22,21 @@ class AccountPage extends StatelessWidget {
           ListTile(
               title: Obx(
                   () => SelectableText("ユーザーID: ${controller.currentUid()}"))),
-          ListTile(title: Obx(() {
-            final negativeScore =
-                controller.publicUser.value?.typedUserName().negativeScore ?? 0;
-            final text = "ユーザー名ネガティブスコア :$negativeScore";
-            return negativeScore > negativeLimit
-                ? Text(
-                    text,
-                    style: const TextStyle(color: Colors.red),
-                  )
-                : Text(text);
-          })),
-          ListTile(title: Obx(() {
-            final negativeScore =
-                controller.publicUser.value?.typedBio().negativeScore ?? 0;
-            final text = "説明文ネガティブスコア :$negativeScore";
-            return negativeScore > negativeLimit
-                ? Text(
-                    text,
-                    style: const TextStyle(color: Colors.red),
-                  )
-                : Text(text);
-          })),
+          Obx(
+            () {
+              final publicUser = controller.publicUser.value;
+              if (publicUser == null || !publicUser.isInappropriate()) {
+                return const SizedBox.shrink();
+              }
+
+              return ListTile(
+                title: Text(
+                  "非表示の理由: \n${publicUser.inappropriateReason(controller.currentUid())}",
+                  style: const TextStyle(color: Colors.red),
+                ),
+              );
+            },
+          ),
           Obx(() => controller.isLoggedIn()
               ? ListTile(
                   title: const Text("ログアウトする"),
