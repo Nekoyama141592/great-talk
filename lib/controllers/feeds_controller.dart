@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
@@ -10,6 +11,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class FeedsController extends DocsController {
   FeedsController() : super(enablePullDown: true, requiresValueReset: false);
   List<QDoc> _timelineDocs = [];
+  static FeedsController get to => Get.find<FeedsController>();
 
   @override
   void setQuery() {
