@@ -44,6 +44,9 @@ abstract class Post implements _$Post {
   DocRef typedRef() => ref as DocRef;
   DetectedText typedTitle() => DetectedText.fromJson(title);
   Timestamp typedUpdatedAtAt() => updatedAt as Timestamp;
+  bool isInappropriate() =>
+      typedImage().moderationLabels.isNotEmpty ||
+      typedDescription().negativeScore > negativeLimit;
 
   String inappropriateReason(String currentUid) {
     String reason = "";

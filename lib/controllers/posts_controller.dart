@@ -268,4 +268,19 @@ class PostsController extends GetxController with CurrentUserMixin {
     await repository.deleteToken(currentUid(), deleteToken.tokenId);
     await repository.deletePostLike(post.typedRef(), deleteToken.activeUid);
   }
+
+  void deletePost(Post deletePost) {
+    UIHelper.cupertinoAlertDialog("投稿を削除しますが本当によろしいですか?", () async {
+      Get.back();
+      final repository = FirestoreRepository();
+      final result = await repository.deletePost(deletePost.ref);
+      result.when(success: (_) {
+        CurrentUserController.to.addDeletePostId(deletePost.postId);
+        Get.back();
+        UIHelper.showErrorFlutterToast("投稿を削除しました。");
+      }, failure: () {
+        UIHelper.showErrorFlutterToast("投稿を削除することができませんでした。");
+      });
+    });
+  }
 }
