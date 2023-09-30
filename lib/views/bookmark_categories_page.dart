@@ -30,6 +30,12 @@ class BookmarkCategoriesPage extends HookWidget {
                                 controller.bookmarkCategoryTokens[index];
                             return ListTile(
                               title: Text(token.categoryName),
+                              trailing: InkWell(
+                                onTap: () => controller
+                                    .onBookmarkCategoryDeleteButtonPressed(
+                                        token),
+                                child: const Icon(Icons.delete),
+                              ),
                             );
                           }),
                     ),

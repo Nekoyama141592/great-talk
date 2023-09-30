@@ -111,6 +111,10 @@ class CurrentUserController extends GetxController {
     bookmarkCategoryTokens.add(token);
   }
 
+  void removeBookmarkCategory(BookmarkCategoryToken token) {
+    bookmarkCategoryTokens.remove(token);
+  }
+
   void addFollowing(FollowingToken followingToken) {
     followingTokens.add(followingToken);
     followingUids.add(followingToken.passiveUid);
@@ -408,7 +412,27 @@ class CurrentUserController extends GetxController {
       addBookmarkCategory(newCategory);
       UIHelper.showFlutterToast("カテゴリーを作成できました。");
     }, failure: () {
-      UIHelper.showFlutterToast("カテゴリーを作成できませんでした。");
+      UIHelper.showErrorFlutterToast("カテゴリーを作成できませんでした。");
+    });
+  }
+
+  void onBookmarkCategoryDeleteButtonPressed(BookmarkCategoryToken token) {
+    UIHelper.cupertinoAlertDialog(
+        "このカテゴリーを削除しますが、よろしいですか？", () => _deleteBookmarkCategory(token));
+  }
+
+  void _deleteBookmarkCategory(BookmarkCategoryToken token) async {
+    final user = publicUser.value;
+    if (user == null) return;
+    final repository = FirestoreRepository();
+    final currentUid = user.uid;
+    final result = await repository.deleteToken(currentUid, token.tokenId);
+    result.when(success: (_) {
+      Get.back();
+      removeBookmarkCategory(token);
+      UIHelper.showFlutterToast("カテゴリーを削除できました。");
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("カテゴリーを削除できませんでした。");
     });
   }
 }
