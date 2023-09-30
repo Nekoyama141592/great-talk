@@ -25,6 +25,9 @@ class OriginalDrawer extends StatelessWidget {
           ListTile(
               title: const Text("公式コンテンツ"),
               onTap: () => Get.toNamed('/originalContents')),
+          ListTile(
+              title: const Text("ブックマーク"),
+              onTap: () => Get.toNamed("/bookmarkCategory")),
           Obx(
             () => ListTile(
               title: const Text("テーマ切り替え"),

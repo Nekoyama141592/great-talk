@@ -15,6 +15,11 @@ abstract class DetectedImage implements _$DetectedImage {
   }) = _DetectedImage;
   factory DetectedImage.fromJson(Map<String, dynamic> json) =>
       _$DetectedImageFromJson(json);
+  factory DetectedImage.initial() => const DetectedImage(
+      bucketName: "",
+      moderationLabels: [],
+      moderationModelVersion: "",
+      value: "");
   List<ModerationLabel> typedMLs() =>
       moderationLabels.map((e) => ModerationLabel.fromJson(e)).toList();
 }
