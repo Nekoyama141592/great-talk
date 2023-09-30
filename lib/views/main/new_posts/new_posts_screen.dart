@@ -8,6 +8,9 @@ class NewPostsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(NewPostsController());
-    return RefreshScreen(docsController: controller);
+    return Scaffold(
+        floatingActionButton: FloatingActionButton(
+            onPressed: controller.onRefresh, child: const Icon(Icons.refresh)),
+        body: RefreshScreen(docsController: controller));
   }
 }

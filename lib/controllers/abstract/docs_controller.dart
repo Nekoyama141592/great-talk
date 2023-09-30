@@ -115,4 +115,13 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
     }
     refreshController.loadComplete();
   }
+
+  Future<void> onRefresh() async {
+    try {
+      final elements = await query.endBeforeDocument(docs.first.doc).get();
+      insertAllDocs(elements.docs);
+    } catch (e) {
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+    }
+  }
 }

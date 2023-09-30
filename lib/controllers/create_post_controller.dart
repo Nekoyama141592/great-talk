@@ -6,7 +6,7 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/feeds_controller.dart';
+import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
@@ -125,7 +125,7 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
     result.when(success: (_) {
       Get.back();
       _resetState(); // 初期化を行う
-      _reloadMyPost(); // 投稿の再取得を行う
+      _refreshMyPost(); // 投稿の再取得を行う
       UIHelper.showFlutterToast("投稿が作成できました！");
     }, failure: () {
       UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
@@ -149,7 +149,7 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
   }
 
   // 投稿を作成した後に再取得
-  Future<void> _reloadMyPost() async {
-    await FeedsController.to.onReload();
+  Future<void> _refreshMyPost() async {
+    await MyProfileController.to.onRefresh();
   }
 }
