@@ -74,10 +74,12 @@ class FirestoreQueries {
       tokensQuery(currentUid).doc(tokenId);
   static ColRef tokensQuery(String currentUid) =>
       privateUserDocRef(currentUid).collection("tokens");
-  static ColRef bookmarksQuery(BookmarkCategoryToken token) =>
+  static ColRef _bookmarksColRef(BookmarkCategoryToken token) =>
       token.ref.collection('bookmarks');
   static DocRef bookmarkQuery(BookmarkCategoryToken token, String postId) =>
-      bookmarksQuery(token).doc(postId);
+      _bookmarksColRef(token).doc(postId);
+  static MapQuery bookmarksQuery(BookmarkCategoryToken token) =>
+      _bookmarksColRef(token).limit(whereInLimit);
 
   static DocRef userDocRef(String uid) => _usersColRef.doc(uid);
   static final ColRef _usersColRef = _publicV1.collection('users');
