@@ -10,7 +10,6 @@ class BookmarksPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(BookmarksController());
     return BasicPage(
-      appBarText: "投稿一覧",
-        child: RefreshScreen(docsController: controller,child: const Text("あいうえお"),));
+        appBarText: "投稿一覧", child: RefreshScreen(docsController: controller));
   }
 }

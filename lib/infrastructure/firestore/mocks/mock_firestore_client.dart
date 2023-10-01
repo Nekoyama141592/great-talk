@@ -1,4 +1,3 @@
-import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/infrastructure/firestore/mocks/mock_data.dart';
@@ -179,19 +178,6 @@ class MockFirestoreClient implements FirestoreClient {
     final data = mockPosts.map((e) => MockQDoc(e.toJson(), e.postId)).toList();
     return MockQSnapshot(data);
   }
-
-  @override
-  FutureQSnapshot getTimelines(DocRef userRef) async {
-    await Future.delayed(const Duration(microseconds: awaitMilliSeconds));
-    final timelines = mockTimelines();
-    final data =
-        timelines.map((e) => MockQDoc(e.toJson(), randomString())).toList();
-    return MockQSnapshot(data);
-  }
-
-  @override
-  FutureQSnapshot getMoreTimelines(DocRef userRef, Doc lastDoc) =>
-      getTimelines(userRef);
 
   @override
   FutureQSnapshot getTimelinePosts(List<String> timelinePostIds) async {

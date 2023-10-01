@@ -22,8 +22,7 @@ final getPages = [
   GetPage(name: "/admin", page: () => const AdminPage()),
   GetPage(
       name: "/bookmarkCategory", page: () => const BookmarkCategoriesPage()),
-  GetPage(
-      name: "/bookmarks", page: () => const BookmarksPage()),
+  GetPage(name: "/bookmarks", page: () => const BookmarksPage()),
   GetPage(
     name: "/chat/users/:uid/posts/:postId",
     page: () => const RealtimeResPage(),

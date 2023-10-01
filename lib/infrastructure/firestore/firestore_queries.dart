@@ -16,8 +16,6 @@ class FirestoreQueries {
   static final searchLogsCollectionGroup =
       _instance.collectionGroup('searchLogs');
   // collection
-  static MapQuery moreQuery(MapQuery query, Doc lastDoc) =>
-      query.startAtDocument(lastDoc);
 
   static DocRef followerQuery(String currentUid, String passiveUid) =>
       _usersColRef.doc(passiveUid).collection('followers').doc(currentUid);
@@ -43,8 +41,6 @@ class FirestoreQueries {
       _userPostsColRef(uid).limit(oneTimeReadCount);
   static MapQuery userPostsQueryByNewest(String uid) =>
       userPostsQuery(uid).orderBy("createdAt", descending: true);
-  static MapQuery moreUserPostsQueryByNewest(String uid, Doc lastDoc) =>
-      moreQuery(userPostsQueryByNewest(uid), lastDoc);
 
   static final postsQueryByLikeCount =
       _postsLimitedCollectionGroupQuery.orderBy('likeCount', descending: true);
@@ -65,8 +61,6 @@ class FirestoreQueries {
       .collection('timelines')
       .orderBy('createdAt', descending: true)
       .limit(whereInLimit);
-  static MapQuery moreTimelinesQuery(DocRef userRef, Doc lastDoc) =>
-      moreQuery(timelinesQuery(userRef), lastDoc);
 
   static MapQuery timelinePostsQuery(List<String> timelinePostIds) {
     if (timelinePostIds.isEmpty) {
@@ -75,10 +69,6 @@ class FirestoreQueries {
     return _postsLimitedCollectionGroupQuery.where('postId',
         whereIn: timelinePostIds);
   }
-
-  static MapQuery moreTimelinePostsQuery(
-          List<String> timelinePostIds, Doc lastDoc) =>
-      moreQuery(timelinePostsQuery(timelinePostIds), lastDoc);
 
   static DocRef tokenQuery(String currentUid, String tokenId) =>
       tokensQuery(currentUid).doc(tokenId);

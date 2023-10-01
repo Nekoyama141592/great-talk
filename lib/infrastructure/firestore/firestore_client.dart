@@ -85,7 +85,6 @@ class FirestoreClient {
   Future<void> deleteUser(String uid) async =>
       await FirestoreQueries.userDocRef(uid).delete();
   // read
-
   FutureDoc getPost(String uid, String postId) async =>
       await FirestoreQueries.userPostRef(uid, postId).get();
 
@@ -93,11 +92,6 @@ class FirestoreClient {
 
   FutureQSnapshot getTimelinePosts(List<String> timelinePostIds) async =>
       await FirestoreQueries.timelinePostsQuery(timelinePostIds).get();
-
-  FutureQSnapshot getTimelines(DocRef userRef) async =>
-      await FirestoreQueries.timelinesQuery(userRef).get();
-  FutureQSnapshot getMoreTimelines(DocRef userRef, Doc lastDoc) async =>
-      await FirestoreQueries.moreTimelinesQuery(userRef, lastDoc).get();
 
   FutureQSnapshot getTokens(String currentUid) async =>
       await FirestoreQueries.tokensQuery(currentUid).get();

@@ -262,6 +262,7 @@ class FirestoreRepository {
   }
 
   // read
+
   FutureResult<Doc> getPost(String uid, String postId) async {
     try {
       final res = await client.getPost(uid, postId);
@@ -287,9 +288,9 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<List<QDoc>> getTimelines(DocRef userRef) async {
+  FutureResult<List<QDoc>> getPosts(MapQuery query) async {
     try {
-      final res = await client.getTimelines(userRef);
+      final res = await client.getPosts(query);
       final docs = res.docs;
       return Result.success(docs);
     } catch (e) {
@@ -301,17 +302,6 @@ class FirestoreRepository {
   FutureResult<List<QDoc>> getTokens(String currentUid) async {
     try {
       final res = await client.getTokens(currentUid);
-      final docs = res.docs;
-      return Result.success(docs);
-    } catch (e) {
-      debugPrint(e.toString());
-      return const Result.failure();
-    }
-  }
-
-  FutureResult<List<QDoc>> getMoreTimelines(DocRef userRef, Doc lastDoc) async {
-    try {
-      final res = await client.getMoreTimelines(userRef, lastDoc);
       final docs = res.docs;
       return Result.success(docs);
     } catch (e) {
