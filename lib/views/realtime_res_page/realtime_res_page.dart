@@ -10,9 +10,8 @@ import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/circle_image.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
-import 'package:great_talk/views/realtime_res_page/components/clear_log_button.dart';
 import 'package:great_talk/views/realtime_res_page/components/delete_post_button.dart';
-import 'package:great_talk/views/realtime_res_page/components/description_button.dart';
+import 'package:great_talk/views/realtime_res_page/components/menu_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
 
@@ -34,8 +33,6 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
       child: Scaffold(
           appBar: AppBar(
               actions: [
-                const DescriptionButton(),
-                const ClearLogButton(),
                 // 自分の投稿なら削除ボタン、それ以外ならレポートボタンを表示する.
                 Obx(() =>
                     controller.post.value?.typedPoster().uid == currentUid()
@@ -45,6 +42,7 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                     ? const SizedBox.shrink()
                     : PostLikeButton(
                         isHorizontal: true, post: controller.post.value!)),
+                const MenuButton(),
               ],
               title: Obx(() =>
                   EllipsisText(controller.interlocutor.value?.title ?? ""))),

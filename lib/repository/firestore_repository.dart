@@ -45,6 +45,26 @@ class FirestoreRepository {
   }
 
   // write
+  FutureResult<bool> createDoc(DocRef ref, SDMap json) async {
+    try {
+      await client.createDoc(ref, json);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
+  FutureResult<bool> deleteDoc(DocRef ref) async {
+    try {
+      await client.deleteDoc(ref);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
   FutureResult<bool> createMessage(DocRef messageRef, SDMap json) async {
     try {
       await client.createMessage(messageRef, json);

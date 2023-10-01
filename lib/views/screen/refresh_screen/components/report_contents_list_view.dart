@@ -38,7 +38,10 @@ class ReportContentsListView extends StatelessWidget {
                                     )
                                   : const SizedBox.shrink(),
                             ),
-                            BasicBoldText(content)
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: BasicBoldText(content),
+                            )
                           ],
                         ),
                       );

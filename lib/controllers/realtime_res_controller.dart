@@ -11,6 +11,7 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
@@ -18,6 +19,8 @@ import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
+import 'package:great_talk/model/bookmark/bookmark.dart';
+import 'package:great_talk/model/bookmark_category_token/bookmark_category_token.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/post/post.dart';
@@ -27,6 +30,7 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
+import 'package:great_talk/views/realtime_res_page/components/bookmark_categories_list_view.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -401,11 +405,6 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     }
   }
 
-  void showCleanLocalMsgDialog() {
-    UIHelper.cupertinoAlertDialog("履歴を全て削除しますがよろしいですか？",
-        () => _cleanLocalMessage().then((value) => Get.back));
-  }
-
   Future<void> _cleanLocalMessage() async {
     if (messages.isEmpty) return;
     messages([]); // 初期化.
@@ -418,5 +417,76 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     final deletePost = post.value;
     if (deletePost == null) return;
     PostsController.to.deletePost(deletePost);
+  }
+
+  void showBookmarkCategories() {
+    Get.dialog(const BookmarkCategoriesListView());
+  }
+
+  void onBookmarkCategoryTapped(BookmarkCategoryToken token) async {
+    if (CurrentUserController.to.hasNoPublicUser()) {
+      UIHelper.showFlutterToast("ログインが必要です");
+      return;
+    }
+    await _bookmark(token);
+  }
+
+  Future<void> _bookmark(BookmarkCategoryToken token) async {
+    final bookmarkedPost = post.value;
+    if (bookmarkedPost == null) return;
+    final Timestamp now = Timestamp.now();
+    final String passiveUid = bookmarkedPost.typedPoster().uid;
+    final postRef = bookmarkedPost.ref;
+    final postId = bookmarkedPost.postId;
+    final bookmarkRef = FirestoreQueries.bookmarkQuery(token, postId);
+    final bookmark = Bookmark(
+      activeUid: currentUid(),
+      ref: bookmarkRef,
+      categoryId: token.tokenId,
+      createdAt: now,
+      passiveUid: passiveUid,
+      postRef: postRef,
+      postId: postId,
+    );
+    final result = await repository.createDoc(bookmarkRef, bookmark.toJson());
+    result.when(success: (_) {
+      Get.back();
+      UIHelper.showFlutterToast(
+          "${bookmarkedPost.typedTitle().value}を${token.categoryName}に保存しました。");
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("保存が失敗しました。");
+    });
+  }
+
+  void onMenuPressed(BuildContext context) async {
+    UIHelper.showPopup(
+        context: context,
+        builder: (innerContext) {
+          return CupertinoActionSheet(
+            actions: [
+              CupertinoActionSheetAction(
+                  onPressed: () {
+                    Navigator.pop(innerContext);
+                    _cleanLocalMessage();
+                  },
+                  child: const Text("会話履歴を削除")),
+              CupertinoActionSheetAction(
+                  onPressed: () {
+                    Navigator.pop(innerContext);
+                    onDescriptionButtonPressed();
+                  },
+                  child: const Text("説明を見る")),
+              CupertinoActionSheetAction(
+                  onPressed: () {
+                    Navigator.pop(innerContext);
+                    showBookmarkCategories();
+                  },
+                  child: const Text("ブックマーク")),
+              CupertinoActionSheetAction(
+                  onPressed: () => Navigator.pop(innerContext),
+                  child: const Text("戻る"))
+            ],
+          );
+        });
   }
 }

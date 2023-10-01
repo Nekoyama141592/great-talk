@@ -7,6 +7,12 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
 
 class UIHelper {
+  static void showPopup(
+      {required BuildContext context,
+      required Widget Function(BuildContext) builder}) {
+    showCupertinoModalPopup(context: context, builder: builder);
+  }
+
   static Future<void> showFlutterToast(String msg) async {
     await fluttertoast.Fluttertoast.showToast(
         msg: msg, timeInSecForIosWeb: timeInSecForIosWeb);
