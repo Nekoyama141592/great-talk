@@ -59,6 +59,10 @@ service cloud.firestore {
       match /tokens/{tokenId} {
         allow read, delete: if isTheSameUserAndVerified(uid);
         allow create: if isTheSameUserAndVerified(uid) && isValidToken(request.resource.data);
+        match /bookmarks/{postId} {
+          allow read, delete: if isTheSameUser(uid);
+          allow create: if isTheSameUser(uid);
+        }
       }
       match /searchLogs/{searchLogId} {
         allow create: if isTheSameUser(uid) && isValidSearchLog(request.resource.data); // 認証されている必要はない.

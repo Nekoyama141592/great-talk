@@ -29,6 +29,7 @@ class BookmarkCategoriesPage extends HookWidget {
                             final token =
                                 controller.bookmarkCategoryTokens[index];
                             return ListTile(
+                              onTap: () => Get.toNamed("/bookmarks?categoryId=${token.tokenId}",),
                               title: Text(token.categoryName),
                               trailing: InkWell(
                                 onTap: () => controller

@@ -6,6 +6,7 @@ import 'package:great_talk/views/auth/logouted_page.dart';
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
 import 'package:great_talk/views/auth/user_deleted_page.dart';
 import 'package:great_talk/views/bookmark_categories_page.dart';
+import 'package:great_talk/views/bookmarks_page.dart';
 import 'package:great_talk/views/create_post/create_post_page.dart';
 import 'package:great_talk/views/edit_page.dart';
 import 'package:great_talk/views/mute/mute_posts/mute_posts_page.dart';
@@ -21,6 +22,8 @@ final getPages = [
   GetPage(name: "/admin", page: () => const AdminPage()),
   GetPage(
       name: "/bookmarkCategory", page: () => const BookmarkCategoriesPage()),
+  GetPage(
+      name: "/bookmarks", page: () => const BookmarksPage()),
   GetPage(
     name: "/chat/users/:uid/posts/:postId",
     page: () => const RealtimeResPage(),
