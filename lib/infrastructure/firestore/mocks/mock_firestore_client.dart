@@ -166,6 +166,12 @@ class MockFirestoreClient implements FirestoreClient {
 
   // read
   @override
+  FutureDoc getBookmark(DocRef ref) {
+    // TODO: implement getBookmark
+    throw UnimplementedError();
+  }
+
+  @override
   FutureDoc getPost(String uid, String postId) async {
     final data = mockPosts.firstWhere((element) =>
         element.typedPoster().uid == uid && element.postId == postId);

@@ -263,6 +263,16 @@ class FirestoreRepository {
 
   // read
 
+  FutureResult<Doc> getBookmark(DocRef ref) async {
+    try {
+      final res = await client.getBookmark(ref);
+      return Result.success(res);
+    } catch (e) {
+      debugPrint(e.toString());
+      return const Result.failure();
+    }
+  }
+
   FutureResult<Doc> getPost(String uid, String postId) async {
     try {
       final res = await client.getPost(uid, postId);

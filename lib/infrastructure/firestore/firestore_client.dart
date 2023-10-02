@@ -86,6 +86,7 @@ class FirestoreClient {
   Future<void> deleteUser(String uid) async =>
       await FirestoreQueries.userDocRef(uid).delete();
   // read
+  FutureDoc getBookmark(DocRef ref) async => await ref.get();
   FutureDoc getPost(String uid, String postId) async =>
       await FirestoreQueries.userPostRef(uid, postId).get();
 

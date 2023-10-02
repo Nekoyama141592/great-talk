@@ -28,6 +28,7 @@ import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/text_message/text_message.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/repository/wolfram_repository.dart';
+import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 import 'package:great_talk/views/realtime_res_page/components/bookmark_categories_list_view.dart';
@@ -435,12 +436,21 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     }
   }
 
-  void onBookmarkCategoryTapped(BookmarkCategory token) async {
+  void onBookmarkCategoryTapped(BookmarkCategory category) async {
     if (CurrentUserController.to.hasNoPublicUser()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
-    await _bookmark(token);
+    final bookmarkRef = FirestoreQueries.bookmarkQuery(category, postId);
+    final repository = FirestoreRepository();
+    final result = await repository.getBookmark(bookmarkRef);
+    result.when(success: (res) async {
+      res.exists
+          ? await _unBookmark(res)
+          : await _bookmark(category); // 存在するなら削除、しないなら作成
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("通信に失敗しました");
+    });
   }
 
   Future<void> _bookmark(BookmarkCategory category) async {
@@ -467,6 +477,17 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
           "${bookmarkedPost.typedTitle().value}を${category.title}に保存しました。");
     }, failure: () {
       UIHelper.showErrorFlutterToast("保存が失敗しました。");
+    });
+  }
+
+  Future<void> _unBookmark(Doc doc) async {
+    final repository = FirestoreRepository();
+    final result = await repository.deleteDoc(doc.reference);
+    result.when(success: (_) {
+      Get.back();
+      UIHelper.showFlutterToast("ブックマークを解除しました。");
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("ブックマークを解除できませんでした。");
     });
   }
 
