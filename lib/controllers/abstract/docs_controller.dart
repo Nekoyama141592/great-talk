@@ -107,6 +107,10 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
   }
 
   Future<void> onLoading(RefreshController refreshController) async {
+    if (docs.isEmpty) {
+      refreshController.loadComplete();
+      return;
+    }
     try {
       final elements = await query.startAtDocument(docs.last.doc).get();
       addAllDocs(elements.docs);
@@ -117,6 +121,7 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
   }
 
   Future<void> onRefresh() async {
+    if (docs.isEmpty) return;
     try {
       final elements = await query.endBeforeDocument(docs.first.doc).get();
       insertAllDocs(elements.docs);

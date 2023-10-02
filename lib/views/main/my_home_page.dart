@@ -12,8 +12,9 @@ import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/views/auth/login_page.dart';
 import 'package:great_talk/views/components/original_drawer.dart';
-import 'package:great_talk/views/main/feeds/feeds_screen.dart';
-import 'package:great_talk/views/main/my_profile/my_profile_screen.dart';
+import 'package:great_talk/views/main/components/main_floating_action_button.dart';
+import 'package:great_talk/views/main/feeds/feeds_page.dart';
+import 'package:great_talk/views/main/my_profile/my_profile_page.dart';
 import 'package:great_talk/views/main/new_posts/new_posts_screen.dart';
 import 'package:great_talk/views/main/ranking/ranking_screen.dart';
 import 'package:great_talk/views/main/subscribe/subscribe_screen.dart';
@@ -35,6 +36,8 @@ class MyHomePage extends HookWidget {
             ? null
             : AppBar(
                 title: BasicBoldText(appName), shape: appBarShape(context)),
+        floatingActionButton: MainFloatingActionButton(
+            controller: pageController, pageIndex: pageIndex),
         drawer: const OriginalDrawer(),
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
@@ -49,13 +52,13 @@ class MyHomePage extends HookWidget {
           onPageChanged: (index) => pageIndex.value = index,
           controller: pageController,
           children: [
-            const FeedsScreen(),
+            const FeedsPage(),
             const RankingScreen(),
             const NewPostsScreen(),
             const SubscribeScreen(),
             Obx(() => CurrentUserController.to.isNotLoggedIn()
                 ? const LoginPage()
-                : const MyProfileScreen())
+                : const MyProfilePage())
           ],
         ));
   }

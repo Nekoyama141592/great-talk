@@ -150,6 +150,9 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
 
   // 投稿を作成した後に再取得
   Future<void> _refreshMyPost() async {
-    await MyProfileController.to.onRefresh();
+    final myProfileController = MyProfileController.to;
+    myProfileController.docs.isEmpty
+        ? await myProfileController.onReload()
+        : await MyProfileController.to.onRefresh();
   }
 }
