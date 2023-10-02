@@ -419,8 +419,17 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     PostsController.to.deletePost(deletePost);
   }
 
-  void showBookmarkCategories() {
-    Get.dialog(const BookmarkCategoriesListView());
+  void _onBookmarkTextTapped() {
+    if (CurrentUserController.to.hasNoPublicUser()) {
+      UIHelper.showFlutterToast("ログインが必要です");
+      return;
+    }
+    if (CurrentUserController.to.bookmarkCategoryTokens.isEmpty) {
+      Get.toNamed("/bookmarkCategory");
+      UIHelper.showFlutterToast("まずはカテゴリーを作成してみましょう!");
+    } else {
+      Get.dialog(const BookmarkCategoriesListView());
+    }
   }
 
   void onBookmarkCategoryTapped(BookmarkCategoryToken token) async {
@@ -479,7 +488,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
               CupertinoActionSheetAction(
                   onPressed: () {
                     Navigator.pop(innerContext);
-                    showBookmarkCategories();
+                    _onBookmarkTextTapped();
                   },
                   child: const Text("ブックマーク")),
               CupertinoActionSheetAction(
