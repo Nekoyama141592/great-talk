@@ -26,17 +26,17 @@ class BookmarkCategoriesPage extends HookWidget {
                       child: ListView.builder(
                           itemCount: controller.bookmarkCategoryTokens.length,
                           itemBuilder: (context, index) {
-                            final token =
+                            final category =
                                 controller.bookmarkCategoryTokens[index];
                             return ListTile(
                               onTap: () => Get.toNamed(
-                                "/bookmarks?categoryId=${token.categoryId}",
+                                "/bookmarks?categoryId=${category.id}",
                               ),
-                              title: Text(token.categoryName),
+                              title: Text(category.title),
                               trailing: InkWell(
                                 onTap: () => controller
                                     .onBookmarkCategoryDeleteButtonPressed(
-                                        token),
+                                        category),
                                 child: const Icon(Icons.delete),
                               ),
                             );

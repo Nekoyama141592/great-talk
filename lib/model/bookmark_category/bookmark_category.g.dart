@@ -9,8 +9,8 @@ part of 'bookmark_category.dart';
 _$_BookmarkCategory _$$_BookmarkCategoryFromJson(Map<String, dynamic> json) =>
     _$_BookmarkCategory(
       createdAt: json['createdAt'],
-      categoryName: json['categoryName'] as String,
-      categoryId: json['categoryId'] as String,
+      title: json['title'] as String,
+      id: json['id'] as String,
       image: json['image'] as Map<String, dynamic>,
       ref: json['ref'],
       updatedAt: json['updatedAt'],
@@ -19,8 +19,8 @@ _$_BookmarkCategory _$$_BookmarkCategoryFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$_BookmarkCategoryToJson(_$_BookmarkCategory instance) =>
     <String, dynamic>{
       'createdAt': instance.createdAt,
-      'categoryName': instance.categoryName,
-      'categoryId': instance.categoryId,
+      'title': instance.title,
+      'id': instance.id,
       'image': instance.image,
       'ref': instance.ref,
       'updatedAt': instance.updatedAt,

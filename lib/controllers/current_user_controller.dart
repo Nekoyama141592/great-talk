@@ -403,8 +403,8 @@ class CurrentUserController extends GetxController {
     final repository = FirestoreRepository();
     final newCategory = BookmarkCategory(
         createdAt: now,
-        categoryId: categoryId,
-        categoryName: inputController.text,
+        id: categoryId,
+        title: inputController.text,
         image: DetectedImage.initial().toJson(),
         ref: ref,
         updatedAt: now);

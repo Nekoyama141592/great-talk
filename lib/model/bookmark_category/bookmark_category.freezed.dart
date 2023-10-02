@@ -21,8 +21,8 @@ BookmarkCategory _$BookmarkCategoryFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$BookmarkCategory {
   dynamic get createdAt => throw _privateConstructorUsedError;
-  String get categoryName => throw _privateConstructorUsedError;
-  String get categoryId => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   Map<String, dynamic> get image => throw _privateConstructorUsedError;
   dynamic get ref => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
@@ -41,8 +41,8 @@ abstract class $BookmarkCategoryCopyWith<$Res> {
   @useResult
   $Res call(
       {dynamic createdAt,
-      String categoryName,
-      String categoryId,
+      String title,
+      String id,
       Map<String, dynamic> image,
       dynamic ref,
       dynamic updatedAt});
@@ -62,8 +62,8 @@ class _$BookmarkCategoryCopyWithImpl<$Res, $Val extends BookmarkCategory>
   @override
   $Res call({
     Object? createdAt = freezed,
-    Object? categoryName = null,
-    Object? categoryId = null,
+    Object? title = null,
+    Object? id = null,
     Object? image = null,
     Object? ref = freezed,
     Object? updatedAt = freezed,
@@ -73,13 +73,13 @@ class _$BookmarkCategoryCopyWithImpl<$Res, $Val extends BookmarkCategory>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      categoryName: null == categoryName
-          ? _value.categoryName
-          : categoryName // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       image: null == image
           ? _value.image
@@ -107,8 +107,8 @@ abstract class _$$_BookmarkCategoryCopyWith<$Res>
   @useResult
   $Res call(
       {dynamic createdAt,
-      String categoryName,
-      String categoryId,
+      String title,
+      String id,
       Map<String, dynamic> image,
       dynamic ref,
       dynamic updatedAt});
@@ -126,8 +126,8 @@ class __$$_BookmarkCategoryCopyWithImpl<$Res>
   @override
   $Res call({
     Object? createdAt = freezed,
-    Object? categoryName = null,
-    Object? categoryId = null,
+    Object? title = null,
+    Object? id = null,
     Object? image = null,
     Object? ref = freezed,
     Object? updatedAt = freezed,
@@ -137,13 +137,13 @@ class __$$_BookmarkCategoryCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      categoryName: null == categoryName
-          ? _value.categoryName
-          : categoryName // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
       image: null == image
           ? _value._image
@@ -166,8 +166,8 @@ class __$$_BookmarkCategoryCopyWithImpl<$Res>
 class _$_BookmarkCategory implements _BookmarkCategory {
   const _$_BookmarkCategory(
       {required this.createdAt,
-      required this.categoryName,
-      required this.categoryId,
+      required this.title,
+      required this.id,
       required final Map<String, dynamic> image,
       required this.ref,
       required this.updatedAt})
@@ -179,9 +179,9 @@ class _$_BookmarkCategory implements _BookmarkCategory {
   @override
   final dynamic createdAt;
   @override
-  final String categoryName;
+  final String title;
   @override
-  final String categoryId;
+  final String id;
   final Map<String, dynamic> _image;
   @override
   Map<String, dynamic> get image {
@@ -197,7 +197,7 @@ class _$_BookmarkCategory implements _BookmarkCategory {
 
   @override
   String toString() {
-    return 'BookmarkCategory(createdAt: $createdAt, categoryName: $categoryName, categoryId: $categoryId, image: $image, ref: $ref, updatedAt: $updatedAt)';
+    return 'BookmarkCategory(createdAt: $createdAt, title: $title, id: $id, image: $image, ref: $ref, updatedAt: $updatedAt)';
   }
 
   @override
@@ -206,10 +206,8 @@ class _$_BookmarkCategory implements _BookmarkCategory {
         (other.runtimeType == runtimeType &&
             other is _$_BookmarkCategory &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            (identical(other.categoryName, categoryName) ||
-                other.categoryName == categoryName) &&
-            (identical(other.categoryId, categoryId) ||
-                other.categoryId == categoryId) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._image, _image) &&
             const DeepCollectionEquality().equals(other.ref, ref) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
@@ -220,8 +218,8 @@ class _$_BookmarkCategory implements _BookmarkCategory {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(createdAt),
-      categoryName,
-      categoryId,
+      title,
+      id,
       const DeepCollectionEquality().hash(_image),
       const DeepCollectionEquality().hash(ref),
       const DeepCollectionEquality().hash(updatedAt));
@@ -243,8 +241,8 @@ class _$_BookmarkCategory implements _BookmarkCategory {
 abstract class _BookmarkCategory implements BookmarkCategory {
   const factory _BookmarkCategory(
       {required final dynamic createdAt,
-      required final String categoryName,
-      required final String categoryId,
+      required final String title,
+      required final String id,
       required final Map<String, dynamic> image,
       required final dynamic ref,
       required final dynamic updatedAt}) = _$_BookmarkCategory;
@@ -255,9 +253,9 @@ abstract class _BookmarkCategory implements BookmarkCategory {
   @override
   dynamic get createdAt;
   @override
-  String get categoryName;
+  String get title;
   @override
-  String get categoryId;
+  String get id;
   @override
   Map<String, dynamic> get image;
   @override

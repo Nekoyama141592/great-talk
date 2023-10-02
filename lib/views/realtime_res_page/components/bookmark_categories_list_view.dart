@@ -34,7 +34,7 @@ class BookmarkCategoriesListView extends StatelessWidget {
                           onTap: () =>
                               controller.onBookmarkCategoryTapped(token),
                           child: ListTile(
-                            title: BasicBoldText(token.categoryName),
+                            title: BasicBoldText(token.title),
                           ));
                     },
                   ),

@@ -8,8 +8,8 @@ part 'bookmark_category.g.dart';
 abstract class BookmarkCategory with _$BookmarkCategory {
   const factory BookmarkCategory({
     required dynamic createdAt,
-    required String categoryName,
-    required String categoryId,
+    required String title,
+    required String id,
     required SDMap image,
     required dynamic ref,
     required dynamic updatedAt,

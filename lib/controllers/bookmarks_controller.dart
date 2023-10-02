@@ -12,8 +12,8 @@ class BookmarksController extends IndexPostsController {
   @override
   void setQuery() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final token = CurrentUserController.to.bookmarkCategoryTokens.firstWhere(
-          (element) => element.categoryId == Get.parameters["categoryId"]);
+      final token = CurrentUserController.to.bookmarkCategoryTokens
+          .firstWhere((element) => element.id == Get.parameters["categoryId"]);
       query = FirestoreQueries.bookmarksQuery(token);
     });
   }

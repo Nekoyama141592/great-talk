@@ -451,7 +451,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     final bookmark = Bookmark(
       activeUid: currentUid(),
       ref: bookmarkRef,
-      categoryId: category.categoryId,
+      categoryId: category.id,
       createdAt: now,
       passiveUid: passiveUid,
       postRef: postRef,
@@ -461,7 +461,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     result.when(success: (_) {
       Get.back();
       UIHelper.showFlutterToast(
-          "${bookmarkedPost.typedTitle().value}を${category.categoryName}に保存しました。");
+          "${bookmarkedPost.typedTitle().value}を${category.title}に保存しました。");
     }, failure: () {
       UIHelper.showErrorFlutterToast("保存が失敗しました。");
     });
