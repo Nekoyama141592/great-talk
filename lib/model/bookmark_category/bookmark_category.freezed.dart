@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'bookmark_category_token.dart';
+part of 'bookmark_category.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-BookmarkCategoryToken _$BookmarkCategoryTokenFromJson(
-    Map<String, dynamic> json) {
-  return _BookmarkCategoryToken.fromJson(json);
+BookmarkCategory _$BookmarkCategoryFromJson(Map<String, dynamic> json) {
+  return _BookmarkCategory.fromJson(json);
 }
 
 /// @nodoc
-mixin _$BookmarkCategoryToken {
+mixin _$BookmarkCategory {
   dynamic get createdAt => throw _privateConstructorUsedError;
   String get categoryName => throw _privateConstructorUsedError;
   String get categoryId => throw _privateConstructorUsedError;
@@ -30,15 +29,15 @@ mixin _$BookmarkCategoryToken {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $BookmarkCategoryTokenCopyWith<BookmarkCategoryToken> get copyWith =>
+  $BookmarkCategoryCopyWith<BookmarkCategory> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BookmarkCategoryTokenCopyWith<$Res> {
-  factory $BookmarkCategoryTokenCopyWith(BookmarkCategoryToken value,
-          $Res Function(BookmarkCategoryToken) then) =
-      _$BookmarkCategoryTokenCopyWithImpl<$Res, BookmarkCategoryToken>;
+abstract class $BookmarkCategoryCopyWith<$Res> {
+  factory $BookmarkCategoryCopyWith(
+          BookmarkCategory value, $Res Function(BookmarkCategory) then) =
+      _$BookmarkCategoryCopyWithImpl<$Res, BookmarkCategory>;
   @useResult
   $Res call(
       {dynamic createdAt,
@@ -50,10 +49,9 @@ abstract class $BookmarkCategoryTokenCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BookmarkCategoryTokenCopyWithImpl<$Res,
-        $Val extends BookmarkCategoryToken>
-    implements $BookmarkCategoryTokenCopyWith<$Res> {
-  _$BookmarkCategoryTokenCopyWithImpl(this._value, this._then);
+class _$BookmarkCategoryCopyWithImpl<$Res, $Val extends BookmarkCategory>
+    implements $BookmarkCategoryCopyWith<$Res> {
+  _$BookmarkCategoryCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -100,11 +98,11 @@ class _$BookmarkCategoryTokenCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_BookmarkCategoryTokenCopyWith<$Res>
-    implements $BookmarkCategoryTokenCopyWith<$Res> {
-  factory _$$_BookmarkCategoryTokenCopyWith(_$_BookmarkCategoryToken value,
-          $Res Function(_$_BookmarkCategoryToken) then) =
-      __$$_BookmarkCategoryTokenCopyWithImpl<$Res>;
+abstract class _$$_BookmarkCategoryCopyWith<$Res>
+    implements $BookmarkCategoryCopyWith<$Res> {
+  factory _$$_BookmarkCategoryCopyWith(
+          _$_BookmarkCategory value, $Res Function(_$_BookmarkCategory) then) =
+      __$$_BookmarkCategoryCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -117,11 +115,11 @@ abstract class _$$_BookmarkCategoryTokenCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BookmarkCategoryTokenCopyWithImpl<$Res>
-    extends _$BookmarkCategoryTokenCopyWithImpl<$Res, _$_BookmarkCategoryToken>
-    implements _$$_BookmarkCategoryTokenCopyWith<$Res> {
-  __$$_BookmarkCategoryTokenCopyWithImpl(_$_BookmarkCategoryToken _value,
-      $Res Function(_$_BookmarkCategoryToken) _then)
+class __$$_BookmarkCategoryCopyWithImpl<$Res>
+    extends _$BookmarkCategoryCopyWithImpl<$Res, _$_BookmarkCategory>
+    implements _$$_BookmarkCategoryCopyWith<$Res> {
+  __$$_BookmarkCategoryCopyWithImpl(
+      _$_BookmarkCategory _value, $Res Function(_$_BookmarkCategory) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -134,7 +132,7 @@ class __$$_BookmarkCategoryTokenCopyWithImpl<$Res>
     Object? ref = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$_BookmarkCategoryToken(
+    return _then(_$_BookmarkCategory(
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -165,8 +163,8 @@ class __$$_BookmarkCategoryTokenCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BookmarkCategoryToken implements _BookmarkCategoryToken {
-  const _$_BookmarkCategoryToken(
+class _$_BookmarkCategory implements _BookmarkCategory {
+  const _$_BookmarkCategory(
       {required this.createdAt,
       required this.categoryName,
       required this.categoryId,
@@ -175,8 +173,8 @@ class _$_BookmarkCategoryToken implements _BookmarkCategoryToken {
       required this.updatedAt})
       : _image = image;
 
-  factory _$_BookmarkCategoryToken.fromJson(Map<String, dynamic> json) =>
-      _$$_BookmarkCategoryTokenFromJson(json);
+  factory _$_BookmarkCategory.fromJson(Map<String, dynamic> json) =>
+      _$$_BookmarkCategoryFromJson(json);
 
   @override
   final dynamic createdAt;
@@ -199,14 +197,14 @@ class _$_BookmarkCategoryToken implements _BookmarkCategoryToken {
 
   @override
   String toString() {
-    return 'BookmarkCategoryToken(createdAt: $createdAt, categoryName: $categoryName, categoryId: $categoryId, image: $image, ref: $ref, updatedAt: $updatedAt)';
+    return 'BookmarkCategory(createdAt: $createdAt, categoryName: $categoryName, categoryId: $categoryId, image: $image, ref: $ref, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BookmarkCategoryToken &&
+            other is _$_BookmarkCategory &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.categoryName, categoryName) ||
                 other.categoryName == categoryName) &&
@@ -231,29 +229,28 @@ class _$_BookmarkCategoryToken implements _BookmarkCategoryToken {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BookmarkCategoryTokenCopyWith<_$_BookmarkCategoryToken> get copyWith =>
-      __$$_BookmarkCategoryTokenCopyWithImpl<_$_BookmarkCategoryToken>(
-          this, _$identity);
+  _$$_BookmarkCategoryCopyWith<_$_BookmarkCategory> get copyWith =>
+      __$$_BookmarkCategoryCopyWithImpl<_$_BookmarkCategory>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BookmarkCategoryTokenToJson(
+    return _$$_BookmarkCategoryToJson(
       this,
     );
   }
 }
 
-abstract class _BookmarkCategoryToken implements BookmarkCategoryToken {
-  const factory _BookmarkCategoryToken(
+abstract class _BookmarkCategory implements BookmarkCategory {
+  const factory _BookmarkCategory(
       {required final dynamic createdAt,
       required final String categoryName,
       required final String categoryId,
       required final Map<String, dynamic> image,
       required final dynamic ref,
-      required final dynamic updatedAt}) = _$_BookmarkCategoryToken;
+      required final dynamic updatedAt}) = _$_BookmarkCategory;
 
-  factory _BookmarkCategoryToken.fromJson(Map<String, dynamic> json) =
-      _$_BookmarkCategoryToken.fromJson;
+  factory _BookmarkCategory.fromJson(Map<String, dynamic> json) =
+      _$_BookmarkCategory.fromJson;
 
   @override
   dynamic get createdAt;
@@ -269,6 +266,6 @@ abstract class _BookmarkCategoryToken implements BookmarkCategoryToken {
   dynamic get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_BookmarkCategoryTokenCopyWith<_$_BookmarkCategoryToken> get copyWith =>
+  _$$_BookmarkCategoryCopyWith<_$_BookmarkCategory> get copyWith =>
       throw _privateConstructorUsedError;
 }

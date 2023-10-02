@@ -8,7 +8,7 @@ import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
-import 'package:great_talk/model/bookmark_category_token/bookmark_category_token.dart';
+import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
@@ -29,7 +29,7 @@ class CurrentUserController extends GetxController {
 
   final deletePostIds = <String>[].obs; // 投稿の削除時に一時的に保存する.
 
-  final bookmarkCategoryTokens = <BookmarkCategoryToken>[].obs;
+  final bookmarkCategoryTokens = <BookmarkCategory>[].obs;
   final followingTokens = <FollowingToken>[];
   final followingUids = <String>[].obs;
 
@@ -66,12 +66,6 @@ class CurrentUserController extends GetxController {
             final TokenType tokenType =
                 TokenType.values.byName(tokenMap['tokenType']);
             switch (tokenType) {
-              // TODO: fetch
-              // case TokenType.bookmarkCategory:
-              //   final BookmarkCategoryToken token =
-              //       BookmarkCategoryToken.fromJson(tokenMap);
-              //   addBookmarkCategory(token);
-              //   break;
               case TokenType.following:
                 final FollowingToken followingToken =
                     FollowingToken.fromJson(tokenMap);
@@ -109,9 +103,8 @@ class CurrentUserController extends GetxController {
       return;
     }
     final qshot = await FirestoreQueries.bookmarkCategoriesColRef(user).get();
-    bookmarkCategoryTokens(qshot.docs
-        .map((e) => BookmarkCategoryToken.fromJson(e.data()))
-        .toList());
+    bookmarkCategoryTokens(
+        qshot.docs.map((e) => BookmarkCategory.fromJson(e.data())).toList());
   }
 
   // 投稿の削除時に外部から呼び出す.
@@ -120,12 +113,12 @@ class CurrentUserController extends GetxController {
     deletePostIds([...deletePostIds]);
   }
 
-  void addBookmarkCategory(BookmarkCategoryToken token) {
-    bookmarkCategoryTokens.add(token);
+  void addBookmarkCategory(BookmarkCategory category) {
+    bookmarkCategoryTokens.add(category);
   }
 
-  void removeBookmarkCategory(BookmarkCategoryToken token) {
-    bookmarkCategoryTokens.remove(token);
+  void removeBookmarkCategory(BookmarkCategory category) {
+    bookmarkCategoryTokens.remove(category);
   }
 
   void addFollowing(FollowingToken followingToken) {
@@ -408,7 +401,7 @@ class CurrentUserController extends GetxController {
     final categoryId = randomString();
     final ref = FirestoreQueries.bookmarkCategoryDocRef(user, categoryId);
     final repository = FirestoreRepository();
-    final newCategory = BookmarkCategoryToken(
+    final newCategory = BookmarkCategory(
         createdAt: now,
         categoryId: categoryId,
         categoryName: inputController.text,
@@ -426,12 +419,12 @@ class CurrentUserController extends GetxController {
     });
   }
 
-  void onBookmarkCategoryDeleteButtonPressed(BookmarkCategoryToken token) {
+  void onBookmarkCategoryDeleteButtonPressed(BookmarkCategory token) {
     UIHelper.cupertinoAlertDialog(
         "このカテゴリーを削除しますが、よろしいですか？", () => _deleteBookmarkCategory(token));
   }
 
-  void _deleteBookmarkCategory(BookmarkCategoryToken token) async {
+  void _deleteBookmarkCategory(BookmarkCategory token) async {
     final user = publicUser.value;
     if (user == null) return;
     final repository = FirestoreRepository();

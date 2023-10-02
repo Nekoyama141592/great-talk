@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/ints.dart';
-import 'package:great_talk/model/bookmark_category_token/bookmark_category_token.dart';
+import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/model/private_user/private_user.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
@@ -82,12 +82,12 @@ class FirestoreQueries {
           PrivateUser privateUser, String categoryId) =>
       bookmarkCategoriesColRef(privateUser).doc(categoryId);
 
-  static ColRef _bookmarksColRef(BookmarkCategoryToken token) =>
-      token.ref.collection('bookmarks');
-  static DocRef bookmarkQuery(BookmarkCategoryToken token, String postId) =>
-      _bookmarksColRef(token).doc(postId);
-  static MapQuery bookmarksQuery(BookmarkCategoryToken token) =>
-      _bookmarksColRef(token).limit(whereInLimit);
+  static ColRef _bookmarksColRef(BookmarkCategory category) =>
+      category.ref.collection('bookmarks');
+  static DocRef bookmarkQuery(BookmarkCategory category, String postId) =>
+      _bookmarksColRef(category).doc(postId);
+  static MapQuery bookmarksQuery(BookmarkCategory category) =>
+      _bookmarksColRef(category).limit(whereInLimit);
 
   static DocRef userDocRef(String uid) => _usersColRef.doc(uid);
   static final ColRef _usersColRef = _publicV1.collection('users');

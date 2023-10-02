@@ -20,7 +20,7 @@ import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/bookmark/bookmark.dart';
-import 'package:great_talk/model/bookmark_category_token/bookmark_category_token.dart';
+import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/post/post.dart';
@@ -432,7 +432,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     }
   }
 
-  void onBookmarkCategoryTapped(BookmarkCategoryToken token) async {
+  void onBookmarkCategoryTapped(BookmarkCategory token) async {
     if (CurrentUserController.to.hasNoPublicUser()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
@@ -440,18 +440,18 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     await _bookmark(token);
   }
 
-  Future<void> _bookmark(BookmarkCategoryToken token) async {
+  Future<void> _bookmark(BookmarkCategory category) async {
     final bookmarkedPost = post.value;
     if (bookmarkedPost == null) return;
     final Timestamp now = Timestamp.now();
     final String passiveUid = bookmarkedPost.typedPoster().uid;
     final postRef = bookmarkedPost.ref;
     final postId = bookmarkedPost.postId;
-    final bookmarkRef = FirestoreQueries.bookmarkQuery(token, postId);
+    final bookmarkRef = FirestoreQueries.bookmarkQuery(category, postId);
     final bookmark = Bookmark(
       activeUid: currentUid(),
       ref: bookmarkRef,
-      categoryId: token.categoryId,
+      categoryId: category.categoryId,
       createdAt: now,
       passiveUid: passiveUid,
       postRef: postRef,
@@ -461,7 +461,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     result.when(success: (_) {
       Get.back();
       UIHelper.showFlutterToast(
-          "${bookmarkedPost.typedTitle().value}を${token.categoryName}に保存しました。");
+          "${bookmarkedPost.typedTitle().value}を${category.categoryName}に保存しました。");
     }, failure: () {
       UIHelper.showErrorFlutterToast("保存が失敗しました。");
     });
