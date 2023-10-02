@@ -7,12 +7,12 @@ part 'bookmark.g.dart';
 abstract class Bookmark implements _$Bookmark {
   const factory Bookmark({
     required String activeUid,
-    required dynamic ref,
     required String categoryId,
     required dynamic createdAt,
     required String passiveUid,
     required dynamic postRef,
     required String postId,
+    required dynamic ref,
   }) = _Bookmark;
   factory Bookmark.fromJson(Map<String, dynamic> json) =>
       _$BookmarkFromJson(json);

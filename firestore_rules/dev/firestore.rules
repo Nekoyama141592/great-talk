@@ -60,8 +60,8 @@ service cloud.firestore {
         allow read, delete: if isTheSameUserAndVerified(uid);
         allow create: if isTheSameUserAndVerified(uid) && isValidToken(request.resource.data);
         match /bookmarks/{postId} {
-          allow read, delete: if isTheSameUser(uid);
-          allow create: if isTheSameUser(uid);
+          allow read, delete: if isTheSameUserAndVerified(uid);
+          allow create: if isTheSameUserAndVerified(uid) && isValidBookmark(request.resource.data);
         }
       }
       match /searchLogs/{searchLogId} {
@@ -260,6 +260,17 @@ service cloud.firestore {
       &&  searchLog.searchTerm.size() >= 2
       && "uid" in searchLog && searchLog.uid is string;
   }
+  function isValidBookmark(bookmark) {
+    return bookmark.size() == 7 &&
+    "activeUid" in bookmark && bookmark.activeUid is string &&
+    "categoryId" in bookmark && bookmark.categoryId is string &&
+    "createdAt" in bookmark && bookmark.createdAt is timestamp &&
+    "passiveUid" in bookmark && bookmark.passiveUid is string &&
+    "postRef" in bookmark && bookmark.postRef is path &&
+    "postId" in bookmark && bookmark.postId is string &&
+    "ref" in bookmark && bookmark.ref is path;
+  }
+
 
   function isAuthenticated() {
   	return request.auth != null;
