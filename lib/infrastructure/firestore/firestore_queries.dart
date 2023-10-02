@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/model/bookmark_category_token/bookmark_category_token.dart';
+import 'package:great_talk/model/private_user/private_user.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreQueries {
@@ -74,6 +75,13 @@ class FirestoreQueries {
       tokensQuery(currentUid).doc(tokenId);
   static ColRef tokensQuery(String currentUid) =>
       privateUserDocRef(currentUid).collection("tokens");
+
+  static ColRef bookmarkCategoriesColRef(PrivateUser privateUser) =>
+      privateUser.typedRef().collection("bookmarkCategories");
+  static DocRef bookmarkCategoryDocRef(
+          PrivateUser privateUser, String categoryId) =>
+      bookmarkCategoriesColRef(privateUser).doc(categoryId);
+
   static ColRef _bookmarksColRef(BookmarkCategoryToken token) =>
       token.ref.collection('bookmarks');
   static DocRef bookmarkQuery(BookmarkCategoryToken token, String postId) =>

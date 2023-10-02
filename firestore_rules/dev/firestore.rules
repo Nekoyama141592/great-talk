@@ -56,13 +56,17 @@ service cloud.firestore {
     match /private/{version}/privateUsers/{uid} {
       allow read: if isTheSameUserAndVerified(uid);
       allow create: if isTheSameUserAndVerified(uid) && isValidPrivateUser(request.resource.data);
-      match /tokens/{tokenId} {
+      match /bookmarkCategories/{categoryId} {
         allow read, delete: if isTheSameUserAndVerified(uid);
-        allow create: if isTheSameUserAndVerified(uid) && isValidToken(request.resource.data);
+        allow create: if isTheSameUserAndVerified(uid);
         match /bookmarks/{postId} {
           allow read, delete: if isTheSameUserAndVerified(uid);
           allow create: if isTheSameUserAndVerified(uid) && isValidBookmark(request.resource.data);
         }
+      }
+      match /tokens/{tokenId} {
+        allow read, delete: if isTheSameUserAndVerified(uid);
+        allow create: if isTheSameUserAndVerified(uid) && isValidToken(request.resource.data);
       }
       match /searchLogs/{searchLogId} {
         allow create: if isTheSameUser(uid) && isValidSearchLog(request.resource.data); // 認証されている必要はない.

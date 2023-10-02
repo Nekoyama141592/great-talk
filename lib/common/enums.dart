@@ -17,11 +17,4 @@ enum PrefsKey {
 
 enum SearchTarget { post, user }
 
-enum TokenType {
-  bookmarkCategory,
-  following,
-  likePost,
-  mutePost,
-  muteUser,
-  reportPost
-}
+enum TokenType { following, likePost, mutePost, muteUser, reportPost }

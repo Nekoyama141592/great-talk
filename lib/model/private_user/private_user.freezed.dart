@@ -189,7 +189,7 @@ class __$$_PrivateUserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PrivateUser implements _PrivateUser {
+class _$_PrivateUser extends _PrivateUser {
   const _$_PrivateUser(
       {required this.createdAt,
       required this.ethAddress,
@@ -198,7 +198,8 @@ class _$_PrivateUser implements _PrivateUser {
       required this.isAdmin,
       required this.ref,
       required this.uid,
-      required this.updatedAt});
+      required this.updatedAt})
+      : super._();
 
   factory _$_PrivateUser.fromJson(Map<String, dynamic> json) =>
       _$$_PrivateUserFromJson(json);
@@ -269,7 +270,7 @@ class _$_PrivateUser implements _PrivateUser {
   }
 }
 
-abstract class _PrivateUser implements PrivateUser {
+abstract class _PrivateUser extends PrivateUser {
   const factory _PrivateUser(
       {required final dynamic createdAt,
       required final String ethAddress,
@@ -279,6 +280,7 @@ abstract class _PrivateUser implements PrivateUser {
       required final dynamic ref,
       required final String uid,
       required final dynamic updatedAt}) = _$_PrivateUser;
+  const _PrivateUser._() : super._();
 
   factory _PrivateUser.fromJson(Map<String, dynamic> json) =
       _$_PrivateUser.fromJson;

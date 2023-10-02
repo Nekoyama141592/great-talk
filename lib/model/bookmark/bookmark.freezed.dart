@@ -21,12 +21,12 @@ Bookmark _$BookmarkFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Bookmark {
   String get activeUid => throw _privateConstructorUsedError;
-  dynamic get ref => throw _privateConstructorUsedError;
   String get categoryId => throw _privateConstructorUsedError;
   dynamic get createdAt => throw _privateConstructorUsedError;
   String get passiveUid => throw _privateConstructorUsedError;
   dynamic get postRef => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
+  dynamic get ref => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,12 +41,12 @@ abstract class $BookmarkCopyWith<$Res> {
   @useResult
   $Res call(
       {String activeUid,
-      dynamic ref,
       String categoryId,
       dynamic createdAt,
       String passiveUid,
       dynamic postRef,
-      String postId});
+      String postId,
+      dynamic ref});
 }
 
 /// @nodoc
@@ -63,22 +63,18 @@ class _$BookmarkCopyWithImpl<$Res, $Val extends Bookmark>
   @override
   $Res call({
     Object? activeUid = null,
-    Object? ref = freezed,
     Object? categoryId = null,
     Object? createdAt = freezed,
     Object? passiveUid = null,
     Object? postRef = freezed,
     Object? postId = null,
+    Object? ref = freezed,
   }) {
     return _then(_value.copyWith(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
-      ref: freezed == ref
-          ? _value.ref
-          : ref // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -99,6 +95,10 @@ class _$BookmarkCopyWithImpl<$Res, $Val extends Bookmark>
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
               as String,
+      ref: freezed == ref
+          ? _value.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -112,12 +112,12 @@ abstract class _$$_BookmarkCopyWith<$Res> implements $BookmarkCopyWith<$Res> {
   @useResult
   $Res call(
       {String activeUid,
-      dynamic ref,
       String categoryId,
       dynamic createdAt,
       String passiveUid,
       dynamic postRef,
-      String postId});
+      String postId,
+      dynamic ref});
 }
 
 /// @nodoc
@@ -132,22 +132,18 @@ class __$$_BookmarkCopyWithImpl<$Res>
   @override
   $Res call({
     Object? activeUid = null,
-    Object? ref = freezed,
     Object? categoryId = null,
     Object? createdAt = freezed,
     Object? passiveUid = null,
     Object? postRef = freezed,
     Object? postId = null,
+    Object? ref = freezed,
   }) {
     return _then(_$_Bookmark(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
-      ref: freezed == ref
-          ? _value.ref
-          : ref // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -168,6 +164,10 @@ class __$$_BookmarkCopyWithImpl<$Res>
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
               as String,
+      ref: freezed == ref
+          ? _value.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -177,20 +177,18 @@ class __$$_BookmarkCopyWithImpl<$Res>
 class _$_Bookmark implements _Bookmark {
   const _$_Bookmark(
       {required this.activeUid,
-      required this.ref,
       required this.categoryId,
       required this.createdAt,
       required this.passiveUid,
       required this.postRef,
-      required this.postId});
+      required this.postId,
+      required this.ref});
 
   factory _$_Bookmark.fromJson(Map<String, dynamic> json) =>
       _$$_BookmarkFromJson(json);
 
   @override
   final String activeUid;
-  @override
-  final dynamic ref;
   @override
   final String categoryId;
   @override
@@ -201,10 +199,12 @@ class _$_Bookmark implements _Bookmark {
   final dynamic postRef;
   @override
   final String postId;
+  @override
+  final dynamic ref;
 
   @override
   String toString() {
-    return 'Bookmark(activeUid: $activeUid, ref: $ref, categoryId: $categoryId, createdAt: $createdAt, passiveUid: $passiveUid, postRef: $postRef, postId: $postId)';
+    return 'Bookmark(activeUid: $activeUid, categoryId: $categoryId, createdAt: $createdAt, passiveUid: $passiveUid, postRef: $postRef, postId: $postId, ref: $ref)';
   }
 
   @override
@@ -214,14 +214,14 @@ class _$_Bookmark implements _Bookmark {
             other is _$_Bookmark &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
-            const DeepCollectionEquality().equals(other.ref, ref) &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.passiveUid, passiveUid) ||
                 other.passiveUid == passiveUid) &&
             const DeepCollectionEquality().equals(other.postRef, postRef) &&
-            (identical(other.postId, postId) || other.postId == postId));
+            (identical(other.postId, postId) || other.postId == postId) &&
+            const DeepCollectionEquality().equals(other.ref, ref));
   }
 
   @JsonKey(ignore: true)
@@ -229,12 +229,12 @@ class _$_Bookmark implements _Bookmark {
   int get hashCode => Object.hash(
       runtimeType,
       activeUid,
-      const DeepCollectionEquality().hash(ref),
       categoryId,
       const DeepCollectionEquality().hash(createdAt),
       passiveUid,
       const DeepCollectionEquality().hash(postRef),
-      postId);
+      postId,
+      const DeepCollectionEquality().hash(ref));
 
   @JsonKey(ignore: true)
   @override
@@ -253,19 +253,17 @@ class _$_Bookmark implements _Bookmark {
 abstract class _Bookmark implements Bookmark {
   const factory _Bookmark(
       {required final String activeUid,
-      required final dynamic ref,
       required final String categoryId,
       required final dynamic createdAt,
       required final String passiveUid,
       required final dynamic postRef,
-      required final String postId}) = _$_Bookmark;
+      required final String postId,
+      required final dynamic ref}) = _$_Bookmark;
 
   factory _Bookmark.fromJson(Map<String, dynamic> json) = _$_Bookmark.fromJson;
 
   @override
   String get activeUid;
-  @override
-  dynamic get ref;
   @override
   String get categoryId;
   @override
@@ -276,6 +274,8 @@ abstract class _Bookmark implements Bookmark {
   dynamic get postRef;
   @override
   String get postId;
+  @override
+  dynamic get ref;
   @override
   @JsonKey(ignore: true)
   _$$_BookmarkCopyWith<_$_Bookmark> get copyWith =>

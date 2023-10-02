@@ -30,7 +30,7 @@ class BookmarkCategoriesPage extends HookWidget {
                                 controller.bookmarkCategoryTokens[index];
                             return ListTile(
                               onTap: () => Get.toNamed(
-                                "/bookmarks?categoryId=${token.tokenId}",
+                                "/bookmarks?categoryId=${token.categoryId}",
                               ),
                               title: Text(token.categoryName),
                               trailing: InkWell(

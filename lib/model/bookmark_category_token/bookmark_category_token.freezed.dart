@@ -23,10 +23,9 @@ BookmarkCategoryToken _$BookmarkCategoryTokenFromJson(
 mixin _$BookmarkCategoryToken {
   dynamic get createdAt => throw _privateConstructorUsedError;
   String get categoryName => throw _privateConstructorUsedError;
+  String get categoryId => throw _privateConstructorUsedError;
   Map<String, dynamic> get image => throw _privateConstructorUsedError;
   dynamic get ref => throw _privateConstructorUsedError;
-  String get tokenId => throw _privateConstructorUsedError;
-  String get tokenType => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,10 +43,9 @@ abstract class $BookmarkCategoryTokenCopyWith<$Res> {
   $Res call(
       {dynamic createdAt,
       String categoryName,
+      String categoryId,
       Map<String, dynamic> image,
       dynamic ref,
-      String tokenId,
-      String tokenType,
       dynamic updatedAt});
 }
 
@@ -67,10 +65,9 @@ class _$BookmarkCategoryTokenCopyWithImpl<$Res,
   $Res call({
     Object? createdAt = freezed,
     Object? categoryName = null,
+    Object? categoryId = null,
     Object? image = null,
     Object? ref = freezed,
-    Object? tokenId = null,
-    Object? tokenType = null,
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -82,6 +79,10 @@ class _$BookmarkCategoryTokenCopyWithImpl<$Res,
           ? _value.categoryName
           : categoryName // ignore: cast_nullable_to_non_nullable
               as String,
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as String,
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -90,14 +91,6 @@ class _$BookmarkCategoryTokenCopyWithImpl<$Res,
           ? _value.ref
           : ref // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      tokenId: null == tokenId
-          ? _value.tokenId
-          : tokenId // ignore: cast_nullable_to_non_nullable
-              as String,
-      tokenType: null == tokenType
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -117,10 +110,9 @@ abstract class _$$_BookmarkCategoryTokenCopyWith<$Res>
   $Res call(
       {dynamic createdAt,
       String categoryName,
+      String categoryId,
       Map<String, dynamic> image,
       dynamic ref,
-      String tokenId,
-      String tokenType,
       dynamic updatedAt});
 }
 
@@ -137,10 +129,9 @@ class __$$_BookmarkCategoryTokenCopyWithImpl<$Res>
   $Res call({
     Object? createdAt = freezed,
     Object? categoryName = null,
+    Object? categoryId = null,
     Object? image = null,
     Object? ref = freezed,
-    Object? tokenId = null,
-    Object? tokenType = null,
     Object? updatedAt = freezed,
   }) {
     return _then(_$_BookmarkCategoryToken(
@@ -152,6 +143,10 @@ class __$$_BookmarkCategoryTokenCopyWithImpl<$Res>
           ? _value.categoryName
           : categoryName // ignore: cast_nullable_to_non_nullable
               as String,
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as String,
       image: null == image
           ? _value._image
           : image // ignore: cast_nullable_to_non_nullable
@@ -160,14 +155,6 @@ class __$$_BookmarkCategoryTokenCopyWithImpl<$Res>
           ? _value.ref
           : ref // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      tokenId: null == tokenId
-          ? _value.tokenId
-          : tokenId // ignore: cast_nullable_to_non_nullable
-              as String,
-      tokenType: null == tokenType
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -182,10 +169,9 @@ class _$_BookmarkCategoryToken implements _BookmarkCategoryToken {
   const _$_BookmarkCategoryToken(
       {required this.createdAt,
       required this.categoryName,
+      required this.categoryId,
       required final Map<String, dynamic> image,
       required this.ref,
-      required this.tokenId,
-      required this.tokenType,
       required this.updatedAt})
       : _image = image;
 
@@ -196,6 +182,8 @@ class _$_BookmarkCategoryToken implements _BookmarkCategoryToken {
   final dynamic createdAt;
   @override
   final String categoryName;
+  @override
+  final String categoryId;
   final Map<String, dynamic> _image;
   @override
   Map<String, dynamic> get image {
@@ -207,15 +195,11 @@ class _$_BookmarkCategoryToken implements _BookmarkCategoryToken {
   @override
   final dynamic ref;
   @override
-  final String tokenId;
-  @override
-  final String tokenType;
-  @override
   final dynamic updatedAt;
 
   @override
   String toString() {
-    return 'BookmarkCategoryToken(createdAt: $createdAt, categoryName: $categoryName, image: $image, ref: $ref, tokenId: $tokenId, tokenType: $tokenType, updatedAt: $updatedAt)';
+    return 'BookmarkCategoryToken(createdAt: $createdAt, categoryName: $categoryName, categoryId: $categoryId, image: $image, ref: $ref, updatedAt: $updatedAt)';
   }
 
   @override
@@ -226,11 +210,10 @@ class _$_BookmarkCategoryToken implements _BookmarkCategoryToken {
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.categoryName, categoryName) ||
                 other.categoryName == categoryName) &&
+            (identical(other.categoryId, categoryId) ||
+                other.categoryId == categoryId) &&
             const DeepCollectionEquality().equals(other._image, _image) &&
             const DeepCollectionEquality().equals(other.ref, ref) &&
-            (identical(other.tokenId, tokenId) || other.tokenId == tokenId) &&
-            (identical(other.tokenType, tokenType) ||
-                other.tokenType == tokenType) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
@@ -240,10 +223,9 @@ class _$_BookmarkCategoryToken implements _BookmarkCategoryToken {
       runtimeType,
       const DeepCollectionEquality().hash(createdAt),
       categoryName,
+      categoryId,
       const DeepCollectionEquality().hash(_image),
       const DeepCollectionEquality().hash(ref),
-      tokenId,
-      tokenType,
       const DeepCollectionEquality().hash(updatedAt));
 
   @JsonKey(ignore: true)
@@ -265,10 +247,9 @@ abstract class _BookmarkCategoryToken implements BookmarkCategoryToken {
   const factory _BookmarkCategoryToken(
       {required final dynamic createdAt,
       required final String categoryName,
+      required final String categoryId,
       required final Map<String, dynamic> image,
       required final dynamic ref,
-      required final String tokenId,
-      required final String tokenType,
       required final dynamic updatedAt}) = _$_BookmarkCategoryToken;
 
   factory _BookmarkCategoryToken.fromJson(Map<String, dynamic> json) =
@@ -279,13 +260,11 @@ abstract class _BookmarkCategoryToken implements BookmarkCategoryToken {
   @override
   String get categoryName;
   @override
+  String get categoryId;
+  @override
   Map<String, dynamic> get image;
   @override
   dynamic get ref;
-  @override
-  String get tokenId;
-  @override
-  String get tokenType;
   @override
   dynamic get updatedAt;
   @override

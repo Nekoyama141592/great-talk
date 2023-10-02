@@ -451,7 +451,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     final bookmark = Bookmark(
       activeUid: currentUid(),
       ref: bookmarkRef,
-      categoryId: token.tokenId,
+      categoryId: token.categoryId,
       createdAt: now,
       passiveUid: passiveUid,
       postRef: postRef,

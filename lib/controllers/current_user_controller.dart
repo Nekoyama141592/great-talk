@@ -49,6 +49,7 @@ class CurrentUserController extends GetxController {
   void onInit() async {
     await _manageUserInfo();
     await _distributeTokens();
+    await _fetchBookmarkCategories();
     super.onInit();
   }
 
@@ -65,11 +66,12 @@ class CurrentUserController extends GetxController {
             final TokenType tokenType =
                 TokenType.values.byName(tokenMap['tokenType']);
             switch (tokenType) {
-              case TokenType.bookmarkCategory:
-                final BookmarkCategoryToken token =
-                    BookmarkCategoryToken.fromJson(tokenMap);
-                addBookmarkCategory(token);
-                break;
+              // TODO: fetch
+              // case TokenType.bookmarkCategory:
+              //   final BookmarkCategoryToken token =
+              //       BookmarkCategoryToken.fromJson(tokenMap);
+              //   addBookmarkCategory(token);
+              //   break;
               case TokenType.following:
                 final FollowingToken followingToken =
                     FollowingToken.fromJson(tokenMap);
@@ -99,6 +101,17 @@ class CurrentUserController extends GetxController {
           }
         },
         failure: () {});
+  }
+
+  Future<void> _fetchBookmarkCategories() async {
+    final user = privateUser.value;
+    if (user == null) {
+      return;
+    }
+    final qshot = await FirestoreQueries.bookmarkCategoriesColRef(user).get();
+    bookmarkCategoryTokens(qshot.docs
+        .map((e) => BookmarkCategoryToken.fromJson(e.data()))
+        .toList());
   }
 
   // 投稿の削除時に外部から呼び出す.
@@ -389,23 +402,20 @@ class CurrentUserController extends GetxController {
 
   void createBookmarkCategory(
       BuildContext context, TextEditingController inputController) async {
-    final user = publicUser.value;
+    final user = privateUser.value;
     if (user == null) return;
     final now = Timestamp.now();
-    final tokenId = randomString();
-    final currentUid = user.uid;
-    final ref = FirestoreQueries.tokenQuery(currentUid, tokenId);
+    final categoryId = randomString();
+    final ref = FirestoreQueries.bookmarkCategoryDocRef(user, categoryId);
     final repository = FirestoreRepository();
     final newCategory = BookmarkCategoryToken(
         createdAt: now,
+        categoryId: categoryId,
         categoryName: inputController.text,
         image: DetectedImage.initial().toJson(),
         ref: ref,
-        tokenId: tokenId,
-        tokenType: TokenType.bookmarkCategory.name,
         updatedAt: now);
-    final result =
-        await repository.createToken(currentUid, tokenId, newCategory.toJson());
+    final result = await repository.createDoc(ref, newCategory.toJson());
     result.when(success: (res) {
       FocusScope.of(context).unfocus();
       inputController.text = "";
@@ -425,8 +435,7 @@ class CurrentUserController extends GetxController {
     final user = publicUser.value;
     if (user == null) return;
     final repository = FirestoreRepository();
-    final currentUid = user.uid;
-    final result = await repository.deleteToken(currentUid, token.tokenId);
+    final result = await repository.deleteDoc(token.ref);
     result.when(success: (_) {
       Get.back();
       removeBookmarkCategory(token);

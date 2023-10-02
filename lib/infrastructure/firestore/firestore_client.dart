@@ -26,6 +26,7 @@ class FirestoreClient {
   }
 
   // write
+
   Future<void> createMessage(DocRef messageRef, SDMap json) async =>
       await messageRef.set(json);
 
