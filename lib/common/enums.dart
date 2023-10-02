@@ -6,7 +6,6 @@ enum MessageType { text }
 
 enum PrefsKey {
   // ${contentId}で各々のChat履歴
-  // isExplained_${contentId}でfalseならダイアログを表示
   chatCount,
   initialPeople,
   isAgreedToTerms,

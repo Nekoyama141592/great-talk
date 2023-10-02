@@ -60,17 +60,14 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
 
   Future<void> init() async {
     await _getChatLog();
-    _showFirstDialog();
+    _processDescriptionMessage();
   }
 
-  void _showFirstDialog() {
+  void _processDescriptionMessage() {
     final content = interlocutor.value;
     if (content == null) return;
-    final prefKey = "isExplained_${content.contentId}";
-    final isExplained = prefs.getBool(prefKey) ?? false;
-    if (!isExplained) {
-      _showDescriptionDialog();
-      prefs.setBool(prefKey, true);
+    if (messages.isEmpty) {
+      _addDescriptionMessage(content);
     }
   }
 
@@ -156,7 +153,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       await _requestReview(); // レビューをリクエスト
       return;
     }
-    _addMessage(content);
+    _addMyMessage(content);
     _addEmptyMessage(); // Viewで表示できる要素数を一つ増やす
     realtimeRes(""); // realtimeResを初期化
     messages([...messages]); // messageを再代入して変更をViewに反映
@@ -311,11 +308,17 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     return textMessage;
   }
 
-  void _addMessage(String content) {
+  void _addMyMessage(String content) {
     final textMessage = _newtTextMessage(content, currentUid());
     messages.add(textMessage);
     messages([...messages]);
     _createTextMsgDoc(textMessage); // firestoreにメッセージを追加
+  }
+
+  void _addDescriptionMessage(ChatContent content) {
+    final textMessage =
+        _newtTextMessage(content.typedDescription().value, content.contentId);
+    messages.add(textMessage);
   }
 
   Future<List<Messages>> _createRequestMessages(String content) async {

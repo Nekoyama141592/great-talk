@@ -79,7 +79,7 @@ const String systemPromptHelpMsg =
 const String titleHelpMsg =
     "投稿のタイトルです。AIの返答には全く影響しません。最大$maxTitleLimit文字までです。$negativeAlertMsg";
 const String descriptionHelpMsg =
-    "投稿の説明や使い方です。AIの返答には全く影響しません。最大$maxDescriptionLimit文字までです。$negativeAlertMsg";
+    "AIの一言目です。使い方などを説明すると良いでしょう。最大$maxDescriptionLimit文字までです。$negativeAlertMsg";
 const String temperatureHelpMsg =
     "値は0.0以上、2.0以下の数を設定できます。0.8のような高い値の場合、出力がランダムになります。0.2のような低い値の場合は出力が決定的になります。topPとどちらか一方しか初期値から変更できません。初期値は$defaultTemperatureです。AIの返答に影響します。$roundMsg";
 const String topPHelpMsg =
