@@ -10,7 +10,7 @@ import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
-import 'package:great_talk/model/aws_s3_repository.dart';
+import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/file_utility.dart';
