@@ -150,8 +150,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     chatCount = _getChatCount(); // 端末から今日のチャット回数を取得
     if (!_allowChat()) {
       // チャットが許されていない場合
-      await UIHelper.showFlutterToast(
-          "チャットは1日$chatLimitPerDay回まで！\nサブスクに加入してください。");
+      Get.toNamed("/subscribe"); // サブスクページへ飛ばす.
+      UIHelper.showFlutterToast("チャットは1日$chatLimitPerDay回まで！\nサブスクに加入してください。");
       await _requestReview(); // レビューをリクエスト
       return;
     }

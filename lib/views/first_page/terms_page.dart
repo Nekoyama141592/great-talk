@@ -11,7 +11,8 @@ class TermsPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = MainController.to;
-    final style = TextStyle(color: Theme.of(context).focusColor, fontSize: 20.0);
+    final style =
+        TextStyle(color: Theme.of(context).focusColor, fontSize: 20.0);
     return Scaffold(
       body: SafeArea(
         child: Padding(

@@ -9,6 +9,7 @@ import 'package:great_talk/views/bookmark_categories_page.dart';
 import 'package:great_talk/views/bookmarks_page.dart';
 import 'package:great_talk/views/create_post/create_post_page.dart';
 import 'package:great_talk/views/edit_page.dart';
+import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
 import 'package:great_talk/views/mute/mute_posts/mute_posts_page.dart';
 import 'package:great_talk/views/mute/mute_users/mute_users_page.dart';
 import 'package:great_talk/views/original_contents_page.dart';
@@ -39,6 +40,7 @@ final getPages = [
   GetPage(
       name: "/reauthenticate/delete",
       page: () => const ReauthenticateToDeletePage()),
+  GetPage(name: "/subscribe", page: () => const SubscribePage()),
   GetPage(name: "/userDeleted", page: () => const UserDeletedPage()),
   GetPage(name: "/users/:uid", page: () => const UserProfilePage()),
   GetPage(

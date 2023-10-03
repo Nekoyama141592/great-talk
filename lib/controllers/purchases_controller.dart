@@ -24,6 +24,8 @@ class PurchasesController extends GetxController {
   final products = <ProductDetails>[].obs;
   final isAvailable = false.obs;
   final loading = false.obs;
+  final isPremiumMode = false.obs; // TODO
+
   void _addPurchase(PurchaseDetails purchaseDetails) =>
       purchases(List.from(purchases)..add(purchaseDetails));
 
@@ -31,10 +33,30 @@ class PurchasesController extends GetxController {
     return purchases.isNotEmpty;
   }
 
+  bool _isPremiumSubscribing() {
+    return purchases
+        .map((element) => element.productID)
+        .toList()
+        .contains(kPremiumSubscriptionId);
+  }
+
   bool hasProductBeenPurchased(ProductDetails productDetails) {
     final purchaseIds = purchases.map((element) => element.productID).toList();
     final result = purchaseIds.contains(productDetails.id);
     return result;
+  }
+
+  void onSwichChanged(bool value) {
+    if (value == false) {
+      isPremiumMode(value);
+      return;
+    }
+    if (_isPremiumSubscribing()) {
+      isPremiumMode(value);
+    } else {
+      Get.toNamed("/subscribe"); // サブスクページへ飛ばす.
+      UIHelper.showFlutterToast("有料プランに加入する必要があります");
+    }
   }
 
   Future<void> restorePurchases() async {
@@ -123,6 +145,12 @@ class PurchasesController extends GetxController {
     return false;
   }
 
+  void enablePremiumMode() {
+    if (_isPremiumSubscribing()) {
+      isPremiumMode(true);
+    }
+  }
+
   Future<void> _listenToPurchaseUpdated(
       List<PurchaseDetails> purchaseDetailsList) async {
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
@@ -148,6 +176,7 @@ class PurchasesController extends GetxController {
         final isValid = await verifyPurchase(purchaseDetails);
         if (isValid) {
           deliverProduct(purchaseDetails);
+          enablePremiumMode(); // Premiumモードを有効化する.
         }
         return;
       }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/theme_controller.dart';
 
 class OriginalDrawer extends StatelessWidget {
@@ -9,6 +10,7 @@ class OriginalDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeController = ThemeController.to;
+    final purchasesController = PurchasesController.to;
     return Drawer(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: ListView(
@@ -34,6 +36,15 @@ class OriginalDrawer extends StatelessWidget {
               trailing: CupertinoSwitch(
                 value: themeController.isDarkTheme.value,
                 onChanged: themeController.onSwichChanged,
+              ),
+            ),
+          ),
+          Obx(
+            () => ListTile(
+              title: const Text("プレミアムモード"),
+              trailing: CupertinoSwitch(
+                value: purchasesController.isPremiumMode.value,
+                onChanged: purchasesController.onSwichChanged,
               ),
             ),
           ),
