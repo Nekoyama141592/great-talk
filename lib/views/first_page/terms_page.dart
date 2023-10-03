@@ -11,7 +11,7 @@ class TermsPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = MainController.to;
-    const style = TextStyle(color: Colors.black, fontSize: 20.0);
+    final style = TextStyle(color: Theme.of(context).focusColor, fontSize: 20.0);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -22,14 +22,14 @@ class TermsPage extends HookWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     wrongInfoMsg,
                     style: style,
                   ),
                   const Divider(),
                   TextButton(
                       onPressed: () async => await UrlRedirector.toTosPage(),
-                      child: const Text(
+                      child: Text(
                         tosText,
                         style: style,
                       )),
@@ -37,7 +37,7 @@ class TermsPage extends HookWidget {
                   TextButton(
                       onPressed: () async =>
                           await UrlRedirector.toPrivacyPage(),
-                      child: const Text(
+                      child: Text(
                         privacyPolicyText,
                         style: style,
                       )),
