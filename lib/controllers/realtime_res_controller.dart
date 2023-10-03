@@ -175,7 +175,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     _listenToChatCompletionSSE(request, scrollController); // ChatGPTのリアルタイム出力
   }
 
-  int _adjustMaxToken() => messages.length < 3 ? maxToken ~/ 2 : maxToken;
+  int _adjustMaxToken() => messages.length < maxRequestLength ? maxToken ~/ 2 : maxToken;
 
   void _addEmptyMessage() {
     messages.add(_newtTextMessage('', interlocutor.value!.contentId));
