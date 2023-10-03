@@ -15,30 +15,14 @@ String randomString() {
 
 String getName(ChatContent person) => person.title;
 final appName = F.title;
-String getPlanDescription(String productID, String price) {
-  String msg = "";
-  if (productID == kAnnualSubscriptionId) {
-    msg = "1年";
-  } else if (productID == kMonthSubscriptionId) {
-    msg = "1ヶ月";
-  } else if (productID == kWeekSubscriptionId) {
-    msg = "1週間";
-  }
-
-  msg += "あたり$priceです。";
-  return msg;
-}
 
 String getPlanName(ProductDetails productDetails) {
   String msg = "";
-  if (productDetails.id == kAnnualSubscriptionId) {
-    msg = '年間プラン | 1年あたり${productDetails.price}';
-  } else if (productDetails.id == kMonthSubscriptionId) {
+  if (productDetails.id == kMonthSubscriptionId) {
     msg = '月間プラン | 1ヶ月あたり${productDetails.price}';
-  } else if (productDetails.id == kWeekSubscriptionId) {
-    msg = '週間プラン | 1週間あたり${productDetails.price}';
+  } else {
+    msg = "プレミアムプラン | 1ヶ月あたり${productDetails.price}";
   }
-
   return msg;
 }
 

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/ints.dart';
-import 'package:great_talk/iap_constants/subscription_constants.dart';
+import 'package:great_talk/iap_constants/mock_product_list.dart';
 
 class PriceList extends StatelessWidget {
   const PriceList({Key? key}) : super(key: key);
@@ -12,17 +11,11 @@ class PriceList extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
-            title: BasicBoldText(
-                "※年額プランは、${getPlanDescription(kAnnualSubscriptionId, "¥$kAnnualPrice")}"),
+            title: BasicBoldText("※${getPlanName(myProductList[0])}"),
           ),
           ListTile(
-            title: BasicBoldText(
-                "※月額プランは、${getPlanDescription(kMonthSubscriptionId, "¥$kMonthPrice")}"),
+            title: BasicBoldText("※${getPlanName(myProductList[1])}"),
           ),
-          ListTile(
-            title: BasicBoldText(
-                "※週額プランは、${getPlanDescription(kWeekSubscriptionId, "¥$kWeekPrice")}"),
-          )
         ],
       ),
     );

@@ -217,7 +217,7 @@ class PurchasesController extends GetxController {
 
   Future<void> confirmPriceChange(
       BuildContext context, InAppPurchase inAppPurchase) async {
-        if (isUseMockData) return;
+    if (isUseMockData) return;
     if (Platform.isIOS) {
       final platformAddition = inAppPurchase
           .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
