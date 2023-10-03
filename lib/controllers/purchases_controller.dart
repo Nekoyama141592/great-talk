@@ -33,17 +33,8 @@ class PurchasesController extends GetxController {
   }
 
   bool hasProductBeenPurchased(ProductDetails productDetails) {
-    bool result;
-    if (Platform.isAndroid) {
-      result = purchases.isNotEmpty
-          ? purchases.last.productID == productDetails.id
-          : false;
-    } else {
-      result = purchases
-          .map((element) => element.productID)
-          .toList()
-          .contains(productDetails.id);
-    }
+    final purchaseIds = purchases.map((element) => element.productID).toList();
+    final result = purchaseIds.contains(productDetails.id);
     return result;
   }
 
@@ -178,8 +169,7 @@ class PurchasesController extends GetxController {
     return iosReceiptResponse;
   }
 
-  Future<void> onPurchaseButtonPressed(
-      InAppPurchase inAppPurchase, ProductDetails productDetails) async {
+  Future<void> onPurchaseButtonPressed(ProductDetails productDetails) async {
     if (loading.value || isUseMockData) return;
     await cancelTransctions();
     final GooglePlayPurchaseDetails? oldSubscription =
@@ -215,8 +205,7 @@ class PurchasesController extends GetxController {
     return oldSubscription;
   }
 
-  Future<void> confirmPriceChange(
-      BuildContext context, InAppPurchase inAppPurchase) async {
+  Future<void> confirmPriceChange() async {
     if (isUseMockData) return;
     if (Platform.isIOS) {
       final platformAddition = inAppPurchase

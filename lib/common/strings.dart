@@ -17,12 +17,8 @@ String getName(ChatContent person) => person.title;
 final appName = F.title;
 
 String getPlanName(ProductDetails productDetails) {
-  String msg = "";
-  if (productDetails.id == kMonthSubscriptionId) {
-    msg = '月間プラン | 1ヶ月あたり${productDetails.price}';
-  } else {
-    msg = "プレミアムプラン | 1ヶ月あたり${productDetails.price}";
-  }
+  String msg =
+      productDetails.id == kMonthSubscriptionId ? "ベーシックプラン" : "プレミアムプラン";
   return msg;
 }
 
