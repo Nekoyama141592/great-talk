@@ -14,7 +14,6 @@ migrate_working_dir/
 lib/gen/
 mobileprovisions/
 lib/iap_constants/subscription_constants.dart
-lib/iap_constants/my_product_list.dart
 json/
 txts/
 firebase_private_key/

@@ -4,10 +4,9 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/bools.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
-import 'package:great_talk/iap_constants/my_product_list.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:great_talk/model/ios_receipt_response/ios_receipt_response.dart';
 import 'package:great_talk/repository/purchases_repository.dart';
@@ -25,13 +24,9 @@ class PurchasesController extends GetxController {
   final repository = PurchasesRepository();
   final products = <ProductDetails>[].obs;
   final isAvailable = false.obs;
-  final purchasePending = false.obs;
-  final loading = true.obs;
-  final queryProductError = "".obs; // 使われていない.
+  final loading = false.obs;
   void _addPurchase(PurchaseDetails purchaseDetails) =>
       purchases(List.from(purchases)..add(purchaseDetails));
-  void _setProducts(List<ProductDetails> productList) =>
-      isProd() ? products(productList) : products(myProductList);
 
   bool isSubscribing() {
     return purchases.isNotEmpty;
@@ -87,48 +82,36 @@ class PurchasesController extends GetxController {
   }
 
   Future<void> initStoreInfo() async {
-    final bool storeConnected = await inAppPurchase.isAvailable();
+    final bool storeConnected =
+        isUseMockData || await inAppPurchase.isAvailable();
     isAvailable(storeConnected);
-    if (!storeConnected) {
-      loading(false);
-      return;
-    }
-
-    if (Platform.isIOS) {
-      final InAppPurchaseStoreKitPlatformAddition iosPlatformAddition =
-          inAppPurchase
-              .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
-      await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
-    }
-
-    final ProductDetailsResponse productDetailResponse =
-        await inAppPurchase.queryProductDetails(kProductIds.toSet());
-    if (productDetailResponse.error != null) {
-      queryProductError(productDetailResponse.error!.message);
-      purchasePending(false);
-      loading(false);
-      return;
-    }
-
-    if (productDetailResponse.productDetails.isEmpty) {
-      _setProducts(myProductList);
-      purchasePending(false);
-      loading(false);
-      return;
-    }
-
-    _setProducts(productDetailResponse.productDetails);
-    purchasePending(false);
+    if (!storeConnected) return;
+    loading(true);
+    await _setDelegate();
+    await _fetchProducts();
     loading(false);
   }
 
-  void showPendingUI() {
-    purchasePending(true);
+  Future<void> _setDelegate() async {
+    if (Platform.isIOS) {
+      final iosPlatformAddition = inAppPurchase
+          .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+      await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
+    }
+  }
+
+  Future<void> _fetchProducts() async {
+    final result = await repository.queryProductDetails(
+        inAppPurchase, kProductIds.toSet());
+    result.when(success: (res) {
+      products(res);
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("商品を取得できませんでした。");
+    });
   }
 
   void deliverProduct(PurchaseDetails purchaseDetails) {
     _addPurchase(purchaseDetails);
-    purchasePending(false);
   }
 
   Future<bool> verifyPurchase(PurchaseDetails purchaseDetails) async {
@@ -151,10 +134,6 @@ class PurchasesController extends GetxController {
     return false;
   }
 
-  void handleError(IAPError error) async {
-    purchasePending(false);
-  }
-
   Future<void> _listenToPurchaseUpdated(
       List<PurchaseDetails> purchaseDetailsList) async {
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
@@ -173,7 +152,7 @@ class PurchasesController extends GetxController {
         return;
       }
       if (purchaseDetails.status == PurchaseStatus.error) {
-        handleError(purchaseDetails.error!);
+        debugPrint(purchaseDetails.error!.message);
       } else if (purchaseDetails.status == PurchaseStatus.purchased ||
           purchaseDetails.status == PurchaseStatus.restored) {
         final isValid = await verifyPurchase(purchaseDetails);
@@ -202,9 +181,7 @@ class PurchasesController extends GetxController {
 
   Future<void> onPurchaseButtonPressed(
       InAppPurchase inAppPurchase, ProductDetails productDetails) async {
-    if (loading.value) {
-      return;
-    }
+    if (loading.value) return;
     final GooglePlayPurchaseDetails? oldSubscription =
         _getOldSubscription(productDetails);
     late PurchaseParam purchaseParam;
