@@ -39,6 +39,7 @@ class UserCard extends StatelessWidget with CurrentUserMixin {
                             msg: "あなたはこのユーザーをミュートしています。",
                             title: "ミュートしている"))
                     : Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                         decoration: BoxDecoration(
                           border:
                               Border.all(color: Theme.of(context).primaryColor),
