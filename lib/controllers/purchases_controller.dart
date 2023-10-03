@@ -184,16 +184,9 @@ class PurchasesController extends GetxController {
     if (loading.value) return;
     final GooglePlayPurchaseDetails? oldSubscription =
         _getOldSubscription(productDetails);
-    late PurchaseParam purchaseParam;
-    if (Platform.isAndroid) {
-      purchaseParam = GooglePlayPurchaseParam(
+    final purchaseParam = Platform.isAndroid ? GooglePlayPurchaseParam(
           productDetails: productDetails,
-          changeSubscriptionParam: Platform.isAndroid
-              ? _getChangeSubscriptionParam(oldSubscription)
-              : null);
-    } else {
-      purchaseParam = PurchaseParam(productDetails: productDetails);
-    }
+          changeSubscriptionParam: _getChangeSubscriptionParam(oldSubscription)) : PurchaseParam(productDetails: productDetails);
     await UIHelper.showFlutterToast("情報を取得しています。 \nしばらくお待ちください。");
     loading(true);
     await repository.buyNonConsumable(inAppPurchase, purchaseParam);
