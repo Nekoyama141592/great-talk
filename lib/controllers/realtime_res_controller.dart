@@ -11,7 +11,6 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
@@ -177,8 +176,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   int _adjustMaxToken() {
-    const maxRequestLength = ChatGPTConstants.gptTurboMaxRequestLength;
-    const maxToken = ChatGPTConstants.gptTurboMaxToken;
+    final maxRequestLength = PurchasesController.to.maxRequestLength();
+    final maxToken = PurchasesController.to.maxToken();
     final result = messages.length < maxRequestLength
         ? maxToken ~/ (maxRequestLength - 1)
         : maxToken;
@@ -367,7 +366,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   List<Messages> _toRequestMessages() {
     // メッセージからリクエストを送るJsonを生成.
     // メッセージ数を制限する。
-    const maxRequestLength = ChatGPTConstants.gptTurboMaxRequestLength;
+    final maxRequestLength = PurchasesController.to.maxRequestLength();
     final requestMessages = messages.length > maxRequestLength
         ? messages.sublist(messages.length - maxRequestLength)
         : [...messages];

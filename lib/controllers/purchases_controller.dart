@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
@@ -24,7 +26,7 @@ class PurchasesController extends GetxController {
   final products = <ProductDetails>[].obs;
   final isAvailable = false.obs;
   final loading = false.obs;
-  final isPremiumMode = false.obs; // TODO
+  final isPremiumMode = false.obs;
 
   void _addPurchase(PurchaseDetails purchaseDetails) =>
       purchases(List.from(purchases)..add(purchaseDetails));
@@ -55,7 +57,7 @@ class PurchasesController extends GetxController {
       isPremiumMode(value);
     } else {
       Get.toNamed("/subscribe"); // サブスクページへ飛ばす.
-      UIHelper.showFlutterToast("有料プランに加入する必要があります");
+      UIHelper.showFlutterToast("プレミアムプランに加入する必要があります");
     }
   }
 
@@ -252,4 +254,14 @@ class PurchasesController extends GetxController {
       }
     }
   }
+
+  // ChatGPTリクエスト
+  int maxToken() => isPremiumMode.value
+      ? ChatGPTConstants.gpt4MaxToken
+      : ChatGPTConstants.gptTurboMaxToken;
+  int maxRequestLength() => isPremiumMode.value
+      ? ChatGPTConstants.gpt4MaxRequestLength
+      : ChatGPTConstants.gptTurboMaxRequestLength;
+  ChatModel model() =>
+      isPremiumMode.value ? Gpt4ChatModel() : GptTurboChatModel();
 }

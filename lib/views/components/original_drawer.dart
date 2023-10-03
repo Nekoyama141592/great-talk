@@ -41,7 +41,7 @@ class OriginalDrawer extends StatelessWidget {
           ),
           Obx(
             () => ListTile(
-              title: const Text("プレミアムモード"),
+              title: const Text("ハイスペックなAIを使用"),
               trailing: CupertinoSwitch(
                 value: purchasesController.isPremiumMode.value,
                 onChanged: purchasesController.onSwichChanged,
