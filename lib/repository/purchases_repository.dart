@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/consts/env_keys.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/iap_constants/mock_product_list.dart';
 import 'package:great_talk/model/ios_receipt_response/ios_receipt_response.dart';
@@ -35,7 +37,9 @@ class PurchasesRepository {
       await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       return const Result.success(true);
     } catch (e) {
-      debugPrint(e.toString());
+      if (CurrentUserController.to.isAdmin()) {
+        UIHelper.showErrorFlutterToast(e.toString());
+      }
       return const Result.failure();
     }
   }
