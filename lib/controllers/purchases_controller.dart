@@ -180,7 +180,7 @@ class PurchasesController extends GetxController {
 
   Future<void> onPurchaseButtonPressed(
       InAppPurchase inAppPurchase, ProductDetails productDetails) async {
-    if (loading.value) return;
+    if (loading.value || isUseMockData) return;
     await cancelTransctions();
     final GooglePlayPurchaseDetails? oldSubscription =
         _getOldSubscription(productDetails);
@@ -217,6 +217,7 @@ class PurchasesController extends GetxController {
 
   Future<void> confirmPriceChange(
       BuildContext context, InAppPurchase inAppPurchase) async {
+        if (isUseMockData) return;
     if (Platform.isIOS) {
       final platformAddition = inAppPurchase
           .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
