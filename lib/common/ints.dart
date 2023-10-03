@@ -1,5 +1,5 @@
 // app version
-const int appVersion = 143;
+const int appVersion = 144;
 // subscription
 const int kAnnualPrice = 6000;
 const int kMonthPrice = 600;

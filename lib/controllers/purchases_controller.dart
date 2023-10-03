@@ -55,7 +55,6 @@ class PurchasesController extends GetxController {
 
   @override
   void onInit() async {
-    await cancelTransction();
     final Stream<List<PurchaseDetails>> purchaseUpdated =
         inAppPurchase.purchaseStream;
     subscription = purchaseUpdated.listen(
@@ -66,7 +65,7 @@ class PurchasesController extends GetxController {
         onError: (Object error) {
           // handle error here.
         });
-    initStoreInfo();
+    await initStoreInfo();
     super.onInit();
   }
 
@@ -182,11 +181,15 @@ class PurchasesController extends GetxController {
   Future<void> onPurchaseButtonPressed(
       InAppPurchase inAppPurchase, ProductDetails productDetails) async {
     if (loading.value) return;
+    await cancelTransctions();
     final GooglePlayPurchaseDetails? oldSubscription =
         _getOldSubscription(productDetails);
-    final purchaseParam = Platform.isAndroid ? GooglePlayPurchaseParam(
-          productDetails: productDetails,
-          changeSubscriptionParam: _getChangeSubscriptionParam(oldSubscription)) : PurchaseParam(productDetails: productDetails);
+    final purchaseParam = Platform.isAndroid
+        ? GooglePlayPurchaseParam(
+            productDetails: productDetails,
+            changeSubscriptionParam:
+                _getChangeSubscriptionParam(oldSubscription))
+        : PurchaseParam(productDetails: productDetails);
     await UIHelper.showFlutterToast("情報を取得しています。 \nしばらくお待ちください。");
     loading(true);
     await repository.buyNonConsumable(inAppPurchase, purchaseParam);
@@ -221,7 +224,7 @@ class PurchasesController extends GetxController {
     }
   }
 
-  Future<void> cancelTransction() async {
+  Future<void> cancelTransctions() async {
     if (Platform.isIOS) {
       final paymentWrapper = SKPaymentQueueWrapper();
       final transactions = await paymentWrapper.transactions();
