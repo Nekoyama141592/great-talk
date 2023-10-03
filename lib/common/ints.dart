@@ -1,9 +1,6 @@
 // app version
 const int appVersion = 144;
 
-const int maxRequestLength = 3;
-const int maxToken = 3000;
-
 const int timeInSecForIosWeb = 5; // FlutterToast
 const chatLimitPerDay = 5;
 
