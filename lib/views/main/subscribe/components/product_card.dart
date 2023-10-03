@@ -13,7 +13,7 @@ class ProductCard extends StatelessWidget {
   final List<Widget> descriptions;
   @override
   Widget build(BuildContext context) {
-    final String planName = getPlanName(productDetails);
+    final String planName = getPlanName(productDetails.id);
     return Container(
       margin: const EdgeInsets.all(16.0),
       padding: const EdgeInsets.all(16.0),

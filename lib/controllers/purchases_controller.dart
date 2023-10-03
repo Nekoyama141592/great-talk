@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/debug_constants.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:great_talk/model/ios_receipt_response/ios_receipt_response.dart';
@@ -141,8 +140,9 @@ class PurchasesController extends GetxController {
       if (purchases.isNotEmpty) {
         return;
       }
-      if (purchaseDetails.status == PurchaseStatus.error) {
-        debugPrint(purchaseDetails.error!.message);
+      if (purchaseDetails.status == PurchaseStatus.error &&
+          CurrentUserController.to.isAdmin()) {
+        UIHelper.showErrorFlutterToast(purchaseDetails.error!.message);
       } else if (purchaseDetails.status == PurchaseStatus.purchased ||
           purchaseDetails.status == PurchaseStatus.restored) {
         final isValid = await verifyPurchase(purchaseDetails);

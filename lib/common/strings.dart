@@ -5,7 +5,6 @@ import 'package:great_talk/flavors.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/chat_user_metadata/chat_user_metadata.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:uuid/uuid.dart';
 
 String randomString() {
@@ -16,9 +15,18 @@ String randomString() {
 String getName(ChatContent person) => person.title;
 final appName = F.title;
 
-String getPlanName(ProductDetails productDetails) {
-  String msg =
-      productDetails.id == kMonthSubscriptionId ? "ベーシックプラン" : "プレミアムプラン";
+String getPlanName(String productId) {
+  String msg = "";
+  if (productId == kAnnualSubscriptionId) {
+    msg = 'ベーシックプラン（年間）';
+  } else if (productId == kMonthSubscriptionId) {
+    msg = 'ベーシックプラン';
+  } else if (productId == kWeekSubscriptionId) {
+    msg = 'ベーシックプラン（週間）';
+  } else {
+    msg = "プレミアムプラン";
+  }
+
   return msg;
 }
 

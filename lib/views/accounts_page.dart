@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/controllers/purchases_controller.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({
@@ -22,6 +24,15 @@ class AccountPage extends StatelessWidget {
           ListTile(
               title: Obx(
                   () => SelectableText("ユーザーID: ${controller.currentUid()}"))),
+          ListTile(
+            title: Obx(() {
+              final purchasesController = PurchasesController.to;
+              final text = purchasesController.isSubscribing()
+                  ? "加入プラン: ${getPlanName(purchasesController.purchases.first.productID)}"
+                  : "現在は有料プランに加入していません。";
+              return Text(text);
+            }),
+          ),
           Obx(
             () {
               final publicUser = controller.publicUser.value;

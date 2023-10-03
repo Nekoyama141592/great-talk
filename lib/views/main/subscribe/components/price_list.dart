@@ -11,10 +11,10 @@ class PriceList extends StatelessWidget {
       child: Column(
         children: [
           ListTile(
-            title: BasicBoldText("※${getPlanName(myProductList[0])}"),
+            title: BasicBoldText("※${getPlanName(myProductList[0].id)}"),
           ),
           ListTile(
-            title: BasicBoldText("※${getPlanName(myProductList[1])}"),
+            title: BasicBoldText("※${getPlanName(myProductList[1].id)}"),
           ),
         ],
       ),
