@@ -63,6 +63,7 @@ class UserCard extends StatelessWidget with CurrentUserMixin {
                               ),
                               const BasicWidthBox(),
                               const Icon(Icons.people),
+                              const BasicWidthBox(),
                               BasicBoldText(publicUser.followerCount.toString())
                             ],
                           ),
