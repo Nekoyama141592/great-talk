@@ -39,6 +39,8 @@ class PurchasesRepository {
     } catch (e) {
       if (CurrentUserController.to.isAdmin()) {
         UIHelper.showErrorFlutterToast(e.toString());
+      } else {
+        UIHelper.showFlutterToast("もう一度ボタンを推してください");
       }
       return const Result.failure();
     }
