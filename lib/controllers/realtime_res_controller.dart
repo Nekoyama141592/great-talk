@@ -399,12 +399,11 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       return;
     }
     final title = content.title;
-    final description = content.typedDescription().value;
     String msgText = !returnIsOriginalContents(content.posterUid)
         ? "累計メッセージ数: ${content.msgCount.formatNumber()}"
         : "";
     UIHelper.simpleAlertDialog(
-      "$title\n\n$description\n\n$msgText",
+      "$title\n\n$msgText",
     );
   }
 
