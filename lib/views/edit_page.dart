@@ -37,6 +37,7 @@ class _CreatePostPageState extends ProcessingState<EditProfilePage>
   String? bio;
 
   Uint8List? uint8list;
+  bool isPicked = false;
   @override
   void initState() {
     uint8list = MyProfileController.to.uint8list.value;
@@ -203,23 +204,34 @@ class _CreatePostPageState extends ProcessingState<EditProfilePage>
     }
     if (isProcessing) return; // 二重リクエストを防止.
     startProcess();
-    final newFileName = s3FileName();
-    final repository = AWSS3Repository();
-    final bucketName = AWSS3Utility.userImagesBucketName();
-    final result =
-        await repository.uploadImage(uint8list!, bucketName, newFileName);
-    result.when(
-        success: (res) => _createUserUpdateLog(res),
-        failure: () {
-          UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
-        });
+    if (isPicked) {
+      // 写真が新しくなった場合の処理
+      final newFileName = s3FileName();
+      final repository = AWSS3Repository();
+      final bucketName = AWSS3Utility.userImagesBucketName();
+      final result =
+          await repository.uploadImage(uint8list!, bucketName, newFileName);
+      result.when(
+          success: (res) async => await _createUserUpdateLog(res),
+          failure: () {
+            UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
+          });
+    } else {
+      // 写真がそのまま場合の処理
+      final publicUser = CurrentUserController.to.publicUser.value;
+      if (publicUser == null) return;
+      await _createUserUpdateLog(publicUser.typedImage().value);
+    }
+
     endProcess();
   }
 
   void _onImagePickButtonPressed() async {
     final result = await FileUtility.getCompressedImage();
+    if (result == null) return;
     setState(() {
       uint8list = result;
+      isPicked = true;
     });
   }
 
