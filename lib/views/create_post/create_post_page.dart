@@ -117,7 +117,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   // description入力をする関数
   List<Widget> _descriptionTextField() {
     return [
-      const FormLabel(title: "説明/使い方", helpMsg: descriptionHelpMsg),
+      const FormLabel(title: "説明/使い方(AIの一言目)", helpMsg: descriptionHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.description.value,
             keyboardType: TextInputType.multiline,
