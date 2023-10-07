@@ -206,25 +206,20 @@ class CurrentUserController extends GetxController {
   Future<void> onAppleButtonPressed() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInWithApple();
-    result.when(
-        success: (res) async {
-          await res.reload();
-          currentUser(res);
-          await _manageUserInfo();
-        },
-        failure: () {});
+    result.when(success: onLoginSuccess, failure: () {});
   }
 
   Future<void> onGoogleButtonPressed() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInWithGoogle();
-    result.when(
-        success: (res) async {
-          await res.reload();
-          currentUser(res);
-          await _manageUserInfo();
-        },
-        failure: () {});
+    result.when(success: onLoginSuccess, failure: () {});
+  }
+
+  Future<void> onLoginSuccess(User user) async {
+    await user.reload();
+    currentUser(user);
+    await _manageUserInfo();
+    await MyProfileController.to.onReload();
   }
 
   Future<void> _createPublicUserWithUser() async {

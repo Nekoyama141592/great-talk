@@ -56,6 +56,14 @@ service cloud.firestore {
     match /private/{version}/privateUsers/{uid} {
       allow read: if isTheSameUserAndVerified(uid);
       allow create: if isTheSameUserAndVerified(uid) && isValidPrivateUser(request.resource.data);
+      match /bookmarkCategories/{categoryId} {
+        allow read, delete: if isTheSameUserAndVerified(uid);
+        allow create: if isTheSameUserAndVerified(uid) && isValidBookmarkCategory(request.resource.data);
+        match /bookmarks/{postId} {
+          allow read, delete: if isTheSameUserAndVerified(uid);
+          allow create: if isTheSameUserAndVerified(uid) && isValidBookmark(request.resource.data);
+        }
+      }
       match /tokens/{tokenId} {
         allow read, delete: if isTheSameUserAndVerified(uid);
         allow create: if isTheSameUserAndVerified(uid) && isValidToken(request.resource.data);
@@ -256,6 +264,27 @@ service cloud.firestore {
       &&  searchLog.searchTerm.size() >= 2
       && "uid" in searchLog && searchLog.uid is string;
   }
+  function isValidBookmarkCategory(bookmarkCategory) {
+    return bookmarkCategory.size() == 6 &&
+    "createdAt" in bookmarkCategory && bookmarkCategory.createdAt is timestamp &&
+    "title" in bookmarkCategory && bookmarkCategory.title is string &&
+    "id" in bookmarkCategory && bookmarkCategory.id is string &&
+    "image" in bookmarkCategory && bookmarkCategory.image is map &&
+    "ref" in bookmarkCategory && bookmarkCategory.ref is path &&
+    "updatedAt" in bookmarkCategory && bookmarkCategory.updatedAt is timestamp;
+  }
+
+  function isValidBookmark(bookmark) {
+    return bookmark.size() == 7 &&
+    "activeUid" in bookmark && bookmark.activeUid is string &&
+    "categoryId" in bookmark && bookmark.categoryId is string &&
+    "createdAt" in bookmark && bookmark.createdAt is timestamp &&
+    "passiveUid" in bookmark && bookmark.passiveUid is string &&
+    "postRef" in bookmark && bookmark.postRef is path &&
+    "postId" in bookmark && bookmark.postId is string &&
+    "ref" in bookmark && bookmark.ref is path;
+  }
+
 
   function isAuthenticated() {
   	return request.auth != null;

@@ -327,6 +327,13 @@ exports.onPrivateUserDelete = functions.firestore.document(privateUserPath).onDe
         await deleteFromColRef(myRef.collection('tokens'));
     }
 );
+exports.onBookmarkCategoryDelete = functions.firestore.document(`${privateUserPath}/bookmarkCategories/{categoryId}`).onDelete(
+    async (snap,_) => {
+        const ref = snap.ref;
+        // カテゴリー下のブックマークを全て削除
+        await deleteFromColRef(ref.collection('bookmarks'));
+    }
+);
 exports.onUserMutesCreate = functions.firestore.document(`${userPath}/userMutes/{activeUid}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();

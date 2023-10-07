@@ -16,6 +16,12 @@ class MyProfileController extends ProfileController with CurrentUserMixin {
     query = FirestoreQueries.userPostsQueryByNewest(currentUid());
   }
 
+  @override
+  Future<void> onReload() async {
+    setQuery();
+    return await super.onReload();
+  }
+
   // CurrentUserControllerから起動させる.
   Future<void> updateProfileUserState(PublicUser result) async {
     passiveUser(result);

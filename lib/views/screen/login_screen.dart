@@ -54,12 +54,12 @@ class LoginScreen extends StatelessWidget {
               if (Platform.isIOS)
                 RoundedButton(
                   text: 'Appleで続ける',
-                  textColor: Colors.white,
-                  buttonColor: Colors.black,
+                  textColor: Theme.of(context).scaffoldBackgroundColor,
+                  buttonColor: Theme.of(context).focusColor,
                   press: onAppleButtonPressed,
-                  icon: const Icon(
+                  icon: Icon(
                     FontAwesomeIcons.apple,
-                    color: Colors.white,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                 ),
             ],
