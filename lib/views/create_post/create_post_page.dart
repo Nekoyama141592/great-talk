@@ -78,8 +78,8 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ..._systemPromptTextField(),
-                ..._titleTextField(),
                 ..._descriptionTextField(),
+                ..._titleTextField(),
                 ..._temperatureNumberField(),
                 ..._topPNumberField(),
                 ..._presencePenaltyNumberField(),
