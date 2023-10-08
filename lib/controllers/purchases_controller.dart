@@ -48,11 +48,12 @@ class PurchasesController extends GetxController {
     return result;
   }
 
-  void onSwichChanged(bool value) {
+  void onSwichChanged(bool value) async {
     if (value == false) {
       isPremiumMode(value);
       return;
     }
+    await restorePurchases();
     if (_isPremiumSubscribing()) {
       isPremiumMode(value);
     } else {
