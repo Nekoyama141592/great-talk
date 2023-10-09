@@ -122,7 +122,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
             initialValue: CreatePostController.to.description.value,
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            decoration: const InputDecoration(hintText: "例: かわいい猫のAIです！"),
+            decoration: const InputDecoration(hintText: "例: かわいい猫のAIだにゃん！"),
             onSaved: CreatePostController.to.setDescription,
             validator: (value) {
               if (value!.isEmpty) {

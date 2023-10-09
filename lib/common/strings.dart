@@ -75,7 +75,7 @@ const String topPHelpMsg =
 const String presencePenaltyHelpMsg =
     "値は-2.0以上、2.0以下の数を設定できます。初期値は$defaultPresencePenaltyです。正の値は、新しいトークンがこれまでにテキストに現れたかどうかに基づいてペナルティを課し、モデルが新しいトピックについて話す可能性を高めます。AIの返答に影響します。$roundMsg";
 const String frequencyPenaltyHelpMsg =
-    "値は-2.0以上、2.0以下の数を設定できます。初期値は$defaultFrequencyPenaltyです。正の値は、新しいトークンに、これまでのテキストでの頻度に基づいてペナルティを与え、モデルが同じ行を逐語的に繰り返す可能性を減らします。。AIの返答に影響します。$roundMsg";
+    "値は-2.0以上、2.0以下の数を設定できます。初期値は$defaultFrequencyPenaltyです。正の値は、新しいトークンに、これまでのテキストでの頻度に基づいてペナルティを与え、モデルが同じ行を逐語的に繰り返す可能性を減らします。AIの返答に影響します。$roundMsg";
 const String roundMsg = "また、値は少数第二位で四捨五入されます。";
 const String negativeAlertMsg = "ネガティブな内容を含むと、他のユーザーに表示されなくなる可能性があります。";
 
