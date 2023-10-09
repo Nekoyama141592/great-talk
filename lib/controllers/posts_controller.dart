@@ -48,9 +48,10 @@ class PostsController extends GetxController with CurrentUserMixin {
         context: context,
         builder: (innerContext) => CupertinoActionSheet(
               actions: [
-                CupertinoActionSheetAction(
-                    onPressed: () => _reportPost(innerContext),
-                    child: const BasicBoldText("投稿を報告")),
+                // 報告機能は、非表示にしておく
+                // CupertinoActionSheetAction(
+                //     onPressed: () => _reportPost(innerContext),
+                //     child: const BasicBoldText("投稿を報告")),
                 CupertinoActionSheetAction(
                     onPressed: () => _mutePost(innerContext),
                     child: const BasicBoldText("投稿をミュート")),
