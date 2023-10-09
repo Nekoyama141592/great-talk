@@ -9,7 +9,7 @@ class DeletePostButton extends StatelessWidget {
     final controller = RealtimeResController.to;
     return AppBarAction(
       onTap: controller.onDeleteButtonPressed,
-      child: const Icon(Icons.delete),
+      child: const Icon(Icons.delete,color: Colors.purple,),
     );
   }
 }
