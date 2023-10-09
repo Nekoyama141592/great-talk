@@ -24,10 +24,10 @@ class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<EditProfilePage> createState() => _CreatePostPageState();
+  State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
-class _CreatePostPageState extends ProcessingState<EditProfilePage>
+class _EditProfilePageState extends ProcessingState<EditProfilePage>
     with CurrentUserMixin {
   double? _deviceHeight, _deviceWidth;
   // ログとフォームキーをとる
