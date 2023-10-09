@@ -515,13 +515,13 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
                     Navigator.pop(innerContext);
                     onDescriptionButtonPressed();
                   },
-                  child: const Text("説明を見る")),
+                  child: const Text("情報を見る")),
               CupertinoActionSheetAction(
                   onPressed: () {
                     Navigator.pop(innerContext);
                     _onBookmarkTextTapped();
                   },
-                  child: const Text("ブックマーク")),
+                  child: const Text("ブックマークに追加/削除")),
               CupertinoActionSheetAction(
                   onPressed: () => Navigator.pop(innerContext),
                   child: const Text("戻る"))
