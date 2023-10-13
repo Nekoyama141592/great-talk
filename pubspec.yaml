@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' 
 #ints.dartのversionも変更する.
-version: 3.1.2+150
+version: 3.1.3+151
 
 environment:
   sdk: ">=2.18.2 <3.0.0"
@@ -73,7 +73,7 @@ flutter:
 flutter_icons:
   android: true
   ios: true
-  image_path: 'assets/images/logo2.png'
+  image_path: 'assets/images/logo.png'
 # Flavorの設定
 flavorizr:
   app:
