@@ -65,19 +65,19 @@ class PostsController extends GetxController with CurrentUserMixin {
             ));
   }
 
-  void _reportPost(BuildContext innerContext) {
-    if (rxPost.value == null) {
-      return;
-    }
-    final post = rxPost.value!;
-    if (CurrentUserController.to.reportPostIds.contains(post.postId)) {
-      UIHelper.showFlutterToast("すでにこの投稿を報告しています");
-      Navigator.pop(innerContext);
-      return;
-    }
-    Navigator.pop(innerContext);
-    showReportContentDialog(innerContext);
-  }
+  // void _reportPost(BuildContext innerContext) {
+  //   if (rxPost.value == null) {
+  //     return;
+  //   }
+  //   final post = rxPost.value!;
+  //   if (CurrentUserController.to.reportPostIds.contains(post.postId)) {
+  //     UIHelper.showFlutterToast("すでにこの投稿を報告しています");
+  //     Navigator.pop(innerContext);
+  //     return;
+  //   }
+  //   Navigator.pop(innerContext);
+  //   showReportContentDialog(innerContext);
+  // }
 
   void showReportContentDialog(BuildContext context) {
     Get.dialog(
