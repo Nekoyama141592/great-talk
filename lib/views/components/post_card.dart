@@ -51,7 +51,8 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
             onTap: () => controller.onPostCardPressed(post),
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Theme.of(context).primaryColor),
+                border:
+                    Border.all(color: Theme.of(context).colorScheme.primary),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(

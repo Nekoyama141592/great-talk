@@ -15,10 +15,10 @@ ThemeData lightThemeData(BuildContext context) {
     focusColor: Colors.black,
     cardColor: kContentColorLightTheme,
     colorScheme: const ColorScheme.light().copyWith(
-        primary: kSecondaryColor, // CupertinoActionSheetActionのTextカラー
-        secondary: kSecondaryColor,
-        onPrimary: kSecondaryColor // TextButtonの色
-        ),
+      onBackground: kPrimaryColor,
+      primary: kSecondaryColor, // CupertinoActionSheetActionのTextカラー
+      secondary: kSecondaryColor, // TextButtonの色
+    ),
   );
 }
 
@@ -35,8 +35,9 @@ ThemeData darkThemeData(BuildContext context) {
     focusColor: Colors.white,
     cardColor: kContentColorDarkTheme,
     colorScheme: const ColorScheme.dark().copyWith(
-        primary: kPrimaryColor,
-        secondary: kPrimaryColor,
-        onPrimary: kPrimaryColor),
+      onBackground: kSecondaryColor,
+      primary: kPrimaryColor,
+      secondary: kPrimaryColor,
+    ),
   );
 }

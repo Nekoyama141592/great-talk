@@ -81,14 +81,14 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
               ? Icon(
                   Icons.verified,
                   size: 40.0,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.primary,
                 )
               : const SizedBox.shrink())
         ],
       ),
     ];
     return Obx(() => GradientScreen(
-          baseColor: Theme.of(context).colorScheme.secondary,
+          baseColor: Theme.of(context).colorScheme.onBackground,
           header: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
