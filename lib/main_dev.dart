@@ -9,8 +9,8 @@ void main() async {
     F.appFlavor = Flavor.dev;
     await dotenv.load(fileName: 'dev.env');
     // Dartのエラーを報告
-    await RunApp.runGreatTalk(F.appFlavor!);
-  }, (error, stackTrace) {
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    await RunApp.runMyApp(F.appFlavor!);
+  }, (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack);
   });
 }

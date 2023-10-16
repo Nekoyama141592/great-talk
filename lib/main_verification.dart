@@ -3,5 +3,5 @@ import 'flavors.dart';
 
 void main() {
   F.appFlavor = Flavor.verification;
-  RunApp.runGreatTalk(F.appFlavor!);
+  RunApp.runMyApp(F.appFlavor!);
 }
