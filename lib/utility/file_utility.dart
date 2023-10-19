@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -7,8 +8,13 @@ import 'package:image/image.dart' as img;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FileUtility {
+  FileUtility() {
+    _fetchPrefs();
+  }
+  static SharedPreferences? prefs;
   static Future<Uint8List?> getCompressedImage() async {
     final xFile = await _pickImage();
     final croppedFile = await _cropImage(xFile);
@@ -19,19 +25,45 @@ class FileUtility {
 
   static Future<Uint8List?> getS3Image(
       String bucketName, String fileName) async {
-    final repository = AWSS3Repository();
     if (fileName.isEmpty) {
       return null;
     }
-    final result = await repository.getImage(bucketName, fileName);
-    Uint8List? uint8List;
-    result.when(success: (res) {
-      uint8List = res;
-    }, failure: () {
-      UIHelper.showErrorFlutterToast("画像の取得が失敗しました");
-      uint8List = null;
-    });
+    Uint8List? uint8List = _getCachedUint8List(fileName); // キャッシュされている画像を取得.
+    // キャッシュされていない場合、S3から取得.
+    if (uint8List == null) {
+      final repository = AWSS3Repository();
+      final result = await repository.getImage(bucketName, fileName);
+      result.when(success: (res) {
+        uint8List = res;
+        _cacheUint8List(fileName, res); // 画像を非同期でキャッシュする.
+      }, failure: () {
+        UIHelper.showErrorFlutterToast("画像の取得が失敗しました");
+        uint8List = null;
+      });
+    }
     return uint8List;
+  }
+
+  static Future<void> _fetchPrefs() async =>
+      prefs ??= await SharedPreferences.getInstance();
+
+  static Future<void> _cacheUint8List(String fileName, Uint8List data) async {
+    if (prefs == null) {
+      _fetchPrefs();
+      return;
+    }
+    final base64String = base64Encode(data);
+    await prefs!.setString(fileName, base64String);
+  }
+
+  static Uint8List? _getCachedUint8List(String fileName) {
+    if (prefs == null) {
+      _fetchPrefs();
+      return null;
+    } else {
+      final base64String = prefs!.getString(fileName);
+      return base64String == null ? null : base64Decode(base64String);
+    }
   }
 
   static Future<Uint8List?> _compressImage(File? jpgFile) async {
