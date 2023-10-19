@@ -6,6 +6,7 @@ enum MessageType { text }
 
 enum PrefsKey {
   // ${contentId}で各々のChat履歴
+  // ${fileName}でキャッシュされた画像
   chatCount,
   initialPeople,
   isAgreedToTerms,
