@@ -28,8 +28,7 @@ class ProductList extends StatelessWidget {
                   productDetails: productDetails,
                   descriptions: const [
                       PlanDescription(text: '無制限のチャット'),
-                      PlanDescription(text: 'コピー可能な返答'),
-                      PlanDescription(text: 'プロンプトが閲覧可能に'),
+                      PlanDescription(text: 'コピー可能な説明や返答'),
                     ])
               : ProductCard(
                   productDetails: productDetails,

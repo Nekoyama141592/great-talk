@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' 
 #ints.dartのversionも変更する.
-version: 4.0.3+154
+version: 4.0.4+155
 
 environment:
   sdk: ">=2.18.2 <3.0.0"

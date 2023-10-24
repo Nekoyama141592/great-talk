@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
+import 'package:great_talk/common/subscribed_copyable_text.dart';
 
 class UIHelper {
   static void showPopup(
@@ -40,7 +41,7 @@ class UIHelper {
     ));
   }
 
-  static void simpleAlertDialog(String msg) {
+  static void simpleAlertDialog(String msg, {bool? needsSubscribing}) {
     const style = TextStyle(fontSize: 20);
     Get.dialog(AlertDialog(
       content: SizedBox(
@@ -49,15 +50,18 @@ class UIHelper {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SelectableText(
-                msg,
-                style: style,
-              ),
+              (needsSubscribing ?? false)
+                  ? SubscribedCopyableText(
+                      data: msg,
+                      style: style,
+                    )
+                  : SelectableText(
+                      msg,
+                      style: style,
+                    ),
               const Divider(),
               TextButton(
-                  onPressed: () {
-                    Get.back();
-                  },
+                  onPressed: Get.back,
                   child: const Text(
                     okText,
                     style: style,

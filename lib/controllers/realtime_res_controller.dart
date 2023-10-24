@@ -399,15 +399,13 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       return;
     }
     final title = "タイトル: ${content.title}";
-    final systemPrompt = PurchasesController.to.isSubscribing()
-        ? "システムプロンプト: ${content.managedCustomCompleteText().systemPrompt}"
-        : "システムプロンプトはベーシックプランに登録すると見ることができます。";
+    final systemPrompt =
+        "システムプロンプト: ${content.managedCustomCompleteText().systemPrompt}";
     String msgText = !returnIsOriginalContents(content.posterUid)
         ? "累計メッセージ数: ${content.msgCount.formatNumber()}"
         : "";
-    UIHelper.simpleAlertDialog(
-      "$title\n\n$systemPrompt\n\n$msgText",
-    );
+    UIHelper.simpleAlertDialog("$title\n\n$systemPrompt\n\n$msgText",
+        needsSubscribing: true);
   }
 
   bool isMyContent(TextMessage message) {
