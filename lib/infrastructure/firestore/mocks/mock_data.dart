@@ -10,10 +10,13 @@ import 'package:great_talk/model/timeline/timeline.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 
-const String mockCurrentUid = "current-user";
-final currentUser = NewContent.newUser(mockCurrentUid,
-    userName: "M.LO", bio: "すごいAIの開発者です", imageValue: "megami2.jpeg");
-final privatetUser = NewContent.newPrivateUser(mockCurrentUid);
+class MockData {
+  static const String currentUid = "current-user";
+  static final currentUser = NewContent.newUser(currentUid,
+      userName: "M.LO", bio: "すごいAIの開発者です", imageValue: "megami2.jpeg");
+  static final privatetUser = NewContent.newPrivateUser(currentUid);
+}
+
 final List<PublicUser> mockUsers = [
   PublicUser(
     accountName: "a",
