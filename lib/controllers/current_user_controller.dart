@@ -23,7 +23,7 @@ import 'package:great_talk/utility/new_content.dart';
 
 class CurrentUserController extends GetxController {
   static CurrentUserController get to => Get.find<CurrentUserController>();
-  final Rx<User?> currentUser = Rx(FirebaseAuth.instance.currentUser);
+  final Rx<User?> authUser = Rx(FirebaseAuth.instance.currentUser);
   final Rx<PublicUser?> publicUser = Rx(null);
   final Rx<PrivateUser?> privateUser = Rx(null);
 
@@ -180,25 +180,25 @@ class CurrentUserController extends GetxController {
     final result = await repository.signInAnonymously();
     result.when(
         success: (res) {
-          currentUser(res);
+          authUser(res);
         },
         failure: () {});
   }
 
-  String currentUid() => currentUser.value!.uid;
+  String currentUid() => authUser.value!.uid;
 
   bool isAdmin() => privateUser.value?.isAdmin ?? false;
 
-  bool isAnonymous() => currentUser.value!.isAnonymous;
+  bool isAnonymous() => authUser.value!.isAnonymous;
 
-  bool isNotLoggedIn() => currentUser.value == null || isAnonymous();
+  bool isNotLoggedIn() => authUser.value == null || isAnonymous();
   bool isLoggedIn() => !isNotLoggedIn();
 
   bool _hasPublicUser() =>
-      currentUser.value!.emailVerified && publicUser.value != null;
+      authUser.value!.emailVerified && publicUser.value != null;
   bool hasNoPublicUser() => !_hasPublicUser();
 
-  bool isNotVerified() => !currentUser.value!.emailVerified;
+  bool isNotVerified() => !authUser.value!.emailVerified;
   bool isDeletedPost(String postId) => deletePostIds.contains(postId);
   bool isMutingPost(String postId) => mutePostIds.contains(postId);
   bool isMutingUser(String uid) => muteUids.contains(uid);
@@ -217,7 +217,7 @@ class CurrentUserController extends GetxController {
 
   Future<void> onLoginSuccess(User user) async {
     await user.reload();
-    currentUser(user);
+    authUser(user);
     await _manageUserInfo();
     await MyProfileController.to.onReload();
   }
@@ -248,18 +248,18 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> _manageUserInfo() async {
-    if (currentUser.value == null) {
+    if (authUser.value == null) {
       await _createAnonymousUser();
       return;
     }
-    if (currentUser.value!.isAnonymous) {
+    if (authUser.value!.isAnonymous) {
       return;
     }
-    await _getCurrentUser();
+    await _getPublicUser();
     await _getPrivateUser();
   }
 
-  Future<void> _getCurrentUser() async {
+  Future<void> _getPublicUser() async {
     final repository = FirestoreRepository();
     final result = await repository.getCurrentUser(currentUid());
     result.when(success: (res) async {
@@ -306,9 +306,9 @@ class CurrentUserController extends GetxController {
   }
 
   CurrentAuthState currentAuthState() {
-    if (currentUser.value == null) {
+    if (authUser.value == null) {
       return CurrentAuthState.notLoggedIn;
-    } else if (currentUser.value!.isAnonymous) {
+    } else if (authUser.value!.isAnonymous) {
       return CurrentAuthState.isAnonymous;
     } else {
       return CurrentAuthState.notLoggedIn;
@@ -342,7 +342,7 @@ class CurrentUserController extends GetxController {
   Future<void> _reauthenticateToDelete(AuthCredential credential) async {
     final repository = FirebaseAuthRepository();
     final result = await repository.reauthenticateWithCredential(
-        currentUser.value!, credential);
+        authUser.value!, credential);
     result.when(
         success: (_) {
           _showDeleteUserDialog();
@@ -366,7 +366,7 @@ class CurrentUserController extends GetxController {
 
   Future<void> _deleteAuthUser() async {
     final repository = FirebaseAuthRepository();
-    final result = await repository.deleteUser(currentUser.value!);
+    final result = await repository.deleteUser(authUser.value!);
     result.when(
         success: (_) async {
           Get.toNamed('/userDeleted');

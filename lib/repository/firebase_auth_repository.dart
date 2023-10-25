@@ -8,48 +8,46 @@ class FirebaseAuthRepository {
   final client = FirebaseAuthClient();
 
   FutureResult<User> signInAnonymously() async {
-    late Result<User> result;
     try {
       final res = await client.signInAnonymously();
-      if (res.user == null) {
-        result = const Result.failure();
+      final user = res.user;
+      if (user == null) {
+        return const Result.failure();
+      } else {
+        return Result.success(user);
       }
-      result = Result.success(res.user!);
     } catch (e) {
       debugPrint(e.toString());
-      result = const Result.failure();
+      return const Result.failure();
     }
-    return result;
   }
 
   FutureResult<User> signInWithApple() async {
-    late Result<User> result;
     try {
       final res = await client.signinWithApple();
       if (res == null || res.user == null) {
-        result = const Result.failure();
+        return const Result.failure();
+      } else {
+        return Result.success(res.user!);
       }
-      result = Result.success(res!.user!);
     } on FirebaseAuthException catch (e) {
-      result = const Result.failure();
       _manageErrorCredential(e);
+      return const Result.failure();
     }
-    return result;
   }
 
   FutureResult<User> signInWithGoogle() async {
-    late Result<User> result;
     try {
       final res = await client.signInWithGoogle();
       if (res == null || res.user == null) {
-        result = const Result.failure();
+        return const Result.failure();
+      } else {
+        return Result.success(res.user!);
       }
-      result = Result.success(res!.user!);
     } on FirebaseAuthException catch (e) {
-      result = const Result.failure();
       _manageErrorCredential(e);
+      return const Result.failure();
     }
-    return result;
   }
 
   FutureResult<bool> signOut() async {
