@@ -222,7 +222,7 @@ class CurrentUserController extends GetxController {
     await MyProfileController.to.onReload();
   }
 
-  Future<void> _createPublicUserWithUser() async {
+  Future<void> _createPublicUser() async {
     final repository = FirestoreRepository();
     final newUser = NewContent.newUser(currentUid());
     final result = await repository.createUser(currentUid(), newUser.toJson());
@@ -235,7 +235,7 @@ class CurrentUserController extends GetxController {
     });
   }
 
-  Future<void> _createPrivateUserWithUser() async {
+  Future<void> _createPrivateUser() async {
     final repository = FirestoreRepository();
     final newPrivateUser = NewContent.newPrivateUser(currentUid());
     final result = await repository.createPrivateUser(
@@ -270,7 +270,7 @@ class CurrentUserController extends GetxController {
         MyProfileController.to.updateProfileUserState(newUser);
       } else {
         // アカウントが存在しないなら作成する
-        await _createPublicUserWithUser();
+        await _createPublicUser();
       }
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
@@ -286,7 +286,7 @@ class CurrentUserController extends GetxController {
         privateUser(PrivateUser.fromJson(res.data()!));
       } else {
         // アカウントが存在しないなら作成する
-        await _createPrivateUserWithUser();
+        await _createPrivateUser();
       }
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
