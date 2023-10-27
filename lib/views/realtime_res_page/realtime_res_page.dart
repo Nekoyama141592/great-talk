@@ -35,19 +35,19 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
               actions: [
                 // 自分の投稿なら削除ボタン、それ以外ならレポートボタンを表示する.
                 Obx(() =>
-                    controller.post.value?.typedPoster().uid == currentUid()
+                    controller.rxPost.value?.typedPoster().uid == currentUid()
                         ? const DeletePostButton()
                         : const PostReportButton()),
-                Obx(() => controller.post.value == null
+                Obx(() => controller.rxPost.value == null
                     ? const SizedBox.shrink()
                     : PostLikeButton(
-                        isHorizontal: true, post: controller.post.value!)),
+                        isHorizontal: true, post: controller.rxPost.value!)),
                 const MenuButton(),
               ],
               title: Obx(() =>
-                  EllipsisText(controller.interlocutor.value?.title ?? ""))),
+                  EllipsisText(controller.rxChatContent.value?.title ?? ""))),
           body: Obx(() => controller.isLoading.value ||
-                  controller.interlocutor.value == null
+                  controller.rxChatContent.value == null
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
@@ -78,15 +78,15 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                                 : controller.onCardLongTap,
                                         leading: Obx(() => CircleImage(
                                               bucketName: controller
-                                                  .interlocutor.value!
+                                                  .rxChatContent.value!
                                                   .typedImage()
                                                   .bucketName,
                                               imageValue: controller
-                                                  .interlocutor
+                                                  .rxChatContent
                                                   .value!
                                                   .imageValue,
                                               uint8list:
-                                                  controller.uint8list.value,
+                                                  controller.rxUint8list.value,
                                             )),
                                         title:
                                             purchaseController.isSubscribing()
@@ -118,15 +118,15 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                             ? null
                                             : Obx(() => CircleImage(
                                                   bucketName: controller
-                                                      .interlocutor.value!
+                                                      .rxChatContent.value!
                                                       .typedImage()
                                                       .bucketName,
                                                   imageValue: controller
-                                                      .interlocutor
+                                                      .rxChatContent
                                                       .value!
                                                       .imageValue,
                                                   uint8list: controller
-                                                      .uint8list.value,
+                                                      .rxUint8list.value,
                                                 )),
                                         title:
                                             purchaseController.isSubscribing()

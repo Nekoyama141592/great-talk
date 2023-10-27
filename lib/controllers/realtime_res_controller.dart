@@ -44,9 +44,9 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   String postId = "";
   int chatCount = 0;
   late SharedPreferences prefs;
-  final Rx<ChatContent?> interlocutor = Rx(null);
-  final Rx<Post?> post = Rx(null);
-  final Rx<Uint8List?> uint8list = Rx(null);
+  final Rx<ChatContent?> rxChatContent = Rx(null);
+  final Rx<Post?> rxPost = Rx(null);
+  final Rx<Uint8List?> rxUint8list = Rx(null);
   final repository = FirestoreRepository();
 
   void resetState() {
@@ -55,8 +55,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     isLoading(false);
     isGenerating(false);
     postId = "";
-    interlocutor.value = null;
-    post.value = null;
+    rxChatContent.value = null;
+    rxPost.value = null;
   }
 
   Future<void> init() async {
@@ -65,7 +65,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   void _processDescriptionMessage() {
-    final content = interlocutor.value;
+    final content = rxChatContent.value;
     if (content == null) return;
     if (messages.isEmpty) {
       _addDescriptionMessage(content);
@@ -84,18 +84,18 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     if (type == InterlocutorType.originalContent) {
       final res =
           originalContents.firstWhere((element) => element.contentId == postId);
-      interlocutor(res);
+      rxChatContent(res);
     } else {
       final result = await repository.getPost(uid, postId);
       result.when(success: (res) async {
         if (res.exists) {
           final fetchedPost = Post.fromJson(res.data()!);
-          post(fetchedPost);
-          interlocutor(ChatContent.fromPost(fetchedPost));
+          rxPost(fetchedPost);
+          rxChatContent(ChatContent.fromPost(fetchedPost));
           final detectedImage = fetchedPost.typedImage();
           final s3Image = await FileUtility.getS3Image(
               detectedImage.bucketName, detectedImage.value);
-          uint8list(s3Image);
+          rxUint8list(s3Image);
         } else {
           UIHelper.showFlutterToast("投稿が存在しません");
           return;
@@ -111,10 +111,10 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   List<TextMessage> _getLocalMessages() {
-    if (interlocutor.value == null) {
+    if (rxChatContent.value == null) {
       return [];
     }
-    final jsonString = prefs.getString(interlocutor.value!.contentId) ?? "";
+    final jsonString = prefs.getString(rxChatContent.value!.contentId) ?? "";
     List<TextMessage> messages = [];
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
@@ -161,7 +161,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     // リクエストを作成
     final requestMessages = await _createRequestMessages(content);
     final CustomCompleteText completeText =
-        interlocutor.value!.managedCustomCompleteText();
+        rxChatContent.value!.managedCustomCompleteText();
     final request = ChatCompleteText(
       model: model,
       messages: requestMessages,
@@ -185,7 +185,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   void _addEmptyMessage() {
-    messages.add(_newtTextMessage('', interlocutor.value!.contentId));
+    messages.add(_newtTextMessage('', rxChatContent.value!.contentId));
   }
 
   void _scrollToBottom(ScrollController scrollController) {
@@ -199,7 +199,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   void _listenToChatCompletionSSE(
       ChatCompleteText request, ScrollController scrollController) {
     // 生成中なら何もしない
-    if (isGenerating.value || interlocutor.value == null) {
+    if (isGenerating.value || rxChatContent.value == null) {
       return;
     }
     isGenerating(true);
@@ -212,7 +212,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       }
     }, onDone: () {
       final completedMsg =
-          _newtTextMessage(realtimeRes.value, interlocutor.value!.contentId);
+          _newtTextMessage(realtimeRes.value, rxChatContent.value!.contentId);
       messages.last = completedMsg;
       messages([...messages]);
       isGenerating(false);
@@ -231,7 +231,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
 
   Future<void> _createTextMsgDoc(TextMessage message) async {
     // オリジナルコンテンツなら保存はしない
-    if (!returnIsOriginalContents(interlocutor.value!.posterUid)) {
+    if (!returnIsOriginalContents(rxChatContent.value!.posterUid)) {
       final repository = FirestoreRepository();
       await repository.createMessage(
           message.typedMessageRef(), message.toJson());
@@ -268,7 +268,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _setValues() async {
-    if (interlocutor.value == null) {
+    if (rxChatContent.value == null) {
       return;
     }
     await _setLocalMessage();
@@ -277,10 +277,10 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _setLocalMessage() async {
-    if (interlocutor.value == null) {
+    if (rxChatContent.value == null) {
       return;
     }
-    final String interlocutorId = interlocutor.value!.contentId;
+    final String interlocutorId = rxChatContent.value!.contentId;
     final objectList =
         messages.map((e) => SaveTextMsg.fromTextMessage(e)).toList();
     final jsonString = jsonEncode(objectList);
@@ -301,14 +301,14 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   TextMessage _newtTextMessage(String content, String senderUid) {
     final now = Timestamp.now();
     final id = randomString();
-    final posterUid = interlocutor.value!.posterUid;
+    final posterUid = rxChatContent.value!.posterUid;
     final textMessage = TextMessage(
       createdAt: now,
       id: id,
       messageType: MessageType.text.name,
       messageRef: FirestoreQueries.postMessageDocRef(
-          posterUid, interlocutor.value!.contentId, currentUid(), id),
-      postRef: interlocutor.value!.typedRef(),
+          posterUid, rxChatContent.value!.contentId, currentUid(), id),
+      postRef: rxChatContent.value!.typedRef(),
       text: NewContent.newDetectedText(content).toJson(),
       posterUid: posterUid,
       senderUid: senderUid,
@@ -330,10 +330,10 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Future<List<Messages>> _createRequestMessages(String content) async {
-    if (interlocutor.value == null) {
+    if (rxChatContent.value == null) {
       return [];
     }
-    final id = interlocutor.value!.contentId;
+    final id = rxChatContent.value!.contentId;
     switch (id) {
       case wolframId:
         final wolframRes = await WolframRepository.fetchApi(content);
@@ -377,7 +377,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
 
   Messages _systemMsg() {
     String content =
-        interlocutor.value!.managedCustomCompleteText().systemPrompt;
+        rxChatContent.value!.managedCustomCompleteText().systemPrompt;
     content += attention;
     return Messages(role: Role.system, content: content);
   }
@@ -394,7 +394,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   void onDescriptionButtonPressed() => _showDescriptionDialog();
 
   void _showDescriptionDialog() {
-    final content = interlocutor.value;
+    final content = rxChatContent.value;
     if (content == null) {
       return;
     }
@@ -410,7 +410,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
 
   bool isMyContent(TextMessage message) {
     if (message.senderUid == currentUid()) return true;
-    if (message.senderUid != interlocutor.value!.contentId) {
+    if (message.senderUid != rxChatContent.value!.contentId) {
       return true;
     } else {
       return false;
@@ -426,7 +426,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   void onDeleteButtonPressed() async {
-    final deletePost = post.value;
+    final deletePost = rxPost.value;
     if (deletePost == null) return;
     PostsController.to.deletePost(deletePost);
   }
@@ -462,7 +462,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _bookmark(BookmarkCategory category) async {
-    final bookmarkedPost = post.value;
+    final bookmarkedPost = rxPost.value;
     if (bookmarkedPost == null) return;
     final Timestamp now = Timestamp.now();
     final String passiveUid = bookmarkedPost.typedPoster().uid;

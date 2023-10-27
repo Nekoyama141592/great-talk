@@ -23,9 +23,9 @@ import 'package:great_talk/utility/new_content.dart';
 
 class CurrentUserController extends GetxController {
   static CurrentUserController get to => Get.find<CurrentUserController>();
-  final Rx<User?> authUser = Rx(FirebaseAuth.instance.currentUser);
-  final Rx<PublicUser?> publicUser = Rx(null);
-  final Rx<PrivateUser?> privateUser = Rx(null);
+  final Rx<User?> rxAuthUser = Rx(FirebaseAuth.instance.currentUser);
+  final Rx<PublicUser?> rxPublicUser = Rx(null);
+  final Rx<PrivateUser?> rxPrivateUser = Rx(null);
 
   final deletePostIds = <String>[].obs; // 投稿の削除時に一時的に保存する.
 
@@ -98,7 +98,7 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> _fetchBookmarkCategories() async {
-    final user = privateUser.value;
+    final user = rxPrivateUser.value;
     if (user == null) {
       return;
     }
@@ -180,25 +180,25 @@ class CurrentUserController extends GetxController {
     final result = await repository.signInAnonymously();
     result.when(
         success: (res) {
-          authUser(res);
+          rxAuthUser(res);
         },
         failure: () {});
   }
 
-  String currentUid() => authUser.value!.uid;
+  String currentUid() => rxAuthUser.value!.uid;
 
-  bool isAdmin() => privateUser.value?.isAdmin ?? false;
+  bool isAdmin() => rxPrivateUser.value?.isAdmin ?? false;
 
-  bool isAnonymous() => authUser.value!.isAnonymous;
+  bool isAnonymous() => rxAuthUser.value!.isAnonymous;
 
-  bool isNotLoggedIn() => authUser.value == null || isAnonymous();
+  bool isNotLoggedIn() => rxAuthUser.value == null || isAnonymous();
   bool isLoggedIn() => !isNotLoggedIn();
 
   bool _hasPublicUser() =>
-      authUser.value!.emailVerified && publicUser.value != null;
+      rxAuthUser.value!.emailVerified && rxPublicUser.value != null;
   bool hasNoPublicUser() => !_hasPublicUser();
 
-  bool isNotVerified() => !authUser.value!.emailVerified;
+  bool isNotVerified() => !rxAuthUser.value!.emailVerified;
   bool isDeletedPost(String postId) => deletePostIds.contains(postId);
   bool isMutingPost(String postId) => mutePostIds.contains(postId);
   bool isMutingUser(String uid) => muteUids.contains(uid);
@@ -217,7 +217,7 @@ class CurrentUserController extends GetxController {
 
   Future<void> onLoginSuccess(User user) async {
     await user.reload();
-    authUser(user);
+    rxAuthUser(user);
     await _manageUserInfo();
     await MyProfileController.to.onReload();
   }
@@ -227,7 +227,7 @@ class CurrentUserController extends GetxController {
     final newUser = NewContent.newUser(currentUid());
     final result = await repository.createUser(currentUid(), newUser.toJson());
     result.when(success: (_) {
-      publicUser(newUser);
+      rxPublicUser(newUser);
       MyProfileController.to.updateProfileUserState(newUser);
       UIHelper.showFlutterToast("ユーザーが作成されました");
     }, failure: () {
@@ -241,18 +241,18 @@ class CurrentUserController extends GetxController {
     final result = await repository.createPrivateUser(
         currentUid(), newPrivateUser.toJson());
     result.when(success: (_) {
-      privateUser(newPrivateUser);
+      rxPrivateUser(newPrivateUser);
     }, failure: () {
       UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
     });
   }
 
   Future<void> _manageUserInfo() async {
-    if (authUser.value == null) {
+    if (rxAuthUser.value == null) {
       await _createAnonymousUser();
       return;
     }
-    if (authUser.value!.isAnonymous) {
+    if (rxAuthUser.value!.isAnonymous) {
       return;
     }
     await _getPublicUser();
@@ -263,10 +263,10 @@ class CurrentUserController extends GetxController {
     final repository = FirestoreRepository();
     final result = await repository.getCurrentUser(currentUid());
     result.when(success: (res) async {
-      if (res.exists && publicUser.value == null) {
+      if (res.exists && rxPublicUser.value == null) {
         // アカウントが存在するなら代入する
         final newUser = PublicUser.fromJson(res.data()!);
-        publicUser(newUser);
+        rxPublicUser(newUser);
         MyProfileController.to.updateProfileUserState(newUser);
       } else {
         // アカウントが存在しないなら作成する
@@ -281,9 +281,9 @@ class CurrentUserController extends GetxController {
     final repository = FirestoreRepository();
     final result = await repository.getPrivateUser(currentUid());
     result.when(success: (res) async {
-      if (res.exists && privateUser.value == null) {
+      if (res.exists && rxPrivateUser.value == null) {
         // アカウントが存在するなら代入する
-        privateUser(PrivateUser.fromJson(res.data()!));
+        rxPrivateUser(PrivateUser.fromJson(res.data()!));
       } else {
         // アカウントが存在しないなら作成する
         await _createPrivateUser();
@@ -306,9 +306,9 @@ class CurrentUserController extends GetxController {
   }
 
   CurrentAuthState currentAuthState() {
-    if (authUser.value == null) {
+    if (rxAuthUser.value == null) {
       return CurrentAuthState.notLoggedIn;
-    } else if (authUser.value!.isAnonymous) {
+    } else if (rxAuthUser.value!.isAnonymous) {
       return CurrentAuthState.isAnonymous;
     } else {
       return CurrentAuthState.notLoggedIn;
@@ -342,7 +342,7 @@ class CurrentUserController extends GetxController {
   Future<void> _reauthenticateToDelete(AuthCredential credential) async {
     final repository = FirebaseAuthRepository();
     final result = await repository.reauthenticateWithCredential(
-        authUser.value!, credential);
+        rxAuthUser.value!, credential);
     result.when(
         success: (_) {
           _showDeleteUserDialog();
@@ -366,7 +366,7 @@ class CurrentUserController extends GetxController {
 
   Future<void> _deleteAuthUser() async {
     final repository = FirebaseAuthRepository();
-    final result = await repository.deleteUser(authUser.value!);
+    final result = await repository.deleteUser(rxAuthUser.value!);
     result.when(
         success: (_) async {
           Get.toNamed('/userDeleted');
@@ -379,18 +379,18 @@ class CurrentUserController extends GetxController {
     String bio,
     String fileName,
   ) async {
-    final user = publicUser.value!;
+    final user = rxPublicUser.value!;
     final result = user.copyWith(
         bio: user.typedBio().copyWith(value: bio).toJson(),
         userName: user.typedUserName().copyWith(value: userName).toJson(),
         image: user.typedImage().copyWith(value: fileName).toJson());
-    publicUser(result);
+    rxPublicUser(result);
     MyProfileController.to.updateProfileUserState(result);
   }
 
   void createBookmarkCategory(
       BuildContext context, TextEditingController inputController) async {
-    final user = privateUser.value;
+    final user = rxPrivateUser.value;
     if (user == null) return;
     final now = Timestamp.now();
     final categoryId = randomString();
@@ -420,7 +420,7 @@ class CurrentUserController extends GetxController {
   }
 
   void _deleteBookmarkCategory(BookmarkCategory token) async {
-    final user = publicUser.value;
+    final user = rxPublicUser.value;
     if (user == null) return;
     final repository = FirestoreRepository();
     final result = await repository.deleteDoc(token.ref);

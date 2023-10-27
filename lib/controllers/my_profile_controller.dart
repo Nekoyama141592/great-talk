@@ -24,9 +24,9 @@ class MyProfileController extends ProfileController with CurrentUserMixin {
 
   // CurrentUserControllerから起動させる.
   Future<void> updateProfileUserState(PublicUser result) async {
-    passiveUser(result);
+    rxPassiveUser(result);
     final s3Image = await FileUtility.getS3Image(
         result.typedImage().bucketName, result.typedImage().value);
-    uint8list(s3Image);
+    rxUint8list(s3Image);
   }
 }

@@ -8,8 +8,8 @@ abstract class ProfileController extends DocsController {
   ProfileController(this.isMyProfile)
       : super(enablePullDown: true, requiresValueReset: !isMyProfile);
   final bool isMyProfile;
-  final Rx<PublicUser?> passiveUser = Rx(null);
-  final Rx<Uint8List?> uint8list = Rx(null);
+  final Rx<PublicUser?> rxPassiveUser = Rx(null);
+  final Rx<Uint8List?> rxUint8list = Rx(null);
 
   @override
   void setQuery();

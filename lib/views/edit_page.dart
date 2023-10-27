@@ -40,7 +40,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
   bool isPicked = false;
   @override
   void initState() {
-    uint8list = MyProfileController.to.uint8list.value;
+    uint8list = MyProfileController.to.rxUint8list.value;
     super.initState();
   }
 
@@ -107,7 +107,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
       ),
       OriginalForm(
         initialValue:
-            CurrentUserController.to.publicUser.value!.typedUserName().value,
+            CurrentUserController.to.rxPublicUser.value!.typedUserName().value,
         onSaved: (value) {
           setState(() {
             userName = value;
@@ -135,7 +135,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
       ),
       OriginalForm(
         initialValue:
-            CurrentUserController.to.publicUser.value!.typedBio().value,
+            CurrentUserController.to.rxPublicUser.value!.typedBio().value,
         keyboardType: TextInputType.multiline,
         maxLines: null,
         onSaved: (value) {
@@ -218,7 +218,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
           });
     } else {
       // 写真がそのまま場合の処理
-      final publicUser = CurrentUserController.to.publicUser.value;
+      final publicUser = CurrentUserController.to.rxPublicUser.value;
       if (publicUser == null) return;
       await _createUserUpdateLog(publicUser.typedImage().value);
     }
@@ -244,7 +244,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
         stringUserName: userName!.trim(),
         uid: currentUid(),
         imageFileName: fileName,
-        userRef: CurrentUserController.to.publicUser.value!.ref);
+        userRef: CurrentUserController.to.rxPublicUser.value!.ref);
     final result = await repository.createUserUpdateLog(
         currentUid(), newUpdateLog.toJson());
     result.when(success: (_) {

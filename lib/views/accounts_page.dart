@@ -35,7 +35,7 @@ class AccountPage extends StatelessWidget {
           ),
           Obx(
             () {
-              final publicUser = controller.publicUser.value;
+              final publicUser = controller.rxPublicUser.value;
               if (publicUser == null || !publicUser.isInappropriate()) {
                 return const SizedBox.shrink();
               }

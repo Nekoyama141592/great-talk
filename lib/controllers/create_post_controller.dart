@@ -117,7 +117,7 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
         title.trim(),
         description.trim(),
         fileName,
-        CurrentUserController.to.publicUser.value!,
+        CurrentUserController.to.rxPublicUser.value!,
         postId,
         postRef,
         customCompleteText);

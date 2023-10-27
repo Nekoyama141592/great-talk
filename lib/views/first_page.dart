@@ -33,7 +33,7 @@ class FirstPage extends HookWidget {
       if (!mainController.isAgreedToTerms.value) {
         return const TermsPage();
       }
-      if (currentUserController.authUser.value == null) {
+      if (currentUserController.rxAuthUser.value == null) {
         return const LoadingPage();
       } else {
         return const MyHomePage();

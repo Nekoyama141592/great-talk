@@ -154,7 +154,7 @@ class PostsController extends GetxController with CurrentUserMixin {
     CurrentUserController.to.addMuteUser(muteUserToken);
     await repository.createToken(currentUid(), tokenId, muteUserToken.toJson());
     final UserMute userMute = UserMute(
-        activeUserRef: CurrentUserController.to.publicUser.value!.typedRef(),
+        activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
         activeUid: currentUid(),
         createdAt: now,
         passiveUid: passiveUid,
@@ -195,7 +195,7 @@ class PostsController extends GetxController with CurrentUserMixin {
     await repository.createToken(
         currentUid(), tokenId, reportPostToken.toJson());
     final PostReport postReport = PostReport(
-      activeUserRef: CurrentUserController.to.publicUser.value!.typedRef(),
+      activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
       activeUid: currentUid(),
       createdAt: Timestamp.now(),
       others: others.value,

@@ -30,30 +30,30 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
           ),
         ),
       Obx(() => EllipsisText(
-            controller.passiveUser.value!.typedUserName().value,
+            controller.rxPassiveUser.value!.typedUserName().value,
             style: StyleUtility.bold25(),
           )),
       Row(
         children: [
           Obx(
-            () => controller.passiveUser.value == null
+            () => controller.rxPassiveUser.value == null
                 ? const SizedBox.shrink()
                 : CircleImage(
                     bucketName:
-                        controller.passiveUser.value!.typedImage().bucketName,
+                        controller.rxPassiveUser.value!.typedImage().bucketName,
                     imageValue:
-                        controller.passiveUser.value!.typedImage().value,
-                    uint8list: controller.uint8list.value,
+                        controller.rxPassiveUser.value!.typedImage().value,
+                    uint8list: controller.rxUint8list.value,
                   ),
           ),
           Obx(() => Text(
-                "フォロー ${controller.passiveUser.value?.followingCount.formatNumber() ?? 0}",
+                "フォロー ${controller.rxPassiveUser.value?.followingCount.formatNumber() ?? 0}",
               )),
           const SizedBox(
             width: 20.0,
           ),
           Obx(() => Text(
-                "フォロワー ${controller.passiveUser.value?.followerCount.formatNumber() ?? 0}",
+                "フォロワー ${controller.rxPassiveUser.value?.followerCount.formatNumber() ?? 0}",
               ))
         ],
       ),
@@ -62,7 +62,7 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
           ? const SizedBox.shrink()
           : Align(
               alignment: Alignment.centerLeft,
-              child: Text(controller.passiveUser.value!
+              child: Text(controller.rxPassiveUser.value!
                   .typedBio()
                   .value
                   .removeNewlinesAndSpaces()),
@@ -77,7 +77,7 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
               size: 40.0,
             ),
           ),
-          Obx(() => controller.passiveUser.value!.isOfficial
+          Obx(() => controller.rxPassiveUser.value!.isOfficial
               ? Icon(
                   Icons.verified,
                   size: 40.0,
@@ -94,9 +94,9 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  if (controller.passiveUser.value != null) ...children,
+                  if (controller.rxPassiveUser.value != null) ...children,
                   Obx(() {
-                    final passiveUser = controller.passiveUser.value;
+                    final passiveUser = controller.rxPassiveUser.value;
                     if (passiveUser == null) {
                       return const SizedBox.shrink();
                     }

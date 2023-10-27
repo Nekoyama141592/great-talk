@@ -31,21 +31,21 @@ class UserProfileController extends ProfileController {
   Future<void> _getPassiveUser() async {
     final result = await repository.getPublicUser(passiveUid());
     result.when(success: (res) {
-      passiveUser(PublicUser.fromJson(res.data()!));
+      rxPassiveUser(PublicUser.fromJson(res.data()!));
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
-    final detectedImage = passiveUser.value!.typedImage();
+    final detectedImage = rxPassiveUser.value!.typedImage();
     final s3Image = await FileUtility.getS3Image(
         detectedImage.bucketName, detectedImage.value);
-    uint8list(s3Image);
+    rxUint8list(s3Image);
   }
 
   void onFollowPressed() async {
-    if (passiveUser.value == null) {
+    if (rxPassiveUser.value == null) {
       return;
     }
-    if (passiveUser.value!.uid == currentUid()) {
+    if (rxPassiveUser.value!.uid == currentUid()) {
       UIHelper.showFlutterToast("自分をフォローすることはできません。");
       return;
     }
@@ -63,28 +63,28 @@ class UserProfileController extends ProfileController {
   Future<void> _follow() async {
     final String tokenId = randomString();
     final Timestamp now = Timestamp.now();
-    passiveUser(passiveUser.value!
-        .copyWith(followerCount: passiveUser.value!.followerCount + plusOne));
+    rxPassiveUser(rxPassiveUser.value!
+        .copyWith(followerCount: rxPassiveUser.value!.followerCount + plusOne));
     final followingToken = FollowingToken(
         createdAt: now,
         passiveUid: passiveUid(),
         tokenId: tokenId,
-        passiveUserRef: passiveUser.value!.ref,
+        passiveUserRef: rxPassiveUser.value!.ref,
         tokenType: TokenType.following.name);
     CurrentUserController.to.addFollowing(followingToken);
     await repository.createToken(
         currentUid(), tokenId, followingToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
     final follower = Follower(
-        activeUserRef: CurrentUserController.to.publicUser.value!.typedRef(),
+        activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
         createdAt: now,
-        passiveUserRef: passiveUser.value!.typedRef());
+        passiveUserRef: rxPassiveUser.value!.typedRef());
     await repository.createFollower(
         currentUid(), passiveUid(), follower.toJson());
   }
 
   void onUnFollowPressed() async {
-    if (passiveUser.value == null) {
+    if (rxPassiveUser.value == null) {
       return;
     }
     if (CurrentUserController.to.hasNoPublicUser()) {
@@ -95,8 +95,8 @@ class UserProfileController extends ProfileController {
   }
 
   Future<void> _unfollow() async {
-    passiveUser(passiveUser.value!
-        .copyWith(followerCount: passiveUser.value!.followerCount + minusOne));
+    rxPassiveUser(rxPassiveUser.value!
+        .copyWith(followerCount: rxPassiveUser.value!.followerCount + minusOne));
     final deleteToken = CurrentUserController.to.followingTokens
         .firstWhere((element) => element.passiveUid == passiveUid());
     CurrentUserController.to.removeFollowing(deleteToken);
