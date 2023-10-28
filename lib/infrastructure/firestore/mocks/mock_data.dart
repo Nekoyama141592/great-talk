@@ -14,7 +14,7 @@ class MockData {
   static const String currentUid = "current-user";
   static final currentUser = NewContent.newUser(currentUid,
       userName: "M.LO", bio: "すごいAIの開発者です", imageValue: "megami2.jpeg");
-  static final privatetUser = NewContent.newPrivateUser(currentUid);
+  static final privateUser = NewContent.newPrivateUser(currentUid);
 }
 
 final List<PublicUser> mockUsers = [
