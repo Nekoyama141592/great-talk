@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:great_talk/common/strings.dart';
 
 class MockQDoc implements QueryDocumentSnapshot<Map<String, dynamic>> {
   MockQDoc(this._data, this._id);
