@@ -95,8 +95,8 @@ class UserProfileController extends ProfileController {
   }
 
   Future<void> _unfollow() async {
-    rxPassiveUser(rxPassiveUser.value!
-        .copyWith(followerCount: rxPassiveUser.value!.followerCount + minusOne));
+    rxPassiveUser(rxPassiveUser.value!.copyWith(
+        followerCount: rxPassiveUser.value!.followerCount + minusOne));
     final deleteToken = CurrentUserController.to.followingTokens
         .firstWhere((element) => element.passiveUid == passiveUid());
     CurrentUserController.to.removeFollowing(deleteToken);
