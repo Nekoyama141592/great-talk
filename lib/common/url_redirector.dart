@@ -14,7 +14,7 @@ class UrlRedirector {
       await launchUrl(eulaUri, mode: LaunchMode.externalApplication);
 
   static const String _tos =
-      "https://www.notion.so/bccd27c2976242958409537ac1cbc31b";
+      "https://impartial-literature-dfb.notion.site/AI-bccd27c2976242958409537ac1cbc31b?pvs=4";
   static final tosUri = Uri.parse(_tos);
   static Future<void> toTosPage() async =>
       await launchUrl(tosUri, mode: LaunchMode.externalApplication);
