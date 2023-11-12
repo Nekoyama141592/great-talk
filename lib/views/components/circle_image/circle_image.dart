@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:great_talk/views/screen/refresh_screen/components/s3_image.dart';
+import 'package:great_talk/views/components/circle_image/components/s3_image.dart';
 
 class CircleImage extends StatelessWidget {
   const CircleImage(

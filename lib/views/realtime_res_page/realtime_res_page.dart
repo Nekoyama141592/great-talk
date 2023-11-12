@@ -8,7 +8,7 @@ import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
-import 'package:great_talk/views/components/circle_image.dart';
+import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 import 'package:great_talk/views/realtime_res_page/components/delete_post_button.dart';
 import 'package:great_talk/views/realtime_res_page/components/menu_button.dart';

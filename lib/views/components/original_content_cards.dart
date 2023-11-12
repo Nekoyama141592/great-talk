@@ -5,7 +5,7 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
-import 'package:great_talk/views/components/circle_image.dart';
+import 'package:great_talk/views/components/circle_image/circle_image.dart';
 
 class OriginalContentCards extends StatelessWidget {
   const OriginalContentCards({Key? key}) : super(key: key);
