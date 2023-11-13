@@ -32,7 +32,7 @@ class FileUtility {
     // キャッシュされていない場合、S3から取得.
     if (uint8List == null) {
       final repository = AWSS3Repository();
-      final result = await repository.getImage(bucketName, fileName);
+      final result = await repository.getObject(bucketName, fileName);
       result.when(success: (res) {
         uint8List = res;
         _cacheUint8List(fileName, res); // 画像を非同期でキャッシュする.

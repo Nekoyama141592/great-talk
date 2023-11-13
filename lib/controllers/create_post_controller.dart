@@ -87,11 +87,11 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
     }
     if (isLoading.value) return; // 二重リクエストを防止.
     startLoading();
-    final newFileName = s3FileName();
+    final newFileName = AWSS3Utility.s3FileName();
     final bucketName = AWSS3Utility.postImagesBucketName();
     final repository = AWSS3Repository();
     final result =
-        await repository.uploadImage(uint8list.value!, bucketName, newFileName);
+        await repository.putObject(uint8list.value!, bucketName, newFileName);
     result.when(
         success: (res) => _createPost(res),
         failure: () {

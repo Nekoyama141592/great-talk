@@ -206,11 +206,11 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
     startProcess();
     if (isPicked) {
       // 写真が新しくなった場合の処理
-      final newFileName = s3FileName();
+      final newFileName = AWSS3Utility.s3FileName();
       final repository = AWSS3Repository();
       final bucketName = AWSS3Utility.userImagesBucketName();
       final result =
-          await repository.uploadImage(uint8list!, bucketName, newFileName);
+          await repository.putObject(uint8list!, bucketName, newFileName);
       result.when(
           success: (res) async => await _createUserUpdateLog(res),
           failure: () {
