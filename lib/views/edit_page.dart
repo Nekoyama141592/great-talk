@@ -210,10 +210,9 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
       // 写真が新しくなった場合の処理
       final oldFileName = publicUser.typedImage().value;
       final newFileName = AWSS3Utility.s3FileName();
-      final repository = AWSS3Repository();
       final bucketName = AWSS3Utility.userImagesBucketName();
       final result =
-          await repository.putObject(uint8list!, bucketName, newFileName);
+          await AWSS3Repository.instance.putObject(uint8list!, bucketName, newFileName);
       result.when(success: (res) async {
         // 非同期で処理.
         await Future.wait([
@@ -227,7 +226,6 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
       // 写真がそのまま場合の処理
       await _createUserUpdateLog(publicUser.typedImage().value);
     }
-
     endProcess();
   }
 
