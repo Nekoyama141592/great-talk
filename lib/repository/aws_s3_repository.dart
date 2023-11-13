@@ -4,6 +4,8 @@ import 'package:great_talk/repository/result.dart';
 
 class AWSS3Repository {
   final client = AWSS3Client();
+
+  static final instance = AWSS3Repository();
   FutureResult<Uint8List> getObject(String bucketName, String fileName) async {
     try {
       final stream = await client.getObject(bucketName, fileName);
@@ -35,7 +37,6 @@ class AWSS3Repository {
       await client.removeObject(bucketName, fileName);
       return const Result.success(true);
     } catch (e) {
-      debugPrint(e.toString());
       return const Result.failure();
     }
   }

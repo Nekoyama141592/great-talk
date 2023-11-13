@@ -17,8 +17,10 @@ import 'package:great_talk/model/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/model/private_user/private_user.dart';
 import 'package:great_talk/model/tokens/report_post_token/report_post_token.dart';
+import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 
 class CurrentUserController extends GetxController {
@@ -358,7 +360,8 @@ class CurrentUserController extends GetxController {
     final repository = FirestoreRepository();
     final result = await repository.deleteUser(currentUid());
     result.when(success: (_) async {
-      await _deleteAuthUser();
+      _deleteAuthUser();
+      _removeImage();
     }, failure: () {
       UIHelper.showErrorFlutterToast("データベースからユーザーを削除できませんでした");
     });
@@ -368,10 +371,18 @@ class CurrentUserController extends GetxController {
     final repository = FirebaseAuthRepository();
     final result = await repository.deleteUser(rxAuthUser.value!);
     result.when(
-        success: (_) async {
+        success: (_) {
           Get.toNamed('/userDeleted');
         },
         failure: () {});
+  }
+
+  Future<void> _removeImage() async {
+    final publicUser = CurrentUserController.to.rxPublicUser.value;
+    if (publicUser == null) return;
+    final bucketName = AWSS3Utility.userImagesBucketName();
+    final fileName = publicUser.typedImage().value;
+    await AWSS3Repository.instance.removeObject(bucketName, fileName);
   }
 
   void updateUser(

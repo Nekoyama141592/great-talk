@@ -194,6 +194,8 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
       // フォームフィールドの情報を変数に保存
       _formKey.currentState!.save();
     }
+    final publicUser = CurrentUserController.to.rxPublicUser.value;
+    if (publicUser == null) return;
     if (uint8list == null) {
       await UIHelper.showErrorFlutterToast("アイコンをタップしてプロフィール画像をアップロードしてください");
       return;
@@ -206,20 +208,23 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
     startProcess();
     if (isPicked) {
       // 写真が新しくなった場合の処理
+      final oldFileName = publicUser.typedImage().value;
       final newFileName = AWSS3Utility.s3FileName();
       final repository = AWSS3Repository();
       final bucketName = AWSS3Utility.userImagesBucketName();
       final result =
           await repository.putObject(uint8list!, bucketName, newFileName);
-      result.when(
-          success: (res) async => await _createUserUpdateLog(res),
-          failure: () {
-            UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
-          });
+      result.when(success: (res) async {
+        // 非同期で処理.
+        await Future.wait([
+          _createUserUpdateLog(res), // ユーザー情報を更新.
+          _removeOldImage(bucketName, oldFileName) // 古いオブジェクトをS3から削除.
+        ]);
+      }, failure: () {
+        UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
+      });
     } else {
       // 写真がそのまま場合の処理
-      final publicUser = CurrentUserController.to.rxPublicUser.value;
-      if (publicUser == null) return;
       await _createUserUpdateLog(publicUser.typedImage().value);
     }
 
@@ -235,6 +240,8 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
     });
   }
 
+  Future<void> _removeOldImage(String bucketName, String oldFileName) =>
+      AWSS3Repository.instance.removeObject(bucketName, oldFileName);
   Future<void> _createUserUpdateLog(String fileName) async {
     final repository = FirestoreRepository();
     final newUpdateLog = UserUpdateLog(
