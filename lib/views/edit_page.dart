@@ -194,8 +194,6 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
       // フォームフィールドの情報を変数に保存
       _formKey.currentState!.save();
     }
-    final publicUser = CurrentUserController.to.rxPublicUser.value;
-    if (publicUser == null) return;
     if (uint8list == null) {
       await UIHelper.showErrorFlutterToast("アイコンをタップしてプロフィール画像をアップロードしてください");
       return;
@@ -206,6 +204,8 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
     }
     if (isProcessing) return; // 二重リクエストを防止.
     startProcess();
+    final publicUser = CurrentUserController.to.rxPublicUser.value;
+    if (publicUser == null) return;
     if (isPicked) {
       // 写真が新しくなった場合の処理
       final oldFileName = publicUser.typedImage().value;
