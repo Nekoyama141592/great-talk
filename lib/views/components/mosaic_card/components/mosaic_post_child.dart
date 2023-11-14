@@ -30,7 +30,7 @@ class MosaicPostChild extends StatelessWidget with CurrentUserMixin {
           ),
         ),
         const BasicHeightBox(),
-        Obx(() => post.typedPoster().uid == currentUid() &&
+        Obx(() => (post.typedPoster().uid == currentUid() || CurrentUserController.to.isAdmin()) &&
                 !CurrentUserController.to.deletePostIds.contains(post.postId)
             ? InkWell(
                 onTap: () => PostsController.to.deletePost(post),
