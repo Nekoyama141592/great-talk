@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/texts.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
@@ -33,11 +34,12 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
       child: Scaffold(
           appBar: AppBar(
               actions: [
-                // 自分の投稿なら削除ボタン、それ以外ならレポートボタンを表示する.
-                Obx(() =>
-                    controller.rxPost.value?.typedPoster().uid == currentUid()
-                        ? const DeletePostButton()
-                        : const PostReportButton()),
+                // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示する.
+                Obx(() => controller.rxPost.value?.typedPoster().uid ==
+                            currentUid() ||
+                        CurrentUserController.to.isAdmin()
+                    ? const DeletePostButton()
+                    : const PostReportButton()),
                 Obx(() => controller.rxPost.value == null
                     ? const SizedBox.shrink()
                     : PostLikeButton(

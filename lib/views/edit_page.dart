@@ -211,8 +211,8 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
       final oldFileName = publicUser.typedImage().value;
       final newFileName = AWSS3Utility.s3FileName();
       final bucketName = AWSS3Utility.userImagesBucketName();
-      final result =
-          await AWSS3Repository.instance.putObject(uint8list!, bucketName, newFileName);
+      final result = await AWSS3Repository.instance
+          .putObject(uint8list!, bucketName, newFileName);
       result.when(success: (res) async {
         // 非同期で処理.
         await Future.wait([

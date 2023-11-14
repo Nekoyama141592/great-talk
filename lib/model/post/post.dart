@@ -47,6 +47,7 @@ abstract class Post implements _$Post {
   bool isInappropriate() =>
       typedImage().moderationLabels.isNotEmpty ||
       typedDescription().negativeScore > negativeLimit;
+  String get posterUid => typedPoster().uid;
 
   String inappropriateReason(String currentUid) {
     String reason = "";

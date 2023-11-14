@@ -21,7 +21,7 @@ service cloud.firestore {
       match /posts/{postId} {
         allow read: if isAuthenticated();
         allow create: if isTheSameUserAndVerified(uid) && isValidPost(request.resource.data);
-        allow delete: if isTheSameUserAndVerified(uid);
+        allow delete: if isTheSameUserAndVerified(uid) || isAdmin();
         match /senders/{senderUid}/messages/{id} {
           allow create: if isTheSameUser(senderUid) && isValidMessage(request.resource.data);
         }

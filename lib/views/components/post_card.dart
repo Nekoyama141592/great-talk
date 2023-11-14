@@ -22,83 +22,88 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
   Widget build(BuildContext context) {
     final controller = PostsController.to;
     // 不適切なら弾く
-    return Padding(
-        padding: EdgeInsets.all(defaultPadding(context)),
-        child: Obx(() {
-          if (CurrentUserController.to.isDeletedPost(post.postId)) {
-            return MosaicCard(
+    return InkWell(
+      onLongPress: () => controller.onUserCardLongPressed(post.typedPoster()),
+      child: Padding(
+          padding: EdgeInsets.all(defaultPadding(context)),
+          child: Obx(() {
+            if (CurrentUserController.to.isDeletedPost(post.postId)) {
+              return MosaicCard(
+                  child: MosaicPostChild(
+                      msg: "この投稿はあなたによって削除されました。",
+                      post: post,
+                      title: "削除された投稿"));
+            }
+            if (CurrentUserController.to.isMutingPost(post.postId) ||
+                CurrentUserController.to.isMutingUser(post.typedPoster().uid)) {
+              return MosaicCard(
+                  child: MosaicPostChild(
+                      msg: "あなたはこの投稿、もしくはその投稿者をミュートしています。",
+                      post: post,
+                      title: "制限されている投稿"));
+            }
+            if (post.isInappropriate()) {
+              return MosaicCard(
                 child: MosaicPostChild(
-                    msg: "この投稿はあなたによって削除されました。", post: post, title: "削除された投稿"));
-          }
-          if (CurrentUserController.to.isMutingPost(post.postId) ||
-              CurrentUserController.to.isMutingUser(post.typedPoster().uid)) {
-            return MosaicCard(
-                child: MosaicPostChild(
-                    msg: "あなたはこの投稿、もしくはその投稿者をミュートしています。",
-                    post: post,
-                    title: "制限されている投稿"));
-          }
-          if (post.isInappropriate()) {
-            return MosaicCard(
-              child: MosaicPostChild(
-                msg: post.inappropriateReason(currentUid()),
-                post: post,
-                title: "不適切なコンテンツ",
+                  msg: post.inappropriateReason(currentUid()),
+                  post: post,
+                  title: "不適切なコンテンツ",
+                ),
+              );
+            }
+            return GestureDetector(
+              onTap: () => controller.onPostCardPressed(post),
+              child: Container(
+                decoration: BoxDecoration(
+                  border:
+                      Border.all(color: Theme.of(context).colorScheme.primary),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  children: [
+                    CircleImage(
+                      bucketName: post.typedImage().bucketName,
+                      imageValue: post.typedImage().value,
+                      onTap: () => controller.onPostCardPressed(post),
+                      uint8list: uint8list,
+                    ),
+                    EllipsisText(
+                      post.typedTitle().value,
+                    ),
+                    TextButton(
+                      onPressed: () =>
+                          Get.toNamed("/users/${post.typedPoster().uid}"),
+                      child: EllipsisText(
+                        "by ${post.typedPoster().typedUserName().value}",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary),
+                      ),
+                    ),
+                    Center(
+                      child: Row(
+                        children: [
+                          PostLikeButton(
+                            isHorizontal: false,
+                            post: post,
+                          ),
+                          const Spacer(),
+                          Column(
+                            children: [
+                              InkWell(
+                                onTap: () => controller.onPostCardPressed(post),
+                                child: const Icon(Icons.message),
+                              ),
+                              const Text("")
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
-          }
-          return GestureDetector(
-            onTap: () => controller.onPostCardPressed(post),
-            child: Container(
-              decoration: BoxDecoration(
-                border:
-                    Border.all(color: Theme.of(context).colorScheme.primary),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                children: [
-                  CircleImage(
-                    bucketName: post.typedImage().bucketName,
-                    imageValue: post.typedImage().value,
-                    onTap: () => controller.onPostCardPressed(post),
-                    uint8list: uint8list,
-                  ),
-                  EllipsisText(
-                    post.typedTitle().value,
-                  ),
-                  TextButton(
-                    onPressed: () =>
-                        Get.toNamed("/users/${post.typedPoster().uid}"),
-                    child: EllipsisText(
-                      "by ${post.typedPoster().typedUserName().value}",
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary),
-                    ),
-                  ),
-                  Center(
-                    child: Row(
-                      children: [
-                        PostLikeButton(
-                          isHorizontal: false,
-                          post: post,
-                        ),
-                        const Spacer(),
-                        Column(
-                          children: [
-                            InkWell(
-                              onTap: () => controller.onPostCardPressed(post),
-                              child: const Icon(Icons.message),
-                            ),
-                            const Text("")
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }));
+          })),
+    );
   }
 }

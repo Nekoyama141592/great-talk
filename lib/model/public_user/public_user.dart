@@ -44,6 +44,9 @@ abstract class PublicUser implements _$PublicUser {
   Timestamp typedUpdatedAtAt() => updatedAt as Timestamp;
   DetectedText typedUserName() => DetectedText.fromJson(userName);
 
+  String get bioValue => typedBio().value;
+  String get nameValue => typedUserName().value;
+
   bool isInappropriate() =>
       typedImage().moderationLabels.isNotEmpty ||
       typedBio().negativeScore > negativeLimit ||
