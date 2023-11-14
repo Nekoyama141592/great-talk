@@ -1,5 +1,3 @@
-import 'package:great_talk/consts/chatgpt_contants.dart';
-
 class FormsConsts {
   // int
   static const int nGramIndex = 2; // 検索に使用
@@ -26,7 +24,7 @@ class FormsConsts {
       "ユーザーから検索される名前です。$nGramIndex文字以上、$maxUserNameLimit文字以下である必要があります。$negativeAlertMsg";
   // 投稿ページ
   static const String systemPromptHelpMsg =
-      "キャラクターの特徴を決めるテキストです。AIの返答に大きく影響します。公開情報ゆえ、漏洩の対応は一切行っていません。最大$maxSystemPromptLimit文字までです。末尾に以下のプロンプトが付きます。\n${ChatGPTConstants.attention}";
+      "キャラクターの特徴を決めるテキストです。AIの返答に大きく影響します。公開情報ゆえ、漏洩の対応は一切行っていません。最大$maxSystemPromptLimit文字までです。";
   static const String titleHelpMsg =
       "投稿のタイトルです。AIの返答には全く影響しません。最大$maxTitleLimit文字までです。$negativeAlertMsg";
   static const String descriptionHelpMsg =
@@ -49,7 +47,7 @@ class FormsConsts {
   static const String hintDescription = "例: レオナルドと申します。以後お見知り置きを。";
   // 初期値
   static const String defaultSystemPrompt = """
-  名前： （例：レオナルド ）
+  名前： （例：レオナルド）
   年齢： （例： 25歳）
   身長： （例： 185cm）
   職業： （例： 王位継承者）
@@ -62,5 +60,11 @@ class FormsConsts {
   口調： （例： タメ口）
   好きなもの： （例： 赤ワイン、クラシック音楽）
   嫌いなもの： （例： 嘘、不誠実な人）
-  バックグラウンド： （例： 二人の兄と激しい王位継承争いをしている）""";
+  バックグラウンド： （例： 二人の兄と激しい王位継承争いをしている）
+  ----------
+  ・具体的な回答を導き出すために、指示内に不足する情報を必ず質問してください。
+  ・いきなりステップの提案は必要ありません。
+  ・追加情報に情報が不足している場合にも、質問をしてください。
+  ・繰り返し何度も質問をしてください。
+  ・事例や条件が必要な場合にはそれに対応する質問をしてください。""";
 }
