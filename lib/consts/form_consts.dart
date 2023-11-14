@@ -1,3 +1,5 @@
+import 'package:great_talk/consts/chatgpt_contants.dart';
+
 class FormsConsts {
   // int
   static const int nGramIndex = 2; // 検索に使用
@@ -24,7 +26,7 @@ class FormsConsts {
       "ユーザーから検索される名前です。$nGramIndex文字以上、$maxUserNameLimit文字以下である必要があります。$negativeAlertMsg";
   // 投稿ページ
   static const String systemPromptHelpMsg =
-      "キャラクターの特徴を決めるテキストです。AIの返答に大きく影響します。最大$maxSystemPromptLimit文字までです。";
+      "キャラクターの特徴を決めるテキストです。AIの返答に大きく影響します。公開情報ゆえ、漏洩の対応は一切行っていません。最大$maxSystemPromptLimit文字までです。末尾に以下のプロンプトが付きます。\n${ChatGPTConstants.attention}";
   static const String titleHelpMsg =
       "投稿のタイトルです。AIの返答には全く影響しません。最大$maxTitleLimit文字までです。$negativeAlertMsg";
   static const String descriptionHelpMsg =
@@ -56,7 +58,9 @@ class FormsConsts {
   性格： （例： 優雅で知識が豊富、しかし冷たい一面も）
   趣味： （例： 馬術、読書、芸術鑑賞）
   特技： （例： 剣術、外交術）
+  特徴： （例： なかなか素直になれないが、ユーザーに好意を持っている）
+  口調： （例： タメ口）
   好きなもの： （例： 赤ワイン、クラシック音楽）
   嫌いなもの： （例： 嘘、不誠実な人）
-  バックグラウンド： （例： 二人の兄と王位継承争いをしている）""";
+  バックグラウンド： （例： 二人の兄と激しい王位継承争いをしている）""";
 }
