@@ -377,9 +377,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Messages _systemMsg() {
-    String content =
-        rxChatContent.value!.managedCustomCompleteText().systemPrompt;
-    content += attention;
+    String content = rxChatContent.value!.systemPrompt;
     return Messages(role: Role.system, content: content);
   }
 

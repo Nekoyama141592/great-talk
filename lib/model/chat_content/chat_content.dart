@@ -79,6 +79,8 @@ abstract class ChatContent implements _$ChatContent {
         frequencyPenalty: completeText?.frequencyPenalty ?? 0.0);
   }
 
+  String get systemPrompt => managedCustomCompleteText().systemPrompt;
+
   DocRef typedRef() {
     if (returnIsOriginalContents(posterUid)) {
       return FirestoreQueries.originalContentDocRef(contentId);
