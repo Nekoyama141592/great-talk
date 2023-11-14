@@ -40,7 +40,23 @@ class FormsConsts {
   static const String roundMsg = "また、値は少数第二位で四捨五入されます。";
   static const String negativeAlertMsg =
       "ネガティブな内容を含むと、他のユーザーに表示されなくなる可能性があります。";
-
   static String textLimitMsg(int limit, String value) =>
       "最大$limit文字までです。（現在${value.length}文字)";
+  // ヒントテキスト
+  static const String hintTitle = "例: レオナルド";
+  static const String hintDescription = "例: レオナルドと申します。以後お見知り置きを。";
+  // 初期値
+  static const String defaultSystemPrompt = """
+  名前： （例：レオナルド ）
+  年齢： （例： 25歳）
+  身長： （例： 185cm）
+  職業： （例： 王位継承者）
+  髪色： （例： ブロンド）
+  眼色： （例： 青）
+  性格： （例： 優雅で知識が豊富、しかし冷たい一面も）
+  趣味： （例： 馬術、読書、芸術鑑賞）
+  特技： （例： 剣術、外交術）
+  好きなもの： （例： 赤ワイン、クラシック音楽）
+  嫌いなもの： （例： 嘘、不誠実な人）
+  バックグラウンド： （例： 二人の兄と王位継承争いをしている）""";
 }

@@ -20,7 +20,7 @@ import 'package:great_talk/validator/post_validator.dart';
 class CreatePostController extends LoadingController with CurrentUserMixin {
   static CreatePostController get to => Get.find<CreatePostController>();
   final title = "".obs;
-  final systemPrompt = "".obs;
+  final systemPrompt = FormsConsts.defaultSystemPrompt.obs;
   final description = "".obs;
   final temperature = FormsConsts.defaultTemperature.toString().obs;
   final topP = FormsConsts.defaultTopP.toString().obs;
@@ -134,7 +134,7 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
 
   void _resetState() {
     title.value = "";
-    systemPrompt.value = "";
+    systemPrompt.value = FormsConsts.defaultSystemPrompt;
     description.value = "";
     temperature.value = FormsConsts.defaultTemperature.toString();
     topP.value = FormsConsts.defaultTopP.toString();

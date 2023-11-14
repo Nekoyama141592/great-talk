@@ -98,7 +98,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
       ),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.title.value,
-            decoration: const InputDecoration(hintText: "例: 猫GPT"),
+            decoration: const InputDecoration(hintText: FormsConsts.hintTitle),
             onSaved: CreatePostController.to.setTitle,
             validator: (value) {
               if (value!.length < FormsConsts.nGramIndex) {
@@ -123,7 +123,8 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
             initialValue: CreatePostController.to.description.value,
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            decoration: const InputDecoration(hintText: "例: かわいい猫のAIだにゃん！"),
+            decoration:
+                const InputDecoration(hintText: FormsConsts.hintDescription),
             onSaved: CreatePostController.to.setDescription,
             validator: (value) {
               if (value!.isEmpty) {
@@ -148,8 +149,6 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
             initialValue: CreatePostController.to.systemPrompt.value,
             keyboardType: TextInputType.multiline,
             maxLines: null,
-            decoration:
-                const InputDecoration(hintText: "例: 語尾に必ず「にゃん」をつけて返答して！"),
             onSaved: CreatePostController.to.setSystemPrompt,
             validator: (value) {
               if (value!.isEmpty) {
