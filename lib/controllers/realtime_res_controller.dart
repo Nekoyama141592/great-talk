@@ -11,6 +11,7 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
@@ -133,9 +134,9 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       TextEditingController inputController,
       ScrollController scrollController) {
     final text = inputController.text;
-    if (text.length > maxMessageLimit) {
+    if (text.length > FormsConsts.maxMessageLimit) {
       UIHelper.showErrorFlutterToast(
-          "メッセージは${textLimitMsg(maxMessageLimit, text)}");
+          "メッセージは${FormsConsts.textLimitMsg(FormsConsts.maxMessageLimit, text)}");
       return;
     }
     FocusScope.of(context).unfocus();

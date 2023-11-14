@@ -1,4 +1,4 @@
-import 'package:great_talk/common/ints.dart';
+import 'package:great_talk/consts/form_consts.dart';
 
 const List<String> notUseOnField = ['.', '[', ']', '*', '`'];
 List<String> returnSearchWords(String searchTerm) {
@@ -11,6 +11,7 @@ List<String> returnSearchWords(String searchTerm) {
   }
   // bi-gram
   final int length = result.length;
+  const nGramIndex = FormsConsts.nGramIndex;
   List<String> searchWords = [];
   if (length < nGramIndex) {
     searchWords.add(result);

@@ -1,4 +1,4 @@
-import 'package:great_talk/common/ints.dart';
+import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 
 class PostValidator {
@@ -23,20 +23,21 @@ class PostValidator {
   static bool _isInValidDescription(String? description) {
     final result = description == null ||
         description.isEmpty ||
-        description.length > maxDescriptionLimit;
+        description.length > FormsConsts.maxDescriptionLimit;
     return result;
   }
 
   static bool _isInValidSystemPrompt(String? prompt) {
     final result = prompt == null ||
         prompt.isEmpty ||
-        prompt.length > maxSystemPromptLimit;
+        prompt.length > FormsConsts.maxSystemPromptLimit;
     return result;
   }
 
   static bool _isInValidTitle(String? title) {
-    final result =
-        title == null || title.isEmpty || title.length > maxTitleLimit;
+    final result = title == null ||
+        title.isEmpty ||
+        title.length > FormsConsts.maxTitleLimit;
     return result;
   }
 

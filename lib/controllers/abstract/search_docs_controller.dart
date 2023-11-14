@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/enums.dart';
-import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/lists.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/model/search_log/search_log.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
@@ -20,7 +20,7 @@ abstract class SearchDocsController extends DocsController {
   void setQuery();
   @override
   Future<void> fetchDocs() async {
-    if (searchTerm.length < nGramIndex) {
+    if (searchTerm.length < FormsConsts.nGramIndex) {
       return;
     }
     _setSearchQuery();

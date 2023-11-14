@@ -3,10 +3,9 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/maps.dart';
-import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
@@ -103,7 +102,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
     return [
       const FormLabel(
         title: "ニックネーム",
-        helpMsg: userNameHelpMsg,
+        helpMsg: FormsConsts.userNameHelpMsg,
       ),
       OriginalForm(
         initialValue:
@@ -114,10 +113,11 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
           });
         },
         validator: (value) {
-          if (value!.length < nGramIndex) {
-            return "$nGramIndex文字以上の入力を行なってください";
-          } else if (value.length > maxUserNameLimit) {
-            return textLimitMsg(maxUserNameLimit, value);
+          if (value!.length < FormsConsts.nGramIndex) {
+            return "${FormsConsts.nGramIndex}文字以上の入力を行なってください";
+          } else if (value.length > FormsConsts.maxUserNameLimit) {
+            return FormsConsts.textLimitMsg(
+                FormsConsts.maxUserNameLimit, value);
           } else {
             return null;
           }
@@ -131,7 +131,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
     return [
       const FormLabel(
         title: "紹介文",
-        helpMsg: bioHelpMsg,
+        helpMsg: FormsConsts.bioHelpMsg,
       ),
       OriginalForm(
         initialValue:
@@ -146,8 +146,8 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
         validator: (value) {
           if (value!.isEmpty) {
             return "入力を行なってください";
-          } else if (value.length > maxBioLimit) {
-            return textLimitMsg(maxBioLimit, value);
+          } else if (value.length > FormsConsts.maxBioLimit) {
+            return FormsConsts.textLimitMsg(FormsConsts.maxBioLimit, value);
           } else {
             return null;
           }

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/maps.dart';
+import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
@@ -29,11 +29,13 @@ class NewContent {
         frequencyPenalty.trim().toRoundToSecondDecimalPlace();
     return CustomCompleteText(
       systemPrompt: systemPrompt,
-      temperature: pTemperature != defaultTemperature ? pTemperature : null,
-      topP: pTopP != defaultTopP ? pTopP : null,
-      presencePenalty:
-          pPresencePenalty != defaultPresencePenalty ? pPresencePenalty : null,
-      frequencyPenalty: pFrequencyPenalty != defaultFrequencyPenalty
+      temperature:
+          pTemperature != FormsConsts.defaultTemperature ? pTemperature : null,
+      topP: pTopP != FormsConsts.defaultTopP ? pTopP : null,
+      presencePenalty: pPresencePenalty != FormsConsts.defaultPresencePenalty
+          ? pPresencePenalty
+          : null,
+      frequencyPenalty: pFrequencyPenalty != FormsConsts.defaultFrequencyPenalty
           ? pFrequencyPenalty
           : null,
     );

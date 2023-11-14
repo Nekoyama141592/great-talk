@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/ints.dart';
-import 'package:great_talk/common/strings.dart';
+import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/create_post_controller.dart';
 import 'package:great_talk/state/abstract/processing_state.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
@@ -95,17 +94,18 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
     return [
       const FormLabel(
         title: "タイトル",
-        helpMsg: titleHelpMsg,
+        helpMsg: FormsConsts.titleHelpMsg,
       ),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.title.value,
             decoration: const InputDecoration(hintText: "例: 猫GPT"),
             onSaved: CreatePostController.to.setTitle,
             validator: (value) {
-              if (value!.length < nGramIndex) {
-                return "$nGramIndex文字以上の入力をしてください";
-              } else if (value.length > maxTitleLimit) {
-                return textLimitMsg(maxTitleLimit, value);
+              if (value!.length < FormsConsts.nGramIndex) {
+                return "${FormsConsts.nGramIndex}文字以上の入力をしてください";
+              } else if (value.length > FormsConsts.maxTitleLimit) {
+                return FormsConsts.textLimitMsg(
+                    FormsConsts.maxTitleLimit, value);
               } else {
                 return null;
               }
@@ -117,7 +117,8 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   // description入力をする関数
   List<Widget> _descriptionTextField() {
     return [
-      const FormLabel(title: "説明/使い方(AIの一言目)", helpMsg: descriptionHelpMsg),
+      const FormLabel(
+          title: "説明/使い方(AIの一言目)", helpMsg: FormsConsts.descriptionHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.description.value,
             keyboardType: TextInputType.multiline,
@@ -127,8 +128,9 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
             validator: (value) {
               if (value!.isEmpty) {
                 return "入力をしてください";
-              } else if (value.length > maxDescriptionLimit) {
-                return textLimitMsg(maxDescriptionLimit, value);
+              } else if (value.length > FormsConsts.maxDescriptionLimit) {
+                return FormsConsts.textLimitMsg(
+                    FormsConsts.maxDescriptionLimit, value);
               } else {
                 return null;
               }
@@ -140,7 +142,8 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   // systemPrompt入力をする関数
   List<Widget> _systemPromptTextField() {
     return [
-      const FormLabel(title: "システムプロンプト", helpMsg: systemPromptHelpMsg),
+      const FormLabel(
+          title: "システムプロンプト", helpMsg: FormsConsts.systemPromptHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.systemPrompt.value,
             keyboardType: TextInputType.multiline,
@@ -151,8 +154,9 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
             validator: (value) {
               if (value!.isEmpty) {
                 return "入力をしてください";
-              } else if (value.length > maxSystemPromptLimit) {
-                return textLimitMsg(maxSystemPromptLimit, value);
+              } else if (value.length > FormsConsts.maxSystemPromptLimit) {
+                return FormsConsts.textLimitMsg(
+                    FormsConsts.maxSystemPromptLimit, value);
               } else {
                 return null;
               }
@@ -164,7 +168,8 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   // temperature入力をする関数
   List<Widget> _temperatureNumberField() {
     return [
-      const FormLabel(title: "temperature", helpMsg: temperatureHelpMsg),
+      const FormLabel(
+          title: "temperature", helpMsg: FormsConsts.temperatureHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.temperature.value,
             keyboardType: TextInputType.text,
@@ -186,7 +191,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   // topP入力をする関数
   List<Widget> _topPNumberField() {
     return [
-      const FormLabel(title: "topP", helpMsg: topPHelpMsg),
+      const FormLabel(title: "topP", helpMsg: FormsConsts.topPHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.topP.value,
             keyboardType: TextInputType.text,
@@ -209,7 +214,8 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   List<Widget> _presencePenaltyNumberField() {
     return [
       const FormLabel(
-          title: "PresencePenalty", helpMsg: presencePenaltyHelpMsg),
+          title: "PresencePenalty",
+          helpMsg: FormsConsts.presencePenaltyHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.presencePenalty.value,
             keyboardType: TextInputType.text,
@@ -232,7 +238,8 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   List<Widget> _frequencyPenaltyNumberField() {
     return [
       const FormLabel(
-          title: "FrequencyPenalty", helpMsg: frequencyPenaltyHelpMsg),
+          title: "FrequencyPenalty",
+          helpMsg: FormsConsts.frequencyPenaltyHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.frequencyPenalty.value,
             keyboardType: TextInputType.text,

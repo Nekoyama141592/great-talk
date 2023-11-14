@@ -1,9 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:get/get.dart';
-import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
@@ -22,10 +22,10 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
   final title = "".obs;
   final systemPrompt = "".obs;
   final description = "".obs;
-  final temperature = defaultTemperature.toString().obs;
-  final topP = defaultTopP.toString().obs;
-  final presencePenalty = defaultPresencePenalty.toString().obs;
-  final frequencyPenalty = defaultFrequencyPenalty.toString().obs;
+  final temperature = FormsConsts.defaultTemperature.toString().obs;
+  final topP = FormsConsts.defaultTopP.toString().obs;
+  final presencePenalty = FormsConsts.defaultPresencePenalty.toString().obs;
+  final frequencyPenalty = FormsConsts.defaultFrequencyPenalty.toString().obs;
   final Rx<Uint8List?> uint8list = Rx(null);
   // セッターメソッド
   void setTitle(String? value) {
@@ -80,8 +80,8 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
       return;
     }
     if ((temperature.value.toRoundToSecondDecimalPlace() !=
-            defaultTemperature) &&
-        (topP.value.toRoundToSecondDecimalPlace() != defaultTopP)) {
+            FormsConsts.defaultTemperature) &&
+        (topP.value.toRoundToSecondDecimalPlace() != FormsConsts.defaultTopP)) {
       await UIHelper.showErrorFlutterToast("temperatureとtopPはどちらか一方しか変更できません");
       return;
     }
@@ -136,10 +136,10 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
     title.value = "";
     systemPrompt.value = "";
     description.value = "";
-    temperature.value = defaultTemperature.toString();
-    topP.value = defaultTopP.toString();
-    presencePenalty.value = defaultPresencePenalty.toString();
-    frequencyPenalty.value = defaultFrequencyPenalty.toString();
+    temperature.value = FormsConsts.defaultTemperature.toString();
+    topP.value = FormsConsts.defaultTopP.toString();
+    presencePenalty.value = FormsConsts.defaultPresencePenalty.toString();
+    frequencyPenalty.value = FormsConsts.defaultFrequencyPenalty.toString();
     uint8list.value = null;
   }
 
