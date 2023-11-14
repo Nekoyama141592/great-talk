@@ -1,5 +1,5 @@
 // app version
-const int appVersion = 160;
+const int appVersion = 161;
 
 const int timeInSecForIosWeb = 5; // FlutterToast
 const chatLimitPerDay = 5;
