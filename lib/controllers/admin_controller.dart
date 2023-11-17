@@ -12,10 +12,8 @@ class AdminController extends LoadingController {
 
   Future<void> init() async {
     startLoading();
-    await _countUsers();
-    await _countPosts();
-    await _countMessages();
-    await _countSearchLogs();
+    await Future.wait(
+        [_countUsers(), _countPosts(), _countMessages(), _countSearchLogs()]);
     endLoading();
   }
 
