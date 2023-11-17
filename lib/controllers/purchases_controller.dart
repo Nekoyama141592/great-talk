@@ -264,6 +264,6 @@ class PurchasesController extends GetxController {
       ? ChatGPTConstants.gpt4MaxRequestLength
       : ChatGPTConstants.gptTurboMaxRequestLength;
   ChatModel model() => isPremiumMode.value
-      ? ChatModelFromValue(model: "gpt-4-1106-preview")
-      : ChatModelFromValue(model: "gpt-3.5-turbo-1106");
+      ? ChatModelFromValue(model: ChatGPTConstants.premiumModel)
+      : ChatModelFromValue(model: ChatGPTConstants.basicModel);
 }
