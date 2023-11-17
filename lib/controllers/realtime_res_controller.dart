@@ -7,10 +7,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/date_converter.dart';
 import 'package:great_talk/common/enums.dart';
-import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/main_controller.dart';
@@ -151,7 +151,8 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     if (!_allowChat()) {
       // チャットが許されていない場合
       Get.toNamed("/subscribe"); // サブスクページへ飛ばす.
-      UIHelper.showFlutterToast("チャットは1日$chatLimitPerDay回まで！\nサブスクに加入してください。");
+      UIHelper.showFlutterToast(
+          "チャットは1日${ChatGPTConstants.chatLimitPerDay}回まで！\nサブスクに加入してください。");
       await _requestReview(); // レビューをリクエスト
       return;
     }
@@ -256,7 +257,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   bool _allowChat() {
-    return chatCount < chatLimitPerDay ||
+    return chatCount < ChatGPTConstants.chatLimitPerDay ||
         PurchasesController.to.purchases.isNotEmpty;
   }
 
