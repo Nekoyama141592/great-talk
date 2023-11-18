@@ -10,6 +10,7 @@ import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
+import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/post_like/post_like.dart';
 import 'package:great_talk/model/post_mute/post_mute.dart';
@@ -20,6 +21,7 @@ import 'package:great_talk/model/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/model/tokens/report_post_token/report_post_token.dart';
 import 'package:great_talk/model/user_mute/user_mute.dart';
+import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/report_contents_list_view.dart';
 
@@ -287,6 +289,7 @@ class PostsController extends GetxController with CurrentUserMixin {
       final result = await repository.deletePost(deletePost.ref);
       result.when(success: (_) {
         CurrentUserController.to.addDeletePostId(deletePost.postId);
+        _removePostImage(deletePost.typedImage());
         Get.back();
         UIHelper.showErrorFlutterToast("投稿を削除しました。");
       }, failure: () {
@@ -294,4 +297,8 @@ class PostsController extends GetxController with CurrentUserMixin {
       });
     });
   }
+
+  Future<void> _removePostImage(DetectedImage image) async =>
+      await AWSS3Repository.instance
+          .removeObject(image.bucketName, image.value);
 }
