@@ -71,7 +71,7 @@ class NewContent {
         exampleTexts: [],
         genre: '',
         hashTags: [],
-        image: newDetectedImage(AWSS3Utility.postImagesBucketName(), fileName)
+        image: newDetectedImage(AWSS3Utility.postImagesBucketName, fileName)
             .toJson(),
         impressionCount: 0,
         likeCount: 0,
@@ -115,9 +115,9 @@ class NewContent {
       uid: uid,
       updatedAt: now,
       image: imageValue != null
-          ? newDetectedImage(AWSS3Utility.userImagesBucketName(), imageValue)
+          ? newDetectedImage(AWSS3Utility.userImagesBucketName, imageValue)
               .toJson()
-          : newDetectedImage(AWSS3Utility.userImagesBucketName(), '').toJson(),
+          : newDetectedImage(AWSS3Utility.userImagesBucketName, '').toJson(),
       userName: userName != null
           ? newDetectedText(userName).toJson()
           : newDetectedText('名無し').toJson(),

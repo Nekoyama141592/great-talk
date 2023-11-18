@@ -380,7 +380,7 @@ class CurrentUserController extends GetxController {
   Future<void> _removeImage() async {
     final publicUser = CurrentUserController.to.rxPublicUser.value;
     if (publicUser == null) return;
-    final bucketName = AWSS3Utility.userImagesBucketName();
+    final bucketName = AWSS3Utility.userImagesBucketName;
     final fileName = publicUser.typedImage().value;
     await AWSS3Repository.instance.removeObject(bucketName, fileName);
   }
