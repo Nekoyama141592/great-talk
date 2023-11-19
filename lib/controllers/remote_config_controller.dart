@@ -2,10 +2,9 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/controllers/once_init_controller.dart';
 import 'package:great_talk/extensions/remote_config_key_extension.dart';
 
-class RemoteConfigController extends OnceInitController {
+class RemoteConfigController extends GetxController {
   static RemoteConfigController get to => Get.find<RemoteConfigController>();
   // iosとAndroidで分ける
   final maintenanceMode = false.obs;
@@ -13,10 +12,9 @@ class RemoteConfigController extends OnceInitController {
   final forcedUpdateVersion = appVersion.obs;
   final forcedUpdateMsg = defaultForcedUpdateMsg.obs;
 
-  bool needsUpdate() => appVersion < forcedUpdateVersion.value;
-
+  bool get needsUpdate => appVersion < forcedUpdateVersion.value;
   @override
-  Future<void> fetchData() async {
+  void onInit() async {
     // インスタンスの作成
     final remoteConfig = FirebaseRemoteConfig.instance;
 
@@ -51,8 +49,9 @@ class RemoteConfigController extends OnceInitController {
     forcedUpdateVersion(
         remoteConfig.getInt(forcedUpdateVersionKey)); // 強制アップデートが必要なバージョンを取得
     // 強制アップデートが必要なら表示するメッセージを表示
-    if (needsUpdate()) {
+    if (needsUpdate) {
       forcedUpdateMsg(remoteConfig.getString(forcedUpdateMsgKey));
     }
+    super.onInit();
   }
 }
