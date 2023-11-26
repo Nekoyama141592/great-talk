@@ -232,6 +232,11 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
   void _onImagePickButtonPressed() async {
     final result = await FileUtility.getCompressedImage();
     if (result == null) return;
+    final isNotSquare = await FileUtility.isNotSquareImage(result);
+    if (isNotSquare) {
+      UIHelper.showErrorFlutterToast(FileUtility.squareImageRequestMsg);
+      return;
+    }
     setState(() {
       uint8list = result;
       isPicked = true;

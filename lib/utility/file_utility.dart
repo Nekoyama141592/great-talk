@@ -3,12 +3,14 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:ui' as ui;
 
 class FileUtility {
   FileUtility() {
@@ -112,4 +114,17 @@ class FileUtility {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     return image;
   }
+
+  static Future<bool> isNotSquareImage(Uint8List imageBytes) async {
+    ui.Codec codec1 = await ui.instantiateImageCodec(imageBytes);
+    ui.FrameInfo frameInfo1 = await codec1.getNextFrame();
+    int width = frameInfo1.image.width;
+    int height = frameInfo1.image.height;
+    // 正方形でないならtrueを返す
+    return width != height;
+  }
+
+  static String get squareImageRequestMsg => Platform.isIOS
+      ? FormsConsts.iosSquareImageRequestMsg
+      : FormsConsts.androidSquareImageRequestMsg;
 }

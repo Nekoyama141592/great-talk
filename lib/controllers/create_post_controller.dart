@@ -145,6 +145,12 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
 
   void onImagePickButtonPressed() async {
     final result = await FileUtility.getCompressedImage();
+    if (result == null) return;
+    final isNotSquare = await FileUtility.isNotSquareImage(result);
+    if (isNotSquare) {
+      UIHelper.showErrorFlutterToast(FileUtility.squareImageRequestMsg);
+      return;
+    }
     uint8list(result);
   }
 

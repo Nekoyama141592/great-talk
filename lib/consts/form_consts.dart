@@ -42,6 +42,9 @@ class FormsConsts {
       "ネガティブな内容を含むと、他のユーザーに表示されなくなる可能性があります。";
   static String textLimitMsg(int limit, String value) =>
       "最大$limit文字までです。（現在${value.length}文字)";
+  static const iosSquareImageRequestMsg = "下のバーの右から2番目のボタンを押して画像を正方形にしてください";
+  static const androidSquareImageRequestMsg = "画像を正方形にしてください";
+
   // ヒントテキスト
   static const String hintTitle = "例: レオナルド";
   static const String hintDescription = "例: レオナルドと申します。以後お見知り置きを。";
