@@ -106,7 +106,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
       ),
       OriginalForm(
         initialValue:
-            CurrentUserController.to.rxPublicUser.value!.typedUserName().value,
+            CurrentUserController.to.rxPublicUser.value!.nameValue,
         onSaved: (value) {
           setState(() {
             userName = value;
