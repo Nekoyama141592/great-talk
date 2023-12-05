@@ -175,7 +175,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
                   size: 100.0,
                 ),
               ),
-              const Text("画像を選択")
+              const Text(FormsConsts.imageLabel)
             ],
           )
         : InkWell(
@@ -231,7 +231,8 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
   void _onImagePickButtonPressed() async {
     final result = await FileUtility.getCompressedImage();
     if (result == null) return;
-    final isNotSquare = await FileUtility.isNotSquareImage(result);
+    final info = await FileUtility.getImageInfo(result);
+    final isNotSquare = info.isNotSquare;
     if (isNotSquare) {
       UIHelper.showErrorFlutterToast(FileUtility.squareImageRequestMsg);
       return;

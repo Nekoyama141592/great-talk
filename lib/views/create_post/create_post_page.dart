@@ -278,7 +278,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
                   size: 100.0,
                 ),
               ),
-              const Text("画像を選択")
+              const Text(FormsConsts.imageLabel)
             ],
           )
         : InkWell(

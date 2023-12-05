@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/form_consts.dart';
+import 'package:great_talk/model/image_info/original_image_info.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_cropper/image_cropper.dart';
@@ -74,9 +75,9 @@ class FileUtility {
     }
     final result = await FlutterImageCompress.compressWithFile(
       jpgFile.path,
-      minWidth: 512,
-      minHeight: 512,
-      quality: 80,
+      minWidth: FormsConsts.minImageWidth,
+      minHeight: FormsConsts.minImageHeight,
+      quality: FormsConsts.imageQuality,
     );
     return result;
   }
@@ -115,13 +116,12 @@ class FileUtility {
     return image;
   }
 
-  static Future<bool> isNotSquareImage(Uint8List imageBytes) async {
+  static Future<OriginalImageInfo> getImageInfo(Uint8List imageBytes) async {
     ui.Codec codec1 = await ui.instantiateImageCodec(imageBytes);
     ui.FrameInfo frameInfo1 = await codec1.getNextFrame();
     int width = frameInfo1.image.width;
     int height = frameInfo1.image.height;
-    // 正方形でないならtrueを返す
-    return width != height;
+    return OriginalImageInfo(height: height, width: width);
   }
 
   static String get squareImageRequestMsg => Platform.isIOS

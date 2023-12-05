@@ -144,11 +144,18 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
   }
 
   void onImagePickButtonPressed() async {
+    // TODO: ImageControllerでLoadingControllerを継承して一般化
     final result = await FileUtility.getCompressedImage();
     if (result == null) return;
-    final isNotSquare = await FileUtility.isNotSquareImage(result);
+    final info = await FileUtility.getImageInfo(result);
+    final isNotSquare = info.isNotSquare;
     if (isNotSquare) {
       UIHelper.showErrorFlutterToast(FileUtility.squareImageRequestMsg);
+      return;
+    }
+    final isSmall = info.isSmall;
+    if (isSmall) {
+      UIHelper.showErrorFlutterToast(FormsConsts.bigImageRequestMsg);
       return;
     }
     uint8list(result);

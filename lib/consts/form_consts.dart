@@ -16,6 +16,14 @@ class FormsConsts {
   static const double defaultTopP = 1.0;
   static const double defaultPresencePenalty = 0.0;
   static const double defaultFrequencyPenalty = 0.0;
+  // 画像サイズ
+  static const minImageHeight = 512;
+  static const minImageWidth = 512;
+  static const imageQuality = 80;
+  static const iosSquareImageRequestMsg = "下のバーの右から2番目のボタンを押して画像を正方形にしてください";
+  static const androidSquareImageRequestMsg = "画像を正方形にしてください";
+  static const bigImageRequestMsg = "一辺が $minImageHeight px以上の正方形の画像を使用してください";
+  static const imageLabel = "画像を設定\n・一辺が $minImageHeight px以上\n・正方形に切り取る";
   // 文字列
   // プロフィール編集
   static const String bioHelpMsg =
@@ -42,8 +50,6 @@ class FormsConsts {
       "ネガティブな内容を含むと、他のユーザーに表示されなくなる可能性があります。";
   static String textLimitMsg(int limit, String value) =>
       "最大$limit文字までです。（現在${value.length}文字)";
-  static const iosSquareImageRequestMsg = "下のバーの右から2番目のボタンを押して画像を正方形にしてください";
-  static const androidSquareImageRequestMsg = "画像を正方形にしてください";
 
   // ヒントテキスト
   static const String hintTitle = "例: レオナルド";
