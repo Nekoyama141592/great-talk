@@ -1,5 +1,5 @@
 // app version
-const int appVersion = 165;
+const int appVersion = 166;
 
 const int timeInSecForIosWeb = 5; // FlutterToast
 // like
