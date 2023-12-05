@@ -23,7 +23,7 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
     final controller = PostsController.to;
     // 不適切なら弾く
     return InkWell(
-      onLongPress: () => controller.onUserCardLongPressed(post.typedPoster()),
+      onLongPress: () => controller.onPostCardLongPressed(post),
       child: Padding(
           padding: EdgeInsets.all(defaultPadding(context)),
           child: Obx(() {

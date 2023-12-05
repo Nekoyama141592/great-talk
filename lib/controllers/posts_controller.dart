@@ -15,7 +15,6 @@ import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/post_like/post_like.dart';
 import 'package:great_talk/model/post_mute/post_mute.dart';
 import 'package:great_talk/model/post_report/post_report.dart';
-import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/tokens/mute_user_token/mute_user_token.dart';
@@ -39,11 +38,14 @@ class PostsController extends GetxController with CurrentUserMixin {
   }
 
   // UIDをコピーする関数.
-  Future<void> onUserCardLongPressed(PublicUser publicUser) async {
+  Future<void> onPostCardLongPressed(Post post) async {
     if (!CurrentUserController.to.isAdmin()) return;
-    final data = ClipboardData(text: publicUser.uid);
+    final publicUser = post.typedPoster();
+    final text =
+        "UID\n${publicUser.uid}\nユーザーの画像\n${publicUser.typedImage().value}\n投稿の画像${post.typedImage().value}";
+    final data = ClipboardData(text: text);
     await Clipboard.setData(data);
-    UIHelper.showFlutterToast("${publicUser.nameValue}のUIDをコピーしました。");
+    UIHelper.showFlutterToast("三つの情報をコピーしました");
   }
 
   void onReportButtonPressed(BuildContext context) {
