@@ -30,7 +30,7 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
           ),
         ),
       Obx(() => EllipsisText(
-            controller.rxPassiveUser.value!.typedUserName().value,
+            controller.rxPassiveUser.value!.nameValue,
             style: StyleUtility.bold25(),
           )),
       Row(

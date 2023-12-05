@@ -58,7 +58,7 @@ class UserCard extends StatelessWidget with CurrentUserMixin {
                               const BasicWidthBox(),
                               Expanded(
                                 child: EllipsisText(
-                                  publicUser.typedUserName().value,
+                                  publicUser.nameValue,
                                 ),
                               ),
                               const BasicWidthBox(),

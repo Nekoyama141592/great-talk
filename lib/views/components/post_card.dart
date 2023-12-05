@@ -74,7 +74,7 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
                       onPressed: () =>
                           Get.toNamed("/users/${post.typedPoster().uid}"),
                       child: EllipsisText(
-                        "by ${post.typedPoster().typedUserName().value}",
+                        "by ${post.typedPoster().nameValue}",
                         style: TextStyle(
                             color: Theme.of(context).colorScheme.secondary),
                       ),

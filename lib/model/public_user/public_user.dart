@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/common/ints.dart';
+import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
@@ -45,7 +46,11 @@ abstract class PublicUser implements _$PublicUser {
   DetectedText typedUserName() => DetectedText.fromJson(userName);
 
   String get bioValue => typedBio().value;
-  String get nameValue => typedUserName().value;
+  String get nameValue =>
+      typedUserName().value.isEmpty ? noName : typedUserName().value;
+  bool get hasNoName =>
+      nameValue.isEmpty ||
+      nameValue == noName; // 最初はPublicUserの初期値をnoNameにしていたため
 
   bool isInappropriate() =>
       typedImage().moderationLabels.isNotEmpty ||
@@ -72,8 +77,7 @@ abstract class PublicUser implements _$PublicUser {
     if (userNameNS > negativeLimit) {
       reason += "・ユーザー名がネガティブです。\n";
       if (isMe) {
-        reason +=
-            "(ネガティブスコア: $userNameNS)\n(ユーザー名: ${typedUserName().value})\n";
+        reason += "(ネガティブスコア: $userNameNS)\n(ユーザー名: $nameValue)\n";
       }
     }
     return reason;
