@@ -17,14 +17,21 @@ class MainFloatingActionButton extends StatelessWidget {
       return FloatingActionButton(
           backgroundColor: kPrimaryColor,
           onPressed: () {
-            if (CurrentUserController.to.hasNoPublicUser()) {
-              UIHelper.showFlutterToast("投稿するにはログインが必要です");
+            final publicUser = CurrentUserController.to.rxPublicUser.value;
+            String msg = "";
+            if (publicUser == null) {
+              msg = "投稿するにはログインが必要です";
+            } else if (publicUser.hasNoName) {
+              msg = "投稿するにはプロフィールを編集してください";
+            }
+            if (msg.isEmpty) {
+              Get.toNamed("/createPost");
+            } else {
+              UIHelper.showErrorFlutterToast(msg);
               controller.animateToPage(4,
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.fastLinearToSlowEaseIn);
-              return;
             }
-            Get.toNamed("/createPost");
           },
           child: const Icon(Icons.new_label));
     } else if (value == 4) {

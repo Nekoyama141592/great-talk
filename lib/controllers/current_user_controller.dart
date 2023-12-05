@@ -180,11 +180,7 @@ class CurrentUserController extends GetxController {
   Future<void> _createAnonymousUser() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInAnonymously();
-    result.when(
-        success: (res) {
-          rxAuthUser(res);
-        },
-        failure: () {});
+    result.when(success: (res) => rxAuthUser(res), failure: () {});
   }
 
   String currentUid() => rxAuthUser.value!.uid;
@@ -196,8 +192,7 @@ class CurrentUserController extends GetxController {
   bool isNotLoggedIn() => rxAuthUser.value == null || isAnonymous();
   bool isLoggedIn() => !isNotLoggedIn();
 
-  bool _hasPublicUser() =>
-      rxAuthUser.value!.emailVerified && rxPublicUser.value != null;
+  bool _hasPublicUser() => rxPublicUser.value != null;
   bool hasNoPublicUser() => !_hasPublicUser();
 
   bool isNotVerified() => !rxAuthUser.value!.emailVerified;
