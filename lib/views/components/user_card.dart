@@ -1,9 +1,9 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/texts.dart';
+import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
@@ -47,6 +47,15 @@ class UserCard extends StatelessWidget with CurrentUserMixin {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: InkWell(
+                          onLongPress: () async {
+                            if (!CurrentUserController.to.isAdmin()) return;
+                            final text =
+                                "UID\n${publicUser.uid}\nユーザーの画像\n${publicUser.typedImage().value}";
+                            final data = ClipboardData(text: text);
+                            await Clipboard.setData(data);
+                            UIHelper.showFlutterToast(
+                                "${publicUser.nameValue}のUIDと画像のファイル名をコピーしました");
+                          },
                           onTap: () => Get.toNamed("/users/${publicUser.uid}"),
                           child: Row(
                             children: [
