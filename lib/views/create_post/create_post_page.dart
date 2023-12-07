@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/create_post_controller.dart';
+import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/states/abstract/forms_state.dart';
 import 'package:great_talk/views/common/forms_screen.dart';
 import 'package:great_talk/views/create_post/components/form_label.dart';
@@ -124,6 +125,8 @@ class _CreatePostPageState extends FormsState<CreatePostPage> {
                 return "${FormConsts.nGramIndex}文字以上の入力をしてください";
               } else if (value.length > FormConsts.maxTitleLimit) {
                 return FormConsts.textLimitMsg(FormConsts.maxTitleLimit, value);
+              } else if (value.invalidField) {
+                return CreatePostController.to.invalidFieldMsg;
               } else {
                 return null;
               }

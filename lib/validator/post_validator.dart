@@ -3,20 +3,22 @@ import 'package:great_talk/extensions/string_extension.dart';
 
 class PostValidator {
   static bool isInValidPost(
-      String? description,
-      String? prompt,
-      String? title,
-      String? temperature,
-      String? topP,
-      String? presencePenalty,
-      String? frequencyPenalty) {
+      String description,
+      String prompt,
+      String title,
+      String temperature,
+      String topP,
+      String presencePenalty,
+      String frequencyPenalty) {
     final result = _isInValidDescription(description) ||
         _isInValidSystemPrompt(prompt) ||
         _isInValidTitle(title) ||
         _isInValidTemperature(temperature) ||
         _isInValidTopP(topP) ||
         _isInValidPresencePenalty(presencePenalty) ||
-        _isInValidFrequencyPenalty(frequencyPenalty);
+        _isInValidFrequencyPenalty(frequencyPenalty) ||
+        title.invalidField ||
+        prompt == FormConsts.defaultSystemPrompt;
     return result;
   }
 

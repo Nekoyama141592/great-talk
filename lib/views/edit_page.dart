@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/edit_controller.dart';
+import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/states/abstract/forms_state.dart';
 import 'package:great_talk/views/common/forms_screen.dart';
 import 'package:great_talk/views/create_post/components/form_label.dart';
@@ -62,12 +63,15 @@ class _EditProfilePageState extends FormsState<EditProfilePage> {
       ),
       OriginalForm(
         initialValue: CurrentUserController.to.rxPublicUser.value!.nameValue,
+        keyboardType: TextInputType.text,
         onSaved: EditController.to.setUserName,
         validator: (value) {
           if (value!.length < FormConsts.nGramIndex) {
             return "${FormConsts.nGramIndex}文字以上の入力を行なってください";
           } else if (value.length > FormConsts.maxUserNameLimit) {
             return FormConsts.textLimitMsg(FormConsts.maxUserNameLimit, value);
+          } else if (value.invalidField) {
+            return EditController.to.invalidFieldMsg;
           } else {
             return null;
           }

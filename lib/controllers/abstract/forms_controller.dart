@@ -26,4 +26,7 @@ abstract class FormsController extends LoadingController {
     }
     rxUint8list(result);
   }
+
+  String get invalidFieldMsg =>
+      "${FormConsts.notUseOnField.join(",")}の文字は使用できません";
 }

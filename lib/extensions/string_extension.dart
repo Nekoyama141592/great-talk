@@ -1,3 +1,4 @@
+import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/extensions/double_extensions.dart';
 
 extension StringExtension on String {
@@ -6,5 +7,15 @@ extension StringExtension on String {
       double.parse(this).roundToSecondDecimalPlace();
   String removeNewlinesAndSpaces() {
     return replaceAll('\n', '').replaceAll(' ', '');
+  }
+
+  // firestoreのフィールドに使用できないならtrueを返す
+  bool get invalidField {
+    for (final value in FormConsts.notUseOnField) {
+      if (contains(value)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

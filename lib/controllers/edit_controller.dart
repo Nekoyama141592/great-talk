@@ -5,6 +5,7 @@ import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
+import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/user_update_log/user_update_log.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
@@ -43,7 +44,7 @@ class EditController extends FormsController with CurrentUserMixin {
     }
     final userName = rxUserName.value;
     final bio = rxBio.value;
-    if (userName.isEmpty || bio.isEmpty) {
+    if (userName.isEmpty || bio.isEmpty || userName.invalidField) {
       await UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
       return;
     }

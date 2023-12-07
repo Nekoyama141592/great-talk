@@ -50,7 +50,8 @@ class FormConsts {
       "ネガティブな内容を含むと、他のユーザーに表示されなくなる可能性があります。";
   static String textLimitMsg(int limit, String value) =>
       "最大$limit文字までです。（現在${value.length}文字)";
-
+  // 使用できない文字
+  static const List<String> notUseOnField = ['.', '[', ']', '*', '`'];
   // ヒントテキスト
   static const String hintTitle = "例: レオナルド";
   static const String hintDescription = "例: レオナルドと申します。以後お見知り置きを。";
