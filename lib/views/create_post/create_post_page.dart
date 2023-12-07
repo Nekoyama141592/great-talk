@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/create_post_controller.dart';
-import 'package:great_talk/state/abstract/processing_state.dart';
-import 'package:great_talk/views/components/rounded_button.dart';
+import 'package:great_talk/states/abstract/forms_state.dart';
 import 'package:great_talk/views/create_post/components/form_label.dart';
 import 'package:great_talk/views/create_post/components/original_form.dart';
 
@@ -14,19 +13,17 @@ class CreatePostPage extends StatefulWidget {
   State<CreatePostPage> createState() => _CreatePostPageState();
 }
 
-class _CreatePostPageState extends ProcessingState<CreatePostPage> {
-  double? _deviceHeight, _deviceWidth;
-  // ログとフォームキーをとる
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _CreatePostPageState extends FormsState<CreatePostPage> {
   @override
   Widget build(BuildContext context) {
-    _deviceHeight = MediaQuery.of(context).size.height; // 高さを設定
-    _deviceWidth = MediaQuery.of(context).size.width; // 幅を設定
+    deviceHeight = MediaQuery.of(context).size.height; // 高さを設定
+    deviceWidth = MediaQuery.of(context).size.width; // 幅を設定
+    final controller = CreatePostController.to;
     return WillPopScope(
       onWillPop: () async {
-        if (_formKey.currentState!.validate()) {
+        if (formKey.currentState!.validate()) {
           // フォームフィールドの情報を変数に保存
-          _formKey.currentState!.save();
+          formKey.currentState!.save();
         }
         return true; // 画面を閉じる処理を許可
       },
@@ -42,7 +39,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
             FocusScope.of(context).unfocus();
           },
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: _deviceWidth! * 0.05),
+            padding: EdgeInsets.symmetric(horizontal: deviceWidth! * 0.05),
             child: Center(
               child: SingleChildScrollView(
                 child: Column(
@@ -52,8 +49,8 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     _createPostForm(),
-                    _image(),
-                    _createPostButton(),
+                    image(controller),
+                    positiveButton(controller)
                   ],
                 ),
               ),
@@ -67,9 +64,9 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   // 入力フォーム関数
   Widget _createPostForm() {
     return SizedBox(
-      height: _deviceHeight! * 0.50,
+      height: deviceHeight! * 0.50,
       child: Form(
-          key: _formKey,
+          key: formKey,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -253,48 +250,5 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
             },
           ))
     ];
-  }
-
-  // ログインボタン関数
-  Widget _createPostButton() {
-    return RoundedButton(
-        text: "送信",
-        press: _onCreateButtonPressed,
-        buttonColor: Theme.of(context).primaryColor,
-        textColor: Colors.white);
-  }
-
-  Widget _image() {
-    final controller = CreatePostController.to;
-    return Obx(() => controller.uint8list.value == null
-        ? Row(
-            children: [
-              InkWell(
-                onTap: controller.onImagePickButtonPressed,
-                child: const Icon(
-                  Icons.image,
-                  size: 100.0,
-                ),
-              ),
-              const Text(FormConsts.imageLabel)
-            ],
-          )
-        : InkWell(
-            onTap: controller.onImagePickButtonPressed,
-            child: SizedBox(
-                width: 100.0,
-                height: 100.0,
-                child: Obx(
-                  () => Image.memory(controller.uint8list.value!),
-                )),
-          ));
-  }
-
-  void _onCreateButtonPressed() async {
-    if (_formKey.currentState!.validate()) {
-      // フォームフィールドの情報を変数に保存
-      _formKey.currentState!.save();
-    }
-    await CreatePostController.to.processCreatePost();
   }
 }
