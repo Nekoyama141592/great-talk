@@ -115,8 +115,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
           if (value!.length < FormConsts.nGramIndex) {
             return "${FormConsts.nGramIndex}文字以上の入力を行なってください";
           } else if (value.length > FormConsts.maxUserNameLimit) {
-            return FormConsts.textLimitMsg(
-                FormConsts.maxUserNameLimit, value);
+            return FormConsts.textLimitMsg(FormConsts.maxUserNameLimit, value);
           } else {
             return null;
           }

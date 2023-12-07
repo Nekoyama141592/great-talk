@@ -104,8 +104,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
               if (value!.length < FormConsts.nGramIndex) {
                 return "${FormConsts.nGramIndex}文字以上の入力をしてください";
               } else if (value.length > FormConsts.maxTitleLimit) {
-                return FormConsts.textLimitMsg(
-                    FormConsts.maxTitleLimit, value);
+                return FormConsts.textLimitMsg(FormConsts.maxTitleLimit, value);
               } else {
                 return null;
               }
@@ -213,8 +212,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   List<Widget> _presencePenaltyNumberField() {
     return [
       const FormLabel(
-          title: "PresencePenalty",
-          helpMsg: FormConsts.presencePenaltyHelpMsg),
+          title: "PresencePenalty", helpMsg: FormConsts.presencePenaltyHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.presencePenalty.value,
             keyboardType: TextInputType.text,

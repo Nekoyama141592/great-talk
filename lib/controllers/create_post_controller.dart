@@ -85,6 +85,10 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
       await UIHelper.showErrorFlutterToast("temperatureとtopPはどちらか一方しか変更できません");
       return;
     }
+    if (systemPrompt.value == FormConsts.defaultSystemPrompt) {
+      await UIHelper.showErrorFlutterToast("システムプロンプトを初期値から変更してください");
+      return;
+    }
     if (isLoading.value) return; // 二重リクエストを防止.
     startLoading();
     final newFileName = AWSS3Utility.s3FileName();
