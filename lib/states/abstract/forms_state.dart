@@ -5,7 +5,7 @@ import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 
 abstract class FormsState<T extends StatefulWidget> extends State<T> {
-  double? deviceHeight, deviceWidth;
+  double? deviceHeight;
   // ログとフォームキーをとる
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -48,5 +48,13 @@ abstract class FormsState<T extends StatefulWidget> extends State<T> {
       formKey.currentState!.save();
     }
     controller.onPositiveButtonPressed();
+  }
+
+  Future<bool> onWillPop() async {
+    if (formKey.currentState!.validate()) {
+      // フォームフィールドの情報を変数に保存
+      formKey.currentState!.save();
+    }
+    return true; // 画面を閉じる処理を許可
   }
 }

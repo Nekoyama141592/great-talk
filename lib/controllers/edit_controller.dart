@@ -18,10 +18,9 @@ class EditController extends FormsController with CurrentUserMixin {
       (CurrentUserController.to.rxPublicUser.value?.nameValue ?? "").obs;
   final rxBio =
       (CurrentUserController.to.rxPublicUser.value?.bioValue ?? "").obs;
-  @override
-  void onInit() {
-    rxUint8list.value = MyProfileController.to.rxUint8list.value;
-    super.onInit();
+
+  void init() {
+    rxUint8list.value ??= MyProfileController.to.rxUint8list.value;
   }
 
   // セッターメソッド

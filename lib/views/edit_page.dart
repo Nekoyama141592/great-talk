@@ -3,6 +3,7 @@ import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/edit_controller.dart';
 import 'package:great_talk/states/abstract/forms_state.dart';
+import 'package:great_talk/views/common/forms_screen.dart';
 import 'package:great_talk/views/create_post/components/form_label.dart';
 import 'package:great_talk/views/create_post/components/original_form.dart';
 
@@ -15,40 +16,23 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends FormsState<EditProfilePage> {
   @override
+  void initState() {
+    EditController.to.init();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     deviceHeight = MediaQuery.of(context).size.height; // 高さを設定
-    deviceWidth = MediaQuery.of(context).size.width; // 幅を設定
     final controller = EditController.to;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "ユーザー情報を編集",
-        ),
-      ),
-      body: SafeArea(
-          child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: deviceWidth! * 0.05),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                // 水平パディング
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _createPostForm(),
-                  image(controller),
-                  positiveButton(controller)
-                ],
-              ),
-            ),
-          ),
-        ),
-      )),
+    return FormsScreen(
+      onWillPop: onWillPop,
+      appBarText: "ユーザー情報を編集",
+      children: [
+        _createPostForm(),
+        image(controller),
+        positiveButton(controller)
+      ],
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/create_post_controller.dart';
 import 'package:great_talk/states/abstract/forms_state.dart';
+import 'package:great_talk/views/common/forms_screen.dart';
 import 'package:great_talk/views/create_post/components/form_label.dart';
 import 'package:great_talk/views/create_post/components/original_form.dart';
 
@@ -17,47 +18,15 @@ class _CreatePostPageState extends FormsState<CreatePostPage> {
   @override
   Widget build(BuildContext context) {
     deviceHeight = MediaQuery.of(context).size.height; // 高さを設定
-    deviceWidth = MediaQuery.of(context).size.width; // 幅を設定
     final controller = CreatePostController.to;
-    return WillPopScope(
-      onWillPop: () async {
-        if (formKey.currentState!.validate()) {
-          // フォームフィールドの情報を変数に保存
-          formKey.currentState!.save();
-        }
-        return true; // 画面を閉じる処理を許可
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "投稿を作成",
-          ),
-        ),
-        body: SafeArea(
-            child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: deviceWidth! * 0.05),
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  // 水平パディング
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    _createPostForm(),
-                    image(controller),
-                    positiveButton(controller)
-                  ],
-                ),
-              ),
-            ),
-          ),
-        )),
-      ),
+    return FormsScreen(
+      onWillPop: onWillPop,
+      appBarText: "投稿を作成",
+      children: [
+        _createPostForm(),
+        image(controller),
+        positiveButton(controller)
+      ],
     );
   }
 
@@ -86,22 +55,24 @@ class _CreatePostPageState extends FormsState<CreatePostPage> {
     );
   }
 
-  // title入力をする関数
-  List<Widget> _titleTextField() {
+  // systemPrompt入力をする関数
+  List<Widget> _systemPromptTextField() {
     return [
       const FormLabel(
-        title: "タイトル",
-        helpMsg: FormConsts.titleHelpMsg,
-      ),
+          title: "システムプロンプト", helpMsg: FormConsts.systemPromptHelpMsg),
       Obx(() => OriginalForm(
-            initialValue: CreatePostController.to.title.value,
-            decoration: const InputDecoration(hintText: FormConsts.hintTitle),
-            onSaved: CreatePostController.to.setTitle,
+            initialValue: CreatePostController.to.systemPrompt.value,
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            onSaved: CreatePostController.to.setSystemPrompt,
             validator: (value) {
-              if (value!.length < FormConsts.nGramIndex) {
-                return "${FormConsts.nGramIndex}文字以上の入力をしてください";
-              } else if (value.length > FormConsts.maxTitleLimit) {
-                return FormConsts.textLimitMsg(FormConsts.maxTitleLimit, value);
+              if (value!.isEmpty) {
+                return "入力をしてください";
+              } else if (value.length > FormConsts.maxSystemPromptLimit) {
+                return FormConsts.textLimitMsg(
+                    FormConsts.maxSystemPromptLimit, value);
+              } else if (value == FormConsts.defaultSystemPrompt) {
+                return "初期値から変更してください。";
               } else {
                 return null;
               }
@@ -136,22 +107,23 @@ class _CreatePostPageState extends FormsState<CreatePostPage> {
     ];
   }
 
-  // systemPrompt入力をする関数
-  List<Widget> _systemPromptTextField() {
+  // title入力をする関数
+  List<Widget> _titleTextField() {
     return [
       const FormLabel(
-          title: "システムプロンプト", helpMsg: FormConsts.systemPromptHelpMsg),
+        title: "タイトル",
+        helpMsg: FormConsts.titleHelpMsg,
+      ),
       Obx(() => OriginalForm(
-            initialValue: CreatePostController.to.systemPrompt.value,
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-            onSaved: CreatePostController.to.setSystemPrompt,
+            initialValue: CreatePostController.to.title.value,
+            keyboardType: TextInputType.text,
+            decoration: const InputDecoration(hintText: FormConsts.hintTitle),
+            onSaved: CreatePostController.to.setTitle,
             validator: (value) {
-              if (value!.isEmpty) {
-                return "入力をしてください";
-              } else if (value.length > FormConsts.maxSystemPromptLimit) {
-                return FormConsts.textLimitMsg(
-                    FormConsts.maxSystemPromptLimit, value);
+              if (value!.length < FormConsts.nGramIndex) {
+                return "${FormConsts.nGramIndex}文字以上の入力をしてください";
+              } else if (value.length > FormConsts.maxTitleLimit) {
+                return FormConsts.textLimitMsg(FormConsts.maxTitleLimit, value);
               } else {
                 return null;
               }
