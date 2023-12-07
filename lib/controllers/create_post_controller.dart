@@ -20,12 +20,12 @@ import 'package:great_talk/validator/post_validator.dart';
 class CreatePostController extends LoadingController with CurrentUserMixin {
   static CreatePostController get to => Get.find<CreatePostController>();
   final title = "".obs;
-  final systemPrompt = FormsConsts.defaultSystemPrompt.obs;
+  final systemPrompt = FormConsts.defaultSystemPrompt.obs;
   final description = "".obs;
-  final temperature = FormsConsts.defaultTemperature.toString().obs;
-  final topP = FormsConsts.defaultTopP.toString().obs;
-  final presencePenalty = FormsConsts.defaultPresencePenalty.toString().obs;
-  final frequencyPenalty = FormsConsts.defaultFrequencyPenalty.toString().obs;
+  final temperature = FormConsts.defaultTemperature.toString().obs;
+  final topP = FormConsts.defaultTopP.toString().obs;
+  final presencePenalty = FormConsts.defaultPresencePenalty.toString().obs;
+  final frequencyPenalty = FormConsts.defaultFrequencyPenalty.toString().obs;
   final Rx<Uint8List?> uint8list = Rx(null);
   // セッターメソッド
   void setTitle(String? value) {
@@ -80,8 +80,8 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
       return;
     }
     if ((temperature.value.toRoundToSecondDecimalPlace() !=
-            FormsConsts.defaultTemperature) &&
-        (topP.value.toRoundToSecondDecimalPlace() != FormsConsts.defaultTopP)) {
+            FormConsts.defaultTemperature) &&
+        (topP.value.toRoundToSecondDecimalPlace() != FormConsts.defaultTopP)) {
       await UIHelper.showErrorFlutterToast("temperatureとtopPはどちらか一方しか変更できません");
       return;
     }
@@ -134,12 +134,12 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
 
   void _resetState() {
     title.value = "";
-    systemPrompt.value = FormsConsts.defaultSystemPrompt;
+    systemPrompt.value = FormConsts.defaultSystemPrompt;
     description.value = "";
-    temperature.value = FormsConsts.defaultTemperature.toString();
-    topP.value = FormsConsts.defaultTopP.toString();
-    presencePenalty.value = FormsConsts.defaultPresencePenalty.toString();
-    frequencyPenalty.value = FormsConsts.defaultFrequencyPenalty.toString();
+    temperature.value = FormConsts.defaultTemperature.toString();
+    topP.value = FormConsts.defaultTopP.toString();
+    presencePenalty.value = FormConsts.defaultPresencePenalty.toString();
+    frequencyPenalty.value = FormConsts.defaultFrequencyPenalty.toString();
     uint8list.value = null;
   }
 
@@ -155,7 +155,7 @@ class CreatePostController extends LoadingController with CurrentUserMixin {
     }
     final isSmall = info.isSmall;
     if (isSmall) {
-      UIHelper.showErrorFlutterToast(FormsConsts.bigImageRequestMsg);
+      UIHelper.showErrorFlutterToast(FormConsts.bigImageRequestMsg);
       return;
     }
     uint8list(result);

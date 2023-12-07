@@ -1,4 +1,4 @@
-class FormsConsts {
+class FormConsts {
   // int
   static const int nGramIndex = 2; // 検索に使用
   // create post

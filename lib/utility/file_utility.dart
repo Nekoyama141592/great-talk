@@ -75,9 +75,9 @@ class FileUtility {
     }
     final result = await FlutterImageCompress.compressWithFile(
       jpgFile.path,
-      minWidth: FormsConsts.minImageWidth,
-      minHeight: FormsConsts.minImageHeight,
-      quality: FormsConsts.imageQuality,
+      minWidth: FormConsts.minImageWidth,
+      minHeight: FormConsts.minImageHeight,
+      quality: FormConsts.imageQuality,
     );
     return result;
   }
@@ -125,6 +125,6 @@ class FileUtility {
   }
 
   static String get squareImageRequestMsg => Platform.isIOS
-      ? FormsConsts.iosSquareImageRequestMsg
-      : FormsConsts.androidSquareImageRequestMsg;
+      ? FormConsts.iosSquareImageRequestMsg
+      : FormConsts.androidSquareImageRequestMsg;
 }

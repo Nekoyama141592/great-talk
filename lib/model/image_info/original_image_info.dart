@@ -6,5 +6,5 @@ class OriginalImageInfo {
   final int width;
   bool get isNotSquare => height != width;
   bool get isSmall =>
-      height < FormsConsts.minImageHeight || width < FormsConsts.minImageWidth;
+      height < FormConsts.minImageHeight || width < FormConsts.minImageWidth;
 }

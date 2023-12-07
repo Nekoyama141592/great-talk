@@ -11,7 +11,7 @@ List<String> returnSearchWords(String searchTerm) {
   }
   // bi-gram
   final int length = result.length;
-  const nGramIndex = FormsConsts.nGramIndex;
+  const nGramIndex = FormConsts.nGramIndex;
   List<String> searchWords = [];
   if (length < nGramIndex) {
     searchWords.add(result);

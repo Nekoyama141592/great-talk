@@ -102,7 +102,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
     return [
       const FormLabel(
         title: "ニックネーム",
-        helpMsg: FormsConsts.userNameHelpMsg,
+        helpMsg: FormConsts.userNameHelpMsg,
       ),
       OriginalForm(
         initialValue: CurrentUserController.to.rxPublicUser.value!.nameValue,
@@ -112,11 +112,11 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
           });
         },
         validator: (value) {
-          if (value!.length < FormsConsts.nGramIndex) {
-            return "${FormsConsts.nGramIndex}文字以上の入力を行なってください";
-          } else if (value.length > FormsConsts.maxUserNameLimit) {
-            return FormsConsts.textLimitMsg(
-                FormsConsts.maxUserNameLimit, value);
+          if (value!.length < FormConsts.nGramIndex) {
+            return "${FormConsts.nGramIndex}文字以上の入力を行なってください";
+          } else if (value.length > FormConsts.maxUserNameLimit) {
+            return FormConsts.textLimitMsg(
+                FormConsts.maxUserNameLimit, value);
           } else {
             return null;
           }
@@ -130,7 +130,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
     return [
       const FormLabel(
         title: "紹介文",
-        helpMsg: FormsConsts.bioHelpMsg,
+        helpMsg: FormConsts.bioHelpMsg,
       ),
       OriginalForm(
         initialValue:
@@ -145,8 +145,8 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
         validator: (value) {
           if (value!.isEmpty) {
             return "入力を行なってください";
-          } else if (value.length > FormsConsts.maxBioLimit) {
-            return FormsConsts.textLimitMsg(FormsConsts.maxBioLimit, value);
+          } else if (value.length > FormConsts.maxBioLimit) {
+            return FormConsts.textLimitMsg(FormConsts.maxBioLimit, value);
           } else {
             return null;
           }
@@ -175,7 +175,7 @@ class _EditProfilePageState extends ProcessingState<EditProfilePage>
                   size: 100.0,
                 ),
               ),
-              const Text(FormsConsts.imageLabel)
+              const Text(FormConsts.imageLabel)
             ],
           )
         : InkWell(

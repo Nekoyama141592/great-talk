@@ -94,18 +94,18 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
     return [
       const FormLabel(
         title: "タイトル",
-        helpMsg: FormsConsts.titleHelpMsg,
+        helpMsg: FormConsts.titleHelpMsg,
       ),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.title.value,
-            decoration: const InputDecoration(hintText: FormsConsts.hintTitle),
+            decoration: const InputDecoration(hintText: FormConsts.hintTitle),
             onSaved: CreatePostController.to.setTitle,
             validator: (value) {
-              if (value!.length < FormsConsts.nGramIndex) {
-                return "${FormsConsts.nGramIndex}文字以上の入力をしてください";
-              } else if (value.length > FormsConsts.maxTitleLimit) {
-                return FormsConsts.textLimitMsg(
-                    FormsConsts.maxTitleLimit, value);
+              if (value!.length < FormConsts.nGramIndex) {
+                return "${FormConsts.nGramIndex}文字以上の入力をしてください";
+              } else if (value.length > FormConsts.maxTitleLimit) {
+                return FormConsts.textLimitMsg(
+                    FormConsts.maxTitleLimit, value);
               } else {
                 return null;
               }
@@ -118,20 +118,20 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   List<Widget> _descriptionTextField() {
     return [
       const FormLabel(
-          title: "説明/使い方(AIの一言目)", helpMsg: FormsConsts.descriptionHelpMsg),
+          title: "説明/使い方(AIの一言目)", helpMsg: FormConsts.descriptionHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.description.value,
             keyboardType: TextInputType.multiline,
             maxLines: null,
             decoration:
-                const InputDecoration(hintText: FormsConsts.hintDescription),
+                const InputDecoration(hintText: FormConsts.hintDescription),
             onSaved: CreatePostController.to.setDescription,
             validator: (value) {
               if (value!.isEmpty) {
                 return "入力をしてください";
-              } else if (value.length > FormsConsts.maxDescriptionLimit) {
-                return FormsConsts.textLimitMsg(
-                    FormsConsts.maxDescriptionLimit, value);
+              } else if (value.length > FormConsts.maxDescriptionLimit) {
+                return FormConsts.textLimitMsg(
+                    FormConsts.maxDescriptionLimit, value);
               } else {
                 return null;
               }
@@ -144,7 +144,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   List<Widget> _systemPromptTextField() {
     return [
       const FormLabel(
-          title: "システムプロンプト", helpMsg: FormsConsts.systemPromptHelpMsg),
+          title: "システムプロンプト", helpMsg: FormConsts.systemPromptHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.systemPrompt.value,
             keyboardType: TextInputType.multiline,
@@ -153,9 +153,9 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
             validator: (value) {
               if (value!.isEmpty) {
                 return "入力をしてください";
-              } else if (value.length > FormsConsts.maxSystemPromptLimit) {
-                return FormsConsts.textLimitMsg(
-                    FormsConsts.maxSystemPromptLimit, value);
+              } else if (value.length > FormConsts.maxSystemPromptLimit) {
+                return FormConsts.textLimitMsg(
+                    FormConsts.maxSystemPromptLimit, value);
               } else {
                 return null;
               }
@@ -168,7 +168,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   List<Widget> _temperatureNumberField() {
     return [
       const FormLabel(
-          title: "temperature", helpMsg: FormsConsts.temperatureHelpMsg),
+          title: "temperature", helpMsg: FormConsts.temperatureHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.temperature.value,
             keyboardType: TextInputType.text,
@@ -190,7 +190,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
   // topP入力をする関数
   List<Widget> _topPNumberField() {
     return [
-      const FormLabel(title: "topP", helpMsg: FormsConsts.topPHelpMsg),
+      const FormLabel(title: "topP", helpMsg: FormConsts.topPHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.topP.value,
             keyboardType: TextInputType.text,
@@ -214,7 +214,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
     return [
       const FormLabel(
           title: "PresencePenalty",
-          helpMsg: FormsConsts.presencePenaltyHelpMsg),
+          helpMsg: FormConsts.presencePenaltyHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.presencePenalty.value,
             keyboardType: TextInputType.text,
@@ -238,7 +238,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
     return [
       const FormLabel(
           title: "FrequencyPenalty",
-          helpMsg: FormsConsts.frequencyPenaltyHelpMsg),
+          helpMsg: FormConsts.frequencyPenaltyHelpMsg),
       Obx(() => OriginalForm(
             initialValue: CreatePostController.to.frequencyPenalty.value,
             keyboardType: TextInputType.text,
@@ -278,7 +278,7 @@ class _CreatePostPageState extends ProcessingState<CreatePostPage> {
                   size: 100.0,
                 ),
               ),
-              const Text(FormsConsts.imageLabel)
+              const Text(FormConsts.imageLabel)
             ],
           )
         : InkWell(

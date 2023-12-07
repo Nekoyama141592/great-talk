@@ -20,7 +20,7 @@ abstract class SearchDocsController extends DocsController {
   void setQuery();
   @override
   Future<void> fetchDocs() async {
-    if (searchTerm.length < FormsConsts.nGramIndex) {
+    if (searchTerm.length < FormConsts.nGramIndex) {
       return;
     }
     _setSearchQuery();

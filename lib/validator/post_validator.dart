@@ -23,21 +23,21 @@ class PostValidator {
   static bool _isInValidDescription(String? description) {
     final result = description == null ||
         description.isEmpty ||
-        description.length > FormsConsts.maxDescriptionLimit;
+        description.length > FormConsts.maxDescriptionLimit;
     return result;
   }
 
   static bool _isInValidSystemPrompt(String? prompt) {
     final result = prompt == null ||
         prompt.isEmpty ||
-        prompt.length > FormsConsts.maxSystemPromptLimit;
+        prompt.length > FormConsts.maxSystemPromptLimit;
     return result;
   }
 
   static bool _isInValidTitle(String? title) {
     final result = title == null ||
         title.isEmpty ||
-        title.length > FormsConsts.maxTitleLimit;
+        title.length > FormConsts.maxTitleLimit;
     return result;
   }
 

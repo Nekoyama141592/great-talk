@@ -6,12 +6,12 @@ class UserInfoValidator {
   }
 
   static bool _isInValidBio(String? bio) {
-    return bio == null || bio.isEmpty || bio.length > FormsConsts.maxBioLimit;
+    return bio == null || bio.isEmpty || bio.length > FormConsts.maxBioLimit;
   }
 
   static bool _isInValidUserName(String? userName) {
     return userName == null ||
         userName.isEmpty ||
-        userName.length > FormsConsts.maxBioLimit;
+        userName.length > FormConsts.maxBioLimit;
   }
 }

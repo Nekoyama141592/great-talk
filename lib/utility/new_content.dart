@@ -30,12 +30,12 @@ class NewContent {
     return CustomCompleteText(
       systemPrompt: systemPrompt,
       temperature:
-          pTemperature != FormsConsts.defaultTemperature ? pTemperature : null,
-      topP: pTopP != FormsConsts.defaultTopP ? pTopP : null,
-      presencePenalty: pPresencePenalty != FormsConsts.defaultPresencePenalty
+          pTemperature != FormConsts.defaultTemperature ? pTemperature : null,
+      topP: pTopP != FormConsts.defaultTopP ? pTopP : null,
+      presencePenalty: pPresencePenalty != FormConsts.defaultPresencePenalty
           ? pPresencePenalty
           : null,
-      frequencyPenalty: pFrequencyPenalty != FormsConsts.defaultFrequencyPenalty
+      frequencyPenalty: pFrequencyPenalty != FormConsts.defaultFrequencyPenalty
           ? pFrequencyPenalty
           : null,
     );

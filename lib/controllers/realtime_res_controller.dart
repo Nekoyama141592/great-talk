@@ -134,9 +134,9 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       TextEditingController inputController,
       ScrollController scrollController) {
     final text = inputController.text;
-    if (text.length > FormsConsts.maxMessageLimit) {
+    if (text.length > FormConsts.maxMessageLimit) {
       UIHelper.showErrorFlutterToast(
-          "メッセージは${FormsConsts.textLimitMsg(FormsConsts.maxMessageLimit, text)}");
+          "メッセージは${FormConsts.textLimitMsg(FormConsts.maxMessageLimit, text)}");
       return;
     }
     FocusScope.of(context).unfocus();
