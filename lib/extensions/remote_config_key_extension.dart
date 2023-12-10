@@ -1,6 +1,6 @@
 import 'dart:io';
 
 extension RemoteConfigKeyExtension on String {
-  String toOsSpecificRemoteConfigKey() =>
+  String get toOsSpecificRemoteConfigKey =>
       Platform.isIOS ? "ios_$this" : "android_$this";
 }

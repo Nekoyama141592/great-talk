@@ -50,8 +50,5 @@ const String agreeText = "上記の内容、利用規約、プライバシーポ
 
 const String okText = "OK";
 const String cancelText = "キャンセル";
-// msg
-const String defaultMaintenanceMsg = "メンテナンス中";
-const String defaultForcedUpdateMsg = "最新バージョンへのアップデートが必要です。";
 // initialName
 const noName = "名無し";

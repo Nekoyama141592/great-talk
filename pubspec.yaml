@@ -2,7 +2,7 @@ name: great_talk
 description: A new Flutter project.
 
 publish_to: 'none' 
-#ints.dartのversionも変更する.
+# lib/constants/remote_config_constants.dartのappVersionも変更
 version: 4.0.19+169
 
 environment:

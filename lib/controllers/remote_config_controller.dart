@@ -1,18 +1,18 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/ints.dart';
-import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/extensions/remote_config_key_extension.dart';
+import 'package:great_talk/consts/remote_config_constants.dart';
 
 class RemoteConfigController extends GetxController {
   static RemoteConfigController get to => Get.find<RemoteConfigController>();
   // iosとAndroidで分ける
+  int chatLimitPerDay = RemoteConfigConstants.chatLimitPerDay;
   final maintenanceMode = false.obs;
-  final maintenanceMsg = defaultMaintenanceMsg.obs;
-  final forcedUpdateVersion = appVersion.obs;
-  final forcedUpdateMsg = defaultForcedUpdateMsg.obs;
+  final maintenanceMsg = RemoteConfigConstants.maintenanceMsg.obs;
+  final forcedUpdateVersion = RemoteConfigConstants.appVersion.obs;
+  final forcedUpdateMsg = RemoteConfigConstants.forcedUpdateMsg.obs;
 
-  bool get needsUpdate => appVersion < forcedUpdateVersion.value;
+  bool get needsUpdate =>
+      RemoteConfigConstants.appVersion < forcedUpdateVersion.value;
   @override
   void onInit() async {
     // インスタンスの作成
@@ -24,19 +24,19 @@ class RemoteConfigController extends GetxController {
       minimumFetchInterval: const Duration(seconds: 15),
     ));
     // keyの設定
-    final maintenanceModeKey = "maintenance_mode".toOsSpecificRemoteConfigKey();
-    final maintenanceMsgKey = "maintenance_msg".toOsSpecificRemoteConfigKey();
-    final forcedUpdateVersionKey =
-        "forced_update_version".toOsSpecificRemoteConfigKey();
-    final forcedUpdateMsgKey =
-        "forced_update_msg".toOsSpecificRemoteConfigKey();
+    const chatLimitPerDayKey = RemoteConfigConstants.chatLimitPerDayKey;
+    final maintenanceModeKey = RemoteConfigConstants.maintenanceModeKey;
+    final maintenanceMsgKey = RemoteConfigConstants.maintenanceMsgKey;
+    final forcedUpdateVersionKey = RemoteConfigConstants.forcedUpdateVersionKey;
+    final forcedUpdateMsgKey = RemoteConfigConstants.forcedUpdateMsgKey;
 
     // アプリ内デフォルトパラメータ値の設定
     await remoteConfig.setDefaults({
+      chatLimitPerDayKey: RemoteConfigConstants.chatLimitPerDay,
       maintenanceModeKey: false,
-      maintenanceMsgKey: defaultMaintenanceMsg,
-      forcedUpdateVersionKey: appVersion,
-      forcedUpdateMsgKey: defaultForcedUpdateMsg,
+      maintenanceMsgKey: RemoteConfigConstants.maintenanceMsg,
+      forcedUpdateVersionKey: RemoteConfigConstants.appVersion,
+      forcedUpdateMsgKey: RemoteConfigConstants.forcedUpdateMsg,
     });
 
     // 値をフェッチ
@@ -52,6 +52,7 @@ class RemoteConfigController extends GetxController {
     if (needsUpdate) {
       forcedUpdateMsg(remoteConfig.getString(forcedUpdateMsgKey));
     }
+    chatLimitPerDay = remoteConfig.getInt(chatLimitPerDayKey);
     super.onInit();
   }
 }
