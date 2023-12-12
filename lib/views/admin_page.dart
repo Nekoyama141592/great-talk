@@ -33,7 +33,6 @@ class AdminPage extends HookWidget {
                 children: [
                   const SelectableText(
                     "アプリバージョン: ${RemoteConfigConstants.appVersion}",
-                    style: style,
                   ),
                   Obx(() => SelectableText(
                         "登録ユーザー数 ${controller.userCount}",
