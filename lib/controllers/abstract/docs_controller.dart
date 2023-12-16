@@ -31,13 +31,9 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
   void startProcess() => isProcessing = true;
   void endProcess() => isProcessing = false;
 
-  void setAllDocs(List<QDoc> elements) {
-    docs([]); // 配列を初期化
-    addAllDocs(elements);
-  }
-
   void addAllDocs(List<QDoc> elements) async {
     if (isProcessing) return;
+    docs([]); // 配列を初期化
     startProcess();
     final docIds = docs.map((e) => e.doc.id).toList();
     for (final element in elements) {
@@ -77,9 +73,7 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
     if (requiresValueReset) {
       isInit(false);
     }
-    if (isInit.value) {
-      return;
-    }
+    if (isInit.value) return;
     await onReload();
     isInit(true);
   }
@@ -94,7 +88,7 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
   Future<void> fetchDocs() async {
     try {
       final elements = await query.get();
-      setAllDocs(elements.docs);
+      addAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     }

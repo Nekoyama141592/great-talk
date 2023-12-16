@@ -21,7 +21,7 @@ class MainFloatingActionButton extends StatelessWidget {
             String msg = "";
             if (publicUser == null) {
               msg = "投稿するにはログインが必要です";
-            } else if (publicUser.hasNoName) {
+            } else if (publicUser.hasNoBio) {
               msg = "投稿するにはプロフィールを編集してください";
             }
             if (msg.isEmpty) {

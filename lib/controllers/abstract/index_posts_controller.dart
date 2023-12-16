@@ -21,7 +21,7 @@ abstract class IndexPostsController extends DocsController {
   Future<void> _fetchPosts(List<QDoc> fetchedTimelines) async {
     final posts = await _timelinesToPostsResult(fetchedTimelines);
     posts.when(
-        success: (res) => setAllDocs(sortedDocs(res)),
+        success: (res) => addAllDocs(sortedDocs(res)),
         failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 
