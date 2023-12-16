@@ -1,7 +1,7 @@
 import 'package:great_talk/extensions/remote_config_key_extension.dart';
 
 class RemoteConfigConstants {
-  static const int appVersion = 170;
+  static const int appVersion = 171;
   static const chatLimitPerDay = 15; // 一日にできる会話数.
   static const String maintenanceMsg = "メンテナンス中";
   static const String forcedUpdateMsg = "最新バージョンへのアップデートが必要です。";
