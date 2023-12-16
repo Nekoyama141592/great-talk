@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
@@ -146,5 +147,28 @@ class CreatePostController extends FormsController with CurrentUserMixin {
     myProfileController.docs.isEmpty
         ? await myProfileController.onReload()
         : await MyProfileController.to.onRefresh();
+  }
+
+  void onFloatingActionButtonPressed(PageController controller, int pageIndex) {
+    final publicUser = CurrentUserController.to.rxPublicUser.value;
+    if (publicUser == null) {
+      _toMyProfileScreen(controller, pageIndex);
+    } else {
+      publicUser.hasNoBio ? _toEditProfilePage() : Get.toNamed("/createPost");
+    }
+  }
+
+  void _toEditProfilePage() {
+    UIHelper.showErrorFlutterToast("投稿するにはプロフィールを編集してください");
+    Get.toNamed("/edit");
+  }
+
+  void _toMyProfileScreen(PageController controller, int pageIndex) {
+    UIHelper.showErrorFlutterToast("投稿するにはログインが必要です");
+    if (pageIndex != 4) {
+      controller.animateToPage(4,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.fastLinearToSlowEaseIn);
+    }
   }
 }

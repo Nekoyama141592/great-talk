@@ -7,6 +7,7 @@ import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/utility/file_utility.dart';
 
 abstract class FormsController extends LoadingController {
+  bool isPicked = false; // 画像を新たに取得したか判定するフラグ
   final Rx<Uint8List?> rxUint8list = Rx(null);
 
   void onPositiveButtonPressed();
@@ -25,6 +26,7 @@ abstract class FormsController extends LoadingController {
       return;
     }
     rxUint8list(result);
+    isPicked = true;
   }
 
   String get invalidFieldMsg =>

@@ -14,7 +14,6 @@ import 'package:great_talk/utility/aws_s3_utility.dart';
 
 class EditController extends FormsController with CurrentUserMixin {
   static EditController get to => Get.find<EditController>();
-  bool isPicked = false;
   final rxUserName =
       (CurrentUserController.to.rxPublicUser.value?.nameValue ?? "").obs;
   final rxBio =

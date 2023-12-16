@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:great_talk/common/colors.dart';
-import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/controllers/create_post_controller.dart';
 
 class MainFloatingActionButton extends StatelessWidget {
   const MainFloatingActionButton(
@@ -13,37 +11,11 @@ class MainFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final value = pageIndex.value;
-    if (value == 0) {
+    if (value == 0 || value == 4) {
       return FloatingActionButton(
           backgroundColor: kPrimaryColor,
-          onPressed: () {
-            final publicUser = CurrentUserController.to.rxPublicUser.value;
-            String msg = "";
-            if (publicUser == null) {
-              msg = "投稿するにはログインが必要です";
-            } else if (publicUser.hasNoBio) {
-              msg = "投稿するにはプロフィールを編集してください";
-            }
-            if (msg.isEmpty) {
-              Get.toNamed("/createPost");
-            } else {
-              UIHelper.showErrorFlutterToast(msg);
-              controller.animateToPage(4,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.fastLinearToSlowEaseIn);
-            }
-          },
-          child: const Icon(Icons.new_label));
-    } else if (value == 4) {
-      return FloatingActionButton(
-          backgroundColor: kPrimaryColor,
-          onPressed: () {
-            if (CurrentUserController.to.hasNoPublicUser()) {
-              UIHelper.showFlutterToast("投稿するにはログインが必要です");
-              return;
-            }
-            Get.toNamed("/createPost");
-          },
+          onPressed: () => CreatePostController.to
+              .onFloatingActionButtonPressed(controller, pageIndex.value),
           child: const Icon(Icons.new_label));
     } else {
       return const SizedBox.shrink();
