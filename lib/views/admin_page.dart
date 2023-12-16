@@ -10,7 +10,7 @@ class AdminPage extends HookWidget {
   const AdminPage({
     Key? key,
   }) : super(key: key);
-
+  static const path = "/admin";
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(AdminController());

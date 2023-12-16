@@ -11,6 +11,7 @@ import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:great_talk/model/ios_receipt_response/ios_receipt_response.dart';
 import 'package:great_talk/repository/purchases_repository.dart';
+import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
@@ -57,7 +58,7 @@ class PurchasesController extends GetxController {
     if (_isPremiumSubscribing()) {
       isPremiumMode(value);
     } else {
-      Get.toNamed("/subscribe"); // サブスクページへ飛ばす.
+      Get.toNamed(SubscribePage.path); // サブスクページへ飛ばす.
       UIHelper.showFlutterToast("プレミアムプランに加入する必要があります");
     }
   }

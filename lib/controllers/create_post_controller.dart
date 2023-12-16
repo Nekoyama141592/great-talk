@@ -14,6 +14,8 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 import 'package:great_talk/validator/post_validator.dart';
+import 'package:great_talk/views/create_post/create_post_page.dart';
+import 'package:great_talk/views/edit_page.dart';
 
 class CreatePostController extends FormsController with CurrentUserMixin {
   static CreatePostController get to => Get.find<CreatePostController>();
@@ -154,13 +156,15 @@ class CreatePostController extends FormsController with CurrentUserMixin {
     if (publicUser == null) {
       _toMyProfileScreen(controller, pageIndex);
     } else {
-      publicUser.hasNoBio ? _toEditProfilePage() : Get.toNamed("/createPost");
+      publicUser.hasNoBio
+          ? _toEditProfilePage()
+          : Get.toNamed(CreatePostPage.path);
     }
   }
 
   void _toEditProfilePage() {
     UIHelper.showErrorFlutterToast("投稿するにはプロフィールを編集してください");
-    Get.toNamed("/edit");
+    Get.toNamed(EditProfilePage.path);
   }
 
   void _toMyProfileScreen(PageController controller, int pageIndex) {

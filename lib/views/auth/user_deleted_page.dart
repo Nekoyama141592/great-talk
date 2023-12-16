@@ -3,6 +3,7 @@ import 'package:great_talk/views/screen/svg_and_msg_screen.dart';
 
 class UserDeletedPage extends StatelessWidget {
   const UserDeletedPage({Key? key}) : super(key: key);
+  static const path = "/userDeleted";
   @override
   Widget build(BuildContext context) {
     return const SvgAndMsgScreen(

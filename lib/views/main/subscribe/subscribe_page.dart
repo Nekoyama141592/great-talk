@@ -4,6 +4,7 @@ import 'package:great_talk/views/main/subscribe/subscribe_screen.dart';
 
 class SubscribePage extends StatelessWidget {
   const SubscribePage({Key? key}) : super(key: key);
+  static const path = "/subscribe";
   @override
   Widget build(BuildContext context) {
     return const BasicPage(appBarText: "有料プラン", child: SubscribeScreen());

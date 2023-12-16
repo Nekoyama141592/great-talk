@@ -3,11 +3,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/views/bookmarks_page.dart';
 import 'package:great_talk/views/components/basic_page.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 
 class BookmarkCategoriesPage extends HookWidget {
   const BookmarkCategoriesPage({Key? key}) : super(key: key);
+  static const path = "/bookmarkCategory";
   @override
   Widget build(BuildContext context) {
     final inputController = useTextEditingController();
@@ -30,8 +32,7 @@ class BookmarkCategoriesPage extends HookWidget {
                                 controller.bookmarkCategoryTokens[index];
                             return ListTile(
                               onTap: () => Get.toNamed(
-                                "/bookmarks?categoryId=${category.id}",
-                              ),
+                                  BookmarksPage.generatePath(category.id)),
                               title: Text(category.title),
                               trailing: InkWell(
                                 onTap: () => controller

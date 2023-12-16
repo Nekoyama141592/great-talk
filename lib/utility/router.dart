@@ -19,29 +19,32 @@ import 'package:great_talk/views/user_profile_page.dart';
 
 final getPages = [
   GetPage(name: "/", page: () => const MyApp()),
-  GetPage(name: "/account", page: () => const AccountPage()),
-  GetPage(name: "/admin", page: () => const AdminPage()),
+  GetPage(name: AccountPage.path, page: () => const AccountPage()),
+  GetPage(name: AdminPage.path, page: () => const AdminPage()),
   GetPage(
-      name: "/bookmarkCategory", page: () => const BookmarkCategoriesPage()),
-  GetPage(name: "/bookmarks", page: () => const BookmarksPage()),
+      name: BookmarkCategoriesPage.path,
+      page: () => const BookmarkCategoriesPage()),
+  GetPage(name: BookmarksPage.path, page: () => const BookmarksPage()),
   GetPage(
     name: "/chat/users/:uid/posts/:postId",
     page: () => const RealtimeResPage(),
   ),
   GetPage(
-    name: "/createPost",
+    name: CreatePostPage.path,
     page: () => const CreatePostPage(),
   ),
-  GetPage(name: "/edit", page: () => const EditProfilePage()),
-  GetPage(name: "/logouted", page: () => const LogoutedPage()),
-  GetPage(name: "/muteUsers", page: () => const MuteUsersPage()),
-  GetPage(name: "/mutePosts", page: () => const MutePostsPage()),
-  GetPage(name: "/originalContents", page: () => const OriginalContentsPage()),
+  GetPage(name: EditProfilePage.path, page: () => const EditProfilePage()),
+  GetPage(name: LogoutedPage.path, page: () => const LogoutedPage()),
+  GetPage(name: MuteUsersPage.path, page: () => const MuteUsersPage()),
+  GetPage(name: MutePostsPage.path, page: () => const MutePostsPage()),
   GetPage(
-      name: "/reauthenticate/delete",
+      name: OriginalContentsPage.path,
+      page: () => const OriginalContentsPage()),
+  GetPage(
+      name: ReauthenticateToDeletePage.path,
       page: () => const ReauthenticateToDeletePage()),
-  GetPage(name: "/subscribe", page: () => const SubscribePage()),
-  GetPage(name: "/userDeleted", page: () => const UserDeletedPage()),
+  GetPage(name: SubscribePage.path, page: () => const SubscribePage()),
+  GetPage(name: UserDeletedPage.path, page: () => const UserDeletedPage()),
   GetPage(name: "/users/:uid", page: () => const UserProfilePage()),
   GetPage(
       name: "/users/:uid/posts/search", page: () => const SearchUserPostsPage())

@@ -4,7 +4,7 @@ import 'package:great_talk/views/screen/login_screen.dart';
 
 class ReauthenticateToDeletePage extends StatelessWidget {
   const ReauthenticateToDeletePage({Key? key}) : super(key: key);
-
+  static const path = "/reauthenticate/delete";
   @override
   Widget build(BuildContext context) {
     final controller = CurrentUserController.to;

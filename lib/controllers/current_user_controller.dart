@@ -22,6 +22,7 @@ import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
+import 'package:great_talk/views/auth/logouted_page.dart';
 
 class CurrentUserController extends GetxController {
   static CurrentUserController get to => Get.find<CurrentUserController>();
@@ -320,7 +321,7 @@ class CurrentUserController extends GetxController {
     final repository = FirebaseAuthRepository();
     final result = await repository.signOut();
     result.when(success: (_) async {
-      Get.toNamed('/logouted');
+      Get.toNamed(LogoutedPage.path);
     }, failure: () {
       UIHelper.showErrorFlutterToast("ログアウトできませんでした");
     });

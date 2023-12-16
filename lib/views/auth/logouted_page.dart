@@ -3,6 +3,7 @@ import 'package:great_talk/views/screen/svg_and_msg_screen.dart';
 
 class LogoutedPage extends StatelessWidget {
   const LogoutedPage({Key? key}) : super(key: key);
+  static const path = "/logouted";
   @override
   Widget build(BuildContext context) {
     return const SvgAndMsgScreen(

@@ -32,6 +32,8 @@ import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
+import 'package:great_talk/views/bookmark_categories_page.dart';
+import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
 import 'package:great_talk/views/realtime_res_page/components/bookmark_categories_list_view.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -150,7 +152,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     chatCount = _getChatCount(); // 端末から今日のチャット回数を取得
     if (!_allowChat()) {
       // チャットが許されていない場合
-      Get.toNamed("/subscribe"); // サブスクページへ飛ばす.
+      Get.toNamed(SubscribePage.path); // サブスクページへ飛ばす.
       UIHelper.showFlutterToast(
           "チャットは1日${RemoteConfigController.to.chatLimitPerDay}回まで！\nサブスクに加入してください。");
       await _requestReview(); // レビューをリクエスト
@@ -437,7 +439,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       return;
     }
     if (CurrentUserController.to.bookmarkCategoryTokens.isEmpty) {
-      Get.toNamed("/bookmarkCategory");
+      Get.toNamed(BookmarkCategoriesPage.path);
       UIHelper.showFlutterToast("まずはカテゴリーを作成してみましょう!");
     } else {
       Get.dialog(const BookmarkCategoriesListView());

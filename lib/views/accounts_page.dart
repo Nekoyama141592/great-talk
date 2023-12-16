@@ -3,11 +3,13 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
+import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({
     Key? key,
   }) : super(key: key);
+  static const path = "/account";
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,7 @@ class AccountPage extends StatelessWidget {
           Obx(() => controller.isLoggedIn()
               ? ListTile(
                   title: const Text("ユーザーを消去する"),
-                  onTap: () => Get.toNamed("reauthenticate/delete"))
+                  onTap: () => Get.toNamed(ReauthenticateToDeletePage.path))
               : const SizedBox.shrink())
         ],
       ),

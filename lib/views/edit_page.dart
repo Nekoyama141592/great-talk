@@ -10,7 +10,7 @@ import 'package:great_talk/views/create_post/components/original_form.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
-
+  static const path = "/editProfile";
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
 }

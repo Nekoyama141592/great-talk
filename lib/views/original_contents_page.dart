@@ -6,6 +6,7 @@ import 'package:great_talk/views/screen/search_screen.dart';
 
 class OriginalContentsPage extends StatelessWidget {
   const OriginalContentsPage({Key? key}) : super(key: key);
+  static const path = "/originalContents";
   @override
   Widget build(BuildContext context) {
     final PersonsController controller = Get.put(PersonsController());

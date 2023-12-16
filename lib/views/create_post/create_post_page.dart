@@ -10,7 +10,7 @@ import 'package:great_talk/views/create_post/components/original_form.dart';
 
 class CreatePostPage extends StatefulWidget {
   const CreatePostPage({Key? key}) : super(key: key);
-
+  static const path = "/createPost";
   @override
   State<CreatePostPage> createState() => _CreatePostPageState();
 }

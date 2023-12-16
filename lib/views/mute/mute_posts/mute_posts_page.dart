@@ -7,6 +7,7 @@ import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 
 class MutePostsPage extends StatelessWidget {
   const MutePostsPage({Key? key}) : super(key: key);
+  static const path = "/mutePosts";
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(MutePostsController());
