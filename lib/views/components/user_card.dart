@@ -11,6 +11,7 @@ import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/mosaic_card/components/mosaic_user_child.dart';
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
+import 'package:great_talk/views/user_profile_page.dart';
 
 class UserCard extends StatelessWidget with CurrentUserMixin {
   const UserCard({Key? key, required this.publicUser, required this.uint8list})
@@ -56,7 +57,8 @@ class UserCard extends StatelessWidget with CurrentUserMixin {
                             UIHelper.showFlutterToast(
                                 "${publicUser.nameValue}のUIDと画像のファイル名をコピーしました");
                           },
-                          onTap: () => Get.toNamed("/users/${publicUser.uid}"),
+                          onTap: () => Get.toNamed(
+                              UserProfilePage.generatePath(publicUser.uid)),
                           child: Row(
                             children: [
                               CircleImage(

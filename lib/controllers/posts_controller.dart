@@ -22,6 +22,7 @@ import 'package:great_talk/model/tokens/report_post_token/report_post_token.dart
 import 'package:great_talk/model/user_mute/user_mute.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/views/realtime_res_page/realtime_res_page.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/report_contents_list_view.dart';
 
 class PostsController extends GetxController with CurrentUserMixin {
@@ -34,7 +35,7 @@ class PostsController extends GetxController with CurrentUserMixin {
   void onPostCardPressed(Post post) {
     PurchasesController.to.restorePurchases();
     rxPost(post);
-    Get.toNamed('/chat/users/${post.posterUid}/posts/${post.postId}');
+    Get.toNamed(RealtimeResPage.generatePath(post.posterUid, post.postId));
   }
 
   // UIDをコピーする関数.

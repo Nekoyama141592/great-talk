@@ -11,6 +11,7 @@ import 'package:great_talk/views/screen/gradient_screen.dart';
 import 'package:great_talk/views/screen/profile_screen/components/edit_button.dart';
 import 'package:great_talk/views/screen/profile_screen/components/follow_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
+import 'package:great_talk/views/search_user_posts_page.dart';
 
 class ProfileScreen extends StatelessWidget with CurrentUserMixin {
   const ProfileScreen({Key? key, required this.controller}) : super(key: key);
@@ -70,8 +71,8 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
       Row(
         children: [
           InkWell(
-            onTap: () =>
-                Get.toNamed("/users/${controller.passiveUid()}/posts/search"),
+            onTap: () => Get.toNamed(
+                SearchUserPostsPage.generatePath(controller.passiveUid())),
             child: const Icon(
               Icons.search,
               size: 40.0,

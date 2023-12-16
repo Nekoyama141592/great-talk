@@ -6,6 +6,8 @@ import 'package:great_talk/views/screen/search_screen.dart';
 
 class SearchUserPostsPage extends StatelessWidget {
   const SearchUserPostsPage({Key? key}) : super(key: key);
+  static const path = "/users/:uid/searchPosts";
+  static String generatePath(String uid) => "/users/$uid/searchPosts";
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SearchUserPostsController());

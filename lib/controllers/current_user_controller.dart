@@ -23,6 +23,7 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 import 'package:great_talk/views/auth/logouted_page.dart';
+import 'package:great_talk/views/auth/user_deleted_page.dart';
 
 class CurrentUserController extends GetxController {
   static CurrentUserController get to => Get.find<CurrentUserController>();
@@ -368,7 +369,7 @@ class CurrentUserController extends GetxController {
     final result = await repository.deleteUser(rxAuthUser.value!);
     result.when(
         success: (_) {
-          Get.toNamed('/userDeleted');
+          Get.toNamed(UserDeletedPage.path);
         },
         failure: () {});
   }

@@ -18,6 +18,9 @@ import 'package:great_talk/views/screen/refresh_screen/components/post_report_bu
 
 class RealtimeResPage extends HookWidget with CurrentUserMixin {
   const RealtimeResPage({Key? key}) : super(key: key);
+  static const path = "/chat/users/:uid/posts/:postId";
+  static String generatePath(String uid, String postId) =>
+      "/chat/users/$uid/posts/$postId";
   @override
   Widget build(BuildContext context) {
     final controller = RealtimeResController.to;

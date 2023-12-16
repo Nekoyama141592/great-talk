@@ -18,7 +18,7 @@ import 'package:great_talk/views/search_user_posts_page.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 
 final getPages = [
-  GetPage(name: "/", page: () => const MyApp()),
+  GetPage(name: MyApp.path, page: () => const MyApp()),
   GetPage(name: AccountPage.path, page: () => const AccountPage()),
   GetPage(name: AdminPage.path, page: () => const AdminPage()),
   GetPage(
@@ -26,7 +26,7 @@ final getPages = [
       page: () => const BookmarkCategoriesPage()),
   GetPage(name: BookmarksPage.path, page: () => const BookmarksPage()),
   GetPage(
-    name: "/chat/users/:uid/posts/:postId",
+    name: RealtimeResPage.path,
     page: () => const RealtimeResPage(),
   ),
   GetPage(
@@ -45,7 +45,7 @@ final getPages = [
       page: () => const ReauthenticateToDeletePage()),
   GetPage(name: SubscribePage.path, page: () => const SubscribePage()),
   GetPage(name: UserDeletedPage.path, page: () => const UserDeletedPage()),
-  GetPage(name: "/users/:uid", page: () => const UserProfilePage()),
+  GetPage(name: UserProfilePage.path, page: () => const UserProfilePage()),
   GetPage(
-      name: "/users/:uid/posts/search", page: () => const SearchUserPostsPage())
+      name: SearchUserPostsPage.path, page: () => const SearchUserPostsPage())
 ];

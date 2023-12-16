@@ -9,13 +9,14 @@ import 'package:great_talk/views/first_page/first_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+  static const path = "/";
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ThemeController());
     return Obx(() => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         getPages: getPages,
-        initialRoute: '/',
+        initialRoute: path,
         title: F.title,
         theme: controller.isDarkTheme.value
             ? darkThemeData(context)

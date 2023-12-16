@@ -12,6 +12,7 @@ import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/mosaic_card/components/mosaic_post_child.dart';
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
+import 'package:great_talk/views/user_profile_page.dart';
 
 class PostCard extends StatelessWidget with CurrentUserMixin {
   const PostCard({Key? key, required this.post, required this.uint8list})
@@ -71,8 +72,8 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
                       post.typedTitle().value,
                     ),
                     TextButton(
-                      onPressed: () =>
-                          Get.toNamed("/users/${post.typedPoster().uid}"),
+                      onPressed: () => Get.toNamed(
+                          UserProfilePage.generatePath(post.typedPoster().uid)),
                       child: EllipsisText(
                         "by ${post.typedPoster().nameValue}",
                         style: TextStyle(
