@@ -33,7 +33,6 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
 
   void addAllDocs(List<QDoc> elements) async {
     if (isProcessing) return;
-    docs([]); // 配列を初期化
     startProcess();
     final docIds = docs.map((e) => e.doc.id).toList();
     for (final element in elements) {
@@ -42,7 +41,6 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
         docs.add(ImageQDocWraper(element, image));
       }
     }
-    docs([...docs]);
     endProcess();
   }
 
