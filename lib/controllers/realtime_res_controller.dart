@@ -260,7 +260,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
 
   bool _allowChat() {
     return chatCount < RemoteConfigController.to.chatLimitPerDay ||
-        PurchasesController.to.purchases.isNotEmpty;
+        PurchasesController.to.isSubscribing();
   }
 
   Future<void> _requestReview() async {
