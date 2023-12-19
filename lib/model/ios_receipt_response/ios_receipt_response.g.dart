@@ -11,6 +11,7 @@ _$_IOSReceiptResponse _$$_IOSReceiptResponseFromJson(
     _$_IOSReceiptResponse(
       responseCode: json['responseCode'] as int,
       message: json['message'] as String,
+      latestReceipt: json['latestReceipt'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$_IOSReceiptResponseToJson(
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$_IOSReceiptResponseToJson(
     <String, dynamic>{
       'responseCode': instance.responseCode,
       'message': instance.message,
+      'latestReceipt': instance.latestReceipt,
     };

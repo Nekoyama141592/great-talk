@@ -470,13 +470,6 @@ exports.verifyIOSReceipt = functions
             message: "最新のレシートが存在しません",
         });
       }
-      const transactionID = latestReceipt["transaction_id"];
-      const oldTx = await getDataFromFirestore("iosTransactions",transactionID);
-      // 存在しないならFirestoreに保存。
-      if (!oldTx.exists) {
-        await saveDataToFirestore(latestReceipt, "iosTransactions",transactionID);
-        await saveDataToFirestore(latestReceipt, "newIosTransactions",transactionID);
-      }
       // 期限内であることを確認する
       const now = Date.now();
       const expireDate = Number(latestReceipt["expires_date_ms"]);
@@ -484,12 +477,21 @@ exports.verifyIOSReceipt = functions
         res.status(200).send({
             responseCode: 200,
             message: "レシートの検証に成功しました",
+            latestReceipt: latestReceipt,
         });
-        return;
       } else {
         res.status(200).send({
             responseCode: 403,
             message: "期限が切れています",
+            latestReceipt: latestReceipt,
         });
+      }
+      // Responseを送信後、レシートをCloud Firestoreに保存する
+      const transactionID = latestReceipt["transaction_id"];
+      const oldTx = await getDataFromFirestore("iosTransactions",transactionID);
+      // 存在しないなら非同期でFirestoreに保存。
+      if (!oldTx.exists) {
+        saveDataToFirestore(latestReceipt, "iosTransactions",transactionID);
+        saveDataToFirestore(latestReceipt, "newIosTransactions",transactionID);
       }
 });

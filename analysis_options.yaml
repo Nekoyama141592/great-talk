@@ -12,5 +12,6 @@ analyzer:
     - "lib/infrastructure/firestore/mocks/mock_q_doc.dart"
     - "lib/infrastructure/firestore/mocks/mock_doc.dart"
     - "lib/model/moderation_label/moderation_label.dart"
+    - "lib/model/ios_latest_receipt/ios_latest_receipt.dart"
   errors:
     invalid_annotation_target: ignore

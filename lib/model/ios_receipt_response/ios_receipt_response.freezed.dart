@@ -22,6 +22,7 @@ IOSReceiptResponse _$IOSReceiptResponseFromJson(Map<String, dynamic> json) {
 mixin _$IOSReceiptResponse {
   int get responseCode => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get latestReceipt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,8 @@ abstract class $IOSReceiptResponseCopyWith<$Res> {
           IOSReceiptResponse value, $Res Function(IOSReceiptResponse) then) =
       _$IOSReceiptResponseCopyWithImpl<$Res, IOSReceiptResponse>;
   @useResult
-  $Res call({int responseCode, String message});
+  $Res call(
+      {int responseCode, String message, Map<String, dynamic>? latestReceipt});
 }
 
 /// @nodoc
@@ -53,6 +55,7 @@ class _$IOSReceiptResponseCopyWithImpl<$Res, $Val extends IOSReceiptResponse>
   $Res call({
     Object? responseCode = null,
     Object? message = null,
+    Object? latestReceipt = freezed,
   }) {
     return _then(_value.copyWith(
       responseCode: null == responseCode
@@ -63,6 +66,10 @@ class _$IOSReceiptResponseCopyWithImpl<$Res, $Val extends IOSReceiptResponse>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      latestReceipt: freezed == latestReceipt
+          ? _value.latestReceipt
+          : latestReceipt // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 }
@@ -75,7 +82,8 @@ abstract class _$$_IOSReceiptResponseCopyWith<$Res>
       __$$_IOSReceiptResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int responseCode, String message});
+  $Res call(
+      {int responseCode, String message, Map<String, dynamic>? latestReceipt});
 }
 
 /// @nodoc
@@ -91,6 +99,7 @@ class __$$_IOSReceiptResponseCopyWithImpl<$Res>
   $Res call({
     Object? responseCode = null,
     Object? message = null,
+    Object? latestReceipt = freezed,
   }) {
     return _then(_$_IOSReceiptResponse(
       responseCode: null == responseCode
@@ -101,15 +110,23 @@ class __$$_IOSReceiptResponseCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      latestReceipt: freezed == latestReceipt
+          ? _value._latestReceipt
+          : latestReceipt // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_IOSReceiptResponse implements _IOSReceiptResponse {
+class _$_IOSReceiptResponse extends _IOSReceiptResponse {
   const _$_IOSReceiptResponse(
-      {required this.responseCode, required this.message});
+      {required this.responseCode,
+      required this.message,
+      final Map<String, dynamic>? latestReceipt})
+      : _latestReceipt = latestReceipt,
+        super._();
 
   factory _$_IOSReceiptResponse.fromJson(Map<String, dynamic> json) =>
       _$$_IOSReceiptResponseFromJson(json);
@@ -118,10 +135,19 @@ class _$_IOSReceiptResponse implements _IOSReceiptResponse {
   final int responseCode;
   @override
   final String message;
+  final Map<String, dynamic>? _latestReceipt;
+  @override
+  Map<String, dynamic>? get latestReceipt {
+    final value = _latestReceipt;
+    if (value == null) return null;
+    if (_latestReceipt is EqualUnmodifiableMapView) return _latestReceipt;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'IOSReceiptResponse(responseCode: $responseCode, message: $message)';
+    return 'IOSReceiptResponse(responseCode: $responseCode, message: $message, latestReceipt: $latestReceipt)';
   }
 
   @override
@@ -131,12 +157,15 @@ class _$_IOSReceiptResponse implements _IOSReceiptResponse {
             other is _$_IOSReceiptResponse &&
             (identical(other.responseCode, responseCode) ||
                 other.responseCode == responseCode) &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality()
+                .equals(other._latestReceipt, _latestReceipt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, responseCode, message);
+  int get hashCode => Object.hash(runtimeType, responseCode, message,
+      const DeepCollectionEquality().hash(_latestReceipt));
 
   @JsonKey(ignore: true)
   @override
@@ -153,10 +182,12 @@ class _$_IOSReceiptResponse implements _IOSReceiptResponse {
   }
 }
 
-abstract class _IOSReceiptResponse implements IOSReceiptResponse {
+abstract class _IOSReceiptResponse extends IOSReceiptResponse {
   const factory _IOSReceiptResponse(
       {required final int responseCode,
-      required final String message}) = _$_IOSReceiptResponse;
+      required final String message,
+      final Map<String, dynamic>? latestReceipt}) = _$_IOSReceiptResponse;
+  const _IOSReceiptResponse._() : super._();
 
   factory _IOSReceiptResponse.fromJson(Map<String, dynamic> json) =
       _$_IOSReceiptResponse.fromJson;
@@ -165,6 +196,8 @@ abstract class _IOSReceiptResponse implements IOSReceiptResponse {
   int get responseCode;
   @override
   String get message;
+  @override
+  Map<String, dynamic>? get latestReceipt;
   @override
   @JsonKey(ignore: true)
   _$$_IOSReceiptResponseCopyWith<_$_IOSReceiptResponse> get copyWith =>
