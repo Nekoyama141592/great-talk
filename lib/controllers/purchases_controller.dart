@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/debug_constants.dart';
@@ -28,46 +29,6 @@ class PurchasesController extends GetxController {
   final isAvailable = false.obs;
   final loading = false.obs;
   final isPremiumMode = false.obs;
-
-  void _addPurchase(PurchaseDetails purchaseDetails) =>
-      purchases(List.from(purchases)..add(purchaseDetails));
-
-  bool isSubscribing() {
-    return purchases.isNotEmpty;
-  }
-
-  bool _isPremiumSubscribing() {
-    return purchases
-        .map((element) => element.productID)
-        .toList()
-        .contains(kPremiumSubscriptionId);
-  }
-
-  bool hasProductBeenPurchased(ProductDetails productDetails) {
-    final purchaseIds = purchases.map((element) => element.productID).toList();
-    final result = purchaseIds.contains(productDetails.id);
-    return result;
-  }
-
-  void onSwichChanged(bool value) async {
-    if (value == false) {
-      isPremiumMode(value);
-      return;
-    }
-    await restorePurchases();
-    if (_isPremiumSubscribing()) {
-      isPremiumMode(value);
-    } else {
-      Get.toNamed(SubscribePage.path); // サブスクページへ飛ばす.
-      UIHelper.showFlutterToast("プレミアムプランに加入する必要があります");
-    }
-  }
-
-  Future<void> restorePurchases() async {
-    if (purchases.isEmpty) {
-      await repository.restorePurchases(inAppPurchase);
-    }
-  }
 
   @override
   void onInit() async {
@@ -106,6 +67,54 @@ class PurchasesController extends GetxController {
     await _fetchProducts();
     loading(false);
   }
+
+  void _addPurchase(PurchaseDetails purchaseDetails) =>
+      purchases(List.from(purchases)..add(purchaseDetails));
+
+  bool isSubscribing() {
+    return purchases.isNotEmpty;
+  }
+
+  bool _isPremiumSubscribing() {
+    return purchases
+        .map((element) => element.productID)
+        .toList()
+        .contains(kPremiumSubscriptionId);
+  }
+  String get subscriptionText {
+    if (!isSubscribing()) {
+      return "何も契約していません。";
+    } else {
+      final planName = getPlanName(purchases.first.productID);
+      return "$planNameを契約しています。";
+    }
+  }
+  bool hasProductBeenPurchased(ProductDetails productDetails) {
+    final purchaseIds = purchases.map((element) => element.productID).toList();
+    final result = purchaseIds.contains(productDetails.id);
+    return result;
+  }
+
+  void onSwichChanged(bool value) async {
+    if (value == false) {
+      isPremiumMode(value);
+      return;
+    }
+    await restorePurchases();
+    if (_isPremiumSubscribing()) {
+      isPremiumMode(value);
+    } else {
+      Get.toNamed(SubscribePage.path); // サブスクページへ飛ばす.
+      UIHelper.showFlutterToast("プレミアムプランに加入する必要があります");
+    }
+  }
+
+  Future<void> restorePurchases() async {
+    if (purchases.isEmpty) {
+      await repository.restorePurchases(inAppPurchase);
+    }
+  }
+
 
   Future<void> _setDelegate() async {
     if (Platform.isIOS) {
