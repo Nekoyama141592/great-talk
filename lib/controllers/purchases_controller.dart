@@ -10,7 +10,6 @@ import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
-import 'package:great_talk/model/ios_receipt_response/ios_receipt_response.dart';
 import 'package:great_talk/repository/purchases_repository.dart';
 import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -81,6 +80,7 @@ class PurchasesController extends GetxController {
         .toList()
         .contains(kPremiumSubscriptionId);
   }
+
   String get subscriptionText {
     if (!isSubscribing()) {
       return "何も契約していません。";
@@ -89,6 +89,7 @@ class PurchasesController extends GetxController {
       return "$planNameを契約しています。";
     }
   }
+
   bool hasProductBeenPurchased(ProductDetails productDetails) {
     final purchaseIds = purchases.map((element) => element.productID).toList();
     final result = purchaseIds.contains(productDetails.id);
@@ -115,7 +116,6 @@ class PurchasesController extends GetxController {
     }
   }
 
-
   Future<void> _setDelegate() async {
     if (Platform.isIOS) {
       final iosPlatformAddition = inAppPurchase
@@ -140,22 +140,27 @@ class PurchasesController extends GetxController {
 
   Future<bool> verifyPurchase(PurchaseDetails purchaseDetails) async {
     if (Platform.isAndroid) {
-      _postAndroidPurchase(purchaseDetails);
-      return true;
-    }
-    if (Platform.isIOS) {
-      final result = await getIOSResult(
+      // iOSの場合
+      late bool isValid;
+      final result = await repository.getAndroidReceipt(purchaseDetails);
+      result.when(success: (res) {
+        isValid = true;
+      }, failure: () {
+        isValid = false;
+      });
+      return isValid;
+    } else {
+      // iOSの場合
+      late bool isValid;
+      final result = await repository.getIOSReceipt(
           purchaseDetails.verificationData.localVerificationData);
-      if (result == null) {
-        await UIHelper.showFlutterToast("サーバーエラーにより、購入アイテムが検証できません");
-        return false;
-      } else {
-        if (result.responseCode == 200) {
-          return true;
-        }
-      }
+      result.when(success: (res) {
+        isValid = true;
+      }, failure: () {
+        isValid = false;
+      });
+      return isValid;
     }
-    return false;
   }
 
   void enablePremiumMode() {
@@ -196,21 +201,6 @@ class PurchasesController extends GetxController {
     }
   }
 
-  Future<void> _postAndroidPurchase(PurchaseDetails purchaseDetails) async {
-    await repository.postAndroidPurchase(purchaseDetails);
-  }
-
-  Future<IOSReceiptResponse?> getIOSResult(String token) async {
-    IOSReceiptResponse? iosReceiptResponse;
-    final res = await repository.getIOSResult(token);
-    res.when(success: (result) {
-      iosReceiptResponse = result;
-    }, failure: () {
-      iosReceiptResponse = null;
-    });
-    return iosReceiptResponse;
-  }
-
   Future<void> onPurchaseButtonPressed(ProductDetails productDetails) async {
     if (loading.value || isUseMockData) return;
     await cancelTransctions();
@@ -224,7 +214,13 @@ class PurchasesController extends GetxController {
         : PurchaseParam(productDetails: productDetails);
     await UIHelper.showFlutterToast("情報を取得しています。 \nしばらくお待ちください。");
     loading(true);
-    await repository.buyNonConsumable(inAppPurchase, purchaseParam);
+    final result =
+        await repository.buyNonConsumable(inAppPurchase, purchaseParam);
+    result.when(
+        success: (_) {},
+        failure: () {
+          UIHelper.showFlutterToast("もう一度ボタンを押してください");
+        });
     loading(false);
   }
 

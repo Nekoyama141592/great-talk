@@ -446,7 +446,7 @@ exports.onUserUpdateLogCreate = functions
 );
 exports.verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
     if (req.method !== "POST") {
-        res.status(403).send({ error: "POSTリクエストではありません"});
+        res.status(403).send();
         return;
     }
     const json = req.body.data;
@@ -475,17 +475,15 @@ exports.verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
                 token: decodedReceipt["purchaseToken"],
             });
         } catch(error) {
-            res.status(403).send({ error: "Google Developer APIへのリクエストが正確ではありません"});
+            res.status(403).send();
             return;
         }
 
         const latestReceipt = response.data;
         if (!latestReceipt || response.status !== 200) {
-            res.status(403).send({ error: "最新のレシートが存在しません"});
+            res.status(403).send();
             return;
         } else {
-            const transactionID = json["purchaseID"].replace("GPA.", "");
-            saveLatestReceipt(latestReceipt,transactionID,false);
             res.status(200).send({
                 responseCode: 200,
                 message: "レシートの検証に成功しました",
@@ -495,17 +493,18 @@ exports.verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
         }
     }
 });
+// ios
 exports.verifyIOSReceipt = functions
 .runWith({secrets: ["APP_SHARED_SECRET"],})
 .https.onRequest(async (req, res) => {
     const RECEIPT_VERIFICATION_PASSWORD_FOR_IOS = process.env.APP_SHARED_SECRET;
     if (req.method !== "POST") {
-        res.status(403).send({ error: "POSTリクエストではありません"});
+        res.status(403).send();
         return;
     }
     const verificationData = req.body.data;
     if (!verificationData) {
-        res.status(403).send({ error: "verificationDataがありません"});
+        res.status(403).send();
         return;
     }
     let response;
@@ -523,30 +522,27 @@ exports.verifyIOSReceipt = functions
             });
         }
     } catch(err) {
-        res.status(400).send({ error: "axiosのリクエストが失敗しました"});
+        res.status(400).send();
         return;
     }
     const result = response.data;
     if (result["status"] !== 0) {
-        res.status(403).send({ error: "POSTリクエストではありません"});
+        res.status(403).send();
         return;
     }
     if (!result["receipt"] || result["receipt"]["bundle_id"] !== IOS_PKG_NAME) {
-        res.status(403).send({ error: "正しいレシートではありません"});
+        res.status(403).send();
         return;
     }
     const latestReceipt = result["latest_receipt_info"][0];
       if (latestReceipt === null || latestReceipt === undefined) {
-        res.status(403).send({ error: "最新のレシートではありません"});
+        res.status(403).send();
         return;
       }
       // 期限内であることを確認する
       const now = Date.now();
       const expireDate = Number(latestReceipt["expires_date_ms"]);
       if (now < expireDate) {
-        // // 非同期でレシートをCloud Firestoreに保存する
-        const transactionID = latestReceipt["transaction_id"];
-        saveLatestReceipt(latestReceipt,transactionID,true);
         res.status(200).send({
             responseCode: 200,
             message: "レシートの検証に成功しました",
@@ -554,7 +550,7 @@ exports.verifyIOSReceipt = functions
         });
         return;
       } else {
-        res.status(403).send({ error: "有効期限が切れています"});
+        res.status(409).send();
         return;
       }
 });
