@@ -1,17 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyIOSReceipt = exports.verifyAndroidReceipt = void 0;
+// 基本的な設定
 const functions = require("firebase-functions");
-const axios_1 = require("axios");
 const admin = require("firebase-admin");
 admin.initializeApp();
 const fireStore = admin.firestore();
+const fHttps = functions.https;
+// レシート検証(iOS)
+const axios_1 = require("axios");
 const RECEIPT_VERIFICATION_ENDPOINT_SANDBOX = "https://sandbox.itunes.apple.com/verifyReceipt";
 const RECEIPT_VERIFICATION_ENDPOINT_FOR_IOS_PROD = "https://buy.itunes.apple.com/verifyReceipt";
 const config = functions.config();
 const appStoreConfig = config.appstore;
 const IOS_PKG_NAME = appStoreConfig.ios_pkg_name;
-const fHttps = functions.https;
+// レシート検証(Android)
+const { google } = require("googleapis");
 // firestore
 const userPath = "public/{version}/users/{uid}";
 const privateUserPath = "private/{version}/privateUsers/{uid}";
@@ -56,18 +60,49 @@ async function deleteFromColRef(colRef) {
     }
 }
 
-function saveDataToFirestore(json, path,id) {
+function saveDataToFirestore(json, path, id) {
     const db = admin.firestore();
-    return db.collection(path).doc(id).set(json);
+    return new Promise((resolve, reject) => {
+        db.collection(path).doc(id).set(json)
+            .then(() => {
+                resolve('Document successfully written!');
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
 }
-function getDataFromFirestore(path,id) {
+
+function getDataFromFirestore(path, id) {
     const db = admin.firestore();
-    return db.collection(path).doc(id).get();
+    return new Promise((resolve, reject) => {
+        db.collection(path).doc(id).get()
+            .then((doc) => {
+                if (doc.exists) {
+                    resolve(doc.data());
+                } else {
+                    resolve(null);
+                }
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
 }
 function mul100AndRoundingDown(num) {
     const mul100 = num * 100; // ex) 0.9988を99.88にする
     const result = Math.floor(mul100); // 数字を丸める
     return result;
+}
+async function saveLatestReceipt(latestReceipt,transactionID,isIos) {
+    const transactionsPath = isIos ? "iosTransactions" : "androidTransactions";
+    const newTransactionsPath = isIos ? "newIosTransactions" : "newAndroidTransactions";
+    const oldTx = await getDataFromFirestore(transactionsPath,transactionID);
+    // 存在しないなら非同期でFirestoreに保存。
+    if (!oldTx.exists) {
+        saveDataToFirestore(latestReceipt, transactionsPath,transactionID);
+        saveDataToFirestore(latestReceipt, newTransactionsPath,transactionID);
+    }
 }
 async function detectDominantLanguage(text) {
     updateAWSConfig();
@@ -188,6 +223,29 @@ async function detectModerationLabels(bucketName, fileName) {
 
     return detectedImage;
 }
+function getPrivateKey(privateKey) {
+    const key  = chunkSplit(privateKey, 64, '\n');
+    const pkey = '-----BEGIN PRIVATE KEY-----\n' + key + '-----END PRIVATE KEY-----\n';
+
+    return pkey;
+  }
+  
+  function getPublicKey(publicKey) {
+    const key = chunkSplit(publicKey, 64, '\n');
+    const pkey = '-----BEGIN PUBLIC KEY-----\n' + key + '-----END PUBLIC KEY-----\n';
+  
+    return pkey;
+  }
+  
+  function chunkSplit(str, len, end) {
+    const match = str.match(new RegExp('.{0,' + len + '}', 'g'));
+    if (!match) {
+      return '';
+    }
+  
+    return match.join(end);
+  }
+
 exports.onFollowerCreate = functions.firestore.document(`${userPath}/followers/{followerUid}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
@@ -388,43 +446,66 @@ exports.onUserUpdateLogCreate = functions
 );
 exports.verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
     if (req.method !== "POST") {
-        res.status(200).send({
-            responseCode: 403,
-            message: "POSTリクエストではありません！！",
-        });
+        res.status(403).send({ error: "POSTリクエストではありません"});
         return;
     }
     const json = req.body.data;
-    res.status(200).send({
-        responseCode: 200,
-        message: "Receipt Android verification successfully.",
+    const privateKey = getPrivateKey(functions.config().env.private_key);
+    const authClient = new google.auth.JWT({
+        email: functions.config().env.client_email,
+        key: privateKey,
+        scopes: ["https://www.googleapis.com/auth/androidpublisher"],
     });
-    const docID = json["purchaseID"].replace("GPA.", "");
-    const oldTx = await getDataFromFirestore("androidPurchases",docID);
-    // 存在しないならFirestoreに保存
-    if (!oldTx.exists) {
-        saveDataToFirestore(json,"androidPurchases",docID);
-        saveDataToFirestore(json,"newAndroidPurchases",docID);
+    const playDeveloperApiClient = google.androidpublisher({
+        version: "v3",
+        auth: authClient,
+    });
+    const receipt = json.verificationData.localVerificationData;
+    const decodedReceipt = JSON.parse(receipt);
+    const typeOfSubscription = decodedReceipt["autoRenewing"];
+    const ANDROID_PACKAGE_NAME = "com.firebaseapp.great_talk_dev";
+    // decode
+    let response;
+    if (typeOfSubscription) {
+        // サブスクアイテム
+        try {
+            response = await playDeveloperApiClient.purchases.subscriptions.get({
+                packageName: ANDROID_PACKAGE_NAME,
+                subscriptionId: decodedReceipt["productId"],
+                token: decodedReceipt["purchaseToken"],
+            });
+        } catch(error) {
+            res.status(403).send({ error: "Google Developer APIへのリクエストが正確ではありません"});
+            return;
+        }
+
+        const latestReceipt = response.data;
+        if (!latestReceipt || response.status !== 200) {
+            res.status(403).send({ error: "最新のレシートが存在しません"});
+            return;
+        } else {
+            const transactionID = json["purchaseID"].replace("GPA.", "");
+            saveLatestReceipt(latestReceipt,transactionID,false);
+            res.status(200).send({
+                responseCode: 200,
+                message: "レシートの検証に成功しました",
+                latestReceipt: latestReceipt,
+            });
+            return;
+        }
     }
-    return;
 });
 exports.verifyIOSReceipt = functions
 .runWith({secrets: ["APP_SHARED_SECRET"],})
 .https.onRequest(async (req, res) => {
     const RECEIPT_VERIFICATION_PASSWORD_FOR_IOS = process.env.APP_SHARED_SECRET;
     if (req.method !== "POST") {
-        res.status(200).send({
-            responseCode: 403,
-            message: "POSTリクエストではありません！！",
-        });
+        res.status(403).send({ error: "POSTリクエストではありません"});
         return;
     }
     const verificationData = req.body.data;
     if (!verificationData) {
-        res.status(200).send({
-            responseCode: 403,
-            message: "verificationDataがありません",
-        });
+        res.status(403).send({ error: "verificationDataがありません"});
         return;
     }
     let response;
@@ -442,56 +523,38 @@ exports.verifyIOSReceipt = functions
             });
         }
     } catch(err) {
-        res.status(200).send({
-            responseCode: 400,
-            message: "axiosのリクエストが失敗しました",
-        });
+        res.status(400).send({ error: "axiosのリクエストが失敗しました"});
         return;
     }
     const result = response.data;
     if (result["status"] !== 0) {
-        res.status(200).send({
-            responseCode: 403,
-            message: `statusが0ではありません.${JSON.stringify(response.data)}`,
-        });
+        res.status(403).send({ error: "POSTリクエストではありません"});
         return;
     }
     if (!result["receipt"] || result["receipt"]["bundle_id"] !== IOS_PKG_NAME) {
-        res.status(200).send({
-            responseCode: 403,
-            message: "正しいレシートではありません",
-        });
+        res.status(403).send({ error: "正しいレシートではありません"});
         return;
     }
     const latestReceipt = result["latest_receipt_info"][0];
       if (latestReceipt === null || latestReceipt === undefined) {
-        res.status(200).send({
-            responseCode: 403,
-            message: "最新のレシートが存在しません",
-        });
+        res.status(403).send({ error: "最新のレシートではありません"});
+        return;
       }
       // 期限内であることを確認する
       const now = Date.now();
       const expireDate = Number(latestReceipt["expires_date_ms"]);
       if (now < expireDate) {
+        // // 非同期でレシートをCloud Firestoreに保存する
+        const transactionID = latestReceipt["transaction_id"];
+        saveLatestReceipt(latestReceipt,transactionID,true);
         res.status(200).send({
             responseCode: 200,
             message: "レシートの検証に成功しました",
             latestReceipt: latestReceipt,
         });
+        return;
       } else {
-        res.status(200).send({
-            responseCode: 403,
-            message: "期限が切れています",
-            latestReceipt: latestReceipt,
-        });
-      }
-      // Responseを送信後、レシートをCloud Firestoreに保存する
-      const transactionID = latestReceipt["transaction_id"];
-      const oldTx = await getDataFromFirestore("iosTransactions",transactionID);
-      // 存在しないなら非同期でFirestoreに保存。
-      if (!oldTx.exists) {
-        saveDataToFirestore(latestReceipt, "iosTransactions",transactionID);
-        saveDataToFirestore(latestReceipt, "newIosTransactions",transactionID);
+        res.status(403).send({ error: "有効期限が切れています"});
+        return;
       }
 });
