@@ -62,33 +62,9 @@ async function deleteFromColRef(colRef) {
 
 function saveDataToFirestore(json, path, id) {
     const db = admin.firestore();
-    return new Promise((resolve, reject) => {
-        db.collection(path).doc(id).set(json)
-            .then(() => {
-                resolve('Document successfully written!');
-            })
-            .catch((error) => {
-                reject(error);
-            });
-    });
+    return db.collection(path).doc(id).set(json);
 }
 
-function getDataFromFirestore(path, id) {
-    const db = admin.firestore();
-    return new Promise((resolve, reject) => {
-        db.collection(path).doc(id).get()
-            .then((doc) => {
-                if (doc.exists) {
-                    resolve(doc.data());
-                } else {
-                    resolve(null);
-                }
-            })
-            .catch((error) => {
-                reject(error);
-            });
-    });
-}
 function mul100AndRoundingDown(num) {
     const mul100 = num * 100; // ex) 0.9988を99.88にする
     const result = Math.floor(mul100); // 数字を丸める
@@ -97,7 +73,7 @@ function mul100AndRoundingDown(num) {
 async function saveLatestReceipt(latestReceipt,transactionID,isIos) {
     const transactionsPath = isIos ? "iosTransactions" : "androidTransactions";
     const newTransactionsPath = isIos ? "newIosTransactions" : "newAndroidTransactions";
-    const oldTx = await getDataFromFirestore(transactionsPath,transactionID);
+    const oldTx = await admin.firestore().collection(transactionsPath).doc(transactionID).get();
     // 存在しないなら非同期でFirestoreに保存。
     if (!oldTx.exists) {
         saveDataToFirestore(latestReceipt, transactionsPath,transactionID);
@@ -483,12 +459,21 @@ exports.verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
         if (!latestReceipt || response.status !== 200) {
             res.status(403).send();
             return;
-        } else {
+        }
+        // 期限内であることを確認する
+        const now = Date.now();
+        const expireDate = Number(latestReceipt["expiryTimeMillis"]);
+        if (now < expireDate) {
+            const transactionID = latestReceipt['orderId'].replace("GPA.", "");
+            await saveLatestReceipt(latestReceipt,transactionID,false); // awaitを使用しないと保存されない
             res.status(200).send({
                 responseCode: 200,
                 message: "レシートの検証に成功しました",
                 latestReceipt: latestReceipt,
             });
+            return;
+        } else {
+            res.status(403).send();
             return;
         }
     }
@@ -535,22 +520,24 @@ exports.verifyIOSReceipt = functions
         return;
     }
     const latestReceipt = result["latest_receipt_info"][0];
-      if (latestReceipt === null || latestReceipt === undefined) {
+    if (latestReceipt === null || latestReceipt === undefined) {
         res.status(403).send();
         return;
-      }
-      // 期限内であることを確認する
-      const now = Date.now();
-      const expireDate = Number(latestReceipt["expires_date_ms"]);
-      if (now < expireDate) {
+    }
+    // 期限内であることを確認する
+    const now = Date.now();
+    const expireDate = Number(latestReceipt["expires_date_ms"]);
+    if (now < expireDate) {
+        const transactionID = latestReceipt["transaction_id"];
+        await saveLatestReceipt(latestReceipt,transactionID,true); // awaitを使用しないと保存されない
         res.status(200).send({
             responseCode: 200,
             message: "レシートの検証に成功しました",
             latestReceipt: latestReceipt,
         });
         return;
-      } else {
-        res.status(409).send();
+    } else {
+        res.status(403).send();
         return;
-      }
+    }
 });
