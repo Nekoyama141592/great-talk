@@ -6,7 +6,6 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp();
 const fireStore = admin.firestore();
-const fHttps = functions.https;
 // レシート検証(iOS)
 const axios_1 = require("axios");
 const RECEIPT_VERIFICATION_ENDPOINT_SANDBOX = "https://sandbox.itunes.apple.com/verifyReceipt";
@@ -420,7 +419,8 @@ exports.onUserUpdateLogCreate = functions
         }
     }
 );
-exports.verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
+exports.verifyAndroidReceipt = functions.
+https.onRequest(async (req, res) => {
     if (req.method !== "POST") {
         res.status(403).send();
         return;
@@ -476,7 +476,7 @@ exports.verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
 });
 // ios
 exports.verifyIOSReceipt = functions
-.runWith({secrets: ["APP_SHARED_SECRET"],})
+.runWith({secrets: ["APP_SHARED_SECRET"]})
 .https.onRequest(async (req, res) => {
     const RECEIPT_VERIFICATION_PASSWORD_FOR_IOS = process.env.APP_SHARED_SECRET;
     if (req.method !== "POST") {
