@@ -20,8 +20,6 @@ ReceiptResponse _$ReceiptResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ReceiptResponse {
-  int get responseCode => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
   Map<String, dynamic> get latestReceipt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,8 +34,7 @@ abstract class $ReceiptResponseCopyWith<$Res> {
           ReceiptResponse value, $Res Function(ReceiptResponse) then) =
       _$ReceiptResponseCopyWithImpl<$Res, ReceiptResponse>;
   @useResult
-  $Res call(
-      {int responseCode, String message, Map<String, dynamic> latestReceipt});
+  $Res call({Map<String, dynamic> latestReceipt});
 }
 
 /// @nodoc
@@ -53,19 +50,9 @@ class _$ReceiptResponseCopyWithImpl<$Res, $Val extends ReceiptResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? responseCode = null,
-    Object? message = null,
     Object? latestReceipt = null,
   }) {
     return _then(_value.copyWith(
-      responseCode: null == responseCode
-          ? _value.responseCode
-          : responseCode // ignore: cast_nullable_to_non_nullable
-              as int,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
       latestReceipt: null == latestReceipt
           ? _value.latestReceipt
           : latestReceipt // ignore: cast_nullable_to_non_nullable
@@ -82,8 +69,7 @@ abstract class _$$_ReceiptResponseCopyWith<$Res>
       __$$_ReceiptResponseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int responseCode, String message, Map<String, dynamic> latestReceipt});
+  $Res call({Map<String, dynamic> latestReceipt});
 }
 
 /// @nodoc
@@ -97,19 +83,9 @@ class __$$_ReceiptResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? responseCode = null,
-    Object? message = null,
     Object? latestReceipt = null,
   }) {
     return _then(_$_ReceiptResponse(
-      responseCode: null == responseCode
-          ? _value.responseCode
-          : responseCode // ignore: cast_nullable_to_non_nullable
-              as int,
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
       latestReceipt: null == latestReceipt
           ? _value._latestReceipt
           : latestReceipt // ignore: cast_nullable_to_non_nullable
@@ -121,20 +97,13 @@ class __$$_ReceiptResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_ReceiptResponse extends _ReceiptResponse {
-  const _$_ReceiptResponse(
-      {required this.responseCode,
-      required this.message,
-      required final Map<String, dynamic> latestReceipt})
+  const _$_ReceiptResponse({required final Map<String, dynamic> latestReceipt})
       : _latestReceipt = latestReceipt,
         super._();
 
   factory _$_ReceiptResponse.fromJson(Map<String, dynamic> json) =>
       _$$_ReceiptResponseFromJson(json);
 
-  @override
-  final int responseCode;
-  @override
-  final String message;
   final Map<String, dynamic> _latestReceipt;
   @override
   Map<String, dynamic> get latestReceipt {
@@ -145,7 +114,7 @@ class _$_ReceiptResponse extends _ReceiptResponse {
 
   @override
   String toString() {
-    return 'ReceiptResponse(responseCode: $responseCode, message: $message, latestReceipt: $latestReceipt)';
+    return 'ReceiptResponse(latestReceipt: $latestReceipt)';
   }
 
   @override
@@ -153,17 +122,14 @@ class _$_ReceiptResponse extends _ReceiptResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReceiptResponse &&
-            (identical(other.responseCode, responseCode) ||
-                other.responseCode == responseCode) &&
-            (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality()
                 .equals(other._latestReceipt, _latestReceipt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, responseCode, message,
-      const DeepCollectionEquality().hash(_latestReceipt));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_latestReceipt));
 
   @JsonKey(ignore: true)
   @override
@@ -181,18 +147,12 @@ class _$_ReceiptResponse extends _ReceiptResponse {
 
 abstract class _ReceiptResponse extends ReceiptResponse {
   const factory _ReceiptResponse(
-      {required final int responseCode,
-      required final String message,
-      required final Map<String, dynamic> latestReceipt}) = _$_ReceiptResponse;
+      {required final Map<String, dynamic> latestReceipt}) = _$_ReceiptResponse;
   const _ReceiptResponse._() : super._();
 
   factory _ReceiptResponse.fromJson(Map<String, dynamic> json) =
       _$_ReceiptResponse.fromJson;
 
-  @override
-  int get responseCode;
-  @override
-  String get message;
   @override
   Map<String, dynamic> get latestReceipt;
   @override

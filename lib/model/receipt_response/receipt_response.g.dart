@@ -8,14 +8,10 @@ part of 'receipt_response.dart';
 
 _$_ReceiptResponse _$$_ReceiptResponseFromJson(Map<String, dynamic> json) =>
     _$_ReceiptResponse(
-      responseCode: json['responseCode'] as int,
-      message: json['message'] as String,
       latestReceipt: json['latestReceipt'] as Map<String, dynamic>,
     );
 
 Map<String, dynamic> _$$_ReceiptResponseToJson(_$_ReceiptResponse instance) =>
     <String, dynamic>{
-      'responseCode': instance.responseCode,
-      'message': instance.message,
       'latestReceipt': instance.latestReceipt,
     };

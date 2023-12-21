@@ -466,11 +466,7 @@ exports.verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
         if (now < expireDate) {
             const transactionID = latestReceipt['orderId'].replace("GPA.", "");
             await saveLatestReceipt(latestReceipt,transactionID,false); // awaitを使用しないと保存されない
-            res.status(200).send({
-                responseCode: 200,
-                message: "レシートの検証に成功しました",
-                latestReceipt: latestReceipt,
-            });
+            res.status(200).send({ latestReceipt: latestReceipt,});
             return;
         } else {
             res.status(403).send();
@@ -530,11 +526,7 @@ exports.verifyIOSReceipt = functions
     if (now < expireDate) {
         const transactionID = latestReceipt["transaction_id"];
         await saveLatestReceipt(latestReceipt,transactionID,true); // awaitを使用しないと保存されない
-        res.status(200).send({
-            responseCode: 200,
-            message: "レシートの検証に成功しました",
-            latestReceipt: latestReceipt,
-        });
+        res.status(200).send({ latestReceipt: latestReceipt,});
         return;
     } else {
         res.status(403).send();
