@@ -152,27 +152,30 @@ class PurchasesController extends GetxController {
       List<PurchaseDetails> purchaseDetailsList) async {
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
       await inAppPurchase.completePurchase(purchaseDetails);
-      if (purchaseDetails.pendingCompletePurchase ||
-          purchaseDetails.status == PurchaseStatus.pending) {
-        if (Platform.isAndroid) {
-          // 承認を行う.行わないと払い戻しが行われる.
-          BillingClient client = BillingClient((_) {});
-          await client.acknowledgePurchase(
-              purchaseDetails.verificationData.serverVerificationData);
-        }
+      if (purchaseDetails.isPending) {
+        await _acknowledge(
+            purchaseDetails.verificationData.serverVerificationData);
       }
       // 登録しているサブスクが一つでも認証していれば、もう検証しなくて良い
       if (purchases.isNotEmpty) return;
       if (purchaseDetails.status == PurchaseStatus.error &&
           CurrentUserController.to.isAdmin()) {
         UIHelper.showErrorFlutterToast(purchaseDetails.error!.message);
-      } else if (purchaseDetails.isPending) {
+      } else if (purchaseDetails.isPurchased) {
         final isValid = await verifyPurchase(purchaseDetails);
         if (isValid) {
           deliverProduct(purchaseDetails);
         }
         return;
       }
+    }
+  }
+
+  Future<void> _acknowledge(String serverVerificationData) async {
+    if (Platform.isAndroid) {
+      // 承認を行う.行わないと払い戻しが行われる.
+      BillingClient client = BillingClient((_) {});
+      await client.acknowledgePurchase(serverVerificationData);
     }
   }
 

@@ -18,6 +18,8 @@ extension PurchaseDetailsExtension on PurchaseDetails {
   }
 
   bool get isPending =>
+      pendingCompletePurchase || status == PurchaseStatus.pending;
+  bool get isPurchased =>
       status == PurchaseStatus.purchased || status == PurchaseStatus.restored;
   String _errorMessage() => error?.message ?? "";
 }
