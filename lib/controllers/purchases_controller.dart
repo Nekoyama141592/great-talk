@@ -100,6 +100,10 @@ class PurchasesController extends GetxController {
       await repository.restorePurchases(inAppPurchase);
     }
   }
+  void onRestoreButtonPressed() async {
+    purchases([]);// 購入情報を初期化
+    await restorePurchases(); 
+  }
 
   Future<void> _setDelegate() async {
     if (Platform.isIOS) {
