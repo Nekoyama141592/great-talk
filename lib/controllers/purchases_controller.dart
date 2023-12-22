@@ -9,9 +9,9 @@ import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
+import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:great_talk/repository/purchases_repository.dart';
-import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
@@ -27,7 +27,6 @@ class PurchasesController extends GetxController {
   final products = <ProductDetails>[].obs;
   final isAvailable = false.obs;
   final loading = false.obs;
-  final isPremiumMode = false.obs;
 
   @override
   void onInit() async {
@@ -96,20 +95,6 @@ class PurchasesController extends GetxController {
     return result;
   }
 
-  void onSwichChanged(bool value) async {
-    if (value == false) {
-      isPremiumMode(value);
-      return;
-    }
-    await restorePurchases();
-    if (_isPremiumSubscribing()) {
-      isPremiumMode(value);
-    } else {
-      Get.toNamed(SubscribePage.path); // サブスクページへ飛ばす.
-      UIHelper.showFlutterToast("プレミアムプランに加入する必要があります");
-    }
-  }
-
   Future<void> restorePurchases() async {
     if (purchases.isEmpty) {
       await repository.restorePurchases(inAppPurchase);
@@ -163,12 +148,6 @@ class PurchasesController extends GetxController {
     }
   }
 
-  void enablePremiumMode() {
-    if (_isPremiumSubscribing()) {
-      isPremiumMode(true);
-    }
-  }
-
   Future<void> _listenToPurchaseUpdated(
       List<PurchaseDetails> purchaseDetailsList) async {
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
@@ -183,18 +162,14 @@ class PurchasesController extends GetxController {
         }
       }
       // 登録しているサブスクが一つでも認証していれば、もう検証しなくて良い
-      if (purchases.isNotEmpty) {
-        return;
-      }
+      if (purchases.isNotEmpty) return;
       if (purchaseDetails.status == PurchaseStatus.error &&
           CurrentUserController.to.isAdmin()) {
         UIHelper.showErrorFlutterToast(purchaseDetails.error!.message);
-      } else if (purchaseDetails.status == PurchaseStatus.purchased ||
-          purchaseDetails.status == PurchaseStatus.restored) {
+      } else if (purchaseDetails.isPending) {
         final isValid = await verifyPurchase(purchaseDetails);
         if (isValid) {
           deliverProduct(purchaseDetails);
-          enablePremiumMode(); // Premiumモードを有効化する.
         }
         return;
       }
@@ -263,13 +238,13 @@ class PurchasesController extends GetxController {
   }
 
   // ChatGPTリクエスト
-  int maxToken() => isPremiumMode.value
+  int maxToken() => _isPremiumSubscribing()
       ? ChatGPTConstants.gpt4MaxToken
       : ChatGPTConstants.gptTurboMaxToken;
-  int maxRequestLength() => isPremiumMode.value
+  int maxRequestLength() => _isPremiumSubscribing()
       ? ChatGPTConstants.gpt4MaxRequestLength
       : ChatGPTConstants.gptTurboMaxRequestLength;
-  ChatModel model() => isPremiumMode.value
+  ChatModel model() => _isPremiumSubscribing()
       ? ChatModelFromValue(model: ChatGPTConstants.premiumModel)
       : ChatModelFromValue(model: ChatGPTConstants.basicModel);
 }

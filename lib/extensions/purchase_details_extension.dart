@@ -1,10 +1,9 @@
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:intl/intl.dart';
 
 extension PurchaseDetailsExtension on PurchaseDetails {
   Map<String, dynamic> toJson() {
     return {
-      "formattedDate": convertUnixTimeToDate(),
+      "error": _errorMessage(),
       "productID": productID,
       "purchaseID": purchaseID,
       "verificationData": {
@@ -18,13 +17,7 @@ extension PurchaseDetailsExtension on PurchaseDetails {
     };
   }
 
-  String convertUnixTimeToDate() {
-    if (transactionDate == null) {
-      return "";
-    }
-    final x = int.parse(transactionDate!);
-    final date = DateTime.fromMillisecondsSinceEpoch(x);
-    final formattedDate = DateFormat('yyyy-MM-dd HH:mm').format(date);
-    return formattedDate;
-  }
+  bool get isPending =>
+      status == PurchaseStatus.purchased || status == PurchaseStatus.restored;
+  String _errorMessage() => error?.message ?? "";
 }
