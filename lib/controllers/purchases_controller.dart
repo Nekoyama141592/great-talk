@@ -78,7 +78,7 @@ class PurchasesController extends GetxController {
     return purchases.isNotEmpty || rxCachedReceipt.value.isValid();
   }
 
-  bool _isPremiumSubscribing() {
+  bool isPremiumSubscribing() {
     final cachedReceipt = rxCachedReceipt.value;
     return purchases
             .map((element) => element.productID)
@@ -270,13 +270,13 @@ class PurchasesController extends GetxController {
   }
 
   // ChatGPTリクエスト
-  int maxToken() => _isPremiumSubscribing()
+  int maxToken() => isPremiumSubscribing()
       ? ChatGPTConstants.gpt4MaxToken
       : ChatGPTConstants.gptTurboMaxToken;
-  int maxRequestLength() => _isPremiumSubscribing()
+  int maxRequestLength() => isPremiumSubscribing()
       ? ChatGPTConstants.gpt4MaxRequestLength
       : ChatGPTConstants.gptTurboMaxRequestLength;
-  ChatModel model() => _isPremiumSubscribing()
+  ChatModel model() => isPremiumSubscribing()
       ? ChatModelFromValue(model: ChatGPTConstants.premiumModel)
       : ChatModelFromValue(model: ChatGPTConstants.basicModel);
 }

@@ -8,6 +8,7 @@ class OriginalForm extends StatelessWidget {
       this.decoration,
       this.maxLines,
       this.keyboardType,
+      this.onChanged,
       this.onSaved,
       this.validator})
       : super(key: key);
@@ -16,6 +17,7 @@ class OriginalForm extends StatelessWidget {
   final int? maxLines;
   final TextInputType? keyboardType;
   final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
   final String? Function(String?)? validator;
 
   @override
@@ -26,6 +28,7 @@ class OriginalForm extends StatelessWidget {
         keyboardType: keyboardType,
         maxLines: maxLines,
         decoration: decoration,
+        onChanged: onChanged,
         onSaved: onSaved,
         validator: validator,
       ),

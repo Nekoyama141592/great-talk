@@ -53,6 +53,8 @@
 	<string>画像をアイコンで使用します</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>画像をアイコンで使用します</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>画像を端末に保存します</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
