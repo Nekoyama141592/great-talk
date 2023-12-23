@@ -19,7 +19,9 @@ abstract class ReceiptResponse implements _$ReceiptResponse {
       AndroidReceiptResponse.fromJson(latestReceipt);
   IOSReceiptResponse get iosReceipt =>
       IOSReceiptResponse.fromJson(latestReceipt);
-  String get originalTransactionId => Platform.isIOS ? iosReceipt.original_transaction_id : removeTrailingDots(androidReceipt.orderId);
+  String get originalTransactionId => Platform.isIOS
+      ? iosReceipt.original_transaction_id
+      : removeTrailingDots(androidReceipt.orderId);
 
   String removeTrailingDots(String input) {
     // 正規表現を使用して「..」以降の文字を取り除く

@@ -12,6 +12,7 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
+import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/receipt_response/cached_receipt/cached_receipt.dart';
 import 'package:great_talk/model/receipt_response/receipt_response.dart';
 import 'package:great_talk/repository/purchases_repository.dart';
@@ -22,7 +23,7 @@ import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
-class PurchasesController extends GetxController {
+class PurchasesController extends GetxController with CurrentUserMixin {
   static PurchasesController get to => Get.find<PurchasesController>();
   final purchases = <PurchaseDetails>[].obs;
   final Rx<CachedReceipt> rxCachedReceipt = Rx(CachedReceipt.instance());
@@ -140,7 +141,8 @@ class PurchasesController extends GetxController {
     if (Platform.isAndroid) {
       // iOSの場合
       late bool isValid;
-      final result = await repository.getAndroidReceipt(purchaseDetails);
+      final result =
+          await repository.getAndroidReceipt(purchaseDetails, currentUid());
       result.when(success: (res) async {
         isValid = true;
         await _cachReceipt(res); // キャッシュを行う
@@ -152,7 +154,7 @@ class PurchasesController extends GetxController {
       // iOSの場合
       late bool isValid;
       final result = await repository.getIOSReceipt(
-          purchaseDetails.verificationData.localVerificationData);
+          purchaseDetails.verificationData.localVerificationData, currentUid());
       result.when(success: (res) async {
         isValid = true;
         await _cachReceipt(res); // キャッシュを行う
@@ -164,8 +166,8 @@ class PurchasesController extends GetxController {
   }
 
   Future<void> _cachReceipt(ReceiptResponse receiptResponse) async {
-    rxCachedReceipt(
-        CachedReceipt.fromReceiptResponse(receiptResponse,receiptResponse.originalTransactionId)); // キャッシュする前に上書き
+    rxCachedReceipt(CachedReceipt.fromReceiptResponse(receiptResponse,
+        receiptResponse.originalTransactionId)); // キャッシュする前に上書き
     await PrefsUtility.setJson(
         PrefsKey.receiptReceipt.name, receiptResponse.toJson());
   }
@@ -174,7 +176,8 @@ class PurchasesController extends GetxController {
     final json = await PrefsUtility.getJson(PrefsKey.receiptReceipt.name);
     if (json == null) return;
     final receiptResponse = ReceiptResponse.fromJson(json);
-    rxCachedReceipt(CachedReceipt.fromReceiptResponse(receiptResponse,receiptResponse.originalTransactionId));
+    rxCachedReceipt(CachedReceipt.fromReceiptResponse(
+        receiptResponse, receiptResponse.originalTransactionId));
   }
 
   Future<void> _listenToPurchaseUpdated(

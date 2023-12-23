@@ -20,7 +20,8 @@ abstract class CachedReceipt implements _$CachedReceipt {
   factory CachedReceipt.fromJson(Map<String, dynamic> json) =>
       _$CachedReceiptFromJson(json);
 
-  factory CachedReceipt.fromReceiptResponse(ReceiptResponse response,String originalTransactionId) {
+  factory CachedReceipt.fromReceiptResponse(
+      ReceiptResponse response, String originalTransactionId) {
     if (Platform.isIOS) {
       final iosReceipt = response.iosReceipt;
       return CachedReceipt(
@@ -41,7 +42,11 @@ abstract class CachedReceipt implements _$CachedReceipt {
   }
 
   factory CachedReceipt.instance() => const CachedReceipt(
-      expiryTimeMillis: "", orderId: "",originalTransactionId: "", productId: "", startTimeMillis: "");
+      expiryTimeMillis: "",
+      orderId: "",
+      originalTransactionId: "",
+      productId: "",
+      startTimeMillis: "");
 
   bool isValid() {
     final intExpiryMills = int.tryParse(expiryTimeMillis);

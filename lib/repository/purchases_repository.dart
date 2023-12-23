@@ -41,7 +41,7 @@ class PurchasesRepository {
   }
 
   FutureResult<ReceiptResponse> getAndroidReceipt(
-      PurchaseDetails purchaseDetails) async {
+      PurchaseDetails purchaseDetails, String currentUid) async {
     final instance = dio.Dio();
     Map<String, dynamic>? data;
     try {
@@ -49,6 +49,7 @@ class PurchasesRepository {
           await instance.post(dotenv.get(EnvKeys.VERIFY_ANDROID_ENDPOINT.name),
               data: {
                 "data": purchaseDetails.toJson(),
+                "uid": currentUid,
               },
               options: dio.Options(method: "POST"));
       data = res.data;
@@ -66,7 +67,8 @@ class PurchasesRepository {
     }
   }
 
-  FutureResult<ReceiptResponse> getIOSReceipt(String token) async {
+  FutureResult<ReceiptResponse> getIOSReceipt(
+      String token, String currentUid) async {
     final instance = dio.Dio();
     Map<String, dynamic>? data;
     try {
@@ -74,6 +76,7 @@ class PurchasesRepository {
           await instance.post(dotenv.get(EnvKeys.VERIFY_IOS_ENDPOINT.name),
               data: {
                 "data": token,
+                "uid": currentUid,
               },
               options: dio.Options(method: "POST"));
       data = res.data;
