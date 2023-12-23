@@ -13,6 +13,7 @@ _$_CachedReceipt _$$_CachedReceiptFromJson(Map<String, dynamic> json) =>
       originalTransactionId: json['originalTransactionId'] as String,
       productId: json['productId'] as String,
       startTimeMillis: json['startTimeMillis'] as String,
+      uid: json['uid'] as String,
     );
 
 Map<String, dynamic> _$$_CachedReceiptToJson(_$_CachedReceipt instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$_CachedReceiptToJson(_$_CachedReceipt instance) =>
       'originalTransactionId': instance.originalTransactionId,
       'productId': instance.productId,
       'startTimeMillis': instance.startTimeMillis,
+      'uid': instance.uid,
     };

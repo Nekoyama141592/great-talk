@@ -22,6 +22,7 @@ _$_AndroidReceiptResponse _$$_AndroidReceiptResponseFromJson(
       productId: json['productId'] as String,
       purchaseType: json['purchaseType'] as int,
       startTimeMillis: json['startTimeMillis'] as String,
+      uid: json['uid'] as String,
     );
 
 Map<String, dynamic> _$$_AndroidReceiptResponseToJson(
@@ -40,4 +41,5 @@ Map<String, dynamic> _$$_AndroidReceiptResponseToJson(
       'productId': instance.productId,
       'purchaseType': instance.purchaseType,
       'startTimeMillis': instance.startTimeMillis,
+      'uid': instance.uid,
     };

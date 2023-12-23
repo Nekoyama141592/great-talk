@@ -27,6 +27,7 @@ _$_IOSReceiptResponse _$$_IOSReceiptResponseFromJson(
       subscription_group_identifier:
           json['subscription_group_identifier'] as String,
       transaction_id: json['transaction_id'] as String,
+      uid: json['uid'] as String,
       web_order_line_item_id: json['web_order_line_item_id'] as String,
     );
 
@@ -50,5 +51,6 @@ Map<String, dynamic> _$$_IOSReceiptResponseToJson(
       'quantity': instance.quantity,
       'subscription_group_identifier': instance.subscription_group_identifier,
       'transaction_id': instance.transaction_id,
+      'uid': instance.uid,
       'web_order_line_item_id': instance.web_order_line_item_id,
     };

@@ -34,7 +34,8 @@ class ProductList extends StatelessWidget {
                   productDetails: productDetails,
                   descriptions: const [
                       PlanDescription(text: 'ベーシックプランの全ての機能'),
-                      PlanDescription(text: 'よりハイスペックなAI')
+                      PlanDescription(text: '高精度な応答をするAI'),
+                      PlanDescription(text: '画像を生成するAI'),
                     ]);
         },
       ).toList();

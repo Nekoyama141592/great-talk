@@ -16,7 +16,8 @@ abstract class CachedReceipt implements _$CachedReceipt {
       required String orderId,
       required String originalTransactionId,
       required String productId,
-      required String startTimeMillis}) = _CachedReceipt;
+      required String startTimeMillis,
+      required String uid}) = _CachedReceipt;
   factory CachedReceipt.fromJson(Map<String, dynamic> json) =>
       _$CachedReceiptFromJson(json);
 
@@ -29,7 +30,8 @@ abstract class CachedReceipt implements _$CachedReceipt {
           orderId: iosReceipt.transaction_id,
           originalTransactionId: originalTransactionId,
           productId: iosReceipt.product_id,
-          startTimeMillis: iosReceipt.purchase_date_ms);
+          startTimeMillis: iosReceipt.purchase_date_ms,
+          uid: iosReceipt.uid);
     } else {
       final androidReceipt = response.androidReceipt;
       return CachedReceipt(
@@ -37,7 +39,8 @@ abstract class CachedReceipt implements _$CachedReceipt {
           orderId: androidReceipt.orderId,
           originalTransactionId: originalTransactionId,
           productId: androidReceipt.productId,
-          startTimeMillis: androidReceipt.startTimeMillis);
+          startTimeMillis: androidReceipt.startTimeMillis,
+          uid: androidReceipt.uid);
     }
   }
 
@@ -46,7 +49,8 @@ abstract class CachedReceipt implements _$CachedReceipt {
       orderId: "",
       originalTransactionId: "",
       productId: "",
-      startTimeMillis: "");
+      startTimeMillis: "",
+      uid: "");
 
   bool isValid() {
     final intExpiryMills = int.tryParse(expiryTimeMillis);

@@ -38,6 +38,7 @@ mixin _$IOSReceiptResponse {
   String get subscription_group_identifier =>
       throw _privateConstructorUsedError;
   String get transaction_id => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError; // 独自設定
   String get web_order_line_item_id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -70,6 +71,7 @@ abstract class $IOSReceiptResponseCopyWith<$Res> {
       String quantity,
       String subscription_group_identifier,
       String transaction_id,
+      String uid,
       String web_order_line_item_id});
 }
 
@@ -103,6 +105,7 @@ class _$IOSReceiptResponseCopyWithImpl<$Res, $Val extends IOSReceiptResponse>
     Object? quantity = null,
     Object? subscription_group_identifier = null,
     Object? transaction_id = null,
+    Object? uid = null,
     Object? web_order_line_item_id = null,
   }) {
     return _then(_value.copyWith(
@@ -174,6 +177,10 @@ class _$IOSReceiptResponseCopyWithImpl<$Res, $Val extends IOSReceiptResponse>
           ? _value.transaction_id
           : transaction_id // ignore: cast_nullable_to_non_nullable
               as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       web_order_line_item_id: null == web_order_line_item_id
           ? _value.web_order_line_item_id
           : web_order_line_item_id // ignore: cast_nullable_to_non_nullable
@@ -208,6 +215,7 @@ abstract class _$$_IOSReceiptResponseCopyWith<$Res>
       String quantity,
       String subscription_group_identifier,
       String transaction_id,
+      String uid,
       String web_order_line_item_id});
 }
 
@@ -239,6 +247,7 @@ class __$$_IOSReceiptResponseCopyWithImpl<$Res>
     Object? quantity = null,
     Object? subscription_group_identifier = null,
     Object? transaction_id = null,
+    Object? uid = null,
     Object? web_order_line_item_id = null,
   }) {
     return _then(_$_IOSReceiptResponse(
@@ -310,6 +319,10 @@ class __$$_IOSReceiptResponseCopyWithImpl<$Res>
           ? _value.transaction_id
           : transaction_id // ignore: cast_nullable_to_non_nullable
               as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
       web_order_line_item_id: null == web_order_line_item_id
           ? _value.web_order_line_item_id
           : web_order_line_item_id // ignore: cast_nullable_to_non_nullable
@@ -339,6 +352,7 @@ class _$_IOSReceiptResponse extends _IOSReceiptResponse {
       required this.quantity,
       required this.subscription_group_identifier,
       required this.transaction_id,
+      required this.uid,
       required this.web_order_line_item_id})
       : super._();
 
@@ -380,11 +394,14 @@ class _$_IOSReceiptResponse extends _IOSReceiptResponse {
   @override
   final String transaction_id;
   @override
+  final String uid;
+// 独自設定
+  @override
   final String web_order_line_item_id;
 
   @override
   String toString() {
-    return 'IOSReceiptResponse(expires_date: $expires_date, expires_date_ms: $expires_date_ms, expires_date_pst: $expires_date_pst, in_app_ownership_type: $in_app_ownership_type, is_in_intro_offer_period: $is_in_intro_offer_period, is_trial_period: $is_trial_period, original_purchase_date: $original_purchase_date, original_purchase_date_ms: $original_purchase_date_ms, original_purchase_date_pst: $original_purchase_date_pst, original_transaction_id: $original_transaction_id, product_id: $product_id, purchase_date: $purchase_date, purchase_date_ms: $purchase_date_ms, purchase_date_pst: $purchase_date_pst, quantity: $quantity, subscription_group_identifier: $subscription_group_identifier, transaction_id: $transaction_id, web_order_line_item_id: $web_order_line_item_id)';
+    return 'IOSReceiptResponse(expires_date: $expires_date, expires_date_ms: $expires_date_ms, expires_date_pst: $expires_date_pst, in_app_ownership_type: $in_app_ownership_type, is_in_intro_offer_period: $is_in_intro_offer_period, is_trial_period: $is_trial_period, original_purchase_date: $original_purchase_date, original_purchase_date_ms: $original_purchase_date_ms, original_purchase_date_pst: $original_purchase_date_pst, original_transaction_id: $original_transaction_id, product_id: $product_id, purchase_date: $purchase_date, purchase_date_ms: $purchase_date_ms, purchase_date_pst: $purchase_date_pst, quantity: $quantity, subscription_group_identifier: $subscription_group_identifier, transaction_id: $transaction_id, uid: $uid, web_order_line_item_id: $web_order_line_item_id)';
   }
 
   @override
@@ -430,32 +447,35 @@ class _$_IOSReceiptResponse extends _IOSReceiptResponse {
                     subscription_group_identifier) &&
             (identical(other.transaction_id, transaction_id) ||
                 other.transaction_id == transaction_id) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.web_order_line_item_id, web_order_line_item_id) ||
                 other.web_order_line_item_id == web_order_line_item_id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      expires_date,
-      expires_date_ms,
-      expires_date_pst,
-      in_app_ownership_type,
-      is_in_intro_offer_period,
-      is_trial_period,
-      original_purchase_date,
-      original_purchase_date_ms,
-      original_purchase_date_pst,
-      original_transaction_id,
-      product_id,
-      purchase_date,
-      purchase_date_ms,
-      purchase_date_pst,
-      quantity,
-      subscription_group_identifier,
-      transaction_id,
-      web_order_line_item_id);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        expires_date,
+        expires_date_ms,
+        expires_date_pst,
+        in_app_ownership_type,
+        is_in_intro_offer_period,
+        is_trial_period,
+        original_purchase_date,
+        original_purchase_date_ms,
+        original_purchase_date_pst,
+        original_transaction_id,
+        product_id,
+        purchase_date,
+        purchase_date_ms,
+        purchase_date_pst,
+        quantity,
+        subscription_group_identifier,
+        transaction_id,
+        uid,
+        web_order_line_item_id
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -491,6 +511,7 @@ abstract class _IOSReceiptResponse extends IOSReceiptResponse {
       required final String quantity,
       required final String subscription_group_identifier,
       required final String transaction_id,
+      required final String uid,
       required final String web_order_line_item_id}) = _$_IOSReceiptResponse;
   const _IOSReceiptResponse._() : super._();
 
@@ -532,6 +553,8 @@ abstract class _IOSReceiptResponse extends IOSReceiptResponse {
   @override
   String get transaction_id;
   @override
+  String get uid;
+  @override // 独自設定
   String get web_order_line_item_id;
   @override
   @JsonKey(ignore: true)

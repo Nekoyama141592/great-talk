@@ -5,7 +5,7 @@ exports.verifyIOSReceipt = exports.verifyAndroidReceipt = void 0;
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp();
-const fireStore = admin.firestore();
+const db = admin.firestore();
 // レシート検証(iOS)
 const axios_1 = require("axios");
 const RECEIPT_VERIFICATION_ENDPOINT_SANDBOX = "https://sandbox.itunes.apple.com/verifyReceipt";
@@ -41,7 +41,7 @@ function updateAWSConfig() {
 async function deleteFromColRef(colRef) {
     const qshot = await colRef.get();
     let count = 0;
-    let batch = fireStore.batch();
+    let batch = db.batch();
 
     for (const doc of qshot.docs) {
         batch.delete(doc.ref);
@@ -49,7 +49,7 @@ async function deleteFromColRef(colRef) {
 
         if (count === batchLimit) {
             await batch.commit();
-            batch = fireStore.batch();
+            batch = db.batch();
             count = 0;
         }
     }
@@ -59,9 +59,8 @@ async function deleteFromColRef(colRef) {
     }
 }
 
-function saveDataToFirestore(json, path, id) {
-    const db = admin.firestore();
-    return db.collection(path).doc(id).set(json);
+function saveDataToFirestore(json, colRef, id) {
+    return colRef.doc(id).set(json);
 }
 
 function mul100AndRoundingDown(num) {
@@ -69,14 +68,16 @@ function mul100AndRoundingDown(num) {
     const result = Math.floor(mul100); // 数字を丸める
     return result;
 }
-async function saveLatestReceipt(latestReceipt,transactionID,isIos) {
+async function saveLatestReceipt(latestReceipt,uid,transactionID,isIos) {
     const transactionsPath = isIos ? "iosTransactions" : "androidTransactions";
+    const transactionColRef = db.collection('private').doc('v1').collection('privateUsers').doc(uid).collection(transactionsPath);
     const newTransactionsPath = isIos ? "newIosTransactions" : "newAndroidTransactions";
-    const oldTx = await admin.firestore().collection(transactionsPath).doc(transactionID).get();
+    const newTransactionsColRef = db.collection(newTransactionsPath);
+    const oldTx = await transactionColRef.doc(transactionID).get();
     // 存在しないなら非同期でFirestoreに保存。
     if (!oldTx.exists) {
-        saveDataToFirestore(latestReceipt, transactionsPath,transactionID);
-        saveDataToFirestore(latestReceipt, newTransactionsPath,transactionID);
+        saveDataToFirestore(latestReceipt, transactionColRef,transactionID);
+        saveDataToFirestore(latestReceipt, newTransactionsColRef,transactionID);
     }
 }
 async function detectDominantLanguage(text) {
@@ -269,7 +270,7 @@ exports.onPostCreate = functions
         // followersをget
         const followers = await posterRef.collection("followers").get();
         let count = 0;
-        let batch = fireStore.batch();
+        let batch = db.batch();
         for (const follower of followers.docs) {
             const data = follower.data();
             // followerのtimelineを作成
@@ -278,7 +279,7 @@ exports.onPostCreate = functions
             count++;
             if (count == batchLimit) {
                 await batch.commit();
-                batch = fireStore.batch();
+                batch = db.batch();
                 count = 0;
             }
         }
@@ -350,7 +351,7 @@ exports.onUserDelete = functions.firestore.document(userPath).onDelete(
         // 自分のuserUpdateLogsを消す
         await deleteFromColRef(myRef.collection('userUpdateLogs'));
         // privateUserを削除
-        await fireStore.collection('private').doc('v1').collection('privateUsers').doc(uid).delete();
+        await db.collection('private').doc('v1').collection('privateUsers').doc(uid).delete();
     }
 );
 exports.onPrivateUserDelete = functions.firestore.document(privateUserPath).onDelete(
@@ -402,7 +403,7 @@ exports.onUserUpdateLogCreate = functions
         const user = await userRef.get();
         const posts = await userRef.collection('posts').get();
         let postCount = 0;
-        let postBatch = fireStore.batch();
+        let postBatch = db.batch();
         for (const post of posts.docs) {
             postBatch.update(post.ref,{
                 "poster": user.data(),
@@ -410,7 +411,7 @@ exports.onUserUpdateLogCreate = functions
             postCount++;
             if (postCount == batchLimit) {
                 await postBatch.commit();
-                postBatch = fireStore.batch();
+                postBatch = db.batch();
                 postCount = 0;
             }
         }
@@ -426,7 +427,7 @@ exports.verifyAndroidReceipt = functions
         res.status(403).send();
         return;
     }
-    const json = req.body.data;
+    const json = req.body["data"];
     const privateKey = getPrivateKey(process.env.GCP_PRIVATE_KEY);
     const authClient = new google.auth.JWT({
         email: config.gcp.client_email,
@@ -465,9 +466,11 @@ exports.verifyAndroidReceipt = functions
         const now = Date.now();
         const expireDate = Number(latestReceipt["expiryTimeMillis"]);
         if (now < expireDate) {
-            latestReceipt["productId"] = productId;
             const transactionID = latestReceipt['orderId'].replace("GPA.", "");
-            await saveLatestReceipt(latestReceipt,transactionID,false); // awaitを使用しないと保存されない
+            const uid = req.body["uid"];
+            latestReceipt["productId"] = productId;
+            latestReceipt["uid"] = uid;
+            await saveLatestReceipt(latestReceipt,uid,transactionID,false); // awaitを使用しないと保存されない
             res.status(200).send({ latestReceipt: latestReceipt,});
             return;
         } else {
@@ -485,7 +488,7 @@ exports.verifyIOSReceipt = functions
         res.status(403).send();
         return;
     }
-    const verificationData = req.body.data;
+    const verificationData = req.body["data"];
     if (!verificationData) {
         res.status(403).send();
         return;
@@ -517,7 +520,7 @@ exports.verifyIOSReceipt = functions
         res.status(403).send();
         return;
     }
-    const latestReceipt = result["latest_receipt_info"][0];
+    let latestReceipt = result["latest_receipt_info"][0];
     if (latestReceipt === null || latestReceipt === undefined) {
         res.status(403).send();
         return;
@@ -527,7 +530,9 @@ exports.verifyIOSReceipt = functions
     const expireDate = Number(latestReceipt["expires_date_ms"]);
     if (now < expireDate) {
         const transactionID = latestReceipt["transaction_id"];
-        await saveLatestReceipt(latestReceipt,transactionID,true); // awaitを使用しないと保存されない
+        const uid = req.body["uid"];
+        latestReceipt["uid"] = uid;
+        await saveLatestReceipt(latestReceipt,uid,transactionID,true); // awaitを使用しないと保存されない
         res.status(200).send({ latestReceipt: latestReceipt,});
         return;
     } else {

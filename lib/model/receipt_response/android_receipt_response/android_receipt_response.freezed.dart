@@ -34,6 +34,7 @@ mixin _$AndroidReceiptResponse {
   String get productId => throw _privateConstructorUsedError; // 独自設定
   int get purchaseType => throw _privateConstructorUsedError;
   String get startTimeMillis => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,7 +61,8 @@ abstract class $AndroidReceiptResponseCopyWith<$Res> {
       String priceCurrencyCode,
       String productId,
       int purchaseType,
-      String startTimeMillis});
+      String startTimeMillis,
+      String uid});
 }
 
 /// @nodoc
@@ -90,6 +92,7 @@ class _$AndroidReceiptResponseCopyWithImpl<$Res,
     Object? productId = null,
     Object? purchaseType = null,
     Object? startTimeMillis = null,
+    Object? uid = null,
   }) {
     return _then(_value.copyWith(
       acknowledgementState: null == acknowledgementState
@@ -144,6 +147,10 @@ class _$AndroidReceiptResponseCopyWithImpl<$Res,
           ? _value.startTimeMillis
           : startTimeMillis // ignore: cast_nullable_to_non_nullable
               as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -169,7 +176,8 @@ abstract class _$$_AndroidReceiptResponseCopyWith<$Res>
       String priceCurrencyCode,
       String productId,
       int purchaseType,
-      String startTimeMillis});
+      String startTimeMillis,
+      String uid});
 }
 
 /// @nodoc
@@ -197,6 +205,7 @@ class __$$_AndroidReceiptResponseCopyWithImpl<$Res>
     Object? productId = null,
     Object? purchaseType = null,
     Object? startTimeMillis = null,
+    Object? uid = null,
   }) {
     return _then(_$_AndroidReceiptResponse(
       acknowledgementState: null == acknowledgementState
@@ -251,6 +260,10 @@ class __$$_AndroidReceiptResponseCopyWithImpl<$Res>
           ? _value.startTimeMillis
           : startTimeMillis // ignore: cast_nullable_to_non_nullable
               as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -271,7 +284,8 @@ class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
       required this.priceCurrencyCode,
       required this.productId,
       required this.purchaseType,
-      required this.startTimeMillis})
+      required this.startTimeMillis,
+      required this.uid})
       : super._();
 
   factory _$_AndroidReceiptResponse.fromJson(Map<String, dynamic> json) =>
@@ -304,10 +318,12 @@ class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
   final int purchaseType;
   @override
   final String startTimeMillis;
+  @override
+  final String uid;
 
   @override
   String toString() {
-    return 'AndroidReceiptResponse(acknowledgementState: $acknowledgementState, autoRenewing: $autoRenewing, countryCode: $countryCode, developerPayload: $developerPayload, expiryTimeMillis: $expiryTimeMillis, kind: $kind, orderId: $orderId, paymentState: $paymentState, priceAmountMicros: $priceAmountMicros, priceCurrencyCode: $priceCurrencyCode, productId: $productId, purchaseType: $purchaseType, startTimeMillis: $startTimeMillis)';
+    return 'AndroidReceiptResponse(acknowledgementState: $acknowledgementState, autoRenewing: $autoRenewing, countryCode: $countryCode, developerPayload: $developerPayload, expiryTimeMillis: $expiryTimeMillis, kind: $kind, orderId: $orderId, paymentState: $paymentState, priceAmountMicros: $priceAmountMicros, priceCurrencyCode: $priceCurrencyCode, productId: $productId, purchaseType: $purchaseType, startTimeMillis: $startTimeMillis, uid: $uid)';
   }
 
   @override
@@ -338,7 +354,8 @@ class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
             (identical(other.purchaseType, purchaseType) ||
                 other.purchaseType == purchaseType) &&
             (identical(other.startTimeMillis, startTimeMillis) ||
-                other.startTimeMillis == startTimeMillis));
+                other.startTimeMillis == startTimeMillis) &&
+            (identical(other.uid, uid) || other.uid == uid));
   }
 
   @JsonKey(ignore: true)
@@ -357,7 +374,8 @@ class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
       priceCurrencyCode,
       productId,
       purchaseType,
-      startTimeMillis);
+      startTimeMillis,
+      uid);
 
   @JsonKey(ignore: true)
   @override
@@ -388,7 +406,8 @@ abstract class _AndroidReceiptResponse extends AndroidReceiptResponse {
       required final String priceCurrencyCode,
       required final String productId,
       required final int purchaseType,
-      required final String startTimeMillis}) = _$_AndroidReceiptResponse;
+      required final String startTimeMillis,
+      required final String uid}) = _$_AndroidReceiptResponse;
   const _AndroidReceiptResponse._() : super._();
 
   factory _AndroidReceiptResponse.fromJson(Map<String, dynamic> json) =
@@ -420,6 +439,8 @@ abstract class _AndroidReceiptResponse extends AndroidReceiptResponse {
   int get purchaseType;
   @override
   String get startTimeMillis;
+  @override
+  String get uid;
   @override
   @JsonKey(ignore: true)
   _$$_AndroidReceiptResponseCopyWith<_$_AndroidReceiptResponse> get copyWith =>

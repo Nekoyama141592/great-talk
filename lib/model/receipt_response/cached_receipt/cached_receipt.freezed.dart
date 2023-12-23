@@ -25,6 +25,7 @@ mixin _$CachedReceipt {
   String get originalTransactionId => throw _privateConstructorUsedError;
   String get productId => throw _privateConstructorUsedError;
   String get startTimeMillis => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $CachedReceiptCopyWith<$Res> {
       String orderId,
       String originalTransactionId,
       String productId,
-      String startTimeMillis});
+      String startTimeMillis,
+      String uid});
 }
 
 /// @nodoc
@@ -64,6 +66,7 @@ class _$CachedReceiptCopyWithImpl<$Res, $Val extends CachedReceipt>
     Object? originalTransactionId = null,
     Object? productId = null,
     Object? startTimeMillis = null,
+    Object? uid = null,
   }) {
     return _then(_value.copyWith(
       expiryTimeMillis: null == expiryTimeMillis
@@ -86,6 +89,10 @@ class _$CachedReceiptCopyWithImpl<$Res, $Val extends CachedReceipt>
           ? _value.startTimeMillis
           : startTimeMillis // ignore: cast_nullable_to_non_nullable
               as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -103,7 +110,8 @@ abstract class _$$_CachedReceiptCopyWith<$Res>
       String orderId,
       String originalTransactionId,
       String productId,
-      String startTimeMillis});
+      String startTimeMillis,
+      String uid});
 }
 
 /// @nodoc
@@ -122,6 +130,7 @@ class __$$_CachedReceiptCopyWithImpl<$Res>
     Object? originalTransactionId = null,
     Object? productId = null,
     Object? startTimeMillis = null,
+    Object? uid = null,
   }) {
     return _then(_$_CachedReceipt(
       expiryTimeMillis: null == expiryTimeMillis
@@ -144,6 +153,10 @@ class __$$_CachedReceiptCopyWithImpl<$Res>
           ? _value.startTimeMillis
           : startTimeMillis // ignore: cast_nullable_to_non_nullable
               as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -156,7 +169,8 @@ class _$_CachedReceipt extends _CachedReceipt {
       required this.orderId,
       required this.originalTransactionId,
       required this.productId,
-      required this.startTimeMillis})
+      required this.startTimeMillis,
+      required this.uid})
       : super._();
 
   factory _$_CachedReceipt.fromJson(Map<String, dynamic> json) =>
@@ -172,10 +186,12 @@ class _$_CachedReceipt extends _CachedReceipt {
   final String productId;
   @override
   final String startTimeMillis;
+  @override
+  final String uid;
 
   @override
   String toString() {
-    return 'CachedReceipt(expiryTimeMillis: $expiryTimeMillis, orderId: $orderId, originalTransactionId: $originalTransactionId, productId: $productId, startTimeMillis: $startTimeMillis)';
+    return 'CachedReceipt(expiryTimeMillis: $expiryTimeMillis, orderId: $orderId, originalTransactionId: $originalTransactionId, productId: $productId, startTimeMillis: $startTimeMillis, uid: $uid)';
   }
 
   @override
@@ -191,13 +207,14 @@ class _$_CachedReceipt extends _CachedReceipt {
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.startTimeMillis, startTimeMillis) ||
-                other.startTimeMillis == startTimeMillis));
+                other.startTimeMillis == startTimeMillis) &&
+            (identical(other.uid, uid) || other.uid == uid));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, expiryTimeMillis, orderId,
-      originalTransactionId, productId, startTimeMillis);
+      originalTransactionId, productId, startTimeMillis, uid);
 
   @JsonKey(ignore: true)
   @override
@@ -219,7 +236,8 @@ abstract class _CachedReceipt extends CachedReceipt {
       required final String orderId,
       required final String originalTransactionId,
       required final String productId,
-      required final String startTimeMillis}) = _$_CachedReceipt;
+      required final String startTimeMillis,
+      required final String uid}) = _$_CachedReceipt;
   const _CachedReceipt._() : super._();
 
   factory _CachedReceipt.fromJson(Map<String, dynamic> json) =
@@ -235,6 +253,8 @@ abstract class _CachedReceipt extends CachedReceipt {
   String get productId;
   @override
   String get startTimeMillis;
+  @override
+  String get uid;
   @override
   @JsonKey(ignore: true)
   _$$_CachedReceiptCopyWith<_$_CachedReceipt> get copyWith =>
