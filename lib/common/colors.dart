@@ -8,4 +8,4 @@ const kErrorColor = Color(0xFF93032E);
 const kContentColorDarkTheme = Color(0xFF1D1D35);
 const kContentColorLightTheme = Color(0xFFF5FCF9);
 const kAccentColorDarkTheme = Color(0xFFf9dc5c);
-const kAccentColorLightTheme = Color(0xFF1d3354);
+const kAccentColorLightTheme = Color(0xFFff715b);
