@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:great_talk/model/receipt_response/receipt_response.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 
 part 'cached_receipt.freezed.dart';
 part 'cached_receipt.g.dart';
@@ -17,7 +19,7 @@ abstract class CachedReceipt implements _$CachedReceipt {
   factory CachedReceipt.fromJson(Map<String, dynamic> json) =>
       _$CachedReceiptFromJson(json);
 
-  factory CachedReceipt.fromLatestReceipt(ReceiptResponse response) {
+  factory CachedReceipt.fromReceiptResponse(ReceiptResponse response) {
     if (Platform.isIOS) {
       final iosReceipt = response.iosReceipt;
       return CachedReceipt(
@@ -37,4 +39,19 @@ abstract class CachedReceipt implements _$CachedReceipt {
 
   factory CachedReceipt.instance() => const CachedReceipt(
       expiryTimeMillis: "", orderId: "", productId: "", startTimeMillis: "");
+
+  bool isValid() {
+    final intExpiryMills = int.tryParse(expiryTimeMillis);
+    if (intExpiryMills == null) {
+      return false;
+    } else {
+      final now = DateTime.now().millisecondsSinceEpoch;
+      return now < intExpiryMills;
+    }
+  }
+
+  bool isValidPremium() => productId == kPremiumSubscriptionId && isValid();
+
+  bool hasProductBeenPurchased(ProductDetails productDetails) =>
+      isValid() && productId == productDetails.id;
 }
