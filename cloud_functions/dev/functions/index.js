@@ -11,10 +11,10 @@ const axios_1 = require("axios");
 const RECEIPT_VERIFICATION_ENDPOINT_SANDBOX = "https://sandbox.itunes.apple.com/verifyReceipt";
 const RECEIPT_VERIFICATION_ENDPOINT_FOR_IOS_PROD = "https://buy.itunes.apple.com/verifyReceipt";
 const config = functions.config();
-const appStoreConfig = config.appstore;
-const IOS_PKG_NAME = appStoreConfig.ios_pkg_name;
+const IOS_PKG_NAME = config.appstore.ios_pkg_name;
 // レシート検証(Android)
 const { google } = require("googleapis");
+const ANDROID_PKG_NAME = config.playstore.android_pkg_name;
 // firestore
 const userPath = "public/{version}/users/{uid}";
 const privateUserPath = "private/{version}/privateUsers/{uid}";
@@ -385,7 +385,7 @@ exports.onUserMutesDelete = functions.firestore.document(`${userPath}/userMutes/
     }
 );
 exports.onUserUpdateLogCreate = functions
-.runWith({secrets: ["AWS_ACCESS_KEY","AWS_SECRET_ACCESS_KEY"],})
+.runWith({secrets: ["AWS_ACCESS_KEY","AWS_SECRET_ACCESS_KEY"]})
 .firestore.document(`${userPath}/userUpdateLogs/{id}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
@@ -419,16 +419,17 @@ exports.onUserUpdateLogCreate = functions
         }
     }
 );
-exports.verifyAndroidReceipt = functions.
-https.onRequest(async (req, res) => {
+exports.verifyAndroidReceipt = functions
+.runWith({secrets: ["GCP_PRIVATE_KEY"]})
+.https.onRequest(async (req, res) => {
     if (req.method !== "POST") {
         res.status(403).send();
         return;
     }
     const json = req.body.data;
-    const privateKey = getPrivateKey(functions.config().env.private_key);
+    const privateKey = getPrivateKey(process.env.GCP_PRIVATE_KEY);
     const authClient = new google.auth.JWT({
-        email: functions.config().env.client_email,
+        email: config.gcp.client_email,
         key: privateKey,
         scopes: ["https://www.googleapis.com/auth/androidpublisher"],
     });
@@ -439,7 +440,6 @@ https.onRequest(async (req, res) => {
     const receipt = json.verificationData.localVerificationData;
     const decodedReceipt = JSON.parse(receipt);
     const typeOfSubscription = decodedReceipt["autoRenewing"];
-    const ANDROID_PACKAGE_NAME = "com.firebaseapp.great_talk_dev";
     const productId = decodedReceipt["productId"];
     // decode
     let response;
@@ -447,7 +447,7 @@ https.onRequest(async (req, res) => {
         // サブスクアイテム
         try {
             response = await playDeveloperApiClient.purchases.subscriptions.get({
-                packageName: ANDROID_PACKAGE_NAME,
+                packageName: ANDROID_PKG_NAME,
                 subscriptionId: productId,
                 token: decodedReceipt["purchaseToken"],
             });
