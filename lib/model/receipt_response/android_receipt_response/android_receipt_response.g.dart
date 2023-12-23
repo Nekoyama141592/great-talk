@@ -19,6 +19,7 @@ _$_AndroidReceiptResponse _$$_AndroidReceiptResponseFromJson(
       paymentState: json['paymentState'] as int,
       priceAmountMicros: json['priceAmountMicros'] as String,
       priceCurrencyCode: json['priceCurrencyCode'] as String,
+      productId: json['productId'] as String,
       purchaseType: json['purchaseType'] as int,
       startTimeMillis: json['startTimeMillis'] as String,
     );
@@ -36,6 +37,7 @@ Map<String, dynamic> _$$_AndroidReceiptResponseToJson(
       'paymentState': instance.paymentState,
       'priceAmountMicros': instance.priceAmountMicros,
       'priceCurrencyCode': instance.priceCurrencyCode,
+      'productId': instance.productId,
       'purchaseType': instance.purchaseType,
       'startTimeMillis': instance.startTimeMillis,
     };

@@ -31,6 +31,7 @@ mixin _$AndroidReceiptResponse {
   int get paymentState => throw _privateConstructorUsedError;
   String get priceAmountMicros => throw _privateConstructorUsedError;
   String get priceCurrencyCode => throw _privateConstructorUsedError;
+  String get productId => throw _privateConstructorUsedError; // 独自設定
   int get purchaseType => throw _privateConstructorUsedError;
   String get startTimeMillis => throw _privateConstructorUsedError;
 
@@ -57,6 +58,7 @@ abstract class $AndroidReceiptResponseCopyWith<$Res> {
       int paymentState,
       String priceAmountMicros,
       String priceCurrencyCode,
+      String productId,
       int purchaseType,
       String startTimeMillis});
 }
@@ -85,6 +87,7 @@ class _$AndroidReceiptResponseCopyWithImpl<$Res,
     Object? paymentState = null,
     Object? priceAmountMicros = null,
     Object? priceCurrencyCode = null,
+    Object? productId = null,
     Object? purchaseType = null,
     Object? startTimeMillis = null,
   }) {
@@ -129,6 +132,10 @@ class _$AndroidReceiptResponseCopyWithImpl<$Res,
           ? _value.priceCurrencyCode
           : priceCurrencyCode // ignore: cast_nullable_to_non_nullable
               as String,
+      productId: null == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
       purchaseType: null == purchaseType
           ? _value.purchaseType
           : purchaseType // ignore: cast_nullable_to_non_nullable
@@ -160,6 +167,7 @@ abstract class _$$_AndroidReceiptResponseCopyWith<$Res>
       int paymentState,
       String priceAmountMicros,
       String priceCurrencyCode,
+      String productId,
       int purchaseType,
       String startTimeMillis});
 }
@@ -186,6 +194,7 @@ class __$$_AndroidReceiptResponseCopyWithImpl<$Res>
     Object? paymentState = null,
     Object? priceAmountMicros = null,
     Object? priceCurrencyCode = null,
+    Object? productId = null,
     Object? purchaseType = null,
     Object? startTimeMillis = null,
   }) {
@@ -230,6 +239,10 @@ class __$$_AndroidReceiptResponseCopyWithImpl<$Res>
           ? _value.priceCurrencyCode
           : priceCurrencyCode // ignore: cast_nullable_to_non_nullable
               as String,
+      productId: null == productId
+          ? _value.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
       purchaseType: null == purchaseType
           ? _value.purchaseType
           : purchaseType // ignore: cast_nullable_to_non_nullable
@@ -256,6 +269,7 @@ class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
       required this.paymentState,
       required this.priceAmountMicros,
       required this.priceCurrencyCode,
+      required this.productId,
       required this.purchaseType,
       required this.startTimeMillis})
       : super._();
@@ -284,13 +298,16 @@ class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
   @override
   final String priceCurrencyCode;
   @override
+  final String productId;
+// 独自設定
+  @override
   final int purchaseType;
   @override
   final String startTimeMillis;
 
   @override
   String toString() {
-    return 'AndroidReceiptResponse(acknowledgementState: $acknowledgementState, autoRenewing: $autoRenewing, countryCode: $countryCode, developerPayload: $developerPayload, expiryTimeMillis: $expiryTimeMillis, kind: $kind, orderId: $orderId, paymentState: $paymentState, priceAmountMicros: $priceAmountMicros, priceCurrencyCode: $priceCurrencyCode, purchaseType: $purchaseType, startTimeMillis: $startTimeMillis)';
+    return 'AndroidReceiptResponse(acknowledgementState: $acknowledgementState, autoRenewing: $autoRenewing, countryCode: $countryCode, developerPayload: $developerPayload, expiryTimeMillis: $expiryTimeMillis, kind: $kind, orderId: $orderId, paymentState: $paymentState, priceAmountMicros: $priceAmountMicros, priceCurrencyCode: $priceCurrencyCode, productId: $productId, purchaseType: $purchaseType, startTimeMillis: $startTimeMillis)';
   }
 
   @override
@@ -316,6 +333,8 @@ class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
                 other.priceAmountMicros == priceAmountMicros) &&
             (identical(other.priceCurrencyCode, priceCurrencyCode) ||
                 other.priceCurrencyCode == priceCurrencyCode) &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
             (identical(other.purchaseType, purchaseType) ||
                 other.purchaseType == purchaseType) &&
             (identical(other.startTimeMillis, startTimeMillis) ||
@@ -336,6 +355,7 @@ class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
       paymentState,
       priceAmountMicros,
       priceCurrencyCode,
+      productId,
       purchaseType,
       startTimeMillis);
 
@@ -366,6 +386,7 @@ abstract class _AndroidReceiptResponse extends AndroidReceiptResponse {
       required final int paymentState,
       required final String priceAmountMicros,
       required final String priceCurrencyCode,
+      required final String productId,
       required final int purchaseType,
       required final String startTimeMillis}) = _$_AndroidReceiptResponse;
   const _AndroidReceiptResponse._() : super._();
@@ -394,6 +415,8 @@ abstract class _AndroidReceiptResponse extends AndroidReceiptResponse {
   @override
   String get priceCurrencyCode;
   @override
+  String get productId;
+  @override // 独自設定
   int get purchaseType;
   @override
   String get startTimeMillis;

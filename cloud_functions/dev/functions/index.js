@@ -440,6 +440,7 @@ https.onRequest(async (req, res) => {
     const decodedReceipt = JSON.parse(receipt);
     const typeOfSubscription = decodedReceipt["autoRenewing"];
     const ANDROID_PACKAGE_NAME = "com.firebaseapp.great_talk_dev";
+    const productId = decodedReceipt["productId"];
     // decode
     let response;
     if (typeOfSubscription) {
@@ -447,7 +448,7 @@ https.onRequest(async (req, res) => {
         try {
             response = await playDeveloperApiClient.purchases.subscriptions.get({
                 packageName: ANDROID_PACKAGE_NAME,
-                subscriptionId: decodedReceipt["productId"],
+                subscriptionId: productId,
                 token: decodedReceipt["purchaseToken"],
             });
         } catch(error) {
@@ -455,7 +456,7 @@ https.onRequest(async (req, res) => {
             return;
         }
 
-        const latestReceipt = response.data;
+        let latestReceipt = response.data;
         if (!latestReceipt || response.status !== 200) {
             res.status(403).send();
             return;
@@ -464,6 +465,7 @@ https.onRequest(async (req, res) => {
         const now = Date.now();
         const expireDate = Number(latestReceipt["expiryTimeMillis"]);
         if (now < expireDate) {
+            latestReceipt["productId"] = productId;
             const transactionID = latestReceipt['orderId'].replace("GPA.", "");
             await saveLatestReceipt(latestReceipt,transactionID,false); // awaitを使用しないと保存されない
             res.status(200).send({ latestReceipt: latestReceipt,});
