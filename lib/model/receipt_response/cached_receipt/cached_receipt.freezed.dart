@@ -22,6 +22,7 @@ CachedReceipt _$CachedReceiptFromJson(Map<String, dynamic> json) {
 mixin _$CachedReceipt {
   String get expiryTimeMillis => throw _privateConstructorUsedError;
   String get orderId => throw _privateConstructorUsedError;
+  String get originalTransactionId => throw _privateConstructorUsedError;
   String get productId => throw _privateConstructorUsedError;
   String get startTimeMillis => throw _privateConstructorUsedError;
 
@@ -40,6 +41,7 @@ abstract class $CachedReceiptCopyWith<$Res> {
   $Res call(
       {String expiryTimeMillis,
       String orderId,
+      String originalTransactionId,
       String productId,
       String startTimeMillis});
 }
@@ -59,6 +61,7 @@ class _$CachedReceiptCopyWithImpl<$Res, $Val extends CachedReceipt>
   $Res call({
     Object? expiryTimeMillis = null,
     Object? orderId = null,
+    Object? originalTransactionId = null,
     Object? productId = null,
     Object? startTimeMillis = null,
   }) {
@@ -70,6 +73,10 @@ class _$CachedReceiptCopyWithImpl<$Res, $Val extends CachedReceipt>
       orderId: null == orderId
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
+      originalTransactionId: null == originalTransactionId
+          ? _value.originalTransactionId
+          : originalTransactionId // ignore: cast_nullable_to_non_nullable
               as String,
       productId: null == productId
           ? _value.productId
@@ -94,6 +101,7 @@ abstract class _$$_CachedReceiptCopyWith<$Res>
   $Res call(
       {String expiryTimeMillis,
       String orderId,
+      String originalTransactionId,
       String productId,
       String startTimeMillis});
 }
@@ -111,6 +119,7 @@ class __$$_CachedReceiptCopyWithImpl<$Res>
   $Res call({
     Object? expiryTimeMillis = null,
     Object? orderId = null,
+    Object? originalTransactionId = null,
     Object? productId = null,
     Object? startTimeMillis = null,
   }) {
@@ -122,6 +131,10 @@ class __$$_CachedReceiptCopyWithImpl<$Res>
       orderId: null == orderId
           ? _value.orderId
           : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
+      originalTransactionId: null == originalTransactionId
+          ? _value.originalTransactionId
+          : originalTransactionId // ignore: cast_nullable_to_non_nullable
               as String,
       productId: null == productId
           ? _value.productId
@@ -141,6 +154,7 @@ class _$_CachedReceipt extends _CachedReceipt {
   const _$_CachedReceipt(
       {required this.expiryTimeMillis,
       required this.orderId,
+      required this.originalTransactionId,
       required this.productId,
       required this.startTimeMillis})
       : super._();
@@ -153,13 +167,15 @@ class _$_CachedReceipt extends _CachedReceipt {
   @override
   final String orderId;
   @override
+  final String originalTransactionId;
+  @override
   final String productId;
   @override
   final String startTimeMillis;
 
   @override
   String toString() {
-    return 'CachedReceipt(expiryTimeMillis: $expiryTimeMillis, orderId: $orderId, productId: $productId, startTimeMillis: $startTimeMillis)';
+    return 'CachedReceipt(expiryTimeMillis: $expiryTimeMillis, orderId: $orderId, originalTransactionId: $originalTransactionId, productId: $productId, startTimeMillis: $startTimeMillis)';
   }
 
   @override
@@ -170,6 +186,8 @@ class _$_CachedReceipt extends _CachedReceipt {
             (identical(other.expiryTimeMillis, expiryTimeMillis) ||
                 other.expiryTimeMillis == expiryTimeMillis) &&
             (identical(other.orderId, orderId) || other.orderId == orderId) &&
+            (identical(other.originalTransactionId, originalTransactionId) ||
+                other.originalTransactionId == originalTransactionId) &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
             (identical(other.startTimeMillis, startTimeMillis) ||
@@ -178,8 +196,8 @@ class _$_CachedReceipt extends _CachedReceipt {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, expiryTimeMillis, orderId, productId, startTimeMillis);
+  int get hashCode => Object.hash(runtimeType, expiryTimeMillis, orderId,
+      originalTransactionId, productId, startTimeMillis);
 
   @JsonKey(ignore: true)
   @override
@@ -199,6 +217,7 @@ abstract class _CachedReceipt extends CachedReceipt {
   const factory _CachedReceipt(
       {required final String expiryTimeMillis,
       required final String orderId,
+      required final String originalTransactionId,
       required final String productId,
       required final String startTimeMillis}) = _$_CachedReceipt;
   const _CachedReceipt._() : super._();
@@ -210,6 +229,8 @@ abstract class _CachedReceipt extends CachedReceipt {
   String get expiryTimeMillis;
   @override
   String get orderId;
+  @override
+  String get originalTransactionId;
   @override
   String get productId;
   @override

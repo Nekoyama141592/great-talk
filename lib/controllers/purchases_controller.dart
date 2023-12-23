@@ -165,7 +165,7 @@ class PurchasesController extends GetxController {
 
   Future<void> _cachReceipt(ReceiptResponse receiptResponse) async {
     rxCachedReceipt(
-        CachedReceipt.fromReceiptResponse(receiptResponse)); // キャッシュする前に上書き
+        CachedReceipt.fromReceiptResponse(receiptResponse,receiptResponse.originalTransactionId)); // キャッシュする前に上書き
     await PrefsUtility.setJson(
         PrefsKey.receiptReceipt.name, receiptResponse.toJson());
   }
@@ -174,7 +174,7 @@ class PurchasesController extends GetxController {
     final json = await PrefsUtility.getJson(PrefsKey.receiptReceipt.name);
     if (json == null) return;
     final receiptResponse = ReceiptResponse.fromJson(json);
-    rxCachedReceipt(CachedReceipt.fromReceiptResponse(receiptResponse));
+    rxCachedReceipt(CachedReceipt.fromReceiptResponse(receiptResponse,receiptResponse.originalTransactionId));
   }
 
   Future<void> _listenToPurchaseUpdated(
