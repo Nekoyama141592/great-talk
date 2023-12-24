@@ -17,7 +17,7 @@ class FormConsts {
   static const double defaultPresencePenalty = 0.0;
   static const double defaultFrequencyPenalty = 0.0;
   // generateImage
-  static const generateImageHint = "例: 寝ている猫";
+  static const generateImageHint = "例: かわいい猫";
   // 画像サイズ
   static const minImageHeight = 512;
   static const minImageWidth = 512;

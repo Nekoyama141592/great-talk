@@ -46,7 +46,7 @@ class OriginalDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text("使用モデル名"),
+            title: const Text("使用モデルID"),
             subtitle: Obx(() => Text(purchasesController.model().model)),
           ),
           Obx(() => CurrentUserController.to.isAdmin()

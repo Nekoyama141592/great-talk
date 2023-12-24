@@ -1,19 +1,20 @@
 import 'dart:typed_data';
 
-import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
-import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
+import 'package:great_talk/mixin/current_uid_mixin.dart';
+import 'package:great_talk/model/generata_image/generate_image_request/generate_image_request.dart';
+import 'package:great_talk/repository/open_ai_repository.dart';
 import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
-class GenerateImageController extends LoadingController {
+class GenerateImageController extends LoadingController with CurrentUserMixin {
   static GenerateImageController get to => Get.find<GenerateImageController>();
-  final rxPrompt = "寝ている猫".obs;
+  final rxPrompt = "".obs;
   final rxUrl = "".obs;
   // セッターメソッド
   void setPrompt(String? value) {
@@ -40,17 +41,15 @@ class GenerateImageController extends LoadingController {
     }
     startLoading();
     rxUrl(""); // 初期化
-    final client = ChatGptApiClient();
-    final openAI = client.openAI;
-    final request = GenerateImage(rxPrompt.value, 1);
-    final response = await openAI.generateImage(request);
-    if (response == null) {
-      UIHelper.showErrorFlutterToast("画像が生成できませんでした");
-      return;
-    } else {
-      final url = response.data?.last?.url;
+    final repository = OpenAIRepository();
+    final request = GenerateImageRequest.instance(rxPrompt.value, currentUid());
+    final result = await repository.generateImage(request);
+    result.when(success: (res) {
+      final url = res.data?.last?.url;
       rxUrl(url);
-    }
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("画像が生成できませんでした");
+    });
     endLoading();
   }
 

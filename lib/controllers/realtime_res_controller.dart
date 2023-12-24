@@ -17,7 +17,7 @@ import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/remote_config_controller.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
-import 'package:great_talk/infrastructure/chat_gpt_api_client.dart';
+import 'package:great_talk/infrastructure/chat_gpt_sdk_client.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/bookmark/bookmark.dart';
@@ -207,7 +207,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       return;
     }
     isGenerating(true);
-    final client = ChatGptApiClient();
+    final client = ChatGptSdkClient();
     client.openAI.onChatCompletionSSE(request: request).listen((it) {
       final content = it.choices?.last.message?.content;
       if (content != null && content.isNotEmpty) {

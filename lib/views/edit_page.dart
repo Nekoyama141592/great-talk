@@ -27,7 +27,7 @@ class _EditProfilePageState extends FormsState<EditProfilePage> {
     deviceHeight = MediaQuery.of(context).size.height; // 高さを設定
     final controller = EditController.to;
     return FormsScreen(
-      onWillPop: onWillPop,
+      canPop: canPop,
       appBarText: "ユーザー情報を編集",
       children: [
         _createPostForm(),

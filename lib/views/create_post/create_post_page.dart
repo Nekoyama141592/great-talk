@@ -21,7 +21,7 @@ class _CreatePostPageState extends FormsState<CreatePostPage> {
     deviceHeight = MediaQuery.of(context).size.height; // 高さを設定
     final controller = CreatePostController.to;
     return FormsScreen(
-      onWillPop: onWillPop,
+      canPop: canPop,
       appBarText: "投稿を作成",
       children: [
         _createPostForm(),

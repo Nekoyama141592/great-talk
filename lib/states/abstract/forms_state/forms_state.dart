@@ -53,7 +53,7 @@ abstract class FormsState<T extends StatefulWidget> extends State<T> {
     controller.onPositiveButtonPressed();
   }
 
-  Future<bool> onWillPop() async {
+  bool get canPop {
     if (formKey.currentState!.validate()) {
       // フォームフィールドの情報を変数に保存
       formKey.currentState!.save();
