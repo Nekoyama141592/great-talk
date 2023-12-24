@@ -1,17 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyIOSReceipt = exports.verifyAndroidReceipt = void 0;
+// 基本的な設定
 const functions = require("firebase-functions");
-const axios_1 = require("axios");
 const admin = require("firebase-admin");
 admin.initializeApp();
-const fireStore = admin.firestore();
+const db = admin.firestore();
+// レシート検証(iOS)
+const axios_1 = require("axios");
 const RECEIPT_VERIFICATION_ENDPOINT_SANDBOX = "https://sandbox.itunes.apple.com/verifyReceipt";
 const RECEIPT_VERIFICATION_ENDPOINT_FOR_IOS_PROD = "https://buy.itunes.apple.com/verifyReceipt";
 const config = functions.config();
-const appStoreConfig = config.appstore;
-const IOS_PKG_NAME = appStoreConfig.ios_pkg_name;
-const fHttps = functions.https;
+const IOS_PKG_NAME = config.appstore.ios_pkg_name;
+// レシート検証(Android)
+const { google } = require("googleapis");
+const ANDROID_PKG_NAME = config.playstore.android_pkg_name;
 // firestore
 const userPath = "public/{version}/users/{uid}";
 const privateUserPath = "private/{version}/privateUsers/{uid}";
@@ -38,7 +41,7 @@ function updateAWSConfig() {
 async function deleteFromColRef(colRef) {
     const qshot = await colRef.get();
     let count = 0;
-    let batch = fireStore.batch();
+    let batch = db.batch();
 
     for (const doc of qshot.docs) {
         batch.delete(doc.ref);
@@ -46,7 +49,7 @@ async function deleteFromColRef(colRef) {
 
         if (count === batchLimit) {
             await batch.commit();
-            batch = fireStore.batch();
+            batch = db.batch();
             count = 0;
         }
     }
@@ -56,11 +59,26 @@ async function deleteFromColRef(colRef) {
     }
 }
 
+function saveDataToFirestore(json, colRef, id) {
+    return colRef.doc(id).set(json);
+}
 
 function mul100AndRoundingDown(num) {
     const mul100 = num * 100; // ex) 0.9988を99.88にする
     const result = Math.floor(mul100); // 数字を丸める
     return result;
+}
+async function saveLatestReceipt(latestReceipt,uid,transactionID,isIos) {
+    const transactionsPath = isIos ? "iosTransactions" : "androidTransactions";
+    const transactionColRef = db.collection('private').doc('v1').collection('privateUsers').doc(uid).collection(transactionsPath);
+    const newTransactionsPath = isIos ? "newIosTransactions" : "newAndroidTransactions";
+    const newTransactionsColRef = db.collection(newTransactionsPath);
+    const oldTx = await transactionColRef.doc(transactionID).get();
+    // 存在しないなら非同期でFirestoreに保存。
+    if (!oldTx.exists) {
+        saveDataToFirestore(latestReceipt, transactionColRef,transactionID);
+        saveDataToFirestore(latestReceipt, newTransactionsColRef,transactionID);
+    }
 }
 async function detectDominantLanguage(text) {
     updateAWSConfig();
@@ -181,6 +199,29 @@ async function detectModerationLabels(bucketName, fileName) {
 
     return detectedImage;
 }
+function getPrivateKey(privateKey) {
+    const key  = chunkSplit(privateKey, 64, '\n');
+    const pkey = '-----BEGIN PRIVATE KEY-----\n' + key + '-----END PRIVATE KEY-----\n';
+
+    return pkey;
+  }
+  
+  function getPublicKey(publicKey) {
+    const key = chunkSplit(publicKey, 64, '\n');
+    const pkey = '-----BEGIN PUBLIC KEY-----\n' + key + '-----END PUBLIC KEY-----\n';
+  
+    return pkey;
+  }
+  
+  function chunkSplit(str, len, end) {
+    const match = str.match(new RegExp('.{0,' + len + '}', 'g'));
+    if (!match) {
+      return '';
+    }
+  
+    return match.join(end);
+  }
+
 exports.onFollowerCreate = functions.firestore.document(`${userPath}/followers/{followerUid}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
@@ -229,7 +270,7 @@ exports.onPostCreate = functions
         // followersをget
         const followers = await posterRef.collection("followers").get();
         let count = 0;
-        let batch = fireStore.batch();
+        let batch = db.batch();
         for (const follower of followers.docs) {
             const data = follower.data();
             // followerのtimelineを作成
@@ -238,7 +279,7 @@ exports.onPostCreate = functions
             count++;
             if (count == batchLimit) {
                 await batch.commit();
-                batch = fireStore.batch();
+                batch = db.batch();
                 count = 0;
             }
         }
@@ -310,7 +351,7 @@ exports.onUserDelete = functions.firestore.document(userPath).onDelete(
         // 自分のuserUpdateLogsを消す
         await deleteFromColRef(myRef.collection('userUpdateLogs'));
         // privateUserを削除
-        await fireStore.collection('private').doc('v1').collection('privateUsers').doc(uid).delete();
+        await db.collection('private').doc('v1').collection('privateUsers').doc(uid).delete();
     }
 );
 exports.onPrivateUserDelete = functions.firestore.document(privateUserPath).onDelete(
@@ -345,7 +386,7 @@ exports.onUserMutesDelete = functions.firestore.document(`${userPath}/userMutes/
     }
 );
 exports.onUserUpdateLogCreate = functions
-.runWith({secrets: ["AWS_ACCESS_KEY","AWS_SECRET_ACCESS_KEY"],})
+.runWith({secrets: ["AWS_ACCESS_KEY","AWS_SECRET_ACCESS_KEY"]})
 .firestore.document(`${userPath}/userUpdateLogs/{id}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
@@ -362,7 +403,7 @@ exports.onUserUpdateLogCreate = functions
         const user = await userRef.get();
         const posts = await userRef.collection('posts').get();
         let postCount = 0;
-        let postBatch = fireStore.batch();
+        let postBatch = db.batch();
         for (const post of posts.docs) {
             postBatch.update(post.ref,{
                 "poster": user.data(),
@@ -370,7 +411,7 @@ exports.onUserUpdateLogCreate = functions
             postCount++;
             if (postCount == batchLimit) {
                 await postBatch.commit();
-                postBatch = fireStore.batch();
+                postBatch = db.batch();
                 postCount = 0;
             }
         }
@@ -379,17 +420,66 @@ exports.onUserUpdateLogCreate = functions
         }
     }
 );
-exports.verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
+exports.verifyAndroidReceipt = functions
+.runWith({secrets: ["GCP_PRIVATE_KEY"]})
+.https.onRequest(async (req, res) => {
     if (req.method !== "POST") {
         res.status(403).send();
         return;
     }
-    res.status(200).send({
-        responseCode: 200,
-        message: "Receipt Android verification successfully.",
+    const json = req.body["data"];
+    const privateKey = getPrivateKey(process.env.GCP_PRIVATE_KEY);
+    const authClient = new google.auth.JWT({
+        email: config.gcp.client_email,
+        key: privateKey,
+        scopes: ["https://www.googleapis.com/auth/androidpublisher"],
     });
-    return;
+    const playDeveloperApiClient = google.androidpublisher({
+        version: "v3",
+        auth: authClient,
+    });
+    const receipt = json.verificationData.localVerificationData;
+    const decodedReceipt = JSON.parse(receipt);
+    const typeOfSubscription = decodedReceipt["autoRenewing"];
+    const productId = decodedReceipt["productId"];
+    // decode
+    let response;
+    if (typeOfSubscription) {
+        // サブスクアイテム
+        try {
+            response = await playDeveloperApiClient.purchases.subscriptions.get({
+                packageName: ANDROID_PKG_NAME,
+                subscriptionId: productId,
+                token: decodedReceipt["purchaseToken"],
+            });
+        } catch(error) {
+            res.status(403).send();
+            return;
+        }
+
+        let latestReceipt = response.data;
+        if (!latestReceipt || response.status !== 200) {
+            res.status(403).send();
+            return;
+        }
+        // 期限内であることを確認する
+        const now = Date.now();
+        const expireDate = Number(latestReceipt["expiryTimeMillis"]);
+        if (now < expireDate) {
+            const transactionID = latestReceipt['orderId'].replace("GPA.", "");
+            const uid = req.body["uid"];
+            latestReceipt["productId"] = productId;
+            latestReceipt["uid"] = uid;
+            await saveLatestReceipt(latestReceipt,uid,transactionID,false); // awaitを使用しないと保存されない
+            res.status(200).send({ latestReceipt: latestReceipt,});
+            return;
+        } else {
+            res.status(403).send();
+            return;
+        }
+    }
 });
+// ios
 exports.verifyIOSReceipt = functions
 .runWith({secrets: ["APP_SHARED_SECRET"],})
 .https.onRequest(async (req, res) => {
@@ -430,7 +520,7 @@ exports.verifyIOSReceipt = functions
         res.status(403).send();
         return;
     }
-    const latestReceipt = result["latest_receipt_info"][0];
+    let latestReceipt = result["latest_receipt_info"][0];
       if (latestReceipt === null || latestReceipt === undefined) {
         res.status(403).send();
       }
@@ -438,9 +528,11 @@ exports.verifyIOSReceipt = functions
       const now = Date.now();
       const expireDate = Number(latestReceipt["expires_date_ms"]);
       if (now < expireDate) {
+        latestReceipt["uid"] = "";
         res.status(200).send({
             responseCode: 200,
             message: "レシートの検証に成功しました",
+            latestReceipt: latestReceipt,
         });
         return;
       } else {

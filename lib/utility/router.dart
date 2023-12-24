@@ -49,5 +49,5 @@ final getPages = [
   GetPage(name: UserProfilePage.path, page: () => const UserProfilePage()),
   GetPage(
       name: SearchUserPostsPage.path, page: () => const SearchUserPostsPage()),
-  GetPage(name: GenerateImagePage.path, page: () => const GenerateImagePage())
+  GetPage(name: GenerateImagePage.path, page: () => const GenerateImagePage()),
 ];
