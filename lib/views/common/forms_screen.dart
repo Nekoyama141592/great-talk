@@ -4,17 +4,17 @@ import 'package:great_talk/views/components/basic_page.dart';
 class FormsScreen extends StatelessWidget {
   const FormsScreen(
       {Key? key,
-      required this.canPop,
+      required this.onWillPop,
       required this.appBarText,
       required this.children})
       : super(key: key);
-  final bool canPop;
+  final Future<bool> Function()? onWillPop;
   final String appBarText;
   final List<Widget> children;
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-        canPop: canPop,
+    return WillPopScope(
+        onWillPop: onWillPop,
         child: BasicPage(
             appBarText: appBarText,
             child: GestureDetector(
