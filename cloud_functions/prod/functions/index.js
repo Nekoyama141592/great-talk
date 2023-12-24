@@ -56,14 +56,7 @@ async function deleteFromColRef(colRef) {
     }
 }
 
-function saveDataToFirestore(json, path,id) {
-    const db = admin.firestore();
-    return db.collection(path).doc(id).set(json);
-}
-function getDataFromFirestore(path,id) {
-    const db = admin.firestore();
-    return db.collection(path).doc(id).get();
-}
+
 function mul100AndRoundingDown(num) {
     const mul100 = num * 100; // ex) 0.9988を99.88にする
     const result = Math.floor(mul100); // 数字を丸める
@@ -388,24 +381,13 @@ exports.onUserUpdateLogCreate = functions
 );
 exports.verifyAndroidReceipt = fHttps.onRequest(async (req, res) => {
     if (req.method !== "POST") {
-        res.status(200).send({
-            responseCode: 403,
-            message: "POSTリクエストではありません！！",
-        });
+        res.status(403).send();
         return;
     }
-    const json = req.body.data;
     res.status(200).send({
         responseCode: 200,
         message: "Receipt Android verification successfully.",
     });
-    const docID = json["purchaseID"].replace("GPA.", "");
-    const oldTx = await getDataFromFirestore("androidPurchases",docID);
-    // 存在しないならFirestoreに保存
-    if (!oldTx.exists) {
-        saveDataToFirestore(json,"androidPurchases",docID);
-        saveDataToFirestore(json,"newAndroidPurchases",docID);
-    }
     return;
 });
 exports.verifyIOSReceipt = functions
@@ -413,18 +395,12 @@ exports.verifyIOSReceipt = functions
 .https.onRequest(async (req, res) => {
     const RECEIPT_VERIFICATION_PASSWORD_FOR_IOS = process.env.APP_SHARED_SECRET;
     if (req.method !== "POST") {
-        res.status(200).send({
-            responseCode: 403,
-            message: "POSTリクエストではありません！！",
-        });
+        res.status(403).send();
         return;
     }
     const verificationData = req.body.data;
     if (!verificationData) {
-        res.status(200).send({
-            responseCode: 403,
-            message: "verificationDataがありません",
-        });
+        res.status(403).send();
         return;
     }
     let response;
@@ -442,40 +418,21 @@ exports.verifyIOSReceipt = functions
             });
         }
     } catch(err) {
-        res.status(200).send({
-            responseCode: 400,
-            message: "axiosのリクエストが失敗しました",
-        });
+        res.status(403).send();
         return;
     }
     const result = response.data;
     if (result["status"] !== 0) {
-        res.status(200).send({
-            responseCode: 403,
-            message: `statusが0ではありません.${JSON.stringify(response.data)}`,
-        });
+        res.status(403).send();
         return;
     }
     if (!result["receipt"] || result["receipt"]["bundle_id"] !== IOS_PKG_NAME) {
-        res.status(200).send({
-            responseCode: 403,
-            message: "正しいレシートではありません",
-        });
+        res.status(403).send();
         return;
     }
     const latestReceipt = result["latest_receipt_info"][0];
       if (latestReceipt === null || latestReceipt === undefined) {
-        res.status(200).send({
-            responseCode: 403,
-            message: "最新のレシートが存在しません",
-        });
-      }
-      const transactionID = latestReceipt["transaction_id"];
-      const oldTx = await getDataFromFirestore("iosTransactions",transactionID);
-      // 存在しないならFirestoreに保存。
-      if (!oldTx.exists) {
-        await saveDataToFirestore(latestReceipt, "iosTransactions",transactionID);
-        await saveDataToFirestore(latestReceipt, "newIosTransactions",transactionID);
+        res.status(403).send();
       }
       // 期限内であることを確認する
       const now = Date.now();
@@ -487,9 +444,6 @@ exports.verifyIOSReceipt = functions
         });
         return;
       } else {
-        res.status(200).send({
-            responseCode: 403,
-            message: "期限が切れています",
-        });
+        res.status(403).send();
       }
 });
