@@ -59,6 +59,7 @@ class GenerateImageController extends LoadingController with CurrentUserMixin {
 
   Future<void> saveImage() async {
     Get.back();
+    startLoading();
     try {
       final imageUrl = rxUrl.value;
       final response = await Dio()
@@ -74,5 +75,6 @@ class GenerateImageController extends LoadingController with CurrentUserMixin {
     } catch (e) {
       UIHelper.showErrorFlutterToast("画像を保存できませんでした");
     }
+    endLoading();
   }
 }
