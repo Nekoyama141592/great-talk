@@ -153,8 +153,8 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     } else {
       // iOSの場合
       late bool isValid;
-      final result = await repository.getIOSReceipt(
-          purchaseDetails.verificationData.localVerificationData, currentUid());
+      final result =
+          await repository.getIOSReceipt(purchaseDetails, currentUid());
       result.when(success: (res) async {
         isValid = true;
         await _cachReceipt(res); // キャッシュを行う

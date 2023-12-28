@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/consts/env_keys.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/iap_constants/mock_product_list.dart';
 import 'package:great_talk/model/receipt_response/receipt_response.dart';
@@ -60,22 +58,19 @@ class PurchasesRepository {
         return Result.success(result);
       }
     } catch (e) {
-      if (CurrentUserController.to.isAdmin()) {
-        UIHelper.showErrorFlutterToast("Androidのレシート検証が失敗しました ${e.toString()}");
-      }
       return const Result.failure();
     }
   }
 
   FutureResult<ReceiptResponse> getIOSReceipt(
-      String token, String currentUid) async {
+      PurchaseDetails purchaseDetails, String currentUid) async {
     final instance = dio.Dio();
     Map<String, dynamic>? data;
     try {
       final dio.Response<Map<String, dynamic>> res =
           await instance.post(dotenv.get(EnvKeys.VERIFY_IOS_ENDPOINT.name),
               data: {
-                "data": token,
+                "data": purchaseDetails.toJson(),
                 "uid": currentUid,
               },
               options: dio.Options(method: "POST"));
@@ -87,9 +82,6 @@ class PurchasesRepository {
         return Result.success(result);
       }
     } catch (e) {
-      if (CurrentUserController.to.isAdmin()) {
-        UIHelper.showErrorFlutterToast("iOSのレシート検証が失敗しました ${e.toString()}");
-      }
       return const Result.failure();
     }
   }
