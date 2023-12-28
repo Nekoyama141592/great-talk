@@ -466,7 +466,7 @@ exports.verifyAndroidReceipt = functions
         const now = Date.now();
         const expireDate = Number(latestReceipt["expiryTimeMillis"]);
         if (now < expireDate) {
-            const transactionID = latestReceipt['orderId'].replace("GPA.", "");
+            const transactionID = latestReceipt['orderId'];
             const uid = req.body["uid"];
             latestReceipt["productId"] = productId;
             latestReceipt["uid"] = uid;
@@ -481,14 +481,14 @@ exports.verifyAndroidReceipt = functions
 });
 // ios
 exports.verifyIOSReceipt = functions
-.runWith({secrets: ["APP_SHARED_SECRET"],})
+.runWith({secrets: ["APP_SHARED_SECRET"]})
 .https.onRequest(async (req, res) => {
     const RECEIPT_VERIFICATION_PASSWORD_FOR_IOS = process.env.APP_SHARED_SECRET;
     if (req.method !== "POST") {
         res.status(403).send();
         return;
     }
-    const verificationData = req.body.data;
+    const verificationData = req.body["data"];
     if (!verificationData) {
         res.status(403).send();
         return;
@@ -508,7 +508,7 @@ exports.verifyIOSReceipt = functions
             });
         }
     } catch(err) {
-        res.status(403).send();
+        res.status(400).send();
         return;
     }
     const result = response.data;
@@ -521,21 +521,22 @@ exports.verifyIOSReceipt = functions
         return;
     }
     let latestReceipt = result["latest_receipt_info"][0];
-      if (latestReceipt === null || latestReceipt === undefined) {
+    if (latestReceipt === null || latestReceipt === undefined) {
         res.status(403).send();
-      }
-      // 期限内であることを確認する
-      const now = Date.now();
-      const expireDate = Number(latestReceipt["expires_date_ms"]);
-      if (now < expireDate) {
-        latestReceipt["uid"] = "";
-        res.status(200).send({
-            responseCode: 200,
-            message: "レシートの検証に成功しました",
-            latestReceipt: latestReceipt,
-        });
         return;
-      } else {
+    }
+    // 期限内であることを確認する
+    const now = Date.now();
+    const expireDate = Number(latestReceipt["expires_date_ms"]);
+    if (now < expireDate) {
+        const transactionID = latestReceipt["transaction_id"];
+        const uid = req.body["uid"];
+        latestReceipt["uid"] = uid;
+        await saveLatestReceipt(latestReceipt,uid,transactionID,true); // awaitを使用しないと保存されない
+        res.status(200).send({ latestReceipt: latestReceipt });
+        return;
+    } else {
         res.status(403).send();
-      }
+        return;
+    }
 });

@@ -466,7 +466,7 @@ exports.verifyAndroidReceipt = functions
         const now = Date.now();
         const expireDate = Number(latestReceipt["expiryTimeMillis"]);
         if (now < expireDate) {
-            const transactionID = latestReceipt['orderId'].replace("GPA.", "");
+            const transactionID = latestReceipt['orderId'];
             const uid = req.body["uid"];
             latestReceipt["productId"] = productId;
             latestReceipt["uid"] = uid;
@@ -533,7 +533,7 @@ exports.verifyIOSReceipt = functions
         const uid = req.body["uid"];
         latestReceipt["uid"] = uid;
         await saveLatestReceipt(latestReceipt,uid,transactionID,true); // awaitを使用しないと保存されない
-        res.status(200).send({ latestReceipt: latestReceipt,});
+        res.status(200).send({ latestReceipt: latestReceipt });
         return;
     } else {
         res.status(403).send();
