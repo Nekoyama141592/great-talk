@@ -276,9 +276,6 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   int maxToken() => isPremiumSubscribing()
       ? ChatGPTConstants.gpt4MaxToken
       : ChatGPTConstants.gptTurboMaxToken;
-  int maxRequestLength() => isPremiumSubscribing()
-      ? ChatGPTConstants.gpt4MaxRequestLength
-      : ChatGPTConstants.gptTurboMaxRequestLength;
   ChatModel model() => isPremiumSubscribing()
       ? ChatModelFromValue(model: ChatGPTConstants.premiumModel)
       : ChatModelFromValue(model: ChatGPTConstants.basicModel);

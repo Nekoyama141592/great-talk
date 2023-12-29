@@ -10,6 +10,7 @@ import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
@@ -166,7 +167,8 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
       UIHelper.showFlutterToast("チャットは1日$freeLimit回まで！\nサブスクに加入してください。");
       await _requestReview(); // レビューをリクエスト
       return;
-    } else if (chatCountToday.basic >= basicLimit && PurchasesController.to.isSubscribing()) {
+    } else if (chatCountToday.basic >= basicLimit &&
+        PurchasesController.to.isSubscribing()) {
       // 一時的にベーシックプランの利用が制限されている場合.
       UIHelper.showFlutterToast(
           "利用コストの急激な増加により、一時的にベーシックプランでのAPI利用回数を一日につき$basicLimit回までに制限させていただいています。\nご迷惑をおかけし、大変申し訳ございません。");
@@ -180,7 +182,6 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   Future<void> execute(ScrollController scrollController, String content,
       TextEditingController inputController) async {
     _setValues(); // チャットした日と回数を端末に保存.
-    final model = PurchasesController.to.model();
     _addMyMessage(content);
     _addEmptyMessage(); // Viewで表示できる要素数を一つ増やす
     realtimeRes(""); // realtimeResを初期化
@@ -190,7 +191,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     final CustomCompleteText completeText =
         rxChatContent.value!.managedCustomCompleteText();
     final request = ChatCompleteText(
-      model: model,
+      model: PurchasesController.to.model(),
       messages: requestMessages,
       temperature: completeText.temperature,
       topP: completeText.topP,
@@ -204,7 +205,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   }
 
   int _adjustMaxToken() {
-    final maxRequestLength = PurchasesController.to.maxRequestLength();
+    const maxRequestLength = ChatGPTConstants.maxRequestLength;
     final maxToken = PurchasesController.to.maxToken();
     final result = messages.length < maxRequestLength
         ? maxToken ~/ (maxRequestLength - 1)
@@ -389,10 +390,10 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   List<Messages> _toRequestMessages() {
     // メッセージからリクエストを送るJsonを生成.
     // メッセージ数を制限する。
-    final maxRequestLength = PurchasesController.to.maxRequestLength();
+    const maxRequestLength = ChatGPTConstants.maxRequestLength;
     final requestMessages = messages.length > maxRequestLength
         ? messages.sublist(messages.length - maxRequestLength)
-        : [...messages];
+        : messages;
     final List<Messages> result =
         requestMessages.map((e) => _toRequestMessage(e)).toList();
     return result;
