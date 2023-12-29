@@ -427,7 +427,7 @@ exports.verifyAndroidReceipt = functions
         res.status(403).send();
         return;
     }
-    const json = req.body["data"];
+    const purchaseDetails = req.body["data"];
     const privateKey = getPrivateKey(process.env.GCP_PRIVATE_KEY);
     const authClient = new google.auth.JWT({
         email: config.gcp.client_email,
@@ -438,7 +438,7 @@ exports.verifyAndroidReceipt = functions
         version: "v3",
         auth: authClient,
     });
-    const receipt = json.verificationData.localVerificationData;
+    const receipt = purchaseDetails.verificationData.localVerificationData;
     const decodedReceipt = JSON.parse(receipt);
     const typeOfSubscription = decodedReceipt["autoRenewing"];
     const productId = decodedReceipt["productId"];
@@ -468,8 +468,8 @@ exports.verifyAndroidReceipt = functions
         if (now < expireDate) {
             const transactionID = latestReceipt['orderId'];
             const uid = req.body["uid"];
-            latestReceipt["productId"] = productId;
             latestReceipt["uid"] = uid;
+            latestReceipt["purchaseDetails"] = purchaseDetails;
             await saveLatestReceipt(latestReceipt,uid,transactionID,false); // awaitを使用しないと保存されない
             res.status(200).send({ latestReceipt: latestReceipt,});
             return;
@@ -488,7 +488,8 @@ exports.verifyIOSReceipt = functions
         res.status(403).send();
         return;
     }
-    const verificationData = req.body["data"];
+    const purchaseDetails = req.body["data"];
+    const verificationData = purchaseDetails.verificationData.serverVerificationData;
     if (!verificationData) {
         res.status(403).send();
         return;
@@ -532,6 +533,7 @@ exports.verifyIOSReceipt = functions
         const transactionID = latestReceipt["transaction_id"];
         const uid = req.body["uid"];
         latestReceipt["uid"] = uid;
+        latestReceipt["purchase_details"] = purchaseDetails;
         await saveLatestReceipt(latestReceipt,uid,transactionID,true); // awaitを使用しないと保存されない
         res.status(200).send({ latestReceipt: latestReceipt });
         return;

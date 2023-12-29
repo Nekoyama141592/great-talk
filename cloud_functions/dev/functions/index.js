@@ -533,7 +533,7 @@ exports.verifyIOSReceipt = functions
         const transactionID = latestReceipt["transaction_id"];
         const uid = req.body["uid"];
         latestReceipt["uid"] = uid;
-        latestReceipt["purchaseDetails"] = purchaseDetails;
+        latestReceipt["purchase_details"] = purchaseDetails;
         await saveLatestReceipt(latestReceipt,uid,transactionID,true); // awaitを使用しないと保存されない
         res.status(200).send({ latestReceipt: latestReceipt });
         return;
