@@ -169,11 +169,11 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     rxCachedReceipt(CachedReceipt.fromReceiptResponse(receiptResponse,
         receiptResponse.originalTransactionId)); // キャッシュする前に上書き
     await PrefsUtility.setJson(
-        PrefsKey.receiptReceipt.name, receiptResponse.toJson());
+        PrefsKey.latestReceipt.name, receiptResponse.toJson());
   }
 
   Future<void> _getCachedReceipt() async {
-    final json = await PrefsUtility.getJson(PrefsKey.receiptReceipt.name);
+    final json = await PrefsUtility.getJson(PrefsKey.latestReceipt.name);
     if (json == null) return;
     final receiptResponse = ReceiptResponse.fromJson(json);
     rxCachedReceipt(CachedReceipt.fromReceiptResponse(
