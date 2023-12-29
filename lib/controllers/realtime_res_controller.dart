@@ -420,11 +420,11 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     if (content == null) {
       return;
     }
-    final title = "タイトル: ${content.title}";
+    final title = "タイトル:\n${content.title}";
     final systemPrompt =
-        "システムプロンプト: ${content.managedCustomCompleteText().systemPrompt}";
+        "システムプロンプト:\n${content.managedCustomCompleteText().systemPrompt}";
     String msgText = !returnIsOriginalContents(content.posterUid)
-        ? "累計メッセージ数: ${content.msgCount.formatNumber()}"
+        ? "累計メッセージ数:\n${content.msgCount.formatNumber()}"
         : "";
     UIHelper.simpleAlertDialog("$title\n\n$systemPrompt\n\n$msgText",
         needsSubscribing: true);
