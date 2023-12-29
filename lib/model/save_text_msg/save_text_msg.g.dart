@@ -6,8 +6,8 @@ part of 'save_text_msg.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SaveTextMsg _$$_SaveTextMsgFromJson(Map<String, dynamic> json) =>
-    _$_SaveTextMsg(
+_$SaveTextMsgImpl _$$SaveTextMsgImplFromJson(Map<String, dynamic> json) =>
+    _$SaveTextMsgImpl(
       createdAt: DateTime.parse(json['createdAt'] as String),
       id: json['id'] as String,
       messageType: json['messageType'] as String,
@@ -16,7 +16,7 @@ _$_SaveTextMsg _$$_SaveTextMsgFromJson(Map<String, dynamic> json) =>
       text: json['text'] as Map<String, dynamic>,
     );
 
-Map<String, dynamic> _$$_SaveTextMsgToJson(_$_SaveTextMsg instance) =>
+Map<String, dynamic> _$$SaveTextMsgImplToJson(_$SaveTextMsgImpl instance) =>
     <String, dynamic>{
       'createdAt': instance.createdAt.toIso8601String(),
       'id': instance.id,

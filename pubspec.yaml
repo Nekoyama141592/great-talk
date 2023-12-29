@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' 
 # lib/constants/remote_config_constants.dartのappVersionも変更
-version: 5.0.4+193
+version: 5.0.5+194
 
 environment:
   sdk: ">=2.18.2 <3.0.0"

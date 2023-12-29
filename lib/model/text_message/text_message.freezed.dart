@@ -112,11 +112,11 @@ class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
 }
 
 /// @nodoc
-abstract class _$$_TextMessageCopyWith<$Res>
+abstract class _$$TextMessageImplCopyWith<$Res>
     implements $TextMessageCopyWith<$Res> {
-  factory _$$_TextMessageCopyWith(
-          _$_TextMessage value, $Res Function(_$_TextMessage) then) =
-      __$$_TextMessageCopyWithImpl<$Res>;
+  factory _$$TextMessageImplCopyWith(
+          _$TextMessageImpl value, $Res Function(_$TextMessageImpl) then) =
+      __$$TextMessageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -131,11 +131,11 @@ abstract class _$$_TextMessageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TextMessageCopyWithImpl<$Res>
-    extends _$TextMessageCopyWithImpl<$Res, _$_TextMessage>
-    implements _$$_TextMessageCopyWith<$Res> {
-  __$$_TextMessageCopyWithImpl(
-      _$_TextMessage _value, $Res Function(_$_TextMessage) _then)
+class __$$TextMessageImplCopyWithImpl<$Res>
+    extends _$TextMessageCopyWithImpl<$Res, _$TextMessageImpl>
+    implements _$$TextMessageImplCopyWith<$Res> {
+  __$$TextMessageImplCopyWithImpl(
+      _$TextMessageImpl _value, $Res Function(_$TextMessageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -150,7 +150,7 @@ class __$$_TextMessageCopyWithImpl<$Res>
     Object? senderUid = null,
     Object? text = null,
   }) {
-    return _then(_$_TextMessage(
+    return _then(_$TextMessageImpl(
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -189,8 +189,8 @@ class __$$_TextMessageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TextMessage extends _TextMessage {
-  const _$_TextMessage(
+class _$TextMessageImpl extends _TextMessage {
+  const _$TextMessageImpl(
       {required this.createdAt,
       required this.id,
       required this.messageType,
@@ -202,8 +202,8 @@ class _$_TextMessage extends _TextMessage {
       : _text = text,
         super._();
 
-  factory _$_TextMessage.fromJson(Map<String, dynamic> json) =>
-      _$$_TextMessageFromJson(json);
+  factory _$TextMessageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TextMessageImplFromJson(json);
 
   @override
   final dynamic createdAt;
@@ -233,10 +233,10 @@ class _$_TextMessage extends _TextMessage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TextMessage &&
+            other is _$TextMessageImpl &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.messageType, messageType) ||
@@ -267,12 +267,12 @@ class _$_TextMessage extends _TextMessage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TextMessageCopyWith<_$_TextMessage> get copyWith =>
-      __$$_TextMessageCopyWithImpl<_$_TextMessage>(this, _$identity);
+  _$$TextMessageImplCopyWith<_$TextMessageImpl> get copyWith =>
+      __$$TextMessageImplCopyWithImpl<_$TextMessageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TextMessageToJson(
+    return _$$TextMessageImplToJson(
       this,
     );
   }
@@ -287,11 +287,11 @@ abstract class _TextMessage extends TextMessage {
       final dynamic postRef,
       required final String posterUid,
       required final String senderUid,
-      required final Map<String, dynamic> text}) = _$_TextMessage;
+      required final Map<String, dynamic> text}) = _$TextMessageImpl;
   const _TextMessage._() : super._();
 
   factory _TextMessage.fromJson(Map<String, dynamic> json) =
-      _$_TextMessage.fromJson;
+      _$TextMessageImpl.fromJson;
 
   @override
   dynamic get createdAt;
@@ -311,6 +311,6 @@ abstract class _TextMessage extends TextMessage {
   Map<String, dynamic> get text;
   @override
   @JsonKey(ignore: true)
-  _$$_TextMessageCopyWith<_$_TextMessage> get copyWith =>
+  _$$TextMessageImplCopyWith<_$TextMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

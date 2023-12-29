@@ -1,11 +1,14 @@
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
+import 'package:great_talk/controllers/realtime_res_controller.dart';
+import 'package:great_talk/controllers/remote_config_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/generata_image/generate_image_request/generate_image_request.dart';
 import 'package:great_talk/repository/open_ai_repository.dart';
@@ -30,7 +33,13 @@ class GenerateImageController extends LoadingController with CurrentUserMixin {
       UIHelper.showErrorFlutterToast("プレミアムプランに登録してください");
       Get.toNamed(SubscribePage.path);
     } else {
-      await _generateImage();
+      final chatCountToday = await RealtimeResController.to.getChatCount();
+      final premiumLimit = RemoteConfigController.to.chatLimitPerDay.premium;
+      chatCountToday.premium >= premiumLimit &&
+              PurchasesController.to.isPremiumSubscribing()
+          ? UIHelper.showFlutterToast(
+              "利用コストの急激な増加により、一時的にプレミアムプランでのAPI利用回数を一日につき$premiumLimit回までに制限させていただいています。\nご迷惑をおかけし、大変申し訳ございません。")
+          : await _generateImage();
     }
   }
 
@@ -47,6 +56,7 @@ class GenerateImageController extends LoadingController with CurrentUserMixin {
     result.when(success: (res) {
       final url = res.data?.last?.url;
       rxUrl(url);
+      RealtimeResController.to.setChatCount(true);
     }, failure: () {
       UIHelper.showErrorFlutterToast("画像が生成できませんでした");
     });

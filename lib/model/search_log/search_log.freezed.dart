@@ -83,11 +83,11 @@ class _$SearchLogCopyWithImpl<$Res, $Val extends SearchLog>
 }
 
 /// @nodoc
-abstract class _$$_UserUpdateLogCopyWith<$Res>
+abstract class _$$UserUpdateLogImplCopyWith<$Res>
     implements $SearchLogCopyWith<$Res> {
-  factory _$$_UserUpdateLogCopyWith(
-          _$_UserUpdateLog value, $Res Function(_$_UserUpdateLog) then) =
-      __$$_UserUpdateLogCopyWithImpl<$Res>;
+  factory _$$UserUpdateLogImplCopyWith(
+          _$UserUpdateLogImpl value, $Res Function(_$UserUpdateLogImpl) then) =
+      __$$UserUpdateLogImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -98,11 +98,11 @@ abstract class _$$_UserUpdateLogCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserUpdateLogCopyWithImpl<$Res>
-    extends _$SearchLogCopyWithImpl<$Res, _$_UserUpdateLog>
-    implements _$$_UserUpdateLogCopyWith<$Res> {
-  __$$_UserUpdateLogCopyWithImpl(
-      _$_UserUpdateLog _value, $Res Function(_$_UserUpdateLog) _then)
+class __$$UserUpdateLogImplCopyWithImpl<$Res>
+    extends _$SearchLogCopyWithImpl<$Res, _$UserUpdateLogImpl>
+    implements _$$UserUpdateLogImplCopyWith<$Res> {
+  __$$UserUpdateLogImplCopyWithImpl(
+      _$UserUpdateLogImpl _value, $Res Function(_$UserUpdateLogImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -113,7 +113,7 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
     Object? searchTerm = null,
     Object? uid = null,
   }) {
-    return _then(_$_UserUpdateLog(
+    return _then(_$UserUpdateLogImpl(
       logCreatedAt: freezed == logCreatedAt
           ? _value.logCreatedAt
           : logCreatedAt // ignore: cast_nullable_to_non_nullable
@@ -136,15 +136,15 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserUpdateLog implements _UserUpdateLog {
-  const _$_UserUpdateLog(
+class _$UserUpdateLogImpl implements _UserUpdateLog {
+  const _$UserUpdateLogImpl(
       {required this.logCreatedAt,
       required this.searchTarget,
       required this.searchTerm,
       required this.uid});
 
-  factory _$_UserUpdateLog.fromJson(Map<String, dynamic> json) =>
-      _$$_UserUpdateLogFromJson(json);
+  factory _$UserUpdateLogImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserUpdateLogImplFromJson(json);
 
   @override
   final dynamic logCreatedAt;
@@ -161,10 +161,10 @@ class _$_UserUpdateLog implements _UserUpdateLog {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserUpdateLog &&
+            other is _$UserUpdateLogImpl &&
             const DeepCollectionEquality()
                 .equals(other.logCreatedAt, logCreatedAt) &&
             (identical(other.searchTarget, searchTarget) ||
@@ -186,12 +186,12 @@ class _$_UserUpdateLog implements _UserUpdateLog {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserUpdateLogCopyWith<_$_UserUpdateLog> get copyWith =>
-      __$$_UserUpdateLogCopyWithImpl<_$_UserUpdateLog>(this, _$identity);
+  _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
+      __$$UserUpdateLogImplCopyWithImpl<_$UserUpdateLogImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserUpdateLogToJson(
+    return _$$UserUpdateLogImplToJson(
       this,
     );
   }
@@ -202,10 +202,10 @@ abstract class _UserUpdateLog implements SearchLog {
       {required final dynamic logCreatedAt,
       required final String searchTarget,
       required final String searchTerm,
-      required final String uid}) = _$_UserUpdateLog;
+      required final String uid}) = _$UserUpdateLogImpl;
 
   factory _UserUpdateLog.fromJson(Map<String, dynamic> json) =
-      _$_UserUpdateLog.fromJson;
+      _$UserUpdateLogImpl.fromJson;
 
   @override
   dynamic get logCreatedAt;
@@ -217,6 +217,6 @@ abstract class _UserUpdateLog implements SearchLog {
   String get uid;
   @override
   @JsonKey(ignore: true)
-  _$$_UserUpdateLogCopyWith<_$_UserUpdateLog> get copyWith =>
+  _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -74,22 +74,22 @@ class _$ModerationLabelCopyWithImpl<$Res, $Val extends ModerationLabel>
 }
 
 /// @nodoc
-abstract class _$$_ModerationLabelCopyWith<$Res>
+abstract class _$$ModerationLabelImplCopyWith<$Res>
     implements $ModerationLabelCopyWith<$Res> {
-  factory _$$_ModerationLabelCopyWith(
-          _$_ModerationLabel value, $Res Function(_$_ModerationLabel) then) =
-      __$$_ModerationLabelCopyWithImpl<$Res>;
+  factory _$$ModerationLabelImplCopyWith(_$ModerationLabelImpl value,
+          $Res Function(_$ModerationLabelImpl) then) =
+      __$$ModerationLabelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({num Confidence, String Name, String ParentName});
 }
 
 /// @nodoc
-class __$$_ModerationLabelCopyWithImpl<$Res>
-    extends _$ModerationLabelCopyWithImpl<$Res, _$_ModerationLabel>
-    implements _$$_ModerationLabelCopyWith<$Res> {
-  __$$_ModerationLabelCopyWithImpl(
-      _$_ModerationLabel _value, $Res Function(_$_ModerationLabel) _then)
+class __$$ModerationLabelImplCopyWithImpl<$Res>
+    extends _$ModerationLabelCopyWithImpl<$Res, _$ModerationLabelImpl>
+    implements _$$ModerationLabelImplCopyWith<$Res> {
+  __$$ModerationLabelImplCopyWithImpl(
+      _$ModerationLabelImpl _value, $Res Function(_$ModerationLabelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_ModerationLabelCopyWithImpl<$Res>
     Object? Name = null,
     Object? ParentName = null,
   }) {
-    return _then(_$_ModerationLabel(
+    return _then(_$ModerationLabelImpl(
       Confidence: null == Confidence
           ? _value.Confidence
           : Confidence // ignore: cast_nullable_to_non_nullable
@@ -118,12 +118,12 @@ class __$$_ModerationLabelCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ModerationLabel implements _ModerationLabel {
-  const _$_ModerationLabel(
+class _$ModerationLabelImpl implements _ModerationLabel {
+  const _$ModerationLabelImpl(
       {required this.Confidence, required this.Name, required this.ParentName});
 
-  factory _$_ModerationLabel.fromJson(Map<String, dynamic> json) =>
-      _$$_ModerationLabelFromJson(json);
+  factory _$ModerationLabelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ModerationLabelImplFromJson(json);
 
   @override
   final num Confidence;
@@ -138,10 +138,10 @@ class _$_ModerationLabel implements _ModerationLabel {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ModerationLabel &&
+            other is _$ModerationLabelImpl &&
             (identical(other.Confidence, Confidence) ||
                 other.Confidence == Confidence) &&
             (identical(other.Name, Name) || other.Name == Name) &&
@@ -156,12 +156,13 @@ class _$_ModerationLabel implements _ModerationLabel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ModerationLabelCopyWith<_$_ModerationLabel> get copyWith =>
-      __$$_ModerationLabelCopyWithImpl<_$_ModerationLabel>(this, _$identity);
+  _$$ModerationLabelImplCopyWith<_$ModerationLabelImpl> get copyWith =>
+      __$$ModerationLabelImplCopyWithImpl<_$ModerationLabelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ModerationLabelToJson(
+    return _$$ModerationLabelImplToJson(
       this,
     );
   }
@@ -171,10 +172,10 @@ abstract class _ModerationLabel implements ModerationLabel {
   const factory _ModerationLabel(
       {required final num Confidence,
       required final String Name,
-      required final String ParentName}) = _$_ModerationLabel;
+      required final String ParentName}) = _$ModerationLabelImpl;
 
   factory _ModerationLabel.fromJson(Map<String, dynamic> json) =
-      _$_ModerationLabel.fromJson;
+      _$ModerationLabelImpl.fromJson;
 
   @override
   num get Confidence;
@@ -184,6 +185,6 @@ abstract class _ModerationLabel implements ModerationLabel {
   String get ParentName;
   @override
   @JsonKey(ignore: true)
-  _$$_ModerationLabelCopyWith<_$_ModerationLabel> get copyWith =>
+  _$$ModerationLabelImplCopyWith<_$ModerationLabelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -190,11 +190,11 @@ class _$IOSReceiptResponseCopyWithImpl<$Res, $Val extends IOSReceiptResponse>
 }
 
 /// @nodoc
-abstract class _$$_IOSReceiptResponseCopyWith<$Res>
+abstract class _$$IOSReceiptResponseImplCopyWith<$Res>
     implements $IOSReceiptResponseCopyWith<$Res> {
-  factory _$$_IOSReceiptResponseCopyWith(_$_IOSReceiptResponse value,
-          $Res Function(_$_IOSReceiptResponse) then) =
-      __$$_IOSReceiptResponseCopyWithImpl<$Res>;
+  factory _$$IOSReceiptResponseImplCopyWith(_$IOSReceiptResponseImpl value,
+          $Res Function(_$IOSReceiptResponseImpl) then) =
+      __$$IOSReceiptResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -220,11 +220,11 @@ abstract class _$$_IOSReceiptResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_IOSReceiptResponseCopyWithImpl<$Res>
-    extends _$IOSReceiptResponseCopyWithImpl<$Res, _$_IOSReceiptResponse>
-    implements _$$_IOSReceiptResponseCopyWith<$Res> {
-  __$$_IOSReceiptResponseCopyWithImpl(
-      _$_IOSReceiptResponse _value, $Res Function(_$_IOSReceiptResponse) _then)
+class __$$IOSReceiptResponseImplCopyWithImpl<$Res>
+    extends _$IOSReceiptResponseCopyWithImpl<$Res, _$IOSReceiptResponseImpl>
+    implements _$$IOSReceiptResponseImplCopyWith<$Res> {
+  __$$IOSReceiptResponseImplCopyWithImpl(_$IOSReceiptResponseImpl _value,
+      $Res Function(_$IOSReceiptResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -250,7 +250,7 @@ class __$$_IOSReceiptResponseCopyWithImpl<$Res>
     Object? uid = null,
     Object? web_order_line_item_id = null,
   }) {
-    return _then(_$_IOSReceiptResponse(
+    return _then(_$IOSReceiptResponseImpl(
       expires_date: null == expires_date
           ? _value.expires_date
           : expires_date // ignore: cast_nullable_to_non_nullable
@@ -333,8 +333,8 @@ class __$$_IOSReceiptResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_IOSReceiptResponse extends _IOSReceiptResponse {
-  const _$_IOSReceiptResponse(
+class _$IOSReceiptResponseImpl extends _IOSReceiptResponse {
+  const _$IOSReceiptResponseImpl(
       {required this.expires_date,
       required this.expires_date_ms,
       required this.expires_date_pst,
@@ -356,8 +356,8 @@ class _$_IOSReceiptResponse extends _IOSReceiptResponse {
       required this.web_order_line_item_id})
       : super._();
 
-  factory _$_IOSReceiptResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_IOSReceiptResponseFromJson(json);
+  factory _$IOSReceiptResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$IOSReceiptResponseImplFromJson(json);
 
   @override
   final String expires_date;
@@ -405,10 +405,10 @@ class _$_IOSReceiptResponse extends _IOSReceiptResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_IOSReceiptResponse &&
+            other is _$IOSReceiptResponseImpl &&
             (identical(other.expires_date, expires_date) ||
                 other.expires_date == expires_date) &&
             (identical(other.expires_date_ms, expires_date_ms) ||
@@ -480,13 +480,13 @@ class _$_IOSReceiptResponse extends _IOSReceiptResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_IOSReceiptResponseCopyWith<_$_IOSReceiptResponse> get copyWith =>
-      __$$_IOSReceiptResponseCopyWithImpl<_$_IOSReceiptResponse>(
+  _$$IOSReceiptResponseImplCopyWith<_$IOSReceiptResponseImpl> get copyWith =>
+      __$$IOSReceiptResponseImplCopyWithImpl<_$IOSReceiptResponseImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IOSReceiptResponseToJson(
+    return _$$IOSReceiptResponseImplToJson(
       this,
     );
   }
@@ -512,11 +512,11 @@ abstract class _IOSReceiptResponse extends IOSReceiptResponse {
       required final String subscription_group_identifier,
       required final String transaction_id,
       required final String uid,
-      required final String web_order_line_item_id}) = _$_IOSReceiptResponse;
+      required final String web_order_line_item_id}) = _$IOSReceiptResponseImpl;
   const _IOSReceiptResponse._() : super._();
 
   factory _IOSReceiptResponse.fromJson(Map<String, dynamic> json) =
-      _$_IOSReceiptResponse.fromJson;
+      _$IOSReceiptResponseImpl.fromJson;
 
   @override
   String get expires_date;
@@ -558,6 +558,6 @@ abstract class _IOSReceiptResponse extends IOSReceiptResponse {
   String get web_order_line_item_id;
   @override
   @JsonKey(ignore: true)
-  _$$_IOSReceiptResponseCopyWith<_$_IOSReceiptResponse> get copyWith =>
+  _$$IOSReceiptResponseImplCopyWith<_$IOSReceiptResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

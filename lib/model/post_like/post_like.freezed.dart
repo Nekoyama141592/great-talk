@@ -90,10 +90,11 @@ class _$PostLikeCopyWithImpl<$Res, $Val extends PostLike>
 }
 
 /// @nodoc
-abstract class _$$_PostLikeCopyWith<$Res> implements $PostLikeCopyWith<$Res> {
-  factory _$$_PostLikeCopyWith(
-          _$_PostLike value, $Res Function(_$_PostLike) then) =
-      __$$_PostLikeCopyWithImpl<$Res>;
+abstract class _$$PostLikeImplCopyWith<$Res>
+    implements $PostLikeCopyWith<$Res> {
+  factory _$$PostLikeImplCopyWith(
+          _$PostLikeImpl value, $Res Function(_$PostLikeImpl) then) =
+      __$$PostLikeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -105,11 +106,11 @@ abstract class _$$_PostLikeCopyWith<$Res> implements $PostLikeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PostLikeCopyWithImpl<$Res>
-    extends _$PostLikeCopyWithImpl<$Res, _$_PostLike>
-    implements _$$_PostLikeCopyWith<$Res> {
-  __$$_PostLikeCopyWithImpl(
-      _$_PostLike _value, $Res Function(_$_PostLike) _then)
+class __$$PostLikeImplCopyWithImpl<$Res>
+    extends _$PostLikeCopyWithImpl<$Res, _$PostLikeImpl>
+    implements _$$PostLikeImplCopyWith<$Res> {
+  __$$PostLikeImplCopyWithImpl(
+      _$PostLikeImpl _value, $Res Function(_$PostLikeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -121,7 +122,7 @@ class __$$_PostLikeCopyWithImpl<$Res>
     Object? postRef = freezed,
     Object? postId = null,
   }) {
-    return _then(_$_PostLike(
+    return _then(_$PostLikeImpl(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
@@ -148,16 +149,16 @@ class __$$_PostLikeCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostLike implements _PostLike {
-  const _$_PostLike(
+class _$PostLikeImpl implements _PostLike {
+  const _$PostLikeImpl(
       {required this.activeUid,
       required this.createdAt,
       required this.passiveUid,
       required this.postRef,
       required this.postId});
 
-  factory _$_PostLike.fromJson(Map<String, dynamic> json) =>
-      _$$_PostLikeFromJson(json);
+  factory _$PostLikeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostLikeImplFromJson(json);
 
   @override
   final String activeUid;
@@ -176,10 +177,10 @@ class _$_PostLike implements _PostLike {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostLike &&
+            other is _$PostLikeImpl &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -202,12 +203,12 @@ class _$_PostLike implements _PostLike {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostLikeCopyWith<_$_PostLike> get copyWith =>
-      __$$_PostLikeCopyWithImpl<_$_PostLike>(this, _$identity);
+  _$$PostLikeImplCopyWith<_$PostLikeImpl> get copyWith =>
+      __$$PostLikeImplCopyWithImpl<_$PostLikeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostLikeToJson(
+    return _$$PostLikeImplToJson(
       this,
     );
   }
@@ -219,9 +220,10 @@ abstract class _PostLike implements PostLike {
       required final dynamic createdAt,
       required final String passiveUid,
       required final dynamic postRef,
-      required final String postId}) = _$_PostLike;
+      required final String postId}) = _$PostLikeImpl;
 
-  factory _PostLike.fromJson(Map<String, dynamic> json) = _$_PostLike.fromJson;
+  factory _PostLike.fromJson(Map<String, dynamic> json) =
+      _$PostLikeImpl.fromJson;
 
   @override
   String get activeUid;
@@ -235,6 +237,6 @@ abstract class _PostLike implements PostLike {
   String get postId;
   @override
   @JsonKey(ignore: true)
-  _$$_PostLikeCopyWith<_$_PostLike> get copyWith =>
+  _$$PostLikeImplCopyWith<_$PostLikeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

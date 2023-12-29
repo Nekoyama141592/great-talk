@@ -98,11 +98,11 @@ class _$ReportPostTokenCopyWithImpl<$Res, $Val extends ReportPostToken>
 }
 
 /// @nodoc
-abstract class _$$_ReportPostTokenCopyWith<$Res>
+abstract class _$$ReportPostTokenImplCopyWith<$Res>
     implements $ReportPostTokenCopyWith<$Res> {
-  factory _$$_ReportPostTokenCopyWith(
-          _$_ReportPostToken value, $Res Function(_$_ReportPostToken) then) =
-      __$$_ReportPostTokenCopyWithImpl<$Res>;
+  factory _$$ReportPostTokenImplCopyWith(_$ReportPostTokenImpl value,
+          $Res Function(_$ReportPostTokenImpl) then) =
+      __$$ReportPostTokenImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_ReportPostTokenCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReportPostTokenCopyWithImpl<$Res>
-    extends _$ReportPostTokenCopyWithImpl<$Res, _$_ReportPostToken>
-    implements _$$_ReportPostTokenCopyWith<$Res> {
-  __$$_ReportPostTokenCopyWithImpl(
-      _$_ReportPostToken _value, $Res Function(_$_ReportPostToken) _then)
+class __$$ReportPostTokenImplCopyWithImpl<$Res>
+    extends _$ReportPostTokenCopyWithImpl<$Res, _$ReportPostTokenImpl>
+    implements _$$ReportPostTokenImplCopyWith<$Res> {
+  __$$ReportPostTokenImplCopyWithImpl(
+      _$ReportPostTokenImpl _value, $Res Function(_$ReportPostTokenImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_ReportPostTokenCopyWithImpl<$Res>
     Object? tokenId = null,
     Object? tokenType = null,
   }) {
-    return _then(_$_ReportPostToken(
+    return _then(_$ReportPostTokenImpl(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
@@ -163,8 +163,8 @@ class __$$_ReportPostTokenCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReportPostToken implements _ReportPostToken {
-  const _$_ReportPostToken(
+class _$ReportPostTokenImpl implements _ReportPostToken {
+  const _$ReportPostTokenImpl(
       {required this.activeUid,
       required this.createdAt,
       required this.postId,
@@ -172,8 +172,8 @@ class _$_ReportPostToken implements _ReportPostToken {
       required this.tokenId,
       required this.tokenType});
 
-  factory _$_ReportPostToken.fromJson(Map<String, dynamic> json) =>
-      _$$_ReportPostTokenFromJson(json);
+  factory _$ReportPostTokenImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReportPostTokenImplFromJson(json);
 
   @override
   final String activeUid;
@@ -194,10 +194,10 @@ class _$_ReportPostToken implements _ReportPostToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReportPostToken &&
+            other is _$ReportPostTokenImpl &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -222,12 +222,13 @@ class _$_ReportPostToken implements _ReportPostToken {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReportPostTokenCopyWith<_$_ReportPostToken> get copyWith =>
-      __$$_ReportPostTokenCopyWithImpl<_$_ReportPostToken>(this, _$identity);
+  _$$ReportPostTokenImplCopyWith<_$ReportPostTokenImpl> get copyWith =>
+      __$$ReportPostTokenImplCopyWithImpl<_$ReportPostTokenImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReportPostTokenToJson(
+    return _$$ReportPostTokenImplToJson(
       this,
     );
   }
@@ -240,10 +241,10 @@ abstract class _ReportPostToken implements ReportPostToken {
       required final String postId,
       required final dynamic postRef,
       required final String tokenId,
-      required final String tokenType}) = _$_ReportPostToken;
+      required final String tokenType}) = _$ReportPostTokenImpl;
 
   factory _ReportPostToken.fromJson(Map<String, dynamic> json) =
-      _$_ReportPostToken.fromJson;
+      _$ReportPostTokenImpl.fromJson;
 
   @override
   String get activeUid;
@@ -259,6 +260,6 @@ abstract class _ReportPostToken implements ReportPostToken {
   String get tokenType;
   @override
   @JsonKey(ignore: true)
-  _$$_ReportPostTokenCopyWith<_$_ReportPostToken> get copyWith =>
+  _$$ReportPostTokenImplCopyWith<_$ReportPostTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

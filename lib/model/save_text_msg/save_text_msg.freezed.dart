@@ -98,11 +98,11 @@ class _$SaveTextMsgCopyWithImpl<$Res, $Val extends SaveTextMsg>
 }
 
 /// @nodoc
-abstract class _$$_SaveTextMsgCopyWith<$Res>
+abstract class _$$SaveTextMsgImplCopyWith<$Res>
     implements $SaveTextMsgCopyWith<$Res> {
-  factory _$$_SaveTextMsgCopyWith(
-          _$_SaveTextMsg value, $Res Function(_$_SaveTextMsg) then) =
-      __$$_SaveTextMsgCopyWithImpl<$Res>;
+  factory _$$SaveTextMsgImplCopyWith(
+          _$SaveTextMsgImpl value, $Res Function(_$SaveTextMsgImpl) then) =
+      __$$SaveTextMsgImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_SaveTextMsgCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SaveTextMsgCopyWithImpl<$Res>
-    extends _$SaveTextMsgCopyWithImpl<$Res, _$_SaveTextMsg>
-    implements _$$_SaveTextMsgCopyWith<$Res> {
-  __$$_SaveTextMsgCopyWithImpl(
-      _$_SaveTextMsg _value, $Res Function(_$_SaveTextMsg) _then)
+class __$$SaveTextMsgImplCopyWithImpl<$Res>
+    extends _$SaveTextMsgCopyWithImpl<$Res, _$SaveTextMsgImpl>
+    implements _$$SaveTextMsgImplCopyWith<$Res> {
+  __$$SaveTextMsgImplCopyWithImpl(
+      _$SaveTextMsgImpl _value, $Res Function(_$SaveTextMsgImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_SaveTextMsgCopyWithImpl<$Res>
     Object? senderUid = null,
     Object? text = null,
   }) {
-    return _then(_$_SaveTextMsg(
+    return _then(_$SaveTextMsgImpl(
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -163,8 +163,8 @@ class __$$_SaveTextMsgCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SaveTextMsg extends _SaveTextMsg {
-  const _$_SaveTextMsg(
+class _$SaveTextMsgImpl extends _SaveTextMsg {
+  const _$SaveTextMsgImpl(
       {required this.createdAt,
       required this.id,
       required this.messageType,
@@ -174,8 +174,8 @@ class _$_SaveTextMsg extends _SaveTextMsg {
       : _text = text,
         super._();
 
-  factory _$_SaveTextMsg.fromJson(Map<String, dynamic> json) =>
-      _$$_SaveTextMsgFromJson(json);
+  factory _$SaveTextMsgImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SaveTextMsgImplFromJson(json);
 
   @override
   final DateTime createdAt;
@@ -201,10 +201,10 @@ class _$_SaveTextMsg extends _SaveTextMsg {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SaveTextMsg &&
+            other is _$SaveTextMsgImpl &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.id, id) || other.id == id) &&
@@ -225,12 +225,12 @@ class _$_SaveTextMsg extends _SaveTextMsg {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SaveTextMsgCopyWith<_$_SaveTextMsg> get copyWith =>
-      __$$_SaveTextMsgCopyWithImpl<_$_SaveTextMsg>(this, _$identity);
+  _$$SaveTextMsgImplCopyWith<_$SaveTextMsgImpl> get copyWith =>
+      __$$SaveTextMsgImplCopyWithImpl<_$SaveTextMsgImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SaveTextMsgToJson(
+    return _$$SaveTextMsgImplToJson(
       this,
     );
   }
@@ -243,11 +243,11 @@ abstract class _SaveTextMsg extends SaveTextMsg {
       required final String messageType,
       required final String posterUid,
       required final String senderUid,
-      required final Map<String, dynamic> text}) = _$_SaveTextMsg;
+      required final Map<String, dynamic> text}) = _$SaveTextMsgImpl;
   const _SaveTextMsg._() : super._();
 
   factory _SaveTextMsg.fromJson(Map<String, dynamic> json) =
-      _$_SaveTextMsg.fromJson;
+      _$SaveTextMsgImpl.fromJson;
 
   @override
   DateTime get createdAt;
@@ -263,6 +263,6 @@ abstract class _SaveTextMsg extends SaveTextMsg {
   Map<String, dynamic> get text;
   @override
   @JsonKey(ignore: true)
-  _$$_SaveTextMsgCopyWith<_$_SaveTextMsg> get copyWith =>
+  _$$SaveTextMsgImplCopyWith<_$SaveTextMsgImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

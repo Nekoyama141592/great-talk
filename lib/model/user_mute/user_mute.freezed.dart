@@ -90,10 +90,11 @@ class _$UserMuteCopyWithImpl<$Res, $Val extends UserMute>
 }
 
 /// @nodoc
-abstract class _$$_UserMuteCopyWith<$Res> implements $UserMuteCopyWith<$Res> {
-  factory _$$_UserMuteCopyWith(
-          _$_UserMute value, $Res Function(_$_UserMute) then) =
-      __$$_UserMuteCopyWithImpl<$Res>;
+abstract class _$$UserMuteImplCopyWith<$Res>
+    implements $UserMuteCopyWith<$Res> {
+  factory _$$UserMuteImplCopyWith(
+          _$UserMuteImpl value, $Res Function(_$UserMuteImpl) then) =
+      __$$UserMuteImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -105,11 +106,11 @@ abstract class _$$_UserMuteCopyWith<$Res> implements $UserMuteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserMuteCopyWithImpl<$Res>
-    extends _$UserMuteCopyWithImpl<$Res, _$_UserMute>
-    implements _$$_UserMuteCopyWith<$Res> {
-  __$$_UserMuteCopyWithImpl(
-      _$_UserMute _value, $Res Function(_$_UserMute) _then)
+class __$$UserMuteImplCopyWithImpl<$Res>
+    extends _$UserMuteCopyWithImpl<$Res, _$UserMuteImpl>
+    implements _$$UserMuteImplCopyWith<$Res> {
+  __$$UserMuteImplCopyWithImpl(
+      _$UserMuteImpl _value, $Res Function(_$UserMuteImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -121,7 +122,7 @@ class __$$_UserMuteCopyWithImpl<$Res>
     Object? passiveUid = null,
     Object? passiveUserRef = freezed,
   }) {
-    return _then(_$_UserMute(
+    return _then(_$UserMuteImpl(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
@@ -148,16 +149,16 @@ class __$$_UserMuteCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserMute implements _UserMute {
-  const _$_UserMute(
+class _$UserMuteImpl implements _UserMute {
+  const _$UserMuteImpl(
       {required this.activeUid,
       required this.activeUserRef,
       required this.createdAt,
       required this.passiveUid,
       required this.passiveUserRef});
 
-  factory _$_UserMute.fromJson(Map<String, dynamic> json) =>
-      _$$_UserMuteFromJson(json);
+  factory _$UserMuteImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserMuteImplFromJson(json);
 
   @override
   final String activeUid;
@@ -176,10 +177,10 @@ class _$_UserMute implements _UserMute {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserMute &&
+            other is _$UserMuteImpl &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
             const DeepCollectionEquality()
@@ -204,12 +205,12 @@ class _$_UserMute implements _UserMute {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserMuteCopyWith<_$_UserMute> get copyWith =>
-      __$$_UserMuteCopyWithImpl<_$_UserMute>(this, _$identity);
+  _$$UserMuteImplCopyWith<_$UserMuteImpl> get copyWith =>
+      __$$UserMuteImplCopyWithImpl<_$UserMuteImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserMuteToJson(
+    return _$$UserMuteImplToJson(
       this,
     );
   }
@@ -221,9 +222,10 @@ abstract class _UserMute implements UserMute {
       required final dynamic activeUserRef,
       required final dynamic createdAt,
       required final String passiveUid,
-      required final dynamic passiveUserRef}) = _$_UserMute;
+      required final dynamic passiveUserRef}) = _$UserMuteImpl;
 
-  factory _UserMute.fromJson(Map<String, dynamic> json) = _$_UserMute.fromJson;
+  factory _UserMute.fromJson(Map<String, dynamic> json) =
+      _$UserMuteImpl.fromJson;
 
   @override
   String get activeUid;
@@ -237,6 +239,6 @@ abstract class _UserMute implements UserMute {
   dynamic get passiveUserRef;
   @override
   @JsonKey(ignore: true)
-  _$$_UserMuteCopyWith<_$_UserMute> get copyWith =>
+  _$$UserMuteImplCopyWith<_$UserMuteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,9 +6,9 @@ part of 'custom_complete_text.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CustomCompleteText _$$_CustomCompleteTextFromJson(
+_$CustomCompleteTextImpl _$$CustomCompleteTextImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CustomCompleteText(
+    _$CustomCompleteTextImpl(
       systemPrompt: json['systemPrompt'] as String,
       temperature: (json['temperature'] as num?)?.toDouble(),
       topP: (json['topP'] as num?)?.toDouble(),
@@ -16,8 +16,8 @@ _$_CustomCompleteText _$$_CustomCompleteTextFromJson(
       frequencyPenalty: (json['frequencyPenalty'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$_CustomCompleteTextToJson(
-        _$_CustomCompleteText instance) =>
+Map<String, dynamic> _$$CustomCompleteTextImplToJson(
+        _$CustomCompleteTextImpl instance) =>
     <String, dynamic>{
       'systemPrompt': instance.systemPrompt,
       'temperature': instance.temperature,

@@ -64,22 +64,24 @@ class _$GenerateImageResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_GenerateImageResponseCopyWith<$Res>
+abstract class _$$GenerateImageResponseImplCopyWith<$Res>
     implements $GenerateImageResponseCopyWith<$Res> {
-  factory _$$_GenerateImageResponseCopyWith(_$_GenerateImageResponse value,
-          $Res Function(_$_GenerateImageResponse) then) =
-      __$$_GenerateImageResponseCopyWithImpl<$Res>;
+  factory _$$GenerateImageResponseImplCopyWith(
+          _$GenerateImageResponseImpl value,
+          $Res Function(_$GenerateImageResponseImpl) then) =
+      __$$GenerateImageResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<GenerateImageData?>? data});
 }
 
 /// @nodoc
-class __$$_GenerateImageResponseCopyWithImpl<$Res>
-    extends _$GenerateImageResponseCopyWithImpl<$Res, _$_GenerateImageResponse>
-    implements _$$_GenerateImageResponseCopyWith<$Res> {
-  __$$_GenerateImageResponseCopyWithImpl(_$_GenerateImageResponse _value,
-      $Res Function(_$_GenerateImageResponse) _then)
+class __$$GenerateImageResponseImplCopyWithImpl<$Res>
+    extends _$GenerateImageResponseCopyWithImpl<$Res,
+        _$GenerateImageResponseImpl>
+    implements _$$GenerateImageResponseImplCopyWith<$Res> {
+  __$$GenerateImageResponseImplCopyWithImpl(_$GenerateImageResponseImpl _value,
+      $Res Function(_$GenerateImageResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +89,7 @@ class __$$_GenerateImageResponseCopyWithImpl<$Res>
   $Res call({
     Object? data = freezed,
   }) {
-    return _then(_$_GenerateImageResponse(
+    return _then(_$GenerateImageResponseImpl(
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -98,12 +100,12 @@ class __$$_GenerateImageResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GenerateImageResponse implements _GenerateImageResponse {
-  const _$_GenerateImageResponse({final List<GenerateImageData?>? data})
+class _$GenerateImageResponseImpl implements _GenerateImageResponse {
+  const _$GenerateImageResponseImpl({final List<GenerateImageData?>? data})
       : _data = data;
 
-  factory _$_GenerateImageResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_GenerateImageResponseFromJson(json);
+  factory _$GenerateImageResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GenerateImageResponseImplFromJson(json);
 
   final List<GenerateImageData?>? _data;
   @override
@@ -121,10 +123,10 @@ class _$_GenerateImageResponse implements _GenerateImageResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GenerateImageResponse &&
+            other is _$GenerateImageResponseImpl &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
@@ -136,13 +138,13 @@ class _$_GenerateImageResponse implements _GenerateImageResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GenerateImageResponseCopyWith<_$_GenerateImageResponse> get copyWith =>
-      __$$_GenerateImageResponseCopyWithImpl<_$_GenerateImageResponse>(
-          this, _$identity);
+  _$$GenerateImageResponseImplCopyWith<_$GenerateImageResponseImpl>
+      get copyWith => __$$GenerateImageResponseImplCopyWithImpl<
+          _$GenerateImageResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GenerateImageResponseToJson(
+    return _$$GenerateImageResponseImplToJson(
       this,
     );
   }
@@ -150,15 +152,15 @@ class _$_GenerateImageResponse implements _GenerateImageResponse {
 
 abstract class _GenerateImageResponse implements GenerateImageResponse {
   const factory _GenerateImageResponse({final List<GenerateImageData?>? data}) =
-      _$_GenerateImageResponse;
+      _$GenerateImageResponseImpl;
 
   factory _GenerateImageResponse.fromJson(Map<String, dynamic> json) =
-      _$_GenerateImageResponse.fromJson;
+      _$GenerateImageResponseImpl.fromJson;
 
   @override
   List<GenerateImageData?>? get data;
   @override
   @JsonKey(ignore: true)
-  _$$_GenerateImageResponseCopyWith<_$_GenerateImageResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$GenerateImageResponseImplCopyWith<_$GenerateImageResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

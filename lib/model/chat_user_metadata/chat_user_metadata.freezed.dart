@@ -68,22 +68,22 @@ class _$ChatUserMetadataCopyWithImpl<$Res, $Val extends ChatUserMetadata>
 }
 
 /// @nodoc
-abstract class _$$_ChatUserMetadataCopyWith<$Res>
+abstract class _$$ChatUserMetadataImplCopyWith<$Res>
     implements $ChatUserMetadataCopyWith<$Res> {
-  factory _$$_ChatUserMetadataCopyWith(
-          _$_ChatUserMetadata value, $Res Function(_$_ChatUserMetadata) then) =
-      __$$_ChatUserMetadataCopyWithImpl<$Res>;
+  factory _$$ChatUserMetadataImplCopyWith(_$ChatUserMetadataImpl value,
+          $Res Function(_$ChatUserMetadataImpl) then) =
+      __$$ChatUserMetadataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? lastAnswer, String? description});
 }
 
 /// @nodoc
-class __$$_ChatUserMetadataCopyWithImpl<$Res>
-    extends _$ChatUserMetadataCopyWithImpl<$Res, _$_ChatUserMetadata>
-    implements _$$_ChatUserMetadataCopyWith<$Res> {
-  __$$_ChatUserMetadataCopyWithImpl(
-      _$_ChatUserMetadata _value, $Res Function(_$_ChatUserMetadata) _then)
+class __$$ChatUserMetadataImplCopyWithImpl<$Res>
+    extends _$ChatUserMetadataCopyWithImpl<$Res, _$ChatUserMetadataImpl>
+    implements _$$ChatUserMetadataImplCopyWith<$Res> {
+  __$$ChatUserMetadataImplCopyWithImpl(_$ChatUserMetadataImpl _value,
+      $Res Function(_$ChatUserMetadataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_ChatUserMetadataCopyWithImpl<$Res>
     Object? lastAnswer = freezed,
     Object? description = freezed,
   }) {
-    return _then(_$_ChatUserMetadata(
+    return _then(_$ChatUserMetadataImpl(
       lastAnswer: freezed == lastAnswer
           ? _value.lastAnswer
           : lastAnswer // ignore: cast_nullable_to_non_nullable
@@ -107,11 +107,11 @@ class __$$_ChatUserMetadataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ChatUserMetadata implements _ChatUserMetadata {
-  const _$_ChatUserMetadata({this.lastAnswer, this.description});
+class _$ChatUserMetadataImpl implements _ChatUserMetadata {
+  const _$ChatUserMetadataImpl({this.lastAnswer, this.description});
 
-  factory _$_ChatUserMetadata.fromJson(Map<String, dynamic> json) =>
-      _$$_ChatUserMetadataFromJson(json);
+  factory _$ChatUserMetadataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ChatUserMetadataImplFromJson(json);
 
   @override
   final String? lastAnswer;
@@ -124,10 +124,10 @@ class _$_ChatUserMetadata implements _ChatUserMetadata {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChatUserMetadata &&
+            other is _$ChatUserMetadataImpl &&
             (identical(other.lastAnswer, lastAnswer) ||
                 other.lastAnswer == lastAnswer) &&
             (identical(other.description, description) ||
@@ -141,12 +141,13 @@ class _$_ChatUserMetadata implements _ChatUserMetadata {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChatUserMetadataCopyWith<_$_ChatUserMetadata> get copyWith =>
-      __$$_ChatUserMetadataCopyWithImpl<_$_ChatUserMetadata>(this, _$identity);
+  _$$ChatUserMetadataImplCopyWith<_$ChatUserMetadataImpl> get copyWith =>
+      __$$ChatUserMetadataImplCopyWithImpl<_$ChatUserMetadataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ChatUserMetadataToJson(
+    return _$$ChatUserMetadataImplToJson(
       this,
     );
   }
@@ -155,10 +156,10 @@ class _$_ChatUserMetadata implements _ChatUserMetadata {
 abstract class _ChatUserMetadata implements ChatUserMetadata {
   const factory _ChatUserMetadata(
       {final String? lastAnswer,
-      final String? description}) = _$_ChatUserMetadata;
+      final String? description}) = _$ChatUserMetadataImpl;
 
   factory _ChatUserMetadata.fromJson(Map<String, dynamic> json) =
-      _$_ChatUserMetadata.fromJson;
+      _$ChatUserMetadataImpl.fromJson;
 
   @override
   String? get lastAnswer;
@@ -166,6 +167,6 @@ abstract class _ChatUserMetadata implements ChatUserMetadata {
   String? get description;
   @override
   @JsonKey(ignore: true)
-  _$$_ChatUserMetadataCopyWith<_$_ChatUserMetadata> get copyWith =>
+  _$$ChatUserMetadataImplCopyWith<_$ChatUserMetadataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

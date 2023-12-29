@@ -112,11 +112,11 @@ class _$PrivateUserCopyWithImpl<$Res, $Val extends PrivateUser>
 }
 
 /// @nodoc
-abstract class _$$_PrivateUserCopyWith<$Res>
+abstract class _$$PrivateUserImplCopyWith<$Res>
     implements $PrivateUserCopyWith<$Res> {
-  factory _$$_PrivateUserCopyWith(
-          _$_PrivateUser value, $Res Function(_$_PrivateUser) then) =
-      __$$_PrivateUserCopyWithImpl<$Res>;
+  factory _$$PrivateUserImplCopyWith(
+          _$PrivateUserImpl value, $Res Function(_$PrivateUserImpl) then) =
+      __$$PrivateUserImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -131,11 +131,11 @@ abstract class _$$_PrivateUserCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PrivateUserCopyWithImpl<$Res>
-    extends _$PrivateUserCopyWithImpl<$Res, _$_PrivateUser>
-    implements _$$_PrivateUserCopyWith<$Res> {
-  __$$_PrivateUserCopyWithImpl(
-      _$_PrivateUser _value, $Res Function(_$_PrivateUser) _then)
+class __$$PrivateUserImplCopyWithImpl<$Res>
+    extends _$PrivateUserCopyWithImpl<$Res, _$PrivateUserImpl>
+    implements _$$PrivateUserImplCopyWith<$Res> {
+  __$$PrivateUserImplCopyWithImpl(
+      _$PrivateUserImpl _value, $Res Function(_$PrivateUserImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -150,7 +150,7 @@ class __$$_PrivateUserCopyWithImpl<$Res>
     Object? uid = null,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$_PrivateUser(
+    return _then(_$PrivateUserImpl(
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -189,8 +189,8 @@ class __$$_PrivateUserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PrivateUser extends _PrivateUser {
-  const _$_PrivateUser(
+class _$PrivateUserImpl extends _PrivateUser {
+  const _$PrivateUserImpl(
       {required this.createdAt,
       required this.ethAddress,
       required this.gender,
@@ -201,8 +201,8 @@ class _$_PrivateUser extends _PrivateUser {
       required this.updatedAt})
       : super._();
 
-  factory _$_PrivateUser.fromJson(Map<String, dynamic> json) =>
-      _$$_PrivateUserFromJson(json);
+  factory _$PrivateUserImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PrivateUserImplFromJson(json);
 
   @override
   final dynamic createdAt;
@@ -227,10 +227,10 @@ class _$_PrivateUser extends _PrivateUser {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PrivateUser &&
+            other is _$PrivateUserImpl &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.ethAddress, ethAddress) ||
                 other.ethAddress == ethAddress) &&
@@ -259,12 +259,12 @@ class _$_PrivateUser extends _PrivateUser {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PrivateUserCopyWith<_$_PrivateUser> get copyWith =>
-      __$$_PrivateUserCopyWithImpl<_$_PrivateUser>(this, _$identity);
+  _$$PrivateUserImplCopyWith<_$PrivateUserImpl> get copyWith =>
+      __$$PrivateUserImplCopyWithImpl<_$PrivateUserImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PrivateUserToJson(
+    return _$$PrivateUserImplToJson(
       this,
     );
   }
@@ -279,11 +279,11 @@ abstract class _PrivateUser extends PrivateUser {
       required final bool isAdmin,
       required final dynamic ref,
       required final String uid,
-      required final dynamic updatedAt}) = _$_PrivateUser;
+      required final dynamic updatedAt}) = _$PrivateUserImpl;
   const _PrivateUser._() : super._();
 
   factory _PrivateUser.fromJson(Map<String, dynamic> json) =
-      _$_PrivateUser.fromJson;
+      _$PrivateUserImpl.fromJson;
 
   @override
   dynamic get createdAt;
@@ -303,6 +303,6 @@ abstract class _PrivateUser extends PrivateUser {
   dynamic get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_PrivateUserCopyWith<_$_PrivateUser> get copyWith =>
+  _$$PrivateUserImplCopyWith<_$PrivateUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

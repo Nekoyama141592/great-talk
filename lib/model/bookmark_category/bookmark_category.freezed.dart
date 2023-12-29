@@ -98,11 +98,11 @@ class _$BookmarkCategoryCopyWithImpl<$Res, $Val extends BookmarkCategory>
 }
 
 /// @nodoc
-abstract class _$$_BookmarkCategoryCopyWith<$Res>
+abstract class _$$BookmarkCategoryImplCopyWith<$Res>
     implements $BookmarkCategoryCopyWith<$Res> {
-  factory _$$_BookmarkCategoryCopyWith(
-          _$_BookmarkCategory value, $Res Function(_$_BookmarkCategory) then) =
-      __$$_BookmarkCategoryCopyWithImpl<$Res>;
+  factory _$$BookmarkCategoryImplCopyWith(_$BookmarkCategoryImpl value,
+          $Res Function(_$BookmarkCategoryImpl) then) =
+      __$$BookmarkCategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_BookmarkCategoryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_BookmarkCategoryCopyWithImpl<$Res>
-    extends _$BookmarkCategoryCopyWithImpl<$Res, _$_BookmarkCategory>
-    implements _$$_BookmarkCategoryCopyWith<$Res> {
-  __$$_BookmarkCategoryCopyWithImpl(
-      _$_BookmarkCategory _value, $Res Function(_$_BookmarkCategory) _then)
+class __$$BookmarkCategoryImplCopyWithImpl<$Res>
+    extends _$BookmarkCategoryCopyWithImpl<$Res, _$BookmarkCategoryImpl>
+    implements _$$BookmarkCategoryImplCopyWith<$Res> {
+  __$$BookmarkCategoryImplCopyWithImpl(_$BookmarkCategoryImpl _value,
+      $Res Function(_$BookmarkCategoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_BookmarkCategoryCopyWithImpl<$Res>
     Object? ref = freezed,
     Object? updatedAt = freezed,
   }) {
-    return _then(_$_BookmarkCategory(
+    return _then(_$BookmarkCategoryImpl(
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -163,8 +163,8 @@ class __$$_BookmarkCategoryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BookmarkCategory implements _BookmarkCategory {
-  const _$_BookmarkCategory(
+class _$BookmarkCategoryImpl implements _BookmarkCategory {
+  const _$BookmarkCategoryImpl(
       {required this.createdAt,
       required this.id,
       required final Map<String, dynamic> image,
@@ -173,8 +173,8 @@ class _$_BookmarkCategory implements _BookmarkCategory {
       required this.updatedAt})
       : _image = image;
 
-  factory _$_BookmarkCategory.fromJson(Map<String, dynamic> json) =>
-      _$$_BookmarkCategoryFromJson(json);
+  factory _$BookmarkCategoryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BookmarkCategoryImplFromJson(json);
 
   @override
   final dynamic createdAt;
@@ -201,10 +201,10 @@ class _$_BookmarkCategory implements _BookmarkCategory {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BookmarkCategory &&
+            other is _$BookmarkCategoryImpl &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._image, _image) &&
@@ -227,12 +227,13 @@ class _$_BookmarkCategory implements _BookmarkCategory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BookmarkCategoryCopyWith<_$_BookmarkCategory> get copyWith =>
-      __$$_BookmarkCategoryCopyWithImpl<_$_BookmarkCategory>(this, _$identity);
+  _$$BookmarkCategoryImplCopyWith<_$BookmarkCategoryImpl> get copyWith =>
+      __$$BookmarkCategoryImplCopyWithImpl<_$BookmarkCategoryImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BookmarkCategoryToJson(
+    return _$$BookmarkCategoryImplToJson(
       this,
     );
   }
@@ -245,10 +246,10 @@ abstract class _BookmarkCategory implements BookmarkCategory {
       required final Map<String, dynamic> image,
       required final String title,
       required final dynamic ref,
-      required final dynamic updatedAt}) = _$_BookmarkCategory;
+      required final dynamic updatedAt}) = _$BookmarkCategoryImpl;
 
   factory _BookmarkCategory.fromJson(Map<String, dynamic> json) =
-      _$_BookmarkCategory.fromJson;
+      _$BookmarkCategoryImpl.fromJson;
 
   @override
   dynamic get createdAt;
@@ -264,6 +265,6 @@ abstract class _BookmarkCategory implements BookmarkCategory {
   dynamic get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_BookmarkCategoryCopyWith<_$_BookmarkCategory> get copyWith =>
+  _$$BookmarkCategoryImplCopyWith<_$BookmarkCategoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -134,11 +134,11 @@ class _$ChatContentCopyWithImpl<$Res, $Val extends ChatContent>
 }
 
 /// @nodoc
-abstract class _$$_ChatContentCopyWith<$Res>
+abstract class _$$ChatContentImplCopyWith<$Res>
     implements $ChatContentCopyWith<$Res> {
-  factory _$$_ChatContentCopyWith(
-          _$_ChatContent value, $Res Function(_$_ChatContent) then) =
-      __$$_ChatContentCopyWithImpl<$Res>;
+  factory _$$ChatContentImplCopyWith(
+          _$ChatContentImpl value, $Res Function(_$ChatContentImpl) then) =
+      __$$ChatContentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -156,11 +156,11 @@ abstract class _$$_ChatContentCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ChatContentCopyWithImpl<$Res>
-    extends _$ChatContentCopyWithImpl<$Res, _$_ChatContent>
-    implements _$$_ChatContentCopyWith<$Res> {
-  __$$_ChatContentCopyWithImpl(
-      _$_ChatContent _value, $Res Function(_$_ChatContent) _then)
+class __$$ChatContentImplCopyWithImpl<$Res>
+    extends _$ChatContentCopyWithImpl<$Res, _$ChatContentImpl>
+    implements _$$ChatContentImplCopyWith<$Res> {
+  __$$ChatContentImplCopyWithImpl(
+      _$ChatContentImpl _value, $Res Function(_$ChatContentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -178,7 +178,7 @@ class __$$_ChatContentCopyWithImpl<$Res>
     Object? ref = freezed,
     Object? title = null,
   }) {
-    return _then(_$_ChatContent(
+    return _then(_$ChatContentImpl(
       contentId: null == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
@@ -229,8 +229,8 @@ class __$$_ChatContentCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ChatContent extends _ChatContent {
-  const _$_ChatContent(
+class _$ChatContentImpl extends _ChatContent {
+  const _$ChatContentImpl(
       {required this.contentId,
       final Map<String, dynamic>? customCompleteText,
       final Map<String, dynamic>? description,
@@ -248,8 +248,8 @@ class _$_ChatContent extends _ChatContent {
         _metadata = metadata,
         super._();
 
-  factory _$_ChatContent.fromJson(Map<String, dynamic> json) =>
-      _$$_ChatContentFromJson(json);
+  factory _$ChatContentImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ChatContentImplFromJson(json);
 
   @override
   final String contentId;
@@ -313,10 +313,10 @@ class _$_ChatContent extends _ChatContent {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChatContent &&
+            other is _$ChatContentImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
             const DeepCollectionEquality()
@@ -356,12 +356,12 @@ class _$_ChatContent extends _ChatContent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChatContentCopyWith<_$_ChatContent> get copyWith =>
-      __$$_ChatContentCopyWithImpl<_$_ChatContent>(this, _$identity);
+  _$$ChatContentImplCopyWith<_$ChatContentImpl> get copyWith =>
+      __$$ChatContentImplCopyWithImpl<_$ChatContentImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ChatContentToJson(
+    return _$$ChatContentImplToJson(
       this,
     );
   }
@@ -379,11 +379,11 @@ abstract class _ChatContent extends ChatContent {
       required final int msgCount,
       required final String posterUid,
       final dynamic ref,
-      required final String title}) = _$_ChatContent;
+      required final String title}) = _$ChatContentImpl;
   const _ChatContent._() : super._();
 
   factory _ChatContent.fromJson(Map<String, dynamic> json) =
-      _$_ChatContent.fromJson;
+      _$ChatContentImpl.fromJson;
 
   @override
   String get contentId;
@@ -409,6 +409,6 @@ abstract class _ChatContent extends ChatContent {
   String get title;
   @override
   @JsonKey(ignore: true)
-  _$$_ChatContentCopyWith<_$_ChatContent> get copyWith =>
+  _$$ChatContentImplCopyWith<_$ChatContentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

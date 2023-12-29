@@ -6,7 +6,8 @@ part of 'bookmark.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Bookmark _$$_BookmarkFromJson(Map<String, dynamic> json) => _$_Bookmark(
+_$BookmarkImpl _$$BookmarkImplFromJson(Map<String, dynamic> json) =>
+    _$BookmarkImpl(
       activeUid: json['activeUid'] as String,
       categoryId: json['categoryId'] as String,
       createdAt: json['createdAt'],
@@ -16,7 +17,7 @@ _$_Bookmark _$$_BookmarkFromJson(Map<String, dynamic> json) => _$_Bookmark(
       ref: json['ref'],
     );
 
-Map<String, dynamic> _$$_BookmarkToJson(_$_Bookmark instance) =>
+Map<String, dynamic> _$$BookmarkImplToJson(_$BookmarkImpl instance) =>
     <String, dynamic>{
       'activeUid': instance.activeUid,
       'categoryId': instance.categoryId,

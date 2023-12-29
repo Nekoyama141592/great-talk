@@ -6,13 +6,15 @@ part of 'chat_user_metadata.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ChatUserMetadata _$$_ChatUserMetadataFromJson(Map<String, dynamic> json) =>
-    _$_ChatUserMetadata(
+_$ChatUserMetadataImpl _$$ChatUserMetadataImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ChatUserMetadataImpl(
       lastAnswer: json['lastAnswer'] as String?,
       description: json['description'] as String?,
     );
 
-Map<String, dynamic> _$$_ChatUserMetadataToJson(_$_ChatUserMetadata instance) =>
+Map<String, dynamic> _$$ChatUserMetadataImplToJson(
+        _$ChatUserMetadataImpl instance) =>
     <String, dynamic>{
       'lastAnswer': instance.lastAnswer,
       'description': instance.description,

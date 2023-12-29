@@ -105,11 +105,11 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
 }
 
 /// @nodoc
-abstract class _$$_UserUpdateLogCopyWith<$Res>
+abstract class _$$UserUpdateLogImplCopyWith<$Res>
     implements $UserUpdateLogCopyWith<$Res> {
-  factory _$$_UserUpdateLogCopyWith(
-          _$_UserUpdateLog value, $Res Function(_$_UserUpdateLog) then) =
-      __$$_UserUpdateLogCopyWithImpl<$Res>;
+  factory _$$UserUpdateLogImplCopyWith(
+          _$UserUpdateLogImpl value, $Res Function(_$UserUpdateLogImpl) then) =
+      __$$UserUpdateLogImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -123,11 +123,11 @@ abstract class _$$_UserUpdateLogCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserUpdateLogCopyWithImpl<$Res>
-    extends _$UserUpdateLogCopyWithImpl<$Res, _$_UserUpdateLog>
-    implements _$$_UserUpdateLogCopyWith<$Res> {
-  __$$_UserUpdateLogCopyWithImpl(
-      _$_UserUpdateLog _value, $Res Function(_$_UserUpdateLog) _then)
+class __$$UserUpdateLogImplCopyWithImpl<$Res>
+    extends _$UserUpdateLogCopyWithImpl<$Res, _$UserUpdateLogImpl>
+    implements _$$UserUpdateLogImplCopyWith<$Res> {
+  __$$UserUpdateLogImplCopyWithImpl(
+      _$UserUpdateLogImpl _value, $Res Function(_$UserUpdateLogImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -141,7 +141,7 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
     Object? imageFileName = null,
     Object? userRef = freezed,
   }) {
-    return _then(_$_UserUpdateLog(
+    return _then(_$UserUpdateLogImpl(
       logCreatedAt: freezed == logCreatedAt
           ? _value.logCreatedAt
           : logCreatedAt // ignore: cast_nullable_to_non_nullable
@@ -176,8 +176,8 @@ class __$$_UserUpdateLogCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserUpdateLog implements _UserUpdateLog {
-  const _$_UserUpdateLog(
+class _$UserUpdateLogImpl implements _UserUpdateLog {
+  const _$UserUpdateLogImpl(
       {required this.logCreatedAt,
       required final Map<String, dynamic> searchToken,
       required this.stringBio,
@@ -187,8 +187,8 @@ class _$_UserUpdateLog implements _UserUpdateLog {
       required this.userRef})
       : _searchToken = searchToken;
 
-  factory _$_UserUpdateLog.fromJson(Map<String, dynamic> json) =>
-      _$$_UserUpdateLogFromJson(json);
+  factory _$UserUpdateLogImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserUpdateLogImplFromJson(json);
 
   @override
   final dynamic logCreatedAt;
@@ -217,10 +217,10 @@ class _$_UserUpdateLog implements _UserUpdateLog {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserUpdateLog &&
+            other is _$UserUpdateLogImpl &&
             const DeepCollectionEquality()
                 .equals(other.logCreatedAt, logCreatedAt) &&
             const DeepCollectionEquality()
@@ -250,12 +250,12 @@ class _$_UserUpdateLog implements _UserUpdateLog {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserUpdateLogCopyWith<_$_UserUpdateLog> get copyWith =>
-      __$$_UserUpdateLogCopyWithImpl<_$_UserUpdateLog>(this, _$identity);
+  _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
+      __$$UserUpdateLogImplCopyWithImpl<_$UserUpdateLogImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserUpdateLogToJson(
+    return _$$UserUpdateLogImplToJson(
       this,
     );
   }
@@ -269,10 +269,10 @@ abstract class _UserUpdateLog implements UserUpdateLog {
       required final String stringUserName,
       required final String uid,
       required final String imageFileName,
-      required final dynamic userRef}) = _$_UserUpdateLog;
+      required final dynamic userRef}) = _$UserUpdateLogImpl;
 
   factory _UserUpdateLog.fromJson(Map<String, dynamic> json) =
-      _$_UserUpdateLog.fromJson;
+      _$UserUpdateLogImpl.fromJson;
 
   @override
   dynamic get logCreatedAt;
@@ -290,6 +290,6 @@ abstract class _UserUpdateLog implements UserUpdateLog {
   dynamic get userRef;
   @override
   @JsonKey(ignore: true)
-  _$$_UserUpdateLogCopyWith<_$_UserUpdateLog> get copyWith =>
+  _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

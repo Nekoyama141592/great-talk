@@ -91,11 +91,11 @@ class _$CustomCompleteTextCopyWithImpl<$Res, $Val extends CustomCompleteText>
 }
 
 /// @nodoc
-abstract class _$$_CustomCompleteTextCopyWith<$Res>
+abstract class _$$CustomCompleteTextImplCopyWith<$Res>
     implements $CustomCompleteTextCopyWith<$Res> {
-  factory _$$_CustomCompleteTextCopyWith(_$_CustomCompleteText value,
-          $Res Function(_$_CustomCompleteText) then) =
-      __$$_CustomCompleteTextCopyWithImpl<$Res>;
+  factory _$$CustomCompleteTextImplCopyWith(_$CustomCompleteTextImpl value,
+          $Res Function(_$CustomCompleteTextImpl) then) =
+      __$$CustomCompleteTextImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +107,11 @@ abstract class _$$_CustomCompleteTextCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CustomCompleteTextCopyWithImpl<$Res>
-    extends _$CustomCompleteTextCopyWithImpl<$Res, _$_CustomCompleteText>
-    implements _$$_CustomCompleteTextCopyWith<$Res> {
-  __$$_CustomCompleteTextCopyWithImpl(
-      _$_CustomCompleteText _value, $Res Function(_$_CustomCompleteText) _then)
+class __$$CustomCompleteTextImplCopyWithImpl<$Res>
+    extends _$CustomCompleteTextCopyWithImpl<$Res, _$CustomCompleteTextImpl>
+    implements _$$CustomCompleteTextImplCopyWith<$Res> {
+  __$$CustomCompleteTextImplCopyWithImpl(_$CustomCompleteTextImpl _value,
+      $Res Function(_$CustomCompleteTextImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +123,7 @@ class __$$_CustomCompleteTextCopyWithImpl<$Res>
     Object? presencePenalty = freezed,
     Object? frequencyPenalty = freezed,
   }) {
-    return _then(_$_CustomCompleteText(
+    return _then(_$CustomCompleteTextImpl(
       systemPrompt: null == systemPrompt
           ? _value.systemPrompt
           : systemPrompt // ignore: cast_nullable_to_non_nullable
@@ -150,8 +150,8 @@ class __$$_CustomCompleteTextCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CustomCompleteText extends _CustomCompleteText {
-  const _$_CustomCompleteText(
+class _$CustomCompleteTextImpl extends _CustomCompleteText {
+  const _$CustomCompleteTextImpl(
       {required this.systemPrompt,
       this.temperature,
       this.topP,
@@ -159,8 +159,8 @@ class _$_CustomCompleteText extends _CustomCompleteText {
       this.frequencyPenalty})
       : super._();
 
-  factory _$_CustomCompleteText.fromJson(Map<String, dynamic> json) =>
-      _$$_CustomCompleteTextFromJson(json);
+  factory _$CustomCompleteTextImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CustomCompleteTextImplFromJson(json);
 
   @override
   final String systemPrompt;
@@ -179,10 +179,10 @@ class _$_CustomCompleteText extends _CustomCompleteText {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CustomCompleteText &&
+            other is _$CustomCompleteTextImpl &&
             (identical(other.systemPrompt, systemPrompt) ||
                 other.systemPrompt == systemPrompt) &&
             (identical(other.temperature, temperature) ||
@@ -202,13 +202,13 @@ class _$_CustomCompleteText extends _CustomCompleteText {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CustomCompleteTextCopyWith<_$_CustomCompleteText> get copyWith =>
-      __$$_CustomCompleteTextCopyWithImpl<_$_CustomCompleteText>(
+  _$$CustomCompleteTextImplCopyWith<_$CustomCompleteTextImpl> get copyWith =>
+      __$$CustomCompleteTextImplCopyWithImpl<_$CustomCompleteTextImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CustomCompleteTextToJson(
+    return _$$CustomCompleteTextImplToJson(
       this,
     );
   }
@@ -220,11 +220,11 @@ abstract class _CustomCompleteText extends CustomCompleteText {
       final double? temperature,
       final double? topP,
       final double? presencePenalty,
-      final double? frequencyPenalty}) = _$_CustomCompleteText;
+      final double? frequencyPenalty}) = _$CustomCompleteTextImpl;
   const _CustomCompleteText._() : super._();
 
   factory _CustomCompleteText.fromJson(Map<String, dynamic> json) =
-      _$_CustomCompleteText.fromJson;
+      _$CustomCompleteTextImpl.fromJson;
 
   @override
   String get systemPrompt;
@@ -238,6 +238,6 @@ abstract class _CustomCompleteText extends CustomCompleteText {
   double? get frequencyPenalty;
   @override
   @JsonKey(ignore: true)
-  _$$_CustomCompleteTextCopyWith<_$_CustomCompleteText> get copyWith =>
+  _$$CustomCompleteTextImplCopyWith<_$CustomCompleteTextImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

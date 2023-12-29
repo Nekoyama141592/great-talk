@@ -210,11 +210,11 @@ class _$PublicUserCopyWithImpl<$Res, $Val extends PublicUser>
 }
 
 /// @nodoc
-abstract class _$$_PublicUserCopyWith<$Res>
+abstract class _$$PublicUserImplCopyWith<$Res>
     implements $PublicUserCopyWith<$Res> {
-  factory _$$_PublicUserCopyWith(
-          _$_PublicUser value, $Res Function(_$_PublicUser) then) =
-      __$$_PublicUserCopyWithImpl<$Res>;
+  factory _$$PublicUserImplCopyWith(
+          _$PublicUserImpl value, $Res Function(_$PublicUserImpl) then) =
+      __$$PublicUserImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -243,11 +243,11 @@ abstract class _$$_PublicUserCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PublicUserCopyWithImpl<$Res>
-    extends _$PublicUserCopyWithImpl<$Res, _$_PublicUser>
-    implements _$$_PublicUserCopyWith<$Res> {
-  __$$_PublicUserCopyWithImpl(
-      _$_PublicUser _value, $Res Function(_$_PublicUser) _then)
+class __$$PublicUserImplCopyWithImpl<$Res>
+    extends _$PublicUserCopyWithImpl<$Res, _$PublicUserImpl>
+    implements _$$PublicUserImplCopyWith<$Res> {
+  __$$PublicUserImplCopyWithImpl(
+      _$PublicUserImpl _value, $Res Function(_$PublicUserImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -276,7 +276,7 @@ class __$$_PublicUserCopyWithImpl<$Res>
     Object? userName = null,
     Object? walletAddresses = null,
   }) {
-    return _then(_$_PublicUser(
+    return _then(_$PublicUserImpl(
       accountName: null == accountName
           ? _value.accountName
           : accountName // ignore: cast_nullable_to_non_nullable
@@ -371,8 +371,8 @@ class __$$_PublicUserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PublicUser extends _PublicUser {
-  _$_PublicUser(
+class _$PublicUserImpl extends _PublicUser {
+  _$PublicUserImpl(
       {required this.accountName,
       required final Map<String, dynamic> bio,
       required this.blockCount,
@@ -403,8 +403,8 @@ class _$_PublicUser extends _PublicUser {
         _walletAddresses = walletAddresses,
         super._();
 
-  factory _$_PublicUser.fromJson(Map<String, dynamic> json) =>
-      _$$_PublicUserFromJson(json);
+  factory _$PublicUserImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PublicUserImplFromJson(json);
 
   @override
   final String accountName;
@@ -492,10 +492,10 @@ class _$_PublicUser extends _PublicUser {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PublicUser &&
+            other is _$PublicUserImpl &&
             (identical(other.accountName, accountName) ||
                 other.accountName == accountName) &&
             const DeepCollectionEquality().equals(other._bio, _bio) &&
@@ -564,12 +564,12 @@ class _$_PublicUser extends _PublicUser {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PublicUserCopyWith<_$_PublicUser> get copyWith =>
-      __$$_PublicUserCopyWithImpl<_$_PublicUser>(this, _$identity);
+  _$$PublicUserImplCopyWith<_$PublicUserImpl> get copyWith =>
+      __$$PublicUserImplCopyWithImpl<_$PublicUserImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PublicUserToJson(
+    return _$$PublicUserImplToJson(
       this,
     );
   }
@@ -598,11 +598,11 @@ abstract class _PublicUser extends PublicUser {
       required final dynamic updatedAt,
       required final Map<String, dynamic> image,
       required final Map<String, dynamic> userName,
-      required final List<SDMap> walletAddresses}) = _$_PublicUser;
+      required final List<SDMap> walletAddresses}) = _$PublicUserImpl;
   _PublicUser._() : super._();
 
   factory _PublicUser.fromJson(Map<String, dynamic> json) =
-      _$_PublicUser.fromJson;
+      _$PublicUserImpl.fromJson;
 
   @override
   String get accountName;
@@ -650,6 +650,6 @@ abstract class _PublicUser extends PublicUser {
   List<SDMap> get walletAddresses;
   @override
   @JsonKey(ignore: true)
-  _$$_PublicUserCopyWith<_$_PublicUser> get copyWith =>
+  _$$PublicUserImplCopyWith<_$PublicUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

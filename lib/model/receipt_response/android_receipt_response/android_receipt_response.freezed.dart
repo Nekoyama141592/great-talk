@@ -156,11 +156,12 @@ class _$AndroidReceiptResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_AndroidReceiptResponseCopyWith<$Res>
+abstract class _$$AndroidReceiptResponseImplCopyWith<$Res>
     implements $AndroidReceiptResponseCopyWith<$Res> {
-  factory _$$_AndroidReceiptResponseCopyWith(_$_AndroidReceiptResponse value,
-          $Res Function(_$_AndroidReceiptResponse) then) =
-      __$$_AndroidReceiptResponseCopyWithImpl<$Res>;
+  factory _$$AndroidReceiptResponseImplCopyWith(
+          _$AndroidReceiptResponseImpl value,
+          $Res Function(_$AndroidReceiptResponseImpl) then) =
+      __$$AndroidReceiptResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -181,12 +182,13 @@ abstract class _$$_AndroidReceiptResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AndroidReceiptResponseCopyWithImpl<$Res>
+class __$$AndroidReceiptResponseImplCopyWithImpl<$Res>
     extends _$AndroidReceiptResponseCopyWithImpl<$Res,
-        _$_AndroidReceiptResponse>
-    implements _$$_AndroidReceiptResponseCopyWith<$Res> {
-  __$$_AndroidReceiptResponseCopyWithImpl(_$_AndroidReceiptResponse _value,
-      $Res Function(_$_AndroidReceiptResponse) _then)
+        _$AndroidReceiptResponseImpl>
+    implements _$$AndroidReceiptResponseImplCopyWith<$Res> {
+  __$$AndroidReceiptResponseImplCopyWithImpl(
+      _$AndroidReceiptResponseImpl _value,
+      $Res Function(_$AndroidReceiptResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -207,7 +209,7 @@ class __$$_AndroidReceiptResponseCopyWithImpl<$Res>
     Object? startTimeMillis = null,
     Object? uid = null,
   }) {
-    return _then(_$_AndroidReceiptResponse(
+    return _then(_$AndroidReceiptResponseImpl(
       acknowledgementState: null == acknowledgementState
           ? _value.acknowledgementState
           : acknowledgementState // ignore: cast_nullable_to_non_nullable
@@ -270,8 +272,8 @@ class __$$_AndroidReceiptResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
-  const _$_AndroidReceiptResponse(
+class _$AndroidReceiptResponseImpl extends _AndroidReceiptResponse {
+  const _$AndroidReceiptResponseImpl(
       {required this.acknowledgementState,
       required this.autoRenewing,
       required this.countryCode,
@@ -288,8 +290,8 @@ class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
       required this.uid})
       : super._();
 
-  factory _$_AndroidReceiptResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_AndroidReceiptResponseFromJson(json);
+  factory _$AndroidReceiptResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AndroidReceiptResponseImplFromJson(json);
 
   @override
   final int acknowledgementState;
@@ -327,10 +329,10 @@ class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AndroidReceiptResponse &&
+            other is _$AndroidReceiptResponseImpl &&
             (identical(other.acknowledgementState, acknowledgementState) ||
                 other.acknowledgementState == acknowledgementState) &&
             (identical(other.autoRenewing, autoRenewing) ||
@@ -380,13 +382,13 @@ class _$_AndroidReceiptResponse extends _AndroidReceiptResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AndroidReceiptResponseCopyWith<_$_AndroidReceiptResponse> get copyWith =>
-      __$$_AndroidReceiptResponseCopyWithImpl<_$_AndroidReceiptResponse>(
-          this, _$identity);
+  _$$AndroidReceiptResponseImplCopyWith<_$AndroidReceiptResponseImpl>
+      get copyWith => __$$AndroidReceiptResponseImplCopyWithImpl<
+          _$AndroidReceiptResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AndroidReceiptResponseToJson(
+    return _$$AndroidReceiptResponseImplToJson(
       this,
     );
   }
@@ -407,11 +409,11 @@ abstract class _AndroidReceiptResponse extends AndroidReceiptResponse {
       required final String productId,
       required final int purchaseType,
       required final String startTimeMillis,
-      required final String uid}) = _$_AndroidReceiptResponse;
+      required final String uid}) = _$AndroidReceiptResponseImpl;
   const _AndroidReceiptResponse._() : super._();
 
   factory _AndroidReceiptResponse.fromJson(Map<String, dynamic> json) =
-      _$_AndroidReceiptResponse.fromJson;
+      _$AndroidReceiptResponseImpl.fromJson;
 
   @override
   int get acknowledgementState;
@@ -443,6 +445,6 @@ abstract class _AndroidReceiptResponse extends AndroidReceiptResponse {
   String get uid;
   @override
   @JsonKey(ignore: true)
-  _$$_AndroidReceiptResponseCopyWith<_$_AndroidReceiptResponse> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AndroidReceiptResponseImplCopyWith<_$AndroidReceiptResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

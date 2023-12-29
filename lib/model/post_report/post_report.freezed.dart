@@ -98,11 +98,11 @@ class _$PostReportCopyWithImpl<$Res, $Val extends PostReport>
 }
 
 /// @nodoc
-abstract class _$$_PostReportCopyWith<$Res>
+abstract class _$$PostReportImplCopyWith<$Res>
     implements $PostReportCopyWith<$Res> {
-  factory _$$_PostReportCopyWith(
-          _$_PostReport value, $Res Function(_$_PostReport) then) =
-      __$$_PostReportCopyWithImpl<$Res>;
+  factory _$$PostReportImplCopyWith(
+          _$PostReportImpl value, $Res Function(_$PostReportImpl) then) =
+      __$$PostReportImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_PostReportCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PostReportCopyWithImpl<$Res>
-    extends _$PostReportCopyWithImpl<$Res, _$_PostReport>
-    implements _$$_PostReportCopyWith<$Res> {
-  __$$_PostReportCopyWithImpl(
-      _$_PostReport _value, $Res Function(_$_PostReport) _then)
+class __$$PostReportImplCopyWithImpl<$Res>
+    extends _$PostReportCopyWithImpl<$Res, _$PostReportImpl>
+    implements _$$PostReportImplCopyWith<$Res> {
+  __$$PostReportImplCopyWithImpl(
+      _$PostReportImpl _value, $Res Function(_$PostReportImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_PostReportCopyWithImpl<$Res>
     Object? postRef = freezed,
     Object? reportContents = null,
   }) {
-    return _then(_$_PostReport(
+    return _then(_$PostReportImpl(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
@@ -163,8 +163,8 @@ class __$$_PostReportCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostReport implements _PostReport {
-  const _$_PostReport(
+class _$PostReportImpl implements _PostReport {
+  const _$PostReportImpl(
       {required this.activeUid,
       required this.activeUserRef,
       required this.createdAt,
@@ -173,8 +173,8 @@ class _$_PostReport implements _PostReport {
       required final List<String> reportContents})
       : _reportContents = reportContents;
 
-  factory _$_PostReport.fromJson(Map<String, dynamic> json) =>
-      _$$_PostReportFromJson(json);
+  factory _$PostReportImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostReportImplFromJson(json);
 
   @override
   final String activeUid;
@@ -200,10 +200,10 @@ class _$_PostReport implements _PostReport {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostReport &&
+            other is _$PostReportImpl &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
             const DeepCollectionEquality()
@@ -229,12 +229,12 @@ class _$_PostReport implements _PostReport {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostReportCopyWith<_$_PostReport> get copyWith =>
-      __$$_PostReportCopyWithImpl<_$_PostReport>(this, _$identity);
+  _$$PostReportImplCopyWith<_$PostReportImpl> get copyWith =>
+      __$$PostReportImplCopyWithImpl<_$PostReportImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostReportToJson(
+    return _$$PostReportImplToJson(
       this,
     );
   }
@@ -247,10 +247,10 @@ abstract class _PostReport implements PostReport {
       required final dynamic createdAt,
       required final String others,
       required final dynamic postRef,
-      required final List<String> reportContents}) = _$_PostReport;
+      required final List<String> reportContents}) = _$PostReportImpl;
 
   factory _PostReport.fromJson(Map<String, dynamic> json) =
-      _$_PostReport.fromJson;
+      _$PostReportImpl.fromJson;
 
   @override
   String get activeUid;
@@ -266,6 +266,6 @@ abstract class _PostReport implements PostReport {
   List<String> get reportContents;
   @override
   @JsonKey(ignore: true)
-  _$$_PostReportCopyWith<_$_PostReport> get copyWith =>
+  _$$PostReportImplCopyWith<_$PostReportImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -62,22 +62,22 @@ class _$ReceiptResponseCopyWithImpl<$Res, $Val extends ReceiptResponse>
 }
 
 /// @nodoc
-abstract class _$$_ReceiptResponseCopyWith<$Res>
+abstract class _$$ReceiptResponseImplCopyWith<$Res>
     implements $ReceiptResponseCopyWith<$Res> {
-  factory _$$_ReceiptResponseCopyWith(
-          _$_ReceiptResponse value, $Res Function(_$_ReceiptResponse) then) =
-      __$$_ReceiptResponseCopyWithImpl<$Res>;
+  factory _$$ReceiptResponseImplCopyWith(_$ReceiptResponseImpl value,
+          $Res Function(_$ReceiptResponseImpl) then) =
+      __$$ReceiptResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Map<String, dynamic> latestReceipt});
 }
 
 /// @nodoc
-class __$$_ReceiptResponseCopyWithImpl<$Res>
-    extends _$ReceiptResponseCopyWithImpl<$Res, _$_ReceiptResponse>
-    implements _$$_ReceiptResponseCopyWith<$Res> {
-  __$$_ReceiptResponseCopyWithImpl(
-      _$_ReceiptResponse _value, $Res Function(_$_ReceiptResponse) _then)
+class __$$ReceiptResponseImplCopyWithImpl<$Res>
+    extends _$ReceiptResponseCopyWithImpl<$Res, _$ReceiptResponseImpl>
+    implements _$$ReceiptResponseImplCopyWith<$Res> {
+  __$$ReceiptResponseImplCopyWithImpl(
+      _$ReceiptResponseImpl _value, $Res Function(_$ReceiptResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +85,7 @@ class __$$_ReceiptResponseCopyWithImpl<$Res>
   $Res call({
     Object? latestReceipt = null,
   }) {
-    return _then(_$_ReceiptResponse(
+    return _then(_$ReceiptResponseImpl(
       latestReceipt: null == latestReceipt
           ? _value._latestReceipt
           : latestReceipt // ignore: cast_nullable_to_non_nullable
@@ -96,13 +96,14 @@ class __$$_ReceiptResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReceiptResponse extends _ReceiptResponse {
-  const _$_ReceiptResponse({required final Map<String, dynamic> latestReceipt})
+class _$ReceiptResponseImpl extends _ReceiptResponse {
+  const _$ReceiptResponseImpl(
+      {required final Map<String, dynamic> latestReceipt})
       : _latestReceipt = latestReceipt,
         super._();
 
-  factory _$_ReceiptResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_ReceiptResponseFromJson(json);
+  factory _$ReceiptResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReceiptResponseImplFromJson(json);
 
   final Map<String, dynamic> _latestReceipt;
   @override
@@ -118,10 +119,10 @@ class _$_ReceiptResponse extends _ReceiptResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReceiptResponse &&
+            other is _$ReceiptResponseImpl &&
             const DeepCollectionEquality()
                 .equals(other._latestReceipt, _latestReceipt));
   }
@@ -134,12 +135,13 @@ class _$_ReceiptResponse extends _ReceiptResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReceiptResponseCopyWith<_$_ReceiptResponse> get copyWith =>
-      __$$_ReceiptResponseCopyWithImpl<_$_ReceiptResponse>(this, _$identity);
+  _$$ReceiptResponseImplCopyWith<_$ReceiptResponseImpl> get copyWith =>
+      __$$ReceiptResponseImplCopyWithImpl<_$ReceiptResponseImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReceiptResponseToJson(
+    return _$$ReceiptResponseImplToJson(
       this,
     );
   }
@@ -147,16 +149,17 @@ class _$_ReceiptResponse extends _ReceiptResponse {
 
 abstract class _ReceiptResponse extends ReceiptResponse {
   const factory _ReceiptResponse(
-      {required final Map<String, dynamic> latestReceipt}) = _$_ReceiptResponse;
+          {required final Map<String, dynamic> latestReceipt}) =
+      _$ReceiptResponseImpl;
   const _ReceiptResponse._() : super._();
 
   factory _ReceiptResponse.fromJson(Map<String, dynamic> json) =
-      _$_ReceiptResponse.fromJson;
+      _$ReceiptResponseImpl.fromJson;
 
   @override
   Map<String, dynamic> get latestReceipt;
   @override
   @JsonKey(ignore: true)
-  _$$_ReceiptResponseCopyWith<_$_ReceiptResponse> get copyWith =>
+  _$$ReceiptResponseImplCopyWith<_$ReceiptResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

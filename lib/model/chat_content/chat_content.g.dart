@@ -6,8 +6,8 @@ part of 'chat_content.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ChatContent _$$_ChatContentFromJson(Map<String, dynamic> json) =>
-    _$_ChatContent(
+_$ChatContentImpl _$$ChatContentImplFromJson(Map<String, dynamic> json) =>
+    _$ChatContentImpl(
       contentId: json['contentId'] as String,
       customCompleteText: json['customCompleteText'] as Map<String, dynamic>?,
       description: json['description'] as Map<String, dynamic>?,
@@ -21,7 +21,7 @@ _$_ChatContent _$$_ChatContentFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String,
     );
 
-Map<String, dynamic> _$$_ChatContentToJson(_$_ChatContent instance) =>
+Map<String, dynamic> _$$ChatContentImplToJson(_$ChatContentImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
       'customCompleteText': instance.customCompleteText,

@@ -85,11 +85,11 @@ class _$DetectedImageCopyWithImpl<$Res, $Val extends DetectedImage>
 }
 
 /// @nodoc
-abstract class _$$_DetectedImageCopyWith<$Res>
+abstract class _$$DetectedImageImplCopyWith<$Res>
     implements $DetectedImageCopyWith<$Res> {
-  factory _$$_DetectedImageCopyWith(
-          _$_DetectedImage value, $Res Function(_$_DetectedImage) then) =
-      __$$_DetectedImageCopyWithImpl<$Res>;
+  factory _$$DetectedImageImplCopyWith(
+          _$DetectedImageImpl value, $Res Function(_$DetectedImageImpl) then) =
+      __$$DetectedImageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -100,11 +100,11 @@ abstract class _$$_DetectedImageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DetectedImageCopyWithImpl<$Res>
-    extends _$DetectedImageCopyWithImpl<$Res, _$_DetectedImage>
-    implements _$$_DetectedImageCopyWith<$Res> {
-  __$$_DetectedImageCopyWithImpl(
-      _$_DetectedImage _value, $Res Function(_$_DetectedImage) _then)
+class __$$DetectedImageImplCopyWithImpl<$Res>
+    extends _$DetectedImageCopyWithImpl<$Res, _$DetectedImageImpl>
+    implements _$$DetectedImageImplCopyWith<$Res> {
+  __$$DetectedImageImplCopyWithImpl(
+      _$DetectedImageImpl _value, $Res Function(_$DetectedImageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +115,7 @@ class __$$_DetectedImageCopyWithImpl<$Res>
     Object? moderationModelVersion = null,
     Object? value = null,
   }) {
-    return _then(_$_DetectedImage(
+    return _then(_$DetectedImageImpl(
       bucketName: null == bucketName
           ? _value.bucketName
           : bucketName // ignore: cast_nullable_to_non_nullable
@@ -138,8 +138,8 @@ class __$$_DetectedImageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DetectedImage extends _DetectedImage {
-  const _$_DetectedImage(
+class _$DetectedImageImpl extends _DetectedImage {
+  const _$DetectedImageImpl(
       {required this.bucketName,
       required final List<Map<String, dynamic>> moderationLabels,
       required this.moderationModelVersion,
@@ -147,8 +147,8 @@ class _$_DetectedImage extends _DetectedImage {
       : _moderationLabels = moderationLabels,
         super._();
 
-  factory _$_DetectedImage.fromJson(Map<String, dynamic> json) =>
-      _$$_DetectedImageFromJson(json);
+  factory _$DetectedImageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DetectedImageImplFromJson(json);
 
   @override
   final String bucketName;
@@ -172,10 +172,10 @@ class _$_DetectedImage extends _DetectedImage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DetectedImage &&
+            other is _$DetectedImageImpl &&
             (identical(other.bucketName, bucketName) ||
                 other.bucketName == bucketName) &&
             const DeepCollectionEquality()
@@ -197,12 +197,12 @@ class _$_DetectedImage extends _DetectedImage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DetectedImageCopyWith<_$_DetectedImage> get copyWith =>
-      __$$_DetectedImageCopyWithImpl<_$_DetectedImage>(this, _$identity);
+  _$$DetectedImageImplCopyWith<_$DetectedImageImpl> get copyWith =>
+      __$$DetectedImageImplCopyWithImpl<_$DetectedImageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DetectedImageToJson(
+    return _$$DetectedImageImplToJson(
       this,
     );
   }
@@ -213,11 +213,11 @@ abstract class _DetectedImage extends DetectedImage {
       {required final String bucketName,
       required final List<Map<String, dynamic>> moderationLabels,
       required final String moderationModelVersion,
-      required final String value}) = _$_DetectedImage;
+      required final String value}) = _$DetectedImageImpl;
   const _DetectedImage._() : super._();
 
   factory _DetectedImage.fromJson(Map<String, dynamic> json) =
-      _$_DetectedImage.fromJson;
+      _$DetectedImageImpl.fromJson;
 
   @override
   String get bucketName;
@@ -229,6 +229,6 @@ abstract class _DetectedImage extends DetectedImage {
   String get value;
   @override
   @JsonKey(ignore: true)
-  _$$_DetectedImageCopyWith<_$_DetectedImage> get copyWith =>
+  _$$DetectedImageImplCopyWith<_$DetectedImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

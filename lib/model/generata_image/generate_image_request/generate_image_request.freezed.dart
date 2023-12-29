@@ -87,22 +87,22 @@ class _$GenerateImageRequestCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_GenerateImageRequestCopyWith<$Res>
+abstract class _$$GenerateImageRequestImplCopyWith<$Res>
     implements $GenerateImageRequestCopyWith<$Res> {
-  factory _$$_GenerateImageRequestCopyWith(_$_GenerateImageRequest value,
-          $Res Function(_$_GenerateImageRequest) then) =
-      __$$_GenerateImageRequestCopyWithImpl<$Res>;
+  factory _$$GenerateImageRequestImplCopyWith(_$GenerateImageRequestImpl value,
+          $Res Function(_$GenerateImageRequestImpl) then) =
+      __$$GenerateImageRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String model, String prompt, int n, String size, String user});
 }
 
 /// @nodoc
-class __$$_GenerateImageRequestCopyWithImpl<$Res>
-    extends _$GenerateImageRequestCopyWithImpl<$Res, _$_GenerateImageRequest>
-    implements _$$_GenerateImageRequestCopyWith<$Res> {
-  __$$_GenerateImageRequestCopyWithImpl(_$_GenerateImageRequest _value,
-      $Res Function(_$_GenerateImageRequest) _then)
+class __$$GenerateImageRequestImplCopyWithImpl<$Res>
+    extends _$GenerateImageRequestCopyWithImpl<$Res, _$GenerateImageRequestImpl>
+    implements _$$GenerateImageRequestImplCopyWith<$Res> {
+  __$$GenerateImageRequestImplCopyWithImpl(_$GenerateImageRequestImpl _value,
+      $Res Function(_$GenerateImageRequestImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +114,7 @@ class __$$_GenerateImageRequestCopyWithImpl<$Res>
     Object? size = null,
     Object? user = null,
   }) {
-    return _then(_$_GenerateImageRequest(
+    return _then(_$GenerateImageRequestImpl(
       model: null == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
@@ -141,16 +141,16 @@ class __$$_GenerateImageRequestCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GenerateImageRequest implements _GenerateImageRequest {
-  const _$_GenerateImageRequest(
+class _$GenerateImageRequestImpl implements _GenerateImageRequest {
+  const _$GenerateImageRequestImpl(
       {required this.model,
       required this.prompt,
       required this.n,
       required this.size,
       required this.user});
 
-  factory _$_GenerateImageRequest.fromJson(Map<String, dynamic> json) =>
-      _$$_GenerateImageRequestFromJson(json);
+  factory _$GenerateImageRequestImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GenerateImageRequestImplFromJson(json);
 
   @override
   final String model;
@@ -169,10 +169,10 @@ class _$_GenerateImageRequest implements _GenerateImageRequest {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GenerateImageRequest &&
+            other is _$GenerateImageRequestImpl &&
             (identical(other.model, model) || other.model == model) &&
             (identical(other.prompt, prompt) || other.prompt == prompt) &&
             (identical(other.n, n) || other.n == n) &&
@@ -187,13 +187,14 @@ class _$_GenerateImageRequest implements _GenerateImageRequest {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GenerateImageRequestCopyWith<_$_GenerateImageRequest> get copyWith =>
-      __$$_GenerateImageRequestCopyWithImpl<_$_GenerateImageRequest>(
-          this, _$identity);
+  _$$GenerateImageRequestImplCopyWith<_$GenerateImageRequestImpl>
+      get copyWith =>
+          __$$GenerateImageRequestImplCopyWithImpl<_$GenerateImageRequestImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GenerateImageRequestToJson(
+    return _$$GenerateImageRequestImplToJson(
       this,
     );
   }
@@ -205,10 +206,10 @@ abstract class _GenerateImageRequest implements GenerateImageRequest {
       required final String prompt,
       required final int n,
       required final String size,
-      required final String user}) = _$_GenerateImageRequest;
+      required final String user}) = _$GenerateImageRequestImpl;
 
   factory _GenerateImageRequest.fromJson(Map<String, dynamic> json) =
-      _$_GenerateImageRequest.fromJson;
+      _$GenerateImageRequestImpl.fromJson;
 
   @override
   String get model;
@@ -222,6 +223,6 @@ abstract class _GenerateImageRequest implements GenerateImageRequest {
   String get user;
   @override
   @JsonKey(ignore: true)
-  _$$_GenerateImageRequestCopyWith<_$_GenerateImageRequest> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$GenerateImageRequestImplCopyWith<_$GenerateImageRequestImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

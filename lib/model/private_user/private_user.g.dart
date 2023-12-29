@@ -6,8 +6,8 @@ part of 'private_user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_PrivateUser _$$_PrivateUserFromJson(Map<String, dynamic> json) =>
-    _$_PrivateUser(
+_$PrivateUserImpl _$$PrivateUserImplFromJson(Map<String, dynamic> json) =>
+    _$PrivateUserImpl(
       createdAt: json['createdAt'],
       ethAddress: json['ethAddress'] as String,
       gender: json['gender'] as String,
@@ -18,7 +18,7 @@ _$_PrivateUser _$$_PrivateUserFromJson(Map<String, dynamic> json) =>
       updatedAt: json['updatedAt'],
     );
 
-Map<String, dynamic> _$$_PrivateUserToJson(_$_PrivateUser instance) =>
+Map<String, dynamic> _$$PrivateUserImplToJson(_$PrivateUserImpl instance) =>
     <String, dynamic>{
       'createdAt': instance.createdAt,
       'ethAddress': instance.ethAddress,

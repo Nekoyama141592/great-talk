@@ -6,9 +6,9 @@ part of 'generate_image_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GenerateImageResponse _$$_GenerateImageResponseFromJson(
+_$GenerateImageResponseImpl _$$GenerateImageResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_GenerateImageResponse(
+    _$GenerateImageResponseImpl(
       data: (json['data'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
@@ -16,8 +16,8 @@ _$_GenerateImageResponse _$$_GenerateImageResponseFromJson(
           .toList(),
     );
 
-Map<String, dynamic> _$$_GenerateImageResponseToJson(
-        _$_GenerateImageResponse instance) =>
+Map<String, dynamic> _$$GenerateImageResponseImplToJson(
+        _$GenerateImageResponseImpl instance) =>
     <String, dynamic>{
       'data': instance.data,
     };

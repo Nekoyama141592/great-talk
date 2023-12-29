@@ -80,10 +80,11 @@ class _$PostMuteCopyWithImpl<$Res, $Val extends PostMute>
 }
 
 /// @nodoc
-abstract class _$$_PostMuteCopyWith<$Res> implements $PostMuteCopyWith<$Res> {
-  factory _$$_PostMuteCopyWith(
-          _$_PostMute value, $Res Function(_$_PostMute) then) =
-      __$$_PostMuteCopyWithImpl<$Res>;
+abstract class _$$PostMuteImplCopyWith<$Res>
+    implements $PostMuteCopyWith<$Res> {
+  factory _$$PostMuteImplCopyWith(
+          _$PostMuteImpl value, $Res Function(_$PostMuteImpl) then) =
+      __$$PostMuteImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -91,11 +92,11 @@ abstract class _$$_PostMuteCopyWith<$Res> implements $PostMuteCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PostMuteCopyWithImpl<$Res>
-    extends _$PostMuteCopyWithImpl<$Res, _$_PostMute>
-    implements _$$_PostMuteCopyWith<$Res> {
-  __$$_PostMuteCopyWithImpl(
-      _$_PostMute _value, $Res Function(_$_PostMute) _then)
+class __$$PostMuteImplCopyWithImpl<$Res>
+    extends _$PostMuteCopyWithImpl<$Res, _$PostMuteImpl>
+    implements _$$PostMuteImplCopyWith<$Res> {
+  __$$PostMuteImplCopyWithImpl(
+      _$PostMuteImpl _value, $Res Function(_$PostMuteImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +107,7 @@ class __$$_PostMuteCopyWithImpl<$Res>
     Object? postId = null,
     Object? postRef = freezed,
   }) {
-    return _then(_$_PostMute(
+    return _then(_$PostMuteImpl(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
@@ -129,15 +130,15 @@ class __$$_PostMuteCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PostMute implements _PostMute {
-  const _$_PostMute(
+class _$PostMuteImpl implements _PostMute {
+  const _$PostMuteImpl(
       {required this.activeUid,
       required this.createdAt,
       required this.postId,
       required this.postRef});
 
-  factory _$_PostMute.fromJson(Map<String, dynamic> json) =>
-      _$$_PostMuteFromJson(json);
+  factory _$PostMuteImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PostMuteImplFromJson(json);
 
   @override
   final String activeUid;
@@ -154,10 +155,10 @@ class _$_PostMute implements _PostMute {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PostMute &&
+            other is _$PostMuteImpl &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -177,12 +178,12 @@ class _$_PostMute implements _PostMute {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PostMuteCopyWith<_$_PostMute> get copyWith =>
-      __$$_PostMuteCopyWithImpl<_$_PostMute>(this, _$identity);
+  _$$PostMuteImplCopyWith<_$PostMuteImpl> get copyWith =>
+      __$$PostMuteImplCopyWithImpl<_$PostMuteImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PostMuteToJson(
+    return _$$PostMuteImplToJson(
       this,
     );
   }
@@ -193,9 +194,10 @@ abstract class _PostMute implements PostMute {
       {required final String activeUid,
       required final dynamic createdAt,
       required final String postId,
-      required final dynamic postRef}) = _$_PostMute;
+      required final dynamic postRef}) = _$PostMuteImpl;
 
-  factory _PostMute.fromJson(Map<String, dynamic> json) = _$_PostMute.fromJson;
+  factory _PostMute.fromJson(Map<String, dynamic> json) =
+      _$PostMuteImpl.fromJson;
 
   @override
   String get activeUid;
@@ -207,6 +209,6 @@ abstract class _PostMute implements PostMute {
   dynamic get postRef;
   @override
   @JsonKey(ignore: true)
-  _$$_PostMuteCopyWith<_$_PostMute> get copyWith =>
+  _$$PostMuteImplCopyWith<_$PostMuteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

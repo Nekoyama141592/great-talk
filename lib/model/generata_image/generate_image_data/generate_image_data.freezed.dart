@@ -62,22 +62,22 @@ class _$GenerateImageDataCopyWithImpl<$Res, $Val extends GenerateImageData>
 }
 
 /// @nodoc
-abstract class _$$_GenerateImageDataCopyWith<$Res>
+abstract class _$$GenerateImageDataImplCopyWith<$Res>
     implements $GenerateImageDataCopyWith<$Res> {
-  factory _$$_GenerateImageDataCopyWith(_$_GenerateImageData value,
-          $Res Function(_$_GenerateImageData) then) =
-      __$$_GenerateImageDataCopyWithImpl<$Res>;
+  factory _$$GenerateImageDataImplCopyWith(_$GenerateImageDataImpl value,
+          $Res Function(_$GenerateImageDataImpl) then) =
+      __$$GenerateImageDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String url});
 }
 
 /// @nodoc
-class __$$_GenerateImageDataCopyWithImpl<$Res>
-    extends _$GenerateImageDataCopyWithImpl<$Res, _$_GenerateImageData>
-    implements _$$_GenerateImageDataCopyWith<$Res> {
-  __$$_GenerateImageDataCopyWithImpl(
-      _$_GenerateImageData _value, $Res Function(_$_GenerateImageData) _then)
+class __$$GenerateImageDataImplCopyWithImpl<$Res>
+    extends _$GenerateImageDataCopyWithImpl<$Res, _$GenerateImageDataImpl>
+    implements _$$GenerateImageDataImplCopyWith<$Res> {
+  __$$GenerateImageDataImplCopyWithImpl(_$GenerateImageDataImpl _value,
+      $Res Function(_$GenerateImageDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +85,7 @@ class __$$_GenerateImageDataCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
   }) {
-    return _then(_$_GenerateImageData(
+    return _then(_$GenerateImageDataImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -96,11 +96,11 @@ class __$$_GenerateImageDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GenerateImageData implements _GenerateImageData {
-  const _$_GenerateImageData({required this.url});
+class _$GenerateImageDataImpl implements _GenerateImageData {
+  const _$GenerateImageDataImpl({required this.url});
 
-  factory _$_GenerateImageData.fromJson(Map<String, dynamic> json) =>
-      _$$_GenerateImageDataFromJson(json);
+  factory _$GenerateImageDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GenerateImageDataImplFromJson(json);
 
   @override
   final String url;
@@ -111,10 +111,10 @@ class _$_GenerateImageData implements _GenerateImageData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GenerateImageData &&
+            other is _$GenerateImageDataImpl &&
             (identical(other.url, url) || other.url == url));
   }
 
@@ -125,13 +125,13 @@ class _$_GenerateImageData implements _GenerateImageData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GenerateImageDataCopyWith<_$_GenerateImageData> get copyWith =>
-      __$$_GenerateImageDataCopyWithImpl<_$_GenerateImageData>(
+  _$$GenerateImageDataImplCopyWith<_$GenerateImageDataImpl> get copyWith =>
+      __$$GenerateImageDataImplCopyWithImpl<_$GenerateImageDataImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GenerateImageDataToJson(
+    return _$$GenerateImageDataImplToJson(
       this,
     );
   }
@@ -139,15 +139,15 @@ class _$_GenerateImageData implements _GenerateImageData {
 
 abstract class _GenerateImageData implements GenerateImageData {
   const factory _GenerateImageData({required final String url}) =
-      _$_GenerateImageData;
+      _$GenerateImageDataImpl;
 
   factory _GenerateImageData.fromJson(Map<String, dynamic> json) =
-      _$_GenerateImageData.fromJson;
+      _$GenerateImageDataImpl.fromJson;
 
   @override
   String get url;
   @override
   @JsonKey(ignore: true)
-  _$$_GenerateImageDataCopyWith<_$_GenerateImageData> get copyWith =>
+  _$$GenerateImageDataImplCopyWith<_$GenerateImageDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

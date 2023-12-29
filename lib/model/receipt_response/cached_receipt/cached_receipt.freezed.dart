@@ -98,11 +98,11 @@ class _$CachedReceiptCopyWithImpl<$Res, $Val extends CachedReceipt>
 }
 
 /// @nodoc
-abstract class _$$_CachedReceiptCopyWith<$Res>
+abstract class _$$CachedReceiptImplCopyWith<$Res>
     implements $CachedReceiptCopyWith<$Res> {
-  factory _$$_CachedReceiptCopyWith(
-          _$_CachedReceipt value, $Res Function(_$_CachedReceipt) then) =
-      __$$_CachedReceiptCopyWithImpl<$Res>;
+  factory _$$CachedReceiptImplCopyWith(
+          _$CachedReceiptImpl value, $Res Function(_$CachedReceiptImpl) then) =
+      __$$CachedReceiptImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_CachedReceiptCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CachedReceiptCopyWithImpl<$Res>
-    extends _$CachedReceiptCopyWithImpl<$Res, _$_CachedReceipt>
-    implements _$$_CachedReceiptCopyWith<$Res> {
-  __$$_CachedReceiptCopyWithImpl(
-      _$_CachedReceipt _value, $Res Function(_$_CachedReceipt) _then)
+class __$$CachedReceiptImplCopyWithImpl<$Res>
+    extends _$CachedReceiptCopyWithImpl<$Res, _$CachedReceiptImpl>
+    implements _$$CachedReceiptImplCopyWith<$Res> {
+  __$$CachedReceiptImplCopyWithImpl(
+      _$CachedReceiptImpl _value, $Res Function(_$CachedReceiptImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_CachedReceiptCopyWithImpl<$Res>
     Object? startTimeMillis = null,
     Object? uid = null,
   }) {
-    return _then(_$_CachedReceipt(
+    return _then(_$CachedReceiptImpl(
       expiryTimeMillis: null == expiryTimeMillis
           ? _value.expiryTimeMillis
           : expiryTimeMillis // ignore: cast_nullable_to_non_nullable
@@ -163,8 +163,8 @@ class __$$_CachedReceiptCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CachedReceipt extends _CachedReceipt {
-  const _$_CachedReceipt(
+class _$CachedReceiptImpl extends _CachedReceipt {
+  const _$CachedReceiptImpl(
       {required this.expiryTimeMillis,
       required this.orderId,
       required this.originalTransactionId,
@@ -173,8 +173,8 @@ class _$_CachedReceipt extends _CachedReceipt {
       required this.uid})
       : super._();
 
-  factory _$_CachedReceipt.fromJson(Map<String, dynamic> json) =>
-      _$$_CachedReceiptFromJson(json);
+  factory _$CachedReceiptImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CachedReceiptImplFromJson(json);
 
   @override
   final String expiryTimeMillis;
@@ -195,10 +195,10 @@ class _$_CachedReceipt extends _CachedReceipt {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CachedReceipt &&
+            other is _$CachedReceiptImpl &&
             (identical(other.expiryTimeMillis, expiryTimeMillis) ||
                 other.expiryTimeMillis == expiryTimeMillis) &&
             (identical(other.orderId, orderId) || other.orderId == orderId) &&
@@ -219,12 +219,12 @@ class _$_CachedReceipt extends _CachedReceipt {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CachedReceiptCopyWith<_$_CachedReceipt> get copyWith =>
-      __$$_CachedReceiptCopyWithImpl<_$_CachedReceipt>(this, _$identity);
+  _$$CachedReceiptImplCopyWith<_$CachedReceiptImpl> get copyWith =>
+      __$$CachedReceiptImplCopyWithImpl<_$CachedReceiptImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CachedReceiptToJson(
+    return _$$CachedReceiptImplToJson(
       this,
     );
   }
@@ -237,11 +237,11 @@ abstract class _CachedReceipt extends CachedReceipt {
       required final String originalTransactionId,
       required final String productId,
       required final String startTimeMillis,
-      required final String uid}) = _$_CachedReceipt;
+      required final String uid}) = _$CachedReceiptImpl;
   const _CachedReceipt._() : super._();
 
   factory _CachedReceipt.fromJson(Map<String, dynamic> json) =
-      _$_CachedReceipt.fromJson;
+      _$CachedReceiptImpl.fromJson;
 
   @override
   String get expiryTimeMillis;
@@ -257,6 +257,6 @@ abstract class _CachedReceipt extends CachedReceipt {
   String get uid;
   @override
   @JsonKey(ignore: true)
-  _$$_CachedReceiptCopyWith<_$_CachedReceipt> get copyWith =>
+  _$$CachedReceiptImplCopyWith<_$CachedReceiptImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

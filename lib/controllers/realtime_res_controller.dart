@@ -11,8 +11,8 @@ import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/form_consts.dart';
+import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/remote_config_controller.dart';
@@ -23,6 +23,7 @@ import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/bookmark/bookmark.dart';
 import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
+import 'package:great_talk/model/chat_count_today/chat_count_today.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
@@ -32,25 +33,32 @@ import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
+import 'package:great_talk/utility/prefs_utility.dart';
 import 'package:great_talk/views/bookmark_categories_page.dart';
 import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
 import 'package:great_talk/views/realtime_res_page/components/bookmark_categories_list_view.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class RealtimeResController extends GetxController with CurrentUserMixin {
+class RealtimeResController extends LoadingController with CurrentUserMixin {
   static RealtimeResController get to => Get.find<RealtimeResController>();
   final messages = <TextMessage>[].obs;
   final realtimeRes = "".obs;
-  final isLoading = false.obs;
   final isGenerating = false.obs;
   String postId = "";
-  int chatCount = 0;
   late SharedPreferences prefs;
+  // ChatCountToday chatCountToday = ChatCountToday.instance();
   final Rx<ChatContent?> rxChatContent = Rx(null);
   final Rx<Post?> rxPost = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
   final repository = FirestoreRepository();
+  @override
+  void onInit() async {
+    startLoading();
+    prefs = await SharedPreferences.getInstance();
+    endLoading();
+    super.onInit();
+  }
 
   void resetState() {
     messages([]);
@@ -77,8 +85,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
 
   // 与えられたinterlocutorとのチャット履歴を取得
   Future<void> _getChatLog() async {
-    prefs = MainController.to.prefs;
-    isLoading(true);
+    startLoading();
     final uid = Get.parameters['uid']!;
     postId = Get.parameters['postId']!;
     final type = returnIsOriginalContents(uid)
@@ -107,13 +114,12 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
         UIHelper.showErrorFlutterToast("データの取得に失敗しました");
       });
     }
-    List<TextMessage> a = _getLocalMessages();
-    await PurchasesController.to.restorePurchases(); // 購入内容を復元
+    List<TextMessage> a = await _getLocalMessages();
     messages(a);
-    isLoading(false);
+    endLoading();
   }
 
-  List<TextMessage> _getLocalMessages() {
+  Future<List<TextMessage>> _getLocalMessages() async {
     if (rxChatContent.value == null) {
       return [];
     }
@@ -134,7 +140,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   void onSendPressed(
       BuildContext context,
       TextEditingController inputController,
-      ScrollController scrollController) {
+      ScrollController scrollController) async {
     final text = inputController.text;
     if (text.length > FormConsts.maxMessageLimit) {
       UIHelper.showErrorFlutterToast(
@@ -142,22 +148,39 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       return;
     }
     FocusScope.of(context).unfocus();
-    execute(scrollController, text);
-    inputController.text = "";
-  }
-
-  Future<void> execute(
-      ScrollController scrollController, String content) async {
-    final model = PurchasesController.to.model();
-    chatCount = _getChatCount(); // 端末から今日のチャット回数を取得
-    if (!_allowChat()) {
-      // チャットが許されていない場合
-      Get.toNamed(SubscribePage.path); // サブスクページへ飛ばす.
+    final chatCountToday = await getChatCount(); // 端末から今日のチャット回数を取得
+    final remoteConfigController = RemoteConfigController.to;
+    final chatLimitPerDay = remoteConfigController.chatLimitPerDay;
+    final premiumLimit = chatLimitPerDay.premium;
+    final freeLimit = chatLimitPerDay.free;
+    final basicLimit = chatLimitPerDay.basic;
+    if (chatCountToday.premium >= premiumLimit &&
+        PurchasesController.to.isPremiumSubscribing()) {
       UIHelper.showFlutterToast(
-          "チャットは1日${RemoteConfigController.to.chatLimitPerDay}回まで！\nサブスクに加入してください。");
+          "利用コストの急激な増加により、一時的にプレミアムプランでのAPI利用回数を一日につき$premiumLimit回までに制限させていただいています。\nご迷惑をおかけし、大変申し訳ございません。");
+      return;
+    } else if (chatCountToday.basic >= freeLimit &&
+        !PurchasesController.to.isSubscribing()) {
+      // 無料回数を超過し、サブスクに入っていない場合
+      Get.toNamed(SubscribePage.path); // サブスクページへ飛ばす.
+      UIHelper.showFlutterToast("チャットは1日$freeLimit回まで！\nサブスクに加入してください。");
       await _requestReview(); // レビューをリクエスト
       return;
+    } else if (chatCountToday.basic >= basicLimit) {
+      // 一時的にベーシックプランの利用が制限されている場合.
+      UIHelper.showFlutterToast(
+          "利用コストの急激な増加により、一時的にベーシックプランでのAPI利用回数を一日につき$basicLimit回までに制限させていただいています。\nご迷惑をおかけし、大変申し訳ございません。");
+      return;
+    } else {
+      await execute(scrollController, text, inputController); // ChatGPTのAPIを実行
+      return;
     }
+  }
+
+  Future<void> execute(ScrollController scrollController, String content,
+      TextEditingController inputController) async {
+    _setValues(); // チャットした日と回数を端末に保存.
+    final model = PurchasesController.to.model();
     _addMyMessage(content);
     _addEmptyMessage(); // Viewで表示できる要素数を一つ増やす
     realtimeRes(""); // realtimeResを初期化
@@ -177,6 +200,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       user: currentUid(),
     );
     _listenToChatCompletionSSE(request, scrollController); // ChatGPTのリアルタイム出力
+    inputController.text = "";
   }
 
   int _adjustMaxToken() {
@@ -203,9 +227,7 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   void _listenToChatCompletionSSE(
       ChatCompleteText request, ScrollController scrollController) {
     // 生成中なら何もしない
-    if (isGenerating.value || rxChatContent.value == null) {
-      return;
-    }
+    if (isGenerating.value || rxChatContent.value == null) return;
     isGenerating(true);
     final client = ChatGptSdkClient();
     client.openAI.onChatCompletionSSE(request: request).listen((it) {
@@ -220,10 +242,9 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
       messages.last = completedMsg;
       messages([...messages]);
       isGenerating(false);
-      _setValues();
+      _setLocalMessage();
     }, onError: (e) {
-      chatCount--; // チャット数を一つ減らす
-      _setChatCount(); // チャット数を保存
+      setChatCount(false); // チャット数を保存
       messages.removeRange(
           messages.length - 2, messages.length); // うまく生成できなかったメッセージを削除
       messages([...messages]);
@@ -242,25 +263,24 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     }
   }
 
-  int _getChatCount() {
-    int count = prefs.getInt(PrefsKey.chatCount.name) ?? 0;
+  Future<ChatCountToday> getChatCount() async {
+    final SDMap? json =
+        await PrefsUtility.getJson(PrefsKey.chatCountToday.name, prefs: prefs);
+    ChatCountToday chatCountToday = json != null
+        ? ChatCountToday.fromJson(json)
+        : ChatCountToday.instance();
     // もし、最後のチャットから24時間経過していたらchatCountを0にして送信を許可
-    if (_is24HoursFromLast()) {
-      count = 0;
+    if (await _is24HoursFromLast()) {
+      chatCountToday = ChatCountToday.instance();
     }
-    return count;
+    return chatCountToday;
   }
 
-  bool _is24HoursFromLast() {
+  Future<bool> _is24HoursFromLast() async {
     final int last = prefs.getInt(PrefsKey.lastChatDate.name) ?? 0;
     final lastDay = DateConverter.intToDateTime(last);
     final now = DateTime.now();
     return last == 0 ? true : DateConverter.isCrossingDate(lastDay, now);
-  }
-
-  bool _allowChat() {
-    return chatCount < RemoteConfigController.to.chatLimitPerDay ||
-        PurchasesController.to.isSubscribing();
   }
 
   Future<void> _requestReview() async {
@@ -272,19 +292,14 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _setValues() async {
-    if (rxChatContent.value == null) {
-      return;
-    }
-    await _setLocalMessage();
-    await _setLocalDate();
-    await _setChatCount();
+    if (rxChatContent.value == null) return;
+    await Future.wait([_setLocalDate(), setChatCount(true)]);
   }
 
   Future<void> _setLocalMessage() async {
-    if (rxChatContent.value == null) {
-      return;
-    }
-    final String interlocutorId = rxChatContent.value!.contentId;
+    final chatContent = rxChatContent.value;
+    if (chatContent == null) return;
+    final String interlocutorId = chatContent.contentId;
     final objectList =
         messages.map((e) => SaveTextMsg.fromTextMessage(e)).toList();
     final jsonString = jsonEncode(objectList);
@@ -296,10 +311,14 @@ class RealtimeResController extends GetxController with CurrentUserMixin {
     await prefs.setInt(PrefsKey.lastChatDate.name, dateInt);
   }
 
-  Future<void> _setChatCount() async {
+  Future<void> setChatCount(bool isIncreace) async {
     // 24時間経過していたらchatCountには0がくる
-    chatCount++;
-    await prefs.setInt(PrefsKey.chatCount.name, chatCount);
+    final chatCountToday = await getChatCount();
+    final newChatCountToday =
+        isIncreace ? chatCountToday.increaced() : chatCountToday.decreaced();
+    await PrefsUtility.setJson(
+        PrefsKey.chatCountToday.name, newChatCountToday.toJson(),
+        prefs: prefs);
   }
 
   TextMessage _newtTextMessage(String content, String senderUid) {

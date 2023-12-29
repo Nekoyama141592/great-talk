@@ -1,11 +1,12 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
+import 'package:great_talk/model/chat_limit_per_day/chat_limit_per_day.dart';
 
 class RemoteConfigController extends GetxController {
   static RemoteConfigController get to => Get.find<RemoteConfigController>();
+  ChatLimitPerDay chatLimitPerDay = ChatLimitPerDay.instance();
   // iosとAndroidで分ける
-  int chatLimitPerDay = RemoteConfigConstants.chatLimitPerDay;
   final maintenanceMode = false.obs;
   final maintenanceMsg = RemoteConfigConstants.maintenanceMsg.obs;
   final forcedUpdateVersion = RemoteConfigConstants.appVersion.obs;
@@ -24,15 +25,20 @@ class RemoteConfigController extends GetxController {
       minimumFetchInterval: const Duration(seconds: 15),
     ));
     // keyの設定
-    const chatLimitPerDayKey = RemoteConfigConstants.chatLimitPerDayKey;
+    // チャット数制限
+    const freeLimitPerDayKey = RemoteConfigConstants.freeLimitPerDayKey;
+    const basicLimitPerDayKey = RemoteConfigConstants.basicLimitPerDayKey;
+    const premiumLimitPerDayKey = RemoteConfigConstants.premiumLimitPerDayKey;
+    // メンテナンス
     final maintenanceModeKey = RemoteConfigConstants.maintenanceModeKey;
     final maintenanceMsgKey = RemoteConfigConstants.maintenanceMsgKey;
     final forcedUpdateVersionKey = RemoteConfigConstants.forcedUpdateVersionKey;
     final forcedUpdateMsgKey = RemoteConfigConstants.forcedUpdateMsgKey;
-
     // アプリ内デフォルトパラメータ値の設定
     await remoteConfig.setDefaults({
-      chatLimitPerDayKey: RemoteConfigConstants.chatLimitPerDay,
+      freeLimitPerDayKey: RemoteConfigConstants.freeLimitPerDay,
+      basicLimitPerDayKey: RemoteConfigConstants.basicLimitPerDay,
+      premiumLimitPerDayKey: RemoteConfigConstants.premiumLimitPerDay,
       maintenanceModeKey: false,
       maintenanceMsgKey: RemoteConfigConstants.maintenanceMsg,
       forcedUpdateVersionKey: RemoteConfigConstants.appVersion,
@@ -52,7 +58,11 @@ class RemoteConfigController extends GetxController {
     if (needsUpdate) {
       forcedUpdateMsg(remoteConfig.getString(forcedUpdateMsgKey));
     }
-    chatLimitPerDay = remoteConfig.getInt(chatLimitPerDayKey);
+    chatLimitPerDay = ChatLimitPerDay(
+      basic: remoteConfig.getInt(basicLimitPerDayKey),
+      free: remoteConfig.getInt(freeLimitPerDayKey),
+      premium: remoteConfig.getInt(premiumLimitPerDayKey),
+    );
     super.onInit();
   }
 }

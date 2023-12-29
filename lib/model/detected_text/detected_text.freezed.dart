@@ -91,11 +91,11 @@ class _$DetectedTextCopyWithImpl<$Res, $Val extends DetectedText>
 }
 
 /// @nodoc
-abstract class _$$_DetectedTextCopyWith<$Res>
+abstract class _$$DetectedTextImplCopyWith<$Res>
     implements $DetectedTextCopyWith<$Res> {
-  factory _$$_DetectedTextCopyWith(
-          _$_DetectedText value, $Res Function(_$_DetectedText) then) =
-      __$$_DetectedTextCopyWithImpl<$Res>;
+  factory _$$DetectedTextImplCopyWith(
+          _$DetectedTextImpl value, $Res Function(_$DetectedTextImpl) then) =
+      __$$DetectedTextImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +107,11 @@ abstract class _$$_DetectedTextCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DetectedTextCopyWithImpl<$Res>
-    extends _$DetectedTextCopyWithImpl<$Res, _$_DetectedText>
-    implements _$$_DetectedTextCopyWith<$Res> {
-  __$$_DetectedTextCopyWithImpl(
-      _$_DetectedText _value, $Res Function(_$_DetectedText) _then)
+class __$$DetectedTextImplCopyWithImpl<$Res>
+    extends _$DetectedTextCopyWithImpl<$Res, _$DetectedTextImpl>
+    implements _$$DetectedTextImplCopyWith<$Res> {
+  __$$DetectedTextImplCopyWithImpl(
+      _$DetectedTextImpl _value, $Res Function(_$DetectedTextImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +123,7 @@ class __$$_DetectedTextCopyWithImpl<$Res>
     Object? sentiment = null,
     Object? value = null,
   }) {
-    return _then(_$_DetectedText(
+    return _then(_$DetectedTextImpl(
       languageCode: null == languageCode
           ? _value.languageCode
           : languageCode // ignore: cast_nullable_to_non_nullable
@@ -150,16 +150,16 @@ class __$$_DetectedTextCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DetectedText implements _DetectedText {
-  const _$_DetectedText(
+class _$DetectedTextImpl implements _DetectedText {
+  const _$DetectedTextImpl(
       {required this.languageCode,
       required this.negativeScore,
       required this.positiveScore,
       required this.sentiment,
       required this.value});
 
-  factory _$_DetectedText.fromJson(Map<String, dynamic> json) =>
-      _$$_DetectedTextFromJson(json);
+  factory _$DetectedTextImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DetectedTextImplFromJson(json);
 
   @override
   final String languageCode;
@@ -178,10 +178,10 @@ class _$_DetectedText implements _DetectedText {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DetectedText &&
+            other is _$DetectedTextImpl &&
             (identical(other.languageCode, languageCode) ||
                 other.languageCode == languageCode) &&
             (identical(other.negativeScore, negativeScore) ||
@@ -201,12 +201,12 @@ class _$_DetectedText implements _DetectedText {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DetectedTextCopyWith<_$_DetectedText> get copyWith =>
-      __$$_DetectedTextCopyWithImpl<_$_DetectedText>(this, _$identity);
+  _$$DetectedTextImplCopyWith<_$DetectedTextImpl> get copyWith =>
+      __$$DetectedTextImplCopyWithImpl<_$DetectedTextImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DetectedTextToJson(
+    return _$$DetectedTextImplToJson(
       this,
     );
   }
@@ -218,10 +218,10 @@ abstract class _DetectedText implements DetectedText {
       required final int negativeScore,
       required final int positiveScore,
       required final String sentiment,
-      required final String value}) = _$_DetectedText;
+      required final String value}) = _$DetectedTextImpl;
 
   factory _DetectedText.fromJson(Map<String, dynamic> json) =
-      _$_DetectedText.fromJson;
+      _$DetectedTextImpl.fromJson;
 
   @override
   String get languageCode;
@@ -235,6 +235,6 @@ abstract class _DetectedText implements DetectedText {
   String get value;
   @override
   @JsonKey(ignore: true)
-  _$$_DetectedTextCopyWith<_$_DetectedText> get copyWith =>
+  _$$DetectedTextImplCopyWith<_$DetectedTextImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

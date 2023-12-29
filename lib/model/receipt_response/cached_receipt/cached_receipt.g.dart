@@ -6,8 +6,8 @@ part of 'cached_receipt.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CachedReceipt _$$_CachedReceiptFromJson(Map<String, dynamic> json) =>
-    _$_CachedReceipt(
+_$CachedReceiptImpl _$$CachedReceiptImplFromJson(Map<String, dynamic> json) =>
+    _$CachedReceiptImpl(
       expiryTimeMillis: json['expiryTimeMillis'] as String,
       orderId: json['orderId'] as String,
       originalTransactionId: json['originalTransactionId'] as String,
@@ -16,7 +16,7 @@ _$_CachedReceipt _$$_CachedReceiptFromJson(Map<String, dynamic> json) =>
       uid: json['uid'] as String,
     );
 
-Map<String, dynamic> _$$_CachedReceiptToJson(_$_CachedReceipt instance) =>
+Map<String, dynamic> _$$CachedReceiptImplToJson(_$CachedReceiptImpl instance) =>
     <String, dynamic>{
       'expiryTimeMillis': instance.expiryTimeMillis,
       'orderId': instance.orderId,

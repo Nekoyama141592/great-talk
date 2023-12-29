@@ -6,9 +6,9 @@ part of 'ios_receipt_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_IOSReceiptResponse _$$_IOSReceiptResponseFromJson(
+_$IOSReceiptResponseImpl _$$IOSReceiptResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$_IOSReceiptResponse(
+    _$IOSReceiptResponseImpl(
       expires_date: json['expires_date'] as String,
       expires_date_ms: json['expires_date_ms'] as String,
       expires_date_pst: json['expires_date_pst'] as String,
@@ -31,8 +31,8 @@ _$_IOSReceiptResponse _$$_IOSReceiptResponseFromJson(
       web_order_line_item_id: json['web_order_line_item_id'] as String,
     );
 
-Map<String, dynamic> _$$_IOSReceiptResponseToJson(
-        _$_IOSReceiptResponse instance) =>
+Map<String, dynamic> _$$IOSReceiptResponseImplToJson(
+        _$IOSReceiptResponseImpl instance) =>
     <String, dynamic>{
       'expires_date': instance.expires_date,
       'expires_date_ms': instance.expires_date_ms,

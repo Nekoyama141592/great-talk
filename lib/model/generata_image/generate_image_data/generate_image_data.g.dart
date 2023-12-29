@@ -6,13 +6,14 @@ part of 'generate_image_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GenerateImageData _$$_GenerateImageDataFromJson(Map<String, dynamic> json) =>
-    _$_GenerateImageData(
+_$GenerateImageDataImpl _$$GenerateImageDataImplFromJson(
+        Map<String, dynamic> json) =>
+    _$GenerateImageDataImpl(
       url: json['url'] as String,
     );
 
-Map<String, dynamic> _$$_GenerateImageDataToJson(
-        _$_GenerateImageData instance) =>
+Map<String, dynamic> _$$GenerateImageDataImplToJson(
+        _$GenerateImageDataImpl instance) =>
     <String, dynamic>{
       'url': instance.url,
     };

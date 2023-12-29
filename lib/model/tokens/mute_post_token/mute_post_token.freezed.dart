@@ -98,11 +98,11 @@ class _$MutePostTokenCopyWithImpl<$Res, $Val extends MutePostToken>
 }
 
 /// @nodoc
-abstract class _$$_MutePostTokenCopyWith<$Res>
+abstract class _$$MutePostTokenImplCopyWith<$Res>
     implements $MutePostTokenCopyWith<$Res> {
-  factory _$$_MutePostTokenCopyWith(
-          _$_MutePostToken value, $Res Function(_$_MutePostToken) then) =
-      __$$_MutePostTokenCopyWithImpl<$Res>;
+  factory _$$MutePostTokenImplCopyWith(
+          _$MutePostTokenImpl value, $Res Function(_$MutePostTokenImpl) then) =
+      __$$MutePostTokenImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -115,11 +115,11 @@ abstract class _$$_MutePostTokenCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MutePostTokenCopyWithImpl<$Res>
-    extends _$MutePostTokenCopyWithImpl<$Res, _$_MutePostToken>
-    implements _$$_MutePostTokenCopyWith<$Res> {
-  __$$_MutePostTokenCopyWithImpl(
-      _$_MutePostToken _value, $Res Function(_$_MutePostToken) _then)
+class __$$MutePostTokenImplCopyWithImpl<$Res>
+    extends _$MutePostTokenCopyWithImpl<$Res, _$MutePostTokenImpl>
+    implements _$$MutePostTokenImplCopyWith<$Res> {
+  __$$MutePostTokenImplCopyWithImpl(
+      _$MutePostTokenImpl _value, $Res Function(_$MutePostTokenImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -132,7 +132,7 @@ class __$$_MutePostTokenCopyWithImpl<$Res>
     Object? tokenId = null,
     Object? tokenType = null,
   }) {
-    return _then(_$_MutePostToken(
+    return _then(_$MutePostTokenImpl(
       activeUid: null == activeUid
           ? _value.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
@@ -163,8 +163,8 @@ class __$$_MutePostTokenCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MutePostToken implements _MutePostToken {
-  const _$_MutePostToken(
+class _$MutePostTokenImpl implements _MutePostToken {
+  const _$MutePostTokenImpl(
       {required this.activeUid,
       required this.createdAt,
       required this.postId,
@@ -172,8 +172,8 @@ class _$_MutePostToken implements _MutePostToken {
       required this.tokenId,
       required this.tokenType});
 
-  factory _$_MutePostToken.fromJson(Map<String, dynamic> json) =>
-      _$$_MutePostTokenFromJson(json);
+  factory _$MutePostTokenImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MutePostTokenImplFromJson(json);
 
   @override
   final String activeUid;
@@ -194,10 +194,10 @@ class _$_MutePostToken implements _MutePostToken {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MutePostToken &&
+            other is _$MutePostTokenImpl &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -222,12 +222,12 @@ class _$_MutePostToken implements _MutePostToken {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MutePostTokenCopyWith<_$_MutePostToken> get copyWith =>
-      __$$_MutePostTokenCopyWithImpl<_$_MutePostToken>(this, _$identity);
+  _$$MutePostTokenImplCopyWith<_$MutePostTokenImpl> get copyWith =>
+      __$$MutePostTokenImplCopyWithImpl<_$MutePostTokenImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MutePostTokenToJson(
+    return _$$MutePostTokenImplToJson(
       this,
     );
   }
@@ -240,10 +240,10 @@ abstract class _MutePostToken implements MutePostToken {
       required final String postId,
       required final dynamic postRef,
       required final String tokenId,
-      required final String tokenType}) = _$_MutePostToken;
+      required final String tokenType}) = _$MutePostTokenImpl;
 
   factory _MutePostToken.fromJson(Map<String, dynamic> json) =
-      _$_MutePostToken.fromJson;
+      _$MutePostTokenImpl.fromJson;
 
   @override
   String get activeUid;
@@ -259,6 +259,6 @@ abstract class _MutePostToken implements MutePostToken {
   String get tokenType;
   @override
   @JsonKey(ignore: true)
-  _$$_MutePostTokenCopyWith<_$_MutePostToken> get copyWith =>
+  _$$MutePostTokenImplCopyWith<_$MutePostTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
