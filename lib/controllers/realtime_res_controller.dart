@@ -166,7 +166,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
       UIHelper.showFlutterToast("チャットは1日$freeLimit回まで！\nサブスクに加入してください。");
       await _requestReview(); // レビューをリクエスト
       return;
-    } else if (chatCountToday.basic >= basicLimit) {
+    } else if (chatCountToday.basic >= basicLimit && PurchasesController.to.isSubscribing()) {
       // 一時的にベーシックプランの利用が制限されている場合.
       UIHelper.showFlutterToast(
           "利用コストの急激な増加により、一時的にベーシックプランでのAPI利用回数を一日につき$basicLimit回までに制限させていただいています。\nご迷惑をおかけし、大変申し訳ございません。");
