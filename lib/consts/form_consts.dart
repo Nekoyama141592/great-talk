@@ -52,6 +52,8 @@ class FormConsts {
       "ネガティブな内容を含むと、他のユーザーに表示されなくなる可能性があります。";
   static String textLimitMsg(int limit, String value) =>
       "最大$limit文字までです。（現在${value.length}文字)";
+  // 管理者ページ
+  static const updateOfficialHelpMsg = "公式フラグを反転させたいユーザーのUID";
   // 使用できない文字
   static const List<String> notUseOnField = ['.', '[', ']', '*', '`'];
   // ヒントテキスト

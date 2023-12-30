@@ -17,6 +17,7 @@ service cloud.firestore {
     match /public/{version}/users/{uid} {
       allow read: if isAuthenticated();
       allow create: if isTheSameUserAndVerified(uid) && isValidInitialPublicUser(request.resource.data);
+      allow update: if isAdmin(); // isOfficialのフラグ設定を行う
       allow delete: if isTheSameUserAndVerified(uid);
       match /posts/{postId} {
         allow read: if isAuthenticated();

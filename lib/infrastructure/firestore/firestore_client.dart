@@ -81,6 +81,8 @@ class FirestoreClient {
       await FirestoreQueries.tokenQuery(currentUid, tokenId).delete();
 
   Future<void> createDoc(DocRef ref, SDMap json) async => await ref.set(json);
+  Future<void> updateDoc(DocRef ref, SDMap json) async =>
+      await ref.update(json);
   Future<void> deleteDoc(DocRef ref) async => await ref.delete();
 
   Future<void> deleteUser(String uid) async =>

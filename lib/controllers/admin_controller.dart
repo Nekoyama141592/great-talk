@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
+import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 
 class AdminController extends LoadingController {
@@ -9,6 +10,8 @@ class AdminController extends LoadingController {
   final messageCount = 0.obs;
   final searchCount = 0.obs;
   final repository = FirestoreRepository();
+
+  final rxToggleOfficialUid = "".obs;
 
   Future<void> init() async {
     startLoading();
@@ -50,6 +53,45 @@ class AdminController extends LoadingController {
       searchCount(res);
     }, failure: () {
       UIHelper.showErrorFlutterToast("検索数の取得に失敗しました");
+    });
+  }
+
+  void setOfficialUid(String? value) {
+    if (value == null) return;
+    rxToggleOfficialUid.value = value;
+  }
+
+  void onPositiveButtonPressed() {
+    if (rxToggleOfficialUid.isEmpty) return;
+    UIHelper.cupertinoAlertDialog("実行しますがよろしいですか？", () async {
+      Get.back();
+      await _toggleIsOfficial();
+    });
+  }
+
+  Future<void> _toggleIsOfficial() async {
+    final uid = rxToggleOfficialUid.value;
+    final result = await repository.getPublicUser(uid);
+    result.when(
+        success: (res) async {
+          final data = res.data();
+          if (data == null) return;
+          final user = PublicUser.fromJson(data);
+          await _updateIsOfficial(user);
+        },
+        failure: () {});
+  }
+
+  Future<void> _updateIsOfficial(PublicUser user) async {
+    final ref = user.typedRef();
+    final json = {
+      "isOfficial": !user.isOfficial,
+    };
+    final result = await repository.updateDoc(ref, json);
+    result.when(success: (res) {
+      UIHelper.showFlutterToast(json.toString());
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("更新に失敗しました");
     });
   }
 }
