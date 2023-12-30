@@ -49,7 +49,6 @@ abstract class PublicUser implements _$PublicUser {
   String get nameValue =>
       typedUserName().value.isEmpty ? noName : typedUserName().value;
   bool get hasNoBio => bioValue.isEmpty;
-
   bool isInappropriate() =>
       typedImage().moderationLabels.isNotEmpty ||
       typedBio().negativeScore > negativeLimit ||

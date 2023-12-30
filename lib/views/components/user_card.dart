@@ -11,6 +11,7 @@ import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/mosaic_card/components/mosaic_user_child.dart';
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
+import 'package:great_talk/views/components/official_mark.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 
 class UserCard extends StatelessWidget with CurrentUserMixin {
@@ -75,7 +76,10 @@ class UserCard extends StatelessWidget with CurrentUserMixin {
                               const BasicWidthBox(),
                               const Icon(Icons.people),
                               const BasicWidthBox(),
-                              BasicBoldText(publicUser.followerCount.toString())
+                              BasicBoldText(
+                                  publicUser.followerCount.toString()),
+                              const BasicWidthBox(),
+                              if (publicUser.isOfficial) const OfficialMark()
                             ],
                           ),
                         ),

@@ -7,6 +7,7 @@ import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/utility/style_utility.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
+import 'package:great_talk/views/components/official_mark.dart';
 import 'package:great_talk/views/screen/gradient_screen.dart';
 import 'package:great_talk/views/screen/profile_screen/components/edit_button.dart';
 import 'package:great_talk/views/screen/profile_screen/components/follow_button.dart';
@@ -78,12 +79,8 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
               size: 40.0,
             ),
           ),
-          Obx(() => controller.rxPassiveUser.value!.isOfficial
-              ? Icon(
-                  Icons.verified,
-                  size: 40.0,
-                  color: Theme.of(context).colorScheme.primary,
-                )
+          Obx(() => (controller.rxPassiveUser.value?.isOfficial ?? false)
+              ? const OfficialMark()
               : const SizedBox.shrink())
         ],
       ),
