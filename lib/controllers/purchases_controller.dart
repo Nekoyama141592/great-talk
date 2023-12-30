@@ -76,7 +76,9 @@ class PurchasesController extends GetxController with CurrentUserMixin {
       purchases(List.from(purchases)..add(purchaseDetails));
 
   bool isSubscribing() {
-    return purchases.isNotEmpty || rxCachedReceipt.value.isValid();
+    return purchases.isNotEmpty ||
+        rxCachedReceipt.value.isValid() ||
+        CurrentUserController.to.isOfficial();
   }
 
   bool isPremiumSubscribing() {
@@ -85,7 +87,8 @@ class PurchasesController extends GetxController with CurrentUserMixin {
             .map((element) => element.productID)
             .toList()
             .contains(kPremiumSubscriptionId) ||
-        cachedReceipt.isValidPremium();
+        cachedReceipt.isValidPremium() ||
+        CurrentUserController.to.isOfficial();
   }
 
   String get subscriptionText {
@@ -105,7 +108,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> restorePurchases() async {
-    if (purchases.isEmpty) {
+    if (purchases.isEmpty && !CurrentUserController.to.isOfficial()) {
       await repository.restorePurchases(inAppPurchase);
     }
   }

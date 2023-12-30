@@ -188,6 +188,7 @@ class CurrentUserController extends GetxController {
   String currentUid() => rxAuthUser.value!.uid;
 
   bool isAdmin() => rxPrivateUser.value?.isAdmin ?? false;
+  bool isOfficial() => rxPublicUser.value?.isOfficial ?? false;
 
   bool isAnonymous() => rxAuthUser.value!.isAnonymous;
 
