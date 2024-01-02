@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/maps.dart';
+import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
@@ -43,7 +44,7 @@ class EditController extends FormsController with CurrentUserMixin {
     }
     final userName = rxUserName.value;
     final bio = rxBio.value;
-    if (userName.isEmpty || bio.isEmpty || userName.invalidField) {
+    if (userName.isEmpty || bio.isEmpty || userName.invalidField || userName == noName) {
       await UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
       return;
     }
