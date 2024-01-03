@@ -2,7 +2,7 @@ import 'package:great_talk/extensions/remote_config_key_extension.dart';
 
 class RemoteConfigConstants {
   static const int appVersion = 200;
-  // 一日にできる会話数.200
+  // 一日にできる会話数
   static const freeLimitPerDay = 15;
   static const basicLimitPerDay = 10000;
   static const premiumLimitPerDay = 1000;
