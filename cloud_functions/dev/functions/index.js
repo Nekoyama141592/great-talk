@@ -117,8 +117,8 @@ async function detectText(text) {
     const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
     let detectedText = {
         "languageCode": "",
-        "negativeScore": 0.0,
-        "positiveScore": 0.0,
+        "negativeScore": 0,
+        "positiveScore": 0,
         "sentiment": "",
         "value": text,
     };
@@ -129,6 +129,9 @@ async function detectText(text) {
 
     try {
         const lCode = await detectDominantLanguage(text);
+        if (!lCode || lCode.trim() === "") {
+            return detectedText;
+        }
         if (lCode) {
             const dSparams = {
                 LanguageCode: lCode,
@@ -205,13 +208,7 @@ function getPrivateKey(privateKey) {
 
     return pkey;
   }
-  
-  function getPublicKey(publicKey) {
-    const key = chunkSplit(publicKey, 64, '\n');
-    const pkey = '-----BEGIN PUBLIC KEY-----\n' + key + '-----END PUBLIC KEY-----\n';
-  
-    return pkey;
-  }
+
   
   function chunkSplit(str, len, end) {
     const match = str.match(new RegExp('.{0,' + len + '}', 'g'));
@@ -391,9 +388,20 @@ exports.onUserUpdateLogCreate = functions
     async (snap,_) => {
         const newValue = snap.data();
         const userRef = newValue.userRef;
-        const detectedUserName = await detectText(newValue.stringUserName);
-        const detectedBio = await detectText(newValue.stringBio);
-        const detectedImage = await detectModerationLabels(userImagesBucket,newValue.imageFileName);
+
+        const oldUser = await userRef.get();
+        const oldUserJson = oldUser.data();
+        const detectedUserName = {
+            "languageCode": "",
+            "negativeScore": 0,
+            "positiveScore": 0,
+            "sentiment": "",
+            "value": newValue.stringUserName,
+        };
+        const newBio = newValue.stringBio;
+        const detectedBio = (newBio === oldUserJson['bio']['value']) ? oldUserJson['bio'] : await detectText(newBio);
+        const newFileName = newValue.imageFileName;
+        const detectedImage = (newFileName === oldUserJson['image']['value']) ? oldUserJson['image'] : await detectModerationLabels(userImagesBucket,newFileName);
         await userRef.update({
             'bio': detectedBio,
             'image': detectedImage,
