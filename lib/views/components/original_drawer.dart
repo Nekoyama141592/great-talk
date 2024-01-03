@@ -23,7 +23,10 @@ class OriginalDrawer extends StatelessWidget {
         children: [
           ListTile(
               title: const Text("アカウント情報"),
-              onTap: () => Get.toNamed(AccountPage.path)),
+              onTap: () {
+                PurchasesController.to.restorePurchases();
+                Get.toNamed(AccountPage.path);
+              }),
           ListTile(
               title: const Text("ミュートしているユーザー"),
               onTap: () => Get.toNamed(MuteUsersPage.path)),

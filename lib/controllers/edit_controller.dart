@@ -44,7 +44,10 @@ class EditController extends FormsController with CurrentUserMixin {
     }
     final userName = rxUserName.value;
     final bio = rxBio.value;
-    if (userName.isEmpty || bio.isEmpty || userName.invalidField || userName == noName) {
+    if (userName.isEmpty ||
+        bio.isEmpty ||
+        userName.invalidField ||
+        userName == noName) {
       await UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
       return;
     }

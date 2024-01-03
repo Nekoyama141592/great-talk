@@ -94,6 +94,10 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   String get subscriptionText {
     if (!isSubscribing()) {
       return "何も契約していません。";
+    } else if (CurrentUserController.to.isOfficial()) {
+      return "プレミアムプラン(公式ユーザー)";
+    } else if (purchases.isEmpty) {
+      return "購入情報を取得中...";
     } else {
       final planName = getPlanName(purchases.first.productID);
       return "$planNameを契約しています。";
