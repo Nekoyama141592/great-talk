@@ -108,15 +108,16 @@ class __$$ChatCountTodayImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ChatCountTodayImpl extends _ChatCountToday {
-  const _$ChatCountTodayImpl({required this.basic, required this.premium})
-      : super._();
+  const _$ChatCountTodayImpl({this.basic = 0, this.premium = 0}) : super._();
 
   factory _$ChatCountTodayImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChatCountTodayImplFromJson(json);
 
   @override
+  @JsonKey()
   final int basic;
   @override
+  @JsonKey()
   final int premium;
 
   @override
@@ -153,9 +154,8 @@ class _$ChatCountTodayImpl extends _ChatCountToday {
 }
 
 abstract class _ChatCountToday extends ChatCountToday {
-  const factory _ChatCountToday(
-      {required final int basic,
-      required final int premium}) = _$ChatCountTodayImpl;
+  const factory _ChatCountToday({final int basic, final int premium}) =
+      _$ChatCountTodayImpl;
   const _ChatCountToday._() : super._();
 
   factory _ChatCountToday.fromJson(Map<String, dynamic> json) =

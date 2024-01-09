@@ -26,6 +26,7 @@ import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/chat_count_today/chat_count_today.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/text_message/text_message.dart';
@@ -33,7 +34,6 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
-import 'package:great_talk/utility/new_content.dart';
 import 'package:great_talk/utility/prefs_utility.dart';
 import 'package:great_talk/views/bookmark_categories_page.dart';
 import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
@@ -267,12 +267,11 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   Future<ChatCountToday> getChatCount() async {
     final SDMap? json =
         await PrefsUtility.getJson(PrefsKey.chatCountToday.name, prefs: prefs);
-    ChatCountToday chatCountToday = json != null
-        ? ChatCountToday.fromJson(json)
-        : ChatCountToday.instance();
+    ChatCountToday chatCountToday =
+        json != null ? ChatCountToday.fromJson(json) : const ChatCountToday();
     // もし、最後のチャットから24時間経過していたらchatCountを0にして送信を許可
     if (await _is24HoursFromLast()) {
-      chatCountToday = ChatCountToday.instance();
+      chatCountToday = const ChatCountToday();
     }
     return chatCountToday;
   }
@@ -333,7 +332,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
       messageRef: FirestoreQueries.postMessageDocRef(
           posterUid, rxChatContent.value!.contentId, currentUid(), id),
       postRef: rxChatContent.value!.typedRef(),
-      text: NewContent.newDetectedText(content).toJson(),
+      text: DetectedText(value: content).toJson(),
       posterUid: posterUid,
       senderUid: senderUid,
     );

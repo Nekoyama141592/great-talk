@@ -8,11 +8,11 @@ part of 'detected_text.dart';
 
 _$DetectedTextImpl _$$DetectedTextImplFromJson(Map<String, dynamic> json) =>
     _$DetectedTextImpl(
-      languageCode: json['languageCode'] as String,
-      negativeScore: json['negativeScore'] as int,
-      positiveScore: json['positiveScore'] as int,
-      sentiment: json['sentiment'] as String,
-      value: json['value'] as String,
+      languageCode: json['languageCode'] as String? ?? "",
+      negativeScore: json['negativeScore'] as int? ?? 0,
+      positiveScore: json['positiveScore'] as int? ?? 0,
+      sentiment: json['sentiment'] as String? ?? "",
+      value: json['value'] as String? ?? "",
     );
 
 Map<String, dynamic> _$$DetectedTextImplToJson(_$DetectedTextImpl instance) =>

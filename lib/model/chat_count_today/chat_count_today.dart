@@ -7,12 +7,10 @@ part 'chat_count_today.g.dart';
 @freezed
 abstract class ChatCountToday implements _$ChatCountToday {
   const ChatCountToday._();
-  const factory ChatCountToday({required int basic, required int premium}) =
-      _ChatCountToday;
+  const factory ChatCountToday(
+      {@Default(0) int basic, @Default(0) int premium}) = _ChatCountToday;
   factory ChatCountToday.fromJson(Map<String, dynamic> json) =>
       _$ChatCountTodayFromJson(json);
-  factory ChatCountToday.instance() =>
-      const ChatCountToday(basic: 0, premium: 0);
 
   ChatCountToday increaced() {
     final isPremium = PurchasesController.to.isPremiumSubscribing();

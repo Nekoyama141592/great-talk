@@ -141,8 +141,8 @@ class __$$DetectedImageImplCopyWithImpl<$Res>
 class _$DetectedImageImpl extends _DetectedImage {
   const _$DetectedImageImpl(
       {required this.bucketName,
-      required final List<Map<String, dynamic>> moderationLabels,
-      required this.moderationModelVersion,
+      final List<Map<String, dynamic>> moderationLabels = const [],
+      this.moderationModelVersion = "",
       required this.value})
       : _moderationLabels = moderationLabels,
         super._();
@@ -154,6 +154,7 @@ class _$DetectedImageImpl extends _DetectedImage {
   final String bucketName;
   final List<Map<String, dynamic>> _moderationLabels;
   @override
+  @JsonKey()
   List<Map<String, dynamic>> get moderationLabels {
     if (_moderationLabels is EqualUnmodifiableListView)
       return _moderationLabels;
@@ -162,6 +163,7 @@ class _$DetectedImageImpl extends _DetectedImage {
   }
 
   @override
+  @JsonKey()
   final String moderationModelVersion;
   @override
   final String value;
@@ -211,8 +213,8 @@ class _$DetectedImageImpl extends _DetectedImage {
 abstract class _DetectedImage extends DetectedImage {
   const factory _DetectedImage(
       {required final String bucketName,
-      required final List<Map<String, dynamic>> moderationLabels,
-      required final String moderationModelVersion,
+      final List<Map<String, dynamic>> moderationLabels,
+      final String moderationModelVersion,
       required final String value}) = _$DetectedImageImpl;
   const _DetectedImage._() : super._();
 

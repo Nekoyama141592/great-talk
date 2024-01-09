@@ -9,10 +9,10 @@ abstract class PrivateUser implements _$PrivateUser {
   const PrivateUser._();
   const factory PrivateUser({
     required dynamic createdAt,
-    required String ethAddress,
-    required String gender,
-    required String ipAddress,
-    required bool isAdmin,
+    @Default("") String ethAddress,
+    @Default("") String gender,
+    @Default("") String ipAddress,
+    @Default(false) bool isAdmin,
     required dynamic ref,
     required String uid,
     required dynamic updatedAt,

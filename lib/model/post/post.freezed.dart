@@ -370,28 +370,28 @@ class __$$PostImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PostImpl extends _Post {
   const _$PostImpl(
-      {required this.bookmarkCount,
+      {this.bookmarkCount = 0,
       required this.createdAt,
       required final Map<String, dynamic> customCompleteText,
       required final Map<String, dynamic> description,
-      required final List<SDMap> exampleTexts,
-      required this.genre,
-      required final List<String> hashTags,
+      final List<SDMap> exampleTexts = const [],
+      this.genre = "",
+      final List<String> hashTags = const [],
       required final Map<String, dynamic> image,
-      required this.impressionCount,
-      required this.likeCount,
-      required final List<SDMap> links,
-      required this.msgCount,
-      required this.muteCount,
+      this.impressionCount = 0,
+      this.likeCount = 0,
+      final List<SDMap> links = const [],
+      this.msgCount = 0,
+      this.muteCount = 0,
       required final Map<String, dynamic> poster,
       required this.postId,
       required this.ref,
-      required this.reportCount,
-      required this.score,
+      this.reportCount = 0,
+      this.score = 0.0,
       required final Map<String, dynamic> searchToken,
       required final Map<String, dynamic> title,
       required this.updatedAt,
-      required this.userCount})
+      this.userCount = 0})
       : _customCompleteText = customCompleteText,
         _description = description,
         _exampleTexts = exampleTexts,
@@ -407,6 +407,7 @@ class _$PostImpl extends _Post {
       _$$PostImplFromJson(json);
 
   @override
+  @JsonKey()
   final int bookmarkCount;
   @override
   final dynamic createdAt;
@@ -429,6 +430,7 @@ class _$PostImpl extends _Post {
 
   final List<SDMap> _exampleTexts;
   @override
+  @JsonKey()
   List<SDMap> get exampleTexts {
     if (_exampleTexts is EqualUnmodifiableListView) return _exampleTexts;
     // ignore: implicit_dynamic_type
@@ -436,9 +438,11 @@ class _$PostImpl extends _Post {
   }
 
   @override
+  @JsonKey()
   final String genre;
   final List<String> _hashTags;
   @override
+  @JsonKey()
   List<String> get hashTags {
     if (_hashTags is EqualUnmodifiableListView) return _hashTags;
     // ignore: implicit_dynamic_type
@@ -454,11 +458,14 @@ class _$PostImpl extends _Post {
   }
 
   @override
+  @JsonKey()
   final int impressionCount;
   @override
+  @JsonKey()
   final int likeCount;
   final List<SDMap> _links;
   @override
+  @JsonKey()
   List<SDMap> get links {
     if (_links is EqualUnmodifiableListView) return _links;
     // ignore: implicit_dynamic_type
@@ -466,8 +473,10 @@ class _$PostImpl extends _Post {
   }
 
   @override
+  @JsonKey()
   final int msgCount;
   @override
+  @JsonKey()
   final int muteCount;
   final Map<String, dynamic> _poster;
   @override
@@ -482,8 +491,10 @@ class _$PostImpl extends _Post {
   @override
   final dynamic ref;
   @override
+  @JsonKey()
   final int reportCount;
   @override
+  @JsonKey()
   final double score;
   final Map<String, dynamic> _searchToken;
   @override
@@ -504,6 +515,7 @@ class _$PostImpl extends _Post {
   @override
   final dynamic updatedAt;
   @override
+  @JsonKey()
   final int userCount;
 
   @override
@@ -595,28 +607,28 @@ class _$PostImpl extends _Post {
 
 abstract class _Post extends Post {
   const factory _Post(
-      {required final int bookmarkCount,
+      {final int bookmarkCount,
       required final dynamic createdAt,
       required final Map<String, dynamic> customCompleteText,
       required final Map<String, dynamic> description,
-      required final List<SDMap> exampleTexts,
-      required final String genre,
-      required final List<String> hashTags,
+      final List<SDMap> exampleTexts,
+      final String genre,
+      final List<String> hashTags,
       required final Map<String, dynamic> image,
-      required final int impressionCount,
-      required final int likeCount,
-      required final List<SDMap> links,
-      required final int msgCount,
-      required final int muteCount,
+      final int impressionCount,
+      final int likeCount,
+      final List<SDMap> links,
+      final int msgCount,
+      final int muteCount,
       required final Map<String, dynamic> poster,
       required final String postId,
       required final dynamic ref,
-      required final int reportCount,
-      required final double score,
+      final int reportCount,
+      final double score,
       required final Map<String, dynamic> searchToken,
       required final Map<String, dynamic> title,
       required final dynamic updatedAt,
-      required final int userCount}) = _$PostImpl;
+      final int userCount}) = _$PostImpl;
   const _Post._() : super._();
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;

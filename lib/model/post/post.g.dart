@@ -7,33 +7,37 @@ part of 'post.dart';
 // **************************************************************************
 
 _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
-      bookmarkCount: json['bookmarkCount'] as int,
+      bookmarkCount: json['bookmarkCount'] as int? ?? 0,
       createdAt: json['createdAt'],
       customCompleteText: json['customCompleteText'] as Map<String, dynamic>,
       description: json['description'] as Map<String, dynamic>,
-      exampleTexts: (json['exampleTexts'] as List<dynamic>)
-          .map((e) => e as Map<String, dynamic>)
-          .toList(),
-      genre: json['genre'] as String,
-      hashTags:
-          (json['hashTags'] as List<dynamic>).map((e) => e as String).toList(),
+      exampleTexts: (json['exampleTexts'] as List<dynamic>?)
+              ?.map((e) => e as Map<String, dynamic>)
+              .toList() ??
+          const [],
+      genre: json['genre'] as String? ?? "",
+      hashTags: (json['hashTags'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       image: json['image'] as Map<String, dynamic>,
-      impressionCount: json['impressionCount'] as int,
-      likeCount: json['likeCount'] as int,
-      links: (json['links'] as List<dynamic>)
-          .map((e) => e as Map<String, dynamic>)
-          .toList(),
-      msgCount: json['msgCount'] as int,
-      muteCount: json['muteCount'] as int,
+      impressionCount: json['impressionCount'] as int? ?? 0,
+      likeCount: json['likeCount'] as int? ?? 0,
+      links: (json['links'] as List<dynamic>?)
+              ?.map((e) => e as Map<String, dynamic>)
+              .toList() ??
+          const [],
+      msgCount: json['msgCount'] as int? ?? 0,
+      muteCount: json['muteCount'] as int? ?? 0,
       poster: json['poster'] as Map<String, dynamic>,
       postId: json['postId'] as String,
       ref: json['ref'],
-      reportCount: json['reportCount'] as int,
-      score: (json['score'] as num).toDouble(),
+      reportCount: json['reportCount'] as int? ?? 0,
+      score: (json['score'] as num?)?.toDouble() ?? 0.0,
       searchToken: json['searchToken'] as Map<String, dynamic>,
       title: json['title'] as Map<String, dynamic>,
       updatedAt: json['updatedAt'],
-      userCount: json['userCount'] as int,
+      userCount: json['userCount'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>

@@ -7,18 +7,11 @@ part 'generate_image_request.g.dart';
 @freezed
 abstract class GenerateImageRequest implements _$GenerateImageRequest {
   const factory GenerateImageRequest(
-      {required String model,
+      {@Default(OpenAIConstants.imageModel) String model,
       required String prompt,
-      required int n,
-      required String size,
+      @Default(1) int n,
+      @Default("1024x1024") String size,
       required String user}) = _GenerateImageRequest;
   factory GenerateImageRequest.fromJson(Map<String, dynamic> json) =>
       _$GenerateImageRequestFromJson(json);
-  factory GenerateImageRequest.instance(String prompt, String uid) =>
-      GenerateImageRequest(
-          model: OpenAIConstants.imageModel,
-          prompt: prompt,
-          n: 1,
-          size: "1024x1024",
-          user: uid);
 }

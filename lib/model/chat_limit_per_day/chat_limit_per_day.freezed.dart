@@ -120,17 +120,22 @@ class __$$ChatLimitPerDayImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ChatLimitPerDayImpl extends _ChatLimitPerDay {
   const _$ChatLimitPerDayImpl(
-      {required this.basic, required this.free, required this.premium})
+      {this.basic = RemoteConfigConstants.basicLimitPerDay,
+      this.free = RemoteConfigConstants.freeLimitPerDay,
+      this.premium = RemoteConfigConstants.premiumLimitPerDay})
       : super._();
 
   factory _$ChatLimitPerDayImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChatLimitPerDayImplFromJson(json);
 
   @override
+  @JsonKey()
   final int basic;
   @override
+  @JsonKey()
   final int free;
   @override
+  @JsonKey()
   final int premium;
 
   @override
@@ -169,9 +174,9 @@ class _$ChatLimitPerDayImpl extends _ChatLimitPerDay {
 
 abstract class _ChatLimitPerDay extends ChatLimitPerDay {
   const factory _ChatLimitPerDay(
-      {required final int basic,
-      required final int free,
-      required final int premium}) = _$ChatLimitPerDayImpl;
+      {final int basic,
+      final int free,
+      final int premium}) = _$ChatLimitPerDayImpl;
   const _ChatLimitPerDay._() : super._();
 
   factory _ChatLimitPerDay.fromJson(Map<String, dynamic> json) =

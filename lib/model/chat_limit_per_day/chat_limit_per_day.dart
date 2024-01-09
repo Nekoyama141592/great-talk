@@ -8,13 +8,10 @@ part 'chat_limit_per_day.g.dart';
 abstract class ChatLimitPerDay implements _$ChatLimitPerDay {
   const ChatLimitPerDay._();
   const factory ChatLimitPerDay(
-      {required int basic,
-      required int free,
-      required int premium}) = _ChatLimitPerDay;
+          {@Default(RemoteConfigConstants.basicLimitPerDay) int basic,
+          @Default(RemoteConfigConstants.freeLimitPerDay) int free,
+          @Default(RemoteConfigConstants.premiumLimitPerDay) int premium}) =
+      _ChatLimitPerDay;
   factory ChatLimitPerDay.fromJson(Map<String, dynamic> json) =>
       _$ChatLimitPerDayFromJson(json);
-  factory ChatLimitPerDay.instance() => const ChatLimitPerDay(
-      basic: RemoteConfigConstants.basicLimitPerDay,
-      free: RemoteConfigConstants.freeLimitPerDay,
-      premium: RemoteConfigConstants.premiumLimitPerDay);
 }

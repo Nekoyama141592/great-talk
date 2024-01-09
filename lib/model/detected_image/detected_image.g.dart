@@ -9,10 +9,11 @@ part of 'detected_image.dart';
 _$DetectedImageImpl _$$DetectedImageImplFromJson(Map<String, dynamic> json) =>
     _$DetectedImageImpl(
       bucketName: json['bucketName'] as String,
-      moderationLabels: (json['moderationLabels'] as List<dynamic>)
-          .map((e) => e as Map<String, dynamic>)
-          .toList(),
-      moderationModelVersion: json['moderationModelVersion'] as String,
+      moderationLabels: (json['moderationLabels'] as List<dynamic>?)
+              ?.map((e) => e as Map<String, dynamic>)
+              .toList() ??
+          const [],
+      moderationModelVersion: json['moderationModelVersion'] as String? ?? "",
       value: json['value'] as String,
     );
 

@@ -5,7 +5,7 @@ import 'package:great_talk/model/chat_limit_per_day/chat_limit_per_day.dart';
 
 class RemoteConfigController extends GetxController {
   static RemoteConfigController get to => Get.find<RemoteConfigController>();
-  ChatLimitPerDay chatLimitPerDay = ChatLimitPerDay.instance();
+  ChatLimitPerDay chatLimitPerDay = const ChatLimitPerDay();
   // iosとAndroidで分ける
   final maintenanceMode = false.obs;
   final maintenanceMsg = RemoteConfigConstants.maintenanceMsg.obs;

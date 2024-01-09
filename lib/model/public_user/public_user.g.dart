@@ -8,32 +8,34 @@ part of 'public_user.dart';
 
 _$PublicUserImpl _$$PublicUserImplFromJson(Map<String, dynamic> json) =>
     _$PublicUserImpl(
-      accountName: json['accountName'] as String,
+      accountName: json['accountName'] as String? ?? "",
       bio: json['bio'] as Map<String, dynamic>,
-      blockCount: json['blockCount'] as int,
+      blockCount: json['blockCount'] as int? ?? 0,
       createdAt: json['createdAt'],
-      ethAddress: json['ethAddress'] as String,
-      followerCount: json['followerCount'] as int,
-      followingCount: json['followingCount'] as int,
-      isNFTicon: json['isNFTicon'] as bool,
-      isOfficial: json['isOfficial'] as bool,
-      isSuspended: json['isSuspended'] as bool,
-      links: (json['links'] as List<dynamic>)
-          .map((e) => e as Map<String, dynamic>)
-          .toList(),
-      muteCount: json['muteCount'] as int,
-      postCount: json['postCount'] as int,
+      ethAddress: json['ethAddress'] as String? ?? "",
+      followerCount: json['followerCount'] as int? ?? 0,
+      followingCount: json['followingCount'] as int? ?? 0,
+      isNFTicon: json['isNFTicon'] as bool? ?? false,
+      isOfficial: json['isOfficial'] as bool? ?? false,
+      isSuspended: json['isSuspended'] as bool? ?? false,
+      links: (json['links'] as List<dynamic>?)
+              ?.map((e) => e as Map<String, dynamic>)
+              .toList() ??
+          const [],
+      muteCount: json['muteCount'] as int? ?? 0,
+      postCount: json['postCount'] as int? ?? 0,
       ref: json['ref'],
-      reportCount: json['reportCount'] as int,
-      score: (json['score'] as num).toDouble(),
-      searchToken: json['searchToken'] as Map<String, dynamic>,
+      reportCount: json['reportCount'] as int? ?? 0,
+      score: (json['score'] as num?)?.toDouble() ?? 0.0,
+      searchToken: json['searchToken'] as Map<String, dynamic>? ?? const {},
       uid: json['uid'] as String,
       updatedAt: json['updatedAt'],
       image: json['image'] as Map<String, dynamic>,
       userName: json['userName'] as Map<String, dynamic>,
-      walletAddresses: (json['walletAddresses'] as List<dynamic>)
-          .map((e) => e as Map<String, dynamic>)
-          .toList(),
+      walletAddresses: (json['walletAddresses'] as List<dynamic>?)
+              ?.map((e) => e as Map<String, dynamic>)
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$PublicUserImplToJson(_$PublicUserImpl instance) =>

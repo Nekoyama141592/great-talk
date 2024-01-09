@@ -15,7 +15,7 @@ _$ChatContentImpl _$$ChatContentImplFromJson(Map<String, dynamic> json) =>
       imageValue: json['imageValue'] as String,
       lastSeen: json['lastSeen'] as int?,
       metadata: json['metadata'] as Map<String, dynamic>?,
-      msgCount: json['msgCount'] as int,
+      msgCount: json['msgCount'] as int? ?? 0,
       posterUid: json['posterUid'] as String,
       ref: json['ref'],
       title: json['title'] as String,

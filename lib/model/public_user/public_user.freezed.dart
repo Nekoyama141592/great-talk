@@ -373,28 +373,28 @@ class __$$PublicUserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PublicUserImpl extends _PublicUser {
   _$PublicUserImpl(
-      {required this.accountName,
+      {this.accountName = "",
       required final Map<String, dynamic> bio,
-      required this.blockCount,
+      this.blockCount = 0,
       required this.createdAt,
-      required this.ethAddress,
-      required this.followerCount,
-      required this.followingCount,
-      required this.isNFTicon,
-      required this.isOfficial,
-      required this.isSuspended,
-      required final List<SDMap> links,
-      required this.muteCount,
-      required this.postCount,
+      this.ethAddress = "",
+      this.followerCount = 0,
+      this.followingCount = 0,
+      this.isNFTicon = false,
+      this.isOfficial = false,
+      this.isSuspended = false,
+      final List<SDMap> links = const [],
+      this.muteCount = 0,
+      this.postCount = 0,
       required this.ref,
-      required this.reportCount,
-      required this.score,
-      required final Map<String, dynamic> searchToken,
+      this.reportCount = 0,
+      this.score = 0.0,
+      final Map<String, dynamic> searchToken = const {},
       required this.uid,
       required this.updatedAt,
       required final Map<String, dynamic> image,
       required final Map<String, dynamic> userName,
-      required final List<SDMap> walletAddresses})
+      final List<SDMap> walletAddresses = const []})
       : _bio = bio,
         _links = links,
         _searchToken = searchToken,
@@ -407,6 +407,7 @@ class _$PublicUserImpl extends _PublicUser {
       _$$PublicUserImplFromJson(json);
 
   @override
+  @JsonKey()
   final String accountName;
   final Map<String, dynamic> _bio;
   @override
@@ -417,23 +418,31 @@ class _$PublicUserImpl extends _PublicUser {
   }
 
   @override
+  @JsonKey()
   final int blockCount;
   @override
   final dynamic createdAt;
   @override
+  @JsonKey()
   final String ethAddress;
   @override
+  @JsonKey()
   final int followerCount;
   @override
+  @JsonKey()
   final int followingCount;
   @override
+  @JsonKey()
   final bool isNFTicon;
   @override
+  @JsonKey()
   final bool isOfficial;
   @override
+  @JsonKey()
   final bool isSuspended;
   final List<SDMap> _links;
   @override
+  @JsonKey()
   List<SDMap> get links {
     if (_links is EqualUnmodifiableListView) return _links;
     // ignore: implicit_dynamic_type
@@ -441,17 +450,22 @@ class _$PublicUserImpl extends _PublicUser {
   }
 
   @override
+  @JsonKey()
   final int muteCount;
   @override
+  @JsonKey()
   final int postCount;
   @override
   final dynamic ref;
   @override
+  @JsonKey()
   final int reportCount;
   @override
+  @JsonKey()
   final double score;
   final Map<String, dynamic> _searchToken;
   @override
+  @JsonKey()
   Map<String, dynamic> get searchToken {
     if (_searchToken is EqualUnmodifiableMapView) return _searchToken;
     // ignore: implicit_dynamic_type
@@ -480,6 +494,7 @@ class _$PublicUserImpl extends _PublicUser {
 
   final List<SDMap> _walletAddresses;
   @override
+  @JsonKey()
   List<SDMap> get walletAddresses {
     if (_walletAddresses is EqualUnmodifiableListView) return _walletAddresses;
     // ignore: implicit_dynamic_type
@@ -577,28 +592,28 @@ class _$PublicUserImpl extends _PublicUser {
 
 abstract class _PublicUser extends PublicUser {
   factory _PublicUser(
-      {required final String accountName,
+      {final String accountName,
       required final Map<String, dynamic> bio,
-      required final int blockCount,
+      final int blockCount,
       required final dynamic createdAt,
-      required final String ethAddress,
-      required final int followerCount,
-      required final int followingCount,
-      required final bool isNFTicon,
-      required final bool isOfficial,
-      required final bool isSuspended,
-      required final List<SDMap> links,
-      required final int muteCount,
-      required final int postCount,
+      final String ethAddress,
+      final int followerCount,
+      final int followingCount,
+      final bool isNFTicon,
+      final bool isOfficial,
+      final bool isSuspended,
+      final List<SDMap> links,
+      final int muteCount,
+      final int postCount,
       required final dynamic ref,
-      required final int reportCount,
-      required final double score,
-      required final Map<String, dynamic> searchToken,
+      final int reportCount,
+      final double score,
+      final Map<String, dynamic> searchToken,
       required final String uid,
       required final dynamic updatedAt,
       required final Map<String, dynamic> image,
       required final Map<String, dynamic> userName,
-      required final List<SDMap> walletAddresses}) = _$PublicUserImpl;
+      final List<SDMap> walletAddresses}) = _$PublicUserImpl;
   _PublicUser._() : super._();
 
   factory _PublicUser.fromJson(Map<String, dynamic> json) =

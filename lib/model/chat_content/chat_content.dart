@@ -23,7 +23,7 @@ abstract class ChatContent implements _$ChatContent {
     required String imageValue,
     int? lastSeen,
     Map<String, dynamic>? metadata,
-    required int msgCount,
+    @Default(0) int msgCount,
     required String posterUid,
     dynamic ref,
     required String title,
@@ -47,7 +47,7 @@ abstract class ChatContent implements _$ChatContent {
   DetectedText typedDescription() {
     if (returnIsOriginalContents(posterUid)) {
       final text = contentDescription(contentId, title);
-      return NewContent.newDetectedText(text);
+      return DetectedText(value: text);
     } else {
       return DetectedText.fromJson(description!);
     }

@@ -238,7 +238,7 @@ class _$ChatContentImpl extends _ChatContent {
       required this.imageValue,
       this.lastSeen,
       final Map<String, dynamic>? metadata,
-      required this.msgCount,
+      this.msgCount = 0,
       required this.posterUid,
       this.ref,
       required this.title})
@@ -299,6 +299,7 @@ class _$ChatContentImpl extends _ChatContent {
   }
 
   @override
+  @JsonKey()
   final int msgCount;
   @override
   final String posterUid;
@@ -376,7 +377,7 @@ abstract class _ChatContent extends ChatContent {
       required final String imageValue,
       final int? lastSeen,
       final Map<String, dynamic>? metadata,
-      required final int msgCount,
+      final int msgCount,
       required final String posterUid,
       final dynamic ref,
       required final String title}) = _$ChatContentImpl;

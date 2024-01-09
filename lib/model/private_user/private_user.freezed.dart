@@ -192,10 +192,10 @@ class __$$PrivateUserImplCopyWithImpl<$Res>
 class _$PrivateUserImpl extends _PrivateUser {
   const _$PrivateUserImpl(
       {required this.createdAt,
-      required this.ethAddress,
-      required this.gender,
-      required this.ipAddress,
-      required this.isAdmin,
+      this.ethAddress = "",
+      this.gender = "",
+      this.ipAddress = "",
+      this.isAdmin = false,
       required this.ref,
       required this.uid,
       required this.updatedAt})
@@ -207,12 +207,16 @@ class _$PrivateUserImpl extends _PrivateUser {
   @override
   final dynamic createdAt;
   @override
+  @JsonKey()
   final String ethAddress;
   @override
+  @JsonKey()
   final String gender;
   @override
+  @JsonKey()
   final String ipAddress;
   @override
+  @JsonKey()
   final bool isAdmin;
   @override
   final dynamic ref;
@@ -273,10 +277,10 @@ class _$PrivateUserImpl extends _PrivateUser {
 abstract class _PrivateUser extends PrivateUser {
   const factory _PrivateUser(
       {required final dynamic createdAt,
-      required final String ethAddress,
-      required final String gender,
-      required final String ipAddress,
-      required final bool isAdmin,
+      final String ethAddress,
+      final String gender,
+      final String ipAddress,
+      final bool isAdmin,
       required final dynamic ref,
       required final String uid,
       required final dynamic updatedAt}) = _$PrivateUserImpl;

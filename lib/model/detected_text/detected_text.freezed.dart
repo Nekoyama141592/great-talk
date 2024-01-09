@@ -152,24 +152,29 @@ class __$$DetectedTextImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DetectedTextImpl implements _DetectedText {
   const _$DetectedTextImpl(
-      {required this.languageCode,
-      required this.negativeScore,
-      required this.positiveScore,
-      required this.sentiment,
-      required this.value});
+      {this.languageCode = "",
+      this.negativeScore = 0,
+      this.positiveScore = 0,
+      this.sentiment = "",
+      this.value = ""});
 
   factory _$DetectedTextImpl.fromJson(Map<String, dynamic> json) =>
       _$$DetectedTextImplFromJson(json);
 
   @override
+  @JsonKey()
   final String languageCode;
   @override
+  @JsonKey()
   final int negativeScore;
   @override
+  @JsonKey()
   final int positiveScore;
   @override
+  @JsonKey()
   final String sentiment;
   @override
+  @JsonKey()
   final String value;
 
   @override
@@ -214,11 +219,11 @@ class _$DetectedTextImpl implements _DetectedText {
 
 abstract class _DetectedText implements DetectedText {
   const factory _DetectedText(
-      {required final String languageCode,
-      required final int negativeScore,
-      required final int positiveScore,
-      required final String sentiment,
-      required final String value}) = _$DetectedTextImpl;
+      {final String languageCode,
+      final int negativeScore,
+      final int positiveScore,
+      final String sentiment,
+      final String value}) = _$DetectedTextImpl;
 
   factory _DetectedText.fromJson(Map<String, dynamic> json) =
       _$DetectedTextImpl.fromJson;

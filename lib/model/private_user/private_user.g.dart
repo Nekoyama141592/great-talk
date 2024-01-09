@@ -9,10 +9,10 @@ part of 'private_user.dart';
 _$PrivateUserImpl _$$PrivateUserImplFromJson(Map<String, dynamic> json) =>
     _$PrivateUserImpl(
       createdAt: json['createdAt'],
-      ethAddress: json['ethAddress'] as String,
-      gender: json['gender'] as String,
-      ipAddress: json['ipAddress'] as String,
-      isAdmin: json['isAdmin'] as bool,
+      ethAddress: json['ethAddress'] as String? ?? "",
+      gender: json['gender'] as String? ?? "",
+      ipAddress: json['ipAddress'] as String? ?? "",
+      isAdmin: json['isAdmin'] as bool? ?? false,
       ref: json['ref'],
       uid: json['uid'] as String,
       updatedAt: json['updatedAt'],

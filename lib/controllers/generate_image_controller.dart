@@ -51,7 +51,8 @@ class GenerateImageController extends LoadingController with CurrentUserMixin {
     startLoading();
     rxUrl(""); // 初期化
     final repository = OpenAIRepository();
-    final request = GenerateImageRequest.instance(rxPrompt.value, currentUid());
+    final request =
+        GenerateImageRequest(prompt: rxPrompt.value, user: currentUid());
     final result = await repository.generateImage(request);
     result.when(success: (res) {
       final url = res.data?.last?.url;

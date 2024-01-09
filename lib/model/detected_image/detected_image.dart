@@ -9,17 +9,12 @@ abstract class DetectedImage implements _$DetectedImage {
   const DetectedImage._();
   const factory DetectedImage({
     required String bucketName,
-    required List<Map<String, dynamic>> moderationLabels,
-    required String moderationModelVersion,
+    @Default([]) List<Map<String, dynamic>> moderationLabels,
+    @Default("") String moderationModelVersion,
     required String value, // オリジナルコンテンツならURL、ユーザーの投稿ならS3のファイル名
   }) = _DetectedImage;
   factory DetectedImage.fromJson(Map<String, dynamic> json) =>
       _$DetectedImageFromJson(json);
-  factory DetectedImage.initial() => const DetectedImage(
-      bucketName: "",
-      moderationLabels: [],
-      moderationModelVersion: "",
-      value: "");
   List<ModerationLabel> typedMLs() =>
       moderationLabels.map((e) => ModerationLabel.fromJson(e)).toList();
 }

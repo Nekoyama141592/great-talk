@@ -41,18 +41,8 @@ class NewContent {
     );
   }
 
-  static DetectedText newDetectedText(String value) => DetectedText(
-      languageCode: "",
-      negativeScore: 0,
-      positiveScore: 0,
-      sentiment: "",
-      value: value);
   static DetectedImage newDetectedImage(String bucketName, String value) =>
-      DetectedImage(
-          bucketName: bucketName,
-          moderationLabels: [],
-          moderationModelVersion: "",
-          value: value);
+      DetectedImage(bucketName: bucketName, value: value);
   static Post newPost(
       String systemPrompt,
       String title,
@@ -64,54 +54,29 @@ class NewContent {
       SDMap customCompleteText) {
     final now = Timestamp.now();
     return Post(
-        bookmarkCount: 0,
-        createdAt: now,
-        customCompleteText: customCompleteText,
-        description: newDetectedText(description).toJson(),
-        exampleTexts: [],
-        genre: '',
-        hashTags: [],
-        image: newDetectedImage(AWSS3Utility.postImagesBucketName, fileName)
-            .toJson(),
-        impressionCount: 0,
-        likeCount: 0,
-        links: [],
-        msgCount: 0,
-        muteCount: 0,
-        poster: poster.toJson(),
-        postId: postId,
-        ref: postRef,
-        reportCount: 0,
-        score: 0.0,
-        searchToken: returnSearchToken(title),
-        title: newDetectedText(title).toJson(),
-        updatedAt: now,
-        userCount: 0);
+      createdAt: now,
+      customCompleteText: customCompleteText,
+      description: DetectedText(value: description).toJson(),
+      image: newDetectedImage(AWSS3Utility.postImagesBucketName, fileName)
+          .toJson(),
+      poster: poster.toJson(),
+      postId: postId,
+      ref: postRef,
+      searchToken: returnSearchToken(title),
+      title: DetectedText(value: title).toJson(),
+      updatedAt: now,
+    );
   }
 
   static PublicUser newUser(String uid,
       {String? userName, String? bio, String? imageValue}) {
     final now = Timestamp.now();
     return PublicUser(
-      accountName: "",
       createdAt: now,
       bio: bio != null
-          ? newDetectedText(bio).toJson()
-          : newDetectedText("").toJson(),
-      blockCount: 0,
-      ethAddress: '',
-      followerCount: 0,
-      followingCount: 0,
-      isNFTicon: false,
-      isOfficial: false,
-      isSuspended: false,
-      muteCount: 0,
-      postCount: 0,
-      links: [],
+          ? DetectedText(value: bio).toJson()
+          : const DetectedText().toJson(),
       ref: FirestoreQueries.userDocRef(uid),
-      reportCount: 0,
-      score: 0,
-      searchToken: {},
       uid: uid,
       updatedAt: now,
       image: imageValue != null
@@ -119,9 +84,8 @@ class NewContent {
               .toJson()
           : newDetectedImage(AWSS3Utility.userImagesBucketName, '').toJson(),
       userName: userName != null
-          ? newDetectedText(userName).toJson()
-          : newDetectedText('').toJson(),
-      walletAddresses: [],
+          ? DetectedText(value: userName).toJson()
+          : const DetectedText().toJson(),
     );
   }
 
@@ -129,10 +93,6 @@ class NewContent {
     final now = Timestamp.now();
     return PrivateUser(
         createdAt: now,
-        ethAddress: '',
-        gender: '',
-        ipAddress: '',
-        isAdmin: false,
         ref: FirestoreQueries.privateUserDocRef(uid),
         uid: uid,
         updatedAt: now);
