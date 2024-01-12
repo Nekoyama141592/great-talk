@@ -43,8 +43,8 @@ class FirestoreQueries {
   static MapQuery userPostsQueryByNewest(String uid) =>
       userPostsQuery(uid).orderBy("createdAt", descending: true);
 
-  static final postsQueryByLikeCount =
-      _postsLimitedCollectionGroupQuery.orderBy('likeCount', descending: true);
+  static final postsQueryByMsgCount =
+      _postsLimitedCollectionGroupQuery.orderBy('msgCount', descending: true);
   static final postsQueryByNewest =
       _postsLimitedCollectionGroupQuery.orderBy('createdAt', descending: true);
 

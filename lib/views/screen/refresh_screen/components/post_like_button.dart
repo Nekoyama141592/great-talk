@@ -33,7 +33,8 @@ class PostLikeButton extends HookWidget {
                   controller.onLikeButtonPressed(copyPost, isLiked, post)),
       Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(copyPost.value.likeCount.formatNumber()))
+          child:
+              Text(isHorizontal ? copyPost.value.likeCount.formatNumber() : ""))
     ];
     return isHorizontal
         ? Row(

@@ -6,6 +6,6 @@ class PostRankingController extends DocsController {
       : super(enablePullDown: false, requiresValueReset: false);
   @override
   void setQuery() {
-    query = FirestoreQueries.postsQueryByLikeCount;
+    query = FirestoreQueries.postsQueryByMsgCount;
   }
 }

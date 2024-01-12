@@ -12,6 +12,7 @@ import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/mosaic_card/components/mosaic_post_child.dart';
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
+import 'package:great_talk/views/screen/refresh_screen/components/post_msg_button.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 
 class PostCard extends StatelessWidget with CurrentUserMixin {
@@ -88,15 +89,7 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
                             post: post,
                           ),
                           const Spacer(),
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () => controller.onPostCardPressed(post),
-                                child: const Icon(Icons.message),
-                              ),
-                              const Text("")
-                            ],
-                          ),
+                          PostMsgButton(isHorizontal: false, post: post)
                         ],
                       ),
                     ),
