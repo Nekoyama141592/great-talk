@@ -7,6 +7,9 @@ class AWSS3Repository {
 
   static final instance = AWSS3Repository();
   FutureResult<Uint8List> getObject(String bucketName, String fileName) async {
+    if (bucketName.isEmpty || fileName.isEmpty) {
+      return const Result.failure();
+    }
     try {
       final stream = await client.getObject(bucketName, fileName);
       List<int> memory = [];

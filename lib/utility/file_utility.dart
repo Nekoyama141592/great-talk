@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/image_info/original_image_info.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
@@ -40,7 +39,6 @@ class FileUtility {
         uint8List = res;
         _cacheUint8List(fileName, res); // 画像を非同期でキャッシュする.
       }, failure: () {
-        UIHelper.showErrorFlutterToast("画像の取得が失敗しました");
         uint8List = null;
       });
     }

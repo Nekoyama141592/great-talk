@@ -409,7 +409,10 @@ class CurrentUserController extends GetxController {
         createdAt: now,
         id: categoryId,
         title: inputController.text,
-        image: const DetectedImage(bucketName: "", value: "").toJson(),
+        image: DetectedImage(
+                bucketName: AWSS3Utility.bookmarkCategoryImagesBucketName,
+                value: "")
+            .toJson(),
         ref: ref,
         updatedAt: now);
     final result = await repository.createDoc(ref, newCategory.toJson());

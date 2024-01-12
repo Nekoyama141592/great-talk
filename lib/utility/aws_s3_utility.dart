@@ -17,6 +17,8 @@ class AWSS3Utility {
     secretKey: _secretKey,
   );
   // bucketName
+  static String get bookmarkCategoryImagesBucketName =>
+      dotenv.get(EnvKeys.AWS_S3_BOOKMARK_CATEGORY_IMAGES_BUCKET.name);
   static String get postImagesBucketName =>
       dotenv.get(EnvKeys.AWS_S3_POST_IMAGES_BUCKET.name);
   static String get userImagesBucketName =>
