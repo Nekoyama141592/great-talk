@@ -13,8 +13,9 @@ import 'package:great_talk/model/tokens/following_token/following_token.dart';
 import 'package:great_talk/utility/file_utility.dart';
 
 class UserProfileController extends ProfileController {
-  UserProfileController() : super(false);
   static UserProfileController get to => Get.find<UserProfileController>();
+  @override
+  bool get isMyProfile => false;
   @override
   String passiveUid() => Get.parameters['uid']!;
   @override

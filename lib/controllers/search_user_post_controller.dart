@@ -7,8 +7,8 @@ import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class SearchUserPostsController extends SearchDocsController {
-  SearchUserPostsController() : super(searchTarget: SearchTarget.post);
-
+  @override
+  SearchTarget get searchTarget => SearchTarget.post;
   @override
   void setQuery() {
     final passiveUid = Get.parameters['uid']!;

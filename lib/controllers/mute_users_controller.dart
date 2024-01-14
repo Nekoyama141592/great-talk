@@ -8,7 +8,10 @@ import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MuteUsersController extends DocsController {
-  MuteUsersController() : super(enablePullDown: true, requiresValueReset: true);
+  @override
+  bool get enablePullDown => true;
+  @override
+  bool get requiresValueReset => true;
   static MuteUsersController get to => Get.find<MuteUsersController>();
   @override
   void setQuery() {

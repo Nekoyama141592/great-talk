@@ -5,9 +5,11 @@ import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 
 abstract class ProfileController extends DocsController {
-  ProfileController(this.isMyProfile)
-      : super(enablePullDown: true, requiresValueReset: !isMyProfile);
-  final bool isMyProfile;
+  @override
+  bool get enablePullDown => true;
+  @override
+  bool get requiresValueReset => !isMyProfile;
+  bool get isMyProfile;
   final Rx<PublicUser?> rxPassiveUser = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
 

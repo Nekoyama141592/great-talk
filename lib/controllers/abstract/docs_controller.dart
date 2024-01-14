@@ -12,11 +12,9 @@ import 'package:great_talk/utility/file_utility.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class DocsController extends LoadingController with CurrentUserMixin {
-  DocsController(
-      {required this.enablePullDown, required this.requiresValueReset});
   final FirestoreRepository repository = FirestoreRepository();
-  final bool enablePullDown;
-  final bool requiresValueReset;
+  bool get enablePullDown => false;
+  bool get requiresValueReset => false; // ページを開くたびに初期化が必要かどうかを判定
   final docs = <ImageQDocWraper>[].obs;
   final isInit = false.obs;
   bool isProcessing = false; // addAllDocsに使用.

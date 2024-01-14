@@ -6,7 +6,8 @@ import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/utility/file_utility.dart';
 
 class MyProfileController extends ProfileController with CurrentUserMixin {
-  MyProfileController() : super(true);
+  @override
+  bool get isMyProfile => true;
   static MyProfileController get to => Get.find<MyProfileController>();
   @override
   String passiveUid() => currentUid();

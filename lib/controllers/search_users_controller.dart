@@ -6,7 +6,8 @@ import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class SearchUsersController extends SearchDocsController {
-  SearchUsersController() : super(searchTarget: SearchTarget.user);
+  @override
+  SearchTarget get searchTarget => SearchTarget.user;
   @override
   void setQuery() {
     query = FirestoreQueries.usersQuery;
