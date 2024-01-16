@@ -12,9 +12,8 @@ class ColRefCore {
       category.ref.collection('bookmarks');
   static ColRef messages(String posterUid, String postId, String currentUid) =>
       DocRefCore.post(posterUid, postId)
-          .collection('senders')
-          .doc(currentUid)
-          .collection('messages');
+          .collection('senders/$currentUid/messages');
   static ColRef bookmarkCategories(PrivateUser privateUser) =>
       privateUser.typedRef().collection("bookmarkCategories");
+  static ColRef timelines(DocRef userRef) => userRef.collection('timelines');
 }

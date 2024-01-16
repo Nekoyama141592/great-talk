@@ -19,8 +19,7 @@ class QueryCore {
       posts().orderBy('msgCount', descending: true);
   static MapQuery postsByNewest() =>
       posts().orderBy('createdAt', descending: true);
-  static MapQuery timelines(DocRef userRef) => userRef
-      .collection('timelines')
+  static MapQuery timelines(DocRef userRef) => ColRefCore.timelines(userRef)
       .orderBy('createdAt', descending: true)
       .limit(whereInLimit);
   static MapQuery timelinePosts(List<String> timelinePostIds) =>
