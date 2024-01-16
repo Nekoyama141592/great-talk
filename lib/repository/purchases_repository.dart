@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/consts/env_keys.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
-import 'package:great_talk/iap_constants/mock_product_list.dart';
 import 'package:great_talk/model/receipt_response/receipt_response.dart';
 import 'package:great_talk/repository/result.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -12,9 +10,6 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 class PurchasesRepository {
   FutureResult<List<ProductDetails>> queryProductDetails(
       InAppPurchase inAppPurchase, Set<String> identifiers) async {
-    if (isUseMockData) {
-      return Result.success(myProductList);
-    }
     try {
       final ProductDetailsResponse productDetailResponse =
           await inAppPurchase.queryProductDetails(identifiers);

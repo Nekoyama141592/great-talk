@@ -7,7 +7,6 @@ import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
-import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
@@ -62,8 +61,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _initStoreInfo() async {
-    final bool storeConnected =
-        isUseMockData || await inAppPurchase.isAvailable();
+    final bool storeConnected = await inAppPurchase.isAvailable();
     isAvailable(storeConnected);
     if (!storeConnected) return;
     loading(true);
@@ -219,7 +217,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> onPurchaseButtonPressed(ProductDetails productDetails) async {
-    if (loading.value || isUseMockData) return;
+    if (loading.value) return;
     await cancelTransctions();
     final GooglePlayPurchaseDetails? oldSubscription =
         _getOldSubscription(productDetails);
@@ -261,7 +259,6 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> confirmPriceChange() async {
-    if (isUseMockData) return;
     if (Platform.isIOS) {
       final platformAddition = inAppPurchase
           .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();

@@ -1,12 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:great_talk/consts/debug_constants.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
-import 'package:great_talk/infrastructure/firestore/mocks/mock_firestore_client.dart';
 import 'package:great_talk/repository/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreRepository {
-  final client = isUseMockData ? MockFirestoreClient() : FirestoreClient();
+  final client = FirestoreClient();
   // count
   FutureResult<int> countUsers() async {
     try {
