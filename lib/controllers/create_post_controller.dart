@@ -6,8 +6,8 @@ import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/string_extension.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
@@ -103,7 +103,7 @@ class CreatePostController extends FormsController with CurrentUserMixin {
   Future<void> _createPost(String fileName) async {
     final repository = FirestoreRepository();
     final postId = randomString();
-    final postRef = FirestoreQueries.userPostRef(currentUid(), postId);
+    final postRef = DocRefCore.post(currentUid(), postId);
     final customCompleteText = NewContent.newCustomCompleteText(
             systemPrompt.value,
             temperature.value,
@@ -121,7 +121,8 @@ class CreatePostController extends FormsController with CurrentUserMixin {
         postId,
         postRef,
         customCompleteText);
-    final result = await repository.createPost(postRef, newPost.toJson());
+    final json = newPost.toJson();
+    final result = await repository.createDoc(postRef, json);
     result.when(success: (_) {
       Get.back();
       _resetState(); // 初期化を行う

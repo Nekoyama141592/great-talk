@@ -17,9 +17,9 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/remote_config_controller.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/infrastructure/chat_gpt_sdk_client.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/bookmark/bookmark.dart';
 import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
@@ -97,7 +97,8 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
           originalContents.firstWhere((element) => element.contentId == postId);
       rxChatContent(res);
     } else {
-      final result = await repository.getPost(uid, postId);
+      final ref = DocRefCore.post(uid, postId);
+      final result = await repository.getDoc(ref);
       result.when(success: (res) async {
         if (res.exists) {
           final fetchedPost = Post.fromJson(res.data()!);
@@ -259,8 +260,9 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     // オリジナルコンテンツなら保存はしない
     if (!returnIsOriginalContents(rxChatContent.value!.posterUid)) {
       final repository = FirestoreRepository();
-      await repository.createMessage(
-          message.typedMessageRef(), message.toJson());
+      final ref = message.typedMessageRef();
+      final json = message.toJson();
+      await repository.createDoc(ref, json);
     }
   }
 
@@ -329,7 +331,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
       createdAt: now,
       id: id,
       messageType: MessageType.text.name,
-      messageRef: FirestoreQueries.postMessageDocRef(
+      messageRef: DocRefCore.message(
           posterUid, rxChatContent.value!.contentId, currentUid(), id),
       postRef: rxChatContent.value!.typedRef(),
       text: DetectedText(value: content).toJson(),
@@ -470,9 +472,9 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
-    final bookmarkRef = FirestoreQueries.bookmarkQuery(category, postId);
+    final bookmarkRef = DocRefCore.bookmark(category, postId);
     final repository = FirestoreRepository();
-    final result = await repository.getBookmark(bookmarkRef);
+    final result = await repository.getDoc(bookmarkRef);
     result.when(success: (res) async {
       res.exists
           ? await _unBookmark(res)
@@ -489,7 +491,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     final String passiveUid = bookmarkedPost.typedPoster().uid;
     final postRef = bookmarkedPost.ref;
     final postId = bookmarkedPost.postId;
-    final bookmarkRef = FirestoreQueries.bookmarkQuery(category, postId);
+    final bookmarkRef = DocRefCore.bookmark(category, postId);
     final bookmark = Bookmark(
       activeUid: currentUid(),
       ref: bookmarkRef,

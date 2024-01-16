@@ -3,7 +3,8 @@ import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -16,7 +17,7 @@ class MuteUsersController extends DocsController {
   @override
   void setQuery() {
     final requestUids = _createRequestUids();
-    query = FirestoreQueries.usersQueryByWhereIn(requestUids);
+    query = QueryCore.usersByWhereIn(requestUids);
   }
 
   @override
@@ -62,7 +63,10 @@ class MuteUsersController extends DocsController {
     docs.removeWhere(
         (element) => PublicUser.fromJson(element.doc.data()).uid == passiveUid);
     docs([...docs]);
-    await repository.deleteToken(currentUid(), deleteToken.tokenId);
-    await repository.deleteUserMute(passiveUid, currentUid());
+    final tokenId = deleteToken.tokenId;
+    final tokenRef = DocRefCore.token(currentUid(), tokenId);
+    await repository.deleteDoc(tokenRef);
+    final userMuteRef = DocRefCore.userMute(passiveUid, currentUid());
+    await repository.deleteDoc(userMuteRef);
   }
 }

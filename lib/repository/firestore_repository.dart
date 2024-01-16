@@ -72,6 +72,7 @@ class FirestoreRepository {
       return const Result.failure();
     }
   }
+
   FutureResult<Doc> getDoc(DocRef ref) async {
     final client = FirestoreClient();
     try {

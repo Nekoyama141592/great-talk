@@ -5,6 +5,5 @@ class CollectionGroupCore {
   static final users = _instance.collectionGroup('users');
   static final posts = _instance.collectionGroup('posts');
   static final messages = _instance.collectionGroup('messages');
-  static final searchLogs =
-      _instance.collectionGroup('searchLogs');
+  static final searchLogs = _instance.collectionGroup('searchLogs');
 }

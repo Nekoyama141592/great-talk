@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/common/maps.dart';
 import 'package:great_talk/consts/form_consts.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/string_extension.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
@@ -76,7 +76,7 @@ class NewContent {
       bio: bio != null
           ? DetectedText(value: bio).toJson()
           : const DetectedText().toJson(),
-      ref: FirestoreQueries.userDocRef(uid),
+      ref: DocRefCore.user(uid),
       uid: uid,
       updatedAt: now,
       image: imageValue != null
@@ -93,7 +93,7 @@ class NewContent {
     final now = Timestamp.now();
     return PrivateUser(
         createdAt: now,
-        ref: FirestoreQueries.privateUserDocRef(uid),
+        ref: DocRefCore.privateUser(uid),
         uid: uid,
         updatedAt: now);
   }

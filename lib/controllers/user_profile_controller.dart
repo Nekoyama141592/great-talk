@@ -6,7 +6,8 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/abstract/profile_controller.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/follower/follower.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
@@ -26,13 +27,16 @@ class UserProfileController extends ProfileController {
 
   @override
   void setQuery() async {
-    query = FirestoreQueries.userPostsQueryByNewest(passiveUid());
+    query = QueryCore.userPostsByNewest(passiveUid());
   }
 
   Future<void> _getPassiveUser() async {
-    final result = await repository.getPublicUser(passiveUid());
+    final ref = DocRefCore.user(passiveUid());
+    final result = await repository.getDoc(ref);
     result.when(success: (res) {
-      rxPassiveUser(PublicUser.fromJson(res.data()!));
+      if (res.exists) {
+        rxPassiveUser(PublicUser.fromJson(res.data()!));
+      }
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
@@ -73,15 +77,15 @@ class UserProfileController extends ProfileController {
         passiveUserRef: rxPassiveUser.value!.ref,
         tokenType: TokenType.following.name);
     CurrentUserController.to.addFollowing(followingToken);
-    await repository.createToken(
-        currentUid(), tokenId, followingToken.toJson());
+    final tokenRef = DocRefCore.token(currentUid(), tokenId);
+    await repository.createDoc(tokenRef, followingToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
     final follower = Follower(
         activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
         createdAt: now,
         passiveUserRef: rxPassiveUser.value!.typedRef());
-    await repository.createFollower(
-        currentUid(), passiveUid(), follower.toJson());
+    final followerRef = DocRefCore.follower(currentUid(), passiveUid());
+    await repository.createDoc(followerRef, follower.toJson());
   }
 
   void onUnFollowPressed() async {
@@ -101,7 +105,9 @@ class UserProfileController extends ProfileController {
     final deleteToken = CurrentUserController.to.followingTokens
         .firstWhere((element) => element.passiveUid == passiveUid());
     CurrentUserController.to.removeFollowing(deleteToken);
-    await repository.deleteToken(currentUid(), deleteToken.tokenId);
-    await repository.deleteFollower(currentUid(), passiveUid());
+    final tokenRef = DocRefCore.token(currentUid(), deleteToken.tokenId);
+    await repository.deleteDoc(tokenRef);
+    final followerRef = DocRefCore.follower(currentUid(), passiveUid());
+    await repository.deleteDoc(followerRef);
   }
 }

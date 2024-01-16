@@ -14,14 +14,12 @@ class FirestoreClient {
   }
 
   Future<int> countMessages() async {
-    final snapshot =
-        await CollectionGroupCore.messages.count().get();
+    final snapshot = await CollectionGroupCore.messages.count().get();
     return snapshot.count;
   }
 
   Future<int> countSearchLogs() async {
-    final snapshot =
-        await CollectionGroupCore.searchLogs.count().get();
+    final snapshot = await CollectionGroupCore.searchLogs.count().get();
     return snapshot.count;
   }
 

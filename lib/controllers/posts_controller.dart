@@ -9,6 +9,7 @@ import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/post/post.dart';
@@ -132,14 +133,15 @@ class PostsController extends GetxController with CurrentUserMixin {
         tokenId: tokenId,
         tokenType: TokenType.mutePost.name);
     CurrentUserController.to.addMutePost(mutePostToken);
-    await repository.createToken(currentUid(), tokenId, mutePostToken.toJson());
+    final tokenRef = DocRefCore.token(currentUid(), tokenId);
+    await repository.createDoc(tokenRef, mutePostToken.toJson());
     final PostMute postMute = PostMute(
         activeUid: currentUid(),
         createdAt: now,
         postId: postId,
         postRef: postRef);
-    await repository.createPostMute(
-        post.typedRef(), currentUid(), postMute.toJson());
+    final postMuteRef = DocRefCore.postMute(postRef, currentUid());
+    await repository.createDoc(postMuteRef, postMute.toJson());
     if (innerContext.mounted) {
       Navigator.pop(innerContext);
       Get.back();
@@ -167,15 +169,16 @@ class PostsController extends GetxController with CurrentUserMixin {
         tokenId: tokenId,
         tokenType: TokenType.muteUser.name);
     CurrentUserController.to.addMuteUser(muteUserToken);
-    await repository.createToken(currentUid(), tokenId, muteUserToken.toJson());
+    final tokenRef = DocRefCore.token(currentUid(), tokenId);
+    await repository.createDoc(tokenRef, muteUserToken.toJson());
     final UserMute userMute = UserMute(
         activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
         activeUid: currentUid(),
         createdAt: now,
         passiveUid: passiveUid,
         passiveUserRef: passiveUser.typedRef());
-    await repository.createUserMute(
-        passiveUid, currentUid(), userMute.toJson());
+    final userMuteRef = DocRefCore.userMute(passiveUid, currentUid());
+    await repository.createDoc(userMuteRef, userMute.toJson());
     if (innerContext.mounted) {
       Navigator.pop(innerContext);
       Get.back();
@@ -207,8 +210,8 @@ class PostsController extends GetxController with CurrentUserMixin {
         tokenId: tokenId,
         tokenType: TokenType.reportPost.name);
     CurrentUserController.to.addReportPost(reportPostToken);
-    await repository.createToken(
-        currentUid(), tokenId, reportPostToken.toJson());
+    final tokenRef = DocRefCore.token(currentUid(), tokenId);
+    await repository.createDoc(tokenRef, reportPostToken.toJson());
     final PostReport postReport = PostReport(
       activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
       activeUid: currentUid(),
@@ -217,8 +220,9 @@ class PostsController extends GetxController with CurrentUserMixin {
       postRef: post.typedRef(),
       reportContents: reportContents,
     );
-    final result = await repository.createPostReport(
-        post.typedRef(), currentUid(), postReport.toJson());
+    final postReportRef = DocRefCore.postReport(postRef, currentUid());
+    final result =
+        await repository.createDoc(postReportRef, postReport.toJson());
     result.when(success: (res) {
       UIHelper.showFlutterToast("報告が完了しました！");
     }, failure: () {
@@ -253,7 +257,8 @@ class PostsController extends GetxController with CurrentUserMixin {
         tokenId: tokenId,
         tokenType: TokenType.likePost.name);
     CurrentUserController.to.addLikePost(likePostToken);
-    await repository.createToken(currentUid(), tokenId, likePostToken.toJson());
+    final tokenRef = DocRefCore.token(currentUid(), tokenId);
+    await repository.createDoc(tokenRef, likePostToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
     final postLike = PostLike(
         activeUid: currentUid(),
@@ -261,7 +266,8 @@ class PostsController extends GetxController with CurrentUserMixin {
         passiveUid: passiveUid,
         postRef: postRef,
         postId: postId);
-    await repository.createPostLike(postRef, currentUid(), postLike.toJson());
+    final postLikeRef = DocRefCore.postLike(postRef, currentUid());
+    await repository.createDoc(postLikeRef, postLike.toJson());
   }
 
   void onUnLikeButtonPressed(ValueNotifier<Post> copyPost,
@@ -281,15 +287,20 @@ class PostsController extends GetxController with CurrentUserMixin {
     final deleteToken = CurrentUserController.to.likePostTokens
         .firstWhere((element) => element.passiveUid == passiveUid);
     CurrentUserController.to.removeLikePost(deleteToken);
-    await repository.deleteToken(currentUid(), deleteToken.tokenId);
-    await repository.deletePostLike(post.typedRef(), deleteToken.activeUid);
+    final tokenId = deleteToken.tokenId;
+    final tokenRef = DocRefCore.token(currentUid(), tokenId);
+    await repository.deleteDoc(tokenRef);
+    final postRef = post.typedRef();
+    final activeUid = deleteToken.activeUid;
+    final postLikeRef = DocRefCore.postLike(postRef, activeUid);
+    await repository.deleteDoc(postLikeRef);
   }
 
   void deletePost(Post deletePost) {
     UIHelper.cupertinoAlertDialog("投稿を削除しますが本当によろしいですか?", () async {
       Get.back();
       final repository = FirestoreRepository();
-      final result = await repository.deletePost(deletePost.ref);
+      final result = await repository.deleteDoc(deletePost.ref);
       result.when(success: (_) {
         CurrentUserController.to.addDeletePostId(deletePost.postId);
         _removePostImage(deletePost.typedImage());

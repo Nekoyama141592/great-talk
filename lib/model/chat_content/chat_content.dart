@@ -2,7 +2,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/abstract/profile_controller.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
+import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/utility/file_utility.dart';
@@ -14,7 +14,7 @@ class MyProfileController extends ProfileController with CurrentUserMixin {
   @override
   void setQuery() {
     // MyProfileのpassiveUserの情報はCurrentUserControllerで代入されている
-    query = FirestoreQueries.userPostsQueryByNewest(currentUid());
+    query = QueryCore.userPostsByNewest(currentUid());
   }
 
   @override

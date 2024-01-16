@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 
@@ -71,7 +72,8 @@ class AdminController extends LoadingController {
 
   Future<void> _toggleIsOfficial() async {
     final uid = rxToggleOfficialUid.value;
-    final result = await repository.getPublicUser(uid);
+    final ref = DocRefCore.user(uid);
+    final result = await repository.getDoc(ref);
     result.when(
         success: (res) async {
           final data = res.data();

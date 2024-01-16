@@ -6,6 +6,7 @@ import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/user_update_log/user_update_log.dart';
@@ -92,8 +93,9 @@ class EditController extends FormsController with CurrentUserMixin {
         uid: currentUid(),
         imageFileName: fileName,
         userRef: CurrentUserController.to.rxPublicUser.value!.ref);
-    final result = await repository.createUserUpdateLog(
-        currentUid(), newUpdateLog.toJson());
+    final ref = DocRefCore.userUpdateLog(currentUid());
+    final json = newUpdateLog.toJson();
+    final result = await repository.createDoc(ref, json);
     result.when(success: (_) {
       CurrentUserController.to.updateUser(userName, bio, fileName);
       Get.back();

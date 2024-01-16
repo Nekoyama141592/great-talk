@@ -4,6 +4,7 @@ import 'package:great_talk/common/lists.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/search_log/search_log.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
@@ -53,7 +54,9 @@ abstract class SearchDocsController extends DocsController {
         searchTarget: searchTarget,
         searchTerm: searchTerm,
         uid: uid);
-    await repository.createSearchLog(uid, searchLog.toJson());
+    final ref = DocRefCore.searchLog(currentUid());
+    final json = searchLog.toJson();
+    await repository.createDoc(ref, json);
   }
 
   void _setSearchQuery() {

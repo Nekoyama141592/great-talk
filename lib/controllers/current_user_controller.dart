@@ -6,8 +6,9 @@ import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/my_profile_controller.dart';
+import 'package:great_talk/core/firestore/col_ref_core.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_queries.dart';
 import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
@@ -62,7 +63,8 @@ class CurrentUserController extends GetxController {
       return;
     }
     final repository = FirestoreRepository();
-    final result = await repository.getTokens(currentUid());
+    final tokensColRef = ColRefCore.tokens(currentUid());
+    final result = await repository.getDocs(tokensColRef);
     result.when(
         success: (res) {
           for (final token in res) {
@@ -103,12 +105,16 @@ class CurrentUserController extends GetxController {
 
   Future<void> _fetchBookmarkCategories() async {
     final user = rxPrivateUser.value;
-    if (user == null) {
-      return;
-    }
-    final qshot = await FirestoreQueries.bookmarkCategoriesColRef(user).get();
-    bookmarkCategoryTokens(
-        qshot.docs.map((e) => BookmarkCategory.fromJson(e.data())).toList());
+    if (user == null) return;
+    final colRef = ColRefCore.bookmarkCategories(user);
+    final repository = FirestoreRepository();
+    final result = await repository.getDocs(colRef);
+    result.when(
+        success: (res) {
+          bookmarkCategoryTokens(
+              res.map((e) => BookmarkCategory.fromJson(e.data())).toList());
+        },
+        failure: () {});
   }
 
   // 投稿の削除時に外部から呼び出す.
@@ -225,7 +231,9 @@ class CurrentUserController extends GetxController {
   Future<void> _createPublicUser() async {
     final repository = FirestoreRepository();
     final newUser = NewContent.newUser(currentUid());
-    final result = await repository.createUser(currentUid(), newUser.toJson());
+    final ref = DocRefCore.user(currentUid());
+    final json = newUser.toJson();
+    final result = await repository.createDoc(ref, json);
     result.when(success: (_) {
       rxPublicUser(newUser);
       MyProfileController.to.updateProfileUserState(newUser);
@@ -238,8 +246,9 @@ class CurrentUserController extends GetxController {
   Future<void> _createPrivateUser() async {
     final repository = FirestoreRepository();
     final newPrivateUser = NewContent.newPrivateUser(currentUid());
-    final result = await repository.createPrivateUser(
-        currentUid(), newPrivateUser.toJson());
+    final ref = DocRefCore.privateUser(currentUid());
+    final json = newPrivateUser.toJson();
+    final result = await repository.createDoc(ref, json);
     result.when(success: (_) {
       rxPrivateUser(newPrivateUser);
     }, failure: () {
@@ -261,7 +270,8 @@ class CurrentUserController extends GetxController {
 
   Future<void> _getPublicUser() async {
     final repository = FirestoreRepository();
-    final result = await repository.getCurrentUser(currentUid());
+    final ref = DocRefCore.user(currentUid());
+    final result = await repository.getDoc(ref);
     result.when(success: (res) async {
       if (res.exists && rxPublicUser.value == null) {
         // アカウントが存在するなら代入する
@@ -279,7 +289,8 @@ class CurrentUserController extends GetxController {
 
   Future<void> _getPrivateUser() async {
     final repository = FirestoreRepository();
-    final result = await repository.getPrivateUser(currentUid());
+    final ref = DocRefCore.privateUser(currentUid());
+    final result = await repository.getDoc(ref);
     result.when(success: (res) async {
       if (res.exists && rxPrivateUser.value == null) {
         // アカウントが存在するなら代入する
@@ -355,8 +366,11 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> _deletePublicUser() async {
+    final user = rxPublicUser.value;
+    if (user == null) return;
     final repository = FirestoreRepository();
-    final result = await repository.deleteUser(currentUid());
+    final ref = user.typedRef();
+    final result = await repository.deleteDoc(ref);
     result.when(success: (_) async {
       _deleteAuthUser();
       _removeImage();
@@ -403,7 +417,7 @@ class CurrentUserController extends GetxController {
     if (user == null) return;
     final now = Timestamp.now();
     final categoryId = randomString();
-    final ref = FirestoreQueries.bookmarkCategoryDocRef(user, categoryId);
+    final ref = DocRefCore.bookmarkCategory(user, categoryId);
     final repository = FirestoreRepository();
     final newCategory = BookmarkCategory(
         createdAt: now,
