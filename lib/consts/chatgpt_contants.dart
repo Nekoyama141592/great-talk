@@ -3,6 +3,6 @@ class ChatGPTConstants {
   static const maxRequestLength = 3;
   static const gpt4MaxToken = 4000;
   // model
-  static const basicModel = "gpt-3.5-turbo-1106";
-  static const premiumModel = "gpt-4-1106-preview";
+  static const basicModel = "gpt-3.5-turbo";
+  static const premiumModel = "gpt-4-0125-preview";
 }
