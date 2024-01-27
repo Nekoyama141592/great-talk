@@ -19,8 +19,8 @@ class FormConsts {
   // generateImage
   static const generateImageHint = "例: かわいい猫";
   // 画像サイズ
-  static const minImageHeight = 512;
-  static const minImageWidth = 512;
+  static const minImageHeight = 256;
+  static const minImageWidth = 256;
   static const imageQuality = 80;
   static const iosSquareImageRequestMsg = "下のバーの右から2番目のボタンを押して画像を正方形にしてください";
   static const androidSquareImageRequestMsg = "画像を正方形にしてください";
