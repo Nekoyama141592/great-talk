@@ -8,7 +8,7 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/delegates/example_payment_queue_delegate.dart';
+import 'package:great_talk/delegates/payment_queue_delegate.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
@@ -122,7 +122,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     if (Platform.isIOS) {
       final iosPlatformAddition = inAppPurchase
           .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
-      await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
+      await iosPlatformAddition.setDelegate(PaymentQueueDelegate());
     }
   }
 
