@@ -25,11 +25,11 @@ import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 class PurchasesController extends GetxController with CurrentUserMixin {
   static PurchasesController get to => Get.find<PurchasesController>();
   final purchases = <PurchaseDetails>[].obs;
+  final products = <ProductDetails>[].obs;
   final Rx<CachedReceipt> rxCachedReceipt = Rx(CachedReceipt.instance());
   final InAppPurchase inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> subscription;
   final repository = PurchasesRepository();
-  final products = <ProductDetails>[].obs;
   final isAvailable = false.obs;
   final loading = false.obs;
 
@@ -42,9 +42,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
           _listenToPurchaseUpdated(purchaseDetailsList); // 成功
         },
         onDone: () {},
-        onError: (Object error) {
-          // handle error here.
-        });
+        onError: (Object error) {});
     await Future.wait([_initStoreInfo(), _getCachedReceipt()]);
     super.onInit();
   }
@@ -71,7 +69,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   }
 
   void _addPurchase(PurchaseDetails purchaseDetails) =>
-      purchases(List.from(purchases)..add(purchaseDetails));
+      purchases.add(purchaseDetails);
 
   bool isSubscribing() {
     return purchases.isNotEmpty ||
@@ -256,14 +254,6 @@ class PurchasesController extends GetxController with CurrentUserMixin {
       oldSubscription = purchases.last as GooglePlayPurchaseDetails;
     }
     return oldSubscription;
-  }
-
-  Future<void> confirmPriceChange() async {
-    if (Platform.isIOS) {
-      final platformAddition = inAppPurchase
-          .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
-      await platformAddition.showPriceConsentIfNeeded();
-    }
   }
 
   Future<void> cancelTransctions() async {

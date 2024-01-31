@@ -18,7 +18,6 @@ class PurchaseButton extends StatelessWidget {
             textColor: textColor,
             buttonColor: Colors.grey.withOpacity(0.8),
             text: "契約中",
-            press: controller.confirmPriceChange,
           )
         : RoundedButton(
             textColor: textColor,
