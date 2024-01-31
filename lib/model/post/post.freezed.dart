@@ -43,6 +43,7 @@ mixin _$Post {
   Map<String, dynamic> get title => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
   int get userCount => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -76,7 +77,8 @@ abstract class $PostCopyWith<$Res> {
       Map<String, dynamic> searchToken,
       Map<String, dynamic> title,
       dynamic updatedAt,
-      int userCount});
+      int userCount,
+      String uid});
 }
 
 /// @nodoc
@@ -114,6 +116,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? title = null,
     Object? updatedAt = freezed,
     Object? userCount = null,
+    Object? uid = null,
   }) {
     return _then(_value.copyWith(
       bookmarkCount: null == bookmarkCount
@@ -204,6 +207,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
           ? _value.userCount
           : userCount // ignore: cast_nullable_to_non_nullable
               as int,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -237,7 +244,8 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       Map<String, dynamic> searchToken,
       Map<String, dynamic> title,
       dynamic updatedAt,
-      int userCount});
+      int userCount,
+      String uid});
 }
 
 /// @nodoc
@@ -272,6 +280,7 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? title = null,
     Object? updatedAt = freezed,
     Object? userCount = null,
+    Object? uid = null,
   }) {
     return _then(_$PostImpl(
       bookmarkCount: null == bookmarkCount
@@ -362,6 +371,10 @@ class __$$PostImplCopyWithImpl<$Res>
           ? _value.userCount
           : userCount // ignore: cast_nullable_to_non_nullable
               as int,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -391,7 +404,8 @@ class _$PostImpl extends _Post {
       required final Map<String, dynamic> searchToken,
       required final Map<String, dynamic> title,
       required this.updatedAt,
-      this.userCount = 0})
+      this.userCount = 0,
+      required this.uid})
       : _customCompleteText = customCompleteText,
         _description = description,
         _exampleTexts = exampleTexts,
@@ -517,10 +531,12 @@ class _$PostImpl extends _Post {
   @override
   @JsonKey()
   final int userCount;
+  @override
+  final String uid;
 
   @override
   String toString() {
-    return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, image: $image, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, poster: $poster, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount)';
+    return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, image: $image, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, poster: $poster, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, updatedAt: $updatedAt, userCount: $userCount, uid: $uid)';
   }
 
   @override
@@ -560,7 +576,8 @@ class _$PostImpl extends _Post {
             const DeepCollectionEquality().equals(other._title, _title) &&
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
             (identical(other.userCount, userCount) ||
-                other.userCount == userCount));
+                other.userCount == userCount) &&
+            (identical(other.uid, uid) || other.uid == uid));
   }
 
   @JsonKey(ignore: true)
@@ -588,7 +605,8 @@ class _$PostImpl extends _Post {
         const DeepCollectionEquality().hash(_searchToken),
         const DeepCollectionEquality().hash(_title),
         const DeepCollectionEquality().hash(updatedAt),
-        userCount
+        userCount,
+        uid
       ]);
 
   @JsonKey(ignore: true)
@@ -628,7 +646,8 @@ abstract class _Post extends Post {
       required final Map<String, dynamic> searchToken,
       required final Map<String, dynamic> title,
       required final dynamic updatedAt,
-      final int userCount}) = _$PostImpl;
+      final int userCount,
+      required final String uid}) = _$PostImpl;
   const _Post._() : super._();
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
@@ -677,6 +696,8 @@ abstract class _Post extends Post {
   dynamic get updatedAt;
   @override
   int get userCount;
+  @override
+  String get uid;
   @override
   @JsonKey(ignore: true)
   _$$PostImplCopyWith<_$PostImpl> get copyWith =>

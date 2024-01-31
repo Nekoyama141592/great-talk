@@ -51,7 +51,9 @@ class NewContent {
       PublicUser poster,
       String postId,
       DocRef postRef,
-      SDMap customCompleteText) {
+      SDMap customCompleteText,
+      String uid
+    ) {
     final now = Timestamp.now();
     return Post(
       createdAt: now,
@@ -65,6 +67,7 @@ class NewContent {
       searchToken: returnSearchToken(title),
       title: DetectedText(value: title).toJson(),
       updatedAt: now,
+      uid: uid
     );
   }
 

@@ -203,21 +203,35 @@ async function detectModerationLabels(bucketName, fileName) {
     return detectedImage;
 }
 function getPrivateKey(privateKey) {
-    const key  = chunkSplit(privateKey, 64, '\n');
-    const pkey = '-----BEGIN PRIVATE KEY-----\n' + key + '-----END PRIVATE KEY-----\n';
+const key  = chunkSplit(privateKey, 64, '\n');
+const pkey = '-----BEGIN PRIVATE KEY-----\n' + key + '-----END PRIVATE KEY-----\n';
 
-    return pkey;
-  }
+return pkey;
+}
 
   
-  function chunkSplit(str, len, end) {
-    const match = str.match(new RegExp('.{0,' + len + '}', 'g'));
-    if (!match) {
-      return '';
+function chunkSplit(str, len, end) {
+const match = str.match(new RegExp('.{0,' + len + '}', 'g'));
+if (!match) {
+    return '';
+}
+
+return match.join(end);
+}
+
+exports.onACreate = functions.firestore.document("a/{id}").onCreate(
+    async (_,__) => {
+        const qshot = await db.collectionGroup("posts").get();
+        const batch = db.batch();
+        for (const doc of qshot.docs) {
+            batch.update(doc.ref,{
+                uid: doc.data()["poster"]["uid"],
+            });
+        }
+        await batch.commit();
+        return;
     }
-  
-    return match.join(end);
-  }
+);
 
 exports.onFollowerCreate = functions.firestore.document(`${userPath}/followers/{followerUid}`).onCreate(
     async (snap,_) => {
@@ -245,7 +259,8 @@ exports.onFollowerDelete = functions.firestore.document(`${userPath}/followers/{
 exports.onPostCreate = functions
 .runWith({secrets: ["AWS_ACCESS_KEY","AWS_SECRET_ACCESS_KEY"]})
 .firestore.document(postPath).onCreate(
-    async (snap,_) => {
+    async (snap,context) => {
+        const uid = context.params.uid;
         const newValue = snap.data();
         const detectedDescription = await detectText(newValue.description.value);
         const detectedTitle = await detectText(newValue.title.value);
@@ -254,6 +269,7 @@ exports.onPostCreate = functions
             'description': detectedDescription,
             'title': detectedTitle,
             'image': detectedImage,
+            'uid': uid, // TODO: 消す
         });
         // timelineを作成
         const timeline = {

@@ -126,7 +126,7 @@ service cloud.firestore {
   }
 
   function isValidPost(post) {
-    return post.size() == 22 &&
+    return post.size() == 23 &&
       "bookmarkCount" in post && post.bookmarkCount == 0 &&
       "createdAt" in post && post.createdAt is timestamp &&
       "customCompleteText" in post && isValidCustomCompleteText(post.customCompleteText) &&
@@ -147,6 +147,7 @@ service cloud.firestore {
       "score" in post && post.score == 0 &&
       "searchToken" in post && post.searchToken is map &&
       "title" in post && isValidDetectedText(post.title,32) &&
+      "uid" in post && post.uid is string &&
       "updatedAt" in post && post.updatedAt is timestamp &&
       "userCount" in post && post.userCount == 0;
   }

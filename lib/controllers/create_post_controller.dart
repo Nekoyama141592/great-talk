@@ -101,6 +101,8 @@ class CreatePostController extends FormsController with CurrentUserMixin {
   }
 
   Future<void> _createPost(String fileName) async {
+    final publicUser = CurrentUserController.to.rxPublicUser.value;
+    if (publicUser == null) return;
     final repository = FirestoreRepository();
     final postId = randomString();
     final postRef = DocRefCore.post(currentUid(), postId);
@@ -117,10 +119,12 @@ class CreatePostController extends FormsController with CurrentUserMixin {
         title.trim(),
         description.trim(),
         fileName,
-        CurrentUserController.to.rxPublicUser.value!,
+        publicUser,
         postId,
         postRef,
-        customCompleteText);
+        customCompleteText,
+        publicUser.uid
+        );
     final json = newPost.toJson();
     final result = await repository.createDoc(postRef, json);
     result.when(success: (_) {

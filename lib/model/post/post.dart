@@ -35,6 +35,7 @@ abstract class Post implements _$Post {
     required SDMap title,
     required dynamic updatedAt,
     @Default(0) int userCount,
+    required String uid,
   }) = _Post;
   factory Post.fromJson(SDMap json) => _$PostFromJson(json);
   Timestamp typedCreatedAt() => createdAt as Timestamp;
