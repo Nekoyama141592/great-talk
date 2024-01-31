@@ -2,6 +2,7 @@ import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
+import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/repository/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -13,6 +14,7 @@ abstract class IndexPostsController extends DocsController {
 
   FutureResult<List<QDoc>> _timelinesToPostsResult(
       List<QDoc> fetchedDocs) async {
+        final repository = FirestoreRepository();
     final List<String> postIds =
         fetchedDocs.map((e) => e.data()["postId"] as String).toList();
     final query = QueryCore.timelinePosts(postIds);

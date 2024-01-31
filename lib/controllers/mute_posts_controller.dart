@@ -6,6 +6,7 @@ import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/post/post.dart';
+import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MutePostsController extends DocsController {
@@ -57,6 +58,7 @@ class MutePostsController extends DocsController {
   }
 
   Future<void> unMutePost(Post post) async {
+    final repository = FirestoreRepository();
     final postId = post.postId;
     final deleteToken = CurrentUserController.to.mutePostTokens
         .firstWhere((element) => element.postId == postId);

@@ -6,6 +6,7 @@ import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
+import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MuteUsersController extends DocsController {
@@ -57,6 +58,7 @@ class MuteUsersController extends DocsController {
   }
 
   Future<void> unMuteUser(String passiveUid) async {
+    final repository = FirestoreRepository();
     final deleteToken = CurrentUserController.to.muteUserTokens
         .firstWhere((element) => element.passiveUid == passiveUid);
     CurrentUserController.to.removeMuteUer(deleteToken);

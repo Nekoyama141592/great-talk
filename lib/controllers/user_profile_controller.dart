@@ -11,6 +11,7 @@ import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/follower/follower.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
+import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/file_utility.dart';
 
 class UserProfileController extends ProfileController {
@@ -31,6 +32,7 @@ class UserProfileController extends ProfileController {
   }
 
   Future<void> _getPassiveUser() async {
+    final repository = FirestoreRepository();
     final ref = DocRefCore.user(passiveUid());
     final result = await repository.getDoc(ref);
     result.when(success: (res) {
@@ -66,6 +68,7 @@ class UserProfileController extends ProfileController {
   }
 
   Future<void> _follow() async {
+    final repository = FirestoreRepository();
     final String tokenId = randomString();
     final Timestamp now = Timestamp.now();
     rxPassiveUser(rxPassiveUser.value!
@@ -100,6 +103,7 @@ class UserProfileController extends ProfileController {
   }
 
   Future<void> _unfollow() async {
+    final repository = FirestoreRepository();
     rxPassiveUser(rxPassiveUser.value!.copyWith(
         followerCount: rxPassiveUser.value!.followerCount + minusOne));
     final deleteToken = CurrentUserController.to.followingTokens

@@ -6,13 +6,12 @@ import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/image_doc_wraper/image_q_doc_wraper.dart';
-import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class DocsController extends LoadingController with CurrentUserMixin {
-  final FirestoreRepository repository = FirestoreRepository();
+  
   bool get enablePullDown => false;
   bool get requiresValueReset => false; // ページを開くたびに初期化が必要かどうかを判定
   final docs = <ImageQDocWraper>[].obs;
