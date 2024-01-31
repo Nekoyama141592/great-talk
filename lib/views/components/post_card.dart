@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
@@ -8,6 +6,7 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/post/post.dart';
+import 'package:great_talk/model/q_doc_info/q_doc_info.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/mosaic_card/components/mosaic_post_child.dart';
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
@@ -16,13 +15,14 @@ import 'package:great_talk/views/screen/refresh_screen/components/post_msg_butto
 import 'package:great_talk/views/user_profile_page.dart';
 
 class PostCard extends StatelessWidget with CurrentUserMixin {
-  const PostCard({Key? key, required this.post, required this.uint8list})
-      : super(key: key);
-  final Post post;
-  final Uint8List? uint8list;
+  const PostCard({Key? key, required this.qDocInfo}) : super(key: key);
+  final QDocInfo qDocInfo;
   @override
   Widget build(BuildContext context) {
     final controller = PostsController.to;
+    final post = Post.fromJson(qDocInfo.qDoc.data());
+    final uint8list = qDocInfo.userImage;
+    final publicUser = qDocInfo.publicUser;
     // 不適切なら弾く
     return InkWell(
       onLongPress: () => controller.onPostCardLongPressed(post),
@@ -37,7 +37,7 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
                       title: "削除された投稿"));
             }
             if (CurrentUserController.to.isMutingPost(post.postId) ||
-                CurrentUserController.to.isMutingUser(post.typedPoster().uid)) {
+                CurrentUserController.to.isMutingUser(post.uid)) {
               return MosaicCard(
                   child: MosaicPostChild(
                       msg: "あなたはこの投稿、もしくはその投稿者をミュートしています。",
@@ -73,10 +73,10 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
                       post.typedTitle().value,
                     ),
                     TextButton(
-                      onPressed: () => Get.toNamed(
-                          UserProfilePage.generatePath(post.typedPoster().uid)),
+                      onPressed: () =>
+                          Get.toNamed(UserProfilePage.generatePath(post.uid)),
                       child: EllipsisText(
-                        "by ${post.typedPoster().nameValue}",
+                        "by ${publicUser.nameValue}",
                         style: TextStyle(
                             color: Theme.of(context).colorScheme.secondary),
                       ),

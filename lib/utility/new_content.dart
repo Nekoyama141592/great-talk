@@ -52,23 +52,21 @@ class NewContent {
       String postId,
       DocRef postRef,
       SDMap customCompleteText,
-      String uid
-    ) {
+      String uid) {
     final now = Timestamp.now();
     return Post(
-      createdAt: now,
-      customCompleteText: customCompleteText,
-      description: DetectedText(value: description).toJson(),
-      image: newDetectedImage(AWSS3Utility.postImagesBucketName, fileName)
-          .toJson(),
-      poster: poster.toJson(),
-      postId: postId,
-      ref: postRef,
-      searchToken: returnSearchToken(title),
-      title: DetectedText(value: title).toJson(),
-      updatedAt: now,
-      uid: uid
-    );
+        createdAt: now,
+        customCompleteText: customCompleteText,
+        description: DetectedText(value: description).toJson(),
+        image: newDetectedImage(AWSS3Utility.postImagesBucketName, fileName)
+            .toJson(),
+        poster: poster.toJson(),
+        postId: postId,
+        ref: postRef,
+        searchToken: returnSearchToken(title),
+        title: DetectedText(value: title).toJson(),
+        updatedAt: now,
+        uid: uid);
   }
 
   static PublicUser newUser(String uid,

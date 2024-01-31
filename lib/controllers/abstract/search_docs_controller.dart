@@ -32,7 +32,7 @@ abstract class SearchDocsController extends DocsController {
   Future<void> onLoading(RefreshController refreshController) async {
     // Loadingの際はフォームのSearchTermは空になる
     if (searchTerm.isEmpty &&
-        docs.isNotEmpty &&
+        qDocInfoList.isNotEmpty &&
         firestoreSearchTerm.isNotEmpty) {
       super.onLoading(refreshController);
     } else {

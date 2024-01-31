@@ -14,7 +14,7 @@ abstract class IndexPostsController extends DocsController {
 
   FutureResult<List<QDoc>> _timelinesToPostsResult(
       List<QDoc> fetchedDocs) async {
-        final repository = FirestoreRepository();
+    final repository = FirestoreRepository();
     final List<String> postIds =
         fetchedDocs.map((e) => e.data()["postId"] as String).toList();
     final query = QueryCore.timelinePosts(postIds);

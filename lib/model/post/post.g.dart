@@ -36,9 +36,9 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       score: (json['score'] as num?)?.toDouble() ?? 0.0,
       searchToken: json['searchToken'] as Map<String, dynamic>,
       title: json['title'] as Map<String, dynamic>,
+      uid: json['uid'] as String,
       updatedAt: json['updatedAt'],
       userCount: json['userCount'] as int? ?? 0,
-      uid: json['uid'] as String,
     );
 
 Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
@@ -63,7 +63,7 @@ Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
       'score': instance.score,
       'searchToken': instance.searchToken,
       'title': instance.title,
+      'uid': instance.uid,
       'updatedAt': instance.updatedAt,
       'userCount': instance.userCount,
-      'uid': instance.uid,
     };

@@ -17,11 +17,11 @@ class SearchUsersScreen extends StatelessWidget {
         child: Obx(() => RefreshScreen(
             docsController: controller,
             child: ListView.builder(
-                itemCount: controller.docs.length,
+                itemCount: controller.qDocInfoList.length,
                 itemBuilder: (c, i) {
-                  final publicUser =
-                      PublicUser.fromJson(controller.docs[i].doc.data());
-                  final uint8list = controller.docs[i].uint8list;
+                  final publicUser = PublicUser.fromJson(
+                      controller.qDocInfoList[i].qDoc.data());
+                  final uint8list = controller.qDocInfoList[i].userImage;
                   return UserCard(publicUser: publicUser, uint8list: uint8list);
                 }))));
   }

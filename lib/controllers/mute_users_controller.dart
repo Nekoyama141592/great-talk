@@ -39,11 +39,11 @@ class MuteUsersController extends DocsController {
   }
 
   List<String> _createRequestUids() {
-    final int userDocsLength = docs.length;
+    final int userDocsLength = qDocInfoList.length;
     final muteUids = CurrentUserController.to.muteUids;
-    if (muteUids.length > docs.length) {
+    if (muteUids.length > qDocInfoList.length) {
       final List<String> requestUids =
-          (muteUids.length - docs.length) >= whereInLimit
+          (muteUids.length - qDocInfoList.length) >= whereInLimit
               ? muteUids.sublist(userDocsLength, userDocsLength + whereInLimit)
               : muteUids.sublist(userDocsLength, muteUids.length);
       return requestUids;
@@ -62,9 +62,8 @@ class MuteUsersController extends DocsController {
     final deleteToken = CurrentUserController.to.muteUserTokens
         .firstWhere((element) => element.passiveUid == passiveUid);
     CurrentUserController.to.removeMuteUer(deleteToken);
-    docs.removeWhere(
-        (element) => PublicUser.fromJson(element.doc.data()).uid == passiveUid);
-    docs([...docs]);
+    qDocInfoList.removeWhere((element) =>
+        PublicUser.fromJson(element.qDoc.data()).uid == passiveUid);
     final tokenId = deleteToken.tokenId;
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.deleteDoc(tokenRef);

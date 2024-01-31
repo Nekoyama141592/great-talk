@@ -38,8 +38,7 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
           appBar: AppBar(
               actions: [
                 // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示する.
-                Obx(() => controller.rxPost.value?.typedPoster().uid ==
-                            currentUid() ||
+                Obx(() => controller.rxPost.value?.uid == currentUid() ||
                         CurrentUserController.to.isAdmin()
                     ? const DeletePostButton()
                     : const PostReportButton()),

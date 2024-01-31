@@ -37,7 +37,7 @@ abstract class ChatContent implements _$ChatContent {
         imageValue: post.typedImage().value,
         contentId: post.postId,
         msgCount: post.msgCount,
-        posterUid: post.typedPoster().uid,
+        posterUid: post.uid,
         ref: post.ref,
         title: post.typedTitle().value);
   }

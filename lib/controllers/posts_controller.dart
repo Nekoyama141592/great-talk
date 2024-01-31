@@ -36,15 +36,13 @@ class PostsController extends GetxController with CurrentUserMixin {
   void onPostCardPressed(Post post) {
     PurchasesController.to.restorePurchases();
     rxPost(post);
-    Get.toNamed(RealtimeResPage.generatePath(post.posterUid, post.postId));
+    Get.toNamed(RealtimeResPage.generatePath(post.uid, post.postId));
   }
 
   // UIDをコピーする関数.
   Future<void> onPostCardLongPressed(Post post) async {
     if (!CurrentUserController.to.isAdmin()) return;
-    final publicUser = post.typedPoster();
-    final text =
-        "UID\n${publicUser.uid}\nユーザーの画像\n${publicUser.typedImage().value}\n投稿の画像${post.typedImage().value}";
+    final text = "UID\n${post.uid}\n投稿の画像${post.typedImage().value}";
     final data = ClipboardData(text: text);
     await Clipboard.setData(data);
     UIHelper.showFlutterToast("三つの情報をコピーしました");
@@ -149,23 +147,22 @@ class PostsController extends GetxController with CurrentUserMixin {
   }
 
   void _muteUser(BuildContext innerContext) async {
-    if (rxPost.value == null) {
-      return;
-    }
-    final passiveUser = rxPost.value!.typedPoster();
-    if (CurrentUserController.to.muteUids.contains(passiveUser.uid)) {
+    final post = rxPost.value;
+    if (post == null) return;
+    final passiveUid = post.uid;
+    if (CurrentUserController.to.muteUids.contains(passiveUid)) {
       UIHelper.showFlutterToast("すでにこのユーザーをミュートしています");
       Navigator.pop(innerContext);
       return;
     }
     final tokenId = randomString();
     final now = Timestamp.now();
-    final passiveUid = passiveUser.uid;
+    final passiveUserRef = DocRefCore.user(passiveUid);
     final MuteUserToken muteUserToken = MuteUserToken(
         activeUid: currentUid(),
         createdAt: now,
         passiveUid: passiveUid,
-        passiveUserRef: passiveUser.ref,
+        passiveUserRef: passiveUserRef,
         tokenId: tokenId,
         tokenType: TokenType.muteUser.name);
     CurrentUserController.to.addMuteUser(muteUserToken);
@@ -176,7 +173,7 @@ class PostsController extends GetxController with CurrentUserMixin {
         activeUid: currentUid(),
         createdAt: now,
         passiveUid: passiveUid,
-        passiveUserRef: passiveUser.typedRef());
+        passiveUserRef: passiveUserRef);
     final userMuteRef = DocRefCore.userMute(passiveUid, currentUid());
     await repository.createDoc(userMuteRef, userMute.toJson());
     if (innerContext.mounted) {
@@ -186,9 +183,7 @@ class PostsController extends GetxController with CurrentUserMixin {
   }
 
   void onOkCreatePostReportButtonPressed() async {
-    if (reportContents.isEmpty) {
-      return;
-    }
+    if (reportContents.isEmpty) return;
     await _createPostReport().then((value) {
       if (Get.isDialogOpen ?? false) {
         Get.back();
@@ -245,7 +240,7 @@ class PostsController extends GetxController with CurrentUserMixin {
   Future<void> _likePost(Post post) async {
     final String tokenId = randomString();
     final Timestamp now = Timestamp.now();
-    final String passiveUid = post.typedPoster().uid;
+    final String passiveUid = post.uid;
     final postRef = post.ref;
     final postId = post.postId;
     final likePostToken = LikePostToken(
@@ -283,7 +278,7 @@ class PostsController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _unLikePost(Post post) async {
-    final String passiveUid = post.typedPoster().uid;
+    final String passiveUid = post.uid;
     final deleteToken = CurrentUserController.to.likePostTokens
         .firstWhere((element) => element.passiveUid == passiveUid);
     CurrentUserController.to.removeLikePost(deleteToken);

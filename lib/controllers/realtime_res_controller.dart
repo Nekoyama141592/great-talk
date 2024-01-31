@@ -488,7 +488,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     final bookmarkedPost = rxPost.value;
     if (bookmarkedPost == null) return;
     final Timestamp now = Timestamp.now();
-    final String passiveUid = bookmarkedPost.typedPoster().uid;
+    final String passiveUid = bookmarkedPost.uid;
     final postRef = bookmarkedPost.ref;
     final postId = bookmarkedPost.postId;
     final bookmarkRef = DocRefCore.bookmark(category, postId);

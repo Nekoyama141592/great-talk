@@ -123,8 +123,7 @@ class CreatePostController extends FormsController with CurrentUserMixin {
         postId,
         postRef,
         customCompleteText,
-        publicUser.uid
-        );
+        publicUser.uid);
     final json = newPost.toJson();
     final result = await repository.createDoc(postRef, json);
     result.when(success: (_) {
@@ -151,7 +150,7 @@ class CreatePostController extends FormsController with CurrentUserMixin {
   // 投稿を作成した後に再取得
   Future<void> _refreshMyPost() async {
     final myProfileController = MyProfileController.to;
-    myProfileController.docs.isEmpty
+    myProfileController.qDocInfoList.isEmpty
         ? await myProfileController.onReload()
         : await MyProfileController.to.onRefresh();
   }

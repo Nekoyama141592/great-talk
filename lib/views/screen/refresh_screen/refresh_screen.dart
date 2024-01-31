@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
-import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/post_card.dart';
 import 'package:great_talk/views/screen/loading_screen.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/reload_screen/reload_screen.dart';
@@ -32,7 +31,7 @@ class RefreshScreen extends HookWidget {
       if (docsController.cannotShow()) {
         return const LoadingScreen();
       }
-      if (docsController.docs.isEmpty) {
+      if (docsController.qDocInfoList.isEmpty) {
         return ReloadScreen(
           onReload: docsController.onReload,
           reloadMsg: reloadMsg,
@@ -46,14 +45,14 @@ class RefreshScreen extends HookWidget {
           onLoading: () => docsController.onLoading(refreshController),
           child: child ??
               GridView.builder(
-                  itemCount: docsController.docs.length,
+                  itemCount: docsController.qDocInfoList.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3, childAspectRatio: 0.5),
                   itemBuilder: (c, i) {
-                    final post =
-                        Post.fromJson(docsController.docs[i].doc.data());
-                    final uint8list = docsController.docs[i].uint8list;
-                    return PostCard(post: post, uint8list: uint8list);
+                    final qDocInfo = docsController.qDocInfoList[i];
+                    return PostCard(
+                      qDocInfo: qDocInfo,
+                    );
                   }));
     });
   }

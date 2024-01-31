@@ -39,11 +39,11 @@ class MutePostsController extends DocsController {
   }
 
   List<String> _createRequestPostIds() {
-    final int userDocsLength = docs.length;
+    final int userDocsLength = qDocInfoList.length;
     final muteUids = CurrentUserController.to.mutePostIds;
-    if (muteUids.length > docs.length) {
+    if (muteUids.length > qDocInfoList.length) {
       final List<String> requestUids =
-          (muteUids.length - docs.length) >= whereInLimit
+          (muteUids.length - qDocInfoList.length) >= whereInLimit
               ? muteUids.sublist(userDocsLength, userDocsLength + whereInLimit)
               : muteUids.sublist(userDocsLength, muteUids.length);
       return requestUids;
@@ -63,9 +63,8 @@ class MutePostsController extends DocsController {
     final deleteToken = CurrentUserController.to.mutePostTokens
         .firstWhere((element) => element.postId == postId);
     CurrentUserController.to.removeMutePost(deleteToken);
-    docs.removeWhere(
-        (element) => Post.fromJson(element.doc.data()).postId == postId);
-    docs([...docs]);
+    qDocInfoList.removeWhere(
+        (element) => Post.fromJson(element.qDoc.data()).postId == postId);
     final tokenId = deleteToken.tokenId;
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.deleteDoc(tokenRef);
