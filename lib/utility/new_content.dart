@@ -48,7 +48,6 @@ class NewContent {
       String title,
       String description,
       String fileName,
-      PublicUser poster,
       String postId,
       DocRef postRef,
       SDMap customCompleteText,
@@ -60,7 +59,6 @@ class NewContent {
         description: DetectedText(value: description).toJson(),
         image: newDetectedImage(AWSS3Utility.postImagesBucketName, fileName)
             .toJson(),
-        poster: poster.toJson(),
         postId: postId,
         ref: postRef,
         searchToken: returnSearchToken(title),

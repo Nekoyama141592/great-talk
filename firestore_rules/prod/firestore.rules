@@ -99,34 +99,9 @@ service cloud.firestore {
       "userName" in user && isValidDetectedText(user.userName, 32) &&
       "walletAddresses" in user && user.walletAddresses is list;
   }
-  function isValidPublicUser(user) {
-    return user.size() == 22 &&
-      "accountName" in user && user.accountName is string &&
-      "bio" in user && isValidDetectedText(user.bio,200) &&
-      "blockCount" in user && user.blockCount is number &&
-      "createdAt" in user && user.createdAt is timestamp &&
-      "ethAddress" in user && user.ethAddress is string &&
-      "followerCount" in user && user.followerCount is number &&
-      "followingCount" in user && user.followingCount is number &&
-      "isNFTicon" in user && user.isNFTicon is bool &&
-      "isOfficial" in user && user.isOfficial is bool &&
-      "isSuspended" in user && user.isSuspended is bool &&
-      "links" in user && user.links is list &&
-      "muteCount" in user && user.muteCount is number &&
-      "postCount" in user && user.postCount is number &&
-      "ref" in user && user.ref is path &&
-      "reportCount" in user && user.reportCount is number &&
-      "score" in user && user.score is number &&
-      "searchToken" in user && user.searchToken is map &&
-      "uid" in user && user.uid is string &&
-      "updatedAt" in user && user.updatedAt is timestamp &&
-      "image" in user && isValidDetectedImage(user.image) &&
-      "userName" in user && isValidDetectedText(user.userName,32) &&
-      "walletAddresses" in user && user.walletAddresses is list;
-  }
 
   function isValidPost(post) {
-    return post.size() == 23 &&
+    return post.size() == 22 &&
       "bookmarkCount" in post && post.bookmarkCount == 0 &&
       "createdAt" in post && post.createdAt is timestamp &&
       "customCompleteText" in post && isValidCustomCompleteText(post.customCompleteText) &&
@@ -140,7 +115,6 @@ service cloud.firestore {
       "links" in post && post.links is list &&
       "msgCount" in post && post.msgCount == 0 &&
       "muteCount" in post && post.muteCount == 0 &&
-      "poster" in post && isValidPublicUser(post.poster) &&
       "postId" in post && post.postId is string &&
       "ref" in post && post.ref is path &&
       "reportCount" in post && post.reportCount == 0 &&

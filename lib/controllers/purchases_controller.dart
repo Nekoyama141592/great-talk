@@ -37,12 +37,10 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   void onInit() async {
     final Stream<List<PurchaseDetails>> purchaseUpdated =
         inAppPurchase.purchaseStream;
-    subscription = purchaseUpdated.listen(
-        (List<PurchaseDetails> purchaseDetailsList) {
-          _listenToPurchaseUpdated(purchaseDetailsList); // 成功
-        },
-        onDone: () {},
-        onError: (Object error) {});
+    subscription =
+        purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
+      _listenToPurchaseUpdated(purchaseDetailsList); // 成功
+    }, onDone: () {}, onError: (Object error) {});
     await Future.wait([_initStoreInfo(), _getCachedReceipt()]);
     super.onInit();
   }

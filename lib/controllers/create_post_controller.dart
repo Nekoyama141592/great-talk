@@ -119,7 +119,6 @@ class CreatePostController extends FormsController with CurrentUserMixin {
         title.trim(),
         description.trim(),
         fileName,
-        publicUser,
         postId,
         postRef,
         customCompleteText,

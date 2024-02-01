@@ -224,8 +224,10 @@ exports.onACreate = functions.firestore.document("a/{id}").onCreate(
         const qshot = await db.collectionGroup("posts").get();
         const batch = db.batch();
         for (const doc of qshot.docs) {
+            const uid = doc.data()["poster"]["uid"];
             batch.update(doc.ref,{
-                uid: doc.data()["poster"]["uid"],
+                uid: uid,
+                poster: admin.firestore.FieldValue.delete(),
             });
         }
         await batch.commit();
@@ -275,10 +277,10 @@ exports.onPostCreate = functions
         const timeline = {
             "createdAt": newValue.createdAt,
             "isRead": false,
-            "posterUid": newValue.poster.uid,
+            "posterUid": newValue.uid,
             "postId": newValue.postId,
         };
-        const posterRef = newValue.poster.ref;
+        const posterRef = db.collection('public/v1/users').doc(uid);
         await posterRef.collection('timelines').doc(newValue.postId).set(timeline); // 投稿者にもSet
         // followersをget
         const followers = await posterRef.collection("followers").get();
@@ -424,24 +426,6 @@ exports.onUserUpdateLogCreate = functions
             'searchToken': newValue.searchToken,
             'userName': detectedUserName,
         });
-        const user = await userRef.get();
-        const posts = await userRef.collection('posts').get();
-        let postCount = 0;
-        let postBatch = db.batch();
-        for (const post of posts.docs) {
-            postBatch.update(post.ref,{
-                "poster": user.data(),
-            })
-            postCount++;
-            if (postCount == batchLimit) {
-                await postBatch.commit();
-                postBatch = db.batch();
-                postCount = 0;
-            }
-        }
-        if (postCount > 0) {
-            await postBatch.commit();
-        }
     }
 );
 exports.verifyAndroidReceipt = functions

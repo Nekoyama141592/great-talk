@@ -25,7 +25,6 @@ abstract class Post implements _$Post {
     @Default([]) List<SDMap> links,
     @Default(0) int msgCount,
     @Default(0) int muteCount,
-    required SDMap poster, // TODO: 消す
     required String postId,
     required dynamic ref,
     @Default(0) int reportCount,
