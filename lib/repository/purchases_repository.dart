@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart' as dio;
-import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:great_talk/consts/env_keys.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
@@ -81,11 +80,13 @@ class PurchasesRepository {
     }
   }
 
-  Future<void> restorePurchases(InAppPurchase inAppPurchase) async {
+  FutureResult<bool> restorePurchases() async {
     try {
+      final inAppPurchase = InAppPurchase.instance;
       await inAppPurchase.restorePurchases();
+      return const Result.success(true);
     } catch (e) {
-      debugPrint(e.toString());
+      return const Result.failure();
     }
   }
 }

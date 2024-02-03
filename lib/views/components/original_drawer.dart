@@ -24,7 +24,6 @@ class OriginalDrawer extends StatelessWidget {
           ListTile(
               title: const Text("アカウント情報"),
               onTap: () {
-                PurchasesController.to.restorePurchases();
                 Get.toNamed(AccountPage.path);
               }),
           ListTile(

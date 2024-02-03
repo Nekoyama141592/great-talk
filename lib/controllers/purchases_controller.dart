@@ -66,9 +66,6 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     loading(false);
   }
 
-  void _addPurchase(PurchaseDetails purchaseDetails) =>
-      purchases.add(purchaseDetails);
-
   bool isSubscribing() {
     return purchases.isNotEmpty ||
         rxCachedReceipt.value.isValid() ||
@@ -105,15 +102,14 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     return result;
   }
 
-  Future<void> restorePurchases() async {
-    if (purchases.isEmpty && !CurrentUserController.to.isOfficial()) {
-      await repository.restorePurchases(inAppPurchase);
-    }
-  }
-
   void onRestoreButtonPressed() async {
     purchases([]); // 購入情報を初期化
-    await restorePurchases();
+    final result = await repository.restorePurchases();
+    result.when(success: (_) {
+      UIHelper.showFlutterToast("購入の復元に成功しました。現在、サーバーで購入情報を検証しています。");
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("購入の復元が失敗しました。");
+    });
   }
 
   Future<void> _setDelegate() async {
@@ -135,7 +131,8 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   }
 
   void deliverProduct(PurchaseDetails purchaseDetails) {
-    _addPurchase(purchaseDetails);
+    purchases.add(purchaseDetails);
+    UIHelper.showFlutterToast("サーバーでの検証が成功しました");
   }
 
   Future<bool> verifyPurchase(PurchaseDetails purchaseDetails) async {

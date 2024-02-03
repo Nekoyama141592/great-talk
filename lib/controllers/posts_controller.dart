@@ -8,7 +8,6 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
@@ -34,7 +33,6 @@ class PostsController extends GetxController with CurrentUserMixin {
   final Rx<Post?> rxPost = Rx(null);
 
   void onPostCardPressed(Post post) {
-    PurchasesController.to.restorePurchases();
     rxPost(post);
     Get.toNamed(RealtimeResPage.generatePath(post.uid, post.postId));
   }
