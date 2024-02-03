@@ -146,7 +146,7 @@ class _$GenerateImageRequestImpl implements _GenerateImageRequest {
       {this.model = OpenAIConstants.imageModel,
       required this.prompt,
       this.n = 1,
-      this.size = "1024x1024",
+      this.size = "1792x1024",
       required this.user});
 
   factory _$GenerateImageRequestImpl.fromJson(Map<String, dynamic> json) =>

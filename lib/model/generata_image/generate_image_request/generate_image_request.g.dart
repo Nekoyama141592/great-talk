@@ -12,7 +12,7 @@ _$GenerateImageRequestImpl _$$GenerateImageRequestImplFromJson(
       model: json['model'] as String? ?? OpenAIConstants.imageModel,
       prompt: json['prompt'] as String,
       n: json['n'] as int? ?? 1,
-      size: json['size'] as String? ?? "1024x1024",
+      size: json['size'] as String? ?? "1792x1024",
       user: json['user'] as String,
     );
 

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/consts/generate_image_constants.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/realtime_res_controller.dart';
@@ -19,10 +20,16 @@ class GenerateImageController extends LoadingController with CurrentUserMixin {
   static GenerateImageController get to => Get.find<GenerateImageController>();
   final rxPrompt = "".obs;
   final rxUrl = "".obs;
+  final rxSize = GenerateImageConstants.square.obs;
   // セッターメソッド
   void setPrompt(String? value) {
     if (value == null) return;
     rxPrompt.value = value;
+  }
+
+  void setSize(String? value) {
+    if (value == null) return;
+    rxSize.value = value;
   }
 
   void onGenerateButtonPressed() async {
@@ -51,8 +58,8 @@ class GenerateImageController extends LoadingController with CurrentUserMixin {
     startLoading();
     rxUrl(""); // 初期化
     final repository = OpenAIRepository();
-    final request =
-        GenerateImageRequest(prompt: rxPrompt.value, user: currentUid());
+    final request = GenerateImageRequest(
+        size: rxSize.value, prompt: rxPrompt.value, user: currentUid());
     final result = await repository.generateImage(request);
     result.when(success: (res) {
       final url = res.data?.last?.url;

@@ -10,7 +10,7 @@ abstract class GenerateImageRequest implements _$GenerateImageRequest {
       {@Default(OpenAIConstants.imageModel) String model,
       required String prompt,
       @Default(1) int n,
-      @Default("1024x1024") String size,
+      required String size,
       required String user}) = _GenerateImageRequest;
   factory GenerateImageRequest.fromJson(Map<String, dynamic> json) =>
       _$GenerateImageRequestFromJson(json);
