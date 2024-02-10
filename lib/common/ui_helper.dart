@@ -41,7 +41,8 @@ class UIHelper {
     ));
   }
 
-  static void simpleAlertDialog(String msg, {bool? needsSubscribing}) {
+  static void simpleAlertDialog(String msg,
+      {bool? needsSubscribing, void Function()? positiveAction}) {
     const style = TextStyle(fontSize: 20);
     Get.dialog(AlertDialog(
       content: SizedBox(
@@ -61,7 +62,7 @@ class UIHelper {
                     ),
               const Divider(),
               TextButton(
-                  onPressed: Get.back,
+                  onPressed: positiveAction ?? Get.back,
                   child: const Text(
                     okText,
                     style: style,

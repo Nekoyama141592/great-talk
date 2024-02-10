@@ -21,6 +21,7 @@ import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PurchasesController extends GetxController with CurrentUserMixin {
   static PurchasesController get to => Get.find<PurchasesController>();
@@ -29,7 +30,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   final Rx<CachedReceipt> rxCachedReceipt = Rx(CachedReceipt.instance());
   final InAppPurchase inAppPurchase = InAppPurchase.instance;
   late StreamSubscription<List<PurchaseDetails>> subscription;
-  final repository = PurchasesRepository();
+
   final isAvailable = false.obs;
   final loading = false.obs;
 
@@ -54,6 +55,19 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     }
     subscription.cancel();
     super.onClose();
+  }
+
+  @override
+  void onReady() async {
+    final result = await _getCachedReceipt();
+    if (result == null) return;
+    if (!result.isValid()) {
+      UIHelper.simpleAlertDialog("サブスクの購入情報を更新する", positiveAction: () async {
+        Get.back();
+        await _clearCach();
+        await _restorePurchase();
+      });
+    }
   }
 
   Future<void> _initStoreInfo() async {
@@ -104,6 +118,11 @@ class PurchasesController extends GetxController with CurrentUserMixin {
 
   void onRestoreButtonPressed() async {
     purchases([]); // 購入情報を初期化
+    await _restorePurchase();
+  }
+
+  Future<void> _restorePurchase() async {
+    final repository = PurchasesRepository();
     final result = await repository.restorePurchases();
     result.when(success: (_) {
       UIHelper.showFlutterToast("購入の復元に成功しました。現在、サーバーで購入情報を検証しています。");
@@ -121,10 +140,15 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _fetchProducts() async {
+    final repository = PurchasesRepository();
     final result = await repository.queryProductDetails(
         inAppPurchase, kProductIds.toSet());
     result.when(success: (res) {
-      products(res);
+      final sorted = res
+        ..sort(
+          (a, b) => a.id.compareTo(b.id),
+        );
+      products(sorted);
     }, failure: () {
       UIHelper.showErrorFlutterToast("商品を取得できませんでした。");
     });
@@ -139,6 +163,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     if (Platform.isAndroid) {
       // iOSの場合
       late bool isValid;
+      final repository = PurchasesRepository();
       final result =
           await repository.getAndroidReceipt(purchaseDetails, currentUid());
       result.when(success: (res) async {
@@ -151,6 +176,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     } else {
       // iOSの場合
       late bool isValid;
+      final repository = PurchasesRepository();
       final result =
           await repository.getIOSReceipt(purchaseDetails, currentUid());
       result.when(success: (res) async {
@@ -170,12 +196,21 @@ class PurchasesController extends GetxController with CurrentUserMixin {
         PrefsKey.latestReceipt.name, receiptResponse.toJson());
   }
 
-  Future<void> _getCachedReceipt() async {
+  Future<void> _clearCach() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove(PrefsKey.latestReceipt.name);
+  }
+
+  Future<CachedReceipt?> _getCachedReceipt() async {
     final json = await PrefsUtility.getJson(PrefsKey.latestReceipt.name);
-    if (json == null) return;
+    if (json == null) {
+      return null;
+    }
     final receiptResponse = ReceiptResponse.fromJson(json);
-    rxCachedReceipt(CachedReceipt.fromReceiptResponse(
-        receiptResponse, receiptResponse.originalTransactionId));
+    final result = CachedReceipt.fromReceiptResponse(
+        receiptResponse, receiptResponse.originalTransactionId);
+    rxCachedReceipt(result);
+    return result;
   }
 
   Future<void> _listenToPurchaseUpdated(
@@ -222,6 +257,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
         : PurchaseParam(productDetails: productDetails);
     await UIHelper.showFlutterToast("情報を取得しています。 \nしばらくお待ちください。");
     loading(true);
+    final repository = PurchasesRepository();
     final result =
         await repository.buyNonConsumable(inAppPurchase, purchaseParam);
     result.when(
