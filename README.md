@@ -18,11 +18,11 @@ flutter run --flavor prod -t lib/main_prod.dart
 
 ### iOS
 flutter build ios --flavor dev -t lib/main_dev.dart --release
-flutter build ios --flavor prod -t lib/main_prod.dart --release
+flutter build ios --flavor prod -t lib/main_prod.dart --release --no-tree-shake-icons
 
 ### Android
 flutter build appbundle --flavor dev -t lib/main_dev.dart
-flutter build appbundle --flavor prod -t lib/main_prod.dart
+flutter build appbundle --flavor prod -t lib/main_prod.dart --no-tree-shake-icons
 
 ## フォーマット
 dart format --set-exit-if-changed .
