@@ -2,5 +2,5 @@
 
 FLUTTER_TARGET=lib/main_verification.dart
 ASSET_PREFIX=verification
-BUNDLE_NAME=すごいAI Verification
-BUNDLE_DISPLAY_NAME=すごいAI Verification
+BUNDLE_NAME=Gretal Verification
+BUNDLE_DISPLAY_NAME=Gretal Verification

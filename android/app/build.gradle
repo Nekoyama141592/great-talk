@@ -38,17 +38,17 @@ android {
         dev {
             dimension "flavor-type"
             applicationId "com.firebaseapp.great_talk_dev"
-            resValue "string", "app_name", "すごいAI Dev"
+            resValue "string", "app_name", "Gretal Dev"
         }
         verification {
             dimension "flavor-type"
             applicationId "com.firebaseapp.great_talk_verification"
-            resValue "string", "app_name", "すごいAI Verification"
+            resValue "string", "app_name", "Gretal Verification"
         }
         prod {
             dimension "flavor-type"
             applicationId "com.firebaseapp.great_talk"
-            resValue "string", "app_name", "すごいAI"
+            resValue "string", "app_name", "Gretal"
         }
     }
 
