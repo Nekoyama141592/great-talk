@@ -9,8 +9,7 @@ import 'package:great_talk/views/components/circle_image/circle_image.dart';
 
 class MuteUserCard extends StatelessWidget {
   const MuteUserCard(
-      {Key? key, required this.passiveUser, required this.uint8list})
-      : super(key: key);
+      {super.key, required this.passiveUser, required this.uint8list});
   final PublicUser passiveUser;
   final Uint8List? uint8list;
   @override

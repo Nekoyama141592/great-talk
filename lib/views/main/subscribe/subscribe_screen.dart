@@ -10,7 +10,7 @@ import 'package:great_talk/views/main/subscribe/components/policy_button.dart';
 import 'package:great_talk/views/main/subscribe/components/restore_button.dart';
 
 class SubscribeScreen extends StatelessWidget {
-  const SubscribeScreen({Key? key}) : super(key: key);
+  const SubscribeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final PurchasesController purchasesController = PurchasesController.to;

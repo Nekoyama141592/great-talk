@@ -15,8 +15,8 @@ import 'package:great_talk/views/components/official_mark.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 
 class UserCard extends StatelessWidget with CurrentUserMixin {
-  const UserCard({Key? key, required this.publicUser, required this.uint8list})
-      : super(key: key);
+  const UserCard(
+      {super.key, required this.publicUser, required this.uint8list});
   final PublicUser publicUser;
   final Uint8List? uint8list;
 

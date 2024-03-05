@@ -12,7 +12,7 @@ import 'package:great_talk/views/mute/mute_users/mute_users_page.dart';
 import 'package:great_talk/views/original_contents_page.dart';
 
 class OriginalDrawer extends StatelessWidget {
-  const OriginalDrawer({Key? key}) : super(key: key);
+  const OriginalDrawer({super.key});
   @override
   Widget build(BuildContext context) {
     final themeController = ThemeController.to;

@@ -7,7 +7,7 @@ import 'package:great_talk/views/main/subscribe/components/product_card.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class ProductList extends StatelessWidget {
-  const ProductList({Key? key}) : super(key: key);
+  const ProductList({super.key});
 
   @override
   Widget build(BuildContext context) {

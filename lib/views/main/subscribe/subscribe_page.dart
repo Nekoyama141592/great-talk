@@ -3,7 +3,7 @@ import 'package:great_talk/views/components/basic_page.dart';
 import 'package:great_talk/views/main/subscribe/subscribe_screen.dart';
 
 class SubscribePage extends StatelessWidget {
-  const SubscribePage({Key? key}) : super(key: key);
+  const SubscribePage({super.key});
   static const path = "/subscribe";
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:great_talk/controllers/feeds_controller.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 
 class FeedsPage extends StatelessWidget {
-  const FeedsPage({Key? key}) : super(key: key);
+  const FeedsPage({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(FeedsController());

@@ -10,8 +10,7 @@ import 'package:great_talk/views/components/basic_height_box.dart';
 
 class MosaicPostChild extends StatelessWidget with CurrentUserMixin {
   const MosaicPostChild(
-      {Key? key, required this.msg, required this.post, required this.title})
-      : super(key: key);
+      {super.key, required this.msg, required this.post, required this.title});
   final String msg;
   final Post post;
   final String title;

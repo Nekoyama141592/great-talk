@@ -52,7 +52,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   final Rx<ChatContent?> rxChatContent = Rx(null);
   final Rx<Post?> rxPost = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
-  final repository = FirestoreRepository();
+
   @override
   void onInit() async {
     startLoading();
@@ -98,6 +98,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
       rxChatContent(res);
     } else {
       final ref = DocRefCore.post(uid, postId);
+      final repository = FirestoreRepository();
       final result = await repository.getDoc(ref);
       result.when(success: (res) async {
         if (res.exists) {
@@ -189,11 +190,12 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     messages([...messages]); // messageを再代入して変更をViewに反映
     // リクエストを作成
     final requestMessages = await _createRequestMessages(content);
+    final jsonMessages = requestMessages.map((e) => e.toJson()).toList();
     final CustomCompleteText completeText =
         rxChatContent.value!.managedCustomCompleteText();
     final request = ChatCompleteText(
       model: PurchasesController.to.model(),
-      messages: requestMessages,
+      messages: jsonMessages,
       temperature: completeText.temperature,
       topP: completeText.topP,
       maxToken: _adjustMaxToken(),
@@ -501,6 +503,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
       postRef: postRef,
       postId: postId,
     );
+    final repository = FirestoreRepository();
     final result = await repository.createDoc(bookmarkRef, bookmark.toJson());
     result.when(success: (_) {
       Get.back();

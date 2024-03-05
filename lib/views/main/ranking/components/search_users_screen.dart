@@ -7,7 +7,7 @@ import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 import 'package:great_talk/views/screen/search_screen.dart';
 
 class SearchUsersScreen extends StatelessWidget {
-  const SearchUsersScreen({Key? key}) : super(key: key);
+  const SearchUsersScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SearchUsersController());

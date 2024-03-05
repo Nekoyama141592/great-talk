@@ -5,7 +5,7 @@ import 'package:great_talk/controllers/user_profile_controller.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 
 class FollowButton extends StatelessWidget {
-  const FollowButton({Key? key}) : super(key: key);
+  const FollowButton({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = UserProfileController.to;

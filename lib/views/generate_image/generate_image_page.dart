@@ -12,7 +12,7 @@ import 'package:great_talk/views/generate_image/components/generated_image.dart'
 import 'package:great_talk/views/screen/loading_screen.dart';
 
 class GenerateImagePage extends StatelessWidget {
-  const GenerateImagePage({Key? key}) : super(key: key);
+  const GenerateImagePage({super.key});
   static const path = "/generateImage";
   @override
   Widget build(BuildContext context) {

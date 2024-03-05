@@ -6,11 +6,10 @@ import 'package:material_floating_search_bar_2/material_floating_search_bar_2.da
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen(
-      {Key? key,
+      {super.key,
       required this.hint,
       required this.onQueryChanged,
-      required this.child})
-      : super(key: key);
+      required this.child});
   final String hint;
   final void Function(String)? onQueryChanged;
   final Widget child;

@@ -7,8 +7,7 @@ import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 
 class MutePostCard extends StatelessWidget {
-  const MutePostCard({Key? key, required this.post, required this.uint8list})
-      : super(key: key);
+  const MutePostCard({super.key, required this.post, required this.uint8list});
   final Post post;
   final Uint8List? uint8list;
   @override

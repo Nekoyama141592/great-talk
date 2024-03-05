@@ -13,8 +13,8 @@ import 'package:great_talk/views/create_post/components/original_form.dart';
 
 class AdminPage extends HookWidget {
   const AdminPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   static const path = "/admin";
   @override
   Widget build(BuildContext context) {

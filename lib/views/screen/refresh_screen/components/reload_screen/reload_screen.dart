@@ -4,8 +4,7 @@ import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/reload_screen/components/reload_button.dart';
 
 class ReloadScreen extends StatelessWidget {
-  const ReloadScreen({Key? key, required this.onReload, this.reloadMsg})
-      : super(key: key);
+  const ReloadScreen({super.key, required this.onReload, this.reloadMsg});
   final void Function()? onReload;
   final String? reloadMsg;
   @override

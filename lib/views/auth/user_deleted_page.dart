@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/views/screen/svg_and_msg_screen.dart';
 
 class UserDeletedPage extends StatelessWidget {
-  const UserDeletedPage({Key? key}) : super(key: key);
+  const UserDeletedPage({super.key});
   static const path = "/userDeleted";
   @override
   Widget build(BuildContext context) {

@@ -6,8 +6,7 @@ import 'package:great_talk/views/components/rounded_button.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class PurchaseButton extends StatelessWidget {
-  const PurchaseButton({Key? key, required this.productDetails})
-      : super(key: key);
+  const PurchaseButton({super.key, required this.productDetails});
   final ProductDetails productDetails;
   @override
   Widget build(BuildContext context) {

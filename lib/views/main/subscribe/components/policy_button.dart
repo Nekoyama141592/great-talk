@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PolicyButton extends StatelessWidget {
-  const PolicyButton({Key? key, required this.label, required this.onPressed})
-      : super(key: key);
+  const PolicyButton({super.key, required this.label, required this.onPressed});
   final String label;
   final void Function()? onPressed;
   @override

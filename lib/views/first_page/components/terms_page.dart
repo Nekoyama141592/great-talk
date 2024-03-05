@@ -7,7 +7,7 @@ import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 
 class TermsPage extends HookWidget {
-  const TermsPage({Key? key}) : super(key: key);
+  const TermsPage({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = MainController.to;

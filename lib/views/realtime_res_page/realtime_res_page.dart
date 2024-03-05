@@ -17,7 +17,7 @@ import 'package:great_talk/views/screen/refresh_screen/components/post_like_butt
 import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
 
 class RealtimeResPage extends HookWidget with CurrentUserMixin {
-  const RealtimeResPage({Key? key}) : super(key: key);
+  const RealtimeResPage({super.key});
   static const path = "/chat/users/:uid/posts/:postId";
   static String generatePath(String uid, String postId) =>
       "/chat/users/$uid/posts/$postId";

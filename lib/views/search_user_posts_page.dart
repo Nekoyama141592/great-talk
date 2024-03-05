@@ -5,7 +5,7 @@ import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 import 'package:great_talk/views/screen/search_screen.dart';
 
 class SearchUserPostsPage extends StatelessWidget {
-  const SearchUserPostsPage({Key? key}) : super(key: key);
+  const SearchUserPostsPage({super.key});
   static const path = "/users/:uid/searchPosts";
   static String generatePath(String uid) => "/users/$uid/searchPosts";
   @override

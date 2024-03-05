@@ -6,10 +6,10 @@ import 'package:great_talk/model/post/post.dart';
 
 class PostMsgButton extends HookWidget {
   const PostMsgButton({
-    Key? key,
+    super.key,
     required this.isHorizontal,
     required this.post,
-  }) : super(key: key);
+  });
   final bool isHorizontal;
   final Post post;
   @override

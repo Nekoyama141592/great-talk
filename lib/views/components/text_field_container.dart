@@ -3,9 +3,9 @@ import 'package:great_talk/common/doubles.dart';
 
 class TextFieldContainer extends StatelessWidget {
   const TextFieldContainer({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   final Widget child;
 

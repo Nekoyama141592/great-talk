@@ -4,8 +4,7 @@ import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 
 class SubscribedCopyableText extends StatelessWidget {
-  const SubscribedCopyableText({Key? key, required this.data, this.style})
-      : super(key: key);
+  const SubscribedCopyableText({super.key, required this.data, this.style});
   final String data;
   final TextStyle? style;
   @override

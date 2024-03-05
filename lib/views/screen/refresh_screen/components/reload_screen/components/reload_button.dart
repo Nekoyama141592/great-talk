@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ReloadButton extends StatelessWidget {
-  const ReloadButton({Key? key, required this.onReload}) : super(key: key);
+  const ReloadButton({super.key, required this.onReload});
   final void Function()? onReload;
   @override
   Widget build(BuildContext context) {

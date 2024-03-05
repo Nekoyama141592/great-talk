@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppBarAction extends StatelessWidget {
-  const AppBarAction({Key? key, required this.onTap, required this.child})
-      : super(key: key);
+  const AppBarAction({super.key, required this.onTap, required this.child});
   final void Function()? onTap;
   final Widget child;
   @override

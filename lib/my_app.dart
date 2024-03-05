@@ -8,7 +8,7 @@ import 'package:great_talk/utility/router.dart';
 import 'package:great_talk/views/first_page/first_page.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
   static const path = "/";
   @override
   Widget build(BuildContext context) {

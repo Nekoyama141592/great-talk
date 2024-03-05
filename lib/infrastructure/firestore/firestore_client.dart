@@ -5,22 +5,22 @@ class FirestoreClient {
   // count
   Future<int> countUsers() async {
     final snapshot = await CollectionGroupCore.users.count().get();
-    return snapshot.count;
+    return snapshot.count ?? 0;
   }
 
   Future<int> countPosts() async {
     final snapshot = await CollectionGroupCore.posts.count().get();
-    return snapshot.count;
+    return snapshot.count ?? 0;
   }
 
   Future<int> countMessages() async {
     final snapshot = await CollectionGroupCore.messages.count().get();
-    return snapshot.count;
+    return snapshot.count ?? 0;
   }
 
   Future<int> countSearchLogs() async {
     final snapshot = await CollectionGroupCore.searchLogs.count().get();
-    return snapshot.count;
+    return snapshot.count ?? 0;
   }
 
   // write

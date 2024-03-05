@@ -5,7 +5,7 @@ import 'package:great_talk/views/components/basic_page.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 
 class BookmarksPage extends StatelessWidget {
-  const BookmarksPage({Key? key}) : super(key: key);
+  const BookmarksPage({super.key});
   static const path = "/bookmarks/:categoryId";
   static String generatePath(String categoryId) => "/bookmarks/$categoryId";
   @override

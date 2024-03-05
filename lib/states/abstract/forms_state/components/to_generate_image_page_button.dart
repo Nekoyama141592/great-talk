@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/views/generate_image/generate_image_page.dart';
 
 class ToGeneratePageButton extends StatelessWidget {
-  const ToGeneratePageButton({Key? key}) : super(key: key);
+  const ToGeneratePageButton({super.key});
   @override
   Widget build(BuildContext context) {
     return TextButton(

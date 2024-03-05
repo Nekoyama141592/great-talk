@@ -9,11 +9,11 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RefreshScreen extends HookWidget {
   const RefreshScreen({
-    Key? key,
+    super.key,
     required this.docsController,
     this.reloadMsg,
     this.child,
-  }) : super(key: key);
+  });
   final DocsController docsController;
   final String? reloadMsg;
   final Widget? child;

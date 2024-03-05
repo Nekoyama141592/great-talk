@@ -9,7 +9,7 @@ import 'package:great_talk/views/create_post/components/form_label.dart';
 import 'package:great_talk/views/create_post/components/original_form.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
+  const EditProfilePage({super.key});
   static const path = "/editProfile";
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -27,7 +27,6 @@ class _EditProfilePageState extends FormsState<EditProfilePage> {
     deviceHeight = MediaQuery.of(context).size.height; // 高さを設定
     final controller = EditController.to;
     return FormsScreen(
-      onWillPop: onWillPop,
       appBarText: "ユーザー情報を編集",
       children: [
         _createPostForm(),

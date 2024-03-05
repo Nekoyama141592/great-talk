@@ -7,12 +7,11 @@ import 'package:great_talk/views/components/circle_image/components/s3_image.dar
 
 class CircleImage extends StatelessWidget {
   const CircleImage(
-      {Key? key,
+      {super.key,
       required this.bucketName,
       required this.imageValue,
       this.uint8list,
-      this.onTap})
-      : super(key: key);
+      this.onTap});
   final String bucketName;
   final String imageValue;
   final Uint8List? uint8list;

@@ -15,7 +15,7 @@ import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 import 'package:great_talk/views/search_user_posts_page.dart';
 
 class ProfileScreen extends StatelessWidget with CurrentUserMixin {
-  const ProfileScreen({Key? key, required this.controller}) : super(key: key);
+  const ProfileScreen({super.key, required this.controller});
   final ProfileController controller;
   @override
   Widget build(BuildContext context) {

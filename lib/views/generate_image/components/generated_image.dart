@@ -5,7 +5,7 @@ import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/generate_image/components/sized_wrapper.dart';
 
 class GeneratedImage extends StatelessWidget {
-  const GeneratedImage({Key? key}) : super(key: key);
+  const GeneratedImage({super.key});
   @override
   Widget build(BuildContext context) {
     return Obx(() {

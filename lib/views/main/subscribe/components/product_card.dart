@@ -7,8 +7,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard(
-      {Key? key, required this.productDetails, required this.descriptions})
-      : super(key: key);
+      {super.key, required this.productDetails, required this.descriptions});
   final ProductDetails productDetails;
   final List<Widget> descriptions;
   @override

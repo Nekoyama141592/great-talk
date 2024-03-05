@@ -6,8 +6,8 @@ import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   static const path = "/account";
 
   @override

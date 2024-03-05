@@ -24,7 +24,7 @@ import 'package:great_talk/views/main/subscribe/subscribe_screen.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 
 class MyHomePage extends HookWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({super.key});
   @override
   Widget build(context) {
     Get.put(PurchasesController());

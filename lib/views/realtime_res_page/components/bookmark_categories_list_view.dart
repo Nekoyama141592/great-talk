@@ -9,7 +9,7 @@ import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 
 class BookmarkCategoriesListView extends StatelessWidget {
-  const BookmarkCategoriesListView({Key? key}) : super(key: key);
+  const BookmarkCategoriesListView({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = RealtimeResController.to;

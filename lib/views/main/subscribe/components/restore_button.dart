@@ -3,7 +3,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 
 class RestoreButton extends StatelessWidget {
-  const RestoreButton({Key? key}) : super(key: key);
+  const RestoreButton({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = PurchasesController.to;

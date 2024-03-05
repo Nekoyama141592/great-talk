@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/states/abstract/forms_state/components/to_generate_image_page_button.dart';
@@ -52,14 +51,5 @@ abstract class FormsState<T extends StatefulWidget> extends State<T> {
       formKey.currentState!.save();
     }
     controller.onPositiveButtonPressed();
-  }
-
-  Future<bool> onWillPop() async {
-    bool value = false;
-    UIHelper.cupertinoAlertDialog("変更内容が破棄されます", () {
-      Get.back();
-      Get.back();
-    });
-    return value;
   }
 }

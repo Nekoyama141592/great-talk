@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MosaicCard extends StatelessWidget {
-  const MosaicCard({Key? key, required this.child}) : super(key: key);
+  const MosaicCard({super.key, required this.child});
   final Widget child;
   @override
   Widget build(BuildContext context) {

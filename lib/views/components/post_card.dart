@@ -15,7 +15,7 @@ import 'package:great_talk/views/screen/refresh_screen/components/post_msg_butto
 import 'package:great_talk/views/user_profile_page.dart';
 
 class PostCard extends StatelessWidget with CurrentUserMixin {
-  const PostCard({Key? key, required this.qDocInfo}) : super(key: key);
+  const PostCard({super.key, required this.qDocInfo});
   final QDocInfo qDocInfo;
   @override
   Widget build(BuildContext context) {

@@ -6,11 +6,10 @@ import 'package:great_talk/views/components/basic_width_box.dart';
 
 class MosaicUserChild extends StatelessWidget {
   const MosaicUserChild(
-      {Key? key,
+      {super.key,
       required this.publicUser,
       required this.msg,
-      required this.title})
-      : super(key: key);
+      required this.title});
   final PublicUser publicUser;
   final String msg;
   final String title;

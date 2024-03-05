@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SizedWrapper extends StatelessWidget {
-  const SizedWrapper({Key? key, this.child}) : super(key: key);
+  const SizedWrapper({super.key, this.child});
   final Widget? child;
   @override
   Widget build(BuildContext context) {

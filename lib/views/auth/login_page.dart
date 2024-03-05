@@ -3,7 +3,7 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/views/screen/login_screen.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {

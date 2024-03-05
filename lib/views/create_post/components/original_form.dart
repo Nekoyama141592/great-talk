@@ -3,15 +3,14 @@ import 'package:great_talk/views/components/text_field_container.dart';
 
 class OriginalForm extends StatelessWidget {
   const OriginalForm(
-      {Key? key,
+      {super.key,
       this.initialValue,
       this.decoration,
       this.maxLines,
       this.keyboardType,
       this.onChanged,
       this.onSaved,
-      this.validator})
-      : super(key: key);
+      this.validator});
   final String? initialValue;
   final InputDecoration? decoration;
   final int? maxLines;

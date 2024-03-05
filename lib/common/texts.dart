@@ -14,7 +14,7 @@ class EllipsisText extends Text {
 }
 
 class BasicBoldText extends StatelessWidget {
-  const BasicBoldText(this.text, {Key? key, this.textColor}) : super(key: key);
+  const BasicBoldText(this.text, {super.key, this.textColor});
   final String text;
   final Color? textColor;
   @override
@@ -28,7 +28,7 @@ class BasicBoldText extends StatelessWidget {
 }
 
 class BoldWhiteText extends StatelessWidget {
-  const BoldWhiteText(this.text, {Key? key}) : super(key: key);
+  const BoldWhiteText(this.text, {super.key});
   final String text;
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class BoldWhiteText extends StatelessWidget {
 }
 
 class TabText extends StatelessWidget {
-  const TabText(this.text, {Key? key}) : super(key: key);
+  const TabText(this.text, {super.key});
   final String text;
   @override
   Widget build(BuildContext context) {

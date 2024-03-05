@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 
 class BasicPage extends StatelessWidget {
   const BasicPage(
-      {Key? key,
+      {super.key,
       this.appBarText,
       this.floatingActionButton,
-      required this.child})
-      : super(key: key);
+      required this.child});
   final String? appBarText;
   final Widget? floatingActionButton;
   final Widget child;

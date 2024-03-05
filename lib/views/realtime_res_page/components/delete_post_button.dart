@@ -3,7 +3,7 @@ import 'package:great_talk/controllers/realtime_res_controller.dart';
 import 'package:great_talk/views/components/app_bar_action.dart';
 
 class DeletePostButton extends StatelessWidget {
-  const DeletePostButton({Key? key}) : super(key: key);
+  const DeletePostButton({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = RealtimeResController.to;

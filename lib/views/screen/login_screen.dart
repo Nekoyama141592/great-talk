@@ -10,11 +10,10 @@ import 'package:great_talk/views/components/rounded_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen(
-      {Key? key,
+      {super.key,
       required this.onAppleButtonPressed,
       required this.onGoogleButtonPressed,
-      required this.title})
-      : super(key: key);
+      required this.title});
   final void Function()? onAppleButtonPressed;
   final void Function()? onGoogleButtonPressed;
   final String title;

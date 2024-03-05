@@ -5,7 +5,7 @@ import 'package:great_talk/views/components/original_content_cards.dart';
 import 'package:great_talk/views/screen/search_screen.dart';
 
 class OriginalContentsPage extends StatelessWidget {
-  const OriginalContentsPage({Key? key}) : super(key: key);
+  const OriginalContentsPage({super.key});
   static const path = "/originalContents";
   @override
   Widget build(BuildContext context) {

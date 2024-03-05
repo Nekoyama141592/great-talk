@@ -7,7 +7,7 @@ import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 
 class ReportContentsListView extends StatelessWidget {
-  const ReportContentsListView({Key? key}) : super(key: key);
+  const ReportContentsListView({super.key});
   @override
   Widget build(BuildContext context) {
     const List<String> reportContents = ["暴力的なコンテンツ", "性的なコンテンツ", "不快なコンテンツ"];

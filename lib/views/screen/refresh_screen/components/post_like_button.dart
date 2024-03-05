@@ -7,10 +7,10 @@ import 'package:great_talk/model/post/post.dart';
 
 class PostLikeButton extends HookWidget {
   const PostLikeButton({
-    Key? key,
+    super.key,
     required this.isHorizontal,
     required this.post,
-  }) : super(key: key);
+  });
   final bool isHorizontal;
   final Post post;
   @override

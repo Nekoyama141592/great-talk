@@ -8,7 +8,7 @@ import 'package:great_talk/views/components/basic_page.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 
 class BookmarkCategoriesPage extends HookWidget {
-  const BookmarkCategoriesPage({Key? key}) : super(key: key);
+  const BookmarkCategoriesPage({super.key});
   static const path = "/bookmarkCategory";
   @override
   Widget build(BuildContext context) {

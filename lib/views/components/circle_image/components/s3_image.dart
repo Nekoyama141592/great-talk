@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/common/doubles.dart';
 
 class S3Image extends StatelessWidget {
-  const S3Image({Key? key, required this.uint8list}) : super(key: key);
+  const S3Image({super.key, required this.uint8list});
   final Uint8List uint8list;
   @override
   Widget build(BuildContext context) {

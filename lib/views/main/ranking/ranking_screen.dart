@@ -6,7 +6,7 @@ import 'package:great_talk/views/main/ranking/components/search_users_screen.dar
 import 'package:great_talk/views/main/ranking/components/user_ranking_screen.dart';
 
 class RankingScreen extends StatelessWidget {
-  const RankingScreen({Key? key}) : super(key: key);
+  const RankingScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

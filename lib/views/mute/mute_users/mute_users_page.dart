@@ -6,7 +6,7 @@ import 'package:great_talk/views/mute/mute_users/component/mute_user_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 
 class MuteUsersPage extends StatelessWidget {
-  const MuteUsersPage({Key? key}) : super(key: key);
+  const MuteUsersPage({super.key});
   static const path = "/muteUsers";
   @override
   Widget build(BuildContext context) {

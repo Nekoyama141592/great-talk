@@ -4,7 +4,7 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/iap_constants/mock_product_list.dart';
 
 class PriceList extends StatelessWidget {
-  const PriceList({Key? key}) : super(key: key);
+  const PriceList({super.key});
   @override
   Widget build(BuildContext context) {
     return Card(

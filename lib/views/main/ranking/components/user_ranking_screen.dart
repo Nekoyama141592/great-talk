@@ -6,7 +6,7 @@ import 'package:great_talk/views/components/user_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 
 class UserRankingScreen extends StatelessWidget {
-  const UserRankingScreen({Key? key}) : super(key: key);
+  const UserRankingScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserRankingController());

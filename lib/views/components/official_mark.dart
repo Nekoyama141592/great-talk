@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OfficialMark extends StatelessWidget {
-  const OfficialMark({Key? key}) : super(key: key);
+  const OfficialMark({super.key});
   @override
   Widget build(BuildContext context) {
     return Icon(

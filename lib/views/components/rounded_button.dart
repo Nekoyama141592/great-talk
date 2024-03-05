@@ -5,14 +5,14 @@ import 'package:great_talk/common/texts.dart';
 
 class RoundedButton extends StatelessWidget {
   const RoundedButton({
-    Key? key,
+    super.key,
     required this.text,
     this.press,
     this.buttonColor,
     this.textColor,
     this.icon,
     this.widthRate = 0.85,
-  }) : super(key: key);
+  });
 
   final String text;
   final double widthRate;

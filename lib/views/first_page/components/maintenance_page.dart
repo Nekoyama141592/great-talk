@@ -4,7 +4,7 @@ import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/remote_config_controller.dart';
 
 class MaintenancePage extends StatelessWidget {
-  const MaintenancePage({Key? key}) : super(key: key);
+  const MaintenancePage({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = RemoteConfigController.to;

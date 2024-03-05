@@ -3,12 +3,12 @@ import 'package:great_talk/common/doubles.dart';
 
 class GradientScreen extends StatelessWidget {
   const GradientScreen({
-    Key? key,
+    super.key,
     this.baseColor,
     this.top,
     this.header,
     required this.child,
-  }) : super(key: key);
+  });
 
   final Color? baseColor;
   final Widget? top;

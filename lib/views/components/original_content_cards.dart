@@ -7,7 +7,7 @@ import 'package:great_talk/controllers/persons_controller.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 
 class OriginalContentCards extends StatelessWidget {
-  const OriginalContentCards({Key? key}) : super(key: key);
+  const OriginalContentCards({super.key});
   @override
   Widget build(context) {
     final PersonsController controller = PersonsController.to;

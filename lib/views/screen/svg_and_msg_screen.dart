@@ -5,8 +5,10 @@ import 'package:great_talk/views/screen/gradient_screen.dart';
 
 class SvgAndMsgScreen extends StatelessWidget {
   const SvgAndMsgScreen(
-      {Key? key, required this.title, required this.msg, required this.svgPath})
-      : super(key: key);
+      {super.key,
+      required this.title,
+      required this.msg,
+      required this.svgPath});
 
   final String title;
   final String msg;

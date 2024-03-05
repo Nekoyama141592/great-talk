@@ -4,7 +4,7 @@ import 'package:great_talk/views/components/rounded_button.dart';
 import 'package:great_talk/views/edit_page.dart';
 
 class EditButton extends StatelessWidget {
-  const EditButton({Key? key}) : super(key: key);
+  const EditButton({super.key});
   @override
   Widget build(BuildContext context) {
     return RoundedButton(

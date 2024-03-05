@@ -5,8 +5,8 @@ import 'package:great_talk/views/components/app_bar_action.dart';
 
 class PostReportButton extends HookWidget {
   const PostReportButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     final controller = PostsController.to;

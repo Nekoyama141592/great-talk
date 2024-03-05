@@ -10,7 +10,7 @@ import 'package:great_talk/views/loading_page.dart';
 import 'package:great_talk/views/main/my_home_page.dart';
 
 class FirstPage extends StatelessWidget {
-  const FirstPage({Key? key}) : super(key: key);
+  const FirstPage({super.key});
   @override
   Widget build(BuildContext context) {
     final currentUserController = Get.put(CurrentUserController());

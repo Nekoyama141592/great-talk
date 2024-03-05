@@ -4,8 +4,7 @@ import 'package:great_talk/controllers/create_post_controller.dart';
 
 class MainFloatingActionButton extends StatelessWidget {
   const MainFloatingActionButton(
-      {Key? key, required this.controller, required this.pageIndex})
-      : super(key: key);
+      {super.key, required this.controller, required this.pageIndex});
   final PageController controller;
   final ValueNotifier<int> pageIndex;
   @override
