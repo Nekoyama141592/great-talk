@@ -32,8 +32,8 @@ const userImagesBucket = aws_config.s3.user_images; // s3バケット
 
 function updateAWSConfig() {
     AWS.config.update({
-        accessKeyId: process.env.AWS_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        accessKeyId: `${process.env.AWS_ACCESS_KEY}`,
+        secretAccessKey: `${process.env.AWS_SECRET_ACCESS_KEY}`,
         region: AWS_REGION,
     });
 }
@@ -259,7 +259,6 @@ exports.onFollowerDelete = functions.firestore.document(`${userPath}/followers/{
     }
 );
 exports.onPostCreate = functions
-.runWith({secrets: ["AWS_ACCESS_KEY","AWS_SECRET_ACCESS_KEY"]})
 .firestore.document(postPath).onCreate(
     async (snap,context) => {
         const uid = context.params.uid;
@@ -401,7 +400,6 @@ exports.onUserMutesDelete = functions.firestore.document(`${userPath}/userMutes/
     }
 );
 exports.onUserUpdateLogCreate = functions
-.runWith({secrets: ["AWS_ACCESS_KEY","AWS_SECRET_ACCESS_KEY"]})
 .firestore.document(`${userPath}/userUpdateLogs/{id}`).onCreate(
     async (snap,_) => {
         const newValue = snap.data();
@@ -429,14 +427,13 @@ exports.onUserUpdateLogCreate = functions
     }
 );
 exports.verifyAndroidReceipt = functions
-.runWith({secrets: ["GCP_PRIVATE_KEY"]})
 .https.onRequest(async (req, res) => {
     if (req.method !== "POST") {
         res.status(403).send();
         return;
     }
     const purchaseDetails = req.body["data"];
-    const privateKey = getPrivateKey(process.env.GCP_PRIVATE_KEY);
+    const privateKey = getPrivateKey(`${process.env.GCP_PRIVATE_KEY}`);
     const authClient = new google.auth.JWT({
         email: config.gcp.client_email,
         key: privateKey,
@@ -489,9 +486,8 @@ exports.verifyAndroidReceipt = functions
 });
 // ios
 exports.verifyIOSReceipt = functions
-.runWith({secrets: ["APP_SHARED_SECRET"]})
 .https.onRequest(async (req, res) => {
-    const RECEIPT_VERIFICATION_PASSWORD_FOR_IOS = process.env.APP_SHARED_SECRET;
+    const RECEIPT_VERIFICATION_PASSWORD_FOR_IOS = `${process.env.APP_SHARED_SECRET}`;
     if (req.method !== "POST") {
         res.status(403).send();
         return;
