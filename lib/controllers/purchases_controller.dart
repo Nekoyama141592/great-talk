@@ -213,11 +213,11 @@ class PurchasesController extends GetxController with CurrentUserMixin {
 
   Future<void> _listenToPurchaseUpdated(
       List<PurchaseDetails> purchaseDetailsList) async {
+    if (CurrentUserController.to.isAdmin()) {
+      await UIHelper.showFlutterToast(
+          "${purchaseDetailsList.length}件のアイテムに対して処理を実行");
+    }
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
-      if (CurrentUserController.to.isAdmin()) {
-        await UIHelper.showFlutterToast(
-            "${purchaseDetailsList.length}件のアイテムに対して処理を実行");
-      }
       if (purchaseDetails.pendingCompletePurchase) {
         await inAppPurchase.completePurchase(purchaseDetails);
       }
