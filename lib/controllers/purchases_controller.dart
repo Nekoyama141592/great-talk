@@ -7,6 +7,7 @@ import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
+import 'package:great_talk/consts/purchase_constants.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/delegates/payment_queue_delegate.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
@@ -217,14 +218,10 @@ class PurchasesController extends GetxController with CurrentUserMixin {
       await UIHelper.showFlutterToast(
           "${purchaseDetailsList.length}件のアイテムに対して処理を実行");
     }
-    for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
-      if (purchaseDetails.pendingCompletePurchase) {
-        await inAppPurchase.completePurchase(purchaseDetails);
-      }
-      if (purchaseDetails.status == PurchaseStatus.pending) {
-        await _acknowledge(
-            purchaseDetails.verificationData.serverVerificationData);
-      }
+    for (int i = 0; i < PurchaseConstants.verifyItemLimit; i++) {
+      final purchaseDetails = purchaseDetailsList[i];
+      await _completePurchase(purchaseDetails);
+      await _acknowledge(purchaseDetails);
       if (purchaseDetails.status == PurchaseStatus.error &&
           CurrentUserController.to.isAdmin()) {
         UIHelper.showErrorFlutterToast(
@@ -238,10 +235,19 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     }
   }
 
-  Future<void> _acknowledge(String serverVerificationData) async {
-    if (Platform.isAndroid) {
+  Future<void> _completePurchase(PurchaseDetails purchaseDetails) async {
+    if (purchaseDetails.pendingCompletePurchase) {
+      await inAppPurchase.completePurchase(purchaseDetails);
+    }
+  }
+
+  Future<void> _acknowledge(PurchaseDetails purchaseDetails) async {
+    if (Platform.isAndroid &&
+        purchaseDetails.status == PurchaseStatus.pending) {
       // 承認を行う.行わないと払い戻しが行われる.
       BillingClient client = BillingClient((_) {});
+      final serverVerificationData =
+          purchaseDetails.verificationData.serverVerificationData;
       await client.acknowledgePurchase(serverVerificationData);
     }
   }
