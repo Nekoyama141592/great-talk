@@ -28,11 +28,14 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   final purchases = <PurchaseDetails>[].obs;
   final products = <ProductDetails>[].obs;
   final Rx<CachedReceipt> rxCachedReceipt = Rx(CachedReceipt.instance());
-  final InAppPurchase inAppPurchase = InAppPurchase.instance;
+
   late StreamSubscription<List<PurchaseDetails>> subscription;
 
   final isAvailable = false.obs;
   final loading = false.obs;
+
+  PurchasesRepository get repository => PurchasesRepository();
+  InAppPurchase get inAppPurchase => InAppPurchase.instance;
 
   @override
   void onInit() async {
@@ -122,7 +125,6 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _restorePurchase() async {
-    final repository = PurchasesRepository();
     final result = await repository.restorePurchases();
     result.when(success: (_) {
       UIHelper.showFlutterToast("購入の復元に成功しました。現在、サーバーで購入情報を検証しています。");
@@ -140,9 +142,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> _fetchProducts() async {
-    final repository = PurchasesRepository();
-    final result = await repository.queryProductDetails(
-        inAppPurchase, kProductIds.toSet());
+    final result = await repository.queryProductDetails(kProductIds.toSet());
     result.when(success: (res) {
       final sorted = res
         ..sort(
@@ -163,7 +163,6 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     if (Platform.isAndroid) {
       // iOSの場合
       late bool isValid;
-      final repository = PurchasesRepository();
       final result =
           await repository.getAndroidReceipt(purchaseDetails, currentUid());
       result.when(success: (res) async {
@@ -176,7 +175,6 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     } else {
       // iOSの場合
       late bool isValid;
-      final repository = PurchasesRepository();
       final result =
           await repository.getIOSReceipt(purchaseDetails, currentUid());
       result.when(success: (res) async {
@@ -216,22 +214,26 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   Future<void> _listenToPurchaseUpdated(
       List<PurchaseDetails> purchaseDetailsList) async {
     for (final PurchaseDetails purchaseDetails in purchaseDetailsList) {
-      await inAppPurchase.completePurchase(purchaseDetails);
-      if (purchaseDetails.isPending) {
+      if (CurrentUserController.to.isAdmin()) {
+        await UIHelper.showFlutterToast(
+            "${purchaseDetailsList.length}件のアイテムに対して処理を実行");
+      }
+      if (purchaseDetails.pendingCompletePurchase) {
+        await inAppPurchase.completePurchase(purchaseDetails);
+      }
+      if (purchaseDetails.status == PurchaseStatus.pending) {
         await _acknowledge(
             purchaseDetails.verificationData.serverVerificationData);
       }
-      // 登録しているサブスクが一つでも認証していれば、もう検証しなくて良い
-      if (purchases.isNotEmpty) return;
       if (purchaseDetails.status == PurchaseStatus.error &&
           CurrentUserController.to.isAdmin()) {
-        UIHelper.showErrorFlutterToast(purchaseDetails.error!.message);
+        UIHelper.showErrorFlutterToast(
+            purchaseDetails.error?.message ?? "購入時にエラーが発生");
       } else if (purchaseDetails.isPurchased) {
         final isValid = await verifyPurchase(purchaseDetails);
         if (isValid) {
           deliverProduct(purchaseDetails);
         }
-        return;
       }
     }
   }
@@ -257,9 +259,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
         : PurchaseParam(productDetails: productDetails);
     await UIHelper.showFlutterToast("情報を取得しています。 \nしばらくお待ちください。");
     loading(true);
-    final repository = PurchasesRepository();
-    final result =
-        await repository.buyNonConsumable(inAppPurchase, purchaseParam);
+    final result = await repository.buyNonConsumable(purchaseParam);
     result.when(
         success: (_) {},
         failure: () {

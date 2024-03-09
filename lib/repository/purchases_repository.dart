@@ -7,8 +7,9 @@ import 'package:great_talk/repository/result.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class PurchasesRepository {
+  InAppPurchase get inAppPurchase => InAppPurchase.instance;
   FutureResult<List<ProductDetails>> queryProductDetails(
-      InAppPurchase inAppPurchase, Set<String> identifiers) async {
+      Set<String> identifiers) async {
     try {
       final ProductDetailsResponse productDetailResponse =
           await inAppPurchase.queryProductDetails(identifiers);
@@ -22,8 +23,7 @@ class PurchasesRepository {
     }
   }
 
-  FutureResult<bool> buyNonConsumable(
-      InAppPurchase inAppPurchase, PurchaseParam purchaseParam) async {
+  FutureResult<bool> buyNonConsumable(PurchaseParam purchaseParam) async {
     try {
       await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       return const Result.success(true);
@@ -82,7 +82,6 @@ class PurchasesRepository {
 
   FutureResult<bool> restorePurchases() async {
     try {
-      final inAppPurchase = InAppPurchase.instance;
       await inAppPurchase.restorePurchases();
       return const Result.success(true);
     } catch (e) {
