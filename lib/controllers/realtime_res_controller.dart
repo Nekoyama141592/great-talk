@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -234,8 +235,19 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     if (isGenerating.value || rxChatContent.value == null) return;
     isGenerating(true);
     final client = ChatGptSdkClient();
-    client.openAI.onChatCompletionSSE(request: request).listen((it) {
-      final content = it.choices?.last.message?.content;
+    client.openAI.onChatCompletionSSE(request: request).transform(
+        StreamTransformer.fromHandlers(handleError: (err, stackTrace, sink) {
+      if (err is OpenAIAuthError) {
+        UIHelper.showFlutterToast("OpenAIの認証でエラーが発生しました。運営の対応をお待ちください。");
+      }
+      if (err is OpenAIRateLimitError) {
+        UIHelper.showFlutterToast("RateLimitエラーが発生しました。しばらく待ってからお試しください。");
+      }
+      if (err is OpenAIServerError) {
+        UIHelper.showFlutterToast("OpenAIのサーバーでエラーが発生しました。しばらく待ってからお試しください。");
+      }
+    })).listen((it) {
+      final content = (it as ChatResponseSSE).choices?.last.message?.content;
       if (content != null && content.isNotEmpty) {
         realtimeRes(realtimeRes.value + content);
         _scrollToBottom(scrollController);
@@ -252,8 +264,6 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
       messages.removeRange(
           messages.length - 2, messages.length); // うまく生成できなかったメッセージを削除
       messages([...messages]);
-      UIHelper.showFlutterToast("文字数オーバーもしくはサーバーエラーで、値を取得できませんでした。");
-      debugPrint("メッセージ生成時のエラー $e");
       isGenerating(false);
     });
   }
