@@ -36,12 +36,15 @@ class PostLikeButton extends HookWidget {
           child:
               Text(isHorizontal ? copyPost.value.likeCount.formatNumber() : ""))
     ];
-    return isHorizontal
-        ? Row(
-            children: children,
-          )
-        : Column(
-            children: children,
-          );
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: isHorizontal
+          ? Row(
+              children: children,
+            )
+          : Column(
+              children: children,
+            ),
+    );
   }
 }

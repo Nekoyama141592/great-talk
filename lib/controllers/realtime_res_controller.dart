@@ -358,7 +358,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     if (post == null) return [];
     final id = post.postId;
     switch (id) {
-      case wolframId:
+      case calculateAI:
         final wolframRes = await WolframRepository.fetchApi(content);
         List<Messages> requestMessages = [];
         wolframRes.when(success: (res) {

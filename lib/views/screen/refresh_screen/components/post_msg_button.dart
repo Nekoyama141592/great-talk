@@ -25,12 +25,15 @@ class PostMsgButton extends HookWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Text((post.msgCount).formatNumber()))
     ];
-    return isHorizontal
-        ? Row(
-            children: children,
-          )
-        : Column(
-            children: children,
-          );
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0),
+      child: isHorizontal
+          ? Row(
+              children: children,
+            )
+          : Column(
+              children: children,
+            ),
+    );
   }
 }

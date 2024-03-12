@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/doubles.dart';
+import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
@@ -57,8 +58,10 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
               onTap: () => controller.onPostCardPressed(post),
               child: Container(
                 decoration: BoxDecoration(
-                  border:
-                      Border.all(color: Theme.of(context).colorScheme.primary),
+                  border: Border.all(
+                      color: post.uid == officialUid
+                          ? Colors.orange
+                          : Theme.of(context).colorScheme.primary),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Column(
@@ -90,7 +93,7 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
                             post: post,
                           ),
                           const Spacer(),
-                          PostMsgButton(isHorizontal: false, post: post)
+                          PostMsgButton(isHorizontal: false, post: post),
                         ],
                       ),
                     ),

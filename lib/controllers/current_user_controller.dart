@@ -225,7 +225,7 @@ class CurrentUserController extends GetxController {
 
   Future<void> onLoginSuccess(User user) async {
     Get.back();
-    UIHelper.showErrorFlutterToast("ログインに成功しました");
+    UIHelper.showFlutterToast("ログインに成功しました");
     await user.reload();
     rxAuthUser(user);
     await _manageUserInfo();
