@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
-import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/core/firestore/col_ref_core.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
@@ -22,6 +23,7 @@ import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
+import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 import 'package:great_talk/views/auth/logouted_page.dart';
 import 'package:great_talk/views/auth/user_deleted_page.dart';
@@ -31,7 +33,7 @@ class CurrentUserController extends GetxController {
   final Rx<User?> rxAuthUser = Rx(FirebaseAuth.instance.currentUser);
   final Rx<PublicUser?> rxPublicUser = Rx(null);
   final Rx<PrivateUser?> rxPrivateUser = Rx(null);
-
+  final Rx<Uint8List?> rxUint8list = Rx(null);
   final deletePostIds = <String>[].obs; // 投稿の削除時に一時的に保存する.
 
   final bookmarkCategoryTokens = <BookmarkCategory>[].obs;
@@ -222,10 +224,11 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> onLoginSuccess(User user) async {
+    Get.back();
+    UIHelper.showErrorFlutterToast("ログインに成功しました");
     await user.reload();
     rxAuthUser(user);
     await _manageUserInfo();
-    await MyProfileController.to.onReload();
   }
 
   Future<void> _createPublicUser() async {
@@ -236,7 +239,6 @@ class CurrentUserController extends GetxController {
     final result = await repository.createDoc(ref, json);
     result.when(success: (_) {
       rxPublicUser(newUser);
-      MyProfileController.to.updateProfileUserState(newUser);
       UIHelper.showFlutterToast("ユーザーが作成されました");
     }, failure: () {
       UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
@@ -275,9 +277,14 @@ class CurrentUserController extends GetxController {
     result.when(success: (res) async {
       if (res.exists && rxPublicUser.value == null) {
         // アカウントが存在するなら代入する
-        final newUser = PublicUser.fromJson(res.data()!);
-        rxPublicUser(newUser);
-        MyProfileController.to.updateProfileUserState(newUser);
+        final user = PublicUser.fromJson(res.data()!);
+        rxPublicUser(user);
+        final bucketName = user.typedImage().bucketName;
+        final fileName = user.typedImage().value;
+        if (bucketName.isNotEmpty && fileName.isNotEmpty) {
+          final image = await FileUtility.getS3Image(bucketName, fileName);
+          rxUint8list(image);
+        }
       } else {
         // アカウントが存在しないなら作成する
         await _createPublicUser();
@@ -408,7 +415,9 @@ class CurrentUserController extends GetxController {
         userName: user.typedUserName().copyWith(value: userName).toJson(),
         image: user.typedImage().copyWith(value: fileName).toJson());
     rxPublicUser(result);
-    MyProfileController.to.updateProfileUserState(result);
+    final image =
+        await FileUtility.getS3Image(user.typedImage().bucketName, fileName);
+    rxUint8list(image);
   }
 
   void createBookmarkCategory(

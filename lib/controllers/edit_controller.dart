@@ -5,7 +5,6 @@ import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
@@ -22,7 +21,7 @@ class EditController extends FormsController with CurrentUserMixin {
       (CurrentUserController.to.rxPublicUser.value?.bioValue ?? "").obs;
 
   void init() {
-    rxUint8list.value ??= MyProfileController.to.rxUint8list.value;
+    rxUint8list.value ??= CurrentUserController.to.rxUint8list.value;
   }
 
   // セッターメソッド
@@ -98,6 +97,7 @@ class EditController extends FormsController with CurrentUserMixin {
     final result = await repository.createDoc(ref, json);
     result.when(success: (_) {
       CurrentUserController.to.updateUser(userName, bio, fileName);
+      Get.back();
       Get.back();
       UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
     }, failure: () {

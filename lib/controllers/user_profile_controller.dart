@@ -17,13 +17,11 @@ import 'package:great_talk/utility/file_utility.dart';
 class UserProfileController extends ProfileController {
   static UserProfileController get to => Get.find<UserProfileController>();
   @override
-  bool get isMyProfile => false;
-  @override
   String passiveUid() => Get.parameters['uid']!;
   @override
-  void onInit() async {
-    super.onInit();
+  Future<void> init() async {
     await _getPassiveUser();
+    return super.init();
   }
 
   @override
@@ -42,7 +40,9 @@ class UserProfileController extends ProfileController {
     }, failure: () {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
-    final detectedImage = rxPassiveUser.value!.typedImage();
+    final user = rxPassiveUser.value;
+    if (user == null) return;
+    final detectedImage = user.typedImage();
     final s3Image = await FileUtility.getS3Image(
         detectedImage.bucketName, detectedImage.value);
     rxUint8list(s3Image);

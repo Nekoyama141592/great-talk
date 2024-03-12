@@ -10,11 +10,10 @@ class MainFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final value = pageIndex.value;
-    if (value == 0 || value == 4) {
+    if (value == 0 || value == 1) {
       return FloatingActionButton(
           backgroundColor: kPrimaryColor,
-          onPressed: () => CreatePostController.to
-              .onFloatingActionButtonPressed(controller, pageIndex.value),
+          onPressed: CreatePostController.to.onFloatingActionButtonPressed,
           child: const Icon(Icons.new_label));
     } else {
       return const SizedBox.shrink();

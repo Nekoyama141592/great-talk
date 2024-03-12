@@ -27,10 +27,4 @@ final List<BottomNavigationBarItem> bnbElements = [
         Icons.subscriptions,
         color: kSecondaryColor,
       )),
-  const BottomNavigationBarItem(
-      label: 'マイページ',
-      icon: Icon(
-        Icons.settings,
-        color: kSecondaryColor,
-      )),
 ];

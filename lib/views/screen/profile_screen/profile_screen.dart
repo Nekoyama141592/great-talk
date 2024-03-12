@@ -6,6 +6,7 @@ import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/utility/style_utility.dart';
+import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/official_mark.dart';
 import 'package:great_talk/views/screen/gradient_screen.dart';
@@ -20,17 +21,16 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
   @override
   Widget build(BuildContext context) {
     final children = <Widget>[
-      if (!controller.isMyProfile)
-        Align(
-          alignment: Alignment.centerLeft,
-          child: InkWell(
-            onTap: Get.back,
-            child: const Icon(
-              Icons.arrow_back,
-              size: 30.0,
-            ),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: InkWell(
+          onTap: Get.back,
+          child: const Icon(
+            Icons.arrow_back,
+            size: 30.0,
           ),
         ),
+      ),
       Obx(() => EllipsisText(
             controller.rxPassiveUser.value!.nameValue,
             style: StyleUtility.bold25(),
@@ -48,12 +48,11 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
                     uint8list: controller.rxUint8list.value,
                   ),
           ),
+          const BasicWidthBox(),
           Obx(() => Text(
                 "フォロー ${controller.rxPassiveUser.value?.followingCount.formatNumber() ?? 0}",
               )),
-          const SizedBox(
-            width: 20.0,
-          ),
+          const BasicWidthBox(),
           Obx(() => Text(
                 "フォロワー ${controller.rxPassiveUser.value?.followerCount.formatNumber() ?? 0}",
               ))
@@ -98,8 +97,7 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
                     if (passiveUser == null) {
                       return const SizedBox.shrink();
                     }
-                    return controller.isMyProfile ||
-                            passiveUser.uid == currentUid()
+                    return passiveUser.uid == currentUid()
                         ? const EditButton()
                         : const FollowButton();
                   })

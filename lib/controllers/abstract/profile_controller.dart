@@ -8,8 +8,7 @@ abstract class ProfileController extends DocsController {
   @override
   bool get enablePullDown => true;
   @override
-  bool get requiresValueReset => !isMyProfile;
-  bool get isMyProfile;
+  bool get requiresValueReset => true;
   final Rx<PublicUser?> rxPassiveUser = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
 

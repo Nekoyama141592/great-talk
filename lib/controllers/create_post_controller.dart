@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/my_profile_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
@@ -14,6 +12,7 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 import 'package:great_talk/validator/post_validator.dart';
+import 'package:great_talk/views/auth/login_page.dart';
 import 'package:great_talk/views/create_post/create_post_page.dart';
 import 'package:great_talk/views/edit_page.dart';
 
@@ -128,7 +127,6 @@ class CreatePostController extends FormsController with CurrentUserMixin {
     result.when(success: (_) {
       Get.back();
       _resetState(); // 初期化を行う
-      _refreshMyPost(); // 投稿の再取得を行う
       UIHelper.showFlutterToast("投稿が作成できました！");
     }, failure: () {
       UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
@@ -146,18 +144,10 @@ class CreatePostController extends FormsController with CurrentUserMixin {
     rxUint8list.value = null;
   }
 
-  // 投稿を作成した後に再取得
-  Future<void> _refreshMyPost() async {
-    final myProfileController = MyProfileController.to;
-    myProfileController.qDocInfoList.isEmpty
-        ? await myProfileController.onReload()
-        : await MyProfileController.to.onRefresh();
-  }
-
-  void onFloatingActionButtonPressed(PageController controller, int pageIndex) {
+  void onFloatingActionButtonPressed() {
     final publicUser = CurrentUserController.to.rxPublicUser.value;
     if (publicUser == null) {
-      _toMyProfileScreen(controller, pageIndex);
+      _toLoginPage();
     } else {
       publicUser.hasNoBio
           ? _toEditProfilePage()
@@ -170,12 +160,8 @@ class CreatePostController extends FormsController with CurrentUserMixin {
     Get.toNamed(EditProfilePage.path);
   }
 
-  void _toMyProfileScreen(PageController controller, int pageIndex) {
+  void _toLoginPage() {
     UIHelper.showErrorFlutterToast("投稿するにはログインが必要です");
-    if (pageIndex != 4) {
-      controller.animateToPage(4,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.fastLinearToSlowEaseIn);
-    }
+    Get.toNamed(LoginPage.path);
   }
 }

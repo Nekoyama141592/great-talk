@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/my_app.dart';
 import 'package:great_talk/views/accounts_page.dart';
 import 'package:great_talk/views/admin_page.dart';
+import 'package:great_talk/views/auth/login_page.dart';
 import 'package:great_talk/views/auth/logouted_page.dart';
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
 import 'package:great_talk/views/auth/user_deleted_page.dart';
@@ -20,6 +21,7 @@ import 'package:great_talk/views/user_profile_page.dart';
 
 final getPages = [
   GetPage(name: MyApp.path, page: () => const MyApp()),
+  GetPage(name: LoginPage.path, page: () => const LoginPage()),
   GetPage(name: AccountPage.path, page: () => const AccountPage()),
   GetPage(name: AdminPage.path, page: () => const AdminPage()),
   GetPage(
