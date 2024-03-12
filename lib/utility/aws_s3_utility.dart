@@ -23,5 +23,5 @@ class AWSS3Utility {
       dotenv.get(EnvKeys.AWS_S3_POST_IMAGES_BUCKET.name);
   static String get userImagesBucketName =>
       dotenv.get(EnvKeys.AWS_S3_USER_IMAGES_BUCKET.name);
-  static String s3FileName() => "${randomString()}.jpg";
+  static String s3FileName(String uid) => "$uid/${randomString()}.jpg";
 }

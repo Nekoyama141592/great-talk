@@ -58,7 +58,7 @@ class EditController extends FormsController with CurrentUserMixin {
     if (isPicked) {
       // 写真が新しくなった場合の処理
       final oldFileName = publicUser.typedImage().value;
-      final newFileName = AWSS3Utility.s3FileName();
+      final newFileName = AWSS3Utility.s3FileName(currentUid());
       final bucketName = AWSS3Utility.userImagesBucketName;
       final result = await AWSS3Repository.instance
           .putObject(uint8list, bucketName, newFileName);

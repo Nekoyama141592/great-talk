@@ -86,7 +86,7 @@ class CreatePostController extends FormsController with CurrentUserMixin {
     }
     if (isLoading.value) return; // 二重リクエストを防止.
     startLoading();
-    final newFileName = AWSS3Utility.s3FileName();
+    final newFileName = AWSS3Utility.s3FileName(currentUid());
     final bucketName = AWSS3Utility.postImagesBucketName;
     final repository = AWSS3Repository();
     final result =
