@@ -17,7 +17,6 @@ import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/mute/mute_posts/mute_posts_page.dart';
 import 'package:great_talk/views/mute/mute_users/mute_users_page.dart';
-import 'package:great_talk/views/original_contents_page.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 
 class OriginalDrawer extends StatelessWidget with CurrentUserMixin {
@@ -46,8 +45,6 @@ class OriginalDrawer extends StatelessWidget with CurrentUserMixin {
                           Row(
                             children: [
                               CircleImage(
-                                bucketName: user.typedImage().bucketName,
-                                imageValue: user.typedImage().value,
                                 uint8list:
                                     CurrentUserController.to.rxUint8list.value,
                               ),
@@ -85,9 +82,6 @@ class OriginalDrawer extends StatelessWidget with CurrentUserMixin {
           ListTile(
               title: const Text("ミュートしている投稿"),
               onTap: () => Get.toNamed(MutePostsPage.path)),
-          ListTile(
-              title: const Text("公式コンテンツ"),
-              onTap: () => Get.toNamed(OriginalContentsPage.path)),
           ListTile(
               title: const Text("ブックマーク"),
               onTap: () => Get.toNamed(BookmarkCategoriesPage.path)),

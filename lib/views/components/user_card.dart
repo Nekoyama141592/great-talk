@@ -63,8 +63,6 @@ class UserCard extends StatelessWidget with CurrentUserMixin {
                           child: Row(
                             children: [
                               CircleImage(
-                                bucketName: publicUser.typedImage().bucketName,
-                                imageValue: publicUser.typedImage().value,
                                 uint8list: uint8list,
                               ),
                               const BasicWidthBox(),

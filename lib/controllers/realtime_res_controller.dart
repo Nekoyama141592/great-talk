@@ -24,7 +24,6 @@ import 'package:great_talk/infrastructure/chat_gpt_sdk_client.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/bookmark/bookmark.dart';
 import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
-import 'package:great_talk/model/chat_content/chat_content.dart';
 import 'package:great_talk/model/chat_count_today/chat_count_today.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
@@ -49,8 +48,6 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   final isGenerating = false.obs;
   String postId = "";
   late SharedPreferences prefs;
-  // ChatCountToday chatCountToday = ChatCountToday.instance();
-  final Rx<ChatContent?> rxChatContent = Rx(null);
   final Rx<Post?> rxPost = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
 
@@ -68,7 +65,6 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     isLoading(false);
     isGenerating(false);
     postId = "";
-    rxChatContent.value = null;
     rxPost.value = null;
   }
 
@@ -78,10 +74,10 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   }
 
   void _processDescriptionMessage() {
-    final content = rxChatContent.value;
-    if (content == null) return;
+    final post = rxPost.value;
+    if (post == null) return;
     if (messages.isEmpty) {
-      _addDescriptionMessage(content);
+      _addDescriptionMessage(post);
     }
   }
 
@@ -90,44 +86,35 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     startLoading();
     final uid = Get.parameters['uid']!;
     postId = Get.parameters['postId']!;
-    final type = returnIsOriginalContents(uid)
-        ? InterlocutorType.originalContent
-        : InterlocutorType.userContent;
-    if (type == InterlocutorType.originalContent) {
-      final res =
-          originalContents.firstWhere((element) => element.contentId == postId);
-      rxChatContent(res);
-    } else {
-      final ref = DocRefCore.post(uid, postId);
-      final repository = FirestoreRepository();
-      final result = await repository.getDoc(ref);
-      result.when(success: (res) async {
-        if (res.exists) {
-          final fetchedPost = Post.fromJson(res.data()!);
-          rxPost(fetchedPost);
-          rxChatContent(ChatContent.fromPost(fetchedPost));
-          final detectedImage = fetchedPost.typedImage();
-          final s3Image = await FileUtility.getS3Image(
-              detectedImage.bucketName, detectedImage.value);
-          rxUint8list(s3Image);
-        } else {
-          UIHelper.showFlutterToast("投稿が存在しません");
-          return;
-        }
-      }, failure: () {
-        UIHelper.showErrorFlutterToast("データの取得に失敗しました");
-      });
-    }
+    final ref = DocRefCore.post(uid, postId);
+    final repository = FirestoreRepository();
+    final result = await repository.getDoc(ref);
+    result.when(success: (res) async {
+      if (res.exists) {
+        final fetchedPost = Post.fromJson(res.data()!);
+        rxPost(fetchedPost);
+        final detectedImage = fetchedPost.typedImage();
+        final s3Image = await FileUtility.getS3Image(
+            detectedImage.bucketName, detectedImage.value);
+        rxUint8list(s3Image);
+      } else {
+        UIHelper.showFlutterToast("投稿が存在しません");
+        return;
+      }
+    }, failure: () {
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+    });
     List<TextMessage> a = await _getLocalMessages();
     messages(a);
     endLoading();
   }
 
   Future<List<TextMessage>> _getLocalMessages() async {
-    if (rxChatContent.value == null) {
+    final post = rxPost.value;
+    if (post == null) {
       return [];
     }
-    final jsonString = prefs.getString(rxChatContent.value!.contentId) ?? "";
+    final jsonString = prefs.getString(post.postId) ?? "";
     List<TextMessage> messages = [];
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
@@ -184,6 +171,8 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
 
   Future<void> execute(ScrollController scrollController, String content,
       TextEditingController inputController) async {
+    final post = rxPost.value;
+    if (post == null) return;
     _setValues(); // チャットした日と回数を端末に保存.
     _addMyMessage(content);
     _addEmptyMessage(); // Viewで表示できる要素数を一つ増やす
@@ -192,8 +181,7 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     // リクエストを作成
     final requestMessages = await _createRequestMessages(content);
     final jsonMessages = requestMessages.map((e) => e.toJson()).toList();
-    final CustomCompleteText completeText =
-        rxChatContent.value!.managedCustomCompleteText();
+    final CustomCompleteText completeText = post.typedCustomCompleteText();
     final request = ChatCompleteText(
       model: PurchasesController.to.model(),
       messages: jsonMessages,
@@ -218,7 +206,9 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   }
 
   void _addEmptyMessage() {
-    messages.add(_newtTextMessage('', rxChatContent.value!.contentId));
+    final post = rxPost.value;
+    if (post == null) return;
+    messages.add(_newtTextMessage('', post.postId));
   }
 
   void _scrollToBottom(ScrollController scrollController) {
@@ -232,7 +222,8 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   void _listenToChatCompletionSSE(
       ChatCompleteText request, ScrollController scrollController) {
     // 生成中なら何もしない
-    if (isGenerating.value || rxChatContent.value == null) return;
+    final post = rxPost.value;
+    if (isGenerating.value || post == null) return;
     isGenerating(true);
     final client = ChatGptSdkClient();
     client.openAI.onChatCompletionSSE(request: request).transform(
@@ -253,8 +244,9 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
         _scrollToBottom(scrollController);
       }
     }, onDone: () {
-      final completedMsg =
-          _newtTextMessage(realtimeRes.value, rxChatContent.value!.contentId);
+      final post = rxPost.value;
+      if (post == null) return;
+      final completedMsg = _newtTextMessage(realtimeRes.value, post.postId);
       messages.last = completedMsg;
       messages([...messages]);
       isGenerating(false);
@@ -269,13 +261,10 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   }
 
   Future<void> _createTextMsgDoc(TextMessage message) async {
-    // オリジナルコンテンツなら保存はしない
-    if (!returnIsOriginalContents(rxChatContent.value!.posterUid)) {
-      final repository = FirestoreRepository();
-      final ref = message.typedMessageRef();
-      final json = message.toJson();
-      await repository.createDoc(ref, json);
-    }
+    final repository = FirestoreRepository();
+    final ref = message.typedMessageRef();
+    final json = message.toJson();
+    await repository.createDoc(ref, json);
   }
 
   Future<ChatCountToday> getChatCount() async {
@@ -306,18 +295,16 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   }
 
   Future<void> _setValues() async {
-    if (rxChatContent.value == null) return;
     await Future.wait([_setLocalDate(), setChatCount(true)]);
   }
 
   Future<void> _setLocalMessage() async {
-    final chatContent = rxChatContent.value;
-    if (chatContent == null) return;
-    final String interlocutorId = chatContent.contentId;
+    final post = rxPost.value;
+    if (post == null) return;
     final objectList =
         messages.map((e) => SaveTextMsg.fromTextMessage(e)).toList();
     final jsonString = jsonEncode(objectList);
-    await prefs.setString(interlocutorId, jsonString);
+    await prefs.setString(post.postId, jsonString);
   }
 
   Future<void> _setLocalDate() async {
@@ -338,14 +325,14 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   TextMessage _newtTextMessage(String content, String senderUid) {
     final now = Timestamp.now();
     final id = randomString();
-    final posterUid = rxChatContent.value!.posterUid;
+    final post = rxPost.value;
+    final posterUid = post!.uid;
     final textMessage = TextMessage(
       createdAt: now,
       id: id,
       messageType: MessageType.text.name,
-      messageRef: DocRefCore.message(
-          posterUid, rxChatContent.value!.contentId, currentUid(), id),
-      postRef: rxChatContent.value!.typedRef(),
+      messageRef: DocRefCore.message(posterUid, post.postId, currentUid(), id),
+      postRef: post.typedRef(),
       text: DetectedText(value: content).toJson(),
       posterUid: posterUid,
       senderUid: senderUid,
@@ -360,17 +347,16 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
     _createTextMsgDoc(textMessage); // firestoreにメッセージを追加
   }
 
-  void _addDescriptionMessage(ChatContent content) {
+  void _addDescriptionMessage(Post post) {
     final textMessage =
-        _newtTextMessage(content.typedDescription().value, content.contentId);
+        _newtTextMessage(post.typedDescription().value, post.postId);
     messages.add(textMessage);
   }
 
   Future<List<Messages>> _createRequestMessages(String content) async {
-    if (rxChatContent.value == null) {
-      return [];
-    }
-    final id = rxChatContent.value!.contentId;
+    final post = rxPost.value;
+    if (post == null) return [];
+    final id = post.postId;
     switch (id) {
       case wolframId:
         final wolframRes = await WolframRepository.fetchApi(content);
@@ -385,8 +371,6 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
           requestMessages = [Messages(role: Role.user, content: content)];
         });
         return requestMessages;
-      case chatGPTId:
-        return _toRequestMessages();
       default:
         final requestMessages = _toRequestMessages();
         requestMessages.insert(0, _systemMsg());
@@ -413,7 +397,8 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   }
 
   Messages _systemMsg() {
-    final content = rxChatContent.value!.systemPrompt;
+    final post = rxPost.value;
+    final content = post!.typedCustomCompleteText().systemPrompt;
     return Messages(role: Role.system, content: content);
   }
 
@@ -429,23 +414,20 @@ class RealtimeResController extends LoadingController with CurrentUserMixin {
   void onDescriptionButtonPressed() => _showDescriptionDialog();
 
   void _showDescriptionDialog() {
-    final content = rxChatContent.value;
-    if (content == null) {
-      return;
-    }
-    final title = "タイトル:\n${content.title}";
+    final post = rxPost.value;
+    if (post == null) return;
+    final title = "タイトル:\n${post.typedTitle().value}";
     final systemPrompt =
-        "システムプロンプト:\n${content.managedCustomCompleteText().systemPrompt}";
-    String msgText = !returnIsOriginalContents(content.posterUid)
-        ? "累計メッセージ数:\n${content.msgCount.formatNumber()}"
-        : "";
+        "システムプロンプト:\n${post.typedCustomCompleteText().systemPrompt}";
+    String msgText = "累計メッセージ数:\n${post.msgCount.formatNumber()}";
     UIHelper.simpleAlertDialog("$title\n\n$systemPrompt\n\n$msgText",
         needsSubscribing: true);
   }
 
   bool isMyContent(TextMessage message) {
     if (message.senderUid == currentUid()) return true;
-    if (message.senderUid != rxChatContent.value!.contentId) {
+    final post = rxPost.value;
+    if (message.senderUid != post!.postId) {
       return true;
     } else {
       return false;

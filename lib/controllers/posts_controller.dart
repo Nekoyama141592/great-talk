@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/enums.dart';
-import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/common/ui_helper.dart';
@@ -48,7 +47,7 @@ class PostsController extends GetxController with CurrentUserMixin {
 
   void onReportButtonPressed(BuildContext context) {
     final posterUid = Get.parameters['uid']!;
-    if (returnIsOriginalContents(posterUid) || currentUid() == posterUid) {
+    if (currentUid() == posterUid) {
       UIHelper.showFlutterToast("自分の投稿を報告したり、ミュートしたりすることはできません。");
       return;
     }

@@ -17,8 +17,6 @@ class MuteUserCard extends StatelessWidget {
     final controller = Get.put(MuteUsersController());
     return ListTile(
       leading: CircleImage(
-        bucketName: passiveUser.typedImage().bucketName,
-        imageValue: passiveUser.typedImage().value,
         uint8list: uint8list,
       ),
       title: EllipsisText(

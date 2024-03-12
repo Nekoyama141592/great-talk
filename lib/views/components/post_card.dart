@@ -66,8 +66,6 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CircleImage(
-                        bucketName: post.typedImage().bucketName,
-                        imageValue: post.typedImage().value,
                         onTap: () => controller.onPostCardPressed(post),
                         uint8list: uint8list,
                       ),

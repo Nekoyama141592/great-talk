@@ -48,10 +48,10 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                         isHorizontal: true, post: controller.rxPost.value!)),
                 const MenuButton(),
               ],
-              title: Obx(() =>
-                  EllipsisText(controller.rxChatContent.value?.title ?? ""))),
+              title: Obx(() => EllipsisText(
+                  controller.rxPost.value?.typedTitle().value ?? ""))),
           body: Obx(() => controller.isLoading.value ||
-                  controller.rxChatContent.value == null
+                  controller.rxPost.value == null
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
@@ -81,14 +81,6 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                                 ? null
                                                 : controller.onCardLongTap,
                                         leading: Obx(() => CircleImage(
-                                              bucketName: controller
-                                                  .rxChatContent.value!
-                                                  .typedImage()
-                                                  .bucketName,
-                                              imageValue: controller
-                                                  .rxChatContent
-                                                  .value!
-                                                  .imageValue,
                                               uint8list:
                                                   controller.rxUint8list.value,
                                             )),
@@ -121,14 +113,6 @@ class RealtimeResPage extends HookWidget with CurrentUserMixin {
                                         leading: controller.isMyContent(message)
                                             ? null
                                             : Obx(() => CircleImage(
-                                                  bucketName: controller
-                                                      .rxChatContent.value!
-                                                      .typedImage()
-                                                      .bucketName,
-                                                  imageValue: controller
-                                                      .rxChatContent
-                                                      .value!
-                                                      .imageValue,
                                                   uint8list: controller
                                                       .rxUint8list.value,
                                                 )),
