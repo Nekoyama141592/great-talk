@@ -17,11 +17,12 @@ flutter run --flavor prod -t lib/main_prod.dart
 ## Build
 
 ### iOS
-flutter build ios --flavor dev -t lib/main_dev.dart --release
+flutter build ios --flavor dev -t lib/main_dev.dart --release --no-tree-shake-icons
+
 flutter build ios --flavor prod -t lib/main_prod.dart --release --no-tree-shake-icons
 
 ### Android
-flutter build appbundle --flavor dev -t lib/main_dev.dart
+flutter build appbundle --flavor dev -t lib/main_dev.dart --no-tree-shake-icons
 flutter build appbundle --flavor prod -t lib/main_prod.dart --no-tree-shake-icons
 
 ## フォーマット
