@@ -63,11 +63,14 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
                 ),
                 child: Column(
                   children: [
-                    CircleImage(
-                      bucketName: post.typedImage().bucketName,
-                      imageValue: post.typedImage().value,
-                      onTap: () => controller.onPostCardPressed(post),
-                      uint8list: uint8list,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleImage(
+                        bucketName: post.typedImage().bucketName,
+                        imageValue: post.typedImage().value,
+                        onTap: () => controller.onPostCardPressed(post),
+                        uint8list: uint8list,
+                      ),
                     ),
                     EllipsisText(
                       post.typedTitle().value,
