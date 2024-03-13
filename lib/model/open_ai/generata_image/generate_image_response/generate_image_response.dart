@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/model/generata_image/generate_image_data/generate_image_data.dart';
+import 'package:great_talk/model/open_ai/generata_image/generate_image_data/generate_image_data.dart';
 
 part 'generate_image_response.freezed.dart';
 part 'generate_image_response.g.dart';

@@ -12,7 +12,7 @@ part of 'generate_image_request.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 GenerateImageRequest _$GenerateImageRequestFromJson(Map<String, dynamic> json) {
   return _GenerateImageRequest.fromJson(json);
@@ -146,7 +146,7 @@ class _$GenerateImageRequestImpl implements _GenerateImageRequest {
       {this.model = OpenAIConstants.imageModel,
       required this.prompt,
       this.n = 1,
-      this.size = "1792x1024",
+      required this.size,
       required this.user});
 
   factory _$GenerateImageRequestImpl.fromJson(Map<String, dynamic> json) =>
@@ -161,7 +161,6 @@ class _$GenerateImageRequestImpl implements _GenerateImageRequest {
   @JsonKey()
   final int n;
   @override
-  @JsonKey()
   final String size;
   @override
   final String user;
@@ -208,7 +207,7 @@ abstract class _GenerateImageRequest implements GenerateImageRequest {
       {final String model,
       required final String prompt,
       final int n,
-      final String size,
+      required final String size,
       required final String user}) = _$GenerateImageRequestImpl;
 
   factory _GenerateImageRequest.fromJson(Map<String, dynamic> json) =

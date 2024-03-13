@@ -11,7 +11,7 @@ import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/chat_controller.dart';
 import 'package:great_talk/controllers/remote_config_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
-import 'package:great_talk/model/generata_image/generate_image_request/generate_image_request.dart';
+import 'package:great_talk/model/open_ai/generata_image/generate_image_request/generate_image_request.dart';
 import 'package:great_talk/repository/open_ai_repository.dart';
 import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';

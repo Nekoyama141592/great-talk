@@ -21,7 +21,7 @@ class _OpenAIClient implements OpenAIClient {
   @override
   Future<GenerateImageResponse> generateImage(
       GenerateImageRequest request) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
@@ -43,6 +43,33 @@ class _OpenAIClient implements OpenAIClient {
               baseUrl,
             ))));
     final value = GenerateImageResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GenerateTextResponse> generateText(GenerateTextRequest request) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GenerateTextResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/chat/completions',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = GenerateTextResponse.fromJson(_result.data!);
     return value;
   }
 

@@ -27,10 +27,13 @@ import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/model/chat_count_today/chat_count_today.dart';
 import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
+import 'package:great_talk/model/open_ai/generate_text/generate_text_request/generate_text_response.dart';
+import 'package:great_talk/model/open_ai/generate_text/generate_text_response/generate_text_request.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/text_message/text_message.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/repository/open_ai_repository.dart';
 import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
@@ -46,11 +49,12 @@ class ChatController extends LoadingController with CurrentUserMixin {
   final messages = <TextMessage>[].obs;
   final realtimeRes = "".obs;
   final isGenerating = false.obs;
-  String postId = "";
   late SharedPreferences prefs;
   final Rx<Post?> rxPost = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
+  String get postId => Get.parameters['postId']!;
 
+  ChatModel get model => PurchasesController.to.model();
   @override
   void onInit() async {
     startLoading();
@@ -64,7 +68,6 @@ class ChatController extends LoadingController with CurrentUserMixin {
     realtimeRes('');
     isLoading(false);
     isGenerating(false);
-    postId = "";
     rxPost.value = null;
   }
 
@@ -85,7 +88,6 @@ class ChatController extends LoadingController with CurrentUserMixin {
   Future<void> _getChatLog() async {
     startLoading();
     final uid = Get.parameters['uid']!;
-    postId = Get.parameters['postId']!;
     final ref = DocRefCore.post(uid, postId);
     final repository = FirestoreRepository();
     final result = await repository.getDoc(ref);
@@ -183,7 +185,7 @@ class ChatController extends LoadingController with CurrentUserMixin {
     final jsonMessages = requestMessages.map((e) => e.toJson()).toList();
     final CustomCompleteText completeText = post.typedCustomCompleteText();
     final request = ChatCompleteText(
-      model: PurchasesController.to.model(),
+      model: model,
       messages: jsonMessages,
       temperature: completeText.temperature,
       topP: completeText.topP,
@@ -359,11 +361,21 @@ class ChatController extends LoadingController with CurrentUserMixin {
     final id = post.postId;
     switch (id) {
       case calculateAI:
-        final wolframRes = await WolframRepository.fetchApi(content);
+        final response = await gptFunctionCalling(content);
+        if (response != null && response.choices.isNotEmpty) {
+          final List<dynamic> tools =
+              response.choices.first["message"]["tool_calls"];
+          if (tools.isNotEmpty) {
+            debugPrint("${tools.first["function"]}");
+          }
+        }
         List<Messages> requestMessages = [];
+        final wolframRes = await WolframRepository.fetchApi(content);
         wolframRes.when(success: (res) {
           requestMessages = [
-            Messages(role: Role.system, content: "わかりやすい日本語にして下さい。"),
+            Messages(
+                role: Role.system,
+                content: "わかりやすく、学術的な日本語にして下さい。大きい数字は3桁ごとにカンマ(,)を入れてください"),
             Messages(role: Role.user, content: res)
           ];
         }, failure: () {
@@ -376,6 +388,48 @@ class ChatController extends LoadingController with CurrentUserMixin {
         requestMessages.insert(0, _systemMsg());
         return requestMessages;
     }
+  }
+
+  Future<GenerateTextResponse?> gptFunctionCalling(String content) async {
+    final request = GenerateTextRequest(model: model.model, messages: [
+      Messages(role: Role.user, content: content).toJson(),
+    ], tools: [
+      {
+        "type": "function",
+        "function": {
+          "name": "get_current_weather",
+          "description": "Get the current weather",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "location": {
+                "type": "string",
+                "description": "The city and state, e.g. San Francisco, CA",
+              },
+              "format": {
+                "type": "string",
+                "enum": ["celsius", "fahrenheit"],
+                "description":
+                    "The temperature unit to use. Infer this from the users location.",
+              },
+            },
+            "required": ["location", "format"],
+          },
+        }
+      },
+    ], tool_choice: {
+      "type": "function",
+      "function": {"name": "get_current_weather"}
+    });
+    GenerateTextResponse? response;
+    final repository = OpenAIRepository();
+    final result = await repository.generateText(request);
+    result.when(
+        success: (res) {
+          response = res;
+        },
+        failure: () {});
+    return response;
   }
 
   Messages _toRequestMessage(TextMessage msg) {
