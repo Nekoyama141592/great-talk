@@ -11,6 +11,7 @@ import 'package:great_talk/common/enums.dart';
 import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/consts/chat_constants.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
@@ -55,6 +56,19 @@ class ChatController extends LoadingController with CurrentUserMixin {
   String get postId => Get.parameters['postId']!;
 
   ChatModel get model => PurchasesController.to.model();
+  int get incrementCount {
+    final post = rxPost.value;
+    if (post == null) {
+      return 0;
+    } else if (PurchasesController.to.isPremiumSubscribing()) {
+      return ChatConstants.premiumPostConsumePoint;
+    } else if (post.isOfficialPost()) {
+      return ChatConstants.officialPostConsumePoint;
+    } else {
+      return ChatConstants.basicPostConsumePoint;
+    }
+  }
+
   @override
   void onInit() async {
     startLoading();
@@ -147,23 +161,23 @@ class ChatController extends LoadingController with CurrentUserMixin {
     final premiumLimit = chatLimitPerDay.premium;
     final freeLimit = chatLimitPerDay.free;
     final basicLimit = chatLimitPerDay.basic;
-    if (chatCountToday.premium >= premiumLimit &&
+    if (chatCountToday.premium + incrementCount > premiumLimit &&
         PurchasesController.to.isPremiumSubscribing()) {
       UIHelper.showFlutterToast(
-          "利用コストの急激な増加により、一時的にプレミアムプランでのAPI利用回数を一日につき$premiumLimit回までに制限させていただいています。\nご迷惑をおかけし、大変申し訳ございません。");
+          "利用コストの急激な増加により、一時的にプレミアムプランでのAPI利用回数を制限させていただいています。\nご迷惑をおかけし、大変申し訳ございません。");
       return;
-    } else if (chatCountToday.basic >= freeLimit &&
+    } else if (chatCountToday.basic + incrementCount > freeLimit &&
         !PurchasesController.to.isSubscribing()) {
       // 無料回数を超過し、サブスクに入っていない場合
       Get.toNamed(SubscribePage.path); // サブスクページへ飛ばす.
-      UIHelper.showFlutterToast("チャットは1日$freeLimit回まで！\nサブスクに加入してください。");
+      UIHelper.showFlutterToast("使えるのは1日$freeLimitポイントまで！\nサブスクに加入してください。");
       await _requestReview(); // レビューをリクエスト
       return;
-    } else if (chatCountToday.basic >= basicLimit &&
+    } else if (chatCountToday.basic + incrementCount > basicLimit &&
         PurchasesController.to.isSubscribing()) {
       // 一時的にベーシックプランの利用が制限されている場合.
       UIHelper.showFlutterToast(
-          "利用コストの急激な増加により、一時的にベーシックプランでのAPI利用回数を一日につき$basicLimit回までに制限させていただいています。\nご迷惑をおかけし、大変申し訳ございません。");
+          "利用コストの急激な増加により、一時的にベーシックプランでのAPI利用回数を制限させていただいています。\nご迷惑をおかけし、大変申し訳ございません。");
       return;
     } else {
       await execute(scrollController, text, inputController); // ChatGPTのAPIを実行
@@ -297,6 +311,8 @@ class ChatController extends LoadingController with CurrentUserMixin {
   }
 
   Future<void> _setValues() async {
+    final post = rxPost.value;
+    if (post == null) return;
     await Future.wait([_setLocalDate(), setChatCount(true)]);
   }
 
@@ -317,8 +333,9 @@ class ChatController extends LoadingController with CurrentUserMixin {
   Future<void> setChatCount(bool isIncreace) async {
     // 24時間経過していたらchatCountには0がくる
     final chatCountToday = await getChatCount();
-    final newChatCountToday =
-        isIncreace ? chatCountToday.increaced() : chatCountToday.decreaced();
+    final newChatCountToday = isIncreace
+        ? chatCountToday.increaced(incrementCount)
+        : chatCountToday.decreaced(incrementCount);
     await PrefsUtility.setJson(
         PrefsKey.chatCountToday.name, newChatCountToday.toJson(),
         prefs: prefs);

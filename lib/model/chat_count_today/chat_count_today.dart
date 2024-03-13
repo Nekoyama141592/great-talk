@@ -12,17 +12,17 @@ abstract class ChatCountToday implements _$ChatCountToday {
   factory ChatCountToday.fromJson(Map<String, dynamic> json) =>
       _$ChatCountTodayFromJson(json);
 
-  ChatCountToday increaced() {
+  ChatCountToday increaced(int incrementCount) {
     final isPremium = PurchasesController.to.isPremiumSubscribing();
-    final newBasic = isPremium ? basic : basic + 1;
-    final newPremium = isPremium ? premium + 1 : premium;
+    final newBasic = isPremium ? basic : basic + incrementCount;
+    final newPremium = isPremium ? premium + incrementCount : premium;
     return ChatCountToday(basic: newBasic, premium: newPremium);
   }
 
-  ChatCountToday decreaced() {
+  ChatCountToday decreaced(int incrementCount) {
     final isPremium = PurchasesController.to.isPremiumSubscribing();
-    final newBasic = isPremium ? basic : basic - 1;
-    final newPremium = isPremium ? premium - 1 : premium;
+    final newBasic = isPremium ? basic : basic - incrementCount;
+    final newPremium = isPremium ? premium - incrementCount : premium;
     return ChatCountToday(basic: newBasic, premium: newPremium);
   }
 }

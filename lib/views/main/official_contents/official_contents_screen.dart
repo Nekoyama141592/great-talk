@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/consts/chat_constants.dart';
 import 'package:great_talk/controllers/official_contents_controller.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/post_card.dart';
@@ -34,6 +35,10 @@ class OfficialContentsScreen extends HookWidget {
           }),
           const BasicHeightBox(),
           const PlanDescription(text: "数学が得意なAIです"),
+          const PlanDescription(text: "正確な計算結果を返せるように独自にプログラムしています"),
+          const PlanDescription(
+              text:
+                  "この投稿のみ、一度の使用で${ChatConstants.officialPostConsumePoint}ポイント消費した扱いになります(通常は一度の使用で${ChatConstants.basicPostConsumePoint}ポイント消費した扱いになります)"),
         ],
       ),
     );
