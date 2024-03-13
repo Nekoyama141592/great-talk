@@ -37,12 +37,12 @@ import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/prefs_utility.dart';
 import 'package:great_talk/views/bookmark_categories_page.dart';
 import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
-import 'package:great_talk/views/realtime_res_page/components/bookmark_categories_list_view.dart';
+import 'package:great_talk/views/chat/components/bookmark_categories_list_view.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class RealtimeResController extends LoadingController with CurrentUserMixin {
-  static RealtimeResController get to => Get.find<RealtimeResController>();
+class ChatController extends LoadingController with CurrentUserMixin {
+  static ChatController get to => Get.find<ChatController>();
   final messages = <TextMessage>[].obs;
   final realtimeRes = "".obs;
   final isGenerating = false.obs;

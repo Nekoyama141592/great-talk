@@ -8,7 +8,7 @@ import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/generate_image_constants.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
-import 'package:great_talk/controllers/realtime_res_controller.dart';
+import 'package:great_talk/controllers/chat_controller.dart';
 import 'package:great_talk/controllers/remote_config_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/generata_image/generate_image_request/generate_image_request.dart';
@@ -40,7 +40,7 @@ class GenerateImageController extends LoadingController with CurrentUserMixin {
       UIHelper.showErrorFlutterToast("プレミアムプランに登録してください");
       Get.toNamed(SubscribePage.path);
     } else {
-      final chatCountToday = await RealtimeResController.to.getChatCount();
+      final chatCountToday = await ChatController.to.getChatCount();
       final premiumLimit = RemoteConfigController.to.chatLimitPerDay.premium;
       chatCountToday.premium >= premiumLimit &&
               PurchasesController.to.isPremiumSubscribing()
@@ -64,7 +64,7 @@ class GenerateImageController extends LoadingController with CurrentUserMixin {
     result.when(success: (res) {
       final url = res.data?.last?.url;
       rxUrl(url);
-      RealtimeResController.to.setChatCount(true);
+      ChatController.to.setChatCount(true);
     }, failure: () {
       UIHelper.showErrorFlutterToast("画像が生成できませんでした");
     });

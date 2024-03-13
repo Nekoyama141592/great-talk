@@ -10,7 +10,7 @@ import 'package:great_talk/controllers/edit_controller.dart';
 import 'package:great_talk/controllers/generate_image_controller.dart';
 import 'package:great_talk/controllers/notification_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
-import 'package:great_talk/controllers/realtime_res_controller.dart';
+import 'package:great_talk/controllers/chat_controller.dart';
 import 'package:great_talk/views/components/original_drawer.dart';
 import 'package:great_talk/views/main/components/main_floating_action_button.dart';
 import 'package:great_talk/views/main/feeds/feeds_page.dart';
@@ -27,7 +27,7 @@ class MyHomePage extends HookWidget {
     Get.put(PurchasesController());
     Get.put(NotificationController());
     Get.put(PostsController());
-    Get.put(RealtimeResController());
+    Get.put(ChatController());
     Get.put(CreatePostController());
     Get.put(EditController());
     Get.put(GenerateImageController());

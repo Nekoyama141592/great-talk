@@ -14,7 +14,7 @@ import 'package:great_talk/views/generate_image/generate_image_page.dart';
 import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
 import 'package:great_talk/views/mute/mute_posts/mute_posts_page.dart';
 import 'package:great_talk/views/mute/mute_users/mute_users_page.dart';
-import 'package:great_talk/views/realtime_res_page/realtime_res_page.dart';
+import 'package:great_talk/views/chat/chat_page.dart';
 import 'package:great_talk/views/search_user_posts_page.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 
@@ -28,8 +28,8 @@ final getPages = [
       page: () => const BookmarkCategoriesPage()),
   GetPage(name: BookmarksPage.path, page: () => const BookmarksPage()),
   GetPage(
-    name: RealtimeResPage.path,
-    page: () => const RealtimeResPage(),
+    name: ChatPage.path,
+    page: () => const ChatPage(),
   ),
   GetPage(
     name: CreatePostPage.path,

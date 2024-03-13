@@ -6,24 +6,24 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
-import 'package:great_talk/controllers/realtime_res_controller.dart';
+import 'package:great_talk/controllers/chat_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
-import 'package:great_talk/views/realtime_res_page/components/delete_post_button.dart';
-import 'package:great_talk/views/realtime_res_page/components/menu_button.dart';
+import 'package:great_talk/views/chat/components/delete_post_button.dart';
+import 'package:great_talk/views/chat/components/menu_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
 
-class RealtimeResPage extends HookWidget with CurrentUserMixin {
-  const RealtimeResPage({super.key});
+class ChatPage extends HookWidget with CurrentUserMixin {
+  const ChatPage({super.key});
   static const path = "/chat/users/:uid/posts/:postId";
   static String generatePath(String uid, String postId) =>
       "/chat/users/$uid/posts/$postId";
   @override
   Widget build(BuildContext context) {
-    final controller = RealtimeResController.to;
+    final controller = ChatController.to;
     final purchaseController = PurchasesController.to;
     final inputController = useTextEditingController();
     final scrollCotroller = useScrollController();

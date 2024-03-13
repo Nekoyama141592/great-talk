@@ -4,7 +4,7 @@ import 'package:great_talk/common/doubles.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/realtime_res_controller.dart';
+import 'package:great_talk/controllers/chat_controller.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 
@@ -12,7 +12,7 @@ class BookmarkCategoriesListView extends StatelessWidget {
   const BookmarkCategoriesListView({super.key});
   @override
   Widget build(BuildContext context) {
-    final controller = RealtimeResController.to;
+    final controller = ChatController.to;
     // dialogで表示するので高さが必要
     return SizedBox(
         height: fullHeight(context) * 0.8,
