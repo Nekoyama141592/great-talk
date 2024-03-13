@@ -361,21 +361,16 @@ class ChatController extends LoadingController with CurrentUserMixin {
     final id = post.postId;
     switch (id) {
       case calculateAI:
-        final response = await gptFunctionCalling(content);
-        if (response != null && response.choices.isNotEmpty) {
-          final List<dynamic> tools =
-              response.choices.first["message"]["tool_calls"];
-          if (tools.isNotEmpty) {
-            debugPrint("${tools.first["function"]}");
-          }
-        }
         List<Messages> requestMessages = [];
-        final wolframRes = await WolframRepository.fetchApi(content);
+        final repository = WolframRepository();
+        final query = await wolframQuery(content);
+        final wolframRes = await repository.fetchApi(query);
         wolframRes.when(success: (res) {
           requestMessages = [
             Messages(
                 role: Role.system,
-                content: "わかりやすく、学術的な日本語にして下さい。大きい数字は3桁ごとにカンマ(,)を入れてください"),
+                content:
+                    "わかりやすく、学術的な日本語にして下さい。大きい数字は3桁ごとにカンマ(,)を入れてください。記号文字は使わないでください。"),
             Messages(role: Role.user, content: res)
           ];
         }, failure: () {
@@ -390,36 +385,50 @@ class ChatController extends LoadingController with CurrentUserMixin {
     }
   }
 
+  Future<String> wolframQuery(String content) async {
+    String query = content;
+    final response = await gptFunctionCalling(content);
+    if (response != null && response.choices.isNotEmpty) {
+      final List<dynamic> tools =
+          response.choices.first["message"]["tool_calls"];
+      if (tools.isNotEmpty) {
+        final Map<String, dynamic> result = tools.first["function"];
+        if (result["name"] == "fetch_wolfram_alpha_api") {
+          final String arguments = result["arguments"];
+          final Map<String, dynamic> json = jsonDecode(arguments);
+          query = json["query"];
+        }
+      }
+    }
+    return query;
+  }
+
   Future<GenerateTextResponse?> gptFunctionCalling(String content) async {
-    final request = GenerateTextRequest(model: model.model, messages: [
+    final request =
+        GenerateTextRequest(model: ChatGPTConstants.basicModel, messages: [
       Messages(role: Role.user, content: content).toJson(),
     ], tools: [
       {
         "type": "function",
         "function": {
-          "name": "get_current_weather",
-          "description": "Get the current weather",
+          "name": "fetch_wolfram_alpha_api",
+          "description": "Calculate with the Wolfram Alpha Simple API",
           "parameters": {
             "type": "object",
             "properties": {
-              "location": {
+              "query": {
                 "type": "string",
-                "description": "The city and state, e.g. San Francisco, CA",
-              },
-              "format": {
-                "type": "string",
-                "enum": ["celsius", "fahrenheit"],
                 "description":
-                    "The temperature unit to use. Infer this from the users location.",
+                    "Wolfram language format query to calculate with the Wolfram Alpha Simple API",
               },
             },
-            "required": ["location", "format"],
+            "required": ["query"],
           },
         }
       },
     ], tool_choice: {
       "type": "function",
-      "function": {"name": "get_current_weather"}
+      "function": {"name": "fetch_wolfram_alpha_api"}
     });
     GenerateTextResponse? response;
     final repository = OpenAIRepository();

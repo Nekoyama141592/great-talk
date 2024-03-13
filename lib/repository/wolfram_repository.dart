@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:great_talk/repository/result.dart';
 
 class WolframRepository {
-  static FutureResult<String> fetchApi(String query) async {
+  FutureResult<String> fetchApi(String query) async {
     Result<String> result = const Result.failure();
     final String wolframAppId =
         dotenv.get("WOLFRAM_APP_ID"); // Wolfram API App IDを設定する
