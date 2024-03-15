@@ -35,10 +35,10 @@ class OfficialContentsScreen extends HookWidget {
           }),
           const BasicHeightBox(),
           const PlanDescription(text: "数学が得意なAIです"),
-          const PlanDescription(text: "正確な計算結果を返せるように独自にプログラムしています"),
+          const PlanDescription(text: "正確な計算結果を返せるように独自にプログラムを組んでいます"),
           const PlanDescription(
               text:
-                  "この投稿のみ、一度の使用で${ChatConstants.officialPostConsumePoint}ポイント消費した扱いになります(通常は一度の使用で${ChatConstants.basicPostConsumePoint}ポイント消費した扱いになります)"),
+                  "この投稿のみ、一度の使用で${ChatConstants.officialPostConsumePoint}回チャットする扱いになります(通常は一度の使用で${ChatConstants.basicPostConsumePoint}回チャットする扱いになります)"),
         ],
       ),
     );

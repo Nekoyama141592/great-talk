@@ -60,8 +60,6 @@ class ChatController extends LoadingController with CurrentUserMixin {
     final post = rxPost.value;
     if (post == null) {
       return 0;
-    } else if (PurchasesController.to.isPremiumSubscribing()) {
-      return ChatConstants.premiumPostConsumePoint;
     } else if (post.isOfficialPost()) {
       return ChatConstants.officialPostConsumePoint;
     } else {
@@ -170,7 +168,7 @@ class ChatController extends LoadingController with CurrentUserMixin {
         !PurchasesController.to.isSubscribing()) {
       // 無料回数を超過し、サブスクに入っていない場合
       Get.toNamed(SubscribePage.path); // サブスクページへ飛ばす.
-      UIHelper.showFlutterToast("使えるのは1日$freeLimitポイントまで！\nサブスクに加入してください。");
+      UIHelper.showFlutterToast("遊べるのは1日$freeLimitチャットまで！\nサブスクに加入してください。");
       await _requestReview(); // レビューをリクエスト
       return;
     } else if (chatCountToday.basic + incrementCount > basicLimit &&
