@@ -387,8 +387,7 @@ class ChatController extends LoadingController with CurrentUserMixin {
           wolframRes.when(success: (res) {
             requestMessages = [
               Messages(
-                  role: Role.system,
-                  content: "わかりやすく、学術的な日本語にして下さい。大きい数字は3桁ごとにカンマ(,)を入れてください。"),
+                  role: Role.system, content: "Always reply in LaTex format!"),
               Messages(role: Role.user, content: res)
             ];
           }, failure: () {
