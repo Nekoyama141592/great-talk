@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/date_converter.dart';
@@ -422,8 +422,7 @@ class ChatController extends LoadingController with CurrentUserMixin {
   }
 
   Future<GenerateTextResponse?> gptFunctionCalling(String content) async {
-    final request =
-        GenerateTextRequest(model: model.model, messages: [
+    final request = GenerateTextRequest(model: model.model, messages: [
       Messages(role: Role.user, content: content).toJson(),
     ], tools: [
       {
@@ -485,6 +484,18 @@ class ChatController extends LoadingController with CurrentUserMixin {
 
   void onCardTap() {
     if (PurchasesController.to.isSubscribing()) {
+      return;
+    } else {
+      UIHelper.showFlutterToast("テキストをコピーするには有料プランを登録する必要があります");
+      return;
+    }
+  }
+
+  void onCopyButtonTap(String text) async {
+    if (PurchasesController.to.isSubscribing()) {
+      final data = ClipboardData(text: text);
+      await Clipboard.setData(data);
+      UIHelper.showFlutterToast("テキストをクリップボードにコピーしました！");
       return;
     } else {
       UIHelper.showFlutterToast("テキストをコピーするには有料プランを登録する必要があります");

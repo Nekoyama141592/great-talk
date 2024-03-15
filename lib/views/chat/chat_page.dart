@@ -8,6 +8,7 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/chat_controller.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
+import 'package:great_talk/views/chat/components/copy_button.dart';
 import 'package:great_talk/views/chat/components/latex_text.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
@@ -86,13 +87,12 @@ class ChatPage extends HookWidget with CurrentUserMixin {
                                     child: Obx(() {
                                       final text = controller.realtimeRes.value;
                                       return ListTile(
-                                        onTap: onTap,
-                                        leading: Obx(() => CircleImage(
-                                              uint8list:
-                                                  controller.rxUint8list.value,
-                                            )),
-                                        title: LatexText(data: text),
-                                      );
+                                          onTap: onTap,
+                                          leading: Obx(() => CircleImage(
+                                                uint8list: controller
+                                                    .rxUint8list.value,
+                                              )),
+                                          title: LatexText(data: text));
                                     }),
                                   );
                                 } else {
@@ -118,6 +118,9 @@ class ChatPage extends HookWidget with CurrentUserMixin {
                                                       .rxUint8list.value,
                                                 )),
                                         title: LatexText(data: text),
+                                        trailing: CopyButton(
+                                            onCopyButtonTap: () => controller
+                                                .onCopyButtonTap(text)),
                                       );
                                     }),
                                   );
