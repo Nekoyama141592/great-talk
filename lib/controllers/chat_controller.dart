@@ -379,19 +379,23 @@ class ChatController extends LoadingController with CurrentUserMixin {
         List<Messages> requestMessages = [];
         final repository = WolframRepository();
         final query = await wolframQuery(content);
-        final wolframRes = await repository.fetchApi(query);
-        wolframRes.when(success: (res) {
-          requestMessages = [
-            Messages(
-                role: Role.system,
-                content:
-                    "わかりやすく、学術的な日本語にして下さい。大きい数字は3桁ごとにカンマ(,)を入れてください。記号文字は使わないでください。"),
-            Messages(role: Role.user, content: res)
-          ];
-        }, failure: () {
-          realtimeRes("計算AIから結果が得られなかったので普通のAIが対応します。\n\n");
+        if (query == null) {
+          realtimeRes("計算クエリの作成に失敗したので普通のAIが対応します。\n\n");
           requestMessages = [Messages(role: Role.user, content: content)];
-        });
+        } else {
+          final wolframRes = await repository.fetchApi(query);
+          wolframRes.when(success: (res) {
+            requestMessages = [
+              Messages(
+                  role: Role.system,
+                  content: "わかりやすく、学術的な日本語にして下さい。大きい数字は3桁ごとにカンマ(,)を入れてください。"),
+              Messages(role: Role.user, content: res)
+            ];
+          }, failure: () {
+            realtimeRes("クエリを与えた計算AIから応答が得られなかったので普通のAIが対応します。\n\n");
+            requestMessages = [Messages(role: Role.user, content: content)];
+          });
+        }
         return requestMessages;
       default:
         final requestMessages = _toRequestMessages();
@@ -400,8 +404,8 @@ class ChatController extends LoadingController with CurrentUserMixin {
     }
   }
 
-  Future<String> wolframQuery(String content) async {
-    String query = content;
+  Future<String?> wolframQuery(String content) async {
+    String? query;
     final response = await gptFunctionCalling(content);
     if (response != null && response.choices.isNotEmpty) {
       final List<dynamic> tools =
