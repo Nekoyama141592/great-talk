@@ -98,7 +98,7 @@ class ChatPage extends HookWidget with CurrentUserMixin {
                                     }),
                                   );
                                 } else {
-                                  // 生成中が終わった場合の表示
+                                  // 生成が終わった場合の表示
                                   return Padding(
                                     padding: padding,
                                     child: Obx(() {
