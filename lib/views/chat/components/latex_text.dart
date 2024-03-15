@@ -14,7 +14,7 @@ class LatexText extends StatelessWidget {
       final selectable = PurchasesController.to.isSubscribing();
       return MarkdownBody(
         selectable: selectable,
-        data: "\ $data",
+        data: "\ $data".replaceAll(r"\(", r"").replaceAll(r"\)", r""),
         builders: {
           'latex': LatexElementBuilder(),
         },
