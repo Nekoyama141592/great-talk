@@ -10,7 +10,7 @@ class CircleImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return uint8list == null
-        ? const CircularProgressIndicator()
+        ? const Icon(Icons.person)
         : S3Image(uint8list: uint8list!);
   }
 }
