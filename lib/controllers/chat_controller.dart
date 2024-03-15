@@ -484,7 +484,7 @@ class ChatController extends LoadingController with CurrentUserMixin {
     return Messages(role: Role.system, content: content);
   }
 
-  void onCardLongTap() {
+  void onCardTap() {
     if (PurchasesController.to.isSubscribing()) {
       return;
     } else {

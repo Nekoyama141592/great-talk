@@ -42,10 +42,14 @@ class ChatPage extends HookWidget with CurrentUserMixin {
                         CurrentUserController.to.isAdmin()
                     ? const DeletePostButton()
                     : const PostReportButton()),
-                Obx(() => controller.rxPost.value == null
-                    ? const SizedBox.shrink()
-                    : PostLikeButton(
-                        isHorizontal: true, post: controller.rxPost.value!)),
+                Obx(() {
+                  final post = controller.rxPost.value;
+                  if (post == null) {
+                    return const SizedBox.shrink();
+                  } else {
+                    return PostLikeButton(isHorizontal: true, post: post);
+                  }
+                }),
                 const MenuButton(),
               ],
               title: Obx(() => EllipsisText(
@@ -68,18 +72,20 @@ class ChatPage extends HookWidget with CurrentUserMixin {
                               itemCount: controller.messages.length,
                               itemBuilder: ((context, index) {
                                 final messages = controller.messages.toList();
+                                final onTap = purchaseController.isSubscribing()
+                                    ? null
+                                    : controller.onCardTap;
+                                final padding =
+                                    EdgeInsets.all(defaultPadding(context));
                                 if (index == messages.indexOf(messages.last) &&
                                     messages.last.typedText().value.isEmpty) {
+                                  // 生成中の表示
                                   return Padding(
-                                    padding:
-                                        EdgeInsets.all(defaultPadding(context)),
+                                    padding: padding,
                                     child: Obx(() {
                                       final text = controller.realtimeRes.value;
                                       return ListTile(
-                                        onTap:
-                                            purchaseController.isSubscribing()
-                                                ? null
-                                                : controller.onCardLongTap,
+                                        onTap: onTap,
                                         leading: Obx(() => CircleImage(
                                               uint8list:
                                                   controller.rxUint8list.value,
@@ -92,9 +98,9 @@ class ChatPage extends HookWidget with CurrentUserMixin {
                                     }),
                                   );
                                 } else {
+                                  // 生成中が終わった場合の表示
                                   return Padding(
-                                    padding:
-                                        EdgeInsets.all(defaultPadding(context)),
+                                    padding: padding,
                                     child: Obx(() {
                                       final message = messages[index];
                                       final String text = controller
@@ -102,10 +108,7 @@ class ChatPage extends HookWidget with CurrentUserMixin {
                                           .typedText()
                                           .value;
                                       return ListTile(
-                                        onTap:
-                                            purchaseController.isSubscribing()
-                                                ? null
-                                                : controller.onCardLongTap,
+                                        onTap: onTap,
                                         tileColor: controller
                                                 .isMyContent(message)
                                             ? kSecondaryColor.withOpacity(0.3)
