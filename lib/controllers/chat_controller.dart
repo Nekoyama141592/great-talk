@@ -423,7 +423,7 @@ class ChatController extends LoadingController with CurrentUserMixin {
 
   Future<GenerateTextResponse?> gptFunctionCalling(String content) async {
     final request =
-        GenerateTextRequest(model: ChatGPTConstants.basicModel, messages: [
+        GenerateTextRequest(model: model.model, messages: [
       Messages(role: Role.user, content: content).toJson(),
     ], tools: [
       {
