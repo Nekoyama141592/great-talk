@@ -40,3 +40,10 @@ keytool -list -v -keystore key.jks -alias key
 Play Console -> アプリ -> 設定 -> アプリの署名 -> アプリ署名鍵の証明書 -> SHA1
 ## イラスト素材
 https://storyset.com/
+
+## Xcodeキャッシュ削除
+rm -rf ~/Library/Developer/Xcode/DerivedData
+rm -rf ~/Library/Caches/com.apple.dt.Xcode
+rm -rf ~/Library/Developer/Xcode/UserData/Previews
+rm -rf ~/Library/Developer/XCPGDevices
+rm -rf ~/Library/Developer/Xcode/iOS ＼DeviceSupport
