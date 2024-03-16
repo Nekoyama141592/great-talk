@@ -21,7 +21,7 @@ class EditController extends FormsController with CurrentUserMixin {
       (CurrentUserController.to.rxPublicUser.value?.bioValue ?? "").obs;
 
   void init() {
-    rxUint8list.value ??= CurrentUserController.to.rxUint8list.value;
+    rxPickedUint8list.value ??= CurrentUserController.to.rxUint8list.value;
   }
 
   // セッターメソッド
@@ -37,7 +37,7 @@ class EditController extends FormsController with CurrentUserMixin {
 
   @override
   void onPositiveButtonPressed() async {
-    final uint8list = rxUint8list.value;
+    final uint8list = rxPickedUint8list.value;
     if (uint8list == null) {
       await UIHelper.showErrorFlutterToast("アイコンをタップしてプロフィール画像をアップロードしてください");
       return;

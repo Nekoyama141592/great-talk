@@ -29,7 +29,7 @@ class LatexText extends StatelessWidget {
       final selectable = PurchasesController.to.isSubscribing();
       return MarkdownBody(
         selectable: selectable,
-        data:  "\ $data".replaceAll(r"\(", "\n\n" + r"\("),
+        data: "\ $data".replaceAll(r"\(", "\n\n" + r"\("),
         builders: {
           'latex': LatexElementBuilder(),
         },

@@ -11,6 +11,7 @@ import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/views/chat/components/copy_button.dart';
 import 'package:great_talk/views/chat/components/latex_text.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
+import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 import 'package:great_talk/views/chat/components/delete_post_button.dart';
@@ -132,10 +133,37 @@ class ChatPage extends HookWidget with CurrentUserMixin {
                         if (controller.isGenerating.value) {
                           return const SizedBox.shrink();
                         }
-                        return RoundedInputField(
-                            controller: inputController,
-                            send: () => controller.onSendPressed(
-                                context, inputController, scrollCotroller));
+                        return Row(
+                          children: [
+                            const BasicWidthBox(),
+                            Obx(() {
+                              final image = controller.rxPickedUint8list.value;
+                              const size = 25.0;
+                              late Widget child;
+                              if (image == null) {
+                                child = const Icon(
+                                  Icons.image,
+                                  size: size,
+                                );
+                              } else {
+                                child = CircleImage(
+                                  uint8list: image,
+                                  width: size,
+                                  height: size,
+                                );
+                              }
+                              return InkWell(
+                                onTap: controller.onImagePickButtonPressed,
+                                child: child,
+                              );
+                            }),
+                            const BasicWidthBox(),
+                            RoundedInputField(
+                                controller: inputController,
+                                send: () => controller.onSendPressed(
+                                    context, inputController, scrollCotroller)),
+                          ],
+                        );
                       })
                     ],
                   ),

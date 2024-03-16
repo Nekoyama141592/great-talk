@@ -14,7 +14,7 @@ import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/chat_constants.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/controllers/abstract/loading_controller.dart';
+import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
@@ -45,7 +45,7 @@ import 'package:great_talk/views/chat/components/bookmark_categories_list_view.d
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ChatController extends LoadingController with CurrentUserMixin {
+class ChatController extends FormsController with CurrentUserMixin {
   static ChatController get to => Get.find<ChatController>();
   final messages = <TextMessage>[].obs;
   final realtimeRes = "".obs;

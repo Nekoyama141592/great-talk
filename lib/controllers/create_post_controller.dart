@@ -63,7 +63,7 @@ class CreatePostController extends FormsController with CurrentUserMixin {
 
   @override
   Future<void> onPositiveButtonPressed() async {
-    if (rxUint8list.value == null) {
+    if (rxPickedUint8list.value == null) {
       await UIHelper.showErrorFlutterToast("アイコンをタップして画像をアップロードしてください");
       return;
     }
@@ -89,8 +89,8 @@ class CreatePostController extends FormsController with CurrentUserMixin {
     final newFileName = AWSS3Utility.s3FileName(currentUid());
     final bucketName = AWSS3Utility.postImagesBucketName;
     final repository = AWSS3Repository();
-    final result =
-        await repository.putObject(rxUint8list.value!, bucketName, newFileName);
+    final result = await repository.putObject(
+        rxPickedUint8list.value!, bucketName, newFileName);
     result.when(
         success: (res) => _createPost(res),
         failure: () {
@@ -141,7 +141,7 @@ class CreatePostController extends FormsController with CurrentUserMixin {
     topP.value = FormConsts.defaultTopP.toString();
     presencePenalty.value = FormConsts.defaultPresencePenalty.toString();
     frequencyPenalty.value = FormConsts.defaultFrequencyPenalty.toString();
-    rxUint8list.value = null;
+    rxPickedUint8list.value = null;
   }
 
   void onFloatingActionButtonPressed() {

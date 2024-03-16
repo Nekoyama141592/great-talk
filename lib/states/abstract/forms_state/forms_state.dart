@@ -11,7 +11,7 @@ abstract class FormsState<T extends StatefulWidget> extends State<T> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Widget image(FormsController controller) {
-    return Obx(() => controller.rxUint8list.value == null
+    return Obx(() => controller.rxPickedUint8list.value == null
         ? Row(
             children: [
               InkWell(
@@ -32,7 +32,7 @@ abstract class FormsState<T extends StatefulWidget> extends State<T> {
                 width: 100.0,
                 height: 100.0,
                 child: Obx(
-                  () => Image.memory(controller.rxUint8list.value!),
+                  () => Image.memory(controller.rxPickedUint8list.value!),
                 )),
           ));
   }

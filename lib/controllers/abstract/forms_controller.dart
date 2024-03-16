@@ -8,9 +8,9 @@ import 'package:great_talk/utility/file_utility.dart';
 
 abstract class FormsController extends LoadingController {
   bool isPicked = false; // 画像を新たに取得したか判定するフラグ
-  final Rx<Uint8List?> rxUint8list = Rx(null);
+  final Rx<Uint8List?> rxPickedUint8list = Rx(null);
 
-  void onPositiveButtonPressed();
+  void onPositiveButtonPressed() {}
   void onImagePickButtonPressed() async {
     final result = await FileUtility.getCompressedImage();
     if (result == null) return;
@@ -25,7 +25,7 @@ abstract class FormsController extends LoadingController {
       UIHelper.showErrorFlutterToast(FormConsts.bigImageRequestMsg);
       return;
     }
-    rxUint8list(result);
+    rxPickedUint8list(result);
     isPicked = true;
   }
 
