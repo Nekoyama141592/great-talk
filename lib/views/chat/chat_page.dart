@@ -136,28 +136,6 @@ class ChatPage extends HookWidget with CurrentUserMixin {
                         return Row(
                           children: [
                             const BasicWidthBox(),
-                            Obx(() {
-                              final image = controller.rxPickedUint8list.value;
-                              const size = 25.0;
-                              late Widget child;
-                              if (image == null) {
-                                child = const Icon(
-                                  Icons.image,
-                                  size: size,
-                                );
-                              } else {
-                                child = CircleImage(
-                                  uint8list: image,
-                                  width: size,
-                                  height: size,
-                                );
-                              }
-                              return InkWell(
-                                onTap: controller.onImagePickButtonPressed,
-                                child: child,
-                              );
-                            }),
-                            const BasicWidthBox(),
                             RoundedInputField(
                                 controller: inputController,
                                 send: () => controller.onSendPressed(
