@@ -88,6 +88,9 @@ class ChatController extends FormsController with CurrentUserMixin {
     _processDescriptionMessage();
   }
 
+  bool isGeneratingMsg(int index) =>
+      index == messages.indexOf(messages.last) &&
+      messages.last.typedText().value.isEmpty;
   void _processDescriptionMessage() {
     final post = rxPost.value;
     if (post == null) return;
@@ -186,7 +189,8 @@ class ChatController extends FormsController with CurrentUserMixin {
   Future<void> execute(ScrollController scrollController, String content,
       TextEditingController inputController) async {
     final post = rxPost.value;
-    if (post == null) return;
+    if (post == null || isGenerating.value) return;
+    isGenerating(true);
     _setValues(); // チャットした日と回数を端末に保存.
     _addMyMessage(content);
     _addEmptyMessage(); // Viewで表示できる要素数を一つ増やす
@@ -208,6 +212,7 @@ class ChatController extends FormsController with CurrentUserMixin {
     );
     _listenToChatCompletionSSE(request, scrollController); // ChatGPTのリアルタイム出力
     inputController.text = "";
+    isGenerating(false);
   }
 
   int _adjustMaxToken() {
@@ -237,8 +242,7 @@ class ChatController extends FormsController with CurrentUserMixin {
       ChatCompleteText request, ScrollController scrollController) {
     // 生成中なら何もしない
     final post = rxPost.value;
-    if (isGenerating.value || post == null) return;
-    isGenerating(true);
+    if (post == null) return;
     final client = ChatGptSdkClient();
     client.openAI.onChatCompletionSSE(request: request).transform(
         StreamTransformer.fromHandlers(handleError: (err, stackTrace, sink) {
@@ -263,14 +267,12 @@ class ChatController extends FormsController with CurrentUserMixin {
       final completedMsg = _newtTextMessage(realtimeRes.value, post.postId);
       messages.last = completedMsg;
       messages([...messages]);
-      isGenerating(false);
       _setLocalMessage();
     }, onError: (e) {
       setChatCount(false); // チャット数を保存
       messages.removeRange(
           messages.length - 2, messages.length); // うまく生成できなかったメッセージを削除
       messages([...messages]);
-      isGenerating(false);
     });
   }
 
@@ -482,25 +484,21 @@ class ChatController extends FormsController with CurrentUserMixin {
     return Messages(role: Role.system, content: content);
   }
 
-  void onCardTap() {
-    if (PurchasesController.to.isSubscribing()) {
+  void onCardTap(BuildContext context, int index) {
+    if (!PurchasesController.to.isSubscribing()) {
+      UIHelper.showFlutterToast("テキストをコピーするには有料プランに登録する必要があります");
       return;
     } else {
-      UIHelper.showFlutterToast("テキストをコピーするには有料プランを登録する必要があります");
+      _showCopyTypeDialog(context, index);
       return;
     }
   }
 
-  void onCopyButtonTap(String text) async {
-    if (PurchasesController.to.isSubscribing()) {
-      final data = ClipboardData(text: text);
-      await Clipboard.setData(data);
-      UIHelper.showFlutterToast("テキストをクリップボードにコピーしました！");
-      return;
-    } else {
-      UIHelper.showFlutterToast("テキストをコピーするには有料プランを登録する必要があります");
-      return;
-    }
+  void _copyToClipboard(String text) async {
+    final data = ClipboardData(text: text);
+    await Clipboard.setData(data);
+    UIHelper.showFlutterToast("テキストをクリップボードにコピーしました！");
+    return;
   }
 
   void onDescriptionButtonPressed() => _showDescriptionDialog();
@@ -516,7 +514,7 @@ class ChatController extends FormsController with CurrentUserMixin {
         needsSubscribing: true);
   }
 
-  bool isMyContent(TextMessage message) {
+  bool isMyMessage(TextMessage message) {
     if (message.senderUid == currentUid()) return true;
     final post = rxPost.value;
     if (message.senderUid != post!.postId) {
@@ -633,6 +631,33 @@ class ChatController extends FormsController with CurrentUserMixin {
                     _onBookmarkTextTapped();
                   },
                   child: const Text("ブックマークに追加/削除")),
+              CupertinoActionSheetAction(
+                  onPressed: () => Navigator.pop(innerContext),
+                  child: const Text("戻る"))
+            ],
+          );
+        });
+  }
+
+  void _showCopyTypeDialog(BuildContext context, int index) async {
+    final text = messages[index].typedText().value;
+    UIHelper.showPopup(
+        context: context,
+        builder: (innerContext) {
+          return CupertinoActionSheet(
+            actions: [
+              CupertinoActionSheetAction(
+                  onPressed: () {
+                    Navigator.pop(innerContext);
+                    _copyToClipboard(text);
+                  },
+                  child: const Text("クリップボードに全てコピー")),
+              CupertinoActionSheetAction(
+                  onPressed: () {
+                    Navigator.pop(innerContext);
+                    UIHelper.simpleAlertDialog(text);
+                  },
+                  child: const Text("一部をコピー")),
               CupertinoActionSheetAction(
                   onPressed: () => Navigator.pop(innerContext),
                   child: const Text("戻る"))

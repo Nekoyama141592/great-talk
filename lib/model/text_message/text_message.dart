@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/extensions/custom_date_time_formatting.dart';
 import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
@@ -33,4 +34,7 @@ abstract class TextMessage implements _$TextMessage {
   DocRef typedMessageRef() => messageRef as DocRef;
   DetectedText typedText() => DetectedText.fromJson(text);
   Timestamp typedUpdatedAtAt() => createdAt as Timestamp;
+
+  DateTime get createdAtDateTime => typedCreatedAt().toDate();
+  String timeCreatedAt() => createdAtDateTime.timeString();
 }

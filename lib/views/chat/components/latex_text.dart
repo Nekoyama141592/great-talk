@@ -25,19 +25,15 @@ class LatexText extends StatelessWidget {
   final String data;
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      final selectable = PurchasesController.to.isSubscribing();
-      return MarkdownBody(
-        selectable: selectable,
-        data: "\ $data".replaceAll(r"\(", "\n\n" + r"\("),
-        builders: {
-          'latex': LatexElementBuilder(),
-        },
-        extensionSet: md.ExtensionSet(
-          [LatexBlockSyntax()],
-          [LatexInlineSyntax()],
-        ),
-      );
-    });
+    return MarkdownBody(
+      data: "\ $data".replaceAll(r"\(", "\n\n" + r"\("),
+      builders: {
+        'latex': LatexElementBuilder(),
+      },
+      extensionSet: md.ExtensionSet(
+        [LatexBlockSyntax()],
+        [LatexInlineSyntax()],
+      ),
+    );
   }
 }

@@ -15,7 +15,8 @@ ThemeData lightThemeData(BuildContext context) {
         onBackground: kPrimaryColor,
         primary: kSecondaryColor, // CupertinoActionSheetActionのTextカラー
         secondary: kSecondaryColor, // TextButtonの色
-        tertiary: kAccentColorLightTheme),
+        tertiary: kAccentColorLightTheme,
+        inversePrimary: kPrimaryColor),
   );
 }
 
@@ -32,6 +33,7 @@ ThemeData darkThemeData(BuildContext context) {
         onBackground: kSecondaryColor,
         primary: kPrimaryColor,
         secondary: kPrimaryColor,
-        tertiary: kAccentColorDarkTheme),
+        tertiary: kAccentColorDarkTheme,
+        inversePrimary: kSecondaryColor),
   );
 }
