@@ -665,4 +665,10 @@ class ChatController extends FormsController with CurrentUserMixin {
           );
         });
   }
+
+  bool isAnotherDay(int i) {
+    final message = messages[i];
+    return i == 0 ||
+        message.createdAtDateTime.day != messages[i - 1].createdAtDateTime.day;
+  }
 }

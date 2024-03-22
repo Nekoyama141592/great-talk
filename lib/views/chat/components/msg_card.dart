@@ -5,6 +5,7 @@ import 'package:great_talk/extensions/custom_date_time_formatting.dart';
 import 'package:great_talk/ui_core/padding_core.dart';
 import 'package:great_talk/ui_core/text_core.dart';
 import 'package:great_talk/views/chat/components/latex_text.dart';
+import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:get/get.dart';
 
@@ -12,10 +13,12 @@ class MsgCard extends StatelessWidget {
   const MsgCard(
       {super.key,
       required this.isMyMsg,
+      required this.isAnotherDay,
       required this.text,
       required this.index,
       this.createdAt});
   final bool isMyMsg;
+  final bool isAnotherDay;
   final String text;
   final int index;
   final Timestamp? createdAt;
@@ -69,7 +72,7 @@ class MsgCard extends StatelessWidget {
                 uint8list: controller.rxUint8list.value,
               )),
     ];
-    return Container(
+    final child = Container(
       width: fullWidth * 0.9,
       padding: isMyMsg
           ? EdgeInsets.only(left: fullWidth * 0.1, top: 4.0, bottom: 4.0)
@@ -80,5 +83,15 @@ class MsgCard extends StatelessWidget {
         children: isMyMsg ? rowChildren : rowChildren.reversed.toList(),
       ),
     );
+    return isAnotherDay && createdAt != null
+        ? Column(
+            children: [
+              const BasicHeightBox(),
+              Text(createdAt!.toDate().japaneseDifference()),
+              const BasicHeightBox(),
+              child
+            ],
+          )
+        : child;
   }
 }

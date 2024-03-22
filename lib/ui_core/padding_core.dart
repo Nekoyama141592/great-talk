@@ -7,4 +7,9 @@ class PaddingCore {
     final value = defaultPadding(context);
     return EdgeInsets.all(value);
   }
+
+  static EdgeInsetsGeometry defaultVertical(BuildContext context) {
+    final value = defaultPadding(context);
+    return EdgeInsets.symmetric(vertical: value);
+  }
 }

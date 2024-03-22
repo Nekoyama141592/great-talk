@@ -76,8 +76,11 @@ class ChatPage extends HookWidget with CurrentUserMixin {
                                   // 生成中の表示
                                   return Obx(() {
                                     final text = controller.realtimeRes.value;
+                                    final isAnotherDay =
+                                        controller.isAnotherDay(index);
                                     return MsgCard(
                                       isMyMsg: false,
+                                      isAnotherDay: isAnotherDay,
                                       text: text,
                                       index: index,
                                     );
@@ -92,9 +95,12 @@ class ChatPage extends HookWidget with CurrentUserMixin {
                                         .value;
                                     final isMyMessage =
                                         controller.isMyMessage(message);
+                                    final isAnotherDay =
+                                        controller.isAnotherDay(index);
                                     final createdAt = message.typedCreatedAt();
                                     return MsgCard(
                                       isMyMsg: isMyMessage,
+                                      isAnotherDay: isAnotherDay,
                                       text: text,
                                       index: index,
                                       createdAt: createdAt,
