@@ -462,7 +462,7 @@ class ChatController extends FormsController with CurrentUserMixin {
 
   Messages _toRequestMessage(TextMessage msg) {
     return Messages(
-        role: msg.senderUid == currentUid() ? Role.user : Role.assistant,
+        role: msg.senderUid == postId ? Role.assistant : Role.user,
         content: msg.typedText().value);
   }
 
