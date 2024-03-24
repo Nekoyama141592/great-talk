@@ -90,7 +90,7 @@ class PostsController extends GetxController with CurrentUserMixin {
   //   showReportContentDialog(innerContext);
   // }
 
-  void showReportContentDialog(BuildContext context) {
+  void showReportContentDialog() {
     Get.dialog(
       const ReportContentsListView(),
     );
@@ -99,10 +99,8 @@ class PostsController extends GetxController with CurrentUserMixin {
   void onReportContentTapped(String content) {
     if (!reportContents.contains(content)) {
       reportContents.add(content);
-      reportContents([...reportContents]);
     } else {
       reportContents.remove(content);
-      reportContents([...reportContents]);
     }
   }
 
