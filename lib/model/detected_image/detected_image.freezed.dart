@@ -140,10 +140,10 @@ class __$$DetectedImageImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DetectedImageImpl extends _DetectedImage {
   const _$DetectedImageImpl(
-      {required this.bucketName,
+      {this.bucketName = "",
       final List<Map<String, dynamic>> moderationLabels = const [],
       this.moderationModelVersion = "",
-      required this.value})
+      this.value = ""})
       : _moderationLabels = moderationLabels,
         super._();
 
@@ -151,6 +151,7 @@ class _$DetectedImageImpl extends _DetectedImage {
       _$$DetectedImageImplFromJson(json);
 
   @override
+  @JsonKey()
   final String bucketName;
   final List<Map<String, dynamic>> _moderationLabels;
   @override
@@ -166,6 +167,7 @@ class _$DetectedImageImpl extends _DetectedImage {
   @JsonKey()
   final String moderationModelVersion;
   @override
+  @JsonKey()
   final String value;
 
   @override
@@ -212,10 +214,10 @@ class _$DetectedImageImpl extends _DetectedImage {
 
 abstract class _DetectedImage extends DetectedImage {
   const factory _DetectedImage(
-      {required final String bucketName,
+      {final String bucketName,
       final List<Map<String, dynamic>> moderationLabels,
       final String moderationModelVersion,
-      required final String value}) = _$DetectedImageImpl;
+      final String value}) = _$DetectedImageImpl;
   const _DetectedImage._() : super._();
 
   factory _DetectedImage.fromJson(Map<String, dynamic> json) =

@@ -13,6 +13,7 @@ _$UserUpdateLogImpl _$$UserUpdateLogImplFromJson(Map<String, dynamic> json) =>
       stringBio: json['stringBio'] as String,
       stringUserName: json['stringUserName'] as String,
       uid: json['uid'] as String,
+      image: json['image'] as Map<String, dynamic>,
       imageFileName: json['imageFileName'] as String,
       userRef: json['userRef'],
     );
@@ -24,6 +25,7 @@ Map<String, dynamic> _$$UserUpdateLogImplToJson(_$UserUpdateLogImpl instance) =>
       'stringBio': instance.stringBio,
       'stringUserName': instance.stringUserName,
       'uid': instance.uid,
+      'image': instance.image,
       'imageFileName': instance.imageFileName,
       'userRef': instance.userRef,
     };

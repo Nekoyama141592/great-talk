@@ -22,7 +22,6 @@ import 'package:great_talk/model/tokens/report_post_token/report_post_token.dart
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
-import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 import 'package:great_talk/views/auth/logouted_page.dart';
@@ -399,7 +398,8 @@ class CurrentUserController extends GetxController {
   Future<void> _removeImage() async {
     final publicUser = CurrentUserController.to.rxPublicUser.value;
     if (publicUser == null) return;
-    final bucketName = AWSS3Utility.userImagesBucketName;
+    final image = publicUser.typedImage();
+    final bucketName = image.bucketName;
     final fileName = publicUser.typedImage().value;
     await AWSS3Repository.instance.removeObject(bucketName, fileName);
   }
@@ -432,10 +432,7 @@ class CurrentUserController extends GetxController {
         createdAt: now,
         id: categoryId,
         title: inputController.text,
-        image: DetectedImage(
-                bucketName: AWSS3Utility.bookmarkCategoryImagesBucketName,
-                value: "")
-            .toJson(),
+        image: const DetectedImage().toJson(),
         ref: ref,
         updatedAt: now);
     final result = await repository.createDoc(ref, newCategory.toJson());

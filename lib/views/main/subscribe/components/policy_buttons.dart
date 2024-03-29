@@ -13,18 +13,18 @@ class PolicyButtons extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           const PolicyButton(
-                  label: 'プライバシーポリシー',
-                  onPressed: UrlRedirector.toPrivacyPage,
-                ),
-                const PolicyButton(
-                  label: '利用規約',
-                  onPressed: UrlRedirector.toTosPage,
-                ),
-                if (Platform.isIOS)
-                  const PolicyButton(
-                    label: 'EULA',
-                    onPressed: UrlRedirector.toEULAPage,
-                  ),
+            label: 'プライバシーポリシー',
+            onPressed: UrlRedirector.toPrivacyPage,
+          ),
+          const PolicyButton(
+            label: '利用規約',
+            onPressed: UrlRedirector.toTosPage,
+          ),
+          if (Platform.isIOS)
+            const PolicyButton(
+              label: 'EULA',
+              onPressed: UrlRedirector.toEULAPage,
+            ),
         ],
       ),
     );

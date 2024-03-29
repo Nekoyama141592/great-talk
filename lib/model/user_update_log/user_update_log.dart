@@ -12,6 +12,7 @@ abstract class UserUpdateLog implements _$UserUpdateLog {
     required String stringBio,
     required String stringUserName,
     required String uid,
+    required SDMap image,
     required String imageFileName,
     required dynamic userRef,
   }) = _UserUpdateLog;

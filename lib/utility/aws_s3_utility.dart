@@ -16,12 +16,8 @@ class AWSS3Utility {
     accessKey: _accessKey,
     secretKey: _secretKey,
   );
-  // bucketName
-  static String get bookmarkCategoryImagesBucketName =>
-      dotenv.get(EnvKeys.AWS_S3_BOOKMARK_CATEGORY_IMAGES_BUCKET.name);
-  static String get postImagesBucketName =>
-      dotenv.get(EnvKeys.AWS_S3_POST_IMAGES_BUCKET.name);
-  static String get userImagesBucketName =>
-      dotenv.get(EnvKeys.AWS_S3_USER_IMAGES_BUCKET.name);
-  static String s3FileName(String uid) => "$uid/${randomString()}.jpg";
+  static String get bucketName => dotenv.get(EnvKeys.AWS_S3_BUCKET.name);
+  static String _s3FileName() => "${randomString()}.jpg";
+  static String profileObject(String uid) => "$uid/profile/${_s3FileName()}";
+  static String postObject(String uid) => "$uid/posts/${_s3FileName()}";
 }

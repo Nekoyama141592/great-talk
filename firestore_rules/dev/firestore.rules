@@ -182,12 +182,13 @@ service cloud.firestore {
   }
 
   function isValidUserUpdateLog(userUpdateLog) {
-    return userUpdateLog.size() == 7
+    return userUpdateLog.size() == 8
       && "logCreatedAt" in userUpdateLog && userUpdateLog.logCreatedAt is timestamp &&
       "searchToken" in userUpdateLog && userUpdateLog.searchToken is map &&
       "stringBio" in userUpdateLog && userUpdateLog.stringBio is string &&
       "stringUserName" in userUpdateLog && userUpdateLog.stringUserName is string &&
       "uid" in userUpdateLog && userUpdateLog.uid is string &&
+      "image" in userUpdateLog && userUpdateLog.image is map &&
       "imageFileName" in userUpdateLog && userUpdateLog.imageFileName is string &&
       "userRef" in userUpdateLog && userUpdateLog.userRef is path;
   }

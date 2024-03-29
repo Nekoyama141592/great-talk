@@ -9,7 +9,6 @@ import 'package:great_talk/model/detected_text/detected_text.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/private_user/private_user.dart';
-import 'package:great_talk/model/user_update_log/user_update_log.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 
@@ -57,8 +56,7 @@ class NewContent {
         createdAt: now,
         customCompleteText: customCompleteText,
         description: DetectedText(value: description).toJson(),
-        image: newDetectedImage(AWSS3Utility.postImagesBucketName, fileName)
-            .toJson(),
+        image: newDetectedImage(AWSS3Utility.bucketName, fileName).toJson(),
         postId: postId,
         ref: postRef,
         searchToken: returnSearchToken(title),
@@ -79,9 +77,8 @@ class NewContent {
       uid: uid,
       updatedAt: now,
       image: imageValue != null
-          ? newDetectedImage(AWSS3Utility.userImagesBucketName, imageValue)
-              .toJson()
-          : newDetectedImage(AWSS3Utility.userImagesBucketName, '').toJson(),
+          ? newDetectedImage(AWSS3Utility.bucketName, imageValue).toJson()
+          : newDetectedImage(AWSS3Utility.bucketName, '').toJson(),
       userName: userName != null
           ? DetectedText(value: userName).toJson()
           : const DetectedText().toJson(),
@@ -96,15 +93,4 @@ class NewContent {
         uid: uid,
         updatedAt: now);
   }
-
-  static UserUpdateLog newUserUpdateLog(String stringBio, String stringUserName,
-          String uid, String userImageUrl, DocRef userRef) =>
-      UserUpdateLog(
-          logCreatedAt: Timestamp.now(),
-          searchToken: returnSearchToken(stringUserName),
-          stringBio: stringBio,
-          stringUserName: stringUserName,
-          uid: uid,
-          imageFileName: userImageUrl,
-          userRef: userRef);
 }

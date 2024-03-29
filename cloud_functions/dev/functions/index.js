@@ -24,11 +24,7 @@ const plusOne = 1;
 const minusOne = -1;
 // AWS
 const AWS = require('aws-sdk');
-const aws_config = config.aws;
 const AWS_REGION = "ap-northeast-1";
-
-const postImagesBucket = aws_config.s3.post_images; // s3バケット
-const userImagesBucket = aws_config.s3.user_images; // s3バケット
 
 function updateAWSConfig() {
     AWS.config.update({
@@ -265,7 +261,7 @@ exports.onPostCreate = functions
         const newValue = snap.data();
         const detectedDescription = await detectText(newValue.description.value);
         const detectedTitle = await detectText(newValue.title.value);
-        const detectedImage = await detectModerationLabels(postImagesBucket,newValue.image.value);
+        const detectedImage = await detectModerationLabels(newValue.image.bucketName,newValue.image.value);
         await snap.ref.update({
             'description': detectedDescription,
             'title': detectedTitle,
@@ -416,8 +412,10 @@ exports.onUserUpdateLogCreate = functions
         };
         const newBio = newValue.stringBio;
         const detectedBio = (newBio === oldUserJson['bio']['value']) ? oldUserJson['bio'] : await detectText(newBio);
-        const newFileName = newValue.imageFileName;
-        const detectedImage = (newFileName === oldUserJson['image']['value']) ? oldUserJson['image'] : await detectModerationLabels(userImagesBucket,newFileName);
+        const newImage = newValue.image;
+        const newBucketName = newImage.bucketName;
+        const newFileName = newImage.value;
+        const detectedImage = (newFileName === oldUserJson['image']['value']) ? oldUserJson['image'] : await detectModerationLabels(newBucketName,newFileName);
         await userRef.update({
             'bio': detectedBio,
             'image': detectedImage,

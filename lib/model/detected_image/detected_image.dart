@@ -8,10 +8,10 @@ part 'detected_image.g.dart';
 abstract class DetectedImage implements _$DetectedImage {
   const DetectedImage._();
   const factory DetectedImage({
-    required String bucketName,
+    @Default("") String bucketName,
     @Default([]) List<Map<String, dynamic>> moderationLabels,
     @Default("") String moderationModelVersion,
-    required String value, // オリジナルコンテンツならURL、ユーザーの投稿ならS3のファイル名
+    @Default("") String value, // S3のファイル名
   }) = _DetectedImage;
   factory DetectedImage.fromJson(Map<String, dynamic> json) =>
       _$DetectedImageFromJson(json);
