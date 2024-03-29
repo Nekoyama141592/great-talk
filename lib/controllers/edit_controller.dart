@@ -92,7 +92,6 @@ class EditController extends FormsController with CurrentUserMixin {
         stringBio: bio.trim(),
         stringUserName: userName.trim(),
         uid: currentUid(),
-        imageFileName: fileName,
         image: DetectedImage(bucketName: bucketName, value: fileName).toJson(),
         userRef: CurrentUserController.to.rxPublicUser.value!.ref);
     final ref = DocRefCore.userUpdateLog(currentUid());

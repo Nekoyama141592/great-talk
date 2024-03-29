@@ -26,7 +26,6 @@ mixin _$UserUpdateLog {
   String get stringUserName => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
   Map<String, dynamic> get image => throw _privateConstructorUsedError;
-  String get imageFileName => throw _privateConstructorUsedError;
   dynamic get userRef => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,7 +47,6 @@ abstract class $UserUpdateLogCopyWith<$Res> {
       String stringUserName,
       String uid,
       Map<String, dynamic> image,
-      String imageFileName,
       dynamic userRef});
 }
 
@@ -71,7 +69,6 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
     Object? stringUserName = null,
     Object? uid = null,
     Object? image = null,
-    Object? imageFileName = null,
     Object? userRef = freezed,
   }) {
     return _then(_value.copyWith(
@@ -99,10 +96,6 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
-      imageFileName: null == imageFileName
-          ? _value.imageFileName
-          : imageFileName // ignore: cast_nullable_to_non_nullable
-              as String,
       userRef: freezed == userRef
           ? _value.userRef
           : userRef // ignore: cast_nullable_to_non_nullable
@@ -126,7 +119,6 @@ abstract class _$$UserUpdateLogImplCopyWith<$Res>
       String stringUserName,
       String uid,
       Map<String, dynamic> image,
-      String imageFileName,
       dynamic userRef});
 }
 
@@ -147,7 +139,6 @@ class __$$UserUpdateLogImplCopyWithImpl<$Res>
     Object? stringUserName = null,
     Object? uid = null,
     Object? image = null,
-    Object? imageFileName = null,
     Object? userRef = freezed,
   }) {
     return _then(_$UserUpdateLogImpl(
@@ -175,10 +166,6 @@ class __$$UserUpdateLogImplCopyWithImpl<$Res>
           ? _value._image
           : image // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
-      imageFileName: null == imageFileName
-          ? _value.imageFileName
-          : imageFileName // ignore: cast_nullable_to_non_nullable
-              as String,
       userRef: freezed == userRef
           ? _value.userRef
           : userRef // ignore: cast_nullable_to_non_nullable
@@ -197,7 +184,6 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
       required this.stringUserName,
       required this.uid,
       required final Map<String, dynamic> image,
-      required this.imageFileName,
       required this.userRef})
       : _searchToken = searchToken,
         _image = image;
@@ -230,13 +216,11 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
   }
 
   @override
-  final String imageFileName;
-  @override
   final dynamic userRef;
 
   @override
   String toString() {
-    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, searchToken: $searchToken, stringBio: $stringBio, stringUserName: $stringUserName, uid: $uid, image: $image, imageFileName: $imageFileName, userRef: $userRef)';
+    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, searchToken: $searchToken, stringBio: $stringBio, stringUserName: $stringUserName, uid: $uid, image: $image, userRef: $userRef)';
   }
 
   @override
@@ -254,8 +238,6 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
                 other.stringUserName == stringUserName) &&
             (identical(other.uid, uid) || other.uid == uid) &&
             const DeepCollectionEquality().equals(other._image, _image) &&
-            (identical(other.imageFileName, imageFileName) ||
-                other.imageFileName == imageFileName) &&
             const DeepCollectionEquality().equals(other.userRef, userRef));
   }
 
@@ -269,7 +251,6 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
       stringUserName,
       uid,
       const DeepCollectionEquality().hash(_image),
-      imageFileName,
       const DeepCollectionEquality().hash(userRef));
 
   @JsonKey(ignore: true)
@@ -294,7 +275,6 @@ abstract class _UserUpdateLog implements UserUpdateLog {
       required final String stringUserName,
       required final String uid,
       required final Map<String, dynamic> image,
-      required final String imageFileName,
       required final dynamic userRef}) = _$UserUpdateLogImpl;
 
   factory _UserUpdateLog.fromJson(Map<String, dynamic> json) =
@@ -312,8 +292,6 @@ abstract class _UserUpdateLog implements UserUpdateLog {
   String get uid;
   @override
   Map<String, dynamic> get image;
-  @override
-  String get imageFileName;
   @override
   dynamic get userRef;
   @override
