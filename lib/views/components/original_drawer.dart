@@ -49,13 +49,18 @@ class OriginalDrawer extends StatelessWidget with CurrentUserMixin {
                                     CurrentUserController.to.rxUint8list.value,
                               ),
                               const BasicWidthBox(),
-                              Text(
-                                "フォロー ${user.followingCount.formatNumber()}",
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "フォロー ${user.followingCount.formatNumber()}",
+                                  ),
+                                  const BasicHeightBox(),
+                                  Text(
+                                    "フォロワー ${user.followerCount.formatNumber()}",
+                                  )
+                                ],
                               ),
-                              const BasicWidthBox(),
-                              Text(
-                                "フォロワー ${user.followerCount.formatNumber()}",
-                              )
                             ],
                           )
                         ],
