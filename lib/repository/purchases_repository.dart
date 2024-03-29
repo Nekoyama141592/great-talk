@@ -43,7 +43,10 @@ class PurchasesRepository {
                 "data": purchaseDetails.toJson(),
                 "uid": currentUid,
               },
-              options: dio.Options(method: "POST"));
+              options: dio.Options(method: "POST", headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Bearer ${dotenv.get(EnvKeys.API_KEY.name)}'
+              }));
       data = res.data;
       if (data == null || res.statusCode != 200) {
         return const Result.failure();
@@ -67,7 +70,10 @@ class PurchasesRepository {
                 "data": purchaseDetails.toJson(),
                 "uid": currentUid,
               },
-              options: dio.Options(method: "POST"));
+              options: dio.Options(method: "POST", headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Bearer ${dotenv.get(EnvKeys.API_KEY.name)}'
+              }));
       data = res.data;
       if (data == null || res.statusCode != 200) {
         return const Result.failure();

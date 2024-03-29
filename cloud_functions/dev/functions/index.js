@@ -214,7 +214,19 @@ if (!match) {
 
 return match.join(end);
 }
-
+function isValidAuth(authHeader) {
+  // 'Authorization' ヘッダーが存在しない場合、または 'Bearer' トークンを含まない場合は403エラーを返す
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return false;
+  }
+  // トークンの抽出
+  const token = authHeader.split('Bearer ')[1];
+  if (token === process.env.API_KEY) {
+    return true;
+  } else {
+    return false;
+  }
+}
 exports.onACreate = functions.firestore.document("a/{id}").onCreate(
     async (_,__) => {
         const qshot = await db.collectionGroup("posts").get();
@@ -426,7 +438,7 @@ exports.onUserUpdateLogCreate = functions
 );
 exports.verifyAndroidReceipt = functions
 .https.onRequest(async (req, res) => {
-    if (req.method !== "POST") {
+    if (req.method !== "POST" || !isValidAuth(req.headers.authorization)) {
         res.status(403).send();
         return;
     }
@@ -485,8 +497,7 @@ exports.verifyAndroidReceipt = functions
 // ios
 exports.verifyIOSReceipt = functions
 .https.onRequest(async (req, res) => {
-    const RECEIPT_VERIFICATION_PASSWORD_FOR_IOS = `${process.env.APP_SHARED_SECRET}`;
-    if (req.method !== "POST") {
+    if (req.method !== "POST" || !isValidAuth(req.headers.authorization)) {
         res.status(403).send();
         return;
     }
@@ -497,6 +508,7 @@ exports.verifyIOSReceipt = functions
         return;
     }
     let response;
+    const RECEIPT_VERIFICATION_PASSWORD_FOR_IOS = `${process.env.APP_SHARED_SECRET}`;
     try {
         response = await axios_1.default.post(RECEIPT_VERIFICATION_ENDPOINT_FOR_IOS_PROD, {
             "receipt-data": verificationData,
