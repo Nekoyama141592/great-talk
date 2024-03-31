@@ -1,12 +1,22 @@
-import 'package:dio/dio.dart' as dio;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:great_talk/consts/env_keys.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
+import 'package:great_talk/infrastructure/cloud_functions/cloud_functions_client.dart';
+import 'package:great_talk/infrastructure/open_ai/original_dio.dart';
+import 'package:great_talk/model/receipt_request/receipt_request.dart';
 import 'package:great_talk/model/receipt_response/receipt_response.dart';
 import 'package:great_talk/repository/result.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class PurchasesRepository {
+  CloudFunctionsClient get _client {
+    final dio = OriginalDio.withOptions(
+        baseUrl: dotenv.get(EnvKeys.BASE_URL.name),
+        token: dotenv.get(EnvKeys.API_KEY.name));
+    final client = CloudFunctionsClient(dio);
+    return client;
+  }
+
   InAppPurchase get inAppPurchase => InAppPurchase.instance;
   FutureResult<List<ProductDetails>> queryProductDetails(
       Set<String> identifiers) async {
@@ -34,26 +44,11 @@ class PurchasesRepository {
 
   FutureResult<ReceiptResponse> getAndroidReceipt(
       PurchaseDetails purchaseDetails, String currentUid) async {
-    final instance = dio.Dio();
-    Map<String, dynamic>? data;
     try {
-      final dio.Response<Map<String, dynamic>> res =
-          await instance.post(dotenv.get(EnvKeys.VERIFY_ANDROID_ENDPOINT.name),
-              data: {
-                "data": purchaseDetails.toJson(),
-                "uid": currentUid,
-              },
-              options: dio.Options(method: "POST", headers: {
-                'content-type': 'application/json',
-                'Authorization': 'Bearer ${dotenv.get(EnvKeys.API_KEY.name)}'
-              }));
-      data = res.data;
-      if (data == null || res.statusCode != 200) {
-        return const Result.failure();
-      } else {
-        final result = ReceiptResponse.fromJson(data);
-        return Result.success(result);
-      }
+      final request =
+          ReceiptRequest(data: purchaseDetails.toJson(), uid: currentUid);
+      final result = await _client.getAndroidReceipt(request);
+      return Result.success(result);
     } catch (e) {
       return const Result.failure();
     }
@@ -61,26 +56,11 @@ class PurchasesRepository {
 
   FutureResult<ReceiptResponse> getIOSReceipt(
       PurchaseDetails purchaseDetails, String currentUid) async {
-    final instance = dio.Dio();
-    Map<String, dynamic>? data;
     try {
-      final dio.Response<Map<String, dynamic>> res =
-          await instance.post(dotenv.get(EnvKeys.VERIFY_IOS_ENDPOINT.name),
-              data: {
-                "data": purchaseDetails.toJson(),
-                "uid": currentUid,
-              },
-              options: dio.Options(method: "POST", headers: {
-                'content-type': 'application/json',
-                'Authorization': 'Bearer ${dotenv.get(EnvKeys.API_KEY.name)}'
-              }));
-      data = res.data;
-      if (data == null || res.statusCode != 200) {
-        return const Result.failure();
-      } else {
-        final result = ReceiptResponse.fromJson(data);
-        return Result.success(result);
-      }
+      final request =
+          ReceiptRequest(data: purchaseDetails.toJson(), uid: currentUid);
+      final result = await _client.getIOSReceipt(request);
+      return Result.success(result);
     } catch (e) {
       return const Result.failure();
     }
