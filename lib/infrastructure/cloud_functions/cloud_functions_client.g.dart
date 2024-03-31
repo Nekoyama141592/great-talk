@@ -19,8 +19,8 @@ class _CloudFunctionsClient implements CloudFunctionsClient {
   String? baseUrl;
 
   @override
-  Future<ReceiptResponse> getIOSReceipt(request) async {
-    const _extra = <String, dynamic>{};
+  Future<ReceiptResponse> getIOSReceipt(ReceiptRequest request) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
@@ -36,14 +36,18 @@ class _CloudFunctionsClient implements CloudFunctionsClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = ReceiptResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<ReceiptResponse> getAndroidReceipt(request) async {
-    const _extra = <String, dynamic>{};
+  Future<ReceiptResponse> getAndroidReceipt(ReceiptRequest request) async {
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
@@ -59,7 +63,11 @@ class _CloudFunctionsClient implements CloudFunctionsClient {
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = ReceiptResponse.fromJson(_result.data!);
     return value;
   }
@@ -75,5 +83,22 @@ class _CloudFunctionsClient implements CloudFunctionsClient {
       }
     }
     return requestOptions;
+  }
+
+  String _combineBaseUrls(
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
+    if (baseUrl == null || baseUrl.trim().isEmpty) {
+      return dioBaseUrl;
+    }
+
+    final url = Uri.parse(baseUrl);
+
+    if (url.isAbsolute) {
+      return url.toString();
+    }
+
+    return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }

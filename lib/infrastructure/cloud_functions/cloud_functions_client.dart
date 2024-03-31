@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:great_talk/infrastructure/open_ai/original_dio.dart';
 import 'package:great_talk/model/receipt_request/receipt_request.dart';
 import 'package:great_talk/model/receipt_response/receipt_response.dart';
