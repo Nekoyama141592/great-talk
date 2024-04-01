@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 double fullHeight(BuildContext context) => MediaQuery.of(context).size.height;
-double userImageSize(BuildContext context) => fullHeight(context) * 0.05;
+double fullWidth(BuildContext context) => MediaQuery.of(context).size.width;
+double userImageSize(BuildContext context) => fullWidth(context) * 0.16;
 double defaultPadding(BuildContext context) => fullHeight(context) / 100.0;
 double defaultHeaderTextSize(BuildContext context) =>
     fullHeight(context) / 32.0;

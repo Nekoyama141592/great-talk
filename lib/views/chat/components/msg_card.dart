@@ -37,7 +37,6 @@ class MsgCard extends StatelessWidget {
           if (createdAt != null)
             Text(
               createdAt!.toDate().timeString(),
-              style: TextStyle(fontSize: fullWidth * 0.05),
             ),
         ],
       ),
