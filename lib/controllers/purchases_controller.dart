@@ -245,7 +245,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     if (Platform.isAndroid &&
         purchaseDetails.status == PurchaseStatus.pending) {
       // 承認を行う.行わないと払い戻しが行われる.
-      BillingClient client = BillingClient((_) {});
+      BillingClient client = BillingClient((_) {}, (__) {});
       final serverVerificationData =
           purchaseDetails.verificationData.serverVerificationData;
       await client.acknowledgePurchase(serverVerificationData);
