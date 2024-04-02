@@ -188,7 +188,7 @@ service cloud.firestore {
       "stringBio" in userUpdateLog && userUpdateLog.stringBio is string &&
       "stringUserName" in userUpdateLog && userUpdateLog.stringUserName is string &&
       "uid" in userUpdateLog && userUpdateLog.uid is string &&
-      "imageFileName" in userUpdateLog && userUpdateLog.imageFileName is string &&
+      "image" in userUpdateLog && userUpdateLog.image is map &&
       "userRef" in userUpdateLog && userUpdateLog.userRef is path;
   }
 
