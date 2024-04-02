@@ -20,8 +20,10 @@ PrivateUser _$PrivateUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PrivateUser {
+  String? get accessToken => throw _privateConstructorUsedError;
   dynamic get createdAt => throw _privateConstructorUsedError;
   String get ethAddress => throw _privateConstructorUsedError;
+  String? get fcmToken => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   String get ipAddress => throw _privateConstructorUsedError;
   bool get isAdmin => throw _privateConstructorUsedError;
@@ -42,8 +44,10 @@ abstract class $PrivateUserCopyWith<$Res> {
       _$PrivateUserCopyWithImpl<$Res, PrivateUser>;
   @useResult
   $Res call(
-      {dynamic createdAt,
+      {String? accessToken,
+      dynamic createdAt,
       String ethAddress,
+      String? fcmToken,
       String gender,
       String ipAddress,
       bool isAdmin,
@@ -65,8 +69,10 @@ class _$PrivateUserCopyWithImpl<$Res, $Val extends PrivateUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? accessToken = freezed,
     Object? createdAt = freezed,
     Object? ethAddress = null,
+    Object? fcmToken = freezed,
     Object? gender = null,
     Object? ipAddress = null,
     Object? isAdmin = null,
@@ -75,6 +81,10 @@ class _$PrivateUserCopyWithImpl<$Res, $Val extends PrivateUser>
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
+      accessToken: freezed == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -83,6 +93,10 @@ class _$PrivateUserCopyWithImpl<$Res, $Val extends PrivateUser>
           ? _value.ethAddress
           : ethAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      fcmToken: freezed == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String?,
       gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
@@ -120,8 +134,10 @@ abstract class _$$PrivateUserImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {dynamic createdAt,
+      {String? accessToken,
+      dynamic createdAt,
       String ethAddress,
+      String? fcmToken,
       String gender,
       String ipAddress,
       bool isAdmin,
@@ -141,8 +157,10 @@ class __$$PrivateUserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? accessToken = freezed,
     Object? createdAt = freezed,
     Object? ethAddress = null,
+    Object? fcmToken = freezed,
     Object? gender = null,
     Object? ipAddress = null,
     Object? isAdmin = null,
@@ -151,6 +169,10 @@ class __$$PrivateUserImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
   }) {
     return _then(_$PrivateUserImpl(
+      accessToken: freezed == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -159,6 +181,10 @@ class __$$PrivateUserImplCopyWithImpl<$Res>
           ? _value.ethAddress
           : ethAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      fcmToken: freezed == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String?,
       gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
@@ -191,8 +217,10 @@ class __$$PrivateUserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PrivateUserImpl extends _PrivateUser {
   const _$PrivateUserImpl(
-      {required this.createdAt,
+      {this.accessToken = "",
+      required this.createdAt,
       this.ethAddress = "",
+      this.fcmToken = "",
       this.gender = "",
       this.ipAddress = "",
       this.isAdmin = false,
@@ -205,10 +233,16 @@ class _$PrivateUserImpl extends _PrivateUser {
       _$$PrivateUserImplFromJson(json);
 
   @override
+  @JsonKey()
+  final String? accessToken;
+  @override
   final dynamic createdAt;
   @override
   @JsonKey()
   final String ethAddress;
+  @override
+  @JsonKey()
+  final String? fcmToken;
   @override
   @JsonKey()
   final String gender;
@@ -227,7 +261,7 @@ class _$PrivateUserImpl extends _PrivateUser {
 
   @override
   String toString() {
-    return 'PrivateUser(createdAt: $createdAt, ethAddress: $ethAddress, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, ref: $ref, uid: $uid, updatedAt: $updatedAt)';
+    return 'PrivateUser(accessToken: $accessToken, createdAt: $createdAt, ethAddress: $ethAddress, fcmToken: $fcmToken, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, ref: $ref, uid: $uid, updatedAt: $updatedAt)';
   }
 
   @override
@@ -235,9 +269,13 @@ class _$PrivateUserImpl extends _PrivateUser {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PrivateUserImpl &&
+            (identical(other.accessToken, accessToken) ||
+                other.accessToken == accessToken) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.ethAddress, ethAddress) ||
                 other.ethAddress == ethAddress) &&
+            (identical(other.fcmToken, fcmToken) ||
+                other.fcmToken == fcmToken) &&
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.ipAddress, ipAddress) ||
                 other.ipAddress == ipAddress) &&
@@ -251,8 +289,10 @@ class _$PrivateUserImpl extends _PrivateUser {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      accessToken,
       const DeepCollectionEquality().hash(createdAt),
       ethAddress,
+      fcmToken,
       gender,
       ipAddress,
       isAdmin,
@@ -276,8 +316,10 @@ class _$PrivateUserImpl extends _PrivateUser {
 
 abstract class _PrivateUser extends PrivateUser {
   const factory _PrivateUser(
-      {required final dynamic createdAt,
+      {final String? accessToken,
+      required final dynamic createdAt,
       final String ethAddress,
+      final String? fcmToken,
       final String gender,
       final String ipAddress,
       final bool isAdmin,
@@ -290,9 +332,13 @@ abstract class _PrivateUser extends PrivateUser {
       _$PrivateUserImpl.fromJson;
 
   @override
+  String? get accessToken;
+  @override
   dynamic get createdAt;
   @override
   String get ethAddress;
+  @override
+  String? get fcmToken;
   @override
   String get gender;
   @override

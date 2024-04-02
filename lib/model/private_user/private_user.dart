@@ -8,8 +8,10 @@ part 'private_user.g.dart';
 abstract class PrivateUser implements _$PrivateUser {
   const PrivateUser._();
   const factory PrivateUser({
+    @Default("") String? accessToken,
     required dynamic createdAt,
     @Default("") String ethAddress,
+    @Default("") String? fcmToken,
     @Default("") String gender,
     @Default("") String ipAddress,
     @Default(false) bool isAdmin,
