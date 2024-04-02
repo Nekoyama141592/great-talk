@@ -24,11 +24,7 @@ const plusOne = 1;
 const minusOne = -1;
 // AWS
 const AWS = require('aws-sdk');
-const aws_config = config.aws;
 const AWS_REGION = "ap-northeast-1";
-
-const postImagesBucket = aws_config.s3.post_images; // s3バケット
-const userImagesBucket = aws_config.s3.user_images; // s3バケット
 
 function updateAWSConfig() {
     AWS.config.update({
@@ -218,7 +214,19 @@ if (!match) {
 
 return match.join(end);
 }
-
+function isValidAuth(authHeader) {
+  // 'Authorization' ヘッダーが存在しない場合、または 'Bearer' トークンを含まない場合は403エラーを返す
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return false;
+  }
+  // トークンの抽出
+  const token = authHeader.split('Bearer ')[1];
+  if (token === process.env.API_KEY) {
+    return true;
+  } else {
+    return false;
+  }
+}
 exports.onACreate = functions.firestore.document("a/{id}").onCreate(
     async (_,__) => {
         const qshot = await db.collectionGroup("posts").get();
@@ -265,7 +273,7 @@ exports.onPostCreate = functions
         const newValue = snap.data();
         const detectedDescription = await detectText(newValue.description.value);
         const detectedTitle = await detectText(newValue.title.value);
-        const detectedImage = await detectModerationLabels(postImagesBucket,newValue.image.value);
+        const detectedImage = await detectModerationLabels(newValue.image.bucketName,newValue.image.value);
         await snap.ref.update({
             'description': detectedDescription,
             'title': detectedTitle,
@@ -416,8 +424,10 @@ exports.onUserUpdateLogCreate = functions
         };
         const newBio = newValue.stringBio;
         const detectedBio = (newBio === oldUserJson['bio']['value']) ? oldUserJson['bio'] : await detectText(newBio);
-        const newFileName = newValue.imageFileName;
-        const detectedImage = (newFileName === oldUserJson['image']['value']) ? oldUserJson['image'] : await detectModerationLabels(userImagesBucket,newFileName);
+        const newImage = newValue.image;
+        const newBucketName = newImage.bucketName;
+        const newFileName = newImage.value;
+        const detectedImage = (newFileName === oldUserJson['image']['value']) ? oldUserJson['image'] : await detectModerationLabels(newBucketName,newFileName);
         await userRef.update({
             'bio': detectedBio,
             'image': detectedImage,
@@ -428,7 +438,7 @@ exports.onUserUpdateLogCreate = functions
 );
 exports.verifyAndroidReceipt = functions
 .https.onRequest(async (req, res) => {
-    if (req.method !== "POST") {
+    if (req.method !== "POST" || !isValidAuth(req.headers.authorization)) {
         res.status(403).send();
         return;
     }
@@ -487,8 +497,7 @@ exports.verifyAndroidReceipt = functions
 // ios
 exports.verifyIOSReceipt = functions
 .https.onRequest(async (req, res) => {
-    const RECEIPT_VERIFICATION_PASSWORD_FOR_IOS = `${process.env.APP_SHARED_SECRET}`;
-    if (req.method !== "POST") {
+    if (req.method !== "POST" || !isValidAuth(req.headers.authorization)) {
         res.status(403).send();
         return;
     }
@@ -499,6 +508,7 @@ exports.verifyIOSReceipt = functions
         return;
     }
     let response;
+    const RECEIPT_VERIFICATION_PASSWORD_FOR_IOS = `${process.env.APP_SHARED_SECRET}`;
     try {
         response = await axios_1.default.post(RECEIPT_VERIFICATION_ENDPOINT_FOR_IOS_PROD, {
             "receipt-data": verificationData,
