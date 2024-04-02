@@ -89,7 +89,7 @@ class NewContent {
   static PrivateUser newPrivateUser(String uid) {
     final now = Timestamp.now();
     return PrivateUser(
-      accessToken: randomString(),
+        accessToken: randomString(),
         createdAt: now,
         ref: DocRefCore.privateUser(uid),
         uid: uid,

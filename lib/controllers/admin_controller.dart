@@ -63,14 +63,14 @@ class AdminController extends LoadingController {
   }
 
   void onPositiveButtonPressed() {
-    if (rxToggleOfficialUid.isEmpty) return;
-    UIHelper.cupertinoAlertDialog("実行しますがよろしいですか？", () async {
+    UIHelper.cupertinoAlertDialog("公式フラグを変更しますがよろしいですか？", () async {
       Get.back();
       await _toggleIsOfficial();
     });
   }
 
   Future<void> _toggleIsOfficial() async {
+    if (rxToggleOfficialUid.isEmpty) return;
     final uid = rxToggleOfficialUid.value;
     final ref = DocRefCore.user(uid);
     final result = await repository.getDoc(ref);
@@ -91,7 +91,8 @@ class AdminController extends LoadingController {
     };
     final result = await repository.updateDoc(ref, json);
     result.when(success: (res) {
-      UIHelper.showFlutterToast(json.toString());
+      UIHelper.showFlutterToast(
+          "${user.nameValue}のisOfficialを${!user.isOfficial}にしました！");
     }, failure: () {
       UIHelper.showErrorFlutterToast("更新に失敗しました");
     });
