@@ -114,4 +114,6 @@ class UserProfileController extends ProfileController {
     final followerRef = DocRefCore.follower(currentUid(), passiveUid());
     await repository.deleteDoc(followerRef);
   }
+
+  bool isMyProfile() => passiveUid() == currentUid();
 }
