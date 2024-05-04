@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk');
 const { updateAWSConfig } = require('./updateAWSConfig');
 const { detectDominantLanguage } = require('./detectDominantLanguage');
+const { mul100AndRoundingDown } = require('./mul100AndRoundingDown');
 async function detectText(text) {
     updateAWSConfig();
     const comprehend = new AWS.Comprehend({apiVersion: '2017-11-27'});
