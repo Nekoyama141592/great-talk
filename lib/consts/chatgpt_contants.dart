@@ -4,5 +4,5 @@ class ChatGPTConstants {
   static const gpt4MaxToken = 4000;
   // model
   static const basicModel = "gpt-3.5-turbo";
-  static const premiumModel = "gpt-4-0125-preview";
+  static const premiumModel = "gpt-4o";
 }
