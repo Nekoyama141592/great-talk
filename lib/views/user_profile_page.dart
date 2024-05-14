@@ -12,10 +12,12 @@ class UserProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(UserProfileController());
     return Obx(() => Scaffold(
-      floatingActionButton: controller.isMyProfile() ? const MainFloatingActionButton(isShow: true) : null,
-      body: ProfileScreen(
-        controller: controller,
-      ),
-    ));
+          floatingActionButton: controller.isMyProfile()
+              ? const MainFloatingActionButton(isShow: true)
+              : null,
+          body: ProfileScreen(
+            controller: controller,
+          ),
+        ));
   }
 }

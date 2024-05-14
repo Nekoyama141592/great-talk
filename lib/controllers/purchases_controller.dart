@@ -9,6 +9,7 @@ import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/purchase_constants.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/controllers/remote_config_controller.dart';
 import 'package:great_talk/delegates/payment_queue_delegate.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
@@ -308,6 +309,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
       ? ChatGPTConstants.gpt4MaxToken
       : ChatGPTConstants.gptTurboMaxToken;
   ChatModel model() => isPremiumSubscribing()
-      ? ChatModelFromValue(model: ChatGPTConstants.premiumModel)
-      : ChatModelFromValue(model: ChatGPTConstants.basicModel);
+      ? ChatModelFromValue(
+          model: RemoteConfigController.to.rxPremiumModel.value)
+      : ChatModelFromValue(model: RemoteConfigController.to.rxBasicModel.value);
 }

@@ -3,8 +3,7 @@ import 'package:great_talk/common/colors.dart';
 import 'package:great_talk/controllers/create_post_controller.dart';
 
 class MainFloatingActionButton extends StatelessWidget {
-  const MainFloatingActionButton(
-      {super.key, required this.isShow});
+  const MainFloatingActionButton({super.key, required this.isShow});
   final bool isShow;
   @override
   Widget build(BuildContext context) {

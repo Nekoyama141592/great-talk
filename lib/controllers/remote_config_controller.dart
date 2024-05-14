@@ -11,7 +11,8 @@ class RemoteConfigController extends GetxController {
   final maintenanceMsg = RemoteConfigConstants.maintenanceMsg.obs;
   final forcedUpdateVersion = RemoteConfigConstants.appVersion.obs;
   final forcedUpdateMsg = RemoteConfigConstants.forcedUpdateMsg.obs;
-
+  final rxBasicModel = RemoteConfigConstants.basicModel.obs;
+  final rxPremiumModel = RemoteConfigConstants.premiumModel.obs;
   bool get needsUpdate =>
       RemoteConfigConstants.appVersion < forcedUpdateVersion.value;
   @override
@@ -34,6 +35,9 @@ class RemoteConfigController extends GetxController {
     final maintenanceMsgKey = RemoteConfigConstants.maintenanceMsgKey;
     final forcedUpdateVersionKey = RemoteConfigConstants.forcedUpdateVersionKey;
     final forcedUpdateMsgKey = RemoteConfigConstants.forcedUpdateMsgKey;
+    // chatGpt
+    const basicModelKey = RemoteConfigConstants.basicModelKey;
+    const premiumModelKey = RemoteConfigConstants.premiumModelKey;
     // アプリ内デフォルトパラメータ値の設定
     await remoteConfig.setDefaults({
       freeLimitPerDayKey: RemoteConfigConstants.freeLimitPerDay,
@@ -43,6 +47,8 @@ class RemoteConfigController extends GetxController {
       maintenanceMsgKey: RemoteConfigConstants.maintenanceMsg,
       forcedUpdateVersionKey: RemoteConfigConstants.appVersion,
       forcedUpdateMsgKey: RemoteConfigConstants.forcedUpdateMsg,
+      basicModelKey: RemoteConfigConstants.basicModel,
+      premiumModelKey: RemoteConfigConstants.premiumModel
     });
 
     // 値をフェッチ
@@ -63,6 +69,8 @@ class RemoteConfigController extends GetxController {
       free: remoteConfig.getInt(freeLimitPerDayKey),
       premium: remoteConfig.getInt(premiumLimitPerDayKey),
     );
+    rxBasicModel.value = remoteConfig.getString(basicModelKey);
+    rxPremiumModel.value = remoteConfig.getString(premiumModelKey);
     super.onInit();
   }
 }
