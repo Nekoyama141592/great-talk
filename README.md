@@ -1,49 +1,83 @@
-# great_talk
+# Gretal
 
-## iOS
-https://apps.apple.com/us/app/great-talk/id1667705303
+## 概要
 
-## Android
-https://play.google.com/store/apps/details?id=com.firebaseapp.great_talk&pli=1
+「Gretal」は、さまざまなAIエージェントと簡単に会話を楽しむことができるアプリケーションです。このアプリケーションを使用することで、異なるAIモデルとのインタラクションを通じて、さまざまな体験や学習を行うことができます。
 
-## 実行コード
+## 主な機能
 
-### dev
+- **複数のAIエージェント**：異なるAIモデルを選択して会話を楽しむことができます。
+- **リアルタイム会話**：リアルタイムでAIとスムーズに会話できます。
+- **履歴の保存**：会話の履歴を保存し、後で参照することができます。
+- **カスタマイズ可能な設定**：ユーザーはAIの設定をカスタマイズし、自分好みの会話体験を設定できます。
+
+## インストール
+
+以下の手順に従ってアプリケーションをインストールしてください。
+
+### 前提条件
+
+- iOSバージョン13以上
+
+## 使い方
+
+### アプリケーションの起動
+
+以下のコマンドでアプリケーションを起動します。
+
+```bash
+# dev
 flutter run --flavor dev -t lib/main_dev.dart
 
-### prod
+# prod
 flutter run --flavor prod -t lib/main_prod.dart
+```
 
-## Build
+### アプリケーションへのアクセス
 
-### iOS
-flutter build ios --flavor dev -t lib/main_dev.dart --release --no-tree-shake-icons
+ブラウザを開き、以下のURLにアクセスします。
 
-flutter build ios --flavor prod -t lib/main_prod.dart --release --no-tree-shake-icons
 
-### Android
-flutter build appbundle --flavor dev -t lib/main_dev.dart --no-tree-shake-icons
-flutter build appbundle --flavor prod -t lib/main_prod.dart --no-tree-shake-icons
+- **iOS**：https://apps.apple.com/us/app/great-talk/id1667705303s
 
-## フォーマット
-dart format --set-exit-if-changed .
+- **Android**：https://play.google.com/store/apps/details?id=com.firebaseapp.great_talk&pli=1
 
-flutter analyze .
-## 自動生成
-flutter pub run build_runner build --delete-conflicting-outputs
-## 一括アップデート
-flutter pub upgrade --major-versions
+## ディレクトリ構成
 
-## SHA1の署名鍵
-keytool -list -v \-alias androiddebugkey -keystore ~/.android/debug.keystore
-keytool -list -v -keystore key.jks -alias key
-Play Console -> アプリ -> 設定 -> アプリの署名 -> アプリ署名鍵の証明書 -> SHA1
+```
+great_talk/
+│
+├── android/              # Androidディレクトリ
+├── assets/               # アセットディレクトリ
+├── cloud_functions/      # Cloud Functionsディレクトリ
+├── firestore_rules/      # Firestoreルールディレクトリ
+├── ios/                  # iOSディレクトリ
+├── lib/                  # ライブラリディレクトリ
+│    ├── common/          # 共通ディレクトリ
+│    ├── consts/          # 定数ディレクトリ
+│    ├── controllers/     # コントローラディレクトリ
+│    ├── core/            # コアディレクトリ
+│    ├── delegates/       # デリゲートディレクトリ
+│    ├── extensions/      # 拡張ディレクトリ
+│    ├── iap_constants/   # IAP定数ディレクトリ
+│    ├── infrastructure/  # インフラディレクトリ
+│    ├── mixin/           # ミックスインディレクトリ
+│    ├── model/           # モデルディレクトリ
+│    ├── repository/      # リポジトリディレクトリ
+│    ├── states/          # ステートディレクトリ
+│    ├── themes/          # テーマディレクトリ
+│    ├── typedefs/        # 型定義ディレクトリ
+│    ├── ui_core/         # UIコアディレクトリ
+│    ├── utility/         # ユーティリティディレクトリ
+│    ├── validator/       # バリデータディレクトリ
+│    ├── views/           # ビューディレクトリ
+├── .gitignore            # Git無視ファイル
+├── analysis_options.yaml # エラー無視ファイル
+├── COMMAND.md            # 使用コマンドファイル
+├── pubspec.yaml          # 依存関係ファイル
+├── pubspec.lock          # 依存関係ロックファイル
+└── README.md             # このREADMEファイル
+```
+
 ## イラスト素材
 https://storyset.com/
-
-## Xcodeキャッシュ削除
-rm -rf ~/Library/Developer/Xcode/DerivedData
-rm -rf ~/Library/Caches/com.apple.dt.Xcode
-rm -rf ~/Library/Developer/Xcode/UserData/Previews
-rm -rf ~/Library/Developer/XCPGDevices
-rm -rf ~/Library/Developer/Xcode/iOS ＼DeviceSupport
