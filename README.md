@@ -47,24 +47,24 @@ great_talk/
 ├── firestore_rules/      # Firestoreルールディレクトリ
 ├── ios/                  # iOSディレクトリ
 ├── lib/                  # ライブラリディレクトリ
-│    ├── common/          # 共通ディレクトリ
-│    ├── consts/          # 定数ディレクトリ
-│    ├── controllers/     # コントローラディレクトリ
-│    ├── core/            # コアディレクトリ
-│    ├── delegates/       # デリゲートディレクトリ
-│    ├── extensions/      # 拡張ディレクトリ
-│    ├── iap_constants/   # IAP定数ディレクトリ
-│    ├── infrastructure/  # インフラディレクトリ
-│    ├── mixin/           # ミックスインディレクトリ
-│    ├── model/           # モデルディレクトリ
-│    ├── repository/      # リポジトリディレクトリ
-│    ├── states/          # ステートディレクトリ
-│    ├── themes/          # テーマディレクトリ
-│    ├── typedefs/        # 型定義ディレクトリ
-│    ├── ui_core/         # UIコアディレクトリ
-│    ├── utility/         # ユーティリティディレクトリ
-│    ├── validator/       # バリデータディレクトリ
-│    ├── views/           # ビューディレクトリ
+│    ├── common/          # 共通する画面の構成要素のファイルを格納
+│    ├── consts/          # 定数ファイルを格納
+│    ├── controllers/     # GetXControllerを使用するファイルを格納
+│    ├── core/            # 全体で共通する処理のファイルを格納
+│    ├── delegates/       # 抽象クラスのインスタンスを使うために継承
+│    ├── extensions/      # クラスの拡張ファイルを格納
+│    ├── iap_constants/   # Mockの課金アイテムに関わるファイルを格納
+│    ├── infrastructure/  # 通信に関わるファイルを格納
+│    ├── mixin/           # ミックスインを定義したファイルを格納
+│    ├── model/           # freezedを使用したmodelのファイルを格納
+│    ├── repository/      # 例外処理を行うファイルを格納
+│    ├── states/          # StatefulWidgetで使うStateの抽象クラス
+│    ├── themes/          # テーマに関わるファイルを格納
+│    ├── typedefs/        # typedefsを記述するファイルを格納
+│    ├── ui_core/         # 共通する画面の構成要素のファイルを格納
+│    ├── utility/         # 全体で共通する処理のファイルを格納
+│    ├── validator/       # フォームで使用するバリデータに関するファイルを格納
+│    ├── views/           # 画面に関わるファイルを格納
 ├── .gitignore            # Git無視ファイル
 ├── analysis_options.yaml # エラー無視ファイル
 ├── COMMAND.md            # 使用コマンドファイル
