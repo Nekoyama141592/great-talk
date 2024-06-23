@@ -5,7 +5,7 @@ import 'package:great_talk/infrastructure/firebase_auth/firebase_auth_client.dar
 import 'package:great_talk/repository/result.dart';
 
 class FirebaseAuthRepository {
-  final client = FirebaseAuthClient();
+  FirebaseAuthClient get client => FirebaseAuthClient();
 
   FutureResult<User> signInAnonymously() async {
     try {

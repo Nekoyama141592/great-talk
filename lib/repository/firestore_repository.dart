@@ -4,7 +4,7 @@ import 'package:great_talk/repository/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreRepository {
-  final client = FirestoreClient();
+  FirestoreClient get client => FirestoreClient();
   // count
   FutureResult<int> countUsers() async {
     try {
