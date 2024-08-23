@@ -46,10 +46,10 @@ abstract class FormsState<T extends StatefulWidget> extends State<T> {
   }
 
   void _onPositiveButtonPressed(FormsController controller) async {
-    if (formKey.currentState!.validate()) {
-      // フォームフィールドの情報を変数に保存
-      formKey.currentState!.save();
-    }
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
+    // フォームフィールドの情報を変数に保存π
+    formKey.currentState!.save();
     controller.onPositiveButtonPressed();
   }
 }
