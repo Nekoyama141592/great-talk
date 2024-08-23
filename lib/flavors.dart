@@ -1,6 +1,5 @@
 enum Flavor {
   dev,
-  verification,
   prod,
 }
 
@@ -13,8 +12,6 @@ class F {
     switch (appFlavor) {
       case Flavor.dev:
         return 'Gretal Dev';
-      case Flavor.verification:
-        return 'Gretal Verification';
       case Flavor.prod:
         return 'Gretal';
       default:
