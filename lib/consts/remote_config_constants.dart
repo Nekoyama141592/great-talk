@@ -1,7 +1,7 @@
 import 'package:great_talk/extensions/remote_config_key_extension.dart';
 
 class RemoteConfigConstants {
-  static const int appVersion = 225;
+  static const int appVersion = 227;
   // 一日にできる会話数
   static const freeLimitPerDay = 15;
   static const basicLimitPerDay = 10000;
@@ -10,7 +10,7 @@ class RemoteConfigConstants {
   static const String maintenanceMsg = "メンテナンス中";
   static const String forcedUpdateMsg = "最新バージョンへのアップデートが必要です。";
   // chatGpt
-  static const basicModel = "gpt-3.5-turbo";
+  static const basicModel = "gpt-4o-mini";
   static const premiumModel = "gpt-4o";
   // key
   static const freeLimitPerDayKey = "free_limit_per_day";

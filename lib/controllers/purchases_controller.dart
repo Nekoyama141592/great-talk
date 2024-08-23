@@ -308,8 +308,10 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   int maxToken() => isPremiumSubscribing()
       ? ChatGPTConstants.gpt4MaxToken
       : ChatGPTConstants.gptTurboMaxToken;
-  ChatModel model() => isPremiumSubscribing()
-      ? ChatModelFromValue(
-          model: RemoteConfigController.to.rxPremiumModel.value)
-      : ChatModelFromValue(model: RemoteConfigController.to.rxBasicModel.value);
+  ChatModel model() {
+    // final model = isPremiumSubscribing() ? RemoteConfigController.to.rxPremiumModel.value : RemoteConfigController.to.rxBasicModel.value;
+    const model = "gpt-4o-mini";
+    return ChatModelFromValue(model: model);
+  }
+
 }
