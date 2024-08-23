@@ -1,11 +1,10 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:great_talk/consts/env_keys.dart';
+import 'package:great_talk/utility/env_utility.dart';
 
 class ChatGptSdkClient {
   ChatGptSdkClient() {
     openAI = OpenAI.instance.build(
-        token: dotenv.get(EnvKeys.OPEN_AI_API_KEY.name),
+        token: EnvUtility.openAiApiKey,
         baseOption: HttpSetup(
             receiveTimeout: const Duration(seconds: 20),
             connectTimeout: const Duration(seconds: 20)),

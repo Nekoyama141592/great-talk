@@ -1,18 +1,18 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:great_talk/consts/env_keys.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/infrastructure/cloud_functions/cloud_functions_client.dart';
 import 'package:great_talk/infrastructure/open_ai/original_dio.dart';
 import 'package:great_talk/model/receipt_request/receipt_request.dart';
 import 'package:great_talk/model/receipt_response/receipt_response.dart';
 import 'package:great_talk/repository/result.dart';
+import 'package:great_talk/utility/env_utility.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class PurchasesRepository {
   CloudFunctionsClient get _client {
     final dio = OriginalDio.withOptions(
-        baseUrl: dotenv.get(EnvKeys.BASE_URL.name),
-        token: dotenv.get(EnvKeys.API_KEY.name));
+        baseUrl: EnvUtility.baseUrl,
+        token: EnvUtility.apiKey
+      );
     final client = CloudFunctionsClient(dio);
     return client;
   }

@@ -1,5 +1,4 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:great_talk/consts/env_keys.dart';
+import 'package:great_talk/utility/env_utility.dart';
 
 const String calculateAI = "calculate_ai";
-final officialUid = dotenv.get(EnvKeys.OFFICIAL_ACCOUNT_UID.name);
+final officialUid = EnvUtility.officialAccountUid;
