@@ -90,21 +90,21 @@ flavorizr:
   flavors:
     dev:
       app:
-        name: "Gretal Dev"
+        name: "ShareAI Dev"
       android:
         applicationId: "com.firebaseapp.great_talk_dev"
       ios:
         bundleId: "com.firebaseapp.greatTalkDev"
     verification:
       app:
-        name: "Gretal Verification"
+        name: "ShareAI Verification"
       android:
         applicationId: "com.firebaseapp.great_talk_verification"
       ios:
         bundleId: "com.firebaseapp.greatTalkVerification"
     prod:
       app:
-        name: "Gretal"
+        name: "ShareAI"
       android:
         applicationId: "com.firebaseapp.great_talk"
       ios:
