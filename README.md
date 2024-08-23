@@ -52,6 +52,7 @@ great_talk/
 │    ├── controllers/     # GetXControllerを使用するファイルを格納
 │    ├── core/            # 全体で共通する処理のファイルを格納
 │    ├── delegates/       # 抽象クラスのインスタンスを使うために継承
+│    ├── env/             # 環境変数を扱うディレクトリ
 │    ├── extensions/      # クラスの拡張ファイルを格納
 │    ├── iap_constants/   # Mockの課金アイテムに関わるファイルを格納
 │    ├── infrastructure/  # 通信に関わるファイルを格納
