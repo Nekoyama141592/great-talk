@@ -74,8 +74,6 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
-    - dev.env
-    - prod.env
 flutter_icons:
   android: true
   ios: true
