@@ -35,4 +35,3 @@ abstract class Env {
   @EnviedField(varName: 'WOLFRAM_APP_ID', obfuscate: true)
   static String get wolframAppId => _Env.wolframAppId;
 }
-

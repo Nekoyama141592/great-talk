@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
-import 'package:great_talk/controllers/theme_controller.dart';
+import 'package:great_talk/controllers/local_controller.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/utility/style_utility.dart';
@@ -24,7 +24,7 @@ class OriginalDrawer extends StatelessWidget with CurrentUserMixin {
   @override
   Widget build(BuildContext context) {
     final currentUserController = CurrentUserController.to;
-    final themeController = ThemeController.to;
+    final localController = LocalController.to;
     final purchasesController = PurchasesController.to;
     return Drawer(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -94,8 +94,17 @@ class OriginalDrawer extends StatelessWidget with CurrentUserMixin {
             () => ListTile(
               title: const Text("テーマ切り替え"),
               trailing: CupertinoSwitch(
-                value: themeController.isDarkTheme.value,
-                onChanged: themeController.onSwichChanged,
+                value: localController.rxIsDarkTheme.value,
+                onChanged: localController.onThemeSwichChanged,
+              ),
+            ),
+          ),
+          Obx(
+            () => ListTile(
+              title: const Text("最初のメッセージを受け取る"),
+              trailing: CupertinoSwitch(
+                value: localController.rxNeedFirstMessage.value,
+                onChanged: localController.onNeedFirstMessageSwichChanged,
               ),
             ),
           ),

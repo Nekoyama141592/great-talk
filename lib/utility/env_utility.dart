@@ -1,18 +1,19 @@
-
 import 'package:great_talk/env/env_interface.dart';
 import 'package:great_talk/env/dev_env.dart';
 import 'package:great_talk/env/prod_env.dart';
 import 'package:great_talk/flavors.dart';
+
 class EnvUtility {
   static EnvInterface get env {
     final flavor = F.appFlavor!;
-    switch(flavor) {
+    switch (flavor) {
       case Flavor.dev:
-      return DevEnv();
+        return DevEnv();
       case Flavor.prod:
-      return ProdEnv();
+        return ProdEnv();
     }
   }
+
   static String get awsS3AccessKey => env.awsS3AccessKey;
 
   static String get awsS3Bucket => env.awsS3Bucket;

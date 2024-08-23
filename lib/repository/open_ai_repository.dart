@@ -9,9 +9,7 @@ import 'package:great_talk/utility/env_utility.dart';
 
 class OpenAIRepository {
   OpenAIClient get client => OpenAIClient(OriginalDio.withOptions(
-        baseUrl: "https://api.openai.com/v1",
-        token: EnvUtility.openAiApiKey
-      ));
+      baseUrl: "https://api.openai.com/v1", token: EnvUtility.openAiApiKey));
 
   FutureResult<GenerateImageResponse> generateImage(
       GenerateImageRequest request) async {

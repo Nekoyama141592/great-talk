@@ -13,7 +13,8 @@ enum PrefsKey {
   isDarkTheme,
   isV3initialized,
   lastChatDate,
-  latestReceipt
+  latestReceipt,
+  needFirstMessage
 }
 
 enum SearchTarget { post, user }

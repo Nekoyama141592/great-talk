@@ -1,7 +1,7 @@
 import 'package:great_talk/env/dev.env.dart' as dev;
 import 'package:great_talk/env/env_interface.dart';
 
-class DevEnv implements EnvInterface{
+class DevEnv implements EnvInterface {
   @override
   String get awsS3AccessKey => dev.Env.awsS3AccessKey;
   @override

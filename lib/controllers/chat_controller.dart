@@ -16,6 +16,7 @@ import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/controllers/local_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/remote_config_controller.dart';
@@ -94,7 +95,7 @@ class ChatController extends FormsController with CurrentUserMixin {
   void _processDescriptionMessage() {
     final post = rxPost.value;
     if (post == null) return;
-    if (messages.isEmpty) {
+    if (messages.isEmpty && LocalController.to.rxNeedFirstMessage.value) {
       _addDescriptionMessage(post);
     }
   }
