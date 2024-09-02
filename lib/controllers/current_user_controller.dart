@@ -37,19 +37,19 @@ class CurrentUserController extends GetxController {
 
   final bookmarkCategoryTokens = <BookmarkCategory>[].obs;
   final followingTokens = <FollowingToken>[];
-  final followingUids = <String>[].obs;
+  List<String> get followingUids => followingTokens.map((e) => e.passiveUid).toList();
 
   final likePostTokens = <LikePostToken>[];
-  final likePostIds = <String>[].obs;
+  List<String> get likePostIds => likePostTokens.map((e) => e.postId).toList();
 
   final mutePostTokens = <MutePostToken>[];
-  final mutePostIds = <String>[].obs;
+  List<String> get mutePostIds => mutePostTokens.map((e) => e.postId).toList();
 
   final muteUserTokens = <MuteUserToken>[];
-  final muteUids = <String>[].obs;
+  List<String> get  muteUids => muteUserTokens.map((e) => e.passiveUid).toList();
 
   final reportPostTokens = <ReportPostToken>[];
-  final reportPostIds = <String>[].obs;
+  List<String> get reportPostIds => reportPostTokens.map((e) => e.postId).toList();
 
   @override
   void onInit() async {
@@ -121,7 +121,6 @@ class CurrentUserController extends GetxController {
   // 投稿の削除時に外部から呼び出す.
   void addDeletePostId(String postId) {
     deletePostIds.add(postId);
-    deletePostIds([...deletePostIds]);
   }
 
   void addBookmarkCategory(BookmarkCategory category) {
@@ -134,56 +133,38 @@ class CurrentUserController extends GetxController {
 
   void addFollowing(FollowingToken followingToken) {
     followingTokens.add(followingToken);
-    followingUids.add(followingToken.passiveUid);
-    followingUids([...followingUids]);
   }
 
   void removeFollowing(FollowingToken followingToken) {
     followingTokens.remove(followingToken);
-    followingUids.remove(followingToken.passiveUid);
-    followingUids([...followingUids]);
   }
 
   void addLikePost(LikePostToken likePostToken) {
     likePostTokens.add(likePostToken);
-    likePostIds.add(likePostToken.postId);
-    likePostIds([...likePostIds]);
   }
 
   void removeLikePost(LikePostToken likePostToken) {
     likePostTokens.remove(likePostToken);
-    likePostIds.remove(likePostToken.postId);
-    likePostIds([...likePostIds]);
   }
 
   void addMutePost(MutePostToken mutePostToken) {
     mutePostTokens.add(mutePostToken);
-    mutePostIds.add(mutePostToken.postId);
-    mutePostIds([...mutePostIds]);
   }
 
   void removeMutePost(MutePostToken mutePostToken) {
     mutePostTokens.remove(mutePostToken);
-    mutePostIds.remove(mutePostToken.postId);
-    mutePostIds([...mutePostIds]);
   }
 
   void addMuteUser(MuteUserToken muteUserToken) {
     muteUserTokens.add(muteUserToken);
-    muteUids.add(muteUserToken.passiveUid);
-    muteUids([...muteUids]);
   }
 
   void removeMuteUer(MuteUserToken muteUserToken) {
     muteUserTokens.remove(muteUserToken);
-    muteUids.remove(muteUserToken.passiveUid);
-    muteUids([...muteUids]);
   }
 
   void addReportPost(ReportPostToken reportPostToken) {
     reportPostTokens.add(reportPostToken);
-    reportPostIds.add(reportPostToken.postId);
-    reportPostIds([...reportPostIds]);
   }
 
   Future<void> _createAnonymousUser() async {
