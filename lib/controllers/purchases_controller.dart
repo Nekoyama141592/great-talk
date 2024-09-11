@@ -159,7 +159,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   }
 
   void _fetchMockProducts() {
-    if (Platform.isAndroid && products.isEmpty) {
+    if (products.isEmpty) {
       products(mockProductList);
     }
   }
