@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 final List<BottomNavigationBarItem> bnbElements = [
   const BottomNavigationBarItem(
-      label: 'ホーム',
-      icon: Icon(
-        Icons.home,
-      )),
-  const BottomNavigationBarItem(
       label: '人気',
       icon: Icon(
         Icons.stars,
+      )),
+  const BottomNavigationBarItem(
+      label: 'ホーム',
+      icon: Icon(
+        Icons.home,
       )),
   const BottomNavigationBarItem(
       label: '数学',
