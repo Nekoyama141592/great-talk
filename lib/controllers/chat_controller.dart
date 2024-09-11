@@ -107,7 +107,7 @@ class ChatController extends FormsController with CurrentUserMixin {
     final ref = DocRefCore.post(uid, postId);
     final repository = FirestoreRepository();
     final result = await repository.getDoc(ref);
-    result.when(success: (res) async {
+    await result.when(success: (res) async {
       if (res.exists) {
         final fetchedPost = Post.fromJson(res.data()!);
         rxPost(fetchedPost);
@@ -560,7 +560,7 @@ class ChatController extends FormsController with CurrentUserMixin {
     final bookmarkRef = DocRefCore.bookmark(category, postId);
     final repository = FirestoreRepository();
     final result = await repository.getDoc(bookmarkRef);
-    result.when(success: (res) async {
+    await result.when(success: (res) async {
       res.exists
           ? await _unBookmark(res)
           : await _bookmark(category); // 存在するなら削除、しないなら作成

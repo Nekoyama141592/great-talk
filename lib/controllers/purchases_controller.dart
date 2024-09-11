@@ -167,7 +167,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
       late bool isValid;
       final result =
           await repository.getAndroidReceipt(purchaseDetails, currentUid());
-      result.when(success: (res) async {
+      await result.when(success: (res) async {
         isValid = true;
         await _cachReceipt(res); // キャッシュを行う
       }, failure: () {
@@ -179,7 +179,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
       late bool isValid;
       final result =
           await repository.getIOSReceipt(purchaseDetails, currentUid());
-      result.when(success: (res) async {
+      await result.when(success: (res) async {
         isValid = true;
         await _cachReceipt(res); // キャッシュを行う
       }, failure: () {

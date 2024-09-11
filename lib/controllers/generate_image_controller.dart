@@ -61,10 +61,10 @@ class GenerateImageController extends LoadingController with CurrentUserMixin {
     final request = GenerateImageRequest(
         size: rxSize.value, prompt: rxPrompt.value, user: currentUid());
     final result = await repository.generateImage(request);
-    result.when(success: (res) {
+    await result.when(success: (res) async {
       final url = res.data?.last?.url;
       rxUrl(url);
-      ChatController.to.setChatCount(true);
+      await ChatController.to.setChatCount(true);
     }, failure: () {
       UIHelper.showErrorFlutterToast("画像が生成できませんでした");
     });

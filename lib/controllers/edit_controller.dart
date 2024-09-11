@@ -64,7 +64,7 @@ class EditController extends FormsController with CurrentUserMixin {
       final newFileName = AWSS3Utility.profileObject(currentUid());
       final result = await AWSS3Repository.instance
           .putObject(uint8list, bucketName, newFileName);
-      result.when(success: (res) async {
+      await result.when(success: (res) async {
         // 非同期で処理.
         await Future.wait([
           _createUserUpdateLog(bucketName, res), // ユーザー情報を更新.

@@ -74,7 +74,7 @@ class AdminController extends LoadingController {
     final uid = rxToggleOfficialUid.value;
     final ref = DocRefCore.user(uid);
     final result = await repository.getDoc(ref);
-    result.when(
+    await result.when(
         success: (res) async {
           final data = res.data();
           if (data == null) return;

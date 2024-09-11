@@ -35,9 +35,9 @@ class FileUtility {
     if (uint8List == null) {
       final repository = AWSS3Repository();
       final result = await repository.getObject(bucketName, fileName);
-      result.when(success: (res) {
+      await result.when(success: (res) async {
         uint8List = res;
-        _cacheUint8List(fileName, res); // 画像を非同期でキャッシュする.
+        await _cacheUint8List(fileName, res); // 画像を非同期でキャッシュする.
       }, failure: () {
         uint8List = null;
       });

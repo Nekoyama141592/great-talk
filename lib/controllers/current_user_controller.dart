@@ -194,13 +194,13 @@ class CurrentUserController extends GetxController {
   Future<void> onAppleButtonPressed() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInWithApple();
-    result.when(success: onLoginSuccess, failure: () {});
+    await result.when(success: onLoginSuccess, failure: () {});
   }
 
   Future<void> onGoogleButtonPressed() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInWithGoogle();
-    result.when(success: onLoginSuccess, failure: () {});
+    await result.when(success: onLoginSuccess, failure: () {});
   }
 
   Future<void> onLoginSuccess(User user) async {
@@ -254,7 +254,7 @@ class CurrentUserController extends GetxController {
     final repository = FirestoreRepository();
     final ref = DocRefCore.user(currentUid());
     final result = await repository.getDoc(ref);
-    result.when(success: (res) async {
+    await result.when(success: (res) async {
       if (res.exists && rxPublicUser.value == null) {
         // アカウントが存在するなら代入する
         final user = PublicUser.fromJson(res.data()!);
@@ -278,7 +278,7 @@ class CurrentUserController extends GetxController {
     final repository = FirestoreRepository();
     final ref = DocRefCore.privateUser(currentUid());
     final result = await repository.getDoc(ref);
-    result.when(success: (res) async {
+    await result.when(success: (res) async {
       if (res.exists && rxPrivateUser.value == null) {
         // アカウントが存在するなら代入する
         rxPrivateUser(PrivateUser.fromJson(res.data()!));
@@ -320,7 +320,7 @@ class CurrentUserController extends GetxController {
   Future<void> _signOut() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signOut();
-    result.when(success: (_) async {
+    result.when(success: (_) {
       Get.toNamed(LogoutedPage.path);
     }, failure: () {
       UIHelper.showErrorFlutterToast("ログアウトできませんでした");
@@ -358,7 +358,7 @@ class CurrentUserController extends GetxController {
     final repository = FirestoreRepository();
     final ref = user.typedRef();
     final result = await repository.deleteDoc(ref);
-    result.when(success: (_) async {
+    await result.when(success: (_) async {
       _deleteAuthUser();
       _removeImage();
     }, failure: () {

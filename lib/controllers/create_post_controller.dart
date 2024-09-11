@@ -91,8 +91,8 @@ class CreatePostController extends FormsController with CurrentUserMixin {
     final repository = AWSS3Repository();
     final result = await repository.putObject(
         rxPickedUint8list.value!, bucketName, newFileName);
-    result.when(
-        success: (res) => _createPost(res),
+    await result.when(
+        success: (res) async => await _createPost(res),
         failure: () {
           UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
         });

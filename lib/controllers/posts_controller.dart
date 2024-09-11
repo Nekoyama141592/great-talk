@@ -291,9 +291,9 @@ class PostsController extends GetxController with CurrentUserMixin {
       Get.back();
       final repository = FirestoreRepository();
       final result = await repository.deleteDoc(deletePost.ref);
-      result.when(success: (_) {
+      await result.when(success: (_) async {
         CurrentUserController.to.addDeletePostId(deletePost.postId);
-        _removePostImage(deletePost.typedImage());
+        await _removePostImage(deletePost.typedImage());
         Get.back();
         UIHelper.showErrorFlutterToast("投稿を削除しました。");
       }, failure: () {
