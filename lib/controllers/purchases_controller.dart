@@ -12,6 +12,7 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/remote_config_controller.dart';
 import 'package:great_talk/delegates/payment_queue_delegate.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
+import 'package:great_talk/iap_constants/mock_product_list.dart';
 import 'package:great_talk/iap_constants/subscription_constants.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/receipt_response/cached_receipt/cached_receipt.dart';
@@ -154,8 +155,14 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     }, failure: () {
       UIHelper.showErrorFlutterToast("商品を取得できませんでした。");
     });
+    _fetchMockProducts();
   }
 
+  void _fetchMockProducts() {
+    if (Platform.isAndroid && products.isEmpty) {
+      products(mockProductList);
+    }
+  }
   void deliverProduct(PurchaseDetails purchaseDetails) {
     purchases.add(purchaseDetails);
     UIHelper.showFlutterToast("サーバーでの検証が成功しました");
