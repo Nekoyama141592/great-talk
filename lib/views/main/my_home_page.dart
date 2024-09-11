@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:great_talk/common/ints.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/bottom_navigation_bar_elements.dart';
 import 'package:great_talk/common/others.dart';
@@ -34,12 +35,12 @@ class MyHomePage extends HookWidget {
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(
-        appBar: pageIndex.value == 1 || pageIndex.value == 4
+        appBar: pageIndex.value == rankingIndex
             ? null
             : AppBar(
                 title: BasicBoldText(appName), shape: appBarShape(context)),
         floatingActionButton: MainFloatingActionButton(
-          isShow: pageIndex.value == 0 || pageIndex.value == 1,
+          isShow: pageIndex.value == rankingIndex || pageIndex.value == feedsIndex,
         ),
         drawer: const OriginalDrawer(),
         bottomNavigationBar: BottomNavigationBar(
