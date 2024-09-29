@@ -255,9 +255,10 @@ class CurrentUserController extends GetxController {
     final ref = DocRefCore.user(currentUid());
     final result = await repository.getDoc(ref);
     await result.when(success: (res) async {
-      if (res.exists && rxPublicUser.value == null) {
+      final data = res.data();
+      if (res.exists && data != null) {
         // アカウントが存在するなら代入する
-        final user = PublicUser.fromJson(res.data()!);
+        final user = PublicUser.fromJson(data);
         rxPublicUser(user);
         final bucketName = user.typedImage().bucketName;
         final fileName = user.typedImage().value;
@@ -279,9 +280,10 @@ class CurrentUserController extends GetxController {
     final ref = DocRefCore.privateUser(currentUid());
     final result = await repository.getDoc(ref);
     await result.when(success: (res) async {
-      if (res.exists && rxPrivateUser.value == null) {
+      final data = res.data();
+      if (res.exists && data != null) {
         // アカウントが存在するなら代入する
-        rxPrivateUser(PrivateUser.fromJson(res.data()!));
+        rxPrivateUser(PrivateUser.fromJson(data));
       } else {
         // アカウントが存在しないなら作成する
         await _createPrivateUser();

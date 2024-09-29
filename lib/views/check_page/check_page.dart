@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/controllers/remote_config_controller.dart';
-import 'package:great_talk/views/first_page/components/maintenance_page.dart';
-import 'package:great_talk/views/first_page/components/required_update_page.dart';
-import 'package:great_talk/views/first_page/components/terms_page.dart';
+import 'package:great_talk/views/check_page/components/maintenance_page.dart';
+import 'package:great_talk/views/check_page/components/required_update_page.dart';
+import 'package:great_talk/views/check_page/components/terms_page.dart';
 import 'package:great_talk/views/loading_page.dart';
-import 'package:great_talk/views/main/my_home_page.dart';
 
-class FirstPage extends StatelessWidget {
-  const FirstPage({super.key});
+class CheckPage extends StatelessWidget {
+  const CheckPage({super.key,required this.child});
+  final Widget child;
   @override
   Widget build(BuildContext context) {
     final currentUserController = Get.put(CurrentUserController());
@@ -29,7 +29,7 @@ class FirstPage extends StatelessWidget {
       if (currentUserController.rxAuthUser.value == null) {
         return const LoadingPage();
       } else {
-        return const MyHomePage();
+        return child;
       }
     });
   }
