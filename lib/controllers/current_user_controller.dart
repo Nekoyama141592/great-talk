@@ -36,19 +36,19 @@ class CurrentUserController extends GetxController {
   final deletePostIds = <String>[].obs; // 投稿の削除時に一時的に保存する.
 
   final bookmarkCategoryTokens = <BookmarkCategory>[].obs;
-  final followingTokens = <FollowingToken>[];
+  final followingTokens = <FollowingToken>[].obs;
   List<String> get followingUids => followingTokens.map((e) => e.passiveUid).toList();
 
-  final likePostTokens = <LikePostToken>[];
+  final likePostTokens = <LikePostToken>[].obs;
   List<String> get likePostIds => likePostTokens.map((e) => e.postId).toList();
 
-  final mutePostTokens = <MutePostToken>[];
+  final mutePostTokens = <MutePostToken>[].obs;
   List<String> get mutePostIds => mutePostTokens.map((e) => e.postId).toList();
 
-  final muteUserTokens = <MuteUserToken>[];
+  final muteUserTokens = <MuteUserToken>[].obs;
   List<String> get  muteUids => muteUserTokens.map((e) => e.passiveUid).toList();
 
-  final reportPostTokens = <ReportPostToken>[];
+  final reportPostTokens = <ReportPostToken>[].obs;
   List<String> get reportPostIds => reportPostTokens.map((e) => e.postId).toList();
 
   @override
