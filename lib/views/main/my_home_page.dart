@@ -39,7 +39,8 @@ class MyHomePage extends HookWidget {
             : AppBar(
                 title: BasicBoldText(appName), shape: appBarShape(context)),
         floatingActionButton: MainFloatingActionButton(
-          isShow: pageIndex.value == rankingIndex || pageIndex.value == feedsIndex,
+          isShow:
+              pageIndex.value == rankingIndex || pageIndex.value == feedsIndex,
         ),
         drawer: const OriginalDrawer(),
         bottomNavigationBar: BottomNavigationBar(

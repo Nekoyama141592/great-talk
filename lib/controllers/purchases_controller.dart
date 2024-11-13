@@ -163,6 +163,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
       products(mockProductList);
     }
   }
+
   void deliverProduct(PurchaseDetails purchaseDetails) {
     purchases.add(purchaseDetails);
     UIHelper.showFlutterToast("サーバーでの検証が成功しました");

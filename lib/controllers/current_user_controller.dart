@@ -37,7 +37,8 @@ class CurrentUserController extends GetxController {
 
   final bookmarkCategoryTokens = <BookmarkCategory>[].obs;
   final followingTokens = <FollowingToken>[].obs;
-  List<String> get followingUids => followingTokens.map((e) => e.passiveUid).toList();
+  List<String> get followingUids =>
+      followingTokens.map((e) => e.passiveUid).toList();
 
   final likePostTokens = <LikePostToken>[].obs;
   List<String> get likePostIds => likePostTokens.map((e) => e.postId).toList();
@@ -46,10 +47,11 @@ class CurrentUserController extends GetxController {
   List<String> get mutePostIds => mutePostTokens.map((e) => e.postId).toList();
 
   final muteUserTokens = <MuteUserToken>[].obs;
-  List<String> get  muteUids => muteUserTokens.map((e) => e.passiveUid).toList();
+  List<String> get muteUids => muteUserTokens.map((e) => e.passiveUid).toList();
 
   final reportPostTokens = <ReportPostToken>[].obs;
-  List<String> get reportPostIds => reportPostTokens.map((e) => e.postId).toList();
+  List<String> get reportPostIds =>
+      reportPostTokens.map((e) => e.postId).toList();
 
   @override
   void onInit() async {
