@@ -12,14 +12,13 @@
 .svn/
 migrate_working_dir/
 lib/gen/
+lib/env/
 mobileprovisions/
 lib/iap_constants/subscription_constants.dart
 json/
 txts/
 firebase_private_key/
 gcp_private_key/
-lib/env/dev.env.g.dart
-lib/env/prod.env.g.dart
 cloud_functions/dev/functions/package-lock.json
 cloud_functions/prod/functions/package-lock.json
 cloud_functions_js/

@@ -1,7 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:great_talk/core/firestore/json_core.dart';
 
-abstract class FunctionsRepository {
+class OnCallClient {
   HttpsCallable _httpsCallable(String functionName) =>
       FirebaseFunctions.instance.httpsCallable(
         functionName,
@@ -9,7 +9,7 @@ abstract class FunctionsRepository {
           timeout: const Duration(seconds: 300),
         ),
       );
-  Future<Map<String, dynamic>> _call(
+  Future<Map<String, dynamic>> call(
       String name, Map<String, dynamic> request) async {
     final callable = _httpsCallable(name);
     final result = await callable.call(request);
