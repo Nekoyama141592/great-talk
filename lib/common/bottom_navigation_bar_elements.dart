@@ -13,11 +13,6 @@ final List<BottomNavigationBarItem> bnbElements = [
         Icons.home,
       )),
   const BottomNavigationBarItem(
-      label: '数学',
-      icon: Icon(
-        Icons.calculate,
-      )),
-  const BottomNavigationBarItem(
       label: '最新',
       icon: Icon(
         Icons.update,

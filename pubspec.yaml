@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' 
 # lib/constants/remote_config_constants.dartのappVersionも変更
-version: 6.0.13+230
+version: 6.0.17+234
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -43,7 +43,6 @@ dependencies:
   in_app_purchase_storekit: ^0.3.6+3
   intl: ^0.18.0
   material_floating_search_bar_2: ^0.5.0
-  minio_new: ^1.0.2
   pull_to_refresh: ^2.0.0
   shared_preferences: ^2.0.16
   sign_in_with_apple: ^5.0.0
@@ -58,6 +57,7 @@ dependencies:
   flutter_markdown: ^0.6.21
   markdown: ^7.2.2
   envied: ^0.5.4+1
+  cloud_functions: ^4.7.6
   
 
 dev_dependencies:
@@ -74,6 +74,8 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
+    - dev.env
+    - prod.env
 flutter_icons:
   android: true
   ios: true

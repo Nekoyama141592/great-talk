@@ -9,7 +9,7 @@ import 'package:great_talk/views/check_page/components/terms_page.dart';
 import 'package:great_talk/views/loading_page.dart';
 
 class CheckPage extends StatelessWidget {
-  const CheckPage({super.key,required this.child});
+  const CheckPage({super.key, required this.child});
   final Widget child;
   @override
   Widget build(BuildContext context) {

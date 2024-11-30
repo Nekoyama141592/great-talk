@@ -7,6 +7,7 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
+import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
@@ -85,25 +86,27 @@ class CreatePostController extends FormsController with CurrentUserMixin {
       return;
     }
     if (isLoading.value) return; // 二重リクエストを防止.
+    final unit8List = rxPickedUint8list.value;
+    if (unit8List == null) return;
     startLoading();
-    final newFileName = AWSS3Utility.postObject(currentUid());
-    final bucketName = AWSS3Utility.bucketName;
+    final postId = randomString();
+    final fileName = AWSS3Utility.postObject(currentUid(), postId);
     final repository = AWSS3Repository();
-    final result = await repository.putObject(
-        rxPickedUint8list.value!, bucketName, newFileName);
+    final request = PutObjectRequest.fromUint8List(
+        uint8list: unit8List, fileName: fileName);
+    final result = await repository.putObject(request);
     await result.when(
-        success: (res) async => await _createPost(res),
+        success: (res) async => await _createPost(postId, fileName),
         failure: () {
           UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
         });
     endLoading();
   }
 
-  Future<void> _createPost(String fileName) async {
+  Future<void> _createPost(String postId, String fileName) async {
     final publicUser = CurrentUserController.to.rxPublicUser.value;
     if (publicUser == null) return;
     final repository = FirestoreRepository();
-    final postId = randomString();
     final postRef = DocRefCore.post(currentUid(), postId);
     final customCompleteText = NewContent.newCustomCompleteText(
             systemPrompt.value,

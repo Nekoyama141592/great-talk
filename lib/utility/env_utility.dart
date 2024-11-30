@@ -3,8 +3,8 @@ import 'package:great_talk/env/dev_env.dart';
 import 'package:great_talk/env/prod_env.dart';
 import 'package:great_talk/flavors.dart';
 
-class EnvUtility {
-  static EnvInterface get env {
+class EnvUtility implements EnvInterface {
+  EnvInterface get env {
     final flavor = F.appFlavor!;
     switch (flavor) {
       case Flavor.dev:
@@ -14,23 +14,12 @@ class EnvUtility {
     }
   }
 
-  static String get awsS3AccessKey => env.awsS3AccessKey;
+  @override
+  String get apiKey => env.apiKey;
 
-  static String get awsS3Bucket => env.awsS3Bucket;
+  @override
+  String get baseUrl => env.baseUrl;
 
-  static String get awsS3SecretKey => env.awsS3SecretKey;
-
-  static String get apiKey => env.apiKey;
-
-  static String get baseUrl => env.baseUrl;
-
-  static String get officialAccountUid => env.officialAccountUid;
-
-  static String get openAiApiKey => env.openAiApiKey;
-
-  static String get verifyIosEndpoint => env.verifyIosEndpoint;
-
-  static String get verifyAndroidEndpoint => env.verifyAndroidEndpoint;
-
-  static String get wolframAppId => env.wolframAppId;
+  @override
+  String get openAiApiKey => env.openAiApiKey;
 }

@@ -16,7 +16,6 @@ import 'package:great_talk/views/components/original_drawer.dart';
 import 'package:great_talk/views/main/components/main_floating_action_button.dart';
 import 'package:great_talk/views/main/feeds/feeds_page.dart';
 import 'package:great_talk/views/main/new_posts/new_posts_screen.dart';
-import 'package:great_talk/views/main/official_contents/official_contents_screen.dart';
 import 'package:great_talk/views/main/ranking/ranking_screen.dart';
 import 'package:great_talk/views/main/subscribe/subscribe_screen.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
@@ -40,7 +39,8 @@ class MyHomePage extends HookWidget {
             : AppBar(
                 title: BasicBoldText(appName), shape: appBarShape(context)),
         floatingActionButton: MainFloatingActionButton(
-          isShow: pageIndex.value == rankingIndex || pageIndex.value == feedsIndex,
+          isShow:
+              pageIndex.value == rankingIndex || pageIndex.value == feedsIndex,
         ),
         drawer: const OriginalDrawer(),
         bottomNavigationBar: BottomNavigationBar(
@@ -58,7 +58,6 @@ class MyHomePage extends HookWidget {
           children: const [
             RankingScreen(),
             FeedsPage(),
-            OfficialContentsScreen(),
             NewPostsScreen(),
             SubscribeScreen(),
           ],
