@@ -10,7 +10,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 class PurchasesRepository {
   CloudFunctionsClient get _client {
     final dio = OriginalDio.withOptions(
-        baseUrl: EnvUtility.baseUrl, token: EnvUtility.apiKey);
+        baseUrl: EnvUtility().baseUrl, token: EnvUtility().apiKey);
     final client = CloudFunctionsClient(dio);
     return client;
   }

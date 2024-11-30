@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/common/date_converter.dart';
 import 'package:great_talk/common/enums.dart';
-import 'package:great_talk/common/persons.dart';
 import 'package:great_talk/common/strings.dart';
 import 'package:great_talk/common/ui_helper.dart';
 import 'package:great_talk/consts/chat_constants.dart';
@@ -36,7 +35,6 @@ import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/text_message/text_message.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/repository/open_ai_repository.dart';
-import 'package:great_talk/repository/wolfram_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/prefs_utility.dart';
@@ -61,8 +59,6 @@ class ChatController extends FormsController with CurrentUserMixin {
     final post = rxPost.value;
     if (post == null) {
       return 0;
-    } else if (post.isOfficialPost()) {
-      return ChatConstants.officialPostConsumePoint;
     } else {
       return ChatConstants.basicPostConsumePoint;
     }
@@ -376,34 +372,9 @@ class ChatController extends FormsController with CurrentUserMixin {
   Future<List<Messages>> _createRequestMessages(String content) async {
     final post = rxPost.value;
     if (post == null) return [];
-    final id = post.postId;
-    switch (id) {
-      case calculateAI:
-        List<Messages> requestMessages = [];
-        final repository = WolframRepository();
-        final query = await wolframQuery(content);
-        if (query == null) {
-          realtimeRes("計算クエリの作成に失敗したので普通のAIが対応します。\n\n");
-          requestMessages = [Messages(role: Role.user, content: content)];
-        } else {
-          final wolframRes = await repository.fetchApi(query);
-          wolframRes.when(success: (res) {
-            requestMessages = [
-              Messages(
-                  role: Role.system, content: "Always reply in LaTex format!"),
-              Messages(role: Role.user, content: res)
-            ];
-          }, failure: () {
-            realtimeRes("クエリを与えた計算AIから応答が得られなかったので普通のAIが対応します。\n\n");
-            requestMessages = [Messages(role: Role.user, content: content)];
-          });
-        }
-        return requestMessages;
-      default:
-        final requestMessages = _toRequestMessages();
-        requestMessages.insert(0, _systemMsg());
-        return requestMessages;
-    }
+    final requestMessages = _toRequestMessages();
+    requestMessages.insert(0, _systemMsg());
+    return requestMessages;
   }
 
   Future<String?> wolframQuery(String content) async {

@@ -1,21 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'put_object_request.dart';
+part of 'get_object_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PutObjectRequestImpl _$$PutObjectRequestImplFromJson(
+_$GetObjectResponseImpl _$$GetObjectResponseImplFromJson(
         Map<String, dynamic> json) =>
-    _$PutObjectRequestImpl(
+    _$GetObjectResponseImpl(
       base64Image: json['base64Image'] as String,
-      object: json['object'] as String,
     );
 
-Map<String, dynamic> _$$PutObjectRequestImplToJson(
-        _$PutObjectRequestImpl instance) =>
+Map<String, dynamic> _$$GetObjectResponseImplToJson(
+        _$GetObjectResponseImpl instance) =>
     <String, dynamic>{
       'base64Image': instance.base64Image,
-      'object': instance.object,
     };

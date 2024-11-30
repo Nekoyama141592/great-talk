@@ -20,7 +20,8 @@ PutObjectRequest _$PutObjectRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PutObjectRequest {
-  String get image => throw _privateConstructorUsedError;
+  String get base64Image => throw _privateConstructorUsedError;
+  String get object => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $PutObjectRequestCopyWith<$Res> {
           PutObjectRequest value, $Res Function(PutObjectRequest) then) =
       _$PutObjectRequestCopyWithImpl<$Res, PutObjectRequest>;
   @useResult
-  $Res call({String image});
+  $Res call({String base64Image, String object});
 }
 
 /// @nodoc
@@ -50,12 +51,17 @@ class _$PutObjectRequestCopyWithImpl<$Res, $Val extends PutObjectRequest>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? image = null,
+    Object? base64Image = null,
+    Object? object = null,
   }) {
     return _then(_value.copyWith(
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      base64Image: null == base64Image
+          ? _value.base64Image
+          : base64Image // ignore: cast_nullable_to_non_nullable
+              as String,
+      object: null == object
+          ? _value.object
+          : object // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -69,7 +75,7 @@ abstract class _$$PutObjectRequestImplCopyWith<$Res>
       __$$PutObjectRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String image});
+  $Res call({String base64Image, String object});
 }
 
 /// @nodoc
@@ -83,12 +89,17 @@ class __$$PutObjectRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? image = null,
+    Object? base64Image = null,
+    Object? object = null,
   }) {
     return _then(_$PutObjectRequestImpl(
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      base64Image: null == base64Image
+          ? _value.base64Image
+          : base64Image // ignore: cast_nullable_to_non_nullable
+              as String,
+      object: null == object
+          ? _value.object
+          : object // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -97,17 +108,21 @@ class __$$PutObjectRequestImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$PutObjectRequestImpl extends _PutObjectRequest {
-  const _$PutObjectRequestImpl({required this.image}) : super._();
+  const _$PutObjectRequestImpl(
+      {required this.base64Image, required this.object})
+      : super._();
 
   factory _$PutObjectRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$PutObjectRequestImplFromJson(json);
 
   @override
-  final String image;
+  final String base64Image;
+  @override
+  final String object;
 
   @override
   String toString() {
-    return 'PutObjectRequest(image: $image)';
+    return 'PutObjectRequest(base64Image: $base64Image, object: $object)';
   }
 
   @override
@@ -115,12 +130,14 @@ class _$PutObjectRequestImpl extends _PutObjectRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PutObjectRequestImpl &&
-            (identical(other.image, image) || other.image == image));
+            (identical(other.base64Image, base64Image) ||
+                other.base64Image == base64Image) &&
+            (identical(other.object, object) || other.object == object));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, image);
+  int get hashCode => Object.hash(runtimeType, base64Image, object);
 
   @JsonKey(ignore: true)
   @override
@@ -138,15 +155,18 @@ class _$PutObjectRequestImpl extends _PutObjectRequest {
 }
 
 abstract class _PutObjectRequest extends PutObjectRequest {
-  const factory _PutObjectRequest({required final String image}) =
-      _$PutObjectRequestImpl;
+  const factory _PutObjectRequest(
+      {required final String base64Image,
+      required final String object}) = _$PutObjectRequestImpl;
   const _PutObjectRequest._() : super._();
 
   factory _PutObjectRequest.fromJson(Map<String, dynamic> json) =
       _$PutObjectRequestImpl.fromJson;
 
   @override
-  String get image;
+  String get base64Image;
+  @override
+  String get object;
   @override
   @JsonKey(ignore: true)
   _$$PutObjectRequestImplCopyWith<_$PutObjectRequestImpl> get copyWith =>

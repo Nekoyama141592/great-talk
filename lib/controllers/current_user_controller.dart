@@ -13,6 +13,7 @@ import 'package:great_talk/infrastructure/credential_composer.dart';
 import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
+import 'package:great_talk/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/model/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/tokens/mute_post_token/mute_post_token.dart';
@@ -175,7 +176,7 @@ class CurrentUserController extends GetxController {
     result.when(success: (res) => rxAuthUser(res), failure: () {});
   }
 
-  String currentUid() => rxAuthUser.value!.uid;
+  String currentUid() => rxAuthUser.value?.uid ?? '';
 
   bool isAdmin() => rxPrivateUser.value?.isAdmin ?? false;
   bool isOfficial() => rxPublicUser.value?.isOfficial ?? false;
@@ -383,10 +384,9 @@ class CurrentUserController extends GetxController {
   Future<void> _removeImage() async {
     final publicUser = CurrentUserController.to.rxPublicUser.value;
     if (publicUser == null) return;
-    final image = publicUser.typedImage();
-    final bucketName = image.bucketName;
     final fileName = publicUser.typedImage().value;
-    await AWSS3Repository.instance.removeObject(bucketName, fileName);
+    final request = DeleteObjectRequest(object: fileName);
+    await AWSS3Repository().deleteObject(request);
   }
 
   void updateUser(

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'put_object_response.dart';
+part of 'delete_object_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,33 +14,34 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-PutObjectResponse _$PutObjectResponseFromJson(Map<String, dynamic> json) {
-  return _PutObjectResponse.fromJson(json);
+DeleteObjectResponse _$DeleteObjectResponseFromJson(Map<String, dynamic> json) {
+  return _DeleteObjectResponse.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PutObjectResponse {
+mixin _$DeleteObjectResponse {
   String get base64Image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PutObjectResponseCopyWith<PutObjectResponse> get copyWith =>
+  $DeleteObjectResponseCopyWith<DeleteObjectResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PutObjectResponseCopyWith<$Res> {
-  factory $PutObjectResponseCopyWith(
-          PutObjectResponse value, $Res Function(PutObjectResponse) then) =
-      _$PutObjectResponseCopyWithImpl<$Res, PutObjectResponse>;
+abstract class $DeleteObjectResponseCopyWith<$Res> {
+  factory $DeleteObjectResponseCopyWith(DeleteObjectResponse value,
+          $Res Function(DeleteObjectResponse) then) =
+      _$DeleteObjectResponseCopyWithImpl<$Res, DeleteObjectResponse>;
   @useResult
   $Res call({String base64Image});
 }
 
 /// @nodoc
-class _$PutObjectResponseCopyWithImpl<$Res, $Val extends PutObjectResponse>
-    implements $PutObjectResponseCopyWith<$Res> {
-  _$PutObjectResponseCopyWithImpl(this._value, this._then);
+class _$DeleteObjectResponseCopyWithImpl<$Res,
+        $Val extends DeleteObjectResponse>
+    implements $DeleteObjectResponseCopyWith<$Res> {
+  _$DeleteObjectResponseCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -62,22 +63,22 @@ class _$PutObjectResponseCopyWithImpl<$Res, $Val extends PutObjectResponse>
 }
 
 /// @nodoc
-abstract class _$$PutObjectResponseImplCopyWith<$Res>
-    implements $PutObjectResponseCopyWith<$Res> {
-  factory _$$PutObjectResponseImplCopyWith(_$PutObjectResponseImpl value,
-          $Res Function(_$PutObjectResponseImpl) then) =
-      __$$PutObjectResponseImplCopyWithImpl<$Res>;
+abstract class _$$DeleteObjectResponseImplCopyWith<$Res>
+    implements $DeleteObjectResponseCopyWith<$Res> {
+  factory _$$DeleteObjectResponseImplCopyWith(_$DeleteObjectResponseImpl value,
+          $Res Function(_$DeleteObjectResponseImpl) then) =
+      __$$DeleteObjectResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String base64Image});
 }
 
 /// @nodoc
-class __$$PutObjectResponseImplCopyWithImpl<$Res>
-    extends _$PutObjectResponseCopyWithImpl<$Res, _$PutObjectResponseImpl>
-    implements _$$PutObjectResponseImplCopyWith<$Res> {
-  __$$PutObjectResponseImplCopyWithImpl(_$PutObjectResponseImpl _value,
-      $Res Function(_$PutObjectResponseImpl) _then)
+class __$$DeleteObjectResponseImplCopyWithImpl<$Res>
+    extends _$DeleteObjectResponseCopyWithImpl<$Res, _$DeleteObjectResponseImpl>
+    implements _$$DeleteObjectResponseImplCopyWith<$Res> {
+  __$$DeleteObjectResponseImplCopyWithImpl(_$DeleteObjectResponseImpl _value,
+      $Res Function(_$DeleteObjectResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +86,7 @@ class __$$PutObjectResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? base64Image = null,
   }) {
-    return _then(_$PutObjectResponseImpl(
+    return _then(_$DeleteObjectResponseImpl(
       base64Image: null == base64Image
           ? _value.base64Image
           : base64Image // ignore: cast_nullable_to_non_nullable
@@ -96,25 +97,25 @@ class __$$PutObjectResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PutObjectResponseImpl extends _PutObjectResponse {
-  const _$PutObjectResponseImpl({required this.base64Image}) : super._();
+class _$DeleteObjectResponseImpl extends _DeleteObjectResponse {
+  const _$DeleteObjectResponseImpl({required this.base64Image}) : super._();
 
-  factory _$PutObjectResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PutObjectResponseImplFromJson(json);
+  factory _$DeleteObjectResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DeleteObjectResponseImplFromJson(json);
 
   @override
   final String base64Image;
 
   @override
   String toString() {
-    return 'PutObjectResponse(base64Image: $base64Image)';
+    return 'DeleteObjectResponse(base64Image: $base64Image)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PutObjectResponseImpl &&
+            other is _$DeleteObjectResponseImpl &&
             (identical(other.base64Image, base64Image) ||
                 other.base64Image == base64Image));
   }
@@ -126,30 +127,31 @@ class _$PutObjectResponseImpl extends _PutObjectResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PutObjectResponseImplCopyWith<_$PutObjectResponseImpl> get copyWith =>
-      __$$PutObjectResponseImplCopyWithImpl<_$PutObjectResponseImpl>(
-          this, _$identity);
+  _$$DeleteObjectResponseImplCopyWith<_$DeleteObjectResponseImpl>
+      get copyWith =>
+          __$$DeleteObjectResponseImplCopyWithImpl<_$DeleteObjectResponseImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PutObjectResponseImplToJson(
+    return _$$DeleteObjectResponseImplToJson(
       this,
     );
   }
 }
 
-abstract class _PutObjectResponse extends PutObjectResponse {
-  const factory _PutObjectResponse({required final String base64Image}) =
-      _$PutObjectResponseImpl;
-  const _PutObjectResponse._() : super._();
+abstract class _DeleteObjectResponse extends DeleteObjectResponse {
+  const factory _DeleteObjectResponse({required final String base64Image}) =
+      _$DeleteObjectResponseImpl;
+  const _DeleteObjectResponse._() : super._();
 
-  factory _PutObjectResponse.fromJson(Map<String, dynamic> json) =
-      _$PutObjectResponseImpl.fromJson;
+  factory _DeleteObjectResponse.fromJson(Map<String, dynamic> json) =
+      _$DeleteObjectResponseImpl.fromJson;
 
   @override
   String get base64Image;
   @override
   @JsonKey(ignore: true)
-  _$$PutObjectResponseImplCopyWith<_$PutObjectResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DeleteObjectResponseImplCopyWith<_$DeleteObjectResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

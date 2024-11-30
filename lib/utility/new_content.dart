@@ -11,7 +11,6 @@ import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/private_user/private_user.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
-import 'package:great_talk/utility/aws_s3_utility.dart';
 
 class NewContent {
   static CustomCompleteText newCustomCompleteText(
@@ -41,8 +40,8 @@ class NewContent {
     );
   }
 
-  static DetectedImage newDetectedImage(String bucketName, String value) =>
-      DetectedImage(bucketName: bucketName, value: value);
+  static DetectedImage newDetectedImage(String value) =>
+      DetectedImage(value: value);
   static Post newPost(
       String systemPrompt,
       String title,
@@ -57,7 +56,7 @@ class NewContent {
         createdAt: now,
         customCompleteText: customCompleteText,
         description: DetectedText(value: description).toJson(),
-        image: newDetectedImage(AWSS3Utility.bucketName, fileName).toJson(),
+        image: newDetectedImage(fileName).toJson(),
         postId: postId,
         ref: postRef,
         searchToken: returnSearchToken(title),
@@ -78,8 +77,8 @@ class NewContent {
       uid: uid,
       updatedAt: now,
       image: imageValue != null
-          ? newDetectedImage(AWSS3Utility.bucketName, imageValue).toJson()
-          : newDetectedImage(AWSS3Utility.bucketName, '').toJson(),
+          ? newDetectedImage(imageValue).toJson()
+          : newDetectedImage('').toJson(),
       userName: userName != null
           ? DetectedText(value: userName).toJson()
           : const DetectedText().toJson(),

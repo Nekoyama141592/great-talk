@@ -9,6 +9,7 @@ import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
+import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/user_update_log/user_update_log.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
@@ -56,33 +57,24 @@ class EditController extends FormsController with CurrentUserMixin {
     startLoading();
     final publicUser = CurrentUserController.to.rxPublicUser.value;
     if (publicUser == null) return;
-    final bucketName = AWSS3Utility.bucketName;
     if (isPicked) {
-      // 写真が新しくなった場合の処理
-      final oldBucketName = publicUser.typedImage().bucketName;
-      final oldFileName = publicUser.typedImage().value;
-      final newFileName = AWSS3Utility.profileObject(currentUid());
-      final result = await AWSS3Repository.instance
-          .putObject(uint8list, bucketName, newFileName);
+      final fileName = AWSS3Utility.profileObject(currentUid());
+      final request = PutObjectRequest.fromUint8List(
+          uint8list: uint8list, fileName: fileName);
+      final result = await AWSS3Repository().putObject(request);
       await result.when(success: (res) async {
-        // 非同期で処理.
-        await Future.wait([
-          _createUserUpdateLog(bucketName, res), // ユーザー情報を更新.
-          _removeOldImage(oldBucketName, oldFileName) // 古いオブジェクトをS3から削除.
-        ]);
+        await _createUserUpdateLog(fileName); // ユーザー情報を更新.
       }, failure: () {
         UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
       });
     } else {
       // 写真がそのまま場合の処理
-      await _createUserUpdateLog(bucketName, publicUser.typedImage().value);
+      await _createUserUpdateLog(publicUser.typedImage().value);
     }
     endLoading();
   }
 
-  Future<void> _removeOldImage(String bucketName, String oldFileName) =>
-      AWSS3Repository.instance.removeObject(bucketName, oldFileName);
-  Future<void> _createUserUpdateLog(String bucketName, String fileName) async {
+  Future<void> _createUserUpdateLog(String fileName) async {
     final repository = FirestoreRepository();
     final bio = rxBio.value;
     final userName = rxUserName.value;
@@ -92,7 +84,7 @@ class EditController extends FormsController with CurrentUserMixin {
         stringBio: bio.trim(),
         stringUserName: userName.trim(),
         uid: currentUid(),
-        image: DetectedImage(bucketName: bucketName, value: fileName).toJson(),
+        image: DetectedImage(value: fileName).toJson(),
         userRef: CurrentUserController.to.rxPublicUser.value!.ref);
     final ref = DocRefCore.userUpdateLog(currentUid());
     final json = newUpdateLog.toJson();

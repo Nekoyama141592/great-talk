@@ -1,21 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'put_object_request.dart';
+part of 'delete_object_request.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PutObjectRequestImpl _$$PutObjectRequestImplFromJson(
+_$DeleteObjectRequestImpl _$$DeleteObjectRequestImplFromJson(
         Map<String, dynamic> json) =>
-    _$PutObjectRequestImpl(
-      base64Image: json['base64Image'] as String,
+    _$DeleteObjectRequestImpl(
       object: json['object'] as String,
     );
 
-Map<String, dynamic> _$$PutObjectRequestImplToJson(
-        _$PutObjectRequestImpl instance) =>
+Map<String, dynamic> _$$DeleteObjectRequestImplToJson(
+        _$DeleteObjectRequestImpl instance) =>
     <String, dynamic>{
-      'base64Image': instance.base64Image,
       'object': instance.object,
     };

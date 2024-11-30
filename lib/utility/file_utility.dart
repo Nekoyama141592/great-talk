@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/image_info/original_image_info.dart';
+import 'package:great_talk/model/rest_api/get_object/request/get_object_request.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_cropper/image_cropper.dart';
@@ -34,7 +35,8 @@ class FileUtility {
     // キャッシュされていない場合、S3から取得.
     if (uint8List == null) {
       final repository = AWSS3Repository();
-      final result = await repository.getObject(bucketName, fileName);
+      final request = GetObjectRequest(object: fileName);
+      final result = await repository.getObject(request);
       result.when(success: (res) {
         uint8List = res;
         _cacheUint8List(fileName, res); // 画像を非同期でキャッシュする.

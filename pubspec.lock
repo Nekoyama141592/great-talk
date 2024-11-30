@@ -57,14 +57,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  buffer:
-    dependency: transitive
-    description:
-      name: buffer
-      sha256: "389da2ec2c16283c8787e0adaede82b1842102f8c8aae2f49003a766c5c6b3d1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.3"
   build:
     dependency: transitive
     description:
@@ -1096,14 +1088,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-  minio_new:
-    dependency: "direct main"
-    description:
-      name: minio_new
-      sha256: f7fd883ee2458a7a02e00d8e095584961b78ae94742078c332d553f9ee7e1f58
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.2"
   nested:
     dependency: transitive
     description:
