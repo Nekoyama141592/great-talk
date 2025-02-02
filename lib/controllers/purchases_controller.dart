@@ -264,7 +264,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
   Future<void> onPurchaseButtonPressed(ProductDetails productDetails) async {
     if (loading.value) return;
     await cancelTransctions();
-    final GooglePlayPurchaseDetails? oldSubscription =
+    final oldSubscription =
         _getOldSubscription(productDetails);
     final purchaseParam = Platform.isAndroid
         ? GooglePlayPurchaseParam(
