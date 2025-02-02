@@ -9,7 +9,7 @@ extension PurchaseDetailsExtension on PurchaseDetails {
       "verificationData": {
         "localVerificationData": verificationData.localVerificationData,
         "serverVerificationData": verificationData.serverVerificationData,
-        "source ": verificationData.source,
+        "source": verificationData.source,
       },
       "transactionDate": transactionDate ?? "",
       "status": status.name,
