@@ -66,8 +66,8 @@ great_talk/
 │    ├── utility/         # 全体で共通する処理のファイルを格納
 │    ├── validator/       # フォームで使用するバリデータに関するファイルを格納
 │    ├── views/           # 画面に関わるファイルを格納
-├── .gitignore            # Git無視ファイル
-├── analysis_options.yaml # エラー無視ファイル
+├── .gitignore            # Gitに含めないファイルを記述
+├── analysis_options.yaml # コード記述のルールを定める
 ├── COMMAND.md            # 使用コマンドファイル
 ├── pubspec.yaml          # 依存関係ファイル
 ├── pubspec.lock          # 依存関係ロックファイル
