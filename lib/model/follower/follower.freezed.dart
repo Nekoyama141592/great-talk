@@ -24,8 +24,12 @@ mixin _$Follower {
   dynamic get createdAt => throw _privateConstructorUsedError;
   dynamic get passiveUserRef => throw _privateConstructorUsedError;
 
+  /// Serializes this Follower to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Follower
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FollowerCopyWith<Follower> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$FollowerCopyWithImpl<$Res, $Val extends Follower>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Follower
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,6 +97,8 @@ class __$$FollowerImplCopyWithImpl<$Res>
       _$FollowerImpl _value, $Res Function(_$FollowerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Follower
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,7 +159,7 @@ class _$FollowerImpl extends _Follower {
                 .equals(other.passiveUserRef, passiveUserRef));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -159,7 +167,9 @@ class _$FollowerImpl extends _Follower {
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(passiveUserRef));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Follower
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FollowerImplCopyWith<_$FollowerImpl> get copyWith =>
@@ -189,8 +199,11 @@ abstract class _Follower extends Follower {
   dynamic get createdAt;
   @override
   dynamic get passiveUserRef;
+
+  /// Create a copy of Follower
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FollowerImplCopyWith<_$FollowerImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

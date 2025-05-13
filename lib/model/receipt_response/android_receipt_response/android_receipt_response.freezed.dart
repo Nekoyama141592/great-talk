@@ -36,8 +36,12 @@ mixin _$AndroidReceiptResponse {
   String get startTimeMillis => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
 
+  /// Serializes this AndroidReceiptResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AndroidReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AndroidReceiptResponseCopyWith<AndroidReceiptResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -76,6 +80,8 @@ class _$AndroidReceiptResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AndroidReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -191,6 +197,8 @@ class __$$AndroidReceiptResponseImplCopyWithImpl<$Res>
       $Res Function(_$AndroidReceiptResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AndroidReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -360,7 +368,7 @@ class _$AndroidReceiptResponseImpl extends _AndroidReceiptResponse {
             (identical(other.uid, uid) || other.uid == uid));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -379,7 +387,9 @@ class _$AndroidReceiptResponseImpl extends _AndroidReceiptResponse {
       startTimeMillis,
       uid);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AndroidReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AndroidReceiptResponseImplCopyWith<_$AndroidReceiptResponseImpl>
@@ -436,15 +446,18 @@ abstract class _AndroidReceiptResponse extends AndroidReceiptResponse {
   @override
   String get priceCurrencyCode;
   @override
-  String get productId;
-  @override // 独自設定
+  String get productId; // 独自設定
+  @override
   int get purchaseType;
   @override
   String get startTimeMillis;
   @override
   String get uid;
+
+  /// Create a copy of AndroidReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AndroidReceiptResponseImplCopyWith<_$AndroidReceiptResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

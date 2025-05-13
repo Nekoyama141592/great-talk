@@ -27,8 +27,12 @@ mixin _$SaveTextMsg {
   String get senderUid => throw _privateConstructorUsedError;
   Map<String, dynamic> get text => throw _privateConstructorUsedError;
 
+  /// Serializes this SaveTextMsg to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SaveTextMsg
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SaveTextMsgCopyWith<SaveTextMsg> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$SaveTextMsgCopyWithImpl<$Res, $Val extends SaveTextMsg>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SaveTextMsg
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class __$$SaveTextMsgImplCopyWithImpl<$Res>
       _$SaveTextMsgImpl _value, $Res Function(_$SaveTextMsgImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SaveTextMsg
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -217,12 +225,14 @@ class _$SaveTextMsgImpl extends _SaveTextMsg {
             const DeepCollectionEquality().equals(other._text, _text));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, createdAt, id, messageType,
       posterUid, senderUid, const DeepCollectionEquality().hash(_text));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SaveTextMsg
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SaveTextMsgImplCopyWith<_$SaveTextMsgImpl> get copyWith =>
@@ -261,8 +271,11 @@ abstract class _SaveTextMsg extends SaveTextMsg {
   String get senderUid;
   @override
   Map<String, dynamic> get text;
+
+  /// Create a copy of SaveTextMsg
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SaveTextMsgImplCopyWith<_$SaveTextMsgImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

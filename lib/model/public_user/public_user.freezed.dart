@@ -43,8 +43,12 @@ mixin _$PublicUser {
   Map<String, dynamic> get userName => throw _privateConstructorUsedError;
   List<SDMap> get walletAddresses => throw _privateConstructorUsedError;
 
+  /// Serializes this PublicUser to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PublicUser
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PublicUserCopyWith<PublicUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -90,6 +94,8 @@ class _$PublicUserCopyWithImpl<$Res, $Val extends PublicUser>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PublicUser
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -250,6 +256,8 @@ class __$$PublicUserImplCopyWithImpl<$Res>
       _$PublicUserImpl _value, $Res Function(_$PublicUserImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PublicUser
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -548,7 +556,7 @@ class _$PublicUserImpl extends _PublicUser {
                 .equals(other._walletAddresses, _walletAddresses));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -576,7 +584,9 @@ class _$PublicUserImpl extends _PublicUser {
         const DeepCollectionEquality().hash(_walletAddresses)
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PublicUser
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PublicUserImplCopyWith<_$PublicUserImpl> get copyWith =>
@@ -663,8 +673,11 @@ abstract class _PublicUser extends PublicUser {
   Map<String, dynamic> get userName;
   @override
   List<SDMap> get walletAddresses;
+
+  /// Create a copy of PublicUser
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PublicUserImplCopyWith<_$PublicUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

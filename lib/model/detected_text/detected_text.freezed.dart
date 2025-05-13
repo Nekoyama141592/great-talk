@@ -26,8 +26,12 @@ mixin _$DetectedText {
   String get sentiment => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
 
+  /// Serializes this DetectedText to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DetectedText
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DetectedTextCopyWith<DetectedText> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$DetectedTextCopyWithImpl<$Res, $Val extends DetectedText>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DetectedText
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +120,8 @@ class __$$DetectedTextImplCopyWithImpl<$Res>
       _$DetectedTextImpl _value, $Res Function(_$DetectedTextImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DetectedText
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -198,12 +206,14 @@ class _$DetectedTextImpl implements _DetectedText {
             (identical(other.value, value) || other.value == value));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, languageCode, negativeScore,
       positiveScore, sentiment, value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DetectedText
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DetectedTextImplCopyWith<_$DetectedTextImpl> get copyWith =>
@@ -238,8 +248,11 @@ abstract class _DetectedText implements DetectedText {
   String get sentiment;
   @override
   String get value;
+
+  /// Create a copy of DetectedText
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DetectedTextImplCopyWith<_$DetectedTextImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -41,8 +41,12 @@ mixin _$IOSReceiptResponse {
   String get uid => throw _privateConstructorUsedError; // 独自設定
   String get web_order_line_item_id => throw _privateConstructorUsedError;
 
+  /// Serializes this IOSReceiptResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of IOSReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $IOSReceiptResponseCopyWith<IOSReceiptResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -85,6 +89,8 @@ class _$IOSReceiptResponseCopyWithImpl<$Res, $Val extends IOSReceiptResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of IOSReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -227,6 +233,8 @@ class __$$IOSReceiptResponseImplCopyWithImpl<$Res>
       $Res Function(_$IOSReceiptResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of IOSReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -452,7 +460,7 @@ class _$IOSReceiptResponseImpl extends _IOSReceiptResponse {
                 other.web_order_line_item_id == web_order_line_item_id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -477,7 +485,9 @@ class _$IOSReceiptResponseImpl extends _IOSReceiptResponse {
         web_order_line_item_id
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of IOSReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$IOSReceiptResponseImplCopyWith<_$IOSReceiptResponseImpl> get copyWith =>
@@ -553,11 +563,14 @@ abstract class _IOSReceiptResponse extends IOSReceiptResponse {
   @override
   String get transaction_id;
   @override
-  String get uid;
-  @override // 独自設定
-  String get web_order_line_item_id;
+  String get uid; // 独自設定
   @override
-  @JsonKey(ignore: true)
+  String get web_order_line_item_id;
+
+  /// Create a copy of IOSReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$IOSReceiptResponseImplCopyWith<_$IOSReceiptResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

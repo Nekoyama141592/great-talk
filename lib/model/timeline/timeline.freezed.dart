@@ -25,8 +25,12 @@ mixin _$Timeline {
   String get posterUid => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
 
+  /// Serializes this Timeline to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Timeline
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TimelineCopyWith<Timeline> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$TimelineCopyWithImpl<$Res, $Val extends Timeline>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Timeline
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -97,6 +103,8 @@ class __$$TimelineImplCopyWithImpl<$Res>
       _$TimelineImpl _value, $Res Function(_$TimelineImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Timeline
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -165,7 +173,7 @@ class _$TimelineImpl implements _Timeline {
             (identical(other.postId, postId) || other.postId == postId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -174,7 +182,9 @@ class _$TimelineImpl implements _Timeline {
       posterUid,
       postId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Timeline
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TimelineImplCopyWith<_$TimelineImpl> get copyWith =>
@@ -201,13 +211,16 @@ abstract class _Timeline implements Timeline {
   @override
   dynamic get createdAt;
   @override
-  bool get isRead;
-  @override // フォロワーが投稿を読んだかどうか
+  bool get isRead; // フォロワーが投稿を読んだかどうか
+  @override
   String get posterUid;
   @override
   String get postId;
+
+  /// Create a copy of Timeline
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TimelineImplCopyWith<_$TimelineImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

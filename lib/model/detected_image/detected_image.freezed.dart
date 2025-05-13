@@ -26,8 +26,12 @@ mixin _$DetectedImage {
   String get moderationModelVersion => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
 
+  /// Serializes this DetectedImage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DetectedImage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DetectedImageCopyWith<DetectedImage> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$DetectedImageCopyWithImpl<$Res, $Val extends DetectedImage>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DetectedImage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -107,6 +113,8 @@ class __$$DetectedImageImplCopyWithImpl<$Res>
       _$DetectedImageImpl _value, $Res Function(_$DetectedImageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DetectedImage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -189,7 +197,7 @@ class _$DetectedImageImpl extends _DetectedImage {
             (identical(other.value, value) || other.value == value));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -198,7 +206,9 @@ class _$DetectedImageImpl extends _DetectedImage {
       moderationModelVersion,
       value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DetectedImage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DetectedImageImplCopyWith<_$DetectedImageImpl> get copyWith =>
@@ -231,8 +241,11 @@ abstract class _DetectedImage extends DetectedImage {
   String get moderationModelVersion;
   @override
   String get value;
+
+  /// Create a copy of DetectedImage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DetectedImageImplCopyWith<_$DetectedImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

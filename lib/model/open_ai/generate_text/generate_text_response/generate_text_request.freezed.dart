@@ -25,8 +25,12 @@ mixin _$GenerateTextRequest {
   List<Map<String, dynamic>>? get tools => throw _privateConstructorUsedError;
   Map<String, dynamic>? get tool_choice => throw _privateConstructorUsedError;
 
+  /// Serializes this GenerateTextRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GenerateTextRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GenerateTextRequestCopyWith<GenerateTextRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$GenerateTextRequestCopyWithImpl<$Res, $Val extends GenerateTextRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GenerateTextRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +112,8 @@ class __$$GenerateTextRequestImplCopyWithImpl<$Res>
       $Res Function(_$GenerateTextRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GenerateTextRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -197,7 +205,7 @@ class _$GenerateTextRequestImpl implements _GenerateTextRequest {
                 .equals(other._tool_choice, _tool_choice));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -206,7 +214,9 @@ class _$GenerateTextRequestImpl implements _GenerateTextRequest {
       const DeepCollectionEquality().hash(_tools),
       const DeepCollectionEquality().hash(_tool_choice));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GenerateTextRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GenerateTextRequestImplCopyWith<_$GenerateTextRequestImpl> get copyWith =>
@@ -239,8 +249,11 @@ abstract class _GenerateTextRequest implements GenerateTextRequest {
   List<Map<String, dynamic>>? get tools;
   @override
   Map<String, dynamic>? get tool_choice;
+
+  /// Create a copy of GenerateTextRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GenerateTextRequestImplCopyWith<_$GenerateTextRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

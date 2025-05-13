@@ -24,8 +24,12 @@ mixin _$ChatLimitPerDay {
   int get free => throw _privateConstructorUsedError;
   int get premium => throw _privateConstructorUsedError;
 
+  /// Serializes this ChatLimitPerDay to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ChatLimitPerDay
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChatLimitPerDayCopyWith<ChatLimitPerDay> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$ChatLimitPerDayCopyWithImpl<$Res, $Val extends ChatLimitPerDay>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ChatLimitPerDay
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$ChatLimitPerDayImplCopyWithImpl<$Res>
       _$ChatLimitPerDayImpl _value, $Res Function(_$ChatLimitPerDayImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChatLimitPerDay
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,11 +161,13 @@ class _$ChatLimitPerDayImpl extends _ChatLimitPerDay {
             (identical(other.premium, premium) || other.premium == premium));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, basic, free, premium);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChatLimitPerDay
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChatLimitPerDayImplCopyWith<_$ChatLimitPerDayImpl> get copyWith =>
@@ -188,8 +198,11 @@ abstract class _ChatLimitPerDay extends ChatLimitPerDay {
   int get free;
   @override
   int get premium;
+
+  /// Create a copy of ChatLimitPerDay
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChatLimitPerDayImplCopyWith<_$ChatLimitPerDayImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

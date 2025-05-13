@@ -8,8 +8,8 @@ part of 'chat_count_today.dart';
 
 _$ChatCountTodayImpl _$$ChatCountTodayImplFromJson(Map<String, dynamic> json) =>
     _$ChatCountTodayImpl(
-      basic: json['basic'] as int? ?? 0,
-      premium: json['premium'] as int? ?? 0,
+      basic: (json['basic'] as num?)?.toInt() ?? 0,
+      premium: (json['premium'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$ChatCountTodayImplToJson(

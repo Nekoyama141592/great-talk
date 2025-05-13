@@ -28,8 +28,12 @@ mixin _$LikePostToken {
   String get tokenId => throw _privateConstructorUsedError;
   String get tokenType => throw _privateConstructorUsedError;
 
+  /// Serializes this LikePostToken to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of LikePostToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LikePostTokenCopyWith<LikePostToken> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$LikePostTokenCopyWithImpl<$Res, $Val extends LikePostToken>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LikePostToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,6 +136,8 @@ class __$$LikePostTokenImplCopyWithImpl<$Res>
       _$LikePostTokenImpl _value, $Res Function(_$LikePostTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LikePostToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -226,7 +234,7 @@ class _$LikePostTokenImpl implements _LikePostToken {
                 other.tokenType == tokenType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -238,7 +246,9 @@ class _$LikePostTokenImpl implements _LikePostToken {
       tokenId,
       tokenType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LikePostToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LikePostTokenImplCopyWith<_$LikePostTokenImpl> get copyWith =>
@@ -279,8 +289,11 @@ abstract class _LikePostToken implements LikePostToken {
   String get tokenId;
   @override
   String get tokenType;
+
+  /// Create a copy of LikePostToken
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LikePostTokenImplCopyWith<_$LikePostTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

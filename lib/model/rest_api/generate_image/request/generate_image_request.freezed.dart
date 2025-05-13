@@ -20,11 +20,7 @@ GenerateImageRequest _$GenerateImageRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GenerateImageRequest {
-  String get model => throw _privateConstructorUsedError;
   String get prompt => throw _privateConstructorUsedError;
-  int get n => throw _privateConstructorUsedError;
-  String get size => throw _privateConstructorUsedError;
-  String get user => throw _privateConstructorUsedError;
 
   /// Serializes this GenerateImageRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,7 +38,7 @@ abstract class $GenerateImageRequestCopyWith<$Res> {
           $Res Function(GenerateImageRequest) then) =
       _$GenerateImageRequestCopyWithImpl<$Res, GenerateImageRequest>;
   @useResult
-  $Res call({String model, String prompt, int n, String size, String user});
+  $Res call({String prompt});
 }
 
 /// @nodoc
@@ -61,32 +57,12 @@ class _$GenerateImageRequestCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? model = null,
     Object? prompt = null,
-    Object? n = null,
-    Object? size = null,
-    Object? user = null,
   }) {
     return _then(_value.copyWith(
-      model: null == model
-          ? _value.model
-          : model // ignore: cast_nullable_to_non_nullable
-              as String,
       prompt: null == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
-              as String,
-      n: null == n
-          ? _value.n
-          : n // ignore: cast_nullable_to_non_nullable
-              as int,
-      size: null == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -100,7 +76,7 @@ abstract class _$$GenerateImageRequestImplCopyWith<$Res>
       __$$GenerateImageRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String model, String prompt, int n, String size, String user});
+  $Res call({String prompt});
 }
 
 /// @nodoc
@@ -116,32 +92,12 @@ class __$$GenerateImageRequestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? model = null,
     Object? prompt = null,
-    Object? n = null,
-    Object? size = null,
-    Object? user = null,
   }) {
     return _then(_$GenerateImageRequestImpl(
-      model: null == model
-          ? _value.model
-          : model // ignore: cast_nullable_to_non_nullable
-              as String,
       prompt: null == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
-              as String,
-      n: null == n
-          ? _value.n
-          : n // ignore: cast_nullable_to_non_nullable
-              as int,
-      size: null == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -149,33 +105,18 @@ class __$$GenerateImageRequestImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GenerateImageRequestImpl implements _GenerateImageRequest {
-  const _$GenerateImageRequestImpl(
-      {this.model = OpenAIConstants.imageModel,
-      required this.prompt,
-      this.n = 1,
-      required this.size,
-      required this.user});
+class _$GenerateImageRequestImpl extends _GenerateImageRequest {
+  const _$GenerateImageRequestImpl({required this.prompt}) : super._();
 
   factory _$GenerateImageRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$GenerateImageRequestImplFromJson(json);
 
   @override
-  @JsonKey()
-  final String model;
-  @override
   final String prompt;
-  @override
-  @JsonKey()
-  final int n;
-  @override
-  final String size;
-  @override
-  final String user;
 
   @override
   String toString() {
-    return 'GenerateImageRequest(model: $model, prompt: $prompt, n: $n, size: $size, user: $user)';
+    return 'GenerateImageRequest(prompt: $prompt)';
   }
 
   @override
@@ -183,16 +124,12 @@ class _$GenerateImageRequestImpl implements _GenerateImageRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GenerateImageRequestImpl &&
-            (identical(other.model, model) || other.model == model) &&
-            (identical(other.prompt, prompt) || other.prompt == prompt) &&
-            (identical(other.n, n) || other.n == n) &&
-            (identical(other.size, size) || other.size == size) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.prompt, prompt) || other.prompt == prompt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, model, prompt, n, size, user);
+  int get hashCode => Object.hash(runtimeType, prompt);
 
   /// Create a copy of GenerateImageRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -212,27 +149,16 @@ class _$GenerateImageRequestImpl implements _GenerateImageRequest {
   }
 }
 
-abstract class _GenerateImageRequest implements GenerateImageRequest {
-  const factory _GenerateImageRequest(
-      {final String model,
-      required final String prompt,
-      final int n,
-      required final String size,
-      required final String user}) = _$GenerateImageRequestImpl;
+abstract class _GenerateImageRequest extends GenerateImageRequest {
+  const factory _GenerateImageRequest({required final String prompt}) =
+      _$GenerateImageRequestImpl;
+  const _GenerateImageRequest._() : super._();
 
   factory _GenerateImageRequest.fromJson(Map<String, dynamic> json) =
       _$GenerateImageRequestImpl.fromJson;
 
   @override
-  String get model;
-  @override
   String get prompt;
-  @override
-  int get n;
-  @override
-  String get size;
-  @override
-  String get user;
 
   /// Create a copy of GenerateImageRequest
   /// with the given fields replaced by the non-null parameter values.

@@ -24,8 +24,12 @@ mixin _$VerifyAndroidReceiptRequest {
   String get localVerificationData => throw _privateConstructorUsedError;
   String get productID => throw _privateConstructorUsedError;
 
+  /// Serializes this VerifyAndroidReceiptRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of VerifyAndroidReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VerifyAndroidReceiptRequestCopyWith<VerifyAndroidReceiptRequest>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$VerifyAndroidReceiptRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of VerifyAndroidReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -93,6 +99,8 @@ class __$$VerifyAndroidReceiptRequestImplCopyWithImpl<$Res>
       $Res Function(_$VerifyAndroidReceiptRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VerifyAndroidReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -144,12 +152,14 @@ class _$VerifyAndroidReceiptRequestImpl extends _VerifyAndroidReceiptRequest {
                 other.productID == productID));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, localVerificationData, productID);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VerifyAndroidReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VerifyAndroidReceiptRequestImplCopyWith<_$VerifyAndroidReceiptRequestImpl>
@@ -178,8 +188,11 @@ abstract class _VerifyAndroidReceiptRequest
   String get localVerificationData;
   @override
   String get productID;
+
+  /// Create a copy of VerifyAndroidReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VerifyAndroidReceiptRequestImplCopyWith<_$VerifyAndroidReceiptRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

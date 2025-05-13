@@ -31,8 +31,12 @@ mixin _$PrivateUser {
   String get uid => throw _privateConstructorUsedError;
   dynamic get updatedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this PrivateUser to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PrivateUser
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PrivateUserCopyWith<PrivateUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -66,6 +70,8 @@ class _$PrivateUserCopyWithImpl<$Res, $Val extends PrivateUser>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PrivateUser
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,6 +160,8 @@ class __$$PrivateUserImplCopyWithImpl<$Res>
       _$PrivateUserImpl _value, $Res Function(_$PrivateUserImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PrivateUser
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -285,7 +293,7 @@ class _$PrivateUserImpl extends _PrivateUser {
             const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -300,7 +308,9 @@ class _$PrivateUserImpl extends _PrivateUser {
       uid,
       const DeepCollectionEquality().hash(updatedAt));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PrivateUser
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PrivateUserImplCopyWith<_$PrivateUserImpl> get copyWith =>
@@ -351,8 +361,11 @@ abstract class _PrivateUser extends PrivateUser {
   String get uid;
   @override
   dynamic get updatedAt;
+
+  /// Create a copy of PrivateUser
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PrivateUserImplCopyWith<_$PrivateUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

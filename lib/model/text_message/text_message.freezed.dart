@@ -29,8 +29,12 @@ mixin _$TextMessage {
   String get senderUid => throw _privateConstructorUsedError;
   Map<String, dynamic> get text => throw _privateConstructorUsedError;
 
+  /// Serializes this TextMessage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TextMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TextMessageCopyWith<TextMessage> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -62,6 +66,8 @@ class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TextMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,6 +144,8 @@ class __$$TextMessageImplCopyWithImpl<$Res>
       _$TextMessageImpl _value, $Res Function(_$TextMessageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TextMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -251,7 +259,7 @@ class _$TextMessageImpl extends _TextMessage {
             const DeepCollectionEquality().equals(other._text, _text));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -264,7 +272,9 @@ class _$TextMessageImpl extends _TextMessage {
       senderUid,
       const DeepCollectionEquality().hash(_text));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TextMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TextMessageImplCopyWith<_$TextMessageImpl> get copyWith =>
@@ -309,8 +319,11 @@ abstract class _TextMessage extends TextMessage {
   String get senderUid;
   @override
   Map<String, dynamic> get text;
+
+  /// Create a copy of TextMessage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TextMessageImplCopyWith<_$TextMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

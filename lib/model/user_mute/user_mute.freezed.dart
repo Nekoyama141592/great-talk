@@ -26,8 +26,12 @@ mixin _$UserMute {
   String get passiveUid => throw _privateConstructorUsedError;
   dynamic get passiveUserRef => throw _privateConstructorUsedError;
 
+  /// Serializes this UserMute to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserMute
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserMuteCopyWith<UserMute> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$UserMuteCopyWithImpl<$Res, $Val extends UserMute>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserMute
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,6 +119,8 @@ class __$$UserMuteImplCopyWithImpl<$Res>
       _$UserMuteImpl _value, $Res Function(_$UserMuteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserMute
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -192,7 +200,7 @@ class _$UserMuteImpl implements _UserMute {
                 .equals(other.passiveUserRef, passiveUserRef));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -202,7 +210,9 @@ class _$UserMuteImpl implements _UserMute {
       passiveUid,
       const DeepCollectionEquality().hash(passiveUserRef));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserMute
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserMuteImplCopyWith<_$UserMuteImpl> get copyWith =>
@@ -237,8 +247,11 @@ abstract class _UserMute implements UserMute {
   String get passiveUid;
   @override
   dynamic get passiveUserRef;
+
+  /// Create a copy of UserMute
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserMuteImplCopyWith<_$UserMuteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

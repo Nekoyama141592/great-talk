@@ -27,8 +27,12 @@ mixin _$CachedReceipt {
   String get startTimeMillis => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
 
+  /// Serializes this CachedReceipt to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CachedReceipt
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CachedReceiptCopyWith<CachedReceipt> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$CachedReceiptCopyWithImpl<$Res, $Val extends CachedReceipt>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CachedReceipt
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class __$$CachedReceiptImplCopyWithImpl<$Res>
       _$CachedReceiptImpl _value, $Res Function(_$CachedReceiptImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CachedReceipt
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -211,12 +219,14 @@ class _$CachedReceiptImpl extends _CachedReceipt {
             (identical(other.uid, uid) || other.uid == uid));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, expiryTimeMillis, orderId,
       originalTransactionId, productId, startTimeMillis, uid);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CachedReceipt
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CachedReceiptImplCopyWith<_$CachedReceiptImpl> get copyWith =>
@@ -255,8 +265,11 @@ abstract class _CachedReceipt extends CachedReceipt {
   String get startTimeMillis;
   @override
   String get uid;
+
+  /// Create a copy of CachedReceipt
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CachedReceiptImplCopyWith<_$CachedReceiptImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

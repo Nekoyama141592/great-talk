@@ -22,8 +22,12 @@ DeleteObjectRequest _$DeleteObjectRequestFromJson(Map<String, dynamic> json) {
 mixin _$DeleteObjectRequest {
   String get object => throw _privateConstructorUsedError;
 
+  /// Serializes this DeleteObjectRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeleteObjectRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeleteObjectRequestCopyWith<DeleteObjectRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$DeleteObjectRequestCopyWithImpl<$Res, $Val extends DeleteObjectRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeleteObjectRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$DeleteObjectRequestImplCopyWithImpl<$Res>
       $Res Function(_$DeleteObjectRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeleteObjectRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,11 +126,13 @@ class _$DeleteObjectRequestImpl extends _DeleteObjectRequest {
             (identical(other.object, object) || other.object == object));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, object);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeleteObjectRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteObjectRequestImplCopyWith<_$DeleteObjectRequestImpl> get copyWith =>
@@ -147,8 +157,11 @@ abstract class _DeleteObjectRequest extends DeleteObjectRequest {
 
   @override
   String get object;
+
+  /// Create a copy of DeleteObjectRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteObjectRequestImplCopyWith<_$DeleteObjectRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

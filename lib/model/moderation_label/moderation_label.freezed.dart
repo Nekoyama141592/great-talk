@@ -24,8 +24,12 @@ mixin _$ModerationLabel {
   String get Name => throw _privateConstructorUsedError;
   String get ParentName => throw _privateConstructorUsedError;
 
+  /// Serializes this ModerationLabel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ModerationLabel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ModerationLabelCopyWith<ModerationLabel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$ModerationLabelCopyWithImpl<$Res, $Val extends ModerationLabel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ModerationLabel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$ModerationLabelImplCopyWithImpl<$Res>
       _$ModerationLabelImpl _value, $Res Function(_$ModerationLabelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ModerationLabel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -149,11 +157,13 @@ class _$ModerationLabelImpl implements _ModerationLabel {
                 other.ParentName == ParentName));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, Confidence, Name, ParentName);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ModerationLabel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ModerationLabelImplCopyWith<_$ModerationLabelImpl> get copyWith =>
@@ -183,8 +193,11 @@ abstract class _ModerationLabel implements ModerationLabel {
   String get Name;
   @override
   String get ParentName;
+
+  /// Create a copy of ModerationLabel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ModerationLabelImplCopyWith<_$ModerationLabelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

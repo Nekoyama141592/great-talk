@@ -26,8 +26,12 @@ mixin _$PostLike {
   dynamic get postRef => throw _privateConstructorUsedError;
   String get postId => throw _privateConstructorUsedError;
 
+  /// Serializes this PostLike to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PostLike
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PostLikeCopyWith<PostLike> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +59,8 @@ class _$PostLikeCopyWithImpl<$Res, $Val extends PostLike>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PostLike
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,6 +119,8 @@ class __$$PostLikeImplCopyWithImpl<$Res>
       _$PostLikeImpl _value, $Res Function(_$PostLikeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PostLike
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -190,7 +198,7 @@ class _$PostLikeImpl implements _PostLike {
             (identical(other.postId, postId) || other.postId == postId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -200,7 +208,9 @@ class _$PostLikeImpl implements _PostLike {
       const DeepCollectionEquality().hash(postRef),
       postId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PostLike
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PostLikeImplCopyWith<_$PostLikeImpl> get copyWith =>
@@ -235,8 +245,11 @@ abstract class _PostLike implements PostLike {
   dynamic get postRef;
   @override
   String get postId;
+
+  /// Create a copy of PostLike
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostLikeImplCopyWith<_$PostLikeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

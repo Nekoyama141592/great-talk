@@ -28,8 +28,12 @@ mixin _$UserUpdateLog {
   Map<String, dynamic> get image => throw _privateConstructorUsedError;
   dynamic get userRef => throw _privateConstructorUsedError;
 
+  /// Serializes this UserUpdateLog to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserUpdateLog
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserUpdateLogCopyWith<UserUpdateLog> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserUpdateLog
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,6 +136,8 @@ class __$$UserUpdateLogImplCopyWithImpl<$Res>
       _$UserUpdateLogImpl _value, $Res Function(_$UserUpdateLogImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserUpdateLog
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -241,7 +249,7 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
             const DeepCollectionEquality().equals(other.userRef, userRef));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -253,7 +261,9 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
       const DeepCollectionEquality().hash(_image),
       const DeepCollectionEquality().hash(userRef));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserUpdateLog
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
@@ -294,8 +304,11 @@ abstract class _UserUpdateLog implements UserUpdateLog {
   Map<String, dynamic> get image;
   @override
   dynamic get userRef;
+
+  /// Create a copy of UserUpdateLog
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

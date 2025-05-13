@@ -26,8 +26,12 @@ mixin _$CustomCompleteText {
   double? get presencePenalty => throw _privateConstructorUsedError;
   double? get frequencyPenalty => throw _privateConstructorUsedError;
 
+  /// Serializes this CustomCompleteText to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CustomCompleteText
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CustomCompleteTextCopyWith<CustomCompleteText> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$CustomCompleteTextCopyWithImpl<$Res, $Val extends CustomCompleteText>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CustomCompleteText
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +120,8 @@ class __$$CustomCompleteTextImplCopyWithImpl<$Res>
       $Res Function(_$CustomCompleteTextImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CustomCompleteText
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -194,12 +202,14 @@ class _$CustomCompleteTextImpl extends _CustomCompleteText {
                 other.frequencyPenalty == frequencyPenalty));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, systemPrompt, temperature, topP,
       presencePenalty, frequencyPenalty);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CustomCompleteText
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CustomCompleteTextImplCopyWith<_$CustomCompleteTextImpl> get copyWith =>
@@ -236,8 +246,11 @@ abstract class _CustomCompleteText extends CustomCompleteText {
   double? get presencePenalty;
   @override
   double? get frequencyPenalty;
+
+  /// Create a copy of CustomCompleteText
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CustomCompleteTextImplCopyWith<_$CustomCompleteTextImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

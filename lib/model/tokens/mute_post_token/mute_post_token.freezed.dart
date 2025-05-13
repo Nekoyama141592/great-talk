@@ -27,8 +27,12 @@ mixin _$MutePostToken {
   String get tokenId => throw _privateConstructorUsedError;
   String get tokenType => throw _privateConstructorUsedError;
 
+  /// Serializes this MutePostToken to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MutePostToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MutePostTokenCopyWith<MutePostToken> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$MutePostTokenCopyWithImpl<$Res, $Val extends MutePostToken>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MutePostToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class __$$MutePostTokenImplCopyWithImpl<$Res>
       _$MutePostTokenImpl _value, $Res Function(_$MutePostTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MutePostToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -208,7 +216,7 @@ class _$MutePostTokenImpl implements _MutePostToken {
                 other.tokenType == tokenType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -219,7 +227,9 @@ class _$MutePostTokenImpl implements _MutePostToken {
       tokenId,
       tokenType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MutePostToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MutePostTokenImplCopyWith<_$MutePostTokenImpl> get copyWith =>
@@ -257,8 +267,11 @@ abstract class _MutePostToken implements MutePostToken {
   String get tokenId;
   @override
   String get tokenType;
+
+  /// Create a copy of MutePostToken
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MutePostTokenImplCopyWith<_$MutePostTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

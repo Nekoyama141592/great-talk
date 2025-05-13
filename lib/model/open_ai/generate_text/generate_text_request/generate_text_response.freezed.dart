@@ -22,8 +22,12 @@ GenerateTextResponse _$GenerateTextResponseFromJson(Map<String, dynamic> json) {
 mixin _$GenerateTextResponse {
   List<Map<String, dynamic>> get choices => throw _privateConstructorUsedError;
 
+  /// Serializes this GenerateTextResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GenerateTextResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GenerateTextResponseCopyWith<GenerateTextResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$GenerateTextResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GenerateTextResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +87,8 @@ class __$$GenerateTextResponseImplCopyWithImpl<$Res>
       $Res Function(_$GenerateTextResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GenerateTextResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -126,12 +134,14 @@ class _$GenerateTextResponseImpl implements _GenerateTextResponse {
             const DeepCollectionEquality().equals(other._choices, _choices));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_choices));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GenerateTextResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GenerateTextResponseImplCopyWith<_$GenerateTextResponseImpl>
@@ -157,8 +167,11 @@ abstract class _GenerateTextResponse implements GenerateTextResponse {
 
   @override
   List<Map<String, dynamic>> get choices;
+
+  /// Create a copy of GenerateTextResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GenerateTextResponseImplCopyWith<_$GenerateTextResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

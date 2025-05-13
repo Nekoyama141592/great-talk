@@ -22,8 +22,12 @@ GetObjectRequest _$GetObjectRequestFromJson(Map<String, dynamic> json) {
 mixin _$GetObjectRequest {
   String get object => throw _privateConstructorUsedError;
 
+  /// Serializes this GetObjectRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GetObjectRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GetObjectRequestCopyWith<GetObjectRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$GetObjectRequestCopyWithImpl<$Res, $Val extends GetObjectRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GetObjectRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$GetObjectRequestImplCopyWithImpl<$Res>
       $Res Function(_$GetObjectRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GetObjectRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -118,11 +126,13 @@ class _$GetObjectRequestImpl extends _GetObjectRequest {
             (identical(other.object, object) || other.object == object));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, object);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GetObjectRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GetObjectRequestImplCopyWith<_$GetObjectRequestImpl> get copyWith =>
@@ -147,8 +157,11 @@ abstract class _GetObjectRequest extends GetObjectRequest {
 
   @override
   String get object;
+
+  /// Create a copy of GetObjectRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetObjectRequestImplCopyWith<_$GetObjectRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

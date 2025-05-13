@@ -26,8 +26,12 @@ mixin _$FollowingToken {
   String get tokenId => throw _privateConstructorUsedError;
   String get tokenType => throw _privateConstructorUsedError;
 
+  /// Serializes this FollowingToken to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FollowingToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FollowingTokenCopyWith<FollowingToken> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$FollowingTokenCopyWithImpl<$Res, $Val extends FollowingToken>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FollowingToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +120,8 @@ class __$$FollowingTokenImplCopyWithImpl<$Res>
       _$FollowingTokenImpl _value, $Res Function(_$FollowingTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FollowingToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -206,7 +214,7 @@ class _$FollowingTokenImpl extends _FollowingToken
                 other.tokenType == tokenType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -216,7 +224,9 @@ class _$FollowingTokenImpl extends _FollowingToken
       tokenId,
       tokenType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FollowingToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FollowingTokenImplCopyWith<_$FollowingTokenImpl> get copyWith =>
@@ -253,8 +263,11 @@ abstract class _FollowingToken extends FollowingToken {
   String get tokenId;
   @override
   String get tokenType;
+
+  /// Create a copy of FollowingToken
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FollowingTokenImplCopyWith<_$FollowingTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

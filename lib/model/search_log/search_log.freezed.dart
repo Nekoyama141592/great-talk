@@ -25,8 +25,12 @@ mixin _$SearchLog {
   String get searchTerm => throw _privateConstructorUsedError;
   String get uid => throw _privateConstructorUsedError;
 
+  /// Serializes this SearchLog to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SearchLog
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchLogCopyWith<SearchLog> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +57,8 @@ class _$SearchLogCopyWithImpl<$Res, $Val extends SearchLog>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchLog
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -105,6 +111,8 @@ class __$$UserUpdateLogImplCopyWithImpl<$Res>
       _$UserUpdateLogImpl _value, $Res Function(_$UserUpdateLogImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchLog
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -174,7 +182,7 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
             (identical(other.uid, uid) || other.uid == uid));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -183,7 +191,9 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
       searchTerm,
       uid);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchLog
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
@@ -215,8 +225,11 @@ abstract class _UserUpdateLog implements SearchLog {
   String get searchTerm;
   @override
   String get uid;
+
+  /// Create a copy of SearchLog
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -23,8 +23,12 @@ mixin _$ChatCountToday {
   int get basic => throw _privateConstructorUsedError;
   int get premium => throw _privateConstructorUsedError;
 
+  /// Serializes this ChatCountToday to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ChatCountToday
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChatCountTodayCopyWith<ChatCountToday> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$ChatCountTodayCopyWithImpl<$Res, $Val extends ChatCountToday>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ChatCountToday
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$ChatCountTodayImplCopyWithImpl<$Res>
       _$ChatCountTodayImpl _value, $Res Function(_$ChatCountTodayImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChatCountToday
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -134,11 +142,13 @@ class _$ChatCountTodayImpl extends _ChatCountToday {
             (identical(other.premium, premium) || other.premium == premium));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, basic, premium);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChatCountToday
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChatCountTodayImplCopyWith<_$ChatCountTodayImpl> get copyWith =>
@@ -165,8 +175,11 @@ abstract class _ChatCountToday extends ChatCountToday {
   int get basic;
   @override
   int get premium;
+
+  /// Create a copy of ChatCountToday
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChatCountTodayImplCopyWith<_$ChatCountTodayImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

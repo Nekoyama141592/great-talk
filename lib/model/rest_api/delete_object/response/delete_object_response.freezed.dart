@@ -22,8 +22,12 @@ DeleteObjectResponse _$DeleteObjectResponseFromJson(Map<String, dynamic> json) {
 mixin _$DeleteObjectResponse {
   String get base64Image => throw _privateConstructorUsedError;
 
+  /// Serializes this DeleteObjectResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeleteObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeleteObjectResponseCopyWith<DeleteObjectResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$DeleteObjectResponseCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeleteObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +87,8 @@ class __$$DeleteObjectResponseImplCopyWithImpl<$Res>
       $Res Function(_$DeleteObjectResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeleteObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -120,11 +128,13 @@ class _$DeleteObjectResponseImpl extends _DeleteObjectResponse {
                 other.base64Image == base64Image));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, base64Image);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeleteObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteObjectResponseImplCopyWith<_$DeleteObjectResponseImpl>
@@ -150,8 +160,11 @@ abstract class _DeleteObjectResponse extends DeleteObjectResponse {
 
   @override
   String get base64Image;
+
+  /// Create a copy of DeleteObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteObjectResponseImplCopyWith<_$DeleteObjectResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

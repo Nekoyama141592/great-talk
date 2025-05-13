@@ -10,11 +10,11 @@ _$PublicUserImpl _$$PublicUserImplFromJson(Map<String, dynamic> json) =>
     _$PublicUserImpl(
       accountName: json['accountName'] as String? ?? "",
       bio: json['bio'] as Map<String, dynamic>,
-      blockCount: json['blockCount'] as int? ?? 0,
+      blockCount: (json['blockCount'] as num?)?.toInt() ?? 0,
       createdAt: json['createdAt'],
       ethAddress: json['ethAddress'] as String? ?? "",
-      followerCount: json['followerCount'] as int? ?? 0,
-      followingCount: json['followingCount'] as int? ?? 0,
+      followerCount: (json['followerCount'] as num?)?.toInt() ?? 0,
+      followingCount: (json['followingCount'] as num?)?.toInt() ?? 0,
       isNFTicon: json['isNFTicon'] as bool? ?? false,
       isOfficial: json['isOfficial'] as bool? ?? false,
       isSuspended: json['isSuspended'] as bool? ?? false,
@@ -22,10 +22,10 @@ _$PublicUserImpl _$$PublicUserImplFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as Map<String, dynamic>)
               .toList() ??
           const [],
-      muteCount: json['muteCount'] as int? ?? 0,
-      postCount: json['postCount'] as int? ?? 0,
+      muteCount: (json['muteCount'] as num?)?.toInt() ?? 0,
+      postCount: (json['postCount'] as num?)?.toInt() ?? 0,
       ref: json['ref'],
-      reportCount: json['reportCount'] as int? ?? 0,
+      reportCount: (json['reportCount'] as num?)?.toInt() ?? 0,
       score: (json['score'] as num?)?.toDouble() ?? 0.0,
       searchToken: json['searchToken'] as Map<String, dynamic>? ?? const {},
       uid: json['uid'] as String,

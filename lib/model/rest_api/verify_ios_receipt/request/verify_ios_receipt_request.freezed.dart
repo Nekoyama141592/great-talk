@@ -23,8 +23,12 @@ VerifyIOSReceiptRequest _$VerifyIOSReceiptRequestFromJson(
 mixin _$VerifyIOSReceiptRequest {
   String get serverVerificationData => throw _privateConstructorUsedError;
 
+  /// Serializes this VerifyIOSReceiptRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of VerifyIOSReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VerifyIOSReceiptRequestCopyWith<VerifyIOSReceiptRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$VerifyIOSReceiptRequestCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of VerifyIOSReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -85,6 +91,8 @@ class __$$VerifyIOSReceiptRequestImplCopyWithImpl<$Res>
       $Res Function(_$VerifyIOSReceiptRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VerifyIOSReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,11 +133,13 @@ class _$VerifyIOSReceiptRequestImpl extends _VerifyIOSReceiptRequest {
                 other.serverVerificationData == serverVerificationData));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, serverVerificationData);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VerifyIOSReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VerifyIOSReceiptRequestImplCopyWith<_$VerifyIOSReceiptRequestImpl>
@@ -155,8 +165,11 @@ abstract class _VerifyIOSReceiptRequest extends VerifyIOSReceiptRequest {
 
   @override
   String get serverVerificationData;
+
+  /// Create a copy of VerifyIOSReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VerifyIOSReceiptRequestImplCopyWith<_$VerifyIOSReceiptRequestImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -22,8 +22,12 @@ ReceiptResponse _$ReceiptResponseFromJson(Map<String, dynamic> json) {
 mixin _$ReceiptResponse {
   Map<String, dynamic> get latestReceipt => throw _privateConstructorUsedError;
 
+  /// Serializes this ReceiptResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ReceiptResponseCopyWith<ReceiptResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$ReceiptResponseCopyWithImpl<$Res, $Val extends ReceiptResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$ReceiptResponseImplCopyWithImpl<$Res>
       _$ReceiptResponseImpl _value, $Res Function(_$ReceiptResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,12 +135,14 @@ class _$ReceiptResponseImpl extends _ReceiptResponse {
                 .equals(other._latestReceipt, _latestReceipt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_latestReceipt));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReceiptResponseImplCopyWith<_$ReceiptResponseImpl> get copyWith =>
@@ -158,8 +168,11 @@ abstract class _ReceiptResponse extends ReceiptResponse {
 
   @override
   Map<String, dynamic> get latestReceipt;
+
+  /// Create a copy of ReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReceiptResponseImplCopyWith<_$ReceiptResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

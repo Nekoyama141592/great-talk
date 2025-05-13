@@ -9,18 +9,18 @@ part of 'android_receipt_response.dart';
 _$AndroidReceiptResponseImpl _$$AndroidReceiptResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$AndroidReceiptResponseImpl(
-      acknowledgementState: json['acknowledgementState'] as int,
+      acknowledgementState: (json['acknowledgementState'] as num).toInt(),
       autoRenewing: json['autoRenewing'] as bool,
       countryCode: json['countryCode'] as String,
       developerPayload: json['developerPayload'] as String,
       expiryTimeMillis: json['expiryTimeMillis'] as String,
       kind: json['kind'] as String,
       orderId: json['orderId'] as String,
-      paymentState: json['paymentState'] as int,
+      paymentState: (json['paymentState'] as num).toInt(),
       priceAmountMicros: json['priceAmountMicros'] as String,
       priceCurrencyCode: json['priceCurrencyCode'] as String,
       productId: json['productId'] as String,
-      purchaseType: json['purchaseType'] as int,
+      purchaseType: (json['purchaseType'] as num).toInt(),
       startTimeMillis: json['startTimeMillis'] as String,
       uid: json['uid'] as String,
     );

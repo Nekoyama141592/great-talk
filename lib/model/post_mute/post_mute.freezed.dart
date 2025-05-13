@@ -25,8 +25,12 @@ mixin _$PostMute {
   String get postId => throw _privateConstructorUsedError;
   dynamic get postRef => throw _privateConstructorUsedError;
 
+  /// Serializes this PostMute to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PostMute
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PostMuteCopyWith<PostMute> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$PostMuteCopyWithImpl<$Res, $Val extends PostMute>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PostMute
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,6 +105,8 @@ class __$$PostMuteImplCopyWithImpl<$Res>
       _$PostMuteImpl _value, $Res Function(_$PostMuteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PostMute
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -166,7 +174,7 @@ class _$PostMuteImpl implements _PostMute {
             const DeepCollectionEquality().equals(other.postRef, postRef));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -175,7 +183,9 @@ class _$PostMuteImpl implements _PostMute {
       postId,
       const DeepCollectionEquality().hash(postRef));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PostMute
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PostMuteImplCopyWith<_$PostMuteImpl> get copyWith =>
@@ -207,8 +217,11 @@ abstract class _PostMute implements PostMute {
   String get postId;
   @override
   dynamic get postRef;
+
+  /// Create a copy of PostMute
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostMuteImplCopyWith<_$PostMuteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

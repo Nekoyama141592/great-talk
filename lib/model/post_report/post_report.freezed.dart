@@ -27,8 +27,12 @@ mixin _$PostReport {
   dynamic get postRef => throw _privateConstructorUsedError;
   List<String> get reportContents => throw _privateConstructorUsedError;
 
+  /// Serializes this PostReport to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PostReport
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PostReportCopyWith<PostReport> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$PostReportCopyWithImpl<$Res, $Val extends PostReport>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PostReport
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class __$$PostReportImplCopyWithImpl<$Res>
       _$PostReportImpl _value, $Res Function(_$PostReportImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PostReport
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -215,7 +223,7 @@ class _$PostReportImpl implements _PostReport {
                 .equals(other._reportContents, _reportContents));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -226,7 +234,9 @@ class _$PostReportImpl implements _PostReport {
       const DeepCollectionEquality().hash(postRef),
       const DeepCollectionEquality().hash(_reportContents));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PostReport
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PostReportImplCopyWith<_$PostReportImpl> get copyWith =>
@@ -264,8 +274,11 @@ abstract class _PostReport implements PostReport {
   dynamic get postRef;
   @override
   List<String> get reportContents;
+
+  /// Create a copy of PostReport
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PostReportImplCopyWith<_$PostReportImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

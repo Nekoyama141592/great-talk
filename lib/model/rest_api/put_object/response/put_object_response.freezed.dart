@@ -22,8 +22,12 @@ PutObjectResponse _$PutObjectResponseFromJson(Map<String, dynamic> json) {
 mixin _$PutObjectResponse {
   String get base64Image => throw _privateConstructorUsedError;
 
+  /// Serializes this PutObjectResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PutObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PutObjectResponseCopyWith<PutObjectResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$PutObjectResponseCopyWithImpl<$Res, $Val extends PutObjectResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PutObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$PutObjectResponseImplCopyWithImpl<$Res>
       $Res Function(_$PutObjectResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PutObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -119,11 +127,13 @@ class _$PutObjectResponseImpl extends _PutObjectResponse {
                 other.base64Image == base64Image));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, base64Image);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PutObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PutObjectResponseImplCopyWith<_$PutObjectResponseImpl> get copyWith =>
@@ -148,8 +158,11 @@ abstract class _PutObjectResponse extends PutObjectResponse {
 
   @override
   String get base64Image;
+
+  /// Create a copy of PutObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PutObjectResponseImplCopyWith<_$PutObjectResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

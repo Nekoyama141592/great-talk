@@ -27,8 +27,12 @@ mixin _$ReportPostToken {
   String get tokenId => throw _privateConstructorUsedError;
   String get tokenType => throw _privateConstructorUsedError;
 
+  /// Serializes this ReportPostToken to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ReportPostToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ReportPostTokenCopyWith<ReportPostToken> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$ReportPostTokenCopyWithImpl<$Res, $Val extends ReportPostToken>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ReportPostToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class __$$ReportPostTokenImplCopyWithImpl<$Res>
       _$ReportPostTokenImpl _value, $Res Function(_$ReportPostTokenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ReportPostToken
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -208,7 +216,7 @@ class _$ReportPostTokenImpl implements _ReportPostToken {
                 other.tokenType == tokenType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -219,7 +227,9 @@ class _$ReportPostTokenImpl implements _ReportPostToken {
       tokenId,
       tokenType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ReportPostToken
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReportPostTokenImplCopyWith<_$ReportPostTokenImpl> get copyWith =>
@@ -258,8 +268,11 @@ abstract class _ReportPostToken implements ReportPostToken {
   String get tokenId;
   @override
   String get tokenType;
+
+  /// Create a copy of ReportPostToken
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReportPostTokenImplCopyWith<_$ReportPostTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

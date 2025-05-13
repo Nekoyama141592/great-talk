@@ -21,7 +21,7 @@ GenerateImageResponse _$GenerateImageResponseFromJson(
 
 /// @nodoc
 mixin _$GenerateImageResponse {
-  List<GenerateImageData?>? get data => throw _privateConstructorUsedError;
+  String get base64 => throw _privateConstructorUsedError;
 
   /// Serializes this GenerateImageResponse to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $GenerateImageResponseCopyWith<$Res> {
           $Res Function(GenerateImageResponse) then) =
       _$GenerateImageResponseCopyWithImpl<$Res, GenerateImageResponse>;
   @useResult
-  $Res call({List<GenerateImageData?>? data});
+  $Res call({String base64});
 }
 
 /// @nodoc
@@ -58,13 +58,13 @@ class _$GenerateImageResponseCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = freezed,
+    Object? base64 = null,
   }) {
     return _then(_value.copyWith(
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as List<GenerateImageData?>?,
+      base64: null == base64
+          ? _value.base64
+          : base64 // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -78,7 +78,7 @@ abstract class _$$GenerateImageResponseImplCopyWith<$Res>
       __$$GenerateImageResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<GenerateImageData?>? data});
+  $Res call({String base64});
 }
 
 /// @nodoc
@@ -95,39 +95,31 @@ class __$$GenerateImageResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = freezed,
+    Object? base64 = null,
   }) {
     return _then(_$GenerateImageResponseImpl(
-      data: freezed == data
-          ? _value._data
-          : data // ignore: cast_nullable_to_non_nullable
-              as List<GenerateImageData?>?,
+      base64: null == base64
+          ? _value.base64
+          : base64 // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$GenerateImageResponseImpl implements _GenerateImageResponse {
-  const _$GenerateImageResponseImpl({final List<GenerateImageData?>? data})
-      : _data = data;
+class _$GenerateImageResponseImpl extends _GenerateImageResponse {
+  const _$GenerateImageResponseImpl({required this.base64}) : super._();
 
   factory _$GenerateImageResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$GenerateImageResponseImplFromJson(json);
 
-  final List<GenerateImageData?>? _data;
   @override
-  List<GenerateImageData?>? get data {
-    final value = _data;
-    if (value == null) return null;
-    if (_data is EqualUnmodifiableListView) return _data;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final String base64;
 
   @override
   String toString() {
-    return 'GenerateImageResponse(data: $data)';
+    return 'GenerateImageResponse(base64: $base64)';
   }
 
   @override
@@ -135,13 +127,12 @@ class _$GenerateImageResponseImpl implements _GenerateImageResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GenerateImageResponseImpl &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            (identical(other.base64, base64) || other.base64 == base64));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+  int get hashCode => Object.hash(runtimeType, base64);
 
   /// Create a copy of GenerateImageResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -160,15 +151,16 @@ class _$GenerateImageResponseImpl implements _GenerateImageResponse {
   }
 }
 
-abstract class _GenerateImageResponse implements GenerateImageResponse {
-  const factory _GenerateImageResponse({final List<GenerateImageData?>? data}) =
+abstract class _GenerateImageResponse extends GenerateImageResponse {
+  const factory _GenerateImageResponse({required final String base64}) =
       _$GenerateImageResponseImpl;
+  const _GenerateImageResponse._() : super._();
 
   factory _GenerateImageResponse.fromJson(Map<String, dynamic> json) =
       _$GenerateImageResponseImpl.fromJson;
 
   @override
-  List<GenerateImageData?>? get data;
+  String get base64;
 
   /// Create a copy of GenerateImageResponse
   /// with the given fields replaced by the non-null parameter values.
