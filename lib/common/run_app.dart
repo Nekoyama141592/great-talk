@@ -8,15 +8,15 @@ import 'package:great_talk/gen/firebase_options_prod.dart' as prod;
 import 'package:great_talk/my_app.dart';
 import 'package:great_talk/providers/prefs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 class RunApp {
   static Future<void> runMyApp(Flavor flavor) async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(options: getFirebaseOption(flavor));
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    runApp(ProviderScope(
-      overrides: [prefsProvider.overrideWithValue(await SharedPreferences.getInstance()),],
-      child: const MyApp()
-    ));
+    runApp(ProviderScope(overrides: [
+      prefsProvider.overrideWithValue(await SharedPreferences.getInstance()),
+    ], child: const MyApp()));
   }
 
   static FirebaseOptions getFirebaseOption(Flavor flavor) {

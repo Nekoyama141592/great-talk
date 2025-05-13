@@ -51,17 +51,18 @@ class OnCallRepository {
       return const Result.failure();
     }
   }
-  FutureResult<GenerateImageResponse> generateImage(
-      String prompt,String size) async {
+
+  Future<GenerateImageResponse?> generateImage(
+      String prompt, String size) async {
     try {
       const name = 'generateImage';
-      final request = GenerateImageRequest(prompt: prompt,size: size);
+      final request = GenerateImageRequest(prompt: prompt, size: size);
       final result = await _client.call(name, request.toJson());
       final res = GenerateImageResponse.fromJson(result);
-      return Result.success(res);
+      return res;
     } catch (e) {
       debugPrint(e.toString());
-      return const Result.failure();
+      return null;
     }
   }
 }

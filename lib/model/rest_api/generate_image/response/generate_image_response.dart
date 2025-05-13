@@ -6,7 +6,8 @@ part 'generate_image_response.g.dart';
 @freezed
 abstract class GenerateImageResponse implements _$GenerateImageResponse {
   const GenerateImageResponse._();
-  const factory GenerateImageResponse({required String base64}) = _GenerateImageResponse;
+  const factory GenerateImageResponse({required String base64}) =
+      _GenerateImageResponse;
   factory GenerateImageResponse.fromJson(Map<String, dynamic> json) =>
       _$GenerateImageResponseFromJson(json);
 }
