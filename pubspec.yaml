@@ -52,7 +52,7 @@ dependencies:
   image_gallery_saver: 
   path_provider: 
   retrofit_generator: 
-  retrofit: 
+  retrofit: ^4.4.2 
   flutter_markdown_latex: 
   flutter_markdown: 
   markdown: 
