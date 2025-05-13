@@ -7,12 +7,12 @@ part of 'generate_image_view_model.dart';
 // **************************************************************************
 
 String _$generateImageViewModelHash() =>
-    r'eab9fa6d83648129391767eb024eb7f9ae11e004';
+    r'0012e1a39915c0a64918ea211cfc4b4e4d580bae';
 
 /// See also [GenerateImageViewModel].
 @ProviderFor(GenerateImageViewModel)
-final generateImageViewModelProvider =
-    AutoDisposeAsyncNotifierProvider<GenerateImageViewModel, String?>.internal(
+final generateImageViewModelProvider = AutoDisposeAsyncNotifierProvider<
+    GenerateImageViewModel, GenerateImageState>.internal(
   GenerateImageViewModel.new,
   name: r'generateImageViewModelProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final generateImageViewModelProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$GenerateImageViewModel = AutoDisposeAsyncNotifier<String?>;
+typedef _$GenerateImageViewModel = AutoDisposeAsyncNotifier<GenerateImageState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

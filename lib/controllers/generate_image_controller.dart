@@ -20,7 +20,7 @@ class GenerateImageController extends LoadingController with CurrentUserMixin {
   static GenerateImageController get to => Get.find<GenerateImageController>();
   final rxPrompt = "".obs;
   final rxUrl = "".obs;
-  final rxSize = GenerateImageConstants.square.obs;
+  final rxSize = GenerateImageEnum.sqare.text().obs;
   // セッターメソッド
   void setPrompt(String? value) {
     if (value == null) return;
