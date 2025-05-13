@@ -7,9 +7,11 @@
 *.txt
 .DS_Store
 .atom/
+.build/
 .buildlog/
 .history
 .svn/
+.swiftpm/
 migrate_working_dir/
 lib/gen/
 lib/env/
