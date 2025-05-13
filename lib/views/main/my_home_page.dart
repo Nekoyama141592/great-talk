@@ -8,7 +8,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/common/texts.dart';
 import 'package:great_talk/controllers/create_post_controller.dart';
 import 'package:great_talk/controllers/edit_controller.dart';
-import 'package:great_talk/controllers/generate_image_controller.dart';
 import 'package:great_talk/controllers/notification_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/chat_controller.dart';
@@ -30,7 +29,6 @@ class MyHomePage extends HookWidget {
     Get.put(ChatController());
     Get.put(CreatePostController());
     Get.put(EditController());
-    Get.put(GenerateImageController());
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(
