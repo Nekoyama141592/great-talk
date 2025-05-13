@@ -10,10 +10,12 @@ _$GenerateImageRequestImpl _$$GenerateImageRequestImplFromJson(
         Map<String, dynamic> json) =>
     _$GenerateImageRequestImpl(
       prompt: json['prompt'] as String,
+      size: json['size'] as String,
     );
 
 Map<String, dynamic> _$$GenerateImageRequestImplToJson(
         _$GenerateImageRequestImpl instance) =>
     <String, dynamic>{
       'prompt': instance.prompt,
+      'size': instance.size,
     };

@@ -51,9 +51,10 @@ abstract class OnCallRepository {
     }
   }
   FutureResult<GenerateImageResponse> generateImage(
-      GenerateImageRequest request) async {
+      String prompt,String size) async {
     try {
       const name = 'generateImage';
+      final request = GenerateImageRequest(prompt: prompt,size: size);
       final result = await _client.call(name, request.toJson());
       final res = GenerateImageResponse.fromJson(result);
       return Result.success(res);

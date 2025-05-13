@@ -21,6 +21,7 @@ GenerateImageRequest _$GenerateImageRequestFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GenerateImageRequest {
   String get prompt => throw _privateConstructorUsedError;
+  String get size => throw _privateConstructorUsedError;
 
   /// Serializes this GenerateImageRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +39,7 @@ abstract class $GenerateImageRequestCopyWith<$Res> {
           $Res Function(GenerateImageRequest) then) =
       _$GenerateImageRequestCopyWithImpl<$Res, GenerateImageRequest>;
   @useResult
-  $Res call({String prompt});
+  $Res call({String prompt, String size});
 }
 
 /// @nodoc
@@ -58,11 +59,16 @@ class _$GenerateImageRequestCopyWithImpl<$Res,
   @override
   $Res call({
     Object? prompt = null,
+    Object? size = null,
   }) {
     return _then(_value.copyWith(
       prompt: null == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
+              as String,
+      size: null == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -76,7 +82,7 @@ abstract class _$$GenerateImageRequestImplCopyWith<$Res>
       __$$GenerateImageRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String prompt});
+  $Res call({String prompt, String size});
 }
 
 /// @nodoc
@@ -93,11 +99,16 @@ class __$$GenerateImageRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? prompt = null,
+    Object? size = null,
   }) {
     return _then(_$GenerateImageRequestImpl(
       prompt: null == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
+              as String,
+      size: null == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -106,17 +117,20 @@ class __$$GenerateImageRequestImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$GenerateImageRequestImpl extends _GenerateImageRequest {
-  const _$GenerateImageRequestImpl({required this.prompt}) : super._();
+  const _$GenerateImageRequestImpl({required this.prompt, required this.size})
+      : super._();
 
   factory _$GenerateImageRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$GenerateImageRequestImplFromJson(json);
 
   @override
   final String prompt;
+  @override
+  final String size;
 
   @override
   String toString() {
-    return 'GenerateImageRequest(prompt: $prompt)';
+    return 'GenerateImageRequest(prompt: $prompt, size: $size)';
   }
 
   @override
@@ -124,12 +138,13 @@ class _$GenerateImageRequestImpl extends _GenerateImageRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GenerateImageRequestImpl &&
-            (identical(other.prompt, prompt) || other.prompt == prompt));
+            (identical(other.prompt, prompt) || other.prompt == prompt) &&
+            (identical(other.size, size) || other.size == size));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, prompt);
+  int get hashCode => Object.hash(runtimeType, prompt, size);
 
   /// Create a copy of GenerateImageRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -150,8 +165,9 @@ class _$GenerateImageRequestImpl extends _GenerateImageRequest {
 }
 
 abstract class _GenerateImageRequest extends GenerateImageRequest {
-  const factory _GenerateImageRequest({required final String prompt}) =
-      _$GenerateImageRequestImpl;
+  const factory _GenerateImageRequest(
+      {required final String prompt,
+      required final String size}) = _$GenerateImageRequestImpl;
   const _GenerateImageRequest._() : super._();
 
   factory _GenerateImageRequest.fromJson(Map<String, dynamic> json) =
@@ -159,6 +175,8 @@ abstract class _GenerateImageRequest extends GenerateImageRequest {
 
   @override
   String get prompt;
+  @override
+  String get size;
 
   /// Create a copy of GenerateImageRequest
   /// with the given fields replaced by the non-null parameter values.
