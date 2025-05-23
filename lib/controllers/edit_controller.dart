@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/maps.dart';
-import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/core/maps.dart';
+import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';

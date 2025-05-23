@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/texts.dart';
+import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/local_controller.dart';

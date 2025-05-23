@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/common/doubles.dart';
-import 'package:great_talk/common/ranking_tab_bar_elements.dart';
+import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/views/common/ranking_tab_bar_elements.dart';
 import 'package:great_talk/views/main/ranking/components/post_ranking_screen.dart';
 import 'package:great_talk/views/main/ranking/components/search_users_screen.dart';
 import 'package:great_talk/views/main/ranking/components/user_ranking_screen.dart';

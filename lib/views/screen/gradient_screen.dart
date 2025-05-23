@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/common/doubles.dart';
+import 'package:great_talk/core/doubles.dart';
 
 class GradientScreen extends StatelessWidget {
   const GradientScreen({

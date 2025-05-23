@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/common/texts.dart';
-import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/ui_core/texts.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
 

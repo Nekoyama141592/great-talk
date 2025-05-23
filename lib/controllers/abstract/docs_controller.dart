@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:get/get.dart';
-import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';

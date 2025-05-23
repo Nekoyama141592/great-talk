@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:great_talk/common/colors.dart';
+import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';

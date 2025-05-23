@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/texts.dart';
+import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/purchase_button.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';

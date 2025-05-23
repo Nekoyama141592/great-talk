@@ -1,7 +1,7 @@
 // packages
 import 'package:great_talk/flavors.dart';
 import 'package:great_talk/model/chat_user_metadata/chat_user_metadata.dart';
-import 'package:great_talk/iap_constants/subscription_constants.dart';
+import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 import 'package:uuid/uuid.dart';
 
 String randomString() {

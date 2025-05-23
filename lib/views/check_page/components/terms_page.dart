@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/url_redirector.dart';
+import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/core/url_redirector.dart';
 import 'package:great_talk/controllers/main_controller.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 

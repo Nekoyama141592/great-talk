@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/infrastructure/firebase_auth/firebase_auth_client.dart';
 import 'package:great_talk/repository/result.dart';
 

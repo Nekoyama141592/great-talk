@@ -1,5 +1,5 @@
-import 'package:great_talk/common/enums.dart';
-import 'package:great_talk/common/ints.dart';
+import 'package:great_talk/consts/enums.dart';
+import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/controllers/abstract/search_docs_controller.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/public_user/public_user.dart';

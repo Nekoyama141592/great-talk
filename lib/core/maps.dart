@@ -1,4 +1,4 @@
-import 'package:great_talk/common/lists.dart';
+import 'package:great_talk/core/lists.dart';
 
 Map<String, dynamic> returnSearchToken(String searchTerm) {
   final searchWords = returnSearchWords(searchTerm);

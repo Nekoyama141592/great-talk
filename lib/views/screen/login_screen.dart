@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:great_talk/common/colors.dart';
-import 'package:great_talk/common/doubles.dart';
+import 'package:great_talk/consts/colors.dart';
+import 'package:great_talk/core/doubles.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 

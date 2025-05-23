@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/texts.dart';
+import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/controllers/abstract/profile_controller.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/extensions/string_extension.dart';

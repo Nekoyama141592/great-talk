@@ -1,4 +1,4 @@
-import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/query_core.dart';

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:great_talk/common/run_app.dart';
+import 'package:great_talk/run_app.dart';
 import 'flavors.dart';
 
 void main() async {

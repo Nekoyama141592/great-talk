@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:great_talk/common/enums.dart';
+import 'package:great_talk/consts/enums.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainController extends GetxController {

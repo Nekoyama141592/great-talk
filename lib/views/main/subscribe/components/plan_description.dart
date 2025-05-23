@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/common/colors.dart';
+import 'package:great_talk/consts/colors.dart';
 
 class PlanDescription extends StatelessWidget {
   const PlanDescription({super.key, required this.text});

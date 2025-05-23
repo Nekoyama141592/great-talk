@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/remote_config_controller.dart';
-import 'package:great_talk/iap_constants/subscription_constants.dart';
+import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 import 'package:great_talk/views/main/subscribe/components/plan_description.dart';
 import 'package:great_talk/views/main/subscribe/components/product_card.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 
 class SubscribedCopyableText extends StatelessWidget {

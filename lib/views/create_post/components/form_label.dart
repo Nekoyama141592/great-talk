@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/common/ui_helper.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 
 class FormLabel extends StatelessWidget {

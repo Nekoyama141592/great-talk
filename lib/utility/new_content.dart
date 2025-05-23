@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:great_talk/common/maps.dart';
-import 'package:great_talk/common/strings.dart';
+import 'package:great_talk/core/maps.dart';
+import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/string_extension.dart';

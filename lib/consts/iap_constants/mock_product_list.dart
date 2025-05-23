@@ -1,4 +1,4 @@
-import 'package:great_talk/iap_constants/subscription_constants.dart';
+import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 final List<ProductDetails> mockProductList = [

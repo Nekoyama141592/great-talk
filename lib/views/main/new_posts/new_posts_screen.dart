@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/common/colors.dart';
+import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/controllers/new_posts_controller.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 

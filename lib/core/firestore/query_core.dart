@@ -1,4 +1,4 @@
-import 'package:great_talk/common/ints.dart';
+import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/core/firestore/col_ref_core.dart';
 import 'package:great_talk/core/firestore/collection_group_core.dart';
 import 'package:great_talk/model/bookmark_category/bookmark_category.dart';

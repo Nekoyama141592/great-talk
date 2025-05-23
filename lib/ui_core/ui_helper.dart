@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart' as fluttertoast;
 import 'package:get/get.dart';
-import 'package:great_talk/common/colors.dart';
-import 'package:great_talk/common/ints.dart';
-import 'package:great_talk/common/strings.dart';
-import 'package:great_talk/common/subscribed_copyable_text.dart';
+import 'package:great_talk/consts/colors.dart';
+import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/views/common/subscribed_copyable_text.dart';
 
 class UIHelper {
   static void showPopup(

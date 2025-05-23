@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/common/colors.dart';
-import 'package:great_talk/common/doubles.dart';
+import 'package:great_talk/consts/colors.dart';
+import 'package:great_talk/core/doubles.dart';
 
 class EllipsisText extends Text {
   final String text;
