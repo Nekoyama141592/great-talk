@@ -33,7 +33,7 @@ final getPages = [
   ),
   GetPage(
     name: CreatePostPage.path,
-    page: () => const CreatePostPage(),
+    page: () => CreatePostPage(),
   ),
   GetPage(name: EditProfilePage.path, page: () => const EditProfilePage()),
   GetPage(name: LogoutedPage.path, page: () => const LogoutedPage()),
