@@ -68,7 +68,7 @@ class MsgCard extends StatelessWidget {
       isMyMsg
           ? const SizedBox.shrink()
           : Obx(() => CircleImage(
-                uint8list: controller.rxUint8list.value,
+                uint8list: controller.rxPostImage.value,
               )),
     ];
     final child = Container(

@@ -49,7 +49,7 @@ class ChatController extends GetxController with CurrentUserMixin {
   final isGenerating = false.obs;
   late SharedPreferences prefs;
   final Rx<Post?> rxPost = Rx(null);
-  final Rx<Uint8List?> rxUint8list = Rx(null);
+  final Rx<Uint8List?> rxPostImage = Rx(null);
   String get postId => Get.parameters['postId']!;
 
   ChatModel get model => PurchasesController.to.model();
@@ -129,7 +129,7 @@ class ChatController extends GetxController with CurrentUserMixin {
         final detectedImage = fetchedPost.typedImage();
         final s3Image = await FileUtility.getS3Image(
             detectedImage.bucketName, detectedImage.value);
-        rxUint8list(s3Image);
+        rxPostImage(s3Image);
       } else {
         UIHelper.showFlutterToast("投稿が存在しません");
         return;
