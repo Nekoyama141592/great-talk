@@ -21,6 +21,12 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   final qDocInfoList = <QDocInfo>[].obs;
   final isInit = false.obs;
   late MapQuery query;
+  List<QDoc> indexDocs = [];
+  final Rx<PublicUser?> rxPassiveUser = Rx(null);
+  final Rx<Uint8List?> rxUint8list = Rx(null);
+  String searchTerm = "";
+  String firestoreSearchTerm = "";
+  late MapQuery initialQuery;
   @override
   void onInit() {
     setQuery();

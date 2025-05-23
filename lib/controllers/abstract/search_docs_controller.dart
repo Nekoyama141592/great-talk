@@ -11,9 +11,7 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class SearchDocsController extends DocsController {
-  String searchTerm = "";
-  String firestoreSearchTerm = "";
-  late MapQuery initialQuery;
+  
   SearchTarget get searchTarget;
   @override
   void setQuery();
