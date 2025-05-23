@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/chat_controller.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/views/chat/components/msg_card.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
@@ -14,14 +14,15 @@ import 'package:great_talk/views/chat/components/delete_post_button.dart';
 import 'package:great_talk/views/chat/components/menu_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ChatPage extends HookWidget with CurrentUserMixin {
+class ChatPage extends HookConsumerWidget {
   const ChatPage({super.key});
   static const path = "/chat/users/:uid/posts/:postId";
   static String generatePath(String uid, String postId) =>
       "/chat/users/$uid/posts/$postId";
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     final controller = ChatController.to;
     final inputController = useTextEditingController();
     final scrollCotroller = useScrollController();
@@ -36,7 +37,7 @@ class ChatPage extends HookWidget with CurrentUserMixin {
           appBar: AppBar(
               actions: [
                 // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示する.
-                Obx(() => controller.rxPost.value?.uid == currentUid() ||
+                Obx(() => controller.rxPost.value?.uid == ref.watch(streamAuthUidProvider).value ||
                         CurrentUserController.to.isAdmin()
                     ? const DeletePostButton()
                     : const PostReportButton()),
