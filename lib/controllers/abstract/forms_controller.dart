@@ -31,7 +31,4 @@ abstract class FormsController extends GetxController {
     rxPickedUint8list(result);
     isPicked = true;
   }
-
-  String get invalidFieldMsg =>
-      "${FormConsts.notUseOnField.join(",")}の文字は使用できません";
 }

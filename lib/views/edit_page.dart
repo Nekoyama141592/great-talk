@@ -4,6 +4,7 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/edit_controller.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/states/abstract/forms_state/forms_state.dart';
+import 'package:great_talk/ui_core/form_ui_core.dart';
 import 'package:great_talk/views/common/forms_screen.dart';
 import 'package:great_talk/views/create_post/components/form_label.dart';
 import 'package:great_talk/views/create_post/components/original_form.dart';
@@ -70,7 +71,7 @@ class _EditProfilePageState extends FormsState<EditProfilePage> {
           } else if (value.length > FormConsts.maxUserNameLimit) {
             return FormConsts.textLimitMsg(FormConsts.maxUserNameLimit, value);
           } else if (value.invalidField) {
-            return EditController.to.invalidFieldMsg;
+            return FormUiCore.invalidFieldMsg;
           } else {
             return null;
           }
