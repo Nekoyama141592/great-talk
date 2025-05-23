@@ -286,8 +286,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
       GooglePlayPurchaseDetails? oldSubscription) {
     return (oldSubscription != null)
         ? ChangeSubscriptionParam(
-            oldPurchaseDetails: oldSubscription,
-            prorationMode: ProrationMode.immediateWithTimeProration)
+            oldPurchaseDetails: oldSubscription)
         : null;
   }
 

@@ -105,7 +105,7 @@ class FileUtility {
     final instance = ImageCropper();
     final result = await instance.cropImage(
       sourcePath: xFile.path,
-      aspectRatioPresets: [CropAspectRatioPreset.square],
+      aspectRatio: CropAspectRatio(ratioX: 1,ratioY: 1)
     );
     return result;
   }

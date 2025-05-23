@@ -113,6 +113,7 @@ class NotificationController extends GetxController
           badgeNumber: 1,
         ),
       ),
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
     );
   }
 }
