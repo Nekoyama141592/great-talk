@@ -35,8 +35,8 @@ class ProductList extends StatelessWidget {
                   const PlanDescription(text: 'ベーシックプランの全ての機能'),
                   Obx(() {
                     final remoteConfigController = RemoteConfigController.to;
-                    final basic = remoteConfigController.rxBasicModel.value;
-                    final premium = remoteConfigController.rxPremiumModel.value;
+                    final basic = remoteConfigController.basicModel.value;
+                    final premium = remoteConfigController.premiumModel.value;
                     if (basic == premium) {
                       return const SizedBox.shrink();
                     } else {

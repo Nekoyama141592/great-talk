@@ -11,8 +11,8 @@ class RemoteConfigController extends GetxController {
   final maintenanceMsg = RemoteConfigConstants.maintenanceMsg.obs;
   final forcedUpdateVersion = RemoteConfigConstants.appVersion.obs;
   final forcedUpdateMsg = RemoteConfigConstants.forcedUpdateMsg.obs;
-  final rxBasicModel = RemoteConfigConstants.basicModel.obs;
-  final rxPremiumModel = RemoteConfigConstants.premiumModel.obs;
+  final basicModel = RemoteConfigConstants.basicModel.obs;
+  final premiumModel = RemoteConfigConstants.premiumModel.obs;
   bool get needsUpdate =>
       RemoteConfigConstants.appVersion < forcedUpdateVersion.value;
   @override
@@ -69,8 +69,8 @@ class RemoteConfigController extends GetxController {
       free: remoteConfig.getInt(freeLimitPerDayKey),
       premium: remoteConfig.getInt(premiumLimitPerDayKey),
     );
-    rxBasicModel.value = remoteConfig.getString(basicModelKey);
-    rxPremiumModel.value = remoteConfig.getString(premiumModelKey);
+    basicModel.value = remoteConfig.getString(basicModelKey);
+    premiumModel.value = remoteConfig.getString(premiumModelKey);
     super.onInit();
   }
 }
