@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/core/firestore/col_ref_core.dart';
-import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
-import 'package:great_talk/model/private_user/private_user.dart';
+import 'package:great_talk/model/database_schema/bookmark_category/bookmark_category.dart';
+import 'package:great_talk/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class DocRefCore {

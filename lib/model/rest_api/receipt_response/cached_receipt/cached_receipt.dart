@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
-import 'package:great_talk/model/receipt_response/receipt_response.dart';
+import 'package:great_talk/model/rest_api/receipt_response/receipt_response.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 part 'cached_receipt.freezed.dart';

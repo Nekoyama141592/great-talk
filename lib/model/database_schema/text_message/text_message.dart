@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/extensions/custom_date_time_formatting.dart';
-import 'package:great_talk/model/detected_text/detected_text.dart';
-import 'package:great_talk/model/save_text_msg/save_text_msg.dart';
+import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'text_message.freezed.dart';

@@ -8,9 +8,9 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/abstract/profile_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
-import 'package:great_talk/model/follower/follower.dart';
-import 'package:great_talk/model/public_user/public_user.dart';
-import 'package:great_talk/model/tokens/following_token/following_token.dart';
+import 'package:great_talk/model/database_schema/follower/follower.dart';
+import 'package:great_talk/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/file_utility.dart';
 

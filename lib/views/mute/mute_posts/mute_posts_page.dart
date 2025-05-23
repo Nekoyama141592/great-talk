@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/mute_posts_controller.dart';
-import 'package:great_talk/model/post/post.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/views/mute/mute_posts/component/mute_post_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 

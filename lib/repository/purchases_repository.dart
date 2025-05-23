@@ -1,8 +1,8 @@
 import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/infrastructure/cloud_functions/cloud_functions_client.dart';
 import 'package:great_talk/infrastructure/open_ai/original_dio.dart';
-import 'package:great_talk/model/receipt_request/receipt_request.dart';
-import 'package:great_talk/model/receipt_response/receipt_response.dart';
+import 'package:great_talk/model/rest_api/receipt_request/receipt_request.dart';
+import 'package:great_talk/model/rest_api/receipt_response/receipt_response.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/utility/env_utility.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';

@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:get/get.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
-import 'package:great_talk/model/public_user/public_user.dart';
+import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 
 abstract class ProfileController extends DocsController {
   @override

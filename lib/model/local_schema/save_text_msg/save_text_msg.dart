@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/model/text_message/text_message.dart';
+import 'package:great_talk/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'save_text_msg.freezed.dart';

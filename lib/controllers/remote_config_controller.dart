@@ -1,7 +1,7 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
-import 'package:great_talk/model/chat_limit_per_day/chat_limit_per_day.dart';
+import 'package:great_talk/model/global/remote_config/chat_limit_per_day/chat_limit_per_day.dart';
 
 class RemoteConfigController extends GetxController {
   static RemoteConfigController get to => Get.find<RemoteConfigController>();

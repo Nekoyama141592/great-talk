@@ -66,7 +66,7 @@ abstract mixin class $TimelineCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TimelineCopyWithImpl<$Res> with $TimelineCopyWith<$Res> {
+class _$TimelineCopyWithImpl<$Res> implements $TimelineCopyWith<$Res> {
   _$TimelineCopyWithImpl(this._self, this._then);
 
   final Timeline _self;
@@ -168,7 +168,7 @@ class _Timeline implements Timeline {
 
 /// @nodoc
 abstract mixin class _$TimelineCopyWith<$Res>
-    with $TimelineCopyWith<$Res> {
+    implements $TimelineCopyWith<$Res> {
   factory _$TimelineCopyWith(_Timeline value, $Res Function(_Timeline) _then) =
       __$TimelineCopyWithImpl;
   @override
@@ -177,7 +177,7 @@ abstract mixin class _$TimelineCopyWith<$Res>
 }
 
 /// @nodoc
-class __$TimelineCopyWithImpl<$Res> with _$TimelineCopyWith<$Res> {
+class __$TimelineCopyWithImpl<$Res> implements _$TimelineCopyWith<$Res> {
   __$TimelineCopyWithImpl(this._self, this._then);
 
   final _Timeline _self;

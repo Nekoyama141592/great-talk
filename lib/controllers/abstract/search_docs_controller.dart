@@ -5,7 +5,7 @@ import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
-import 'package:great_talk/model/search_log/search_log.dart';
+import 'package:great_talk/model/database_schema/search_log/search_log.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

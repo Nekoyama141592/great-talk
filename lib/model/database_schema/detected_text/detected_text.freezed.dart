@@ -74,7 +74,7 @@ abstract mixin class $DetectedTextCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DetectedTextCopyWithImpl<$Res> with $DetectedTextCopyWith<$Res> {
+class _$DetectedTextCopyWithImpl<$Res> implements $DetectedTextCopyWith<$Res> {
   _$DetectedTextCopyWithImpl(this._self, this._then);
 
   final DetectedText _self;
@@ -188,7 +188,7 @@ class _DetectedText implements DetectedText {
 
 /// @nodoc
 abstract mixin class _$DetectedTextCopyWith<$Res>
-    with $DetectedTextCopyWith<$Res> {
+    implements $DetectedTextCopyWith<$Res> {
   factory _$DetectedTextCopyWith(
           _DetectedText value, $Res Function(_DetectedText) _then) =
       __$DetectedTextCopyWithImpl;
@@ -204,7 +204,7 @@ abstract mixin class _$DetectedTextCopyWith<$Res>
 
 /// @nodoc
 class __$DetectedTextCopyWithImpl<$Res>
-    with _$DetectedTextCopyWith<$Res> {
+    implements _$DetectedTextCopyWith<$Res> {
   __$DetectedTextCopyWithImpl(this._self, this._then);
 
   final _DetectedText _self;

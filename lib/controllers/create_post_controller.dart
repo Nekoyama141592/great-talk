@@ -84,8 +84,6 @@ class CreatePostController extends GetxController with CurrentUserMixin {
     if (value == null) return;
     frequencyPenalty.value = value;
   }
-
-  @override
   Future<void> onPositiveButtonPressed() async {
     if (rxPickedUint8list.value == null) {
       await UIHelper.showErrorFlutterToast("アイコンをタップして画像をアップロードしてください");

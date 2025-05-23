@@ -5,7 +5,7 @@ import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
-import 'package:great_talk/model/post/post.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

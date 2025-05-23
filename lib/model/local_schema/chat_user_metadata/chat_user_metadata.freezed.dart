@@ -61,7 +61,7 @@ abstract mixin class $ChatUserMetadataCopyWith<$Res> {
 
 /// @nodoc
 class _$ChatUserMetadataCopyWithImpl<$Res>
-    with $ChatUserMetadataCopyWith<$Res> {
+    implements $ChatUserMetadataCopyWith<$Res> {
   _$ChatUserMetadataCopyWithImpl(this._self, this._then);
 
   final ChatUserMetadata _self;
@@ -138,7 +138,7 @@ class _ChatUserMetadata implements ChatUserMetadata {
 
 /// @nodoc
 abstract mixin class _$ChatUserMetadataCopyWith<$Res>
-    with $ChatUserMetadataCopyWith<$Res> {
+    implements $ChatUserMetadataCopyWith<$Res> {
   factory _$ChatUserMetadataCopyWith(
           _ChatUserMetadata value, $Res Function(_ChatUserMetadata) _then) =
       __$ChatUserMetadataCopyWithImpl;
@@ -149,7 +149,7 @@ abstract mixin class _$ChatUserMetadataCopyWith<$Res>
 
 /// @nodoc
 class __$ChatUserMetadataCopyWithImpl<$Res>
-    with _$ChatUserMetadataCopyWith<$Res> {
+    implements _$ChatUserMetadataCopyWith<$Res> {
   __$ChatUserMetadataCopyWithImpl(this._self, this._then);
 
   final _ChatUserMetadata _self;

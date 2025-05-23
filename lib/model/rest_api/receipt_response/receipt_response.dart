@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/model/receipt_response/android_receipt_response/android_receipt_response.dart';
-import 'package:great_talk/model/receipt_response/ios_receipt_response/ios_receipt_response.dart';
+import 'package:great_talk/model/rest_api/receipt_response/android_receipt_response/android_receipt_response.dart';
+import 'package:great_talk/model/rest_api/receipt_response/ios_receipt_response/ios_receipt_response.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'receipt_response.freezed.dart';

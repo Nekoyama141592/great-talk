@@ -1,7 +1,7 @@
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/core/firestore/col_ref_core.dart';
 import 'package:great_talk/core/firestore/collection_group_core.dart';
-import 'package:great_talk/model/bookmark_category/bookmark_category.dart';
+import 'package:great_talk/model/database_schema/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class QueryCore {

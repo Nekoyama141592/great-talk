@@ -15,6 +15,7 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$RemoteConfigState {
+  ChatLimitPerDay get chatLimitPerDay;
   bool get maintenanceMode;
   String get maintenanceMsg;
   int get forcedUpdateVersion;
@@ -38,6 +39,8 @@ mixin _$RemoteConfigState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is RemoteConfigState &&
+            (identical(other.chatLimitPerDay, chatLimitPerDay) ||
+                other.chatLimitPerDay == chatLimitPerDay) &&
             (identical(other.maintenanceMode, maintenanceMode) ||
                 other.maintenanceMode == maintenanceMode) &&
             (identical(other.maintenanceMsg, maintenanceMsg) ||
@@ -54,12 +57,19 @@ mixin _$RemoteConfigState {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, maintenanceMode, maintenanceMsg,
-      forcedUpdateVersion, forcedUpdateMsg, basicModel, premiumModel);
+  int get hashCode => Object.hash(
+      runtimeType,
+      chatLimitPerDay,
+      maintenanceMode,
+      maintenanceMsg,
+      forcedUpdateVersion,
+      forcedUpdateMsg,
+      basicModel,
+      premiumModel);
 
   @override
   String toString() {
-    return 'RemoteConfigState(maintenanceMode: $maintenanceMode, maintenanceMsg: $maintenanceMsg, forcedUpdateVersion: $forcedUpdateVersion, forcedUpdateMsg: $forcedUpdateMsg, basicModel: $basicModel, premiumModel: $premiumModel)';
+    return 'RemoteConfigState(chatLimitPerDay: $chatLimitPerDay, maintenanceMode: $maintenanceMode, maintenanceMsg: $maintenanceMsg, forcedUpdateVersion: $forcedUpdateVersion, forcedUpdateMsg: $forcedUpdateMsg, basicModel: $basicModel, premiumModel: $premiumModel)';
   }
 }
 
@@ -70,12 +80,15 @@ abstract mixin class $RemoteConfigStateCopyWith<$Res> {
       _$RemoteConfigStateCopyWithImpl;
   @useResult
   $Res call(
-      {bool maintenanceMode,
+      {ChatLimitPerDay chatLimitPerDay,
+      bool maintenanceMode,
       String maintenanceMsg,
       int forcedUpdateVersion,
       String forcedUpdateMsg,
       String basicModel,
       String premiumModel});
+
+  $ChatLimitPerDayCopyWith<$Res> get chatLimitPerDay;
 }
 
 /// @nodoc
@@ -91,6 +104,7 @@ class _$RemoteConfigStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? chatLimitPerDay = null,
     Object? maintenanceMode = null,
     Object? maintenanceMsg = null,
     Object? forcedUpdateVersion = null,
@@ -99,6 +113,10 @@ class _$RemoteConfigStateCopyWithImpl<$Res>
     Object? premiumModel = null,
   }) {
     return _then(_self.copyWith(
+      chatLimitPerDay: null == chatLimitPerDay
+          ? _self.chatLimitPerDay
+          : chatLimitPerDay // ignore: cast_nullable_to_non_nullable
+              as ChatLimitPerDay,
       maintenanceMode: null == maintenanceMode
           ? _self.maintenanceMode
           : maintenanceMode // ignore: cast_nullable_to_non_nullable
@@ -125,13 +143,24 @@ class _$RemoteConfigStateCopyWithImpl<$Res>
               as String,
     ));
   }
+
+  /// Create a copy of RemoteConfigState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ChatLimitPerDayCopyWith<$Res> get chatLimitPerDay {
+    return $ChatLimitPerDayCopyWith<$Res>(_self.chatLimitPerDay, (value) {
+      return _then(_self.copyWith(chatLimitPerDay: value));
+    });
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _RemoteConfigState extends RemoteConfigState {
   const _RemoteConfigState(
-      {this.maintenanceMode = false,
+      {this.chatLimitPerDay = const ChatLimitPerDay(),
+      this.maintenanceMode = false,
       this.maintenanceMsg = '',
       this.forcedUpdateVersion = 0,
       this.forcedUpdateMsg = '',
@@ -141,6 +170,9 @@ class _RemoteConfigState extends RemoteConfigState {
   factory _RemoteConfigState.fromJson(Map<String, dynamic> json) =>
       _$RemoteConfigStateFromJson(json);
 
+  @override
+  @JsonKey()
+  final ChatLimitPerDay chatLimitPerDay;
   @override
   @JsonKey()
   final bool maintenanceMode;
@@ -180,6 +212,8 @@ class _RemoteConfigState extends RemoteConfigState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _RemoteConfigState &&
+            (identical(other.chatLimitPerDay, chatLimitPerDay) ||
+                other.chatLimitPerDay == chatLimitPerDay) &&
             (identical(other.maintenanceMode, maintenanceMode) ||
                 other.maintenanceMode == maintenanceMode) &&
             (identical(other.maintenanceMsg, maintenanceMsg) ||
@@ -196,12 +230,19 @@ class _RemoteConfigState extends RemoteConfigState {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, maintenanceMode, maintenanceMsg,
-      forcedUpdateVersion, forcedUpdateMsg, basicModel, premiumModel);
+  int get hashCode => Object.hash(
+      runtimeType,
+      chatLimitPerDay,
+      maintenanceMode,
+      maintenanceMsg,
+      forcedUpdateVersion,
+      forcedUpdateMsg,
+      basicModel,
+      premiumModel);
 
   @override
   String toString() {
-    return 'RemoteConfigState(maintenanceMode: $maintenanceMode, maintenanceMsg: $maintenanceMsg, forcedUpdateVersion: $forcedUpdateVersion, forcedUpdateMsg: $forcedUpdateMsg, basicModel: $basicModel, premiumModel: $premiumModel)';
+    return 'RemoteConfigState(chatLimitPerDay: $chatLimitPerDay, maintenanceMode: $maintenanceMode, maintenanceMsg: $maintenanceMsg, forcedUpdateVersion: $forcedUpdateVersion, forcedUpdateMsg: $forcedUpdateMsg, basicModel: $basicModel, premiumModel: $premiumModel)';
   }
 }
 
@@ -214,12 +255,16 @@ abstract mixin class _$RemoteConfigStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool maintenanceMode,
+      {ChatLimitPerDay chatLimitPerDay,
+      bool maintenanceMode,
       String maintenanceMsg,
       int forcedUpdateVersion,
       String forcedUpdateMsg,
       String basicModel,
       String premiumModel});
+
+  @override
+  $ChatLimitPerDayCopyWith<$Res> get chatLimitPerDay;
 }
 
 /// @nodoc
@@ -235,6 +280,7 @@ class __$RemoteConfigStateCopyWithImpl<$Res>
   @override
   @pragma('vm:prefer-inline')
   $Res call({
+    Object? chatLimitPerDay = null,
     Object? maintenanceMode = null,
     Object? maintenanceMsg = null,
     Object? forcedUpdateVersion = null,
@@ -243,6 +289,10 @@ class __$RemoteConfigStateCopyWithImpl<$Res>
     Object? premiumModel = null,
   }) {
     return _then(_RemoteConfigState(
+      chatLimitPerDay: null == chatLimitPerDay
+          ? _self.chatLimitPerDay
+          : chatLimitPerDay // ignore: cast_nullable_to_non_nullable
+              as ChatLimitPerDay,
       maintenanceMode: null == maintenanceMode
           ? _self.maintenanceMode
           : maintenanceMode // ignore: cast_nullable_to_non_nullable
@@ -268,6 +318,16 @@ class __$RemoteConfigStateCopyWithImpl<$Res>
           : premiumModel // ignore: cast_nullable_to_non_nullable
               as String,
     ));
+  }
+
+  /// Create a copy of RemoteConfigState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ChatLimitPerDayCopyWith<$Res> get chatLimitPerDay {
+    return $ChatLimitPerDayCopyWith<$Res>(_self.chatLimitPerDay, (value) {
+      return _then(_self.copyWith(chatLimitPerDay: value));
+    });
   }
 }
 

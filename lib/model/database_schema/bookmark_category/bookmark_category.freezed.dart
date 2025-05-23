@@ -80,7 +80,7 @@ abstract mixin class $BookmarkCategoryCopyWith<$Res> {
 
 /// @nodoc
 class _$BookmarkCategoryCopyWithImpl<$Res>
-    with $BookmarkCategoryCopyWith<$Res> {
+    implements $BookmarkCategoryCopyWith<$Res> {
   _$BookmarkCategoryCopyWithImpl(this._self, this._then);
 
   final BookmarkCategory _self;
@@ -207,7 +207,7 @@ class _BookmarkCategory implements BookmarkCategory {
 
 /// @nodoc
 abstract mixin class _$BookmarkCategoryCopyWith<$Res>
-    with $BookmarkCategoryCopyWith<$Res> {
+    implements $BookmarkCategoryCopyWith<$Res> {
   factory _$BookmarkCategoryCopyWith(
           _BookmarkCategory value, $Res Function(_BookmarkCategory) _then) =
       __$BookmarkCategoryCopyWithImpl;
@@ -224,7 +224,7 @@ abstract mixin class _$BookmarkCategoryCopyWith<$Res>
 
 /// @nodoc
 class __$BookmarkCategoryCopyWithImpl<$Res>
-    with _$BookmarkCategoryCopyWith<$Res> {
+    implements _$BookmarkCategoryCopyWith<$Res> {
   __$BookmarkCategoryCopyWithImpl(this._self, this._then);
 
   final _BookmarkCategory _self;

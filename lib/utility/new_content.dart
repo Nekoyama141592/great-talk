@@ -4,12 +4,12 @@ import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/string_extension.dart';
-import 'package:great_talk/model/custom_complete_text/custom_complete_text.dart';
-import 'package:great_talk/model/detected_image/detected_image.dart';
-import 'package:great_talk/model/detected_text/detected_text.dart';
-import 'package:great_talk/model/public_user/public_user.dart';
-import 'package:great_talk/model/post/post.dart';
-import 'package:great_talk/model/private_user/private_user.dart';
+import 'package:great_talk/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class NewContent {

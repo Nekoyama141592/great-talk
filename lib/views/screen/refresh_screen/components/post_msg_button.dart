@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
-import 'package:great_talk/model/post/post.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
 
 class PostMsgButton extends HookWidget {
   const PostMsgButton({
