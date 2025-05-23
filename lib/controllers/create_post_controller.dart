@@ -1,190 +1,190 @@
-import 'dart:typed_data';
+// import 'dart:typed_data';
 
-import 'package:get/get.dart';
-import 'package:great_talk/core/strings.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
-import 'package:great_talk/extensions/string_extension.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
-import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
-import 'package:great_talk/repository/aws_s3_repository.dart';
-import 'package:great_talk/repository/firestore_repository.dart';
-import 'package:great_talk/utility/aws_s3_utility.dart';
-import 'package:great_talk/utility/file_utility.dart';
-import 'package:great_talk/utility/new_content.dart';
-import 'package:great_talk/ui_core/validator/post_validator.dart';
-import 'package:great_talk/views/auth/login_page.dart';
-import 'package:great_talk/views/create_post/create_post_page.dart';
-import 'package:great_talk/views/edit_page.dart';
+// import 'package:get/get.dart';
+// import 'package:great_talk/core/strings.dart';
+// import 'package:great_talk/ui_core/ui_helper.dart';
+// import 'package:great_talk/consts/form_consts.dart';
+// import 'package:great_talk/controllers/current_user_controller.dart';
+// import 'package:great_talk/core/firestore/doc_ref_core.dart';
+// import 'package:great_talk/extensions/string_extension.dart';
+// import 'package:great_talk/mixin/current_uid_mixin.dart';
+// import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
+// import 'package:great_talk/repository/aws_s3_repository.dart';
+// import 'package:great_talk/repository/firestore_repository.dart';
+// import 'package:great_talk/utility/aws_s3_utility.dart';
+// import 'package:great_talk/utility/file_utility.dart';
+// import 'package:great_talk/utility/new_content.dart';
+// import 'package:great_talk/ui_core/validator/post_validator.dart';
+// import 'package:great_talk/views/auth/login_page.dart';
+// import 'package:great_talk/views/create_post/create_post_page.dart';
+// import 'package:great_talk/views/edit_page.dart';
 
-class CreatePostController extends GetxController with CurrentUserMixin {
-  static CreatePostController get to => Get.find<CreatePostController>();
-  final title = "".obs;
-  final systemPrompt = FormConsts.defaultSystemPrompt.obs;
-  final description = "".obs;
-  final temperature = FormConsts.defaultTemperature.toString().obs;
-  final topP = FormConsts.defaultTopP.toString().obs;
-  final presencePenalty = FormConsts.defaultPresencePenalty.toString().obs;
-  final frequencyPenalty = FormConsts.defaultFrequencyPenalty.toString().obs;
-  bool isPicked = false; // 画像を新たに取得したか判定するフラグ
-  final Rx<Uint8List?> rxPickedUint8list = Rx(null);
+// class CreatePostController extends GetxController with CurrentUserMixin {
+//   static CreatePostController get to => Get.find<CreatePostController>();
+//   final title = "".obs;
+//   final systemPrompt = FormConsts.defaultSystemPrompt.obs;
+//   final description = "".obs;
+//   final temperature = FormConsts.defaultTemperature.toString().obs;
+//   final topP = FormConsts.defaultTopP.toString().obs;
+//   final presencePenalty = FormConsts.defaultPresencePenalty.toString().obs;
+//   final frequencyPenalty = FormConsts.defaultFrequencyPenalty.toString().obs;
+//   bool isPicked = false; // 画像を新たに取得したか判定するフラグ
+//   final Rx<Uint8List?> rxPickedUint8list = Rx(null);
 
-  void onImagePickButtonPressed() async {
-    final result = await FileUtility.getCompressedImage();
-    if (result == null) return;
-    final info = await FileUtility.getImageInfo(result);
-    final isNotSquare = info.isNotSquare;
-    if (isNotSquare) {
-      UIHelper.showErrorFlutterToast(FileUtility.squareImageRequestMsg);
-      return;
-    }
-    final isSmall = info.isSmall;
-    if (isSmall) {
-      UIHelper.showErrorFlutterToast(FormConsts.bigImageRequestMsg);
-      return;
-    }
-    rxPickedUint8list(result);
-    isPicked = true;
-  }
-  // セッターメソッド
-  void setTitle(String? value) {
-    if (value == null) return;
-    title.value = value;
-  }
+//   void onImagePickButtonPressed() async {
+//     final result = await FileUtility.getCompressedImage();
+//     if (result == null) return;
+//     final info = await FileUtility.getImageInfo(result);
+//     final isNotSquare = info.isNotSquare;
+//     if (isNotSquare) {
+//       UIHelper.showErrorFlutterToast(FileUtility.squareImageRequestMsg);
+//       return;
+//     }
+//     final isSmall = info.isSmall;
+//     if (isSmall) {
+//       UIHelper.showErrorFlutterToast(FormConsts.bigImageRequestMsg);
+//       return;
+//     }
+//     rxPickedUint8list(result);
+//     isPicked = true;
+//   }
+//   // セッターメソッド
+//   void setTitle(String? value) {
+//     if (value == null) return;
+//     title.value = value;
+//   }
 
-  void setSystemPrompt(String? value) {
-    if (value == null) return;
-    systemPrompt.value = value;
-  }
+//   void setSystemPrompt(String? value) {
+//     if (value == null) return;
+//     systemPrompt.value = value;
+//   }
 
-  void setDescription(String? value) {
-    if (value == null) return;
-    description.value = value;
-  }
+//   void setDescription(String? value) {
+//     if (value == null) return;
+//     description.value = value;
+//   }
 
-  void setTemperature(String? value) {
-    if (value == null) return;
-    temperature.value = value;
-  }
+//   void setTemperature(String? value) {
+//     if (value == null) return;
+//     temperature.value = value;
+//   }
 
-  void setTopP(String? value) {
-    if (value == null) return;
-    topP.value = value;
-  }
+//   void setTopP(String? value) {
+//     if (value == null) return;
+//     topP.value = value;
+//   }
 
-  void setPresencePenalty(String? value) {
-    if (value == null) return;
-    presencePenalty.value = value;
-  }
+//   void setPresencePenalty(String? value) {
+//     if (value == null) return;
+//     presencePenalty.value = value;
+//   }
 
-  void setFrequencyPenalty(String? value) {
-    if (value == null) return;
-    frequencyPenalty.value = value;
-  }
-  Future<void> onPositiveButtonPressed() async {
-    if (rxPickedUint8list.value == null) {
-      await UIHelper.showErrorFlutterToast("アイコンをタップして画像をアップロードしてください");
-      return;
-    }
-    if (PostValidator.isInValidPost(
-        description.value,
-        systemPrompt.value,
-        title.value,
-        temperature.value,
-        topP.value,
-        presencePenalty.value,
-        frequencyPenalty.value)) {
-      await UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
-      return;
-    }
-    if ((temperature.value.toRoundToSecondDecimalPlace() !=
-            FormConsts.defaultTemperature) &&
-        (topP.value.toRoundToSecondDecimalPlace() != FormConsts.defaultTopP)) {
-      await UIHelper.showErrorFlutterToast("temperatureとtopPはどちらか一方しか変更できません");
-      return;
-    }
-    if (isLoading.value) return; // 二重リクエストを防止.
-    final unit8List = rxPickedUint8list.value;
-    if (unit8List == null) return;
-    startLoading();
-    final postId = randomString();
-    final fileName = AWSS3Utility.postObject(currentUid(), postId);
-    final repository = AWSS3Repository();
-    final request = PutObjectRequest.fromUint8List(
-        uint8list: unit8List, fileName: fileName);
-    final result = await repository.putObject(request);
-    await result.when(
-        success: (res) async => await _createPost(postId, fileName),
-        failure: (e) {
-          UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
-        });
-    endLoading();
-  }
+//   void setFrequencyPenalty(String? value) {
+//     if (value == null) return;
+//     frequencyPenalty.value = value;
+//   }
+//   Future<void> onPositiveButtonPressed() async {
+//     if (rxPickedUint8list.value == null) {
+//       await UIHelper.showErrorFlutterToast("アイコンをタップして画像をアップロードしてください");
+//       return;
+//     }
+//     if (PostValidator.isInValidPost(
+//         description.value,
+//         systemPrompt.value,
+//         title.value,
+//         temperature.value,
+//         topP.value,
+//         presencePenalty.value,
+//         frequencyPenalty.value)) {
+//       await UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
+//       return;
+//     }
+//     if ((temperature.value.toRoundToSecondDecimalPlace() !=
+//             FormConsts.defaultTemperature) &&
+//         (topP.value.toRoundToSecondDecimalPlace() != FormConsts.defaultTopP)) {
+//       await UIHelper.showErrorFlutterToast("temperatureとtopPはどちらか一方しか変更できません");
+//       return;
+//     }
+//     if (isLoading.value) return; // 二重リクエストを防止.
+//     final unit8List = rxPickedUint8list.value;
+//     if (unit8List == null) return;
+//     startLoading();
+//     final postId = randomString();
+//     final fileName = AWSS3Utility.postObject(currentUid(), postId);
+//     final repository = AWSS3Repository();
+//     final request = PutObjectRequest.fromUint8List(
+//         uint8list: unit8List, fileName: fileName);
+//     final result = await repository.putObject(request);
+//     await result.when(
+//         success: (res) async => await _createPost(postId, fileName),
+//         failure: (e) {
+//           UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
+//         });
+//     endLoading();
+//   }
 
-  Future<void> _createPost(String postId, String fileName) async {
-    final publicUser = CurrentUserController.to.rxPublicUser.value;
-    if (publicUser == null) return;
-    final repository = FirestoreRepository();
-    final postRef = DocRefCore.post(currentUid(), postId);
-    final customCompleteText = NewContent.newCustomCompleteText(
-            systemPrompt.value,
-            temperature.value,
-            topP.value,
-            presencePenalty.value,
-            frequencyPenalty.value)
-        .toJson()
-      ..removeWhere((key, value) => value == null);
-    final newPost = NewContent.newPost(
-        systemPrompt.trim(),
-        title.trim(),
-        description.trim(),
-        fileName,
-        postId,
-        postRef,
-        customCompleteText,
-        publicUser.uid);
-    final json = newPost.toJson();
-    final result = await repository.createDoc(postRef, json);
-    result.when(success: (_) {
-      Get.back();
-      _resetState(); // 初期化を行う
-      UIHelper.showFlutterToast("投稿が作成できました！");
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
-    });
-  }
+//   Future<void> _createPost(String postId, String fileName) async {
+//     final publicUser = CurrentUserController.to.rxPublicUser.value;
+//     if (publicUser == null) return;
+//     final repository = FirestoreRepository();
+//     final postRef = DocRefCore.post(currentUid(), postId);
+//     final customCompleteText = NewContent.newCustomCompleteText(
+//             systemPrompt.value,
+//             temperature.value,
+//             topP.value,
+//             presencePenalty.value,
+//             frequencyPenalty.value)
+//         .toJson()
+//       ..removeWhere((key, value) => value == null);
+//     final newPost = NewContent.newPost(
+//         systemPrompt.trim(),
+//         title.trim(),
+//         description.trim(),
+//         fileName,
+//         postId,
+//         postRef,
+//         customCompleteText,
+//         publicUser.uid);
+//     final json = newPost.toJson();
+//     final result = await repository.createDoc(postRef, json);
+//     result.when(success: (_) {
+//       Get.back();
+//       _resetState(); // 初期化を行う
+//       UIHelper.showFlutterToast("投稿が作成できました！");
+//     }, failure: (e) {
+//       UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
+//     });
+//   }
 
-  void _resetState() {
-    title.value = "";
-    systemPrompt.value = FormConsts.defaultSystemPrompt;
-    description.value = "";
-    temperature.value = FormConsts.defaultTemperature.toString();
-    topP.value = FormConsts.defaultTopP.toString();
-    presencePenalty.value = FormConsts.defaultPresencePenalty.toString();
-    frequencyPenalty.value = FormConsts.defaultFrequencyPenalty.toString();
-    rxPickedUint8list.value = null;
-  }
+//   void _resetState() {
+//     title.value = "";
+//     systemPrompt.value = FormConsts.defaultSystemPrompt;
+//     description.value = "";
+//     temperature.value = FormConsts.defaultTemperature.toString();
+//     topP.value = FormConsts.defaultTopP.toString();
+//     presencePenalty.value = FormConsts.defaultPresencePenalty.toString();
+//     frequencyPenalty.value = FormConsts.defaultFrequencyPenalty.toString();
+//     rxPickedUint8list.value = null;
+//   }
 
-  void onFloatingActionButtonPressed() {
-    final publicUser = CurrentUserController.to.rxPublicUser.value;
-    if (publicUser == null) {
-      _toLoginPage();
-    } else {
-      publicUser.hasNoBio
-          ? _toEditProfilePage()
-          : Get.toNamed(CreatePostPage.path);
-    }
-  }
+//   void onFloatingActionButtonPressed() {
+//     final publicUser = CurrentUserController.to.rxPublicUser.value;
+//     if (publicUser == null) {
+//       _toLoginPage();
+//     } else {
+//       publicUser.hasNoBio
+//           ? _toEditProfilePage()
+//           : Get.toNamed(CreatePostPage.path);
+//     }
+//   }
 
-  void _toEditProfilePage() {
-    UIHelper.showErrorFlutterToast("投稿するにはプロフィールを編集してください");
-    Get.toNamed(EditProfilePage.path);
-  }
+//   void _toEditProfilePage() {
+//     UIHelper.showErrorFlutterToast("投稿するにはプロフィールを編集してください");
+//     Get.toNamed(EditProfilePage.path);
+//   }
 
-  void _toLoginPage() {
-    UIHelper.showErrorFlutterToast("投稿するにはログインが必要です");
-    Get.toNamed(LoginPage.path);
-  }
-}
+//   void _toLoginPage() {
+//     UIHelper.showErrorFlutterToast("投稿するにはログインが必要です");
+//     Get.toNamed(LoginPage.path);
+//   }
+// }

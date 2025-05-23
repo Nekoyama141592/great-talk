@@ -11,8 +11,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MuteUsersController extends DocsController {
   @override
-  bool get enablePullDown => true;
-  @override
   bool get requiresValueReset => true;
   static MuteUsersController get to => Get.find<MuteUsersController>();
   @override

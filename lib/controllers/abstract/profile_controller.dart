@@ -6,8 +6,6 @@ import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 
 abstract class ProfileController extends DocsController {
   @override
-  bool get enablePullDown => true;
-  @override
   bool get requiresValueReset => true;
   final Rx<PublicUser?> rxPassiveUser = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);

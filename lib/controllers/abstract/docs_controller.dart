@@ -17,11 +17,9 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   bool cannotShow() => isLoading.value;
   void startLoading() => isLoading(true);
   void endLoading() => isLoading(false);
-  bool get enablePullDown => false;
   bool get requiresValueReset => false; // ページを開くたびに初期化が必要かどうかを判定
   final qDocInfoList = <QDocInfo>[].obs;
   final isInit = false.obs;
-  bool isProcessing = false; // addAllDocsに使用.
   late MapQuery query;
   @override
   void onInit() {
@@ -30,12 +28,10 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   }
 
   void setQuery();
-  void startProcess() => isProcessing = true;
-  void endProcess() => isProcessing = false;
 
   void addAllDocs(List<QDoc> elements) async {
-    if (isProcessing) return;
-    startProcess();
+    if (isLoading.value) return;
+    startLoading();
     final docIds = qDocInfoList.map((e) => e.qDoc.id).toList();
     final uids = elements.map((e) => e.data()['uid'] as String).toList();
     if (uids.isEmpty) return; // 投稿が取得できていないなら処理を終了させる
@@ -52,12 +48,12 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
         qDocInfoList.add(qDocInfo);
       }
     }
-    endProcess();
+    endLoading();
   }
 
   void insertAllDocs(List<QDoc> elements) async {
-    if (isProcessing) return;
-    startProcess();
+    if (isLoading.value) return;
+    startLoading();
     final docIds = qDocInfoList.map((e) => e.qDoc.id).toList();
     final uids = elements.map((e) => e.data()['uid'] as String).toList();
     if (uids.isEmpty) return; // 投稿が取得できていないなら処理を終了させる
@@ -74,7 +70,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
         qDocInfoList.insert(0, qDocInfo);
       }
     }
-    endProcess();
+    endLoading();
   }
 
   List<QDoc> sortedDocs(List<QDoc> elements) {
