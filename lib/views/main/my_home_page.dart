@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/controllers/create_post_controller.dart';
-import 'package:great_talk/controllers/edit_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/chat_controller.dart';
 import 'package:great_talk/views/components/original_drawer.dart';
@@ -29,7 +28,6 @@ class MyHomePage extends HookConsumerWidget {
     Get.put(PostsController());
     Get.put(ChatController());
     Get.put(CreatePostController());
-    Get.put(EditController());
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(

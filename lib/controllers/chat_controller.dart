@@ -13,7 +13,6 @@ import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/consts/chat_constants.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
@@ -43,7 +42,7 @@ import 'package:great_talk/views/chat/components/bookmark_categories_list_view.d
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ChatController extends FormsController with CurrentUserMixin {
+class ChatController extends GetxController with CurrentUserMixin {
   static ChatController get to => Get.find<ChatController>();
   final messages = <TextMessage>[].obs;
   final realtimeRes = "".obs;
@@ -54,26 +53,26 @@ class ChatController extends FormsController with CurrentUserMixin {
   String get postId => Get.parameters['postId']!;
 
   ChatModel get model => PurchasesController.to.model();
-  // Future<void> _fetch() async {
-  //   final Uri url = Uri.parse('http://localhost:3000/api/chat');
-  //   final messages = {'messages': [{'role': 'system', 'content': '日本語に翻訳するAIです'},{'role': 'user', 'content': 'Hello, World'}]};
-  //   final response = await http.Client().send(http.Request('POST', url)
-  //     ..body = json.encode(messages));
-  //   String results = '';
-  //   response.stream
-  //       .transform(utf8.decoder) // UTF-8デコード
-  //       .listen((chunk) {
-  //         if (chunk.startsWith('0:')) {
-  //           final result = chunk.replaceAll('0:', '').replaceAll('\n', '').replaceAll('"', '');
-  //           print(result);
-  //           results += result;
-  //         }
-  //   }, onDone: () {
-  //     print(results);
-  //   },onError: (e) {
-  //     print('error: $e');
-  //   });
-  // }
+  bool isPicked = false; // 画像を新たに取得したか判定するフラグ
+  final Rx<Uint8List?> rxPickedUint8list = Rx(null);
+
+  void onImagePickButtonPressed() async {
+    final result = await FileUtility.getCompressedImage();
+    if (result == null) return;
+    final info = await FileUtility.getImageInfo(result);
+    final isNotSquare = info.isNotSquare;
+    if (isNotSquare) {
+      UIHelper.showErrorFlutterToast(FileUtility.squareImageRequestMsg);
+      return;
+    }
+    final isSmall = info.isSmall;
+    if (isSmall) {
+      UIHelper.showErrorFlutterToast(FormConsts.bigImageRequestMsg);
+      return;
+    }
+    rxPickedUint8list(result);
+    isPicked = true;
+  }
   int get incrementCount {
     final post = rxPost.value;
     if (post == null) {

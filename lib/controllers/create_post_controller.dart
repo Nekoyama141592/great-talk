@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:get/get.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
@@ -11,13 +13,14 @@ import 'package:great_talk/model/rest_api/put_object/request/put_object_request.
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
+import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 import 'package:great_talk/ui_core/validator/post_validator.dart';
 import 'package:great_talk/views/auth/login_page.dart';
 import 'package:great_talk/views/create_post/create_post_page.dart';
 import 'package:great_talk/views/edit_page.dart';
 
-class CreatePostController extends FormsController with CurrentUserMixin {
+class CreatePostController extends GetxController with CurrentUserMixin {
   static CreatePostController get to => Get.find<CreatePostController>();
   final title = "".obs;
   final systemPrompt = FormConsts.defaultSystemPrompt.obs;
@@ -26,6 +29,26 @@ class CreatePostController extends FormsController with CurrentUserMixin {
   final topP = FormConsts.defaultTopP.toString().obs;
   final presencePenalty = FormConsts.defaultPresencePenalty.toString().obs;
   final frequencyPenalty = FormConsts.defaultFrequencyPenalty.toString().obs;
+  bool isPicked = false; // 画像を新たに取得したか判定するフラグ
+  final Rx<Uint8List?> rxPickedUint8list = Rx(null);
+
+  void onImagePickButtonPressed() async {
+    final result = await FileUtility.getCompressedImage();
+    if (result == null) return;
+    final info = await FileUtility.getImageInfo(result);
+    final isNotSquare = info.isNotSquare;
+    if (isNotSquare) {
+      UIHelper.showErrorFlutterToast(FileUtility.squareImageRequestMsg);
+      return;
+    }
+    final isSmall = info.isSmall;
+    if (isSmall) {
+      UIHelper.showErrorFlutterToast(FormConsts.bigImageRequestMsg);
+      return;
+    }
+    rxPickedUint8list(result);
+    isPicked = true;
+  }
   // セッターメソッド
   void setTitle(String? value) {
     if (value == null) return;
