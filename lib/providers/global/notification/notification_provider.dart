@@ -1,55 +1,70 @@
 import 'dart:io';
-// flutter
-import 'package:flutter/material.dart';
-// packages
-import 'package:get/get.dart';
+
+import 'package:flutter/widgets.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/core/strings.dart'; // 元のコードのimportを維持
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-class NotificationController extends GetxController
+// riverpod_generator が生成するファイル
+part 'notification_provider.g.dart';
+
+/// FlutterLocalNotificationsPluginのインスタンスを提供するProvider
+/// アプリが生きている間は常にインスタンスを保持する
+@Riverpod(keepAlive: true)
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin(Ref ref) {
+  return FlutterLocalNotificationsPlugin();
+}
+
+/// 通知関連のロジックを管理するNotifier
+@Riverpod(keepAlive: true)
+class Notification extends _$Notification
     with WidgetsBindingObserver {
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
 
+  /// buildメソッドで初期化処理とライフサイクル管理を行う
   @override
-  void onInit() {
-    super.onInit();
+  Future<Notification> build() async {
+    // WidgetsBindingObserverを登録し、Providerが破棄される時に解除する
     WidgetsBinding.instance.addObserver(this);
-    _init();
+    ref.onDispose(() => WidgetsBinding.instance.removeObserver(this));
+    await _init();
+    // このNotifier自身のインスタンスを返す
+    return this;
   }
 
-  @override
-  void onClose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.onClose();
-  }
-
+  /// アプリのライフサイクルが変更されたときに呼ばれる
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
     if (state == AppLifecycleState.resumed) {
+      // アプリがフォアグラウンドに戻った時にバッジを消す
       FlutterAppBadger.removeBadge();
     }
   }
 
+  /// すべての通知関連の初期化処理をまとめたメソッド
   Future<void> _init() async {
     await _configureLocalTimeZone();
     await _initializeNotification();
-    await cancelNotification();
+    await cancelAllNotifications();
     await requestPermissions();
-    await registerMessage();
+    await registerDailyNotification();
   }
 
+  /// タイムゾーンを設定する
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
     final String timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZoneName));
   }
 
+  /// 通知プラグインを初期化する
   Future<void> _initializeNotification() async {
+    final plugin = ref.read(flutterLocalNotificationsPluginProvider);
     const DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
       requestAlertPermission: false,
@@ -64,16 +79,20 @@ class NotificationController extends GetxController
       android: initializationSettingsAndroid,
       iOS: initializationSettingsIOS,
     );
-    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    await plugin.initialize(initializationSettings);
   }
 
-  Future<void> cancelNotification() async {
-    await _flutterLocalNotificationsPlugin.cancelAll();
+  /// すべての通知をキャンセルする
+  Future<void> cancelAllNotifications() async {
+    final plugin = ref.read(flutterLocalNotificationsPluginProvider);
+    await plugin.cancelAll();
   }
 
+  /// 通知の権限をリクエストする
   Future<void> requestPermissions() async {
+    final plugin = ref.read(flutterLocalNotificationsPluginProvider);
     if (Platform.isIOS) {
-      await _flutterLocalNotificationsPlugin
+      await plugin
           .resolvePlatformSpecificImplementation<
               IOSFlutterLocalNotificationsPlugin>()
           ?.requestPermissions(
@@ -81,22 +100,21 @@ class NotificationController extends GetxController
             badge: true,
             sound: true,
           );
-    }
-    if (Platform.isAndroid) {
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-          FlutterLocalNotificationsPlugin();
-      await flutterLocalNotificationsPlugin
+    } else if (Platform.isAndroid) {
+      await plugin
           .resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()
           ?.requestNotificationsPermission();
     }
   }
 
-  Future<void> registerMessage() async {
+  /// 毎日の定期通知を登録する
+  Future<void> registerDailyNotification() async {
+    final plugin = ref.read(flutterLocalNotificationsPluginProvider);
     const message = "今日も面白いAIが投稿されてないか探してみましょう！";
-    await _flutterLocalNotificationsPlugin.periodicallyShow(
+    await plugin.periodicallyShow(
       0,
-      appName,
+      appName, // `great_talk/core/strings.dart` からのインポート
       message,
       RepeatInterval.daily,
       const NotificationDetails(
@@ -105,7 +123,7 @@ class NotificationController extends GetxController
           '定期的な通知',
           importance: Importance.high,
           priority: Priority.high,
-          ongoing: true,
+          // ongoing: false, // ongoing: trueだとユーザーが消せなくなるため、定期リマインダーではfalseが一般的
           largeIcon: DrawableResourceAndroidBitmap('ic_notification'),
           styleInformation: BigTextStyleInformation(message),
         ),
