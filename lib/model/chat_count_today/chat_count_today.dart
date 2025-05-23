@@ -5,7 +5,7 @@ part 'chat_count_today.freezed.dart';
 part 'chat_count_today.g.dart';
 
 @freezed
-abstract class ChatCountToday implements _$ChatCountToday {
+abstract class ChatCountToday with _$ChatCountToday {
   const ChatCountToday._();
   const factory ChatCountToday(
       {@Default(0) int basic, @Default(0) int premium}) = _ChatCountToday;

@@ -4,7 +4,7 @@ part 'delete_object_response.freezed.dart';
 part 'delete_object_response.g.dart';
 
 @freezed
-abstract class DeleteObjectResponse implements _$DeleteObjectResponse {
+abstract class DeleteObjectResponse with _$DeleteObjectResponse {
   const DeleteObjectResponse._();
   const factory DeleteObjectResponse({required String base64Image}) =
       _DeleteObjectResponse;

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,227 +10,132 @@ part of 'post.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Post _$PostFromJson(Map<String, dynamic> json) {
-  return _Post.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Post {
-  int get bookmarkCount => throw _privateConstructorUsedError;
-  dynamic get createdAt => throw _privateConstructorUsedError;
-  Map<String, dynamic> get customCompleteText =>
-      throw _privateConstructorUsedError;
-  Map<String, dynamic> get description => throw _privateConstructorUsedError;
-  List<SDMap> get exampleTexts => throw _privateConstructorUsedError;
-  String get genre => throw _privateConstructorUsedError;
-  List<String> get hashTags => throw _privateConstructorUsedError;
-  Map<String, dynamic> get image => throw _privateConstructorUsedError;
-  int get impressionCount => throw _privateConstructorUsedError;
-  int get likeCount => throw _privateConstructorUsedError;
-  List<SDMap> get links => throw _privateConstructorUsedError;
-  int get msgCount => throw _privateConstructorUsedError;
-  int get muteCount => throw _privateConstructorUsedError;
-  String get postId => throw _privateConstructorUsedError;
-  dynamic get ref => throw _privateConstructorUsedError;
-  int get reportCount => throw _privateConstructorUsedError;
-  double get score => throw _privateConstructorUsedError;
-  Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
-  Map<String, dynamic> get title => throw _privateConstructorUsedError;
-  String get uid => throw _privateConstructorUsedError;
-  dynamic get updatedAt => throw _privateConstructorUsedError;
-  int get userCount => throw _privateConstructorUsedError;
-
-  /// Serializes this Post to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  int get bookmarkCount;
+  dynamic get createdAt;
+  SDMap get customCompleteText;
+  SDMap get description;
+  List<SDMap> get exampleTexts;
+  String get genre;
+  List<String> get hashTags;
+  SDMap get image;
+  int get impressionCount;
+  int get likeCount;
+  List<SDMap> get links;
+  int get msgCount;
+  int get muteCount;
+  String get postId;
+  dynamic get ref;
+  int get reportCount;
+  double get score;
+  SDMap get searchToken;
+  SDMap get title;
+  String get uid;
+  dynamic get updatedAt;
+  int get userCount;
 
   /// Create a copy of Post
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PostCopyWith<$Res> {
-  factory $PostCopyWith(Post value, $Res Function(Post) then) =
-      _$PostCopyWithImpl<$Res, Post>;
-  @useResult
-  $Res call(
-      {int bookmarkCount,
-      dynamic createdAt,
-      Map<String, dynamic> customCompleteText,
-      Map<String, dynamic> description,
-      List<SDMap> exampleTexts,
-      String genre,
-      List<String> hashTags,
-      Map<String, dynamic> image,
-      int impressionCount,
-      int likeCount,
-      List<SDMap> links,
-      int msgCount,
-      int muteCount,
-      String postId,
-      dynamic ref,
-      int reportCount,
-      double score,
-      Map<String, dynamic> searchToken,
-      Map<String, dynamic> title,
-      String uid,
-      dynamic updatedAt,
-      int userCount});
-}
-
-/// @nodoc
-class _$PostCopyWithImpl<$Res, $Val extends Post>
-    implements $PostCopyWith<$Res> {
-  _$PostCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Post
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $PostCopyWith<Post> get copyWith =>
+      _$PostCopyWithImpl<Post>(this as Post, _$identity);
+
+  /// Serializes this Post to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? bookmarkCount = null,
-    Object? createdAt = freezed,
-    Object? customCompleteText = null,
-    Object? description = null,
-    Object? exampleTexts = null,
-    Object? genre = null,
-    Object? hashTags = null,
-    Object? image = null,
-    Object? impressionCount = null,
-    Object? likeCount = null,
-    Object? links = null,
-    Object? msgCount = null,
-    Object? muteCount = null,
-    Object? postId = null,
-    Object? ref = freezed,
-    Object? reportCount = null,
-    Object? score = null,
-    Object? searchToken = null,
-    Object? title = null,
-    Object? uid = null,
-    Object? updatedAt = freezed,
-    Object? userCount = null,
-  }) {
-    return _then(_value.copyWith(
-      bookmarkCount: null == bookmarkCount
-          ? _value.bookmarkCount
-          : bookmarkCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      customCompleteText: null == customCompleteText
-          ? _value.customCompleteText
-          : customCompleteText // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      exampleTexts: null == exampleTexts
-          ? _value.exampleTexts
-          : exampleTexts // ignore: cast_nullable_to_non_nullable
-              as List<SDMap>,
-      genre: null == genre
-          ? _value.genre
-          : genre // ignore: cast_nullable_to_non_nullable
-              as String,
-      hashTags: null == hashTags
-          ? _value.hashTags
-          : hashTags // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      impressionCount: null == impressionCount
-          ? _value.impressionCount
-          : impressionCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      likeCount: null == likeCount
-          ? _value.likeCount
-          : likeCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      links: null == links
-          ? _value.links
-          : links // ignore: cast_nullable_to_non_nullable
-              as List<SDMap>,
-      msgCount: null == msgCount
-          ? _value.msgCount
-          : msgCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      muteCount: null == muteCount
-          ? _value.muteCount
-          : muteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
-      ref: freezed == ref
-          ? _value.ref
-          : ref // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      reportCount: null == reportCount
-          ? _value.reportCount
-          : reportCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as double,
-      searchToken: null == searchToken
-          ? _value.searchToken
-          : searchToken // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      userCount: null == userCount
-          ? _value.userCount
-          : userCount // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Post &&
+            (identical(other.bookmarkCount, bookmarkCount) ||
+                other.bookmarkCount == bookmarkCount) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality()
+                .equals(other.customCompleteText, customCompleteText) &&
+            const DeepCollectionEquality()
+                .equals(other.description, description) &&
+            const DeepCollectionEquality()
+                .equals(other.exampleTexts, exampleTexts) &&
+            (identical(other.genre, genre) || other.genre == genre) &&
+            const DeepCollectionEquality().equals(other.hashTags, hashTags) &&
+            const DeepCollectionEquality().equals(other.image, image) &&
+            (identical(other.impressionCount, impressionCount) ||
+                other.impressionCount == impressionCount) &&
+            (identical(other.likeCount, likeCount) ||
+                other.likeCount == likeCount) &&
+            const DeepCollectionEquality().equals(other.links, links) &&
+            (identical(other.msgCount, msgCount) ||
+                other.msgCount == msgCount) &&
+            (identical(other.muteCount, muteCount) ||
+                other.muteCount == muteCount) &&
+            (identical(other.postId, postId) || other.postId == postId) &&
+            const DeepCollectionEquality().equals(other.ref, ref) &&
+            (identical(other.reportCount, reportCount) ||
+                other.reportCount == reportCount) &&
+            (identical(other.score, score) || other.score == score) &&
+            const DeepCollectionEquality()
+                .equals(other.searchToken, searchToken) &&
+            const DeepCollectionEquality().equals(other.title, title) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            (identical(other.userCount, userCount) ||
+                other.userCount == userCount));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        bookmarkCount,
+        const DeepCollectionEquality().hash(createdAt),
+        const DeepCollectionEquality().hash(customCompleteText),
+        const DeepCollectionEquality().hash(description),
+        const DeepCollectionEquality().hash(exampleTexts),
+        genre,
+        const DeepCollectionEquality().hash(hashTags),
+        const DeepCollectionEquality().hash(image),
+        impressionCount,
+        likeCount,
+        const DeepCollectionEquality().hash(links),
+        msgCount,
+        muteCount,
+        postId,
+        const DeepCollectionEquality().hash(ref),
+        reportCount,
+        score,
+        const DeepCollectionEquality().hash(searchToken),
+        const DeepCollectionEquality().hash(title),
+        uid,
+        const DeepCollectionEquality().hash(updatedAt),
+        userCount
+      ]);
+
+  @override
+  String toString() {
+    return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, image: $image, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, uid: $uid, updatedAt: $updatedAt, userCount: $userCount)';
   }
 }
 
 /// @nodoc
-abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
-  factory _$$PostImplCopyWith(
-          _$PostImpl value, $Res Function(_$PostImpl) then) =
-      __$$PostImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PostCopyWith<$Res> {
+  factory $PostCopyWith(Post value, $Res Function(Post) _then) =
+      _$PostCopyWithImpl;
   @useResult
   $Res call(
       {int bookmarkCount,
       dynamic createdAt,
-      Map<String, dynamic> customCompleteText,
-      Map<String, dynamic> description,
+      SDMap customCompleteText,
+      SDMap description,
       List<SDMap> exampleTexts,
       String genre,
       List<String> hashTags,
-      Map<String, dynamic> image,
+      SDMap image,
       int impressionCount,
       int likeCount,
       List<SDMap> links,
@@ -239,19 +145,19 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       dynamic ref,
       int reportCount,
       double score,
-      Map<String, dynamic> searchToken,
-      Map<String, dynamic> title,
+      SDMap searchToken,
+      SDMap title,
       String uid,
       dynamic updatedAt,
       int userCount});
 }
 
 /// @nodoc
-class __$$PostImplCopyWithImpl<$Res>
-    extends _$PostCopyWithImpl<$Res, _$PostImpl>
-    implements _$$PostImplCopyWith<$Res> {
-  __$$PostImplCopyWithImpl(_$PostImpl _value, $Res Function(_$PostImpl) _then)
-      : super(_value, _then);
+class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
+  _$PostCopyWithImpl(this._self, this._then);
+
+  final Post _self;
+  final $Res Function(Post) _then;
 
   /// Create a copy of Post
   /// with the given fields replaced by the non-null parameter values.
@@ -281,93 +187,93 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? userCount = null,
   }) {
-    return _then(_$PostImpl(
+    return _then(_self.copyWith(
       bookmarkCount: null == bookmarkCount
-          ? _value.bookmarkCount
+          ? _self.bookmarkCount
           : bookmarkCount // ignore: cast_nullable_to_non_nullable
               as int,
       createdAt: freezed == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
       customCompleteText: null == customCompleteText
-          ? _value._customCompleteText
+          ? _self.customCompleteText
           : customCompleteText // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
       description: null == description
-          ? _value._description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
       exampleTexts: null == exampleTexts
-          ? _value._exampleTexts
+          ? _self.exampleTexts
           : exampleTexts // ignore: cast_nullable_to_non_nullable
               as List<SDMap>,
       genre: null == genre
-          ? _value.genre
+          ? _self.genre
           : genre // ignore: cast_nullable_to_non_nullable
               as String,
       hashTags: null == hashTags
-          ? _value._hashTags
+          ? _self.hashTags
           : hashTags // ignore: cast_nullable_to_non_nullable
               as List<String>,
       image: null == image
-          ? _value._image
+          ? _self.image
           : image // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
       impressionCount: null == impressionCount
-          ? _value.impressionCount
+          ? _self.impressionCount
           : impressionCount // ignore: cast_nullable_to_non_nullable
               as int,
       likeCount: null == likeCount
-          ? _value.likeCount
+          ? _self.likeCount
           : likeCount // ignore: cast_nullable_to_non_nullable
               as int,
       links: null == links
-          ? _value._links
+          ? _self.links
           : links // ignore: cast_nullable_to_non_nullable
               as List<SDMap>,
       msgCount: null == msgCount
-          ? _value.msgCount
+          ? _self.msgCount
           : msgCount // ignore: cast_nullable_to_non_nullable
               as int,
       muteCount: null == muteCount
-          ? _value.muteCount
+          ? _self.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
               as int,
       postId: null == postId
-          ? _value.postId
+          ? _self.postId
           : postId // ignore: cast_nullable_to_non_nullable
               as String,
       ref: freezed == ref
-          ? _value.ref
+          ? _self.ref
           : ref // ignore: cast_nullable_to_non_nullable
               as dynamic,
       reportCount: null == reportCount
-          ? _value.reportCount
+          ? _self.reportCount
           : reportCount // ignore: cast_nullable_to_non_nullable
               as int,
       score: null == score
-          ? _value.score
+          ? _self.score
           : score // ignore: cast_nullable_to_non_nullable
               as double,
       searchToken: null == searchToken
-          ? _value._searchToken
+          ? _self.searchToken
           : searchToken // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
       title: null == title
-          ? _value._title
+          ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
       uid: null == uid
-          ? _value.uid
+          ? _self.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
       updatedAt: freezed == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
       userCount: null == userCount
-          ? _value.userCount
+          ? _self.userCount
           : userCount // ignore: cast_nullable_to_non_nullable
               as int,
     ));
@@ -376,16 +282,16 @@ class __$$PostImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PostImpl extends _Post {
-  const _$PostImpl(
+class _Post extends Post {
+  const _Post(
       {this.bookmarkCount = 0,
       required this.createdAt,
-      required final Map<String, dynamic> customCompleteText,
-      required final Map<String, dynamic> description,
+      required final SDMap customCompleteText,
+      required final SDMap description,
       final List<SDMap> exampleTexts = const [],
       this.genre = "",
       final List<String> hashTags = const [],
-      required final Map<String, dynamic> image,
+      required final SDMap image,
       this.impressionCount = 0,
       this.likeCount = 0,
       final List<SDMap> links = const [],
@@ -395,8 +301,8 @@ class _$PostImpl extends _Post {
       required this.ref,
       this.reportCount = 0,
       this.score = 0.0,
-      required final Map<String, dynamic> searchToken,
-      required final Map<String, dynamic> title,
+      required final SDMap searchToken,
+      required final SDMap title,
       required this.uid,
       required this.updatedAt,
       this.userCount = 0})
@@ -409,27 +315,25 @@ class _$PostImpl extends _Post {
         _searchToken = searchToken,
         _title = title,
         super._();
-
-  factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PostImplFromJson(json);
+  factory _Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
   @override
   @JsonKey()
   final int bookmarkCount;
   @override
   final dynamic createdAt;
-  final Map<String, dynamic> _customCompleteText;
+  final SDMap _customCompleteText;
   @override
-  Map<String, dynamic> get customCompleteText {
+  SDMap get customCompleteText {
     if (_customCompleteText is EqualUnmodifiableMapView)
       return _customCompleteText;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_customCompleteText);
   }
 
-  final Map<String, dynamic> _description;
+  final SDMap _description;
   @override
-  Map<String, dynamic> get description {
+  SDMap get description {
     if (_description is EqualUnmodifiableMapView) return _description;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_description);
@@ -456,9 +360,9 @@ class _$PostImpl extends _Post {
     return EqualUnmodifiableListView(_hashTags);
   }
 
-  final Map<String, dynamic> _image;
+  final SDMap _image;
   @override
-  Map<String, dynamic> get image {
+  SDMap get image {
     if (_image is EqualUnmodifiableMapView) return _image;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_image);
@@ -495,17 +399,17 @@ class _$PostImpl extends _Post {
   @override
   @JsonKey()
   final double score;
-  final Map<String, dynamic> _searchToken;
+  final SDMap _searchToken;
   @override
-  Map<String, dynamic> get searchToken {
+  SDMap get searchToken {
     if (_searchToken is EqualUnmodifiableMapView) return _searchToken;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_searchToken);
   }
 
-  final Map<String, dynamic> _title;
+  final SDMap _title;
   @override
-  Map<String, dynamic> get title {
+  SDMap get title {
     if (_title is EqualUnmodifiableMapView) return _title;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_title);
@@ -519,16 +423,26 @@ class _$PostImpl extends _Post {
   @JsonKey()
   final int userCount;
 
+  /// Create a copy of Post
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, image: $image, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, uid: $uid, updatedAt: $updatedAt, userCount: $userCount)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PostCopyWith<_Post> get copyWith =>
+      __$PostCopyWithImpl<_Post>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PostToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PostImpl &&
+            other is _Post &&
             (identical(other.bookmarkCount, bookmarkCount) ||
                 other.bookmarkCount == bookmarkCount) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -592,99 +506,169 @@ class _$PostImpl extends _Post {
         userCount
       ]);
 
-  /// Create a copy of Post
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
-      __$$PostImplCopyWithImpl<_$PostImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PostImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, image: $image, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, postId: $postId, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, uid: $uid, updatedAt: $updatedAt, userCount: $userCount)';
   }
 }
 
-abstract class _Post extends Post {
-  const factory _Post(
-      {final int bookmarkCount,
-      required final dynamic createdAt,
-      required final Map<String, dynamic> customCompleteText,
-      required final Map<String, dynamic> description,
-      final List<SDMap> exampleTexts,
-      final String genre,
-      final List<String> hashTags,
-      required final Map<String, dynamic> image,
-      final int impressionCount,
-      final int likeCount,
-      final List<SDMap> links,
-      final int msgCount,
-      final int muteCount,
-      required final String postId,
-      required final dynamic ref,
-      final int reportCount,
-      final double score,
-      required final Map<String, dynamic> searchToken,
-      required final Map<String, dynamic> title,
-      required final String uid,
-      required final dynamic updatedAt,
-      final int userCount}) = _$PostImpl;
-  const _Post._() : super._();
+/// @nodoc
+abstract mixin class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
+  factory _$PostCopyWith(_Post value, $Res Function(_Post) _then) =
+      __$PostCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {int bookmarkCount,
+      dynamic createdAt,
+      SDMap customCompleteText,
+      SDMap description,
+      List<SDMap> exampleTexts,
+      String genre,
+      List<String> hashTags,
+      SDMap image,
+      int impressionCount,
+      int likeCount,
+      List<SDMap> links,
+      int msgCount,
+      int muteCount,
+      String postId,
+      dynamic ref,
+      int reportCount,
+      double score,
+      SDMap searchToken,
+      SDMap title,
+      String uid,
+      dynamic updatedAt,
+      int userCount});
+}
 
-  factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
+/// @nodoc
+class __$PostCopyWithImpl<$Res> implements _$PostCopyWith<$Res> {
+  __$PostCopyWithImpl(this._self, this._then);
 
-  @override
-  int get bookmarkCount;
-  @override
-  dynamic get createdAt;
-  @override
-  Map<String, dynamic> get customCompleteText;
-  @override
-  Map<String, dynamic> get description;
-  @override
-  List<SDMap> get exampleTexts;
-  @override
-  String get genre;
-  @override
-  List<String> get hashTags;
-  @override
-  Map<String, dynamic> get image;
-  @override
-  int get impressionCount;
-  @override
-  int get likeCount;
-  @override
-  List<SDMap> get links;
-  @override
-  int get msgCount;
-  @override
-  int get muteCount;
-  @override
-  String get postId;
-  @override
-  dynamic get ref;
-  @override
-  int get reportCount;
-  @override
-  double get score;
-  @override
-  Map<String, dynamic> get searchToken;
-  @override
-  Map<String, dynamic> get title;
-  @override
-  String get uid;
-  @override
-  dynamic get updatedAt;
-  @override
-  int get userCount;
+  final _Post _self;
+  final $Res Function(_Post) _then;
 
   /// Create a copy of Post
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PostImplCopyWith<_$PostImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? bookmarkCount = null,
+    Object? createdAt = freezed,
+    Object? customCompleteText = null,
+    Object? description = null,
+    Object? exampleTexts = null,
+    Object? genre = null,
+    Object? hashTags = null,
+    Object? image = null,
+    Object? impressionCount = null,
+    Object? likeCount = null,
+    Object? links = null,
+    Object? msgCount = null,
+    Object? muteCount = null,
+    Object? postId = null,
+    Object? ref = freezed,
+    Object? reportCount = null,
+    Object? score = null,
+    Object? searchToken = null,
+    Object? title = null,
+    Object? uid = null,
+    Object? updatedAt = freezed,
+    Object? userCount = null,
+  }) {
+    return _then(_Post(
+      bookmarkCount: null == bookmarkCount
+          ? _self.bookmarkCount
+          : bookmarkCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      customCompleteText: null == customCompleteText
+          ? _self._customCompleteText
+          : customCompleteText // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+      description: null == description
+          ? _self._description
+          : description // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+      exampleTexts: null == exampleTexts
+          ? _self._exampleTexts
+          : exampleTexts // ignore: cast_nullable_to_non_nullable
+              as List<SDMap>,
+      genre: null == genre
+          ? _self.genre
+          : genre // ignore: cast_nullable_to_non_nullable
+              as String,
+      hashTags: null == hashTags
+          ? _self._hashTags
+          : hashTags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      image: null == image
+          ? _self._image
+          : image // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+      impressionCount: null == impressionCount
+          ? _self.impressionCount
+          : impressionCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      likeCount: null == likeCount
+          ? _self.likeCount
+          : likeCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      links: null == links
+          ? _self._links
+          : links // ignore: cast_nullable_to_non_nullable
+              as List<SDMap>,
+      msgCount: null == msgCount
+          ? _self.msgCount
+          : msgCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      muteCount: null == muteCount
+          ? _self.muteCount
+          : muteCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      postId: null == postId
+          ? _self.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as String,
+      ref: freezed == ref
+          ? _self.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      reportCount: null == reportCount
+          ? _self.reportCount
+          : reportCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      score: null == score
+          ? _self.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as double,
+      searchToken: null == searchToken
+          ? _self._searchToken
+          : searchToken // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+      title: null == title
+          ? _self._title
+          : title // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+      uid: null == uid
+          ? _self.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: freezed == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      userCount: null == userCount
+          ? _self.userCount
+          : userCount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
+
+// dart format on

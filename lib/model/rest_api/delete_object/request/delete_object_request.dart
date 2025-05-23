@@ -4,7 +4,7 @@ part 'delete_object_request.freezed.dart';
 part 'delete_object_request.g.dart';
 
 @freezed
-abstract class DeleteObjectRequest implements _$DeleteObjectRequest {
+abstract class DeleteObjectRequest with _$DeleteObjectRequest {
   const DeleteObjectRequest._();
   const factory DeleteObjectRequest({required String object}) =
       _DeleteObjectRequest;

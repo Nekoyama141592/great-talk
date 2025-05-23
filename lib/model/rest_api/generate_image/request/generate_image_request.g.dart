@@ -6,15 +6,15 @@ part of 'generate_image_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GenerateImageRequestImpl _$$GenerateImageRequestImplFromJson(
+_GenerateImageRequest _$GenerateImageRequestFromJson(
         Map<String, dynamic> json) =>
-    _$GenerateImageRequestImpl(
+    _GenerateImageRequest(
       prompt: json['prompt'] as String,
       size: json['size'] as String,
     );
 
-Map<String, dynamic> _$$GenerateImageRequestImplToJson(
-        _$GenerateImageRequestImpl instance) =>
+Map<String, dynamic> _$GenerateImageRequestToJson(
+        _GenerateImageRequest instance) =>
     <String, dynamic>{
       'prompt': instance.prompt,
       'size': instance.size,

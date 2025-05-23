@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,86 +10,58 @@ part of 'generate_image_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-GenerateImageResponse _$GenerateImageResponseFromJson(
-    Map<String, dynamic> json) {
-  return _GenerateImageResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$GenerateImageResponse {
-  String get base64 => throw _privateConstructorUsedError;
-
-  /// Serializes this GenerateImageResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get base64;
 
   /// Create a copy of GenerateImageResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GenerateImageResponseCopyWith<GenerateImageResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GenerateImageResponseCopyWith<$Res> {
-  factory $GenerateImageResponseCopyWith(GenerateImageResponse value,
-          $Res Function(GenerateImageResponse) then) =
-      _$GenerateImageResponseCopyWithImpl<$Res, GenerateImageResponse>;
-  @useResult
-  $Res call({String base64});
-}
-
-/// @nodoc
-class _$GenerateImageResponseCopyWithImpl<$Res,
-        $Val extends GenerateImageResponse>
-    implements $GenerateImageResponseCopyWith<$Res> {
-  _$GenerateImageResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of GenerateImageResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $GenerateImageResponseCopyWith<GenerateImageResponse> get copyWith =>
+      _$GenerateImageResponseCopyWithImpl<GenerateImageResponse>(
+          this as GenerateImageResponse, _$identity);
+
+  /// Serializes this GenerateImageResponse to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? base64 = null,
-  }) {
-    return _then(_value.copyWith(
-      base64: null == base64
-          ? _value.base64
-          : base64 // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GenerateImageResponse &&
+            (identical(other.base64, base64) || other.base64 == base64));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, base64);
+
+  @override
+  String toString() {
+    return 'GenerateImageResponse(base64: $base64)';
   }
 }
 
 /// @nodoc
-abstract class _$$GenerateImageResponseImplCopyWith<$Res>
-    implements $GenerateImageResponseCopyWith<$Res> {
-  factory _$$GenerateImageResponseImplCopyWith(
-          _$GenerateImageResponseImpl value,
-          $Res Function(_$GenerateImageResponseImpl) then) =
-      __$$GenerateImageResponseImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $GenerateImageResponseCopyWith<$Res> {
+  factory $GenerateImageResponseCopyWith(GenerateImageResponse value,
+          $Res Function(GenerateImageResponse) _then) =
+      _$GenerateImageResponseCopyWithImpl;
   @useResult
   $Res call({String base64});
 }
 
 /// @nodoc
-class __$$GenerateImageResponseImplCopyWithImpl<$Res>
-    extends _$GenerateImageResponseCopyWithImpl<$Res,
-        _$GenerateImageResponseImpl>
-    implements _$$GenerateImageResponseImplCopyWith<$Res> {
-  __$$GenerateImageResponseImplCopyWithImpl(_$GenerateImageResponseImpl _value,
-      $Res Function(_$GenerateImageResponseImpl) _then)
-      : super(_value, _then);
+class _$GenerateImageResponseCopyWithImpl<$Res>
+    implements $GenerateImageResponseCopyWith<$Res> {
+  _$GenerateImageResponseCopyWithImpl(this._self, this._then);
+
+  final GenerateImageResponse _self;
+  final $Res Function(GenerateImageResponse) _then;
 
   /// Create a copy of GenerateImageResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -97,9 +70,9 @@ class __$$GenerateImageResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? base64 = null,
   }) {
-    return _then(_$GenerateImageResponseImpl(
+    return _then(_self.copyWith(
       base64: null == base64
-          ? _value.base64
+          ? _self.base64
           : base64 // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -108,25 +81,35 @@ class __$$GenerateImageResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GenerateImageResponseImpl extends _GenerateImageResponse {
-  const _$GenerateImageResponseImpl({required this.base64}) : super._();
-
-  factory _$GenerateImageResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GenerateImageResponseImplFromJson(json);
+class _GenerateImageResponse extends GenerateImageResponse {
+  const _GenerateImageResponse({required this.base64}) : super._();
+  factory _GenerateImageResponse.fromJson(Map<String, dynamic> json) =>
+      _$GenerateImageResponseFromJson(json);
 
   @override
   final String base64;
 
+  /// Create a copy of GenerateImageResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GenerateImageResponse(base64: $base64)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GenerateImageResponseCopyWith<_GenerateImageResponse> get copyWith =>
+      __$GenerateImageResponseCopyWithImpl<_GenerateImageResponse>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$GenerateImageResponseToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GenerateImageResponseImpl &&
+            other is _GenerateImageResponse &&
             (identical(other.base64, base64) || other.base64 == base64));
   }
 
@@ -134,38 +117,45 @@ class _$GenerateImageResponseImpl extends _GenerateImageResponse {
   @override
   int get hashCode => Object.hash(runtimeType, base64);
 
-  /// Create a copy of GenerateImageResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$GenerateImageResponseImplCopyWith<_$GenerateImageResponseImpl>
-      get copyWith => __$$GenerateImageResponseImplCopyWithImpl<
-          _$GenerateImageResponseImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GenerateImageResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'GenerateImageResponse(base64: $base64)';
   }
 }
 
-abstract class _GenerateImageResponse extends GenerateImageResponse {
-  const factory _GenerateImageResponse({required final String base64}) =
-      _$GenerateImageResponseImpl;
-  const _GenerateImageResponse._() : super._();
-
-  factory _GenerateImageResponse.fromJson(Map<String, dynamic> json) =
-      _$GenerateImageResponseImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$GenerateImageResponseCopyWith<$Res>
+    implements $GenerateImageResponseCopyWith<$Res> {
+  factory _$GenerateImageResponseCopyWith(_GenerateImageResponse value,
+          $Res Function(_GenerateImageResponse) _then) =
+      __$GenerateImageResponseCopyWithImpl;
   @override
-  String get base64;
+  @useResult
+  $Res call({String base64});
+}
+
+/// @nodoc
+class __$GenerateImageResponseCopyWithImpl<$Res>
+    implements _$GenerateImageResponseCopyWith<$Res> {
+  __$GenerateImageResponseCopyWithImpl(this._self, this._then);
+
+  final _GenerateImageResponse _self;
+  final $Res Function(_GenerateImageResponse) _then;
 
   /// Create a copy of GenerateImageResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GenerateImageResponseImplCopyWith<_$GenerateImageResponseImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? base64 = null,
+  }) {
+    return _then(_GenerateImageResponse(
+      base64: null == base64
+          ? _self.base64
+          : base64 // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
+
+// dart format on

@@ -6,14 +6,12 @@ part of 'get_object_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GetObjectResponseImpl _$$GetObjectResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$GetObjectResponseImpl(
+_GetObjectResponse _$GetObjectResponseFromJson(Map<String, dynamic> json) =>
+    _GetObjectResponse(
       base64Image: json['base64Image'] as String,
     );
 
-Map<String, dynamic> _$$GetObjectResponseImplToJson(
-        _$GetObjectResponseImpl instance) =>
+Map<String, dynamic> _$GetObjectResponseToJson(_GetObjectResponse instance) =>
     <String, dynamic>{
       'base64Image': instance.base64Image,
     };

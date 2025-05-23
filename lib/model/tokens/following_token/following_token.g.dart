@@ -6,8 +6,8 @@ part of 'following_token.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$FollowingTokenImpl _$$FollowingTokenImplFromJson(Map<String, dynamic> json) =>
-    _$FollowingTokenImpl(
+_FollowingToken _$FollowingTokenFromJson(Map<String, dynamic> json) =>
+    _FollowingToken(
       createdAt: json['createdAt'],
       passiveUid: json['passiveUid'] as String,
       passiveUserRef: json['passiveUserRef'],
@@ -15,8 +15,7 @@ _$FollowingTokenImpl _$$FollowingTokenImplFromJson(Map<String, dynamic> json) =>
       tokenType: json['tokenType'] as String,
     );
 
-Map<String, dynamic> _$$FollowingTokenImplToJson(
-        _$FollowingTokenImpl instance) =>
+Map<String, dynamic> _$FollowingTokenToJson(_FollowingToken instance) =>
     <String, dynamic>{
       'createdAt': instance.createdAt,
       'passiveUid': instance.passiveUid,

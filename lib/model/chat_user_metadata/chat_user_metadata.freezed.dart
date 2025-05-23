@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,133 +10,30 @@ part of 'chat_user_metadata.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ChatUserMetadata _$ChatUserMetadataFromJson(Map<String, dynamic> json) {
-  return _ChatUserMetadata.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ChatUserMetadata {
-  String? get lastAnswer => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-
-  /// Serializes this ChatUserMetadata to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String? get lastAnswer;
+  String? get description;
 
   /// Create a copy of ChatUserMetadata
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ChatUserMetadataCopyWith<ChatUserMetadata> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$ChatUserMetadataCopyWithImpl<ChatUserMetadata>(
+          this as ChatUserMetadata, _$identity);
 
-/// @nodoc
-abstract class $ChatUserMetadataCopyWith<$Res> {
-  factory $ChatUserMetadataCopyWith(
-          ChatUserMetadata value, $Res Function(ChatUserMetadata) then) =
-      _$ChatUserMetadataCopyWithImpl<$Res, ChatUserMetadata>;
-  @useResult
-  $Res call({String? lastAnswer, String? description});
-}
-
-/// @nodoc
-class _$ChatUserMetadataCopyWithImpl<$Res, $Val extends ChatUserMetadata>
-    implements $ChatUserMetadataCopyWith<$Res> {
-  _$ChatUserMetadataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ChatUserMetadata
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? lastAnswer = freezed,
-    Object? description = freezed,
-  }) {
-    return _then(_value.copyWith(
-      lastAnswer: freezed == lastAnswer
-          ? _value.lastAnswer
-          : lastAnswer // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$ChatUserMetadataImplCopyWith<$Res>
-    implements $ChatUserMetadataCopyWith<$Res> {
-  factory _$$ChatUserMetadataImplCopyWith(_$ChatUserMetadataImpl value,
-          $Res Function(_$ChatUserMetadataImpl) then) =
-      __$$ChatUserMetadataImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? lastAnswer, String? description});
-}
-
-/// @nodoc
-class __$$ChatUserMetadataImplCopyWithImpl<$Res>
-    extends _$ChatUserMetadataCopyWithImpl<$Res, _$ChatUserMetadataImpl>
-    implements _$$ChatUserMetadataImplCopyWith<$Res> {
-  __$$ChatUserMetadataImplCopyWithImpl(_$ChatUserMetadataImpl _value,
-      $Res Function(_$ChatUserMetadataImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ChatUserMetadata
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? lastAnswer = freezed,
-    Object? description = freezed,
-  }) {
-    return _then(_$ChatUserMetadataImpl(
-      lastAnswer: freezed == lastAnswer
-          ? _value.lastAnswer
-          : lastAnswer // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ChatUserMetadataImpl implements _ChatUserMetadata {
-  const _$ChatUserMetadataImpl({this.lastAnswer, this.description});
-
-  factory _$ChatUserMetadataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChatUserMetadataImplFromJson(json);
-
-  @override
-  final String? lastAnswer;
-  @override
-  final String? description;
-
-  @override
-  String toString() {
-    return 'ChatUserMetadata(lastAnswer: $lastAnswer, description: $description)';
-  }
+  /// Serializes this ChatUserMetadata to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChatUserMetadataImpl &&
+            other is ChatUserMetadata &&
             (identical(other.lastAnswer, lastAnswer) ||
                 other.lastAnswer == lastAnswer) &&
             (identical(other.description, description) ||
@@ -146,40 +44,136 @@ class _$ChatUserMetadataImpl implements _ChatUserMetadata {
   @override
   int get hashCode => Object.hash(runtimeType, lastAnswer, description);
 
-  /// Create a copy of ChatUserMetadata
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ChatUserMetadataImplCopyWith<_$ChatUserMetadataImpl> get copyWith =>
-      __$$ChatUserMetadataImplCopyWithImpl<_$ChatUserMetadataImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ChatUserMetadataImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ChatUserMetadata(lastAnswer: $lastAnswer, description: $description)';
   }
 }
 
-abstract class _ChatUserMetadata implements ChatUserMetadata {
-  const factory _ChatUserMetadata(
-      {final String? lastAnswer,
-      final String? description}) = _$ChatUserMetadataImpl;
+/// @nodoc
+abstract mixin class $ChatUserMetadataCopyWith<$Res> {
+  factory $ChatUserMetadataCopyWith(
+          ChatUserMetadata value, $Res Function(ChatUserMetadata) _then) =
+      _$ChatUserMetadataCopyWithImpl;
+  @useResult
+  $Res call({String? lastAnswer, String? description});
+}
 
-  factory _ChatUserMetadata.fromJson(Map<String, dynamic> json) =
-      _$ChatUserMetadataImpl.fromJson;
+/// @nodoc
+class _$ChatUserMetadataCopyWithImpl<$Res>
+    with $ChatUserMetadataCopyWith<$Res> {
+  _$ChatUserMetadataCopyWithImpl(this._self, this._then);
+
+  final ChatUserMetadata _self;
+  final $Res Function(ChatUserMetadata) _then;
+
+  /// Create a copy of ChatUserMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? lastAnswer = freezed,
+    Object? description = freezed,
+  }) {
+    return _then(_self.copyWith(
+      lastAnswer: freezed == lastAnswer
+          ? _self.lastAnswer
+          : lastAnswer // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _ChatUserMetadata implements ChatUserMetadata {
+  const _ChatUserMetadata({this.lastAnswer, this.description});
+  factory _ChatUserMetadata.fromJson(Map<String, dynamic> json) =>
+      _$ChatUserMetadataFromJson(json);
 
   @override
-  String? get lastAnswer;
+  final String? lastAnswer;
   @override
-  String? get description;
+  final String? description;
 
   /// Create a copy of ChatUserMetadata
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChatUserMetadataImplCopyWith<_$ChatUserMetadataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$ChatUserMetadataCopyWith<_ChatUserMetadata> get copyWith =>
+      __$ChatUserMetadataCopyWithImpl<_ChatUserMetadata>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ChatUserMetadataToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ChatUserMetadata &&
+            (identical(other.lastAnswer, lastAnswer) ||
+                other.lastAnswer == lastAnswer) &&
+            (identical(other.description, description) ||
+                other.description == description));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, lastAnswer, description);
+
+  @override
+  String toString() {
+    return 'ChatUserMetadata(lastAnswer: $lastAnswer, description: $description)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$ChatUserMetadataCopyWith<$Res>
+    with $ChatUserMetadataCopyWith<$Res> {
+  factory _$ChatUserMetadataCopyWith(
+          _ChatUserMetadata value, $Res Function(_ChatUserMetadata) _then) =
+      __$ChatUserMetadataCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String? lastAnswer, String? description});
+}
+
+/// @nodoc
+class __$ChatUserMetadataCopyWithImpl<$Res>
+    with _$ChatUserMetadataCopyWith<$Res> {
+  __$ChatUserMetadataCopyWithImpl(this._self, this._then);
+
+  final _ChatUserMetadata _self;
+  final $Res Function(_ChatUserMetadata) _then;
+
+  /// Create a copy of ChatUserMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? lastAnswer = freezed,
+    Object? description = freezed,
+  }) {
+    return _then(_ChatUserMetadata(
+      lastAnswer: freezed == lastAnswer
+          ? _self.lastAnswer
+          : lastAnswer // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+// dart format on

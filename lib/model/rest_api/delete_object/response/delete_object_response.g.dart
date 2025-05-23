@@ -6,14 +6,14 @@ part of 'delete_object_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DeleteObjectResponseImpl _$$DeleteObjectResponseImplFromJson(
+_DeleteObjectResponse _$DeleteObjectResponseFromJson(
         Map<String, dynamic> json) =>
-    _$DeleteObjectResponseImpl(
+    _DeleteObjectResponse(
       base64Image: json['base64Image'] as String,
     );
 
-Map<String, dynamic> _$$DeleteObjectResponseImplToJson(
-        _$DeleteObjectResponseImpl instance) =>
+Map<String, dynamic> _$DeleteObjectResponseToJson(
+        _DeleteObjectResponse instance) =>
     <String, dynamic>{
       'base64Image': instance.base64Image,
     };

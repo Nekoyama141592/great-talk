@@ -6,16 +6,14 @@ part of 'moderation_label.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ModerationLabelImpl _$$ModerationLabelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ModerationLabelImpl(
+_ModerationLabel _$ModerationLabelFromJson(Map<String, dynamic> json) =>
+    _ModerationLabel(
       Confidence: json['Confidence'] as num,
       Name: json['Name'] as String,
       ParentName: json['ParentName'] as String,
     );
 
-Map<String, dynamic> _$$ModerationLabelImplToJson(
-        _$ModerationLabelImpl instance) =>
+Map<String, dynamic> _$ModerationLabelToJson(_ModerationLabel instance) =>
     <String, dynamic>{
       'Confidence': instance.Confidence,
       'Name': instance.Name,

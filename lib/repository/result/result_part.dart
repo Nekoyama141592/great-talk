@@ -19,19 +19,19 @@ mixin _$Result<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function() failure,
+    required TResult Function(Object e) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function()? failure,
+    TResult? Function(Object e)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function()? failure,
+    TResult Function(Object e)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -146,7 +146,7 @@ class _$SuccessImpl<T> implements Success<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function() failure,
+    required TResult Function(Object e) failure,
   }) {
     return success(value);
   }
@@ -155,7 +155,7 @@ class _$SuccessImpl<T> implements Success<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function()? failure,
+    TResult? Function(Object e)? failure,
   }) {
     return success?.call(value);
   }
@@ -164,7 +164,7 @@ class _$SuccessImpl<T> implements Success<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function()? failure,
+    TResult Function(Object e)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -222,6 +222,8 @@ abstract class _$$FailureImplCopyWith<T, $Res> {
   factory _$$FailureImplCopyWith(
           _$FailureImpl<T> value, $Res Function(_$FailureImpl<T>) then) =
       __$$FailureImplCopyWithImpl<T, $Res>;
+  @useResult
+  $Res call({Object e});
 }
 
 /// @nodoc
@@ -234,54 +236,77 @@ class __$$FailureImplCopyWithImpl<T, $Res>
 
   /// Create a copy of Result
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? e = null,
+  }) {
+    return _then(_$FailureImpl<T>(
+      null == e ? _value.e : e,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$FailureImpl<T> implements Failure<T> {
-  const _$FailureImpl();
+  const _$FailureImpl(this.e);
+
+  @override
+  final Object e;
 
   @override
   String toString() {
-    return 'Result<$T>.failure()';
+    return 'Result<$T>.failure(e: $e)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FailureImpl<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$FailureImpl<T> &&
+            const DeepCollectionEquality().equals(other.e, e));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(e));
+
+  /// Create a copy of Result
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FailureImplCopyWith<T, _$FailureImpl<T>> get copyWith =>
+      __$$FailureImplCopyWithImpl<T, _$FailureImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function() failure,
+    required TResult Function(Object e) failure,
   }) {
-    return failure();
+    return failure(e);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function()? failure,
+    TResult? Function(Object e)? failure,
   }) {
-    return failure?.call();
+    return failure?.call(e);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function()? failure,
+    TResult Function(Object e)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
-      return failure();
+      return failure(e);
     }
     return orElse();
   }
@@ -319,5 +344,13 @@ class _$FailureImpl<T> implements Failure<T> {
 }
 
 abstract class Failure<T> implements Result<T> {
-  const factory Failure() = _$FailureImpl<T>;
+  const factory Failure(final Object e) = _$FailureImpl<T>;
+
+  Object get e;
+
+  /// Create a copy of Result
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FailureImplCopyWith<T, _$FailureImpl<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }

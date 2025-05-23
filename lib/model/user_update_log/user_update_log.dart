@@ -5,7 +5,7 @@ part 'user_update_log.freezed.dart';
 part 'user_update_log.g.dart';
 
 @freezed
-abstract class UserUpdateLog implements _$UserUpdateLog {
+abstract class UserUpdateLog with _$UserUpdateLog {
   const factory UserUpdateLog({
     required dynamic logCreatedAt,
     required SDMap searchToken,

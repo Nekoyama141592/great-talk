@@ -9,7 +9,7 @@ part 'text_message.freezed.dart';
 part 'text_message.g.dart';
 
 @freezed
-abstract class TextMessage implements _$TextMessage {
+abstract class TextMessage with _$TextMessage {
   const TextMessage._();
   const factory TextMessage(
       {required dynamic createdAt,

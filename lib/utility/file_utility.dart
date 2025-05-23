@@ -40,7 +40,7 @@ class FileUtility {
       result.when(success: (res) {
         uint8List = res;
         _cacheUint8List(fileName, res); // 画像を非同期でキャッシュする.
-      }, failure: () {
+      }, failure: (e) {
         uint8List = null;
       });
     }

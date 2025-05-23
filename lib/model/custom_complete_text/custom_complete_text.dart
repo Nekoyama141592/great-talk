@@ -4,7 +4,7 @@ part 'custom_complete_text.freezed.dart';
 part 'custom_complete_text.g.dart';
 
 @freezed
-abstract class CustomCompleteText implements _$CustomCompleteText {
+abstract class CustomCompleteText with _$CustomCompleteText {
   const CustomCompleteText._();
   const factory CustomCompleteText({
     required String systemPrompt,

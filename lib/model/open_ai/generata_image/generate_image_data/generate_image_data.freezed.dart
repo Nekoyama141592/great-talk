@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,82 +10,58 @@ part of 'generate_image_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-GenerateImageData _$GenerateImageDataFromJson(Map<String, dynamic> json) {
-  return _GenerateImageData.fromJson(json);
-}
 
 /// @nodoc
 mixin _$GenerateImageData {
-  String get url => throw _privateConstructorUsedError;
-
-  /// Serializes this GenerateImageData to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get url;
 
   /// Create a copy of GenerateImageData
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GenerateImageDataCopyWith<GenerateImageData> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GenerateImageDataCopyWith<$Res> {
-  factory $GenerateImageDataCopyWith(
-          GenerateImageData value, $Res Function(GenerateImageData) then) =
-      _$GenerateImageDataCopyWithImpl<$Res, GenerateImageData>;
-  @useResult
-  $Res call({String url});
-}
-
-/// @nodoc
-class _$GenerateImageDataCopyWithImpl<$Res, $Val extends GenerateImageData>
-    implements $GenerateImageDataCopyWith<$Res> {
-  _$GenerateImageDataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of GenerateImageData
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $GenerateImageDataCopyWith<GenerateImageData> get copyWith =>
+      _$GenerateImageDataCopyWithImpl<GenerateImageData>(
+          this as GenerateImageData, _$identity);
+
+  /// Serializes this GenerateImageData to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? url = null,
-  }) {
-    return _then(_value.copyWith(
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GenerateImageData &&
+            (identical(other.url, url) || other.url == url));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, url);
+
+  @override
+  String toString() {
+    return 'GenerateImageData(url: $url)';
   }
 }
 
 /// @nodoc
-abstract class _$$GenerateImageDataImplCopyWith<$Res>
-    implements $GenerateImageDataCopyWith<$Res> {
-  factory _$$GenerateImageDataImplCopyWith(_$GenerateImageDataImpl value,
-          $Res Function(_$GenerateImageDataImpl) then) =
-      __$$GenerateImageDataImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $GenerateImageDataCopyWith<$Res> {
+  factory $GenerateImageDataCopyWith(
+          GenerateImageData value, $Res Function(GenerateImageData) _then) =
+      _$GenerateImageDataCopyWithImpl;
   @useResult
   $Res call({String url});
 }
 
 /// @nodoc
-class __$$GenerateImageDataImplCopyWithImpl<$Res>
-    extends _$GenerateImageDataCopyWithImpl<$Res, _$GenerateImageDataImpl>
-    implements _$$GenerateImageDataImplCopyWith<$Res> {
-  __$$GenerateImageDataImplCopyWithImpl(_$GenerateImageDataImpl _value,
-      $Res Function(_$GenerateImageDataImpl) _then)
-      : super(_value, _then);
+class _$GenerateImageDataCopyWithImpl<$Res>
+    implements $GenerateImageDataCopyWith<$Res> {
+  _$GenerateImageDataCopyWithImpl(this._self, this._then);
+
+  final GenerateImageData _self;
+  final $Res Function(GenerateImageData) _then;
 
   /// Create a copy of GenerateImageData
   /// with the given fields replaced by the non-null parameter values.
@@ -93,9 +70,9 @@ class __$$GenerateImageDataImplCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
   }) {
-    return _then(_$GenerateImageDataImpl(
+    return _then(_self.copyWith(
       url: null == url
-          ? _value.url
+          ? _self.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -104,25 +81,34 @@ class __$$GenerateImageDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GenerateImageDataImpl implements _GenerateImageData {
-  const _$GenerateImageDataImpl({required this.url});
-
-  factory _$GenerateImageDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GenerateImageDataImplFromJson(json);
+class _GenerateImageData implements GenerateImageData {
+  const _GenerateImageData({required this.url});
+  factory _GenerateImageData.fromJson(Map<String, dynamic> json) =>
+      _$GenerateImageDataFromJson(json);
 
   @override
   final String url;
 
+  /// Create a copy of GenerateImageData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GenerateImageData(url: $url)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GenerateImageDataCopyWith<_GenerateImageData> get copyWith =>
+      __$GenerateImageDataCopyWithImpl<_GenerateImageData>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$GenerateImageDataToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GenerateImageDataImpl &&
+            other is _GenerateImageData &&
             (identical(other.url, url) || other.url == url));
   }
 
@@ -130,37 +116,45 @@ class _$GenerateImageDataImpl implements _GenerateImageData {
   @override
   int get hashCode => Object.hash(runtimeType, url);
 
-  /// Create a copy of GenerateImageData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$GenerateImageDataImplCopyWith<_$GenerateImageDataImpl> get copyWith =>
-      __$$GenerateImageDataImplCopyWithImpl<_$GenerateImageDataImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GenerateImageDataImplToJson(
-      this,
-    );
+  String toString() {
+    return 'GenerateImageData(url: $url)';
   }
 }
 
-abstract class _GenerateImageData implements GenerateImageData {
-  const factory _GenerateImageData({required final String url}) =
-      _$GenerateImageDataImpl;
-
-  factory _GenerateImageData.fromJson(Map<String, dynamic> json) =
-      _$GenerateImageDataImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$GenerateImageDataCopyWith<$Res>
+    implements $GenerateImageDataCopyWith<$Res> {
+  factory _$GenerateImageDataCopyWith(
+          _GenerateImageData value, $Res Function(_GenerateImageData) _then) =
+      __$GenerateImageDataCopyWithImpl;
   @override
-  String get url;
+  @useResult
+  $Res call({String url});
+}
+
+/// @nodoc
+class __$GenerateImageDataCopyWithImpl<$Res>
+    implements _$GenerateImageDataCopyWith<$Res> {
+  __$GenerateImageDataCopyWithImpl(this._self, this._then);
+
+  final _GenerateImageData _self;
+  final $Res Function(_GenerateImageData) _then;
 
   /// Create a copy of GenerateImageData
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GenerateImageDataImplCopyWith<_$GenerateImageDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? url = null,
+  }) {
+    return _then(_GenerateImageData(
+      url: null == url
+          ? _self.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
+
+// dart format on

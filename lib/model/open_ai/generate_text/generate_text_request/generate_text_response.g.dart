@@ -6,16 +6,16 @@ part of 'generate_text_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GenerateTextResponseImpl _$$GenerateTextResponseImplFromJson(
+_GenerateTextResponse _$GenerateTextResponseFromJson(
         Map<String, dynamic> json) =>
-    _$GenerateTextResponseImpl(
+    _GenerateTextResponse(
       choices: (json['choices'] as List<dynamic>)
           .map((e) => e as Map<String, dynamic>)
           .toList(),
     );
 
-Map<String, dynamic> _$$GenerateTextResponseImplToJson(
-        _$GenerateTextResponseImpl instance) =>
+Map<String, dynamic> _$GenerateTextResponseToJson(
+        _GenerateTextResponse instance) =>
     <String, dynamic>{
       'choices': instance.choices,
     };

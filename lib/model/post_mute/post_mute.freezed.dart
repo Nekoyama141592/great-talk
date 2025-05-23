@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,164 +10,31 @@ part of 'post_mute.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-PostMute _$PostMuteFromJson(Map<String, dynamic> json) {
-  return _PostMute.fromJson(json);
-}
 
 /// @nodoc
 mixin _$PostMute {
-  String get activeUid => throw _privateConstructorUsedError;
-  dynamic get createdAt => throw _privateConstructorUsedError;
-  String get postId => throw _privateConstructorUsedError;
-  dynamic get postRef => throw _privateConstructorUsedError;
-
-  /// Serializes this PostMute to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get activeUid;
+  dynamic get createdAt;
+  String get postId;
+  dynamic get postRef;
 
   /// Create a copy of PostMute
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $PostMuteCopyWith<PostMute> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$PostMuteCopyWithImpl<PostMute>(this as PostMute, _$identity);
 
-/// @nodoc
-abstract class $PostMuteCopyWith<$Res> {
-  factory $PostMuteCopyWith(PostMute value, $Res Function(PostMute) then) =
-      _$PostMuteCopyWithImpl<$Res, PostMute>;
-  @useResult
-  $Res call(
-      {String activeUid, dynamic createdAt, String postId, dynamic postRef});
-}
-
-/// @nodoc
-class _$PostMuteCopyWithImpl<$Res, $Val extends PostMute>
-    implements $PostMuteCopyWith<$Res> {
-  _$PostMuteCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PostMute
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? activeUid = null,
-    Object? createdAt = freezed,
-    Object? postId = null,
-    Object? postRef = freezed,
-  }) {
-    return _then(_value.copyWith(
-      activeUid: null == activeUid
-          ? _value.activeUid
-          : activeUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
-      postRef: freezed == postRef
-          ? _value.postRef
-          : postRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$PostMuteImplCopyWith<$Res>
-    implements $PostMuteCopyWith<$Res> {
-  factory _$$PostMuteImplCopyWith(
-          _$PostMuteImpl value, $Res Function(_$PostMuteImpl) then) =
-      __$$PostMuteImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String activeUid, dynamic createdAt, String postId, dynamic postRef});
-}
-
-/// @nodoc
-class __$$PostMuteImplCopyWithImpl<$Res>
-    extends _$PostMuteCopyWithImpl<$Res, _$PostMuteImpl>
-    implements _$$PostMuteImplCopyWith<$Res> {
-  __$$PostMuteImplCopyWithImpl(
-      _$PostMuteImpl _value, $Res Function(_$PostMuteImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of PostMute
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? activeUid = null,
-    Object? createdAt = freezed,
-    Object? postId = null,
-    Object? postRef = freezed,
-  }) {
-    return _then(_$PostMuteImpl(
-      activeUid: null == activeUid
-          ? _value.activeUid
-          : activeUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
-      postRef: freezed == postRef
-          ? _value.postRef
-          : postRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$PostMuteImpl implements _PostMute {
-  const _$PostMuteImpl(
-      {required this.activeUid,
-      required this.createdAt,
-      required this.postId,
-      required this.postRef});
-
-  factory _$PostMuteImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PostMuteImplFromJson(json);
-
-  @override
-  final String activeUid;
-  @override
-  final dynamic createdAt;
-  @override
-  final String postId;
-  @override
-  final dynamic postRef;
-
-  @override
-  String toString() {
-    return 'PostMute(activeUid: $activeUid, createdAt: $createdAt, postId: $postId, postRef: $postRef)';
-  }
+  /// Serializes this PostMute to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PostMuteImpl &&
+            other is PostMute &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -183,45 +51,168 @@ class _$PostMuteImpl implements _PostMute {
       postId,
       const DeepCollectionEquality().hash(postRef));
 
-  /// Create a copy of PostMute
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PostMuteImplCopyWith<_$PostMuteImpl> get copyWith =>
-      __$$PostMuteImplCopyWithImpl<_$PostMuteImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PostMuteImplToJson(
-      this,
-    );
+  String toString() {
+    return 'PostMute(activeUid: $activeUid, createdAt: $createdAt, postId: $postId, postRef: $postRef)';
   }
 }
 
-abstract class _PostMute implements PostMute {
-  const factory _PostMute(
-      {required final String activeUid,
-      required final dynamic createdAt,
-      required final String postId,
-      required final dynamic postRef}) = _$PostMuteImpl;
+/// @nodoc
+abstract mixin class $PostMuteCopyWith<$Res> {
+  factory $PostMuteCopyWith(PostMute value, $Res Function(PostMute) _then) =
+      _$PostMuteCopyWithImpl;
+  @useResult
+  $Res call(
+      {String activeUid, dynamic createdAt, String postId, dynamic postRef});
+}
 
-  factory _PostMute.fromJson(Map<String, dynamic> json) =
-      _$PostMuteImpl.fromJson;
+/// @nodoc
+class _$PostMuteCopyWithImpl<$Res> implements $PostMuteCopyWith<$Res> {
+  _$PostMuteCopyWithImpl(this._self, this._then);
+
+  final PostMute _self;
+  final $Res Function(PostMute) _then;
+
+  /// Create a copy of PostMute
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activeUid = null,
+    Object? createdAt = freezed,
+    Object? postId = null,
+    Object? postRef = freezed,
+  }) {
+    return _then(_self.copyWith(
+      activeUid: null == activeUid
+          ? _self.activeUid
+          : activeUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      postId: null == postId
+          ? _self.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as String,
+      postRef: freezed == postRef
+          ? _self.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _PostMute implements PostMute {
+  const _PostMute(
+      {required this.activeUid,
+      required this.createdAt,
+      required this.postId,
+      required this.postRef});
+  factory _PostMute.fromJson(Map<String, dynamic> json) =>
+      _$PostMuteFromJson(json);
 
   @override
-  String get activeUid;
+  final String activeUid;
   @override
-  dynamic get createdAt;
+  final dynamic createdAt;
   @override
-  String get postId;
+  final String postId;
   @override
-  dynamic get postRef;
+  final dynamic postRef;
 
   /// Create a copy of PostMute
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PostMuteImplCopyWith<_$PostMuteImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$PostMuteCopyWith<_PostMute> get copyWith =>
+      __$PostMuteCopyWithImpl<_PostMute>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PostMuteToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _PostMute &&
+            (identical(other.activeUid, activeUid) ||
+                other.activeUid == activeUid) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            (identical(other.postId, postId) || other.postId == postId) &&
+            const DeepCollectionEquality().equals(other.postRef, postRef));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      activeUid,
+      const DeepCollectionEquality().hash(createdAt),
+      postId,
+      const DeepCollectionEquality().hash(postRef));
+
+  @override
+  String toString() {
+    return 'PostMute(activeUid: $activeUid, createdAt: $createdAt, postId: $postId, postRef: $postRef)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$PostMuteCopyWith<$Res>
+    implements $PostMuteCopyWith<$Res> {
+  factory _$PostMuteCopyWith(_PostMute value, $Res Function(_PostMute) _then) =
+      __$PostMuteCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String activeUid, dynamic createdAt, String postId, dynamic postRef});
+}
+
+/// @nodoc
+class __$PostMuteCopyWithImpl<$Res> implements _$PostMuteCopyWith<$Res> {
+  __$PostMuteCopyWithImpl(this._self, this._then);
+
+  final _PostMute _self;
+  final $Res Function(_PostMute) _then;
+
+  /// Create a copy of PostMute
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? activeUid = null,
+    Object? createdAt = freezed,
+    Object? postId = null,
+    Object? postRef = freezed,
+  }) {
+    return _then(_PostMute(
+      activeUid: null == activeUid
+          ? _self.activeUid
+          : activeUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      postId: null == postId
+          ? _self.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as String,
+      postRef: freezed == postRef
+          ? _self.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
+}
+
+// dart format on

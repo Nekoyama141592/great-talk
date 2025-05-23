@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,149 +10,30 @@ part of 'follower.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Follower _$FollowerFromJson(Map<String, dynamic> json) {
-  return _Follower.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Follower {
-  dynamic get activeUserRef => throw _privateConstructorUsedError;
-  dynamic get createdAt => throw _privateConstructorUsedError;
-  dynamic get passiveUserRef => throw _privateConstructorUsedError;
-
-  /// Serializes this Follower to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  dynamic get activeUserRef;
+  dynamic get createdAt;
+  dynamic get passiveUserRef;
 
   /// Create a copy of Follower
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $FollowerCopyWith<Follower> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$FollowerCopyWithImpl<Follower>(this as Follower, _$identity);
 
-/// @nodoc
-abstract class $FollowerCopyWith<$Res> {
-  factory $FollowerCopyWith(Follower value, $Res Function(Follower) then) =
-      _$FollowerCopyWithImpl<$Res, Follower>;
-  @useResult
-  $Res call({dynamic activeUserRef, dynamic createdAt, dynamic passiveUserRef});
-}
-
-/// @nodoc
-class _$FollowerCopyWithImpl<$Res, $Val extends Follower>
-    implements $FollowerCopyWith<$Res> {
-  _$FollowerCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Follower
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? activeUserRef = freezed,
-    Object? createdAt = freezed,
-    Object? passiveUserRef = freezed,
-  }) {
-    return _then(_value.copyWith(
-      activeUserRef: freezed == activeUserRef
-          ? _value.activeUserRef
-          : activeUserRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      passiveUserRef: freezed == passiveUserRef
-          ? _value.passiveUserRef
-          : passiveUserRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$FollowerImplCopyWith<$Res>
-    implements $FollowerCopyWith<$Res> {
-  factory _$$FollowerImplCopyWith(
-          _$FollowerImpl value, $Res Function(_$FollowerImpl) then) =
-      __$$FollowerImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic activeUserRef, dynamic createdAt, dynamic passiveUserRef});
-}
-
-/// @nodoc
-class __$$FollowerImplCopyWithImpl<$Res>
-    extends _$FollowerCopyWithImpl<$Res, _$FollowerImpl>
-    implements _$$FollowerImplCopyWith<$Res> {
-  __$$FollowerImplCopyWithImpl(
-      _$FollowerImpl _value, $Res Function(_$FollowerImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Follower
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? activeUserRef = freezed,
-    Object? createdAt = freezed,
-    Object? passiveUserRef = freezed,
-  }) {
-    return _then(_$FollowerImpl(
-      activeUserRef: freezed == activeUserRef
-          ? _value.activeUserRef
-          : activeUserRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      passiveUserRef: freezed == passiveUserRef
-          ? _value.passiveUserRef
-          : passiveUserRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$FollowerImpl extends _Follower {
-  const _$FollowerImpl(
-      {required this.activeUserRef,
-      required this.createdAt,
-      required this.passiveUserRef})
-      : super._();
-
-  factory _$FollowerImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FollowerImplFromJson(json);
-
-  @override
-  final dynamic activeUserRef;
-  @override
-  final dynamic createdAt;
-  @override
-  final dynamic passiveUserRef;
-
-  @override
-  String toString() {
-    return 'Follower(activeUserRef: $activeUserRef, createdAt: $createdAt, passiveUserRef: $passiveUserRef)';
-  }
+  /// Serializes this Follower to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FollowerImpl &&
+            other is Follower &&
             const DeepCollectionEquality()
                 .equals(other.activeUserRef, activeUserRef) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -167,43 +49,153 @@ class _$FollowerImpl extends _Follower {
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(passiveUserRef));
 
-  /// Create a copy of Follower
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$FollowerImplCopyWith<_$FollowerImpl> get copyWith =>
-      __$$FollowerImplCopyWithImpl<_$FollowerImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FollowerImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Follower(activeUserRef: $activeUserRef, createdAt: $createdAt, passiveUserRef: $passiveUserRef)';
   }
 }
 
-abstract class _Follower extends Follower {
-  const factory _Follower(
-      {required final dynamic activeUserRef,
-      required final dynamic createdAt,
-      required final dynamic passiveUserRef}) = _$FollowerImpl;
-  const _Follower._() : super._();
+/// @nodoc
+abstract mixin class $FollowerCopyWith<$Res> {
+  factory $FollowerCopyWith(Follower value, $Res Function(Follower) _then) =
+      _$FollowerCopyWithImpl;
+  @useResult
+  $Res call({dynamic activeUserRef, dynamic createdAt, dynamic passiveUserRef});
+}
 
-  factory _Follower.fromJson(Map<String, dynamic> json) =
-      _$FollowerImpl.fromJson;
+/// @nodoc
+class _$FollowerCopyWithImpl<$Res> implements $FollowerCopyWith<$Res> {
+  _$FollowerCopyWithImpl(this._self, this._then);
+
+  final Follower _self;
+  final $Res Function(Follower) _then;
+
+  /// Create a copy of Follower
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activeUserRef = freezed,
+    Object? createdAt = freezed,
+    Object? passiveUserRef = freezed,
+  }) {
+    return _then(_self.copyWith(
+      activeUserRef: freezed == activeUserRef
+          ? _self.activeUserRef
+          : activeUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      passiveUserRef: freezed == passiveUserRef
+          ? _self.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _Follower extends Follower {
+  const _Follower(
+      {required this.activeUserRef,
+      required this.createdAt,
+      required this.passiveUserRef})
+      : super._();
+  factory _Follower.fromJson(Map<String, dynamic> json) =>
+      _$FollowerFromJson(json);
 
   @override
-  dynamic get activeUserRef;
+  final dynamic activeUserRef;
   @override
-  dynamic get createdAt;
+  final dynamic createdAt;
   @override
-  dynamic get passiveUserRef;
+  final dynamic passiveUserRef;
 
   /// Create a copy of Follower
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FollowerImplCopyWith<_$FollowerImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$FollowerCopyWith<_Follower> get copyWith =>
+      __$FollowerCopyWithImpl<_Follower>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$FollowerToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Follower &&
+            const DeepCollectionEquality()
+                .equals(other.activeUserRef, activeUserRef) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality()
+                .equals(other.passiveUserRef, passiveUserRef));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(activeUserRef),
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(passiveUserRef));
+
+  @override
+  String toString() {
+    return 'Follower(activeUserRef: $activeUserRef, createdAt: $createdAt, passiveUserRef: $passiveUserRef)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$FollowerCopyWith<$Res>
+    implements $FollowerCopyWith<$Res> {
+  factory _$FollowerCopyWith(_Follower value, $Res Function(_Follower) _then) =
+      __$FollowerCopyWithImpl;
+  @override
+  @useResult
+  $Res call({dynamic activeUserRef, dynamic createdAt, dynamic passiveUserRef});
+}
+
+/// @nodoc
+class __$FollowerCopyWithImpl<$Res> implements _$FollowerCopyWith<$Res> {
+  __$FollowerCopyWithImpl(this._self, this._then);
+
+  final _Follower _self;
+  final $Res Function(_Follower) _then;
+
+  /// Create a copy of Follower
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? activeUserRef = freezed,
+    Object? createdAt = freezed,
+    Object? passiveUserRef = freezed,
+  }) {
+    return _then(_Follower(
+      activeUserRef: freezed == activeUserRef
+          ? _self.activeUserRef
+          : activeUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      passiveUserRef: freezed == passiveUserRef
+          ? _self.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
+}
+
+// dart format on

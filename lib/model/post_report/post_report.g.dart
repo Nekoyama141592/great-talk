@@ -6,8 +6,7 @@ part of 'post_report.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PostReportImpl _$$PostReportImplFromJson(Map<String, dynamic> json) =>
-    _$PostReportImpl(
+_PostReport _$PostReportFromJson(Map<String, dynamic> json) => _PostReport(
       activeUid: json['activeUid'] as String,
       activeUserRef: json['activeUserRef'],
       createdAt: json['createdAt'],
@@ -18,7 +17,7 @@ _$PostReportImpl _$$PostReportImplFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$PostReportImplToJson(_$PostReportImpl instance) =>
+Map<String, dynamic> _$PostReportToJson(_PostReport instance) =>
     <String, dynamic>{
       'activeUid': instance.activeUid,
       'activeUserRef': instance.activeUserRef,

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,88 +10,61 @@ part of 'receipt_request.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ReceiptRequest _$ReceiptRequestFromJson(Map<String, dynamic> json) {
-  return _ReceiptRequest.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ReceiptRequest {
-  Map<String, dynamic> get data => throw _privateConstructorUsedError;
-  String get uid => throw _privateConstructorUsedError;
-
-  /// Serializes this ReceiptRequest to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> get data;
+  String get uid;
 
   /// Create a copy of ReceiptRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ReceiptRequestCopyWith<ReceiptRequest> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ReceiptRequestCopyWith<$Res> {
-  factory $ReceiptRequestCopyWith(
-          ReceiptRequest value, $Res Function(ReceiptRequest) then) =
-      _$ReceiptRequestCopyWithImpl<$Res, ReceiptRequest>;
-  @useResult
-  $Res call({Map<String, dynamic> data, String uid});
-}
-
-/// @nodoc
-class _$ReceiptRequestCopyWithImpl<$Res, $Val extends ReceiptRequest>
-    implements $ReceiptRequestCopyWith<$Res> {
-  _$ReceiptRequestCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $ReceiptRequestCopyWith<ReceiptRequest> get copyWith =>
+      _$ReceiptRequestCopyWithImpl<ReceiptRequest>(
+          this as ReceiptRequest, _$identity);
+
+  /// Serializes this ReceiptRequest to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? data = null,
-    Object? uid = null,
-  }) {
-    return _then(_value.copyWith(
-      data: null == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ReceiptRequest &&
+            const DeepCollectionEquality().equals(other.data, data) &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data), uid);
+
+  @override
+  String toString() {
+    return 'ReceiptRequest(data: $data, uid: $uid)';
   }
 }
 
 /// @nodoc
-abstract class _$$ReceiptRequestImplCopyWith<$Res>
-    implements $ReceiptRequestCopyWith<$Res> {
-  factory _$$ReceiptRequestImplCopyWith(_$ReceiptRequestImpl value,
-          $Res Function(_$ReceiptRequestImpl) then) =
-      __$$ReceiptRequestImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ReceiptRequestCopyWith<$Res> {
+  factory $ReceiptRequestCopyWith(
+          ReceiptRequest value, $Res Function(ReceiptRequest) _then) =
+      _$ReceiptRequestCopyWithImpl;
   @useResult
   $Res call({Map<String, dynamic> data, String uid});
 }
 
 /// @nodoc
-class __$$ReceiptRequestImplCopyWithImpl<$Res>
-    extends _$ReceiptRequestCopyWithImpl<$Res, _$ReceiptRequestImpl>
-    implements _$$ReceiptRequestImplCopyWith<$Res> {
-  __$$ReceiptRequestImplCopyWithImpl(
-      _$ReceiptRequestImpl _value, $Res Function(_$ReceiptRequestImpl) _then)
-      : super(_value, _then);
+class _$ReceiptRequestCopyWithImpl<$Res>
+    implements $ReceiptRequestCopyWith<$Res> {
+  _$ReceiptRequestCopyWithImpl(this._self, this._then);
+
+  final ReceiptRequest _self;
+  final $Res Function(ReceiptRequest) _then;
 
   /// Create a copy of ReceiptRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -100,13 +74,13 @@ class __$$ReceiptRequestImplCopyWithImpl<$Res>
     Object? data = null,
     Object? uid = null,
   }) {
-    return _then(_$ReceiptRequestImpl(
+    return _then(_self.copyWith(
       data: null == data
-          ? _value._data
+          ? _self.data
           : data // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
       uid: null == uid
-          ? _value.uid
+          ? _self.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -115,14 +89,13 @@ class __$$ReceiptRequestImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ReceiptRequestImpl extends _ReceiptRequest {
-  const _$ReceiptRequestImpl(
+class _ReceiptRequest extends ReceiptRequest {
+  const _ReceiptRequest(
       {required final Map<String, dynamic> data, required this.uid})
       : _data = data,
         super._();
-
-  factory _$ReceiptRequestImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ReceiptRequestImplFromJson(json);
+  factory _ReceiptRequest.fromJson(Map<String, dynamic> json) =>
+      _$ReceiptRequestFromJson(json);
 
   final Map<String, dynamic> _data;
   @override
@@ -135,16 +108,26 @@ class _$ReceiptRequestImpl extends _ReceiptRequest {
   @override
   final String uid;
 
+  /// Create a copy of ReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ReceiptRequest(data: $data, uid: $uid)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ReceiptRequestCopyWith<_ReceiptRequest> get copyWith =>
+      __$ReceiptRequestCopyWithImpl<_ReceiptRequest>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ReceiptRequestToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ReceiptRequestImpl &&
+            other is _ReceiptRequest &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.uid, uid) || other.uid == uid));
   }
@@ -154,41 +137,50 @@ class _$ReceiptRequestImpl extends _ReceiptRequest {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_data), uid);
 
-  /// Create a copy of ReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ReceiptRequestImplCopyWith<_$ReceiptRequestImpl> get copyWith =>
-      __$$ReceiptRequestImplCopyWithImpl<_$ReceiptRequestImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ReceiptRequestImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ReceiptRequest(data: $data, uid: $uid)';
   }
 }
 
-abstract class _ReceiptRequest extends ReceiptRequest {
-  const factory _ReceiptRequest(
-      {required final Map<String, dynamic> data,
-      required final String uid}) = _$ReceiptRequestImpl;
-  const _ReceiptRequest._() : super._();
-
-  factory _ReceiptRequest.fromJson(Map<String, dynamic> json) =
-      _$ReceiptRequestImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$ReceiptRequestCopyWith<$Res>
+    implements $ReceiptRequestCopyWith<$Res> {
+  factory _$ReceiptRequestCopyWith(
+          _ReceiptRequest value, $Res Function(_ReceiptRequest) _then) =
+      __$ReceiptRequestCopyWithImpl;
   @override
-  Map<String, dynamic> get data;
-  @override
-  String get uid;
+  @useResult
+  $Res call({Map<String, dynamic> data, String uid});
+}
+
+/// @nodoc
+class __$ReceiptRequestCopyWithImpl<$Res>
+    implements _$ReceiptRequestCopyWith<$Res> {
+  __$ReceiptRequestCopyWithImpl(this._self, this._then);
+
+  final _ReceiptRequest _self;
+  final $Res Function(_ReceiptRequest) _then;
 
   /// Create a copy of ReceiptRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ReceiptRequestImplCopyWith<_$ReceiptRequestImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? data = null,
+    Object? uid = null,
+  }) {
+    return _then(_ReceiptRequest(
+      data: null == data
+          ? _self._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      uid: null == uid
+          ? _self.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
+
+// dart format on

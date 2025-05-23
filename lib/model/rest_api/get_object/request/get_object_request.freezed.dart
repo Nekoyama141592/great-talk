@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,82 +10,58 @@ part of 'get_object_request.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-GetObjectRequest _$GetObjectRequestFromJson(Map<String, dynamic> json) {
-  return _GetObjectRequest.fromJson(json);
-}
 
 /// @nodoc
 mixin _$GetObjectRequest {
-  String get object => throw _privateConstructorUsedError;
-
-  /// Serializes this GetObjectRequest to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get object;
 
   /// Create a copy of GetObjectRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GetObjectRequestCopyWith<GetObjectRequest> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GetObjectRequestCopyWith<$Res> {
-  factory $GetObjectRequestCopyWith(
-          GetObjectRequest value, $Res Function(GetObjectRequest) then) =
-      _$GetObjectRequestCopyWithImpl<$Res, GetObjectRequest>;
-  @useResult
-  $Res call({String object});
-}
-
-/// @nodoc
-class _$GetObjectRequestCopyWithImpl<$Res, $Val extends GetObjectRequest>
-    implements $GetObjectRequestCopyWith<$Res> {
-  _$GetObjectRequestCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of GetObjectRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $GetObjectRequestCopyWith<GetObjectRequest> get copyWith =>
+      _$GetObjectRequestCopyWithImpl<GetObjectRequest>(
+          this as GetObjectRequest, _$identity);
+
+  /// Serializes this GetObjectRequest to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? object = null,
-  }) {
-    return _then(_value.copyWith(
-      object: null == object
-          ? _value.object
-          : object // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GetObjectRequest &&
+            (identical(other.object, object) || other.object == object));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, object);
+
+  @override
+  String toString() {
+    return 'GetObjectRequest(object: $object)';
   }
 }
 
 /// @nodoc
-abstract class _$$GetObjectRequestImplCopyWith<$Res>
-    implements $GetObjectRequestCopyWith<$Res> {
-  factory _$$GetObjectRequestImplCopyWith(_$GetObjectRequestImpl value,
-          $Res Function(_$GetObjectRequestImpl) then) =
-      __$$GetObjectRequestImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $GetObjectRequestCopyWith<$Res> {
+  factory $GetObjectRequestCopyWith(
+          GetObjectRequest value, $Res Function(GetObjectRequest) _then) =
+      _$GetObjectRequestCopyWithImpl;
   @useResult
   $Res call({String object});
 }
 
 /// @nodoc
-class __$$GetObjectRequestImplCopyWithImpl<$Res>
-    extends _$GetObjectRequestCopyWithImpl<$Res, _$GetObjectRequestImpl>
-    implements _$$GetObjectRequestImplCopyWith<$Res> {
-  __$$GetObjectRequestImplCopyWithImpl(_$GetObjectRequestImpl _value,
-      $Res Function(_$GetObjectRequestImpl) _then)
-      : super(_value, _then);
+class _$GetObjectRequestCopyWithImpl<$Res>
+    implements $GetObjectRequestCopyWith<$Res> {
+  _$GetObjectRequestCopyWithImpl(this._self, this._then);
+
+  final GetObjectRequest _self;
+  final $Res Function(GetObjectRequest) _then;
 
   /// Create a copy of GetObjectRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -93,9 +70,9 @@ class __$$GetObjectRequestImplCopyWithImpl<$Res>
   $Res call({
     Object? object = null,
   }) {
-    return _then(_$GetObjectRequestImpl(
+    return _then(_self.copyWith(
       object: null == object
-          ? _value.object
+          ? _self.object
           : object // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -104,25 +81,34 @@ class __$$GetObjectRequestImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GetObjectRequestImpl extends _GetObjectRequest {
-  const _$GetObjectRequestImpl({required this.object}) : super._();
-
-  factory _$GetObjectRequestImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GetObjectRequestImplFromJson(json);
+class _GetObjectRequest extends GetObjectRequest {
+  const _GetObjectRequest({required this.object}) : super._();
+  factory _GetObjectRequest.fromJson(Map<String, dynamic> json) =>
+      _$GetObjectRequestFromJson(json);
 
   @override
   final String object;
 
+  /// Create a copy of GetObjectRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GetObjectRequest(object: $object)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GetObjectRequestCopyWith<_GetObjectRequest> get copyWith =>
+      __$GetObjectRequestCopyWithImpl<_GetObjectRequest>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$GetObjectRequestToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetObjectRequestImpl &&
+            other is _GetObjectRequest &&
             (identical(other.object, object) || other.object == object));
   }
 
@@ -130,38 +116,45 @@ class _$GetObjectRequestImpl extends _GetObjectRequest {
   @override
   int get hashCode => Object.hash(runtimeType, object);
 
-  /// Create a copy of GetObjectRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$GetObjectRequestImplCopyWith<_$GetObjectRequestImpl> get copyWith =>
-      __$$GetObjectRequestImplCopyWithImpl<_$GetObjectRequestImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GetObjectRequestImplToJson(
-      this,
-    );
+  String toString() {
+    return 'GetObjectRequest(object: $object)';
   }
 }
 
-abstract class _GetObjectRequest extends GetObjectRequest {
-  const factory _GetObjectRequest({required final String object}) =
-      _$GetObjectRequestImpl;
-  const _GetObjectRequest._() : super._();
-
-  factory _GetObjectRequest.fromJson(Map<String, dynamic> json) =
-      _$GetObjectRequestImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$GetObjectRequestCopyWith<$Res>
+    implements $GetObjectRequestCopyWith<$Res> {
+  factory _$GetObjectRequestCopyWith(
+          _GetObjectRequest value, $Res Function(_GetObjectRequest) _then) =
+      __$GetObjectRequestCopyWithImpl;
   @override
-  String get object;
+  @useResult
+  $Res call({String object});
+}
+
+/// @nodoc
+class __$GetObjectRequestCopyWithImpl<$Res>
+    implements _$GetObjectRequestCopyWith<$Res> {
+  __$GetObjectRequestCopyWithImpl(this._self, this._then);
+
+  final _GetObjectRequest _self;
+  final $Res Function(_GetObjectRequest) _then;
 
   /// Create a copy of GetObjectRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetObjectRequestImplCopyWith<_$GetObjectRequestImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? object = null,
+  }) {
+    return _then(_GetObjectRequest(
+      object: null == object
+          ? _self.object
+          : object // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
+
+// dart format on

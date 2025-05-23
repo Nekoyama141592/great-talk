@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,100 +10,60 @@ part of 'detected_text.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-DetectedText _$DetectedTextFromJson(Map<String, dynamic> json) {
-  return _DetectedText.fromJson(json);
-}
 
 /// @nodoc
 mixin _$DetectedText {
-  String get languageCode => throw _privateConstructorUsedError;
-  int get negativeScore => throw _privateConstructorUsedError;
-  int get positiveScore => throw _privateConstructorUsedError;
-  String get sentiment => throw _privateConstructorUsedError;
-  String get value => throw _privateConstructorUsedError;
-
-  /// Serializes this DetectedText to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get languageCode;
+  int get negativeScore;
+  int get positiveScore;
+  String get sentiment;
+  String get value;
 
   /// Create a copy of DetectedText
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $DetectedTextCopyWith<DetectedText> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DetectedTextCopyWith<$Res> {
-  factory $DetectedTextCopyWith(
-          DetectedText value, $Res Function(DetectedText) then) =
-      _$DetectedTextCopyWithImpl<$Res, DetectedText>;
-  @useResult
-  $Res call(
-      {String languageCode,
-      int negativeScore,
-      int positiveScore,
-      String sentiment,
-      String value});
-}
-
-/// @nodoc
-class _$DetectedTextCopyWithImpl<$Res, $Val extends DetectedText>
-    implements $DetectedTextCopyWith<$Res> {
-  _$DetectedTextCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DetectedText
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $DetectedTextCopyWith<DetectedText> get copyWith =>
+      _$DetectedTextCopyWithImpl<DetectedText>(
+          this as DetectedText, _$identity);
+
+  /// Serializes this DetectedText to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? languageCode = null,
-    Object? negativeScore = null,
-    Object? positiveScore = null,
-    Object? sentiment = null,
-    Object? value = null,
-  }) {
-    return _then(_value.copyWith(
-      languageCode: null == languageCode
-          ? _value.languageCode
-          : languageCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      negativeScore: null == negativeScore
-          ? _value.negativeScore
-          : negativeScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      positiveScore: null == positiveScore
-          ? _value.positiveScore
-          : positiveScore // ignore: cast_nullable_to_non_nullable
-              as int,
-      sentiment: null == sentiment
-          ? _value.sentiment
-          : sentiment // ignore: cast_nullable_to_non_nullable
-              as String,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DetectedText &&
+            (identical(other.languageCode, languageCode) ||
+                other.languageCode == languageCode) &&
+            (identical(other.negativeScore, negativeScore) ||
+                other.negativeScore == negativeScore) &&
+            (identical(other.positiveScore, positiveScore) ||
+                other.positiveScore == positiveScore) &&
+            (identical(other.sentiment, sentiment) ||
+                other.sentiment == sentiment) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, languageCode, negativeScore,
+      positiveScore, sentiment, value);
+
+  @override
+  String toString() {
+    return 'DetectedText(languageCode: $languageCode, negativeScore: $negativeScore, positiveScore: $positiveScore, sentiment: $sentiment, value: $value)';
   }
 }
 
 /// @nodoc
-abstract class _$$DetectedTextImplCopyWith<$Res>
-    implements $DetectedTextCopyWith<$Res> {
-  factory _$$DetectedTextImplCopyWith(
-          _$DetectedTextImpl value, $Res Function(_$DetectedTextImpl) then) =
-      __$$DetectedTextImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $DetectedTextCopyWith<$Res> {
+  factory $DetectedTextCopyWith(
+          DetectedText value, $Res Function(DetectedText) _then) =
+      _$DetectedTextCopyWithImpl;
   @useResult
   $Res call(
       {String languageCode,
@@ -113,12 +74,11 @@ abstract class _$$DetectedTextImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$DetectedTextImplCopyWithImpl<$Res>
-    extends _$DetectedTextCopyWithImpl<$Res, _$DetectedTextImpl>
-    implements _$$DetectedTextImplCopyWith<$Res> {
-  __$$DetectedTextImplCopyWithImpl(
-      _$DetectedTextImpl _value, $Res Function(_$DetectedTextImpl) _then)
-      : super(_value, _then);
+class _$DetectedTextCopyWithImpl<$Res> with $DetectedTextCopyWith<$Res> {
+  _$DetectedTextCopyWithImpl(this._self, this._then);
+
+  final DetectedText _self;
+  final $Res Function(DetectedText) _then;
 
   /// Create a copy of DetectedText
   /// with the given fields replaced by the non-null parameter values.
@@ -131,25 +91,25 @@ class __$$DetectedTextImplCopyWithImpl<$Res>
     Object? sentiment = null,
     Object? value = null,
   }) {
-    return _then(_$DetectedTextImpl(
+    return _then(_self.copyWith(
       languageCode: null == languageCode
-          ? _value.languageCode
+          ? _self.languageCode
           : languageCode // ignore: cast_nullable_to_non_nullable
               as String,
       negativeScore: null == negativeScore
-          ? _value.negativeScore
+          ? _self.negativeScore
           : negativeScore // ignore: cast_nullable_to_non_nullable
               as int,
       positiveScore: null == positiveScore
-          ? _value.positiveScore
+          ? _self.positiveScore
           : positiveScore // ignore: cast_nullable_to_non_nullable
               as int,
       sentiment: null == sentiment
-          ? _value.sentiment
+          ? _self.sentiment
           : sentiment // ignore: cast_nullable_to_non_nullable
               as String,
       value: null == value
-          ? _value.value
+          ? _self.value
           : value // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -158,16 +118,15 @@ class __$$DetectedTextImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DetectedTextImpl implements _DetectedText {
-  const _$DetectedTextImpl(
+class _DetectedText implements DetectedText {
+  const _DetectedText(
       {this.languageCode = "",
       this.negativeScore = 0,
       this.positiveScore = 0,
       this.sentiment = "",
       this.value = ""});
-
-  factory _$DetectedTextImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DetectedTextImplFromJson(json);
+  factory _DetectedText.fromJson(Map<String, dynamic> json) =>
+      _$DetectedTextFromJson(json);
 
   @override
   @JsonKey()
@@ -185,16 +144,26 @@ class _$DetectedTextImpl implements _DetectedText {
   @JsonKey()
   final String value;
 
+  /// Create a copy of DetectedText
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DetectedText(languageCode: $languageCode, negativeScore: $negativeScore, positiveScore: $positiveScore, sentiment: $sentiment, value: $value)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DetectedTextCopyWith<_DetectedText> get copyWith =>
+      __$DetectedTextCopyWithImpl<_DetectedText>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DetectedTextToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DetectedTextImpl &&
+            other is _DetectedText &&
             (identical(other.languageCode, languageCode) ||
                 other.languageCode == languageCode) &&
             (identical(other.negativeScore, negativeScore) ||
@@ -211,48 +180,70 @@ class _$DetectedTextImpl implements _DetectedText {
   int get hashCode => Object.hash(runtimeType, languageCode, negativeScore,
       positiveScore, sentiment, value);
 
-  /// Create a copy of DetectedText
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DetectedTextImplCopyWith<_$DetectedTextImpl> get copyWith =>
-      __$$DetectedTextImplCopyWithImpl<_$DetectedTextImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DetectedTextImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DetectedText(languageCode: $languageCode, negativeScore: $negativeScore, positiveScore: $positiveScore, sentiment: $sentiment, value: $value)';
   }
 }
 
-abstract class _DetectedText implements DetectedText {
-  const factory _DetectedText(
-      {final String languageCode,
-      final int negativeScore,
-      final int positiveScore,
-      final String sentiment,
-      final String value}) = _$DetectedTextImpl;
+/// @nodoc
+abstract mixin class _$DetectedTextCopyWith<$Res>
+    with $DetectedTextCopyWith<$Res> {
+  factory _$DetectedTextCopyWith(
+          _DetectedText value, $Res Function(_DetectedText) _then) =
+      __$DetectedTextCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String languageCode,
+      int negativeScore,
+      int positiveScore,
+      String sentiment,
+      String value});
+}
 
-  factory _DetectedText.fromJson(Map<String, dynamic> json) =
-      _$DetectedTextImpl.fromJson;
+/// @nodoc
+class __$DetectedTextCopyWithImpl<$Res>
+    with _$DetectedTextCopyWith<$Res> {
+  __$DetectedTextCopyWithImpl(this._self, this._then);
 
-  @override
-  String get languageCode;
-  @override
-  int get negativeScore;
-  @override
-  int get positiveScore;
-  @override
-  String get sentiment;
-  @override
-  String get value;
+  final _DetectedText _self;
+  final $Res Function(_DetectedText) _then;
 
   /// Create a copy of DetectedText
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DetectedTextImplCopyWith<_$DetectedTextImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? languageCode = null,
+    Object? negativeScore = null,
+    Object? positiveScore = null,
+    Object? sentiment = null,
+    Object? value = null,
+  }) {
+    return _then(_DetectedText(
+      languageCode: null == languageCode
+          ? _self.languageCode
+          : languageCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      negativeScore: null == negativeScore
+          ? _self.negativeScore
+          : negativeScore // ignore: cast_nullable_to_non_nullable
+              as int,
+      positiveScore: null == positiveScore
+          ? _self.positiveScore
+          : positiveScore // ignore: cast_nullable_to_non_nullable
+              as int,
+      sentiment: null == sentiment
+          ? _self.sentiment
+          : sentiment // ignore: cast_nullable_to_non_nullable
+              as String,
+      value: null == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
+
+// dart format on

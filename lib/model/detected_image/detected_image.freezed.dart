@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,94 +10,61 @@ part of 'detected_image.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-DetectedImage _$DetectedImageFromJson(Map<String, dynamic> json) {
-  return _DetectedImage.fromJson(json);
-}
 
 /// @nodoc
 mixin _$DetectedImage {
-  String get bucketName => throw _privateConstructorUsedError;
-  List<Map<String, dynamic>> get moderationLabels =>
-      throw _privateConstructorUsedError;
-  String get moderationModelVersion => throw _privateConstructorUsedError;
-  String get value => throw _privateConstructorUsedError;
-
-  /// Serializes this DetectedImage to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get bucketName;
+  List<Map<String, dynamic>> get moderationLabels;
+  String get moderationModelVersion;
+  String get value;
 
   /// Create a copy of DetectedImage
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $DetectedImageCopyWith<DetectedImage> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DetectedImageCopyWith<$Res> {
-  factory $DetectedImageCopyWith(
-          DetectedImage value, $Res Function(DetectedImage) then) =
-      _$DetectedImageCopyWithImpl<$Res, DetectedImage>;
-  @useResult
-  $Res call(
-      {String bucketName,
-      List<Map<String, dynamic>> moderationLabels,
-      String moderationModelVersion,
-      String value});
-}
-
-/// @nodoc
-class _$DetectedImageCopyWithImpl<$Res, $Val extends DetectedImage>
-    implements $DetectedImageCopyWith<$Res> {
-  _$DetectedImageCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DetectedImage
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $DetectedImageCopyWith<DetectedImage> get copyWith =>
+      _$DetectedImageCopyWithImpl<DetectedImage>(
+          this as DetectedImage, _$identity);
+
+  /// Serializes this DetectedImage to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? bucketName = null,
-    Object? moderationLabels = null,
-    Object? moderationModelVersion = null,
-    Object? value = null,
-  }) {
-    return _then(_value.copyWith(
-      bucketName: null == bucketName
-          ? _value.bucketName
-          : bucketName // ignore: cast_nullable_to_non_nullable
-              as String,
-      moderationLabels: null == moderationLabels
-          ? _value.moderationLabels
-          : moderationLabels // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
-      moderationModelVersion: null == moderationModelVersion
-          ? _value.moderationModelVersion
-          : moderationModelVersion // ignore: cast_nullable_to_non_nullable
-              as String,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DetectedImage &&
+            (identical(other.bucketName, bucketName) ||
+                other.bucketName == bucketName) &&
+            const DeepCollectionEquality()
+                .equals(other.moderationLabels, moderationLabels) &&
+            (identical(other.moderationModelVersion, moderationModelVersion) ||
+                other.moderationModelVersion == moderationModelVersion) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      bucketName,
+      const DeepCollectionEquality().hash(moderationLabels),
+      moderationModelVersion,
+      value);
+
+  @override
+  String toString() {
+    return 'DetectedImage(bucketName: $bucketName, moderationLabels: $moderationLabels, moderationModelVersion: $moderationModelVersion, value: $value)';
   }
 }
 
 /// @nodoc
-abstract class _$$DetectedImageImplCopyWith<$Res>
-    implements $DetectedImageCopyWith<$Res> {
-  factory _$$DetectedImageImplCopyWith(
-          _$DetectedImageImpl value, $Res Function(_$DetectedImageImpl) then) =
-      __$$DetectedImageImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $DetectedImageCopyWith<$Res> {
+  factory $DetectedImageCopyWith(
+          DetectedImage value, $Res Function(DetectedImage) _then) =
+      _$DetectedImageCopyWithImpl;
   @useResult
   $Res call(
       {String bucketName,
@@ -106,12 +74,12 @@ abstract class _$$DetectedImageImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$DetectedImageImplCopyWithImpl<$Res>
-    extends _$DetectedImageCopyWithImpl<$Res, _$DetectedImageImpl>
-    implements _$$DetectedImageImplCopyWith<$Res> {
-  __$$DetectedImageImplCopyWithImpl(
-      _$DetectedImageImpl _value, $Res Function(_$DetectedImageImpl) _then)
-      : super(_value, _then);
+class _$DetectedImageCopyWithImpl<$Res>
+    implements $DetectedImageCopyWith<$Res> {
+  _$DetectedImageCopyWithImpl(this._self, this._then);
+
+  final DetectedImage _self;
+  final $Res Function(DetectedImage) _then;
 
   /// Create a copy of DetectedImage
   /// with the given fields replaced by the non-null parameter values.
@@ -123,21 +91,21 @@ class __$$DetectedImageImplCopyWithImpl<$Res>
     Object? moderationModelVersion = null,
     Object? value = null,
   }) {
-    return _then(_$DetectedImageImpl(
+    return _then(_self.copyWith(
       bucketName: null == bucketName
-          ? _value.bucketName
+          ? _self.bucketName
           : bucketName // ignore: cast_nullable_to_non_nullable
               as String,
       moderationLabels: null == moderationLabels
-          ? _value._moderationLabels
+          ? _self.moderationLabels
           : moderationLabels // ignore: cast_nullable_to_non_nullable
               as List<Map<String, dynamic>>,
       moderationModelVersion: null == moderationModelVersion
-          ? _value.moderationModelVersion
+          ? _self.moderationModelVersion
           : moderationModelVersion // ignore: cast_nullable_to_non_nullable
               as String,
       value: null == value
-          ? _value.value
+          ? _self.value
           : value // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -146,17 +114,16 @@ class __$$DetectedImageImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DetectedImageImpl extends _DetectedImage {
-  const _$DetectedImageImpl(
+class _DetectedImage extends DetectedImage {
+  const _DetectedImage(
       {this.bucketName = "",
       final List<Map<String, dynamic>> moderationLabels = const [],
       this.moderationModelVersion = "",
       this.value = ""})
       : _moderationLabels = moderationLabels,
         super._();
-
-  factory _$DetectedImageImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DetectedImageImplFromJson(json);
+  factory _DetectedImage.fromJson(Map<String, dynamic> json) =>
+      _$DetectedImageFromJson(json);
 
   @override
   @JsonKey()
@@ -178,16 +145,26 @@ class _$DetectedImageImpl extends _DetectedImage {
   @JsonKey()
   final String value;
 
+  /// Create a copy of DetectedImage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'DetectedImage(bucketName: $bucketName, moderationLabels: $moderationLabels, moderationModelVersion: $moderationModelVersion, value: $value)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DetectedImageCopyWith<_DetectedImage> get copyWith =>
+      __$DetectedImageCopyWithImpl<_DetectedImage>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DetectedImageToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DetectedImageImpl &&
+            other is _DetectedImage &&
             (identical(other.bucketName, bucketName) ||
                 other.bucketName == bucketName) &&
             const DeepCollectionEquality()
@@ -206,46 +183,64 @@ class _$DetectedImageImpl extends _DetectedImage {
       moderationModelVersion,
       value);
 
-  /// Create a copy of DetectedImage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DetectedImageImplCopyWith<_$DetectedImageImpl> get copyWith =>
-      __$$DetectedImageImplCopyWithImpl<_$DetectedImageImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DetectedImageImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DetectedImage(bucketName: $bucketName, moderationLabels: $moderationLabels, moderationModelVersion: $moderationModelVersion, value: $value)';
   }
 }
 
-abstract class _DetectedImage extends DetectedImage {
-  const factory _DetectedImage(
-      {final String bucketName,
-      final List<Map<String, dynamic>> moderationLabels,
-      final String moderationModelVersion,
-      final String value}) = _$DetectedImageImpl;
-  const _DetectedImage._() : super._();
+/// @nodoc
+abstract mixin class _$DetectedImageCopyWith<$Res>
+    implements $DetectedImageCopyWith<$Res> {
+  factory _$DetectedImageCopyWith(
+          _DetectedImage value, $Res Function(_DetectedImage) _then) =
+      __$DetectedImageCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String bucketName,
+      List<Map<String, dynamic>> moderationLabels,
+      String moderationModelVersion,
+      String value});
+}
 
-  factory _DetectedImage.fromJson(Map<String, dynamic> json) =
-      _$DetectedImageImpl.fromJson;
+/// @nodoc
+class __$DetectedImageCopyWithImpl<$Res>
+    implements _$DetectedImageCopyWith<$Res> {
+  __$DetectedImageCopyWithImpl(this._self, this._then);
 
-  @override
-  String get bucketName;
-  @override
-  List<Map<String, dynamic>> get moderationLabels;
-  @override
-  String get moderationModelVersion;
-  @override
-  String get value;
+  final _DetectedImage _self;
+  final $Res Function(_DetectedImage) _then;
 
   /// Create a copy of DetectedImage
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DetectedImageImplCopyWith<_$DetectedImageImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? bucketName = null,
+    Object? moderationLabels = null,
+    Object? moderationModelVersion = null,
+    Object? value = null,
+  }) {
+    return _then(_DetectedImage(
+      bucketName: null == bucketName
+          ? _self.bucketName
+          : bucketName // ignore: cast_nullable_to_non_nullable
+              as String,
+      moderationLabels: null == moderationLabels
+          ? _self._moderationLabels
+          : moderationLabels // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>,
+      moderationModelVersion: null == moderationModelVersion
+          ? _self.moderationModelVersion
+          : moderationModelVersion // ignore: cast_nullable_to_non_nullable
+              as String,
+      value: null == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
+
+// dart format on

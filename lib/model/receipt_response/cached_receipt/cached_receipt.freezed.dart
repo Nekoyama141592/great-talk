@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,204 +10,34 @@ part of 'cached_receipt.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-CachedReceipt _$CachedReceiptFromJson(Map<String, dynamic> json) {
-  return _CachedReceipt.fromJson(json);
-}
 
 /// @nodoc
 mixin _$CachedReceipt {
-  String get expiryTimeMillis => throw _privateConstructorUsedError;
-  String get orderId => throw _privateConstructorUsedError;
-  String get originalTransactionId => throw _privateConstructorUsedError;
-  String get productId => throw _privateConstructorUsedError;
-  String get startTimeMillis => throw _privateConstructorUsedError;
-  String get uid => throw _privateConstructorUsedError;
-
-  /// Serializes this CachedReceipt to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get expiryTimeMillis;
+  String get orderId;
+  String get originalTransactionId;
+  String get productId;
+  String get startTimeMillis;
+  String get uid;
 
   /// Create a copy of CachedReceipt
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $CachedReceiptCopyWith<CachedReceipt> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$CachedReceiptCopyWithImpl<CachedReceipt>(
+          this as CachedReceipt, _$identity);
 
-/// @nodoc
-abstract class $CachedReceiptCopyWith<$Res> {
-  factory $CachedReceiptCopyWith(
-          CachedReceipt value, $Res Function(CachedReceipt) then) =
-      _$CachedReceiptCopyWithImpl<$Res, CachedReceipt>;
-  @useResult
-  $Res call(
-      {String expiryTimeMillis,
-      String orderId,
-      String originalTransactionId,
-      String productId,
-      String startTimeMillis,
-      String uid});
-}
-
-/// @nodoc
-class _$CachedReceiptCopyWithImpl<$Res, $Val extends CachedReceipt>
-    implements $CachedReceiptCopyWith<$Res> {
-  _$CachedReceiptCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of CachedReceipt
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? expiryTimeMillis = null,
-    Object? orderId = null,
-    Object? originalTransactionId = null,
-    Object? productId = null,
-    Object? startTimeMillis = null,
-    Object? uid = null,
-  }) {
-    return _then(_value.copyWith(
-      expiryTimeMillis: null == expiryTimeMillis
-          ? _value.expiryTimeMillis
-          : expiryTimeMillis // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderId: null == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
-              as String,
-      originalTransactionId: null == originalTransactionId
-          ? _value.originalTransactionId
-          : originalTransactionId // ignore: cast_nullable_to_non_nullable
-              as String,
-      productId: null == productId
-          ? _value.productId
-          : productId // ignore: cast_nullable_to_non_nullable
-              as String,
-      startTimeMillis: null == startTimeMillis
-          ? _value.startTimeMillis
-          : startTimeMillis // ignore: cast_nullable_to_non_nullable
-              as String,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$CachedReceiptImplCopyWith<$Res>
-    implements $CachedReceiptCopyWith<$Res> {
-  factory _$$CachedReceiptImplCopyWith(
-          _$CachedReceiptImpl value, $Res Function(_$CachedReceiptImpl) then) =
-      __$$CachedReceiptImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String expiryTimeMillis,
-      String orderId,
-      String originalTransactionId,
-      String productId,
-      String startTimeMillis,
-      String uid});
-}
-
-/// @nodoc
-class __$$CachedReceiptImplCopyWithImpl<$Res>
-    extends _$CachedReceiptCopyWithImpl<$Res, _$CachedReceiptImpl>
-    implements _$$CachedReceiptImplCopyWith<$Res> {
-  __$$CachedReceiptImplCopyWithImpl(
-      _$CachedReceiptImpl _value, $Res Function(_$CachedReceiptImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CachedReceipt
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? expiryTimeMillis = null,
-    Object? orderId = null,
-    Object? originalTransactionId = null,
-    Object? productId = null,
-    Object? startTimeMillis = null,
-    Object? uid = null,
-  }) {
-    return _then(_$CachedReceiptImpl(
-      expiryTimeMillis: null == expiryTimeMillis
-          ? _value.expiryTimeMillis
-          : expiryTimeMillis // ignore: cast_nullable_to_non_nullable
-              as String,
-      orderId: null == orderId
-          ? _value.orderId
-          : orderId // ignore: cast_nullable_to_non_nullable
-              as String,
-      originalTransactionId: null == originalTransactionId
-          ? _value.originalTransactionId
-          : originalTransactionId // ignore: cast_nullable_to_non_nullable
-              as String,
-      productId: null == productId
-          ? _value.productId
-          : productId // ignore: cast_nullable_to_non_nullable
-              as String,
-      startTimeMillis: null == startTimeMillis
-          ? _value.startTimeMillis
-          : startTimeMillis // ignore: cast_nullable_to_non_nullable
-              as String,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$CachedReceiptImpl extends _CachedReceipt {
-  const _$CachedReceiptImpl(
-      {required this.expiryTimeMillis,
-      required this.orderId,
-      required this.originalTransactionId,
-      required this.productId,
-      required this.startTimeMillis,
-      required this.uid})
-      : super._();
-
-  factory _$CachedReceiptImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CachedReceiptImplFromJson(json);
-
-  @override
-  final String expiryTimeMillis;
-  @override
-  final String orderId;
-  @override
-  final String originalTransactionId;
-  @override
-  final String productId;
-  @override
-  final String startTimeMillis;
-  @override
-  final String uid;
-
-  @override
-  String toString() {
-    return 'CachedReceipt(expiryTimeMillis: $expiryTimeMillis, orderId: $orderId, originalTransactionId: $originalTransactionId, productId: $productId, startTimeMillis: $startTimeMillis, uid: $uid)';
-  }
+  /// Serializes this CachedReceipt to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CachedReceiptImpl &&
+            other is CachedReceipt &&
             (identical(other.expiryTimeMillis, expiryTimeMillis) ||
                 other.expiryTimeMillis == expiryTimeMillis) &&
             (identical(other.orderId, orderId) || other.orderId == orderId) &&
@@ -224,52 +55,210 @@ class _$CachedReceiptImpl extends _CachedReceipt {
   int get hashCode => Object.hash(runtimeType, expiryTimeMillis, orderId,
       originalTransactionId, productId, startTimeMillis, uid);
 
-  /// Create a copy of CachedReceipt
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$CachedReceiptImplCopyWith<_$CachedReceiptImpl> get copyWith =>
-      __$$CachedReceiptImplCopyWithImpl<_$CachedReceiptImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CachedReceiptImplToJson(
-      this,
-    );
+  String toString() {
+    return 'CachedReceipt(expiryTimeMillis: $expiryTimeMillis, orderId: $orderId, originalTransactionId: $originalTransactionId, productId: $productId, startTimeMillis: $startTimeMillis, uid: $uid)';
   }
 }
 
-abstract class _CachedReceipt extends CachedReceipt {
-  const factory _CachedReceipt(
-      {required final String expiryTimeMillis,
-      required final String orderId,
-      required final String originalTransactionId,
-      required final String productId,
-      required final String startTimeMillis,
-      required final String uid}) = _$CachedReceiptImpl;
-  const _CachedReceipt._() : super._();
+/// @nodoc
+abstract mixin class $CachedReceiptCopyWith<$Res> {
+  factory $CachedReceiptCopyWith(
+          CachedReceipt value, $Res Function(CachedReceipt) _then) =
+      _$CachedReceiptCopyWithImpl;
+  @useResult
+  $Res call(
+      {String expiryTimeMillis,
+      String orderId,
+      String originalTransactionId,
+      String productId,
+      String startTimeMillis,
+      String uid});
+}
 
-  factory _CachedReceipt.fromJson(Map<String, dynamic> json) =
-      _$CachedReceiptImpl.fromJson;
+/// @nodoc
+class _$CachedReceiptCopyWithImpl<$Res>
+    implements $CachedReceiptCopyWith<$Res> {
+  _$CachedReceiptCopyWithImpl(this._self, this._then);
+
+  final CachedReceipt _self;
+  final $Res Function(CachedReceipt) _then;
+
+  /// Create a copy of CachedReceipt
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? expiryTimeMillis = null,
+    Object? orderId = null,
+    Object? originalTransactionId = null,
+    Object? productId = null,
+    Object? startTimeMillis = null,
+    Object? uid = null,
+  }) {
+    return _then(_self.copyWith(
+      expiryTimeMillis: null == expiryTimeMillis
+          ? _self.expiryTimeMillis
+          : expiryTimeMillis // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderId: null == orderId
+          ? _self.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
+      originalTransactionId: null == originalTransactionId
+          ? _self.originalTransactionId
+          : originalTransactionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      productId: null == productId
+          ? _self.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTimeMillis: null == startTimeMillis
+          ? _self.startTimeMillis
+          : startTimeMillis // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _self.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _CachedReceipt extends CachedReceipt {
+  const _CachedReceipt(
+      {required this.expiryTimeMillis,
+      required this.orderId,
+      required this.originalTransactionId,
+      required this.productId,
+      required this.startTimeMillis,
+      required this.uid})
+      : super._();
+  factory _CachedReceipt.fromJson(Map<String, dynamic> json) =>
+      _$CachedReceiptFromJson(json);
 
   @override
-  String get expiryTimeMillis;
+  final String expiryTimeMillis;
   @override
-  String get orderId;
+  final String orderId;
   @override
-  String get originalTransactionId;
+  final String originalTransactionId;
   @override
-  String get productId;
+  final String productId;
   @override
-  String get startTimeMillis;
+  final String startTimeMillis;
   @override
-  String get uid;
+  final String uid;
 
   /// Create a copy of CachedReceipt
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CachedReceiptImplCopyWith<_$CachedReceiptImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$CachedReceiptCopyWith<_CachedReceipt> get copyWith =>
+      __$CachedReceiptCopyWithImpl<_CachedReceipt>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$CachedReceiptToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _CachedReceipt &&
+            (identical(other.expiryTimeMillis, expiryTimeMillis) ||
+                other.expiryTimeMillis == expiryTimeMillis) &&
+            (identical(other.orderId, orderId) || other.orderId == orderId) &&
+            (identical(other.originalTransactionId, originalTransactionId) ||
+                other.originalTransactionId == originalTransactionId) &&
+            (identical(other.productId, productId) ||
+                other.productId == productId) &&
+            (identical(other.startTimeMillis, startTimeMillis) ||
+                other.startTimeMillis == startTimeMillis) &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, expiryTimeMillis, orderId,
+      originalTransactionId, productId, startTimeMillis, uid);
+
+  @override
+  String toString() {
+    return 'CachedReceipt(expiryTimeMillis: $expiryTimeMillis, orderId: $orderId, originalTransactionId: $originalTransactionId, productId: $productId, startTimeMillis: $startTimeMillis, uid: $uid)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$CachedReceiptCopyWith<$Res>
+    implements $CachedReceiptCopyWith<$Res> {
+  factory _$CachedReceiptCopyWith(
+          _CachedReceipt value, $Res Function(_CachedReceipt) _then) =
+      __$CachedReceiptCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String expiryTimeMillis,
+      String orderId,
+      String originalTransactionId,
+      String productId,
+      String startTimeMillis,
+      String uid});
+}
+
+/// @nodoc
+class __$CachedReceiptCopyWithImpl<$Res>
+    implements _$CachedReceiptCopyWith<$Res> {
+  __$CachedReceiptCopyWithImpl(this._self, this._then);
+
+  final _CachedReceipt _self;
+  final $Res Function(_CachedReceipt) _then;
+
+  /// Create a copy of CachedReceipt
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? expiryTimeMillis = null,
+    Object? orderId = null,
+    Object? originalTransactionId = null,
+    Object? productId = null,
+    Object? startTimeMillis = null,
+    Object? uid = null,
+  }) {
+    return _then(_CachedReceipt(
+      expiryTimeMillis: null == expiryTimeMillis
+          ? _self.expiryTimeMillis
+          : expiryTimeMillis // ignore: cast_nullable_to_non_nullable
+              as String,
+      orderId: null == orderId
+          ? _self.orderId
+          : orderId // ignore: cast_nullable_to_non_nullable
+              as String,
+      originalTransactionId: null == originalTransactionId
+          ? _self.originalTransactionId
+          : originalTransactionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      productId: null == productId
+          ? _self.productId
+          : productId // ignore: cast_nullable_to_non_nullable
+              as String,
+      startTimeMillis: null == startTimeMillis
+          ? _self.startTimeMillis
+          : startTimeMillis // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _self.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

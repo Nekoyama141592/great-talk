@@ -6,8 +6,8 @@ part of 'like_post_token.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LikePostTokenImpl _$$LikePostTokenImplFromJson(Map<String, dynamic> json) =>
-    _$LikePostTokenImpl(
+_LikePostToken _$LikePostTokenFromJson(Map<String, dynamic> json) =>
+    _LikePostToken(
       activeUid: json['activeUid'] as String,
       createdAt: json['createdAt'],
       passiveUid: json['passiveUid'] as String,
@@ -17,7 +17,7 @@ _$LikePostTokenImpl _$$LikePostTokenImplFromJson(Map<String, dynamic> json) =>
       tokenType: json['tokenType'] as String,
     );
 
-Map<String, dynamic> _$$LikePostTokenImplToJson(_$LikePostTokenImpl instance) =>
+Map<String, dynamic> _$LikePostTokenToJson(_LikePostToken instance) =>
     <String, dynamic>{
       'activeUid': instance.activeUid,
       'createdAt': instance.createdAt,

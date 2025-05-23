@@ -6,9 +6,8 @@ part of 'generate_text_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GenerateTextRequestImpl _$$GenerateTextRequestImplFromJson(
-        Map<String, dynamic> json) =>
-    _$GenerateTextRequestImpl(
+_GenerateTextRequest _$GenerateTextRequestFromJson(Map<String, dynamic> json) =>
+    _GenerateTextRequest(
       model: json['model'] as String,
       messages: (json['messages'] as List<dynamic>)
           .map((e) => e as Map<String, dynamic>)
@@ -19,8 +18,8 @@ _$GenerateTextRequestImpl _$$GenerateTextRequestImplFromJson(
       tool_choice: json['tool_choice'] as Map<String, dynamic>?,
     );
 
-Map<String, dynamic> _$$GenerateTextRequestImplToJson(
-        _$GenerateTextRequestImpl instance) =>
+Map<String, dynamic> _$GenerateTextRequestToJson(
+        _GenerateTextRequest instance) =>
     <String, dynamic>{
       'model': instance.model,
       'messages': instance.messages,

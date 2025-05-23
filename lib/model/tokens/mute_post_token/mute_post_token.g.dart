@@ -6,8 +6,8 @@ part of 'mute_post_token.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MutePostTokenImpl _$$MutePostTokenImplFromJson(Map<String, dynamic> json) =>
-    _$MutePostTokenImpl(
+_MutePostToken _$MutePostTokenFromJson(Map<String, dynamic> json) =>
+    _MutePostToken(
       activeUid: json['activeUid'] as String,
       createdAt: json['createdAt'],
       postId: json['postId'] as String,
@@ -16,7 +16,7 @@ _$MutePostTokenImpl _$$MutePostTokenImplFromJson(Map<String, dynamic> json) =>
       tokenType: json['tokenType'] as String,
     );
 
-Map<String, dynamic> _$$MutePostTokenImplToJson(_$MutePostTokenImpl instance) =>
+Map<String, dynamic> _$MutePostTokenToJson(_MutePostToken instance) =>
     <String, dynamic>{
       'activeUid': instance.activeUid,
       'createdAt': instance.createdAt,

@@ -4,7 +4,7 @@ part 'generate_image_state.freezed.dart';
 part 'generate_image_state.g.dart';
 
 @freezed
-abstract class GenerateImageState implements _$GenerateImageState {
+abstract class GenerateImageState with _$GenerateImageState {
   const factory GenerateImageState(
       {@Default('') String prompt,
       @Default('') String size,

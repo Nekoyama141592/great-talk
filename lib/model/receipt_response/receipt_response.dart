@@ -9,7 +9,7 @@ part 'receipt_response.freezed.dart';
 part 'receipt_response.g.dart';
 
 @freezed
-abstract class ReceiptResponse implements _$ReceiptResponse {
+abstract class ReceiptResponse with _$ReceiptResponse {
   const ReceiptResponse._();
   const factory ReceiptResponse({required SDMap latestReceipt}) =
       _ReceiptResponse;

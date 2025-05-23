@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,94 +10,62 @@ part of 'chat_limit_per_day.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ChatLimitPerDay _$ChatLimitPerDayFromJson(Map<String, dynamic> json) {
-  return _ChatLimitPerDay.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ChatLimitPerDay {
-  int get basic => throw _privateConstructorUsedError;
-  int get free => throw _privateConstructorUsedError;
-  int get premium => throw _privateConstructorUsedError;
-
-  /// Serializes this ChatLimitPerDay to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  int get basic;
+  int get free;
+  int get premium;
 
   /// Create a copy of ChatLimitPerDay
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ChatLimitPerDayCopyWith<ChatLimitPerDay> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ChatLimitPerDayCopyWith<$Res> {
-  factory $ChatLimitPerDayCopyWith(
-          ChatLimitPerDay value, $Res Function(ChatLimitPerDay) then) =
-      _$ChatLimitPerDayCopyWithImpl<$Res, ChatLimitPerDay>;
-  @useResult
-  $Res call({int basic, int free, int premium});
-}
-
-/// @nodoc
-class _$ChatLimitPerDayCopyWithImpl<$Res, $Val extends ChatLimitPerDay>
-    implements $ChatLimitPerDayCopyWith<$Res> {
-  _$ChatLimitPerDayCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ChatLimitPerDay
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $ChatLimitPerDayCopyWith<ChatLimitPerDay> get copyWith =>
+      _$ChatLimitPerDayCopyWithImpl<ChatLimitPerDay>(
+          this as ChatLimitPerDay, _$identity);
+
+  /// Serializes this ChatLimitPerDay to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? basic = null,
-    Object? free = null,
-    Object? premium = null,
-  }) {
-    return _then(_value.copyWith(
-      basic: null == basic
-          ? _value.basic
-          : basic // ignore: cast_nullable_to_non_nullable
-              as int,
-      free: null == free
-          ? _value.free
-          : free // ignore: cast_nullable_to_non_nullable
-              as int,
-      premium: null == premium
-          ? _value.premium
-          : premium // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ChatLimitPerDay &&
+            (identical(other.basic, basic) || other.basic == basic) &&
+            (identical(other.free, free) || other.free == free) &&
+            (identical(other.premium, premium) || other.premium == premium));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, basic, free, premium);
+
+  @override
+  String toString() {
+    return 'ChatLimitPerDay(basic: $basic, free: $free, premium: $premium)';
   }
 }
 
 /// @nodoc
-abstract class _$$ChatLimitPerDayImplCopyWith<$Res>
-    implements $ChatLimitPerDayCopyWith<$Res> {
-  factory _$$ChatLimitPerDayImplCopyWith(_$ChatLimitPerDayImpl value,
-          $Res Function(_$ChatLimitPerDayImpl) then) =
-      __$$ChatLimitPerDayImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ChatLimitPerDayCopyWith<$Res> {
+  factory $ChatLimitPerDayCopyWith(
+          ChatLimitPerDay value, $Res Function(ChatLimitPerDay) _then) =
+      _$ChatLimitPerDayCopyWithImpl;
   @useResult
   $Res call({int basic, int free, int premium});
 }
 
 /// @nodoc
-class __$$ChatLimitPerDayImplCopyWithImpl<$Res>
-    extends _$ChatLimitPerDayCopyWithImpl<$Res, _$ChatLimitPerDayImpl>
-    implements _$$ChatLimitPerDayImplCopyWith<$Res> {
-  __$$ChatLimitPerDayImplCopyWithImpl(
-      _$ChatLimitPerDayImpl _value, $Res Function(_$ChatLimitPerDayImpl) _then)
-      : super(_value, _then);
+class _$ChatLimitPerDayCopyWithImpl<$Res>
+    implements $ChatLimitPerDayCopyWith<$Res> {
+  _$ChatLimitPerDayCopyWithImpl(this._self, this._then);
+
+  final ChatLimitPerDay _self;
+  final $Res Function(ChatLimitPerDay) _then;
 
   /// Create a copy of ChatLimitPerDay
   /// with the given fields replaced by the non-null parameter values.
@@ -107,17 +76,17 @@ class __$$ChatLimitPerDayImplCopyWithImpl<$Res>
     Object? free = null,
     Object? premium = null,
   }) {
-    return _then(_$ChatLimitPerDayImpl(
+    return _then(_self.copyWith(
       basic: null == basic
-          ? _value.basic
+          ? _self.basic
           : basic // ignore: cast_nullable_to_non_nullable
               as int,
       free: null == free
-          ? _value.free
+          ? _self.free
           : free // ignore: cast_nullable_to_non_nullable
               as int,
       premium: null == premium
-          ? _value.premium
+          ? _self.premium
           : premium // ignore: cast_nullable_to_non_nullable
               as int,
     ));
@@ -126,15 +95,14 @@ class __$$ChatLimitPerDayImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ChatLimitPerDayImpl extends _ChatLimitPerDay {
-  const _$ChatLimitPerDayImpl(
+class _ChatLimitPerDay extends ChatLimitPerDay {
+  const _ChatLimitPerDay(
       {this.basic = RemoteConfigConstants.basicLimitPerDay,
       this.free = RemoteConfigConstants.freeLimitPerDay,
       this.premium = RemoteConfigConstants.premiumLimitPerDay})
       : super._();
-
-  factory _$ChatLimitPerDayImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChatLimitPerDayImplFromJson(json);
+  factory _ChatLimitPerDay.fromJson(Map<String, dynamic> json) =>
+      _$ChatLimitPerDayFromJson(json);
 
   @override
   @JsonKey()
@@ -146,16 +114,26 @@ class _$ChatLimitPerDayImpl extends _ChatLimitPerDay {
   @JsonKey()
   final int premium;
 
+  /// Create a copy of ChatLimitPerDay
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ChatLimitPerDay(basic: $basic, free: $free, premium: $premium)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ChatLimitPerDayCopyWith<_ChatLimitPerDay> get copyWith =>
+      __$ChatLimitPerDayCopyWithImpl<_ChatLimitPerDay>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ChatLimitPerDayToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChatLimitPerDayImpl &&
+            other is _ChatLimitPerDay &&
             (identical(other.basic, basic) || other.basic == basic) &&
             (identical(other.free, free) || other.free == free) &&
             (identical(other.premium, premium) || other.premium == premium));
@@ -165,44 +143,55 @@ class _$ChatLimitPerDayImpl extends _ChatLimitPerDay {
   @override
   int get hashCode => Object.hash(runtimeType, basic, free, premium);
 
-  /// Create a copy of ChatLimitPerDay
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ChatLimitPerDayImplCopyWith<_$ChatLimitPerDayImpl> get copyWith =>
-      __$$ChatLimitPerDayImplCopyWithImpl<_$ChatLimitPerDayImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ChatLimitPerDayImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ChatLimitPerDay(basic: $basic, free: $free, premium: $premium)';
   }
 }
 
-abstract class _ChatLimitPerDay extends ChatLimitPerDay {
-  const factory _ChatLimitPerDay(
-      {final int basic,
-      final int free,
-      final int premium}) = _$ChatLimitPerDayImpl;
-  const _ChatLimitPerDay._() : super._();
+/// @nodoc
+abstract mixin class _$ChatLimitPerDayCopyWith<$Res>
+    implements $ChatLimitPerDayCopyWith<$Res> {
+  factory _$ChatLimitPerDayCopyWith(
+          _ChatLimitPerDay value, $Res Function(_ChatLimitPerDay) _then) =
+      __$ChatLimitPerDayCopyWithImpl;
+  @override
+  @useResult
+  $Res call({int basic, int free, int premium});
+}
 
-  factory _ChatLimitPerDay.fromJson(Map<String, dynamic> json) =
-      _$ChatLimitPerDayImpl.fromJson;
+/// @nodoc
+class __$ChatLimitPerDayCopyWithImpl<$Res>
+    implements _$ChatLimitPerDayCopyWith<$Res> {
+  __$ChatLimitPerDayCopyWithImpl(this._self, this._then);
 
-  @override
-  int get basic;
-  @override
-  int get free;
-  @override
-  int get premium;
+  final _ChatLimitPerDay _self;
+  final $Res Function(_ChatLimitPerDay) _then;
 
   /// Create a copy of ChatLimitPerDay
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChatLimitPerDayImplCopyWith<_$ChatLimitPerDayImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? basic = null,
+    Object? free = null,
+    Object? premium = null,
+  }) {
+    return _then(_ChatLimitPerDay(
+      basic: null == basic
+          ? _self.basic
+          : basic // ignore: cast_nullable_to_non_nullable
+              as int,
+      free: null == free
+          ? _self.free
+          : free // ignore: cast_nullable_to_non_nullable
+              as int,
+      premium: null == premium
+          ? _self.premium
+          : premium // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
+
+// dart format on

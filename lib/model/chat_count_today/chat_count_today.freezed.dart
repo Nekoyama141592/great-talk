@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,135 +10,30 @@ part of 'chat_count_today.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ChatCountToday _$ChatCountTodayFromJson(Map<String, dynamic> json) {
-  return _ChatCountToday.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ChatCountToday {
-  int get basic => throw _privateConstructorUsedError;
-  int get premium => throw _privateConstructorUsedError;
-
-  /// Serializes this ChatCountToday to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  int get basic;
+  int get premium;
 
   /// Create a copy of ChatCountToday
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ChatCountTodayCopyWith<ChatCountToday> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$ChatCountTodayCopyWithImpl<ChatCountToday>(
+          this as ChatCountToday, _$identity);
 
-/// @nodoc
-abstract class $ChatCountTodayCopyWith<$Res> {
-  factory $ChatCountTodayCopyWith(
-          ChatCountToday value, $Res Function(ChatCountToday) then) =
-      _$ChatCountTodayCopyWithImpl<$Res, ChatCountToday>;
-  @useResult
-  $Res call({int basic, int premium});
-}
-
-/// @nodoc
-class _$ChatCountTodayCopyWithImpl<$Res, $Val extends ChatCountToday>
-    implements $ChatCountTodayCopyWith<$Res> {
-  _$ChatCountTodayCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ChatCountToday
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? basic = null,
-    Object? premium = null,
-  }) {
-    return _then(_value.copyWith(
-      basic: null == basic
-          ? _value.basic
-          : basic // ignore: cast_nullable_to_non_nullable
-              as int,
-      premium: null == premium
-          ? _value.premium
-          : premium // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$ChatCountTodayImplCopyWith<$Res>
-    implements $ChatCountTodayCopyWith<$Res> {
-  factory _$$ChatCountTodayImplCopyWith(_$ChatCountTodayImpl value,
-          $Res Function(_$ChatCountTodayImpl) then) =
-      __$$ChatCountTodayImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int basic, int premium});
-}
-
-/// @nodoc
-class __$$ChatCountTodayImplCopyWithImpl<$Res>
-    extends _$ChatCountTodayCopyWithImpl<$Res, _$ChatCountTodayImpl>
-    implements _$$ChatCountTodayImplCopyWith<$Res> {
-  __$$ChatCountTodayImplCopyWithImpl(
-      _$ChatCountTodayImpl _value, $Res Function(_$ChatCountTodayImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ChatCountToday
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? basic = null,
-    Object? premium = null,
-  }) {
-    return _then(_$ChatCountTodayImpl(
-      basic: null == basic
-          ? _value.basic
-          : basic // ignore: cast_nullable_to_non_nullable
-              as int,
-      premium: null == premium
-          ? _value.premium
-          : premium // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ChatCountTodayImpl extends _ChatCountToday {
-  const _$ChatCountTodayImpl({this.basic = 0, this.premium = 0}) : super._();
-
-  factory _$ChatCountTodayImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChatCountTodayImplFromJson(json);
-
-  @override
-  @JsonKey()
-  final int basic;
-  @override
-  @JsonKey()
-  final int premium;
-
-  @override
-  String toString() {
-    return 'ChatCountToday(basic: $basic, premium: $premium)';
-  }
+  /// Serializes this ChatCountToday to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChatCountTodayImpl &&
+            other is ChatCountToday &&
             (identical(other.basic, basic) || other.basic == basic) &&
             (identical(other.premium, premium) || other.premium == premium));
   }
@@ -146,40 +42,136 @@ class _$ChatCountTodayImpl extends _ChatCountToday {
   @override
   int get hashCode => Object.hash(runtimeType, basic, premium);
 
-  /// Create a copy of ChatCountToday
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ChatCountTodayImplCopyWith<_$ChatCountTodayImpl> get copyWith =>
-      __$$ChatCountTodayImplCopyWithImpl<_$ChatCountTodayImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ChatCountTodayImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ChatCountToday(basic: $basic, premium: $premium)';
   }
 }
 
-abstract class _ChatCountToday extends ChatCountToday {
-  const factory _ChatCountToday({final int basic, final int premium}) =
-      _$ChatCountTodayImpl;
-  const _ChatCountToday._() : super._();
+/// @nodoc
+abstract mixin class $ChatCountTodayCopyWith<$Res> {
+  factory $ChatCountTodayCopyWith(
+          ChatCountToday value, $Res Function(ChatCountToday) _then) =
+      _$ChatCountTodayCopyWithImpl;
+  @useResult
+  $Res call({int basic, int premium});
+}
 
-  factory _ChatCountToday.fromJson(Map<String, dynamic> json) =
-      _$ChatCountTodayImpl.fromJson;
+/// @nodoc
+class _$ChatCountTodayCopyWithImpl<$Res>
+    implements $ChatCountTodayCopyWith<$Res> {
+  _$ChatCountTodayCopyWithImpl(this._self, this._then);
+
+  final ChatCountToday _self;
+  final $Res Function(ChatCountToday) _then;
+
+  /// Create a copy of ChatCountToday
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? basic = null,
+    Object? premium = null,
+  }) {
+    return _then(_self.copyWith(
+      basic: null == basic
+          ? _self.basic
+          : basic // ignore: cast_nullable_to_non_nullable
+              as int,
+      premium: null == premium
+          ? _self.premium
+          : premium // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _ChatCountToday extends ChatCountToday {
+  const _ChatCountToday({this.basic = 0, this.premium = 0}) : super._();
+  factory _ChatCountToday.fromJson(Map<String, dynamic> json) =>
+      _$ChatCountTodayFromJson(json);
 
   @override
-  int get basic;
+  @JsonKey()
+  final int basic;
   @override
-  int get premium;
+  @JsonKey()
+  final int premium;
 
   /// Create a copy of ChatCountToday
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChatCountTodayImplCopyWith<_$ChatCountTodayImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$ChatCountTodayCopyWith<_ChatCountToday> get copyWith =>
+      __$ChatCountTodayCopyWithImpl<_ChatCountToday>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ChatCountTodayToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ChatCountToday &&
+            (identical(other.basic, basic) || other.basic == basic) &&
+            (identical(other.premium, premium) || other.premium == premium));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, basic, premium);
+
+  @override
+  String toString() {
+    return 'ChatCountToday(basic: $basic, premium: $premium)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$ChatCountTodayCopyWith<$Res>
+    implements $ChatCountTodayCopyWith<$Res> {
+  factory _$ChatCountTodayCopyWith(
+          _ChatCountToday value, $Res Function(_ChatCountToday) _then) =
+      __$ChatCountTodayCopyWithImpl;
+  @override
+  @useResult
+  $Res call({int basic, int premium});
+}
+
+/// @nodoc
+class __$ChatCountTodayCopyWithImpl<$Res>
+    implements _$ChatCountTodayCopyWith<$Res> {
+  __$ChatCountTodayCopyWithImpl(this._self, this._then);
+
+  final _ChatCountToday _self;
+  final $Res Function(_ChatCountToday) _then;
+
+  /// Create a copy of ChatCountToday
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? basic = null,
+    Object? premium = null,
+  }) {
+    return _then(_ChatCountToday(
+      basic: null == basic
+          ? _self.basic
+          : basic // ignore: cast_nullable_to_non_nullable
+              as int,
+      premium: null == premium
+          ? _self.premium
+          : premium // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+// dart format on

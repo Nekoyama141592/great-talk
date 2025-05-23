@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,132 +10,89 @@ part of 'user_update_log.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-UserUpdateLog _$UserUpdateLogFromJson(Map<String, dynamic> json) {
-  return _UserUpdateLog.fromJson(json);
-}
 
 /// @nodoc
 mixin _$UserUpdateLog {
-  dynamic get logCreatedAt => throw _privateConstructorUsedError;
-  Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
-  String get stringBio => throw _privateConstructorUsedError;
-  String get stringUserName => throw _privateConstructorUsedError;
-  String get uid => throw _privateConstructorUsedError;
-  Map<String, dynamic> get image => throw _privateConstructorUsedError;
-  dynamic get userRef => throw _privateConstructorUsedError;
-
-  /// Serializes this UserUpdateLog to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  dynamic get logCreatedAt;
+  SDMap get searchToken;
+  String get stringBio;
+  String get stringUserName;
+  String get uid;
+  SDMap get image;
+  dynamic get userRef;
 
   /// Create a copy of UserUpdateLog
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $UserUpdateLogCopyWith<UserUpdateLog> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $UserUpdateLogCopyWith<$Res> {
-  factory $UserUpdateLogCopyWith(
-          UserUpdateLog value, $Res Function(UserUpdateLog) then) =
-      _$UserUpdateLogCopyWithImpl<$Res, UserUpdateLog>;
-  @useResult
-  $Res call(
-      {dynamic logCreatedAt,
-      Map<String, dynamic> searchToken,
-      String stringBio,
-      String stringUserName,
-      String uid,
-      Map<String, dynamic> image,
-      dynamic userRef});
-}
-
-/// @nodoc
-class _$UserUpdateLogCopyWithImpl<$Res, $Val extends UserUpdateLog>
-    implements $UserUpdateLogCopyWith<$Res> {
-  _$UserUpdateLogCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of UserUpdateLog
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $UserUpdateLogCopyWith<UserUpdateLog> get copyWith =>
+      _$UserUpdateLogCopyWithImpl<UserUpdateLog>(
+          this as UserUpdateLog, _$identity);
+
+  /// Serializes this UserUpdateLog to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? logCreatedAt = freezed,
-    Object? searchToken = null,
-    Object? stringBio = null,
-    Object? stringUserName = null,
-    Object? uid = null,
-    Object? image = null,
-    Object? userRef = freezed,
-  }) {
-    return _then(_value.copyWith(
-      logCreatedAt: freezed == logCreatedAt
-          ? _value.logCreatedAt
-          : logCreatedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      searchToken: null == searchToken
-          ? _value.searchToken
-          : searchToken // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      stringBio: null == stringBio
-          ? _value.stringBio
-          : stringBio // ignore: cast_nullable_to_non_nullable
-              as String,
-      stringUserName: null == stringUserName
-          ? _value.stringUserName
-          : stringUserName // ignore: cast_nullable_to_non_nullable
-              as String,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      userRef: freezed == userRef
-          ? _value.userRef
-          : userRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UserUpdateLog &&
+            const DeepCollectionEquality()
+                .equals(other.logCreatedAt, logCreatedAt) &&
+            const DeepCollectionEquality()
+                .equals(other.searchToken, searchToken) &&
+            (identical(other.stringBio, stringBio) ||
+                other.stringBio == stringBio) &&
+            (identical(other.stringUserName, stringUserName) ||
+                other.stringUserName == stringUserName) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
+            const DeepCollectionEquality().equals(other.image, image) &&
+            const DeepCollectionEquality().equals(other.userRef, userRef));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(logCreatedAt),
+      const DeepCollectionEquality().hash(searchToken),
+      stringBio,
+      stringUserName,
+      uid,
+      const DeepCollectionEquality().hash(image),
+      const DeepCollectionEquality().hash(userRef));
+
+  @override
+  String toString() {
+    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, searchToken: $searchToken, stringBio: $stringBio, stringUserName: $stringUserName, uid: $uid, image: $image, userRef: $userRef)';
   }
 }
 
 /// @nodoc
-abstract class _$$UserUpdateLogImplCopyWith<$Res>
-    implements $UserUpdateLogCopyWith<$Res> {
-  factory _$$UserUpdateLogImplCopyWith(
-          _$UserUpdateLogImpl value, $Res Function(_$UserUpdateLogImpl) then) =
-      __$$UserUpdateLogImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $UserUpdateLogCopyWith<$Res> {
+  factory $UserUpdateLogCopyWith(
+          UserUpdateLog value, $Res Function(UserUpdateLog) _then) =
+      _$UserUpdateLogCopyWithImpl;
   @useResult
   $Res call(
       {dynamic logCreatedAt,
-      Map<String, dynamic> searchToken,
+      SDMap searchToken,
       String stringBio,
       String stringUserName,
       String uid,
-      Map<String, dynamic> image,
+      SDMap image,
       dynamic userRef});
 }
 
 /// @nodoc
-class __$$UserUpdateLogImplCopyWithImpl<$Res>
-    extends _$UserUpdateLogCopyWithImpl<$Res, _$UserUpdateLogImpl>
-    implements _$$UserUpdateLogImplCopyWith<$Res> {
-  __$$UserUpdateLogImplCopyWithImpl(
-      _$UserUpdateLogImpl _value, $Res Function(_$UserUpdateLogImpl) _then)
-      : super(_value, _then);
+class _$UserUpdateLogCopyWithImpl<$Res>
+    implements $UserUpdateLogCopyWith<$Res> {
+  _$UserUpdateLogCopyWithImpl(this._self, this._then);
+
+  final UserUpdateLog _self;
+  final $Res Function(UserUpdateLog) _then;
 
   /// Create a copy of UserUpdateLog
   /// with the given fields replaced by the non-null parameter values.
@@ -149,33 +107,33 @@ class __$$UserUpdateLogImplCopyWithImpl<$Res>
     Object? image = null,
     Object? userRef = freezed,
   }) {
-    return _then(_$UserUpdateLogImpl(
+    return _then(_self.copyWith(
       logCreatedAt: freezed == logCreatedAt
-          ? _value.logCreatedAt
+          ? _self.logCreatedAt
           : logCreatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
       searchToken: null == searchToken
-          ? _value._searchToken
+          ? _self.searchToken
           : searchToken // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
       stringBio: null == stringBio
-          ? _value.stringBio
+          ? _self.stringBio
           : stringBio // ignore: cast_nullable_to_non_nullable
               as String,
       stringUserName: null == stringUserName
-          ? _value.stringUserName
+          ? _self.stringUserName
           : stringUserName // ignore: cast_nullable_to_non_nullable
               as String,
       uid: null == uid
-          ? _value.uid
+          ? _self.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
       image: null == image
-          ? _value._image
+          ? _self.image
           : image // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
       userRef: freezed == userRef
-          ? _value.userRef
+          ? _self.userRef
           : userRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
     ));
@@ -184,26 +142,25 @@ class __$$UserUpdateLogImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UserUpdateLogImpl implements _UserUpdateLog {
-  const _$UserUpdateLogImpl(
+class _UserUpdateLog implements UserUpdateLog {
+  const _UserUpdateLog(
       {required this.logCreatedAt,
-      required final Map<String, dynamic> searchToken,
+      required final SDMap searchToken,
       required this.stringBio,
       required this.stringUserName,
       required this.uid,
-      required final Map<String, dynamic> image,
+      required final SDMap image,
       required this.userRef})
       : _searchToken = searchToken,
         _image = image;
-
-  factory _$UserUpdateLogImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserUpdateLogImplFromJson(json);
+  factory _UserUpdateLog.fromJson(Map<String, dynamic> json) =>
+      _$UserUpdateLogFromJson(json);
 
   @override
   final dynamic logCreatedAt;
-  final Map<String, dynamic> _searchToken;
+  final SDMap _searchToken;
   @override
-  Map<String, dynamic> get searchToken {
+  SDMap get searchToken {
     if (_searchToken is EqualUnmodifiableMapView) return _searchToken;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_searchToken);
@@ -215,9 +172,9 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
   final String stringUserName;
   @override
   final String uid;
-  final Map<String, dynamic> _image;
+  final SDMap _image;
   @override
-  Map<String, dynamic> get image {
+  SDMap get image {
     if (_image is EqualUnmodifiableMapView) return _image;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_image);
@@ -226,16 +183,26 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
   @override
   final dynamic userRef;
 
+  /// Create a copy of UserUpdateLog
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, searchToken: $searchToken, stringBio: $stringBio, stringUserName: $stringUserName, uid: $uid, image: $image, userRef: $userRef)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$UserUpdateLogCopyWith<_UserUpdateLog> get copyWith =>
+      __$UserUpdateLogCopyWithImpl<_UserUpdateLog>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$UserUpdateLogToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserUpdateLogImpl &&
+            other is _UserUpdateLog &&
             const DeepCollectionEquality()
                 .equals(other.logCreatedAt, logCreatedAt) &&
             const DeepCollectionEquality()
@@ -261,54 +228,82 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
       const DeepCollectionEquality().hash(_image),
       const DeepCollectionEquality().hash(userRef));
 
-  /// Create a copy of UserUpdateLog
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
-      __$$UserUpdateLogImplCopyWithImpl<_$UserUpdateLogImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserUpdateLogImplToJson(
-      this,
-    );
+  String toString() {
+    return 'UserUpdateLog(logCreatedAt: $logCreatedAt, searchToken: $searchToken, stringBio: $stringBio, stringUserName: $stringUserName, uid: $uid, image: $image, userRef: $userRef)';
   }
 }
 
-abstract class _UserUpdateLog implements UserUpdateLog {
-  const factory _UserUpdateLog(
-      {required final dynamic logCreatedAt,
-      required final Map<String, dynamic> searchToken,
-      required final String stringBio,
-      required final String stringUserName,
-      required final String uid,
-      required final Map<String, dynamic> image,
-      required final dynamic userRef}) = _$UserUpdateLogImpl;
+/// @nodoc
+abstract mixin class _$UserUpdateLogCopyWith<$Res>
+    implements $UserUpdateLogCopyWith<$Res> {
+  factory _$UserUpdateLogCopyWith(
+          _UserUpdateLog value, $Res Function(_UserUpdateLog) _then) =
+      __$UserUpdateLogCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {dynamic logCreatedAt,
+      SDMap searchToken,
+      String stringBio,
+      String stringUserName,
+      String uid,
+      SDMap image,
+      dynamic userRef});
+}
 
-  factory _UserUpdateLog.fromJson(Map<String, dynamic> json) =
-      _$UserUpdateLogImpl.fromJson;
+/// @nodoc
+class __$UserUpdateLogCopyWithImpl<$Res>
+    implements _$UserUpdateLogCopyWith<$Res> {
+  __$UserUpdateLogCopyWithImpl(this._self, this._then);
 
-  @override
-  dynamic get logCreatedAt;
-  @override
-  Map<String, dynamic> get searchToken;
-  @override
-  String get stringBio;
-  @override
-  String get stringUserName;
-  @override
-  String get uid;
-  @override
-  Map<String, dynamic> get image;
-  @override
-  dynamic get userRef;
+  final _UserUpdateLog _self;
+  final $Res Function(_UserUpdateLog) _then;
 
   /// Create a copy of UserUpdateLog
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? logCreatedAt = freezed,
+    Object? searchToken = null,
+    Object? stringBio = null,
+    Object? stringUserName = null,
+    Object? uid = null,
+    Object? image = null,
+    Object? userRef = freezed,
+  }) {
+    return _then(_UserUpdateLog(
+      logCreatedAt: freezed == logCreatedAt
+          ? _self.logCreatedAt
+          : logCreatedAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      searchToken: null == searchToken
+          ? _self._searchToken
+          : searchToken // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+      stringBio: null == stringBio
+          ? _self.stringBio
+          : stringBio // ignore: cast_nullable_to_non_nullable
+              as String,
+      stringUserName: null == stringUserName
+          ? _self.stringUserName
+          : stringUserName // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _self.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      image: null == image
+          ? _self._image
+          : image // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+      userRef: freezed == userRef
+          ? _self.userRef
+          : userRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+    ));
+  }
 }
+
+// dart format on

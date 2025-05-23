@@ -9,7 +9,7 @@ part 'cached_receipt.freezed.dart';
 part 'cached_receipt.g.dart';
 
 @freezed
-abstract class CachedReceipt implements _$CachedReceipt {
+abstract class CachedReceipt with _$CachedReceipt {
   const CachedReceipt._();
   const factory CachedReceipt(
       {required String expiryTimeMillis,

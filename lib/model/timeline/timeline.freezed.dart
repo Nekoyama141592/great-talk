@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,163 +10,31 @@ part of 'timeline.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Timeline _$TimelineFromJson(Map<String, dynamic> json) {
-  return _Timeline.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Timeline {
-  dynamic get createdAt => throw _privateConstructorUsedError;
-  bool get isRead => throw _privateConstructorUsedError; // フォロワーが投稿を読んだかどうか
-  String get posterUid => throw _privateConstructorUsedError;
-  String get postId => throw _privateConstructorUsedError;
-
-  /// Serializes this Timeline to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  dynamic get createdAt;
+  bool get isRead; // フォロワーが投稿を読んだかどうか
+  String get posterUid;
+  String get postId;
 
   /// Create a copy of Timeline
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $TimelineCopyWith<Timeline> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$TimelineCopyWithImpl<Timeline>(this as Timeline, _$identity);
 
-/// @nodoc
-abstract class $TimelineCopyWith<$Res> {
-  factory $TimelineCopyWith(Timeline value, $Res Function(Timeline) then) =
-      _$TimelineCopyWithImpl<$Res, Timeline>;
-  @useResult
-  $Res call({dynamic createdAt, bool isRead, String posterUid, String postId});
-}
-
-/// @nodoc
-class _$TimelineCopyWithImpl<$Res, $Val extends Timeline>
-    implements $TimelineCopyWith<$Res> {
-  _$TimelineCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Timeline
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? createdAt = freezed,
-    Object? isRead = null,
-    Object? posterUid = null,
-    Object? postId = null,
-  }) {
-    return _then(_value.copyWith(
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      isRead: null == isRead
-          ? _value.isRead
-          : isRead // ignore: cast_nullable_to_non_nullable
-              as bool,
-      posterUid: null == posterUid
-          ? _value.posterUid
-          : posterUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$TimelineImplCopyWith<$Res>
-    implements $TimelineCopyWith<$Res> {
-  factory _$$TimelineImplCopyWith(
-          _$TimelineImpl value, $Res Function(_$TimelineImpl) then) =
-      __$$TimelineImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({dynamic createdAt, bool isRead, String posterUid, String postId});
-}
-
-/// @nodoc
-class __$$TimelineImplCopyWithImpl<$Res>
-    extends _$TimelineCopyWithImpl<$Res, _$TimelineImpl>
-    implements _$$TimelineImplCopyWith<$Res> {
-  __$$TimelineImplCopyWithImpl(
-      _$TimelineImpl _value, $Res Function(_$TimelineImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Timeline
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? createdAt = freezed,
-    Object? isRead = null,
-    Object? posterUid = null,
-    Object? postId = null,
-  }) {
-    return _then(_$TimelineImpl(
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      isRead: null == isRead
-          ? _value.isRead
-          : isRead // ignore: cast_nullable_to_non_nullable
-              as bool,
-      posterUid: null == posterUid
-          ? _value.posterUid
-          : posterUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$TimelineImpl implements _Timeline {
-  const _$TimelineImpl(
-      {required this.createdAt,
-      required this.isRead,
-      required this.posterUid,
-      required this.postId});
-
-  factory _$TimelineImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TimelineImplFromJson(json);
-
-  @override
-  final dynamic createdAt;
-  @override
-  final bool isRead;
-// フォロワーが投稿を読んだかどうか
-  @override
-  final String posterUid;
-  @override
-  final String postId;
-
-  @override
-  String toString() {
-    return 'Timeline(createdAt: $createdAt, isRead: $isRead, posterUid: $posterUid, postId: $postId)';
-  }
+  /// Serializes this Timeline to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TimelineImpl &&
+            other is Timeline &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.isRead, isRead) || other.isRead == isRead) &&
             (identical(other.posterUid, posterUid) ||
@@ -182,45 +51,167 @@ class _$TimelineImpl implements _Timeline {
       posterUid,
       postId);
 
-  /// Create a copy of Timeline
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TimelineImplCopyWith<_$TimelineImpl> get copyWith =>
-      __$$TimelineImplCopyWithImpl<_$TimelineImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TimelineImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Timeline(createdAt: $createdAt, isRead: $isRead, posterUid: $posterUid, postId: $postId)';
   }
 }
 
-abstract class _Timeline implements Timeline {
-  const factory _Timeline(
-      {required final dynamic createdAt,
-      required final bool isRead,
-      required final String posterUid,
-      required final String postId}) = _$TimelineImpl;
+/// @nodoc
+abstract mixin class $TimelineCopyWith<$Res> {
+  factory $TimelineCopyWith(Timeline value, $Res Function(Timeline) _then) =
+      _$TimelineCopyWithImpl;
+  @useResult
+  $Res call({dynamic createdAt, bool isRead, String posterUid, String postId});
+}
 
-  factory _Timeline.fromJson(Map<String, dynamic> json) =
-      _$TimelineImpl.fromJson;
+/// @nodoc
+class _$TimelineCopyWithImpl<$Res> with $TimelineCopyWith<$Res> {
+  _$TimelineCopyWithImpl(this._self, this._then);
+
+  final Timeline _self;
+  final $Res Function(Timeline) _then;
+
+  /// Create a copy of Timeline
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? createdAt = freezed,
+    Object? isRead = null,
+    Object? posterUid = null,
+    Object? postId = null,
+  }) {
+    return _then(_self.copyWith(
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isRead: null == isRead
+          ? _self.isRead
+          : isRead // ignore: cast_nullable_to_non_nullable
+              as bool,
+      posterUid: null == posterUid
+          ? _self.posterUid
+          : posterUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      postId: null == postId
+          ? _self.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _Timeline implements Timeline {
+  const _Timeline(
+      {required this.createdAt,
+      required this.isRead,
+      required this.posterUid,
+      required this.postId});
+  factory _Timeline.fromJson(Map<String, dynamic> json) =>
+      _$TimelineFromJson(json);
 
   @override
-  dynamic get createdAt;
+  final dynamic createdAt;
   @override
-  bool get isRead; // フォロワーが投稿を読んだかどうか
+  final bool isRead;
+// フォロワーが投稿を読んだかどうか
   @override
-  String get posterUid;
+  final String posterUid;
   @override
-  String get postId;
+  final String postId;
 
   /// Create a copy of Timeline
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TimelineImplCopyWith<_$TimelineImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$TimelineCopyWith<_Timeline> get copyWith =>
+      __$TimelineCopyWithImpl<_Timeline>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$TimelineToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Timeline &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            (identical(other.isRead, isRead) || other.isRead == isRead) &&
+            (identical(other.posterUid, posterUid) ||
+                other.posterUid == posterUid) &&
+            (identical(other.postId, postId) || other.postId == postId));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(createdAt),
+      isRead,
+      posterUid,
+      postId);
+
+  @override
+  String toString() {
+    return 'Timeline(createdAt: $createdAt, isRead: $isRead, posterUid: $posterUid, postId: $postId)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$TimelineCopyWith<$Res>
+    with $TimelineCopyWith<$Res> {
+  factory _$TimelineCopyWith(_Timeline value, $Res Function(_Timeline) _then) =
+      __$TimelineCopyWithImpl;
+  @override
+  @useResult
+  $Res call({dynamic createdAt, bool isRead, String posterUid, String postId});
+}
+
+/// @nodoc
+class __$TimelineCopyWithImpl<$Res> with _$TimelineCopyWith<$Res> {
+  __$TimelineCopyWithImpl(this._self, this._then);
+
+  final _Timeline _self;
+  final $Res Function(_Timeline) _then;
+
+  /// Create a copy of Timeline
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? createdAt = freezed,
+    Object? isRead = null,
+    Object? posterUid = null,
+    Object? postId = null,
+  }) {
+    return _then(_Timeline(
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isRead: null == isRead
+          ? _self.isRead
+          : isRead // ignore: cast_nullable_to_non_nullable
+              as bool,
+      posterUid: null == posterUid
+          ? _self.posterUid
+          : posterUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      postId: null == postId
+          ? _self.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,143 +10,31 @@ part of 'verify_android_receipt_request.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-VerifyAndroidReceiptRequest _$VerifyAndroidReceiptRequestFromJson(
-    Map<String, dynamic> json) {
-  return _VerifyAndroidReceiptRequest.fromJson(json);
-}
 
 /// @nodoc
 mixin _$VerifyAndroidReceiptRequest {
-  String get localVerificationData => throw _privateConstructorUsedError;
-  String get productID => throw _privateConstructorUsedError;
-
-  /// Serializes this VerifyAndroidReceiptRequest to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get localVerificationData;
+  String get productID;
 
   /// Create a copy of VerifyAndroidReceiptRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $VerifyAndroidReceiptRequestCopyWith<VerifyAndroidReceiptRequest>
-      get copyWith => throw _privateConstructorUsedError;
-}
+      get copyWith => _$VerifyAndroidReceiptRequestCopyWithImpl<
+              VerifyAndroidReceiptRequest>(
+          this as VerifyAndroidReceiptRequest, _$identity);
 
-/// @nodoc
-abstract class $VerifyAndroidReceiptRequestCopyWith<$Res> {
-  factory $VerifyAndroidReceiptRequestCopyWith(
-          VerifyAndroidReceiptRequest value,
-          $Res Function(VerifyAndroidReceiptRequest) then) =
-      _$VerifyAndroidReceiptRequestCopyWithImpl<$Res,
-          VerifyAndroidReceiptRequest>;
-  @useResult
-  $Res call({String localVerificationData, String productID});
-}
-
-/// @nodoc
-class _$VerifyAndroidReceiptRequestCopyWithImpl<$Res,
-        $Val extends VerifyAndroidReceiptRequest>
-    implements $VerifyAndroidReceiptRequestCopyWith<$Res> {
-  _$VerifyAndroidReceiptRequestCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of VerifyAndroidReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? localVerificationData = null,
-    Object? productID = null,
-  }) {
-    return _then(_value.copyWith(
-      localVerificationData: null == localVerificationData
-          ? _value.localVerificationData
-          : localVerificationData // ignore: cast_nullable_to_non_nullable
-              as String,
-      productID: null == productID
-          ? _value.productID
-          : productID // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$VerifyAndroidReceiptRequestImplCopyWith<$Res>
-    implements $VerifyAndroidReceiptRequestCopyWith<$Res> {
-  factory _$$VerifyAndroidReceiptRequestImplCopyWith(
-          _$VerifyAndroidReceiptRequestImpl value,
-          $Res Function(_$VerifyAndroidReceiptRequestImpl) then) =
-      __$$VerifyAndroidReceiptRequestImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String localVerificationData, String productID});
-}
-
-/// @nodoc
-class __$$VerifyAndroidReceiptRequestImplCopyWithImpl<$Res>
-    extends _$VerifyAndroidReceiptRequestCopyWithImpl<$Res,
-        _$VerifyAndroidReceiptRequestImpl>
-    implements _$$VerifyAndroidReceiptRequestImplCopyWith<$Res> {
-  __$$VerifyAndroidReceiptRequestImplCopyWithImpl(
-      _$VerifyAndroidReceiptRequestImpl _value,
-      $Res Function(_$VerifyAndroidReceiptRequestImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of VerifyAndroidReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? localVerificationData = null,
-    Object? productID = null,
-  }) {
-    return _then(_$VerifyAndroidReceiptRequestImpl(
-      localVerificationData: null == localVerificationData
-          ? _value.localVerificationData
-          : localVerificationData // ignore: cast_nullable_to_non_nullable
-              as String,
-      productID: null == productID
-          ? _value.productID
-          : productID // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$VerifyAndroidReceiptRequestImpl extends _VerifyAndroidReceiptRequest {
-  const _$VerifyAndroidReceiptRequestImpl(
-      {required this.localVerificationData, required this.productID})
-      : super._();
-
-  factory _$VerifyAndroidReceiptRequestImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$VerifyAndroidReceiptRequestImplFromJson(json);
-
-  @override
-  final String localVerificationData;
-  @override
-  final String productID;
-
-  @override
-  String toString() {
-    return 'VerifyAndroidReceiptRequest(localVerificationData: $localVerificationData, productID: $productID)';
-  }
+  /// Serializes this VerifyAndroidReceiptRequest to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VerifyAndroidReceiptRequestImpl &&
+            other is VerifyAndroidReceiptRequest &&
             (identical(other.localVerificationData, localVerificationData) ||
                 other.localVerificationData == localVerificationData) &&
             (identical(other.productID, productID) ||
@@ -157,42 +46,142 @@ class _$VerifyAndroidReceiptRequestImpl extends _VerifyAndroidReceiptRequest {
   int get hashCode =>
       Object.hash(runtimeType, localVerificationData, productID);
 
-  /// Create a copy of VerifyAndroidReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$VerifyAndroidReceiptRequestImplCopyWith<_$VerifyAndroidReceiptRequestImpl>
-      get copyWith => __$$VerifyAndroidReceiptRequestImplCopyWithImpl<
-          _$VerifyAndroidReceiptRequestImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$VerifyAndroidReceiptRequestImplToJson(
-      this,
-    );
+  String toString() {
+    return 'VerifyAndroidReceiptRequest(localVerificationData: $localVerificationData, productID: $productID)';
   }
 }
 
-abstract class _VerifyAndroidReceiptRequest
-    extends VerifyAndroidReceiptRequest {
-  const factory _VerifyAndroidReceiptRequest(
-      {required final String localVerificationData,
-      required final String productID}) = _$VerifyAndroidReceiptRequestImpl;
-  const _VerifyAndroidReceiptRequest._() : super._();
+/// @nodoc
+abstract mixin class $VerifyAndroidReceiptRequestCopyWith<$Res> {
+  factory $VerifyAndroidReceiptRequestCopyWith(
+          VerifyAndroidReceiptRequest value,
+          $Res Function(VerifyAndroidReceiptRequest) _then) =
+      _$VerifyAndroidReceiptRequestCopyWithImpl;
+  @useResult
+  $Res call({String localVerificationData, String productID});
+}
 
-  factory _VerifyAndroidReceiptRequest.fromJson(Map<String, dynamic> json) =
-      _$VerifyAndroidReceiptRequestImpl.fromJson;
+/// @nodoc
+class _$VerifyAndroidReceiptRequestCopyWithImpl<$Res>
+    implements $VerifyAndroidReceiptRequestCopyWith<$Res> {
+  _$VerifyAndroidReceiptRequestCopyWithImpl(this._self, this._then);
+
+  final VerifyAndroidReceiptRequest _self;
+  final $Res Function(VerifyAndroidReceiptRequest) _then;
+
+  /// Create a copy of VerifyAndroidReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? localVerificationData = null,
+    Object? productID = null,
+  }) {
+    return _then(_self.copyWith(
+      localVerificationData: null == localVerificationData
+          ? _self.localVerificationData
+          : localVerificationData // ignore: cast_nullable_to_non_nullable
+              as String,
+      productID: null == productID
+          ? _self.productID
+          : productID // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _VerifyAndroidReceiptRequest extends VerifyAndroidReceiptRequest {
+  const _VerifyAndroidReceiptRequest(
+      {required this.localVerificationData, required this.productID})
+      : super._();
+  factory _VerifyAndroidReceiptRequest.fromJson(Map<String, dynamic> json) =>
+      _$VerifyAndroidReceiptRequestFromJson(json);
 
   @override
-  String get localVerificationData;
+  final String localVerificationData;
   @override
-  String get productID;
+  final String productID;
 
   /// Create a copy of VerifyAndroidReceiptRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$VerifyAndroidReceiptRequestImplCopyWith<_$VerifyAndroidReceiptRequestImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$VerifyAndroidReceiptRequestCopyWith<_VerifyAndroidReceiptRequest>
+      get copyWith => __$VerifyAndroidReceiptRequestCopyWithImpl<
+          _VerifyAndroidReceiptRequest>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$VerifyAndroidReceiptRequestToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _VerifyAndroidReceiptRequest &&
+            (identical(other.localVerificationData, localVerificationData) ||
+                other.localVerificationData == localVerificationData) &&
+            (identical(other.productID, productID) ||
+                other.productID == productID));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, localVerificationData, productID);
+
+  @override
+  String toString() {
+    return 'VerifyAndroidReceiptRequest(localVerificationData: $localVerificationData, productID: $productID)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$VerifyAndroidReceiptRequestCopyWith<$Res>
+    implements $VerifyAndroidReceiptRequestCopyWith<$Res> {
+  factory _$VerifyAndroidReceiptRequestCopyWith(
+          _VerifyAndroidReceiptRequest value,
+          $Res Function(_VerifyAndroidReceiptRequest) _then) =
+      __$VerifyAndroidReceiptRequestCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String localVerificationData, String productID});
+}
+
+/// @nodoc
+class __$VerifyAndroidReceiptRequestCopyWithImpl<$Res>
+    implements _$VerifyAndroidReceiptRequestCopyWith<$Res> {
+  __$VerifyAndroidReceiptRequestCopyWithImpl(this._self, this._then);
+
+  final _VerifyAndroidReceiptRequest _self;
+  final $Res Function(_VerifyAndroidReceiptRequest) _then;
+
+  /// Create a copy of VerifyAndroidReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? localVerificationData = null,
+    Object? productID = null,
+  }) {
+    return _then(_VerifyAndroidReceiptRequest(
+      localVerificationData: null == localVerificationData
+          ? _self.localVerificationData
+          : localVerificationData // ignore: cast_nullable_to_non_nullable
+              as String,
+      productID: null == productID
+          ? _self.productID
+          : productID // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

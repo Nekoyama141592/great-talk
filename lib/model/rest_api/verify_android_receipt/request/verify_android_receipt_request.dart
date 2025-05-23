@@ -5,7 +5,7 @@ part 'verify_android_receipt_request.g.dart';
 
 @freezed
 abstract class VerifyAndroidReceiptRequest
-    implements _$VerifyAndroidReceiptRequest {
+    with _$VerifyAndroidReceiptRequest {
   const VerifyAndroidReceiptRequest._();
   const factory VerifyAndroidReceiptRequest(
       {required String localVerificationData,

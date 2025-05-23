@@ -5,7 +5,7 @@ part 'chat_limit_per_day.freezed.dart';
 part 'chat_limit_per_day.g.dart';
 
 @freezed
-abstract class ChatLimitPerDay implements _$ChatLimitPerDay {
+abstract class ChatLimitPerDay with _$ChatLimitPerDay {
   const ChatLimitPerDay._();
   const factory ChatLimitPerDay(
           {@Default(RemoteConfigConstants.basicLimitPerDay) int basic,

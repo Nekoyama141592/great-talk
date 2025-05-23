@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,121 +10,73 @@ part of 'text_message.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-TextMessage _$TextMessageFromJson(Map<String, dynamic> json) {
-  return _TextMessage.fromJson(json);
-}
 
 /// @nodoc
 mixin _$TextMessage {
-  dynamic get createdAt => throw _privateConstructorUsedError;
-  String get id => throw _privateConstructorUsedError;
-  String get messageType => throw _privateConstructorUsedError;
-  dynamic get messageRef => throw _privateConstructorUsedError;
-  dynamic get postRef => throw _privateConstructorUsedError;
-  String get posterUid => throw _privateConstructorUsedError;
-  String get senderUid => throw _privateConstructorUsedError;
-  Map<String, dynamic> get text => throw _privateConstructorUsedError;
-
-  /// Serializes this TextMessage to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  dynamic get createdAt;
+  String get id;
+  String get messageType;
+  dynamic get messageRef;
+  dynamic get postRef;
+  String get posterUid;
+  String get senderUid;
+  SDMap get text;
 
   /// Create a copy of TextMessage
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TextMessageCopyWith<TextMessage> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TextMessageCopyWith<$Res> {
-  factory $TextMessageCopyWith(
-          TextMessage value, $Res Function(TextMessage) then) =
-      _$TextMessageCopyWithImpl<$Res, TextMessage>;
-  @useResult
-  $Res call(
-      {dynamic createdAt,
-      String id,
-      String messageType,
-      dynamic messageRef,
-      dynamic postRef,
-      String posterUid,
-      String senderUid,
-      Map<String, dynamic> text});
-}
-
-/// @nodoc
-class _$TextMessageCopyWithImpl<$Res, $Val extends TextMessage>
-    implements $TextMessageCopyWith<$Res> {
-  _$TextMessageCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of TextMessage
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $TextMessageCopyWith<TextMessage> get copyWith =>
+      _$TextMessageCopyWithImpl<TextMessage>(this as TextMessage, _$identity);
+
+  /// Serializes this TextMessage to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? createdAt = freezed,
-    Object? id = null,
-    Object? messageType = null,
-    Object? messageRef = freezed,
-    Object? postRef = freezed,
-    Object? posterUid = null,
-    Object? senderUid = null,
-    Object? text = null,
-  }) {
-    return _then(_value.copyWith(
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      messageType: null == messageType
-          ? _value.messageType
-          : messageType // ignore: cast_nullable_to_non_nullable
-              as String,
-      messageRef: freezed == messageRef
-          ? _value.messageRef
-          : messageRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      postRef: freezed == postRef
-          ? _value.postRef
-          : postRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      posterUid: null == posterUid
-          ? _value.posterUid
-          : posterUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      senderUid: null == senderUid
-          ? _value.senderUid
-          : senderUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      text: null == text
-          ? _value.text
-          : text // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TextMessage &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.messageType, messageType) ||
+                other.messageType == messageType) &&
+            const DeepCollectionEquality()
+                .equals(other.messageRef, messageRef) &&
+            const DeepCollectionEquality().equals(other.postRef, postRef) &&
+            (identical(other.posterUid, posterUid) ||
+                other.posterUid == posterUid) &&
+            (identical(other.senderUid, senderUid) ||
+                other.senderUid == senderUid) &&
+            const DeepCollectionEquality().equals(other.text, text));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(createdAt),
+      id,
+      messageType,
+      const DeepCollectionEquality().hash(messageRef),
+      const DeepCollectionEquality().hash(postRef),
+      posterUid,
+      senderUid,
+      const DeepCollectionEquality().hash(text));
+
+  @override
+  String toString() {
+    return 'TextMessage(createdAt: $createdAt, id: $id, messageType: $messageType, messageRef: $messageRef, postRef: $postRef, posterUid: $posterUid, senderUid: $senderUid, text: $text)';
   }
 }
 
 /// @nodoc
-abstract class _$$TextMessageImplCopyWith<$Res>
-    implements $TextMessageCopyWith<$Res> {
-  factory _$$TextMessageImplCopyWith(
-          _$TextMessageImpl value, $Res Function(_$TextMessageImpl) then) =
-      __$$TextMessageImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $TextMessageCopyWith<$Res> {
+  factory $TextMessageCopyWith(
+          TextMessage value, $Res Function(TextMessage) _then) =
+      _$TextMessageCopyWithImpl;
   @useResult
   $Res call(
       {dynamic createdAt,
@@ -133,16 +86,15 @@ abstract class _$$TextMessageImplCopyWith<$Res>
       dynamic postRef,
       String posterUid,
       String senderUid,
-      Map<String, dynamic> text});
+      SDMap text});
 }
 
 /// @nodoc
-class __$$TextMessageImplCopyWithImpl<$Res>
-    extends _$TextMessageCopyWithImpl<$Res, _$TextMessageImpl>
-    implements _$$TextMessageImplCopyWith<$Res> {
-  __$$TextMessageImplCopyWithImpl(
-      _$TextMessageImpl _value, $Res Function(_$TextMessageImpl) _then)
-      : super(_value, _then);
+class _$TextMessageCopyWithImpl<$Res> implements $TextMessageCopyWith<$Res> {
+  _$TextMessageCopyWithImpl(this._self, this._then);
+
+  final TextMessage _self;
+  final $Res Function(TextMessage) _then;
 
   /// Create a copy of TextMessage
   /// with the given fields replaced by the non-null parameter values.
@@ -158,47 +110,47 @@ class __$$TextMessageImplCopyWithImpl<$Res>
     Object? senderUid = null,
     Object? text = null,
   }) {
-    return _then(_$TextMessageImpl(
+    return _then(_self.copyWith(
       createdAt: freezed == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       messageType: null == messageType
-          ? _value.messageType
+          ? _self.messageType
           : messageType // ignore: cast_nullable_to_non_nullable
               as String,
       messageRef: freezed == messageRef
-          ? _value.messageRef
+          ? _self.messageRef
           : messageRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
       postRef: freezed == postRef
-          ? _value.postRef
+          ? _self.postRef
           : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
       posterUid: null == posterUid
-          ? _value.posterUid
+          ? _self.posterUid
           : posterUid // ignore: cast_nullable_to_non_nullable
               as String,
       senderUid: null == senderUid
-          ? _value.senderUid
+          ? _self.senderUid
           : senderUid // ignore: cast_nullable_to_non_nullable
               as String,
       text: null == text
-          ? _value._text
+          ? _self.text
           : text // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$TextMessageImpl extends _TextMessage {
-  const _$TextMessageImpl(
+class _TextMessage extends TextMessage {
+  const _TextMessage(
       {required this.createdAt,
       required this.id,
       required this.messageType,
@@ -206,12 +158,11 @@ class _$TextMessageImpl extends _TextMessage {
       this.postRef,
       required this.posterUid,
       required this.senderUid,
-      required final Map<String, dynamic> text})
+      required final SDMap text})
       : _text = text,
         super._();
-
-  factory _$TextMessageImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TextMessageImplFromJson(json);
+  factory _TextMessage.fromJson(Map<String, dynamic> json) =>
+      _$TextMessageFromJson(json);
 
   @override
   final dynamic createdAt;
@@ -227,24 +178,34 @@ class _$TextMessageImpl extends _TextMessage {
   final String posterUid;
   @override
   final String senderUid;
-  final Map<String, dynamic> _text;
+  final SDMap _text;
   @override
-  Map<String, dynamic> get text {
+  SDMap get text {
     if (_text is EqualUnmodifiableMapView) return _text;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_text);
   }
 
+  /// Create a copy of TextMessage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'TextMessage(createdAt: $createdAt, id: $id, messageType: $messageType, messageRef: $messageRef, postRef: $postRef, posterUid: $posterUid, senderUid: $senderUid, text: $text)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$TextMessageCopyWith<_TextMessage> get copyWith =>
+      __$TextMessageCopyWithImpl<_TextMessage>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$TextMessageToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TextMessageImpl &&
+            other is _TextMessage &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.messageType, messageType) ||
@@ -272,58 +233,87 @@ class _$TextMessageImpl extends _TextMessage {
       senderUid,
       const DeepCollectionEquality().hash(_text));
 
-  /// Create a copy of TextMessage
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$TextMessageImplCopyWith<_$TextMessageImpl> get copyWith =>
-      __$$TextMessageImplCopyWithImpl<_$TextMessageImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TextMessageImplToJson(
-      this,
-    );
+  String toString() {
+    return 'TextMessage(createdAt: $createdAt, id: $id, messageType: $messageType, messageRef: $messageRef, postRef: $postRef, posterUid: $posterUid, senderUid: $senderUid, text: $text)';
   }
 }
 
-abstract class _TextMessage extends TextMessage {
-  const factory _TextMessage(
-      {required final dynamic createdAt,
-      required final String id,
-      required final String messageType,
-      final dynamic messageRef,
-      final dynamic postRef,
-      required final String posterUid,
-      required final String senderUid,
-      required final Map<String, dynamic> text}) = _$TextMessageImpl;
-  const _TextMessage._() : super._();
+/// @nodoc
+abstract mixin class _$TextMessageCopyWith<$Res>
+    implements $TextMessageCopyWith<$Res> {
+  factory _$TextMessageCopyWith(
+          _TextMessage value, $Res Function(_TextMessage) _then) =
+      __$TextMessageCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {dynamic createdAt,
+      String id,
+      String messageType,
+      dynamic messageRef,
+      dynamic postRef,
+      String posterUid,
+      String senderUid,
+      SDMap text});
+}
 
-  factory _TextMessage.fromJson(Map<String, dynamic> json) =
-      _$TextMessageImpl.fromJson;
+/// @nodoc
+class __$TextMessageCopyWithImpl<$Res> implements _$TextMessageCopyWith<$Res> {
+  __$TextMessageCopyWithImpl(this._self, this._then);
 
-  @override
-  dynamic get createdAt;
-  @override
-  String get id;
-  @override
-  String get messageType;
-  @override
-  dynamic get messageRef;
-  @override
-  dynamic get postRef;
-  @override
-  String get posterUid;
-  @override
-  String get senderUid;
-  @override
-  Map<String, dynamic> get text;
+  final _TextMessage _self;
+  final $Res Function(_TextMessage) _then;
 
   /// Create a copy of TextMessage
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TextMessageImplCopyWith<_$TextMessageImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? createdAt = freezed,
+    Object? id = null,
+    Object? messageType = null,
+    Object? messageRef = freezed,
+    Object? postRef = freezed,
+    Object? posterUid = null,
+    Object? senderUid = null,
+    Object? text = null,
+  }) {
+    return _then(_TextMessage(
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      messageType: null == messageType
+          ? _self.messageType
+          : messageType // ignore: cast_nullable_to_non_nullable
+              as String,
+      messageRef: freezed == messageRef
+          ? _self.messageRef
+          : messageRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      postRef: freezed == postRef
+          ? _self.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      posterUid: null == posterUid
+          ? _self.posterUid
+          : posterUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      senderUid: null == senderUid
+          ? _self.senderUid
+          : senderUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      text: null == text
+          ? _self._text
+          : text // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+    ));
+  }
 }
+
+// dart format on

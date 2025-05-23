@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,187 +10,30 @@ part of 'following_token.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-FollowingToken _$FollowingTokenFromJson(Map<String, dynamic> json) {
-  return _FollowingToken.fromJson(json);
-}
-
 /// @nodoc
-mixin _$FollowingToken {
-  dynamic get createdAt => throw _privateConstructorUsedError;
-  String get passiveUid => throw _privateConstructorUsedError;
-  dynamic get passiveUserRef => throw _privateConstructorUsedError;
-  String get tokenId => throw _privateConstructorUsedError;
-  String get tokenType => throw _privateConstructorUsedError;
-
-  /// Serializes this FollowingToken to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+mixin _$FollowingToken implements DiagnosticableTreeMixin {
+  dynamic get createdAt;
+  String get passiveUid;
+  dynamic get passiveUserRef;
+  String get tokenId;
+  String get tokenType;
 
   /// Create a copy of FollowingToken
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $FollowingTokenCopyWith<FollowingToken> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$FollowingTokenCopyWithImpl<FollowingToken>(
+          this as FollowingToken, _$identity);
 
-/// @nodoc
-abstract class $FollowingTokenCopyWith<$Res> {
-  factory $FollowingTokenCopyWith(
-          FollowingToken value, $Res Function(FollowingToken) then) =
-      _$FollowingTokenCopyWithImpl<$Res, FollowingToken>;
-  @useResult
-  $Res call(
-      {dynamic createdAt,
-      String passiveUid,
-      dynamic passiveUserRef,
-      String tokenId,
-      String tokenType});
-}
-
-/// @nodoc
-class _$FollowingTokenCopyWithImpl<$Res, $Val extends FollowingToken>
-    implements $FollowingTokenCopyWith<$Res> {
-  _$FollowingTokenCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of FollowingToken
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? createdAt = freezed,
-    Object? passiveUid = null,
-    Object? passiveUserRef = freezed,
-    Object? tokenId = null,
-    Object? tokenType = null,
-  }) {
-    return _then(_value.copyWith(
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      passiveUid: null == passiveUid
-          ? _value.passiveUid
-          : passiveUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      passiveUserRef: freezed == passiveUserRef
-          ? _value.passiveUserRef
-          : passiveUserRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      tokenId: null == tokenId
-          ? _value.tokenId
-          : tokenId // ignore: cast_nullable_to_non_nullable
-              as String,
-      tokenType: null == tokenType
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$FollowingTokenImplCopyWith<$Res>
-    implements $FollowingTokenCopyWith<$Res> {
-  factory _$$FollowingTokenImplCopyWith(_$FollowingTokenImpl value,
-          $Res Function(_$FollowingTokenImpl) then) =
-      __$$FollowingTokenImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {dynamic createdAt,
-      String passiveUid,
-      dynamic passiveUserRef,
-      String tokenId,
-      String tokenType});
-}
-
-/// @nodoc
-class __$$FollowingTokenImplCopyWithImpl<$Res>
-    extends _$FollowingTokenCopyWithImpl<$Res, _$FollowingTokenImpl>
-    implements _$$FollowingTokenImplCopyWith<$Res> {
-  __$$FollowingTokenImplCopyWithImpl(
-      _$FollowingTokenImpl _value, $Res Function(_$FollowingTokenImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of FollowingToken
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? createdAt = freezed,
-    Object? passiveUid = null,
-    Object? passiveUserRef = freezed,
-    Object? tokenId = null,
-    Object? tokenType = null,
-  }) {
-    return _then(_$FollowingTokenImpl(
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      passiveUid: null == passiveUid
-          ? _value.passiveUid
-          : passiveUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      passiveUserRef: freezed == passiveUserRef
-          ? _value.passiveUserRef
-          : passiveUserRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      tokenId: null == tokenId
-          ? _value.tokenId
-          : tokenId // ignore: cast_nullable_to_non_nullable
-              as String,
-      tokenType: null == tokenType
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$FollowingTokenImpl extends _FollowingToken
-    with DiagnosticableTreeMixin {
-  const _$FollowingTokenImpl(
-      {required this.createdAt,
-      required this.passiveUid,
-      required this.passiveUserRef,
-      required this.tokenId,
-      required this.tokenType})
-      : super._();
-
-  factory _$FollowingTokenImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FollowingTokenImplFromJson(json);
-
-  @override
-  final dynamic createdAt;
-  @override
-  final String passiveUid;
-  @override
-  final dynamic passiveUserRef;
-  @override
-  final String tokenId;
-  @override
-  final String tokenType;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FollowingToken(createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
-  }
+  /// Serializes this FollowingToken to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'FollowingToken'))
       ..add(DiagnosticsProperty('createdAt', createdAt))
@@ -203,7 +47,7 @@ class _$FollowingTokenImpl extends _FollowingToken
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FollowingTokenImpl &&
+            other is FollowingToken &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             (identical(other.passiveUid, passiveUid) ||
                 other.passiveUid == passiveUid) &&
@@ -224,50 +68,209 @@ class _$FollowingTokenImpl extends _FollowingToken
       tokenId,
       tokenType);
 
-  /// Create a copy of FollowingToken
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$FollowingTokenImplCopyWith<_$FollowingTokenImpl> get copyWith =>
-      __$$FollowingTokenImplCopyWithImpl<_$FollowingTokenImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FollowingTokenImplToJson(
-      this,
-    );
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FollowingToken(createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
   }
 }
 
-abstract class _FollowingToken extends FollowingToken {
-  const factory _FollowingToken(
-      {required final dynamic createdAt,
-      required final String passiveUid,
-      required final dynamic passiveUserRef,
-      required final String tokenId,
-      required final String tokenType}) = _$FollowingTokenImpl;
-  const _FollowingToken._() : super._();
+/// @nodoc
+abstract mixin class $FollowingTokenCopyWith<$Res> {
+  factory $FollowingTokenCopyWith(
+          FollowingToken value, $Res Function(FollowingToken) _then) =
+      _$FollowingTokenCopyWithImpl;
+  @useResult
+  $Res call(
+      {dynamic createdAt,
+      String passiveUid,
+      dynamic passiveUserRef,
+      String tokenId,
+      String tokenType});
+}
 
-  factory _FollowingToken.fromJson(Map<String, dynamic> json) =
-      _$FollowingTokenImpl.fromJson;
+/// @nodoc
+class _$FollowingTokenCopyWithImpl<$Res>
+    implements $FollowingTokenCopyWith<$Res> {
+  _$FollowingTokenCopyWithImpl(this._self, this._then);
+
+  final FollowingToken _self;
+  final $Res Function(FollowingToken) _then;
+
+  /// Create a copy of FollowingToken
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? createdAt = freezed,
+    Object? passiveUid = null,
+    Object? passiveUserRef = freezed,
+    Object? tokenId = null,
+    Object? tokenType = null,
+  }) {
+    return _then(_self.copyWith(
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      passiveUid: null == passiveUid
+          ? _self.passiveUid
+          : passiveUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      passiveUserRef: freezed == passiveUserRef
+          ? _self.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      tokenId: null == tokenId
+          ? _self.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
+              as String,
+      tokenType: null == tokenType
+          ? _self.tokenType
+          : tokenType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _FollowingToken extends FollowingToken with DiagnosticableTreeMixin {
+  const _FollowingToken(
+      {required this.createdAt,
+      required this.passiveUid,
+      required this.passiveUserRef,
+      required this.tokenId,
+      required this.tokenType})
+      : super._();
+  factory _FollowingToken.fromJson(Map<String, dynamic> json) =>
+      _$FollowingTokenFromJson(json);
 
   @override
-  dynamic get createdAt;
+  final dynamic createdAt;
   @override
-  String get passiveUid;
+  final String passiveUid;
   @override
-  dynamic get passiveUserRef;
+  final dynamic passiveUserRef;
   @override
-  String get tokenId;
+  final String tokenId;
   @override
-  String get tokenType;
+  final String tokenType;
 
   /// Create a copy of FollowingToken
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FollowingTokenImplCopyWith<_$FollowingTokenImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$FollowingTokenCopyWith<_FollowingToken> get copyWith =>
+      __$FollowingTokenCopyWithImpl<_FollowingToken>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$FollowingTokenToJson(
+      this,
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'FollowingToken'))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('passiveUid', passiveUid))
+      ..add(DiagnosticsProperty('passiveUserRef', passiveUserRef))
+      ..add(DiagnosticsProperty('tokenId', tokenId))
+      ..add(DiagnosticsProperty('tokenType', tokenType));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _FollowingToken &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            (identical(other.passiveUid, passiveUid) ||
+                other.passiveUid == passiveUid) &&
+            const DeepCollectionEquality()
+                .equals(other.passiveUserRef, passiveUserRef) &&
+            (identical(other.tokenId, tokenId) || other.tokenId == tokenId) &&
+            (identical(other.tokenType, tokenType) ||
+                other.tokenType == tokenType));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(createdAt),
+      passiveUid,
+      const DeepCollectionEquality().hash(passiveUserRef),
+      tokenId,
+      tokenType);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'FollowingToken(createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$FollowingTokenCopyWith<$Res>
+    implements $FollowingTokenCopyWith<$Res> {
+  factory _$FollowingTokenCopyWith(
+          _FollowingToken value, $Res Function(_FollowingToken) _then) =
+      __$FollowingTokenCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {dynamic createdAt,
+      String passiveUid,
+      dynamic passiveUserRef,
+      String tokenId,
+      String tokenType});
+}
+
+/// @nodoc
+class __$FollowingTokenCopyWithImpl<$Res>
+    implements _$FollowingTokenCopyWith<$Res> {
+  __$FollowingTokenCopyWithImpl(this._self, this._then);
+
+  final _FollowingToken _self;
+  final $Res Function(_FollowingToken) _then;
+
+  /// Create a copy of FollowingToken
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? createdAt = freezed,
+    Object? passiveUid = null,
+    Object? passiveUserRef = freezed,
+    Object? tokenId = null,
+    Object? tokenType = null,
+  }) {
+    return _then(_FollowingToken(
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      passiveUid: null == passiveUid
+          ? _self.passiveUid
+          : passiveUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      passiveUserRef: freezed == passiveUserRef
+          ? _self.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      tokenId: null == tokenId
+          ? _self.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
+              as String,
+      tokenType: null == tokenType
+          ? _self.tokenType
+          : tokenType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

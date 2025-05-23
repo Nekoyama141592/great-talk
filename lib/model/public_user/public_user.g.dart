@@ -6,8 +6,7 @@ part of 'public_user.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PublicUserImpl _$$PublicUserImplFromJson(Map<String, dynamic> json) =>
-    _$PublicUserImpl(
+_PublicUser _$PublicUserFromJson(Map<String, dynamic> json) => _PublicUser(
       accountName: json['accountName'] as String? ?? "",
       bio: json['bio'] as Map<String, dynamic>,
       blockCount: (json['blockCount'] as num?)?.toInt() ?? 0,
@@ -38,7 +37,7 @@ _$PublicUserImpl _$$PublicUserImplFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$PublicUserImplToJson(_$PublicUserImpl instance) =>
+Map<String, dynamic> _$PublicUserToJson(_PublicUser instance) =>
     <String, dynamic>{
       'accountName': instance.accountName,
       'bio': instance.bio,

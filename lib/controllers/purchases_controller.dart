@@ -131,7 +131,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     final result = await repository.restorePurchases();
     result.when(success: (_) {
       UIHelper.showFlutterToast("購入の復元に成功しました。現在、サーバーで購入情報を検証しています。");
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("購入の復元が失敗しました。");
     });
   }
@@ -152,7 +152,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
           (a, b) => a.id.compareTo(b.id),
         );
       products(sorted);
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("商品を取得できませんでした。");
     });
     _fetchMockProducts();
@@ -178,7 +178,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
       await result.when(success: (res) async {
         isValid = true;
         await _cachReceipt(res); // キャッシュを行う
-      }, failure: () {
+      }, failure: (e) {
         isValid = false;
       });
       return isValid;
@@ -190,7 +190,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
       await result.when(success: (res) async {
         isValid = true;
         await _cachReceipt(res); // キャッシュを行う
-      }, failure: () {
+      }, failure: (e) {
         isValid = false;
       });
       return isValid;
@@ -276,7 +276,7 @@ class PurchasesController extends GetxController with CurrentUserMixin {
     final result = await repository.buyNonConsumable(purchaseParam);
     result.when(
         success: (_) {},
-        failure: () {
+        failure: (e) {
           UIHelper.showFlutterToast("もう一度ボタンを押してください");
         });
     loading(false);

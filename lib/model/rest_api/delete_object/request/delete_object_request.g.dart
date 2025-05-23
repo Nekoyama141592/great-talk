@@ -6,14 +6,13 @@ part of 'delete_object_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DeleteObjectRequestImpl _$$DeleteObjectRequestImplFromJson(
-        Map<String, dynamic> json) =>
-    _$DeleteObjectRequestImpl(
+_DeleteObjectRequest _$DeleteObjectRequestFromJson(Map<String, dynamic> json) =>
+    _DeleteObjectRequest(
       object: json['object'] as String,
     );
 
-Map<String, dynamic> _$$DeleteObjectRequestImplToJson(
-        _$DeleteObjectRequestImpl instance) =>
+Map<String, dynamic> _$DeleteObjectRequestToJson(
+        _DeleteObjectRequest instance) =>
     <String, dynamic>{
       'object': instance.object,
     };

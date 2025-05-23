@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,94 +10,62 @@ part of 'generate_image_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-GenerateImageState _$GenerateImageStateFromJson(Map<String, dynamic> json) {
-  return _GenerateImageState.fromJson(json);
-}
 
 /// @nodoc
 mixin _$GenerateImageState {
-  String get prompt => throw _privateConstructorUsedError;
-  String get size => throw _privateConstructorUsedError;
-  String? get base64 => throw _privateConstructorUsedError;
-
-  /// Serializes this GenerateImageState to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get prompt;
+  String get size;
+  String? get base64;
 
   /// Create a copy of GenerateImageState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GenerateImageStateCopyWith<GenerateImageState> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GenerateImageStateCopyWith<$Res> {
-  factory $GenerateImageStateCopyWith(
-          GenerateImageState value, $Res Function(GenerateImageState) then) =
-      _$GenerateImageStateCopyWithImpl<$Res, GenerateImageState>;
-  @useResult
-  $Res call({String prompt, String size, String? base64});
-}
-
-/// @nodoc
-class _$GenerateImageStateCopyWithImpl<$Res, $Val extends GenerateImageState>
-    implements $GenerateImageStateCopyWith<$Res> {
-  _$GenerateImageStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of GenerateImageState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $GenerateImageStateCopyWith<GenerateImageState> get copyWith =>
+      _$GenerateImageStateCopyWithImpl<GenerateImageState>(
+          this as GenerateImageState, _$identity);
+
+  /// Serializes this GenerateImageState to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? prompt = null,
-    Object? size = null,
-    Object? base64 = freezed,
-  }) {
-    return _then(_value.copyWith(
-      prompt: null == prompt
-          ? _value.prompt
-          : prompt // ignore: cast_nullable_to_non_nullable
-              as String,
-      size: null == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as String,
-      base64: freezed == base64
-          ? _value.base64
-          : base64 // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GenerateImageState &&
+            (identical(other.prompt, prompt) || other.prompt == prompt) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.base64, base64) || other.base64 == base64));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, prompt, size, base64);
+
+  @override
+  String toString() {
+    return 'GenerateImageState(prompt: $prompt, size: $size, base64: $base64)';
   }
 }
 
 /// @nodoc
-abstract class _$$GenerateImageStateImplCopyWith<$Res>
-    implements $GenerateImageStateCopyWith<$Res> {
-  factory _$$GenerateImageStateImplCopyWith(_$GenerateImageStateImpl value,
-          $Res Function(_$GenerateImageStateImpl) then) =
-      __$$GenerateImageStateImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $GenerateImageStateCopyWith<$Res> {
+  factory $GenerateImageStateCopyWith(
+          GenerateImageState value, $Res Function(GenerateImageState) _then) =
+      _$GenerateImageStateCopyWithImpl;
   @useResult
   $Res call({String prompt, String size, String? base64});
 }
 
 /// @nodoc
-class __$$GenerateImageStateImplCopyWithImpl<$Res>
-    extends _$GenerateImageStateCopyWithImpl<$Res, _$GenerateImageStateImpl>
-    implements _$$GenerateImageStateImplCopyWith<$Res> {
-  __$$GenerateImageStateImplCopyWithImpl(_$GenerateImageStateImpl _value,
-      $Res Function(_$GenerateImageStateImpl) _then)
-      : super(_value, _then);
+class _$GenerateImageStateCopyWithImpl<$Res>
+    implements $GenerateImageStateCopyWith<$Res> {
+  _$GenerateImageStateCopyWithImpl(this._self, this._then);
+
+  final GenerateImageState _self;
+  final $Res Function(GenerateImageState) _then;
 
   /// Create a copy of GenerateImageState
   /// with the given fields replaced by the non-null parameter values.
@@ -107,17 +76,17 @@ class __$$GenerateImageStateImplCopyWithImpl<$Res>
     Object? size = null,
     Object? base64 = freezed,
   }) {
-    return _then(_$GenerateImageStateImpl(
+    return _then(_self.copyWith(
       prompt: null == prompt
-          ? _value.prompt
+          ? _self.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
               as String,
       size: null == size
-          ? _value.size
+          ? _self.size
           : size // ignore: cast_nullable_to_non_nullable
               as String,
       base64: freezed == base64
-          ? _value.base64
+          ? _self.base64
           : base64 // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
@@ -126,12 +95,10 @@ class __$$GenerateImageStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GenerateImageStateImpl implements _GenerateImageState {
-  const _$GenerateImageStateImpl(
-      {this.prompt = '', this.size = '', this.base64});
-
-  factory _$GenerateImageStateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GenerateImageStateImplFromJson(json);
+class _GenerateImageState implements GenerateImageState {
+  const _GenerateImageState({this.prompt = '', this.size = '', this.base64});
+  factory _GenerateImageState.fromJson(Map<String, dynamic> json) =>
+      _$GenerateImageStateFromJson(json);
 
   @override
   @JsonKey()
@@ -142,16 +109,26 @@ class _$GenerateImageStateImpl implements _GenerateImageState {
   @override
   final String? base64;
 
+  /// Create a copy of GenerateImageState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GenerateImageState(prompt: $prompt, size: $size, base64: $base64)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GenerateImageStateCopyWith<_GenerateImageState> get copyWith =>
+      __$GenerateImageStateCopyWithImpl<_GenerateImageState>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$GenerateImageStateToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GenerateImageStateImpl &&
+            other is _GenerateImageState &&
             (identical(other.prompt, prompt) || other.prompt == prompt) &&
             (identical(other.size, size) || other.size == size) &&
             (identical(other.base64, base64) || other.base64 == base64));
@@ -161,43 +138,55 @@ class _$GenerateImageStateImpl implements _GenerateImageState {
   @override
   int get hashCode => Object.hash(runtimeType, prompt, size, base64);
 
-  /// Create a copy of GenerateImageState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$GenerateImageStateImplCopyWith<_$GenerateImageStateImpl> get copyWith =>
-      __$$GenerateImageStateImplCopyWithImpl<_$GenerateImageStateImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GenerateImageStateImplToJson(
-      this,
-    );
+  String toString() {
+    return 'GenerateImageState(prompt: $prompt, size: $size, base64: $base64)';
   }
 }
 
-abstract class _GenerateImageState implements GenerateImageState {
-  const factory _GenerateImageState(
-      {final String prompt,
-      final String size,
-      final String? base64}) = _$GenerateImageStateImpl;
+/// @nodoc
+abstract mixin class _$GenerateImageStateCopyWith<$Res>
+    implements $GenerateImageStateCopyWith<$Res> {
+  factory _$GenerateImageStateCopyWith(
+          _GenerateImageState value, $Res Function(_GenerateImageState) _then) =
+      __$GenerateImageStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String prompt, String size, String? base64});
+}
 
-  factory _GenerateImageState.fromJson(Map<String, dynamic> json) =
-      _$GenerateImageStateImpl.fromJson;
+/// @nodoc
+class __$GenerateImageStateCopyWithImpl<$Res>
+    implements _$GenerateImageStateCopyWith<$Res> {
+  __$GenerateImageStateCopyWithImpl(this._self, this._then);
 
-  @override
-  String get prompt;
-  @override
-  String get size;
-  @override
-  String? get base64;
+  final _GenerateImageState _self;
+  final $Res Function(_GenerateImageState) _then;
 
   /// Create a copy of GenerateImageState
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GenerateImageStateImplCopyWith<_$GenerateImageStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? prompt = null,
+    Object? size = null,
+    Object? base64 = freezed,
+  }) {
+    return _then(_GenerateImageState(
+      prompt: null == prompt
+          ? _self.prompt
+          : prompt // ignore: cast_nullable_to_non_nullable
+              as String,
+      size: null == size
+          ? _self.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as String,
+      base64: freezed == base64
+          ? _self.base64
+          : base64 // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
+
+// dart format on

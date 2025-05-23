@@ -10,7 +10,7 @@ part 'post.freezed.dart';
 part 'post.g.dart';
 
 @freezed
-abstract class Post implements _$Post {
+abstract class Post with _$Post {
   const Post._();
   const factory Post({
     @Default(0) int bookmarkCount,

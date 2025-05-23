@@ -6,8 +6,7 @@ part of 'text_message.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TextMessageImpl _$$TextMessageImplFromJson(Map<String, dynamic> json) =>
-    _$TextMessageImpl(
+_TextMessage _$TextMessageFromJson(Map<String, dynamic> json) => _TextMessage(
       createdAt: json['createdAt'],
       id: json['id'] as String,
       messageType: json['messageType'] as String,
@@ -18,7 +17,7 @@ _$TextMessageImpl _$$TextMessageImplFromJson(Map<String, dynamic> json) =>
       text: json['text'] as Map<String, dynamic>,
     );
 
-Map<String, dynamic> _$$TextMessageImplToJson(_$TextMessageImpl instance) =>
+Map<String, dynamic> _$TextMessageToJson(_TextMessage instance) =>
     <String, dynamic>{
       'createdAt': instance.createdAt,
       'id': instance.id,

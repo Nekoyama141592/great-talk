@@ -6,7 +6,7 @@ part 'following_token.freezed.dart';
 part 'following_token.g.dart';
 
 @freezed
-abstract class FollowingToken implements _$FollowingToken {
+abstract class FollowingToken with _$FollowingToken {
   const FollowingToken._();
   const factory FollowingToken({
     required dynamic createdAt,

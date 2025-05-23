@@ -6,9 +6,9 @@ part of 'android_receipt_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AndroidReceiptResponseImpl _$$AndroidReceiptResponseImplFromJson(
+_AndroidReceiptResponse _$AndroidReceiptResponseFromJson(
         Map<String, dynamic> json) =>
-    _$AndroidReceiptResponseImpl(
+    _AndroidReceiptResponse(
       acknowledgementState: (json['acknowledgementState'] as num).toInt(),
       autoRenewing: json['autoRenewing'] as bool,
       countryCode: json['countryCode'] as String,
@@ -25,8 +25,8 @@ _$AndroidReceiptResponseImpl _$$AndroidReceiptResponseImplFromJson(
       uid: json['uid'] as String,
     );
 
-Map<String, dynamic> _$$AndroidReceiptResponseImplToJson(
-        _$AndroidReceiptResponseImpl instance) =>
+Map<String, dynamic> _$AndroidReceiptResponseToJson(
+        _AndroidReceiptResponse instance) =>
     <String, dynamic>{
       'acknowledgementState': instance.acknowledgementState,
       'autoRenewing': instance.autoRenewing,

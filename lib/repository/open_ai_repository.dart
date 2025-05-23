@@ -4,7 +4,7 @@ import 'package:great_talk/model/open_ai/generata_image/generate_image_request/g
 import 'package:great_talk/model/open_ai/generata_image/generate_image_response/generate_image_response.dart';
 import 'package:great_talk/model/open_ai/generate_text/generate_text_request/generate_text_response.dart';
 import 'package:great_talk/model/open_ai/generate_text/generate_text_response/generate_text_request.dart';
-import 'package:great_talk/repository/result.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/utility/env_utility.dart';
 
 class OpenAIRepository {
@@ -17,7 +17,7 @@ class OpenAIRepository {
       final response = await client.generateImage(request);
       return Result.success(response);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -27,7 +27,7 @@ class OpenAIRepository {
       final response = await client.generateText(request);
       return Result.success(response);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 }

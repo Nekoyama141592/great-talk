@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,203 +10,34 @@ part of 'mute_user_token.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-MuteUserToken _$MuteUserTokenFromJson(Map<String, dynamic> json) {
-  return _MuteUserToken.fromJson(json);
-}
 
 /// @nodoc
 mixin _$MuteUserToken {
-  String get activeUid => throw _privateConstructorUsedError;
-  dynamic get createdAt => throw _privateConstructorUsedError;
-  String get passiveUid => throw _privateConstructorUsedError;
-  dynamic get passiveUserRef => throw _privateConstructorUsedError;
-  String get tokenId => throw _privateConstructorUsedError;
-  String get tokenType => throw _privateConstructorUsedError;
-
-  /// Serializes this MuteUserToken to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get activeUid;
+  dynamic get createdAt;
+  String get passiveUid;
+  dynamic get passiveUserRef;
+  String get tokenId;
+  String get tokenType;
 
   /// Create a copy of MuteUserToken
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $MuteUserTokenCopyWith<MuteUserToken> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$MuteUserTokenCopyWithImpl<MuteUserToken>(
+          this as MuteUserToken, _$identity);
 
-/// @nodoc
-abstract class $MuteUserTokenCopyWith<$Res> {
-  factory $MuteUserTokenCopyWith(
-          MuteUserToken value, $Res Function(MuteUserToken) then) =
-      _$MuteUserTokenCopyWithImpl<$Res, MuteUserToken>;
-  @useResult
-  $Res call(
-      {String activeUid,
-      dynamic createdAt,
-      String passiveUid,
-      dynamic passiveUserRef,
-      String tokenId,
-      String tokenType});
-}
-
-/// @nodoc
-class _$MuteUserTokenCopyWithImpl<$Res, $Val extends MuteUserToken>
-    implements $MuteUserTokenCopyWith<$Res> {
-  _$MuteUserTokenCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of MuteUserToken
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? activeUid = null,
-    Object? createdAt = freezed,
-    Object? passiveUid = null,
-    Object? passiveUserRef = freezed,
-    Object? tokenId = null,
-    Object? tokenType = null,
-  }) {
-    return _then(_value.copyWith(
-      activeUid: null == activeUid
-          ? _value.activeUid
-          : activeUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      passiveUid: null == passiveUid
-          ? _value.passiveUid
-          : passiveUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      passiveUserRef: freezed == passiveUserRef
-          ? _value.passiveUserRef
-          : passiveUserRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      tokenId: null == tokenId
-          ? _value.tokenId
-          : tokenId // ignore: cast_nullable_to_non_nullable
-              as String,
-      tokenType: null == tokenType
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$MuteUserTokenImplCopyWith<$Res>
-    implements $MuteUserTokenCopyWith<$Res> {
-  factory _$$MuteUserTokenImplCopyWith(
-          _$MuteUserTokenImpl value, $Res Function(_$MuteUserTokenImpl) then) =
-      __$$MuteUserTokenImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String activeUid,
-      dynamic createdAt,
-      String passiveUid,
-      dynamic passiveUserRef,
-      String tokenId,
-      String tokenType});
-}
-
-/// @nodoc
-class __$$MuteUserTokenImplCopyWithImpl<$Res>
-    extends _$MuteUserTokenCopyWithImpl<$Res, _$MuteUserTokenImpl>
-    implements _$$MuteUserTokenImplCopyWith<$Res> {
-  __$$MuteUserTokenImplCopyWithImpl(
-      _$MuteUserTokenImpl _value, $Res Function(_$MuteUserTokenImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of MuteUserToken
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? activeUid = null,
-    Object? createdAt = freezed,
-    Object? passiveUid = null,
-    Object? passiveUserRef = freezed,
-    Object? tokenId = null,
-    Object? tokenType = null,
-  }) {
-    return _then(_$MuteUserTokenImpl(
-      activeUid: null == activeUid
-          ? _value.activeUid
-          : activeUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      passiveUid: null == passiveUid
-          ? _value.passiveUid
-          : passiveUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      passiveUserRef: freezed == passiveUserRef
-          ? _value.passiveUserRef
-          : passiveUserRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      tokenId: null == tokenId
-          ? _value.tokenId
-          : tokenId // ignore: cast_nullable_to_non_nullable
-              as String,
-      tokenType: null == tokenType
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$MuteUserTokenImpl implements _MuteUserToken {
-  const _$MuteUserTokenImpl(
-      {required this.activeUid,
-      required this.createdAt,
-      required this.passiveUid,
-      required this.passiveUserRef,
-      required this.tokenId,
-      required this.tokenType});
-
-  factory _$MuteUserTokenImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MuteUserTokenImplFromJson(json);
-
-  @override
-  final String activeUid;
-  @override
-  final dynamic createdAt;
-  @override
-  final String passiveUid;
-  @override
-  final dynamic passiveUserRef;
-  @override
-  final String tokenId;
-  @override
-  final String tokenType;
-
-  @override
-  String toString() {
-    return 'MuteUserToken(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
-  }
+  /// Serializes this MuteUserToken to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MuteUserTokenImpl &&
+            other is MuteUserToken &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -229,51 +61,215 @@ class _$MuteUserTokenImpl implements _MuteUserToken {
       tokenId,
       tokenType);
 
-  /// Create a copy of MuteUserToken
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$MuteUserTokenImplCopyWith<_$MuteUserTokenImpl> get copyWith =>
-      __$$MuteUserTokenImplCopyWithImpl<_$MuteUserTokenImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MuteUserTokenImplToJson(
-      this,
-    );
+  String toString() {
+    return 'MuteUserToken(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
   }
 }
 
-abstract class _MuteUserToken implements MuteUserToken {
-  const factory _MuteUserToken(
-      {required final String activeUid,
-      required final dynamic createdAt,
-      required final String passiveUid,
-      required final dynamic passiveUserRef,
-      required final String tokenId,
-      required final String tokenType}) = _$MuteUserTokenImpl;
+/// @nodoc
+abstract mixin class $MuteUserTokenCopyWith<$Res> {
+  factory $MuteUserTokenCopyWith(
+          MuteUserToken value, $Res Function(MuteUserToken) _then) =
+      _$MuteUserTokenCopyWithImpl;
+  @useResult
+  $Res call(
+      {String activeUid,
+      dynamic createdAt,
+      String passiveUid,
+      dynamic passiveUserRef,
+      String tokenId,
+      String tokenType});
+}
 
-  factory _MuteUserToken.fromJson(Map<String, dynamic> json) =
-      _$MuteUserTokenImpl.fromJson;
+/// @nodoc
+class _$MuteUserTokenCopyWithImpl<$Res>
+    implements $MuteUserTokenCopyWith<$Res> {
+  _$MuteUserTokenCopyWithImpl(this._self, this._then);
+
+  final MuteUserToken _self;
+  final $Res Function(MuteUserToken) _then;
+
+  /// Create a copy of MuteUserToken
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activeUid = null,
+    Object? createdAt = freezed,
+    Object? passiveUid = null,
+    Object? passiveUserRef = freezed,
+    Object? tokenId = null,
+    Object? tokenType = null,
+  }) {
+    return _then(_self.copyWith(
+      activeUid: null == activeUid
+          ? _self.activeUid
+          : activeUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      passiveUid: null == passiveUid
+          ? _self.passiveUid
+          : passiveUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      passiveUserRef: freezed == passiveUserRef
+          ? _self.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      tokenId: null == tokenId
+          ? _self.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
+              as String,
+      tokenType: null == tokenType
+          ? _self.tokenType
+          : tokenType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _MuteUserToken implements MuteUserToken {
+  const _MuteUserToken(
+      {required this.activeUid,
+      required this.createdAt,
+      required this.passiveUid,
+      required this.passiveUserRef,
+      required this.tokenId,
+      required this.tokenType});
+  factory _MuteUserToken.fromJson(Map<String, dynamic> json) =>
+      _$MuteUserTokenFromJson(json);
 
   @override
-  String get activeUid;
+  final String activeUid;
   @override
-  dynamic get createdAt;
+  final dynamic createdAt;
   @override
-  String get passiveUid;
+  final String passiveUid;
   @override
-  dynamic get passiveUserRef;
+  final dynamic passiveUserRef;
   @override
-  String get tokenId;
+  final String tokenId;
   @override
-  String get tokenType;
+  final String tokenType;
 
   /// Create a copy of MuteUserToken
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MuteUserTokenImplCopyWith<_$MuteUserTokenImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$MuteUserTokenCopyWith<_MuteUserToken> get copyWith =>
+      __$MuteUserTokenCopyWithImpl<_MuteUserToken>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$MuteUserTokenToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _MuteUserToken &&
+            (identical(other.activeUid, activeUid) ||
+                other.activeUid == activeUid) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            (identical(other.passiveUid, passiveUid) ||
+                other.passiveUid == passiveUid) &&
+            const DeepCollectionEquality()
+                .equals(other.passiveUserRef, passiveUserRef) &&
+            (identical(other.tokenId, tokenId) || other.tokenId == tokenId) &&
+            (identical(other.tokenType, tokenType) ||
+                other.tokenType == tokenType));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      activeUid,
+      const DeepCollectionEquality().hash(createdAt),
+      passiveUid,
+      const DeepCollectionEquality().hash(passiveUserRef),
+      tokenId,
+      tokenType);
+
+  @override
+  String toString() {
+    return 'MuteUserToken(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$MuteUserTokenCopyWith<$Res>
+    implements $MuteUserTokenCopyWith<$Res> {
+  factory _$MuteUserTokenCopyWith(
+          _MuteUserToken value, $Res Function(_MuteUserToken) _then) =
+      __$MuteUserTokenCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String activeUid,
+      dynamic createdAt,
+      String passiveUid,
+      dynamic passiveUserRef,
+      String tokenId,
+      String tokenType});
+}
+
+/// @nodoc
+class __$MuteUserTokenCopyWithImpl<$Res>
+    implements _$MuteUserTokenCopyWith<$Res> {
+  __$MuteUserTokenCopyWithImpl(this._self, this._then);
+
+  final _MuteUserToken _self;
+  final $Res Function(_MuteUserToken) _then;
+
+  /// Create a copy of MuteUserToken
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? activeUid = null,
+    Object? createdAt = freezed,
+    Object? passiveUid = null,
+    Object? passiveUserRef = freezed,
+    Object? tokenId = null,
+    Object? tokenType = null,
+  }) {
+    return _then(_MuteUserToken(
+      activeUid: null == activeUid
+          ? _self.activeUid
+          : activeUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      passiveUid: null == passiveUid
+          ? _self.passiveUid
+          : passiveUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      passiveUserRef: freezed == passiveUserRef
+          ? _self.passiveUserRef
+          : passiveUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      tokenId: null == tokenId
+          ? _self.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
+              as String,
+      tokenType: null == tokenType
+          ? _self.tokenType
+          : tokenType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

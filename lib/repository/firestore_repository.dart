@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
-import 'package:great_talk/repository/result.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class FirestoreRepository {
@@ -11,7 +11,7 @@ class FirestoreRepository {
       final count = await client.countUsers();
       return Result.success(count);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -20,7 +20,7 @@ class FirestoreRepository {
       final count = await client.countPosts();
       return Result.success(count);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -29,7 +29,7 @@ class FirestoreRepository {
       final count = await client.countMessages();
       return Result.success(count);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -38,7 +38,7 @@ class FirestoreRepository {
       final count = await client.countSearchLogs();
       return Result.success(count);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -49,7 +49,7 @@ class FirestoreRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -59,7 +59,7 @@ class FirestoreRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -69,7 +69,7 @@ class FirestoreRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -79,7 +79,7 @@ class FirestoreRepository {
       final Doc doc = await client.getDoc(ref);
       return Result.success(doc);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -90,7 +90,7 @@ class FirestoreRepository {
       final qDocs = qSnapshot.docs;
       return Result.success(qDocs);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 }

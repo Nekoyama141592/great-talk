@@ -5,7 +5,7 @@ part 'search_log.freezed.dart';
 part 'search_log.g.dart';
 
 @freezed
-abstract class SearchLog implements _$SearchLog {
+abstract class SearchLog with _$SearchLog {
   const factory SearchLog({
     required dynamic logCreatedAt,
     required String searchTarget,

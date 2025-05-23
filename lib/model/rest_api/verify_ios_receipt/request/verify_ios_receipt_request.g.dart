@@ -6,14 +6,14 @@ part of 'verify_ios_receipt_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$VerifyIOSReceiptRequestImpl _$$VerifyIOSReceiptRequestImplFromJson(
+_VerifyIOSReceiptRequest _$VerifyIOSReceiptRequestFromJson(
         Map<String, dynamic> json) =>
-    _$VerifyIOSReceiptRequestImpl(
+    _VerifyIOSReceiptRequest(
       serverVerificationData: json['serverVerificationData'] as String,
     );
 
-Map<String, dynamic> _$$VerifyIOSReceiptRequestImplToJson(
-        _$VerifyIOSReceiptRequestImpl instance) =>
+Map<String, dynamic> _$VerifyIOSReceiptRequestToJson(
+        _VerifyIOSReceiptRequest instance) =>
     <String, dynamic>{
       'serverVerificationData': instance.serverVerificationData,
     };

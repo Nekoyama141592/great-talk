@@ -3,7 +3,7 @@ import 'package:great_talk/infrastructure/cloud_functions/cloud_functions_client
 import 'package:great_talk/infrastructure/open_ai/original_dio.dart';
 import 'package:great_talk/model/receipt_request/receipt_request.dart';
 import 'package:great_talk/model/receipt_response/receipt_response.dart';
-import 'package:great_talk/repository/result.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/utility/env_utility.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -21,13 +21,14 @@ class PurchasesRepository {
     try {
       final ProductDetailsResponse productDetailResponse =
           await inAppPurchase.queryProductDetails(identifiers);
-      if (productDetailResponse.error != null) {
-        return const Result.failure();
+      final e = productDetailResponse.error;
+      if (e != null) {
+        return Result.failure(e);
       } else {
         return Result.success(productDetailResponse.productDetails);
       }
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -36,7 +37,7 @@ class PurchasesRepository {
       await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       return const Result.success(true);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -48,7 +49,7 @@ class PurchasesRepository {
       final result = await _client.getAndroidReceipt(request);
       return Result.success(result);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -60,7 +61,7 @@ class PurchasesRepository {
       final result = await _client.getIOSReceipt(request);
       return Result.success(result);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -69,7 +70,7 @@ class PurchasesRepository {
       await inAppPurchase.restorePurchases();
       return const Result.success(true);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 }

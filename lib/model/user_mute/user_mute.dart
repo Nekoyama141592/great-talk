@@ -4,7 +4,7 @@ part 'user_mute.freezed.dart';
 part 'user_mute.g.dart';
 
 @freezed
-abstract class UserMute implements _$UserMute {
+abstract class UserMute with _$UserMute {
   const factory UserMute(
       {required String activeUid,
       required dynamic activeUserRef,

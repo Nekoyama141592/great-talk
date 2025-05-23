@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,203 +10,34 @@ part of 'mute_post_token.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-MutePostToken _$MutePostTokenFromJson(Map<String, dynamic> json) {
-  return _MutePostToken.fromJson(json);
-}
 
 /// @nodoc
 mixin _$MutePostToken {
-  String get activeUid => throw _privateConstructorUsedError;
-  dynamic get createdAt => throw _privateConstructorUsedError;
-  String get postId => throw _privateConstructorUsedError;
-  dynamic get postRef => throw _privateConstructorUsedError;
-  String get tokenId => throw _privateConstructorUsedError;
-  String get tokenType => throw _privateConstructorUsedError;
-
-  /// Serializes this MutePostToken to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get activeUid;
+  dynamic get createdAt;
+  String get postId;
+  dynamic get postRef;
+  String get tokenId;
+  String get tokenType;
 
   /// Create a copy of MutePostToken
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $MutePostTokenCopyWith<MutePostToken> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$MutePostTokenCopyWithImpl<MutePostToken>(
+          this as MutePostToken, _$identity);
 
-/// @nodoc
-abstract class $MutePostTokenCopyWith<$Res> {
-  factory $MutePostTokenCopyWith(
-          MutePostToken value, $Res Function(MutePostToken) then) =
-      _$MutePostTokenCopyWithImpl<$Res, MutePostToken>;
-  @useResult
-  $Res call(
-      {String activeUid,
-      dynamic createdAt,
-      String postId,
-      dynamic postRef,
-      String tokenId,
-      String tokenType});
-}
-
-/// @nodoc
-class _$MutePostTokenCopyWithImpl<$Res, $Val extends MutePostToken>
-    implements $MutePostTokenCopyWith<$Res> {
-  _$MutePostTokenCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of MutePostToken
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? activeUid = null,
-    Object? createdAt = freezed,
-    Object? postId = null,
-    Object? postRef = freezed,
-    Object? tokenId = null,
-    Object? tokenType = null,
-  }) {
-    return _then(_value.copyWith(
-      activeUid: null == activeUid
-          ? _value.activeUid
-          : activeUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
-      postRef: freezed == postRef
-          ? _value.postRef
-          : postRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      tokenId: null == tokenId
-          ? _value.tokenId
-          : tokenId // ignore: cast_nullable_to_non_nullable
-              as String,
-      tokenType: null == tokenType
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$MutePostTokenImplCopyWith<$Res>
-    implements $MutePostTokenCopyWith<$Res> {
-  factory _$$MutePostTokenImplCopyWith(
-          _$MutePostTokenImpl value, $Res Function(_$MutePostTokenImpl) then) =
-      __$$MutePostTokenImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String activeUid,
-      dynamic createdAt,
-      String postId,
-      dynamic postRef,
-      String tokenId,
-      String tokenType});
-}
-
-/// @nodoc
-class __$$MutePostTokenImplCopyWithImpl<$Res>
-    extends _$MutePostTokenCopyWithImpl<$Res, _$MutePostTokenImpl>
-    implements _$$MutePostTokenImplCopyWith<$Res> {
-  __$$MutePostTokenImplCopyWithImpl(
-      _$MutePostTokenImpl _value, $Res Function(_$MutePostTokenImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of MutePostToken
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? activeUid = null,
-    Object? createdAt = freezed,
-    Object? postId = null,
-    Object? postRef = freezed,
-    Object? tokenId = null,
-    Object? tokenType = null,
-  }) {
-    return _then(_$MutePostTokenImpl(
-      activeUid: null == activeUid
-          ? _value.activeUid
-          : activeUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      postId: null == postId
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
-              as String,
-      postRef: freezed == postRef
-          ? _value.postRef
-          : postRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      tokenId: null == tokenId
-          ? _value.tokenId
-          : tokenId // ignore: cast_nullable_to_non_nullable
-              as String,
-      tokenType: null == tokenType
-          ? _value.tokenType
-          : tokenType // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$MutePostTokenImpl implements _MutePostToken {
-  const _$MutePostTokenImpl(
-      {required this.activeUid,
-      required this.createdAt,
-      required this.postId,
-      required this.postRef,
-      required this.tokenId,
-      required this.tokenType});
-
-  factory _$MutePostTokenImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MutePostTokenImplFromJson(json);
-
-  @override
-  final String activeUid;
-  @override
-  final dynamic createdAt;
-  @override
-  final String postId;
-  @override
-  final dynamic postRef;
-  @override
-  final String tokenId;
-  @override
-  final String tokenType;
-
-  @override
-  String toString() {
-    return 'MutePostToken(activeUid: $activeUid, createdAt: $createdAt, postId: $postId, postRef: $postRef, tokenId: $tokenId, tokenType: $tokenType)';
-  }
+  /// Serializes this MutePostToken to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MutePostTokenImpl &&
+            other is MutePostToken &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -227,51 +59,213 @@ class _$MutePostTokenImpl implements _MutePostToken {
       tokenId,
       tokenType);
 
-  /// Create a copy of MutePostToken
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$MutePostTokenImplCopyWith<_$MutePostTokenImpl> get copyWith =>
-      __$$MutePostTokenImplCopyWithImpl<_$MutePostTokenImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$MutePostTokenImplToJson(
-      this,
-    );
+  String toString() {
+    return 'MutePostToken(activeUid: $activeUid, createdAt: $createdAt, postId: $postId, postRef: $postRef, tokenId: $tokenId, tokenType: $tokenType)';
   }
 }
 
-abstract class _MutePostToken implements MutePostToken {
-  const factory _MutePostToken(
-      {required final String activeUid,
-      required final dynamic createdAt,
-      required final String postId,
-      required final dynamic postRef,
-      required final String tokenId,
-      required final String tokenType}) = _$MutePostTokenImpl;
+/// @nodoc
+abstract mixin class $MutePostTokenCopyWith<$Res> {
+  factory $MutePostTokenCopyWith(
+          MutePostToken value, $Res Function(MutePostToken) _then) =
+      _$MutePostTokenCopyWithImpl;
+  @useResult
+  $Res call(
+      {String activeUid,
+      dynamic createdAt,
+      String postId,
+      dynamic postRef,
+      String tokenId,
+      String tokenType});
+}
 
-  factory _MutePostToken.fromJson(Map<String, dynamic> json) =
-      _$MutePostTokenImpl.fromJson;
+/// @nodoc
+class _$MutePostTokenCopyWithImpl<$Res>
+    implements $MutePostTokenCopyWith<$Res> {
+  _$MutePostTokenCopyWithImpl(this._self, this._then);
+
+  final MutePostToken _self;
+  final $Res Function(MutePostToken) _then;
+
+  /// Create a copy of MutePostToken
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activeUid = null,
+    Object? createdAt = freezed,
+    Object? postId = null,
+    Object? postRef = freezed,
+    Object? tokenId = null,
+    Object? tokenType = null,
+  }) {
+    return _then(_self.copyWith(
+      activeUid: null == activeUid
+          ? _self.activeUid
+          : activeUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      postId: null == postId
+          ? _self.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as String,
+      postRef: freezed == postRef
+          ? _self.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      tokenId: null == tokenId
+          ? _self.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
+              as String,
+      tokenType: null == tokenType
+          ? _self.tokenType
+          : tokenType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _MutePostToken implements MutePostToken {
+  const _MutePostToken(
+      {required this.activeUid,
+      required this.createdAt,
+      required this.postId,
+      required this.postRef,
+      required this.tokenId,
+      required this.tokenType});
+  factory _MutePostToken.fromJson(Map<String, dynamic> json) =>
+      _$MutePostTokenFromJson(json);
 
   @override
-  String get activeUid;
+  final String activeUid;
   @override
-  dynamic get createdAt;
+  final dynamic createdAt;
   @override
-  String get postId;
+  final String postId;
   @override
-  dynamic get postRef;
+  final dynamic postRef;
   @override
-  String get tokenId;
+  final String tokenId;
   @override
-  String get tokenType;
+  final String tokenType;
 
   /// Create a copy of MutePostToken
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MutePostTokenImplCopyWith<_$MutePostTokenImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$MutePostTokenCopyWith<_MutePostToken> get copyWith =>
+      __$MutePostTokenCopyWithImpl<_MutePostToken>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$MutePostTokenToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _MutePostToken &&
+            (identical(other.activeUid, activeUid) ||
+                other.activeUid == activeUid) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            (identical(other.postId, postId) || other.postId == postId) &&
+            const DeepCollectionEquality().equals(other.postRef, postRef) &&
+            (identical(other.tokenId, tokenId) || other.tokenId == tokenId) &&
+            (identical(other.tokenType, tokenType) ||
+                other.tokenType == tokenType));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      activeUid,
+      const DeepCollectionEquality().hash(createdAt),
+      postId,
+      const DeepCollectionEquality().hash(postRef),
+      tokenId,
+      tokenType);
+
+  @override
+  String toString() {
+    return 'MutePostToken(activeUid: $activeUid, createdAt: $createdAt, postId: $postId, postRef: $postRef, tokenId: $tokenId, tokenType: $tokenType)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$MutePostTokenCopyWith<$Res>
+    implements $MutePostTokenCopyWith<$Res> {
+  factory _$MutePostTokenCopyWith(
+          _MutePostToken value, $Res Function(_MutePostToken) _then) =
+      __$MutePostTokenCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String activeUid,
+      dynamic createdAt,
+      String postId,
+      dynamic postRef,
+      String tokenId,
+      String tokenType});
+}
+
+/// @nodoc
+class __$MutePostTokenCopyWithImpl<$Res>
+    implements _$MutePostTokenCopyWith<$Res> {
+  __$MutePostTokenCopyWithImpl(this._self, this._then);
+
+  final _MutePostToken _self;
+  final $Res Function(_MutePostToken) _then;
+
+  /// Create a copy of MutePostToken
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? activeUid = null,
+    Object? createdAt = freezed,
+    Object? postId = null,
+    Object? postRef = freezed,
+    Object? tokenId = null,
+    Object? tokenType = null,
+  }) {
+    return _then(_MutePostToken(
+      activeUid: null == activeUid
+          ? _self.activeUid
+          : activeUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      postId: null == postId
+          ? _self.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as String,
+      postRef: freezed == postRef
+          ? _self.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      tokenId: null == tokenId
+          ? _self.tokenId
+          : tokenId // ignore: cast_nullable_to_non_nullable
+              as String,
+      tokenType: null == tokenType
+          ? _self.tokenType
+          : tokenType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,126 +10,29 @@ part of 'verify_ios_receipt_request.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-VerifyIOSReceiptRequest _$VerifyIOSReceiptRequestFromJson(
-    Map<String, dynamic> json) {
-  return _VerifyIOSReceiptRequest.fromJson(json);
-}
 
 /// @nodoc
 mixin _$VerifyIOSReceiptRequest {
-  String get serverVerificationData => throw _privateConstructorUsedError;
-
-  /// Serializes this VerifyIOSReceiptRequest to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get serverVerificationData;
 
   /// Create a copy of VerifyIOSReceiptRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $VerifyIOSReceiptRequestCopyWith<VerifyIOSReceiptRequest> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$VerifyIOSReceiptRequestCopyWithImpl<VerifyIOSReceiptRequest>(
+          this as VerifyIOSReceiptRequest, _$identity);
 
-/// @nodoc
-abstract class $VerifyIOSReceiptRequestCopyWith<$Res> {
-  factory $VerifyIOSReceiptRequestCopyWith(VerifyIOSReceiptRequest value,
-          $Res Function(VerifyIOSReceiptRequest) then) =
-      _$VerifyIOSReceiptRequestCopyWithImpl<$Res, VerifyIOSReceiptRequest>;
-  @useResult
-  $Res call({String serverVerificationData});
-}
-
-/// @nodoc
-class _$VerifyIOSReceiptRequestCopyWithImpl<$Res,
-        $Val extends VerifyIOSReceiptRequest>
-    implements $VerifyIOSReceiptRequestCopyWith<$Res> {
-  _$VerifyIOSReceiptRequestCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of VerifyIOSReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? serverVerificationData = null,
-  }) {
-    return _then(_value.copyWith(
-      serverVerificationData: null == serverVerificationData
-          ? _value.serverVerificationData
-          : serverVerificationData // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$VerifyIOSReceiptRequestImplCopyWith<$Res>
-    implements $VerifyIOSReceiptRequestCopyWith<$Res> {
-  factory _$$VerifyIOSReceiptRequestImplCopyWith(
-          _$VerifyIOSReceiptRequestImpl value,
-          $Res Function(_$VerifyIOSReceiptRequestImpl) then) =
-      __$$VerifyIOSReceiptRequestImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String serverVerificationData});
-}
-
-/// @nodoc
-class __$$VerifyIOSReceiptRequestImplCopyWithImpl<$Res>
-    extends _$VerifyIOSReceiptRequestCopyWithImpl<$Res,
-        _$VerifyIOSReceiptRequestImpl>
-    implements _$$VerifyIOSReceiptRequestImplCopyWith<$Res> {
-  __$$VerifyIOSReceiptRequestImplCopyWithImpl(
-      _$VerifyIOSReceiptRequestImpl _value,
-      $Res Function(_$VerifyIOSReceiptRequestImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of VerifyIOSReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? serverVerificationData = null,
-  }) {
-    return _then(_$VerifyIOSReceiptRequestImpl(
-      serverVerificationData: null == serverVerificationData
-          ? _value.serverVerificationData
-          : serverVerificationData // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$VerifyIOSReceiptRequestImpl extends _VerifyIOSReceiptRequest {
-  const _$VerifyIOSReceiptRequestImpl({required this.serverVerificationData})
-      : super._();
-
-  factory _$VerifyIOSReceiptRequestImpl.fromJson(Map<String, dynamic> json) =>
-      _$$VerifyIOSReceiptRequestImplFromJson(json);
-
-  @override
-  final String serverVerificationData;
-
-  @override
-  String toString() {
-    return 'VerifyIOSReceiptRequest(serverVerificationData: $serverVerificationData)';
-  }
+  /// Serializes this VerifyIOSReceiptRequest to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$VerifyIOSReceiptRequestImpl &&
+            other is VerifyIOSReceiptRequest &&
             (identical(other.serverVerificationData, serverVerificationData) ||
                 other.serverVerificationData == serverVerificationData));
   }
@@ -137,39 +41,124 @@ class _$VerifyIOSReceiptRequestImpl extends _VerifyIOSReceiptRequest {
   @override
   int get hashCode => Object.hash(runtimeType, serverVerificationData);
 
-  /// Create a copy of VerifyIOSReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$VerifyIOSReceiptRequestImplCopyWith<_$VerifyIOSReceiptRequestImpl>
-      get copyWith => __$$VerifyIOSReceiptRequestImplCopyWithImpl<
-          _$VerifyIOSReceiptRequestImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$VerifyIOSReceiptRequestImplToJson(
-      this,
-    );
+  String toString() {
+    return 'VerifyIOSReceiptRequest(serverVerificationData: $serverVerificationData)';
   }
 }
 
-abstract class _VerifyIOSReceiptRequest extends VerifyIOSReceiptRequest {
-  const factory _VerifyIOSReceiptRequest(
-          {required final String serverVerificationData}) =
-      _$VerifyIOSReceiptRequestImpl;
-  const _VerifyIOSReceiptRequest._() : super._();
+/// @nodoc
+abstract mixin class $VerifyIOSReceiptRequestCopyWith<$Res> {
+  factory $VerifyIOSReceiptRequestCopyWith(VerifyIOSReceiptRequest value,
+          $Res Function(VerifyIOSReceiptRequest) _then) =
+      _$VerifyIOSReceiptRequestCopyWithImpl;
+  @useResult
+  $Res call({String serverVerificationData});
+}
 
-  factory _VerifyIOSReceiptRequest.fromJson(Map<String, dynamic> json) =
-      _$VerifyIOSReceiptRequestImpl.fromJson;
+/// @nodoc
+class _$VerifyIOSReceiptRequestCopyWithImpl<$Res>
+    implements $VerifyIOSReceiptRequestCopyWith<$Res> {
+  _$VerifyIOSReceiptRequestCopyWithImpl(this._self, this._then);
+
+  final VerifyIOSReceiptRequest _self;
+  final $Res Function(VerifyIOSReceiptRequest) _then;
+
+  /// Create a copy of VerifyIOSReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? serverVerificationData = null,
+  }) {
+    return _then(_self.copyWith(
+      serverVerificationData: null == serverVerificationData
+          ? _self.serverVerificationData
+          : serverVerificationData // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _VerifyIOSReceiptRequest extends VerifyIOSReceiptRequest {
+  const _VerifyIOSReceiptRequest({required this.serverVerificationData})
+      : super._();
+  factory _VerifyIOSReceiptRequest.fromJson(Map<String, dynamic> json) =>
+      _$VerifyIOSReceiptRequestFromJson(json);
 
   @override
-  String get serverVerificationData;
+  final String serverVerificationData;
 
   /// Create a copy of VerifyIOSReceiptRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$VerifyIOSReceiptRequestImplCopyWith<_$VerifyIOSReceiptRequestImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$VerifyIOSReceiptRequestCopyWith<_VerifyIOSReceiptRequest> get copyWith =>
+      __$VerifyIOSReceiptRequestCopyWithImpl<_VerifyIOSReceiptRequest>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$VerifyIOSReceiptRequestToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _VerifyIOSReceiptRequest &&
+            (identical(other.serverVerificationData, serverVerificationData) ||
+                other.serverVerificationData == serverVerificationData));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, serverVerificationData);
+
+  @override
+  String toString() {
+    return 'VerifyIOSReceiptRequest(serverVerificationData: $serverVerificationData)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$VerifyIOSReceiptRequestCopyWith<$Res>
+    implements $VerifyIOSReceiptRequestCopyWith<$Res> {
+  factory _$VerifyIOSReceiptRequestCopyWith(_VerifyIOSReceiptRequest value,
+          $Res Function(_VerifyIOSReceiptRequest) _then) =
+      __$VerifyIOSReceiptRequestCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String serverVerificationData});
+}
+
+/// @nodoc
+class __$VerifyIOSReceiptRequestCopyWithImpl<$Res>
+    implements _$VerifyIOSReceiptRequestCopyWith<$Res> {
+  __$VerifyIOSReceiptRequestCopyWithImpl(this._self, this._then);
+
+  final _VerifyIOSReceiptRequest _self;
+  final $Res Function(_VerifyIOSReceiptRequest) _then;
+
+  /// Create a copy of VerifyIOSReceiptRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? serverVerificationData = null,
+  }) {
+    return _then(_VerifyIOSReceiptRequest(
+      serverVerificationData: null == serverVerificationData
+          ? _self.serverVerificationData
+          : serverVerificationData // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

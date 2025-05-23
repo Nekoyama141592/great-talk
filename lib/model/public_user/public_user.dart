@@ -10,7 +10,7 @@ part 'public_user.freezed.dart';
 part 'public_user.g.dart';
 
 @freezed
-abstract class PublicUser implements _$PublicUser {
+abstract class PublicUser with _$PublicUser {
   const PublicUser._();
   factory PublicUser({
     @Default("") String accountName,

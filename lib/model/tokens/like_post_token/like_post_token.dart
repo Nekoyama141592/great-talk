@@ -4,7 +4,7 @@ part 'like_post_token.freezed.dart';
 part 'like_post_token.g.dart';
 
 @freezed
-abstract class LikePostToken implements _$LikePostToken {
+abstract class LikePostToken with _$LikePostToken {
   const factory LikePostToken({
     required String activeUid,
     required dynamic createdAt,

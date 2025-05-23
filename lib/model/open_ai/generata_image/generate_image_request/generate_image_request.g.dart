@@ -6,9 +6,9 @@ part of 'generate_image_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GenerateImageRequestImpl _$$GenerateImageRequestImplFromJson(
+_GenerateImageRequest _$GenerateImageRequestFromJson(
         Map<String, dynamic> json) =>
-    _$GenerateImageRequestImpl(
+    _GenerateImageRequest(
       model: json['model'] as String? ?? OpenAIConstants.imageModel,
       prompt: json['prompt'] as String,
       n: (json['n'] as num?)?.toInt() ?? 1,
@@ -16,8 +16,8 @@ _$GenerateImageRequestImpl _$$GenerateImageRequestImplFromJson(
       user: json['user'] as String,
     );
 
-Map<String, dynamic> _$$GenerateImageRequestImplToJson(
-        _$GenerateImageRequestImpl instance) =>
+Map<String, dynamic> _$GenerateImageRequestToJson(
+        _GenerateImageRequest instance) =>
     <String, dynamic>{
       'model': instance.model,
       'prompt': instance.prompt,

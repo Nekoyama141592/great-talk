@@ -6,9 +6,8 @@ part of 'report_post_token.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ReportPostTokenImpl _$$ReportPostTokenImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ReportPostTokenImpl(
+_ReportPostToken _$ReportPostTokenFromJson(Map<String, dynamic> json) =>
+    _ReportPostToken(
       activeUid: json['activeUid'] as String,
       createdAt: json['createdAt'],
       postId: json['postId'] as String,
@@ -17,8 +16,7 @@ _$ReportPostTokenImpl _$$ReportPostTokenImplFromJson(
       tokenType: json['tokenType'] as String,
     );
 
-Map<String, dynamic> _$$ReportPostTokenImplToJson(
-        _$ReportPostTokenImpl instance) =>
+Map<String, dynamic> _$ReportPostTokenToJson(_ReportPostToken instance) =>
     <String, dynamic>{
       'activeUid': instance.activeUid,
       'createdAt': instance.createdAt,

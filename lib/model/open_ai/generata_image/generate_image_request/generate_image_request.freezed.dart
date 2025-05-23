@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,107 +10,66 @@ part of 'generate_image_request.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-GenerateImageRequest _$GenerateImageRequestFromJson(Map<String, dynamic> json) {
-  return _GenerateImageRequest.fromJson(json);
-}
 
 /// @nodoc
 mixin _$GenerateImageRequest {
-  String get model => throw _privateConstructorUsedError;
-  String get prompt => throw _privateConstructorUsedError;
-  int get n => throw _privateConstructorUsedError;
-  String get size => throw _privateConstructorUsedError;
-  String get user => throw _privateConstructorUsedError;
-
-  /// Serializes this GenerateImageRequest to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get model;
+  String get prompt;
+  int get n;
+  String get size;
+  String get user;
 
   /// Create a copy of GenerateImageRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GenerateImageRequestCopyWith<GenerateImageRequest> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GenerateImageRequestCopyWith<$Res> {
-  factory $GenerateImageRequestCopyWith(GenerateImageRequest value,
-          $Res Function(GenerateImageRequest) then) =
-      _$GenerateImageRequestCopyWithImpl<$Res, GenerateImageRequest>;
-  @useResult
-  $Res call({String model, String prompt, int n, String size, String user});
-}
-
-/// @nodoc
-class _$GenerateImageRequestCopyWithImpl<$Res,
-        $Val extends GenerateImageRequest>
-    implements $GenerateImageRequestCopyWith<$Res> {
-  _$GenerateImageRequestCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of GenerateImageRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $GenerateImageRequestCopyWith<GenerateImageRequest> get copyWith =>
+      _$GenerateImageRequestCopyWithImpl<GenerateImageRequest>(
+          this as GenerateImageRequest, _$identity);
+
+  /// Serializes this GenerateImageRequest to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? model = null,
-    Object? prompt = null,
-    Object? n = null,
-    Object? size = null,
-    Object? user = null,
-  }) {
-    return _then(_value.copyWith(
-      model: null == model
-          ? _value.model
-          : model // ignore: cast_nullable_to_non_nullable
-              as String,
-      prompt: null == prompt
-          ? _value.prompt
-          : prompt // ignore: cast_nullable_to_non_nullable
-              as String,
-      n: null == n
-          ? _value.n
-          : n // ignore: cast_nullable_to_non_nullable
-              as int,
-      size: null == size
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GenerateImageRequest &&
+            (identical(other.model, model) || other.model == model) &&
+            (identical(other.prompt, prompt) || other.prompt == prompt) &&
+            (identical(other.n, n) || other.n == n) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, model, prompt, n, size, user);
+
+  @override
+  String toString() {
+    return 'GenerateImageRequest(model: $model, prompt: $prompt, n: $n, size: $size, user: $user)';
   }
 }
 
 /// @nodoc
-abstract class _$$GenerateImageRequestImplCopyWith<$Res>
-    implements $GenerateImageRequestCopyWith<$Res> {
-  factory _$$GenerateImageRequestImplCopyWith(_$GenerateImageRequestImpl value,
-          $Res Function(_$GenerateImageRequestImpl) then) =
-      __$$GenerateImageRequestImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $GenerateImageRequestCopyWith<$Res> {
+  factory $GenerateImageRequestCopyWith(GenerateImageRequest value,
+          $Res Function(GenerateImageRequest) _then) =
+      _$GenerateImageRequestCopyWithImpl;
   @useResult
   $Res call({String model, String prompt, int n, String size, String user});
 }
 
 /// @nodoc
-class __$$GenerateImageRequestImplCopyWithImpl<$Res>
-    extends _$GenerateImageRequestCopyWithImpl<$Res, _$GenerateImageRequestImpl>
-    implements _$$GenerateImageRequestImplCopyWith<$Res> {
-  __$$GenerateImageRequestImplCopyWithImpl(_$GenerateImageRequestImpl _value,
-      $Res Function(_$GenerateImageRequestImpl) _then)
-      : super(_value, _then);
+class _$GenerateImageRequestCopyWithImpl<$Res>
+    implements $GenerateImageRequestCopyWith<$Res> {
+  _$GenerateImageRequestCopyWithImpl(this._self, this._then);
+
+  final GenerateImageRequest _self;
+  final $Res Function(GenerateImageRequest) _then;
 
   /// Create a copy of GenerateImageRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -122,25 +82,25 @@ class __$$GenerateImageRequestImplCopyWithImpl<$Res>
     Object? size = null,
     Object? user = null,
   }) {
-    return _then(_$GenerateImageRequestImpl(
+    return _then(_self.copyWith(
       model: null == model
-          ? _value.model
+          ? _self.model
           : model // ignore: cast_nullable_to_non_nullable
               as String,
       prompt: null == prompt
-          ? _value.prompt
+          ? _self.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
               as String,
       n: null == n
-          ? _value.n
+          ? _self.n
           : n // ignore: cast_nullable_to_non_nullable
               as int,
       size: null == size
-          ? _value.size
+          ? _self.size
           : size // ignore: cast_nullable_to_non_nullable
               as String,
       user: null == user
-          ? _value.user
+          ? _self.user
           : user // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -149,16 +109,15 @@ class __$$GenerateImageRequestImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GenerateImageRequestImpl implements _GenerateImageRequest {
-  const _$GenerateImageRequestImpl(
+class _GenerateImageRequest implements GenerateImageRequest {
+  const _GenerateImageRequest(
       {this.model = OpenAIConstants.imageModel,
       required this.prompt,
       this.n = 1,
       required this.size,
       required this.user});
-
-  factory _$GenerateImageRequestImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GenerateImageRequestImplFromJson(json);
+  factory _GenerateImageRequest.fromJson(Map<String, dynamic> json) =>
+      _$GenerateImageRequestFromJson(json);
 
   @override
   @JsonKey()
@@ -173,16 +132,27 @@ class _$GenerateImageRequestImpl implements _GenerateImageRequest {
   @override
   final String user;
 
+  /// Create a copy of GenerateImageRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GenerateImageRequest(model: $model, prompt: $prompt, n: $n, size: $size, user: $user)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GenerateImageRequestCopyWith<_GenerateImageRequest> get copyWith =>
+      __$GenerateImageRequestCopyWithImpl<_GenerateImageRequest>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$GenerateImageRequestToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GenerateImageRequestImpl &&
+            other is _GenerateImageRequest &&
             (identical(other.model, model) || other.model == model) &&
             (identical(other.prompt, prompt) || other.prompt == prompt) &&
             (identical(other.n, n) || other.n == n) &&
@@ -194,50 +164,65 @@ class _$GenerateImageRequestImpl implements _GenerateImageRequest {
   @override
   int get hashCode => Object.hash(runtimeType, model, prompt, n, size, user);
 
-  /// Create a copy of GenerateImageRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$GenerateImageRequestImplCopyWith<_$GenerateImageRequestImpl>
-      get copyWith =>
-          __$$GenerateImageRequestImplCopyWithImpl<_$GenerateImageRequestImpl>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GenerateImageRequestImplToJson(
-      this,
-    );
+  String toString() {
+    return 'GenerateImageRequest(model: $model, prompt: $prompt, n: $n, size: $size, user: $user)';
   }
 }
 
-abstract class _GenerateImageRequest implements GenerateImageRequest {
-  const factory _GenerateImageRequest(
-      {final String model,
-      required final String prompt,
-      final int n,
-      required final String size,
-      required final String user}) = _$GenerateImageRequestImpl;
+/// @nodoc
+abstract mixin class _$GenerateImageRequestCopyWith<$Res>
+    implements $GenerateImageRequestCopyWith<$Res> {
+  factory _$GenerateImageRequestCopyWith(_GenerateImageRequest value,
+          $Res Function(_GenerateImageRequest) _then) =
+      __$GenerateImageRequestCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String model, String prompt, int n, String size, String user});
+}
 
-  factory _GenerateImageRequest.fromJson(Map<String, dynamic> json) =
-      _$GenerateImageRequestImpl.fromJson;
+/// @nodoc
+class __$GenerateImageRequestCopyWithImpl<$Res>
+    implements _$GenerateImageRequestCopyWith<$Res> {
+  __$GenerateImageRequestCopyWithImpl(this._self, this._then);
 
-  @override
-  String get model;
-  @override
-  String get prompt;
-  @override
-  int get n;
-  @override
-  String get size;
-  @override
-  String get user;
+  final _GenerateImageRequest _self;
+  final $Res Function(_GenerateImageRequest) _then;
 
   /// Create a copy of GenerateImageRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GenerateImageRequestImplCopyWith<_$GenerateImageRequestImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? model = null,
+    Object? prompt = null,
+    Object? n = null,
+    Object? size = null,
+    Object? user = null,
+  }) {
+    return _then(_GenerateImageRequest(
+      model: null == model
+          ? _self.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String,
+      prompt: null == prompt
+          ? _self.prompt
+          : prompt // ignore: cast_nullable_to_non_nullable
+              as String,
+      n: null == n
+          ? _self.n
+          : n // ignore: cast_nullable_to_non_nullable
+              as int,
+      size: null == size
+          ? _self.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as String,
+      user: null == user
+          ? _self.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
+
+// dart format on

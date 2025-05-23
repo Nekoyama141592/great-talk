@@ -6,14 +6,13 @@ part of 'receipt_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ReceiptRequestImpl _$$ReceiptRequestImplFromJson(Map<String, dynamic> json) =>
-    _$ReceiptRequestImpl(
+_ReceiptRequest _$ReceiptRequestFromJson(Map<String, dynamic> json) =>
+    _ReceiptRequest(
       data: json['data'] as Map<String, dynamic>,
       uid: json['uid'] as String,
     );
 
-Map<String, dynamic> _$$ReceiptRequestImplToJson(
-        _$ReceiptRequestImpl instance) =>
+Map<String, dynamic> _$ReceiptRequestToJson(_ReceiptRequest instance) =>
     <String, dynamic>{
       'data': instance.data,
       'uid': instance.uid,

@@ -6,15 +6,15 @@ part of 'verify_android_receipt_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$VerifyAndroidReceiptRequestImpl _$$VerifyAndroidReceiptRequestImplFromJson(
+_VerifyAndroidReceiptRequest _$VerifyAndroidReceiptRequestFromJson(
         Map<String, dynamic> json) =>
-    _$VerifyAndroidReceiptRequestImpl(
+    _VerifyAndroidReceiptRequest(
       localVerificationData: json['localVerificationData'] as String,
       productID: json['productID'] as String,
     );
 
-Map<String, dynamic> _$$VerifyAndroidReceiptRequestImplToJson(
-        _$VerifyAndroidReceiptRequestImpl instance) =>
+Map<String, dynamic> _$VerifyAndroidReceiptRequestToJson(
+        _VerifyAndroidReceiptRequest instance) =>
     <String, dynamic>{
       'localVerificationData': instance.localVerificationData,
       'productID': instance.productID,

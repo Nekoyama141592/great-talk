@@ -6,9 +6,8 @@ part of 'chat_limit_per_day.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ChatLimitPerDayImpl _$$ChatLimitPerDayImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ChatLimitPerDayImpl(
+_ChatLimitPerDay _$ChatLimitPerDayFromJson(Map<String, dynamic> json) =>
+    _ChatLimitPerDay(
       basic: (json['basic'] as num?)?.toInt() ??
           RemoteConfigConstants.basicLimitPerDay,
       free: (json['free'] as num?)?.toInt() ??
@@ -17,8 +16,7 @@ _$ChatLimitPerDayImpl _$$ChatLimitPerDayImplFromJson(
           RemoteConfigConstants.premiumLimitPerDay,
     );
 
-Map<String, dynamic> _$$ChatLimitPerDayImplToJson(
-        _$ChatLimitPerDayImpl instance) =>
+Map<String, dynamic> _$ChatLimitPerDayToJson(_ChatLimitPerDay instance) =>
     <String, dynamic>{
       'basic': instance.basic,
       'free': instance.free,

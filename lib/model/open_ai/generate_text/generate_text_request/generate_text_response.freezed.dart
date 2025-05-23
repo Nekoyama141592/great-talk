@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,83 +10,59 @@ part of 'generate_text_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-GenerateTextResponse _$GenerateTextResponseFromJson(Map<String, dynamic> json) {
-  return _GenerateTextResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$GenerateTextResponse {
-  List<Map<String, dynamic>> get choices => throw _privateConstructorUsedError;
-
-  /// Serializes this GenerateTextResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  List<Map<String, dynamic>> get choices;
 
   /// Create a copy of GenerateTextResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GenerateTextResponseCopyWith<GenerateTextResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GenerateTextResponseCopyWith<$Res> {
-  factory $GenerateTextResponseCopyWith(GenerateTextResponse value,
-          $Res Function(GenerateTextResponse) then) =
-      _$GenerateTextResponseCopyWithImpl<$Res, GenerateTextResponse>;
-  @useResult
-  $Res call({List<Map<String, dynamic>> choices});
-}
-
-/// @nodoc
-class _$GenerateTextResponseCopyWithImpl<$Res,
-        $Val extends GenerateTextResponse>
-    implements $GenerateTextResponseCopyWith<$Res> {
-  _$GenerateTextResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of GenerateTextResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $GenerateTextResponseCopyWith<GenerateTextResponse> get copyWith =>
+      _$GenerateTextResponseCopyWithImpl<GenerateTextResponse>(
+          this as GenerateTextResponse, _$identity);
+
+  /// Serializes this GenerateTextResponse to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? choices = null,
-  }) {
-    return _then(_value.copyWith(
-      choices: null == choices
-          ? _value.choices
-          : choices // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GenerateTextResponse &&
+            const DeepCollectionEquality().equals(other.choices, choices));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(choices));
+
+  @override
+  String toString() {
+    return 'GenerateTextResponse(choices: $choices)';
   }
 }
 
 /// @nodoc
-abstract class _$$GenerateTextResponseImplCopyWith<$Res>
-    implements $GenerateTextResponseCopyWith<$Res> {
-  factory _$$GenerateTextResponseImplCopyWith(_$GenerateTextResponseImpl value,
-          $Res Function(_$GenerateTextResponseImpl) then) =
-      __$$GenerateTextResponseImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $GenerateTextResponseCopyWith<$Res> {
+  factory $GenerateTextResponseCopyWith(GenerateTextResponse value,
+          $Res Function(GenerateTextResponse) _then) =
+      _$GenerateTextResponseCopyWithImpl;
   @useResult
   $Res call({List<Map<String, dynamic>> choices});
 }
 
 /// @nodoc
-class __$$GenerateTextResponseImplCopyWithImpl<$Res>
-    extends _$GenerateTextResponseCopyWithImpl<$Res, _$GenerateTextResponseImpl>
-    implements _$$GenerateTextResponseImplCopyWith<$Res> {
-  __$$GenerateTextResponseImplCopyWithImpl(_$GenerateTextResponseImpl _value,
-      $Res Function(_$GenerateTextResponseImpl) _then)
-      : super(_value, _then);
+class _$GenerateTextResponseCopyWithImpl<$Res>
+    implements $GenerateTextResponseCopyWith<$Res> {
+  _$GenerateTextResponseCopyWithImpl(this._self, this._then);
+
+  final GenerateTextResponse _self;
+  final $Res Function(GenerateTextResponse) _then;
 
   /// Create a copy of GenerateTextResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -94,9 +71,9 @@ class __$$GenerateTextResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? choices = null,
   }) {
-    return _then(_$GenerateTextResponseImpl(
+    return _then(_self.copyWith(
       choices: null == choices
-          ? _value._choices
+          ? _self.choices
           : choices // ignore: cast_nullable_to_non_nullable
               as List<Map<String, dynamic>>,
     ));
@@ -105,13 +82,12 @@ class __$$GenerateTextResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GenerateTextResponseImpl implements _GenerateTextResponse {
-  const _$GenerateTextResponseImpl(
+class _GenerateTextResponse implements GenerateTextResponse {
+  const _GenerateTextResponse(
       {required final List<Map<String, dynamic>> choices})
       : _choices = choices;
-
-  factory _$GenerateTextResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GenerateTextResponseImplFromJson(json);
+  factory _GenerateTextResponse.fromJson(Map<String, dynamic> json) =>
+      _$GenerateTextResponseFromJson(json);
 
   final List<Map<String, dynamic>> _choices;
   @override
@@ -121,16 +97,27 @@ class _$GenerateTextResponseImpl implements _GenerateTextResponse {
     return EqualUnmodifiableListView(_choices);
   }
 
+  /// Create a copy of GenerateTextResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GenerateTextResponse(choices: $choices)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GenerateTextResponseCopyWith<_GenerateTextResponse> get copyWith =>
+      __$GenerateTextResponseCopyWithImpl<_GenerateTextResponse>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$GenerateTextResponseToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GenerateTextResponseImpl &&
+            other is _GenerateTextResponse &&
             const DeepCollectionEquality().equals(other._choices, _choices));
   }
 
@@ -139,39 +126,45 @@ class _$GenerateTextResponseImpl implements _GenerateTextResponse {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_choices));
 
-  /// Create a copy of GenerateTextResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$GenerateTextResponseImplCopyWith<_$GenerateTextResponseImpl>
-      get copyWith =>
-          __$$GenerateTextResponseImplCopyWithImpl<_$GenerateTextResponseImpl>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GenerateTextResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'GenerateTextResponse(choices: $choices)';
   }
 }
 
-abstract class _GenerateTextResponse implements GenerateTextResponse {
-  const factory _GenerateTextResponse(
-          {required final List<Map<String, dynamic>> choices}) =
-      _$GenerateTextResponseImpl;
-
-  factory _GenerateTextResponse.fromJson(Map<String, dynamic> json) =
-      _$GenerateTextResponseImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$GenerateTextResponseCopyWith<$Res>
+    implements $GenerateTextResponseCopyWith<$Res> {
+  factory _$GenerateTextResponseCopyWith(_GenerateTextResponse value,
+          $Res Function(_GenerateTextResponse) _then) =
+      __$GenerateTextResponseCopyWithImpl;
   @override
-  List<Map<String, dynamic>> get choices;
+  @useResult
+  $Res call({List<Map<String, dynamic>> choices});
+}
+
+/// @nodoc
+class __$GenerateTextResponseCopyWithImpl<$Res>
+    implements _$GenerateTextResponseCopyWith<$Res> {
+  __$GenerateTextResponseCopyWithImpl(this._self, this._then);
+
+  final _GenerateTextResponse _self;
+  final $Res Function(_GenerateTextResponse) _then;
 
   /// Create a copy of GenerateTextResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GenerateTextResponseImplCopyWith<_$GenerateTextResponseImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? choices = null,
+  }) {
+    return _then(_GenerateTextResponse(
+      choices: null == choices
+          ? _self._choices
+          : choices // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>,
+    ));
+  }
 }
+
+// dart format on

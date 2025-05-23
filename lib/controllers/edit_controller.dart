@@ -64,7 +64,7 @@ class EditController extends FormsController with CurrentUserMixin {
       final result = await AWSS3Repository().putObject(request);
       await result.when(success: (res) async {
         await _createUserUpdateLog(fileName); // ユーザー情報を更新.
-      }, failure: () {
+      }, failure: (e) {
         UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
       });
     } else {
@@ -94,7 +94,7 @@ class EditController extends FormsController with CurrentUserMixin {
       Get.back();
       Get.back();
       UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("プロフィールを更新できませんでした");
     });
   }

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,170 +10,34 @@ part of 'search_log.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 SearchLog _$SearchLogFromJson(Map<String, dynamic> json) {
   return _UserUpdateLog.fromJson(json);
 }
 
 /// @nodoc
 mixin _$SearchLog {
-  dynamic get logCreatedAt => throw _privateConstructorUsedError;
-  String get searchTarget => throw _privateConstructorUsedError;
-  String get searchTerm => throw _privateConstructorUsedError;
-  String get uid => throw _privateConstructorUsedError;
-
-  /// Serializes this SearchLog to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  dynamic get logCreatedAt;
+  String get searchTarget;
+  String get searchTerm;
+  String get uid;
 
   /// Create a copy of SearchLog
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $SearchLogCopyWith<SearchLog> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$SearchLogCopyWithImpl<SearchLog>(this as SearchLog, _$identity);
 
-/// @nodoc
-abstract class $SearchLogCopyWith<$Res> {
-  factory $SearchLogCopyWith(SearchLog value, $Res Function(SearchLog) then) =
-      _$SearchLogCopyWithImpl<$Res, SearchLog>;
-  @useResult
-  $Res call(
-      {dynamic logCreatedAt,
-      String searchTarget,
-      String searchTerm,
-      String uid});
-}
-
-/// @nodoc
-class _$SearchLogCopyWithImpl<$Res, $Val extends SearchLog>
-    implements $SearchLogCopyWith<$Res> {
-  _$SearchLogCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of SearchLog
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? logCreatedAt = freezed,
-    Object? searchTarget = null,
-    Object? searchTerm = null,
-    Object? uid = null,
-  }) {
-    return _then(_value.copyWith(
-      logCreatedAt: freezed == logCreatedAt
-          ? _value.logCreatedAt
-          : logCreatedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      searchTarget: null == searchTarget
-          ? _value.searchTarget
-          : searchTarget // ignore: cast_nullable_to_non_nullable
-              as String,
-      searchTerm: null == searchTerm
-          ? _value.searchTerm
-          : searchTerm // ignore: cast_nullable_to_non_nullable
-              as String,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$UserUpdateLogImplCopyWith<$Res>
-    implements $SearchLogCopyWith<$Res> {
-  factory _$$UserUpdateLogImplCopyWith(
-          _$UserUpdateLogImpl value, $Res Function(_$UserUpdateLogImpl) then) =
-      __$$UserUpdateLogImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {dynamic logCreatedAt,
-      String searchTarget,
-      String searchTerm,
-      String uid});
-}
-
-/// @nodoc
-class __$$UserUpdateLogImplCopyWithImpl<$Res>
-    extends _$SearchLogCopyWithImpl<$Res, _$UserUpdateLogImpl>
-    implements _$$UserUpdateLogImplCopyWith<$Res> {
-  __$$UserUpdateLogImplCopyWithImpl(
-      _$UserUpdateLogImpl _value, $Res Function(_$UserUpdateLogImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SearchLog
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? logCreatedAt = freezed,
-    Object? searchTarget = null,
-    Object? searchTerm = null,
-    Object? uid = null,
-  }) {
-    return _then(_$UserUpdateLogImpl(
-      logCreatedAt: freezed == logCreatedAt
-          ? _value.logCreatedAt
-          : logCreatedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      searchTarget: null == searchTarget
-          ? _value.searchTarget
-          : searchTarget // ignore: cast_nullable_to_non_nullable
-              as String,
-      searchTerm: null == searchTerm
-          ? _value.searchTerm
-          : searchTerm // ignore: cast_nullable_to_non_nullable
-              as String,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$UserUpdateLogImpl implements _UserUpdateLog {
-  const _$UserUpdateLogImpl(
-      {required this.logCreatedAt,
-      required this.searchTarget,
-      required this.searchTerm,
-      required this.uid});
-
-  factory _$UserUpdateLogImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UserUpdateLogImplFromJson(json);
-
-  @override
-  final dynamic logCreatedAt;
-  @override
-  final String searchTarget;
-  @override
-  final String searchTerm;
-  @override
-  final String uid;
-
-  @override
-  String toString() {
-    return 'SearchLog(logCreatedAt: $logCreatedAt, searchTarget: $searchTarget, searchTerm: $searchTerm, uid: $uid)';
-  }
+  /// Serializes this SearchLog to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserUpdateLogImpl &&
+            other is SearchLog &&
             const DeepCollectionEquality()
                 .equals(other.logCreatedAt, logCreatedAt) &&
             (identical(other.searchTarget, searchTarget) ||
@@ -191,45 +56,178 @@ class _$UserUpdateLogImpl implements _UserUpdateLog {
       searchTerm,
       uid);
 
-  /// Create a copy of SearchLog
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
-      __$$UserUpdateLogImplCopyWithImpl<_$UserUpdateLogImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$UserUpdateLogImplToJson(
-      this,
-    );
+  String toString() {
+    return 'SearchLog(logCreatedAt: $logCreatedAt, searchTarget: $searchTarget, searchTerm: $searchTerm, uid: $uid)';
   }
 }
 
-abstract class _UserUpdateLog implements SearchLog {
-  const factory _UserUpdateLog(
-      {required final dynamic logCreatedAt,
-      required final String searchTarget,
-      required final String searchTerm,
-      required final String uid}) = _$UserUpdateLogImpl;
+/// @nodoc
+abstract mixin class $SearchLogCopyWith<$Res> {
+  factory $SearchLogCopyWith(SearchLog value, $Res Function(SearchLog) _then) =
+      _$SearchLogCopyWithImpl;
+  @useResult
+  $Res call(
+      {dynamic logCreatedAt,
+      String searchTarget,
+      String searchTerm,
+      String uid});
+}
 
-  factory _UserUpdateLog.fromJson(Map<String, dynamic> json) =
-      _$UserUpdateLogImpl.fromJson;
+/// @nodoc
+class _$SearchLogCopyWithImpl<$Res> implements $SearchLogCopyWith<$Res> {
+  _$SearchLogCopyWithImpl(this._self, this._then);
+
+  final SearchLog _self;
+  final $Res Function(SearchLog) _then;
+
+  /// Create a copy of SearchLog
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? logCreatedAt = freezed,
+    Object? searchTarget = null,
+    Object? searchTerm = null,
+    Object? uid = null,
+  }) {
+    return _then(_self.copyWith(
+      logCreatedAt: freezed == logCreatedAt
+          ? _self.logCreatedAt
+          : logCreatedAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      searchTarget: null == searchTarget
+          ? _self.searchTarget
+          : searchTarget // ignore: cast_nullable_to_non_nullable
+              as String,
+      searchTerm: null == searchTerm
+          ? _self.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _self.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _UserUpdateLog implements SearchLog {
+  const _UserUpdateLog(
+      {required this.logCreatedAt,
+      required this.searchTarget,
+      required this.searchTerm,
+      required this.uid});
+  factory _UserUpdateLog.fromJson(Map<String, dynamic> json) =>
+      _$UserUpdateLogFromJson(json);
 
   @override
-  dynamic get logCreatedAt;
+  final dynamic logCreatedAt;
   @override
-  String get searchTarget;
+  final String searchTarget;
   @override
-  String get searchTerm;
+  final String searchTerm;
   @override
-  String get uid;
+  final String uid;
 
   /// Create a copy of SearchLog
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UserUpdateLogImplCopyWith<_$UserUpdateLogImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$UserUpdateLogCopyWith<_UserUpdateLog> get copyWith =>
+      __$UserUpdateLogCopyWithImpl<_UserUpdateLog>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$UserUpdateLogToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _UserUpdateLog &&
+            const DeepCollectionEquality()
+                .equals(other.logCreatedAt, logCreatedAt) &&
+            (identical(other.searchTarget, searchTarget) ||
+                other.searchTarget == searchTarget) &&
+            (identical(other.searchTerm, searchTerm) ||
+                other.searchTerm == searchTerm) &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(logCreatedAt),
+      searchTarget,
+      searchTerm,
+      uid);
+
+  @override
+  String toString() {
+    return 'SearchLog(logCreatedAt: $logCreatedAt, searchTarget: $searchTarget, searchTerm: $searchTerm, uid: $uid)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$UserUpdateLogCopyWith<$Res>
+    implements $SearchLogCopyWith<$Res> {
+  factory _$UserUpdateLogCopyWith(
+          _UserUpdateLog value, $Res Function(_UserUpdateLog) _then) =
+      __$UserUpdateLogCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {dynamic logCreatedAt,
+      String searchTarget,
+      String searchTerm,
+      String uid});
+}
+
+/// @nodoc
+class __$UserUpdateLogCopyWithImpl<$Res>
+    implements _$UserUpdateLogCopyWith<$Res> {
+  __$UserUpdateLogCopyWithImpl(this._self, this._then);
+
+  final _UserUpdateLog _self;
+  final $Res Function(_UserUpdateLog) _then;
+
+  /// Create a copy of SearchLog
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? logCreatedAt = freezed,
+    Object? searchTarget = null,
+    Object? searchTerm = null,
+    Object? uid = null,
+  }) {
+    return _then(_UserUpdateLog(
+      logCreatedAt: freezed == logCreatedAt
+          ? _self.logCreatedAt
+          : logCreatedAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      searchTarget: null == searchTarget
+          ? _self.searchTarget
+          : searchTarget // ignore: cast_nullable_to_non_nullable
+              as String,
+      searchTerm: null == searchTerm
+          ? _self.searchTerm
+          : searchTerm // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _self.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

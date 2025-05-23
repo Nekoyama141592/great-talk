@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,120 +10,29 @@ part of 'put_object_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-PutObjectResponse _$PutObjectResponseFromJson(Map<String, dynamic> json) {
-  return _PutObjectResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$PutObjectResponse {
-  String get base64Image => throw _privateConstructorUsedError;
-
-  /// Serializes this PutObjectResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get base64Image;
 
   /// Create a copy of PutObjectResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $PutObjectResponseCopyWith<PutObjectResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$PutObjectResponseCopyWithImpl<PutObjectResponse>(
+          this as PutObjectResponse, _$identity);
 
-/// @nodoc
-abstract class $PutObjectResponseCopyWith<$Res> {
-  factory $PutObjectResponseCopyWith(
-          PutObjectResponse value, $Res Function(PutObjectResponse) then) =
-      _$PutObjectResponseCopyWithImpl<$Res, PutObjectResponse>;
-  @useResult
-  $Res call({String base64Image});
-}
-
-/// @nodoc
-class _$PutObjectResponseCopyWithImpl<$Res, $Val extends PutObjectResponse>
-    implements $PutObjectResponseCopyWith<$Res> {
-  _$PutObjectResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PutObjectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? base64Image = null,
-  }) {
-    return _then(_value.copyWith(
-      base64Image: null == base64Image
-          ? _value.base64Image
-          : base64Image // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$PutObjectResponseImplCopyWith<$Res>
-    implements $PutObjectResponseCopyWith<$Res> {
-  factory _$$PutObjectResponseImplCopyWith(_$PutObjectResponseImpl value,
-          $Res Function(_$PutObjectResponseImpl) then) =
-      __$$PutObjectResponseImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String base64Image});
-}
-
-/// @nodoc
-class __$$PutObjectResponseImplCopyWithImpl<$Res>
-    extends _$PutObjectResponseCopyWithImpl<$Res, _$PutObjectResponseImpl>
-    implements _$$PutObjectResponseImplCopyWith<$Res> {
-  __$$PutObjectResponseImplCopyWithImpl(_$PutObjectResponseImpl _value,
-      $Res Function(_$PutObjectResponseImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of PutObjectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? base64Image = null,
-  }) {
-    return _then(_$PutObjectResponseImpl(
-      base64Image: null == base64Image
-          ? _value.base64Image
-          : base64Image // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$PutObjectResponseImpl extends _PutObjectResponse {
-  const _$PutObjectResponseImpl({required this.base64Image}) : super._();
-
-  factory _$PutObjectResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PutObjectResponseImplFromJson(json);
-
-  @override
-  final String base64Image;
-
-  @override
-  String toString() {
-    return 'PutObjectResponse(base64Image: $base64Image)';
-  }
+  /// Serializes this PutObjectResponse to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PutObjectResponseImpl &&
+            other is PutObjectResponse &&
             (identical(other.base64Image, base64Image) ||
                 other.base64Image == base64Image));
   }
@@ -131,38 +41,122 @@ class _$PutObjectResponseImpl extends _PutObjectResponse {
   @override
   int get hashCode => Object.hash(runtimeType, base64Image);
 
-  /// Create a copy of PutObjectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PutObjectResponseImplCopyWith<_$PutObjectResponseImpl> get copyWith =>
-      __$$PutObjectResponseImplCopyWithImpl<_$PutObjectResponseImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PutObjectResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'PutObjectResponse(base64Image: $base64Image)';
   }
 }
 
-abstract class _PutObjectResponse extends PutObjectResponse {
-  const factory _PutObjectResponse({required final String base64Image}) =
-      _$PutObjectResponseImpl;
-  const _PutObjectResponse._() : super._();
+/// @nodoc
+abstract mixin class $PutObjectResponseCopyWith<$Res> {
+  factory $PutObjectResponseCopyWith(
+          PutObjectResponse value, $Res Function(PutObjectResponse) _then) =
+      _$PutObjectResponseCopyWithImpl;
+  @useResult
+  $Res call({String base64Image});
+}
 
-  factory _PutObjectResponse.fromJson(Map<String, dynamic> json) =
-      _$PutObjectResponseImpl.fromJson;
+/// @nodoc
+class _$PutObjectResponseCopyWithImpl<$Res>
+    implements $PutObjectResponseCopyWith<$Res> {
+  _$PutObjectResponseCopyWithImpl(this._self, this._then);
+
+  final PutObjectResponse _self;
+  final $Res Function(PutObjectResponse) _then;
+
+  /// Create a copy of PutObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? base64Image = null,
+  }) {
+    return _then(_self.copyWith(
+      base64Image: null == base64Image
+          ? _self.base64Image
+          : base64Image // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _PutObjectResponse extends PutObjectResponse {
+  const _PutObjectResponse({required this.base64Image}) : super._();
+  factory _PutObjectResponse.fromJson(Map<String, dynamic> json) =>
+      _$PutObjectResponseFromJson(json);
 
   @override
-  String get base64Image;
+  final String base64Image;
 
   /// Create a copy of PutObjectResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PutObjectResponseImplCopyWith<_$PutObjectResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$PutObjectResponseCopyWith<_PutObjectResponse> get copyWith =>
+      __$PutObjectResponseCopyWithImpl<_PutObjectResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PutObjectResponseToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _PutObjectResponse &&
+            (identical(other.base64Image, base64Image) ||
+                other.base64Image == base64Image));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, base64Image);
+
+  @override
+  String toString() {
+    return 'PutObjectResponse(base64Image: $base64Image)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$PutObjectResponseCopyWith<$Res>
+    implements $PutObjectResponseCopyWith<$Res> {
+  factory _$PutObjectResponseCopyWith(
+          _PutObjectResponse value, $Res Function(_PutObjectResponse) _then) =
+      __$PutObjectResponseCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String base64Image});
+}
+
+/// @nodoc
+class __$PutObjectResponseCopyWithImpl<$Res>
+    implements _$PutObjectResponseCopyWith<$Res> {
+  __$PutObjectResponseCopyWithImpl(this._self, this._then);
+
+  final _PutObjectResponse _self;
+  final $Res Function(_PutObjectResponse) _then;
+
+  /// Create a copy of PutObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? base64Image = null,
+  }) {
+    return _then(_PutObjectResponse(
+      base64Image: null == base64Image
+          ? _self.base64Image
+          : base64Image // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,107 +10,66 @@ part of 'post_report.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-PostReport _$PostReportFromJson(Map<String, dynamic> json) {
-  return _PostReport.fromJson(json);
-}
 
 /// @nodoc
 mixin _$PostReport {
-  String get activeUid => throw _privateConstructorUsedError;
-  dynamic get activeUserRef => throw _privateConstructorUsedError;
-  dynamic get createdAt => throw _privateConstructorUsedError;
-  String get others => throw _privateConstructorUsedError;
-  dynamic get postRef => throw _privateConstructorUsedError;
-  List<String> get reportContents => throw _privateConstructorUsedError;
-
-  /// Serializes this PostReport to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get activeUid;
+  dynamic get activeUserRef;
+  dynamic get createdAt;
+  String get others;
+  dynamic get postRef;
+  List<String> get reportContents;
 
   /// Create a copy of PostReport
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PostReportCopyWith<PostReport> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PostReportCopyWith<$Res> {
-  factory $PostReportCopyWith(
-          PostReport value, $Res Function(PostReport) then) =
-      _$PostReportCopyWithImpl<$Res, PostReport>;
-  @useResult
-  $Res call(
-      {String activeUid,
-      dynamic activeUserRef,
-      dynamic createdAt,
-      String others,
-      dynamic postRef,
-      List<String> reportContents});
-}
-
-/// @nodoc
-class _$PostReportCopyWithImpl<$Res, $Val extends PostReport>
-    implements $PostReportCopyWith<$Res> {
-  _$PostReportCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PostReport
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $PostReportCopyWith<PostReport> get copyWith =>
+      _$PostReportCopyWithImpl<PostReport>(this as PostReport, _$identity);
+
+  /// Serializes this PostReport to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? activeUid = null,
-    Object? activeUserRef = freezed,
-    Object? createdAt = freezed,
-    Object? others = null,
-    Object? postRef = freezed,
-    Object? reportContents = null,
-  }) {
-    return _then(_value.copyWith(
-      activeUid: null == activeUid
-          ? _value.activeUid
-          : activeUid // ignore: cast_nullable_to_non_nullable
-              as String,
-      activeUserRef: freezed == activeUserRef
-          ? _value.activeUserRef
-          : activeUserRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      others: null == others
-          ? _value.others
-          : others // ignore: cast_nullable_to_non_nullable
-              as String,
-      postRef: freezed == postRef
-          ? _value.postRef
-          : postRef // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      reportContents: null == reportContents
-          ? _value.reportContents
-          : reportContents // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PostReport &&
+            (identical(other.activeUid, activeUid) ||
+                other.activeUid == activeUid) &&
+            const DeepCollectionEquality()
+                .equals(other.activeUserRef, activeUserRef) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            (identical(other.others, others) || other.others == others) &&
+            const DeepCollectionEquality().equals(other.postRef, postRef) &&
+            const DeepCollectionEquality()
+                .equals(other.reportContents, reportContents));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      activeUid,
+      const DeepCollectionEquality().hash(activeUserRef),
+      const DeepCollectionEquality().hash(createdAt),
+      others,
+      const DeepCollectionEquality().hash(postRef),
+      const DeepCollectionEquality().hash(reportContents));
+
+  @override
+  String toString() {
+    return 'PostReport(activeUid: $activeUid, activeUserRef: $activeUserRef, createdAt: $createdAt, others: $others, postRef: $postRef, reportContents: $reportContents)';
   }
 }
 
 /// @nodoc
-abstract class _$$PostReportImplCopyWith<$Res>
-    implements $PostReportCopyWith<$Res> {
-  factory _$$PostReportImplCopyWith(
-          _$PostReportImpl value, $Res Function(_$PostReportImpl) then) =
-      __$$PostReportImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PostReportCopyWith<$Res> {
+  factory $PostReportCopyWith(
+          PostReport value, $Res Function(PostReport) _then) =
+      _$PostReportCopyWithImpl;
   @useResult
   $Res call(
       {String activeUid,
@@ -121,12 +81,11 @@ abstract class _$$PostReportImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$PostReportImplCopyWithImpl<$Res>
-    extends _$PostReportCopyWithImpl<$Res, _$PostReportImpl>
-    implements _$$PostReportImplCopyWith<$Res> {
-  __$$PostReportImplCopyWithImpl(
-      _$PostReportImpl _value, $Res Function(_$PostReportImpl) _then)
-      : super(_value, _then);
+class _$PostReportCopyWithImpl<$Res> implements $PostReportCopyWith<$Res> {
+  _$PostReportCopyWithImpl(this._self, this._then);
+
+  final PostReport _self;
+  final $Res Function(PostReport) _then;
 
   /// Create a copy of PostReport
   /// with the given fields replaced by the non-null parameter values.
@@ -140,29 +99,29 @@ class __$$PostReportImplCopyWithImpl<$Res>
     Object? postRef = freezed,
     Object? reportContents = null,
   }) {
-    return _then(_$PostReportImpl(
+    return _then(_self.copyWith(
       activeUid: null == activeUid
-          ? _value.activeUid
+          ? _self.activeUid
           : activeUid // ignore: cast_nullable_to_non_nullable
               as String,
       activeUserRef: freezed == activeUserRef
-          ? _value.activeUserRef
+          ? _self.activeUserRef
           : activeUserRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
       createdAt: freezed == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
       others: null == others
-          ? _value.others
+          ? _self.others
           : others // ignore: cast_nullable_to_non_nullable
               as String,
       postRef: freezed == postRef
-          ? _value.postRef
+          ? _self.postRef
           : postRef // ignore: cast_nullable_to_non_nullable
               as dynamic,
       reportContents: null == reportContents
-          ? _value._reportContents
+          ? _self.reportContents
           : reportContents // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
@@ -171,8 +130,8 @@ class __$$PostReportImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PostReportImpl implements _PostReport {
-  const _$PostReportImpl(
+class _PostReport implements PostReport {
+  const _PostReport(
       {required this.activeUid,
       required this.activeUserRef,
       required this.createdAt,
@@ -180,9 +139,8 @@ class _$PostReportImpl implements _PostReport {
       required this.postRef,
       required final List<String> reportContents})
       : _reportContents = reportContents;
-
-  factory _$PostReportImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PostReportImplFromJson(json);
+  factory _PostReport.fromJson(Map<String, dynamic> json) =>
+      _$PostReportFromJson(json);
 
   @override
   final String activeUid;
@@ -202,16 +160,26 @@ class _$PostReportImpl implements _PostReport {
     return EqualUnmodifiableListView(_reportContents);
   }
 
+  /// Create a copy of PostReport
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PostReport(activeUid: $activeUid, activeUserRef: $activeUserRef, createdAt: $createdAt, others: $others, postRef: $postRef, reportContents: $reportContents)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PostReportCopyWith<_PostReport> get copyWith =>
+      __$PostReportCopyWithImpl<_PostReport>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PostReportToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PostReportImpl &&
+            other is _PostReport &&
             (identical(other.activeUid, activeUid) ||
                 other.activeUid == activeUid) &&
             const DeepCollectionEquality()
@@ -234,51 +202,75 @@ class _$PostReportImpl implements _PostReport {
       const DeepCollectionEquality().hash(postRef),
       const DeepCollectionEquality().hash(_reportContents));
 
-  /// Create a copy of PostReport
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PostReportImplCopyWith<_$PostReportImpl> get copyWith =>
-      __$$PostReportImplCopyWithImpl<_$PostReportImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PostReportImplToJson(
-      this,
-    );
+  String toString() {
+    return 'PostReport(activeUid: $activeUid, activeUserRef: $activeUserRef, createdAt: $createdAt, others: $others, postRef: $postRef, reportContents: $reportContents)';
   }
 }
 
-abstract class _PostReport implements PostReport {
-  const factory _PostReport(
-      {required final String activeUid,
-      required final dynamic activeUserRef,
-      required final dynamic createdAt,
-      required final String others,
-      required final dynamic postRef,
-      required final List<String> reportContents}) = _$PostReportImpl;
+/// @nodoc
+abstract mixin class _$PostReportCopyWith<$Res>
+    implements $PostReportCopyWith<$Res> {
+  factory _$PostReportCopyWith(
+          _PostReport value, $Res Function(_PostReport) _then) =
+      __$PostReportCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String activeUid,
+      dynamic activeUserRef,
+      dynamic createdAt,
+      String others,
+      dynamic postRef,
+      List<String> reportContents});
+}
 
-  factory _PostReport.fromJson(Map<String, dynamic> json) =
-      _$PostReportImpl.fromJson;
+/// @nodoc
+class __$PostReportCopyWithImpl<$Res> implements _$PostReportCopyWith<$Res> {
+  __$PostReportCopyWithImpl(this._self, this._then);
 
-  @override
-  String get activeUid;
-  @override
-  dynamic get activeUserRef;
-  @override
-  dynamic get createdAt;
-  @override
-  String get others;
-  @override
-  dynamic get postRef;
-  @override
-  List<String> get reportContents;
+  final _PostReport _self;
+  final $Res Function(_PostReport) _then;
 
   /// Create a copy of PostReport
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PostReportImplCopyWith<_$PostReportImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? activeUid = null,
+    Object? activeUserRef = freezed,
+    Object? createdAt = freezed,
+    Object? others = null,
+    Object? postRef = freezed,
+    Object? reportContents = null,
+  }) {
+    return _then(_PostReport(
+      activeUid: null == activeUid
+          ? _self.activeUid
+          : activeUid // ignore: cast_nullable_to_non_nullable
+              as String,
+      activeUserRef: freezed == activeUserRef
+          ? _self.activeUserRef
+          : activeUserRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      others: null == others
+          ? _self.others
+          : others // ignore: cast_nullable_to_non_nullable
+              as String,
+      postRef: freezed == postRef
+          ? _self.postRef
+          : postRef // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      reportContents: null == reportContents
+          ? _self._reportContents
+          : reportContents // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
 }
+
+// dart format on

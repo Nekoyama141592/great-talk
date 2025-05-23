@@ -4,7 +4,7 @@ part 'moderation_label.freezed.dart';
 part 'moderation_label.g.dart';
 
 @freezed
-abstract class ModerationLabel implements _$ModerationLabel {
+abstract class ModerationLabel with _$ModerationLabel {
   const factory ModerationLabel({
     required num Confidence,
     required String Name,

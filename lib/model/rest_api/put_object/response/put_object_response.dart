@@ -4,7 +4,7 @@ part 'put_object_response.freezed.dart';
 part 'put_object_response.g.dart';
 
 @freezed
-abstract class PutObjectResponse implements _$PutObjectResponse {
+abstract class PutObjectResponse with _$PutObjectResponse {
   const PutObjectResponse._();
   const factory PutObjectResponse({required String base64Image}) =
       _PutObjectResponse;

@@ -6,7 +6,7 @@ part of 'post.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
+_Post _$PostFromJson(Map<String, dynamic> json) => _Post(
       bookmarkCount: (json['bookmarkCount'] as num?)?.toInt() ?? 0,
       createdAt: json['createdAt'],
       customCompleteText: json['customCompleteText'] as Map<String, dynamic>,
@@ -40,8 +40,7 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
       userCount: (json['userCount'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$PostToJson(_Post instance) => <String, dynamic>{
       'bookmarkCount': instance.bookmarkCount,
       'createdAt': instance.createdAt,
       'customCompleteText': instance.customCompleteText,

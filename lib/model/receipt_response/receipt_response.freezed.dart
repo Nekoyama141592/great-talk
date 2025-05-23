@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,82 +10,60 @@ part of 'receipt_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-ReceiptResponse _$ReceiptResponseFromJson(Map<String, dynamic> json) {
-  return _ReceiptResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$ReceiptResponse {
-  Map<String, dynamic> get latestReceipt => throw _privateConstructorUsedError;
-
-  /// Serializes this ReceiptResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  SDMap get latestReceipt;
 
   /// Create a copy of ReceiptResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $ReceiptResponseCopyWith<ReceiptResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ReceiptResponseCopyWith<$Res> {
-  factory $ReceiptResponseCopyWith(
-          ReceiptResponse value, $Res Function(ReceiptResponse) then) =
-      _$ReceiptResponseCopyWithImpl<$Res, ReceiptResponse>;
-  @useResult
-  $Res call({Map<String, dynamic> latestReceipt});
-}
-
-/// @nodoc
-class _$ReceiptResponseCopyWithImpl<$Res, $Val extends ReceiptResponse>
-    implements $ReceiptResponseCopyWith<$Res> {
-  _$ReceiptResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of ReceiptResponse
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $ReceiptResponseCopyWith<ReceiptResponse> get copyWith =>
+      _$ReceiptResponseCopyWithImpl<ReceiptResponse>(
+          this as ReceiptResponse, _$identity);
+
+  /// Serializes this ReceiptResponse to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? latestReceipt = null,
-  }) {
-    return _then(_value.copyWith(
-      latestReceipt: null == latestReceipt
-          ? _value.latestReceipt
-          : latestReceipt // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ReceiptResponse &&
+            const DeepCollectionEquality()
+                .equals(other.latestReceipt, latestReceipt));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(latestReceipt));
+
+  @override
+  String toString() {
+    return 'ReceiptResponse(latestReceipt: $latestReceipt)';
   }
 }
 
 /// @nodoc
-abstract class _$$ReceiptResponseImplCopyWith<$Res>
-    implements $ReceiptResponseCopyWith<$Res> {
-  factory _$$ReceiptResponseImplCopyWith(_$ReceiptResponseImpl value,
-          $Res Function(_$ReceiptResponseImpl) then) =
-      __$$ReceiptResponseImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ReceiptResponseCopyWith<$Res> {
+  factory $ReceiptResponseCopyWith(
+          ReceiptResponse value, $Res Function(ReceiptResponse) _then) =
+      _$ReceiptResponseCopyWithImpl;
   @useResult
-  $Res call({Map<String, dynamic> latestReceipt});
+  $Res call({SDMap latestReceipt});
 }
 
 /// @nodoc
-class __$$ReceiptResponseImplCopyWithImpl<$Res>
-    extends _$ReceiptResponseCopyWithImpl<$Res, _$ReceiptResponseImpl>
-    implements _$$ReceiptResponseImplCopyWith<$Res> {
-  __$$ReceiptResponseImplCopyWithImpl(
-      _$ReceiptResponseImpl _value, $Res Function(_$ReceiptResponseImpl) _then)
-      : super(_value, _then);
+class _$ReceiptResponseCopyWithImpl<$Res>
+    implements $ReceiptResponseCopyWith<$Res> {
+  _$ReceiptResponseCopyWithImpl(this._self, this._then);
+
+  final ReceiptResponse _self;
+  final $Res Function(ReceiptResponse) _then;
 
   /// Create a copy of ReceiptResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -93,44 +72,52 @@ class __$$ReceiptResponseImplCopyWithImpl<$Res>
   $Res call({
     Object? latestReceipt = null,
   }) {
-    return _then(_$ReceiptResponseImpl(
+    return _then(_self.copyWith(
       latestReceipt: null == latestReceipt
-          ? _value._latestReceipt
+          ? _self.latestReceipt
           : latestReceipt // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ReceiptResponseImpl extends _ReceiptResponse {
-  const _$ReceiptResponseImpl(
-      {required final Map<String, dynamic> latestReceipt})
+class _ReceiptResponse extends ReceiptResponse {
+  const _ReceiptResponse({required final SDMap latestReceipt})
       : _latestReceipt = latestReceipt,
         super._();
+  factory _ReceiptResponse.fromJson(Map<String, dynamic> json) =>
+      _$ReceiptResponseFromJson(json);
 
-  factory _$ReceiptResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ReceiptResponseImplFromJson(json);
-
-  final Map<String, dynamic> _latestReceipt;
+  final SDMap _latestReceipt;
   @override
-  Map<String, dynamic> get latestReceipt {
+  SDMap get latestReceipt {
     if (_latestReceipt is EqualUnmodifiableMapView) return _latestReceipt;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_latestReceipt);
   }
 
+  /// Create a copy of ReceiptResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'ReceiptResponse(latestReceipt: $latestReceipt)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ReceiptResponseCopyWith<_ReceiptResponse> get copyWith =>
+      __$ReceiptResponseCopyWithImpl<_ReceiptResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ReceiptResponseToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ReceiptResponseImpl &&
+            other is _ReceiptResponse &&
             const DeepCollectionEquality()
                 .equals(other._latestReceipt, _latestReceipt));
   }
@@ -140,39 +127,45 @@ class _$ReceiptResponseImpl extends _ReceiptResponse {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_latestReceipt));
 
-  /// Create a copy of ReceiptResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ReceiptResponseImplCopyWith<_$ReceiptResponseImpl> get copyWith =>
-      __$$ReceiptResponseImplCopyWithImpl<_$ReceiptResponseImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ReceiptResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'ReceiptResponse(latestReceipt: $latestReceipt)';
   }
 }
 
-abstract class _ReceiptResponse extends ReceiptResponse {
-  const factory _ReceiptResponse(
-          {required final Map<String, dynamic> latestReceipt}) =
-      _$ReceiptResponseImpl;
-  const _ReceiptResponse._() : super._();
-
-  factory _ReceiptResponse.fromJson(Map<String, dynamic> json) =
-      _$ReceiptResponseImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$ReceiptResponseCopyWith<$Res>
+    implements $ReceiptResponseCopyWith<$Res> {
+  factory _$ReceiptResponseCopyWith(
+          _ReceiptResponse value, $Res Function(_ReceiptResponse) _then) =
+      __$ReceiptResponseCopyWithImpl;
   @override
-  Map<String, dynamic> get latestReceipt;
+  @useResult
+  $Res call({SDMap latestReceipt});
+}
+
+/// @nodoc
+class __$ReceiptResponseCopyWithImpl<$Res>
+    implements _$ReceiptResponseCopyWith<$Res> {
+  __$ReceiptResponseCopyWithImpl(this._self, this._then);
+
+  final _ReceiptResponse _self;
+  final $Res Function(_ReceiptResponse) _then;
 
   /// Create a copy of ReceiptResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ReceiptResponseImplCopyWith<_$ReceiptResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? latestReceipt = null,
+  }) {
+    return _then(_ReceiptResponse(
+      latestReceipt: null == latestReceipt
+          ? _self._latestReceipt
+          : latestReceipt // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+    ));
+  }
 }
+
+// dart format on

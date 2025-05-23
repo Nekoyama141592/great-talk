@@ -6,14 +6,12 @@ part of 'get_object_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GetObjectRequestImpl _$$GetObjectRequestImplFromJson(
-        Map<String, dynamic> json) =>
-    _$GetObjectRequestImpl(
+_GetObjectRequest _$GetObjectRequestFromJson(Map<String, dynamic> json) =>
+    _GetObjectRequest(
       object: json['object'] as String,
     );
 
-Map<String, dynamic> _$$GetObjectRequestImplToJson(
-        _$GetObjectRequestImpl instance) =>
+Map<String, dynamic> _$GetObjectRequestToJson(_GetObjectRequest instance) =>
     <String, dynamic>{
       'object': instance.object,
     };

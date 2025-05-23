@@ -6,8 +6,8 @@ part of 'detected_text.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DetectedTextImpl _$$DetectedTextImplFromJson(Map<String, dynamic> json) =>
-    _$DetectedTextImpl(
+_DetectedText _$DetectedTextFromJson(Map<String, dynamic> json) =>
+    _DetectedText(
       languageCode: json['languageCode'] as String? ?? "",
       negativeScore: (json['negativeScore'] as num?)?.toInt() ?? 0,
       positiveScore: (json['positiveScore'] as num?)?.toInt() ?? 0,
@@ -15,7 +15,7 @@ _$DetectedTextImpl _$$DetectedTextImplFromJson(Map<String, dynamic> json) =>
       value: json['value'] as String? ?? "",
     );
 
-Map<String, dynamic> _$$DetectedTextImplToJson(_$DetectedTextImpl instance) =>
+Map<String, dynamic> _$DetectedTextToJson(_DetectedText instance) =>
     <String, dynamic>{
       'languageCode': instance.languageCode,
       'negativeScore': instance.negativeScore,

@@ -4,7 +4,7 @@ part 'post_like.freezed.dart';
 part 'post_like.g.dart';
 
 @freezed
-abstract class PostLike implements _$PostLike {
+abstract class PostLike with _$PostLike {
   const factory PostLike({
     required String activeUid,
     required dynamic createdAt,

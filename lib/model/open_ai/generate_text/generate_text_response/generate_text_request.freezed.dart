@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,93 +10,59 @@ part of 'generate_text_request.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-GenerateTextRequest _$GenerateTextRequestFromJson(Map<String, dynamic> json) {
-  return _GenerateTextRequest.fromJson(json);
-}
 
 /// @nodoc
 mixin _$GenerateTextRequest {
-  String get model => throw _privateConstructorUsedError;
-  List<Map<String, dynamic>> get messages => throw _privateConstructorUsedError;
-  List<Map<String, dynamic>>? get tools => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get tool_choice => throw _privateConstructorUsedError;
-
-  /// Serializes this GenerateTextRequest to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get model;
+  List<Map<String, dynamic>> get messages;
+  List<Map<String, dynamic>>? get tools;
+  Map<String, dynamic>? get tool_choice;
 
   /// Create a copy of GenerateTextRequest
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $GenerateTextRequestCopyWith<GenerateTextRequest> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $GenerateTextRequestCopyWith<$Res> {
-  factory $GenerateTextRequestCopyWith(
-          GenerateTextRequest value, $Res Function(GenerateTextRequest) then) =
-      _$GenerateTextRequestCopyWithImpl<$Res, GenerateTextRequest>;
-  @useResult
-  $Res call(
-      {String model,
-      List<Map<String, dynamic>> messages,
-      List<Map<String, dynamic>>? tools,
-      Map<String, dynamic>? tool_choice});
-}
-
-/// @nodoc
-class _$GenerateTextRequestCopyWithImpl<$Res, $Val extends GenerateTextRequest>
-    implements $GenerateTextRequestCopyWith<$Res> {
-  _$GenerateTextRequestCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of GenerateTextRequest
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $GenerateTextRequestCopyWith<GenerateTextRequest> get copyWith =>
+      _$GenerateTextRequestCopyWithImpl<GenerateTextRequest>(
+          this as GenerateTextRequest, _$identity);
+
+  /// Serializes this GenerateTextRequest to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? model = null,
-    Object? messages = null,
-    Object? tools = freezed,
-    Object? tool_choice = freezed,
-  }) {
-    return _then(_value.copyWith(
-      model: null == model
-          ? _value.model
-          : model // ignore: cast_nullable_to_non_nullable
-              as String,
-      messages: null == messages
-          ? _value.messages
-          : messages // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
-      tools: freezed == tools
-          ? _value.tools
-          : tools // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>?,
-      tool_choice: freezed == tool_choice
-          ? _value.tool_choice
-          : tool_choice // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is GenerateTextRequest &&
+            (identical(other.model, model) || other.model == model) &&
+            const DeepCollectionEquality().equals(other.messages, messages) &&
+            const DeepCollectionEquality().equals(other.tools, tools) &&
+            const DeepCollectionEquality()
+                .equals(other.tool_choice, tool_choice));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      model,
+      const DeepCollectionEquality().hash(messages),
+      const DeepCollectionEquality().hash(tools),
+      const DeepCollectionEquality().hash(tool_choice));
+
+  @override
+  String toString() {
+    return 'GenerateTextRequest(model: $model, messages: $messages, tools: $tools, tool_choice: $tool_choice)';
   }
 }
 
 /// @nodoc
-abstract class _$$GenerateTextRequestImplCopyWith<$Res>
-    implements $GenerateTextRequestCopyWith<$Res> {
-  factory _$$GenerateTextRequestImplCopyWith(_$GenerateTextRequestImpl value,
-          $Res Function(_$GenerateTextRequestImpl) then) =
-      __$$GenerateTextRequestImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $GenerateTextRequestCopyWith<$Res> {
+  factory $GenerateTextRequestCopyWith(
+          GenerateTextRequest value, $Res Function(GenerateTextRequest) _then) =
+      _$GenerateTextRequestCopyWithImpl;
   @useResult
   $Res call(
       {String model,
@@ -105,12 +72,12 @@ abstract class _$$GenerateTextRequestImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GenerateTextRequestImplCopyWithImpl<$Res>
-    extends _$GenerateTextRequestCopyWithImpl<$Res, _$GenerateTextRequestImpl>
-    implements _$$GenerateTextRequestImplCopyWith<$Res> {
-  __$$GenerateTextRequestImplCopyWithImpl(_$GenerateTextRequestImpl _value,
-      $Res Function(_$GenerateTextRequestImpl) _then)
-      : super(_value, _then);
+class _$GenerateTextRequestCopyWithImpl<$Res>
+    implements $GenerateTextRequestCopyWith<$Res> {
+  _$GenerateTextRequestCopyWithImpl(this._self, this._then);
+
+  final GenerateTextRequest _self;
+  final $Res Function(GenerateTextRequest) _then;
 
   /// Create a copy of GenerateTextRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -122,21 +89,21 @@ class __$$GenerateTextRequestImplCopyWithImpl<$Res>
     Object? tools = freezed,
     Object? tool_choice = freezed,
   }) {
-    return _then(_$GenerateTextRequestImpl(
+    return _then(_self.copyWith(
       model: null == model
-          ? _value.model
+          ? _self.model
           : model // ignore: cast_nullable_to_non_nullable
               as String,
       messages: null == messages
-          ? _value._messages
+          ? _self.messages
           : messages // ignore: cast_nullable_to_non_nullable
               as List<Map<String, dynamic>>,
       tools: freezed == tools
-          ? _value._tools
+          ? _self.tools
           : tools // ignore: cast_nullable_to_non_nullable
               as List<Map<String, dynamic>>?,
       tool_choice: freezed == tool_choice
-          ? _value._tool_choice
+          ? _self.tool_choice
           : tool_choice // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
     ));
@@ -145,8 +112,8 @@ class __$$GenerateTextRequestImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GenerateTextRequestImpl implements _GenerateTextRequest {
-  const _$GenerateTextRequestImpl(
+class _GenerateTextRequest implements GenerateTextRequest {
+  const _GenerateTextRequest(
       {required this.model,
       required final List<Map<String, dynamic>> messages,
       final List<Map<String, dynamic>>? tools,
@@ -154,9 +121,8 @@ class _$GenerateTextRequestImpl implements _GenerateTextRequest {
       : _messages = messages,
         _tools = tools,
         _tool_choice = tool_choice;
-
-  factory _$GenerateTextRequestImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GenerateTextRequestImplFromJson(json);
+  factory _GenerateTextRequest.fromJson(Map<String, dynamic> json) =>
+      _$GenerateTextRequestFromJson(json);
 
   @override
   final String model;
@@ -188,16 +154,27 @@ class _$GenerateTextRequestImpl implements _GenerateTextRequest {
     return EqualUnmodifiableMapView(value);
   }
 
+  /// Create a copy of GenerateTextRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'GenerateTextRequest(model: $model, messages: $messages, tools: $tools, tool_choice: $tool_choice)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GenerateTextRequestCopyWith<_GenerateTextRequest> get copyWith =>
+      __$GenerateTextRequestCopyWithImpl<_GenerateTextRequest>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$GenerateTextRequestToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GenerateTextRequestImpl &&
+            other is _GenerateTextRequest &&
             (identical(other.model, model) || other.model == model) &&
             const DeepCollectionEquality().equals(other._messages, _messages) &&
             const DeepCollectionEquality().equals(other._tools, _tools) &&
@@ -214,46 +191,64 @@ class _$GenerateTextRequestImpl implements _GenerateTextRequest {
       const DeepCollectionEquality().hash(_tools),
       const DeepCollectionEquality().hash(_tool_choice));
 
-  /// Create a copy of GenerateTextRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$GenerateTextRequestImplCopyWith<_$GenerateTextRequestImpl> get copyWith =>
-      __$$GenerateTextRequestImplCopyWithImpl<_$GenerateTextRequestImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$GenerateTextRequestImplToJson(
-      this,
-    );
+  String toString() {
+    return 'GenerateTextRequest(model: $model, messages: $messages, tools: $tools, tool_choice: $tool_choice)';
   }
 }
 
-abstract class _GenerateTextRequest implements GenerateTextRequest {
-  const factory _GenerateTextRequest(
-      {required final String model,
-      required final List<Map<String, dynamic>> messages,
-      final List<Map<String, dynamic>>? tools,
-      final Map<String, dynamic>? tool_choice}) = _$GenerateTextRequestImpl;
+/// @nodoc
+abstract mixin class _$GenerateTextRequestCopyWith<$Res>
+    implements $GenerateTextRequestCopyWith<$Res> {
+  factory _$GenerateTextRequestCopyWith(_GenerateTextRequest value,
+          $Res Function(_GenerateTextRequest) _then) =
+      __$GenerateTextRequestCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String model,
+      List<Map<String, dynamic>> messages,
+      List<Map<String, dynamic>>? tools,
+      Map<String, dynamic>? tool_choice});
+}
 
-  factory _GenerateTextRequest.fromJson(Map<String, dynamic> json) =
-      _$GenerateTextRequestImpl.fromJson;
+/// @nodoc
+class __$GenerateTextRequestCopyWithImpl<$Res>
+    implements _$GenerateTextRequestCopyWith<$Res> {
+  __$GenerateTextRequestCopyWithImpl(this._self, this._then);
 
-  @override
-  String get model;
-  @override
-  List<Map<String, dynamic>> get messages;
-  @override
-  List<Map<String, dynamic>>? get tools;
-  @override
-  Map<String, dynamic>? get tool_choice;
+  final _GenerateTextRequest _self;
+  final $Res Function(_GenerateTextRequest) _then;
 
   /// Create a copy of GenerateTextRequest
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GenerateTextRequestImplCopyWith<_$GenerateTextRequestImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? model = null,
+    Object? messages = null,
+    Object? tools = freezed,
+    Object? tool_choice = freezed,
+  }) {
+    return _then(_GenerateTextRequest(
+      model: null == model
+          ? _self.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String,
+      messages: null == messages
+          ? _self._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>,
+      tools: freezed == tools
+          ? _self._tools
+          : tools // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>?,
+      tool_choice: freezed == tool_choice
+          ? _self._tool_choice
+          : tool_choice // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
+  }
 }
+
+// dart format on

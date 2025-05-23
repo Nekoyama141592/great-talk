@@ -6,14 +6,12 @@ part of 'receipt_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ReceiptResponseImpl _$$ReceiptResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ReceiptResponseImpl(
+_ReceiptResponse _$ReceiptResponseFromJson(Map<String, dynamic> json) =>
+    _ReceiptResponse(
       latestReceipt: json['latestReceipt'] as Map<String, dynamic>,
     );
 
-Map<String, dynamic> _$$ReceiptResponseImplToJson(
-        _$ReceiptResponseImpl instance) =>
+Map<String, dynamic> _$ReceiptResponseToJson(_ReceiptResponse instance) =>
     <String, dynamic>{
       'latestReceipt': instance.latestReceipt,
     };

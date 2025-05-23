@@ -97,7 +97,7 @@ class CreatePostController extends FormsController with CurrentUserMixin {
     final result = await repository.putObject(request);
     await result.when(
         success: (res) async => await _createPost(postId, fileName),
-        failure: () {
+        failure: (e) {
           UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
         });
     endLoading();
@@ -131,7 +131,7 @@ class CreatePostController extends FormsController with CurrentUserMixin {
       Get.back();
       _resetState(); // 初期化を行う
       UIHelper.showFlutterToast("投稿が作成できました！");
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
     });
   }

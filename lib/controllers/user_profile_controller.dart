@@ -37,7 +37,7 @@ class UserProfileController extends ProfileController {
       if (res.exists) {
         rxPassiveUser(PublicUser.fromJson(res.data()!));
       }
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
     final user = rxPassiveUser.value;

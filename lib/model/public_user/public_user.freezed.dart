@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,223 +10,129 @@ part of 'public_user.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-PublicUser _$PublicUserFromJson(Map<String, dynamic> json) {
-  return _PublicUser.fromJson(json);
-}
 
 /// @nodoc
 mixin _$PublicUser {
-  String get accountName => throw _privateConstructorUsedError;
-  Map<String, dynamic> get bio => throw _privateConstructorUsedError;
-  int get blockCount => throw _privateConstructorUsedError;
-  dynamic get createdAt => throw _privateConstructorUsedError;
-  String get ethAddress => throw _privateConstructorUsedError;
-  int get followerCount => throw _privateConstructorUsedError;
-  int get followingCount => throw _privateConstructorUsedError;
-  bool get isNFTicon => throw _privateConstructorUsedError;
-  bool get isOfficial => throw _privateConstructorUsedError;
-  bool get isSuspended => throw _privateConstructorUsedError;
-  List<SDMap> get links => throw _privateConstructorUsedError;
-  int get muteCount => throw _privateConstructorUsedError;
-  int get postCount => throw _privateConstructorUsedError;
-  dynamic get ref => throw _privateConstructorUsedError;
-  int get reportCount => throw _privateConstructorUsedError;
-  double get score => throw _privateConstructorUsedError;
-  Map<String, dynamic> get searchToken => throw _privateConstructorUsedError;
-  String get uid => throw _privateConstructorUsedError;
-  dynamic get updatedAt => throw _privateConstructorUsedError;
-  Map<String, dynamic> get image => throw _privateConstructorUsedError;
-  Map<String, dynamic> get userName => throw _privateConstructorUsedError;
-  List<SDMap> get walletAddresses => throw _privateConstructorUsedError;
-
-  /// Serializes this PublicUser to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get accountName;
+  SDMap get bio;
+  int get blockCount;
+  dynamic get createdAt;
+  String get ethAddress;
+  int get followerCount;
+  int get followingCount;
+  bool get isNFTicon;
+  bool get isOfficial;
+  bool get isSuspended;
+  List<SDMap> get links;
+  int get muteCount;
+  int get postCount;
+  dynamic get ref;
+  int get reportCount;
+  double get score;
+  SDMap get searchToken;
+  String get uid;
+  dynamic get updatedAt;
+  SDMap get image;
+  SDMap get userName;
+  List<SDMap> get walletAddresses;
 
   /// Create a copy of PublicUser
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PublicUserCopyWith<PublicUser> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PublicUserCopyWith<$Res> {
-  factory $PublicUserCopyWith(
-          PublicUser value, $Res Function(PublicUser) then) =
-      _$PublicUserCopyWithImpl<$Res, PublicUser>;
-  @useResult
-  $Res call(
-      {String accountName,
-      Map<String, dynamic> bio,
-      int blockCount,
-      dynamic createdAt,
-      String ethAddress,
-      int followerCount,
-      int followingCount,
-      bool isNFTicon,
-      bool isOfficial,
-      bool isSuspended,
-      List<SDMap> links,
-      int muteCount,
-      int postCount,
-      dynamic ref,
-      int reportCount,
-      double score,
-      Map<String, dynamic> searchToken,
-      String uid,
-      dynamic updatedAt,
-      Map<String, dynamic> image,
-      Map<String, dynamic> userName,
-      List<SDMap> walletAddresses});
-}
-
-/// @nodoc
-class _$PublicUserCopyWithImpl<$Res, $Val extends PublicUser>
-    implements $PublicUserCopyWith<$Res> {
-  _$PublicUserCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of PublicUser
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $PublicUserCopyWith<PublicUser> get copyWith =>
+      _$PublicUserCopyWithImpl<PublicUser>(this as PublicUser, _$identity);
+
+  /// Serializes this PublicUser to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? accountName = null,
-    Object? bio = null,
-    Object? blockCount = null,
-    Object? createdAt = freezed,
-    Object? ethAddress = null,
-    Object? followerCount = null,
-    Object? followingCount = null,
-    Object? isNFTicon = null,
-    Object? isOfficial = null,
-    Object? isSuspended = null,
-    Object? links = null,
-    Object? muteCount = null,
-    Object? postCount = null,
-    Object? ref = freezed,
-    Object? reportCount = null,
-    Object? score = null,
-    Object? searchToken = null,
-    Object? uid = null,
-    Object? updatedAt = freezed,
-    Object? image = null,
-    Object? userName = null,
-    Object? walletAddresses = null,
-  }) {
-    return _then(_value.copyWith(
-      accountName: null == accountName
-          ? _value.accountName
-          : accountName // ignore: cast_nullable_to_non_nullable
-              as String,
-      bio: null == bio
-          ? _value.bio
-          : bio // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      blockCount: null == blockCount
-          ? _value.blockCount
-          : blockCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      ethAddress: null == ethAddress
-          ? _value.ethAddress
-          : ethAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-      followerCount: null == followerCount
-          ? _value.followerCount
-          : followerCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      followingCount: null == followingCount
-          ? _value.followingCount
-          : followingCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      isNFTicon: null == isNFTicon
-          ? _value.isNFTicon
-          : isNFTicon // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isOfficial: null == isOfficial
-          ? _value.isOfficial
-          : isOfficial // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isSuspended: null == isSuspended
-          ? _value.isSuspended
-          : isSuspended // ignore: cast_nullable_to_non_nullable
-              as bool,
-      links: null == links
-          ? _value.links
-          : links // ignore: cast_nullable_to_non_nullable
-              as List<SDMap>,
-      muteCount: null == muteCount
-          ? _value.muteCount
-          : muteCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      postCount: null == postCount
-          ? _value.postCount
-          : postCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      ref: freezed == ref
-          ? _value.ref
-          : ref // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      reportCount: null == reportCount
-          ? _value.reportCount
-          : reportCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      score: null == score
-          ? _value.score
-          : score // ignore: cast_nullable_to_non_nullable
-              as double,
-      searchToken: null == searchToken
-          ? _value.searchToken
-          : searchToken // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      uid: null == uid
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      walletAddresses: null == walletAddresses
-          ? _value.walletAddresses
-          : walletAddresses // ignore: cast_nullable_to_non_nullable
-              as List<SDMap>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is PublicUser &&
+            (identical(other.accountName, accountName) ||
+                other.accountName == accountName) &&
+            const DeepCollectionEquality().equals(other.bio, bio) &&
+            (identical(other.blockCount, blockCount) ||
+                other.blockCount == blockCount) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            (identical(other.ethAddress, ethAddress) ||
+                other.ethAddress == ethAddress) &&
+            (identical(other.followerCount, followerCount) ||
+                other.followerCount == followerCount) &&
+            (identical(other.followingCount, followingCount) ||
+                other.followingCount == followingCount) &&
+            (identical(other.isNFTicon, isNFTicon) ||
+                other.isNFTicon == isNFTicon) &&
+            (identical(other.isOfficial, isOfficial) ||
+                other.isOfficial == isOfficial) &&
+            (identical(other.isSuspended, isSuspended) ||
+                other.isSuspended == isSuspended) &&
+            const DeepCollectionEquality().equals(other.links, links) &&
+            (identical(other.muteCount, muteCount) ||
+                other.muteCount == muteCount) &&
+            (identical(other.postCount, postCount) ||
+                other.postCount == postCount) &&
+            const DeepCollectionEquality().equals(other.ref, ref) &&
+            (identical(other.reportCount, reportCount) ||
+                other.reportCount == reportCount) &&
+            (identical(other.score, score) || other.score == score) &&
+            const DeepCollectionEquality()
+                .equals(other.searchToken, searchToken) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt) &&
+            const DeepCollectionEquality().equals(other.image, image) &&
+            const DeepCollectionEquality().equals(other.userName, userName) &&
+            const DeepCollectionEquality()
+                .equals(other.walletAddresses, walletAddresses));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        accountName,
+        const DeepCollectionEquality().hash(bio),
+        blockCount,
+        const DeepCollectionEquality().hash(createdAt),
+        ethAddress,
+        followerCount,
+        followingCount,
+        isNFTicon,
+        isOfficial,
+        isSuspended,
+        const DeepCollectionEquality().hash(links),
+        muteCount,
+        postCount,
+        const DeepCollectionEquality().hash(ref),
+        reportCount,
+        score,
+        const DeepCollectionEquality().hash(searchToken),
+        uid,
+        const DeepCollectionEquality().hash(updatedAt),
+        const DeepCollectionEquality().hash(image),
+        const DeepCollectionEquality().hash(userName),
+        const DeepCollectionEquality().hash(walletAddresses)
+      ]);
+
+  @override
+  String toString() {
+    return 'PublicUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, image: $image, userName: $userName, walletAddresses: $walletAddresses)';
   }
 }
 
 /// @nodoc
-abstract class _$$PublicUserImplCopyWith<$Res>
-    implements $PublicUserCopyWith<$Res> {
-  factory _$$PublicUserImplCopyWith(
-          _$PublicUserImpl value, $Res Function(_$PublicUserImpl) then) =
-      __$$PublicUserImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $PublicUserCopyWith<$Res> {
+  factory $PublicUserCopyWith(
+          PublicUser value, $Res Function(PublicUser) _then) =
+      _$PublicUserCopyWithImpl;
   @useResult
   $Res call(
       {String accountName,
-      Map<String, dynamic> bio,
+      SDMap bio,
       int blockCount,
       dynamic createdAt,
       String ethAddress,
@@ -240,21 +147,20 @@ abstract class _$$PublicUserImplCopyWith<$Res>
       dynamic ref,
       int reportCount,
       double score,
-      Map<String, dynamic> searchToken,
+      SDMap searchToken,
       String uid,
       dynamic updatedAt,
-      Map<String, dynamic> image,
-      Map<String, dynamic> userName,
+      SDMap image,
+      SDMap userName,
       List<SDMap> walletAddresses});
 }
 
 /// @nodoc
-class __$$PublicUserImplCopyWithImpl<$Res>
-    extends _$PublicUserCopyWithImpl<$Res, _$PublicUserImpl>
-    implements _$$PublicUserImplCopyWith<$Res> {
-  __$$PublicUserImplCopyWithImpl(
-      _$PublicUserImpl _value, $Res Function(_$PublicUserImpl) _then)
-      : super(_value, _then);
+class _$PublicUserCopyWithImpl<$Res> implements $PublicUserCopyWith<$Res> {
+  _$PublicUserCopyWithImpl(this._self, this._then);
+
+  final PublicUser _self;
+  final $Res Function(PublicUser) _then;
 
   /// Create a copy of PublicUser
   /// with the given fields replaced by the non-null parameter values.
@@ -284,93 +190,93 @@ class __$$PublicUserImplCopyWithImpl<$Res>
     Object? userName = null,
     Object? walletAddresses = null,
   }) {
-    return _then(_$PublicUserImpl(
+    return _then(_self.copyWith(
       accountName: null == accountName
-          ? _value.accountName
+          ? _self.accountName
           : accountName // ignore: cast_nullable_to_non_nullable
               as String,
       bio: null == bio
-          ? _value._bio
+          ? _self.bio
           : bio // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
       blockCount: null == blockCount
-          ? _value.blockCount
+          ? _self.blockCount
           : blockCount // ignore: cast_nullable_to_non_nullable
               as int,
       createdAt: freezed == createdAt
-          ? _value.createdAt
+          ? _self.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
       ethAddress: null == ethAddress
-          ? _value.ethAddress
+          ? _self.ethAddress
           : ethAddress // ignore: cast_nullable_to_non_nullable
               as String,
       followerCount: null == followerCount
-          ? _value.followerCount
+          ? _self.followerCount
           : followerCount // ignore: cast_nullable_to_non_nullable
               as int,
       followingCount: null == followingCount
-          ? _value.followingCount
+          ? _self.followingCount
           : followingCount // ignore: cast_nullable_to_non_nullable
               as int,
       isNFTicon: null == isNFTicon
-          ? _value.isNFTicon
+          ? _self.isNFTicon
           : isNFTicon // ignore: cast_nullable_to_non_nullable
               as bool,
       isOfficial: null == isOfficial
-          ? _value.isOfficial
+          ? _self.isOfficial
           : isOfficial // ignore: cast_nullable_to_non_nullable
               as bool,
       isSuspended: null == isSuspended
-          ? _value.isSuspended
+          ? _self.isSuspended
           : isSuspended // ignore: cast_nullable_to_non_nullable
               as bool,
       links: null == links
-          ? _value._links
+          ? _self.links
           : links // ignore: cast_nullable_to_non_nullable
               as List<SDMap>,
       muteCount: null == muteCount
-          ? _value.muteCount
+          ? _self.muteCount
           : muteCount // ignore: cast_nullable_to_non_nullable
               as int,
       postCount: null == postCount
-          ? _value.postCount
+          ? _self.postCount
           : postCount // ignore: cast_nullable_to_non_nullable
               as int,
       ref: freezed == ref
-          ? _value.ref
+          ? _self.ref
           : ref // ignore: cast_nullable_to_non_nullable
               as dynamic,
       reportCount: null == reportCount
-          ? _value.reportCount
+          ? _self.reportCount
           : reportCount // ignore: cast_nullable_to_non_nullable
               as int,
       score: null == score
-          ? _value.score
+          ? _self.score
           : score // ignore: cast_nullable_to_non_nullable
               as double,
       searchToken: null == searchToken
-          ? _value._searchToken
+          ? _self.searchToken
           : searchToken // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
       uid: null == uid
-          ? _value.uid
+          ? _self.uid
           : uid // ignore: cast_nullable_to_non_nullable
               as String,
       updatedAt: freezed == updatedAt
-          ? _value.updatedAt
+          ? _self.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as dynamic,
       image: null == image
-          ? _value._image
+          ? _self.image
           : image // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
       userName: null == userName
-          ? _value._userName
+          ? _self.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as SDMap,
       walletAddresses: null == walletAddresses
-          ? _value._walletAddresses
+          ? _self.walletAddresses
           : walletAddresses // ignore: cast_nullable_to_non_nullable
               as List<SDMap>,
     ));
@@ -379,10 +285,10 @@ class __$$PublicUserImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PublicUserImpl extends _PublicUser {
-  _$PublicUserImpl(
+class _PublicUser extends PublicUser {
+  _PublicUser(
       {this.accountName = "",
-      required final Map<String, dynamic> bio,
+      required final SDMap bio,
       this.blockCount = 0,
       required this.createdAt,
       this.ethAddress = "",
@@ -397,11 +303,11 @@ class _$PublicUserImpl extends _PublicUser {
       required this.ref,
       this.reportCount = 0,
       this.score = 0.0,
-      final Map<String, dynamic> searchToken = const {},
+      final SDMap searchToken = const {},
       required this.uid,
       required this.updatedAt,
-      required final Map<String, dynamic> image,
-      required final Map<String, dynamic> userName,
+      required final SDMap image,
+      required final SDMap userName,
       final List<SDMap> walletAddresses = const []})
       : _bio = bio,
         _links = links,
@@ -410,16 +316,15 @@ class _$PublicUserImpl extends _PublicUser {
         _userName = userName,
         _walletAddresses = walletAddresses,
         super._();
-
-  factory _$PublicUserImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PublicUserImplFromJson(json);
+  factory _PublicUser.fromJson(Map<String, dynamic> json) =>
+      _$PublicUserFromJson(json);
 
   @override
   @JsonKey()
   final String accountName;
-  final Map<String, dynamic> _bio;
+  final SDMap _bio;
   @override
-  Map<String, dynamic> get bio {
+  SDMap get bio {
     if (_bio is EqualUnmodifiableMapView) return _bio;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_bio);
@@ -471,10 +376,10 @@ class _$PublicUserImpl extends _PublicUser {
   @override
   @JsonKey()
   final double score;
-  final Map<String, dynamic> _searchToken;
+  final SDMap _searchToken;
   @override
   @JsonKey()
-  Map<String, dynamic> get searchToken {
+  SDMap get searchToken {
     if (_searchToken is EqualUnmodifiableMapView) return _searchToken;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_searchToken);
@@ -484,17 +389,17 @@ class _$PublicUserImpl extends _PublicUser {
   final String uid;
   @override
   final dynamic updatedAt;
-  final Map<String, dynamic> _image;
+  final SDMap _image;
   @override
-  Map<String, dynamic> get image {
+  SDMap get image {
     if (_image is EqualUnmodifiableMapView) return _image;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_image);
   }
 
-  final Map<String, dynamic> _userName;
+  final SDMap _userName;
   @override
-  Map<String, dynamic> get userName {
+  SDMap get userName {
     if (_userName is EqualUnmodifiableMapView) return _userName;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_userName);
@@ -509,16 +414,26 @@ class _$PublicUserImpl extends _PublicUser {
     return EqualUnmodifiableListView(_walletAddresses);
   }
 
+  /// Create a copy of PublicUser
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'PublicUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, image: $image, userName: $userName, walletAddresses: $walletAddresses)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$PublicUserCopyWith<_PublicUser> get copyWith =>
+      __$PublicUserCopyWithImpl<_PublicUser>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$PublicUserToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PublicUserImpl &&
+            other is _PublicUser &&
             (identical(other.accountName, accountName) ||
                 other.accountName == accountName) &&
             const DeepCollectionEquality().equals(other._bio, _bio) &&
@@ -584,100 +499,171 @@ class _$PublicUserImpl extends _PublicUser {
         const DeepCollectionEquality().hash(_walletAddresses)
       ]);
 
-  /// Create a copy of PublicUser
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$PublicUserImplCopyWith<_$PublicUserImpl> get copyWith =>
-      __$$PublicUserImplCopyWithImpl<_$PublicUserImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PublicUserImplToJson(
-      this,
-    );
+  String toString() {
+    return 'PublicUser(accountName: $accountName, bio: $bio, blockCount: $blockCount, createdAt: $createdAt, ethAddress: $ethAddress, followerCount: $followerCount, followingCount: $followingCount, isNFTicon: $isNFTicon, isOfficial: $isOfficial, isSuspended: $isSuspended, links: $links, muteCount: $muteCount, postCount: $postCount, ref: $ref, reportCount: $reportCount, score: $score, searchToken: $searchToken, uid: $uid, updatedAt: $updatedAt, image: $image, userName: $userName, walletAddresses: $walletAddresses)';
   }
 }
 
-abstract class _PublicUser extends PublicUser {
-  factory _PublicUser(
-      {final String accountName,
-      required final Map<String, dynamic> bio,
-      final int blockCount,
-      required final dynamic createdAt,
-      final String ethAddress,
-      final int followerCount,
-      final int followingCount,
-      final bool isNFTicon,
-      final bool isOfficial,
-      final bool isSuspended,
-      final List<SDMap> links,
-      final int muteCount,
-      final int postCount,
-      required final dynamic ref,
-      final int reportCount,
-      final double score,
-      final Map<String, dynamic> searchToken,
-      required final String uid,
-      required final dynamic updatedAt,
-      required final Map<String, dynamic> image,
-      required final Map<String, dynamic> userName,
-      final List<SDMap> walletAddresses}) = _$PublicUserImpl;
-  _PublicUser._() : super._();
+/// @nodoc
+abstract mixin class _$PublicUserCopyWith<$Res>
+    implements $PublicUserCopyWith<$Res> {
+  factory _$PublicUserCopyWith(
+          _PublicUser value, $Res Function(_PublicUser) _then) =
+      __$PublicUserCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String accountName,
+      SDMap bio,
+      int blockCount,
+      dynamic createdAt,
+      String ethAddress,
+      int followerCount,
+      int followingCount,
+      bool isNFTicon,
+      bool isOfficial,
+      bool isSuspended,
+      List<SDMap> links,
+      int muteCount,
+      int postCount,
+      dynamic ref,
+      int reportCount,
+      double score,
+      SDMap searchToken,
+      String uid,
+      dynamic updatedAt,
+      SDMap image,
+      SDMap userName,
+      List<SDMap> walletAddresses});
+}
 
-  factory _PublicUser.fromJson(Map<String, dynamic> json) =
-      _$PublicUserImpl.fromJson;
+/// @nodoc
+class __$PublicUserCopyWithImpl<$Res> implements _$PublicUserCopyWith<$Res> {
+  __$PublicUserCopyWithImpl(this._self, this._then);
 
-  @override
-  String get accountName;
-  @override
-  Map<String, dynamic> get bio;
-  @override
-  int get blockCount;
-  @override
-  dynamic get createdAt;
-  @override
-  String get ethAddress;
-  @override
-  int get followerCount;
-  @override
-  int get followingCount;
-  @override
-  bool get isNFTicon;
-  @override
-  bool get isOfficial;
-  @override
-  bool get isSuspended;
-  @override
-  List<SDMap> get links;
-  @override
-  int get muteCount;
-  @override
-  int get postCount;
-  @override
-  dynamic get ref;
-  @override
-  int get reportCount;
-  @override
-  double get score;
-  @override
-  Map<String, dynamic> get searchToken;
-  @override
-  String get uid;
-  @override
-  dynamic get updatedAt;
-  @override
-  Map<String, dynamic> get image;
-  @override
-  Map<String, dynamic> get userName;
-  @override
-  List<SDMap> get walletAddresses;
+  final _PublicUser _self;
+  final $Res Function(_PublicUser) _then;
 
   /// Create a copy of PublicUser
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PublicUserImplCopyWith<_$PublicUserImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? accountName = null,
+    Object? bio = null,
+    Object? blockCount = null,
+    Object? createdAt = freezed,
+    Object? ethAddress = null,
+    Object? followerCount = null,
+    Object? followingCount = null,
+    Object? isNFTicon = null,
+    Object? isOfficial = null,
+    Object? isSuspended = null,
+    Object? links = null,
+    Object? muteCount = null,
+    Object? postCount = null,
+    Object? ref = freezed,
+    Object? reportCount = null,
+    Object? score = null,
+    Object? searchToken = null,
+    Object? uid = null,
+    Object? updatedAt = freezed,
+    Object? image = null,
+    Object? userName = null,
+    Object? walletAddresses = null,
+  }) {
+    return _then(_PublicUser(
+      accountName: null == accountName
+          ? _self.accountName
+          : accountName // ignore: cast_nullable_to_non_nullable
+              as String,
+      bio: null == bio
+          ? _self._bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+      blockCount: null == blockCount
+          ? _self.blockCount
+          : blockCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: freezed == createdAt
+          ? _self.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      ethAddress: null == ethAddress
+          ? _self.ethAddress
+          : ethAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+      followerCount: null == followerCount
+          ? _self.followerCount
+          : followerCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      followingCount: null == followingCount
+          ? _self.followingCount
+          : followingCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      isNFTicon: null == isNFTicon
+          ? _self.isNFTicon
+          : isNFTicon // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isOfficial: null == isOfficial
+          ? _self.isOfficial
+          : isOfficial // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isSuspended: null == isSuspended
+          ? _self.isSuspended
+          : isSuspended // ignore: cast_nullable_to_non_nullable
+              as bool,
+      links: null == links
+          ? _self._links
+          : links // ignore: cast_nullable_to_non_nullable
+              as List<SDMap>,
+      muteCount: null == muteCount
+          ? _self.muteCount
+          : muteCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      postCount: null == postCount
+          ? _self.postCount
+          : postCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      ref: freezed == ref
+          ? _self.ref
+          : ref // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      reportCount: null == reportCount
+          ? _self.reportCount
+          : reportCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      score: null == score
+          ? _self.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as double,
+      searchToken: null == searchToken
+          ? _self._searchToken
+          : searchToken // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+      uid: null == uid
+          ? _self.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: freezed == updatedAt
+          ? _self.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      image: null == image
+          ? _self._image
+          : image // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+      userName: null == userName
+          ? _self._userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as SDMap,
+      walletAddresses: null == walletAddresses
+          ? _self._walletAddresses
+          : walletAddresses // ignore: cast_nullable_to_non_nullable
+              as List<SDMap>,
+    ));
+  }
 }
+
+// dart format on

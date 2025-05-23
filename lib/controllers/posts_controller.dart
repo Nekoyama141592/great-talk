@@ -216,7 +216,7 @@ class PostsController extends GetxController with CurrentUserMixin {
         await repository.createDoc(postReportRef, postReport.toJson());
     result.when(success: (res) {
       UIHelper.showFlutterToast("報告が完了しました！");
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("報告を完了できませんでした！");
     });
   }
@@ -297,7 +297,7 @@ class PostsController extends GetxController with CurrentUserMixin {
         await _removePostImage(deletePost.typedImage());
         Get.back();
         UIHelper.showErrorFlutterToast("投稿を削除しました。");
-      }, failure: () {
+      }, failure: (e) {
         UIHelper.showErrorFlutterToast("投稿を削除することができませんでした。");
       });
     });

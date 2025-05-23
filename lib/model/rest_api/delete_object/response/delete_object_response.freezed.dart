@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,121 +10,29 @@ part of 'delete_object_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-DeleteObjectResponse _$DeleteObjectResponseFromJson(Map<String, dynamic> json) {
-  return _DeleteObjectResponse.fromJson(json);
-}
 
 /// @nodoc
 mixin _$DeleteObjectResponse {
-  String get base64Image => throw _privateConstructorUsedError;
-
-  /// Serializes this DeleteObjectResponse to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get base64Image;
 
   /// Create a copy of DeleteObjectResponse
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DeleteObjectResponseCopyWith<DeleteObjectResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+      _$DeleteObjectResponseCopyWithImpl<DeleteObjectResponse>(
+          this as DeleteObjectResponse, _$identity);
 
-/// @nodoc
-abstract class $DeleteObjectResponseCopyWith<$Res> {
-  factory $DeleteObjectResponseCopyWith(DeleteObjectResponse value,
-          $Res Function(DeleteObjectResponse) then) =
-      _$DeleteObjectResponseCopyWithImpl<$Res, DeleteObjectResponse>;
-  @useResult
-  $Res call({String base64Image});
-}
-
-/// @nodoc
-class _$DeleteObjectResponseCopyWithImpl<$Res,
-        $Val extends DeleteObjectResponse>
-    implements $DeleteObjectResponseCopyWith<$Res> {
-  _$DeleteObjectResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of DeleteObjectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? base64Image = null,
-  }) {
-    return _then(_value.copyWith(
-      base64Image: null == base64Image
-          ? _value.base64Image
-          : base64Image // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$DeleteObjectResponseImplCopyWith<$Res>
-    implements $DeleteObjectResponseCopyWith<$Res> {
-  factory _$$DeleteObjectResponseImplCopyWith(_$DeleteObjectResponseImpl value,
-          $Res Function(_$DeleteObjectResponseImpl) then) =
-      __$$DeleteObjectResponseImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String base64Image});
-}
-
-/// @nodoc
-class __$$DeleteObjectResponseImplCopyWithImpl<$Res>
-    extends _$DeleteObjectResponseCopyWithImpl<$Res, _$DeleteObjectResponseImpl>
-    implements _$$DeleteObjectResponseImplCopyWith<$Res> {
-  __$$DeleteObjectResponseImplCopyWithImpl(_$DeleteObjectResponseImpl _value,
-      $Res Function(_$DeleteObjectResponseImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DeleteObjectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? base64Image = null,
-  }) {
-    return _then(_$DeleteObjectResponseImpl(
-      base64Image: null == base64Image
-          ? _value.base64Image
-          : base64Image // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$DeleteObjectResponseImpl extends _DeleteObjectResponse {
-  const _$DeleteObjectResponseImpl({required this.base64Image}) : super._();
-
-  factory _$DeleteObjectResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DeleteObjectResponseImplFromJson(json);
-
-  @override
-  final String base64Image;
-
-  @override
-  String toString() {
-    return 'DeleteObjectResponse(base64Image: $base64Image)';
-  }
+  /// Serializes this DeleteObjectResponse to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DeleteObjectResponseImpl &&
+            other is DeleteObjectResponse &&
             (identical(other.base64Image, base64Image) ||
                 other.base64Image == base64Image));
   }
@@ -132,39 +41,123 @@ class _$DeleteObjectResponseImpl extends _DeleteObjectResponse {
   @override
   int get hashCode => Object.hash(runtimeType, base64Image);
 
-  /// Create a copy of DeleteObjectResponse
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteObjectResponseImplCopyWith<_$DeleteObjectResponseImpl>
-      get copyWith =>
-          __$$DeleteObjectResponseImplCopyWithImpl<_$DeleteObjectResponseImpl>(
-              this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DeleteObjectResponseImplToJson(
-      this,
-    );
+  String toString() {
+    return 'DeleteObjectResponse(base64Image: $base64Image)';
   }
 }
 
-abstract class _DeleteObjectResponse extends DeleteObjectResponse {
-  const factory _DeleteObjectResponse({required final String base64Image}) =
-      _$DeleteObjectResponseImpl;
-  const _DeleteObjectResponse._() : super._();
+/// @nodoc
+abstract mixin class $DeleteObjectResponseCopyWith<$Res> {
+  factory $DeleteObjectResponseCopyWith(DeleteObjectResponse value,
+          $Res Function(DeleteObjectResponse) _then) =
+      _$DeleteObjectResponseCopyWithImpl;
+  @useResult
+  $Res call({String base64Image});
+}
 
-  factory _DeleteObjectResponse.fromJson(Map<String, dynamic> json) =
-      _$DeleteObjectResponseImpl.fromJson;
+/// @nodoc
+class _$DeleteObjectResponseCopyWithImpl<$Res>
+    implements $DeleteObjectResponseCopyWith<$Res> {
+  _$DeleteObjectResponseCopyWithImpl(this._self, this._then);
+
+  final DeleteObjectResponse _self;
+  final $Res Function(DeleteObjectResponse) _then;
+
+  /// Create a copy of DeleteObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? base64Image = null,
+  }) {
+    return _then(_self.copyWith(
+      base64Image: null == base64Image
+          ? _self.base64Image
+          : base64Image // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _DeleteObjectResponse extends DeleteObjectResponse {
+  const _DeleteObjectResponse({required this.base64Image}) : super._();
+  factory _DeleteObjectResponse.fromJson(Map<String, dynamic> json) =>
+      _$DeleteObjectResponseFromJson(json);
 
   @override
-  String get base64Image;
+  final String base64Image;
 
   /// Create a copy of DeleteObjectResponse
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DeleteObjectResponseImplCopyWith<_$DeleteObjectResponseImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  _$DeleteObjectResponseCopyWith<_DeleteObjectResponse> get copyWith =>
+      __$DeleteObjectResponseCopyWithImpl<_DeleteObjectResponse>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DeleteObjectResponseToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DeleteObjectResponse &&
+            (identical(other.base64Image, base64Image) ||
+                other.base64Image == base64Image));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, base64Image);
+
+  @override
+  String toString() {
+    return 'DeleteObjectResponse(base64Image: $base64Image)';
+  }
 }
+
+/// @nodoc
+abstract mixin class _$DeleteObjectResponseCopyWith<$Res>
+    implements $DeleteObjectResponseCopyWith<$Res> {
+  factory _$DeleteObjectResponseCopyWith(_DeleteObjectResponse value,
+          $Res Function(_DeleteObjectResponse) _then) =
+      __$DeleteObjectResponseCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String base64Image});
+}
+
+/// @nodoc
+class __$DeleteObjectResponseCopyWithImpl<$Res>
+    implements _$DeleteObjectResponseCopyWith<$Res> {
+  __$DeleteObjectResponseCopyWithImpl(this._self, this._then);
+
+  final _DeleteObjectResponse _self;
+  final $Res Function(_DeleteObjectResponse) _then;
+
+  /// Create a copy of DeleteObjectResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? base64Image = null,
+  }) {
+    return _then(_DeleteObjectResponse(
+      base64Image: null == base64Image
+          ? _self.base64Image
+          : base64Image // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

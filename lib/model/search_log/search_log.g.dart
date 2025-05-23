@@ -6,15 +6,15 @@ part of 'search_log.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserUpdateLogImpl _$$UserUpdateLogImplFromJson(Map<String, dynamic> json) =>
-    _$UserUpdateLogImpl(
+_UserUpdateLog _$UserUpdateLogFromJson(Map<String, dynamic> json) =>
+    _UserUpdateLog(
       logCreatedAt: json['logCreatedAt'],
       searchTarget: json['searchTarget'] as String,
       searchTerm: json['searchTerm'] as String,
       uid: json['uid'] as String,
     );
 
-Map<String, dynamic> _$$UserUpdateLogImplToJson(_$UserUpdateLogImpl instance) =>
+Map<String, dynamic> _$UserUpdateLogToJson(_UserUpdateLog instance) =>
     <String, dynamic>{
       'logCreatedAt': instance.logCreatedAt,
       'searchTarget': instance.searchTarget,
