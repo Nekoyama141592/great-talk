@@ -53,7 +53,7 @@ abstract class PublicUser with _$PublicUser {
       typedImage().moderationLabels.isNotEmpty ||
       typedBio().negativeScore > negativeLimit ||
       typedUserName().negativeScore > negativeLimit;
-  String inappropriateReason(String currentUid) {
+  String inappropriateReason(String? currentUid) {
     String reason = "";
     final bioNS = typedBio().negativeScore;
     final userNameNS = typedUserName().negativeScore;

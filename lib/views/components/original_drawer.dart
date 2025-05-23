@@ -6,7 +6,6 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/local_controller.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/utility/style_utility.dart';
 import 'package:great_talk/views/accounts_page.dart';
 import 'package:great_talk/views/admin_page.dart';
@@ -19,7 +18,7 @@ import 'package:great_talk/views/mute/mute_posts/mute_posts_page.dart';
 import 'package:great_talk/views/mute/mute_users/mute_users_page.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 
-class OriginalDrawer extends StatelessWidget with CurrentUserMixin {
+class OriginalDrawer extends StatelessWidget {
   const OriginalDrawer({super.key});
   @override
   Widget build(BuildContext context) {
