@@ -5,7 +5,7 @@ part 'generate_image_request.freezed.dart';
 part 'generate_image_request.g.dart';
 
 @freezed
-abstract class GenerateImageRequest implements _$GenerateImageRequest {
+abstract class GenerateImageRequest with _$GenerateImageRequest {
   const factory GenerateImageRequest(
       {@Default(OpenAIConstants.imageModel) String model,
       required String prompt,

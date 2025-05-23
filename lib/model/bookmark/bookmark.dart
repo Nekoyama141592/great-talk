@@ -4,7 +4,7 @@ part 'bookmark.freezed.dart';
 part 'bookmark.g.dart';
 
 @freezed
-abstract class Bookmark implements _$Bookmark {
+abstract class Bookmark with _$Bookmark {
   const factory Bookmark({
     required String activeUid,
     required String categoryId,

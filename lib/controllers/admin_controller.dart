@@ -25,7 +25,7 @@ class AdminController extends LoadingController {
     final result = await repository.countUsers();
     result.when(success: (res) {
       userCount(res);
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("ユーザー数の取得に失敗しました");
     });
   }
@@ -34,7 +34,7 @@ class AdminController extends LoadingController {
     final result = await repository.countPosts();
     result.when(success: (res) {
       postCount(res);
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("投稿数の取得に失敗しました");
     });
   }
@@ -43,7 +43,7 @@ class AdminController extends LoadingController {
     final result = await repository.countMessages();
     result.when(success: (res) {
       messageCount(res);
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("メッセージ数の取得に失敗しました");
     });
   }
@@ -52,7 +52,7 @@ class AdminController extends LoadingController {
     final result = await repository.countSearchLogs();
     result.when(success: (res) {
       searchCount(res);
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("検索数の取得に失敗しました");
     });
   }
@@ -81,7 +81,7 @@ class AdminController extends LoadingController {
           final user = PublicUser.fromJson(data);
           await _updateIsOfficial(user);
         },
-        failure: () {});
+        failure: (e) {});
   }
 
   Future<void> _updateIsOfficial(PublicUser user) async {
@@ -93,7 +93,7 @@ class AdminController extends LoadingController {
     result.when(success: (res) {
       UIHelper.showFlutterToast(
           "${user.nameValue}のisOfficialを${!user.isOfficial}にしました！");
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("更新に失敗しました");
     });
   }

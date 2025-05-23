@@ -5,7 +5,7 @@ part 'detected_image.freezed.dart';
 part 'detected_image.g.dart';
 
 @freezed
-abstract class DetectedImage implements _$DetectedImage {
+abstract class DetectedImage with _$DetectedImage {
   const DetectedImage._();
   const factory DetectedImage({
     @Default("") String bucketName,

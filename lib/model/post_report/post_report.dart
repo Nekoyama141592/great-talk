@@ -4,7 +4,7 @@ part 'post_report.freezed.dart';
 part 'post_report.g.dart';
 
 @freezed
-abstract class PostReport implements _$PostReport {
+abstract class PostReport with _$PostReport {
   const factory PostReport({
     required String activeUid,
     required dynamic activeUserRef,

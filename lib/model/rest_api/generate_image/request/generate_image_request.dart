@@ -4,7 +4,7 @@ part 'generate_image_request.freezed.dart';
 part 'generate_image_request.g.dart';
 
 @freezed
-abstract class GenerateImageRequest implements _$GenerateImageRequest {
+abstract class GenerateImageRequest with _$GenerateImageRequest {
   const GenerateImageRequest._();
   const factory GenerateImageRequest(
       {required String prompt, required String size}) = _GenerateImageRequest;

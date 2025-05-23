@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/post/post.dart';
 import 'package:great_talk/model/q_doc_info/q_doc_info.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
@@ -13,12 +13,13 @@ import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_msg_button.dart';
 import 'package:great_talk/views/user_profile_page.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PostCard extends StatelessWidget with CurrentUserMixin {
+class PostCard extends ConsumerWidget {
   const PostCard({super.key, required this.qDocInfo});
   final QDocInfo qDocInfo;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     final controller = PostsController.to;
     final post = Post.fromJson(qDocInfo.qDoc.data());
     final uint8list = qDocInfo.userImage;
@@ -45,9 +46,10 @@ class PostCard extends StatelessWidget with CurrentUserMixin {
                       title: "制限されている投稿"));
             }
             if (post.isInappropriate()) {
+              final authUid = ref.read(streamAuthUidProvider).value;
               return MosaicCard(
                 child: MosaicPostChild(
-                  msg: post.inappropriateReason(currentUid()),
+                  msg: post.inappropriateReason(authUid),
                   post: post,
                   title: "不適切なコンテンツ",
                 ),

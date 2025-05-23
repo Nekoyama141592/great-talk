@@ -10,7 +10,7 @@ part 'public_user.freezed.dart';
 part 'public_user.g.dart';
 
 @freezed
-abstract class PublicUser implements _$PublicUser {
+abstract class PublicUser with _$PublicUser {
   const PublicUser._();
   factory PublicUser({
     @Default("") String accountName,
@@ -53,7 +53,7 @@ abstract class PublicUser implements _$PublicUser {
       typedImage().moderationLabels.isNotEmpty ||
       typedBio().negativeScore > negativeLimit ||
       typedUserName().negativeScore > negativeLimit;
-  String inappropriateReason(String currentUid) {
+  String inappropriateReason(String? currentUid) {
     String reason = "";
     final bioNS = typedBio().negativeScore;
     final userNameNS = typedUserName().negativeScore;

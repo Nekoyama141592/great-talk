@@ -4,7 +4,7 @@ part 'ios_receipt_response.freezed.dart';
 part 'ios_receipt_response.g.dart';
 
 @freezed
-abstract class IOSReceiptResponse implements _$IOSReceiptResponse {
+abstract class IOSReceiptResponse with _$IOSReceiptResponse {
   const IOSReceiptResponse._();
   const factory IOSReceiptResponse(
       {required String expires_date,

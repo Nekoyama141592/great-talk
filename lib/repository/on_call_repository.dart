@@ -11,7 +11,7 @@ import 'package:great_talk/model/rest_api/get_object/request/get_object_request.
 import 'package:great_talk/model/rest_api/get_object/response/get_object_response.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/rest_api/put_object/response/put_object_response.dart';
-import 'package:great_talk/repository/result.dart';
+import 'package:great_talk/repository/result/result.dart';
 
 class OnCallRepository {
   OnCallClient get _client => OnCallClient();
@@ -23,7 +23,7 @@ class OnCallRepository {
       final res = PutObjectResponse.fromJson(result);
       return Result.success(res);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -36,7 +36,7 @@ class OnCallRepository {
       final image = base64Decode(base64Image);
       return Result.success(image);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -48,7 +48,7 @@ class OnCallRepository {
       final res = DeleteObjectResponse.fromJson(result);
       return Result.success(res);
     } catch (e) {
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 

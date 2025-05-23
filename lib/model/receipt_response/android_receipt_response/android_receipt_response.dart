@@ -4,7 +4,7 @@ part 'android_receipt_response.freezed.dart';
 part 'android_receipt_response.g.dart';
 
 @freezed
-abstract class AndroidReceiptResponse implements _$AndroidReceiptResponse {
+abstract class AndroidReceiptResponse with _$AndroidReceiptResponse {
   const AndroidReceiptResponse._();
   const factory AndroidReceiptResponse(
       {required int acknowledgementState,

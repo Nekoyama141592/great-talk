@@ -10,7 +10,7 @@ part 'post.freezed.dart';
 part 'post.g.dart';
 
 @freezed
-abstract class Post implements _$Post {
+abstract class Post with _$Post {
   const Post._();
   const factory Post({
     @Default(0) int bookmarkCount,
@@ -47,7 +47,7 @@ abstract class Post implements _$Post {
       typedImage().moderationLabels.isNotEmpty ||
       typedDescription().negativeScore > negativeLimit;
 
-  String inappropriateReason(String currentUid) {
+  String inappropriateReason(String? currentUid) {
     String reason = "";
     // 不適切なら理由を追加.
     final titleNS = typedTitle().negativeScore;

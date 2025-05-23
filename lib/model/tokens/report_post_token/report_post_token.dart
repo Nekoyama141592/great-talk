@@ -4,7 +4,7 @@ part 'report_post_token.freezed.dart';
 part 'report_post_token.g.dart';
 
 @freezed
-abstract class ReportPostToken implements _$ReportPostToken {
+abstract class ReportPostToken with _$ReportPostToken {
   const factory ReportPostToken({
     required String activeUid,
     required dynamic createdAt,

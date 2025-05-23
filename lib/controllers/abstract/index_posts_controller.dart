@@ -3,7 +3,7 @@ import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
-import 'package:great_talk/repository/result.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -26,14 +26,14 @@ abstract class IndexPostsController extends DocsController {
     final posts = await _timelinesToPostsResult(fetchedTimelines);
     posts.when(
         success: (res) => addAllDocs(sortedDocs(res)),
-        failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
+        failure: (e) => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 
   Future<void> _fetchMorePosts(List<QDoc> fetchedTimelines) async {
     final posts = await _timelinesToPostsResult(fetchedTimelines);
     posts.when(
         success: (res) => addAllDocs(sortedDocs(res)),
-        failure: () => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
+        failure: (e) => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 
   @override

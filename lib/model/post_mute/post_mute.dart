@@ -4,7 +4,7 @@ part 'post_mute.freezed.dart';
 part 'post_mute.g.dart';
 
 @freezed
-abstract class PostMute implements _$PostMute {
+abstract class PostMute with _$PostMute {
   const factory PostMute(
       {required String activeUid,
       required dynamic createdAt,

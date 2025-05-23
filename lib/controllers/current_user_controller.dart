@@ -104,7 +104,7 @@ class CurrentUserController extends GetxController {
             }
           }
         },
-        failure: () {});
+        failure: (e) {});
   }
 
   Future<void> _fetchBookmarkCategories() async {
@@ -118,7 +118,7 @@ class CurrentUserController extends GetxController {
           bookmarkCategoryTokens(
               res.map((e) => BookmarkCategory.fromJson(e.data())).toList());
         },
-        failure: () {});
+        failure: (e) {});
   }
 
   // 投稿の削除時に外部から呼び出す.
@@ -173,7 +173,7 @@ class CurrentUserController extends GetxController {
   Future<void> _createAnonymousUser() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInAnonymously();
-    result.when(success: (res) => rxAuthUser(res), failure: () {});
+    result.when(success: (res) => rxAuthUser(res), failure: (e) {});
   }
 
   String currentUid() => rxAuthUser.value?.uid ?? '';
@@ -197,13 +197,13 @@ class CurrentUserController extends GetxController {
   Future<void> onAppleButtonPressed() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInWithApple();
-    await result.when(success: onLoginSuccess, failure: () {});
+    await result.when(success: onLoginSuccess, failure: (e) {});
   }
 
   Future<void> onGoogleButtonPressed() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInWithGoogle();
-    await result.when(success: onLoginSuccess, failure: () {});
+    await result.when(success: onLoginSuccess, failure: (e) {});
   }
 
   Future<void> onLoginSuccess(User user) async {
@@ -223,7 +223,7 @@ class CurrentUserController extends GetxController {
     result.when(success: (_) {
       rxPublicUser(newUser);
       UIHelper.showFlutterToast("ユーザーが作成されました");
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
     });
   }
@@ -236,7 +236,7 @@ class CurrentUserController extends GetxController {
     final result = await repository.createDoc(ref, json);
     result.when(success: (_) {
       rxPrivateUser(newPrivateUser);
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
     });
   }
@@ -273,7 +273,7 @@ class CurrentUserController extends GetxController {
         // アカウントが存在しないなら作成する
         await _createPublicUser();
       }
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
   }
@@ -291,7 +291,7 @@ class CurrentUserController extends GetxController {
         // アカウントが存在しないなら作成する
         await _createPrivateUser();
       }
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
   }
@@ -327,7 +327,7 @@ class CurrentUserController extends GetxController {
     final result = await repository.signOut();
     result.when(success: (_) {
       Get.toNamed(LogoutedPage.path);
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("ログアウトできませんでした");
     });
   }
@@ -350,7 +350,7 @@ class CurrentUserController extends GetxController {
         success: (_) {
           _showDeleteUserDialog();
         },
-        failure: () {});
+        failure: (e) {});
   }
 
   void _showDeleteUserDialog() {
@@ -366,7 +366,7 @@ class CurrentUserController extends GetxController {
     await result.when(success: (_) async {
       _deleteAuthUser();
       _removeImage();
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("データベースからユーザーを削除できませんでした");
     });
   }
@@ -378,7 +378,7 @@ class CurrentUserController extends GetxController {
         success: (_) {
           Get.toNamed(UserDeletedPage.path);
         },
-        failure: () {});
+        failure: (e) {});
   }
 
   Future<void> _removeImage() async {
@@ -426,7 +426,7 @@ class CurrentUserController extends GetxController {
       inputController.text = "";
       addBookmarkCategory(newCategory);
       UIHelper.showFlutterToast("カテゴリーを作成できました。");
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("カテゴリーを作成できませんでした。");
     });
   }
@@ -445,7 +445,7 @@ class CurrentUserController extends GetxController {
       Get.back();
       removeBookmarkCategory(token);
       UIHelper.showFlutterToast("カテゴリーを削除できました。");
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("カテゴリーを削除できませんでした。");
     });
   }

@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/providers/global/local_setting/local_setting.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
-import 'package:great_talk/controllers/local_controller.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/utility/style_utility.dart';
 import 'package:great_talk/views/accounts_page.dart';
 import 'package:great_talk/views/admin_page.dart';
@@ -18,13 +17,14 @@ import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/mute/mute_posts/mute_posts_page.dart';
 import 'package:great_talk/views/mute/mute_users/mute_users_page.dart';
 import 'package:great_talk/views/user_profile_page.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class OriginalDrawer extends StatelessWidget with CurrentUserMixin {
+class OriginalDrawer extends ConsumerWidget {
   const OriginalDrawer({super.key});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     final currentUserController = CurrentUserController.to;
-    final localController = LocalController.to;
+    final settingState = ref.watch(localSettingProvider);
     final purchasesController = PurchasesController.to;
     return Drawer(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -94,8 +94,8 @@ class OriginalDrawer extends StatelessWidget with CurrentUserMixin {
             () => ListTile(
               title: const Text("テーマ切り替え"),
               trailing: CupertinoSwitch(
-                value: localController.rxIsDarkTheme.value,
-                onChanged: localController.onThemeSwichChanged,
+                value: settingState.isDarkTheme,
+                onChanged: ref.read(localSettingProvider.notifier).onThemeSwichChanged,
               ),
             ),
           ),
@@ -103,8 +103,8 @@ class OriginalDrawer extends StatelessWidget with CurrentUserMixin {
             () => ListTile(
               title: const Text("最初のメッセージを受け取る"),
               trailing: CupertinoSwitch(
-                value: localController.rxNeedFirstMessage.value,
-                onChanged: localController.onNeedFirstMessageSwichChanged,
+                value: settingState.needFirstMessage,
+                onChanged: ref.read(localSettingProvider.notifier).onNeedFirstMessageSwichChanged,
               ),
             ),
           ),

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/public_user/public_user.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
@@ -13,15 +13,16 @@ import 'package:great_talk/views/components/mosaic_card/components/mosaic_user_c
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
 import 'package:great_talk/views/components/official_mark.dart';
 import 'package:great_talk/views/user_profile_page.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class UserCard extends StatelessWidget with CurrentUserMixin {
+class UserCard extends ConsumerWidget {
   const UserCard(
       {super.key, required this.publicUser, required this.uint8list});
   final PublicUser publicUser;
   final Uint8List? uint8list;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Padding(
         padding: EdgeInsets.all(defaultPadding(context)),
         child: (publicUser.isInappropriate())
@@ -30,7 +31,7 @@ class UserCard extends StatelessWidget with CurrentUserMixin {
                 child: MosaicCard(
                     child: MosaicUserChild(
                   publicUser: publicUser,
-                  msg: publicUser.inappropriateReason(currentUid()),
+                  msg: publicUser.inappropriateReason(ref.watch(streamAuthUidProvider).value),
                   title: "不適切なユーザー",
                 )))
             : Obx(

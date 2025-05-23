@@ -6,7 +6,7 @@ part 'save_text_msg.freezed.dart';
 part 'save_text_msg.g.dart';
 
 @freezed
-abstract class SaveTextMsg implements _$SaveTextMsg {
+abstract class SaveTextMsg with _$SaveTextMsg {
   const SaveTextMsg._();
   const factory SaveTextMsg(
       {required DateTime createdAt,

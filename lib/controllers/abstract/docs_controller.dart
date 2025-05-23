@@ -147,7 +147,7 @@ abstract class DocsController extends LoadingController with CurrentUserMixin {
     late List<PublicUser> users;
     result.when(success: (res) {
       users = res.map((e) => PublicUser.fromJson(e.data())).toList();
-    }, failure: () {
+    }, failure: (e) {
       users = [];
     });
     return users;

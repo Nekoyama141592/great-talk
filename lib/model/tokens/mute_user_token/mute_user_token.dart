@@ -4,7 +4,7 @@ part 'mute_user_token.freezed.dart';
 part 'mute_user_token.g.dart';
 
 @freezed
-abstract class MuteUserToken implements _$MuteUserToken {
+abstract class MuteUserToken with _$MuteUserToken {
   const factory MuteUserToken({
     required String activeUid,
     required dynamic createdAt,

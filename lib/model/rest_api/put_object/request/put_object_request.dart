@@ -7,7 +7,7 @@ part 'put_object_request.freezed.dart';
 part 'put_object_request.g.dart';
 
 @freezed
-abstract class PutObjectRequest implements _$PutObjectRequest {
+abstract class PutObjectRequest with _$PutObjectRequest {
   const PutObjectRequest._();
   const factory PutObjectRequest(
       {required String base64Image,

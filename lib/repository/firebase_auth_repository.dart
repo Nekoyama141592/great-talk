@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/infrastructure/firebase_auth/firebase_auth_client.dart';
-import 'package:great_talk/repository/result.dart';
+import 'package:great_talk/repository/result/result.dart';
 
 class FirebaseAuthRepository {
   FirebaseAuthClient get client => FirebaseAuthClient();
@@ -11,14 +11,15 @@ class FirebaseAuthRepository {
     try {
       final res = await client.signInAnonymously();
       final user = res.user;
+      const e = 'user not found.';
       if (user == null) {
-        return const Result.failure();
+        return Result.failure(e);
       } else {
         return Result.success(user);
       }
     } catch (e) {
       debugPrint(e.toString());
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -26,13 +27,14 @@ class FirebaseAuthRepository {
     try {
       final res = await client.signinWithApple();
       if (res == null || res.user == null) {
-        return const Result.failure();
+        const e = 'Signin Failed.';
+        return Result.failure(e);
       } else {
         return Result.success(res.user!);
       }
     } on FirebaseAuthException catch (e) {
       _manageErrorCredential(e);
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -40,13 +42,14 @@ class FirebaseAuthRepository {
     try {
       final res = await client.signInWithGoogle();
       if (res == null || res.user == null) {
-        return const Result.failure();
+        const e = 'Signin Failed.';
+        return Result.failure(e);
       } else {
         return Result.success(res.user!);
       }
     } on FirebaseAuthException catch (e) {
       _manageErrorCredential(e);
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -56,7 +59,7 @@ class FirebaseAuthRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -80,7 +83,7 @@ class FirebaseAuthRepository {
           await UIHelper.showErrorFlutterToast("クレデンシャルが不正、もしくは期限切れです。");
           break;
       }
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 
@@ -96,7 +99,7 @@ class FirebaseAuthRepository {
           await UIHelper.showErrorFlutterToast("再認証が必要です。");
           break;
       }
-      return const Result.failure();
+      return Result.failure(e);
     }
   }
 

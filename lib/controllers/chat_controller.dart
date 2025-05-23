@@ -15,7 +15,6 @@ import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/abstract/forms_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/local_controller.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/controllers/remote_config_controller.dart';
@@ -111,7 +110,8 @@ class ChatController extends FormsController with CurrentUserMixin {
   void _processDescriptionMessage() {
     final post = rxPost.value;
     if (post == null) return;
-    if (messages.isEmpty && LocalController.to.rxNeedFirstMessage.value) {
+    if (messages.isEmpty) {
+    // TODO: if (messages.isEmpty && LocalController.to.rxNeedFirstMessage.value) {
       _addDescriptionMessage(post);
     }
   }
@@ -135,7 +135,7 @@ class ChatController extends FormsController with CurrentUserMixin {
         UIHelper.showFlutterToast("投稿が存在しません");
         return;
       }
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
     List<TextMessage> a = await _getLocalMessages();
@@ -448,7 +448,7 @@ class ChatController extends FormsController with CurrentUserMixin {
         success: (res) {
           response = res;
         },
-        failure: () {});
+        failure: (e) {});
     return response;
   }
 
@@ -555,7 +555,7 @@ class ChatController extends FormsController with CurrentUserMixin {
       res.exists
           ? await _unBookmark(res)
           : await _bookmark(category); // 存在するなら削除、しないなら作成
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("通信に失敗しました");
     });
   }
@@ -583,7 +583,7 @@ class ChatController extends FormsController with CurrentUserMixin {
       Get.back();
       UIHelper.showFlutterToast(
           "${bookmarkedPost.typedTitle().value}を${category.title}に保存しました。");
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("保存が失敗しました。");
     });
   }
@@ -594,7 +594,7 @@ class ChatController extends FormsController with CurrentUserMixin {
     result.when(success: (_) {
       Get.back();
       UIHelper.showFlutterToast("ブックマークを解除しました。");
-    }, failure: () {
+    }, failure: (e) {
       UIHelper.showErrorFlutterToast("ブックマークを解除できませんでした。");
     });
   }

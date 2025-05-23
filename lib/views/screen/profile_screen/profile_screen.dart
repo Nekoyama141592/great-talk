@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/controllers/abstract/profile_controller.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/extensions/string_extension.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/utility/style_utility.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
@@ -14,12 +14,13 @@ import 'package:great_talk/views/screen/profile_screen/components/edit_button.da
 import 'package:great_talk/views/screen/profile_screen/components/follow_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 import 'package:great_talk/views/search_user_posts_page.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ProfileScreen extends StatelessWidget with CurrentUserMixin {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key, required this.controller});
   final ProfileController controller;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     final children = <Widget>[
       Align(
         alignment: Alignment.centerLeft,
@@ -93,7 +94,7 @@ class ProfileScreen extends StatelessWidget with CurrentUserMixin {
                     if (passiveUser == null) {
                       return const SizedBox.shrink();
                     }
-                    return passiveUser.uid == currentUid()
+                    return passiveUser.uid == ref.watch(streamAuthUidProvider).value
                         ? const EditButton()
                         : const FollowButton();
                   })

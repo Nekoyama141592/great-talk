@@ -5,7 +5,7 @@ part 'generate_image_response.freezed.dart';
 part 'generate_image_response.g.dart';
 
 @freezed
-abstract class GenerateImageResponse implements _$GenerateImageResponse {
+abstract class GenerateImageResponse with _$GenerateImageResponse {
   const factory GenerateImageResponse({
     List<GenerateImageData?>? data,
   }) = _GenerateImageResponse;

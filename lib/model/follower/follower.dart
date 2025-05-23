@@ -5,7 +5,7 @@ part 'follower.freezed.dart';
 part 'follower.g.dart';
 
 @freezed
-abstract class Follower implements _$Follower {
+abstract class Follower with _$Follower {
   const Follower._();
   const factory Follower(
       {required dynamic activeUserRef,
