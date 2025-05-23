@@ -14,10 +14,9 @@ class LocalSetting extends _$LocalSetting {
     final needFirstMessage =
         prefs.getBool(PrefsKey.needFirstMessage.name) ?? true;
     return LocalSettingState(
-      isDarkTheme: isDarkTheme,
-      needFirstMessage: needFirstMessage
-    );
+        isDarkTheme: isDarkTheme, needFirstMessage: needFirstMessage);
   }
+
   void onThemeSwichChanged(bool value) async {
     state = state.copyWith(isDarkTheme: value);
     final prefs = ref.read(prefsProvider);

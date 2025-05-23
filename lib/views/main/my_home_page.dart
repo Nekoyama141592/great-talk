@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/controllers/posts_controller.dart';
-import 'package:great_talk/controllers/chat_controller.dart';
 import 'package:great_talk/views/components/original_drawer.dart';
 import 'package:great_talk/views/main/components/main_floating_action_button.dart';
 import 'package:great_talk/views/main/feeds/feeds_page.dart';
@@ -21,11 +20,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class MyHomePage extends HookConsumerWidget {
   const MyHomePage({super.key});
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     Get.put(PurchasesController());
     ref.watch(notificationProvider);
     Get.put(PostsController());
-    Get.put(ChatController());
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(

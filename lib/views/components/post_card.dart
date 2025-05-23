@@ -19,7 +19,7 @@ class PostCard extends ConsumerWidget {
   const PostCard({super.key, required this.qDocInfo});
   final QDocInfo qDocInfo;
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final controller = PostsController.to;
     final post = Post.fromJson(qDocInfo.qDoc.data());
     final uint8list = qDocInfo.userImage;

@@ -22,7 +22,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class OriginalDrawer extends ConsumerWidget {
   const OriginalDrawer({super.key});
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final currentUserController = CurrentUserController.to;
     final settingState = ref.watch(localSettingProvider);
     final purchasesController = PurchasesController.to;
@@ -95,7 +95,8 @@ class OriginalDrawer extends ConsumerWidget {
               title: const Text("テーマ切り替え"),
               trailing: CupertinoSwitch(
                 value: settingState.isDarkTheme,
-                onChanged: ref.read(localSettingProvider.notifier).onThemeSwichChanged,
+                onChanged:
+                    ref.read(localSettingProvider.notifier).onThemeSwichChanged,
               ),
             ),
           ),
@@ -104,7 +105,9 @@ class OriginalDrawer extends ConsumerWidget {
               title: const Text("最初のメッセージを受け取る"),
               trailing: CupertinoSwitch(
                 value: settingState.needFirstMessage,
-                onChanged: ref.read(localSettingProvider.notifier).onNeedFirstMessageSwichChanged,
+                onChanged: ref
+                    .read(localSettingProvider.notifier)
+                    .onNeedFirstMessageSwichChanged,
               ),
             ),
           ),

@@ -20,7 +20,7 @@ class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key, required this.controller});
   final ProfileController controller;
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final children = <Widget>[
       Align(
         alignment: Alignment.centerLeft,
@@ -94,7 +94,8 @@ class ProfileScreen extends ConsumerWidget {
                     if (passiveUser == null) {
                       return const SizedBox.shrink();
                     }
-                    return passiveUser.uid == ref.watch(streamAuthUidProvider).value
+                    return passiveUser.uid ==
+                            ref.watch(streamAuthUidProvider).value
                         ? const EditButton()
                         : const FollowButton();
                   })

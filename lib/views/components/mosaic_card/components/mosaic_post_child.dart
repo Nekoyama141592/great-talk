@@ -16,7 +16,7 @@ class MosaicPostChild extends ConsumerWidget {
   final Post post;
   final String title;
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

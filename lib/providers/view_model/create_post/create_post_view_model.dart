@@ -30,37 +30,43 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     if (value == null) return;
     state.whenData((s) => state = AsyncValue.data(s.copyWith(title: value)));
   }
+
   void setSystemPrompt(String? value) {
     if (value == null) return;
-    state.whenData((s) => state = AsyncValue.data(s.copyWith(systemPrompt: value)));
+    state.whenData(
+        (s) => state = AsyncValue.data(s.copyWith(systemPrompt: value)));
   }
+
   void setDescription(String? value) {
     if (value == null) return;
-    state.whenData((s) => state = AsyncValue.data(s.copyWith(description: value)));
+    state.whenData(
+        (s) => state = AsyncValue.data(s.copyWith(description: value)));
   }
+
   void setTemperature(String? value) {
     if (value == null) return;
-    state.whenData((s) => state = AsyncValue.data(
-      s.copyWith(temperature: double.tryParse(value) ?? FormConsts.defaultTemperature)));
+    state.whenData((s) => state = AsyncValue.data(s.copyWith(
+        temperature: double.tryParse(value) ?? FormConsts.defaultTemperature)));
   }
+
   void setTopP(String? value) {
     if (value == null) return;
     state.whenData((s) => state = AsyncValue.data(
-      s.copyWith(topP: double.tryParse(value) ?? FormConsts.defaultTopP)));
+        s.copyWith(topP: double.tryParse(value) ?? FormConsts.defaultTopP)));
   }
+
   void setPresencePenalty(String? value) {
     if (value == null) return;
-    state.whenData((s) => state =
-      AsyncValue.data(s.copyWith(
-          presencePenalty:
-              double.tryParse(value) ?? FormConsts.defaultPresencePenalty)));
+    state.whenData((s) => state = AsyncValue.data(s.copyWith(
+        presencePenalty:
+            double.tryParse(value) ?? FormConsts.defaultPresencePenalty)));
   }
+
   void setFrequencyPenalty(String? value) {
     if (value == null) return;
-    state.whenData((s) => state =
-      AsyncValue.data(s.copyWith(
-          frequencyPenalty:
-              double.tryParse(value) ?? FormConsts.defaultFrequencyPenalty)));
+    state.whenData((s) => state = AsyncValue.data(s.copyWith(
+        frequencyPenalty:
+            double.tryParse(value) ?? FormConsts.defaultFrequencyPenalty)));
   }
 
   // 画像選択処理
@@ -78,8 +84,8 @@ class CreatePostViewModel extends _$CreatePostViewModel {
       return;
     }
     // state内のpickedImageを更新
-    state.whenData(
-        (s) => state = AsyncValue.data(s.copyWith(pickedImage: base64Encode(result))));
+    state.whenData((s) =>
+        state = AsyncValue.data(s.copyWith(pickedImage: base64Encode(result))));
   }
 
   // 投稿ボタン押下時の処理
@@ -128,7 +134,8 @@ class CreatePostViewModel extends _$CreatePostViewModel {
       final result = await repository.putObject(request);
 
       final success = await result.when<Future<bool>>(
-          success: (res) async => await _createPost(postId, fileName, currentState),
+          success: (res) async =>
+              await _createPost(postId, fileName, currentState),
           failure: (e) async {
             UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
             return false;
@@ -155,7 +162,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
   Future<bool> _createPost(
       String postId, String fileName, CreatePostState postState) async {
     final repository = FirestoreRepository();
-     final currentUid = ref.read(streamAuthUidProvider).value;
+    final currentUid = ref.read(streamAuthUidProvider).value;
     if (currentUid == null) return false;
 
     final postRef = DocRefCore.post(currentUid, postId);

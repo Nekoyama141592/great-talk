@@ -10,7 +10,7 @@ class AdminPage extends HookConsumerWidget {
   });
   static const path = "/admin";
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(adminViewModelProvider);
     const style = TextStyle(fontSize: 20.0);
     return Scaffold(

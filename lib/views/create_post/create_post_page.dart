@@ -60,25 +60,19 @@ class CreatePostPage extends ConsumerWidget {
               const SizedBox(width: 16),
               const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(FormConsts.imageLabel),
-                  ToGeneratePageButton()
-                ],
+                children: [Text(FormConsts.imageLabel), ToGeneratePageButton()],
               )
             ],
           )
         : InkWell(
             onTap: viewModel.onImagePickButtonPressed,
             child: SizedBox(
-                width: 100.0,
-                height: 100.0,
-                child: Image.memory(imageBytes)),
+                width: 100.0, height: 100.0, child: Image.memory(imageBytes)),
           );
   }
 
   // 送信ボタンウィジェット
-  Widget _positiveButton(
-      BuildContext context, WidgetRef ref, bool isLoading) {
+  Widget _positiveButton(BuildContext context, WidgetRef ref, bool isLoading) {
     return RoundedButton(
         text: "送信",
         // ローディング中はnullを渡し、ボタンを非活性化
@@ -94,7 +88,9 @@ class CreatePostPage extends ConsumerWidget {
       return;
     }
     form.save();
-    await ref.read(createPostViewModelProvider.notifier).onPositiveButtonPressed();
+    await ref
+        .read(createPostViewModelProvider.notifier)
+        .onPositiveButtonPressed();
   }
 
   // 投稿フォーム全体
@@ -114,10 +110,14 @@ class CreatePostPage extends ConsumerWidget {
                     state?.systemPrompt ?? FormConsts.defaultSystemPrompt),
                 ..._descriptionTextField(viewModel, state?.description ?? ''),
                 ..._titleTextField(viewModel, state?.title ?? ''),
-                ..._temperatureNumberField(viewModel,
-                    state?.temperature.toString() ?? FormConsts.defaultTemperature.toString()),
-                ..._topPNumberField(viewModel,
-                    state?.topP.toString() ?? FormConsts.defaultTopP.toString()),
+                ..._temperatureNumberField(
+                    viewModel,
+                    state?.temperature.toString() ??
+                        FormConsts.defaultTemperature.toString()),
+                ..._topPNumberField(
+                    viewModel,
+                    state?.topP.toString() ??
+                        FormConsts.defaultTopP.toString()),
                 ..._presencePenaltyNumberField(
                     viewModel,
                     state?.presencePenalty.toString() ??
@@ -262,7 +262,8 @@ class CreatePostPage extends ConsumerWidget {
           title: "PresencePenalty", helpMsg: FormConsts.presencePenaltyHelpMsg),
       OriginalForm(
         initialValue: initialValue,
-        keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+        keyboardType:
+            const TextInputType.numberWithOptions(decimal: true, signed: true),
         onSaved: viewModel.setPresencePenalty,
         validator: (value) {
           final result = double.tryParse(value!);
@@ -286,7 +287,8 @@ class CreatePostPage extends ConsumerWidget {
           helpMsg: FormConsts.frequencyPenaltyHelpMsg),
       OriginalForm(
         initialValue: initialValue,
-        keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+        keyboardType:
+            const TextInputType.numberWithOptions(decimal: true, signed: true),
         onSaved: viewModel.setFrequencyPenalty,
         validator: (value) {
           final result = double.tryParse(value!);

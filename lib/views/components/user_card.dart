@@ -22,7 +22,7 @@ class UserCard extends ConsumerWidget {
   final Uint8List? uint8list;
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
         padding: EdgeInsets.all(defaultPadding(context)),
         child: (publicUser.isInappropriate())
@@ -31,7 +31,8 @@ class UserCard extends ConsumerWidget {
                 child: MosaicCard(
                     child: MosaicUserChild(
                   publicUser: publicUser,
-                  msg: publicUser.inappropriateReason(ref.watch(streamAuthUidProvider).value),
+                  msg: publicUser.inappropriateReason(
+                      ref.watch(streamAuthUidProvider).value),
                   title: "不適切なユーザー",
                 )))
             : Obx(

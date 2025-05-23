@@ -46,9 +46,10 @@ class RemoteConfigNotifier extends _$RemoteConfigNotifier {
         ? remoteConfig.getString(maintenanceMsgKey)
         : RemoteConfigConstants.maintenanceMsg;
     final forcedUpdateVersion = remoteConfig.getInt(forcedUpdateVersionKey);
-    final forcedUpdateMsg = (RemoteConfigConstants.appVersion < forcedUpdateVersion)
-        ? remoteConfig.getString(forcedUpdateMsgKey)
-        : RemoteConfigConstants.forcedUpdateMsg;
+    final forcedUpdateMsg =
+        (RemoteConfigConstants.appVersion < forcedUpdateVersion)
+            ? remoteConfig.getString(forcedUpdateMsgKey)
+            : RemoteConfigConstants.forcedUpdateMsg;
     final basicModel = remoteConfig.getString(basicModelKey);
     final premiumModel = remoteConfig.getString(premiumModelKey);
 

@@ -72,16 +72,17 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   }
 
   Widget _image(EditState data, EditViewModel notifier) {
-    final uint8list =
-        data.base64.isNotEmpty ? base64Decode(data.base64) : null;
-    return uint8list != null ? InkWell(
-      onTap: notifier.onImagePickButtonPressed,
-      child: S3Image(
-        uint8list: uint8list,
-        height: 40.0,
-        width: 40.0,
-      ),
-    ) : const SizedBox.shrink();
+    final uint8list = data.base64.isNotEmpty ? base64Decode(data.base64) : null;
+    return uint8list != null
+        ? InkWell(
+            onTap: notifier.onImagePickButtonPressed,
+            child: S3Image(
+              uint8list: uint8list,
+              height: 40.0,
+              width: 40.0,
+            ),
+          )
+        : const SizedBox.shrink();
   }
 
   Widget _positiveButton(EditState data, EditViewModel notifier) {
@@ -113,7 +114,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
             return FormConsts.textLimitMsg(FormConsts.maxUserNameLimit, value);
           } else if (value.invalidField) {
             return FormUiCore.invalidFieldMsg;
-          } 
+          }
           return null;
         },
       ),

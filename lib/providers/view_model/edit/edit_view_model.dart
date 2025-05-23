@@ -62,7 +62,9 @@ class EditViewModel extends _$EditViewModel {
   /// 初期化
   void init() {
     final uint8list = CurrentUserController.to.rxUint8list.value;
-    if (state.value != null && state.value!.base64.isEmpty && uint8list != null) {
+    if (state.value != null &&
+        state.value!.base64.isEmpty &&
+        uint8list != null) {
       state = AsyncData(state.value!.copyWith(base64: base64Encode(uint8list)));
     }
   }
@@ -125,7 +127,8 @@ class EditViewModel extends _$EditViewModel {
     state = AsyncData(s.copyWith(isPicked: false));
   }
 
-  Future<void> _createUserUpdateLog(String fileName, String userName, String bio) async {
+  Future<void> _createUserUpdateLog(
+      String fileName, String userName, String bio) async {
     final uid = ref.read(streamAuthUidProvider).value;
     if (uid == null) return;
     final repository = FirestoreRepository();

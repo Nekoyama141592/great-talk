@@ -22,9 +22,7 @@ FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin(Ref ref) {
 
 /// 通知関連のロジックを管理するNotifier
 @Riverpod(keepAlive: true)
-class Notification extends _$Notification
-    with WidgetsBindingObserver {
-
+class Notification extends _$Notification with WidgetsBindingObserver {
   /// buildメソッドで初期化処理とライフサイクル管理を行う
   @override
   Future<Notification> build() async {
