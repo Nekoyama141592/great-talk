@@ -1,81 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:get/get.dart';
 import 'package:great_talk/core/doubles.dart';
-import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
-import 'package:great_talk/controllers/admin_controller.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/views/components/basic_height_box.dart';
-import 'package:great_talk/views/components/rounded_button.dart';
-import 'package:great_talk/views/create_post/components/form_label.dart';
-import 'package:great_talk/views/create_post/components/original_form.dart';
+import 'package:great_talk/providers/view_model/admin/admin_view_model.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AdminPage extends HookWidget {
+class AdminPage extends HookConsumerWidget {
   const AdminPage({
     super.key,
   });
   static const path = "/admin";
   @override
-  Widget build(BuildContext context) {
-    final controller = Get.put(AdminController());
+  Widget build(BuildContext context,WidgetRef ref) {
+    final asyncValue = ref.watch(adminViewModelProvider);
     const style = TextStyle(fontSize: 20.0);
-    useEffect(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await controller.init();
-      });
-      return;
-    }, []);
     return Scaffold(
       appBar: AppBar(
         title: const Text("管理者専用ページ"),
       ),
       body: Padding(
         padding: EdgeInsets.all(defaultPadding(context)),
-        child: Obx(() => !CurrentUserController.to.isAdmin()
-            ? const SizedBox.shrink()
-            : ListView(
-                children: [
-                  const SelectableText(
-                    "アプリバージョン: ${RemoteConfigConstants.appVersion}",
-                  ),
-                  Obx(() => SelectableText(
-                        "登録ユーザー数 ${controller.userCount}",
-                        style: style,
-                      )),
-                  const Divider(),
-                  Obx(() => SelectableText(
-                        "累計ポスト数 ${controller.postCount}",
-                        style: style,
-                      )),
-                  const Divider(),
-                  Obx(() => SelectableText(
-                        "累計メッセージ数 ${controller.messageCount}",
-                        style: style,
-                      )),
-                  const Divider(),
-                  Obx(() => SelectableText(
-                        "累計検索数 ${controller.searchCount}",
-                        style: style,
-                      )),
-                  const BasicHeightBox(),
-                  const FormLabel(
-                      title: "公式フラグを反転するUID",
-                      helpMsg: FormConsts.updateOfficialHelpMsg),
-                  OriginalForm(
-                    keyboardType: TextInputType.text,
-                    onChanged: controller.setOfficialUid,
-                    validator: (value) {
-                      return (value?.isEmpty ?? true) ? "入力してください" : null;
-                    },
-                  ),
-                  const BasicHeightBox(),
-                  RoundedButton(
-                    text: "実行する",
-                    press: controller.onPositiveButtonPressed,
-                  )
-                ],
-              )),
+        child: asyncValue.when(
+          data: (state) => ListView(
+            children: [
+              const SelectableText(
+                "アプリバージョン: ${RemoteConfigConstants.appVersion}",
+              ),
+              SelectableText(
+                "登録ユーザー数 ${state.userCount}",
+                style: style,
+              ),
+              const Divider(),
+              SelectableText(
+                "累計ポスト数 ${state.postCount}",
+                style: style,
+              ),
+              const Divider(),
+              SelectableText(
+                "累計メッセージ数 ${state.messageCount}",
+                style: style,
+              ),
+              const Divider(),
+              SelectableText(
+                "累計検索数 ${state.searchCount}",
+                style: style,
+              ),
+            ],
+          ),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (e, st) => Center(child: Text('エラーが発生しました: $e')),
+        ),
       ),
     );
   }

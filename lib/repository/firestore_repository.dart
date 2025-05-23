@@ -6,39 +6,43 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 class FirestoreRepository {
   FirestoreClient get client => FirestoreClient();
   // count
-  FutureResult<int> countUsers() async {
+  Future<int?> countUsers() async {
     try {
       final count = await client.countUsers();
-      return Result.success(count);
+      return count;
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return null;
     }
   }
 
-  FutureResult<int> countPosts() async {
+  Future<int?> countPosts() async {
     try {
       final count = await client.countPosts();
-      return Result.success(count);
+      return count;
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return null;
     }
   }
 
-  FutureResult<int> countMessages() async {
+  Future<int?> countMessages() async {
     try {
       final count = await client.countMessages();
-      return Result.success(count);
+      return count;
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return null;
     }
   }
 
-  FutureResult<int> countSearchLogs() async {
+  Future<int?> countSearchLogs() async {
     try {
       final count = await client.countSearchLogs();
-      return Result.success(count);
+      return count;
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return null;
     }
   }
 

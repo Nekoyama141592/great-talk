@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:get/get.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/controllers/abstract/loading_controller.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/detected_image/detected_image.dart';
@@ -13,7 +12,11 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-abstract class DocsController extends LoadingController with CurrentUserMixin {
+abstract class DocsController extends GetxController with CurrentUserMixin {
+  final isLoading = false.obs;
+  bool cannotShow() => isLoading.value;
+  void startLoading() => isLoading(true);
+  void endLoading() => isLoading(false);
   bool get enablePullDown => false;
   bool get requiresValueReset => false; // ページを開くたびに初期化が必要かどうかを判定
   final qDocInfoList = <QDocInfo>[].obs;
