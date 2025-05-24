@@ -13,7 +13,6 @@ import 'package:great_talk/views/screen/gradient_screen.dart';
 import 'package:great_talk/views/screen/profile_screen/components/edit_button.dart';
 import 'package:great_talk/views/screen/profile_screen/components/follow_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
-import 'package:great_talk/views/search_user_posts_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -68,14 +67,6 @@ class ProfileScreen extends ConsumerWidget {
             )),
       Row(
         children: [
-          InkWell(
-            onTap: () => Get.toNamed(
-                SearchUserPostsPage.generatePath(passiveUid)),
-            child: const Icon(
-              Icons.search,
-              size: 40.0,
-            ),
-          ),
           Obx(() => (controller.rxPassiveUser.value?.isOfficial ?? false)
               ? const OfficialMark()
               : const SizedBox.shrink())
