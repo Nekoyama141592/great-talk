@@ -2,6 +2,8 @@ import 'dart:typed_data';
 
 import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
@@ -36,7 +38,33 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   }
   DocsType get type;
 
-  MapQuery setQuery();
+  // Query
+  String passiveUid() => Get.parameters['uid']!;
+  MapQuery setQuery() {
+    switch (type) {
+      case DocsType.bookmarks:
+        final token = CurrentUserController.to.bookmarkCategoryTokens
+        .firstWhere((element) => element.id == Get.parameters["categoryId"]);
+        return QueryCore.bookmarks(token);
+      case DocsType.feeds:
+        return QueryCore.timelines(DocRefCore.user(currentUid()));
+      case DocsType.mutePosts:
+      case DocsType.muteUsers:
+        throw UnimplementedError();
+      case DocsType.newPosts:
+        // 新着投稿用のクエリを返す
+        return QueryCore.postsByNewest();
+      case DocsType.rankingPosts:
+        // ランキング投稿用のクエリを返す
+        return QueryCore.postsByMsgCount();
+      case DocsType.userProfiles:
+        // ユーザープロフィール用のクエリを返す
+        return QueryCore.userPostsByNewest(passiveUid());
+      case DocsType.rankingUsers:
+        // ランキングユーザー用のクエリを返す
+        return QueryCore.usersByFollowerCount();
+    }
+  }
 
   Future<void> _updateDocInfoList(List<QDoc> elements,
       {bool front = false}) async {

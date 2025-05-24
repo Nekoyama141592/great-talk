@@ -4,11 +4,9 @@ import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/core/strings.dart';
-import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
-import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
@@ -17,18 +15,12 @@ import 'package:great_talk/utility/file_utility.dart';
 
 class UserProfileController extends DocsController {
   static UserProfileController get to => Get.find<UserProfileController>();
-  String passiveUid() => Get.parameters['uid']!;
   @override
   DocsType get type => DocsType.userProfiles;
   @override
   Future<void> init() async {
     await _getPassiveUser();
     return super.init();
-  }
-
-  @override
-  MapQuery setQuery() {
-    return QueryCore.userPostsByNewest(passiveUid());
   }
 
   Future<void> _getPassiveUser() async {
