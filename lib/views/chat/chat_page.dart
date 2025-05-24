@@ -123,6 +123,8 @@ class ChatPage extends HookConsumerWidget {
                               isAnotherDay: isAnotherDay(messages, index),
                               text: text,
                               createdAt: message.typedCreatedAt(),
+                              postImage:
+                                  image != null ? base64Decode(image) : null,
                             );
                           }
                         }),
