@@ -28,15 +28,15 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   String firestoreSearchTerm = "";
   late MapQuery initialQuery;
   @override
-  void onInit() {
+  void onInit() async {
     query = setQuery();
+    await onReload();
     super.onInit();
   }
 
   MapQuery setQuery();
 
   void addAllDocs(List<QDoc> elements) async {
-    if (isLoading.value) return;
     startLoading();
     final docIds = qDocInfoList.map((e) => e.qDoc.id).toList();
     final uids = elements.map((e) => e.data()['uid'] as String).toList();
@@ -107,7 +107,9 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   Future<void> fetchDocs() async {
     try {
       final elements = await query.get();
+      print(elements.docs.length);
       addAllDocs(elements.docs);
+      print(qDocInfoList.length);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     }
