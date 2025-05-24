@@ -19,6 +19,8 @@ class UserProfileController extends DocsController {
   static UserProfileController get to => Get.find<UserProfileController>();
   String passiveUid() => Get.parameters['uid']!;
   @override
+  DocsType get type => DocsType.userProfiles;
+  @override
   Future<void> init() async {
     await _getPassiveUser();
     return super.init();

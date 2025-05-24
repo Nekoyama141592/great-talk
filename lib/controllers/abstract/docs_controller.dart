@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:get/get.dart';
+import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
@@ -33,6 +34,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
     await onReload();
     super.onInit();
   }
+  DocsType get type;
 
   MapQuery setQuery();
 

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
@@ -14,6 +15,8 @@ class MuteUsersController extends DocsController {
   @override
   bool get requiresValueReset => true;
   static MuteUsersController get to => Get.find<MuteUsersController>();
+  @override
+  DocsType get type => DocsType.muteUsers;
   @override
   MapQuery setQuery() {
     final requestUids = _createRequestUids();
