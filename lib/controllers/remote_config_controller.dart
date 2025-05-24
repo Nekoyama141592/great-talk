@@ -1,18 +1,14 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
-import 'package:great_talk/model/global/remote_config/chat_limit_per_day/chat_limit_per_day.dart';
 
 class RemoteConfigController extends GetxController {
   static RemoteConfigController get to => Get.find<RemoteConfigController>();
-  ChatLimitPerDay chatLimitPerDay = const ChatLimitPerDay();
   // iosとAndroidで分ける
   final maintenanceMode = false.obs;
   final maintenanceMsg = RemoteConfigConstants.maintenanceMsg.obs;
   final forcedUpdateVersion = RemoteConfigConstants.appVersion.obs;
   final forcedUpdateMsg = RemoteConfigConstants.forcedUpdateMsg.obs;
-  final basicModel = RemoteConfigConstants.basicModel.obs;
-  final premiumModel = RemoteConfigConstants.premiumModel.obs;
   bool get needsUpdate =>
       RemoteConfigConstants.appVersion < forcedUpdateVersion.value;
   @override
@@ -26,10 +22,6 @@ class RemoteConfigController extends GetxController {
       minimumFetchInterval: const Duration(seconds: 15),
     ));
     // keyの設定
-    // チャット数制限
-    const freeLimitPerDayKey = RemoteConfigConstants.freeLimitPerDayKey;
-    const basicLimitPerDayKey = RemoteConfigConstants.basicLimitPerDayKey;
-    const premiumLimitPerDayKey = RemoteConfigConstants.premiumLimitPerDayKey;
     // メンテナンス
     final maintenanceModeKey = RemoteConfigConstants.maintenanceModeKey;
     final maintenanceMsgKey = RemoteConfigConstants.maintenanceMsgKey;
@@ -40,9 +32,6 @@ class RemoteConfigController extends GetxController {
     const premiumModelKey = RemoteConfigConstants.premiumModelKey;
     // アプリ内デフォルトパラメータ値の設定
     await remoteConfig.setDefaults({
-      freeLimitPerDayKey: RemoteConfigConstants.freeLimitPerDay,
-      basicLimitPerDayKey: RemoteConfigConstants.basicLimitPerDay,
-      premiumLimitPerDayKey: RemoteConfigConstants.premiumLimitPerDay,
       maintenanceModeKey: false,
       maintenanceMsgKey: RemoteConfigConstants.maintenanceMsg,
       forcedUpdateVersionKey: RemoteConfigConstants.appVersion,
@@ -64,13 +53,6 @@ class RemoteConfigController extends GetxController {
     if (needsUpdate) {
       forcedUpdateMsg(remoteConfig.getString(forcedUpdateMsgKey));
     }
-    chatLimitPerDay = ChatLimitPerDay(
-      basic: remoteConfig.getInt(basicLimitPerDayKey),
-      free: remoteConfig.getInt(freeLimitPerDayKey),
-      premium: remoteConfig.getInt(premiumLimitPerDayKey),
-    );
-    basicModel.value = remoteConfig.getString(basicModelKey);
-    premiumModel.value = remoteConfig.getString(premiumModelKey);
     super.onInit();
   }
 }

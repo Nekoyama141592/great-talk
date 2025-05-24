@@ -4,12 +4,12 @@ import 'dart:io';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
+import 'package:great_talk/consts/remote_config_constants.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/purchase_constants.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/remote_config_controller.dart';
 import 'package:great_talk/consts/delegates/payment_queue_delegate.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/consts/iap_constants/mock_product_list.dart';
@@ -315,8 +315,8 @@ class PurchasesController extends GetxController with CurrentUserMixin {
       : ChatGPTConstants.gptTurboMaxToken;
   ChatModel model() {
     final model = isPremiumSubscribing()
-        ? RemoteConfigController.to.premiumModel.value
-        : RemoteConfigController.to.basicModel.value;
+        ? RemoteConfigConstants.premiumModel
+        : RemoteConfigConstants.basicModel;
     return ChatModelFromValue(model: model);
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
-import 'package:great_talk/controllers/remote_config_controller.dart';
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 import 'package:great_talk/views/main/subscribe/components/plan_description.dart';
 import 'package:great_talk/views/main/subscribe/components/product_card.dart';
@@ -33,16 +32,7 @@ class ProductList extends StatelessWidget {
                     ])
               : ProductCard(productDetails: productDetails, descriptions: [
                   const PlanDescription(text: 'ベーシックプランの全ての機能'),
-                  Obx(() {
-                    final remoteConfigController = RemoteConfigController.to;
-                    final basic = remoteConfigController.basicModel.value;
-                    final premium = remoteConfigController.premiumModel.value;
-                    if (basic == premium) {
-                      return const SizedBox.shrink();
-                    } else {
-                      return PlanDescription(text: "モデルが$basicから$premiumに!");
-                    }
-                  }),
+                  const PlanDescription(text: "モデルの性能が向上!"),
                   const PlanDescription(text: '画像を生成するAI'),
                 ]);
         },
