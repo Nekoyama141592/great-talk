@@ -20,7 +20,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   void startLoading() => isLoading(true);
   void endLoading() => isLoading(false);
   final isLoading = false.obs;
-  bool get requiresValueReset => true; // ページを開くたびに初期化が必要かどうかを判定
+  bool get requiresValueReset => false; // ページを開くたびに初期化が必要かどうかを判定
   final qDocInfoList = <QDocInfo>[].obs;
   final isInit = false.obs;
   List<QDoc> indexDocs = [];
