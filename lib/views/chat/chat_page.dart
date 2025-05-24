@@ -53,11 +53,13 @@ class ChatPage extends HookConsumerWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
         // AsyncValue.when を使って、ローディング・エラー・データ表示を切り替える
         body: chatStateAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (err, stack) => Center(child: Text('エラーが発生しました: $err')),
+          error: (err, stack) => Scaffold(
+            appBar: AppBar(),
+            body: Center(child: Text('エラーが発生しました: $stack'),
+          )),
           data: (ChatState data) {
             final Post post = data.post;
             final List<TextMessage> messages = data.messages;

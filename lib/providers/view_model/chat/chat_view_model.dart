@@ -4,7 +4,6 @@ import 'dart:typed_data';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 import 'package:great_talk/consts/form_consts.dart';
@@ -18,7 +17,6 @@ import 'package:great_talk/model/database_schema/bookmark_category/bookmark_cate
 import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
-import 'package:great_talk/providers/global/local_setting/local_setting.dart';
 import 'package:great_talk/providers/overrides/prefs_provider.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
@@ -232,12 +230,6 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   ChatState _processDescriptionMessage(ChatState currentState) {
-    if (currentState.messages.isEmpty &&
-        ref.read(localSettingProvider).needFirstMessage) {
-      final descriptionMessage = _newTextMessage(
-          currentState.post.typedDescription().value, currentState.post.postId);
-      return currentState.copyWith(messages: [descriptionMessage]);
-    }
     return currentState;
   }
 

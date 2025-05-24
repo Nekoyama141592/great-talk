@@ -9,6 +9,7 @@ part 'remote_config_provider.g.dart';
 class RemoteConfigNotifier extends _$RemoteConfigNotifier {
   @override
   FutureOr<RemoteConfigState> build() async {
+    return RemoteConfigState();
     final remoteConfig = FirebaseRemoteConfig.instance;
 
     await remoteConfig.setConfigSettings(RemoteConfigSettings(
