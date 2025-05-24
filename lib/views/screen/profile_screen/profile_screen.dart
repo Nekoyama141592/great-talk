@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/controllers/abstract/profile_controller.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/utility/style_utility.dart';
@@ -17,8 +17,9 @@ import 'package:great_talk/views/search_user_posts_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProfileScreen extends ConsumerWidget {
-  const ProfileScreen({super.key, required this.controller});
-  final ProfileController controller;
+  const ProfileScreen({super.key, required this.controller,required this.passiveUid});
+  final DocsController controller;
+  final String passiveUid;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final children = <Widget>[
@@ -69,7 +70,7 @@ class ProfileScreen extends ConsumerWidget {
         children: [
           InkWell(
             onTap: () => Get.toNamed(
-                SearchUserPostsPage.generatePath(controller.passiveUid())),
+                SearchUserPostsPage.generatePath(passiveUid)),
             child: const Icon(
               Icons.search,
               size: 40.0,
