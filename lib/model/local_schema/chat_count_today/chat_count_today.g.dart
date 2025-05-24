@@ -13,7 +13,4 @@ _ChatCountToday _$ChatCountTodayFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$ChatCountTodayToJson(_ChatCountToday instance) =>
-    <String, dynamic>{
-      'basic': instance.basic,
-      'premium': instance.premium,
-    };
+    <String, dynamic>{'basic': instance.basic, 'premium': instance.premium};

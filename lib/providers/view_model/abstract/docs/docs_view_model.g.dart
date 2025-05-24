@@ -12,14 +12,15 @@ String _$docsViewModelHash() => r'6ab9d3525782b68d856c9ea7cc9b63a4a684e7fd';
 @ProviderFor(DocsViewModel)
 final docsViewModelProvider =
     AutoDisposeNotifierProvider<DocsViewModel, List<QDocInfo>>.internal(
-  DocsViewModel.new,
-  name: r'docsViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$docsViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      DocsViewModel.new,
+      name: r'docsViewModelProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$docsViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$DocsViewModel = AutoDisposeNotifier<List<QDocInfo>>;
 // ignore_for_file: type=lint

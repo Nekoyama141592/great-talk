@@ -7,17 +7,19 @@ part of 'generate_image_response.dart';
 // **************************************************************************
 
 _GenerateImageResponse _$GenerateImageResponseFromJson(
-        Map<String, dynamic> json) =>
-    _GenerateImageResponse(
-      data: (json['data'] as List<dynamic>?)
-          ?.map((e) => e == null
-              ? null
-              : GenerateImageData.fromJson(e as Map<String, dynamic>))
+  Map<String, dynamic> json,
+) => _GenerateImageResponse(
+  data:
+      (json['data'] as List<dynamic>?)
+          ?.map(
+            (e) =>
+                e == null
+                    ? null
+                    : GenerateImageData.fromJson(e as Map<String, dynamic>),
+          )
           .toList(),
-    );
+);
 
 Map<String, dynamic> _$GenerateImageResponseToJson(
-        _GenerateImageResponse instance) =>
-    <String, dynamic>{
-      'data': instance.data,
-    };
+  _GenerateImageResponse instance,
+) => <String, dynamic>{'data': instance.data};

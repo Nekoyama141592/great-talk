@@ -15,46 +15,47 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$GenerateImageData {
-  String get url;
 
-  /// Create a copy of GenerateImageData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $GenerateImageDataCopyWith<GenerateImageData> get copyWith =>
-      _$GenerateImageDataCopyWithImpl<GenerateImageData>(
-          this as GenerateImageData, _$identity);
+ String get url;
+/// Create a copy of GenerateImageData
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$GenerateImageDataCopyWith<GenerateImageData> get copyWith => _$GenerateImageDataCopyWithImpl<GenerateImageData>(this as GenerateImageData, _$identity);
 
   /// Serializes this GenerateImageData to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is GenerateImageData &&
-            (identical(other.url, url) || other.url == url));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, url);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GenerateImageData&&(identical(other.url, url) || other.url == url));
+}
 
-  @override
-  String toString() {
-    return 'GenerateImageData(url: $url)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,url);
+
+@override
+String toString() {
+  return 'GenerateImageData(url: $url)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $GenerateImageDataCopyWith<$Res> {
-  factory $GenerateImageDataCopyWith(
-          GenerateImageData value, $Res Function(GenerateImageData) _then) =
-      _$GenerateImageDataCopyWithImpl;
-  @useResult
-  $Res call({String url});
-}
+abstract mixin class $GenerateImageDataCopyWith<$Res>  {
+  factory $GenerateImageDataCopyWith(GenerateImageData value, $Res Function(GenerateImageData) _then) = _$GenerateImageDataCopyWithImpl;
+@useResult
+$Res call({
+ String url
+});
 
+
+
+
+}
 /// @nodoc
 class _$GenerateImageDataCopyWithImpl<$Res>
     implements $GenerateImageDataCopyWith<$Res> {
@@ -63,76 +64,67 @@ class _$GenerateImageDataCopyWithImpl<$Res>
   final GenerateImageData _self;
   final $Res Function(GenerateImageData) _then;
 
-  /// Create a copy of GenerateImageData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? url = null,
-  }) {
-    return _then(_self.copyWith(
-      url: null == url
-          ? _self.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Create a copy of GenerateImageData
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? url = null,}) {
+  return _then(_self.copyWith(
+url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
+
+}
+
 
 /// @nodoc
 @JsonSerializable()
+
 class _GenerateImageData implements GenerateImageData {
   const _GenerateImageData({required this.url});
-  factory _GenerateImageData.fromJson(Map<String, dynamic> json) =>
-      _$GenerateImageDataFromJson(json);
+  factory _GenerateImageData.fromJson(Map<String, dynamic> json) => _$GenerateImageDataFromJson(json);
 
-  @override
-  final String url;
+@override final  String url;
 
-  /// Create a copy of GenerateImageData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$GenerateImageDataCopyWith<_GenerateImageData> get copyWith =>
-      __$GenerateImageDataCopyWithImpl<_GenerateImageData>(this, _$identity);
+/// Create a copy of GenerateImageData
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$GenerateImageDataCopyWith<_GenerateImageData> get copyWith => __$GenerateImageDataCopyWithImpl<_GenerateImageData>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$GenerateImageDataToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$GenerateImageDataToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _GenerateImageData &&
-            (identical(other.url, url) || other.url == url));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GenerateImageData&&(identical(other.url, url) || other.url == url));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, url);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,url);
 
-  @override
-  String toString() {
-    return 'GenerateImageData(url: $url)';
-  }
+@override
+String toString() {
+  return 'GenerateImageData(url: $url)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$GenerateImageDataCopyWith<$Res>
-    implements $GenerateImageDataCopyWith<$Res> {
-  factory _$GenerateImageDataCopyWith(
-          _GenerateImageData value, $Res Function(_GenerateImageData) _then) =
-      __$GenerateImageDataCopyWithImpl;
-  @override
-  @useResult
-  $Res call({String url});
-}
+abstract mixin class _$GenerateImageDataCopyWith<$Res> implements $GenerateImageDataCopyWith<$Res> {
+  factory _$GenerateImageDataCopyWith(_GenerateImageData value, $Res Function(_GenerateImageData) _then) = __$GenerateImageDataCopyWithImpl;
+@override @useResult
+$Res call({
+ String url
+});
 
+
+
+
+}
 /// @nodoc
 class __$GenerateImageDataCopyWithImpl<$Res>
     implements _$GenerateImageDataCopyWith<$Res> {
@@ -141,20 +133,16 @@ class __$GenerateImageDataCopyWithImpl<$Res>
   final _GenerateImageData _self;
   final $Res Function(_GenerateImageData) _then;
 
-  /// Create a copy of GenerateImageData
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? url = null,
-  }) {
-    return _then(_GenerateImageData(
-      url: null == url
-          ? _self.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Create a copy of GenerateImageData
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? url = null,}) {
+  return _then(_GenerateImageData(
+url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
 }
 
 // dart format on

@@ -12,14 +12,15 @@ String _$termsNotifierHash() => r'c30173d500e885a628613d8ce1ef482b90a69687';
 @ProviderFor(TermsNotifier)
 final termsNotifierProvider =
     AutoDisposeNotifierProvider<TermsNotifier, bool>.internal(
-  TermsNotifier.new,
-  name: r'termsNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$termsNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      TermsNotifier.new,
+      name: r'termsNotifierProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$termsNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$TermsNotifier = AutoDisposeNotifier<bool>;
 // ignore_for_file: type=lint

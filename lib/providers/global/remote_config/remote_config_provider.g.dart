@@ -13,14 +13,15 @@ String _$remoteConfigNotifierHash() =>
 @ProviderFor(RemoteConfigNotifier)
 final remoteConfigNotifierProvider =
     AsyncNotifierProvider<RemoteConfigNotifier, RemoteConfigState>.internal(
-  RemoteConfigNotifier.new,
-  name: r'remoteConfigNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$remoteConfigNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      RemoteConfigNotifier.new,
+      name: r'remoteConfigNotifierProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$remoteConfigNotifierHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$RemoteConfigNotifier = AsyncNotifier<RemoteConfigState>;
 // ignore_for_file: type=lint

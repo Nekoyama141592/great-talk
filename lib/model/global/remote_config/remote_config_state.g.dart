@@ -8,10 +8,12 @@ part of 'remote_config_state.dart';
 
 _RemoteConfigState _$RemoteConfigStateFromJson(Map<String, dynamic> json) =>
     _RemoteConfigState(
-      chatLimitPerDay: json['chatLimitPerDay'] == null
-          ? const ChatLimitPerDay()
-          : ChatLimitPerDay.fromJson(
-              json['chatLimitPerDay'] as Map<String, dynamic>),
+      chatLimitPerDay:
+          json['chatLimitPerDay'] == null
+              ? const ChatLimitPerDay()
+              : ChatLimitPerDay.fromJson(
+                json['chatLimitPerDay'] as Map<String, dynamic>,
+              ),
       maintenanceMode: json['maintenanceMode'] as bool? ?? false,
       maintenanceMsg: json['maintenanceMsg'] as String? ?? '',
       forcedUpdateVersion: (json['forcedUpdateVersion'] as num?)?.toInt() ?? 0,

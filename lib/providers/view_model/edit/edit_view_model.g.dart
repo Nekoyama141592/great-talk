@@ -12,14 +12,15 @@ String _$editViewModelHash() => r'd4cd7200d89c5a96509d7e5e324b24dd733b69da';
 @ProviderFor(EditViewModel)
 final editViewModelProvider =
     AutoDisposeAsyncNotifierProvider<EditViewModel, EditState>.internal(
-  EditViewModel.new,
-  name: r'editViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$editViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      EditViewModel.new,
+      name: r'editViewModelProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$editViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$EditViewModel = AutoDisposeAsyncNotifier<EditState>;
 // ignore_for_file: type=lint

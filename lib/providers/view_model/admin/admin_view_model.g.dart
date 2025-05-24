@@ -12,14 +12,15 @@ String _$adminViewModelHash() => r'ba6872a9cc607961f726b202fb682ed5076f1697';
 @ProviderFor(AdminViewModel)
 final adminViewModelProvider =
     AutoDisposeAsyncNotifierProvider<AdminViewModel, AdminState>.internal(
-  AdminViewModel.new,
-  name: r'adminViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$adminViewModelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      AdminViewModel.new,
+      name: r'adminViewModelProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$adminViewModelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$AdminViewModel = AutoDisposeAsyncNotifier<AdminState>;
 // ignore_for_file: type=lint

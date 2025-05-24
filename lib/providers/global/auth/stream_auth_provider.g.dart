@@ -13,9 +13,10 @@ String _$streamAuthUidHash() => r'36c79485caf31f5a79b8d9a590d15e2411a5c3b3';
 final streamAuthUidProvider = StreamProvider<String?>.internal(
   streamAuthUid,
   name: r'streamAuthUidProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$streamAuthUidHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$streamAuthUidHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

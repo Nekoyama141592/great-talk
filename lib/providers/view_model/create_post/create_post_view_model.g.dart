@@ -12,12 +12,15 @@ String _$createPostViewModelHash() =>
 /// See also [CreatePostViewModel].
 @ProviderFor(CreatePostViewModel)
 final createPostViewModelProvider = AutoDisposeAsyncNotifierProvider<
-    CreatePostViewModel, CreatePostState>.internal(
+  CreatePostViewModel,
+  CreatePostState
+>.internal(
   CreatePostViewModel.new,
   name: r'createPostViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$createPostViewModelHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$createPostViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

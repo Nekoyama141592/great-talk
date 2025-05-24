@@ -16,19 +16,20 @@ String _$flutterLocalNotificationsPluginHash() =>
 @ProviderFor(flutterLocalNotificationsPlugin)
 final flutterLocalNotificationsPluginProvider =
     Provider<FlutterLocalNotificationsPlugin>.internal(
-  flutterLocalNotificationsPlugin,
-  name: r'flutterLocalNotificationsPluginProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$flutterLocalNotificationsPluginHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      flutterLocalNotificationsPlugin,
+      name: r'flutterLocalNotificationsPluginProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$flutterLocalNotificationsPluginHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FlutterLocalNotificationsPluginRef
-    = ProviderRef<FlutterLocalNotificationsPlugin>;
+typedef FlutterLocalNotificationsPluginRef =
+    ProviderRef<FlutterLocalNotificationsPlugin>;
 String _$notificationHash() => r'2c6decc70528033a587ff1200ab708670ae4fa1a';
 
 /// 通知関連のロジックを管理するNotifier
@@ -37,13 +38,15 @@ String _$notificationHash() => r'2c6decc70528033a587ff1200ab708670ae4fa1a';
 @ProviderFor(Notification)
 final notificationProvider =
     AsyncNotifierProvider<Notification, Notification>.internal(
-  Notification.new,
-  name: r'notificationProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$notificationHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      Notification.new,
+      name: r'notificationProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$notificationHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$Notification = AsyncNotifier<Notification>;
 // ignore_for_file: type=lint

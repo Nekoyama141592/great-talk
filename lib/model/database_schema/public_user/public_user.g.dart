@@ -7,35 +7,37 @@ part of 'public_user.dart';
 // **************************************************************************
 
 _PublicUser _$PublicUserFromJson(Map<String, dynamic> json) => _PublicUser(
-      accountName: json['accountName'] as String? ?? "",
-      bio: json['bio'] as Map<String, dynamic>,
-      blockCount: (json['blockCount'] as num?)?.toInt() ?? 0,
-      createdAt: json['createdAt'],
-      ethAddress: json['ethAddress'] as String? ?? "",
-      followerCount: (json['followerCount'] as num?)?.toInt() ?? 0,
-      followingCount: (json['followingCount'] as num?)?.toInt() ?? 0,
-      isNFTicon: json['isNFTicon'] as bool? ?? false,
-      isOfficial: json['isOfficial'] as bool? ?? false,
-      isSuspended: json['isSuspended'] as bool? ?? false,
-      links: (json['links'] as List<dynamic>?)
-              ?.map((e) => e as Map<String, dynamic>)
-              .toList() ??
-          const [],
-      muteCount: (json['muteCount'] as num?)?.toInt() ?? 0,
-      postCount: (json['postCount'] as num?)?.toInt() ?? 0,
-      ref: json['ref'],
-      reportCount: (json['reportCount'] as num?)?.toInt() ?? 0,
-      score: (json['score'] as num?)?.toDouble() ?? 0.0,
-      searchToken: json['searchToken'] as Map<String, dynamic>? ?? const {},
-      uid: json['uid'] as String,
-      updatedAt: json['updatedAt'],
-      image: json['image'] as Map<String, dynamic>,
-      userName: json['userName'] as Map<String, dynamic>,
-      walletAddresses: (json['walletAddresses'] as List<dynamic>?)
-              ?.map((e) => e as Map<String, dynamic>)
-              .toList() ??
-          const [],
-    );
+  accountName: json['accountName'] as String? ?? "",
+  bio: json['bio'] as Map<String, dynamic>,
+  blockCount: (json['blockCount'] as num?)?.toInt() ?? 0,
+  createdAt: json['createdAt'],
+  ethAddress: json['ethAddress'] as String? ?? "",
+  followerCount: (json['followerCount'] as num?)?.toInt() ?? 0,
+  followingCount: (json['followingCount'] as num?)?.toInt() ?? 0,
+  isNFTicon: json['isNFTicon'] as bool? ?? false,
+  isOfficial: json['isOfficial'] as bool? ?? false,
+  isSuspended: json['isSuspended'] as bool? ?? false,
+  links:
+      (json['links'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
+          .toList() ??
+      const [],
+  muteCount: (json['muteCount'] as num?)?.toInt() ?? 0,
+  postCount: (json['postCount'] as num?)?.toInt() ?? 0,
+  ref: json['ref'],
+  reportCount: (json['reportCount'] as num?)?.toInt() ?? 0,
+  score: (json['score'] as num?)?.toDouble() ?? 0.0,
+  searchToken: json['searchToken'] as Map<String, dynamic>? ?? const {},
+  uid: json['uid'] as String,
+  updatedAt: json['updatedAt'],
+  image: json['image'] as Map<String, dynamic>,
+  userName: json['userName'] as Map<String, dynamic>,
+  walletAddresses:
+      (json['walletAddresses'] as List<dynamic>?)
+          ?.map((e) => e as Map<String, dynamic>)
+          .toList() ??
+      const [],
+);
 
 Map<String, dynamic> _$PublicUserToJson(_PublicUser instance) =>
     <String, dynamic>{

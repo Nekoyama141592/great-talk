@@ -7,11 +7,7 @@ part of 'put_object_response.dart';
 // **************************************************************************
 
 _PutObjectResponse _$PutObjectResponseFromJson(Map<String, dynamic> json) =>
-    _PutObjectResponse(
-      base64Image: json['base64Image'] as String,
-    );
+    _PutObjectResponse(base64Image: json['base64Image'] as String);
 
 Map<String, dynamic> _$PutObjectResponseToJson(_PutObjectResponse instance) =>
-    <String, dynamic>{
-      'base64Image': instance.base64Image,
-    };
+    <String, dynamic>{'base64Image': instance.base64Image};

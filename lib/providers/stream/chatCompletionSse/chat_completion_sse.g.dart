@@ -39,21 +39,15 @@ class ChatCompletionSseFamily extends Family<AsyncValue<String>> {
   const ChatCompletionSseFamily();
 
   /// See also [chatCompletionSse].
-  ChatCompletionSseProvider call({
-    required ChatCompleteText request,
-  }) {
-    return ChatCompletionSseProvider(
-      request: request,
-    );
+  ChatCompletionSseProvider call({required ChatCompleteText request}) {
+    return ChatCompletionSseProvider(request: request);
   }
 
   @override
   ChatCompletionSseProvider getProviderOverride(
     covariant ChatCompletionSseProvider provider,
   ) {
-    return call(
-      request: provider.request,
-    );
+    return call(request: provider.request);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -74,24 +68,21 @@ class ChatCompletionSseFamily extends Family<AsyncValue<String>> {
 /// See also [chatCompletionSse].
 class ChatCompletionSseProvider extends AutoDisposeStreamProvider<String> {
   /// See also [chatCompletionSse].
-  ChatCompletionSseProvider({
-    required ChatCompleteText request,
-  }) : this._internal(
-          (ref) => chatCompletionSse(
-            ref as ChatCompletionSseRef,
-            request: request,
-          ),
-          from: chatCompletionSseProvider,
-          name: r'chatCompletionSseProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$chatCompletionSseHash,
-          dependencies: ChatCompletionSseFamily._dependencies,
-          allTransitiveDependencies:
-              ChatCompletionSseFamily._allTransitiveDependencies,
-          request: request,
-        );
+  ChatCompletionSseProvider({required ChatCompleteText request})
+    : this._internal(
+        (ref) =>
+            chatCompletionSse(ref as ChatCompletionSseRef, request: request),
+        from: chatCompletionSseProvider,
+        name: r'chatCompletionSseProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$chatCompletionSseHash,
+        dependencies: ChatCompletionSseFamily._dependencies,
+        allTransitiveDependencies:
+            ChatCompletionSseFamily._allTransitiveDependencies,
+        request: request,
+      );
 
   ChatCompletionSseProvider._internal(
     super._createNotifier, {
@@ -150,11 +141,13 @@ mixin ChatCompletionSseRef on AutoDisposeStreamProviderRef<String> {
 }
 
 class _ChatCompletionSseProviderElement
-    extends AutoDisposeStreamProviderElement<String> with ChatCompletionSseRef {
+    extends AutoDisposeStreamProviderElement<String>
+    with ChatCompletionSseRef {
   _ChatCompletionSseProviderElement(super.provider);
 
   @override
   ChatCompleteText get request => (origin as ChatCompletionSseProvider).request;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

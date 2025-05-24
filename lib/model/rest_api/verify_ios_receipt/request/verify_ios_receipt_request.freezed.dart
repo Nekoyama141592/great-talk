@@ -15,47 +15,47 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$VerifyIOSReceiptRequest {
-  String get serverVerificationData;
 
-  /// Create a copy of VerifyIOSReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $VerifyIOSReceiptRequestCopyWith<VerifyIOSReceiptRequest> get copyWith =>
-      _$VerifyIOSReceiptRequestCopyWithImpl<VerifyIOSReceiptRequest>(
-          this as VerifyIOSReceiptRequest, _$identity);
+ String get serverVerificationData;
+/// Create a copy of VerifyIOSReceiptRequest
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$VerifyIOSReceiptRequestCopyWith<VerifyIOSReceiptRequest> get copyWith => _$VerifyIOSReceiptRequestCopyWithImpl<VerifyIOSReceiptRequest>(this as VerifyIOSReceiptRequest, _$identity);
 
   /// Serializes this VerifyIOSReceiptRequest to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is VerifyIOSReceiptRequest &&
-            (identical(other.serverVerificationData, serverVerificationData) ||
-                other.serverVerificationData == serverVerificationData));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, serverVerificationData);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VerifyIOSReceiptRequest&&(identical(other.serverVerificationData, serverVerificationData) || other.serverVerificationData == serverVerificationData));
+}
 
-  @override
-  String toString() {
-    return 'VerifyIOSReceiptRequest(serverVerificationData: $serverVerificationData)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,serverVerificationData);
+
+@override
+String toString() {
+  return 'VerifyIOSReceiptRequest(serverVerificationData: $serverVerificationData)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $VerifyIOSReceiptRequestCopyWith<$Res> {
-  factory $VerifyIOSReceiptRequestCopyWith(VerifyIOSReceiptRequest value,
-          $Res Function(VerifyIOSReceiptRequest) _then) =
-      _$VerifyIOSReceiptRequestCopyWithImpl;
-  @useResult
-  $Res call({String serverVerificationData});
-}
+abstract mixin class $VerifyIOSReceiptRequestCopyWith<$Res>  {
+  factory $VerifyIOSReceiptRequestCopyWith(VerifyIOSReceiptRequest value, $Res Function(VerifyIOSReceiptRequest) _then) = _$VerifyIOSReceiptRequestCopyWithImpl;
+@useResult
+$Res call({
+ String serverVerificationData
+});
 
+
+
+
+}
 /// @nodoc
 class _$VerifyIOSReceiptRequestCopyWithImpl<$Res>
     implements $VerifyIOSReceiptRequestCopyWith<$Res> {
@@ -64,79 +64,67 @@ class _$VerifyIOSReceiptRequestCopyWithImpl<$Res>
   final VerifyIOSReceiptRequest _self;
   final $Res Function(VerifyIOSReceiptRequest) _then;
 
-  /// Create a copy of VerifyIOSReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? serverVerificationData = null,
-  }) {
-    return _then(_self.copyWith(
-      serverVerificationData: null == serverVerificationData
-          ? _self.serverVerificationData
-          : serverVerificationData // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Create a copy of VerifyIOSReceiptRequest
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? serverVerificationData = null,}) {
+  return _then(_self.copyWith(
+serverVerificationData: null == serverVerificationData ? _self.serverVerificationData : serverVerificationData // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
+
+}
+
 
 /// @nodoc
 @JsonSerializable()
+
 class _VerifyIOSReceiptRequest extends VerifyIOSReceiptRequest {
-  const _VerifyIOSReceiptRequest({required this.serverVerificationData})
-      : super._();
-  factory _VerifyIOSReceiptRequest.fromJson(Map<String, dynamic> json) =>
-      _$VerifyIOSReceiptRequestFromJson(json);
+  const _VerifyIOSReceiptRequest({required this.serverVerificationData}): super._();
+  factory _VerifyIOSReceiptRequest.fromJson(Map<String, dynamic> json) => _$VerifyIOSReceiptRequestFromJson(json);
 
-  @override
-  final String serverVerificationData;
+@override final  String serverVerificationData;
 
-  /// Create a copy of VerifyIOSReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$VerifyIOSReceiptRequestCopyWith<_VerifyIOSReceiptRequest> get copyWith =>
-      __$VerifyIOSReceiptRequestCopyWithImpl<_VerifyIOSReceiptRequest>(
-          this, _$identity);
+/// Create a copy of VerifyIOSReceiptRequest
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$VerifyIOSReceiptRequestCopyWith<_VerifyIOSReceiptRequest> get copyWith => __$VerifyIOSReceiptRequestCopyWithImpl<_VerifyIOSReceiptRequest>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$VerifyIOSReceiptRequestToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$VerifyIOSReceiptRequestToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _VerifyIOSReceiptRequest &&
-            (identical(other.serverVerificationData, serverVerificationData) ||
-                other.serverVerificationData == serverVerificationData));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VerifyIOSReceiptRequest&&(identical(other.serverVerificationData, serverVerificationData) || other.serverVerificationData == serverVerificationData));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, serverVerificationData);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,serverVerificationData);
 
-  @override
-  String toString() {
-    return 'VerifyIOSReceiptRequest(serverVerificationData: $serverVerificationData)';
-  }
+@override
+String toString() {
+  return 'VerifyIOSReceiptRequest(serverVerificationData: $serverVerificationData)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$VerifyIOSReceiptRequestCopyWith<$Res>
-    implements $VerifyIOSReceiptRequestCopyWith<$Res> {
-  factory _$VerifyIOSReceiptRequestCopyWith(_VerifyIOSReceiptRequest value,
-          $Res Function(_VerifyIOSReceiptRequest) _then) =
-      __$VerifyIOSReceiptRequestCopyWithImpl;
-  @override
-  @useResult
-  $Res call({String serverVerificationData});
-}
+abstract mixin class _$VerifyIOSReceiptRequestCopyWith<$Res> implements $VerifyIOSReceiptRequestCopyWith<$Res> {
+  factory _$VerifyIOSReceiptRequestCopyWith(_VerifyIOSReceiptRequest value, $Res Function(_VerifyIOSReceiptRequest) _then) = __$VerifyIOSReceiptRequestCopyWithImpl;
+@override @useResult
+$Res call({
+ String serverVerificationData
+});
 
+
+
+
+}
 /// @nodoc
 class __$VerifyIOSReceiptRequestCopyWithImpl<$Res>
     implements _$VerifyIOSReceiptRequestCopyWith<$Res> {
@@ -145,20 +133,16 @@ class __$VerifyIOSReceiptRequestCopyWithImpl<$Res>
   final _VerifyIOSReceiptRequest _self;
   final $Res Function(_VerifyIOSReceiptRequest) _then;
 
-  /// Create a copy of VerifyIOSReceiptRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? serverVerificationData = null,
-  }) {
-    return _then(_VerifyIOSReceiptRequest(
-      serverVerificationData: null == serverVerificationData
-          ? _self.serverVerificationData
-          : serverVerificationData // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Create a copy of VerifyIOSReceiptRequest
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? serverVerificationData = null,}) {
+  return _then(_VerifyIOSReceiptRequest(
+serverVerificationData: null == serverVerificationData ? _self.serverVerificationData : serverVerificationData // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
 }
 
 // dart format on

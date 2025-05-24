@@ -8,11 +8,14 @@ part of 'chat_limit_per_day.dart';
 
 _ChatLimitPerDay _$ChatLimitPerDayFromJson(Map<String, dynamic> json) =>
     _ChatLimitPerDay(
-      basic: (json['basic'] as num?)?.toInt() ??
+      basic:
+          (json['basic'] as num?)?.toInt() ??
           RemoteConfigConstants.basicLimitPerDay,
-      free: (json['free'] as num?)?.toInt() ??
+      free:
+          (json['free'] as num?)?.toInt() ??
           RemoteConfigConstants.freeLimitPerDay,
-      premium: (json['premium'] as num?)?.toInt() ??
+      premium:
+          (json['premium'] as num?)?.toInt() ??
           RemoteConfigConstants.premiumLimitPerDay,
     );
 

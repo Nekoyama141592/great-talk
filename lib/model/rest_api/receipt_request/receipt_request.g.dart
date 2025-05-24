@@ -13,7 +13,4 @@ _ReceiptRequest _$ReceiptRequestFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$ReceiptRequestToJson(_ReceiptRequest instance) =>
-    <String, dynamic>{
-      'data': instance.data,
-      'uid': instance.uid,
-    };
+    <String, dynamic>{'data': instance.data, 'uid': instance.uid};

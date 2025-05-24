@@ -6,7 +6,7 @@ part of 'chat_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatViewModelHash() => r'7e6ca31618f81166d0555be0f8d6dc45abe116fb';
+String _$chatViewModelHash() => r'aebdd311dc83404d2e96f9f8aaa26e3e447a6401';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,14 +29,12 @@ class _SystemHash {
   }
 }
 
-abstract class _$ChatViewModel extends BuildlessAsyncNotifier<ChatState> {
+abstract class _$ChatViewModel
+    extends BuildlessAutoDisposeAsyncNotifier<ChatState> {
   late final String uid;
   late final String postId;
 
-  FutureOr<ChatState> build(
-    String uid,
-    String postId,
-  );
+  FutureOr<ChatState> build(String uid, String postId);
 }
 
 /// See also [ChatViewModel].
@@ -49,24 +47,15 @@ class ChatViewModelFamily extends Family<AsyncValue<ChatState>> {
   const ChatViewModelFamily();
 
   /// See also [ChatViewModel].
-  ChatViewModelProvider call(
-    String uid,
-    String postId,
-  ) {
-    return ChatViewModelProvider(
-      uid,
-      postId,
-    );
+  ChatViewModelProvider call(String uid, String postId) {
+    return ChatViewModelProvider(uid, postId);
   }
 
   @override
   ChatViewModelProvider getProviderOverride(
     covariant ChatViewModelProvider provider,
   ) {
-    return call(
-      provider.uid,
-      provider.postId,
-    );
+    return call(provider.uid, provider.postId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -86,27 +75,26 @@ class ChatViewModelFamily extends Family<AsyncValue<ChatState>> {
 
 /// See also [ChatViewModel].
 class ChatViewModelProvider
-    extends AsyncNotifierProviderImpl<ChatViewModel, ChatState> {
+    extends AutoDisposeAsyncNotifierProviderImpl<ChatViewModel, ChatState> {
   /// See also [ChatViewModel].
-  ChatViewModelProvider(
-    String uid,
-    String postId,
-  ) : this._internal(
-          () => ChatViewModel()
-            ..uid = uid
-            ..postId = postId,
-          from: chatViewModelProvider,
-          name: r'chatViewModelProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$chatViewModelHash,
-          dependencies: ChatViewModelFamily._dependencies,
-          allTransitiveDependencies:
-              ChatViewModelFamily._allTransitiveDependencies,
-          uid: uid,
-          postId: postId,
-        );
+  ChatViewModelProvider(String uid, String postId)
+    : this._internal(
+        () =>
+            ChatViewModel()
+              ..uid = uid
+              ..postId = postId,
+        from: chatViewModelProvider,
+        name: r'chatViewModelProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$chatViewModelHash,
+        dependencies: ChatViewModelFamily._dependencies,
+        allTransitiveDependencies:
+            ChatViewModelFamily._allTransitiveDependencies,
+        uid: uid,
+        postId: postId,
+      );
 
   ChatViewModelProvider._internal(
     super._createNotifier, {
@@ -123,13 +111,8 @@ class ChatViewModelProvider
   final String postId;
 
   @override
-  FutureOr<ChatState> runNotifierBuild(
-    covariant ChatViewModel notifier,
-  ) {
-    return notifier.build(
-      uid,
-      postId,
-    );
+  FutureOr<ChatState> runNotifierBuild(covariant ChatViewModel notifier) {
+    return notifier.build(uid, postId);
   }
 
   @override
@@ -137,9 +120,10 @@ class ChatViewModelProvider
     return ProviderOverride(
       origin: this,
       override: ChatViewModelProvider._internal(
-        () => create()
-          ..uid = uid
-          ..postId = postId,
+        () =>
+            create()
+              ..uid = uid
+              ..postId = postId,
         from: from,
         name: null,
         dependencies: null,
@@ -152,7 +136,8 @@ class ChatViewModelProvider
   }
 
   @override
-  AsyncNotifierProviderElement<ChatViewModel, ChatState> createElement() {
+  AutoDisposeAsyncNotifierProviderElement<ChatViewModel, ChatState>
+  createElement() {
     return _ChatViewModelProviderElement(this);
   }
 
@@ -175,7 +160,7 @@ class ChatViewModelProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin ChatViewModelRef on AsyncNotifierProviderRef<ChatState> {
+mixin ChatViewModelRef on AutoDisposeAsyncNotifierProviderRef<ChatState> {
   /// The parameter `uid` of this provider.
   String get uid;
 
@@ -184,7 +169,7 @@ mixin ChatViewModelRef on AsyncNotifierProviderRef<ChatState> {
 }
 
 class _ChatViewModelProviderElement
-    extends AsyncNotifierProviderElement<ChatViewModel, ChatState>
+    extends AutoDisposeAsyncNotifierProviderElement<ChatViewModel, ChatState>
     with ChatViewModelRef {
   _ChatViewModelProviderElement(super.provider);
 
@@ -193,5 +178,6 @@ class _ChatViewModelProviderElement
   @override
   String get postId => (origin as ChatViewModelProvider).postId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

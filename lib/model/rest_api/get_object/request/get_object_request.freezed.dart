@@ -15,46 +15,47 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$GetObjectRequest {
-  String get object;
 
-  /// Create a copy of GetObjectRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $GetObjectRequestCopyWith<GetObjectRequest> get copyWith =>
-      _$GetObjectRequestCopyWithImpl<GetObjectRequest>(
-          this as GetObjectRequest, _$identity);
+ String get object;
+/// Create a copy of GetObjectRequest
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$GetObjectRequestCopyWith<GetObjectRequest> get copyWith => _$GetObjectRequestCopyWithImpl<GetObjectRequest>(this as GetObjectRequest, _$identity);
 
   /// Serializes this GetObjectRequest to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is GetObjectRequest &&
-            (identical(other.object, object) || other.object == object));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, object);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetObjectRequest&&(identical(other.object, object) || other.object == object));
+}
 
-  @override
-  String toString() {
-    return 'GetObjectRequest(object: $object)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,object);
+
+@override
+String toString() {
+  return 'GetObjectRequest(object: $object)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $GetObjectRequestCopyWith<$Res> {
-  factory $GetObjectRequestCopyWith(
-          GetObjectRequest value, $Res Function(GetObjectRequest) _then) =
-      _$GetObjectRequestCopyWithImpl;
-  @useResult
-  $Res call({String object});
-}
+abstract mixin class $GetObjectRequestCopyWith<$Res>  {
+  factory $GetObjectRequestCopyWith(GetObjectRequest value, $Res Function(GetObjectRequest) _then) = _$GetObjectRequestCopyWithImpl;
+@useResult
+$Res call({
+ String object
+});
 
+
+
+
+}
 /// @nodoc
 class _$GetObjectRequestCopyWithImpl<$Res>
     implements $GetObjectRequestCopyWith<$Res> {
@@ -63,76 +64,67 @@ class _$GetObjectRequestCopyWithImpl<$Res>
   final GetObjectRequest _self;
   final $Res Function(GetObjectRequest) _then;
 
-  /// Create a copy of GetObjectRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? object = null,
-  }) {
-    return _then(_self.copyWith(
-      object: null == object
-          ? _self.object
-          : object // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Create a copy of GetObjectRequest
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? object = null,}) {
+  return _then(_self.copyWith(
+object: null == object ? _self.object : object // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
+
+}
+
 
 /// @nodoc
 @JsonSerializable()
+
 class _GetObjectRequest extends GetObjectRequest {
-  const _GetObjectRequest({required this.object}) : super._();
-  factory _GetObjectRequest.fromJson(Map<String, dynamic> json) =>
-      _$GetObjectRequestFromJson(json);
+  const _GetObjectRequest({required this.object}): super._();
+  factory _GetObjectRequest.fromJson(Map<String, dynamic> json) => _$GetObjectRequestFromJson(json);
 
-  @override
-  final String object;
+@override final  String object;
 
-  /// Create a copy of GetObjectRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$GetObjectRequestCopyWith<_GetObjectRequest> get copyWith =>
-      __$GetObjectRequestCopyWithImpl<_GetObjectRequest>(this, _$identity);
+/// Create a copy of GetObjectRequest
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$GetObjectRequestCopyWith<_GetObjectRequest> get copyWith => __$GetObjectRequestCopyWithImpl<_GetObjectRequest>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$GetObjectRequestToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$GetObjectRequestToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _GetObjectRequest &&
-            (identical(other.object, object) || other.object == object));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetObjectRequest&&(identical(other.object, object) || other.object == object));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, object);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,object);
 
-  @override
-  String toString() {
-    return 'GetObjectRequest(object: $object)';
-  }
+@override
+String toString() {
+  return 'GetObjectRequest(object: $object)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$GetObjectRequestCopyWith<$Res>
-    implements $GetObjectRequestCopyWith<$Res> {
-  factory _$GetObjectRequestCopyWith(
-          _GetObjectRequest value, $Res Function(_GetObjectRequest) _then) =
-      __$GetObjectRequestCopyWithImpl;
-  @override
-  @useResult
-  $Res call({String object});
-}
+abstract mixin class _$GetObjectRequestCopyWith<$Res> implements $GetObjectRequestCopyWith<$Res> {
+  factory _$GetObjectRequestCopyWith(_GetObjectRequest value, $Res Function(_GetObjectRequest) _then) = __$GetObjectRequestCopyWithImpl;
+@override @useResult
+$Res call({
+ String object
+});
 
+
+
+
+}
 /// @nodoc
 class __$GetObjectRequestCopyWithImpl<$Res>
     implements _$GetObjectRequestCopyWith<$Res> {
@@ -141,20 +133,16 @@ class __$GetObjectRequestCopyWithImpl<$Res>
   final _GetObjectRequest _self;
   final $Res Function(_GetObjectRequest) _then;
 
-  /// Create a copy of GetObjectRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? object = null,
-  }) {
-    return _then(_GetObjectRequest(
-      object: null == object
-          ? _self.object
-          : object // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Create a copy of GetObjectRequest
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? object = null,}) {
+  return _then(_GetObjectRequest(
+object: null == object ? _self.object : object // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
 }
 
 // dart format on

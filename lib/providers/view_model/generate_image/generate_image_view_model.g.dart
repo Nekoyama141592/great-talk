@@ -12,12 +12,15 @@ String _$generateImageViewModelHash() =>
 /// See also [GenerateImageViewModel].
 @ProviderFor(GenerateImageViewModel)
 final generateImageViewModelProvider = AutoDisposeAsyncNotifierProvider<
-    GenerateImageViewModel, GenerateImageState>.internal(
+  GenerateImageViewModel,
+  GenerateImageState
+>.internal(
   GenerateImageViewModel.new,
   name: r'generateImageViewModelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$generateImageViewModelHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$generateImageViewModelHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

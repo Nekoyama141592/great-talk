@@ -15,46 +15,47 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$DeleteObjectRequest {
-  String get object;
 
-  /// Create a copy of DeleteObjectRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $DeleteObjectRequestCopyWith<DeleteObjectRequest> get copyWith =>
-      _$DeleteObjectRequestCopyWithImpl<DeleteObjectRequest>(
-          this as DeleteObjectRequest, _$identity);
+ String get object;
+/// Create a copy of DeleteObjectRequest
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DeleteObjectRequestCopyWith<DeleteObjectRequest> get copyWith => _$DeleteObjectRequestCopyWithImpl<DeleteObjectRequest>(this as DeleteObjectRequest, _$identity);
 
   /// Serializes this DeleteObjectRequest to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is DeleteObjectRequest &&
-            (identical(other.object, object) || other.object == object));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, object);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteObjectRequest&&(identical(other.object, object) || other.object == object));
+}
 
-  @override
-  String toString() {
-    return 'DeleteObjectRequest(object: $object)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,object);
+
+@override
+String toString() {
+  return 'DeleteObjectRequest(object: $object)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $DeleteObjectRequestCopyWith<$Res> {
-  factory $DeleteObjectRequestCopyWith(
-          DeleteObjectRequest value, $Res Function(DeleteObjectRequest) _then) =
-      _$DeleteObjectRequestCopyWithImpl;
-  @useResult
-  $Res call({String object});
-}
+abstract mixin class $DeleteObjectRequestCopyWith<$Res>  {
+  factory $DeleteObjectRequestCopyWith(DeleteObjectRequest value, $Res Function(DeleteObjectRequest) _then) = _$DeleteObjectRequestCopyWithImpl;
+@useResult
+$Res call({
+ String object
+});
 
+
+
+
+}
 /// @nodoc
 class _$DeleteObjectRequestCopyWithImpl<$Res>
     implements $DeleteObjectRequestCopyWith<$Res> {
@@ -63,77 +64,67 @@ class _$DeleteObjectRequestCopyWithImpl<$Res>
   final DeleteObjectRequest _self;
   final $Res Function(DeleteObjectRequest) _then;
 
-  /// Create a copy of DeleteObjectRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? object = null,
-  }) {
-    return _then(_self.copyWith(
-      object: null == object
-          ? _self.object
-          : object // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Create a copy of DeleteObjectRequest
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? object = null,}) {
+  return _then(_self.copyWith(
+object: null == object ? _self.object : object // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
+
+}
+
 
 /// @nodoc
 @JsonSerializable()
+
 class _DeleteObjectRequest extends DeleteObjectRequest {
-  const _DeleteObjectRequest({required this.object}) : super._();
-  factory _DeleteObjectRequest.fromJson(Map<String, dynamic> json) =>
-      _$DeleteObjectRequestFromJson(json);
+  const _DeleteObjectRequest({required this.object}): super._();
+  factory _DeleteObjectRequest.fromJson(Map<String, dynamic> json) => _$DeleteObjectRequestFromJson(json);
 
-  @override
-  final String object;
+@override final  String object;
 
-  /// Create a copy of DeleteObjectRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$DeleteObjectRequestCopyWith<_DeleteObjectRequest> get copyWith =>
-      __$DeleteObjectRequestCopyWithImpl<_DeleteObjectRequest>(
-          this, _$identity);
+/// Create a copy of DeleteObjectRequest
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DeleteObjectRequestCopyWith<_DeleteObjectRequest> get copyWith => __$DeleteObjectRequestCopyWithImpl<_DeleteObjectRequest>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$DeleteObjectRequestToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$DeleteObjectRequestToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _DeleteObjectRequest &&
-            (identical(other.object, object) || other.object == object));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeleteObjectRequest&&(identical(other.object, object) || other.object == object));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, object);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,object);
 
-  @override
-  String toString() {
-    return 'DeleteObjectRequest(object: $object)';
-  }
+@override
+String toString() {
+  return 'DeleteObjectRequest(object: $object)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$DeleteObjectRequestCopyWith<$Res>
-    implements $DeleteObjectRequestCopyWith<$Res> {
-  factory _$DeleteObjectRequestCopyWith(_DeleteObjectRequest value,
-          $Res Function(_DeleteObjectRequest) _then) =
-      __$DeleteObjectRequestCopyWithImpl;
-  @override
-  @useResult
-  $Res call({String object});
-}
+abstract mixin class _$DeleteObjectRequestCopyWith<$Res> implements $DeleteObjectRequestCopyWith<$Res> {
+  factory _$DeleteObjectRequestCopyWith(_DeleteObjectRequest value, $Res Function(_DeleteObjectRequest) _then) = __$DeleteObjectRequestCopyWithImpl;
+@override @useResult
+$Res call({
+ String object
+});
 
+
+
+
+}
 /// @nodoc
 class __$DeleteObjectRequestCopyWithImpl<$Res>
     implements _$DeleteObjectRequestCopyWith<$Res> {
@@ -142,20 +133,16 @@ class __$DeleteObjectRequestCopyWithImpl<$Res>
   final _DeleteObjectRequest _self;
   final $Res Function(_DeleteObjectRequest) _then;
 
-  /// Create a copy of DeleteObjectRequest
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? object = null,
-  }) {
-    return _then(_DeleteObjectRequest(
-      object: null == object
-          ? _self.object
-          : object // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Create a copy of DeleteObjectRequest
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? object = null,}) {
+  return _then(_DeleteObjectRequest(
+object: null == object ? _self.object : object // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
 }
 
 // dart format on

@@ -12,12 +12,15 @@ _CreatePostState _$CreatePostStateFromJson(Map<String, dynamic> json) =>
       systemPrompt:
           json['systemPrompt'] as String? ?? FormConsts.defaultSystemPrompt,
       description: json['description'] as String? ?? '',
-      temperature: (json['temperature'] as num?)?.toDouble() ??
+      temperature:
+          (json['temperature'] as num?)?.toDouble() ??
           FormConsts.defaultTemperature,
       topP: (json['topP'] as num?)?.toDouble() ?? FormConsts.defaultTopP,
-      presencePenalty: (json['presencePenalty'] as num?)?.toDouble() ??
+      presencePenalty:
+          (json['presencePenalty'] as num?)?.toDouble() ??
           FormConsts.defaultPresencePenalty,
-      frequencyPenalty: (json['frequencyPenalty'] as num?)?.toDouble() ??
+      frequencyPenalty:
+          (json['frequencyPenalty'] as num?)?.toDouble() ??
           FormConsts.defaultFrequencyPenalty,
       pickedImage: json['pickedImage'] as String?,
     );

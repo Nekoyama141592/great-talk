@@ -12,6 +12,4 @@ _ReceiptResponse _$ReceiptResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$ReceiptResponseToJson(_ReceiptResponse instance) =>
-    <String, dynamic>{
-      'latestReceipt': instance.latestReceipt,
-    };
+    <String, dynamic>{'latestReceipt': instance.latestReceipt};

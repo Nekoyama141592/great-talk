@@ -7,17 +7,17 @@ part of 'private_user.dart';
 // **************************************************************************
 
 _PrivateUser _$PrivateUserFromJson(Map<String, dynamic> json) => _PrivateUser(
-      accessToken: json['accessToken'] as String? ?? "",
-      createdAt: json['createdAt'],
-      ethAddress: json['ethAddress'] as String? ?? "",
-      fcmToken: json['fcmToken'] as String? ?? "",
-      gender: json['gender'] as String? ?? "",
-      ipAddress: json['ipAddress'] as String? ?? "",
-      isAdmin: json['isAdmin'] as bool? ?? false,
-      ref: json['ref'],
-      uid: json['uid'] as String,
-      updatedAt: json['updatedAt'],
-    );
+  accessToken: json['accessToken'] as String? ?? "",
+  createdAt: json['createdAt'],
+  ethAddress: json['ethAddress'] as String? ?? "",
+  fcmToken: json['fcmToken'] as String? ?? "",
+  gender: json['gender'] as String? ?? "",
+  ipAddress: json['ipAddress'] as String? ?? "",
+  isAdmin: json['isAdmin'] as bool? ?? false,
+  ref: json['ref'],
+  uid: json['uid'] as String,
+  updatedAt: json['updatedAt'],
+);
 
 Map<String, dynamic> _$PrivateUserToJson(_PrivateUser instance) =>
     <String, dynamic>{

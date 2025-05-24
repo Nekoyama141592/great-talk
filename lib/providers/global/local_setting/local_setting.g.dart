@@ -12,13 +12,15 @@ String _$localSettingHash() => r'0f3ce46014266c482ed8974366b97f22009c33b6';
 @ProviderFor(LocalSetting)
 final localSettingProvider =
     NotifierProvider<LocalSetting, LocalSettingState>.internal(
-  LocalSetting.new,
-  name: r'localSettingProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$localSettingHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      LocalSetting.new,
+      name: r'localSettingProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$localSettingHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$LocalSetting = Notifier<LocalSettingState>;
 // ignore_for_file: type=lint

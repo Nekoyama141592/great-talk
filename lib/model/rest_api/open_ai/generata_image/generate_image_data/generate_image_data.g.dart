@@ -7,11 +7,7 @@ part of 'generate_image_data.dart';
 // **************************************************************************
 
 _GenerateImageData _$GenerateImageDataFromJson(Map<String, dynamic> json) =>
-    _GenerateImageData(
-      url: json['url'] as String,
-    );
+    _GenerateImageData(url: json['url'] as String);
 
 Map<String, dynamic> _$GenerateImageDataToJson(_GenerateImageData instance) =>
-    <String, dynamic>{
-      'url': instance.url,
-    };
+    <String, dynamic>{'url': instance.url};

@@ -15,50 +15,47 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$LocalSettingState {
-  bool get isDarkTheme;
-  bool get needFirstMessage;
 
-  /// Create a copy of LocalSettingState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $LocalSettingStateCopyWith<LocalSettingState> get copyWith =>
-      _$LocalSettingStateCopyWithImpl<LocalSettingState>(
-          this as LocalSettingState, _$identity);
+ bool get isDarkTheme; bool get needFirstMessage;
+/// Create a copy of LocalSettingState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LocalSettingStateCopyWith<LocalSettingState> get copyWith => _$LocalSettingStateCopyWithImpl<LocalSettingState>(this as LocalSettingState, _$identity);
 
   /// Serializes this LocalSettingState to a JSON map.
   Map<String, dynamic> toJson();
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is LocalSettingState &&
-            (identical(other.isDarkTheme, isDarkTheme) ||
-                other.isDarkTheme == isDarkTheme) &&
-            (identical(other.needFirstMessage, needFirstMessage) ||
-                other.needFirstMessage == needFirstMessage));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isDarkTheme, needFirstMessage);
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LocalSettingState&&(identical(other.isDarkTheme, isDarkTheme) || other.isDarkTheme == isDarkTheme)&&(identical(other.needFirstMessage, needFirstMessage) || other.needFirstMessage == needFirstMessage));
+}
 
-  @override
-  String toString() {
-    return 'LocalSettingState(isDarkTheme: $isDarkTheme, needFirstMessage: $needFirstMessage)';
-  }
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isDarkTheme,needFirstMessage);
+
+@override
+String toString() {
+  return 'LocalSettingState(isDarkTheme: $isDarkTheme, needFirstMessage: $needFirstMessage)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $LocalSettingStateCopyWith<$Res> {
-  factory $LocalSettingStateCopyWith(
-          LocalSettingState value, $Res Function(LocalSettingState) _then) =
-      _$LocalSettingStateCopyWithImpl;
-  @useResult
-  $Res call({bool isDarkTheme, bool needFirstMessage});
-}
+abstract mixin class $LocalSettingStateCopyWith<$Res>  {
+  factory $LocalSettingStateCopyWith(LocalSettingState value, $Res Function(LocalSettingState) _then) = _$LocalSettingStateCopyWithImpl;
+@useResult
+$Res call({
+ bool isDarkTheme, bool needFirstMessage
+});
 
+
+
+
+}
 /// @nodoc
 class _$LocalSettingStateCopyWithImpl<$Res>
     implements $LocalSettingStateCopyWith<$Res> {
@@ -67,90 +64,69 @@ class _$LocalSettingStateCopyWithImpl<$Res>
   final LocalSettingState _self;
   final $Res Function(LocalSettingState) _then;
 
-  /// Create a copy of LocalSettingState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isDarkTheme = null,
-    Object? needFirstMessage = null,
-  }) {
-    return _then(_self.copyWith(
-      isDarkTheme: null == isDarkTheme
-          ? _self.isDarkTheme
-          : isDarkTheme // ignore: cast_nullable_to_non_nullable
-              as bool,
-      needFirstMessage: null == needFirstMessage
-          ? _self.needFirstMessage
-          : needFirstMessage // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Create a copy of LocalSettingState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? isDarkTheme = null,Object? needFirstMessage = null,}) {
+  return _then(_self.copyWith(
+isDarkTheme: null == isDarkTheme ? _self.isDarkTheme : isDarkTheme // ignore: cast_nullable_to_non_nullable
+as bool,needFirstMessage: null == needFirstMessage ? _self.needFirstMessage : needFirstMessage // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
+
+}
+
 
 /// @nodoc
 @JsonSerializable()
+
 class _LocalSettingState extends LocalSettingState {
-  const _LocalSettingState(
-      {this.isDarkTheme = true, this.needFirstMessage = true})
-      : super._();
-  factory _LocalSettingState.fromJson(Map<String, dynamic> json) =>
-      _$LocalSettingStateFromJson(json);
+  const _LocalSettingState({this.isDarkTheme = true, this.needFirstMessage = true}): super._();
+  factory _LocalSettingState.fromJson(Map<String, dynamic> json) => _$LocalSettingStateFromJson(json);
 
-  @override
-  @JsonKey()
-  final bool isDarkTheme;
-  @override
-  @JsonKey()
-  final bool needFirstMessage;
+@override@JsonKey() final  bool isDarkTheme;
+@override@JsonKey() final  bool needFirstMessage;
 
-  /// Create a copy of LocalSettingState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$LocalSettingStateCopyWith<_LocalSettingState> get copyWith =>
-      __$LocalSettingStateCopyWithImpl<_LocalSettingState>(this, _$identity);
+/// Create a copy of LocalSettingState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LocalSettingStateCopyWith<_LocalSettingState> get copyWith => __$LocalSettingStateCopyWithImpl<_LocalSettingState>(this, _$identity);
 
-  @override
-  Map<String, dynamic> toJson() {
-    return _$LocalSettingStateToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$LocalSettingStateToJson(this, );
+}
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _LocalSettingState &&
-            (identical(other.isDarkTheme, isDarkTheme) ||
-                other.isDarkTheme == isDarkTheme) &&
-            (identical(other.needFirstMessage, needFirstMessage) ||
-                other.needFirstMessage == needFirstMessage));
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LocalSettingState&&(identical(other.isDarkTheme, isDarkTheme) || other.isDarkTheme == isDarkTheme)&&(identical(other.needFirstMessage, needFirstMessage) || other.needFirstMessage == needFirstMessage));
+}
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, isDarkTheme, needFirstMessage);
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,isDarkTheme,needFirstMessage);
 
-  @override
-  String toString() {
-    return 'LocalSettingState(isDarkTheme: $isDarkTheme, needFirstMessage: $needFirstMessage)';
-  }
+@override
+String toString() {
+  return 'LocalSettingState(isDarkTheme: $isDarkTheme, needFirstMessage: $needFirstMessage)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class _$LocalSettingStateCopyWith<$Res>
-    implements $LocalSettingStateCopyWith<$Res> {
-  factory _$LocalSettingStateCopyWith(
-          _LocalSettingState value, $Res Function(_LocalSettingState) _then) =
-      __$LocalSettingStateCopyWithImpl;
-  @override
-  @useResult
-  $Res call({bool isDarkTheme, bool needFirstMessage});
-}
+abstract mixin class _$LocalSettingStateCopyWith<$Res> implements $LocalSettingStateCopyWith<$Res> {
+  factory _$LocalSettingStateCopyWith(_LocalSettingState value, $Res Function(_LocalSettingState) _then) = __$LocalSettingStateCopyWithImpl;
+@override @useResult
+$Res call({
+ bool isDarkTheme, bool needFirstMessage
+});
 
+
+
+
+}
 /// @nodoc
 class __$LocalSettingStateCopyWithImpl<$Res>
     implements _$LocalSettingStateCopyWith<$Res> {
@@ -159,25 +135,17 @@ class __$LocalSettingStateCopyWithImpl<$Res>
   final _LocalSettingState _self;
   final $Res Function(_LocalSettingState) _then;
 
-  /// Create a copy of LocalSettingState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? isDarkTheme = null,
-    Object? needFirstMessage = null,
-  }) {
-    return _then(_LocalSettingState(
-      isDarkTheme: null == isDarkTheme
-          ? _self.isDarkTheme
-          : isDarkTheme // ignore: cast_nullable_to_non_nullable
-              as bool,
-      needFirstMessage: null == needFirstMessage
-          ? _self.needFirstMessage
-          : needFirstMessage // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Create a copy of LocalSettingState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? isDarkTheme = null,Object? needFirstMessage = null,}) {
+  return _then(_LocalSettingState(
+isDarkTheme: null == isDarkTheme ? _self.isDarkTheme : isDarkTheme // ignore: cast_nullable_to_non_nullable
+as bool,needFirstMessage: null == needFirstMessage ? _self.needFirstMessage : needFirstMessage // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
 }
 
 // dart format on

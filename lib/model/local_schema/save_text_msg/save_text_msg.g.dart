@@ -7,13 +7,13 @@ part of 'save_text_msg.dart';
 // **************************************************************************
 
 _SaveTextMsg _$SaveTextMsgFromJson(Map<String, dynamic> json) => _SaveTextMsg(
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      id: json['id'] as String,
-      messageType: json['messageType'] as String,
-      posterUid: json['posterUid'] as String,
-      senderUid: json['senderUid'] as String,
-      text: json['text'] as Map<String, dynamic>,
-    );
+  createdAt: DateTime.parse(json['createdAt'] as String),
+  id: json['id'] as String,
+  messageType: json['messageType'] as String,
+  posterUid: json['posterUid'] as String,
+  senderUid: json['senderUid'] as String,
+  text: json['text'] as Map<String, dynamic>,
+);
 
 Map<String, dynamic> _$SaveTextMsgToJson(_SaveTextMsg instance) =>
     <String, dynamic>{

@@ -9,7 +9,8 @@ part of 'detected_image.dart';
 _DetectedImage _$DetectedImageFromJson(Map<String, dynamic> json) =>
     _DetectedImage(
       bucketName: json['bucketName'] as String? ?? "",
-      moderationLabels: (json['moderationLabels'] as List<dynamic>?)
+      moderationLabels:
+          (json['moderationLabels'] as List<dynamic>?)
               ?.map((e) => e as Map<String, dynamic>)
               .toList() ??
           const [],
