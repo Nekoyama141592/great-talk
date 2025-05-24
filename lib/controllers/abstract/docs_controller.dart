@@ -16,23 +16,18 @@ import 'package:great_talk/utility/file_utility.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class DocsController extends GetxController with CurrentUserMixin {
-  final isLoading = false.obs;
   bool cannotShow() => isLoading.value;
   void startLoading() => isLoading(true);
   void endLoading() => isLoading(false);
-  bool get requiresValueReset => false; // ページを開くたびに初期化が必要かどうかを判定
+  final isLoading = false.obs;
+  bool get requiresValueReset => true; // ページを開くたびに初期化が必要かどうかを判定
   final qDocInfoList = <QDocInfo>[].obs;
   final isInit = false.obs;
-  late MapQuery query;
   List<QDoc> indexDocs = [];
   final Rx<PublicUser?> rxPassiveUser = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
-  String searchTerm = "";
-  String firestoreSearchTerm = "";
-  late MapQuery initialQuery;
   @override
   void onInit() async {
-    query = setQuery();
     await onReload();
     super.onInit();
   }
@@ -142,7 +137,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
       return;
     }
     try {
-      final elements = await query.get();
+      final elements = await setQuery().get();
       await addAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
@@ -167,7 +162,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
     }
     try {
       final elements =
-          await query.startAtDocument(qDocInfoList.last.qDoc).get();
+          await setQuery().startAtDocument(qDocInfoList.last.qDoc).get();
       await addAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
@@ -179,7 +174,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
     if (qDocInfoList.isEmpty) return;
     try {
       final elements =
-          await query.endBeforeDocument(qDocInfoList.first.qDoc).get();
+          await setQuery().endBeforeDocument(qDocInfoList.first.qDoc).get();
       await insertAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
@@ -223,7 +218,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
 
   Future<void> fetchTimelineDocs() async {
     try {
-      final result = await query.get();
+      final result = await setQuery().get();
       indexDocs = result.docs;
       await _fetchTimelinePosts(result.docs);
     } catch (e) {
@@ -232,7 +227,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   }
    Future<void> onLoadingTimeline(RefreshController refreshController) async {
     try {
-      final result = await query.startAfterDocument(indexDocs.last).get();
+      final result = await setQuery().startAfterDocument(indexDocs.last).get();
       indexDocs.addAll(result.docs);
       await _fetchMoreTimelinePosts(result.docs);
     } catch (e) {

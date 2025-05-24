@@ -36,7 +36,7 @@ abstract class IndexPostsController extends DocsController {
   Future<void> fetchDocs() async {
     if (CurrentUserController.to.isNotVerified()) return;
     try {
-      final result = await query.get();
+      final result = await setQuery().get();
       indexDocs = result.docs;
       await _fetchTimelinePosts(result.docs);
     } catch (e) {
@@ -48,7 +48,7 @@ abstract class IndexPostsController extends DocsController {
   Future<void> onLoading(RefreshController refreshController) async {
     if (CurrentUserController.to.isNotVerified()) return;
     try {
-      final result = await query.startAfterDocument(indexDocs.last).get();
+      final result = await setQuery().startAfterDocument(indexDocs.last).get();
       indexDocs.addAll(result.docs);
       await _fetchMoreTimelinePosts(result.docs);
     } catch (e) {
