@@ -10,10 +10,10 @@ class SearchUserPostsController extends SearchDocsController {
   @override
   SearchTarget get searchTarget => SearchTarget.post;
   @override
-  void setQuery() {
+  MapQuery setQuery() {
     final passiveUid = Get.parameters['uid']!;
-    query = QueryCore.userPosts(passiveUid);
-    initialQuery = query;
+    initialQuery = QueryCore.userPosts(passiveUid);
+    return initialQuery;
   }
 
   @override

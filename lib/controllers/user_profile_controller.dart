@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/abstract/profile_controller.dart';
@@ -25,8 +26,8 @@ class UserProfileController extends ProfileController {
   }
 
   @override
-  void setQuery() async {
-    query = QueryCore.userPostsByNewest(passiveUid());
+  MapQuery setQuery() {
+    return QueryCore.userPostsByNewest(passiveUid());
   }
 
   Future<void> _getPassiveUser() async {

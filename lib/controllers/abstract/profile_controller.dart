@@ -4,8 +4,5 @@ abstract class ProfileController extends DocsController {
   @override
   bool get requiresValueReset => true;
 
-  @override
-  void setQuery();
-
   String passiveUid();
 }

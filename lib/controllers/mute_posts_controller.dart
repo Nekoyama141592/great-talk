@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/abstract/docs_controller.dart';
@@ -14,9 +15,9 @@ class MutePostsController extends DocsController {
   bool get requiresValueReset => true;
   static MutePostsController get to => Get.find<MutePostsController>();
   @override
-  void setQuery() {
+  MapQuery setQuery() {
     final requestPostIds = _createRequestPostIds();
-    query = QueryCore.postsByWhereIn(requestPostIds);
+    return QueryCore.postsByWhereIn(requestPostIds);
   }
 
   @override

@@ -9,9 +9,9 @@ class SearchUsersController extends SearchDocsController {
   @override
   SearchTarget get searchTarget => SearchTarget.user;
   @override
-  void setQuery() {
-    query = QueryCore.users();
-    initialQuery = query;
+  MapQuery setQuery() {
+    initialQuery = QueryCore.users();
+    return initialQuery;
   }
 
   @override

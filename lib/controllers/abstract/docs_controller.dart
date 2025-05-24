@@ -29,11 +29,11 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   late MapQuery initialQuery;
   @override
   void onInit() {
-    setQuery();
+    query = setQuery();
     super.onInit();
   }
 
-  void setQuery();
+  MapQuery setQuery();
 
   void addAllDocs(List<QDoc> elements) async {
     if (isLoading.value) return;

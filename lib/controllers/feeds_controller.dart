@@ -9,8 +9,8 @@ class FeedsController extends IndexPostsController {
   static FeedsController get to => Get.find<FeedsController>();
 
   @override
-  void setQuery() {
-    query = QueryCore.timelines(_userRef());
+  MapQuery setQuery() {
+    return QueryCore.timelines(_userRef());
   }
 
   DocRef _userRef() => DocRefCore.user(currentUid());
