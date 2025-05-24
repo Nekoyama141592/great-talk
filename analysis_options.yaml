@@ -14,6 +14,5 @@ analyzer:
     - "lib/model/moderation_label/moderation_label.dart"
     - "lib/model/receipt_response/ios_receipt_response/ios_receipt_response.dart"
     - "lib/model/open_ai/generate_text/generate_text_response/generate_text_request.dart"
-    - "lib/views/chat/components/latex_text.dart"
   errors:
     invalid_annotation_target: ignore

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/extensions/custom_date_time_formatting.dart';
 import 'package:great_talk/ui_core/padding_core.dart';
 import 'package:great_talk/ui_core/text_core.dart';
-import 'package:great_talk/views/chat/components/latex_text.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 
@@ -58,9 +57,7 @@ class MsgCard extends StatelessWidget {
                 color: isMyMsg ? myColor : Theme.of(context).focusColor),
             borderRadius: BorderRadius.circular(16.0),
           ),
-          child: LatexText(
-            data: text,
-          ),
+          child: Text(text),
         ),
       ),
       // Obx を削除し、渡された postImage を直接使用する

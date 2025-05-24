@@ -50,6 +50,7 @@ packages=(
   "timezone"
   "url_launcher"
   "uuid"
+  "gpt_markdown"
 )
 
 echo "Adding packages to dependencies..."

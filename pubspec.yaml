@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 6.0.18+235
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.7.2
 dependencies:
   flutter:
     sdk: flutter
@@ -29,8 +29,6 @@ dependencies:
   flutter_hooks: ^0.21.2
   flutter_image_compress: ^2.4.0
   flutter_local_notifications: ^19.2.1
-  flutter_markdown: ^0.7.7+1
-  flutter_markdown_latex: ^0.3.4
   flutter_native_timezone: ^2.0.0
   flutter_svg: ^2.1.0
   fluttertoast: ^8.2.12
@@ -60,6 +58,7 @@ dependencies:
   timezone: ^0.10.1
   url_launcher: ^6.3.1
   uuid: ^4.5.1
+  gpt_markdown: ^1.0.19
 
 dev_dependencies:
   flutter_test:
