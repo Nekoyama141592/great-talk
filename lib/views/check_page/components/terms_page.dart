@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/core/url_redirector.dart';
-import 'package:great_talk/controllers/main_controller.dart';
+import 'package:great_talk/providers/global/terms/terms_notifier.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TermsPage extends HookWidget {
+class TermsPage extends ConsumerWidget {
   const TermsPage({super.key});
   @override
-  Widget build(BuildContext context) {
-    final controller = MainController.to;
+  Widget build(BuildContext context,WidgetRef ref) {
     final style =
         TextStyle(color: Theme.of(context).focusColor, fontSize: 20.0);
     return Scaffold(
@@ -44,7 +43,7 @@ class TermsPage extends HookWidget {
                       )),
                   const Divider(),
                   RoundedButton(
-                    press: controller.onAgreeButtonPressed,
+                    press: ref.read(termsNotifierProvider.notifier).onAgreeButtonPressed,
                     text: agreeText,
                   ),
                 ],

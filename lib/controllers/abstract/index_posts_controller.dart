@@ -8,8 +8,6 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class IndexPostsController extends DocsController {
-  
-
   FutureResult<List<QDoc>> _timelinesToPostsResult(
       List<QDoc> fetchedDocs) async {
     final repository = FirestoreRepository();

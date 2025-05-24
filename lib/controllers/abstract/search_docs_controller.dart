@@ -11,7 +11,6 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 abstract class SearchDocsController extends DocsController {
-  
   SearchTarget get searchTarget;
   @override
   Future<void> fetchDocs() async {

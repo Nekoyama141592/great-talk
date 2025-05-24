@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/controllers/remote_config_controller.dart';
 
 class MaintenancePage extends StatelessWidget {
-  const MaintenancePage({super.key});
+  const MaintenancePage({super.key, required this.maintenanceMsg});
+  final String maintenanceMsg;
   @override
   Widget build(BuildContext context) {
-    final controller = RemoteConfigController.to;
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Align(
-            alignment: Alignment.center,
-            child: Obx(() => BasicBoldText(controller.maintenanceMsg.value))),
+        body: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Align(
+        alignment: Alignment.center,
+        child: BasicBoldText(maintenanceMsg),
       ),
-    );
+    ));
   }
 }
