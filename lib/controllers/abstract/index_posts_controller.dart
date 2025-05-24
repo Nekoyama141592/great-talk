@@ -18,14 +18,14 @@ abstract class IndexPostsController extends DocsController {
     return posts;
   }
 
-  Future<void> _fetchPosts(List<QDoc> fetchedTimelines) async {
+  Future<void> _fetchTimelinePosts(List<QDoc> fetchedTimelines) async {
     final posts = await _timelinesToPostsResult(fetchedTimelines);
     posts.when(
         success: (res) => addAllDocs(sortedDocs(res)),
         failure: (e) => UIHelper.showErrorFlutterToast("データの取得に失敗しました"));
   }
 
-  Future<void> _fetchMorePosts(List<QDoc> fetchedTimelines) async {
+  Future<void> _fetchMoreTimelinePosts(List<QDoc> fetchedTimelines) async {
     final posts = await _timelinesToPostsResult(fetchedTimelines);
     posts.when(
         success: (res) => addAllDocs(sortedDocs(res)),
@@ -38,7 +38,7 @@ abstract class IndexPostsController extends DocsController {
     try {
       final result = await query.get();
       indexDocs = result.docs;
-      await _fetchPosts(result.docs);
+      await _fetchTimelinePosts(result.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     }
@@ -50,7 +50,7 @@ abstract class IndexPostsController extends DocsController {
     try {
       final result = await query.startAfterDocument(indexDocs.last).get();
       indexDocs.addAll(result.docs);
-      await _fetchMorePosts(result.docs);
+      await _fetchMoreTimelinePosts(result.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     }

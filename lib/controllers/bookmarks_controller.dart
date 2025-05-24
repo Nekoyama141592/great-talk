@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:great_talk/controllers/abstract/index_posts_controller.dart';
+import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
-class BookmarksController extends IndexPostsController {
+class BookmarksController extends DocsController {
   BookmarksController() : super();
   @override
   MapQuery setQuery() {

@@ -106,6 +106,11 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> fetchDocs() async {
+    const isTimeline = 1 == 2;
+    if (isTimeline) {
+      fetchTimelineDocs();
+      return;
+    }
     try {
       final elements = await query.get();
       await addAllDocs(elements.docs);
@@ -123,6 +128,11 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   Future<void> onLoading(RefreshController refreshController) async {
     if (qDocInfoList.isEmpty) {
       refreshController.loadComplete();
+      return;
+    }
+    const isTimeline = 1 == 2; // TODO: family
+    if (isTimeline) {
+      onLoadingTimeline(refreshController);
       return;
     }
     try {
@@ -158,5 +168,46 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
       users = [];
     });
     return users;
+  }
+
+  // Indexが必要
+  Future<List<QDoc>> _timelinesToPostsResult(
+      List<QDoc> fetchedDocs) async {
+    final repository = FirestoreRepository();
+    final List<String> postIds =
+        fetchedDocs.map((e) => e.data()["postId"] as String).toList();
+    final query = QueryCore.timelinePosts(postIds);
+    final posts = await repository.getDocsWithList(query);
+    return posts;
+  }
+
+  Future<void> _fetchTimelinePosts(List<QDoc> fetchedTimelines) async {
+    final res = await _timelinesToPostsResult(fetchedTimelines);
+    addAllDocs(sortedDocs(res));
+  }
+
+  Future<void> _fetchMoreTimelinePosts(List<QDoc> fetchedTimelines) async {
+    final res = await _timelinesToPostsResult(fetchedTimelines);
+    addAllDocs(sortedDocs(res));
+  }
+
+  Future<void> fetchTimelineDocs() async {
+    try {
+      final result = await query.get();
+      indexDocs = result.docs;
+      await _fetchTimelinePosts(result.docs);
+    } catch (e) {
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+    }
+  }
+   Future<void> onLoadingTimeline(RefreshController refreshController) async {
+    try {
+      final result = await query.startAfterDocument(indexDocs.last).get();
+      indexDocs.addAll(result.docs);
+      await _fetchMoreTimelinePosts(result.docs);
+    } catch (e) {
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+    }
+    refreshController.loadComplete();
   }
 }
