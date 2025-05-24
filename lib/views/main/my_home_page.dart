@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/providers/global/notification/notification_provider.dart';
 import 'package:great_talk/views/common/bottom_navigation_bar_elements.dart';
@@ -21,6 +22,7 @@ class MyHomePage extends HookConsumerWidget {
   const MyHomePage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Get.put(CurrentUserController());
     Get.put(PurchasesController());
     ref.watch(notificationProvider);
     Get.put(PostsController());
