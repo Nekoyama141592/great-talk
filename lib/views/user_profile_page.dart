@@ -17,6 +17,7 @@ class UserProfilePage extends StatelessWidget {
               : null,
           body: ProfileScreen(
             controller: controller,
+            passiveUid: controller.passiveUid(),
           ),
         ));
   }

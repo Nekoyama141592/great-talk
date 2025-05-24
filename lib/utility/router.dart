@@ -15,7 +15,6 @@ import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
 import 'package:great_talk/views/mute/mute_posts/mute_posts_page.dart';
 import 'package:great_talk/views/mute/mute_users/mute_users_page.dart';
 import 'package:great_talk/views/chat/chat_page.dart';
-import 'package:great_talk/views/search_user_posts_page.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 
 final getPages = [
@@ -45,7 +44,5 @@ final getPages = [
   GetPage(name: SubscribePage.path, page: () => const SubscribePage()),
   GetPage(name: UserDeletedPage.path, page: () => const UserDeletedPage()),
   GetPage(name: UserProfilePage.path, page: () => const UserProfilePage()),
-  GetPage(
-      name: SearchUserPostsPage.path, page: () => const SearchUserPostsPage()),
   GetPage(name: GenerateImagePage.path, page: () => const GenerateImagePage()),
 ];

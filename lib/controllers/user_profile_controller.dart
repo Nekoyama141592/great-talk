@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/controllers/abstract/docs_controller.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/abstract/profile_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
@@ -15,9 +15,8 @@ import 'package:great_talk/model/database_schema/tokens/following_token/followin
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/file_utility.dart';
 
-class UserProfileController extends ProfileController {
+class UserProfileController extends DocsController {
   static UserProfileController get to => Get.find<UserProfileController>();
-  @override
   String passiveUid() => Get.parameters['uid']!;
   @override
   Future<void> init() async {
