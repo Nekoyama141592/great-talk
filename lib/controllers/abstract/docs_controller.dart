@@ -36,47 +36,48 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
 
   MapQuery setQuery();
 
-  void addAllDocs(List<QDoc> elements) async {
+  Future<void> _updateDocInfoList(List<QDoc> elements,
+      {bool front = false}) async {
+    if (isLoading.value || elements.isEmpty) return;
     startLoading();
-    final docIds = qDocInfoList.map((e) => e.qDoc.id).toList();
-    final uids = elements.map((e) => e.data()['uid'] as String).toList();
-    if (uids.isEmpty) return; // 投稿が取得できていないなら処理を終了させる
-    final fetchedUsers = await _getUsersByUids(uids);
-    final fetchedUids = fetchedUsers.map((e) => e.uid).toList();
-    for (final element in elements) {
-      final String uid = element.data()['uid'];
-      if (!docIds.contains(element.id) && fetchedUids.contains(uid)) {
-        final publicUser =
-            fetchedUsers.firstWhere((fetchedUser) => fetchedUser.uid == uid);
-        final userImage = await _getImageFromDoc(element);
-        final qDocInfo = QDocInfo(
-            publicUser: publicUser, qDoc: element, userImage: userImage);
-        qDocInfoList.add(qDocInfo);
+    try {
+      final docIds = qDocInfoList.map((e) => e.qDoc.id).toSet();
+      final newElements =
+          elements.where((e) => !docIds.contains(e.id)).toList();
+      if (newElements.isEmpty) {
+        endLoading();
+        return;
       }
+
+      final uids = newElements.map((e) => e.data()['uid'] as String).toSet();
+      final fetchedUsers = await _getUsersByUids(uids.toList());
+      final userMap = {for (final user in fetchedUsers) user.uid: user};
+
+      final newQDocInfoList = await Future.wait(newElements
+          .where((element) => userMap.containsKey(element.data()['uid']))
+          .map((element) async {
+        final publicUser = userMap[element.data()['uid']]!;
+        final userImage = await _getImageFromDoc(element);
+        return QDocInfo(
+            publicUser: publicUser, qDoc: element, userImage: userImage);
+      }));
+
+      if (front) {
+        qDocInfoList.value = [...newQDocInfoList.reversed, ...qDocInfoList];
+      } else {
+        qDocInfoList.value = [...qDocInfoList, ...newQDocInfoList];
+      }
+    } finally {
+      endLoading();
     }
-    endLoading();
   }
 
-  void insertAllDocs(List<QDoc> elements) async {
-    if (isLoading.value) return;
-    startLoading();
-    final docIds = qDocInfoList.map((e) => e.qDoc.id).toList();
-    final uids = elements.map((e) => e.data()['uid'] as String).toList();
-    if (uids.isEmpty) return; // 投稿が取得できていないなら処理を終了させる
-    final fetchedUsers = await _getUsersByUids(uids);
-    final fetchedUids = fetchedUsers.map((e) => e.uid).toList();
-    for (final element in elements.reversed.toList()) {
-      final String uid = element.data()['uid'];
-      if (!docIds.contains(element.id) && fetchedUids.contains(uid)) {
-        final publicUser =
-            fetchedUsers.firstWhere((fetchedUser) => fetchedUser.uid == uid);
-        final userImage = await _getImageFromDoc(element);
-        final qDocInfo = QDocInfo(
-            publicUser: publicUser, qDoc: element, userImage: userImage);
-        qDocInfoList.insert(0, qDocInfo);
-      }
-    }
-    endLoading();
+  Future<void> addAllDocs(List<QDoc> elements) async {
+    await _updateDocInfoList(elements);
+  }
+
+  Future<void> insertAllDocs(List<QDoc> elements) async {
+    await _updateDocInfoList(elements, front: true);
   }
 
   List<QDoc> sortedDocs(List<QDoc> elements) {
@@ -107,9 +108,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   Future<void> fetchDocs() async {
     try {
       final elements = await query.get();
-      print(elements.docs.length);
-      addAllDocs(elements.docs);
-      print(qDocInfoList.length);
+      await addAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     }
@@ -129,7 +128,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
     try {
       final elements =
           await query.startAtDocument(qDocInfoList.last.qDoc).get();
-      addAllDocs(elements.docs);
+      await addAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     }
@@ -141,13 +140,14 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
     try {
       final elements =
           await query.endBeforeDocument(qDocInfoList.first.qDoc).get();
-      insertAllDocs(elements.docs);
+      await insertAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     }
   }
 
   Future<List<PublicUser>> _getUsersByUids(List<String> uids) async {
+    if (uids.isEmpty) return [];
     final repository = FirestoreRepository();
     final query = QueryCore.usersByWhereIn(uids);
     final result = await repository.getDocs(query);

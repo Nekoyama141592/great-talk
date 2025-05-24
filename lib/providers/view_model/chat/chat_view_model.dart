@@ -38,7 +38,7 @@ import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/chat/components/bookmark_categories_list_view.dart';
 part 'chat_view_model.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class ChatViewModel extends _$ChatViewModel {
   @override
   Future<ChatState> build(String uid, String postId) async {
@@ -47,6 +47,7 @@ class ChatViewModel extends _$ChatViewModel {
     if (post == null) {
       throw Exception('Post with ID $postId not found for user $uid');
     }
+    
     // 投稿画像とローカルのチャット履歴を取得
     final postImage = await _fetchPostImage(post);
     final localMessages = await _getLocalMessages(post.postId);
