@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/core/post_core.dart';
+
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/controllers/tokens_controller.dart';
-class PostLikeButton extends HookWidget {
+import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
+import 'package:great_talk/providers/logic/post_logic.dart';
+import 'package:great_talk/views/common/async_screen/async_screen.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+class PostLikeButton extends HookConsumerWidget {
   const PostLikeButton({
     super.key,
     required this.isHorizontal,
@@ -13,28 +17,27 @@ class PostLikeButton extends HookWidget {
   final bool isHorizontal;
   final Post post;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     final copyPost = useState(post);
-    final isLiked = useState(
-      TokensController.to.state.value.likePostIds.contains(post.postId),
-    );
-    final children = [
-      isLiked.value
+    final asyncValue = ref.watch(tokensNotifierProvider);
+    
+    return AsyncScreen(asyncValue: asyncValue, data: (state) {
+      final isLiked = state.likePostIds.contains(post.postId);
+      final children = [
+      isLiked
           ? InkWell(
             child: const Icon(Icons.favorite, color: Colors.red),
             onTap:
-                () => PostCore.onUnLikeButtonPressed(
+                () => ref.read(postLogicProvider.notifier).onUnLikeButtonPressed(
                   copyPost,
-                  isLiked,
                   post,
                 ),
           )
           : InkWell(
             child: const Icon(Icons.favorite),
             onTap:
-                () => PostCore.onLikeButtonPressed(
+                () => ref.read(postLogicProvider.notifier).onLikeButtonPressed(
                   copyPost,
-                  isLiked,
                   post,
                 ),
           ),
@@ -50,5 +53,6 @@ class PostLikeButton extends HookWidget {
       child:
           isHorizontal ? Row(children: children) : Column(children: children),
     );
+    });
   }
 }

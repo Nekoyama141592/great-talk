@@ -167,9 +167,7 @@ class TokensNotifier extends _$TokensNotifier {
     _updateState(newState);
   }
 
-  bool isDeletedPost(String postId) => _currentState.deletePostIds.contains(postId);
-  bool isMutingPost(String postId) => _currentState.mutePostIds.contains(postId);
-  bool isMutingUser(String uid) => _currentState.muteUids.contains(uid);
+  
 
   Future<void> createBookmarkCategory(
     BuildContext context,

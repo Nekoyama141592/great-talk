@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/core/doubles.dart';
-import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
+import 'package:great_talk/providers/logic/post_logic.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/q_doc_info/q_doc_info.dart';
+import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/mosaic_card/components/mosaic_post_child.dart';
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
@@ -13,7 +15,7 @@ import 'package:great_talk/views/screen/refresh_screen/components/post_like_butt
 import 'package:great_talk/views/screen/refresh_screen/components/post_msg_button.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:great_talk/controllers/tokens_controller.dart';
+
 class PostCard extends ConsumerWidget {
   const PostCard({super.key, required this.qDocInfo});
   final QDocInfo qDocInfo;
@@ -22,12 +24,15 @@ class PostCard extends ConsumerWidget {
     final post = Post.fromJson(qDocInfo.qDoc.data());
     final uint8list = qDocInfo.userImage;
     final publicUser = qDocInfo.publicUser;
+    final asyncValue = ref.watch(tokensNotifierProvider);
     // 不適切なら弾く
     return InkWell(
       child: Padding(
         padding: EdgeInsets.all(defaultPadding(context)),
-        child: Obx(() {
-          if (TokensController.to.isDeletedPost(post.postId)) {
+        child: AsyncScreen(
+          asyncValue: asyncValue,
+          data: (state) {
+          if (state.isDeletedPost(post.postId)) {
             return MosaicCard(
               child: MosaicPostChild(
                 msg: "この投稿はあなたによって削除されました。",
@@ -36,8 +41,8 @@ class PostCard extends ConsumerWidget {
               ),
             );
           }
-          if (TokensController.to.isMutingPost(post.postId) ||
-              TokensController.to.isMutingUser(post.uid)) {
+          if (state.isMutingPost(post.postId) ||
+              state.isMutingUser(post.uid)) {
             return MosaicCard(
               child: MosaicPostChild(
                 msg: "あなたはこの投稿、もしくはその投稿者をミュートしています。",
@@ -57,7 +62,7 @@ class PostCard extends ConsumerWidget {
             );
           }
           return GestureDetector(
-            onTap: () => PostCore.onPostCardPressed(post),
+            onTap: () => ref.read(postLogicProvider.notifier).onPostCardPressed(post),
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(
@@ -70,7 +75,7 @@ class PostCard extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CircleImage(
-                      onTap: () => PostCore.onPostCardPressed(post),
+                      onTap: () => ref.read(postLogicProvider.notifier).onPostCardPressed(post),
                       uint8list: uint8list,
                     ),
                   ),

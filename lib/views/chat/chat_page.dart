@@ -5,12 +5,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:great_talk/core/doubles.dart';
-import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
+import 'package:great_talk/providers/logic/post_logic.dart';
 import 'package:great_talk/providers/view_model/chat/chat_view_model.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/views/chat/components/menu_button.dart';
@@ -77,10 +77,9 @@ class ChatPage extends HookConsumerWidget {
                   else
                     AppBarAction(
                       onTap:
-                          () => PostCore.onReportButtonPressed(
+                          () => ref.read(postLogicProvider.notifier) .onReportButtonPressed(
                             context,
                             post,
-                            currentUserId,
                           ),
                       child: const Icon(Icons.report),
                     ),

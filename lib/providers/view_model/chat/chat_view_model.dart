@@ -9,7 +9,6 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
-import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/infrastructure/chat_gpt_sdk_client.dart';
 import 'package:great_talk/model/database_schema/bookmark/bookmark.dart';
@@ -18,6 +17,7 @@ import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
+import 'package:great_talk/providers/logic/post_logic.dart';
 import 'package:great_talk/providers/overrides/prefs_provider.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
@@ -423,7 +423,7 @@ class ChatViewModel extends _$ChatViewModel {
 
     if (deletePost == null) return;
 
-    PostCore.deletePost(deletePost);
+    ref.read(postLogicProvider.notifier).deletePost(deletePost);
   }
 
   void _onBookmarkTextTapped() {

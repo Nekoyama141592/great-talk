@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
+import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
+import 'package:great_talk/providers/logic/post_logic.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:great_talk/controllers/tokens_controller.dart';
+
 class MosaicPostChild extends ConsumerWidget {
   const MosaicPostChild({
     super.key,
@@ -23,6 +23,7 @@ class MosaicPostChild extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isMine = post.uid == ref.watch(streamAuthUidProvider).value;
     final isAdmin = ref.watch(currentUserNotifierProvider).value?.isAdmin() ?? false;
+    final asyncValue = ref.watch(tokensNotifierProvider);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -33,16 +34,15 @@ class MosaicPostChild extends ConsumerWidget {
           child: const Icon(Icons.info, color: Colors.white),
         ),
         const BasicHeightBox(),
-        Obx(
-          () =>
-              (isMine || isAdmin) &&
-                      !TokensController.to.state.value.deletePostIds.contains(post.postId)
+        asyncValue.when(data: (state) {
+          return (isMine || isAdmin) &&
+                      !state.deletePostIds.contains(post.postId)
                   ? InkWell(
-                    onTap: () => PostCore.deletePost(post),
+                    onTap: () => ref.read(postLogicProvider.notifier).deletePost(post),
                     child: const Icon(Icons.delete, color: Colors.white),
                   )
-                  : const SizedBox.shrink(),
-        ),
+                  : const SizedBox.shrink();
+        }, error: (e,s) =>const SizedBox.shrink(), loading: () => const SizedBox.shrink())
       ],
     );
   }

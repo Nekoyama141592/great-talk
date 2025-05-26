@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/providers/logic/post_logic.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class PostMsgButton extends HookWidget {
+class PostMsgButton extends ConsumerWidget {
   const PostMsgButton({
     super.key,
     required this.isHorizontal,
@@ -13,11 +13,11 @@ class PostMsgButton extends HookWidget {
   final bool isHorizontal;
   final Post post;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     final children = [
       InkWell(
         child: const Icon(Icons.comment),
-        onTap: () => PostCore.onPostCardPressed(post),
+        onTap: () => ref.read(postLogicProvider.notifier).onPostCardPressed(post),
       ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),

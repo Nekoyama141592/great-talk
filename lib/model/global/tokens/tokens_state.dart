@@ -34,4 +34,7 @@ abstract class TokensState with _$TokensState {
 
   List<String> get reportPostIds =>
       reportPostTokens.map((e) => e.postId).toList();
+  bool isDeletedPost(String postId) => deletePostIds.contains(postId);
+  bool isMutingPost(String postId) => mutePostIds.contains(postId);
+  bool isMutingUser(String uid) => muteUids.contains(uid);
 }

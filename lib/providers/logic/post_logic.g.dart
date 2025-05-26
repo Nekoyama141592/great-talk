@@ -1,33 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'current_user_notifier.dart';
+part of 'post_logic.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firebaseAuthRepositoryHash() =>
-    r'bb0b85dba80caa7fb1d8afaf50ffe3c7f7f061ca';
-
-/// See also [firebaseAuthRepository].
-@ProviderFor(firebaseAuthRepository)
-final firebaseAuthRepositoryProvider =
-    Provider<FirebaseAuthRepository>.internal(
-      firebaseAuthRepository,
-      name: r'firebaseAuthRepositoryProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$firebaseAuthRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FirebaseAuthRepositoryRef = ProviderRef<FirebaseAuthRepository>;
 String _$firestoreRepositoryHash() =>
-    r'467721f4c9c95f4e94b0632f82c6c08a7611709a';
+    r'ab933027d5c9f839a26158279b58521ebf4ff884';
 
 /// See also [firestoreRepository].
 @ProviderFor(firestoreRepository)
@@ -45,7 +25,7 @@ final firestoreRepositoryProvider = Provider<FirestoreRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FirestoreRepositoryRef = ProviderRef<FirestoreRepository>;
-String _$awsS3RepositoryHash() => r'24b051611f9c51b2fd4ab263528846b59dc3c105';
+String _$awsS3RepositoryHash() => r'86bb9b2fc7cdf708bc28a6e00e8ee1b1693bb392';
 
 /// See also [awsS3Repository].
 @ProviderFor(awsS3Repository)
@@ -63,23 +43,19 @@ final awsS3RepositoryProvider = Provider<AWSS3Repository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AwsS3RepositoryRef = ProviderRef<AWSS3Repository>;
-String _$currentUserNotifierHash() =>
-    r'624cb3cddb3eddb9e3bd1e865d8e4747cc1c3ca9';
+String _$postLogicHash() => r'0ba28894a835600cb6b4e80513bc5952574fea3e';
 
-/// See also [CurrentUserNotifier].
-@ProviderFor(CurrentUserNotifier)
-final currentUserNotifierProvider =
-    AsyncNotifierProvider<CurrentUserNotifier, CurrentUserState>.internal(
-      CurrentUserNotifier.new,
-      name: r'currentUserNotifierProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$currentUserNotifierHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+/// See also [PostLogic].
+@ProviderFor(PostLogic)
+final postLogicProvider = AutoDisposeNotifierProvider<PostLogic, void>.internal(
+  PostLogic.new,
+  name: r'postLogicProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$postLogicHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
-typedef _$CurrentUserNotifier = AsyncNotifier<CurrentUserState>;
+typedef _$PostLogic = AutoDisposeNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
