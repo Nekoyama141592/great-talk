@@ -28,13 +28,13 @@ class OriginalDrawer extends ConsumerWidget {
     final currentUserController = CurrentUserController.to;
     final settingState = ref.watch(localSettingProvider);
     final purchasesController = PurchasesController.to;
-    final image = CurrentUserController.to.rxBase64.value;
+    final image = CurrentUserController.to.state.value.base64;
     return Drawer(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: ListView(
         children: [
           Obx(() {
-            final user = currentUserController.rxPublicUser.value;
+            final user = currentUserController.state.value.publicUser;
             if (user != null) {
               return DrawerHeader(
                 child: InkWell(

@@ -119,7 +119,7 @@ $PrivateUserCopyWith<$Res>? get privateUser {
 @JsonSerializable()
 
 class _CurrentUserState extends CurrentUserState {
-  const _CurrentUserState({required this.authUser, required this.publicUser, required this.privateUser, required this.base64}): super._();
+  const _CurrentUserState({this.authUser, this.publicUser, this.privateUser, this.base64}): super._();
   factory _CurrentUserState.fromJson(Map<String, dynamic> json) => _$CurrentUserStateFromJson(json);
 
 @override final  AuthUser? authUser;

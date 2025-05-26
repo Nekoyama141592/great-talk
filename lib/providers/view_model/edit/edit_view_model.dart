@@ -26,10 +26,10 @@ part 'edit_view_model.g.dart';
 class EditViewModel extends _$EditViewModel {
   @override
   FutureOr<EditState> build() {
-    final user = CurrentUserController.to.rxPublicUser.value;
+    final user = CurrentUserController.to.state.value.publicUser;
     final bio = user?.bioValue ?? "";
     final userName = user?.nameValue ?? "";
-    final  base64 = CurrentUserController.to.rxBase64.value;
+    final  base64 = CurrentUserController.to.state.value.base64;
     return EditState(
       bio: bio,
       userName: userName,
@@ -57,7 +57,7 @@ class EditViewModel extends _$EditViewModel {
 
   /// 初期化
   void init() {
-    final base64 = CurrentUserController.to.rxBase64.value;
+    final base64 = CurrentUserController.to.state.value.base64;
     if (state.value?.base64 != null &&
         base64 != null) {
       state = AsyncData(state.value!.copyWith(base64: base64));
@@ -97,7 +97,7 @@ class EditViewModel extends _$EditViewModel {
     }
     if (state.isLoading) return; // 二重リクエスト防止
     state = const AsyncLoading();
-    final publicUser = CurrentUserController.to.rxPublicUser.value;
+    final publicUser = CurrentUserController.to.state.value.publicUser;
     if (publicUser == null) {
       state = AsyncData(s);
       return;
@@ -142,7 +142,7 @@ class EditViewModel extends _$EditViewModel {
       stringUserName: userName.trim(),
       uid: uid,
       image: DetectedImage(value: fileName).toJson(),
-      userRef: CurrentUserController.to.rxPublicUser.value!.ref,
+      userRef: CurrentUserController.to.state.value.publicUser!.ref,
     );
     final docRef = DocRefCore.userUpdateLog(uid);
     final json = newUpdateLog.toJson();

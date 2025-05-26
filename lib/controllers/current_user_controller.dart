@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/model/global/current_user/auth_user/auth_user.dart';
+import 'package:great_talk/model/global/current_user/current_user_state.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
@@ -20,17 +21,15 @@ import 'package:great_talk/views/auth/user_deleted_page.dart';
 
 class CurrentUserController extends GetxController {
   static CurrentUserController get to => Get.find<CurrentUserController>();
-  final Rx<AuthUser?> rxAuthUser = Rx(null);
-  final Rx<PublicUser?> rxPublicUser = Rx(null);
-  final Rx<PrivateUser?> rxPrivateUser = Rx(null);
-  final Rx<String?> rxBase64 = Rx(null);
-
+  final state = const CurrentUserState().obs;
 
   @override
   void onInit() async {
     final authUser = FirebaseAuth.instance.currentUser;
     if (authUser != null) {
-      rxAuthUser.value = AuthUser.fromFirebaseAuthUser(authUser);
+      // stateを更新
+      state.value =
+          state.value.copyWith(authUser: AuthUser.fromFirebaseAuthUser(authUser));
     }
     await _fetchData();
     super.onInit();
@@ -39,24 +38,26 @@ class CurrentUserController extends GetxController {
   Future<void> _createAnonymousUser() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInAnonymously();
-    result.when(success: (res) => setAuthUser(res), failure: (e) {});
+    result.when(success: setAuthUser, failure: (e) {});
   }
 
   void setAuthUser(User user) {
-    rxAuthUser.value = AuthUser.fromFirebaseAuthUser(user);
+    // stateを更新
+    state.value =
+        state.value.copyWith(authUser: AuthUser.fromFirebaseAuthUser(user));
   }
+  // stateから値を取得
+  String currentUid() => state.value.authUser?.uid ?? '';
 
-  String currentUid() => rxAuthUser.value?.uid ?? '';
+  bool isAdmin() => state.value.privateUser?.isAdmin ?? false;
+  bool isOfficial() => state.value.publicUser?.isOfficial ?? false;
 
-  bool isAdmin() => rxPrivateUser.value?.isAdmin ?? false;
-  bool isOfficial() => rxPublicUser.value?.isOfficial ?? false;
+  bool isAnonymous() => state.value.authUser!.isAnonymous;
 
-  bool isAnonymous() => rxAuthUser.value!.isAnonymous;
-
-  bool isNotLoggedIn() => rxAuthUser.value == null || isAnonymous();
+  bool isNotLoggedIn() => state.value.authUser == null || isAnonymous();
   bool isLoggedIn() => !isNotLoggedIn();
 
-  bool isNotVerified() => !rxAuthUser.value!.emailVerified;
+  bool isNotVerified() => !state.value.authUser!.emailVerified;
 
   Future<void> onAppleButtonPressed() async {
     final repository = FirebaseAuthRepository();
@@ -86,7 +87,8 @@ class CurrentUserController extends GetxController {
     final result = await repository.createDoc(ref, json);
     result.when(
       success: (_) {
-        rxPublicUser(newUser);
+        // stateを更新
+        state.value = state.value.copyWith(publicUser: newUser);
         UIHelper.showFlutterToast("ユーザーが作成されました");
       },
       failure: (e) {
@@ -103,7 +105,8 @@ class CurrentUserController extends GetxController {
     final result = await repository.createDoc(ref, json);
     result.when(
       success: (_) {
-        rxPrivateUser(newPrivateUser);
+        // stateを更新
+        state.value = state.value.copyWith(privateUser: newPrivateUser);
       },
       failure: (e) {
         UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
@@ -112,11 +115,11 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> _fetchData() async {
-    if (rxAuthUser.value == null) {
+    if (state.value.authUser == null) {
       await _createAnonymousUser();
       return;
     }
-    if (rxAuthUser.value!.isAnonymous) {
+    if (state.value.authUser!.isAnonymous) {
       return;
     }
     await _getPublicUser();
@@ -131,18 +134,19 @@ class CurrentUserController extends GetxController {
       success: (res) async {
         final data = res.data();
         if (res.exists && data != null) {
-          // アカウントが存在するなら代入する
           final user = PublicUser.fromJson(data);
-          rxPublicUser(user);
+          String? newBase64;
           final bucketName = user.typedImage().bucketName;
           final fileName = user.typedImage().value;
           if (bucketName.isNotEmpty && fileName.isNotEmpty) {
             final image = await FileUtility.getS3Image(bucketName, fileName);
-            if (image == null) return;
-            rxBase64.value = base64Encode(image);
+            if (image != null) {
+              newBase64 = base64Encode(image);
+            }
           }
+          // publicUserとbase64を同時に更新
+          state.value = state.value.copyWith(publicUser: user, base64: newBase64);
         } else {
-          // アカウントが存在しないなら作成する
           await _createPublicUser();
         }
       },
@@ -160,10 +164,9 @@ class CurrentUserController extends GetxController {
       success: (res) async {
         final data = res.data();
         if (res.exists && data != null) {
-          // アカウントが存在するなら代入する
-          rxPrivateUser(PrivateUser.fromJson(data));
+          // stateを更新
+          state.value = state.value.copyWith(privateUser: PrivateUser.fromJson(data));
         } else {
-          // アカウントが存在しないなら作成する
           await _createPrivateUser();
         }
       },
@@ -174,8 +177,8 @@ class CurrentUserController extends GetxController {
   }
 
   String currentAuthStateString() {
-    final state = currentAuthState();
-    switch (state) {
+    final authState = currentAuthState();
+    switch (authState) {
       case CurrentAuthState.isAnonymous:
         return "匿名ログイン中";
       case CurrentAuthState.loggedIn:
@@ -186,16 +189,17 @@ class CurrentUserController extends GetxController {
   }
 
   CurrentAuthState currentAuthState() {
-    if (rxAuthUser.value == null) {
+    if (state.value.authUser == null) {
       return CurrentAuthState.notLoggedIn;
-    } else if (rxAuthUser.value!.isAnonymous) {
+    } else if (state.value.authUser!.isAnonymous) {
       return CurrentAuthState.isAnonymous;
     } else {
-      return CurrentAuthState.notLoggedIn;
+      // ログイン済みだが匿名ではない場合
+      return CurrentAuthState.loggedIn;
     }
   }
 
-  void onLogoutButtonPressed() async {
+  void onLogoutButtonPressed() {
     UIHelper.cupertinoAlertDialog("ログアウトしますが本当によろしいですか？", _signOut);
   }
 
@@ -243,15 +247,15 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> _deletePublicUser() async {
-    final user = rxPublicUser.value;
+    final user = state.value.publicUser;
     if (user == null) return;
     final repository = FirestoreRepository();
     final ref = user.typedRef();
     final result = await repository.deleteDoc(ref);
     await result.when(
       success: (_) async {
-        _deleteAuthUser();
-        _removeImage();
+        await _deleteAuthUser();
+        await _removeImage();
       },
       failure: (e) {
         UIHelper.showErrorFlutterToast("データベースからユーザーを削除できませんでした");
@@ -273,7 +277,7 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> _removeImage() async {
-    final publicUser = rxPublicUser.value;
+    final publicUser = state.value.publicUser;
     if (publicUser == null) return;
     final fileName = publicUser.typedImage().value;
     final request = DeleteObjectRequest(object: fileName);
@@ -281,19 +285,24 @@ class CurrentUserController extends GetxController {
   }
 
   void updateUser(String userName, String bio, String fileName) async {
-    final user = rxPublicUser.value!;
-    final result = user.copyWith(
+    final user = state.value.publicUser;
+    if (user == null) return;
+
+    final updatedUser = user.copyWith(
       bio: user.typedBio().copyWith(value: bio).toJson(),
       userName: user.typedUserName().copyWith(value: userName).toJson(),
       image: user.typedImage().copyWith(value: fileName).toJson(),
     );
-    rxPublicUser(result);
+
+    String? newBase64;
     final image = await FileUtility.getS3Image(
       user.typedImage().bucketName,
       fileName,
     );
-    if (image == null) return;
-    rxBase64(base64Encode(image));
+    if (image != null) {
+      newBase64 = base64Encode(image);
+    }
+    // publicUserとbase64を同時に更新
+    state.value = state.value.copyWith(publicUser: updatedUser, base64: newBase64);
   }
 }
-

@@ -11,10 +11,10 @@ part 'current_user_state.g.dart';
 abstract class CurrentUserState with _$CurrentUserState {
   const CurrentUserState._();
   const factory CurrentUserState({
-    required AuthUser? authUser,
-    required PublicUser? publicUser,
-    required PrivateUser? privateUser,
-    required String? base64,
+    AuthUser? authUser,
+    PublicUser? publicUser,
+    PrivateUser? privateUser,
+    String? base64,
   }) = _CurrentUserState;
   factory CurrentUserState.fromJson(Map<String, dynamic> json) =>
       _$CurrentUserStateFromJson(json);
