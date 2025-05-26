@@ -18,11 +18,11 @@ class MuteUsersPage extends StatelessWidget {
       body: RefreshScreen(
         docsController: controller,
         child: Obx(() => ListView.builder(
-            itemCount: controller.qDocInfoList.length,
+            itemCount: controller.state.value.qDocInfoList.length,
             itemBuilder: (c, i) {
               final passiveUser =
-                  PublicUser.fromJson(controller.qDocInfoList[i].qDoc.data());
-              final uint8list = controller.qDocInfoList[i].userImage;
+                  PublicUser.fromJson(controller.state.value.qDocInfoList[i].qDoc.data());
+              final uint8list = controller.state.value.qDocInfoList[i].userImage;
               return MuteUserCard(
                   passiveUser: passiveUser, uint8list: uint8list);
             })),

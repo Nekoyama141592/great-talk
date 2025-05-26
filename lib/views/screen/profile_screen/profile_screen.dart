@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/ui_core/texts.dart';
@@ -16,9 +17,11 @@ import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProfileScreen extends ConsumerWidget {
-  const ProfileScreen({super.key, required this.controller,required this.passiveUid});
+  const ProfileScreen({super.key, required this.controller,required this.passiveUid,required this.follow,required this.unFollow});
   final DocsController controller;
   final String passiveUid;
+  final void Function()? follow;
+  final void Function()? unFollow;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final children = <Widget>[
@@ -33,25 +36,25 @@ class ProfileScreen extends ConsumerWidget {
         ),
       ),
       Obx(() => EllipsisText(
-            controller.rxPassiveUser.value!.nameValue,
+            controller.state.value.passiveUser!.nameValue,
             style: StyleUtility.bold25(),
           )),
       Row(
         children: [
           Obx(
-            () => controller.rxPassiveUser.value == null
+            () => controller.state.value.passiveUser == null
                 ? const SizedBox.shrink()
                 : CircleImage(
-                    uint8list: controller.rxUint8list.value,
+                    uint8list: controller.state.value.uint8list,
                   ),
           ),
           const BasicWidthBox(),
           Obx(() => Text(
-                "フォロー ${controller.rxPassiveUser.value?.followingCount.formatNumber() ?? 0}",
+                "フォロー ${controller.state.value.passiveUser?.followingCount.formatNumber() ?? 0}",
               )),
           const BasicWidthBox(),
           Obx(() => Text(
-                "フォロワー ${controller.rxPassiveUser.value?.followerCount.formatNumber() ?? 0}",
+                "フォロワー ${controller.state.value.passiveUser?.followerCount.formatNumber() ?? 0}",
               ))
         ],
       ),
@@ -60,14 +63,14 @@ class ProfileScreen extends ConsumerWidget {
           ? const SizedBox.shrink()
           : Align(
               alignment: Alignment.centerLeft,
-              child: Text(controller.rxPassiveUser.value!
+              child: Text(controller.state.value.passiveUser!
                   .typedBio()
                   .value
                   .removeNewlinesAndSpaces()),
             )),
       Row(
         children: [
-          Obx(() => (controller.rxPassiveUser.value?.isOfficial ?? false)
+          Obx(() => (controller.state.value.passiveUser?.isOfficial ?? false)
               ? const OfficialMark()
               : const SizedBox.shrink())
         ],
@@ -80,16 +83,21 @@ class ProfileScreen extends ConsumerWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  if (controller.rxPassiveUser.value != null) ...children,
+                  if (controller.state.value.passiveUser != null) ...children,
                   Obx(() {
-                    final passiveUser = controller.rxPassiveUser.value;
+                    final passiveUser = controller.state.value.passiveUser;
                     if (passiveUser == null) {
                       return const SizedBox.shrink();
                     }
+                    final isFollow = CurrentUserController.to.followingUids.contains(controller.passiveUid());
                     return passiveUser.uid ==
                             ref.watch(streamAuthUidProvider).value
                         ? const EditButton()
-                        : const FollowButton();
+                        : FollowButton(
+                          isFollow: isFollow,
+                          follow: follow,
+                          unFollow: unFollow,
+                        );
                   })
                 ],
               ),

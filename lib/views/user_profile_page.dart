@@ -18,6 +18,8 @@ class UserProfilePage extends StatelessWidget {
           body: ProfileScreen(
             controller: controller,
             passiveUid: controller.passiveUid(),
+            follow: controller.onFollowPressed,
+            unFollow: controller.onUnFollowPressed,
           ),
         ));
   }

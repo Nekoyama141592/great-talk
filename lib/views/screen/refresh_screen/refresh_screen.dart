@@ -31,7 +31,7 @@ class RefreshScreen extends HookWidget {
       if (docsController.cannotShow()) {
         return const LoadingScreen();
       }
-      if (docsController.qDocInfoList.isEmpty) {
+      if (docsController.state.value.qDocInfoList.isEmpty) {
         return ReloadScreen(
           onReload: docsController.onReload,
           reloadMsg: reloadMsg,
@@ -45,11 +45,11 @@ class RefreshScreen extends HookWidget {
           onLoading: () => docsController.onLoading(refreshController),
           child: child ??
               GridView.builder(
-                  itemCount: docsController.qDocInfoList.length,
+                  itemCount: docsController.state.value.qDocInfoList.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3, childAspectRatio: 0.5),
                   itemBuilder: (c, i) {
-                    final qDocInfo = docsController.qDocInfoList[i];
+                    final qDocInfo = docsController.state.value.qDocInfoList[i];
                     return PostCard(
                       qDocInfo: qDocInfo,
                     );

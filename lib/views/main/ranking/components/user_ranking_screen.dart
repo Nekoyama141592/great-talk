@@ -13,11 +13,11 @@ class UserRankingScreen extends StatelessWidget {
     return Obx(() => RefreshScreen(
         docsController: controller,
         child: ListView.builder(
-            itemCount: controller.qDocInfoList.length,
+            itemCount: controller.state.value.qDocInfoList.length,
             itemBuilder: (c, i) {
               final publicUser =
-                  PublicUser.fromJson(controller.qDocInfoList[i].qDoc.data());
-              final uint8list = controller.qDocInfoList[i].userImage;
+                  PublicUser.fromJson(controller.state.value.qDocInfoList[i].qDoc.data());
+              final uint8list = controller.state.value.qDocInfoList[i].userImage;
               return UserCard(publicUser: publicUser, uint8list: uint8list);
             })));
   }

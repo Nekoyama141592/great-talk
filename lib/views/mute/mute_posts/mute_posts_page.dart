@@ -18,12 +18,12 @@ class MutePostsPage extends StatelessWidget {
       body: RefreshScreen(
         docsController: controller,
         child: Obx(() => ListView.builder(
-            itemCount: controller.qDocInfoList.length,
+            itemCount: controller.state.value.qDocInfoList.length,
             itemBuilder: (c, i) {
               final post =
-                  Post.fromJson(controller.qDocInfoList[i].qDoc.data());
-              final uint8list = controller.qDocInfoList[i].userImage;
-              return MutePostCard(post: post, uint8list: uint8list);
+                  Post.fromJson(controller.state.value.qDocInfoList[i].qDoc.data());
+              final uint8list = controller.state.value.qDocInfoList[i].userImage;
+              return MutePostCard(post: post, uint8list: uint8list,onTap: controller.onTap,);
             })),
       ),
     );

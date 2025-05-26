@@ -1,24 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/user_profile_controller.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 
 class FollowButton extends StatelessWidget {
-  const FollowButton({super.key});
+  const FollowButton({super.key,required this.isFollow,required this.follow,required this.unFollow});
+  final bool isFollow;
+  final void Function()? follow;
+  final void Function()? unFollow;
   @override
   Widget build(BuildContext context) {
-    final controller = UserProfileController.to;
-    return Obx(() => !CurrentUserController.to.followingUids
-            .contains(controller.passiveUid())
-        ? RoundedButton(
+    return isFollow ? RoundedButton(
             text: "フォロー",
             textColor: Colors.white,
-            press: controller.onFollowPressed)
+            press: follow)
         : RoundedButton(
             text: "アンフォロー",
-            press: controller.onUnFollowPressed,
+            press: unFollow,
             buttonColor: Colors.grey,
-          ));
+          );
+
+    // return Obx(() => !CurrentUserController.to.followingUids
+    //         .contains(controller.passiveUid())
+    //     ? RoundedButton(
+    //         text: "フォロー",
+    //         textColor: Colors.white,
+    //         press: controller.onFollowPressed)
+    //     : RoundedButton(
+    //         text: "アンフォロー",
+    //         press: controller.onUnFollowPressed,
+    //         buttonColor: Colors.grey,
+    //       ));
   }
 }
