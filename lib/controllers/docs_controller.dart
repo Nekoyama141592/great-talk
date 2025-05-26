@@ -7,6 +7,7 @@ import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/controllers/tokens_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/model/global/tokens/tokens_state.dart';
 import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
@@ -33,6 +34,10 @@ class DocsController extends GetxController {
   bool isLoading() => state.value.isLoading;
   void startLoading() => state.value = state.value.copyWith(isLoading: true);
   void endLoading() => state.value = state.value.copyWith(isLoading: false);
+  // TODO: riverpod_generatorを使ってref.read(tokensNotifierProvider.notifier)に変更
+  TokensController _tokensNotifier() => TokensController.to;
+  // TODO: riverpod_generatorを使ってref.read(tokensNotifierProvider)に変更
+  TokensState _tokensState() => TokensController.to.state.value;
 
   String currentUid() {
     // TODO: riverpod_generatorを使ったら ref.read(streamAuthUidProvider).value!;に変更する
@@ -59,7 +64,7 @@ class DocsController extends GetxController {
   MapQuery setQuery() {
     switch (type) {
       case DocsType.bookmarks:
-        final token = TokensController.to.state.value.bookmarkCategoryTokens.firstWhere(
+        final token = _tokensState().bookmarkCategoryTokens.firstWhere(
           (element) => element.id == Get.parameters["categoryId"],
         );
         return QueryCore.bookmarks(token);
@@ -274,7 +279,7 @@ class DocsController extends GetxController {
 
   List<String> createRequestPostIds() {
     final int userDocsLength = state.value.qDocInfoList.length;
-    final muteUids = TokensController.to.state.value.mutePostIds;
+    final muteUids = _tokensState().mutePostIds;
     if (muteUids.length > state.value.qDocInfoList.length) {
       final List<String> requestUids =
           (muteUids.length - state.value.qDocInfoList.length) >= whereInLimit
@@ -296,10 +301,10 @@ class DocsController extends GetxController {
   Future<void> unMutePost(Post post) async {
     final repository = FirestoreRepository();
     final postId = post.postId;
-    final deleteToken = TokensController.to.state.value.mutePostTokens.firstWhere(
+    final deleteToken = _tokensState().mutePostTokens.firstWhere(
       (element) => element.postId == postId,
     );
-    TokensController.to.removeMutePost(deleteToken);
+    _tokensNotifier().removeMutePost(deleteToken);
     state.value.qDocInfoList.removeWhere(
       (element) => Post.fromJson(element.qDoc.data()).postId == postId,
     );
@@ -313,7 +318,7 @@ class DocsController extends GetxController {
 
   List<String> createRequestUids() {
     final int userDocsLength = state.value.qDocInfoList.length;
-    final muteUids = TokensController.to.state.value.muteUids;
+    final muteUids = _tokensState().muteUids;
     if (muteUids.length > state.value.qDocInfoList.length) {
       final List<String> requestUids =
           (muteUids.length - state.value.qDocInfoList.length) >= whereInLimit
@@ -334,10 +339,10 @@ class DocsController extends GetxController {
 
   Future<void> unMuteUser(String passiveUid) async {
     final repository = FirestoreRepository();
-    final deleteToken = TokensController.to.state.value.muteUserTokens.firstWhere(
+    final deleteToken = _tokensState().muteUserTokens.firstWhere(
       (element) => element.passiveUid == passiveUid,
     );
-    TokensController.to.removeMuteUser(deleteToken);
+    _tokensNotifier().removeMuteUser(deleteToken);
     state.value.qDocInfoList.removeWhere(
       (element) => PublicUser.fromJson(element.qDoc.data()).uid == passiveUid,
     );
@@ -383,7 +388,7 @@ class DocsController extends GetxController {
       UIHelper.showFlutterToast("自分をフォローすることはできません。");
       return;
     }
-    if (TokensController.to.state.value.followingUids.length >= followLimit) {
+    if (_tokensState().followingUids.length >= followLimit) {
       UIHelper.showFlutterToast("フォローできるのは$followLimit人までです。");
       return;
     }
@@ -405,7 +410,7 @@ class DocsController extends GetxController {
       passiveUserRef: state.value.passiveUser!.ref,
       tokenType: TokenType.following.name,
     );
-    TokensController.to.addFollowing(followingToken);
+    _tokensNotifier().addFollowing(followingToken);
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.createDoc(tokenRef, followingToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
@@ -432,10 +437,10 @@ class DocsController extends GetxController {
       followerCount: state.value.passiveUser!.followerCount + minusOne,
     );
     state.value = state.value.copyWith(passiveUser: newUser);
-    final deleteToken = TokensController.to.state.value.followingTokens.firstWhere(
+    final deleteToken = _tokensState().followingTokens.firstWhere(
       (element) => element.passiveUid == passiveUid(),
     );
-    TokensController.to.removeFollowing(deleteToken);
+    _tokensNotifier().removeFollowing(deleteToken);
     final tokenRef = DocRefCore.token(currentUid(), deleteToken.tokenId);
     await repository.deleteDoc(tokenRef);
     final followerRef = DocRefCore.follower(currentUid(), passiveUid());
