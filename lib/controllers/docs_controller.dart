@@ -2,8 +2,10 @@ import 'dart:typed_data';
 
 import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
+import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
@@ -15,6 +17,10 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/model/database_schema/follower/follower.dart';
+import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
 
 class DocsController extends GetxController with CurrentUserMixin {
   DocsController(this.type);
@@ -222,4 +228,161 @@ class DocsController extends GetxController with CurrentUserMixin {
     }
     refreshController.loadComplete();
   }
+
+  List<String> createRequestPostIds() {
+    final int userDocsLength = state.value.qDocInfoList.length;
+    final muteUids = CurrentUserController.to.mutePostIds;
+    if (muteUids.length > state.value.qDocInfoList.length) {
+      final List<String> requestUids =
+          (muteUids.length - state.value.qDocInfoList.length) >= whereInLimit
+              ? muteUids.sublist(userDocsLength, userDocsLength + whereInLimit)
+              : muteUids.sublist(userDocsLength, muteUids.length);
+      return requestUids;
+    } else {
+      return [];
+    }
+  }
+
+  void onMutePostCardTap(Post post) {
+    UIHelper.cupertinoAlertDialog("ミュートを解除しますがよろしいですか？",
+        () => unMutePost(post).then((value) => Get.back()));
+  }
+
+  Future<void> unMutePost(Post post) async {
+    final repository = FirestoreRepository();
+    final postId = post.postId;
+    final deleteToken = CurrentUserController.to.mutePostTokens
+        .firstWhere((element) => element.postId == postId);
+    CurrentUserController.to.removeMutePost(deleteToken);
+    state.value.qDocInfoList.removeWhere(
+        (element) => Post.fromJson(element.qDoc.data()).postId == postId);
+    final tokenId = deleteToken.tokenId;
+    final tokenRef = DocRefCore.token(currentUid(), tokenId);
+    await repository.deleteDoc(tokenRef);
+    final postRef = post.typedRef();
+    final postMuteRef = DocRefCore.postMute(postRef, currentUid());
+    await repository.deleteDoc(postMuteRef);
+  }
+
+  List<String> createRequestUids() {
+    final int userDocsLength = state.value.qDocInfoList.length;
+    final muteUids = CurrentUserController.to.muteUids;
+    if (muteUids.length > state.value.qDocInfoList.length) {
+      final List<String> requestUids =
+          (muteUids.length - state.value.qDocInfoList.length) >= whereInLimit
+              ? muteUids.sublist(userDocsLength, userDocsLength + whereInLimit)
+              : muteUids.sublist(userDocsLength, muteUids.length);
+      return requestUids;
+    } else {
+      return [];
+    }
+  }
+
+  void onMuteUserCardTap(String passiveUid) {
+    UIHelper.cupertinoAlertDialog("ミュートを解除しますがよろしいですか？",
+        () => unMuteUser(passiveUid).then((value) => Get.back()));
+  }
+
+  Future<void> unMuteUser(String passiveUid) async {
+    final repository = FirestoreRepository();
+    final deleteToken = CurrentUserController.to.muteUserTokens
+        .firstWhere((element) => element.passiveUid == passiveUid);
+    CurrentUserController.to.removeMuteUer(deleteToken);
+    state.value.qDocInfoList.removeWhere((element) =>
+        PublicUser.fromJson(element.qDoc.data()).uid == passiveUid);
+    final tokenId = deleteToken.tokenId;
+    final tokenRef = DocRefCore.token(currentUid(), tokenId);
+    await repository.deleteDoc(tokenRef);
+    final userMuteRef = DocRefCore.userMute(passiveUid, currentUid());
+    await repository.deleteDoc(userMuteRef);
+  }
+  Future<void> getPassiveUser() async {
+    final repository = FirestoreRepository();
+    final ref = DocRefCore.user(passiveUid());
+    final result = await repository.getDoc(ref);
+    result.when(success: (res) {
+      if (res.exists) {
+        state.value = state.value.copyWith(passiveUser: PublicUser.fromJson(res.data()!));
+      }
+    }, failure: (e) {
+      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+    });
+    final user = state.value.passiveUser;
+    if (user == null) return;
+    final detectedImage = user.typedImage();
+    final s3Image = await FileUtility.getS3Image(
+        detectedImage.bucketName, detectedImage.value);
+    state.value = state.value.copyWith(uint8list: s3Image);
+  }
+
+  void onFollowPressed() async {
+    if (state.value.passiveUser == null) {
+      return;
+    }
+    if (state.value.passiveUser!.uid == currentUid()) {
+      UIHelper.showFlutterToast("自分をフォローすることはできません。");
+      return;
+    }
+    if (CurrentUserController.to.hasNoPublicUser()) {
+      UIHelper.showFlutterToast("ログインが必要です。");
+      return;
+    }
+    if (CurrentUserController.to.followingUids.length >= followLimit) {
+      UIHelper.showFlutterToast("フォローできるのは$followLimit人までです。");
+      return;
+    }
+    await _follow();
+  }
+
+  Future<void> _follow() async {
+    final repository = FirestoreRepository();
+    final String tokenId = randomString();
+    final Timestamp now = Timestamp.now();
+    final newUser = state.value.passiveUser!
+        .copyWith(followerCount: state.value.passiveUser!.followerCount + plusOne);
+    state.value = state.value.copyWith(passiveUser: newUser);
+    final followingToken = FollowingToken(
+        createdAt: now,
+        passiveUid: passiveUid(),
+        tokenId: tokenId,
+        passiveUserRef: state.value.passiveUser!.ref,
+        tokenType: TokenType.following.name);
+    CurrentUserController.to.addFollowing(followingToken);
+    final tokenRef = DocRefCore.token(currentUid(), tokenId);
+    await repository.createDoc(tokenRef, followingToken.toJson());
+    // 受動的なユーザーがフォローされたdataを生成する
+    final follower = Follower(
+        activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
+        createdAt: now,
+        passiveUserRef: state.value.passiveUser!.typedRef());
+    final followerRef = DocRefCore.follower(currentUid(), passiveUid());
+    await repository.createDoc(followerRef, follower.toJson());
+  }
+
+  void onUnFollowPressed() async {
+    if (state.value.passiveUser == null) {
+      return;
+    }
+    if (CurrentUserController.to.hasNoPublicUser()) {
+      UIHelper.showFlutterToast("ログインが必要です");
+      return;
+    }
+    await _unfollow();
+  }
+
+  Future<void> _unfollow() async {
+    final repository = FirestoreRepository();
+    final newUser = state.value.passiveUser!.copyWith(
+        followerCount: state.value.passiveUser!.followerCount + minusOne);
+    state.value = state.value.copyWith(passiveUser: newUser);
+    final deleteToken = CurrentUserController.to.followingTokens
+        .firstWhere((element) => element.passiveUid == passiveUid());
+    CurrentUserController.to.removeFollowing(deleteToken);
+    final tokenRef = DocRefCore.token(currentUid(), deleteToken.tokenId);
+    await repository.deleteDoc(tokenRef);
+    final followerRef = DocRefCore.follower(currentUid(), passiveUid());
+    await repository.deleteDoc(followerRef);
+  }
+
+  bool isMyProfile() => passiveUid() == currentUid();
 }

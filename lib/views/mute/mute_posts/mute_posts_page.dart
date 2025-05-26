@@ -23,7 +23,7 @@ class MutePostsPage extends StatelessWidget {
               final post =
                   Post.fromJson(controller.state.value.qDocInfoList[i].qDoc.data());
               final uint8list = controller.state.value.qDocInfoList[i].userImage;
-              return MutePostCard(post: post, uint8list: uint8list,onTap: controller.onTap,);
+              return MutePostCard(post: post, uint8list: uint8list,onTap: controller.onMutePostCardTap,);
             })),
       ),
     );
