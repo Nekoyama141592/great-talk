@@ -14,7 +14,7 @@ import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
 import 'package:great_talk/views/components/official_mark.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:great_talk/controllers/tokens_controller.dart';
 class UserCard extends ConsumerWidget {
   const UserCard({
     super.key,

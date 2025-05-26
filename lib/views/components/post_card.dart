@@ -4,7 +4,6 @@ import 'package:great_talk/core/doubles.dart';
 import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/q_doc_info/q_doc_info.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
@@ -14,7 +13,7 @@ import 'package:great_talk/views/screen/refresh_screen/components/post_like_butt
 import 'package:great_talk/views/screen/refresh_screen/components/post_msg_button.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:great_talk/controllers/tokens_controller.dart';
 class PostCard extends ConsumerWidget {
   const PostCard({super.key, required this.qDocInfo, required this.currentUid});
   final QDocInfo qDocInfo;

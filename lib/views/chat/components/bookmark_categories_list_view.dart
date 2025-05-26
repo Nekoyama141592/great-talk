@@ -4,10 +4,9 @@ import 'package:great_talk/core/doubles.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
-
+import 'package:great_talk/controllers/tokens_controller.dart';
 class BookmarkCategoriesListView extends StatelessWidget {
   const BookmarkCategoriesListView({
     super.key,

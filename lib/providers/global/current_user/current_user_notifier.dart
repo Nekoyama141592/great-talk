@@ -337,7 +337,6 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     }
     _updateState(state.value!.copyWith(publicUser: updatedUser, base64: newBase64));
 
-    // Firestoreのデータも更新する (元のコードには更新ロジックがありませんでしたが、必要であれば追加してください)
     final firestoreRepository = ref.read(firestoreRepositoryProvider);
     final docRef = DocRefCore.user(currentUid());
     await firestoreRepository.updateDoc(docRef, updatedUser.toJson());
