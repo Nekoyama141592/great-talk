@@ -25,7 +25,10 @@ class RefreshScreen extends HookWidget {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         await docsController.init();
       });
-      return refreshController.dispose;
+      return () {
+        refreshController.dispose();
+        docsController.close();
+      };
     }, []);
     return Obx(() {
       if (docsController.isLoading()) {

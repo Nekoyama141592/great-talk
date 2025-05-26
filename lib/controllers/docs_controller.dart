@@ -28,16 +28,15 @@ class DocsController extends GetxController with CurrentUserMixin {
   void startLoading() => state.value = state.value.copyWith(isLoading: true);
   void endLoading() => state.value = state.value.copyWith(isLoading: false);
 
-  @override
-  void onInit() async {
+  Future<void> init() async {
     // isTimelineをDocsState内で初期化
     final isTimeline = type == DocsType.bookmarks || type == DocsType.feeds;
     await onReload();
-    state.value = state.value.copyWith(isTimeline: isTimeline);
+    state.value = DocsState(isTimeline: isTimeline);
     super.onInit();
   }
-  @override
-  void onClose() {
+
+  void close() {
     state.value = DocsState();
   }
 
@@ -113,10 +112,6 @@ class DocsController extends GetxController with CurrentUserMixin {
     } else {
       return elements..sort((a, b) => (b["createdAt"]).compareTo(a["createdAt"]));
     }
-  }
-
-  Future<void> init() async {
-    await onReload();
   }
 
   Future<Uint8List?> _getImageFromDoc(Doc doc) async {
