@@ -19,22 +19,20 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class DocsController extends GetxController with CurrentUserMixin {
   DocsController(this.type);
   final DocsType type;
-  bool cannotShow() => isLoading.value;
-  void startLoading() => isLoading(true);
-  void endLoading() => isLoading(false);
-  // TODO: 状態管理をDocsStateに置き換えて消去
-  final isLoading = false.obs;
-  final qDocInfoList = <QDocInfo>[].obs;
-  final Rx<PublicUser?> rxPassiveUser = Rx(null);
-  final Rx<Uint8List?> rxUint8list = Rx(null);
-  List<QDoc> indexDocs = [];
-  bool isTimeline = false;
-  // TODO: 状態管理をDocsStateに置き換える
+
+  // 状態管理をDocsStateに一本化
   final state = Rx(DocsState());
+
+  // state.valueを介してプロパティにアクセス
+  bool cannotShow() => state.value.isLoading;
+  void startLoading() => state.value = state.value.copyWith(isLoading: true);
+  void endLoading() => state.value = state.value.copyWith(isLoading: false);
 
   @override
   void onInit() async {
-    isTimeline = type == DocsType.bookmarks || type == DocsType.feeds;
+    // isTimelineをDocsState内で初期化
+    final isTimeline = type == DocsType.bookmarks || type == DocsType.feeds;
+    state.value = state.value.copyWith(isTimeline: isTimeline);
     await onReload();
     super.onInit();
   }
@@ -45,7 +43,7 @@ class DocsController extends GetxController with CurrentUserMixin {
     switch (type) {
       case DocsType.bookmarks:
         final token = CurrentUserController.to.bookmarkCategoryTokens
-        .firstWhere((element) => element.id == Get.parameters["categoryId"]);
+            .firstWhere((element) => element.id == Get.parameters["categoryId"]);
         return QueryCore.bookmarks(token);
       case DocsType.feeds:
         return QueryCore.timelines(DocRefCore.user(currentUid()));
@@ -53,28 +51,23 @@ class DocsController extends GetxController with CurrentUserMixin {
       case DocsType.muteUsers:
         throw UnimplementedError();
       case DocsType.newPosts:
-        // 新着投稿用のクエリを返す
         return QueryCore.postsByNewest();
       case DocsType.rankingPosts:
-        // ランキング投稿用のクエリを返す
         return QueryCore.postsByMsgCount();
       case DocsType.userProfiles:
-        // ユーザープロフィール用のクエリを返す
         return QueryCore.userPostsByNewest(passiveUid());
       case DocsType.rankingUsers:
-        // ランキングユーザー用のクエリを返す
         return QueryCore.usersByFollowerCount();
     }
   }
 
-  Future<void> _updateDocInfoList(List<QDoc> elements,
-      {bool front = false}) async {
-    if (isLoading.value || elements.isEmpty) return;
+  Future<void> _updateDocInfoList(List<QDoc> elements, {bool front = false}) async {
+    if (state.value.isLoading || elements.isEmpty) return;
     startLoading();
     try {
-      final docIds = qDocInfoList.map((e) => e.qDoc.id).toSet();
-      final newElements =
-          elements.where((e) => !docIds.contains(e.id)).toList();
+      final currentDocs = state.value.qDocInfoList;
+      final docIds = currentDocs.map((e) => e.qDoc.id).toSet();
+      final newElements = elements.where((e) => !docIds.contains(e.id)).toList();
       if (newElements.isEmpty) {
         endLoading();
         return;
@@ -89,14 +82,13 @@ class DocsController extends GetxController with CurrentUserMixin {
           .map((element) async {
         final publicUser = userMap[element.data()['uid']]!;
         final userImage = await _getImageFromDoc(element);
-        return QDocInfo(
-            publicUser: publicUser, qDoc: element, userImage: userImage);
+        return QDocInfo(publicUser: publicUser, qDoc: element, userImage: userImage);
       }));
 
       if (front) {
-        qDocInfoList.value = [...newQDocInfoList.reversed, ...qDocInfoList];
+        state.value = state.value.copyWith(qDocInfoList: [...newQDocInfoList.reversed, ...currentDocs]);
       } else {
-        qDocInfoList.value = [...qDocInfoList, ...newQDocInfoList];
+        state.value = state.value.copyWith(qDocInfoList: [...currentDocs, ...newQDocInfoList]);
       }
     } finally {
       endLoading();
@@ -115,8 +107,7 @@ class DocsController extends GetxController with CurrentUserMixin {
     if (elements.isEmpty) {
       return [];
     } else {
-      return elements
-        ..sort((a, b) => (b["createdAt"]).compareTo(a["createdAt"]));
+      return elements..sort((a, b) => (b["createdAt"]).compareTo(a["createdAt"]));
     }
   }
 
@@ -126,13 +117,12 @@ class DocsController extends GetxController with CurrentUserMixin {
 
   Future<Uint8List?> _getImageFromDoc(Doc doc) async {
     final detectedImage = DetectedImage.fromJson(doc['image']);
-    final image = await FileUtility.getS3Image(
-        detectedImage.bucketName, detectedImage.value);
+    final image = await FileUtility.getS3Image(detectedImage.bucketName, detectedImage.value);
     return image;
   }
 
   Future<void> fetchDocs() async {
-    if (isTimeline) {
+    if (state.value.isTimeline) {
       fetchTimelineDocs();
       return;
     }
@@ -151,17 +141,16 @@ class DocsController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> onLoading(RefreshController refreshController) async {
-    if (qDocInfoList.isEmpty) {
+    if (state.value.qDocInfoList.isEmpty) {
       refreshController.loadComplete();
       return;
     }
-    if (isTimeline) {
+    if (state.value.isTimeline) {
       onLoadingTimeline(refreshController);
       return;
     }
     try {
-      final elements =
-          await setQuery().startAtDocument(qDocInfoList.last.qDoc).get();
+      final elements = await setQuery().startAtDocument(state.value.qDocInfoList.last.qDoc).get();
       await addAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
@@ -170,10 +159,9 @@ class DocsController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> onRefresh() async {
-    if (qDocInfoList.isEmpty) return;
+    if (state.value.qDocInfoList.isEmpty) return;
     try {
-      final elements =
-          await setQuery().endBeforeDocument(qDocInfoList.first.qDoc).get();
+      final elements = await setQuery().endBeforeDocument(state.value.qDocInfoList.first.qDoc).get();
       await insertAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
@@ -194,12 +182,9 @@ class DocsController extends GetxController with CurrentUserMixin {
     return users;
   }
 
-  // Indexが必要
-  Future<List<QDoc>> _timelinesToPostsResult(
-      List<QDoc> fetchedDocs) async {
+  Future<List<QDoc>> _timelinesToPostsResult(List<QDoc> fetchedDocs) async {
     final repository = FirestoreRepository();
-    final List<String> postIds =
-        fetchedDocs.map((e) => e.data()["postId"] as String).toList();
+    final List<String> postIds = fetchedDocs.map((e) => e.data()["postId"] as String).toList();
     final query = QueryCore.timelinePosts(postIds);
     final posts = await repository.getDocsWithList(query);
     return posts;
@@ -218,16 +203,20 @@ class DocsController extends GetxController with CurrentUserMixin {
   Future<void> fetchTimelineDocs() async {
     try {
       final result = await setQuery().get();
-      indexDocs = result.docs;
+      // indexDocsをstate内で更新
+      state.value = state.value.copyWith(indexDocs: result.docs);
       await _fetchTimelinePosts(result.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     }
   }
-   Future<void> onLoadingTimeline(RefreshController refreshController) async {
+
+  Future<void> onLoadingTimeline(RefreshController refreshController) async {
     try {
-      final result = await setQuery().startAfterDocument(indexDocs.last).get();
-      indexDocs.addAll(result.docs);
+      final result = await setQuery().startAfterDocument(state.value.indexDocs.last).get();
+      final newIndexDocs = [...state.value.indexDocs, ...result.docs];
+      // indexDocsをstate内で更新
+      state.value = state.value.copyWith(indexDocs: newIndexDocs);
       await _fetchMoreTimelinePosts(result.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");

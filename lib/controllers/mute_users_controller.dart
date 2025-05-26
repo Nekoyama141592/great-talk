@@ -37,11 +37,11 @@ class MuteUsersController extends DocsController {
   }
 
   List<String> _createRequestUids() {
-    final int userDocsLength = qDocInfoList.length;
+    final int userDocsLength = state.value.qDocInfoList.length;
     final muteUids = CurrentUserController.to.muteUids;
-    if (muteUids.length > qDocInfoList.length) {
+    if (muteUids.length > state.value.qDocInfoList.length) {
       final List<String> requestUids =
-          (muteUids.length - qDocInfoList.length) >= whereInLimit
+          (muteUids.length - state.value.qDocInfoList.length) >= whereInLimit
               ? muteUids.sublist(userDocsLength, userDocsLength + whereInLimit)
               : muteUids.sublist(userDocsLength, muteUids.length);
       return requestUids;
@@ -60,7 +60,7 @@ class MuteUsersController extends DocsController {
     final deleteToken = CurrentUserController.to.muteUserTokens
         .firstWhere((element) => element.passiveUid == passiveUid);
     CurrentUserController.to.removeMuteUer(deleteToken);
-    qDocInfoList.removeWhere((element) =>
+    state.value.qDocInfoList.removeWhere((element) =>
         PublicUser.fromJson(element.qDoc.data()).uid == passiveUid);
     final tokenId = deleteToken.tokenId;
     final tokenRef = DocRefCore.token(currentUid(), tokenId);

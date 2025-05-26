@@ -28,24 +28,24 @@ class UserProfileController extends DocsController {
     final result = await repository.getDoc(ref);
     result.when(success: (res) {
       if (res.exists) {
-        rxPassiveUser(PublicUser.fromJson(res.data()!));
+        state.value = state.value.copyWith(passiveUser: PublicUser.fromJson(res.data()!));
       }
     }, failure: (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     });
-    final user = rxPassiveUser.value;
+    final user = state.value.passiveUser;
     if (user == null) return;
     final detectedImage = user.typedImage();
     final s3Image = await FileUtility.getS3Image(
         detectedImage.bucketName, detectedImage.value);
-    rxUint8list(s3Image);
+    state.value = state.value.copyWith(uint8list: s3Image);
   }
 
   void onFollowPressed() async {
-    if (rxPassiveUser.value == null) {
+    if (state.value.passiveUser == null) {
       return;
     }
-    if (rxPassiveUser.value!.uid == currentUid()) {
+    if (state.value.passiveUser!.uid == currentUid()) {
       UIHelper.showFlutterToast("自分をフォローすることはできません。");
       return;
     }
@@ -64,13 +64,14 @@ class UserProfileController extends DocsController {
     final repository = FirestoreRepository();
     final String tokenId = randomString();
     final Timestamp now = Timestamp.now();
-    rxPassiveUser(rxPassiveUser.value!
-        .copyWith(followerCount: rxPassiveUser.value!.followerCount + plusOne));
+    final newUser = state.value.passiveUser!
+        .copyWith(followerCount: state.value.passiveUser!.followerCount + plusOne);
+    state.value = state.value.copyWith(passiveUser: newUser);
     final followingToken = FollowingToken(
         createdAt: now,
         passiveUid: passiveUid(),
         tokenId: tokenId,
-        passiveUserRef: rxPassiveUser.value!.ref,
+        passiveUserRef: state.value.passiveUser!.ref,
         tokenType: TokenType.following.name);
     CurrentUserController.to.addFollowing(followingToken);
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
@@ -79,13 +80,13 @@ class UserProfileController extends DocsController {
     final follower = Follower(
         activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
         createdAt: now,
-        passiveUserRef: rxPassiveUser.value!.typedRef());
+        passiveUserRef: state.value.passiveUser!.typedRef());
     final followerRef = DocRefCore.follower(currentUid(), passiveUid());
     await repository.createDoc(followerRef, follower.toJson());
   }
 
   void onUnFollowPressed() async {
-    if (rxPassiveUser.value == null) {
+    if (state.value.passiveUser == null) {
       return;
     }
     if (CurrentUserController.to.hasNoPublicUser()) {
@@ -97,8 +98,9 @@ class UserProfileController extends DocsController {
 
   Future<void> _unfollow() async {
     final repository = FirestoreRepository();
-    rxPassiveUser(rxPassiveUser.value!.copyWith(
-        followerCount: rxPassiveUser.value!.followerCount + minusOne));
+    final newUser = state.value.passiveUser!.copyWith(
+        followerCount: state.value.passiveUser!.followerCount + minusOne);
+    state.value = state.value.copyWith(passiveUser: newUser);
     final deleteToken = CurrentUserController.to.followingTokens
         .firstWhere((element) => element.passiveUid == passiveUid());
     CurrentUserController.to.removeFollowing(deleteToken);
