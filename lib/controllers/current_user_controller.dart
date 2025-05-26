@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/model/global/current_user/auth_user/auth_user.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/col_ref_core.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
@@ -30,13 +31,18 @@ import 'package:great_talk/views/auth/user_deleted_page.dart';
 
 class CurrentUserController extends GetxController {
   static CurrentUserController get to => Get.find<CurrentUserController>();
-  final Rx<User?> rxAuthUser = Rx(FirebaseAuth.instance.currentUser);
+  final Rx<AuthUser?> rxAuthUser = Rx(null);
   final Rx<PublicUser?> rxPublicUser = Rx(null);
   final Rx<PrivateUser?> rxPrivateUser = Rx(null);
   final Rx<String?> rxBase64 = Rx(null);
 
+
   @override
   void onInit() async {
+    final authUser = FirebaseAuth.instance.currentUser;
+    if (authUser != null) {
+      rxAuthUser.value = AuthUser.fromFirebaseAuthUser(authUser);
+    }
     await _manageUserInfo();
     super.onInit();
   }
@@ -44,7 +50,11 @@ class CurrentUserController extends GetxController {
   Future<void> _createAnonymousUser() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInAnonymously();
-    result.when(success: (res) => rxAuthUser(res), failure: (e) {});
+    result.when(success: (res) => setAuthUser(res), failure: (e) {});
+  }
+
+  void setAuthUser(User user) {
+    rxAuthUser.value = AuthUser.fromFirebaseAuthUser(user);
   }
 
   String currentUid() => rxAuthUser.value?.uid ?? '';
@@ -78,7 +88,7 @@ class CurrentUserController extends GetxController {
     Get.back();
     UIHelper.showFlutterToast("ログインに成功しました");
     await user.reload();
-    rxAuthUser(user);
+    setAuthUser(user);
     await _manageUserInfo();
   }
 
@@ -228,8 +238,10 @@ class CurrentUserController extends GetxController {
 
   Future<void> _reauthenticateToDelete(AuthCredential credential) async {
     final repository = FirebaseAuthRepository();
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
     final result = await repository.reauthenticateWithCredential(
-      rxAuthUser.value!,
+      user,
       credential,
     );
     result.when(
@@ -263,7 +275,9 @@ class CurrentUserController extends GetxController {
 
   Future<void> _deleteAuthUser() async {
     final repository = FirebaseAuthRepository();
-    final result = await repository.deleteUser(rxAuthUser.value!);
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+    final result = await repository.deleteUser(user);
     result.when(
       success: (_) {
         Get.toNamed(UserDeletedPage.path);
