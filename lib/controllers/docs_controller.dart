@@ -32,8 +32,8 @@ class DocsController extends GetxController with CurrentUserMixin {
   void onInit() async {
     // isTimelineをDocsState内で初期化
     final isTimeline = type == DocsType.bookmarks || type == DocsType.feeds;
-    state.value = state.value.copyWith(isTimeline: isTimeline);
     await onReload();
+    state.value = state.value.copyWith(isTimeline: isTimeline);
     super.onInit();
   }
   @override
