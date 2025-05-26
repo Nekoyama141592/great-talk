@@ -20,12 +20,10 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   void startLoading() => isLoading(true);
   void endLoading() => isLoading(false);
   final isLoading = false.obs;
-  bool get requiresValueReset => false; // ページを開くたびに初期化が必要かどうかを判定
   final qDocInfoList = <QDocInfo>[].obs;
-  final isInit = false.obs;
-  List<QDoc> indexDocs = [];
   final Rx<PublicUser?> rxPassiveUser = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
+  List<QDoc> indexDocs = [];
   bool isTimeline = false;
   @override
   void onInit() async {
@@ -117,12 +115,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> init() async {
-    if (requiresValueReset) {
-      isInit(false);
-    }
-    if (isInit.value) return;
     await onReload();
-    isInit(true);
   }
 
   Future<Uint8List?> _getImageFromDoc(Doc doc) async {

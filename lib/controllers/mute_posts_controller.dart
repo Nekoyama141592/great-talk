@@ -12,8 +12,6 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MutePostsController extends DocsController {
-  @override
-  bool get requiresValueReset => true;
   static MutePostsController get to => Get.find<MutePostsController>();
   @override
   DocsType get type => DocsType.mutePosts;

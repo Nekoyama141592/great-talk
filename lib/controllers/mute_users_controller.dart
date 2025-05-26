@@ -13,8 +13,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MuteUsersController extends DocsController {
   @override
-  bool get requiresValueReset => true;
-  @override
   DocsType get type => DocsType.muteUsers;
   @override
   MapQuery setQuery() {
