@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/q_doc_info/q_doc_info.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
@@ -16,17 +16,17 @@ import 'package:great_talk/views/user_profile_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PostCard extends ConsumerWidget {
-  const PostCard({super.key, required this.qDocInfo});
+  const PostCard({super.key, required this.qDocInfo,required this.currentUid});
   final QDocInfo qDocInfo;
+  final String currentUid;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = PostsController.to;
     final post = Post.fromJson(qDocInfo.qDoc.data());
     final uint8list = qDocInfo.userImage;
     final publicUser = qDocInfo.publicUser;
     // 不適切なら弾く
     return InkWell(
-      onLongPress: () => controller.onPostCardLongPressed(post),
+      onLongPress: () => PostCore.onPostCardLongPressed(post),
       child: Padding(
           padding: EdgeInsets.all(defaultPadding(context)),
           child: Obx(() {
@@ -56,7 +56,7 @@ class PostCard extends ConsumerWidget {
               );
             }
             return GestureDetector(
-              onTap: () => controller.onPostCardPressed(post),
+              onTap: () => PostCore.onPostCardPressed(post),
               child: Container(
                 decoration: BoxDecoration(
                   border:
@@ -68,7 +68,7 @@ class PostCard extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CircleImage(
-                        onTap: () => controller.onPostCardPressed(post),
+                        onTap: () => PostCore.onPostCardPressed(post),
                         uint8list: uint8list,
                       ),
                     ),
@@ -90,6 +90,7 @@ class PostCard extends ConsumerWidget {
                           PostLikeButton(
                             isHorizontal: false,
                             post: post,
+                            currentUid: currentUid,
                           ),
                           const Spacer(),
                           PostMsgButton(isHorizontal: false, post: post),

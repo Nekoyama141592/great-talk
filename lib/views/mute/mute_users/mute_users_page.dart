@@ -3,20 +3,23 @@ import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/views/mute/mute_users/component/mute_user_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MuteUsersPage extends StatelessWidget {
+class MuteUsersPage extends ConsumerWidget {
   const MuteUsersPage({super.key});
   static const path = "/muteUsers";
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     final controller = Get.put(DocsController(DocsType.muteUsers));
     return Scaffold(
       appBar: AppBar(
         title: const Text("ミュートしているユーザー一覧"),
       ),
       body: RefreshScreen(
+        currentUid: ref.watch(streamAuthUidProvider).value!,
         docsController: controller,
         child: Obx(() => ListView.builder(
             itemCount: controller.state.value.qDocInfoList.length,

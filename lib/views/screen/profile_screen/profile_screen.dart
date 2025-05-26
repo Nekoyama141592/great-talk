@@ -17,11 +17,12 @@ import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProfileScreen extends ConsumerWidget {
-  const ProfileScreen({super.key, required this.controller,required this.passiveUid,required this.follow,required this.unFollow});
+  const ProfileScreen({super.key, required this.controller,required this.passiveUid,required this.follow,required this.unFollow,required this.currentUid});
   final DocsController controller;
   final String passiveUid;
   final void Function()? follow;
   final void Function()? unFollow;
+  final String currentUid;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final children = <Widget>[
@@ -105,6 +106,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
           child: RefreshScreen(
             docsController: controller,
+            currentUid: currentUid,
           ),
         ));
   }

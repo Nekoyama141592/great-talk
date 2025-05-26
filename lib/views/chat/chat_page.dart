@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
@@ -12,14 +13,14 @@ import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/view_model/chat/chat_view_model.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/views/chat/components/menu_button.dart';
 import 'package:great_talk/views/chat/components/msg_card.dart';
+import 'package:great_talk/views/components/app_bar_action.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/rounded_input_field.dart';
 import 'package:great_talk/views/chat/components/delete_post_button.dart';
-import 'package:great_talk/views/chat/components/menu_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
-import 'package:great_talk/views/screen/refresh_screen/components/post_report_button.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ChatPage extends HookConsumerWidget {
@@ -79,8 +80,11 @@ class ChatPage extends HookConsumerWidget {
                       onTap: chatNotifier.onDeleteButtonPressed,
                     )
                   else
-                    const PostReportButton(),
-                  PostLikeButton(isHorizontal: true, post: post),
+                    AppBarAction(
+                      onTap: () => PostCore.onReportButtonPressed(context, post,currentUserId),
+                      child: const Icon(Icons.report),
+                    ),
+                  PostLikeButton(isHorizontal: true, post: post,currentUid: currentUserId,),
                   MenuButton(
                     onMenuPressed: chatNotifier.onMenuPressed,
                   ), // MenuButtonにはcleanLocalMessageを渡す必要あり

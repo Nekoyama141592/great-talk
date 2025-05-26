@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/controllers/posts_controller.dart';
+import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 
@@ -14,13 +14,12 @@ class PostMsgButton extends HookWidget {
   final Post post;
   @override
   Widget build(BuildContext context) {
-    final controller = PostsController.to;
     final children = [
       InkWell(
           child: const Icon(
             Icons.comment,
           ),
-          onTap: () => controller.onPostCardPressed(post)),
+          onTap: () => PostCore.onPostCardPressed(post)),
       Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Text((post.msgCount).formatNumber()))

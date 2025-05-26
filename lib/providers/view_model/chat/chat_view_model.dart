@@ -8,8 +8,8 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/posts_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
+import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/infrastructure/chat_gpt_sdk_client.dart';
 import 'package:great_talk/model/database_schema/bookmark/bookmark.dart';
@@ -386,7 +386,7 @@ class ChatViewModel extends _$ChatViewModel {
 
     if (deletePost == null) return;
 
-    PostsController.to.deletePost(deletePost);
+    PostCore.deletePost(deletePost);
   }
 
   void _onBookmarkTextTapped() {

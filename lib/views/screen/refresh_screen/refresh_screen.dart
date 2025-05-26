@@ -12,10 +12,12 @@ class RefreshScreen extends HookWidget {
     super.key,
     required this.docsController,
     this.reloadMsg,
+    required this.currentUid,
     this.child,
   });
   final DocsController docsController;
   final String? reloadMsg;
+  final String currentUid;
   final Widget? child;
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,7 @@ class RefreshScreen extends HookWidget {
                     final qDocInfo = docsController.state.value.qDocInfoList[i];
                     return PostCard(
                       qDocInfo: qDocInfo,
+                      currentUid: currentUid,
                     );
                   }));
     });
