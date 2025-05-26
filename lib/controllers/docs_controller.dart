@@ -27,7 +27,7 @@ class DocsController extends GetxController {
   final DocsType type;
 
   // 状態管理をDocsStateに一本化
-  final state = Rx(DocsState());
+  final state = DocsState().obs;
 
   // state.valueを介してプロパティにアクセス
   bool isLoading() => state.value.isLoading;
