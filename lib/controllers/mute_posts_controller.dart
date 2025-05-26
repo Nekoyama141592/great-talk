@@ -29,7 +29,6 @@ class MutePostsController extends DocsController {
 
   @override
   Future<void> onLoading(RefreshController refreshController) async {
-    setQuery();
     final requestPostIds = _createRequestPostIds();
     if (requestPostIds.isNotEmpty) {
       await super.onLoading(refreshController);
