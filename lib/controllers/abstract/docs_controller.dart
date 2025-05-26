@@ -26,8 +26,10 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   List<QDoc> indexDocs = [];
   final Rx<PublicUser?> rxPassiveUser = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
+  bool isTimeline = false;
   @override
   void onInit() async {
+    isTimeline = type == DocsType.bookmarks || type == DocsType.feeds;
     await onReload();
     super.onInit();
   }
@@ -131,7 +133,6 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> fetchDocs() async {
-    const isTimeline = 1 == 2;
     if (isTimeline) {
       fetchTimelineDocs();
       return;
@@ -155,7 +156,6 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
       refreshController.loadComplete();
       return;
     }
-    const isTimeline = 1 == 2; // TODO: family
     if (isTimeline) {
       onLoadingTimeline(refreshController);
       return;
