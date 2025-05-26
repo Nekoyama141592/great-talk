@@ -12,23 +12,18 @@ import 'package:great_talk/model/database_schema/detected_image/detected_image.d
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/model/database_schema/post_mute/post_mute.dart';
-import 'package:great_talk/model/database_schema/post_report/post_report.dart';
 import 'package:great_talk/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
-import 'package:great_talk/model/database_schema/tokens/report_post_token/report_post_token.dart';
 import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/views/chat/chat_page.dart';
-import 'package:great_talk/views/screen/refresh_screen/components/report_contents_list_view.dart';
 
 class PostsController extends GetxController {
   static PostsController get to => Get.find<PostsController>();
   final repository = FirestoreRepository();
-  final others = "".obs;
-  final reportContents = <String>[].obs;
   final Rx<Post?> rxPost = Rx(null);
   String currentUid() {
     // TODO: riverpod_generatorを使ったら ref.read(streamAuthUidProvider).value;に変更する
@@ -78,35 +73,6 @@ class PostsController extends GetxController {
               ],
             ));
   }
-
-  // void _reportPost(BuildContext innerContext) {
-  //   if (rxPost.value == null) {
-  //     return;
-  //   }
-  //   final post = rxPost.value!;
-  //   if (CurrentUserController.to.reportPostIds.contains(post.postId)) {
-  //     UIHelper.showFlutterToast("すでにこの投稿を報告しています");
-  //     Navigator.pop(innerContext);
-  //     return;
-  //   }
-  //   Navigator.pop(innerContext);
-  //   showReportContentDialog(innerContext);
-  // }
-
-  void showReportContentDialog() {
-    Get.dialog(
-      const ReportContentsListView(),
-    );
-  }
-
-  void onReportContentTapped(String content) {
-    if (!reportContents.contains(content)) {
-      reportContents.add(content);
-    } else {
-      reportContents.remove(content);
-    }
-  }
-
   void _mutePost(BuildContext innerContext) async {
     if (rxPost.value == null) {
       return;
@@ -180,48 +146,6 @@ class PostsController extends GetxController {
     }
   }
 
-  void onOkCreatePostReportButtonPressed() async {
-    if (reportContents.isEmpty) return;
-    await _createPostReport().then((value) {
-      if (Get.isDialogOpen ?? false) {
-        Get.back();
-      }
-    });
-  }
-
-  Future<void> _createPostReport() async {
-    final post = rxPost.value!;
-    final tokenId = randomString();
-    final now = Timestamp.now();
-    final postId = post.postId;
-    final postRef = post.typedRef();
-    final ReportPostToken reportPostToken = ReportPostToken(
-        activeUid: currentUid(),
-        createdAt: now,
-        postId: postId,
-        postRef: postRef,
-        tokenId: tokenId,
-        tokenType: TokenType.reportPost.name);
-    TokensController.to.addReportPost(reportPostToken);
-    final tokenRef = DocRefCore.token(currentUid(), tokenId);
-    await repository.createDoc(tokenRef, reportPostToken.toJson());
-    final PostReport postReport = PostReport(
-      activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
-      activeUid: currentUid(),
-      createdAt: Timestamp.now(),
-      others: others.value,
-      postRef: post.typedRef(),
-      reportContents: reportContents,
-    );
-    final postReportRef = DocRefCore.postReport(postRef, currentUid());
-    final result =
-        await repository.createDoc(postReportRef, postReport.toJson());
-    result.when(success: (res) {
-      UIHelper.showFlutterToast("報告が完了しました！");
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("報告を完了できませんでした！");
-    });
-  }
 
   void onLikeButtonPressed(ValueNotifier<Post> copyPost,
       ValueNotifier<bool> isLiked, Post post) async {
