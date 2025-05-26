@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/controllers/docs_controller.dart';
-import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
-import 'package:great_talk/views/main/components/main_floating_action_button.dart';
+import 'package:great_talk/providers/view_model/docs/docs_view_model.dart';
+import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/screen/profile_screen/profile_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -13,21 +11,18 @@ class UserProfilePage extends ConsumerWidget {
   static String generatePath(String uid) => "/users/$uid";
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = Get.put(DocsController(DocsType.userProfiles));
-    return Obx(
-      () => Scaffold(
-        floatingActionButton:
-            controller.isMyProfile()
-                ? const MainFloatingActionButton(isShow: true)
-                : null,
-        body: ProfileScreen(
-          currentUid: ref.watch(streamAuthUidProvider).value!,
-          controller: controller,
-          passiveUid: controller.passiveUid(),
-          follow: controller.onFollowPressed,
-          unFollow: controller.onUnFollowPressed,
-        ),
-      ),
-    );
+    final asyncValue = ref.watch(docsViewModelProvider(DocsType.userProfiles));
+    final notifier = ref.read(docsViewModelProvider(DocsType.userProfiles).notifier);
+    return Scaffold(
+        body: AsyncScreen(asyncValue: asyncValue, data: (state) {
+          return ProfileScreen(
+            state: state,
+            onLoading: notifier.onLoading,
+            onReload: notifier.onReload,
+          follow: notifier.onFollowPressed,
+          unFollow: notifier.onUnFollowPressed,
+        );
+        })
+      );
   }
 }

@@ -9,11 +9,9 @@ class PostLikeButton extends HookWidget {
     super.key,
     required this.isHorizontal,
     required this.post,
-    required this.currentUid,
   });
   final bool isHorizontal;
   final Post post;
-  final String currentUid;
   @override
   Widget build(BuildContext context) {
     final copyPost = useState(post);

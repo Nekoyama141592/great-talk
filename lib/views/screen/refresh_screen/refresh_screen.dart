@@ -1,44 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:get/get.dart';
-import 'package:great_talk/controllers/docs_controller.dart';
+import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
 import 'package:great_talk/views/components/post_card.dart';
-import 'package:great_talk/views/screen/loading_screen.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/reload_screen/reload_screen.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class RefreshScreen extends HookWidget {
   const RefreshScreen({
     super.key,
-    required this.docsController,
+    required this.state,
     this.reloadMsg,
-    required this.currentUid,
+    required this.onReload,
+    required this.onLoading,
     this.child,
   });
-  final DocsController docsController;
+  final DocsState state;
   final String? reloadMsg;
-  final String currentUid;
+  final void Function()? onReload;
+  final void Function(RefreshController) onLoading;
   final Widget? child;
   @override
   Widget build(BuildContext context) {
     RefreshController refreshController = RefreshController();
     useEffect(() {
       refreshController = RefreshController();
-      WidgetsBinding.instance.addPostFrameCallback((_) async {
-        await docsController.init();
-      });
-      return () {
-        refreshController.dispose();
-        docsController.close();
-      };
+      return refreshController.dispose;
     }, []);
-    return Obx(() {
-      if (docsController.isLoading()) {
-        return const LoadingScreen();
-      }
-      if (docsController.state.value.qDocInfoList.isEmpty) {
+    final qDocInfoList = state.qDocInfoList;
+      if (qDocInfoList.isEmpty) {
         return ReloadScreen(
-          onReload: docsController.onReload,
+          onReload: onReload,
           reloadMsg: reloadMsg,
         );
       }
@@ -47,21 +38,20 @@ class RefreshScreen extends HookWidget {
         enablePullDown: false, // trueだとiosもAndroidも反応しなくなる
         enablePullUp: true,
         header: const WaterDropHeader(),
-        onLoading: () => docsController.onLoading(refreshController),
+        onLoading: () => onLoading(refreshController),
         child:
             child ??
             GridView.builder(
-              itemCount: docsController.state.value.qDocInfoList.length,
+              itemCount: qDocInfoList.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 childAspectRatio: 0.5,
               ),
               itemBuilder: (c, i) {
-                final qDocInfo = docsController.state.value.qDocInfoList[i];
-                return PostCard(qDocInfo: qDocInfo, currentUid: currentUid);
+                final qDocInfo = qDocInfoList[i];
+                return PostCard(qDocInfo: qDocInfo);
               },
             ),
       );
-    });
   }
 }

@@ -87,11 +87,10 @@ class ChatPage extends HookConsumerWidget {
                   PostLikeButton(
                     isHorizontal: true,
                     post: post,
-                    currentUid: currentUserId,
                   ),
                   MenuButton(
                     onMenuPressed: chatNotifier.onMenuPressed,
-                  ), // MenuButtonにはcleanLocalMessageを渡す必要あり
+                  ),
                 ],
               ),
               body: SingleChildScrollView(

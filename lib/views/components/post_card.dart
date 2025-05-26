@@ -15,9 +15,8 @@ import 'package:great_talk/views/user_profile_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:great_talk/controllers/tokens_controller.dart';
 class PostCard extends ConsumerWidget {
-  const PostCard({super.key, required this.qDocInfo, required this.currentUid});
+  const PostCard({super.key, required this.qDocInfo});
   final QDocInfo qDocInfo;
-  final String currentUid;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final post = Post.fromJson(qDocInfo.qDoc.data());
@@ -93,7 +92,6 @@ class PostCard extends ConsumerWidget {
                         PostLikeButton(
                           isHorizontal: false,
                           post: post,
-                          currentUid: currentUid,
                         ),
                         const Spacer(),
                         PostMsgButton(isHorizontal: false, post: post),

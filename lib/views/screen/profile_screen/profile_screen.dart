@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/controllers/docs_controller.dart';
+import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/extensions/string_extension.dart';
@@ -14,23 +15,25 @@ import 'package:great_talk/views/screen/profile_screen/components/edit_button.da
 import 'package:great_talk/views/screen/profile_screen/components/follow_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:great_talk/controllers/tokens_controller.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({
     super.key,
-    required this.controller,
-    required this.passiveUid,
+    required this.state,
+    required this.onReload,
+    required this.onLoading,
     required this.follow,
     required this.unFollow,
-    required this.currentUid,
   });
-  final DocsController controller;
-  final String passiveUid;
+  final DocsState state;
+  final void Function()? onReload;
+  final void Function(RefreshController) onLoading;
   final void Function()? follow;
   final void Function()? unFollow;
-  final String currentUid;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final passiveUser = state.passiveUser;
     final children = <Widget>[
       Align(
         alignment: Alignment.centerLeft,
@@ -39,78 +42,46 @@ class ProfileScreen extends ConsumerWidget {
           child: const Icon(Icons.arrow_back, size: 30.0),
         ),
       ),
-      Obx(
-        () => EllipsisText(
-          controller.state.value.passiveUser!.nameValue,
+      EllipsisText(
+          passiveUser?.nameValue ?? '',
           style: StyleUtility.bold25(),
         ),
-      ),
       Row(
         children: [
-          Obx(
-            () =>
-                controller.state.value.passiveUser == null
-                    ? const SizedBox.shrink()
-                    : CircleImage(uint8list: controller.state.value.uint8list),
-          ),
+          CircleImage(uint8list: state.uint8list),
           const BasicWidthBox(),
-          Obx(
-            () => Text(
-              "フォロー ${controller.state.value.passiveUser?.followingCount.formatNumber() ?? 0}",
+          Text(
+              "フォロー ${passiveUser?.followingCount.formatNumber() ?? 0}",
             ),
-          ),
           const BasicWidthBox(),
-          Obx(
-            () => Text(
-              "フォロワー ${controller.state.value.passiveUser?.followerCount.formatNumber() ?? 0}",
+          Text(
+              "フォロワー ${passiveUser?.followerCount.formatNumber() ?? 0}",
             ),
-          ),
         ],
       ),
       // 横向きなら、表示崩れを防止するためにbioを表示しない。
-      Obx(
-        () =>
-            MediaQuery.of(context).orientation == Orientation.landscape
-                ? const SizedBox.shrink()
-                : Align(
+      if (MediaQuery.of(context).orientation != Orientation.landscape)
+              Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    controller.state.value.passiveUser!
-                        .typedBio()
-                        .value
-                        .removeNewlinesAndSpaces(),
+                    passiveUser?.typedBio().value.removeNewlinesAndSpaces() ?? '',
                   ),
-                ),
       ),
-      Row(
-        children: [
-          Obx(
-            () =>
-                (controller.state.value.passiveUser?.isOfficial ?? false)
-                    ? const OfficialMark()
-                    : const SizedBox.shrink(),
-          ),
-        ],
-      ),
+      if ((passiveUser?.isOfficial ?? false)) const OfficialMark()
     ];
     return Obx(
       () => GradientScreen(
-        baseColor: Theme.of(context).colorScheme.onBackground,
         header: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                if (controller.state.value.passiveUser != null) ...children,
-                Obx(() {
-                  final passiveUser = controller.state.value.passiveUser;
-                  if (passiveUser == null) {
-                    return const SizedBox.shrink();
-                  }
-                  final isFollow = TokensController.to.state.value.followingUids.contains(
-                    controller.passiveUid(),
-                  );
-                  return passiveUser.uid ==
+                if (passiveUser != null) ...children,
+                Builder(builder: (context) {
+                  final isFollow = ref.watch(tokensNotifierProvider).value?.followingUids.contains(
+                    state.passiveUid(),
+                  ) ?? false;
+                  return passiveUser?.uid ==
                           ref.watch(streamAuthUidProvider).value
                       ? const EditButton()
                       : FollowButton(
@@ -118,15 +89,12 @@ class ProfileScreen extends ConsumerWidget {
                         follow: follow,
                         unFollow: unFollow,
                       );
-                }),
+                })
               ],
             ),
           ),
         ),
-        child: RefreshScreen(
-          docsController: controller,
-          currentUid: currentUid,
-        ),
+        child: RefreshScreen(state: state, onReload: onReload, onLoading: onLoading)
       ),
     );
   }
