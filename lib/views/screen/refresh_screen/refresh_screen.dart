@@ -28,7 +28,7 @@ class RefreshScreen extends HookWidget {
       return refreshController.dispose;
     }, []);
     return Obx(() {
-      if (docsController.cannotShow()) {
+      if (docsController.isLoading()) {
         return const LoadingScreen();
       }
       if (docsController.state.value.qDocInfoList.isEmpty) {

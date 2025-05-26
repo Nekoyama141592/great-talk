@@ -24,7 +24,7 @@ class DocsController extends GetxController with CurrentUserMixin {
   final state = Rx(DocsState());
 
   // state.valueを介してプロパティにアクセス
-  bool cannotShow() => state.value.isLoading;
+  bool isLoading() => state.value.isLoading;
   void startLoading() => state.value = state.value.copyWith(isLoading: true);
   void endLoading() => state.value = state.value.copyWith(isLoading: false);
 
