@@ -10,13 +10,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class NewPostsScreen extends ConsumerWidget {
   const NewPostsScreen({super.key});
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final controller = Get.put(DocsController(DocsType.newPosts));
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-            onPressed: controller.onRefresh,
-            backgroundColor: kSecondaryColor,
-            child: const Icon(Icons.refresh)),
-        body: RefreshScreen(docsController: controller,currentUid: ref.watch(streamAuthUidProvider).value!,));
+      floatingActionButton: FloatingActionButton(
+        onPressed: controller.onRefresh,
+        backgroundColor: kSecondaryColor,
+        child: const Icon(Icons.refresh),
+      ),
+      body: RefreshScreen(
+        docsController: controller,
+        currentUid: ref.watch(streamAuthUidProvider).value!,
+      ),
+    );
   }
 }

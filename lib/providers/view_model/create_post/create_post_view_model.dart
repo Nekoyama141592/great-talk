@@ -34,39 +34,64 @@ class CreatePostViewModel extends _$CreatePostViewModel {
   void setSystemPrompt(String? value) {
     if (value == null) return;
     state.whenData(
-        (s) => state = AsyncValue.data(s.copyWith(systemPrompt: value)));
+      (s) => state = AsyncValue.data(s.copyWith(systemPrompt: value)),
+    );
   }
 
   void setDescription(String? value) {
     if (value == null) return;
     state.whenData(
-        (s) => state = AsyncValue.data(s.copyWith(description: value)));
+      (s) => state = AsyncValue.data(s.copyWith(description: value)),
+    );
   }
 
   void setTemperature(String? value) {
     if (value == null) return;
-    state.whenData((s) => state = AsyncValue.data(s.copyWith(
-        temperature: double.tryParse(value) ?? FormConsts.defaultTemperature)));
+    state.whenData(
+      (s) =>
+          state = AsyncValue.data(
+            s.copyWith(
+              temperature:
+                  double.tryParse(value) ?? FormConsts.defaultTemperature,
+            ),
+          ),
+    );
   }
 
   void setTopP(String? value) {
     if (value == null) return;
-    state.whenData((s) => state = AsyncValue.data(
-        s.copyWith(topP: double.tryParse(value) ?? FormConsts.defaultTopP)));
+    state.whenData(
+      (s) =>
+          state = AsyncValue.data(
+            s.copyWith(topP: double.tryParse(value) ?? FormConsts.defaultTopP),
+          ),
+    );
   }
 
   void setPresencePenalty(String? value) {
     if (value == null) return;
-    state.whenData((s) => state = AsyncValue.data(s.copyWith(
-        presencePenalty:
-            double.tryParse(value) ?? FormConsts.defaultPresencePenalty)));
+    state.whenData(
+      (s) =>
+          state = AsyncValue.data(
+            s.copyWith(
+              presencePenalty:
+                  double.tryParse(value) ?? FormConsts.defaultPresencePenalty,
+            ),
+          ),
+    );
   }
 
   void setFrequencyPenalty(String? value) {
     if (value == null) return;
-    state.whenData((s) => state = AsyncValue.data(s.copyWith(
-        frequencyPenalty:
-            double.tryParse(value) ?? FormConsts.defaultFrequencyPenalty)));
+    state.whenData(
+      (s) =>
+          state = AsyncValue.data(
+            s.copyWith(
+              frequencyPenalty:
+                  double.tryParse(value) ?? FormConsts.defaultFrequencyPenalty,
+            ),
+          ),
+    );
   }
 
   // 画像選択処理
@@ -84,8 +109,12 @@ class CreatePostViewModel extends _$CreatePostViewModel {
       return;
     }
     // state内のpickedImageを更新
-    state.whenData((s) =>
-        state = AsyncValue.data(s.copyWith(pickedImage: base64Encode(result))));
+    state.whenData(
+      (s) =>
+          state = AsyncValue.data(
+            s.copyWith(pickedImage: base64Encode(result)),
+          ),
+    );
   }
 
   // 投稿ボタン押下時の処理
@@ -100,13 +129,14 @@ class CreatePostViewModel extends _$CreatePostViewModel {
       return false;
     }
     if (PostValidator.isInValidPost(
-        currentState.description,
-        currentState.systemPrompt,
-        currentState.title,
-        currentState.temperature.toString(),
-        currentState.topP.toString(),
-        currentState.presencePenalty.toString(),
-        currentState.frequencyPenalty.toString())) {
+      currentState.description,
+      currentState.systemPrompt,
+      currentState.title,
+      currentState.temperature.toString(),
+      currentState.topP.toString(),
+      currentState.presencePenalty.toString(),
+      currentState.frequencyPenalty.toString(),
+    )) {
       UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
       return false;
     }
@@ -130,16 +160,19 @@ class CreatePostViewModel extends _$CreatePostViewModel {
       final fileName = AWSS3Utility.postObject(currentUid, postId);
       final repository = AWSS3Repository();
       final request = PutObjectRequest.fromUint8List(
-          uint8list: base64Decode(pickedImage), fileName: fileName);
+        uint8list: base64Decode(pickedImage),
+        fileName: fileName,
+      );
       final result = await repository.putObject(request);
 
       final success = await result.when<Future<bool>>(
-          success: (res) async =>
-              await _createPost(postId, fileName, currentState),
-          failure: (e) async {
-            UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
-            return false;
-          });
+        success:
+            (res) async => await _createPost(postId, fileName, currentState),
+        failure: (e) async {
+          UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
+          return false;
+        },
+      );
 
       if (success) {
         _resetState(); // 成功したら状態をリセット
@@ -160,40 +193,48 @@ class CreatePostViewModel extends _$CreatePostViewModel {
   }
 
   Future<bool> _createPost(
-      String postId, String fileName, CreatePostState postState) async {
+    String postId,
+    String fileName,
+    CreatePostState postState,
+  ) async {
     final repository = FirestoreRepository();
     final currentUid = ref.read(streamAuthUidProvider).value;
     if (currentUid == null) return false;
 
     final postRef = DocRefCore.post(currentUid, postId);
-    final customCompleteText = NewContent.newCustomCompleteText(
+    final customCompleteText =
+        NewContent.newCustomCompleteText(
             postState.systemPrompt,
             postState.temperature.toString(),
             postState.topP.toString(),
             postState.presencePenalty.toString(),
-            postState.frequencyPenalty.toString())
-        .toJson()
-      ..removeWhere((key, value) => value == null);
+            postState.frequencyPenalty.toString(),
+          ).toJson()
+          ..removeWhere((key, value) => value == null);
 
     final newPost = NewContent.newPost(
-        postState.systemPrompt.trim(),
-        postState.title.trim(),
-        postState.description.trim(),
-        fileName,
-        postId,
-        postRef,
-        customCompleteText,
-        currentUid);
+      postState.systemPrompt.trim(),
+      postState.title.trim(),
+      postState.description.trim(),
+      fileName,
+      postId,
+      postRef,
+      customCompleteText,
+      currentUid,
+    );
     final json = newPost.toJson();
     final result = await repository.createDoc(postRef, json);
 
-    return result.when(success: (_) {
-      UIHelper.showFlutterToast("投稿が作成できました！");
-      return true;
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
-      return false;
-    });
+    return result.when(
+      success: (_) {
+        UIHelper.showFlutterToast("投稿が作成できました！");
+        return true;
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
+        return false;
+      },
+    );
   }
 
   void _resetState() {

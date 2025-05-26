@@ -11,18 +11,23 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class UserRankingScreen extends ConsumerWidget {
   const UserRankingScreen({super.key});
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final controller = Get.put(DocsController(DocsType.rankingUsers));
-    return Obx(() => RefreshScreen(
-      currentUid: ref.watch(streamAuthUidProvider).value!,
+    return Obx(
+      () => RefreshScreen(
+        currentUid: ref.watch(streamAuthUidProvider).value!,
         docsController: controller,
         child: ListView.builder(
-            itemCount: controller.state.value.qDocInfoList.length,
-            itemBuilder: (c, i) {
-              final publicUser =
-                  PublicUser.fromJson(controller.state.value.qDocInfoList[i].qDoc.data());
-              final uint8list = controller.state.value.qDocInfoList[i].userImage;
-              return UserCard(publicUser: publicUser, uint8list: uint8list);
-            })));
+          itemCount: controller.state.value.qDocInfoList.length,
+          itemBuilder: (c, i) {
+            final publicUser = PublicUser.fromJson(
+              controller.state.value.qDocInfoList[i].qDoc.data(),
+            );
+            final uint8list = controller.state.value.qDocInfoList[i].userImage;
+            return UserCard(publicUser: publicUser, uint8list: uint8list);
+          },
+        ),
+      ),
+    );
   }
 }

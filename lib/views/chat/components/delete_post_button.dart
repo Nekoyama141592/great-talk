@@ -8,10 +8,7 @@ class DeletePostButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBarAction(
       onTap: onTap,
-      child: const Icon(
-        Icons.delete,
-        color: Colors.purple,
-      ),
+      child: const Icon(Icons.delete, color: Colors.purple),
     );
   }
 }

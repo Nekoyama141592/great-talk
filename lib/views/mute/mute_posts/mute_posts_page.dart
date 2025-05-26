@@ -15,20 +15,27 @@ class MutePostsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = Get.put(DocsController(DocsType.mutePosts));
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("ミュートしている投稿一覧"),
-      ),
+      appBar: AppBar(title: const Text("ミュートしている投稿一覧")),
       body: RefreshScreen(
         currentUid: ref.watch(streamAuthUidProvider).value!,
         docsController: controller,
-        child: Obx(() => ListView.builder(
+        child: Obx(
+          () => ListView.builder(
             itemCount: controller.state.value.qDocInfoList.length,
             itemBuilder: (c, i) {
-              final post =
-                  Post.fromJson(controller.state.value.qDocInfoList[i].qDoc.data());
-              final uint8list = controller.state.value.qDocInfoList[i].userImage;
-              return MutePostCard(post: post, uint8list: uint8list,onTap: controller.onMutePostCardTap,);
-            })),
+              final post = Post.fromJson(
+                controller.state.value.qDocInfoList[i].qDoc.data(),
+              );
+              final uint8list =
+                  controller.state.value.qDocInfoList[i].userImage;
+              return MutePostCard(
+                post: post,
+                uint8list: uint8list,
+                onTap: controller.onMutePostCardTap,
+              );
+            },
+          ),
+        ),
       ),
     );
   }

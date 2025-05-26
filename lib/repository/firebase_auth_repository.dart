@@ -64,7 +64,9 @@ class FirebaseAuthRepository {
   }
 
   FutureResult<bool> reauthenticateWithCredential(
-      User user, AuthCredential credential) async {
+    User user,
+    AuthCredential credential,
+  ) async {
     try {
       await client.reauthenticateWithCredential(user, credential);
       return const Result.success(true);
@@ -74,7 +76,8 @@ class FirebaseAuthRepository {
       switch (errorCode) {
         case 'user-mismatch':
           await UIHelper.showErrorFlutterToast(
-              "認証情報がことなります。現在のユーザーと同じ方法で認証してください。");
+            "認証情報がことなります。現在のユーザーと同じ方法で認証してください。",
+          );
           break;
         case 'user-not-found':
           await UIHelper.showErrorFlutterToast("ユーザーが見つかりません。");

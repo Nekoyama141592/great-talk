@@ -7,10 +7,7 @@ class PlanDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: const Icon(
-        Icons.check,
-        color: kPrimaryColor,
-      ),
+      leading: const Icon(Icons.check, color: kPrimaryColor),
       title: Text(text),
     );
   }

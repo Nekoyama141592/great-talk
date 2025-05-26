@@ -11,18 +11,21 @@ class RestoreButton extends StatelessWidget {
       return controller.loading.value
           ? Container()
           : Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Container(
-                alignment: Alignment.bottomRight,
-                child: TextButton(
-                    onPressed: controller.onRestoreButtonPressed,
-                    child: Text(
-                      '購入を復元',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).focusColor),
-                    )),
-              ));
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+              alignment: Alignment.bottomRight,
+              child: TextButton(
+                onPressed: controller.onRestoreButtonPressed,
+                child: Text(
+                  '購入を復元',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).focusColor,
+                  ),
+                ),
+              ),
+            ),
+          );
     }));
   }
 }

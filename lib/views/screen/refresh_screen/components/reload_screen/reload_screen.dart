@@ -12,19 +12,20 @@ class ReloadScreen extends StatelessWidget {
     return SizedBox(
       height: 100.0,
       width: double.infinity,
-      child: reloadMsg == null
-          ? ReloadButton(onReload: onReload)
-          : Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ReloadButton(onReload: onReload),
-                  const BasicHeightBox(),
-                  BasicBoldText(reloadMsg!)
-                ],
+      child:
+          reloadMsg == null
+              ? ReloadButton(onReload: onReload)
+              : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ReloadButton(onReload: onReload),
+                    const BasicHeightBox(),
+                    BasicBoldText(reloadMsg!),
+                  ],
+                ),
               ),
-            ),
     );
   }
 }

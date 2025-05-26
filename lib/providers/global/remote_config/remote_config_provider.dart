@@ -12,10 +12,12 @@ class RemoteConfigNotifier extends _$RemoteConfigNotifier {
     return RemoteConfigState();
     final remoteConfig = FirebaseRemoteConfig.instance;
 
-    await remoteConfig.setConfigSettings(RemoteConfigSettings(
-      fetchTimeout: const Duration(minutes: 1),
-      minimumFetchInterval: const Duration(seconds: 15),
-    ));
+    await remoteConfig.setConfigSettings(
+      RemoteConfigSettings(
+        fetchTimeout: const Duration(minutes: 1),
+        minimumFetchInterval: const Duration(seconds: 15),
+      ),
+    );
 
     // キーの設定
     const freeLimitPerDayKey = RemoteConfigConstants.freeLimitPerDayKey;
@@ -37,15 +39,16 @@ class RemoteConfigNotifier extends _$RemoteConfigNotifier {
       forcedUpdateVersionKey: RemoteConfigConstants.appVersion,
       forcedUpdateMsgKey: RemoteConfigConstants.forcedUpdateMsg,
       basicModelKey: RemoteConfigConstants.basicModel,
-      premiumModelKey: RemoteConfigConstants.premiumModel
+      premiumModelKey: RemoteConfigConstants.premiumModel,
     });
 
     await remoteConfig.fetchAndActivate();
 
     final maintenanceMode = remoteConfig.getBool(maintenanceModeKey);
-    final maintenanceMsg = maintenanceMode
-        ? remoteConfig.getString(maintenanceMsgKey)
-        : RemoteConfigConstants.maintenanceMsg;
+    final maintenanceMsg =
+        maintenanceMode
+            ? remoteConfig.getString(maintenanceMsgKey)
+            : RemoteConfigConstants.maintenanceMsg;
     final forcedUpdateVersion = remoteConfig.getInt(forcedUpdateVersionKey);
     final forcedUpdateMsg =
         (RemoteConfigConstants.appVersion < forcedUpdateVersion)

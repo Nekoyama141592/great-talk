@@ -10,7 +10,9 @@ class RequiredUpdatePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Align(
-            alignment: Alignment.center, child: BasicBoldText(forcedUpdateMsg)),
+          alignment: Alignment.center,
+          child: BasicBoldText(forcedUpdateMsg),
+        ),
       ),
     );
   }

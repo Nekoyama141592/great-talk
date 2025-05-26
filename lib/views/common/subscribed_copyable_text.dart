@@ -9,13 +9,16 @@ class SubscribedCopyableText extends StatelessWidget {
   final TextStyle? style;
   @override
   Widget build(BuildContext context) {
-    return Obx(() => PurchasesController.to.isSubscribing()
-        ? SelectableText(data)
-        : InkWell(
-            onTap: () => UIHelper.showFlutterToast("コピーするにはベーシックプランへの登録が必要です。"),
-            child: Text(
-              data,
-              style: style,
-            )));
+    return Obx(
+      () =>
+          PurchasesController.to.isSubscribing()
+              ? SelectableText(data)
+              : InkWell(
+                onTap:
+                    () =>
+                        UIHelper.showFlutterToast("コピーするにはベーシックプランへの登録が必要です。"),
+                child: Text(data, style: style),
+              ),
+    );
   }
 }

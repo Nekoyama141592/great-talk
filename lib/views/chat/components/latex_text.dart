@@ -6,10 +6,6 @@ class LatexText extends StatelessWidget {
   final String data;
   @override
   Widget build(BuildContext context) {
-    return GptMarkdown(
-    data,
-      style: const TextStyle(
-      color: Colors.white,
-    ),);
+    return GptMarkdown(data, style: const TextStyle(color: Colors.white));
   }
 }

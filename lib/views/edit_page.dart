@@ -38,14 +38,15 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
     final notifier = ref.read(editViewModelProvider.notifier);
 
     return editState.when(
-      data: (data) => FormsScreen(
-        appBarText: "ユーザー情報を編集",
-        children: [
-          _editForm(data, notifier),
-          _image(data, notifier),
-          _positiveButton(data, notifier),
-        ],
-      ),
+      data:
+          (data) => FormsScreen(
+            appBarText: "ユーザー情報を編集",
+            children: [
+              _editForm(data, notifier),
+              _image(data, notifier),
+              _positiveButton(data, notifier),
+            ],
+          ),
       loading: () => const LoadingPage(),
       error: (err, stack) => Center(child: Text('エラーが発生しました: $err')),
     );
@@ -75,13 +76,9 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
     final uint8list = data.base64.isNotEmpty ? base64Decode(data.base64) : null;
     return uint8list != null
         ? InkWell(
-            onTap: notifier.onImagePickButtonPressed,
-            child: S3Image(
-              uint8list: uint8list,
-              height: 40.0,
-              width: 40.0,
-            ),
-          )
+          onTap: notifier.onImagePickButtonPressed,
+          child: S3Image(uint8list: uint8list, height: 40.0, width: 40.0),
+        )
         : const SizedBox.shrink();
   }
 
@@ -99,10 +96,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
 
   List<Widget> _userNameTextField(EditState data, EditViewModel notifier) {
     return [
-      const FormLabel(
-        title: "ニックネーム",
-        helpMsg: FormConsts.userNameHelpMsg,
-      ),
+      const FormLabel(title: "ニックネーム", helpMsg: FormConsts.userNameHelpMsg),
       OriginalForm(
         initialValue: data.userName,
         keyboardType: TextInputType.text,
@@ -123,10 +117,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
 
   List<Widget> _bioTextField(EditState data, EditViewModel notifier) {
     return [
-      const FormLabel(
-        title: "紹介文",
-        helpMsg: FormConsts.bioHelpMsg,
-      ),
+      const FormLabel(title: "紹介文", helpMsg: FormConsts.bioHelpMsg),
       OriginalForm(
         initialValue: data.bio,
         keyboardType: TextInputType.multiline,

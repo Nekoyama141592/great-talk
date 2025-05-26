@@ -11,46 +11,52 @@ part 'cached_receipt.g.dart';
 @freezed
 abstract class CachedReceipt with _$CachedReceipt {
   const CachedReceipt._();
-  const factory CachedReceipt(
-      {required String expiryTimeMillis,
-      required String orderId,
-      required String originalTransactionId,
-      required String productId,
-      required String startTimeMillis,
-      required String uid}) = _CachedReceipt;
+  const factory CachedReceipt({
+    required String expiryTimeMillis,
+    required String orderId,
+    required String originalTransactionId,
+    required String productId,
+    required String startTimeMillis,
+    required String uid,
+  }) = _CachedReceipt;
   factory CachedReceipt.fromJson(Map<String, dynamic> json) =>
       _$CachedReceiptFromJson(json);
 
   factory CachedReceipt.fromReceiptResponse(
-      ReceiptResponse response, String originalTransactionId) {
+    ReceiptResponse response,
+    String originalTransactionId,
+  ) {
     if (Platform.isIOS) {
       final iosReceipt = response.iosReceipt;
       return CachedReceipt(
-          expiryTimeMillis: iosReceipt.expires_date_ms,
-          orderId: iosReceipt.transaction_id,
-          originalTransactionId: originalTransactionId,
-          productId: iosReceipt.product_id,
-          startTimeMillis: iosReceipt.purchase_date_ms,
-          uid: iosReceipt.uid);
+        expiryTimeMillis: iosReceipt.expires_date_ms,
+        orderId: iosReceipt.transaction_id,
+        originalTransactionId: originalTransactionId,
+        productId: iosReceipt.product_id,
+        startTimeMillis: iosReceipt.purchase_date_ms,
+        uid: iosReceipt.uid,
+      );
     } else {
       final androidReceipt = response.androidReceipt;
       return CachedReceipt(
-          expiryTimeMillis: androidReceipt.expiryTimeMillis,
-          orderId: androidReceipt.orderId,
-          originalTransactionId: originalTransactionId,
-          productId: androidReceipt.productId,
-          startTimeMillis: androidReceipt.startTimeMillis,
-          uid: androidReceipt.uid);
+        expiryTimeMillis: androidReceipt.expiryTimeMillis,
+        orderId: androidReceipt.orderId,
+        originalTransactionId: originalTransactionId,
+        productId: androidReceipt.productId,
+        startTimeMillis: androidReceipt.startTimeMillis,
+        uid: androidReceipt.uid,
+      );
     }
   }
 
   factory CachedReceipt.instance() => const CachedReceipt(
-      expiryTimeMillis: "",
-      orderId: "",
-      originalTransactionId: "",
-      productId: "",
-      startTimeMillis: "",
-      uid: "");
+    expiryTimeMillis: "",
+    orderId: "",
+    originalTransactionId: "",
+    productId: "",
+    startTimeMillis: "",
+    uid: "",
+  );
 
   bool isValid() {
     final intExpiryMills = int.tryParse(expiryTimeMillis);

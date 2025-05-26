@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/core/doubles.dart';
 
 class TextFieldContainer extends StatelessWidget {
-  const TextFieldContainer({
-    super.key,
-    required this.child,
-  });
+  const TextFieldContainer({super.key, required this.child});
 
   final Widget child;
 
@@ -17,8 +14,9 @@ class TextFieldContainer extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: defaultPadding(context)),
         width: size.width * 0.9,
         decoration: BoxDecoration(
-            border: Border.all(color: Theme.of(context).focusColor),
-            borderRadius: BorderRadius.circular(8)),
+          border: Border.all(color: Theme.of(context).focusColor),
+          borderRadius: BorderRadius.circular(8),
+        ),
         child: child,
       ),
     );

@@ -13,9 +13,10 @@ class DocRefCore {
       user(passiveUid).collection('followers').doc(currentUid);
   static DocRef privateUser(String currentUid) =>
       privateV1.collection('privateUsers').doc(currentUid);
-  static DocRef searchLog(String currentUid) => privateUser(currentUid)
-      .collection('searchLogs')
-      .doc(); // privateUserを作成してなくても作成できる
+  static DocRef searchLog(String currentUid) =>
+      privateUser(
+        currentUid,
+      ).collection('searchLogs').doc(); // privateUserを作成してなくても作成できる
   // 実際は使わない
   static DocRef originalContent(String contentId) =>
       _instance.collection('originalContents').doc(contentId);
@@ -37,7 +38,10 @@ class DocRefCore {
       ColRefCore.tokens(currentUid).doc(tokenId);
   static DocRef bookmarkCategory(String uid, String categoryId) =>
       ColRefCore.bookmarkCategories(uid).doc(categoryId);
-  static DocRef message(String posterUid, String postId, String currentUid,
-          String messageId) =>
-      ColRefCore.messages(posterUid, postId, currentUid).doc(messageId);
+  static DocRef message(
+    String posterUid,
+    String postId,
+    String currentUid,
+    String messageId,
+  ) => ColRefCore.messages(posterUid, postId, currentUid).doc(messageId);
 }

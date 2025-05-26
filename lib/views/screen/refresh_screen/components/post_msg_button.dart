@@ -16,23 +16,18 @@ class PostMsgButton extends HookWidget {
   Widget build(BuildContext context) {
     final children = [
       InkWell(
-          child: const Icon(
-            Icons.comment,
-          ),
-          onTap: () => PostCore.onPostCardPressed(post)),
+        child: const Icon(Icons.comment),
+        onTap: () => PostCore.onPostCardPressed(post),
+      ),
       Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text((post.msgCount).formatNumber()))
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Text((post.msgCount).formatNumber()),
+      ),
     ];
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
-      child: isHorizontal
-          ? Row(
-              children: children,
-            )
-          : Column(
-              children: children,
-            ),
+      child:
+          isHorizontal ? Row(children: children) : Column(children: children),
     );
   }
 }

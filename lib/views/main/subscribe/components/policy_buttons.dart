@@ -16,10 +16,7 @@ class PolicyButtons extends StatelessWidget {
             label: 'プライバシーポリシー',
             onPressed: UrlRedirector.toPrivacyPage,
           ),
-          const PolicyButton(
-            label: '利用規約',
-            onPressed: UrlRedirector.toTosPage,
-          ),
+          const PolicyButton(label: '利用規約', onPressed: UrlRedirector.toTosPage),
           if (Platform.isIOS)
             const PolicyButton(
               label: 'EULA',

@@ -14,11 +14,20 @@ enum PrefsKey {
   isV3initialized,
   lastChatDate,
   latestReceipt,
-  needFirstMessage
+  needFirstMessage,
 }
 
 enum SearchTarget { post, user }
 
 enum TokenType { following, likePost, mutePost, muteUser, reportPost }
 
-enum DocsType {bookmarks,feeds,mutePosts,muteUsers,newPosts,rankingPosts,userProfiles,rankingUsers}
+enum DocsType {
+  bookmarks,
+  feeds,
+  mutePosts,
+  muteUsers,
+  newPosts,
+  rankingPosts,
+  userProfiles,
+  rankingUsers,
+}

@@ -11,16 +11,25 @@ part 'chat_completion_sse.g.dart'; // your_file_name は実際のファイル名
 @riverpod
 Stream<String> chatCompletionSse(Ref ref, {required ChatCompleteText request}) {
   final client = ChatGptSdkClient();
-  return client.openAI.onChatCompletionSSE(request: request).transform(
-      StreamTransformer.fromHandlers(handleError: (err, stackTrace, sink) {
-    if (err is OpenAIAuthError) {
-      UIHelper.showFlutterToast("OpenAIの認証でエラーが発生しました。運営の対応をお待ちください。");
-    }
-    if (err is OpenAIRateLimitError) {
-      UIHelper.showFlutterToast("RateLimitエラーが発生しました。しばらく待ってからお試しください。");
-    }
-    if (err is OpenAIServerError) {
-      UIHelper.showFlutterToast("OpenAIのサーバーでエラーが発生しました。しばらく待ってからお試しください。");
-    }
-  }));
+  return client.openAI
+      .onChatCompletionSSE(request: request)
+      .transform(
+        StreamTransformer.fromHandlers(
+          handleError: (err, stackTrace, sink) {
+            if (err is OpenAIAuthError) {
+              UIHelper.showFlutterToast("OpenAIの認証でエラーが発生しました。運営の対応をお待ちください。");
+            }
+            if (err is OpenAIRateLimitError) {
+              UIHelper.showFlutterToast(
+                "RateLimitエラーが発生しました。しばらく待ってからお試しください。",
+              );
+            }
+            if (err is OpenAIServerError) {
+              UIHelper.showFlutterToast(
+                "OpenAIのサーバーでエラーが発生しました。しばらく待ってからお試しください。",
+              );
+            }
+          },
+        ),
+      );
 }

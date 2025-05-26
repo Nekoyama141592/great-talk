@@ -25,50 +25,56 @@ class GenerateImagePage extends HookConsumerWidget {
     return BasicPage(
       appBarText: "AIを使用して画像を生成",
       child: state.when(
-          data: (data) {
-            final base64 = data.base64;
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                base64 != null
-                    ? GeneratedImage(base64: base64)
-                    : const SizedBox.shrink(),
-                OriginalForm(
-                    decoration: const InputDecoration(
-                        hintText: FormConsts.generateImageHint),
-                    keyboardType: TextInputType.text,
-                    onChanged: (text) => promptController.text = text ?? ''),
-                const BasicHeightBox(),
-                Row(
-                  children: [
-                    const Text("画像サイズ(横幅x縦幅)"),
-                    const BasicWidthBox(),
-                    DropdownButton<String>(
-                      value: size.value,
-                      onChanged: (value) => size.value = value ?? '',
-                      items: GenerateImageEnum.values.map((e) {
-                        final text = e.text();
-                        return DropdownMenuItem<String>(
-                          value: text,
-                          child: Text(text),
-                        );
-                      }).toList(),
-                    ),
-                  ],
+        data: (data) {
+          final base64 = data.base64;
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              base64 != null
+                  ? GeneratedImage(base64: base64)
+                  : const SizedBox.shrink(),
+              OriginalForm(
+                decoration: const InputDecoration(
+                  hintText: FormConsts.generateImageHint,
                 ),
-                const BasicHeightBox(),
-                RoundedButton(
-                  text: "生成する",
-                  press: () {
-                    notifier().onGenerateButtonPressed(
-                        promptController.text, size.value);
-                  },
-                )
-              ],
-            );
-          },
-          loading: () => const LoadingScreen(),
-          error: (e, s) => const SizedBox.shrink()),
+                keyboardType: TextInputType.text,
+                onChanged: (text) => promptController.text = text ?? '',
+              ),
+              const BasicHeightBox(),
+              Row(
+                children: [
+                  const Text("画像サイズ(横幅x縦幅)"),
+                  const BasicWidthBox(),
+                  DropdownButton<String>(
+                    value: size.value,
+                    onChanged: (value) => size.value = value ?? '',
+                    items:
+                        GenerateImageEnum.values.map((e) {
+                          final text = e.text();
+                          return DropdownMenuItem<String>(
+                            value: text,
+                            child: Text(text),
+                          );
+                        }).toList(),
+                  ),
+                ],
+              ),
+              const BasicHeightBox(),
+              RoundedButton(
+                text: "生成する",
+                press: () {
+                  notifier().onGenerateButtonPressed(
+                    promptController.text,
+                    size.value,
+                  );
+                },
+              ),
+            ],
+          );
+        },
+        loading: () => const LoadingScreen(),
+        error: (e, s) => const SizedBox.shrink(),
+      ),
     );
   }
 }

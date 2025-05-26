@@ -7,12 +7,13 @@ class MaintenancePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Align(
-        alignment: Alignment.center,
-        child: BasicBoldText(maintenanceMsg),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Align(
+          alignment: Alignment.center,
+          child: BasicBoldText(maintenanceMsg),
+        ),
       ),
-    ));
+    );
   }
 }

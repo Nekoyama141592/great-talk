@@ -8,11 +8,16 @@ import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/utility/env_utility.dart';
 
 class OpenAIRepository {
-  OpenAIClient get client => OpenAIClient(OriginalDio.withOptions(
-      baseUrl: "https://api.openai.com/v1", token: EnvUtility().openAiApiKey));
+  OpenAIClient get client => OpenAIClient(
+    OriginalDio.withOptions(
+      baseUrl: "https://api.openai.com/v1",
+      token: EnvUtility().openAiApiKey,
+    ),
+  );
 
   FutureResult<GenerateImageResponse> generateImage(
-      GenerateImageRequest request) async {
+    GenerateImageRequest request,
+  ) async {
     try {
       final response = await client.generateImage(request);
       return Result.success(response);
@@ -22,7 +27,8 @@ class OpenAIRepository {
   }
 
   FutureResult<GenerateTextResponse> generateText(
-      GenerateTextRequest request) async {
+    GenerateTextRequest request,
+  ) async {
     try {
       final response = await client.generateText(request);
       return Result.success(response);

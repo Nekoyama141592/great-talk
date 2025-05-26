@@ -8,20 +8,22 @@ part 'save_text_msg.g.dart';
 @freezed
 abstract class SaveTextMsg with _$SaveTextMsg {
   const SaveTextMsg._();
-  const factory SaveTextMsg(
-      {required DateTime createdAt,
-      required String id,
-      required String messageType,
-      required String posterUid,
-      required String senderUid,
-      required SDMap text}) = _SaveTextMsg;
+  const factory SaveTextMsg({
+    required DateTime createdAt,
+    required String id,
+    required String messageType,
+    required String posterUid,
+    required String senderUid,
+    required SDMap text,
+  }) = _SaveTextMsg;
   factory SaveTextMsg.fromJson(Map<String, dynamic> json) =>
       _$SaveTextMsgFromJson(json);
   factory SaveTextMsg.fromTextMessage(TextMessage textMessage) => SaveTextMsg(
-      createdAt: textMessage.typedCreatedAt().toDate(),
-      id: textMessage.id,
-      messageType: textMessage.messageType,
-      posterUid: textMessage.posterUid,
-      senderUid: textMessage.senderUid,
-      text: textMessage.typedText().toJson());
+    createdAt: textMessage.typedCreatedAt().toDate(),
+    id: textMessage.id,
+    messageType: textMessage.messageType,
+    posterUid: textMessage.posterUid,
+    senderUid: textMessage.senderUid,
+    text: textMessage.typedText().toJson(),
+  );
 }

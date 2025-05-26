@@ -10,9 +10,10 @@ class MainFloatingActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isShow) {
       return FloatingActionButton(
-          backgroundColor: kPrimaryColor,
-          onPressed: () => Get.toNamed(CreatePostPage.path),
-          child: const Icon(Icons.new_label));
+        backgroundColor: kPrimaryColor,
+        onPressed: () => Get.toNamed(CreatePostPage.path),
+        child: const Icon(Icons.new_label),
+      );
     } else {
       return const SizedBox.shrink();
     }

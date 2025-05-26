@@ -97,6 +97,7 @@ class FirestoreRepository {
       return Result.failure(e);
     }
   }
+
   Future<List<QDoc>> getDocsWithList(MapQuery query) async {
     final client = FirestoreClient();
     try {

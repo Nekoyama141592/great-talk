@@ -11,11 +11,7 @@ class SubscribeScreen extends StatelessWidget {
     return const SafeArea(
       child: SingleChildScrollView(
         child: Column(
-          children: [
-            PolicyButtons(),
-            RestoreButton(),
-            ProductList(),
-          ],
+          children: [PolicyButtons(), RestoreButton(), ProductList()],
         ),
       ),
     );

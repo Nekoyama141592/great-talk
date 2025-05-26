@@ -8,9 +8,10 @@ class EditButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RoundedButton(
-        buttonColor: Theme.of(context).colorScheme.primary,
-        text: "編集する",
-        textColor: Colors.white,
-        press: () => Get.toNamed(EditProfilePage.path));
+      buttonColor: Theme.of(context).colorScheme.primary,
+      text: "編集する",
+      textColor: Colors.white,
+      press: () => Get.toNamed(EditProfilePage.path),
+    );
   }
 }

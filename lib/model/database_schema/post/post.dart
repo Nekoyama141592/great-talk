@@ -62,8 +62,10 @@ abstract class Post with _$Post {
     if (typedImage().moderationLabels.isNotEmpty) {
       reason += "・写真が不適切です。\n";
       if (isMe) {
-        String concatenatedNames =
-            typedImage().typedMLs().map((ml) => ml.Name).join(', ');
+        String concatenatedNames = typedImage()
+            .typedMLs()
+            .map((ml) => ml.Name)
+            .join(', ');
         reason += "(理由: $concatenatedNames)\n";
       }
     }

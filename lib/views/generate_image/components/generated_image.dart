@@ -15,9 +15,7 @@ class GeneratedImage extends StatelessWidget {
       imageBytes,
       fit: BoxFit.cover,
       errorBuilder: (context, error, stackTrace) {
-        return const Center(
-          child: Text('画像の読み込みに失敗しました'),
-        );
+        return const Center(child: Text('画像の読み込みに失敗しました'));
       },
       frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
         if (wasSynchronouslyLoaded) {

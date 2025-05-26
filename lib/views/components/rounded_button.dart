@@ -29,27 +29,24 @@ class RoundedButton extends StatelessWidget {
         child: ElevatedButton(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(
-                buttonColor ?? Theme.of(context).primaryColor),
+              buttonColor ?? Theme.of(context).primaryColor,
+            ),
           ),
           onPressed: press,
-          child: icon != null
-              ? Row(
-                  children: [
-                    icon!,
-                    const SizedBox(
-                      width: 20.0,
-                    ),
-                    BasicBoldText(
-                      text,
-                      textColor: textColor,
-                    )
-                  ],
-                )
-              : BasicBoldText(
-                  text,
-                  textColor:
-                      textColor ?? Theme.of(context).scaffoldBackgroundColor,
-                ),
+          child:
+              icon != null
+                  ? Row(
+                    children: [
+                      icon!,
+                      const SizedBox(width: 20.0),
+                      BasicBoldText(text, textColor: textColor),
+                    ],
+                  )
+                  : BasicBoldText(
+                    text,
+                    textColor:
+                        textColor ?? Theme.of(context).scaffoldBackgroundColor,
+                  ),
         ),
       ),
     );

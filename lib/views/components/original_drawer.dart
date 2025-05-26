@@ -34,62 +34,69 @@ class OriginalDrawer extends ConsumerWidget {
             final user = currentUserController.rxPublicUser.value;
             if (user != null) {
               return DrawerHeader(
-                  child: InkWell(
-                      child: Column(
+                child: InkWell(
+                  child: Column(
+                    children: [
+                      EllipsisText(
+                        user.nameValue,
+                        style: StyleUtility.bold25(),
+                      ),
+                      const BasicHeightBox(),
+                      Row(
                         children: [
-                          EllipsisText(
-                            user.nameValue,
-                            style: StyleUtility.bold25(),
+                          CircleImage(
+                            uint8list:
+                                CurrentUserController.to.rxUint8list.value,
                           ),
-                          const BasicHeightBox(),
-                          Row(
+                          const BasicWidthBox(),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              CircleImage(
-                                uint8list:
-                                    CurrentUserController.to.rxUint8list.value,
+                              Text(
+                                "フォロー ${user.followingCount.formatNumber()}",
                               ),
-                              const BasicWidthBox(),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "フォロー ${user.followingCount.formatNumber()}",
-                                  ),
-                                  const BasicHeightBox(),
-                                  Text(
-                                    "フォロワー ${user.followerCount.formatNumber()}",
-                                  )
-                                ],
+                              const BasicHeightBox(),
+                              Text(
+                                "フォロワー ${user.followerCount.formatNumber()}",
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
-                      onTap: () {
-                        Get.toNamed(UserProfilePage.generatePath(user.uid));
-                      }));
+                    ],
+                  ),
+                  onTap: () {
+                    Get.toNamed(UserProfilePage.generatePath(user.uid));
+                  },
+                ),
+              );
             } else {
               return ListTile(
-                  title: const Text("ログインする"),
-                  onTap: () {
-                    Get.toNamed(LoginPage.path);
-                  });
+                title: const Text("ログインする"),
+                onTap: () {
+                  Get.toNamed(LoginPage.path);
+                },
+              );
             }
           }),
           ListTile(
-              title: const Text("アカウント情報"),
-              onTap: () {
-                Get.toNamed(AccountPage.path);
-              }),
+            title: const Text("アカウント情報"),
+            onTap: () {
+              Get.toNamed(AccountPage.path);
+            },
+          ),
           ListTile(
-              title: const Text("ミュートしているユーザー"),
-              onTap: () => Get.toNamed(MuteUsersPage.path)),
+            title: const Text("ミュートしているユーザー"),
+            onTap: () => Get.toNamed(MuteUsersPage.path),
+          ),
           ListTile(
-              title: const Text("ミュートしている投稿"),
-              onTap: () => Get.toNamed(MutePostsPage.path)),
+            title: const Text("ミュートしている投稿"),
+            onTap: () => Get.toNamed(MutePostsPage.path),
+          ),
           ListTile(
-              title: const Text("ブックマーク"),
-              onTap: () => Get.toNamed(BookmarkCategoriesPage.path)),
+            title: const Text("ブックマーク"),
+            onTap: () => Get.toNamed(BookmarkCategoriesPage.path),
+          ),
           Obx(
             () => ListTile(
               title: const Text("テーマ切り替え"),
@@ -105,9 +112,10 @@ class OriginalDrawer extends ConsumerWidget {
               title: const Text("最初のメッセージを受け取る"),
               trailing: CupertinoSwitch(
                 value: settingState.needFirstMessage,
-                onChanged: ref
-                    .read(localSettingProvider.notifier)
-                    .onNeedFirstMessageSwichChanged,
+                onChanged:
+                    ref
+                        .read(localSettingProvider.notifier)
+                        .onNeedFirstMessageSwichChanged,
               ),
             ),
           ),
@@ -115,11 +123,15 @@ class OriginalDrawer extends ConsumerWidget {
             title: const Text("使用モデルID"),
             subtitle: Obx(() => Text(purchasesController.model().model)),
           ),
-          Obx(() => CurrentUserController.to.isAdmin()
-              ? ListTile(
-                  title: const Text("管理者専用ページ"),
-                  onTap: () => Get.toNamed(AdminPage.path))
-              : const SizedBox.shrink())
+          Obx(
+            () =>
+                CurrentUserController.to.isAdmin()
+                    ? ListTile(
+                      title: const Text("管理者専用ページ"),
+                      onTap: () => Get.toNamed(AdminPage.path),
+                    )
+                    : const SizedBox.shrink(),
+          ),
         ],
       ),
     );

@@ -15,17 +15,15 @@ class _OpenAIClient implements OpenAIClient {
 
   @override
   Future<GenerateImageResponse> generateImage(
-      GenerateImageRequest request) async {
+    GenerateImageRequest request,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GenerateImageResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
+      _setStreamType<GenerateImageResponse>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(
               _dio.options,
               '/images/generations',
@@ -33,10 +31,13 @@ class _OpenAIClient implements OpenAIClient {
               data: _data,
             )
             .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              _dio.options.baseUrl,
-            ))));
+              baseUrl: _combineBaseUrls(
+                _dio.options.baseUrl,
+                _dio.options.baseUrl,
+              ),
+            ),
+      ),
+    );
     final value = GenerateImageResponse.fromJson(_result.data!);
     return value;
   }
@@ -48,11 +49,8 @@ class _OpenAIClient implements OpenAIClient {
     final _headers = <String, dynamic>{};
     final _data = request;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GenerateTextResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
+      _setStreamType<GenerateTextResponse>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(
               _dio.options,
               '/chat/completions',
@@ -60,10 +58,13 @@ class _OpenAIClient implements OpenAIClient {
               data: _data,
             )
             .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              _dio.options.baseUrl,
-            ))));
+              baseUrl: _combineBaseUrls(
+                _dio.options.baseUrl,
+                _dio.options.baseUrl,
+              ),
+            ),
+      ),
+    );
     final value = GenerateTextResponse.fromJson(_result.data!);
     return value;
   }
@@ -81,10 +82,7 @@ class _OpenAIClient implements OpenAIClient {
     return requestOptions;
   }
 
-  String _combineBaseUrls(
-    String dioBaseUrl,
-    String? baseUrl,
-  ) {
+  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }

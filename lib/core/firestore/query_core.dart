@@ -19,9 +19,9 @@ class QueryCore {
       posts().orderBy('msgCount', descending: true);
   static MapQuery postsByNewest() =>
       posts().orderBy('createdAt', descending: true);
-  static MapQuery timelines(DocRef userRef) => ColRefCore.timelines(userRef)
-      .orderBy('createdAt', descending: true)
-      .limit(whereInLimit);
+  static MapQuery timelines(DocRef userRef) => ColRefCore.timelines(
+    userRef,
+  ).orderBy('createdAt', descending: true).limit(whereInLimit);
   static MapQuery timelinePosts(List<String> timelinePostIds) =>
       posts().where('postId', whereIn: timelinePostIds);
   static MapQuery usersByWhereIn(List<String> uids) =>

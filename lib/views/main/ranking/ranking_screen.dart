@@ -9,23 +9,30 @@ class RankingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: rankingTBE.length,
-        child: Scaffold(
-          appBar: AppBar(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(defaultPadding(context) * 2))),
-            bottom: TabBar(
-                indicatorSize: TabBarIndicatorSize.label,
-                tabs: rankingTBE
-                    .map((tabBarElement) => Tab(text: tabBarElement.title))
-                    .toList()),
+      length: rankingTBE.length,
+      child: Scaffold(
+        appBar: AppBar(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(defaultPadding(context) * 2),
+            ),
           ),
-          body: const TabBarView(children: [
+          bottom: TabBar(
+            indicatorSize: TabBarIndicatorSize.label,
+            tabs:
+                rankingTBE
+                    .map((tabBarElement) => Tab(text: tabBarElement.title))
+                    .toList(),
+          ),
+        ),
+        body: const TabBarView(
+          children: [
             PostRankingScreen(),
             UserRankingScreen(),
             // SearchUsersScreen()
-          ]),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 }

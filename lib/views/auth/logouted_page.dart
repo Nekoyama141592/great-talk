@@ -7,8 +7,9 @@ class LogoutedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SvgAndMsgScreen(
-        title: "ログアウト",
-        msg: "ログアウトしました\n\nお疲れ様でした",
-        svgPath: "assets/svgs/coffee_break_pana.svg");
+      title: "ログアウト",
+      msg: "ログアウトしました\n\nお疲れ様でした",
+      svgPath: "assets/svgs/coffee_break_pana.svg",
+    );
   }
 }

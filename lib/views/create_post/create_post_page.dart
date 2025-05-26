@@ -34,51 +34,55 @@ class CreatePostPage extends ConsumerWidget {
       children: [
         _createPostForm(context, viewModel, state, deviceHeight),
         _image(context, viewModel, state),
-        _positiveButton(context, ref, stateAsync.isLoading)
+        _positiveButton(context, ref, stateAsync.isLoading),
       ],
     );
   }
 
   // 画像表示/選択ウィジェット
-  Widget _image(BuildContext context, CreatePostViewModel viewModel,
-      CreatePostState? state) {
+  Widget _image(
+    BuildContext context,
+    CreatePostViewModel viewModel,
+    CreatePostState? state,
+  ) {
     final pickedImageBase64 = state?.pickedImage;
     final Uint8List? imageBytes =
         pickedImageBase64 != null ? base64Decode(pickedImageBase64) : null;
 
     return imageBytes == null
         ? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: viewModel.onImagePickButtonPressed,
-                child: const Icon(
-                  Icons.image,
-                  size: 100.0,
-                ),
-              ),
-              const SizedBox(width: 16),
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [Text(FormConsts.imageLabel), ToGeneratePageButton()],
-              )
-            ],
-          )
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: viewModel.onImagePickButtonPressed,
+              child: const Icon(Icons.image, size: 100.0),
+            ),
+            const SizedBox(width: 16),
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [Text(FormConsts.imageLabel), ToGeneratePageButton()],
+            ),
+          ],
+        )
         : InkWell(
-            onTap: viewModel.onImagePickButtonPressed,
-            child: SizedBox(
-                width: 100.0, height: 100.0, child: Image.memory(imageBytes)),
-          );
+          onTap: viewModel.onImagePickButtonPressed,
+          child: SizedBox(
+            width: 100.0,
+            height: 100.0,
+            child: Image.memory(imageBytes),
+          ),
+        );
   }
 
   // 送信ボタンウィジェット
   Widget _positiveButton(BuildContext context, WidgetRef ref, bool isLoading) {
     return RoundedButton(
-        text: "送信",
-        // ローディング中はnullを渡し、ボタンを非活性化
-        press: isLoading ? null : () => _onPositiveButtonPressed(ref),
-        buttonColor: Theme.of(context).primaryColor,
-        textColor: Colors.white);
+      text: "送信",
+      // ローディング中はnullを渡し、ボタンを非活性化
+      press: isLoading ? null : () => _onPositiveButtonPressed(ref),
+      buttonColor: Theme.of(context).primaryColor,
+      textColor: Colors.white,
+    );
   }
 
   // 送信ボタン押下時の処理
@@ -94,49 +98,63 @@ class CreatePostPage extends ConsumerWidget {
   }
 
   // 投稿フォーム全体
-  Widget _createPostForm(BuildContext context, CreatePostViewModel viewModel,
-      CreatePostState? state, double deviceHeight) {
+  Widget _createPostForm(
+    BuildContext context,
+    CreatePostViewModel viewModel,
+    CreatePostState? state,
+    double deviceHeight,
+  ) {
     return SizedBox(
       height: deviceHeight * 0.50,
       child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ..._systemPromptTextField(viewModel,
-                    state?.systemPrompt ?? FormConsts.defaultSystemPrompt),
-                ..._descriptionTextField(viewModel, state?.description ?? ''),
-                ..._titleTextField(viewModel, state?.title ?? ''),
-                ..._temperatureNumberField(
-                    viewModel,
-                    state?.temperature.toString() ??
-                        FormConsts.defaultTemperature.toString()),
-                ..._topPNumberField(
-                    viewModel,
-                    state?.topP.toString() ??
-                        FormConsts.defaultTopP.toString()),
-                ..._presencePenaltyNumberField(
-                    viewModel,
-                    state?.presencePenalty.toString() ??
-                        FormConsts.defaultPresencePenalty.toString()),
-                ..._frequencyPenaltyNumberField(
-                    viewModel,
-                    state?.frequencyPenalty.toString() ??
-                        FormConsts.defaultFrequencyPenalty.toString())
-              ],
-            ),
-          )),
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ..._systemPromptTextField(
+                viewModel,
+                state?.systemPrompt ?? FormConsts.defaultSystemPrompt,
+              ),
+              ..._descriptionTextField(viewModel, state?.description ?? ''),
+              ..._titleTextField(viewModel, state?.title ?? ''),
+              ..._temperatureNumberField(
+                viewModel,
+                state?.temperature.toString() ??
+                    FormConsts.defaultTemperature.toString(),
+              ),
+              ..._topPNumberField(
+                viewModel,
+                state?.topP.toString() ?? FormConsts.defaultTopP.toString(),
+              ),
+              ..._presencePenaltyNumberField(
+                viewModel,
+                state?.presencePenalty.toString() ??
+                    FormConsts.defaultPresencePenalty.toString(),
+              ),
+              ..._frequencyPenaltyNumberField(
+                viewModel,
+                state?.frequencyPenalty.toString() ??
+                    FormConsts.defaultFrequencyPenalty.toString(),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
   List<Widget> _systemPromptTextField(
-      CreatePostViewModel viewModel, String initialValue) {
+    CreatePostViewModel viewModel,
+    String initialValue,
+  ) {
     return [
       const FormLabel(
-          title: "システムプロンプト", helpMsg: FormConsts.systemPromptHelpMsg),
+        title: "システムプロンプト",
+        helpMsg: FormConsts.systemPromptHelpMsg,
+      ),
       OriginalForm(
         initialValue: initialValue,
         keyboardType: TextInputType.multiline,
@@ -147,22 +165,28 @@ class CreatePostPage extends ConsumerWidget {
             return "入力をしてください";
           } else if (value.length > FormConsts.maxSystemPromptLimit) {
             return FormConsts.textLimitMsg(
-                FormConsts.maxSystemPromptLimit, value);
+              FormConsts.maxSystemPromptLimit,
+              value,
+            );
           } else if (value == FormConsts.defaultSystemPrompt) {
             return "初期値から変更してください。";
           } else {
             return null;
           }
         },
-      )
+      ),
     ];
   }
 
   List<Widget> _descriptionTextField(
-      CreatePostViewModel viewModel, String initialValue) {
+    CreatePostViewModel viewModel,
+    String initialValue,
+  ) {
     return [
       const FormLabel(
-          title: "説明/使い方(AIの一言目)", helpMsg: FormConsts.descriptionHelpMsg),
+        title: "説明/使い方(AIの一言目)",
+        helpMsg: FormConsts.descriptionHelpMsg,
+      ),
       OriginalForm(
         initialValue: initialValue,
         keyboardType: TextInputType.multiline,
@@ -174,22 +198,23 @@ class CreatePostPage extends ConsumerWidget {
             return "入力をしてください";
           } else if (value.length > FormConsts.maxDescriptionLimit) {
             return FormConsts.textLimitMsg(
-                FormConsts.maxDescriptionLimit, value);
+              FormConsts.maxDescriptionLimit,
+              value,
+            );
           } else {
             return null;
           }
         },
-      )
+      ),
     ];
   }
 
   List<Widget> _titleTextField(
-      CreatePostViewModel viewModel, String initialValue) {
+    CreatePostViewModel viewModel,
+    String initialValue,
+  ) {
     return [
-      const FormLabel(
-        title: "タイトル",
-        helpMsg: FormConsts.titleHelpMsg,
-      ),
+      const FormLabel(title: "タイトル", helpMsg: FormConsts.titleHelpMsg),
       OriginalForm(
         initialValue: initialValue,
         keyboardType: TextInputType.text,
@@ -206,15 +231,19 @@ class CreatePostPage extends ConsumerWidget {
             return null;
           }
         },
-      )
+      ),
     ];
   }
 
   List<Widget> _temperatureNumberField(
-      CreatePostViewModel viewModel, String initialValue) {
+    CreatePostViewModel viewModel,
+    String initialValue,
+  ) {
     return [
       const FormLabel(
-          title: "temperature", helpMsg: FormConsts.temperatureHelpMsg),
+        title: "temperature",
+        helpMsg: FormConsts.temperatureHelpMsg,
+      ),
       OriginalForm(
         initialValue: initialValue,
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -229,12 +258,14 @@ class CreatePostPage extends ConsumerWidget {
             return null;
           }
         },
-      )
+      ),
     ];
   }
 
   List<Widget> _topPNumberField(
-      CreatePostViewModel viewModel, String initialValue) {
+    CreatePostViewModel viewModel,
+    String initialValue,
+  ) {
     return [
       const FormLabel(title: "topP", helpMsg: FormConsts.topPHelpMsg),
       OriginalForm(
@@ -251,19 +282,25 @@ class CreatePostPage extends ConsumerWidget {
             return null;
           }
         },
-      )
+      ),
     ];
   }
 
   List<Widget> _presencePenaltyNumberField(
-      CreatePostViewModel viewModel, String initialValue) {
+    CreatePostViewModel viewModel,
+    String initialValue,
+  ) {
     return [
       const FormLabel(
-          title: "PresencePenalty", helpMsg: FormConsts.presencePenaltyHelpMsg),
+        title: "PresencePenalty",
+        helpMsg: FormConsts.presencePenaltyHelpMsg,
+      ),
       OriginalForm(
         initialValue: initialValue,
-        keyboardType:
-            const TextInputType.numberWithOptions(decimal: true, signed: true),
+        keyboardType: const TextInputType.numberWithOptions(
+          decimal: true,
+          signed: true,
+        ),
         onSaved: viewModel.setPresencePenalty,
         validator: (value) {
           final result = double.tryParse(value!);
@@ -275,20 +312,25 @@ class CreatePostPage extends ConsumerWidget {
             return null;
           }
         },
-      )
+      ),
     ];
   }
 
   List<Widget> _frequencyPenaltyNumberField(
-      CreatePostViewModel viewModel, String initialValue) {
+    CreatePostViewModel viewModel,
+    String initialValue,
+  ) {
     return [
       const FormLabel(
-          title: "FrequencyPenalty",
-          helpMsg: FormConsts.frequencyPenaltyHelpMsg),
+        title: "FrequencyPenalty",
+        helpMsg: FormConsts.frequencyPenaltyHelpMsg,
+      ),
       OriginalForm(
         initialValue: initialValue,
-        keyboardType:
-            const TextInputType.numberWithOptions(decimal: true, signed: true),
+        keyboardType: const TextInputType.numberWithOptions(
+          decimal: true,
+          signed: true,
+        ),
         onSaved: viewModel.setFrequencyPenalty,
         validator: (value) {
           final result = double.tryParse(value!);
@@ -300,7 +342,7 @@ class CreatePostPage extends ConsumerWidget {
             return null;
           }
         },
-      )
+      ),
     ];
   }
 }
@@ -310,11 +352,12 @@ class ToGeneratePageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        // Get.toNamedをNavigator.pushNamedに変更
-        onPressed: () => Navigator.pushNamed(context, GenerateImagePage.path),
-        child: Text(
-          "画像を生成する",
-          style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
-        ));
+      // Get.toNamedをNavigator.pushNamedに変更
+      onPressed: () => Navigator.pushNamed(context, GenerateImagePage.path),
+      child: Text(
+        "画像を生成する",
+        style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+      ),
+    );
   }
 }

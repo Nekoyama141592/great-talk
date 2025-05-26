@@ -65,18 +65,18 @@ class Notification extends _$Notification with WidgetsBindingObserver {
     final plugin = ref.read(flutterLocalNotificationsPluginProvider);
     const DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
-      requestAlertPermission: false,
-      requestBadgePermission: false,
-      requestSoundPermission: false,
-    );
+          requestAlertPermission: false,
+          requestBadgePermission: false,
+          requestSoundPermission: false,
+        );
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('ic_notification');
 
     const InitializationSettings initializationSettings =
         InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: initializationSettingsIOS,
-    );
+          android: initializationSettingsAndroid,
+          iOS: initializationSettingsIOS,
+        );
     await plugin.initialize(initializationSettings);
   }
 
@@ -92,16 +92,14 @@ class Notification extends _$Notification with WidgetsBindingObserver {
     if (Platform.isIOS) {
       await plugin
           .resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin>()
-          ?.requestPermissions(
-            alert: true,
-            badge: true,
-            sound: true,
-          );
+            IOSFlutterLocalNotificationsPlugin
+          >()
+          ?.requestPermissions(alert: true, badge: true, sound: true);
     } else if (Platform.isAndroid) {
       await plugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>()
+            AndroidFlutterLocalNotificationsPlugin
+          >()
           ?.requestNotificationsPermission();
     }
   }
@@ -125,9 +123,7 @@ class Notification extends _$Notification with WidgetsBindingObserver {
           largeIcon: DrawableResourceAndroidBitmap('ic_notification'),
           styleInformation: BigTextStyleInformation(message),
         ),
-        iOS: DarwinNotificationDetails(
-          badgeNumber: 1,
-        ),
+        iOS: DarwinNotificationDetails(badgeNumber: 1),
       ),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
     );

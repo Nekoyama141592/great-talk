@@ -45,7 +45,7 @@ class ChatViewModel extends _$ChatViewModel {
     if (post == null) {
       throw Exception('Post with ID $postId not found for user $uid');
     }
-    
+
     // 投稿画像とローカルのチャット履歴を取得
     final postImage = await _fetchPostImage(post);
     final localMessages = await _getLocalMessages(post.postId);
@@ -69,7 +69,8 @@ class ChatViewModel extends _$ChatViewModel {
     final text = inputController.text;
     if (text.isEmpty || text.length > FormConsts.maxMessageLimit) {
       UIHelper.showErrorFlutterToast(
-          "メッセージは1文字以上、${FormConsts.maxMessageLimit}文字以内で入力してください。");
+        "メッセージは1文字以上、${FormConsts.maxMessageLimit}文字以内で入力してください。",
+      );
       return;
     }
     FocusScope.of(context).unfocus();
@@ -118,22 +119,33 @@ class ChatViewModel extends _$ChatViewModel {
 
   /// SSEストリームをリッスンし、状態を更新する
   Future<void> _listenAndUpdate(
-      ChatCompleteText request, ScrollController scrollController) async {
+    ChatCompleteText request,
+    ScrollController scrollController,
+  ) async {
     final client = ChatGptSdkClient();
     final stream = client.openAI
         .onChatCompletionSSE(request: request)
-        .transform(StreamTransformer.fromHandlers(
+        .transform(
+          StreamTransformer.fromHandlers(
             handleError: (err, stackTrace, sink) {
-      if (err is OpenAIAuthError) {
-        UIHelper.showFlutterToast("OpenAIの認証でエラーが発生しました。運営の対応をお待ちください。");
-      }
-      if (err is OpenAIRateLimitError) {
-        UIHelper.showFlutterToast("RateLimitエラーが発生しました。しばらく待ってからお試しください。");
-      }
-      if (err is OpenAIServerError) {
-        UIHelper.showFlutterToast("OpenAIのサーバーでエラーが発生しました。しばらく待ってからお試しください。");
-      }
-    }));
+              if (err is OpenAIAuthError) {
+                UIHelper.showFlutterToast(
+                  "OpenAIの認証でエラーが発生しました。運営の対応をお待ちください。",
+                );
+              }
+              if (err is OpenAIRateLimitError) {
+                UIHelper.showFlutterToast(
+                  "RateLimitエラーが発生しました。しばらく待ってからお試しください。",
+                );
+              }
+              if (err is OpenAIServerError) {
+                UIHelper.showFlutterToast(
+                  "OpenAIのサーバーでエラーが発生しました。しばらく待ってからお試しください。",
+                );
+              }
+            },
+          ),
+        );
     String fullResponse = "";
 
     try {
@@ -158,14 +170,18 @@ class ChatViewModel extends _$ChatViewModel {
     if (state.value == null) return;
     final currentMessages = List<TextMessage>.from(state.value!.messages);
     // 最後尾の空メッセージを、完成したAIの応答で置き換える
-    currentMessages.last =
-        _newTextMessage(finalResponse, state.value!.post.postId);
+    currentMessages.last = _newTextMessage(
+      finalResponse,
+      state.value!.post.postId,
+    );
 
-    state = AsyncData(state.value!.copyWith(
-      isGenerating: false,
-      messages: currentMessages,
-      realtimeRes: "", // リアルタイム応答をクリア
-    ));
+    state = AsyncData(
+      state.value!.copyWith(
+        isGenerating: false,
+        messages: currentMessages,
+        realtimeRes: "", // リアルタイム応答をクリア
+      ),
+    );
     _setLocalMessage(); // チャット履歴をローカルに保存
   }
 
@@ -178,13 +194,17 @@ class ChatViewModel extends _$ChatViewModel {
     final currentMessages = List<TextMessage>.from(state.value!.messages);
     if (currentMessages.length >= 2) {
       currentMessages.removeRange(
-          currentMessages.length - 2, currentMessages.length);
+        currentMessages.length - 2,
+        currentMessages.length,
+      );
     }
-    state = AsyncData(state.value!.copyWith(
-      isGenerating: false,
-      messages: currentMessages,
-      realtimeRes: "",
-    ));
+    state = AsyncData(
+      state.value!.copyWith(
+        isGenerating: false,
+        messages: currentMessages,
+        realtimeRes: "",
+      ),
+    );
   }
 
   /// チャット履歴をクリアする
@@ -215,7 +235,9 @@ class ChatViewModel extends _$ChatViewModel {
   Future<Uint8List?> _fetchPostImage(Post post) async {
     final detectedImage = post.typedImage();
     return FileUtility.getS3Image(
-        detectedImage.bucketName, detectedImage.value);
+      detectedImage.bucketName,
+      detectedImage.value,
+    );
   }
 
   Future<List<TextMessage>> _getLocalMessages(String postId) async {
@@ -250,7 +272,8 @@ class ChatViewModel extends _$ChatViewModel {
     final newMessages = List<TextMessage>.from(state.value!.messages)
       ..add(emptyMessage);
     state = AsyncData(
-        state.value!.copyWith(messages: newMessages, realtimeRes: ""));
+      state.value!.copyWith(messages: newMessages, realtimeRes: ""),
+    );
   }
 
   Future<ChatCompleteText> _createChatRequest(String content) async {
@@ -278,17 +301,19 @@ class ChatViewModel extends _$ChatViewModel {
     const maxRequestLength = ChatGPTConstants.maxRequestLength;
     // 最後のメッセージはAIの空応答なので含めない
     final targetMessages = messages.sublist(0, messages.length - 1);
-    final history = targetMessages.length > maxRequestLength
-        ? targetMessages.sublist(targetMessages.length - maxRequestLength)
-        : targetMessages;
+    final history =
+        targetMessages.length > maxRequestLength
+            ? targetMessages.sublist(targetMessages.length - maxRequestLength)
+            : targetMessages;
     return history.map(_toRequestMessage).toList();
   }
 
   Messages _toRequestMessage(TextMessage msg) {
     final currentUid = ref.read(streamAuthUidProvider).value;
     return Messages(
-        role: msg.senderUid == currentUid ? Role.user : Role.assistant,
-        content: msg.typedText().value);
+      role: msg.senderUid == currentUid ? Role.user : Role.assistant,
+      content: msg.typedText().value,
+    );
   }
 
   Messages _systemMsg(Post post) {
@@ -299,9 +324,10 @@ class ChatViewModel extends _$ChatViewModel {
   int _adjustMaxToken() {
     const maxRequestLength = ChatGPTConstants.maxRequestLength;
     final maxToken = 4000; // 仮の値
-    final result = state.value!.messages.length < maxRequestLength
-        ? maxToken ~/ (maxRequestLength - 1)
-        : maxToken;
+    final result =
+        state.value!.messages.length < maxRequestLength
+            ? maxToken ~/ (maxRequestLength - 1)
+            : maxToken;
     return result.clamp(1, 4096);
   }
 
@@ -315,8 +341,10 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   Future<void> _createTextMsgDoc(TextMessage message) async {
-    await FirestoreRepository()
-        .createDoc(message.typedMessageRef(), message.toJson());
+    await FirestoreRepository().createDoc(
+      message.typedMessageRef(),
+      message.toJson(),
+    );
   }
 
   TextMessage _newTextMessage(String content, String senderUid) {
@@ -325,8 +353,12 @@ class ChatViewModel extends _$ChatViewModel {
       id: randomString(),
       createdAt: Timestamp.now(),
       messageType: MessageType.text.name,
-      messageRef:
-          DocRefCore.message(post.uid, post.postId, senderUid, randomString()),
+      messageRef: DocRefCore.message(
+        post.uid,
+        post.postId,
+        senderUid,
+        randomString(),
+      ),
       postRef: post.typedRef(),
       text: DetectedText(value: content).toJson(),
       posterUid: post.uid,
@@ -348,37 +380,42 @@ class ChatViewModel extends _$ChatViewModel {
 
   void onMenuPressed(BuildContext context) async {
     UIHelper.showPopup(
-        context: context,
-        builder: (innerContext) {
-          return CupertinoActionSheet(
-            actions: [
-              CupertinoActionSheetAction(
-                  onPressed: () {
-                    Navigator.pop(innerContext);
+      context: context,
+      builder: (innerContext) {
+        return CupertinoActionSheet(
+          actions: [
+            CupertinoActionSheetAction(
+              onPressed: () {
+                Navigator.pop(innerContext);
 
-                    _cleanLocalMessage();
-                  },
-                  child: const Text("会話履歴を削除")),
-              CupertinoActionSheetAction(
-                  onPressed: () {
-                    Navigator.pop(innerContext);
+                _cleanLocalMessage();
+              },
+              child: const Text("会話履歴を削除"),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () {
+                Navigator.pop(innerContext);
 
-                    onDescriptionButtonPressed();
-                  },
-                  child: const Text("情報を見る")),
-              CupertinoActionSheetAction(
-                  onPressed: () {
-                    Navigator.pop(innerContext);
+                onDescriptionButtonPressed();
+              },
+              child: const Text("情報を見る"),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () {
+                Navigator.pop(innerContext);
 
-                    _onBookmarkTextTapped();
-                  },
-                  child: const Text("ブックマークに追加/削除")),
-              CupertinoActionSheetAction(
-                  onPressed: () => Navigator.pop(innerContext),
-                  child: const Text("戻る"))
-            ],
-          );
-        });
+                _onBookmarkTextTapped();
+              },
+              child: const Text("ブックマークに追加/削除"),
+            ),
+            CupertinoActionSheetAction(
+              onPressed: () => Navigator.pop(innerContext),
+              child: const Text("戻る"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void onDeleteButtonPressed() async {
@@ -401,9 +438,11 @@ class ChatViewModel extends _$ChatViewModel {
 
       UIHelper.showFlutterToast("まずはカテゴリーを作成してみましょう!");
     } else {
-      Get.dialog(BookmarkCategoriesListView(
-        onBookmarkCategoryTapped: onBookmarkCategoryTapped,
-      ));
+      Get.dialog(
+        BookmarkCategoriesListView(
+          onBookmarkCategoryTapped: onBookmarkCategoryTapped,
+        ),
+      );
     }
   }
 
@@ -420,13 +459,16 @@ class ChatViewModel extends _$ChatViewModel {
 
     final result = await repository.getDoc(bookmarkRef);
 
-    await result.when(success: (res) async {
-      res.exists
-          ? await _unBookmark(res)
-          : await _bookmark(category); // 存在するなら削除、しないなら作成
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("通信に失敗しました");
-    });
+    await result.when(
+      success: (res) async {
+        res.exists
+            ? await _unBookmark(res)
+            : await _bookmark(category); // 存在するなら削除、しないなら作成
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("通信に失敗しました");
+      },
+    );
   }
 
   Future<void> _bookmark(BookmarkCategory category) async {
@@ -458,14 +500,18 @@ class ChatViewModel extends _$ChatViewModel {
 
     final result = await repository.createDoc(bookmarkRef, bookmark.toJson());
 
-    result.when(success: (_) {
-      Get.back();
+    result.when(
+      success: (_) {
+        Get.back();
 
-      UIHelper.showFlutterToast(
-          "${bookmarkedPost.typedTitle().value}を${category.title}に保存しました。");
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("保存が失敗しました。");
-    });
+        UIHelper.showFlutterToast(
+          "${bookmarkedPost.typedTitle().value}を${category.title}に保存しました。",
+        );
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("保存が失敗しました。");
+      },
+    );
   }
 
   Future<void> _unBookmark(Doc doc) async {
@@ -473,13 +519,16 @@ class ChatViewModel extends _$ChatViewModel {
 
     final result = await repository.deleteDoc(doc.reference);
 
-    result.when(success: (_) {
-      Get.back();
+    result.when(
+      success: (_) {
+        Get.back();
 
-      UIHelper.showFlutterToast("ブックマークを解除しました。");
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("ブックマークを解除できませんでした。");
-    });
+        UIHelper.showFlutterToast("ブックマークを解除しました。");
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("ブックマークを解除できませんでした。");
+      },
+    );
   }
 
   void onDescriptionButtonPressed() => _showDescriptionDialog();
@@ -496,8 +545,10 @@ class ChatViewModel extends _$ChatViewModel {
 
     String msgText = "累計メッセージ数:\n${post.msgCount.formatNumber()}";
 
-    UIHelper.simpleAlertDialog("$title\n\n$systemPrompt\n\n$msgText",
-        needsSubscribing: true);
+    UIHelper.simpleAlertDialog(
+      "$title\n\n$systemPrompt\n\n$msgText",
+      needsSubscribing: true,
+    );
   }
 
   Future<void> _cleanLocalMessage() async {

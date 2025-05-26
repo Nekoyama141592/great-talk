@@ -6,8 +6,6 @@ class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint(e.toString());
-    return const Center(
-      child: Text('エラーが発生しました'),
-    );
+    return const Center(child: Text('エラーが発生しました'));
   }
 }

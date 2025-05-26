@@ -10,17 +10,20 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 class PurchasesRepository {
   CloudFunctionsClient get _client {
     final dio = OriginalDio.withOptions(
-        baseUrl: EnvUtility().baseUrl, token: EnvUtility().apiKey);
+      baseUrl: EnvUtility().baseUrl,
+      token: EnvUtility().apiKey,
+    );
     final client = CloudFunctionsClient(dio);
     return client;
   }
 
   InAppPurchase get inAppPurchase => InAppPurchase.instance;
   FutureResult<List<ProductDetails>> queryProductDetails(
-      Set<String> identifiers) async {
+    Set<String> identifiers,
+  ) async {
     try {
-      final ProductDetailsResponse productDetailResponse =
-          await inAppPurchase.queryProductDetails(identifiers);
+      final ProductDetailsResponse productDetailResponse = await inAppPurchase
+          .queryProductDetails(identifiers);
       final e = productDetailResponse.error;
       if (e != null) {
         return Result.failure(e);
@@ -42,10 +45,14 @@ class PurchasesRepository {
   }
 
   FutureResult<ReceiptResponse> getAndroidReceipt(
-      PurchaseDetails purchaseDetails, String currentUid) async {
+    PurchaseDetails purchaseDetails,
+    String currentUid,
+  ) async {
     try {
-      final request =
-          ReceiptRequest(data: purchaseDetails.toJson(), uid: currentUid);
+      final request = ReceiptRequest(
+        data: purchaseDetails.toJson(),
+        uid: currentUid,
+      );
       final result = await _client.getAndroidReceipt(request);
       return Result.success(result);
     } catch (e) {
@@ -54,10 +61,14 @@ class PurchasesRepository {
   }
 
   FutureResult<ReceiptResponse> getIOSReceipt(
-      PurchaseDetails purchaseDetails, String currentUid) async {
+    PurchaseDetails purchaseDetails,
+    String currentUid,
+  ) async {
     try {
-      final request =
-          ReceiptRequest(data: purchaseDetails.toJson(), uid: currentUid);
+      final request = ReceiptRequest(
+        data: purchaseDetails.toJson(),
+        uid: currentUid,
+      );
       final result = await _client.getIOSReceipt(request);
       return Result.success(result);
     } catch (e) {

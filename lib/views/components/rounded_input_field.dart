@@ -3,8 +3,11 @@ import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/views/components/text_field_container.dart';
 
 class RoundedInputField extends StatelessWidget {
-  const RoundedInputField(
-      {super.key, required this.controller, required this.send});
+  const RoundedInputField({
+    super.key,
+    required this.controller,
+    required this.send,
+  });
 
   final TextEditingController controller;
   final void Function()? send;
@@ -19,14 +22,12 @@ class RoundedInputField extends StatelessWidget {
           controller: controller,
           cursorColor: Theme.of(context).highlightColor.withOpacity(0.7),
           decoration: InputDecoration(
-              suffixIcon: InkWell(
-                onTap: send,
-                child: const Icon(
-                  Icons.send,
-                  color: kPrimaryColor,
-                ),
-              ),
-              border: InputBorder.none),
+            suffixIcon: InkWell(
+              onTap: send,
+              child: const Icon(Icons.send, color: kPrimaryColor),
+            ),
+            border: InputBorder.none,
+          ),
         ),
       ),
     );

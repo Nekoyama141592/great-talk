@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class FeedsPage extends ConsumerWidget {
   const FeedsPage({super.key});
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final controller = Get.put(DocsController(DocsType.feeds));
     return RefreshScreen(
       docsController: controller,

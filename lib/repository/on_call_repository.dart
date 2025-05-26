@@ -41,7 +41,8 @@ class OnCallRepository {
   }
 
   FutureResult<DeleteObjectResponse> deleteObject(
-      DeleteObjectRequest request) async {
+    DeleteObjectRequest request,
+  ) async {
     try {
       const name = 'deleteObjectV2';
       final result = await _client.call(name, request.toJson());
@@ -53,7 +54,9 @@ class OnCallRepository {
   }
 
   Future<GenerateImageResponse?> generateImage(
-      String prompt, String size) async {
+    String prompt,
+    String size,
+  ) async {
     try {
       const name = 'generateImage';
       final request = GenerateImageRequest(prompt: prompt, size: size);

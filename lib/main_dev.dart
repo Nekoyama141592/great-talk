@@ -4,11 +4,14 @@ import 'package:great_talk/run_app.dart';
 import 'flavors.dart';
 
 void main() async {
-  await runZonedGuarded(() async {
-    F.appFlavor = Flavor.dev;
-    // Dartのエラーを報告
-    await RunApp.runMyApp(F.appFlavor!);
-  }, (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack);
-  });
+  await runZonedGuarded(
+    () async {
+      F.appFlavor = Flavor.dev;
+      // Dartのエラーを報告
+      await RunApp.runMyApp(F.appFlavor!);
+    },
+    (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack);
+    },
+  );
 }

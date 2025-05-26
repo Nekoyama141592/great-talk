@@ -5,11 +5,12 @@ import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
 
 class MosaicUserChild extends StatelessWidget {
-  const MosaicUserChild(
-      {super.key,
-      required this.publicUser,
-      required this.msg,
-      required this.title});
+  const MosaicUserChild({
+    super.key,
+    required this.publicUser,
+    required this.msg,
+    required this.title,
+  });
   final PublicUser publicUser;
   final String msg;
   final String title;
@@ -23,11 +24,8 @@ class MosaicUserChild extends StatelessWidget {
         const BasicWidthBox(),
         InkWell(
           onTap: () => UIHelper.simpleAlertDialog(msg),
-          child: const Icon(
-            Icons.info,
-            color: Colors.white,
-          ),
-        )
+          child: const Icon(Icons.info, color: Colors.white),
+        ),
       ],
     );
   }

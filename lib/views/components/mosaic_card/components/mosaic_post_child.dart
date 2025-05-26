@@ -10,8 +10,12 @@ import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MosaicPostChild extends ConsumerWidget {
-  const MosaicPostChild(
-      {super.key, required this.msg, required this.post, required this.title});
+  const MosaicPostChild({
+    super.key,
+    required this.msg,
+    required this.post,
+    required this.title,
+  });
   final String msg;
   final Post post;
   final String title;
@@ -24,23 +28,20 @@ class MosaicPostChild extends ConsumerWidget {
         const BasicHeightBox(),
         InkWell(
           onTap: () => UIHelper.simpleAlertDialog(msg),
-          child: const Icon(
-            Icons.info,
-            color: Colors.white,
-          ),
+          child: const Icon(Icons.info, color: Colors.white),
         ),
         const BasicHeightBox(),
-        Obx(() => (post.uid == ref.watch(streamAuthUidProvider).value ||
-                    CurrentUserController.to.isAdmin()) &&
-                !TokensController.to.deletePostIds.contains(post.postId)
-            ? InkWell(
-                onTap: () => PostCore.deletePost(post),
-                child: const Icon(
-                  Icons.delete,
-                  color: Colors.white,
-                ),
-              )
-            : const SizedBox.shrink())
+        Obx(
+          () =>
+              (post.uid == ref.watch(streamAuthUidProvider).value ||
+                          CurrentUserController.to.isAdmin()) &&
+                      !TokensController.to.deletePostIds.contains(post.postId)
+                  ? InkWell(
+                    onTap: () => PostCore.deletePost(post),
+                    child: const Icon(Icons.delete, color: Colors.white),
+                  )
+                  : const SizedBox.shrink(),
+        ),
       ],
     );
   }

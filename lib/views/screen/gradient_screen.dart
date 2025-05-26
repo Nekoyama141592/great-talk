@@ -20,28 +20,39 @@ class GradientScreen extends StatelessWidget {
     final circular = defaultPadding(context) * 2;
     final color = baseColor ?? Theme.of(context).primaryColor;
     return SafeArea(
-        child: Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topLeft, colors: [
-        color.withOpacity(0.9),
-        color.withOpacity(0.4),
-        color.withOpacity(0.1),
-      ])),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        if (top != null) top!,
-        if (header != null) header!,
-        const SizedBox(height: 5.0),
-        Expanded(
-            child: Container(
-          decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(circular),
-                  topRight: Radius.circular(circular))),
-          child: child,
-        ))
-      ]),
-    ));
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            colors: [
+              color.withOpacity(0.9),
+              color.withOpacity(0.4),
+              color.withOpacity(0.1),
+            ],
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (top != null) top!,
+            if (header != null) header!,
+            const SizedBox(height: 5.0),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(circular),
+                    topRight: Radius.circular(circular),
+                  ),
+                ),
+                child: child,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -24,9 +24,7 @@ import 'package:great_talk/views/screen/refresh_screen/components/post_like_butt
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ChatPage extends HookConsumerWidget {
-  const ChatPage({
-    super.key,
-  });
+  const ChatPage({super.key});
 
   // パス生成ロジックはそのまま利用可能
   static const path = "/chat/users/:uid/posts/:postId";
@@ -57,10 +55,11 @@ class ChatPage extends HookConsumerWidget {
         // AsyncValue.when を使って、ローディング・エラー・データ表示を切り替える
         body: chatStateAsync.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (err, stack) => Scaffold(
-            appBar: AppBar(),
-            body: Center(child: Text('エラーが発生しました: $stack'),
-          )),
+          error:
+              (err, stack) => Scaffold(
+                appBar: AppBar(),
+                body: Center(child: Text('エラーが発生しました: $stack')),
+              ),
           data: (ChatState data) {
             final Post post = data.post;
             final List<TextMessage> messages = data.messages;
@@ -76,15 +75,22 @@ class ChatPage extends HookConsumerWidget {
                   if (post.uid == currentUserId ||
                       CurrentUserController.to
                           .isAdmin()) // `CurrentUserController`は依存関係が不明なため残置
-                    DeletePostButton(
-                      onTap: chatNotifier.onDeleteButtonPressed,
-                    )
+                    DeletePostButton(onTap: chatNotifier.onDeleteButtonPressed)
                   else
                     AppBarAction(
-                      onTap: () => PostCore.onReportButtonPressed(context, post,currentUserId),
+                      onTap:
+                          () => PostCore.onReportButtonPressed(
+                            context,
+                            post,
+                            currentUserId,
+                          ),
                       child: const Icon(Icons.report),
                     ),
-                  PostLikeButton(isHorizontal: true, post: post,currentUid: currentUserId,),
+                  PostLikeButton(
+                    isHorizontal: true,
+                    post: post,
+                    currentUid: currentUserId,
+                  ),
                   MenuButton(
                     onMenuPressed: chatNotifier.onMenuPressed,
                   ), // MenuButtonにはcleanLocalMessageを渡す必要あり
@@ -140,9 +146,14 @@ class ChatPage extends HookConsumerWidget {
                         children: [
                           const BasicWidthBox(),
                           RoundedInputField(
-                              controller: inputController,
-                              send: () => chatNotifier.onSendPressed(
-                                  context, inputController, scrollController)),
+                            controller: inputController,
+                            send:
+                                () => chatNotifier.onSendPressed(
+                                  context,
+                                  inputController,
+                                  scrollController,
+                                ),
+                          ),
                         ],
                       )
                     else

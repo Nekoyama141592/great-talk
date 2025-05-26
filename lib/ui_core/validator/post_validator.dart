@@ -3,14 +3,16 @@ import 'package:great_talk/extensions/string_extension.dart';
 
 class PostValidator {
   static bool isInValidPost(
-      String description,
-      String prompt,
-      String title,
-      String temperature,
-      String topP,
-      String presencePenalty,
-      String frequencyPenalty) {
-    final result = _isInValidDescription(description) ||
+    String description,
+    String prompt,
+    String title,
+    String temperature,
+    String topP,
+    String presencePenalty,
+    String frequencyPenalty,
+  ) {
+    final result =
+        _isInValidDescription(description) ||
         _isInValidSystemPrompt(prompt) ||
         _isInValidTitle(title) ||
         _isInValidTemperature(temperature) ||
@@ -23,28 +25,32 @@ class PostValidator {
   }
 
   static bool _isInValidDescription(String? description) {
-    final result = description == null ||
+    final result =
+        description == null ||
         description.isEmpty ||
         description.length > FormConsts.maxDescriptionLimit;
     return result;
   }
 
   static bool _isInValidSystemPrompt(String? prompt) {
-    final result = prompt == null ||
+    final result =
+        prompt == null ||
         prompt.isEmpty ||
         prompt.length > FormConsts.maxSystemPromptLimit;
     return result;
   }
 
   static bool _isInValidTitle(String? title) {
-    final result = title == null ||
+    final result =
+        title == null ||
         title.isEmpty ||
         title.length > FormConsts.maxTitleLimit;
     return result;
   }
 
   static bool _isInValidTemperature(String? temperature) {
-    final result = temperature == null ||
+    final result =
+        temperature == null ||
         temperature.isEmpty ||
         double.tryParse(temperature) == null ||
         temperature.toRoundToSecondDecimalPlace() < 0.0 ||
@@ -53,7 +59,8 @@ class PostValidator {
   }
 
   static bool _isInValidTopP(String? topP) {
-    final result = topP == null ||
+    final result =
+        topP == null ||
         topP.isEmpty ||
         double.tryParse(topP) == null ||
         topP.toRoundToSecondDecimalPlace() < 0.0 ||
@@ -62,7 +69,8 @@ class PostValidator {
   }
 
   static bool _isInValidPresencePenalty(String? presencePenalty) {
-    final result = presencePenalty == null ||
+    final result =
+        presencePenalty == null ||
         presencePenalty.isEmpty ||
         double.tryParse(presencePenalty) == null ||
         presencePenalty.toRoundToSecondDecimalPlace() < -2.0 ||
@@ -71,7 +79,8 @@ class PostValidator {
   }
 
   static bool _isInValidFrequencyPenalty(String? frequencyPenalty) {
-    final result = frequencyPenalty == null ||
+    final result =
+        frequencyPenalty == null ||
         frequencyPenalty.isEmpty ||
         double.tryParse(frequencyPenalty) == null ||
         frequencyPenalty.toRoundToSecondDecimalPlace() < -2.0 ||

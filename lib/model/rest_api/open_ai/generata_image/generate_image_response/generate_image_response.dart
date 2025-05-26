@@ -6,9 +6,8 @@ part 'generate_image_response.g.dart';
 
 @freezed
 abstract class GenerateImageResponse with _$GenerateImageResponse {
-  const factory GenerateImageResponse({
-    List<GenerateImageData?>? data,
-  }) = _GenerateImageResponse;
+  const factory GenerateImageResponse({List<GenerateImageData?>? data}) =
+      _GenerateImageResponse;
   factory GenerateImageResponse.fromJson(Map<String, dynamic> json) =>
       _$GenerateImageResponseFromJson(json);
 }

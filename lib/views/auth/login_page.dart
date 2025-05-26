@@ -10,11 +10,13 @@ class LoginPage extends StatelessWidget {
     final controller = CurrentUserController.to;
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(),
-          body: LoginScreen(
-              onAppleButtonPressed: controller.onAppleButtonPressed,
-              onGoogleButtonPressed: controller.onGoogleButtonPressed,
-              title: "ログイン")),
+        appBar: AppBar(),
+        body: LoginScreen(
+          onAppleButtonPressed: controller.onAppleButtonPressed,
+          onGoogleButtonPressed: controller.onGoogleButtonPressed,
+          title: "ログイン",
+        ),
+      ),
     );
   }
 }

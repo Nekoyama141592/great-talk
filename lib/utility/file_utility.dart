@@ -27,7 +27,9 @@ class FileUtility {
   }
 
   static Future<Uint8List?> getS3Image(
-      String bucketName, String fileName) async {
+    String bucketName,
+    String fileName,
+  ) async {
     if (fileName.isEmpty) {
       return null;
     }
@@ -37,12 +39,15 @@ class FileUtility {
       final repository = AWSS3Repository();
       final request = GetObjectRequest(object: fileName);
       final result = await repository.getObject(request);
-      result.when(success: (res) {
-        uint8List = res;
-        _cacheUint8List(fileName, res); // 画像を非同期でキャッシュする.
-      }, failure: (e) {
-        uint8List = null;
-      });
+      result.when(
+        success: (res) {
+          uint8List = res;
+          _cacheUint8List(fileName, res); // 画像を非同期でキャッシュする.
+        },
+        failure: (e) {
+          uint8List = null;
+        },
+      );
     }
     return uint8List;
   }
@@ -104,8 +109,9 @@ class FileUtility {
     }
     final instance = ImageCropper();
     final result = await instance.cropImage(
-        sourcePath: xFile.path,
-        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1));
+      sourcePath: xFile.path,
+      aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+    );
     return result;
   }
 
@@ -123,7 +129,8 @@ class FileUtility {
     return OriginalImageInfo(height: height, width: width);
   }
 
-  static String get squareImageRequestMsg => Platform.isIOS
-      ? FormConsts.iosSquareImageRequestMsg
-      : FormConsts.androidSquareImageRequestMsg;
+  static String get squareImageRequestMsg =>
+      Platform.isIOS
+          ? FormConsts.iosSquareImageRequestMsg
+          : FormConsts.androidSquareImageRequestMsg;
 }

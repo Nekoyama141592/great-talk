@@ -21,23 +21,18 @@ class _CloudFunctionsClient implements CloudFunctionsClient {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ReceiptResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      _setStreamType<ReceiptResponse>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(
               _dio.options,
               '/verifyIOSReceipt',
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+            .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+      ),
+    );
     final value = ReceiptResponse.fromJson(_result.data!);
     return value;
   }
@@ -48,23 +43,18 @@ class _CloudFunctionsClient implements CloudFunctionsClient {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ReceiptResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      _setStreamType<ReceiptResponse>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
             .compose(
               _dio.options,
               '/verifyAndroidReceipt',
               queryParameters: queryParameters,
               data: _data,
             )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+            .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+      ),
+    );
     final value = ReceiptResponse.fromJson(_result.data!);
     return value;
   }
@@ -82,10 +72,7 @@ class _CloudFunctionsClient implements CloudFunctionsClient {
     return requestOptions;
   }
 
-  String _combineBaseUrls(
-    String dioBaseUrl,
-    String? baseUrl,
-  ) {
+  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }

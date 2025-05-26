@@ -2,8 +2,9 @@ import 'package:great_talk/consts/form_consts.dart';
 
 List<String> returnSearchWords(String searchTerm) {
   List<String> afterSplit = searchTerm.split('');
-  afterSplit
-      .removeWhere((element) => FormConsts.notUseOnField.contains(element));
+  afterSplit.removeWhere(
+    (element) => FormConsts.notUseOnField.contains(element),
+  );
   String result = '';
   for (final element in afterSplit) {
     final x = element.toLowerCase();

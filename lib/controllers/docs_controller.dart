@@ -58,8 +58,9 @@ class DocsController extends GetxController {
   MapQuery setQuery() {
     switch (type) {
       case DocsType.bookmarks:
-        final token = TokensController.to.bookmarkCategoryTokens
-            .firstWhere((element) => element.id == Get.parameters["categoryId"]);
+        final token = TokensController.to.bookmarkCategoryTokens.firstWhere(
+          (element) => element.id == Get.parameters["categoryId"],
+        );
         return QueryCore.bookmarks(token);
       case DocsType.feeds:
         return QueryCore.timelines(DocRefCore.user(currentUid()));
@@ -78,13 +79,17 @@ class DocsController extends GetxController {
     }
   }
 
-  Future<void> _updateDocInfoList(List<QDoc> elements, {bool front = false}) async {
+  Future<void> _updateDocInfoList(
+    List<QDoc> elements, {
+    bool front = false,
+  }) async {
     if (state.value.isLoading || elements.isEmpty) return;
     startLoading();
     try {
       final currentDocs = state.value.qDocInfoList;
       final docIds = currentDocs.map((e) => e.qDoc.id).toSet();
-      final newElements = elements.where((e) => !docIds.contains(e.id)).toList();
+      final newElements =
+          elements.where((e) => !docIds.contains(e.id)).toList();
       if (newElements.isEmpty) {
         endLoading();
         return;
@@ -94,18 +99,28 @@ class DocsController extends GetxController {
       final fetchedUsers = await _getUsersByUids(uids.toList());
       final userMap = {for (final user in fetchedUsers) user.uid: user};
 
-      final newQDocInfoList = await Future.wait(newElements
-          .where((element) => userMap.containsKey(element.data()['uid']))
-          .map((element) async {
-        final publicUser = userMap[element.data()['uid']]!;
-        final userImage = await _getImageFromDoc(element);
-        return QDocInfo(publicUser: publicUser, qDoc: element, userImage: userImage);
-      }));
+      final newQDocInfoList = await Future.wait(
+        newElements
+            .where((element) => userMap.containsKey(element.data()['uid']))
+            .map((element) async {
+              final publicUser = userMap[element.data()['uid']]!;
+              final userImage = await _getImageFromDoc(element);
+              return QDocInfo(
+                publicUser: publicUser,
+                qDoc: element,
+                userImage: userImage,
+              );
+            }),
+      );
 
       if (front) {
-        state.value = state.value.copyWith(qDocInfoList: [...newQDocInfoList.reversed, ...currentDocs]);
+        state.value = state.value.copyWith(
+          qDocInfoList: [...newQDocInfoList.reversed, ...currentDocs],
+        );
       } else {
-        state.value = state.value.copyWith(qDocInfoList: [...currentDocs, ...newQDocInfoList]);
+        state.value = state.value.copyWith(
+          qDocInfoList: [...currentDocs, ...newQDocInfoList],
+        );
       }
     } finally {
       endLoading();
@@ -124,13 +139,17 @@ class DocsController extends GetxController {
     if (elements.isEmpty) {
       return [];
     } else {
-      return elements..sort((a, b) => (b["createdAt"]).compareTo(a["createdAt"]));
+      return elements
+        ..sort((a, b) => (b["createdAt"]).compareTo(a["createdAt"]));
     }
   }
 
   Future<Uint8List?> _getImageFromDoc(Doc doc) async {
     final detectedImage = DetectedImage.fromJson(doc['image']);
-    final image = await FileUtility.getS3Image(detectedImage.bucketName, detectedImage.value);
+    final image = await FileUtility.getS3Image(
+      detectedImage.bucketName,
+      detectedImage.value,
+    );
     return image;
   }
 
@@ -167,7 +186,10 @@ class DocsController extends GetxController {
       return;
     }
     try {
-      final elements = await setQuery().startAtDocument(state.value.qDocInfoList.last.qDoc).get();
+      final elements =
+          await setQuery()
+              .startAtDocument(state.value.qDocInfoList.last.qDoc)
+              .get();
       await addAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
@@ -178,7 +200,10 @@ class DocsController extends GetxController {
   Future<void> onRefresh() async {
     if (state.value.qDocInfoList.isEmpty) return;
     try {
-      final elements = await setQuery().endBeforeDocument(state.value.qDocInfoList.first.qDoc).get();
+      final elements =
+          await setQuery()
+              .endBeforeDocument(state.value.qDocInfoList.first.qDoc)
+              .get();
       await insertAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
@@ -191,17 +216,21 @@ class DocsController extends GetxController {
     final query = QueryCore.usersByWhereIn(uids);
     final result = await repository.getDocs(query);
     late List<PublicUser> users;
-    result.when(success: (res) {
-      users = res.map((e) => PublicUser.fromJson(e.data())).toList();
-    }, failure: (e) {
-      users = [];
-    });
+    result.when(
+      success: (res) {
+        users = res.map((e) => PublicUser.fromJson(e.data())).toList();
+      },
+      failure: (e) {
+        users = [];
+      },
+    );
     return users;
   }
 
   Future<List<QDoc>> _timelinesToPostsResult(List<QDoc> fetchedDocs) async {
     final repository = FirestoreRepository();
-    final List<String> postIds = fetchedDocs.map((e) => e.data()["postId"] as String).toList();
+    final List<String> postIds =
+        fetchedDocs.map((e) => e.data()["postId"] as String).toList();
     final query = QueryCore.timelinePosts(postIds);
     final posts = await repository.getDocsWithList(query);
     return posts;
@@ -230,7 +259,8 @@ class DocsController extends GetxController {
 
   Future<void> onLoadingTimeline(RefreshController refreshController) async {
     try {
-      final result = await setQuery().startAfterDocument(state.value.indexDocs.last).get();
+      final result =
+          await setQuery().startAfterDocument(state.value.indexDocs.last).get();
       final newIndexDocs = [...state.value.indexDocs, ...result.docs];
       // indexDocsをstate内で更新
       state.value = state.value.copyWith(indexDocs: newIndexDocs);
@@ -256,18 +286,22 @@ class DocsController extends GetxController {
   }
 
   void onMutePostCardTap(Post post) {
-    UIHelper.cupertinoAlertDialog("ミュートを解除しますがよろしいですか？",
-        () => unMutePost(post).then((value) => Get.back()));
+    UIHelper.cupertinoAlertDialog(
+      "ミュートを解除しますがよろしいですか？",
+      () => unMutePost(post).then((value) => Get.back()),
+    );
   }
 
   Future<void> unMutePost(Post post) async {
     final repository = FirestoreRepository();
     final postId = post.postId;
-    final deleteToken = TokensController.to.mutePostTokens
-        .firstWhere((element) => element.postId == postId);
+    final deleteToken = TokensController.to.mutePostTokens.firstWhere(
+      (element) => element.postId == postId,
+    );
     TokensController.to.removeMutePost(deleteToken);
     state.value.qDocInfoList.removeWhere(
-        (element) => Post.fromJson(element.qDoc.data()).postId == postId);
+      (element) => Post.fromJson(element.qDoc.data()).postId == postId,
+    );
     final tokenId = deleteToken.tokenId;
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.deleteDoc(tokenRef);
@@ -291,39 +325,51 @@ class DocsController extends GetxController {
   }
 
   void onMuteUserCardTap(String passiveUid) {
-    UIHelper.cupertinoAlertDialog("ミュートを解除しますがよろしいですか？",
-        () => unMuteUser(passiveUid).then((value) => Get.back()));
+    UIHelper.cupertinoAlertDialog(
+      "ミュートを解除しますがよろしいですか？",
+      () => unMuteUser(passiveUid).then((value) => Get.back()),
+    );
   }
 
   Future<void> unMuteUser(String passiveUid) async {
     final repository = FirestoreRepository();
-    final deleteToken = TokensController.to.muteUserTokens
-        .firstWhere((element) => element.passiveUid == passiveUid);
+    final deleteToken = TokensController.to.muteUserTokens.firstWhere(
+      (element) => element.passiveUid == passiveUid,
+    );
     TokensController.to.removeMuteUser(deleteToken);
-    state.value.qDocInfoList.removeWhere((element) =>
-        PublicUser.fromJson(element.qDoc.data()).uid == passiveUid);
+    state.value.qDocInfoList.removeWhere(
+      (element) => PublicUser.fromJson(element.qDoc.data()).uid == passiveUid,
+    );
     final tokenId = deleteToken.tokenId;
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.deleteDoc(tokenRef);
     final userMuteRef = DocRefCore.userMute(passiveUid, currentUid());
     await repository.deleteDoc(userMuteRef);
   }
+
   Future<void> getPassiveUser() async {
     final repository = FirestoreRepository();
     final ref = DocRefCore.user(passiveUid());
     final result = await repository.getDoc(ref);
-    result.when(success: (res) {
-      if (res.exists) {
-        state.value = state.value.copyWith(passiveUser: PublicUser.fromJson(res.data()!));
-      }
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
-    });
+    result.when(
+      success: (res) {
+        if (res.exists) {
+          state.value = state.value.copyWith(
+            passiveUser: PublicUser.fromJson(res.data()!),
+          );
+        }
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+      },
+    );
     final user = state.value.passiveUser;
     if (user == null) return;
     final detectedImage = user.typedImage();
     final s3Image = await FileUtility.getS3Image(
-        detectedImage.bucketName, detectedImage.value);
+      detectedImage.bucketName,
+      detectedImage.value,
+    );
     state.value = state.value.copyWith(uint8list: s3Image);
   }
 
@@ -350,23 +396,26 @@ class DocsController extends GetxController {
     final repository = FirestoreRepository();
     final String tokenId = randomString();
     final Timestamp now = Timestamp.now();
-    final newUser = state.value.passiveUser!
-        .copyWith(followerCount: state.value.passiveUser!.followerCount + plusOne);
+    final newUser = state.value.passiveUser!.copyWith(
+      followerCount: state.value.passiveUser!.followerCount + plusOne,
+    );
     state.value = state.value.copyWith(passiveUser: newUser);
     final followingToken = FollowingToken(
-        createdAt: now,
-        passiveUid: passiveUid(),
-        tokenId: tokenId,
-        passiveUserRef: state.value.passiveUser!.ref,
-        tokenType: TokenType.following.name);
+      createdAt: now,
+      passiveUid: passiveUid(),
+      tokenId: tokenId,
+      passiveUserRef: state.value.passiveUser!.ref,
+      tokenType: TokenType.following.name,
+    );
     TokensController.to.addFollowing(followingToken);
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.createDoc(tokenRef, followingToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
     final follower = Follower(
-        activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
-        createdAt: now,
-        passiveUserRef: state.value.passiveUser!.typedRef());
+      activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
+      createdAt: now,
+      passiveUserRef: state.value.passiveUser!.typedRef(),
+    );
     final followerRef = DocRefCore.follower(currentUid(), passiveUid());
     await repository.createDoc(followerRef, follower.toJson());
   }
@@ -385,10 +434,12 @@ class DocsController extends GetxController {
   Future<void> _unfollow() async {
     final repository = FirestoreRepository();
     final newUser = state.value.passiveUser!.copyWith(
-        followerCount: state.value.passiveUser!.followerCount + minusOne);
+      followerCount: state.value.passiveUser!.followerCount + minusOne,
+    );
     state.value = state.value.copyWith(passiveUser: newUser);
-    final deleteToken = TokensController.to.followingTokens
-        .firstWhere((element) => element.passiveUid == passiveUid());
+    final deleteToken = TokensController.to.followingTokens.firstWhere(
+      (element) => element.passiveUid == passiveUid(),
+    );
     TokensController.to.removeFollowing(deleteToken);
     final tokenRef = DocRefCore.token(currentUid(), deleteToken.tokenId);
     await repository.deleteDoc(tokenRef);

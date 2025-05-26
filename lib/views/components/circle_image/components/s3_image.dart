@@ -11,10 +11,9 @@ class S3Image extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          border: Border.all(
-            color: Theme.of(context).primaryColor,
-          ),
-          shape: BoxShape.circle),
+        border: Border.all(color: Theme.of(context).primaryColor),
+        shape: BoxShape.circle,
+      ),
       child: ClipOval(
         child: SizedBox(
           width: width ?? userImageSize(context),

@@ -14,9 +14,16 @@ class RunApp {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(options: getFirebaseOption(flavor));
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    runApp(ProviderScope(overrides: [
-      prefsProvider.overrideWithValue(await SharedPreferences.getInstance()),
-    ], child: const MyApp()));
+    runApp(
+      ProviderScope(
+        overrides: [
+          prefsProvider.overrideWithValue(
+            await SharedPreferences.getInstance(),
+          ),
+        ],
+        child: const MyApp(),
+      ),
+    );
   }
 
   static FirebaseOptions getFirebaseOption(Flavor flavor) {

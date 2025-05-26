@@ -10,14 +10,13 @@ class ReauthenticateToDeletePage extends StatelessWidget {
     final controller = CurrentUserController.to;
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            title: const Text("ユーザーを削除"),
-          ),
-          body: LoginScreen(
-              onAppleButtonPressed: controller.reauthenticateWithAppleToDelete,
-              onGoogleButtonPressed:
-                  controller.reauthenticateWithGoogleToDelete,
-              title: "ユーザーの削除には再認証が必要です")),
+        appBar: AppBar(title: const Text("ユーザーを削除")),
+        body: LoginScreen(
+          onAppleButtonPressed: controller.reauthenticateWithAppleToDelete,
+          onGoogleButtonPressed: controller.reauthenticateWithGoogleToDelete,
+          title: "ユーザーの削除には再認証が必要です",
+        ),
+      ),
     );
   }
 }

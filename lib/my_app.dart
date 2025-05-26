@@ -16,15 +16,13 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(localSettingProvider);
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        getPages: getPages,
-        initialRoute: path,
-        title: F.title,
-        theme: state.isDarkTheme
-            ? darkThemeData(context)
-            : lightThemeData(context),
-        home: const CheckPage(
-          child: MyHomePage(),
-        ));
+      debugShowCheckedModeBanner: false,
+      getPages: getPages,
+      initialRoute: path,
+      title: F.title,
+      theme:
+          state.isDarkTheme ? darkThemeData(context) : lightThemeData(context),
+      home: const CheckPage(child: MyHomePage()),
+    );
   }
 }

@@ -14,11 +14,12 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class NewContent {
   static CustomCompleteText newCustomCompleteText(
-      String systemPrompt,
-      String temperature,
-      String topP,
-      String presencePenalty,
-      String frequencyPenalty) {
+    String systemPrompt,
+    String temperature,
+    String topP,
+    String presencePenalty,
+    String frequencyPenalty,
+  ) {
     // doubleにparse
     final pTemperature = temperature.trim().toRoundToSecondDecimalPlace();
     final pTopP = topP.trim().toRoundToSecondDecimalPlace();
@@ -31,67 +32,79 @@ class NewContent {
       temperature:
           pTemperature != FormConsts.defaultTemperature ? pTemperature : null,
       topP: pTopP != FormConsts.defaultTopP ? pTopP : null,
-      presencePenalty: pPresencePenalty != FormConsts.defaultPresencePenalty
-          ? pPresencePenalty
-          : null,
-      frequencyPenalty: pFrequencyPenalty != FormConsts.defaultFrequencyPenalty
-          ? pFrequencyPenalty
-          : null,
+      presencePenalty:
+          pPresencePenalty != FormConsts.defaultPresencePenalty
+              ? pPresencePenalty
+              : null,
+      frequencyPenalty:
+          pFrequencyPenalty != FormConsts.defaultFrequencyPenalty
+              ? pFrequencyPenalty
+              : null,
     );
   }
 
   static DetectedImage newDetectedImage(String value) =>
       DetectedImage(value: value);
   static Post newPost(
-      String systemPrompt,
-      String title,
-      String description,
-      String fileName,
-      String postId,
-      DocRef postRef,
-      SDMap customCompleteText,
-      String uid) {
+    String systemPrompt,
+    String title,
+    String description,
+    String fileName,
+    String postId,
+    DocRef postRef,
+    SDMap customCompleteText,
+    String uid,
+  ) {
     final now = Timestamp.now();
     return Post(
-        createdAt: now,
-        customCompleteText: customCompleteText,
-        description: DetectedText(value: description).toJson(),
-        image: newDetectedImage(fileName).toJson(),
-        postId: postId,
-        ref: postRef,
-        searchToken: returnSearchToken(title),
-        title: DetectedText(value: title).toJson(),
-        updatedAt: now,
-        uid: uid);
+      createdAt: now,
+      customCompleteText: customCompleteText,
+      description: DetectedText(value: description).toJson(),
+      image: newDetectedImage(fileName).toJson(),
+      postId: postId,
+      ref: postRef,
+      searchToken: returnSearchToken(title),
+      title: DetectedText(value: title).toJson(),
+      updatedAt: now,
+      uid: uid,
+    );
   }
 
-  static PublicUser newUser(String uid,
-      {String? userName, String? bio, String? imageValue}) {
+  static PublicUser newUser(
+    String uid, {
+    String? userName,
+    String? bio,
+    String? imageValue,
+  }) {
     final now = Timestamp.now();
     return PublicUser(
       createdAt: now,
-      bio: bio != null
-          ? DetectedText(value: bio).toJson()
-          : const DetectedText().toJson(),
+      bio:
+          bio != null
+              ? DetectedText(value: bio).toJson()
+              : const DetectedText().toJson(),
       ref: DocRefCore.user(uid),
       uid: uid,
       updatedAt: now,
-      image: imageValue != null
-          ? newDetectedImage(imageValue).toJson()
-          : newDetectedImage('').toJson(),
-      userName: userName != null
-          ? DetectedText(value: userName).toJson()
-          : const DetectedText().toJson(),
+      image:
+          imageValue != null
+              ? newDetectedImage(imageValue).toJson()
+              : newDetectedImage('').toJson(),
+      userName:
+          userName != null
+              ? DetectedText(value: userName).toJson()
+              : const DetectedText().toJson(),
     );
   }
 
   static PrivateUser newPrivateUser(String uid) {
     final now = Timestamp.now();
     return PrivateUser(
-        accessToken: randomString(),
-        createdAt: now,
-        ref: DocRefCore.privateUser(uid),
-        uid: uid,
-        updatedAt: now);
+      accessToken: randomString(),
+      createdAt: now,
+      ref: DocRefCore.privateUser(uid),
+      uid: uid,
+      updatedAt: now,
+    );
   }
 }

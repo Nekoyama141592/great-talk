@@ -4,11 +4,12 @@ import 'package:great_talk/core/doubles.dart';
 import 'package:great_talk/views/screen/gradient_screen.dart';
 
 class SvgAndMsgScreen extends StatelessWidget {
-  const SvgAndMsgScreen(
-      {super.key,
-      required this.title,
-      required this.msg,
-      required this.svgPath});
+  const SvgAndMsgScreen({
+    super.key,
+    required this.title,
+    required this.msg,
+    required this.svgPath,
+  });
 
   final String title;
   final String msg;
@@ -26,8 +27,9 @@ class SvgAndMsgScreen extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(
-                fontSize: defaultHeaderTextSize(context),
-                fontWeight: FontWeight.bold),
+              fontSize: defaultHeaderTextSize(context),
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         child: SizedBox(
@@ -37,18 +39,17 @@ class SvgAndMsgScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SvgPicture.asset(
-                  svgPath,
-                  height: size.height * 0.3,
-                ),
+                SvgPicture.asset(svgPath, height: size.height * 0.3),
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: defaultPadding(context)),
+                  padding: EdgeInsets.symmetric(
+                    vertical: defaultPadding(context),
+                  ),
                   child: Text(
                     msg,
                     style: TextStyle(
-                        fontSize: defaultHeaderTextSize(context) * 1.25,
-                        fontWeight: FontWeight.bold),
+                      fontSize: defaultHeaderTextSize(context) * 1.25,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],

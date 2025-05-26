@@ -35,26 +35,26 @@ class MsgCard extends StatelessWidget {
       Column(
         children: [
           if (isMyMsg) const Text("既読"),
-          if (createdAt != null)
-            Text(
-              createdAt!.toDate().timeString(),
-            ),
+          if (createdAt != null) Text(createdAt!.toDate().timeString()),
         ],
       ),
-      const SizedBox(
-        width: 4.0,
-      ),
+      const SizedBox(width: 4.0),
       SizedBox(
-        width: TextCore.doesOverFlow(
-                text, style, textWidth - PaddingCore.defaultPadding(context))
-            ? textWidth
-            : null,
+        width:
+            TextCore.doesOverFlow(
+                  text,
+                  style,
+                  textWidth - PaddingCore.defaultPadding(context),
+                )
+                ? textWidth
+                : null,
         child: Container(
           padding: PaddingCore.defaultAll(context),
           decoration: BoxDecoration(
             color: isMyMsg ? myColor : null,
             border: Border.all(
-                color: isMyMsg ? myColor : Theme.of(context).focusColor),
+              color: isMyMsg ? myColor : Theme.of(context).focusColor,
+            ),
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Text(text),
@@ -62,18 +62,17 @@ class MsgCard extends StatelessWidget {
       ),
       // Obx を削除し、渡された postImage を直接使用する
       if (!isMyMsg && postImage != null)
-        CircleImage(
-          uint8list: postImage,
-        )
+        CircleImage(uint8list: postImage)
       else
         const SizedBox.shrink(),
     ];
 
     final child = Container(
       width: fullWidth * 0.9,
-      padding: isMyMsg
-          ? EdgeInsets.only(left: fullWidth * 0.1, top: 4.0, bottom: 4.0)
-          : EdgeInsets.only(top: 4.0, right: fullWidth * 0.1, bottom: 4.0),
+      padding:
+          isMyMsg
+              ? EdgeInsets.only(left: fullWidth * 0.1, top: 4.0, bottom: 4.0)
+              : EdgeInsets.only(top: 4.0, right: fullWidth * 0.1, bottom: 4.0),
       child: Row(
         mainAxisAlignment:
             isMyMsg ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -83,13 +82,13 @@ class MsgCard extends StatelessWidget {
 
     return isAnotherDay && createdAt != null
         ? Column(
-            children: [
-              const BasicHeightBox(),
-              Text(createdAt!.toDate().japaneseDifference()),
-              const BasicHeightBox(),
-              child
-            ],
-          )
+          children: [
+            const BasicHeightBox(),
+            Text(createdAt!.toDate().japaneseDifference()),
+            const BasicHeightBox(),
+            child,
+          ],
+        )
         : child;
   }
 }

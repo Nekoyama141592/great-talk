@@ -9,11 +9,12 @@ import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen(
-      {super.key,
-      required this.onAppleButtonPressed,
-      required this.onGoogleButtonPressed,
-      required this.title});
+  const LoginScreen({
+    super.key,
+    required this.onAppleButtonPressed,
+    required this.onGoogleButtonPressed,
+    required this.title,
+  });
   final void Function()? onAppleButtonPressed;
   final void Function()? onGoogleButtonPressed;
   final String title;
@@ -31,8 +32,10 @@ class LoginScreen extends StatelessWidget {
             children: [
               Text(
                 title,
-                style:
-                    const TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+                style: const TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               SvgPicture.asset(
                 'assets/svgs/login-bro.svg',
@@ -44,10 +47,7 @@ class LoginScreen extends StatelessWidget {
                 textColor: Colors.white,
                 buttonColor: kSecondaryColor,
                 press: onGoogleButtonPressed,
-                icon: const Icon(
-                  FontAwesomeIcons.google,
-                  color: Colors.black,
-                ),
+                icon: const Icon(FontAwesomeIcons.google, color: Colors.black),
               ),
               const BasicHeightBox(),
               if (Platform.isIOS)

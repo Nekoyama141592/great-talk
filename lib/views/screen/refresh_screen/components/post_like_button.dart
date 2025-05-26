@@ -10,7 +10,7 @@ class PostLikeButton extends HookWidget {
     super.key,
     required this.isHorizontal,
     required this.post,
-    required this.currentUid
+    required this.currentUid,
   });
   final bool isHorizontal;
   final Post post;
@@ -18,34 +18,42 @@ class PostLikeButton extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final copyPost = useState(post);
-    final isLiked =
-        useState(TokensController.to.likePostIds.contains(post.postId));
+    final isLiked = useState(
+      TokensController.to.likePostIds.contains(post.postId),
+    );
     final children = [
       isLiked.value
           ? InkWell(
-              child: const Icon(Icons.favorite, color: Colors.red),
-              onTap: () =>
-                  PostCore.onUnLikeButtonPressed(copyPost, isLiked, post,currentUid))
+            child: const Icon(Icons.favorite, color: Colors.red),
+            onTap:
+                () => PostCore.onUnLikeButtonPressed(
+                  copyPost,
+                  isLiked,
+                  post,
+                  currentUid,
+                ),
+          )
           : InkWell(
-              child: const Icon(
-                Icons.favorite,
-              ),
-              onTap: () =>
-                  PostCore.onLikeButtonPressed(copyPost, isLiked, post,currentUid)),
+            child: const Icon(Icons.favorite),
+            onTap:
+                () => PostCore.onLikeButtonPressed(
+                  copyPost,
+                  isLiked,
+                  post,
+                  currentUid,
+                ),
+          ),
       Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child:
-              Text(isHorizontal ? copyPost.value.likeCount.formatNumber() : ""))
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Text(
+          isHorizontal ? copyPost.value.likeCount.formatNumber() : "",
+        ),
+      ),
     ];
     return Padding(
       padding: const EdgeInsets.only(left: 8.0),
-      child: isHorizontal
-          ? Row(
-              children: children,
-            )
-          : Column(
-              children: children,
-            ),
+      child:
+          isHorizontal ? Row(children: children) : Column(children: children),
     );
   }
 }

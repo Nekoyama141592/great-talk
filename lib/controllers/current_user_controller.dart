@@ -35,14 +35,12 @@ class CurrentUserController extends GetxController {
   final Rx<PrivateUser?> rxPrivateUser = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
 
-  
-
   @override
   void onInit() async {
     await _manageUserInfo();
     super.onInit();
   }
-  
+
   Future<void> _createAnonymousUser() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signInAnonymously();
@@ -90,12 +88,15 @@ class CurrentUserController extends GetxController {
     final ref = DocRefCore.user(currentUid());
     final json = newUser.toJson();
     final result = await repository.createDoc(ref, json);
-    result.when(success: (_) {
-      rxPublicUser(newUser);
-      UIHelper.showFlutterToast("ユーザーが作成されました");
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
-    });
+    result.when(
+      success: (_) {
+        rxPublicUser(newUser);
+        UIHelper.showFlutterToast("ユーザーが作成されました");
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
+      },
+    );
   }
 
   Future<void> _createPrivateUser() async {
@@ -104,11 +105,14 @@ class CurrentUserController extends GetxController {
     final ref = DocRefCore.privateUser(currentUid());
     final json = newPrivateUser.toJson();
     final result = await repository.createDoc(ref, json);
-    result.when(success: (_) {
-      rxPrivateUser(newPrivateUser);
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
-    });
+    result.when(
+      success: (_) {
+        rxPrivateUser(newPrivateUser);
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
+      },
+    );
   }
 
   Future<void> _manageUserInfo() async {
@@ -127,43 +131,49 @@ class CurrentUserController extends GetxController {
     final repository = FirestoreRepository();
     final ref = DocRefCore.user(currentUid());
     final result = await repository.getDoc(ref);
-    await result.when(success: (res) async {
-      final data = res.data();
-      if (res.exists && data != null) {
-        // アカウントが存在するなら代入する
-        final user = PublicUser.fromJson(data);
-        rxPublicUser(user);
-        final bucketName = user.typedImage().bucketName;
-        final fileName = user.typedImage().value;
-        if (bucketName.isNotEmpty && fileName.isNotEmpty) {
-          final image = await FileUtility.getS3Image(bucketName, fileName);
-          rxUint8list(image);
+    await result.when(
+      success: (res) async {
+        final data = res.data();
+        if (res.exists && data != null) {
+          // アカウントが存在するなら代入する
+          final user = PublicUser.fromJson(data);
+          rxPublicUser(user);
+          final bucketName = user.typedImage().bucketName;
+          final fileName = user.typedImage().value;
+          if (bucketName.isNotEmpty && fileName.isNotEmpty) {
+            final image = await FileUtility.getS3Image(bucketName, fileName);
+            rxUint8list(image);
+          }
+        } else {
+          // アカウントが存在しないなら作成する
+          await _createPublicUser();
         }
-      } else {
-        // アカウントが存在しないなら作成する
-        await _createPublicUser();
-      }
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
-    });
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+      },
+    );
   }
 
   Future<void> _getPrivateUser() async {
     final repository = FirestoreRepository();
     final ref = DocRefCore.privateUser(currentUid());
     final result = await repository.getDoc(ref);
-    await result.when(success: (res) async {
-      final data = res.data();
-      if (res.exists && data != null) {
-        // アカウントが存在するなら代入する
-        rxPrivateUser(PrivateUser.fromJson(data));
-      } else {
-        // アカウントが存在しないなら作成する
-        await _createPrivateUser();
-      }
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
-    });
+    await result.when(
+      success: (res) async {
+        final data = res.data();
+        if (res.exists && data != null) {
+          // アカウントが存在するなら代入する
+          rxPrivateUser(PrivateUser.fromJson(data));
+        } else {
+          // アカウントが存在しないなら作成する
+          await _createPrivateUser();
+        }
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+      },
+    );
   }
 
   String currentAuthStateString() {
@@ -195,11 +205,14 @@ class CurrentUserController extends GetxController {
   Future<void> _signOut() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.signOut();
-    result.when(success: (_) {
-      Get.toNamed(LogoutedPage.path);
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("ログアウトできませんでした");
-    });
+    result.when(
+      success: (_) {
+        Get.toNamed(LogoutedPage.path);
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("ログアウトできませんでした");
+      },
+    );
   }
 
   Future<void> reauthenticateWithAppleToDelete() async {
@@ -215,12 +228,15 @@ class CurrentUserController extends GetxController {
   Future<void> _reauthenticateToDelete(AuthCredential credential) async {
     final repository = FirebaseAuthRepository();
     final result = await repository.reauthenticateWithCredential(
-        rxAuthUser.value!, credential);
+      rxAuthUser.value!,
+      credential,
+    );
     result.when(
-        success: (_) {
-          _showDeleteUserDialog();
-        },
-        failure: (e) {});
+      success: (_) {
+        _showDeleteUserDialog();
+      },
+      failure: (e) {},
+    );
   }
 
   void _showDeleteUserDialog() {
@@ -233,22 +249,26 @@ class CurrentUserController extends GetxController {
     final repository = FirestoreRepository();
     final ref = user.typedRef();
     final result = await repository.deleteDoc(ref);
-    await result.when(success: (_) async {
-      _deleteAuthUser();
-      _removeImage();
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("データベースからユーザーを削除できませんでした");
-    });
+    await result.when(
+      success: (_) async {
+        _deleteAuthUser();
+        _removeImage();
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("データベースからユーザーを削除できませんでした");
+      },
+    );
   }
 
   Future<void> _deleteAuthUser() async {
     final repository = FirebaseAuthRepository();
     final result = await repository.deleteUser(rxAuthUser.value!);
     result.when(
-        success: (_) {
-          Get.toNamed(UserDeletedPage.path);
-        },
-        failure: (e) {});
+      success: (_) {
+        Get.toNamed(UserDeletedPage.path);
+      },
+      failure: (e) {},
+    );
   }
 
   Future<void> _removeImage() async {
@@ -259,23 +279,20 @@ class CurrentUserController extends GetxController {
     await AWSS3Repository().deleteObject(request);
   }
 
-  void updateUser(
-    String userName,
-    String bio,
-    String fileName,
-  ) async {
+  void updateUser(String userName, String bio, String fileName) async {
     final user = rxPublicUser.value!;
     final result = user.copyWith(
-        bio: user.typedBio().copyWith(value: bio).toJson(),
-        userName: user.typedUserName().copyWith(value: userName).toJson(),
-        image: user.typedImage().copyWith(value: fileName).toJson());
+      bio: user.typedBio().copyWith(value: bio).toJson(),
+      userName: user.typedUserName().copyWith(value: userName).toJson(),
+      image: user.typedImage().copyWith(value: fileName).toJson(),
+    );
     rxPublicUser(result);
-    final image =
-        await FileUtility.getS3Image(user.typedImage().bucketName, fileName);
+    final image = await FileUtility.getS3Image(
+      user.typedImage().bucketName,
+      fileName,
+    );
     rxUint8list(image);
   }
-
-  
 }
 
 class TokensController extends GetxController {
@@ -306,6 +323,7 @@ class TokensController extends GetxController {
     await _fetchBookmarkCategories();
     super.onInit();
   }
+
   Future<void> _distributeTokens() async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;
@@ -317,34 +335,39 @@ class TokensController extends GetxController {
         final allTokensData = res.map((doc) => doc.data()).toList();
 
         // Followings
-        followingTokens.value = allTokensData
-            .where((map) => map['tokenType'] == TokenType.following.name)
-            .map((map) => FollowingToken.fromJson(map))
-            .toList();
+        followingTokens.value =
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.following.name)
+                .map((map) => FollowingToken.fromJson(map))
+                .toList();
 
         // LikePosts
-        likePostTokens.value = allTokensData
-            .where((map) => map['tokenType'] == TokenType.likePost.name)
-            .map((map) => LikePostToken.fromJson(map))
-            .toList();
+        likePostTokens.value =
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.likePost.name)
+                .map((map) => LikePostToken.fromJson(map))
+                .toList();
 
         // MuteUsers
-        muteUserTokens.value = allTokensData
-            .where((map) => map['tokenType'] == TokenType.muteUser.name)
-            .map((map) => MuteUserToken.fromJson(map))
-            .toList();
+        muteUserTokens.value =
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.muteUser.name)
+                .map((map) => MuteUserToken.fromJson(map))
+                .toList();
 
         // MutePosts
-        mutePostTokens.value = allTokensData
-            .where((map) => map['tokenType'] == TokenType.mutePost.name)
-            .map((map) => MutePostToken.fromJson(map))
-            .toList();
+        mutePostTokens.value =
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.mutePost.name)
+                .map((map) => MutePostToken.fromJson(map))
+                .toList();
 
         // ReportPosts
-        reportPostTokens.value = allTokensData
-            .where((map) => map['tokenType'] == TokenType.reportPost.name)
-            .map((map) => ReportPostToken.fromJson(map))
-            .toList();
+        reportPostTokens.value =
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.reportPost.name)
+                .map((map) => ReportPostToken.fromJson(map))
+                .toList();
       },
       failure: (e) {
         // Handle failure, e.g., show an error message
@@ -359,12 +382,13 @@ class TokensController extends GetxController {
     final repository = FirestoreRepository();
     final result = await repository.getDocs(colRef);
     result.when(
-        success: (res) {
-          // This is already an immutable operation.
-          bookmarkCategoryTokens.value =
-              res.map((e) => BookmarkCategory.fromJson(e.data())).toList();
-        },
-        failure: (e) {});
+      success: (res) {
+        // This is already an immutable operation.
+        bookmarkCategoryTokens.value =
+            res.map((e) => BookmarkCategory.fromJson(e.data())).toList();
+      },
+      failure: (e) {},
+    );
   }
 
   // 投稿の削除時に外部から呼び出す.
@@ -386,9 +410,10 @@ class TokensController extends GetxController {
   }
 
   void removeFollowing(FollowingToken followingToken) {
-    followingTokens.value = followingTokens
-        .where((token) => token.passiveUid != followingToken.passiveUid)
-        .toList();
+    followingTokens.value =
+        followingTokens
+            .where((token) => token.passiveUid != followingToken.passiveUid)
+            .toList();
   }
 
   void addLikePost(LikePostToken likePostToken) {
@@ -396,9 +421,10 @@ class TokensController extends GetxController {
   }
 
   void removeLikePost(LikePostToken likePostToken) {
-    likePostTokens.value = likePostTokens
-        .where((token) => token.postId != likePostToken.postId)
-        .toList();
+    likePostTokens.value =
+        likePostTokens
+            .where((token) => token.postId != likePostToken.postId)
+            .toList();
   }
 
   void addMutePost(MutePostToken mutePostToken) {
@@ -406,9 +432,10 @@ class TokensController extends GetxController {
   }
 
   void removeMutePost(MutePostToken mutePostToken) {
-    mutePostTokens.value = mutePostTokens
-        .where((token) => token.postId != mutePostToken.postId)
-        .toList();
+    mutePostTokens.value =
+        mutePostTokens
+            .where((token) => token.postId != mutePostToken.postId)
+            .toList();
   }
 
   void addMuteUser(MuteUserToken muteUserToken) {
@@ -416,20 +443,24 @@ class TokensController extends GetxController {
   }
 
   void removeMuteUser(MuteUserToken muteUserToken) {
-    muteUserTokens.value = muteUserTokens
-        .where((token) => token.passiveUid != muteUserToken.passiveUid)
-        .toList();
+    muteUserTokens.value =
+        muteUserTokens
+            .where((token) => token.passiveUid != muteUserToken.passiveUid)
+            .toList();
   }
 
   void addReportPost(ReportPostToken reportPostToken) {
     reportPostTokens.value = [...reportPostTokens, reportPostToken];
   }
+
   bool isDeletedPost(String postId) => deletePostIds.contains(postId);
   bool isMutingPost(String postId) => mutePostIds.contains(postId);
   bool isMutingUser(String uid) => muteUids.contains(uid);
 
   void createBookmarkCategory(
-      BuildContext context, TextEditingController inputController) async {
+    BuildContext context,
+    TextEditingController inputController,
+  ) async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;
     final now = Timestamp.now();
@@ -437,37 +468,46 @@ class TokensController extends GetxController {
     final ref = DocRefCore.bookmarkCategory(uid, categoryId);
     final repository = FirestoreRepository();
     final newCategory = BookmarkCategory(
-        createdAt: now,
-        id: categoryId,
-        title: inputController.text,
-        image: const DetectedImage().toJson(),
-        ref: ref,
-        updatedAt: now);
+      createdAt: now,
+      id: categoryId,
+      title: inputController.text,
+      image: const DetectedImage().toJson(),
+      ref: ref,
+      updatedAt: now,
+    );
     final result = await repository.createDoc(ref, newCategory.toJson());
-    result.when(success: (res) {
-      FocusScope.of(context).unfocus();
-      inputController.text = "";
-      addBookmarkCategory(newCategory);
-      UIHelper.showFlutterToast("カテゴリーを作成できました。");
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("カテゴリーを作成できませんでした。");
-    });
+    result.when(
+      success: (res) {
+        FocusScope.of(context).unfocus();
+        inputController.text = "";
+        addBookmarkCategory(newCategory);
+        UIHelper.showFlutterToast("カテゴリーを作成できました。");
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("カテゴリーを作成できませんでした。");
+      },
+    );
   }
 
   void onBookmarkCategoryDeleteButtonPressed(BookmarkCategory token) {
     UIHelper.cupertinoAlertDialog(
-        "このカテゴリーを削除しますが、よろしいですか？", () => _deleteBookmarkCategory(token));
+      "このカテゴリーを削除しますが、よろしいですか？",
+      () => _deleteBookmarkCategory(token),
+    );
   }
 
   void _deleteBookmarkCategory(BookmarkCategory token) async {
     final repository = FirestoreRepository();
     final result = await repository.deleteDoc(token.ref);
-    result.when(success: (_) {
-      Get.back();
-      removeBookmarkCategory(token);
-      UIHelper.showFlutterToast("カテゴリーを削除できました。");
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("カテゴリーを削除できませんでした。");
-    });
+    result.when(
+      success: (_) {
+        Get.back();
+        removeBookmarkCategory(token);
+        UIHelper.showFlutterToast("カテゴリーを削除できました。");
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("カテゴリーを削除できませんでした。");
+      },
+    );
   }
 }

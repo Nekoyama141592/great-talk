@@ -6,8 +6,11 @@ import 'package:great_talk/views/components/purchase_button.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard(
-      {super.key, required this.productDetails, required this.descriptions});
+  const ProductCard({
+    super.key,
+    required this.productDetails,
+    required this.descriptions,
+  });
   final ProductDetails productDetails;
   final List<Widget> descriptions;
   @override
@@ -17,9 +20,10 @@ class ProductCard extends StatelessWidget {
       margin: const EdgeInsets.all(16.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          border: Border.all(color: Theme.of(context).focusColor),
-          borderRadius: const BorderRadius.all(Radius.circular(16.0))),
+        color: Theme.of(context).scaffoldBackgroundColor,
+        border: Border.all(color: Theme.of(context).focusColor),
+        borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

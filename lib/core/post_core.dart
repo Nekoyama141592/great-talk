@@ -38,7 +38,11 @@ class PostCore {
     UIHelper.showFlutterToast("三つの情報をコピーしました");
   }
 
-  static void onReportButtonPressed(BuildContext context, Post post,String currentUid) {
+  static void onReportButtonPressed(
+    BuildContext context,
+    Post post,
+    String currentUid,
+  ) {
     final posterUid = Get.parameters['uid']!;
     if (currentUid == posterUid) {
       UIHelper.showFlutterToast("自分の投稿を報告したり、ミュートしたりすることはできません。");
@@ -49,23 +53,32 @@ class PostCore {
       return;
     }
     showCupertinoModalPopup(
-        context: context,
-        builder: (innerContext) => CupertinoActionSheet(
-              actions: [
-                CupertinoActionSheetAction(
-                    onPressed: () => _mutePost(innerContext, post,currentUid),
-                    child: const BasicBoldText("投稿をミュート")),
-                CupertinoActionSheetAction(
-                    onPressed: () => _muteUser(innerContext, post,currentUid),
-                    child: const BasicBoldText("ユーザーをミュート")),
-                CupertinoActionSheetAction(
-                    onPressed: () => Navigator.pop(innerContext),
-                    child: const BasicBoldText(cancelText)),
-              ],
-            ));
+      context: context,
+      builder:
+          (innerContext) => CupertinoActionSheet(
+            actions: [
+              CupertinoActionSheetAction(
+                onPressed: () => _mutePost(innerContext, post, currentUid),
+                child: const BasicBoldText("投稿をミュート"),
+              ),
+              CupertinoActionSheetAction(
+                onPressed: () => _muteUser(innerContext, post, currentUid),
+                child: const BasicBoldText("ユーザーをミュート"),
+              ),
+              CupertinoActionSheetAction(
+                onPressed: () => Navigator.pop(innerContext),
+                child: const BasicBoldText(cancelText),
+              ),
+            ],
+          ),
+    );
   }
 
-  static void _mutePost(BuildContext innerContext, Post post,String currentUid) async {
+  static void _mutePost(
+    BuildContext innerContext,
+    Post post,
+    String currentUid,
+  ) async {
     if (TokensController.to.mutePostIds.contains(post.postId)) {
       UIHelper.showFlutterToast("すでにこの投稿をミュートしています");
       Navigator.pop(innerContext);
@@ -76,20 +89,22 @@ class PostCore {
     final postId = post.postId;
     final postRef = post.typedRef();
     final MutePostToken mutePostToken = MutePostToken(
-        activeUid: currentUid,
-        createdAt: now,
-        postId: postId,
-        postRef: postRef,
-        tokenId: tokenId,
-        tokenType: TokenType.mutePost.name);
+      activeUid: currentUid,
+      createdAt: now,
+      postId: postId,
+      postRef: postRef,
+      tokenId: tokenId,
+      tokenType: TokenType.mutePost.name,
+    );
     TokensController.to.addMutePost(mutePostToken);
     final tokenRef = DocRefCore.token(currentUid, tokenId);
     await _firestoreRepository.createDoc(tokenRef, mutePostToken.toJson());
     final PostMute postMute = PostMute(
-        activeUid: currentUid,
-        createdAt: now,
-        postId: postId,
-        postRef: postRef);
+      activeUid: currentUid,
+      createdAt: now,
+      postId: postId,
+      postRef: postRef,
+    );
     final postMuteRef = DocRefCore.postMute(postRef, currentUid);
     await _firestoreRepository.createDoc(postMuteRef, postMute.toJson());
     if (innerContext.mounted) {
@@ -98,7 +113,11 @@ class PostCore {
     }
   }
 
-  static void _muteUser(BuildContext innerContext, Post post,String currentUid) async {
+  static void _muteUser(
+    BuildContext innerContext,
+    Post post,
+    String currentUid,
+  ) async {
     final passiveUid = post.uid;
     if (TokensController.to.muteUids.contains(passiveUid)) {
       UIHelper.showFlutterToast("すでにこのユーザーをミュートしています");
@@ -109,21 +128,23 @@ class PostCore {
     final now = Timestamp.now();
     final passiveUserRef = DocRefCore.user(passiveUid);
     final MuteUserToken muteUserToken = MuteUserToken(
-        activeUid: currentUid,
-        createdAt: now,
-        passiveUid: passiveUid,
-        passiveUserRef: passiveUserRef,
-        tokenId: tokenId,
-        tokenType: TokenType.muteUser.name);
+      activeUid: currentUid,
+      createdAt: now,
+      passiveUid: passiveUid,
+      passiveUserRef: passiveUserRef,
+      tokenId: tokenId,
+      tokenType: TokenType.muteUser.name,
+    );
     TokensController.to.addMuteUser(muteUserToken);
     final tokenRef = DocRefCore.token(currentUid, tokenId);
     await _firestoreRepository.createDoc(tokenRef, muteUserToken.toJson());
     final UserMute userMute = UserMute(
-        activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
-        activeUid: currentUid,
-        createdAt: now,
-        passiveUid: passiveUid,
-        passiveUserRef: passiveUserRef);
+      activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
+      activeUid: currentUid,
+      createdAt: now,
+      passiveUid: passiveUid,
+      passiveUserRef: passiveUserRef,
+    );
     final userMuteRef = DocRefCore.userMute(passiveUid, currentUid);
     await _firestoreRepository.createDoc(userMuteRef, userMute.toJson());
     if (innerContext.mounted) {
@@ -133,61 +154,74 @@ class PostCore {
   }
 
   static void onLikeButtonPressed(
-      ValueNotifier<Post> copyPost, ValueNotifier<bool> isLiked, Post post,String currentUid) async {
+    ValueNotifier<Post> copyPost,
+    ValueNotifier<bool> isLiked,
+    Post post,
+    String currentUid,
+  ) async {
     if (CurrentUserController.to.hasNoPublicUser()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
-    copyPost.value =
-        copyPost.value.copyWith(likeCount: copyPost.value.likeCount + 1);
+    copyPost.value = copyPost.value.copyWith(
+      likeCount: copyPost.value.likeCount + 1,
+    );
     isLiked.value = true;
-    await _likePost(post,currentUid);
+    await _likePost(post, currentUid);
   }
 
-  static Future<void> _likePost(Post post,String currentUid) async {
+  static Future<void> _likePost(Post post, String currentUid) async {
     final String tokenId = randomString();
     final Timestamp now = Timestamp.now();
     final String passiveUid = post.uid;
     final postRef = post.ref;
     final postId = post.postId;
     final likePostToken = LikePostToken(
-        activeUid: currentUid,
-        createdAt: now,
-        passiveUid: passiveUid,
-        postRef: postRef,
-        postId: postId,
-        tokenId: tokenId,
-        tokenType: TokenType.likePost.name);
+      activeUid: currentUid,
+      createdAt: now,
+      passiveUid: passiveUid,
+      postRef: postRef,
+      postId: postId,
+      tokenId: tokenId,
+      tokenType: TokenType.likePost.name,
+    );
     TokensController.to.addLikePost(likePostToken);
     final tokenRef = DocRefCore.token(currentUid, tokenId);
     await _firestoreRepository.createDoc(tokenRef, likePostToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
     final postLike = PostLike(
-        activeUid: currentUid,
-        createdAt: now,
-        passiveUid: passiveUid,
-        postRef: postRef,
-        postId: postId);
+      activeUid: currentUid,
+      createdAt: now,
+      passiveUid: passiveUid,
+      postRef: postRef,
+      postId: postId,
+    );
     final postLikeRef = DocRefCore.postLike(postRef, currentUid);
     await _firestoreRepository.createDoc(postLikeRef, postLike.toJson());
   }
 
   static void onUnLikeButtonPressed(
-      ValueNotifier<Post> copyPost, ValueNotifier<bool> isLiked, Post post,String currentUid) async {
+    ValueNotifier<Post> copyPost,
+    ValueNotifier<bool> isLiked,
+    Post post,
+    String currentUid,
+  ) async {
     if (CurrentUserController.to.hasNoPublicUser()) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
-    copyPost.value =
-        copyPost.value.copyWith(likeCount: copyPost.value.likeCount - 1);
+    copyPost.value = copyPost.value.copyWith(
+      likeCount: copyPost.value.likeCount - 1,
+    );
     isLiked.value = false;
-    await _unLikePost(post,currentUid);
+    await _unLikePost(post, currentUid);
   }
 
-  static Future<void> _unLikePost(Post post,String currentUid) async {
+  static Future<void> _unLikePost(Post post, String currentUid) async {
     final String passiveUid = post.uid;
-    final deleteToken = TokensController.to.likePostTokens
-        .firstWhere((element) => element.passiveUid == passiveUid);
+    final deleteToken = TokensController.to.likePostTokens.firstWhere(
+      (element) => element.passiveUid == passiveUid,
+    );
     TokensController.to.removeLikePost(deleteToken);
     final tokenId = deleteToken.tokenId;
     final tokenRef = DocRefCore.token(currentUid, tokenId);
@@ -202,14 +236,17 @@ class PostCore {
     UIHelper.cupertinoAlertDialog("投稿を削除しますが本当によろしいですか?", () async {
       Get.back();
       final result = await _firestoreRepository.deleteDoc(deletePost.ref);
-      await result.when(success: (_) async {
-        TokensController.to.addDeletePostId(deletePost.postId);
-        await _removePostImage(deletePost.typedImage());
-        Get.back();
-        UIHelper.showErrorFlutterToast("投稿を削除しました。");
-      }, failure: (e) {
-        UIHelper.showErrorFlutterToast("投稿を削除することができませんでした。");
-      });
+      await result.when(
+        success: (_) async {
+          TokensController.to.addDeletePostId(deletePost.postId);
+          await _removePostImage(deletePost.typedImage());
+          Get.back();
+          UIHelper.showErrorFlutterToast("投稿を削除しました。");
+        },
+        failure: (e) {
+          UIHelper.showErrorFlutterToast("投稿を削除することができませんでした。");
+        },
+      );
     });
   }
 

@@ -31,7 +31,9 @@ class FirebaseAuthClient {
   }
 
   Future<void> reauthenticateWithCredential(
-      User user, AuthCredential credential) async {
+    User user,
+    AuthCredential credential,
+  ) async {
     await user.reauthenticateWithCredential(credential);
   }
 

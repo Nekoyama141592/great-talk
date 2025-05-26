@@ -15,6 +15,11 @@ class BookmarksPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = Get.put(DocsController(DocsType.bookmarks));
     return BasicPage(
-        appBarText: "投稿一覧", child: RefreshScreen(docsController: controller,currentUid: ref.watch(streamAuthUidProvider).value!,));
+      appBarText: "投稿一覧",
+      child: RefreshScreen(
+        docsController: controller,
+        currentUid: ref.watch(streamAuthUidProvider).value!,
+      ),
+    );
   }
 }

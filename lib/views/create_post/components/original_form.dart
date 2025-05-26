@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/views/components/text_field_container.dart';
 
 class OriginalForm extends StatelessWidget {
-  const OriginalForm(
-      {super.key,
-      this.initialValue,
-      this.decoration,
-      this.maxLines,
-      this.keyboardType,
-      this.onChanged,
-      this.onSaved,
-      this.validator});
+  const OriginalForm({
+    super.key,
+    this.initialValue,
+    this.decoration,
+    this.maxLines,
+    this.keyboardType,
+    this.onChanged,
+    this.onSaved,
+    this.validator,
+  });
   final String? initialValue;
   final InputDecoration? decoration;
   final int? maxLines;

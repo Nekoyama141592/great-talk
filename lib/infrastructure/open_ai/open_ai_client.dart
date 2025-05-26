@@ -13,8 +13,10 @@ abstract class OpenAIClient {
   factory OpenAIClient(OriginalDio dio) = _OpenAIClient;
   @POST("/images/generations")
   Future<GenerateImageResponse> generateImage(
-      @Body() GenerateImageRequest request);
+    @Body() GenerateImageRequest request,
+  );
   @POST("/chat/completions")
   Future<GenerateTextResponse> generateText(
-      @Body() GenerateTextRequest request);
+    @Body() GenerateTextRequest request,
+  );
 }

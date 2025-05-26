@@ -12,18 +12,23 @@ class PurchaseButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = PurchasesController.to;
     const textColor = Colors.white;
-    return Obx(() => controller.hasProductBeenPurchased(productDetails)
-        ? RoundedButton(
-            textColor: textColor,
-            buttonColor: Colors.grey.withOpacity(0.8),
-            text: "契約中",
-          )
-        : RoundedButton(
-            textColor: textColor,
-            buttonColor: kSecondaryColor,
-            text: "契約する",
-            press: () async =>
-                await controller.onPurchaseButtonPressed(productDetails),
-          ));
+    return Obx(
+      () =>
+          controller.hasProductBeenPurchased(productDetails)
+              ? RoundedButton(
+                textColor: textColor,
+                buttonColor: Colors.grey.withOpacity(0.8),
+                text: "契約中",
+              )
+              : RoundedButton(
+                textColor: textColor,
+                buttonColor: kSecondaryColor,
+                text: "契約する",
+                press:
+                    () async => await controller.onPurchaseButtonPressed(
+                      productDetails,
+                    ),
+              ),
+    );
   }
 }

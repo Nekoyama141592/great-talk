@@ -53,10 +53,7 @@ class EditViewModel extends _$EditViewModel {
       return;
     }
     final base64 = base64Encode(result);
-    state = AsyncData(state.value!.copyWith(
-      base64: base64,
-      isPicked: true,
-    ));
+    state = AsyncData(state.value!.copyWith(base64: base64, isPicked: true));
   }
 
   /// 初期化
@@ -111,14 +108,19 @@ class EditViewModel extends _$EditViewModel {
       final fileName = AWSS3Utility.profileObject(uid);
       final uint8list = base64Decode(base64);
       final request = PutObjectRequest.fromUint8List(
-          uint8list: uint8list, fileName: fileName);
+        uint8list: uint8list,
+        fileName: fileName,
+      );
       final result = await AWSS3Repository().putObject(request);
-      await result.when(success: (res) async {
-        await _createUserUpdateLog(fileName, userName, bio);
-      }, failure: (e) {
-        UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
-        state = AsyncData(s);
-      });
+      await result.when(
+        success: (res) async {
+          await _createUserUpdateLog(fileName, userName, bio);
+        },
+        failure: (e) {
+          UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
+          state = AsyncData(s);
+        },
+      );
     } else {
       // 写真がそのまま場合の処理
       await _createUserUpdateLog(publicUser.typedImage().value, userName, bio);
@@ -128,28 +130,35 @@ class EditViewModel extends _$EditViewModel {
   }
 
   Future<void> _createUserUpdateLog(
-      String fileName, String userName, String bio) async {
+    String fileName,
+    String userName,
+    String bio,
+  ) async {
     final uid = ref.read(streamAuthUidProvider).value;
     if (uid == null) return;
     final repository = FirestoreRepository();
     final newUpdateLog = UserUpdateLog(
-        logCreatedAt: Timestamp.now(),
-        searchToken: returnSearchToken(userName),
-        stringBio: bio.trim(),
-        stringUserName: userName.trim(),
-        uid: uid,
-        image: DetectedImage(value: fileName).toJson(),
-        userRef: CurrentUserController.to.rxPublicUser.value!.ref);
+      logCreatedAt: Timestamp.now(),
+      searchToken: returnSearchToken(userName),
+      stringBio: bio.trim(),
+      stringUserName: userName.trim(),
+      uid: uid,
+      image: DetectedImage(value: fileName).toJson(),
+      userRef: CurrentUserController.to.rxPublicUser.value!.ref,
+    );
     final docRef = DocRefCore.userUpdateLog(uid);
     final json = newUpdateLog.toJson();
     final result = await repository.createDoc(docRef, json);
-    result.when(success: (_) {
-      CurrentUserController.to.updateUser(userName, bio, fileName);
-      Get.back();
-      Get.back();
-      UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
-    }, failure: (e) {
-      UIHelper.showErrorFlutterToast("プロフィールを更新できませんでした");
-    });
+    result.when(
+      success: (_) {
+        CurrentUserController.to.updateUser(userName, bio, fileName);
+        Get.back();
+        Get.back();
+        UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("プロフィールを更新できませんでした");
+      },
+    );
   }
 }

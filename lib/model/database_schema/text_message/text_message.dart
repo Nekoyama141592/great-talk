@@ -11,24 +11,26 @@ part 'text_message.g.dart';
 @freezed
 abstract class TextMessage with _$TextMessage {
   const TextMessage._();
-  const factory TextMessage(
-      {required dynamic createdAt,
-      required String id,
-      required String messageType,
-      dynamic messageRef,
-      dynamic postRef,
-      required String posterUid,
-      required String senderUid,
-      required SDMap text}) = _TextMessage;
+  const factory TextMessage({
+    required dynamic createdAt,
+    required String id,
+    required String messageType,
+    dynamic messageRef,
+    dynamic postRef,
+    required String posterUid,
+    required String senderUid,
+    required SDMap text,
+  }) = _TextMessage;
   factory TextMessage.fromJson(Map<String, dynamic> json) =>
       _$TextMessageFromJson(json);
   factory TextMessage.fromSaveTextMsg(SaveTextMsg stm) => TextMessage(
-      createdAt: Timestamp.fromDate(stm.createdAt),
-      id: stm.id,
-      messageType: stm.messageType,
-      senderUid: stm.senderUid,
-      posterUid: stm.posterUid,
-      text: DetectedText.fromJson(stm.text).toJson());
+    createdAt: Timestamp.fromDate(stm.createdAt),
+    id: stm.id,
+    messageType: stm.messageType,
+    senderUid: stm.senderUid,
+    posterUid: stm.posterUid,
+    text: DetectedText.fromJson(stm.text).toJson(),
+  );
 
   Timestamp typedCreatedAt() => createdAt as Timestamp;
   DocRef typedMessageRef() => messageRef as DocRef;

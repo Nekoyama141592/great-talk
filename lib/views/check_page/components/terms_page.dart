@@ -9,9 +9,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class TermsPage extends ConsumerWidget {
   const TermsPage({super.key});
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-    final style =
-        TextStyle(color: Theme.of(context).focusColor, fontSize: 20.0);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final style = TextStyle(
+      color: Theme.of(context).focusColor,
+      fontSize: 20.0,
+    );
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -22,28 +24,23 @@ class TermsPage extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    wrongInfoMsg,
-                    style: style,
+                  Text(wrongInfoMsg, style: style),
+                  const Divider(),
+                  TextButton(
+                    onPressed: () async => await UrlRedirector.toTosPage(),
+                    child: Text(tosText, style: style),
                   ),
                   const Divider(),
                   TextButton(
-                      onPressed: () async => await UrlRedirector.toTosPage(),
-                      child: Text(
-                        tosText,
-                        style: style,
-                      )),
-                  const Divider(),
-                  TextButton(
-                      onPressed: () async =>
-                          await UrlRedirector.toPrivacyPage(),
-                      child: Text(
-                        privacyPolicyText,
-                        style: style,
-                      )),
+                    onPressed: () async => await UrlRedirector.toPrivacyPage(),
+                    child: Text(privacyPolicyText, style: style),
+                  ),
                   const Divider(),
                   RoundedButton(
-                    press: ref.read(termsNotifierProvider.notifier).onAgreeButtonPressed,
+                    press:
+                        ref
+                            .read(termsNotifierProvider.notifier)
+                            .onAgreeButtonPressed,
                     text: agreeText,
                   ),
                 ],

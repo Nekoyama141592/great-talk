@@ -43,23 +43,25 @@ class RefreshScreen extends HookWidget {
         );
       }
       return SmartRefresher(
-          controller: refreshController,
-          enablePullDown: false, // trueだとiosもAndroidも反応しなくなる
-          enablePullUp: true,
-          header: const WaterDropHeader(),
-          onLoading: () => docsController.onLoading(refreshController),
-          child: child ??
-              GridView.builder(
-                  itemCount: docsController.state.value.qDocInfoList.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, childAspectRatio: 0.5),
-                  itemBuilder: (c, i) {
-                    final qDocInfo = docsController.state.value.qDocInfoList[i];
-                    return PostCard(
-                      qDocInfo: qDocInfo,
-                      currentUid: currentUid,
-                    );
-                  }));
+        controller: refreshController,
+        enablePullDown: false, // trueだとiosもAndroidも反応しなくなる
+        enablePullUp: true,
+        header: const WaterDropHeader(),
+        onLoading: () => docsController.onLoading(refreshController),
+        child:
+            child ??
+            GridView.builder(
+              itemCount: docsController.state.value.qDocInfoList.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                childAspectRatio: 0.5,
+              ),
+              itemBuilder: (c, i) {
+                final qDocInfo = docsController.state.value.qDocInfoList[i];
+                return PostCard(qDocInfo: qDocInfo, currentUid: currentUid);
+              },
+            ),
+      );
     });
   }
 }

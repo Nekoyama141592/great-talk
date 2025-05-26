@@ -10,12 +10,14 @@ class AdminViewModel extends _$AdminViewModel {
   @override
   FutureOr<AdminState> build() async {
     final [userCount, postCount, messageCount, searchCount] = await Future.wait(
-        [_countUsers(), _countPosts(), _countMessages(), _countSearchLogs()]);
+      [_countUsers(), _countPosts(), _countMessages(), _countSearchLogs()],
+    );
     return AdminState(
-        userCount: userCount,
-        postCount: postCount,
-        messageCount: messageCount,
-        searchCount: searchCount);
+      userCount: userCount,
+      postCount: postCount,
+      messageCount: messageCount,
+      searchCount: searchCount,
+    );
   }
 
   Future<int> _countUsers() async {

@@ -12,19 +12,22 @@ class UserProfilePage extends ConsumerWidget {
   static const path = "/users/:uid";
   static String generatePath(String uid) => "/users/$uid";
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final controller = Get.put(DocsController(DocsType.userProfiles));
-    return Obx(() => Scaffold(
-          floatingActionButton: controller.isMyProfile()
-              ? const MainFloatingActionButton(isShow: true)
-              : null,
-          body: ProfileScreen(
-            currentUid: ref.watch(streamAuthUidProvider).value!,
-            controller: controller,
-            passiveUid: controller.passiveUid(),
-            follow: controller.onFollowPressed,
-            unFollow: controller.onUnFollowPressed,
-          ),
-        ));
+    return Obx(
+      () => Scaffold(
+        floatingActionButton:
+            controller.isMyProfile()
+                ? const MainFloatingActionButton(isShow: true)
+                : null,
+        body: ProfileScreen(
+          currentUid: ref.watch(streamAuthUidProvider).value!,
+          controller: controller,
+          passiveUid: controller.passiveUid(),
+          follow: controller.onFollowPressed,
+          unFollow: controller.onUnFollowPressed,
+        ),
+      ),
+    );
   }
 }

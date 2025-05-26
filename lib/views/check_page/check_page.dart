@@ -18,20 +18,24 @@ class CheckPage extends ConsumerWidget {
     final remoteConfigState = ref.watch(remoteConfigNotifierProvider);
     final localState = ref.watch(termsNotifierProvider);
     return AsyncScreen(
-        asyncValue: remoteConfigState,
-        data: (data) {
-          if (data.maintenanceMode) {
-            return MaintenancePage(maintenanceMsg: data.maintenanceMsg);
-          }
-          if (data.needsUpdate) {
-            return RequiredUpdatePage(forcedUpdateMsg: data.forcedUpdateMsg);
-          }
-          if (!localState) {
-            return const TermsPage();
-          }
-          return AsyncScreen(asyncValue: userStream, data: (uid) {
+      asyncValue: remoteConfigState,
+      data: (data) {
+        if (data.maintenanceMode) {
+          return MaintenancePage(maintenanceMsg: data.maintenanceMsg);
+        }
+        if (data.needsUpdate) {
+          return RequiredUpdatePage(forcedUpdateMsg: data.forcedUpdateMsg);
+        }
+        if (!localState) {
+          return const TermsPage();
+        }
+        return AsyncScreen(
+          asyncValue: userStream,
+          data: (uid) {
             return uid != null ? child : const LoadingPage();
-          });
-        });
+          },
+        );
+      },
+    );
   }
 }

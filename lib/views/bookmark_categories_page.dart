@@ -15,41 +15,52 @@ class BookmarkCategoriesPage extends HookWidget {
     final inputController = useTextEditingController();
     final controller = TokensController.to;
     return BasicPage(
-        appBarText: "ブックマークカテゴリー",
-        child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: Obx(() => SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: fullHeight(context) * 0.7,
-                      child: ListView.builder(
-                          itemCount: controller.bookmarkCategoryTokens.length,
-                          itemBuilder: (context, index) {
-                            final category =
-                                controller.bookmarkCategoryTokens[index];
-                            return ListTile(
-                              onTap: () => Get.toNamed(
-                                  BookmarksPage.generatePath(category.id)),
-                              title: Text(category.title),
-                              trailing: InkWell(
-                                onTap: () => controller
-                                    .onBookmarkCategoryDeleteButtonPressed(
-                                        category),
-                                child: const Icon(Icons.delete),
-                              ),
-                            );
-                          }),
-                    ),
-                    RoundedInputField(
-                        controller: inputController,
-                        send: () => controller.createBookmarkCategory(
-                            context, inputController))
-                  ],
+      appBarText: "ブックマークカテゴリー",
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Obx(
+          () => SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: fullHeight(context) * 0.7,
+                  child: ListView.builder(
+                    itemCount: controller.bookmarkCategoryTokens.length,
+                    itemBuilder: (context, index) {
+                      final category = controller.bookmarkCategoryTokens[index];
+                      return ListTile(
+                        onTap:
+                            () => Get.toNamed(
+                              BookmarksPage.generatePath(category.id),
+                            ),
+                        title: Text(category.title),
+                        trailing: InkWell(
+                          onTap:
+                              () => controller
+                                  .onBookmarkCategoryDeleteButtonPressed(
+                                    category,
+                                  ),
+                          child: const Icon(Icons.delete),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              )),
-        ));
+                RoundedInputField(
+                  controller: inputController,
+                  send:
+                      () => controller.createBookmarkCategory(
+                        context,
+                        inputController,
+                      ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

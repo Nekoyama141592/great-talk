@@ -27,33 +27,40 @@ class MyHomePage extends HookConsumerWidget {
     final pageIndex = useState(0);
     final PageController pageController = usePageController();
     return Scaffold(
-        appBar: pageIndex.value == rankingIndex
-            ? null
-            : AppBar(
-                title: BasicBoldText(appName), shape: appBarShape(context)),
-        floatingActionButton: MainFloatingActionButton(
-          isShow:
-              pageIndex.value == rankingIndex || pageIndex.value == feedsIndex,
-        ),
-        drawer: const OriginalDrawer(),
-        bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            items: bnbElements,
-            currentIndex: pageIndex.value,
-            onTap: (index) async {
-              pageController.animateToPage(index,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.fastLinearToSlowEaseIn);
-            }),
-        body: PageView(
-          onPageChanged: (index) => pageIndex.value = index,
-          controller: pageController,
-          children: const [
-            RankingScreen(),
-            FeedsPage(),
-            NewPostsScreen(),
-            SubscribeScreen(),
-          ],
-        ));
+      appBar:
+          pageIndex.value == rankingIndex
+              ? null
+              : AppBar(
+                title: BasicBoldText(appName),
+                shape: appBarShape(context),
+              ),
+      floatingActionButton: MainFloatingActionButton(
+        isShow:
+            pageIndex.value == rankingIndex || pageIndex.value == feedsIndex,
+      ),
+      drawer: const OriginalDrawer(),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: bnbElements,
+        currentIndex: pageIndex.value,
+        onTap: (index) async {
+          pageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.fastLinearToSlowEaseIn,
+          );
+        },
+      ),
+      body: PageView(
+        onPageChanged: (index) => pageIndex.value = index,
+        controller: pageController,
+        children: const [
+          RankingScreen(),
+          FeedsPage(),
+          NewPostsScreen(),
+          SubscribeScreen(),
+        ],
+      ),
+    );
   }
 }

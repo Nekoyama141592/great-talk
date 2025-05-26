@@ -15,28 +15,33 @@ class ProductList extends StatelessWidget {
     return Obx((() {
       if (controller.loading.value) {
         return const Card(
-            child: ListTile(
-                leading: CircularProgressIndicator(),
-                title: Text('情報を取得しています')));
+          child: ListTile(
+            leading: CircularProgressIndicator(),
+            title: Text('情報を取得しています'),
+          ),
+        );
       }
 
       if (!controller.isAvailable.value) return const SizedBox.shrink();
-      final List<Widget> productList = controller.products.map(
-        (ProductDetails productDetails) {
-          return productDetails.id == kMonthSubscriptionId
-              ? ProductCard(
+      final List<Widget> productList =
+          controller.products.map((ProductDetails productDetails) {
+            return productDetails.id == kMonthSubscriptionId
+                ? ProductCard(
                   productDetails: productDetails,
                   descriptions: const [
-                      PlanDescription(text: '無制限のチャット'),
-                      PlanDescription(text: 'コピー可能な説明や返答'),
-                    ])
-              : ProductCard(productDetails: productDetails, descriptions: [
-                  const PlanDescription(text: 'ベーシックプランの全ての機能'),
-                  const PlanDescription(text: "モデルの性能が向上!"),
-                  const PlanDescription(text: '画像を生成するAI'),
-                ]);
-        },
-      ).toList();
+                    PlanDescription(text: '無制限のチャット'),
+                    PlanDescription(text: 'コピー可能な説明や返答'),
+                  ],
+                )
+                : ProductCard(
+                  productDetails: productDetails,
+                  descriptions: [
+                    const PlanDescription(text: 'ベーシックプランの全ての機能'),
+                    const PlanDescription(text: "モデルの性能が向上!"),
+                    const PlanDescription(text: '画像を生成するAI'),
+                  ],
+                );
+          }).toList();
 
       return Card(child: Column(children: productList));
     }));

@@ -18,7 +18,7 @@ class LoadingScreen extends StatelessWidget {
             ),
           ),
           BasicHeightBox(),
-          Text("ロード中...")
+          Text("ロード中..."),
         ],
       ),
     );

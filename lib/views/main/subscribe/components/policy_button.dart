@@ -7,14 +7,17 @@ class PolicyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: TextButton(
-            onPressed: onPressed,
-            child: Text(
-              label,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).focusColor),
-            )));
+      padding: const EdgeInsets.all(4.0),
+      child: TextButton(
+        onPressed: onPressed,
+        child: Text(
+          label,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).focusColor,
+          ),
+        ),
+      ),
+    );
   }
 }
