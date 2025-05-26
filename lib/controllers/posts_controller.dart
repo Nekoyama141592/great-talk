@@ -8,7 +8,6 @@ import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
@@ -25,13 +24,16 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/views/chat/chat_page.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/report_contents_list_view.dart';
 
-class PostsController extends GetxController with CurrentUserMixin {
+class PostsController extends GetxController {
   static PostsController get to => Get.find<PostsController>();
   final repository = FirestoreRepository();
   final others = "".obs;
   final reportContents = <String>[].obs;
   final Rx<Post?> rxPost = Rx(null);
-
+  String currentUid() {
+    // TODO: riverpod_generatorを使ったら ref.read(streamAuthUidProvider).value;に変更する
+    return 'Hello, User!';
+  }
   void onPostCardPressed(Post post) {
     rxPost(post);
     Get.toNamed(ChatPage.generatePath(post.uid, post.postId));

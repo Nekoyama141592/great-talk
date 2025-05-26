@@ -7,9 +7,9 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
+import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/database_schema/q_doc_info/q_doc_info.dart';
@@ -22,7 +22,7 @@ import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
 
-class DocsController extends GetxController with CurrentUserMixin {
+class DocsController extends GetxController {
   DocsController(this.type);
   final DocsType type;
 
@@ -33,6 +33,11 @@ class DocsController extends GetxController with CurrentUserMixin {
   bool isLoading() => state.value.isLoading;
   void startLoading() => state.value = state.value.copyWith(isLoading: true);
   void endLoading() => state.value = state.value.copyWith(isLoading: false);
+
+  String currentUid() {
+    // TODO: riverpod_generatorを使ったら ref.read(streamAuthUidProvider).value!;に変更する
+    return 'Hello, User!';
+  }
 
   Future<void> init() async {
     if (type == DocsType.userProfiles) {

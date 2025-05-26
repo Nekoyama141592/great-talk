@@ -14,7 +14,6 @@ import 'package:great_talk/consts/delegates/payment_queue_delegate.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/consts/iap_constants/mock_product_list.dart';
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
-import 'package:great_talk/mixin/current_uid_mixin.dart';
 import 'package:great_talk/model/rest_api/receipt_response/cached_receipt/cached_receipt.dart';
 import 'package:great_talk/model/rest_api/receipt_response/receipt_response.dart';
 import 'package:great_talk/repository/purchases_repository.dart';
@@ -26,7 +25,7 @@ import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PurchasesController extends GetxController with CurrentUserMixin {
+class PurchasesController extends GetxController {
   static PurchasesController get to => Get.find<PurchasesController>();
   final purchases = <PurchaseDetails>[].obs;
   final products = <ProductDetails>[].obs;
@@ -39,7 +38,10 @@ class PurchasesController extends GetxController with CurrentUserMixin {
 
   PurchasesRepository get repository => PurchasesRepository();
   InAppPurchase get inAppPurchase => InAppPurchase.instance;
-
+  String currentUid() {
+    // TODO: riverpod_generatorを使ったら ref.read(streamAuthUidProvider).value;に変更する
+    return 'Hello, User!';
+  }
   @override
   void onInit() async {
     final Stream<List<PurchaseDetails>> purchaseUpdated =
