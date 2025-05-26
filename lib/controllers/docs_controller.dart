@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/mixin/current_uid_mixin.dart';
@@ -21,12 +22,16 @@ class DocsController extends GetxController with CurrentUserMixin {
   bool cannotShow() => isLoading.value;
   void startLoading() => isLoading(true);
   void endLoading() => isLoading(false);
+  // TODO: 状態管理をDocsStateに置き換えて消去
   final isLoading = false.obs;
   final qDocInfoList = <QDocInfo>[].obs;
   final Rx<PublicUser?> rxPassiveUser = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
   List<QDoc> indexDocs = [];
   bool isTimeline = false;
+  // TODO: 状態管理をDocsStateに置き換える
+  final state = Rx(DocsState());
+
   @override
   void onInit() async {
     isTimeline = type == DocsType.bookmarks || type == DocsType.feeds;
