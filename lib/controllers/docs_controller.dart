@@ -131,6 +131,8 @@ class DocsController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> fetchDocs() async {
+    if (type == DocsType.mutePosts && createRequestPostIds().isEmpty) return;
+    if (type == DocsType.muteUsers && createRequestUids().isEmpty) return;
     if (state.value.isTimeline) {
       fetchTimelineDocs();
       return;
@@ -150,6 +152,8 @@ class DocsController extends GetxController with CurrentUserMixin {
   }
 
   Future<void> onLoading(RefreshController refreshController) async {
+    if (type == DocsType.mutePosts && createRequestPostIds().isEmpty) return;
+    if (type == DocsType.muteUsers && createRequestUids().isEmpty) return;
     if (state.value.qDocInfoList.isEmpty) {
       refreshController.loadComplete();
       return;
