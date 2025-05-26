@@ -7,8 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 import 'package:great_talk/consts/form_consts.dart';
+import 'package:great_talk/consts/remote_config_constants.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/infrastructure/chat_gpt_sdk_client.dart';
@@ -258,11 +258,11 @@ class ChatViewModel extends _$ChatViewModel {
     final requestMessages = _toRequestMessages();
     requestMessages.insert(0, _systemMsg(post));
     final completeText = post.typedCustomCompleteText();
-    final model = PurchasesController.to.model();
+    final model = RemoteConfigConstants.basicModel;
     final uid = ref.read(streamAuthUidProvider).value;
 
     return ChatCompleteText(
-      model: model,
+      model: ChatModelFromValue(model: model),
       messages: requestMessages.map((e) => e.toJson()).toList(),
       temperature: completeText.temperature,
       topP: completeText.topP,
