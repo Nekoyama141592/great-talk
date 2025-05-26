@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,6 +21,8 @@ class MosaicPostChild extends ConsumerWidget {
   final String title;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isMine = post.uid == ref.watch(streamAuthUidProvider).value;
+    final isAdmin = ref.watch(currentUserNotifierProvider).value?.isAdmin() ?? false;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -33,8 +35,7 @@ class MosaicPostChild extends ConsumerWidget {
         const BasicHeightBox(),
         Obx(
           () =>
-              (post.uid == ref.watch(streamAuthUidProvider).value ||
-                          CurrentUserController.to.isAdmin()) &&
+              (isMine || isAdmin) &&
                       !TokensController.to.state.value.deletePostIds.contains(post.postId)
                   ? InkWell(
                     onTap: () => PostCore.deletePost(post),

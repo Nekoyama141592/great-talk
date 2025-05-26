@@ -10,9 +10,9 @@ import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/view_model/chat/chat_view_model.dart';
 import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/views/chat/components/menu_button.dart';
 import 'package:great_talk/views/chat/components/msg_card.dart';
 import 'package:great_talk/views/components/app_bar_action.dart';
@@ -38,7 +38,7 @@ class ChatPage extends HookConsumerWidget {
     final postId = Get.parameters['postId']!;
     final chatStateAsync = ref.watch(chatViewModelProvider(uid, postId));
     final chatNotifier = ref.read(chatViewModelProvider(uid, postId).notifier);
-
+    final isAdmin = ref.watch(currentUserNotifierProvider).value?.isAdmin() ?? false;
     final inputController = useTextEditingController();
     final scrollController = useScrollController();
 
@@ -72,9 +72,7 @@ class ChatPage extends HookConsumerWidget {
                 title: EllipsisText(post.typedTitle().value),
                 actions: [
                   // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示
-                  if (post.uid == currentUserId ||
-                      CurrentUserController.to
-                          .isAdmin()) // `CurrentUserController`は依存関係が不明なため残置
+                  if (post.uid == currentUserId || isAdmin) // `CurrentUserController`は依存関係が不明なため残置
                     DeletePostButton(onTap: chatNotifier.onDeleteButtonPressed)
                   else
                     AppBarAction(

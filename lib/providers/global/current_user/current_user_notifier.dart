@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/model/global/current_user/auth_user/auth_user.dart';
 import 'package:great_talk/model/global/current_user/current_user_state.dart';
+import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
@@ -72,21 +71,6 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     _updateState(state.value!.copyWith(authUser: newAuthUser));
   }
 
-  String currentUid() => state.value?.authUser?.uid ?? '';
-
-  bool isAdmin() => state.value?.privateUser?.isAdmin ?? false;
-  bool isOfficial() => state.value?.publicUser?.isOfficial ?? false;
-
-  bool isAnonymous() => state.value?.authUser?.isAnonymous ?? true;
-
-  bool isNotLoggedIn() => state.value?.authUser == null || isAnonymous();
-  bool isLoggedIn() => !isNotLoggedIn();
-
-  bool _hasPublicUser() => state.value?.publicUser != null;
-  bool hasNoPublicUser() => !_hasPublicUser();
-
-  bool isNotVerified() => !(state.value?.authUser?.emailVerified ?? false);
-
   Future<void> onAppleButtonPressed() async {
     final repository = ref.read(firebaseAuthRepositoryProvider); // RiverpodでRepositoryを取得
     final result = await repository.signInWithApple();
@@ -117,10 +101,14 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     await _fetchData();
   }
 
+  String? _getCurrentUid() => ref.read(streamAuthUidProvider).value;
+
   Future<void> _createPublicUser() async {
     final repository = ref.read(firestoreRepositoryProvider);
-    final newUser = NewContent.newUser(currentUid());
-    final refDoc = DocRefCore.user(currentUid());
+    final uid = _getCurrentUid();
+    if (uid == null) return;
+    final newUser = NewContent.newUser(uid);
+    final refDoc = DocRefCore.user(uid);
     final json = newUser.toJson();
     final result = await repository.createDoc(refDoc, json);
     result.when(
@@ -135,9 +123,11 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   Future<void> _createPrivateUser() async {
+    final uid = _getCurrentUid();
+    if (uid == null) return;
     final repository = ref.read(firestoreRepositoryProvider);
-    final newPrivateUser = NewContent.newPrivateUser(currentUid());
-    final refDoc = DocRefCore.privateUser(currentUid());
+    final newPrivateUser = NewContent.newPrivateUser(uid);
+    final refDoc = DocRefCore.privateUser(uid);
     final json = newPrivateUser.toJson();
     final result = await repository.createDoc(refDoc, json);
     result.when(
@@ -151,7 +141,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   Future<void> _fetchData() async {
-    if (currentUid().isEmpty) {
+    if (_getCurrentUid() == null) {
       // UIDがない場合は処理をスキップ
       return;
     }
@@ -160,8 +150,10 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   Future<void> _getPublicUser() async {
+    final uid = _getCurrentUid();
+    if (uid == null) return;
     final repository = ref.read(firestoreRepositoryProvider);
-    final refDoc = DocRefCore.user(currentUid());
+    final refDoc = DocRefCore.user(uid);
     final result = await repository.getDoc(refDoc);
     await result.when(
       success: (res) async {
@@ -189,8 +181,10 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   Future<void> _getPrivateUser() async {
+    final uid = _getCurrentUid();
+    if (uid == null) return;
     final repository = ref.read(firestoreRepositoryProvider);
-    final refDoc = DocRefCore.privateUser(currentUid());
+    final refDoc = DocRefCore.privateUser(uid);
     final result = await repository.getDoc(refDoc);
     await result.when(
       success: (res) async {
@@ -207,33 +201,13 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
   }
 
-  CurrentAuthState currentAuthState() {
-    if (state.value?.authUser == null) {
-      return CurrentAuthState.notLoggedIn;
-    } else if (state.value!.authUser!.isAnonymous) {
-      return CurrentAuthState.isAnonymous;
-    } else {
-      return CurrentAuthState.loggedIn; // ログイン済みユーザーの場合
-    }
+  
+
+  void onLogoutButtonPressed() async {
+    UIHelper.cupertinoAlertDialog("ログアウトしますが本当によろしいですか？", () => _signOut());
   }
 
-  String currentAuthStateString() {
-    final authState = currentAuthState();
-    switch (authState) {
-      case CurrentAuthState.isAnonymous:
-        return "匿名ログイン中";
-      case CurrentAuthState.loggedIn:
-        return "ログイン中";
-      case CurrentAuthState.notLoggedIn:
-        return "未ログイン"; // 修正: 未ログイン状態
-    }
-  }
-
-  void onLogoutButtonPressed(BuildContext context) async {
-    UIHelper.cupertinoAlertDialog("ログアウトしますが本当によろしいですか？", () => _signOut(context));
-  }
-
-  Future<void> _signOut(BuildContext context) async {
+  Future<void> _signOut() async {
     final repository = ref.read(firebaseAuthRepositoryProvider);
     final result = await repository.signOut();
     result.when(
@@ -338,7 +312,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     _updateState(state.value!.copyWith(publicUser: updatedUser, base64: newBase64));
 
     final firestoreRepository = ref.read(firestoreRepositoryProvider);
-    final docRef = DocRefCore.user(currentUid());
+    final docRef = DocRefCore.user(user.uid);
     await firestoreRepository.updateDoc(docRef, updatedUser.toJson());
   }
 }

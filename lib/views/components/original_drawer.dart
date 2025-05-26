@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/global/local_setting/local_setting.dart';
 import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/utility/style_utility.dart';
@@ -25,63 +25,75 @@ class OriginalDrawer extends ConsumerWidget {
   const OriginalDrawer({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentUserController = CurrentUserController.to;
     final settingState = ref.watch(localSettingProvider);
     final purchasesController = PurchasesController.to;
-    final image = CurrentUserController.to.state.value.base64;
+    final asyncValue = ref.watch(currentUserNotifierProvider);
+    final currentUser = asyncValue.value;
+    final isAdmin = currentUser?.isAdmin() ?? false;
+    final image = currentUser?.base64;
+    // final image = CurrentUserController.to.state.value.base64;
     return Drawer(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: ListView(
         children: [
-          Obx(() {
-            final user = currentUserController.state.value.publicUser;
-            if (user != null) {
-              return DrawerHeader(
-                child: InkWell(
-                  child: Column(
-                    children: [
-                      EllipsisText(
-                        user.nameValue,
-                        style: StyleUtility.bold25(),
-                      ),
-                      const BasicHeightBox(),
-                      Row(
-                        children: [
-                          if (image != null) CircleImage(
-                            uint8list:
-                                base64Decode(image),
-                          ),
-                          const BasicWidthBox(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "フォロー ${user.followingCount.formatNumber()}",
+          
+          asyncValue.when(
+            data: (state) {
+              final user = state.publicUser;
+              if (user != null) {
+                return DrawerHeader(
+                  child: InkWell(
+                    child: Column(
+                      children: [
+                        EllipsisText(
+                          user.nameValue,
+                          style: StyleUtility.bold25(),
+                        ),
+                        const BasicHeightBox(),
+                        Row(
+                          children: [
+                            if (image != null)
+                              CircleImage(
+                                uint8list: base64Decode(image),
                               ),
-                              const BasicHeightBox(),
-                              Text(
-                                "フォロワー ${user.followerCount.formatNumber()}",
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                            const BasicWidthBox(),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "フォロー ${user.followingCount.formatNumber()}",
+                                ),
+                                const BasicHeightBox(),
+                                Text(
+                                  "フォロワー ${user.followerCount.formatNumber()}",
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      Get.toNamed(UserProfilePage.generatePath(user.uid));
+                    },
                   ),
+                );
+              } else {
+                return ListTile(
+                  title: const Text("ログインする"),
                   onTap: () {
-                    Get.toNamed(UserProfilePage.generatePath(user.uid));
+                    Get.toNamed(LoginPage.path);
                   },
-                ),
-              );
-            } else {
-              return ListTile(
-                title: const Text("ログインする"),
-                onTap: () {
-                  Get.toNamed(LoginPage.path);
-                },
-              );
-            }
-          }),
+                );
+              }
+            },
+            loading: () => const DrawerHeader(
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            error: (err, stack) => DrawerHeader(
+              child: Center(child: Text("ユーザー情報の取得に失敗しました")),
+            ),
+          ),
           ListTile(
             title: const Text("アカウント情報"),
             onTap: () {
@@ -100,8 +112,7 @@ class OriginalDrawer extends ConsumerWidget {
             title: const Text("ブックマーク"),
             onTap: () => Get.toNamed(BookmarkCategoriesPage.path),
           ),
-          Obx(
-            () => ListTile(
+          ListTile(
               title: const Text("テーマ切り替え"),
               trailing: CupertinoSwitch(
                 value: settingState.isDarkTheme,
@@ -109,9 +120,7 @@ class OriginalDrawer extends ConsumerWidget {
                     ref.read(localSettingProvider.notifier).onThemeSwichChanged,
               ),
             ),
-          ),
-          Obx(
-            () => ListTile(
+           ListTile(
               title: const Text("最初のメッセージを受け取る"),
               trailing: CupertinoSwitch(
                 value: settingState.needFirstMessage,
@@ -121,19 +130,14 @@ class OriginalDrawer extends ConsumerWidget {
                         .onNeedFirstMessageSwichChanged,
               ),
             ),
-          ),
           ListTile(
             title: const Text("使用モデルID"),
             subtitle: Obx(() => Text(purchasesController.model().model)),
           ),
-          Obx(
-            () =>
-                CurrentUserController.to.isAdmin()
-                    ? ListTile(
+          if (isAdmin) ListTile(
                       title: const Text("管理者専用ページ"),
                       onTap: () => Get.toNamed(AdminPage.path),
-                    )
-                    : const SizedBox.shrink(),
+                    
           ),
         ],
       ),

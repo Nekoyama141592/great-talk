@@ -1,62 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
+import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
+import 'package:great_talk/views/common/async_screen/async_screen.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends ConsumerWidget {
   const AccountPage({super.key});
   static const path = "/account";
 
   @override
-  Widget build(BuildContext context) {
-    final controller = CurrentUserController.to;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asyncValue = ref.watch(currentUserNotifierProvider);
+    final notifier = ref.watch(currentUserNotifierProvider.notifier);
     return Scaffold(
       appBar: AppBar(title: const Text("アカウントページ")),
-      body: ListView(
-        children: [
-          ListTile(
-            title: Obx(
-              () => Text("認証情報: ${controller.currentAuthStateString()}"),
+      body: AsyncScreen(asyncValue: asyncValue, data: (state) {
+        return ListView(
+          children: [
+            ListTile(
+              title: Text("認証情報: ${state.currentAuthStateString()}"),
             ),
-          ),
-          ListTile(
-            title: Obx(
-              () => SelectableText("ユーザーID: ${controller.currentUid()}"),
+            ListTile(
+              title: SelectableText("ユーザーID: ${state.currentUid()}"),
             ),
-          ),
-          Obx(() {
-            final publicUser = controller.state.value.publicUser;
-            if (publicUser == null || !publicUser.isInappropriate()) {
-              return const SizedBox.shrink();
-            }
-
-            return ListTile(
-              title: Text(
-                "非表示の理由: \n${publicUser.inappropriateReason(controller.currentUid())}",
-                style: const TextStyle(color: Colors.red),
-              ),
-            );
-          }),
-          Obx(
-            () =>
-                controller.isLoggedIn()
-                    ? ListTile(
-                      title: const Text("ログアウトする"),
-                      onTap: controller.onLogoutButtonPressed,
-                    )
-                    : const SizedBox.shrink(),
-          ),
-          Obx(
-            () =>
-                controller.isLoggedIn()
-                    ? ListTile(
-                      title: const Text("ユーザーを消去する"),
-                      onTap: () => Get.toNamed(ReauthenticateToDeletePage.path),
-                    )
-                    : const SizedBox.shrink(),
-          ),
-        ],
-      ),
+            (() {
+              final publicUser = state.publicUser;
+              if (publicUser == null || !publicUser.isInappropriate()) {
+                return const SizedBox.shrink();
+              }
+              return ListTile(
+                title: Text(
+                  "非表示の理由: \n${publicUser.inappropriateReason(state.currentUid())}",
+                  style: const TextStyle(color: Colors.red),
+                ),
+              );
+            })(),
+            state.isLoggedIn()
+                ? ListTile(
+                    title: const Text("ログアウトする"),
+                    onTap: notifier.onLogoutButtonPressed,
+                  )
+                : const SizedBox.shrink(),
+            state.isLoggedIn()
+                ? ListTile(
+                    title: const Text("ユーザーを消去する"),
+                    onTap: () => Get.toNamed(ReauthenticateToDeletePage.path),
+                  )
+                : const SizedBox.shrink(),
+          ],
+        );
+      }),
     );
   }
 }
