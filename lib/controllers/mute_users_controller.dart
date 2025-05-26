@@ -14,18 +14,14 @@ class MuteUsersController extends DocsController {
 
   @override
   Future<void> fetchDocs() async {
-    final requestUids = createRequestUids();
-    if (requestUids.isNotEmpty) {
-      await super.fetchDocs();
-    }
+    if (createRequestUids().isEmpty) return;
+    await super.fetchDocs();
   }
 
   @override
   Future<void> onLoading(RefreshController refreshController) async {
-    final requestUids = createRequestUids();
-    if (requestUids.isNotEmpty) {
-      await super.onLoading(refreshController);
-    }
+    if (createRequestUids().isEmpty) return;
+    await super.onLoading(refreshController);
   }
   
   

@@ -14,18 +14,14 @@ class MutePostsController extends DocsController {
 
   @override
   Future<void> fetchDocs() async {
-    final requestPostIds = createRequestPostIds();
-    if (requestPostIds.isNotEmpty) {
-      await super.fetchDocs();
-    }
+    if (createRequestPostIds().isEmpty) return;
+    await super.fetchDocs();
   }
 
   @override
   Future<void> onLoading(RefreshController refreshController) async {
-    final requestPostIds = createRequestPostIds();
-    if (requestPostIds.isNotEmpty) {
-      await super.onLoading(refreshController);
-    }
+    if (createRequestPostIds().isEmpty) return;
+    await super.onLoading(refreshController);
   }
 
   
