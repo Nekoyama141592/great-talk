@@ -38,7 +38,7 @@ class PurchasesController extends GetxController {
 
   PurchasesRepository get repository => PurchasesRepository();
   InAppPurchase get inAppPurchase => InAppPurchase.instance;
-  String currentUid() {
+  String? _getCurrentUid() {
     // TODO: riverpod_generatorを使ったら ref.read(streamAuthUidProvider).value;に変更する
     return 'Hello, User!';
   }
@@ -190,7 +190,7 @@ class PurchasesController extends GetxController {
       late bool isValid;
       final result = await repository.getAndroidReceipt(
         purchaseDetails,
-        currentUid(),
+        _getCurrentUid()!,
       );
       await result.when(
         success: (res) async {
@@ -207,7 +207,7 @@ class PurchasesController extends GetxController {
       late bool isValid;
       final result = await repository.getIOSReceipt(
         purchaseDetails,
-        currentUid(),
+        _getCurrentUid()!,
       );
       await result.when(
         success: (res) async {
