@@ -8,8 +8,6 @@ import 'package:great_talk/consts/remote_config_constants.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
-import 'package:great_talk/consts/purchase_constants.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/consts/delegates/payment_queue_delegate.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/consts/iap_constants/mock_product_list.dart';
@@ -98,8 +96,7 @@ class PurchasesController extends GetxController {
 
   bool isSubscribing() {
     return purchases.isNotEmpty ||
-        rxCachedReceipt.value.isValid() ||
-        CurrentUserController.to.isOfficial();
+        rxCachedReceipt.value.isValid();
   }
 
   bool isPremiumSubscribing() {
@@ -108,15 +105,12 @@ class PurchasesController extends GetxController {
             .map((element) => element.productID)
             .toList()
             .contains(kPremiumSubscriptionId) ||
-        cachedReceipt.isValidPremium() ||
-        CurrentUserController.to.isOfficial();
+        cachedReceipt.isValidPremium();
   }
 
   String get subscriptionText {
     if (!isSubscribing()) {
       return "何も契約していません。";
-    } else if (CurrentUserController.to.isOfficial()) {
-      return "プレミアムプラン(公式ユーザー)";
     } else if (purchases.isEmpty) {
       return "購入情報を取得中...";
     } else {
@@ -257,20 +251,15 @@ class PurchasesController extends GetxController {
   Future<void> _listenToPurchaseUpdated(
     List<PurchaseDetails> purchaseDetailsList,
   ) async {
-    if (CurrentUserController.to.isAdmin()) {
-      await UIHelper.showFlutterToast(
-        "${purchaseDetailsList.length}件のアイテムに対して処理を実行",
-      );
-    }
-    for (int i = 0; i < PurchaseConstants.verifyItemLimit; i++) {
-      final purchaseDetails = purchaseDetailsList[i];
+    const limitCount = 3; // 検証は最新の3回のみ行う
+    final taked = purchaseDetailsList.take(limitCount).toList();
+    final reversed = taked.reversed.toList(); // 一番新しい履歴を最後に検証する.
+    for (int i = 0; i < reversed.length; i++) {
+      final purchaseDetails = reversed[i];
       await _completePurchase(purchaseDetails);
       await _acknowledge(purchaseDetails);
-      if (purchaseDetails.status == PurchaseStatus.error &&
-          CurrentUserController.to.isAdmin()) {
-        UIHelper.showErrorFlutterToast(
-          purchaseDetails.error?.message ?? "購入時にエラーが発生",
-        );
+      if (purchaseDetails.status == PurchaseStatus.error) {
+        UIHelper.showErrorFlutterToast("購入時にエラーが発生",);
       } else if (purchaseDetails.isPurchased) {
         final isValid = await verifyPurchase(purchaseDetails);
         if (isValid) {
