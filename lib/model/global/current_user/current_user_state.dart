@@ -6,6 +6,7 @@ import 'package:great_talk/model/global/current_user/auth_user/auth_user.dart';
 part 'current_user_state.freezed.dart';
 part 'current_user_state.g.dart';
 
+
 @freezed
 abstract class CurrentUserState with _$CurrentUserState {
   const CurrentUserState._();
