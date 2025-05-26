@@ -26,7 +26,10 @@ class TokensController extends GetxController {
   void onInit() async {
     super.onInit();
     await _distributeTokens();
-    await _fetchBookmarkCategories();
+  }
+
+  void _updateState(TokensState newState) {
+    state.value = newState;
   }
 
   Future<void> _distributeTokens() async {
@@ -34,145 +37,131 @@ class TokensController extends GetxController {
     if (uid == null) return;
     final repository = FirestoreRepository();
     final tokensColRef = ColRefCore.tokens(uid);
-    final result = await repository.getDocs(tokensColRef);
-    result.when(
-      success: (res) {
-        final allTokensData = res.map((doc) => doc.data()).toList();
-
-        // 修正後: stateをcopyWithで一度に更新する
-        state.value = state.value.copyWith(
-          followingTokens: allTokensData
-              .where((map) => map['tokenType'] == TokenType.following.name)
-              .map((map) => FollowingToken.fromJson(map))
-              .toList(),
-          likePostTokens: allTokensData
-              .where((map) => map['tokenType'] == TokenType.likePost.name)
-              .map((map) => LikePostToken.fromJson(map))
-              .toList(),
-          muteUserTokens: allTokensData
-              .where((map) => map['tokenType'] == TokenType.muteUser.name)
-              .map((map) => MuteUserToken.fromJson(map))
-              .toList(),
-          mutePostTokens: allTokensData
-              .where((map) => map['tokenType'] == TokenType.mutePost.name)
-              .map((map) => MutePostToken.fromJson(map))
-              .toList(),
-          reportPostTokens: allTokensData
-              .where((map) => map['tokenType'] == TokenType.reportPost.name)
-              .map((map) => ReportPostToken.fromJson(map))
-              .toList(),
-        );
-      },
-      failure: (e) {
-        // Handle failure, e.g., show an error message
-      },
+    final res = await repository.getDocsOrNull(tokensColRef);
+    if (res == null) return;
+    final allTokensData = res.map((doc) => doc.data()).toList();
+    final categories = await _fetchBookmarkCategories();
+    
+    final newState = state.value.copyWith(
+      bookmarkCategoryTokens: categories,
+      followingTokens: allTokensData
+          .where((map) => map['tokenType'] == TokenType.following.name)
+          .map((map) => FollowingToken.fromJson(map))
+          .toList(),
+      likePostTokens: allTokensData
+          .where((map) => map['tokenType'] == TokenType.likePost.name)
+          .map((map) => LikePostToken.fromJson(map))
+          .toList(),
+      muteUserTokens: allTokensData
+          .where((map) => map['tokenType'] == TokenType.muteUser.name)
+          .map((map) => MuteUserToken.fromJson(map))
+          .toList(),
+      mutePostTokens: allTokensData
+          .where((map) => map['tokenType'] == TokenType.mutePost.name)
+          .map((map) => MutePostToken.fromJson(map))
+          .toList(),
+      reportPostTokens: allTokensData
+          .where((map) => map['tokenType'] == TokenType.reportPost.name)
+          .map((map) => ReportPostToken.fromJson(map))
+          .toList(),
     );
+    _updateState(newState);
   }
 
-  Future<void> _fetchBookmarkCategories() async {
+  Future<List<BookmarkCategory>> _fetchBookmarkCategories() async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid == null) return;
+    if (uid == null) return [];
     final colRef = ColRefCore.bookmarkCategories(uid);
     final repository = FirestoreRepository();
-    final result = await repository.getDocs(colRef);
-    result.when(
-      success: (res) {
-        final categories =
-            res.map((e) => BookmarkCategory.fromJson(e.data())).toList();
-        // 修正後: stateをcopyWithで更新
-        state.value = state.value.copyWith(bookmarkCategoryTokens: categories);
-      },
-      failure: (e) {},
-    );
+    final res = await repository.getDocsOrNull(colRef);
+    if (res == null) return [];
+    final categories =
+        res.map((e) => BookmarkCategory.fromJson(e.data())).toList();
+    return categories;
   }
 
-  // 以下、各メソッドをstateを更新するように修正
-
   void addDeletePostId(String postId) {
-    // 修正後: stateをcopyWithで更新
-    state.value = state.value
+    final newState = state.value
         .copyWith(deletePostIds: [...state.value.deletePostIds, postId]);
+    _updateState(newState);
   }
 
   void addBookmarkCategory(BookmarkCategory category) {
-    // 修正後: stateをcopyWithで更新
-    state.value = state.value.copyWith(bookmarkCategoryTokens: [
-      ...state.value.bookmarkCategoryTokens,
-      category
-    ]);
+    final newState = state.value.copyWith(
+        bookmarkCategoryTokens: [...state.value.bookmarkCategoryTokens, category]);
+    _updateState(newState);
   }
 
   void removeBookmarkCategory(BookmarkCategory category) {
-    // 修正後: stateをcopyWithで更新
     final newList = state.value.bookmarkCategoryTokens
         .where((c) => c.id != category.id)
         .toList();
-    state.value = state.value.copyWith(bookmarkCategoryTokens: newList);
+    final newState = state.value.copyWith(bookmarkCategoryTokens: newList);
+    _updateState(newState);
   }
 
   void addFollowing(FollowingToken followingToken) {
-    // 修正後: stateをcopyWithで更新
-    state.value = state.value.copyWith(
+    final newState = state.value.copyWith(
         followingTokens: [...state.value.followingTokens, followingToken]);
+    _updateState(newState);
   }
 
   void removeFollowing(FollowingToken followingToken) {
-    // 修正後: stateをcopyWithで更新
     final newList = state.value.followingTokens
         .where((token) => token.passiveUid != followingToken.passiveUid)
         .toList();
-    state.value = state.value.copyWith(followingTokens: newList);
+    final newState = state.value.copyWith(followingTokens: newList);
+    _updateState(newState);
   }
 
   void addLikePost(LikePostToken likePostToken) {
-    // 修正後: stateをcopyWithで更新
-    state.value = state.value.copyWith(
+    final newState = state.value.copyWith(
         likePostTokens: [...state.value.likePostTokens, likePostToken]);
+    _updateState(newState);
   }
 
   void removeLikePost(LikePostToken likePostToken) {
-    // 修正後: stateをcopyWithで更新
     final newList = state.value.likePostTokens
         .where((token) => token.postId != likePostToken.postId)
         .toList();
-    state.value = state.value.copyWith(likePostTokens: newList);
+    final newState = state.value.copyWith(likePostTokens: newList);
+    _updateState(newState);
   }
 
   void addMutePost(MutePostToken mutePostToken) {
-    // 修正後: stateをcopyWithで更新
-    state.value = state.value
+    final newState = state.value
         .copyWith(mutePostTokens: [...state.value.mutePostTokens, mutePostToken]);
+    _updateState(newState);
   }
 
   void removeMutePost(MutePostToken mutePostToken) {
-    // 修正後: stateをcopyWithで更新
     final newList = state.value.mutePostTokens
         .where((token) => token.postId != mutePostToken.postId)
         .toList();
-    state.value = state.value.copyWith(mutePostTokens: newList);
+    final newState = state.value.copyWith(mutePostTokens: newList);
+    _updateState(newState);
   }
 
   void addMuteUser(MuteUserToken muteUserToken) {
-    // 修正後: stateをcopyWithで更新
-    state.value = state.value
+    final newState = state.value
         .copyWith(muteUserTokens: [...state.value.muteUserTokens, muteUserToken]);
+    _updateState(newState);
   }
 
   void removeMuteUser(MuteUserToken muteUserToken) {
-    // 修正後: stateをcopyWithで更新
     final newList = state.value.muteUserTokens
         .where((token) => token.passiveUid != muteUserToken.passiveUid)
         .toList();
-    state.value = state.value.copyWith(muteUserTokens: newList);
+    final newState = state.value.copyWith(muteUserTokens: newList);
+    _updateState(newState);
   }
 
   void addReportPost(ReportPostToken reportPostToken) {
-    // 修正後: stateをcopyWithで更新
-    state.value = state.value.copyWith(
+    final newState = state.value.copyWith(
         reportPostTokens: [...state.value.reportPostTokens, reportPostToken]);
+    _updateState(newState);
   }
 
-  // 修正後: stateから直接値を取得するように修正
   bool isDeletedPost(String postId) => state.value.deletePostIds.contains(postId);
   bool isMutingPost(String postId) => state.value.mutePostIds.contains(postId);
   bool isMutingUser(String uid) => state.value.muteUids.contains(uid);
@@ -200,7 +189,6 @@ class TokensController extends GetxController {
       success: (res) {
         FocusScope.of(context).unfocus();
         inputController.text = "";
-        // 状態更新メソッドを呼び出す
         addBookmarkCategory(newCategory);
         UIHelper.showFlutterToast("カテゴリーを作成できました。");
       },
@@ -223,7 +211,6 @@ class TokensController extends GetxController {
     result.when(
       success: (_) {
         Get.back();
-        // 状態更新メソッドを呼び出す
         removeBookmarkCategory(token);
         UIHelper.showFlutterToast("カテゴリーを削除できました。");
       },
