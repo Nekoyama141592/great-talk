@@ -4,7 +4,7 @@ import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/controllers/current_user_controller.dart';
-import 'package:great_talk/controllers/abstract/docs_controller.dart';
+import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';

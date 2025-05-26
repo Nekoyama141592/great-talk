@@ -15,7 +15,7 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-abstract class DocsController extends GetxController with CurrentUserMixin {
+class DocsController extends GetxController with CurrentUserMixin {
   bool cannotShow() => isLoading.value;
   void startLoading() => isLoading(true);
   void endLoading() => isLoading(false);
@@ -31,7 +31,7 @@ abstract class DocsController extends GetxController with CurrentUserMixin {
     await onReload();
     super.onInit();
   }
-  DocsType get type;
+  DocsType get type => DocsType.rankingPosts;
 
   // Query
   String passiveUid() => Get.parameters['uid']!;
