@@ -5,6 +5,7 @@
 # 開発用パッケージの配列を定義
 dev_packages=(
   "build_runner"
+  "custom_lint"
   "flutter_launcher_icons"
   "flutter_lints"
   "freezed"
