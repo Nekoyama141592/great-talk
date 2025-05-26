@@ -46,6 +46,10 @@ class CurrentUserController extends GetxController {
     state.value =
         state.value.copyWith(authUser: AuthUser.fromFirebaseAuthUser(user));
   }
+
+  void _updateState(CurrentUserState newState) {
+    state.value = newState;
+  }
   // stateから値を取得
   String currentUid() => state.value.authUser?.uid ?? '';
 
