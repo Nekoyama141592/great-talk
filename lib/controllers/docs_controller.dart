@@ -7,7 +7,6 @@ import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
-import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
@@ -300,7 +299,7 @@ class DocsController extends GetxController {
     final repository = FirestoreRepository();
     final deleteToken = CurrentUserController.to.muteUserTokens
         .firstWhere((element) => element.passiveUid == passiveUid);
-    CurrentUserController.to.removeMuteUer(deleteToken);
+    CurrentUserController.to.removeMuteUser(deleteToken);
     state.value.qDocInfoList.removeWhere((element) =>
         PublicUser.fromJson(element.qDoc.data()).uid == passiveUid);
     final tokenId = deleteToken.tokenId;

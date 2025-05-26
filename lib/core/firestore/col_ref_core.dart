@@ -1,6 +1,5 @@
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/database_schema/bookmark_category/bookmark_category.dart';
-import 'package:great_talk/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class ColRefCore {
@@ -13,7 +12,7 @@ class ColRefCore {
   static ColRef messages(String posterUid, String postId, String currentUid) =>
       DocRefCore.post(posterUid, postId)
           .collection('senders/$currentUid/messages');
-  static ColRef bookmarkCategories(PrivateUser privateUser) =>
-      privateUser.typedRef().collection("bookmarkCategories");
+  static ColRef bookmarkCategories(String uid) =>
+      DocRefCore.privateUser(uid).collection("bookmarkCategories");
   static ColRef timelines(DocRef userRef) => userRef.collection('timelines');
 }

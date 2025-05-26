@@ -34,6 +34,8 @@ class CurrentUserController extends GetxController {
   final Rx<PublicUser?> rxPublicUser = Rx(null);
   final Rx<PrivateUser?> rxPrivateUser = Rx(null);
   final Rx<Uint8List?> rxUint8list = Rx(null);
+
+  // Tokens
   final deletePostIds = <String>[].obs; // 投稿の削除時に一時的に保存する.
 
   final bookmarkCategoryTokens = <BookmarkCategory>[].obs;
@@ -63,111 +65,122 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> _distributeTokens() async {
-    if (hasNoPublicUser()) {
-      return;
-    }
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
     final repository = FirestoreRepository();
-    final tokensColRef = ColRefCore.tokens(currentUid());
+    final tokensColRef = ColRefCore.tokens(uid);
     final result = await repository.getDocs(tokensColRef);
     result.when(
-        success: (res) {
-          for (final token in res) {
-            final Map<String, dynamic> tokenMap = token.data();
-            final TokenType tokenType =
-                TokenType.values.byName(tokenMap['tokenType']);
-            switch (tokenType) {
-              case TokenType.following:
-                final FollowingToken followingToken =
-                    FollowingToken.fromJson(tokenMap);
-                addFollowing(followingToken);
-                break;
-              case TokenType.likePost:
-                final LikePostToken likePostToken =
-                    LikePostToken.fromJson(tokenMap);
-                addLikePost(likePostToken);
-                break;
-              case TokenType.muteUser:
-                final MuteUserToken muteUserToken =
-                    MuteUserToken.fromJson(tokenMap);
-                addMuteUser(muteUserToken);
-                break;
-              case TokenType.mutePost:
-                final MutePostToken mutePostToken =
-                    MutePostToken.fromJson(tokenMap);
-                addMutePost(mutePostToken);
-                break;
-              case TokenType.reportPost:
-                final ReportPostToken reportPostToken =
-                    ReportPostToken.fromJson(tokenMap);
-                addReportPost(reportPostToken);
-                break;
-            }
-          }
-        },
-        failure: (e) {});
+      success: (res) {
+        final allTokensData = res.map((doc) => doc.data()).toList();
+
+        // Followings
+        followingTokens.value = allTokensData
+            .where((map) => map['tokenType'] == TokenType.following.name)
+            .map((map) => FollowingToken.fromJson(map))
+            .toList();
+
+        // LikePosts
+        likePostTokens.value = allTokensData
+            .where((map) => map['tokenType'] == TokenType.likePost.name)
+            .map((map) => LikePostToken.fromJson(map))
+            .toList();
+
+        // MuteUsers
+        muteUserTokens.value = allTokensData
+            .where((map) => map['tokenType'] == TokenType.muteUser.name)
+            .map((map) => MuteUserToken.fromJson(map))
+            .toList();
+
+        // MutePosts
+        mutePostTokens.value = allTokensData
+            .where((map) => map['tokenType'] == TokenType.mutePost.name)
+            .map((map) => MutePostToken.fromJson(map))
+            .toList();
+
+        // ReportPosts
+        reportPostTokens.value = allTokensData
+            .where((map) => map['tokenType'] == TokenType.reportPost.name)
+            .map((map) => ReportPostToken.fromJson(map))
+            .toList();
+      },
+      failure: (e) {
+        // Handle failure, e.g., show an error message
+      },
+    );
   }
 
   Future<void> _fetchBookmarkCategories() async {
-    final user = rxPrivateUser.value;
-    if (user == null) return;
-    final colRef = ColRefCore.bookmarkCategories(user);
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+    final colRef = ColRefCore.bookmarkCategories(uid);
     final repository = FirestoreRepository();
     final result = await repository.getDocs(colRef);
     result.when(
         success: (res) {
-          bookmarkCategoryTokens(
-              res.map((e) => BookmarkCategory.fromJson(e.data())).toList());
+          // This is already an immutable operation.
+          bookmarkCategoryTokens.value =
+              res.map((e) => BookmarkCategory.fromJson(e.data())).toList();
         },
         failure: (e) {});
   }
 
   // 投稿の削除時に外部から呼び出す.
   void addDeletePostId(String postId) {
-    deletePostIds.add(postId);
+    deletePostIds.value = [...deletePostIds, postId];
   }
 
   void addBookmarkCategory(BookmarkCategory category) {
-    bookmarkCategoryTokens.add(category);
+    bookmarkCategoryTokens.value = [...bookmarkCategoryTokens, category];
   }
 
   void removeBookmarkCategory(BookmarkCategory category) {
-    bookmarkCategoryTokens.remove(category);
+    bookmarkCategoryTokens.value =
+        bookmarkCategoryTokens.where((c) => c.id != category.id).toList();
   }
 
   void addFollowing(FollowingToken followingToken) {
-    followingTokens.add(followingToken);
+    followingTokens.value = [...followingTokens, followingToken];
   }
 
   void removeFollowing(FollowingToken followingToken) {
-    followingTokens.remove(followingToken);
+    followingTokens.value = followingTokens
+        .where((token) => token.passiveUid != followingToken.passiveUid)
+        .toList();
   }
 
   void addLikePost(LikePostToken likePostToken) {
-    likePostTokens.add(likePostToken);
+    likePostTokens.value = [...likePostTokens, likePostToken];
   }
 
   void removeLikePost(LikePostToken likePostToken) {
-    likePostTokens.remove(likePostToken);
+    likePostTokens.value = likePostTokens
+        .where((token) => token.postId != likePostToken.postId)
+        .toList();
   }
 
   void addMutePost(MutePostToken mutePostToken) {
-    mutePostTokens.add(mutePostToken);
+    mutePostTokens.value = [...mutePostTokens, mutePostToken];
   }
 
   void removeMutePost(MutePostToken mutePostToken) {
-    mutePostTokens.remove(mutePostToken);
+    mutePostTokens.value = mutePostTokens
+        .where((token) => token.postId != mutePostToken.postId)
+        .toList();
   }
 
   void addMuteUser(MuteUserToken muteUserToken) {
-    muteUserTokens.add(muteUserToken);
+    muteUserTokens.value = [...muteUserTokens, muteUserToken];
   }
 
-  void removeMuteUer(MuteUserToken muteUserToken) {
-    muteUserTokens.remove(muteUserToken);
+  void removeMuteUser(MuteUserToken muteUserToken) {
+    muteUserTokens.value = muteUserTokens
+        .where((token) => token.passiveUid != muteUserToken.passiveUid)
+        .toList();
   }
 
   void addReportPost(ReportPostToken reportPostToken) {
-    reportPostTokens.add(reportPostToken);
+    reportPostTokens.value = [...reportPostTokens, reportPostToken];
   }
 
   Future<void> _createAnonymousUser() async {

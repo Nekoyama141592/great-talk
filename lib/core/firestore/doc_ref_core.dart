@@ -37,7 +37,7 @@ class DocRefCore {
   static DocRef token(String currentUid, String tokenId) =>
       ColRefCore.tokens(currentUid).doc(tokenId);
   static DocRef bookmarkCategory(PrivateUser privateUser, String categoryId) =>
-      ColRefCore.bookmarkCategories(privateUser).doc(categoryId);
+      ColRefCore.bookmarkCategories(privateUser.uid).doc(categoryId);
   static DocRef message(String posterUid, String postId, String currentUid,
           String messageId) =>
       ColRefCore.messages(posterUid, postId, currentUid).doc(messageId);
