@@ -60,8 +60,9 @@ class DocsController extends GetxController with CurrentUserMixin {
       case DocsType.feeds:
         return QueryCore.timelines(DocRefCore.user(currentUid()));
       case DocsType.mutePosts:
+        return QueryCore.postsByWhereIn(createRequestPostIds());
       case DocsType.muteUsers:
-        throw UnimplementedError();
+        return QueryCore.usersByWhereIn(createRequestUids());
       case DocsType.newPosts:
         return QueryCore.postsByNewest();
       case DocsType.rankingPosts:
