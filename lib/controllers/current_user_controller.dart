@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,7 +33,7 @@ class CurrentUserController extends GetxController {
   final Rx<User?> rxAuthUser = Rx(FirebaseAuth.instance.currentUser);
   final Rx<PublicUser?> rxPublicUser = Rx(null);
   final Rx<PrivateUser?> rxPrivateUser = Rx(null);
-  final Rx<Uint8List?> rxUint8list = Rx(null);
+  final Rx<String?> rxBase64 = Rx(null);
 
   @override
   void onInit() async {
@@ -142,7 +142,8 @@ class CurrentUserController extends GetxController {
           final fileName = user.typedImage().value;
           if (bucketName.isNotEmpty && fileName.isNotEmpty) {
             final image = await FileUtility.getS3Image(bucketName, fileName);
-            rxUint8list(image);
+            if (image == null) return;
+            rxBase64.value = base64Encode(image);
           }
         } else {
           // アカウントが存在しないなら作成する
@@ -291,7 +292,8 @@ class CurrentUserController extends GetxController {
       user.typedImage().bucketName,
       fileName,
     );
-    rxUint8list(image);
+    if (image == null) return;
+    rxBase64(base64Encode(image));
   }
 }
 

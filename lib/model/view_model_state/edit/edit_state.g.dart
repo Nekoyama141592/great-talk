@@ -9,7 +9,7 @@ part of 'edit_state.dart';
 _EditState _$EditStateFromJson(Map<String, dynamic> json) => _EditState(
   bio: json['bio'] as String,
   userName: json['userName'] as String,
-  base64: json['base64'] as String,
+  base64: json['base64'] as String?,
   isPicked: json['isPicked'] as bool? ?? false,
 );
 

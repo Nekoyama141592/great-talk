@@ -73,7 +73,8 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   }
 
   Widget _image(EditState data, EditViewModel notifier) {
-    final uint8list = data.base64.isNotEmpty ? base64Decode(data.base64) : null;
+    final base64 = data.base64;
+    final uint8list = base64 != null ? base64Decode(base64) : null;
     return uint8list != null
         ? InkWell(
           onTap: notifier.onImagePickButtonPressed,

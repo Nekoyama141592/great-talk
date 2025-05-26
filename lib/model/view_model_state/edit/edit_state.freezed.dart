@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$EditState {
 
- String get bio; String get userName; String get base64; bool get isPicked;
+ String get bio; String get userName; String? get base64; bool get isPicked;
 /// Create a copy of EditState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $EditStateCopyWith<$Res>  {
   factory $EditStateCopyWith(EditState value, $Res Function(EditState) _then) = _$EditStateCopyWithImpl;
 @useResult
 $Res call({
- String bio, String userName, String base64, bool isPicked
+ String bio, String userName, String? base64, bool isPicked
 });
 
 
@@ -66,12 +66,12 @@ class _$EditStateCopyWithImpl<$Res>
 
 /// Create a copy of EditState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? bio = null,Object? userName = null,Object? base64 = null,Object? isPicked = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? bio = null,Object? userName = null,Object? base64 = freezed,Object? isPicked = null,}) {
   return _then(_self.copyWith(
 bio: null == bio ? _self.bio : bio // ignore: cast_nullable_to_non_nullable
 as String,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
-as String,base64: null == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
-as String,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
+as String,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
+as String?,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -88,7 +88,7 @@ class _EditState implements EditState {
 
 @override final  String bio;
 @override final  String userName;
-@override final  String base64;
+@override final  String? base64;
 @override@JsonKey() final  bool isPicked;
 
 /// Create a copy of EditState
@@ -124,7 +124,7 @@ abstract mixin class _$EditStateCopyWith<$Res> implements $EditStateCopyWith<$Re
   factory _$EditStateCopyWith(_EditState value, $Res Function(_EditState) _then) = __$EditStateCopyWithImpl;
 @override @useResult
 $Res call({
- String bio, String userName, String base64, bool isPicked
+ String bio, String userName, String? base64, bool isPicked
 });
 
 
@@ -141,12 +141,12 @@ class __$EditStateCopyWithImpl<$Res>
 
 /// Create a copy of EditState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? bio = null,Object? userName = null,Object? base64 = null,Object? isPicked = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? bio = null,Object? userName = null,Object? base64 = freezed,Object? isPicked = null,}) {
   return _then(_EditState(
 bio: null == bio ? _self.bio : bio // ignore: cast_nullable_to_non_nullable
 as String,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
-as String,base64: null == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
-as String,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
+as String,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
+as String?,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

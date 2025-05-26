@@ -29,8 +29,7 @@ class EditViewModel extends _$EditViewModel {
     final user = CurrentUserController.to.rxPublicUser.value;
     final bio = user?.bioValue ?? "";
     final userName = user?.nameValue ?? "";
-    final uint8list = CurrentUserController.to.rxUint8list.value;
-    final base64 = uint8list != null ? base64Encode(uint8list) : "";
+    final  base64 = CurrentUserController.to.rxBase64.value;
     return EditState(
       bio: bio,
       userName: userName,
@@ -58,11 +57,10 @@ class EditViewModel extends _$EditViewModel {
 
   /// 初期化
   void init() {
-    final uint8list = CurrentUserController.to.rxUint8list.value;
-    if (state.value != null &&
-        state.value!.base64.isEmpty &&
-        uint8list != null) {
-      state = AsyncData(state.value!.copyWith(base64: base64Encode(uint8list)));
+    final base64 = CurrentUserController.to.rxBase64.value;
+    if (state.value?.base64 != null &&
+        base64 != null) {
+      state = AsyncData(state.value!.copyWith(base64: base64));
     }
   }
 
@@ -84,7 +82,7 @@ class EditViewModel extends _$EditViewModel {
     final uid = ref.read(streamAuthUidProvider).value;
     if (s == null || uid == null) return;
     final base64 = s.base64;
-    if (base64.isEmpty) {
+    if (base64 == null) {
       await UIHelper.showErrorFlutterToast("アイコンをタップしてプロフィール画像をアップロードしてください");
       return;
     }
@@ -106,9 +104,9 @@ class EditViewModel extends _$EditViewModel {
     }
     if (s.isPicked) {
       final fileName = AWSS3Utility.profileObject(uid);
-      final uint8list = base64Decode(base64);
+      final uint8list = base64;
       final request = PutObjectRequest.fromUint8List(
-        uint8list: uint8list,
+        uint8list: base64Decode(uint8list),
         fileName: fileName,
       );
       final result = await AWSS3Repository().putObject(request);

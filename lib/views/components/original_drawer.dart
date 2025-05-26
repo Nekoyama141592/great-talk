@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,6 +28,7 @@ class OriginalDrawer extends ConsumerWidget {
     final currentUserController = CurrentUserController.to;
     final settingState = ref.watch(localSettingProvider);
     final purchasesController = PurchasesController.to;
+    final image = CurrentUserController.to.rxBase64.value;
     return Drawer(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: ListView(
@@ -44,9 +47,9 @@ class OriginalDrawer extends ConsumerWidget {
                       const BasicHeightBox(),
                       Row(
                         children: [
-                          CircleImage(
+                          if (image != null) CircleImage(
                             uint8list:
-                                CurrentUserController.to.rxUint8list.value,
+                                base64Decode(image),
                           ),
                           const BasicWidthBox(),
                           Column(
