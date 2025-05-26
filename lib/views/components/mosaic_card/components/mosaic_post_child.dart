@@ -35,7 +35,7 @@ class MosaicPostChild extends ConsumerWidget {
           () =>
               (post.uid == ref.watch(streamAuthUidProvider).value ||
                           CurrentUserController.to.isAdmin()) &&
-                      !TokensController.to.deletePostIds.contains(post.postId)
+                      !TokensController.to.state.value.deletePostIds.contains(post.postId)
                   ? InkWell(
                     onTap: () => PostCore.deletePost(post),
                     child: const Icon(Icons.delete, color: Colors.white),

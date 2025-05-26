@@ -59,7 +59,7 @@ class DocsController extends GetxController {
   MapQuery setQuery() {
     switch (type) {
       case DocsType.bookmarks:
-        final token = TokensController.to.bookmarkCategoryTokens.firstWhere(
+        final token = TokensController.to.state.value.bookmarkCategoryTokens.firstWhere(
           (element) => element.id == Get.parameters["categoryId"],
         );
         return QueryCore.bookmarks(token);
@@ -274,7 +274,7 @@ class DocsController extends GetxController {
 
   List<String> createRequestPostIds() {
     final int userDocsLength = state.value.qDocInfoList.length;
-    final muteUids = TokensController.to.mutePostIds;
+    final muteUids = TokensController.to.state.value.mutePostIds;
     if (muteUids.length > state.value.qDocInfoList.length) {
       final List<String> requestUids =
           (muteUids.length - state.value.qDocInfoList.length) >= whereInLimit
@@ -296,7 +296,7 @@ class DocsController extends GetxController {
   Future<void> unMutePost(Post post) async {
     final repository = FirestoreRepository();
     final postId = post.postId;
-    final deleteToken = TokensController.to.mutePostTokens.firstWhere(
+    final deleteToken = TokensController.to.state.value.mutePostTokens.firstWhere(
       (element) => element.postId == postId,
     );
     TokensController.to.removeMutePost(deleteToken);
@@ -313,7 +313,7 @@ class DocsController extends GetxController {
 
   List<String> createRequestUids() {
     final int userDocsLength = state.value.qDocInfoList.length;
-    final muteUids = TokensController.to.muteUids;
+    final muteUids = TokensController.to.state.value.muteUids;
     if (muteUids.length > state.value.qDocInfoList.length) {
       final List<String> requestUids =
           (muteUids.length - state.value.qDocInfoList.length) >= whereInLimit
@@ -334,7 +334,7 @@ class DocsController extends GetxController {
 
   Future<void> unMuteUser(String passiveUid) async {
     final repository = FirestoreRepository();
-    final deleteToken = TokensController.to.muteUserTokens.firstWhere(
+    final deleteToken = TokensController.to.state.value.muteUserTokens.firstWhere(
       (element) => element.passiveUid == passiveUid,
     );
     TokensController.to.removeMuteUser(deleteToken);
@@ -383,7 +383,7 @@ class DocsController extends GetxController {
       UIHelper.showFlutterToast("自分をフォローすることはできません。");
       return;
     }
-    if (TokensController.to.followingUids.length >= followLimit) {
+    if (TokensController.to.state.value.followingUids.length >= followLimit) {
       UIHelper.showFlutterToast("フォローできるのは$followLimit人までです。");
       return;
     }
@@ -432,7 +432,7 @@ class DocsController extends GetxController {
       followerCount: state.value.passiveUser!.followerCount + minusOne,
     );
     state.value = state.value.copyWith(passiveUser: newUser);
-    final deleteToken = TokensController.to.followingTokens.firstWhere(
+    final deleteToken = TokensController.to.state.value.followingTokens.firstWhere(
       (element) => element.passiveUid == passiveUid(),
     );
     TokensController.to.removeFollowing(deleteToken);

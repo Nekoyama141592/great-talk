@@ -107,7 +107,7 @@ class ProfileScreen extends ConsumerWidget {
                   if (passiveUser == null) {
                     return const SizedBox.shrink();
                   }
-                  final isFollow = TokensController.to.followingUids.contains(
+                  final isFollow = TokensController.to.state.value.followingUids.contains(
                     controller.passiveUid(),
                   );
                   return passiveUser.uid ==

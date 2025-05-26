@@ -433,7 +433,7 @@ class ChatViewModel extends _$ChatViewModel {
       return;
     }
 
-    if (TokensController.to.bookmarkCategoryTokens.isEmpty) {
+    if (TokensController.to.state.value.bookmarkCategoryTokens.isEmpty) {
       Get.toNamed(BookmarkCategoriesPage.path);
 
       UIHelper.showFlutterToast("まずはカテゴリーを作成してみましょう!");

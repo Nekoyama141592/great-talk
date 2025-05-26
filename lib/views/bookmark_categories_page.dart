@@ -27,9 +27,9 @@ class BookmarkCategoriesPage extends HookWidget {
                 SizedBox(
                   height: fullHeight(context) * 0.7,
                   child: ListView.builder(
-                    itemCount: controller.bookmarkCategoryTokens.length,
+                    itemCount: controller.state.value.bookmarkCategoryTokens.length,
                     itemBuilder: (context, index) {
-                      final category = controller.bookmarkCategoryTokens[index];
+                      final category = controller.state.value.bookmarkCategoryTokens[index];
                       return ListTile(
                         onTap:
                             () => Get.toNamed(

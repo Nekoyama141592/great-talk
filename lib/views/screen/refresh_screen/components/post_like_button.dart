@@ -18,7 +18,7 @@ class PostLikeButton extends HookWidget {
   Widget build(BuildContext context) {
     final copyPost = useState(post);
     final isLiked = useState(
-      TokensController.to.likePostIds.contains(post.postId),
+      TokensController.to.state.value.likePostIds.contains(post.postId),
     );
     final children = [
       isLiked.value

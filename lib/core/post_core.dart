@@ -70,7 +70,7 @@ class PostCore {
     Post post,
     String currentUid,
   ) async {
-    if (TokensController.to.mutePostIds.contains(post.postId)) {
+    if (TokensController.to.state.value.mutePostIds.contains(post.postId)) {
       UIHelper.showFlutterToast("すでにこの投稿をミュートしています");
       Navigator.pop(innerContext);
       return;
@@ -110,7 +110,7 @@ class PostCore {
     String currentUid,
   ) async {
     final passiveUid = post.uid;
-    if (TokensController.to.muteUids.contains(passiveUid)) {
+    if (TokensController.to.state.value.muteUids.contains(passiveUid)) {
       UIHelper.showFlutterToast("すでにこのユーザーをミュートしています");
       Navigator.pop(innerContext);
       return;
@@ -212,7 +212,7 @@ class PostCore {
 
   static Future<void> _unLikePost(Post post, String currentUid) async {
     final String passiveUid = post.uid;
-    final deleteToken = TokensController.to.likePostTokens.firstWhere(
+    final deleteToken = TokensController.to.state.value.likePostTokens.firstWhere(
       (element) => element.passiveUid == passiveUid,
     );
     TokensController.to.removeLikePost(deleteToken);
