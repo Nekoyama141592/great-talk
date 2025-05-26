@@ -56,9 +56,6 @@ class CurrentUserController extends GetxController {
   bool isNotLoggedIn() => rxAuthUser.value == null || isAnonymous();
   bool isLoggedIn() => !isNotLoggedIn();
 
-  bool _hasPublicUser() => rxPublicUser.value != null;
-  bool hasNoPublicUser() => !_hasPublicUser();
-
   bool isNotVerified() => !rxAuthUser.value!.emailVerified;
 
   Future<void> onAppleButtonPressed() async {
@@ -276,7 +273,7 @@ class CurrentUserController extends GetxController {
   }
 
   Future<void> _removeImage() async {
-    final publicUser = CurrentUserController.to.rxPublicUser.value;
+    final publicUser = rxPublicUser.value;
     if (publicUser == null) return;
     final fileName = publicUser.typedImage().value;
     final request = DeleteObjectRequest(object: fileName);

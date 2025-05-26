@@ -20,17 +20,5 @@ class FollowButton extends StatelessWidget {
           press: unFollow,
           buttonColor: Colors.grey,
         );
-
-    // return Obx(() => !CurrentUserController.to.followingUids
-    //         .contains(controller.passiveUid())
-    //     ? RoundedButton(
-    //         text: "フォロー",
-    //         textColor: Colors.white,
-    //         press: controller.onFollowPressed)
-    //     : RoundedButton(
-    //         text: "アンフォロー",
-    //         press: controller.onUnFollowPressed,
-    //         buttonColor: Colors.grey,
-    //       ));
   }
 }

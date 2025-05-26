@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/post_core.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/infrastructure/chat_gpt_sdk_client.dart';
@@ -427,9 +427,9 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   void _onBookmarkTextTapped() {
-    if (CurrentUserController.to.hasNoPublicUser()) {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
       UIHelper.showFlutterToast("ログインが必要です");
-
       return;
     }
 
@@ -447,9 +447,9 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   void onBookmarkCategoryTapped(BookmarkCategory category) async {
-    if (CurrentUserController.to.hasNoPublicUser()) {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
       UIHelper.showFlutterToast("ログインが必要です");
-
       return;
     }
 

@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
 
 class FirebaseAuthClient {
@@ -9,18 +8,12 @@ class FirebaseAuthClient {
   }
 
   Future<UserCredential?> signinWithApple() async {
-    if (!CurrentUserController.to.isAnonymous()) {
-      return null;
-    }
     final credential = await CredentialComposer.appleCredential();
     final result = await FirebaseAuth.instance.signInWithCredential(credential);
     return result;
   }
 
   Future<UserCredential?> signInWithGoogle() async {
-    if (!CurrentUserController.to.isAnonymous()) {
-      return null;
-    }
     final credential = await CredentialComposer.googleCredential();
     final result = await FirebaseAuth.instance.signInWithCredential(credential);
     return result;

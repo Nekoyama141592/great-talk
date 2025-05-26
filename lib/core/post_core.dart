@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
@@ -29,14 +28,6 @@ class PostCore {
     Get.toNamed(ChatPage.generatePath(post.uid, post.postId));
   }
 
-  // UIDをコピーする関数.
-  static Future<void> onPostCardLongPressed(Post post) async {
-    if (!CurrentUserController.to.isAdmin()) return;
-    final text = "UID\n${post.uid}\n投稿の画像${post.typedImage().value}";
-    final data = ClipboardData(text: text);
-    await Clipboard.setData(data);
-    UIHelper.showFlutterToast("三つの情報をコピーしました");
-  }
 
   static void onReportButtonPressed(
     BuildContext context,
@@ -48,7 +39,7 @@ class PostCore {
       UIHelper.showFlutterToast("自分の投稿を報告したり、ミュートしたりすることはできません。");
       return;
     }
-    if (CurrentUserController.to.hasNoPublicUser()) {
+    if (FirebaseAuth.instance.currentUser == null) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
@@ -139,7 +130,7 @@ class PostCore {
     final tokenRef = DocRefCore.token(currentUid, tokenId);
     await _firestoreRepository.createDoc(tokenRef, muteUserToken.toJson());
     final UserMute userMute = UserMute(
-      activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
+      activeUserRef: DocRefCore.user(currentUid),
       activeUid: currentUid,
       createdAt: now,
       passiveUid: passiveUid,
@@ -157,12 +148,13 @@ class PostCore {
     ValueNotifier<Post> copyPost,
     ValueNotifier<bool> isLiked,
     Post post,
-    String currentUid,
   ) async {
-    if (CurrentUserController.to.hasNoPublicUser()) {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
+    final currentUid = currentUser.uid;
     copyPost.value = copyPost.value.copyWith(
       likeCount: copyPost.value.likeCount + 1,
     );
@@ -204,12 +196,13 @@ class PostCore {
     ValueNotifier<Post> copyPost,
     ValueNotifier<bool> isLiked,
     Post post,
-    String currentUid,
   ) async {
-    if (CurrentUserController.to.hasNoPublicUser()) {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
       UIHelper.showFlutterToast("ログインが必要です");
       return;
     }
+    final currentUid = currentUser.uid;
     copyPost.value = copyPost.value.copyWith(
       likeCount: copyPost.value.likeCount - 1,
     );

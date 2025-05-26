@@ -29,7 +29,6 @@ class PostLikeButton extends HookWidget {
                   copyPost,
                   isLiked,
                   post,
-                  currentUid,
                 ),
           )
           : InkWell(
@@ -39,7 +38,6 @@ class PostLikeButton extends HookWidget {
                   copyPost,
                   isLiked,
                   post,
-                  currentUid,
                 ),
           ),
       Padding(

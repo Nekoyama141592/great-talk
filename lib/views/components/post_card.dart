@@ -25,7 +25,6 @@ class PostCard extends ConsumerWidget {
     final publicUser = qDocInfo.publicUser;
     // 不適切なら弾く
     return InkWell(
-      onLongPress: () => PostCore.onPostCardLongPressed(post),
       child: Padding(
         padding: EdgeInsets.all(defaultPadding(context)),
         child: Obx(() {
