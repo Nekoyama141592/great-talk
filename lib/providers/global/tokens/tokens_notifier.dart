@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:great_talk/consts/enums.dart';
@@ -202,19 +203,19 @@ class TokensNotifier extends _$TokensNotifier {
     );
   }
 
-  void onBookmarkCategoryDeleteButtonPressed(BuildContext context, BookmarkCategory token) {
+  void onBookmarkCategoryDeleteButtonPressed(BookmarkCategory token) {
     UIHelper.cupertinoAlertDialog(
       "このカテゴリーを削除しますが、よろしいですか？",
-      () => _deleteBookmarkCategory(context, token),
+      () => _deleteBookmarkCategory(token),
     );
   }
 
-  Future<void> _deleteBookmarkCategory(BuildContext context, BookmarkCategory token) async {
+  Future<void> _deleteBookmarkCategory(BookmarkCategory token) async {
     final repository = FirestoreRepository();
     final result = await repository.deleteDoc(token.ref);
     result.when(
       success: (_) {
-        Navigator.of(context).pop(); // Get.back()の代替
+        Get.back();
         removeBookmarkCategory(token);
         UIHelper.showFlutterToast("カテゴリーを削除できました。");
       },
