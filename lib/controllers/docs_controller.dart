@@ -36,6 +36,10 @@ class DocsController extends GetxController with CurrentUserMixin {
     await onReload();
     super.onInit();
   }
+  @override
+  void onClose() {
+    state.value = DocsState();
+  }
 
   // Query
   String passiveUid() => Get.parameters['uid']!;
