@@ -26,10 +26,9 @@ class BookmarkCategoriesListView extends StatelessWidget {
                     child: Obx(
                   () => ListView.builder(
                     itemCount:
-                        CurrentUserController.to.bookmarkCategoryTokens.length,
+                        TokensController.to.bookmarkCategoryTokens.length,
                     itemBuilder: (context, index) {
-                      final token = CurrentUserController
-                          .to.bookmarkCategoryTokens[index];
+                      final token = TokensController.to.bookmarkCategoryTokens[index];
                       return InkWell(
                           onTap: () => onBookmarkCategoryTapped(token),
                           child: ListTile(

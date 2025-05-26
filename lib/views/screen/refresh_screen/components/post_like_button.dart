@@ -18,7 +18,7 @@ class PostLikeButton extends HookWidget {
     final controller = PostsController.to;
     final copyPost = useState(post);
     final isLiked =
-        useState(CurrentUserController.to.likePostIds.contains(post.postId));
+        useState(TokensController.to.likePostIds.contains(post.postId));
     final children = [
       isLiked.value
           ? InkWell(

@@ -32,7 +32,7 @@ class MosaicPostChild extends ConsumerWidget {
         const BasicHeightBox(),
         Obx(() => (post.uid == ref.watch(streamAuthUidProvider).value ||
                     CurrentUserController.to.isAdmin()) &&
-                !CurrentUserController.to.deletePostIds.contains(post.postId)
+                !TokensController.to.deletePostIds.contains(post.postId)
             ? InkWell(
                 onTap: () => PostsController.to.deletePost(post),
                 child: const Icon(

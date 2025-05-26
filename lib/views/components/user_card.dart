@@ -36,7 +36,7 @@ class UserCard extends ConsumerWidget {
                   title: "不適切なユーザー",
                 )))
             : Obx(
-                () => CurrentUserController.to.isMutingUser(publicUser.uid)
+                () => TokensController.to.isMutingUser(publicUser.uid)
                     ? MosaicCard(
                         child: MosaicUserChild(
                             publicUser: publicUser,

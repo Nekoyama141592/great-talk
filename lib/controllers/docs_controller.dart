@@ -58,7 +58,7 @@ class DocsController extends GetxController {
   MapQuery setQuery() {
     switch (type) {
       case DocsType.bookmarks:
-        final token = CurrentUserController.to.bookmarkCategoryTokens
+        final token = TokensController.to.bookmarkCategoryTokens
             .firstWhere((element) => element.id == Get.parameters["categoryId"]);
         return QueryCore.bookmarks(token);
       case DocsType.feeds:
@@ -243,7 +243,7 @@ class DocsController extends GetxController {
 
   List<String> createRequestPostIds() {
     final int userDocsLength = state.value.qDocInfoList.length;
-    final muteUids = CurrentUserController.to.mutePostIds;
+    final muteUids = TokensController.to.mutePostIds;
     if (muteUids.length > state.value.qDocInfoList.length) {
       final List<String> requestUids =
           (muteUids.length - state.value.qDocInfoList.length) >= whereInLimit
@@ -263,9 +263,9 @@ class DocsController extends GetxController {
   Future<void> unMutePost(Post post) async {
     final repository = FirestoreRepository();
     final postId = post.postId;
-    final deleteToken = CurrentUserController.to.mutePostTokens
+    final deleteToken = TokensController.to.mutePostTokens
         .firstWhere((element) => element.postId == postId);
-    CurrentUserController.to.removeMutePost(deleteToken);
+    TokensController.to.removeMutePost(deleteToken);
     state.value.qDocInfoList.removeWhere(
         (element) => Post.fromJson(element.qDoc.data()).postId == postId);
     final tokenId = deleteToken.tokenId;
@@ -278,7 +278,7 @@ class DocsController extends GetxController {
 
   List<String> createRequestUids() {
     final int userDocsLength = state.value.qDocInfoList.length;
-    final muteUids = CurrentUserController.to.muteUids;
+    final muteUids = TokensController.to.muteUids;
     if (muteUids.length > state.value.qDocInfoList.length) {
       final List<String> requestUids =
           (muteUids.length - state.value.qDocInfoList.length) >= whereInLimit
@@ -297,9 +297,9 @@ class DocsController extends GetxController {
 
   Future<void> unMuteUser(String passiveUid) async {
     final repository = FirestoreRepository();
-    final deleteToken = CurrentUserController.to.muteUserTokens
+    final deleteToken = TokensController.to.muteUserTokens
         .firstWhere((element) => element.passiveUid == passiveUid);
-    CurrentUserController.to.removeMuteUser(deleteToken);
+    TokensController.to.removeMuteUser(deleteToken);
     state.value.qDocInfoList.removeWhere((element) =>
         PublicUser.fromJson(element.qDoc.data()).uid == passiveUid);
     final tokenId = deleteToken.tokenId;
@@ -339,7 +339,7 @@ class DocsController extends GetxController {
       UIHelper.showFlutterToast("ログインが必要です。");
       return;
     }
-    if (CurrentUserController.to.followingUids.length >= followLimit) {
+    if (TokensController.to.followingUids.length >= followLimit) {
       UIHelper.showFlutterToast("フォローできるのは$followLimit人までです。");
       return;
     }
@@ -359,7 +359,7 @@ class DocsController extends GetxController {
         tokenId: tokenId,
         passiveUserRef: state.value.passiveUser!.ref,
         tokenType: TokenType.following.name);
-    CurrentUserController.to.addFollowing(followingToken);
+    TokensController.to.addFollowing(followingToken);
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.createDoc(tokenRef, followingToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
@@ -387,9 +387,9 @@ class DocsController extends GetxController {
     final newUser = state.value.passiveUser!.copyWith(
         followerCount: state.value.passiveUser!.followerCount + minusOne);
     state.value = state.value.copyWith(passiveUser: newUser);
-    final deleteToken = CurrentUserController.to.followingTokens
+    final deleteToken = TokensController.to.followingTokens
         .firstWhere((element) => element.passiveUid == passiveUid());
-    CurrentUserController.to.removeFollowing(deleteToken);
+    TokensController.to.removeFollowing(deleteToken);
     final tokenRef = DocRefCore.token(currentUid(), deleteToken.tokenId);
     await repository.deleteDoc(tokenRef);
     final followerRef = DocRefCore.follower(currentUid(), passiveUid());

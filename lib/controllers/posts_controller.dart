@@ -112,7 +112,7 @@ class PostsController extends GetxController {
       return;
     }
     final post = rxPost.value!;
-    if (CurrentUserController.to.mutePostIds.contains(post.postId)) {
+    if (TokensController.to.mutePostIds.contains(post.postId)) {
       UIHelper.showFlutterToast("すでにこの投稿をミュートしています");
       Navigator.pop(innerContext);
       return;
@@ -128,7 +128,7 @@ class PostsController extends GetxController {
         postRef: postRef,
         tokenId: tokenId,
         tokenType: TokenType.mutePost.name);
-    CurrentUserController.to.addMutePost(mutePostToken);
+    TokensController.to.addMutePost(mutePostToken);
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.createDoc(tokenRef, mutePostToken.toJson());
     final PostMute postMute = PostMute(
@@ -148,7 +148,7 @@ class PostsController extends GetxController {
     final post = rxPost.value;
     if (post == null) return;
     final passiveUid = post.uid;
-    if (CurrentUserController.to.muteUids.contains(passiveUid)) {
+    if (TokensController.to.muteUids.contains(passiveUid)) {
       UIHelper.showFlutterToast("すでにこのユーザーをミュートしています");
       Navigator.pop(innerContext);
       return;
@@ -163,7 +163,7 @@ class PostsController extends GetxController {
         passiveUserRef: passiveUserRef,
         tokenId: tokenId,
         tokenType: TokenType.muteUser.name);
-    CurrentUserController.to.addMuteUser(muteUserToken);
+    TokensController.to.addMuteUser(muteUserToken);
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.createDoc(tokenRef, muteUserToken.toJson());
     final UserMute userMute = UserMute(
@@ -202,7 +202,7 @@ class PostsController extends GetxController {
         postRef: postRef,
         tokenId: tokenId,
         tokenType: TokenType.reportPost.name);
-    CurrentUserController.to.addReportPost(reportPostToken);
+    TokensController.to.addReportPost(reportPostToken);
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.createDoc(tokenRef, reportPostToken.toJson());
     final PostReport postReport = PostReport(
@@ -249,7 +249,7 @@ class PostsController extends GetxController {
         postId: postId,
         tokenId: tokenId,
         tokenType: TokenType.likePost.name);
-    CurrentUserController.to.addLikePost(likePostToken);
+    TokensController.to.addLikePost(likePostToken);
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.createDoc(tokenRef, likePostToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
@@ -277,9 +277,9 @@ class PostsController extends GetxController {
 
   Future<void> _unLikePost(Post post) async {
     final String passiveUid = post.uid;
-    final deleteToken = CurrentUserController.to.likePostTokens
+    final deleteToken = TokensController.to.likePostTokens
         .firstWhere((element) => element.passiveUid == passiveUid);
-    CurrentUserController.to.removeLikePost(deleteToken);
+    TokensController.to.removeLikePost(deleteToken);
     final tokenId = deleteToken.tokenId;
     final tokenRef = DocRefCore.token(currentUid(), tokenId);
     await repository.deleteDoc(tokenRef);
@@ -295,7 +295,7 @@ class PostsController extends GetxController {
       final repository = FirestoreRepository();
       final result = await repository.deleteDoc(deletePost.ref);
       await result.when(success: (_) async {
-        CurrentUserController.to.addDeletePostId(deletePost.postId);
+        TokensController.to.addDeletePostId(deletePost.postId);
         await _removePostImage(deletePost.typedImage());
         Get.back();
         UIHelper.showErrorFlutterToast("投稿を削除しました。");

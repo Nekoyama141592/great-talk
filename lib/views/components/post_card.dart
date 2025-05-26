@@ -30,15 +30,15 @@ class PostCard extends ConsumerWidget {
       child: Padding(
           padding: EdgeInsets.all(defaultPadding(context)),
           child: Obx(() {
-            if (CurrentUserController.to.isDeletedPost(post.postId)) {
+            if (TokensController.to.isDeletedPost(post.postId)) {
               return MosaicCard(
                   child: MosaicPostChild(
                       msg: "この投稿はあなたによって削除されました。",
                       post: post,
                       title: "削除された投稿"));
             }
-            if (CurrentUserController.to.isMutingPost(post.postId) ||
-                CurrentUserController.to.isMutingUser(post.uid)) {
+            if (TokensController.to.isMutingPost(post.postId) ||
+                TokensController.to.isMutingUser(post.uid)) {
               return MosaicCard(
                   child: MosaicPostChild(
                       msg: "あなたはこの投稿、もしくはその投稿者をミュートしています。",

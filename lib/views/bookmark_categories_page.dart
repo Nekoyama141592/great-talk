@@ -13,7 +13,7 @@ class BookmarkCategoriesPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final inputController = useTextEditingController();
-    final controller = CurrentUserController.to;
+    final controller = TokensController.to;
     return BasicPage(
         appBarText: "ブックマークカテゴリー",
         child: GestureDetector(
