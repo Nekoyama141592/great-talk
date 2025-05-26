@@ -43,7 +43,7 @@ class CurrentUserController extends GetxController {
     if (authUser != null) {
       rxAuthUser.value = AuthUser.fromFirebaseAuthUser(authUser);
     }
-    await _manageUserInfo();
+    await _fetchData();
     super.onInit();
   }
 
@@ -89,7 +89,7 @@ class CurrentUserController extends GetxController {
     UIHelper.showFlutterToast("ログインに成功しました");
     await user.reload();
     setAuthUser(user);
-    await _manageUserInfo();
+    await _fetchData();
   }
 
   Future<void> _createPublicUser() async {
@@ -125,7 +125,7 @@ class CurrentUserController extends GetxController {
     );
   }
 
-  Future<void> _manageUserInfo() async {
+  Future<void> _fetchData() async {
     if (rxAuthUser.value == null) {
       await _createAnonymousUser();
       return;
