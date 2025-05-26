@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/controllers/docs_controller.dart';
@@ -15,7 +14,6 @@ import 'package:great_talk/utility/file_utility.dart';
 
 class UserProfileController extends DocsController {
   UserProfileController() : super(DocsType.userProfiles);
-  static UserProfileController get to => Get.find<UserProfileController>();
   @override
   Future<void> init() async {
     await _getPassiveUser();
