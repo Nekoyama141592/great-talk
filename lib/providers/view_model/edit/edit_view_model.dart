@@ -2,13 +2,14 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/route_manager.dart';
+import 'package:great_talk/model/global/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/core/maps.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/controllers/current_user_controller.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
@@ -24,12 +25,13 @@ part 'edit_view_model.g.dart';
 
 @riverpod
 class EditViewModel extends _$EditViewModel {
+  CurrentUserState? _currentUserState() => ref.read(currentUserNotifierProvider).value;
   @override
   FutureOr<EditState> build() {
-    final user = CurrentUserController.to.state.value.publicUser;
+    final user = _currentUserState()?.publicUser;
     final bio = user?.bioValue ?? "";
     final userName = user?.nameValue ?? "";
-    final  base64 = CurrentUserController.to.state.value.base64;
+    final  base64 = _currentUserState()?.base64;
     return EditState(
       bio: bio,
       userName: userName,
@@ -57,7 +59,7 @@ class EditViewModel extends _$EditViewModel {
 
   /// 初期化
   void init() {
-    final base64 = CurrentUserController.to.state.value.base64;
+    final base64 = _currentUserState()?.base64;
     if (state.value?.base64 != null &&
         base64 != null) {
       state = AsyncData(state.value!.copyWith(base64: base64));
@@ -97,7 +99,7 @@ class EditViewModel extends _$EditViewModel {
     }
     if (state.isLoading) return; // 二重リクエスト防止
     state = const AsyncLoading();
-    final publicUser = CurrentUserController.to.state.value.publicUser;
+    final publicUser = _currentUserState()?.publicUser;
     if (publicUser == null) {
       state = AsyncData(s);
       return;
@@ -142,14 +144,14 @@ class EditViewModel extends _$EditViewModel {
       stringUserName: userName.trim(),
       uid: uid,
       image: DetectedImage(value: fileName).toJson(),
-      userRef: CurrentUserController.to.state.value.publicUser!.ref,
+      userRef: DocRefCore.user(uid),
     );
     final docRef = DocRefCore.userUpdateLog(uid);
     final json = newUpdateLog.toJson();
     final result = await repository.createDoc(docRef, json);
     result.when(
       success: (_) {
-        CurrentUserController.to.updateUser(userName, bio, fileName);
+        ref.read(currentUserNotifierProvider.notifier).updateUser(userName, bio, fileName);
         Get.back();
         Get.back();
         UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");

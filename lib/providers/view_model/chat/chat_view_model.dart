@@ -17,13 +17,13 @@ import 'package:great_talk/model/database_schema/bookmark_category/bookmark_cate
 import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/overrides/prefs_provider.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/views/bookmark_categories_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:great_talk/controllers/tokens_controller.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
@@ -433,7 +433,7 @@ class ChatViewModel extends _$ChatViewModel {
       return;
     }
 
-    if (TokensController.to.state.value.bookmarkCategoryTokens.isEmpty) {
+    if (ref.read(tokensNotifierProvider).value?.bookmarkCategoryTokens.isEmpty ?? true) {
       Get.toNamed(BookmarkCategoriesPage.path);
 
       UIHelper.showFlutterToast("まずはカテゴリーを作成してみましょう!");
