@@ -87,30 +87,30 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
 
   bool isNotVerified() => !(state.value?.authUser?.emailVerified ?? false);
 
-  Future<void> onAppleButtonPressed(BuildContext context) async {
+  Future<void> onAppleButtonPressed() async {
     final repository = ref.read(firebaseAuthRepositoryProvider); // RiverpodでRepositoryを取得
     final result = await repository.signInWithApple();
     await result.when(
-      success: (user) => onLoginSuccess(user, context),
+      success: (user) => onLoginSuccess(user),
       failure: (e) {
         UIHelper.showErrorFlutterToast("Apple ログインに失敗しました: ${e.toString()}");
       },
     );
   }
 
-  Future<void> onGoogleButtonPressed(BuildContext context) async {
+  Future<void> onGoogleButtonPressed() async {
     final repository = ref.read(firebaseAuthRepositoryProvider); // RiverpodでRepositoryを取得
     final result = await repository.signInWithGoogle();
     await result.when(
-      success: (user) => onLoginSuccess(user, context),
+      success: (user) => onLoginSuccess(user),
       failure: (e) {
         UIHelper.showErrorFlutterToast("Google ログインに失敗しました: ${e.toString()}");
       },
     );
   }
 
-  Future<void> onLoginSuccess(User user, BuildContext context) async {
-    Navigator.of(context).pop(); // Get.back() の代わりに Navigator を使用
+  Future<void> onLoginSuccess(User user) async {
+    Get.back();
     UIHelper.showFlutterToast("ログインに成功しました");
     await user.reload();
     setAuthUser(user);
