@@ -27,12 +27,15 @@ class CurrentUserController extends GetxController {
   void onInit() async {
     final authUser = FirebaseAuth.instance.currentUser;
     if (authUser != null) {
-      // stateを更新
-      state.value =
-          state.value.copyWith(authUser: AuthUser.fromFirebaseAuthUser(authUser));
+      _updateState(
+          state.value.copyWith(authUser: AuthUser.fromFirebaseAuthUser(authUser)));
     }
     await _fetchData();
     super.onInit();
+  }
+
+  void _updateState(CurrentUserState newState) {
+    state.value = newState;
   }
 
   Future<void> _createAnonymousUser() async {
@@ -42,14 +45,10 @@ class CurrentUserController extends GetxController {
   }
 
   void setAuthUser(User user) {
-    // stateを更新
-    state.value =
-        state.value.copyWith(authUser: AuthUser.fromFirebaseAuthUser(user));
+    _updateState(
+        state.value.copyWith(authUser: AuthUser.fromFirebaseAuthUser(user)));
   }
 
-  void _updateState(CurrentUserState newState) {
-    state.value = newState;
-  }
   // stateから値を取得
   String currentUid() => state.value.authUser?.uid ?? '';
 
@@ -91,8 +90,7 @@ class CurrentUserController extends GetxController {
     final result = await repository.createDoc(ref, json);
     result.when(
       success: (_) {
-        // stateを更新
-        state.value = state.value.copyWith(publicUser: newUser);
+        _updateState(state.value.copyWith(publicUser: newUser));
         UIHelper.showFlutterToast("ユーザーが作成されました");
       },
       failure: (e) {
@@ -109,8 +107,7 @@ class CurrentUserController extends GetxController {
     final result = await repository.createDoc(ref, json);
     result.when(
       success: (_) {
-        // stateを更新
-        state.value = state.value.copyWith(privateUser: newPrivateUser);
+        _updateState(state.value.copyWith(privateUser: newPrivateUser));
       },
       failure: (e) {
         UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした");
@@ -148,8 +145,7 @@ class CurrentUserController extends GetxController {
               newBase64 = base64Encode(image);
             }
           }
-          // publicUserとbase64を同時に更新
-          state.value = state.value.copyWith(publicUser: user, base64: newBase64);
+          _updateState(state.value.copyWith(publicUser: user, base64: newBase64));
         } else {
           await _createPublicUser();
         }
@@ -168,8 +164,8 @@ class CurrentUserController extends GetxController {
       success: (res) async {
         final data = res.data();
         if (res.exists && data != null) {
-          // stateを更新
-          state.value = state.value.copyWith(privateUser: PrivateUser.fromJson(data));
+          _updateState(
+              state.value.copyWith(privateUser: PrivateUser.fromJson(data)));
         } else {
           await _createPrivateUser();
         }
@@ -186,7 +182,6 @@ class CurrentUserController extends GetxController {
       case CurrentAuthState.isAnonymous:
         return "匿名ログイン中";
       case CurrentAuthState.loggedIn:
-        return "ログイン中";
       case CurrentAuthState.notLoggedIn:
         return "ログイン中";
     }
@@ -306,7 +301,7 @@ class CurrentUserController extends GetxController {
     if (image != null) {
       newBase64 = base64Encode(image);
     }
-    // publicUserとbase64を同時に更新
-    state.value = state.value.copyWith(publicUser: updatedUser, base64: newBase64);
+
+    _updateState(state.value.copyWith(publicUser: updatedUser, base64: newBase64));
   }
 }
