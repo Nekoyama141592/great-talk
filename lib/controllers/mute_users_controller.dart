@@ -12,8 +12,7 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MuteUsersController extends DocsController {
-  @override
-  DocsType get type => DocsType.muteUsers;
+  MuteUsersController() : super(DocsType.muteUsers);
   @override
   MapQuery setQuery() {
     final requestUids = _createRequestUids();

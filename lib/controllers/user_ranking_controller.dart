@@ -3,6 +3,5 @@ import 'package:great_talk/controllers/docs_controller.dart';
 
 
 class UserRankingController extends DocsController {
-  @override
-  DocsType get type => DocsType.rankingUsers;
+  UserRankingController() : super(DocsType.rankingUsers);
 }

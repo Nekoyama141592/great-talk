@@ -14,9 +14,8 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/file_utility.dart';
 
 class UserProfileController extends DocsController {
+  UserProfileController() : super(DocsType.userProfiles);
   static UserProfileController get to => Get.find<UserProfileController>();
-  @override
-  DocsType get type => DocsType.userProfiles;
   @override
   Future<void> init() async {
     await _getPassiveUser();

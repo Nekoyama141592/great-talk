@@ -12,9 +12,8 @@ import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MutePostsController extends DocsController {
+  MutePostsController() : super(DocsType.mutePosts);
   static MutePostsController get to => Get.find<MutePostsController>();
-  @override
-  DocsType get type => DocsType.mutePosts;
   @override
   MapQuery setQuery() {
     final requestPostIds = _createRequestPostIds();

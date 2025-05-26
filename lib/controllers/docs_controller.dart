@@ -16,6 +16,8 @@ import 'package:great_talk/utility/file_utility.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class DocsController extends GetxController with CurrentUserMixin {
+  DocsController(this.type);
+  final DocsType type;
   bool cannotShow() => isLoading.value;
   void startLoading() => isLoading(true);
   void endLoading() => isLoading(false);
@@ -31,7 +33,6 @@ class DocsController extends GetxController with CurrentUserMixin {
     await onReload();
     super.onInit();
   }
-  DocsType get type => DocsType.rankingPosts;
 
   // Query
   String passiveUid() => Get.parameters['uid']!;
