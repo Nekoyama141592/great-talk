@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:great_talk/controllers/post_ranking_controller.dart';
+import 'package:great_talk/consts/enums.dart';
+import 'package:great_talk/controllers/docs_controller.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 
 class PostRankingScreen extends StatelessWidget {
   const PostRankingScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(PostRankingController());
+    final controller = Get.put(DocsController(DocsType.rankingPosts));
     return RefreshScreen(docsController: controller);
   }
 }

@@ -1,6 +1,0 @@
-import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/controllers/docs_controller.dart';
-
-class BookmarksController extends DocsController {
-  BookmarksController() : super(DocsType.bookmarks);
-}
