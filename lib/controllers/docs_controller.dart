@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
@@ -375,15 +376,12 @@ class DocsController extends GetxController {
   }
 
   void onFollowPressed() async {
-    if (state.value.passiveUser == null) {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null ||state.value.passiveUser == null) {
       return;
     }
-    if (state.value.passiveUser!.uid == currentUid()) {
+    if (state.value.passiveUser?.uid == currentUser.uid) {
       UIHelper.showFlutterToast("自分をフォローすることはできません。");
-      return;
-    }
-    if (CurrentUserController.to.hasNoPublicUser()) {
-      UIHelper.showFlutterToast("ログインが必要です。");
       return;
     }
     if (TokensController.to.followingUids.length >= followLimit) {
@@ -413,7 +411,7 @@ class DocsController extends GetxController {
     await repository.createDoc(tokenRef, followingToken.toJson());
     // 受動的なユーザーがフォローされたdataを生成する
     final follower = Follower(
-      activeUserRef: CurrentUserController.to.rxPublicUser.value!.typedRef(),
+      activeUserRef: DocRefCore.user(currentUid()),
       createdAt: now,
       passiveUserRef: state.value.passiveUser!.typedRef(),
     );
