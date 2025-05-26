@@ -294,7 +294,6 @@ class PurchasesController extends GetxController {
   GooglePlayPurchaseDetails? _getOldSubscription(
       ProductDetails productDetails) {
     GooglePlayPurchaseDetails? oldSubscription;
-    final purchases = PurchasesController.to.purchases;
     if (purchases.isNotEmpty && purchases.last.productID != productDetails.id) {
       oldSubscription = purchases.last as GooglePlayPurchaseDetails;
     }
