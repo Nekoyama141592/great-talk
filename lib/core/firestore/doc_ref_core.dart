@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/core/firestore/col_ref_core.dart';
-import 'package:great_talk/model/database_schema/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class DocRefCore {
@@ -28,16 +27,12 @@ class DocRefCore {
       ColRefCore.posts(uid).doc(postId);
   static DocRef userUpdateLog(String uid) =>
       user(uid).collection('userUpdateLogs').doc();
-  static DocRef bookmark(BookmarkCategory category, String postId) =>
-      ColRefCore.bookmarks(category).doc(postId);
   static DocRef postMute(DocRef postRef, String currentUid) =>
       postRef.collection('postMutes').doc(currentUid);
   static DocRef userMute(String uid, String currentUid) =>
       user(uid).collection('userMutes').doc(currentUid);
   static DocRef token(String currentUid, String tokenId) =>
       ColRefCore.tokens(currentUid).doc(tokenId);
-  static DocRef bookmarkCategory(String uid, String categoryId) =>
-      ColRefCore.bookmarkCategories(uid).doc(categoryId);
   static DocRef message(
     String posterUid,
     String postId,

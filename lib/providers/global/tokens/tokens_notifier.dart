@@ -1,17 +1,12 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/firestore/col_ref_core.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
-import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/bookmark_category/bookmark_category.dart';
-import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
@@ -39,11 +34,8 @@ class TokensNotifier extends _$TokensNotifier {
     final res = await repository.getDocsOrNull(tokensColRef);
     final allTokensData = res?.map((doc) => doc.data()).toList() ?? [];
 
-    // 並行してブックマークカテゴリを取得
-    final categories = await _fetchBookmarkCategories(uid, repository);
 
     return TokensState(
-      bookmarkCategoryTokens: categories,
       followingTokens:
           allTokensData
               .where((map) => map['tokenType'] == TokenType.following.name)
@@ -71,19 +63,6 @@ class TokensNotifier extends _$TokensNotifier {
               .toList(),
     );
   }
-
-  Future<List<BookmarkCategory>> _fetchBookmarkCategories(
-    String uid,
-    FirestoreRepository repository,
-  ) async {
-    final colRef = ColRefCore.bookmarkCategories(uid);
-    final res = await repository.getDocsOrNull(colRef);
-    if (res == null) return [];
-    final categories =
-        res.map((e) => BookmarkCategory.fromJson(e.data())).toList();
-    return categories;
-  }
-
   // 状態を安全に更新するためのヘルパー
   void _updateState(TokensState newState) {
     state = AsyncValue.data(newState);
@@ -189,37 +168,6 @@ class TokensNotifier extends _$TokensNotifier {
     _updateState(newState);
   }
 
-  Future<void> createBookmarkCategory(
-    BuildContext context,
-    TextEditingController inputController,
-  ) async {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid == null) return;
-    final now = Timestamp.now();
-    final categoryId = randomString();
-    final ref = DocRefCore.bookmarkCategory(uid, categoryId);
-    final repository = FirestoreRepository();
-    final newCategory = BookmarkCategory(
-      createdAt: now,
-      id: categoryId,
-      title: inputController.text,
-      image: const DetectedImage().toJson(),
-      ref: ref,
-      updatedAt: now,
-    );
-    final result = await repository.createDoc(ref, newCategory.toJson());
-    result.when(
-      success: (res) {
-        FocusScope.of(context).unfocus();
-        inputController.text = "";
-        addBookmarkCategory(newCategory);
-        UIHelper.showFlutterToast("カテゴリーを作成できました。");
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("カテゴリーを作成できませんでした。");
-      },
-    );
-  }
 
   void onBookmarkCategoryDeleteButtonPressed(BookmarkCategory token) {
     UIHelper.cupertinoAlertDialog(

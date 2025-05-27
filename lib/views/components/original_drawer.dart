@@ -11,7 +11,6 @@ import 'package:great_talk/utility/style_utility.dart';
 import 'package:great_talk/views/accounts_page.dart';
 import 'package:great_talk/views/admin_page.dart';
 import 'package:great_talk/views/auth/login_page.dart';
-import 'package:great_talk/views/bookmark_categories_page.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
@@ -103,10 +102,6 @@ class OriginalDrawer extends ConsumerWidget {
           ListTile(
             title: const Text("ミュートしている投稿"),
             onTap: () => Get.toNamed(MutePostsPage.path),
-          ),
-          ListTile(
-            title: const Text("ブックマーク"),
-            onTap: () => Get.toNamed(BookmarkCategoriesPage.path),
           ),
           ListTile(
             title: const Text("テーマ切り替え"),

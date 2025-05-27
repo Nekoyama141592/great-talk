@@ -13,8 +13,6 @@ part 'tokens_state.g.dart';
 abstract class TokensState with _$TokensState {
   const TokensState._();
   const factory TokensState({
-    @Default(<BookmarkCategory>[])
-    List<BookmarkCategory> bookmarkCategoryTokens,
     @Default(<FollowingToken>[]) List<FollowingToken> followingTokens,
     @Default(<LikePostToken>[]) List<LikePostToken> likePostTokens,
     @Default(<MutePostToken>[]) List<MutePostToken> mutePostTokens,

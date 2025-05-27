@@ -33,7 +33,7 @@ class DocsViewModel extends _$DocsViewModel {
 
   @override
   FutureOr<DocsState> build(DocsType type,{String? passiveUid}) async {
-    final isTimeline = type == DocsType.bookmarks || type == DocsType.feeds;
+    final isTimeline = type == DocsType.feeds;
     var initialState = DocsState(isTimeline: isTimeline);
 
     if (type == DocsType.userProfiles) {
@@ -63,11 +63,6 @@ class DocsViewModel extends _$DocsViewModel {
   // Query
   MapQuery _setQuery() {
     switch (type) {
-      case DocsType.bookmarks:
-        final token = _tokensState().bookmarkCategoryTokens.firstWhere(
-          (element) => element.id == Get.parameters["categoryId"],
-        );
-        return QueryCore.bookmarks(token);
       case DocsType.feeds:
         return QueryCore.timelines(DocRefCore.user(_currentUid()));
       case DocsType.mutePosts:
@@ -79,7 +74,7 @@ class DocsViewModel extends _$DocsViewModel {
       case DocsType.rankingPosts:
         return QueryCore.postsByMsgCount();
       case DocsType.userProfiles:
-        return QueryCore.userPostsByNewest(_uid!);
+        return QueryCore.userPostsByNewest(passiveUid!);
       case DocsType.rankingUsers:
         return QueryCore.usersByFollowerCount();
     }

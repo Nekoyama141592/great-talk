@@ -3,25 +3,17 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/instance_manager.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/infrastructure/chat_gpt_sdk_client.dart';
-import 'package:great_talk/model/database_schema/bookmark/bookmark.dart';
-import 'package:great_talk/model/database_schema/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
-import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/logic/post_logic.dart';
 import 'package:great_talk/providers/overrides/prefs_provider.dart';
-import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/utility/file_utility.dart';
-import 'package:great_talk/views/bookmark_categories_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
@@ -33,7 +25,6 @@ import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/views/chat/components/bookmark_categories_list_view.dart';
 part 'chat_view_model.g.dart';
 
 @riverpod
@@ -401,14 +392,6 @@ class ChatViewModel extends _$ChatViewModel {
               child: const Text("情報を見る"),
             ),
             CupertinoActionSheetAction(
-              onPressed: () {
-                Navigator.pop(innerContext);
-
-                _onBookmarkTextTapped();
-              },
-              child: const Text("ブックマークに追加/削除"),
-            ),
-            CupertinoActionSheetAction(
               onPressed: () => Navigator.pop(innerContext),
               child: const Text("戻る"),
             ),
@@ -426,115 +409,6 @@ class ChatViewModel extends _$ChatViewModel {
     ref.read(postLogicProvider.notifier).deletePost(deletePost);
   }
 
-  void _onBookmarkTextTapped() {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser == null) {
-      UIHelper.showFlutterToast("ログインが必要です");
-      return;
-    }
-
-    if (ref
-            .read(tokensNotifierProvider)
-            .value
-            ?.bookmarkCategoryTokens
-            .isEmpty ??
-        true) {
-      Get.toNamed(BookmarkCategoriesPage.path);
-
-      UIHelper.showFlutterToast("まずはカテゴリーを作成してみましょう!");
-    } else {
-      Get.dialog(
-        BookmarkCategoriesListView(
-          onBookmarkCategoryTapped: onBookmarkCategoryTapped,
-        ),
-      );
-    }
-  }
-
-  void onBookmarkCategoryTapped(BookmarkCategory category) async {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser == null) {
-      UIHelper.showFlutterToast("ログインが必要です");
-      return;
-    }
-
-    final bookmarkRef = DocRefCore.bookmark(category, postId);
-
-    final repository = FirestoreRepository();
-
-    final result = await repository.getDoc(bookmarkRef);
-
-    await result.when(
-      success: (res) async {
-        res.exists
-            ? await _unBookmark(res)
-            : await _bookmark(category); // 存在するなら削除、しないなら作成
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("通信に失敗しました");
-      },
-    );
-  }
-
-  Future<void> _bookmark(BookmarkCategory category) async {
-    final bookmarkedPost = state.value?.post;
-
-    if (bookmarkedPost == null) return;
-
-    final Timestamp now = Timestamp.now();
-
-    final String passiveUid = bookmarkedPost.uid;
-
-    final postRef = bookmarkedPost.ref;
-
-    final postId = bookmarkedPost.postId;
-
-    final bookmarkRef = DocRefCore.bookmark(category, postId);
-
-    final bookmark = Bookmark(
-      activeUid: ref.read(streamAuthUidProvider).value!,
-      ref: bookmarkRef,
-      categoryId: category.id,
-      createdAt: now,
-      passiveUid: passiveUid,
-      postRef: postRef,
-      postId: postId,
-    );
-
-    final repository = FirestoreRepository();
-
-    final result = await repository.createDoc(bookmarkRef, bookmark.toJson());
-
-    result.when(
-      success: (_) {
-        Get.back();
-
-        UIHelper.showFlutterToast(
-          "${bookmarkedPost.typedTitle().value}を${category.title}に保存しました。",
-        );
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("保存が失敗しました。");
-      },
-    );
-  }
-
-  Future<void> _unBookmark(Doc doc) async {
-    final repository = FirestoreRepository();
-
-    final result = await repository.deleteDoc(doc.reference);
-
-    result.when(
-      success: (_) {
-        Get.back();
-
-        UIHelper.showFlutterToast("ブックマークを解除しました。");
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("ブックマークを解除できませんでした。");
-      },
-    );
-  }
 
   void onDescriptionButtonPressed() => _showDescriptionDialog();
 
