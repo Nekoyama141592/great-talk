@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/views/screen/login_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+@RoutePage()
 class ReauthenticateToDeletePage extends ConsumerWidget {
   const ReauthenticateToDeletePage({super.key});
   static const path = "/reauthenticate/delete";

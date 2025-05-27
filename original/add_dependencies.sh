@@ -1,6 +1,7 @@
 #!/bin/bash
 
 packages=(
+  "auto_route"
   "cached_network_image"
   "chat_gpt_sdk"
   "cloud_firestore"
@@ -27,6 +28,7 @@ packages=(
   "font_awesome_flutter"
   "freezed_annotation"
   "get"
+  "gpt_markdown"
   "google_sign_in"
   "hooks_riverpod"
   "http"

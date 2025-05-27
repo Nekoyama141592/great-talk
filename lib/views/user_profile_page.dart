@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
@@ -6,6 +7,7 @@ import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/screen/profile_screen/profile_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+@RoutePage()
 class UserProfilePage extends ConsumerWidget {
   const UserProfilePage({super.key});
   static const path = "/users/:uid";

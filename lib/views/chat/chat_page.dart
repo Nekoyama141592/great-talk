@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -23,6 +23,7 @@ import 'package:great_talk/views/chat/components/delete_post_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/components/post_like_button.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+@RoutePage()
 class ChatPage extends HookConsumerWidget {
   const ChatPage({super.key});
 

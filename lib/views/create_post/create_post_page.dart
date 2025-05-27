@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/extensions/string_extension.dart';
@@ -13,7 +13,7 @@ import 'package:great_talk/views/create_post/components/form_label.dart';
 import 'package:great_talk/views/create_post/components/original_form.dart';
 import 'package:great_talk/views/generate_image/generate_image_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+@RoutePage()
 // ConsumerWidgetに変更してStatefulWidgetとStateを削除
 class CreatePostPage extends ConsumerWidget {
   CreatePostPage({super.key});

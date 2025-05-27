@@ -21,7 +21,7 @@ class RunApp {
             await SharedPreferences.getInstance(),
           ),
         ],
-        child: const MyApp(),
+        child: const MyAppPage(),
       ),
     );
   }

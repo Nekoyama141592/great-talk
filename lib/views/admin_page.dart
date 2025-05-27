@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/doubles.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
 import 'package:great_talk/providers/view_model/admin/admin_view_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+@RoutePage()
 class AdminPage extends HookConsumerWidget {
   const AdminPage({super.key});
   static const path = "/admin";

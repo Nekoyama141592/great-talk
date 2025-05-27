@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TokensState {
 
- List<BookmarkCategory> get bookmarkCategoryTokens; List<FollowingToken> get followingTokens; List<LikePostToken> get likePostTokens; List<MutePostToken> get mutePostTokens; List<MuteUserToken> get muteUserTokens; List<ReportPostToken> get reportPostTokens; List<String> get deletePostIds;
+ List<FollowingToken> get followingTokens; List<LikePostToken> get likePostTokens; List<MutePostToken> get mutePostTokens; List<MuteUserToken> get muteUserTokens; List<ReportPostToken> get reportPostTokens; List<String> get deletePostIds;
 /// Create a copy of TokensState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $TokensStateCopyWith<TokensState> get copyWith => _$TokensStateCopyWithImpl<Toke
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TokensState&&const DeepCollectionEquality().equals(other.bookmarkCategoryTokens, bookmarkCategoryTokens)&&const DeepCollectionEquality().equals(other.followingTokens, followingTokens)&&const DeepCollectionEquality().equals(other.likePostTokens, likePostTokens)&&const DeepCollectionEquality().equals(other.mutePostTokens, mutePostTokens)&&const DeepCollectionEquality().equals(other.muteUserTokens, muteUserTokens)&&const DeepCollectionEquality().equals(other.reportPostTokens, reportPostTokens)&&const DeepCollectionEquality().equals(other.deletePostIds, deletePostIds));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TokensState&&const DeepCollectionEquality().equals(other.followingTokens, followingTokens)&&const DeepCollectionEquality().equals(other.likePostTokens, likePostTokens)&&const DeepCollectionEquality().equals(other.mutePostTokens, mutePostTokens)&&const DeepCollectionEquality().equals(other.muteUserTokens, muteUserTokens)&&const DeepCollectionEquality().equals(other.reportPostTokens, reportPostTokens)&&const DeepCollectionEquality().equals(other.deletePostIds, deletePostIds));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bookmarkCategoryTokens),const DeepCollectionEquality().hash(followingTokens),const DeepCollectionEquality().hash(likePostTokens),const DeepCollectionEquality().hash(mutePostTokens),const DeepCollectionEquality().hash(muteUserTokens),const DeepCollectionEquality().hash(reportPostTokens),const DeepCollectionEquality().hash(deletePostIds));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(followingTokens),const DeepCollectionEquality().hash(likePostTokens),const DeepCollectionEquality().hash(mutePostTokens),const DeepCollectionEquality().hash(muteUserTokens),const DeepCollectionEquality().hash(reportPostTokens),const DeepCollectionEquality().hash(deletePostIds));
 
 @override
 String toString() {
-  return 'TokensState(bookmarkCategoryTokens: $bookmarkCategoryTokens, followingTokens: $followingTokens, likePostTokens: $likePostTokens, mutePostTokens: $mutePostTokens, muteUserTokens: $muteUserTokens, reportPostTokens: $reportPostTokens, deletePostIds: $deletePostIds)';
+  return 'TokensState(followingTokens: $followingTokens, likePostTokens: $likePostTokens, mutePostTokens: $mutePostTokens, muteUserTokens: $muteUserTokens, reportPostTokens: $reportPostTokens, deletePostIds: $deletePostIds)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $TokensStateCopyWith<$Res>  {
   factory $TokensStateCopyWith(TokensState value, $Res Function(TokensState) _then) = _$TokensStateCopyWithImpl;
 @useResult
 $Res call({
- List<BookmarkCategory> bookmarkCategoryTokens, List<FollowingToken> followingTokens, List<LikePostToken> likePostTokens, List<MutePostToken> mutePostTokens, List<MuteUserToken> muteUserTokens, List<ReportPostToken> reportPostTokens, List<String> deletePostIds
+ List<FollowingToken> followingTokens, List<LikePostToken> likePostTokens, List<MutePostToken> mutePostTokens, List<MuteUserToken> muteUserTokens, List<ReportPostToken> reportPostTokens, List<String> deletePostIds
 });
 
 
@@ -66,10 +66,9 @@ class _$TokensStateCopyWithImpl<$Res>
 
 /// Create a copy of TokensState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? bookmarkCategoryTokens = null,Object? followingTokens = null,Object? likePostTokens = null,Object? mutePostTokens = null,Object? muteUserTokens = null,Object? reportPostTokens = null,Object? deletePostIds = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? followingTokens = null,Object? likePostTokens = null,Object? mutePostTokens = null,Object? muteUserTokens = null,Object? reportPostTokens = null,Object? deletePostIds = null,}) {
   return _then(_self.copyWith(
-bookmarkCategoryTokens: null == bookmarkCategoryTokens ? _self.bookmarkCategoryTokens : bookmarkCategoryTokens // ignore: cast_nullable_to_non_nullable
-as List<BookmarkCategory>,followingTokens: null == followingTokens ? _self.followingTokens : followingTokens // ignore: cast_nullable_to_non_nullable
+followingTokens: null == followingTokens ? _self.followingTokens : followingTokens // ignore: cast_nullable_to_non_nullable
 as List<FollowingToken>,likePostTokens: null == likePostTokens ? _self.likePostTokens : likePostTokens // ignore: cast_nullable_to_non_nullable
 as List<LikePostToken>,mutePostTokens: null == mutePostTokens ? _self.mutePostTokens : mutePostTokens // ignore: cast_nullable_to_non_nullable
 as List<MutePostToken>,muteUserTokens: null == muteUserTokens ? _self.muteUserTokens : muteUserTokens // ignore: cast_nullable_to_non_nullable
@@ -86,15 +85,8 @@ as List<String>,
 @JsonSerializable()
 
 class _TokensState extends TokensState {
-  const _TokensState({final  List<BookmarkCategory> bookmarkCategoryTokens = const <BookmarkCategory>[], final  List<FollowingToken> followingTokens = const <FollowingToken>[], final  List<LikePostToken> likePostTokens = const <LikePostToken>[], final  List<MutePostToken> mutePostTokens = const <MutePostToken>[], final  List<MuteUserToken> muteUserTokens = const <MuteUserToken>[], final  List<ReportPostToken> reportPostTokens = const <ReportPostToken>[], final  List<String> deletePostIds = const <String>[]}): _bookmarkCategoryTokens = bookmarkCategoryTokens,_followingTokens = followingTokens,_likePostTokens = likePostTokens,_mutePostTokens = mutePostTokens,_muteUserTokens = muteUserTokens,_reportPostTokens = reportPostTokens,_deletePostIds = deletePostIds,super._();
+  const _TokensState({final  List<FollowingToken> followingTokens = const <FollowingToken>[], final  List<LikePostToken> likePostTokens = const <LikePostToken>[], final  List<MutePostToken> mutePostTokens = const <MutePostToken>[], final  List<MuteUserToken> muteUserTokens = const <MuteUserToken>[], final  List<ReportPostToken> reportPostTokens = const <ReportPostToken>[], final  List<String> deletePostIds = const <String>[]}): _followingTokens = followingTokens,_likePostTokens = likePostTokens,_mutePostTokens = mutePostTokens,_muteUserTokens = muteUserTokens,_reportPostTokens = reportPostTokens,_deletePostIds = deletePostIds,super._();
   factory _TokensState.fromJson(Map<String, dynamic> json) => _$TokensStateFromJson(json);
-
- final  List<BookmarkCategory> _bookmarkCategoryTokens;
-@override@JsonKey() List<BookmarkCategory> get bookmarkCategoryTokens {
-  if (_bookmarkCategoryTokens is EqualUnmodifiableListView) return _bookmarkCategoryTokens;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_bookmarkCategoryTokens);
-}
 
  final  List<FollowingToken> _followingTokens;
 @override@JsonKey() List<FollowingToken> get followingTokens {
@@ -152,16 +144,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TokensState&&const DeepCollectionEquality().equals(other._bookmarkCategoryTokens, _bookmarkCategoryTokens)&&const DeepCollectionEquality().equals(other._followingTokens, _followingTokens)&&const DeepCollectionEquality().equals(other._likePostTokens, _likePostTokens)&&const DeepCollectionEquality().equals(other._mutePostTokens, _mutePostTokens)&&const DeepCollectionEquality().equals(other._muteUserTokens, _muteUserTokens)&&const DeepCollectionEquality().equals(other._reportPostTokens, _reportPostTokens)&&const DeepCollectionEquality().equals(other._deletePostIds, _deletePostIds));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TokensState&&const DeepCollectionEquality().equals(other._followingTokens, _followingTokens)&&const DeepCollectionEquality().equals(other._likePostTokens, _likePostTokens)&&const DeepCollectionEquality().equals(other._mutePostTokens, _mutePostTokens)&&const DeepCollectionEquality().equals(other._muteUserTokens, _muteUserTokens)&&const DeepCollectionEquality().equals(other._reportPostTokens, _reportPostTokens)&&const DeepCollectionEquality().equals(other._deletePostIds, _deletePostIds));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_bookmarkCategoryTokens),const DeepCollectionEquality().hash(_followingTokens),const DeepCollectionEquality().hash(_likePostTokens),const DeepCollectionEquality().hash(_mutePostTokens),const DeepCollectionEquality().hash(_muteUserTokens),const DeepCollectionEquality().hash(_reportPostTokens),const DeepCollectionEquality().hash(_deletePostIds));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_followingTokens),const DeepCollectionEquality().hash(_likePostTokens),const DeepCollectionEquality().hash(_mutePostTokens),const DeepCollectionEquality().hash(_muteUserTokens),const DeepCollectionEquality().hash(_reportPostTokens),const DeepCollectionEquality().hash(_deletePostIds));
 
 @override
 String toString() {
-  return 'TokensState(bookmarkCategoryTokens: $bookmarkCategoryTokens, followingTokens: $followingTokens, likePostTokens: $likePostTokens, mutePostTokens: $mutePostTokens, muteUserTokens: $muteUserTokens, reportPostTokens: $reportPostTokens, deletePostIds: $deletePostIds)';
+  return 'TokensState(followingTokens: $followingTokens, likePostTokens: $likePostTokens, mutePostTokens: $mutePostTokens, muteUserTokens: $muteUserTokens, reportPostTokens: $reportPostTokens, deletePostIds: $deletePostIds)';
 }
 
 
@@ -172,7 +164,7 @@ abstract mixin class _$TokensStateCopyWith<$Res> implements $TokensStateCopyWith
   factory _$TokensStateCopyWith(_TokensState value, $Res Function(_TokensState) _then) = __$TokensStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<BookmarkCategory> bookmarkCategoryTokens, List<FollowingToken> followingTokens, List<LikePostToken> likePostTokens, List<MutePostToken> mutePostTokens, List<MuteUserToken> muteUserTokens, List<ReportPostToken> reportPostTokens, List<String> deletePostIds
+ List<FollowingToken> followingTokens, List<LikePostToken> likePostTokens, List<MutePostToken> mutePostTokens, List<MuteUserToken> muteUserTokens, List<ReportPostToken> reportPostTokens, List<String> deletePostIds
 });
 
 
@@ -189,10 +181,9 @@ class __$TokensStateCopyWithImpl<$Res>
 
 /// Create a copy of TokensState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? bookmarkCategoryTokens = null,Object? followingTokens = null,Object? likePostTokens = null,Object? mutePostTokens = null,Object? muteUserTokens = null,Object? reportPostTokens = null,Object? deletePostIds = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? followingTokens = null,Object? likePostTokens = null,Object? mutePostTokens = null,Object? muteUserTokens = null,Object? reportPostTokens = null,Object? deletePostIds = null,}) {
   return _then(_TokensState(
-bookmarkCategoryTokens: null == bookmarkCategoryTokens ? _self._bookmarkCategoryTokens : bookmarkCategoryTokens // ignore: cast_nullable_to_non_nullable
-as List<BookmarkCategory>,followingTokens: null == followingTokens ? _self._followingTokens : followingTokens // ignore: cast_nullable_to_non_nullable
+followingTokens: null == followingTokens ? _self._followingTokens : followingTokens // ignore: cast_nullable_to_non_nullable
 as List<FollowingToken>,likePostTokens: null == likePostTokens ? _self._likePostTokens : likePostTokens // ignore: cast_nullable_to_non_nullable
 as List<LikePostToken>,mutePostTokens: null == mutePostTokens ? _self._mutePostTokens : mutePostTokens // ignore: cast_nullable_to_non_nullable
 as List<MutePostToken>,muteUserTokens: null == muteUserTokens ? _self._muteUserTokens : muteUserTokens // ignore: cast_nullable_to_non_nullable

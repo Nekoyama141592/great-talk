@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/firestore/col_ref_core.dart';
-import 'package:great_talk/model/database_schema/bookmark_category/bookmark_category.dart';
 import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
@@ -14,7 +12,6 @@ import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_use
 import 'package:great_talk/model/database_schema/tokens/report_post_token/report_post_token.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
 
 part 'tokens_notifier.g.dart';
 
@@ -75,25 +72,6 @@ class TokensNotifier extends _$TokensNotifier {
     final newState = _currentState.copyWith(
       deletePostIds: [..._currentState.deletePostIds, postId],
     );
-    _updateState(newState);
-  }
-
-  void addBookmarkCategory(BookmarkCategory category) {
-    final newState = _currentState.copyWith(
-      bookmarkCategoryTokens: [
-        ..._currentState.bookmarkCategoryTokens,
-        category,
-      ],
-    );
-    _updateState(newState);
-  }
-
-  void removeBookmarkCategory(BookmarkCategory category) {
-    final newList =
-        _currentState.bookmarkCategoryTokens
-            .where((c) => c.id != category.id)
-            .toList();
-    final newState = _currentState.copyWith(bookmarkCategoryTokens: newList);
     _updateState(newState);
   }
 
@@ -169,25 +147,5 @@ class TokensNotifier extends _$TokensNotifier {
   }
 
 
-  void onBookmarkCategoryDeleteButtonPressed(BookmarkCategory token) {
-    UIHelper.cupertinoAlertDialog(
-      "このカテゴリーを削除しますが、よろしいですか？",
-      () => _deleteBookmarkCategory(token),
-    );
-  }
 
-  Future<void> _deleteBookmarkCategory(BookmarkCategory token) async {
-    final repository = FirestoreRepository();
-    final result = await repository.deleteDoc(token.ref);
-    result.when(
-      success: (_) {
-        Get.back();
-        removeBookmarkCategory(token);
-        UIHelper.showFlutterToast("カテゴリーを削除できました。");
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("カテゴリーを削除できませんでした。");
-      },
-    );
-  }
 }

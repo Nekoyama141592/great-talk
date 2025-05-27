@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
@@ -6,7 +7,7 @@ import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/mute/mute_posts/component/mute_post_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+@RoutePage()
 class MutePostsPage extends ConsumerWidget {
   const MutePostsPage({super.key});
   static const path = "/mutePosts";

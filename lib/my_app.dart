@@ -1,4 +1,5 @@
 // flutter
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/flavors.dart';
@@ -8,9 +9,9 @@ import 'package:great_talk/utility/router.dart';
 import 'package:great_talk/views/check_page/check_page.dart';
 import 'package:great_talk/views/main/my_home_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-class MyApp extends ConsumerWidget {
-  const MyApp({super.key});
+@RoutePage()
+class MyAppPage extends ConsumerWidget {
+  const MyAppPage({super.key});
   static const path = "/";
   @override
   Widget build(BuildContext context, WidgetRef ref) {

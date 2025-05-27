@@ -16,7 +16,7 @@ import 'package:great_talk/views/chat/chat_page.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 
 final getPages = [
-  GetPage(name: MyApp.path, page: () => const MyApp()),
+  GetPage(name: MyAppPage.path, page: () => const MyAppPage()),
   GetPage(name: LoginPage.path, page: () => const LoginPage()),
   GetPage(name: AccountPage.path, page: () => const AccountPage()),
   GetPage(name: AdminPage.path, page: () => const AdminPage()),

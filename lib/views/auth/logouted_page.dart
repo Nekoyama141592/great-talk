@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/views/screen/svg_and_msg_screen.dart';
 
+@RoutePage()
 class LogoutedPage extends StatelessWidget {
   const LogoutedPage({super.key});
   static const path = "/logouted";

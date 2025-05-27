@@ -7,11 +7,6 @@ part of 'tokens_state.dart';
 // **************************************************************************
 
 _TokensState _$TokensStateFromJson(Map<String, dynamic> json) => _TokensState(
-  bookmarkCategoryTokens:
-      (json['bookmarkCategoryTokens'] as List<dynamic>?)
-          ?.map((e) => BookmarkCategory.fromJson(e as Map<String, dynamic>))
-          .toList() ??
-      const <BookmarkCategory>[],
   followingTokens:
       (json['followingTokens'] as List<dynamic>?)
           ?.map((e) => FollowingToken.fromJson(e as Map<String, dynamic>))
@@ -46,7 +41,6 @@ _TokensState _$TokensStateFromJson(Map<String, dynamic> json) => _TokensState(
 
 Map<String, dynamic> _$TokensStateToJson(_TokensState instance) =>
     <String, dynamic>{
-      'bookmarkCategoryTokens': instance.bookmarkCategoryTokens,
       'followingTokens': instance.followingTokens,
       'likePostTokens': instance.likePostTokens,
       'mutePostTokens': instance.mutePostTokens,

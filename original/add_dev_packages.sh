@@ -4,6 +4,7 @@
 
 # 開発用パッケージの配列を定義
 dev_packages=(
+  "auto_route_generator"
   "build_runner"
   "custom_lint"
   "flutter_launcher_icons"
