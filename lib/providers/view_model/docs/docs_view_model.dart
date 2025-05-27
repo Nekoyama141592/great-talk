@@ -6,7 +6,7 @@ import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
@@ -277,7 +277,7 @@ class DocsViewModel extends _$DocsViewModel {
   void onMutePostCardTap(Post post) {
     UIHelper.cupertinoAlertDialog(
       "ミュートを解除しますがよろしいですか？",
-      () => unMutePost(post).then((_) => RouterCore.back()),
+      () => unMutePost(post).then((_) => RouterLogic.back()),
     );
   }
 
@@ -317,7 +317,7 @@ class DocsViewModel extends _$DocsViewModel {
   void onMuteUserCardTap(String passiveUid) {
     UIHelper.cupertinoAlertDialog(
       "ミュートを解除しますがよろしいですか？",
-      () => unMuteUser(passiveUid).then((_) => RouterCore.back()),
+      () => unMuteUser(passiveUid).then((_) => RouterLogic.back()),
     );
   }
 

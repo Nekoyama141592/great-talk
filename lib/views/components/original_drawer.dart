@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/global/local_setting/local_setting.dart';
 import 'package:great_talk/ui_core/texts.dart';
@@ -67,7 +67,7 @@ class OriginalDrawer extends ConsumerWidget {
                       ],
                     ),
                     onTap: () {
-                      RouterCore.pushPath(
+                      RouterLogic.pushPath(
                         UserProfilePage.generatePath(user.uid),
                       );
                     },
@@ -77,7 +77,7 @@ class OriginalDrawer extends ConsumerWidget {
                 return ListTile(
                   title: const Text("ログインする"),
                   onTap: () {
-                    RouterCore.pushPath(LoginPage.path);
+                    RouterLogic.pushPath(LoginPage.path);
                   },
                 );
               }
@@ -94,16 +94,16 @@ class OriginalDrawer extends ConsumerWidget {
           ListTile(
             title: const Text("アカウント情報"),
             onTap: () {
-              RouterCore.pushPath(AccountPage.path);
+              RouterLogic.pushPath(AccountPage.path);
             },
           ),
           ListTile(
             title: const Text("ミュートしているユーザー"),
-            onTap: () => RouterCore.pushPath(MuteUsersPage.path),
+            onTap: () => RouterLogic.pushPath(MuteUsersPage.path),
           ),
           ListTile(
             title: const Text("ミュートしている投稿"),
-            onTap: () => RouterCore.pushPath(MutePostsPage.path),
+            onTap: () => RouterLogic.pushPath(MutePostsPage.path),
           ),
           ListTile(
             title: const Text("テーマ切り替え"),
@@ -126,7 +126,7 @@ class OriginalDrawer extends ConsumerWidget {
           if (isAdmin)
             ListTile(
               title: const Text("管理者専用ページ"),
-              onTap: () => RouterCore.pushPath(AdminPage.path),
+              onTap: () => RouterLogic.pushPath(AdminPage.path),
             ),
         ],
       ),

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
@@ -46,7 +46,7 @@ class PostLogic extends _$PostLogic {
   String? get _currentUid => FirebaseAuth.instance.currentUser?.uid;
 
   void onPostCardPressed(Post post) {
-    RouterCore.pushPath(ChatPage.generatePath(post.uid, post.postId));
+    RouterLogic.pushPath(ChatPage.generatePath(post.uid, post.postId));
   }
 
   void onReportButtonPressed(BuildContext context, Post post) {
@@ -240,13 +240,13 @@ class PostLogic extends _$PostLogic {
 
   void deletePost(Post deletePost) {
     UIHelper.cupertinoAlertDialog("投稿を削除しますが本当によろしいですか?", () async {
-      RouterCore.back();
+      RouterLogic.back();
       final result = await _firestoreRepository.deleteDoc(deletePost.ref);
       await result.when(
         success: (_) async {
           _tokensNotifier.addDeletePostId(deletePost.postId);
           await _removePostImage(deletePost.typedImage());
-          RouterCore.back();
+          RouterLogic.back();
           UIHelper.showErrorFlutterToast("投稿を削除しました。");
         },
         failure: (e) {

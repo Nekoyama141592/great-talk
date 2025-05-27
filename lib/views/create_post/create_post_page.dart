@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/model/view_model_state/create_post/create_post_state.dart';
 import 'package:great_talk/providers/view_model/create_post/create_post_view_model.dart';
@@ -354,7 +354,7 @@ class ToGeneratePageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => RouterCore.pushPath(GenerateImagePage.path),
+      onPressed: () => RouterLogic.pushPath(GenerateImagePage.path),
       child: Text(
         "画像を生成する",
         style: TextStyle(color: Theme.of(context).colorScheme.tertiary),

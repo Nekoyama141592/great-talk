@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/model/global/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
@@ -154,8 +154,8 @@ class EditViewModel extends _$EditViewModel {
         ref
             .read(currentUserNotifierProvider.notifier)
             .updateUser(userName, bio, fileName);
-        RouterCore.back();
-        RouterCore.back();
+        RouterLogic.back();
+        RouterLogic.back();
         UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
       },
       failure: (e) {

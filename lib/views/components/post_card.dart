@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/doubles.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/logic/post/post_logic.dart';
@@ -88,7 +88,7 @@ class PostCard extends ConsumerWidget {
                     EllipsisText(post.typedTitle().value),
                     TextButton(
                       onPressed:
-                          () => RouterCore.pushPath(
+                          () => RouterLogic.pushPath(
                             UserProfilePage.generatePath(post.uid),
                           ),
                       child: EllipsisText(

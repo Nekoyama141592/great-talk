@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/colors.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/views/create_post/create_post_page.dart';
 
 class MainFloatingActionButton extends StatelessWidget {
@@ -11,7 +11,7 @@ class MainFloatingActionButton extends StatelessWidget {
     if (isShow) {
       return FloatingActionButton(
         backgroundColor: kPrimaryColor,
-        onPressed: () => RouterCore.pushPath(CreatePostPage.path),
+        onPressed: () => RouterLogic.pushPath(CreatePostPage.path),
         child: const Icon(Icons.new_label),
       );
     } else {
