@@ -23,7 +23,7 @@ class MosaicUserChild extends StatelessWidget {
         BoldWhiteText(title),
         const BasicWidthBox(),
         InkWell(
-          onTap: () => UIHelper.simpleAlertDialog(msg),
+          onTap: () => UIHelper.simpleAlertDialog(context, msg),
           child: const Icon(Icons.info, color: Colors.white),
         ),
       ],

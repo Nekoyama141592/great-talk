@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart' as fluttertoast;
-import 'package:get/get.dart';
 import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/providers/logic/router/router_logic.dart';
@@ -32,11 +31,13 @@ class UIHelper {
   }
 
   static void cupertinoAlertDialog(
+    BuildContext context,
     String msg,
     void Function()? positiveAction,
   ) {
-    Get.dialog(
-      CupertinoAlertDialog(
+    showDialog(
+      context: context,
+      builder: (context) => CupertinoAlertDialog(
         content: Text(msg),
         actions: [
           CupertinoDialogAction(
@@ -54,15 +55,17 @@ class UIHelper {
   }
 
   static void simpleAlertDialog(
+    BuildContext context,
     String msg, {
     bool? needsSubscribing,
     void Function()? positiveAction,
   }) {
     const style = TextStyle(fontSize: 20);
-    Get.dialog(
-      AlertDialog(
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
         content: SizedBox(
-          height: Get.height * 0.8,
+          height: MediaQuery.of(context).size.height * 0.8,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

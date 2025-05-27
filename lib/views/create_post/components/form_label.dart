@@ -15,7 +15,7 @@ class FormLabel extends StatelessWidget {
           Text(title),
           const BasicHeightBox(),
           InkWell(
-            onTap: () => UIHelper.simpleAlertDialog(helpMsg),
+            onTap: () => UIHelper.simpleAlertDialog(context, helpMsg),
             child: const Icon(Icons.help),
           ),
         ],

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/model/global/current_user/auth_user/auth_user.dart';
 import 'package:great_talk/model/global/current_user/current_user_state.dart';
@@ -216,8 +217,8 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
   }
 
-  void onLogoutButtonPressed() async {
-    UIHelper.cupertinoAlertDialog("ログアウトしますが本当によろしいですか？", () => _signOut());
+  void onLogoutButtonPressed(BuildContext context) async {
+    UIHelper.cupertinoAlertDialog(context, "ログアウトしますが本当によろしいですか？", () => _signOut());
   }
 
   Future<void> _signOut() async {
@@ -241,17 +242,19 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
   }
 
-  Future<void> reauthenticateWithAppleToDelete() async {
+  Future<void> reauthenticateWithAppleToDelete(BuildContext context) async {
     final credential = await CredentialComposer.appleCredential();
-    await _reauthenticateToDelete(credential);
+    if (!context.mounted) return;
+    await _reauthenticateToDelete(context, credential);
   }
 
-  Future<void> reauthenticateWithGoogleToDelete() async {
+  Future<void> reauthenticateWithGoogleToDelete(BuildContext context) async {
     final credential = await CredentialComposer.googleCredential();
-    await _reauthenticateToDelete(credential);
+    if (!context.mounted) return;
+    await _reauthenticateToDelete(context, credential);
   }
 
-  Future<void> _reauthenticateToDelete(AuthCredential credential) async {
+  Future<void> _reauthenticateToDelete(BuildContext context,AuthCredential credential) async {
     final repository = ref.read(firebaseAuthRepositoryProvider);
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return;
@@ -261,7 +264,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
     result.when(
       success: (_) {
-        _showDeleteUserDialog();
+        _showDeleteUserDialog(context);
       },
       failure: (e) {
         UIHelper.showErrorFlutterToast("再認証に失敗しました: ${e.toString()}");
@@ -269,8 +272,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
   }
 
-  void _showDeleteUserDialog() {
+  void _showDeleteUserDialog(BuildContext context) {
     UIHelper.cupertinoAlertDialog(
+      context,
       "ユーザーを削除しますが本当によろしいですか？",
       () => _deletePublicUser(),
     );

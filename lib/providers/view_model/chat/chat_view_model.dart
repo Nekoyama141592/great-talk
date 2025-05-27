@@ -387,7 +387,7 @@ class ChatViewModel extends _$ChatViewModel {
               onPressed: () {
                 Navigator.pop(innerContext);
 
-                onDescriptionButtonPressed();
+                onDescriptionButtonPressed(context);
               },
               child: const Text("情報を見る"),
             ),
@@ -401,17 +401,17 @@ class ChatViewModel extends _$ChatViewModel {
     );
   }
 
-  void onDeleteButtonPressed() async {
+  void onDeleteButtonPressed(BuildContext context) async {
     final deletePost = state.value?.post;
 
     if (deletePost == null) return;
 
-    ref.read(postLogicProvider.notifier).deletePost(deletePost);
+    ref.read(postLogicProvider.notifier).deletePost(context, deletePost);
   }
 
-  void onDescriptionButtonPressed() => _showDescriptionDialog();
+  void onDescriptionButtonPressed(BuildContext context) => _showDescriptionDialog(context);
 
-  void _showDescriptionDialog() {
+  void _showDescriptionDialog(BuildContext context) {
     final post = state.value?.post;
 
     if (post == null) return;
@@ -424,6 +424,7 @@ class ChatViewModel extends _$ChatViewModel {
     String msgText = "累計メッセージ数:\n${post.msgCount.formatNumber()}";
 
     UIHelper.simpleAlertDialog(
+      context,
       "$title\n\n$systemPrompt\n\n$msgText",
       needsSubscribing: true,
     );

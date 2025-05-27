@@ -31,7 +31,7 @@ class MosaicPostChild extends ConsumerWidget {
         BoldWhiteText(title),
         const BasicHeightBox(),
         InkWell(
-          onTap: () => UIHelper.simpleAlertDialog(msg),
+          onTap: () => UIHelper.simpleAlertDialog(context, msg),
           child: const Icon(Icons.info, color: Colors.white),
         ),
         const BasicHeightBox(),
@@ -42,7 +42,7 @@ class MosaicPostChild extends ConsumerWidget {
                 ? InkWell(
                   onTap:
                       () =>
-                          ref.read(postLogicProvider.notifier).deletePost(post),
+                          ref.read(postLogicProvider.notifier).deletePost(context, post),
                   child: const Icon(Icons.delete, color: Colors.white),
                 )
                 : const SizedBox.shrink();

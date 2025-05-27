@@ -238,8 +238,8 @@ class PostLogic extends _$PostLogic {
     await _firestoreRepository.deleteDoc(postLikeRef);
   }
 
-  void deletePost(Post deletePost) {
-    UIHelper.cupertinoAlertDialog("投稿を削除しますが本当によろしいですか?", () async {
+  void deletePost(BuildContext context,Post deletePost) {
+    UIHelper.cupertinoAlertDialog(context,"投稿を削除しますが本当によろしいですか?", () async {
       RouterLogic.back();
       final result = await _firestoreRepository.deleteDoc(deletePost.ref);
       await result.when(

@@ -14,13 +14,13 @@ class MutePostCard extends StatelessWidget {
   });
   final Post post;
   final Uint8List? uint8list;
-  final void Function(Post) onTap;
+  final void Function(BuildContext, Post) onTap;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleImage(uint8list: uint8list),
       title: EllipsisText(post.typedTitle().value),
-      onTap: () => onTap,
+      onTap: () => onTap(context, post),
     );
   }
 }

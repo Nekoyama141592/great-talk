@@ -39,7 +39,7 @@ class AccountPage extends ConsumerWidget {
               state.isLoggedIn()
                   ? ListTile(
                     title: const Text("ログアウトする"),
-                    onTap: notifier.onLogoutButtonPressed,
+                    onTap: () => notifier.onLogoutButtonPressed(context),
                   )
                   : const SizedBox.shrink(),
               state.isLoggedIn()

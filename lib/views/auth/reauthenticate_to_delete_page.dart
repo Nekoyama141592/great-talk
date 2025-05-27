@@ -16,8 +16,8 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(title: const Text("ユーザーを削除")),
         body: LoginScreen(
-          onAppleButtonPressed: controller.reauthenticateWithAppleToDelete,
-          onGoogleButtonPressed: controller.reauthenticateWithGoogleToDelete,
+          onAppleButtonPressed: () => controller.reauthenticateWithAppleToDelete(context),
+          onGoogleButtonPressed: () => controller.reauthenticateWithGoogleToDelete(context),
           title: "ユーザーの削除には再認証が必要です",
         ),
       ),

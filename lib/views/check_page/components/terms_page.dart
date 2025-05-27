@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/core/url_redirector.dart';
 import 'package:great_talk/providers/global/terms/terms_notifier.dart';
@@ -19,7 +18,7 @@ class TermsPage extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SizedBox(
-            height: Get.height * 0.8,
+            height: MediaQuery.of(context).size.height * 0.8,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

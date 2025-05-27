@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
@@ -274,8 +275,9 @@ class DocsViewModel extends _$DocsViewModel {
     return [];
   }
 
-  void onMutePostCardTap(Post post) {
+  void onMutePostCardTap(BuildContext context,Post post) {
     UIHelper.cupertinoAlertDialog(
+      context,
       "ミュートを解除しますがよろしいですか？",
       () => unMutePost(post).then((_) => RouterLogic.back()),
     );
@@ -314,8 +316,9 @@ class DocsViewModel extends _$DocsViewModel {
     return [];
   }
 
-  void onMuteUserCardTap(String passiveUid) {
+  void onMuteUserCardTap(BuildContext context,String passiveUid) {
     UIHelper.cupertinoAlertDialog(
+      context,
       "ミュートを解除しますがよろしいですか？",
       () => unMuteUser(passiveUid).then((_) => RouterLogic.back()),
     );
