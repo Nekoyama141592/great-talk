@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
+import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
@@ -46,7 +47,7 @@ class PostLogic extends _$PostLogic {
   String? get _currentUid => FirebaseAuth.instance.currentUser?.uid;
 
   void onPostCardPressed(Post post) {
-    Get.toNamed(ChatPage.generatePath(post.uid, post.postId));
+    RouterCore.pushPath(ChatPage.generatePath(post.uid, post.postId));
   }
 
   void onReportButtonPressed(BuildContext context, Post post) {

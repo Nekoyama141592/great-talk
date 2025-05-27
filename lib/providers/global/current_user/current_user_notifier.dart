@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/model/global/current_user/auth_user/auth_user.dart';
 import 'package:great_talk/model/global/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
@@ -233,7 +234,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
             base64: null,
           ),
         ); // 状態をリセット
-        Get.toNamed(LogoutedPage.path);
+        RouterCore.pushPath(LogoutedPage.path);
       },
       failure: (e) {
         UIHelper.showErrorFlutterToast("ログアウトできませんでした: ${e.toString()}");
@@ -310,7 +311,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
             base64: null,
           ),
         ); // 状態をリセット
-        Get.toNamed(UserDeletedPage.path);
+        RouterCore.pushPath(UserDeletedPage.path);
       },
       failure: (e) {
         UIHelper.showErrorFlutterToast(

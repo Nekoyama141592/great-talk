@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
@@ -45,7 +45,10 @@ class AccountPage extends ConsumerWidget {
               state.isLoggedIn()
                   ? ListTile(
                     title: const Text("ユーザーを消去する"),
-                    onTap: () => Get.toNamed(ReauthenticateToDeletePage.path),
+                    onTap:
+                        () => RouterCore.pushPath(
+                          ReauthenticateToDeletePage.path,
+                        ),
                   )
                   : const SizedBox.shrink(),
             ],
