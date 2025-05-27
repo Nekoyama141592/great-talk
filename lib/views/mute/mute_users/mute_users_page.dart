@@ -7,6 +7,7 @@ import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/mute/mute_users/component/mute_user_card.dart';
 import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 @RoutePage()
 class MuteUsersPage extends ConsumerWidget {
   const MuteUsersPage({super.key});

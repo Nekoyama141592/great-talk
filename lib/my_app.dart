@@ -9,6 +9,7 @@ import 'package:great_talk/utility/router.dart';
 import 'package:great_talk/views/check_page/check_page.dart';
 import 'package:great_talk/views/main/my_home_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 @RoutePage()
 class MyAppPage extends ConsumerWidget {
   const MyAppPage({super.key});

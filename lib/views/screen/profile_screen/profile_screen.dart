@@ -63,40 +63,40 @@ class ProfileScreen extends ConsumerWidget {
       if ((passiveUser?.isOfficial ?? false)) const OfficialMark(),
     ];
     return GradientScreen(
-        header: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                if (passiveUser != null) ...children,
-                Builder(
-                  builder: (context) {
-                    final isFollow =
-                        ref
-                            .watch(tokensNotifierProvider)
-                            .value
-                            ?.followingUids
-                            .contains(state.passiveUid()) ??
-                        false;
-                    return passiveUser?.uid ==
-                            ref.watch(streamAuthUidProvider).value
-                        ? const EditButton()
-                        : FollowButton(
-                          isFollow: isFollow,
-                          follow: follow,
-                          unFollow: unFollow,
-                        );
-                  },
-                ),
-              ],
-            ),
+      header: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              if (passiveUser != null) ...children,
+              Builder(
+                builder: (context) {
+                  final isFollow =
+                      ref
+                          .watch(tokensNotifierProvider)
+                          .value
+                          ?.followingUids
+                          .contains(state.passiveUid()) ??
+                      false;
+                  return passiveUser?.uid ==
+                          ref.watch(streamAuthUidProvider).value
+                      ? const EditButton()
+                      : FollowButton(
+                        isFollow: isFollow,
+                        follow: follow,
+                        unFollow: unFollow,
+                      );
+                },
+              ),
+            ],
           ),
         ),
-        child: RefreshScreen(
-          state: state,
-          onReload: onReload,
-          onLoading: onLoading,
-        ),
-      );
+      ),
+      child: RefreshScreen(
+        state: state,
+        onReload: onReload,
+        onLoading: onLoading,
+      ),
+    );
   }
 }

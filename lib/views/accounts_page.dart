@@ -5,6 +5,7 @@ import 'package:great_talk/providers/global/current_user/current_user_notifier.d
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 @RoutePage()
 class AccountPage extends ConsumerWidget {
   const AccountPage({super.key});

@@ -409,7 +409,6 @@ class ChatViewModel extends _$ChatViewModel {
     ref.read(postLogicProvider.notifier).deletePost(deletePost);
   }
 
-
   void onDescriptionButtonPressed() => _showDescriptionDialog();
 
   void _showDescriptionDialog() {

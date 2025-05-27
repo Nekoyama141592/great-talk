@@ -5,4 +5,4 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'router_logic.g.dart';
 
 @riverpod
-StackRouter router(Ref ref,BuildContext context) => context.router;
+StackRouter router(Ref ref, BuildContext context) => context.router;

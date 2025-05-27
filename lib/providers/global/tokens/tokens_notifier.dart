@@ -31,7 +31,6 @@ class TokensNotifier extends _$TokensNotifier {
     final res = await repository.getDocsOrNull(tokensColRef);
     final allTokensData = res?.map((doc) => doc.data()).toList() ?? [];
 
-
     return TokensState(
       followingTokens:
           allTokensData
@@ -60,6 +59,7 @@ class TokensNotifier extends _$TokensNotifier {
               .toList(),
     );
   }
+
   // 状態を安全に更新するためのヘルパー
   void _updateState(TokensState newState) {
     state = AsyncValue.data(newState);
@@ -145,7 +145,4 @@ class TokensNotifier extends _$TokensNotifier {
     );
     _updateState(newState);
   }
-
-
-
 }

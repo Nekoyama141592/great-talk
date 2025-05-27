@@ -32,7 +32,7 @@ class DocsViewModel extends _$DocsViewModel {
   String? get _uid => state.value?.passiveUser?.uid;
 
   @override
-  FutureOr<DocsState> build(DocsType type,{String? passiveUid}) async {
+  FutureOr<DocsState> build(DocsType type, {String? passiveUid}) async {
     final isTimeline = type == DocsType.feeds;
     var initialState = DocsState(isTimeline: isTimeline);
 
