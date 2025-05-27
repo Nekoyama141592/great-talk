@@ -60,7 +60,6 @@ class MsgCard extends StatelessWidget {
           child: Text(text),
         ),
       ),
-      // Obx を削除し、渡された postImage を直接使用する
       if (!isMyMsg && postImage != null)
         CircleImage(uint8list: postImage)
       else

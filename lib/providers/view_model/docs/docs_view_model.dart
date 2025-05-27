@@ -101,7 +101,6 @@ class DocsViewModel extends _$DocsViewModel {
         return currentState.copyWith(qDocInfoList: newQDocInfoList);
       }
     } catch (e, st) {
-      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
       state = AsyncValue.error(e, st);
       return currentState;
     }
@@ -160,7 +159,7 @@ class DocsViewModel extends _$DocsViewModel {
               .get();
       await _insertAllDocs(elements.docs);
     } catch (e) {
-      UIHelper.showErrorFlutterToast("データの取得に失敗しました");
+      UIHelper.showErrorFlutterToast("失敗しました");
     }
   }
 

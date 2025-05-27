@@ -62,8 +62,7 @@ class ProfileScreen extends ConsumerWidget {
         ),
       if ((passiveUser?.isOfficial ?? false)) const OfficialMark(),
     ];
-    return Obx(
-      () => GradientScreen(
+    return GradientScreen(
         header: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
@@ -98,7 +97,6 @@ class ProfileScreen extends ConsumerWidget {
           onReload: onReload,
           onLoading: onLoading,
         ),
-      ),
-    );
+      );
   }
 }
