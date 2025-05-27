@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
-import 'package:great_talk/providers/logic/post_logic.dart';
+import 'package:great_talk/providers/logic/post/post_logic.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

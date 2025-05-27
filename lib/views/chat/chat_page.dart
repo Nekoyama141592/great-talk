@@ -10,7 +10,7 @@ import 'package:great_talk/model/database_schema/text_message/text_message.dart'
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
-import 'package:great_talk/providers/logic/post_logic.dart';
+import 'package:great_talk/providers/logic/post/post_logic.dart';
 import 'package:great_talk/providers/view_model/chat/chat_view_model.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/views/chat/components/menu_button.dart';
