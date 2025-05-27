@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart' as fluttertoast;
 import 'package:get/get.dart';
 import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/views/common/subscribed_copyable_text.dart';
 
@@ -39,7 +40,7 @@ class UIHelper {
         content: Text(msg),
         actions: [
           CupertinoDialogAction(
-            onPressed: Get.back,
+            onPressed: RouterCore.back,
             child: const Text(cancelText),
           ),
           CupertinoDialogAction(
@@ -71,7 +72,7 @@ class UIHelper {
                     : SelectableText(msg, style: style),
                 const Divider(),
                 TextButton(
-                  onPressed: positiveAction ?? Get.back,
+                  onPressed: positiveAction ?? RouterCore.back,
                   child: const Text(okText, style: style),
                 ),
               ],

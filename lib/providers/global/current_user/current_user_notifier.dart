@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
 import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/model/global/current_user/auth_user/auth_user.dart';
 import 'package:great_talk/model/global/current_user/current_user_state.dart';
@@ -100,7 +99,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   Future<void> onLoginSuccess(User user) async {
-    Get.back();
+    RouterCore.back();
     UIHelper.showFlutterToast("ログインに成功しました");
     await user.reload();
     setAuthUser(user);

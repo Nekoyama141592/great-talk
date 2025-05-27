@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/core/strings.dart';
@@ -241,13 +240,13 @@ class PostLogic extends _$PostLogic {
 
   void deletePost(Post deletePost) {
     UIHelper.cupertinoAlertDialog("投稿を削除しますが本当によろしいですか?", () async {
-      Get.back();
+      RouterCore.back();
       final result = await _firestoreRepository.deleteDoc(deletePost.ref);
       await result.when(
         success: (_) async {
           _tokensNotifier.addDeletePostId(deletePost.postId);
           await _removePostImage(deletePost.typedImage());
-          Get.back();
+          RouterCore.back();
           UIHelper.showErrorFlutterToast("投稿を削除しました。");
         },
         failure: (e) {
