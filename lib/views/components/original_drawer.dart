@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/global/local_setting/local_setting.dart';
 import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/controllers/purchases_controller.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/utility/style_utility.dart';
 import 'package:great_talk/views/accounts_page.dart';
@@ -26,12 +25,10 @@ class OriginalDrawer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settingState = ref.watch(localSettingProvider);
-    final purchasesController = PurchasesController.to;
     final asyncValue = ref.watch(currentUserNotifierProvider);
     final currentUser = asyncValue.value;
     final isAdmin = currentUser?.isAdmin() ?? false;
     final image = currentUser?.base64;
-    // final image = CurrentUserController.to.state.value.base64;
     return Drawer(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: ListView(
@@ -130,10 +127,6 @@ class OriginalDrawer extends ConsumerWidget {
                         .onNeedFirstMessageSwichChanged,
               ),
             ),
-          ListTile(
-            title: const Text("使用モデルID"),
-            subtitle: Obx(() => Text(purchasesController.model().model)),
-          ),
           if (isAdmin) ListTile(
                       title: const Text("管理者専用ページ"),
                       onTap: () => Get.toNamed(AdminPage.path),
