@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:great_talk/my_app.dart';
 import 'package:great_talk/views/accounts_page.dart';
 import 'package:great_talk/views/admin_page.dart';
 import 'package:great_talk/views/auth/login_page.dart';
 import 'package:great_talk/views/auth/logouted_page.dart';
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
 import 'package:great_talk/views/auth/user_deleted_page.dart';
+import 'package:great_talk/views/check_page/first_page.dart';
 import 'package:great_talk/views/create_post/create_post_page.dart';
 import 'package:great_talk/views/edit_page.dart';
 import 'package:great_talk/views/generate_image/generate_image_page.dart';
@@ -16,7 +16,7 @@ import 'package:great_talk/views/chat/chat_page.dart';
 import 'package:great_talk/views/user_profile_page.dart';
 
 final getPages = [
-  GetPage(name: MyAppPage.path, page: () => const MyAppPage()),
+  GetPage(name: FirstPage.path, page: () => FirstPage()),
   GetPage(name: LoginPage.path, page: () => const LoginPage()),
   GetPage(name: AccountPage.path, page: () => const AccountPage()),
   GetPage(name: AdminPage.path, page: () => const AdminPage()),

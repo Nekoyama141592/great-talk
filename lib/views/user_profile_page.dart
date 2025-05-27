@@ -14,9 +14,9 @@ class UserProfilePage extends ConsumerWidget {
   static String generatePath(String uid) => "/users/$uid";
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final passiveUid = Get.parameters['uid'];
+    final uid = Get.parameters['uid'];
     final asyncValue = ref.watch(
-      docsViewModelProvider(DocsType.userProfiles, passiveUid: passiveUid),
+      docsViewModelProvider(DocsType.userProfiles, passiveUid: uid),
     );
     final notifier = ref.read(
       docsViewModelProvider(DocsType.userProfiles).notifier,

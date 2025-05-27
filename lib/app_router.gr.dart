@@ -119,6 +119,22 @@ class EditProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [FirstPage]
+class FirstRoute extends PageRouteInfo<void> {
+  const FirstRoute({List<PageRouteInfo>? children})
+    : super(FirstRoute.name, initialChildren: children);
+
+  static const String name = 'FirstRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const FirstPage();
+    },
+  );
+}
+
+/// generated route for
 /// [GenerateImagePage]
 class GenerateImageRoute extends PageRouteInfo<void> {
   const GenerateImageRoute({List<PageRouteInfo>? children})
@@ -194,22 +210,6 @@ class MuteUsersRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const MuteUsersPage();
-    },
-  );
-}
-
-/// generated route for
-/// [MyAppPage]
-class MyAppRoute extends PageRouteInfo<void> {
-  const MyAppRoute({List<PageRouteInfo>? children})
-    : super(MyAppRoute.name, initialChildren: children);
-
-  static const String name = 'MyAppRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const MyAppPage();
     },
   );
 }

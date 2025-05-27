@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:great_talk/my_app.dart';
 import 'package:great_talk/views/accounts_page.dart';
 import 'package:great_talk/views/admin_page.dart';
 import 'package:great_talk/views/auth/login_page.dart';
 import 'package:great_talk/views/auth/logouted_page.dart';
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
 import 'package:great_talk/views/auth/user_deleted_page.dart';
+import 'package:great_talk/views/check_page/first_page.dart';
 import 'package:great_talk/views/create_post/create_post_page.dart';
 import 'package:great_talk/views/edit_page.dart';
 import 'package:great_talk/views/generate_image/generate_image_page.dart';
@@ -21,7 +21,7 @@ part 'app_router.gr.dart';
 class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: MyAppRoute.page, path: MyAppPage.path, initial: true),
+    AutoRoute(page: FirstRoute.page, path: FirstPage.path, initial: true),
     AutoRoute(page: LoginRoute.page, path: LoginPage.path),
     AutoRoute(page: AccountRoute.page, path: AccountPage.path),
     AutoRoute(page: AdminRoute.page, path: AdminPage.path),
