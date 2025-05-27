@@ -15,6 +15,8 @@ enum PrefsKey {
   lastChatDate,
   latestReceipt,
   needFirstMessage,
+  // Repository
+  verifiedPurchases
 }
 
 enum SearchTarget { post, user }

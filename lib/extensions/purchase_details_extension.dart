@@ -19,5 +19,7 @@ extension PurchaseDetailsExtension on PurchaseDetails {
 
   bool get isPurchased =>
       status == PurchaseStatus.purchased || status == PurchaseStatus.restored;
+  bool get isPending => status == PurchaseStatus.pending;
+  bool get isError => status == PurchaseStatus.error;
   String _errorMessage() => error?.message ?? "";
 }
