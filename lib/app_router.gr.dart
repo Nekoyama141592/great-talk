@@ -44,18 +44,60 @@ class AdminRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [ChatPage]
-class ChatRoute extends PageRouteInfo<void> {
-  const ChatRoute({List<PageRouteInfo>? children})
-    : super(ChatRoute.name, initialChildren: children);
+class ChatRoute extends PageRouteInfo<ChatRouteArgs> {
+  ChatRoute({
+    Key? key,
+    String uid = '',
+    String postId = '',
+    List<PageRouteInfo>? children,
+  }) : super(
+         ChatRoute.name,
+         args: ChatRouteArgs(key: key, uid: uid, postId: postId),
+         rawPathParams: {'uid': uid, 'postId': postId},
+         initialChildren: children,
+       );
 
   static const String name = 'ChatRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const ChatPage();
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<ChatRouteArgs>(
+        orElse:
+            () => ChatRouteArgs(
+              uid: pathParams.getString('uid', ''),
+              postId: pathParams.getString('postId', ''),
+            ),
+      );
+      return ChatPage(key: args.key, uid: args.uid, postId: args.postId);
     },
   );
+}
+
+class ChatRouteArgs {
+  const ChatRouteArgs({this.key, this.uid = '', this.postId = ''});
+
+  final Key? key;
+
+  final String uid;
+
+  final String postId;
+
+  @override
+  String toString() {
+    return 'ChatRouteArgs{key: $key, uid: $uid, postId: $postId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ChatRouteArgs) return false;
+    return key == other.key && uid == other.uid && postId == other.postId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ uid.hashCode ^ postId.hashCode;
 }
 
 /// generated route for
@@ -264,16 +306,49 @@ class UserDeletedRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [UserProfilePage]
-class UserProfileRoute extends PageRouteInfo<void> {
-  const UserProfileRoute({List<PageRouteInfo>? children})
-    : super(UserProfileRoute.name, initialChildren: children);
+class UserProfileRoute extends PageRouteInfo<UserProfileRouteArgs> {
+  UserProfileRoute({Key? key, String uid = '', List<PageRouteInfo>? children})
+    : super(
+        UserProfileRoute.name,
+        args: UserProfileRouteArgs(key: key, uid: uid),
+        rawPathParams: {'uid': uid},
+        initialChildren: children,
+      );
 
   static const String name = 'UserProfileRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const UserProfilePage();
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<UserProfileRouteArgs>(
+        orElse:
+            () => UserProfileRouteArgs(uid: pathParams.getString('uid', '')),
+      );
+      return UserProfilePage(key: args.key, uid: args.uid);
     },
   );
+}
+
+class UserProfileRouteArgs {
+  const UserProfileRouteArgs({this.key, this.uid = ''});
+
+  final Key? key;
+
+  final String uid;
+
+  @override
+  String toString() {
+    return 'UserProfileRouteArgs{key: $key, uid: $uid}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! UserProfileRouteArgs) return false;
+    return key == other.key && uid == other.uid;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ uid.hashCode;
 }

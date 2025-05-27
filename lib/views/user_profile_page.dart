@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/providers/view_model/docs/docs_view_model.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
@@ -9,12 +8,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
 class UserProfilePage extends ConsumerWidget {
-  const UserProfilePage({super.key});
+  const UserProfilePage({
+    super.key,
+    @PathParam('uid') this.uid = ''
+  });
+  final String uid;
   static const path = "/users/:uid";
   static String generatePath(String uid) => "/users/$uid";
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final uid = Get.parameters['uid'];
     final asyncValue = ref.watch(
       docsViewModelProvider(DocsType.userProfiles, passiveUid: uid),
     );

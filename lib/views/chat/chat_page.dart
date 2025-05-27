@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:great_talk/core/doubles.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
@@ -25,8 +23,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
 class ChatPage extends HookConsumerWidget {
-  const ChatPage({super.key});
+  const ChatPage({
+    super.key,
+    @PathParam('uid') this.uid = '',
+    @PathParam('postId') this.postId = '',
+  });
 
+  final String uid;
+  final String postId;
   // パス生成ロジックはそのまま利用可能
   static const path = "/chat/users/:uid/posts/:postId";
   static String generatePath(String uid, String postId) =>
@@ -34,9 +38,6 @@ class ChatPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ViewModelとNotifierを取得
-    final uid = Get.parameters['uid']!;
-    final postId = Get.parameters['postId']!;
     final chatStateAsync = ref.watch(chatViewModelProvider(uid, postId));
     final chatNotifier = ref.read(chatViewModelProvider(uid, postId).notifier);
     final isAdmin =
