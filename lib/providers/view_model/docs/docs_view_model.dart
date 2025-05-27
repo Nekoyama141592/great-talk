@@ -275,11 +275,15 @@ class DocsViewModel extends _$DocsViewModel {
     return [];
   }
 
-  void onMutePostCardTap(BuildContext context,Post post) {
+  void onMutePostCardTap(BuildContext context,Post post) async {
     UIHelper.cupertinoAlertDialog(
       context,
       "ミュートを解除しますがよろしいですか？",
-      () => unMutePost(post).then((_) => RouterLogic.back()),
+      () async {
+        await unMutePost(post);
+        if (!context.mounted) return;
+        RouterLogic.back(context);
+      },
     );
   }
 
@@ -320,7 +324,11 @@ class DocsViewModel extends _$DocsViewModel {
     UIHelper.cupertinoAlertDialog(
       context,
       "ミュートを解除しますがよろしいですか？",
-      () => unMuteUser(passiveUid).then((_) => RouterLogic.back()),
+      () async {
+        await unMuteUser(passiveUid);
+        if (!context.mounted) return;
+        RouterLogic.back(context);
+      },
     );
   }
 

@@ -65,7 +65,7 @@ class PostCard extends ConsumerWidget {
               onTap:
                   () => ref
                       .read(postLogicProvider.notifier)
-                      .onPostCardPressed(post),
+                      .onPostCardPressed(context, post),
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -81,7 +81,7 @@ class PostCard extends ConsumerWidget {
                         onTap:
                             () => ref
                                 .read(postLogicProvider.notifier)
-                                .onPostCardPressed(post),
+                                .onPostCardPressed(context, post),
                         uint8list: uint8list,
                       ),
                     ),
@@ -89,6 +89,7 @@ class PostCard extends ConsumerWidget {
                     TextButton(
                       onPressed:
                           () => RouterLogic.pushPath(
+                            context, 
                             UserProfilePage.generatePath(post.uid),
                           ),
                       child: EllipsisText(

@@ -90,7 +90,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
       onPressed: () {
         if (formKey.currentState!.validate()) {
           formKey.currentState!.save();
-          notifier.onPositiveButtonPressed();
+          notifier.onPositiveButtonPressed(context);
         }
       },
       child: const Text("更新する"),

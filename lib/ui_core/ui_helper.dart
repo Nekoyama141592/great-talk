@@ -37,11 +37,11 @@ class UIHelper {
   ) {
     showDialog(
       context: context,
-      builder: (context) => CupertinoAlertDialog(
+      builder: (innerContext) => CupertinoAlertDialog(
         content: Text(msg),
         actions: [
           CupertinoDialogAction(
-            onPressed: RouterLogic.back,
+            onPressed: () => RouterLogic.back(innerContext),
             child: const Text(cancelText),
           ),
           CupertinoDialogAction(
@@ -63,9 +63,9 @@ class UIHelper {
     const style = TextStyle(fontSize: 20);
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (innerContext) => AlertDialog(
         content: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.8,
+          height: MediaQuery.of(innerContext).size.height * 0.8,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +75,7 @@ class UIHelper {
                     : SelectableText(msg, style: style),
                 const Divider(),
                 TextButton(
-                  onPressed: positiveAction ?? RouterLogic.back,
+                  onPressed: positiveAction ?? () =>  RouterLogic.back(innerContext),
                   child: const Text(okText, style: style),
                 ),
               ],

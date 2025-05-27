@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/model/global/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
@@ -79,7 +80,7 @@ class EditViewModel extends _$EditViewModel {
   }
 
   /// プロフィール更新ボタン押下時
-  Future<void> onPositiveButtonPressed() async {
+  Future<void> onPositiveButtonPressed(BuildContext context) async {
     final s = state.value;
     final uid = ref.read(streamAuthUidProvider).value;
     if (s == null || uid == null) return;
@@ -114,7 +115,7 @@ class EditViewModel extends _$EditViewModel {
       final result = await AWSS3Repository().putObject(request);
       await result.when(
         success: (res) async {
-          await _createUserUpdateLog(fileName, userName, bio);
+          await _createUserUpdateLog(context, fileName, userName, bio);
         },
         failure: (e) {
           UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
@@ -123,13 +124,14 @@ class EditViewModel extends _$EditViewModel {
       );
     } else {
       // 写真がそのまま場合の処理
-      await _createUserUpdateLog(publicUser.typedImage().value, userName, bio);
+      await _createUserUpdateLog(context, publicUser.typedImage().value, userName, bio);
     }
     // 完了時はstateを元に戻す
     state = AsyncData(s.copyWith(isPicked: false));
   }
 
   Future<void> _createUserUpdateLog(
+    BuildContext context,
     String fileName,
     String userName,
     String bio,
@@ -154,8 +156,8 @@ class EditViewModel extends _$EditViewModel {
         ref
             .read(currentUserNotifierProvider.notifier)
             .updateUser(userName, bio, fileName);
-        RouterLogic.back();
-        RouterLogic.back();
+        RouterLogic.back(context);
+        RouterLogic.back(context);
         UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
       },
       failure: (e) {

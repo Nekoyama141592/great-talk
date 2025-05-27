@@ -354,7 +354,7 @@ class ToGeneratePageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => RouterLogic.pushPath(GenerateImagePage.path),
+      onPressed: () => RouterLogic.pushPath(context, GenerateImagePage.path),
       child: Text(
         "画像を生成する",
         style: TextStyle(color: Theme.of(context).colorScheme.tertiary),

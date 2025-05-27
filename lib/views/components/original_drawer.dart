@@ -68,6 +68,7 @@ class OriginalDrawer extends ConsumerWidget {
                     ),
                     onTap: () {
                       RouterLogic.pushPath(
+                        context,
                         UserProfilePage.generatePath(user.uid),
                       );
                     },
@@ -77,7 +78,7 @@ class OriginalDrawer extends ConsumerWidget {
                 return ListTile(
                   title: const Text("ログインする"),
                   onTap: () {
-                    RouterLogic.pushPath(LoginPage.path);
+                    RouterLogic.pushPath(context,LoginPage.path);
                   },
                 );
               }
@@ -94,16 +95,16 @@ class OriginalDrawer extends ConsumerWidget {
           ListTile(
             title: const Text("アカウント情報"),
             onTap: () {
-              RouterLogic.pushPath(AccountPage.path);
+              RouterLogic.pushPath(context,AccountPage.path);
             },
           ),
           ListTile(
             title: const Text("ミュートしているユーザー"),
-            onTap: () => RouterLogic.pushPath(MuteUsersPage.path),
+            onTap: () => RouterLogic.pushPath(context,MuteUsersPage.path),
           ),
           ListTile(
             title: const Text("ミュートしている投稿"),
-            onTap: () => RouterLogic.pushPath(MutePostsPage.path),
+            onTap: () => RouterLogic.pushPath(context,MutePostsPage.path),
           ),
           ListTile(
             title: const Text("テーマ切り替え"),
@@ -126,7 +127,7 @@ class OriginalDrawer extends ConsumerWidget {
           if (isAdmin)
             ListTile(
               title: const Text("管理者専用ページ"),
-              onTap: () => RouterLogic.pushPath(AdminPage.path),
+              onTap: () => RouterLogic.pushPath(context,AdminPage.path),
             ),
         ],
       ),

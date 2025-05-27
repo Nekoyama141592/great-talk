@@ -18,7 +18,7 @@ class PostMsgButton extends ConsumerWidget {
       InkWell(
         child: const Icon(Icons.comment),
         onTap:
-            () => ref.read(postLogicProvider.notifier).onPostCardPressed(post),
+            () => ref.read(postLogicProvider.notifier).onPostCardPressed(context, post),
       ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),

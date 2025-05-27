@@ -45,8 +45,8 @@ class PostLogic extends _$PostLogic {
       ref.read(tokensNotifierProvider.notifier);
   String? get _currentUid => FirebaseAuth.instance.currentUser?.uid;
 
-  void onPostCardPressed(Post post) {
-    RouterLogic.pushPath(ChatPage.generatePath(post.uid, post.postId));
+  void onPostCardPressed(BuildContext context,Post post) {
+    RouterLogic.pushPath(context, ChatPage.generatePath(post.uid, post.postId));
   }
 
   void onReportButtonPressed(BuildContext context, Post post) {
@@ -240,13 +240,13 @@ class PostLogic extends _$PostLogic {
 
   void deletePost(BuildContext context,Post deletePost) {
     UIHelper.cupertinoAlertDialog(context,"投稿を削除しますが本当によろしいですか?", () async {
-      RouterLogic.back();
+      RouterLogic.back(context);
       final result = await _firestoreRepository.deleteDoc(deletePost.ref);
       await result.when(
         success: (_) async {
           _tokensNotifier.addDeletePostId(deletePost.postId);
+          RouterLogic.back(context);
           await _removePostImage(deletePost.typedImage());
-          RouterLogic.back();
           UIHelper.showErrorFlutterToast("投稿を削除しました。");
         },
         failure: (e) {

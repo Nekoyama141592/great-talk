@@ -1,11 +1,11 @@
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/utils.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/widgets.dart';
 
 class RouterLogic {
-  static void pushPath(String path) {
-    Get.toNamed(path);
+  static void pushPath(BuildContext context,String path) {
+    context.router.pushPath(path);
   }
-  static void back() {
-    Get.back();
+  static void back(BuildContext context) {
+    context.router.back();
   }
 }

@@ -38,7 +38,7 @@ class ProfileScreen extends ConsumerWidget {
       Align(
         alignment: Alignment.centerLeft,
         child: InkWell(
-          onTap: RouterLogic.back,
+          onTap: () => RouterLogic.back(context),
           child: const Icon(Icons.arrow_back, size: 30.0),
         ),
       ),

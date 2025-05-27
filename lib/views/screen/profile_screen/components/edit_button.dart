@@ -11,7 +11,7 @@ class EditButton extends StatelessWidget {
       buttonColor: Theme.of(context).colorScheme.primary,
       text: "編集する",
       textColor: Colors.white,
-      press: () => RouterLogic.pushPath(EditProfilePage.path),
+      press: () => RouterLogic.pushPath(context, EditProfilePage.path),
     );
   }
 }

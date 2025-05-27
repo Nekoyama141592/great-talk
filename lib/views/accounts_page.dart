@@ -47,6 +47,7 @@ class AccountPage extends ConsumerWidget {
                     title: const Text("ユーザーを消去する"),
                     onTap:
                         () => RouterLogic.pushPath(
+                          context,
                           ReauthenticateToDeletePage.path,
                         ),
                   )

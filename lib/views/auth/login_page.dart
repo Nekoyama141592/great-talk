@@ -15,8 +15,8 @@ class LoginPage extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(),
         body: LoginScreen(
-          onAppleButtonPressed: controller.onAppleButtonPressed,
-          onGoogleButtonPressed: controller.onGoogleButtonPressed,
+          onAppleButtonPressed: () => controller.onAppleButtonPressed(context),
+          onGoogleButtonPressed: () => controller.onGoogleButtonPressed(context),
           title: "ログイン",
         ),
       ),

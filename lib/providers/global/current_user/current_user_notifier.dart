@@ -73,34 +73,34 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     _updateState(state.value!.copyWith(authUser: newAuthUser));
   }
 
-  Future<void> onAppleButtonPressed() async {
+  Future<void> onAppleButtonPressed(BuildContext context) async {
     final repository = ref.read(
       firebaseAuthRepositoryProvider,
     ); // RiverpodでRepositoryを取得
     final result = await repository.signInWithApple();
     await result.when(
-      success: (user) => onLoginSuccess(user),
+      success: (user) => onLoginSuccess(context, user),
       failure: (e) {
         UIHelper.showErrorFlutterToast("Apple ログインに失敗しました: ${e.toString()}");
       },
     );
   }
 
-  Future<void> onGoogleButtonPressed() async {
+  Future<void> onGoogleButtonPressed(BuildContext context) async {
     final repository = ref.read(
       firebaseAuthRepositoryProvider,
     ); // RiverpodでRepositoryを取得
     final result = await repository.signInWithGoogle();
     await result.when(
-      success: (user) => onLoginSuccess(user),
+      success: (user) => onLoginSuccess(context, user),
       failure: (e) {
         UIHelper.showErrorFlutterToast("Google ログインに失敗しました: ${e.toString()}");
       },
     );
   }
 
-  Future<void> onLoginSuccess(User user) async {
-    RouterLogic.back();
+  Future<void> onLoginSuccess(BuildContext context,User user) async {
+    RouterLogic.back(context);
     UIHelper.showFlutterToast("ログインに成功しました");
     await user.reload();
     setAuthUser(user);
@@ -218,10 +218,10 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   void onLogoutButtonPressed(BuildContext context) async {
-    UIHelper.cupertinoAlertDialog(context, "ログアウトしますが本当によろしいですか？", () => _signOut());
+    UIHelper.cupertinoAlertDialog(context, "ログアウトしますが本当によろしいですか？", () => _signOut(context));
   }
 
-  Future<void> _signOut() async {
+  Future<void> _signOut(BuildContext context) async {
     final repository = ref.read(firebaseAuthRepositoryProvider);
     final result = await repository.signOut();
     result.when(
@@ -234,7 +234,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
             base64: null,
           ),
         ); // 状態をリセット
-        RouterLogic.pushPath(LogoutedPage.path);
+        RouterLogic.pushPath(context, LogoutedPage.path);
       },
       failure: (e) {
         UIHelper.showErrorFlutterToast("ログアウトできませんでした: ${e.toString()}");
@@ -276,11 +276,11 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     UIHelper.cupertinoAlertDialog(
       context,
       "ユーザーを削除しますが本当によろしいですか？",
-      () => _deletePublicUser(),
+      () => _deletePublicUser(context),
     );
   }
 
-  Future<void> _deletePublicUser() async {
+  Future<void> _deletePublicUser(BuildContext context) async {
     final user = state.value?.publicUser;
     if (user == null) return;
     final firestoreRepository = ref.read(firestoreRepositoryProvider);
@@ -289,7 +289,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     await result.when(
       success: (_) async {
         await _removeImage();
-        await _deleteAuthUser();
+        await _deleteAuthUser(context);
       },
       failure: (e) {
         UIHelper.showErrorFlutterToast(
@@ -299,7 +299,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
   }
 
-  Future<void> _deleteAuthUser() async {
+  Future<void> _deleteAuthUser(BuildContext context) async {
     final firebaseAuthRepository = ref.read(firebaseAuthRepositoryProvider);
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return;
@@ -314,7 +314,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
             base64: null,
           ),
         ); // 状態をリセット
-        RouterLogic.pushPath(UserDeletedPage.path);
+        RouterLogic.pushPath(context, UserDeletedPage.path);
       },
       failure: (e) {
         UIHelper.showErrorFlutterToast(

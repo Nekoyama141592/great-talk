@@ -11,7 +11,7 @@ class MainFloatingActionButton extends StatelessWidget {
     if (isShow) {
       return FloatingActionButton(
         backgroundColor: kPrimaryColor,
-        onPressed: () => RouterLogic.pushPath(CreatePostPage.path),
+        onPressed: () => RouterLogic.pushPath(context, CreatePostPage.path),
         child: const Icon(Icons.new_label),
       );
     } else {
