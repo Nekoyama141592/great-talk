@@ -12,19 +12,29 @@ class UserRankingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(docsViewModelProvider(DocsType.rankingUsers));
-    final notifier = ref.read(docsViewModelProvider(DocsType.rankingUsers).notifier);
-    return AsyncScreen(asyncValue: asyncValue, data: (state) {
-      final qDocInfoList = state.qDocInfoList;
-      return RefreshScreen(state: state, onReload:notifier. onReload, onLoading:notifier. onLoading,child: ListView.builder(
-          itemCount: qDocInfoList.length,
-          itemBuilder: (c, i) {
-            final publicUser = PublicUser.fromJson(
-              qDocInfoList[i].qDoc.data(),
-            );
-            final uint8list = qDocInfoList[i].userImage;
-            return UserCard(publicUser: publicUser, uint8list: uint8list);
-          },
-        ),);
-    });
+    final notifier = ref.read(
+      docsViewModelProvider(DocsType.rankingUsers).notifier,
+    );
+    return AsyncScreen(
+      asyncValue: asyncValue,
+      data: (state) {
+        final qDocInfoList = state.qDocInfoList;
+        return RefreshScreen(
+          state: state,
+          onReload: notifier.onReload,
+          onLoading: notifier.onLoading,
+          child: ListView.builder(
+            itemCount: qDocInfoList.length,
+            itemBuilder: (c, i) {
+              final publicUser = PublicUser.fromJson(
+                qDocInfoList[i].qDoc.data(),
+              );
+              final uint8list = qDocInfoList[i].userImage;
+              return UserCard(publicUser: publicUser, uint8list: uint8list);
+            },
+          ),
+        );
+      },
+    );
   }
 }

@@ -42,32 +42,25 @@ class ProfileScreen extends ConsumerWidget {
           child: const Icon(Icons.arrow_back, size: 30.0),
         ),
       ),
-      EllipsisText(
-          passiveUser?.nameValue ?? '',
-          style: StyleUtility.bold25(),
-        ),
+      EllipsisText(passiveUser?.nameValue ?? '', style: StyleUtility.bold25()),
       Row(
         children: [
           CircleImage(uint8list: state.uint8list),
           const BasicWidthBox(),
-          Text(
-              "フォロー ${passiveUser?.followingCount.formatNumber() ?? 0}",
-            ),
+          Text("フォロー ${passiveUser?.followingCount.formatNumber() ?? 0}"),
           const BasicWidthBox(),
-          Text(
-              "フォロワー ${passiveUser?.followerCount.formatNumber() ?? 0}",
-            ),
+          Text("フォロワー ${passiveUser?.followerCount.formatNumber() ?? 0}"),
         ],
       ),
       // 横向きなら、表示崩れを防止するためにbioを表示しない。
       if (MediaQuery.of(context).orientation != Orientation.landscape)
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    passiveUser?.typedBio().value.removeNewlinesAndSpaces() ?? '',
-                  ),
-      ),
-      if ((passiveUser?.isOfficial ?? false)) const OfficialMark()
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            passiveUser?.typedBio().value.removeNewlinesAndSpaces() ?? '',
+          ),
+        ),
+      if ((passiveUser?.isOfficial ?? false)) const OfficialMark(),
     ];
     return Obx(
       () => GradientScreen(
@@ -77,24 +70,34 @@ class ProfileScreen extends ConsumerWidget {
             child: Column(
               children: [
                 if (passiveUser != null) ...children,
-                Builder(builder: (context) {
-                  final isFollow = ref.watch(tokensNotifierProvider).value?.followingUids.contains(
-                    state.passiveUid(),
-                  ) ?? false;
-                  return passiveUser?.uid ==
-                          ref.watch(streamAuthUidProvider).value
-                      ? const EditButton()
-                      : FollowButton(
-                        isFollow: isFollow,
-                        follow: follow,
-                        unFollow: unFollow,
-                      );
-                })
+                Builder(
+                  builder: (context) {
+                    final isFollow =
+                        ref
+                            .watch(tokensNotifierProvider)
+                            .value
+                            ?.followingUids
+                            .contains(state.passiveUid()) ??
+                        false;
+                    return passiveUser?.uid ==
+                            ref.watch(streamAuthUidProvider).value
+                        ? const EditButton()
+                        : FollowButton(
+                          isFollow: isFollow,
+                          follow: follow,
+                          unFollow: unFollow,
+                        );
+                  },
+                ),
               ],
             ),
           ),
         ),
-        child: RefreshScreen(state: state, onReload: onReload, onLoading: onLoading)
+        child: RefreshScreen(
+          state: state,
+          onReload: onReload,
+          onLoading: onLoading,
+        ),
       ),
     );
   }

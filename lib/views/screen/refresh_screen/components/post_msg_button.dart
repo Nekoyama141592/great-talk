@@ -13,11 +13,12 @@ class PostMsgButton extends ConsumerWidget {
   final bool isHorizontal;
   final Post post;
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final children = [
       InkWell(
         child: const Icon(Icons.comment),
-        onTap: () => ref.read(postLogicProvider.notifier).onPostCardPressed(post),
+        onTap:
+            () => ref.read(postLogicProvider.notifier).onPostCardPressed(post),
       ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),

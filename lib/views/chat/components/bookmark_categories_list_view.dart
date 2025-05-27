@@ -17,7 +17,7 @@ class BookmarkCategoriesListView extends ConsumerWidget {
   });
   final void Function(BookmarkCategory) onBookmarkCategoryTapped;
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(tokensNotifierProvider);
     return SizedBox(
       height: fullHeight(context) * 0.8,
@@ -28,21 +28,22 @@ class BookmarkCategoriesListView extends ConsumerWidget {
             SizedBox(
               height: fullHeight(context) * 0.7,
               child: Material(
-                child: AsyncScreen(asyncValue: asyncValue, data: (state) {
-                  final bookmarkCategoryTokens = state.bookmarkCategoryTokens;
-                  return ListView.builder(
-                    itemCount:
-                        bookmarkCategoryTokens.length,
-                    itemBuilder: (context, index) {
-                      final token =
-                          bookmarkCategoryTokens[index];
-                      return InkWell(
-                        onTap: () => onBookmarkCategoryTapped(token),
-                        child: ListTile(title: BasicBoldText(token.title)),
-                      );
-                    },
-                  );
-                })
+                child: AsyncScreen(
+                  asyncValue: asyncValue,
+                  data: (state) {
+                    final bookmarkCategoryTokens = state.bookmarkCategoryTokens;
+                    return ListView.builder(
+                      itemCount: bookmarkCategoryTokens.length,
+                      itemBuilder: (context, index) {
+                        final token = bookmarkCategoryTokens[index];
+                        return InkWell(
+                          onTap: () => onBookmarkCategoryTapped(token),
+                          child: ListTile(title: BasicBoldText(token.title)),
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
             const BasicHeightBox(),

@@ -6,11 +6,12 @@ part 'pending_renewal_info.g.dart';
 @freezed
 abstract class PendingRenewalInfo with _$PendingRenewalInfo {
   const PendingRenewalInfo._();
-  const factory PendingRenewalInfo(
-      {required String auto_renew_product_id,
-      required String auto_renew_status,
-      required String original_transaction_id,
-      required String product_id}) = _PendingRenewalInfo;
+  const factory PendingRenewalInfo({
+    required String auto_renew_product_id,
+    required String auto_renew_status,
+    required String original_transaction_id,
+    required String product_id,
+  }) = _PendingRenewalInfo;
   factory PendingRenewalInfo.fromJson(Map<String, dynamic> json) =>
       _$PendingRenewalInfoFromJson(json);
   bool isAutoRenew() {

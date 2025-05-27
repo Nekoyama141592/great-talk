@@ -39,9 +39,10 @@ class ProductsViewModel extends _$ProductsViewModel {
     final products = (res != null && res.isNotEmpty) ? res : mockProducts;
     final verifiedPurchases = _fetchPurchases();
     return PurchasesState(
-        products: products,
-        verifiedPurchases: verifiedPurchases,
-        storeConnected: storeConnected);
+      products: products,
+      verifiedPurchases: verifiedPurchases,
+      storeConnected: storeConnected,
+    );
   }
 
   List<VerifiedPurchase> _fetchPurchases() {
@@ -56,8 +57,10 @@ class ProductsViewModel extends _$ProductsViewModel {
       return;
     }
     await PurchasesCore.cancelTransctions();
-    final purchaseParam =
-        PurchasesCore.param(details, state.value?.verifiedPurchases);
+    final purchaseParam = PurchasesCore.param(
+      details,
+      state.value?.verifiedPurchases,
+    );
     await UIHelper.showFlutterToast("情報を取得しています。 \nしばらくお待ちください。");
     final result = await repository.buyNonConsumable(purchaseParam);
     result.when(success: _onPurchaseSuccess, failure: _onPurchaseFailed);

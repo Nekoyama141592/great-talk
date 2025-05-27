@@ -22,7 +22,8 @@ class MosaicPostChild extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isMine = post.uid == ref.watch(streamAuthUidProvider).value;
-    final isAdmin = ref.watch(currentUserNotifierProvider).value?.isAdmin() ?? false;
+    final isAdmin =
+        ref.watch(currentUserNotifierProvider).value?.isAdmin() ?? false;
     final asyncValue = ref.watch(tokensNotifierProvider);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -34,15 +35,21 @@ class MosaicPostChild extends ConsumerWidget {
           child: const Icon(Icons.info, color: Colors.white),
         ),
         const BasicHeightBox(),
-        asyncValue.when(data: (state) {
-          return (isMine || isAdmin) &&
-                      !state.deletePostIds.contains(post.postId)
-                  ? InkWell(
-                    onTap: () => ref.read(postLogicProvider.notifier).deletePost(post),
-                    child: const Icon(Icons.delete, color: Colors.white),
-                  )
-                  : const SizedBox.shrink();
-        }, error: (e,s) =>const SizedBox.shrink(), loading: () => const SizedBox.shrink())
+        asyncValue.when(
+          data: (state) {
+            return (isMine || isAdmin) &&
+                    !state.deletePostIds.contains(post.postId)
+                ? InkWell(
+                  onTap:
+                      () =>
+                          ref.read(postLogicProvider.notifier).deletePost(post),
+                  child: const Icon(Icons.delete, color: Colors.white),
+                )
+                : const SizedBox.shrink();
+          },
+          error: (e, s) => const SizedBox.shrink(),
+          loading: () => const SizedBox.shrink(),
+        ),
       ],
     );
   }

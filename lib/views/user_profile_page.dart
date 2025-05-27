@@ -12,17 +12,22 @@ class UserProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(docsViewModelProvider(DocsType.userProfiles));
-    final notifier = ref.read(docsViewModelProvider(DocsType.userProfiles).notifier);
+    final notifier = ref.read(
+      docsViewModelProvider(DocsType.userProfiles).notifier,
+    );
     return Scaffold(
-        body: AsyncScreen(asyncValue: asyncValue, data: (state) {
+      body: AsyncScreen(
+        asyncValue: asyncValue,
+        data: (state) {
           return ProfileScreen(
             state: state,
             onLoading: notifier.onLoading,
             onReload: notifier.onReload,
-          follow: notifier.onFollowPressed,
-          unFollow: notifier.onUnFollowPressed,
-        );
-        })
-      );
+            follow: notifier.onFollowPressed,
+            unFollow: notifier.onUnFollowPressed,
+          );
+        },
+      ),
+    );
   }
 }

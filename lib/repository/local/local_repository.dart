@@ -16,7 +16,9 @@ class LocalRepository extends _$LocalRepository {
   SharedPreferences get prefs => ref.read(prefsProvider);
 
   List<T> _fetchList<T>(
-      PrefsKey key, T Function(Map<String, dynamic>) fromJson) {
+    PrefsKey key,
+    T Function(Map<String, dynamic>) fromJson,
+  ) {
     try {
       final keyName = key.name;
       final jsonList = prefs.getJsonList(keyName) ?? [];
@@ -27,14 +29,17 @@ class LocalRepository extends _$LocalRepository {
     }
   }
 
-  FutureResult<bool> _addElement(PrefsKey key,Map<String,dynamic> newElement) async {
+  FutureResult<bool> _addElement(
+    PrefsKey key,
+    Map<String, dynamic> newElement,
+  ) async {
     try {
       final keyName = key.name;
       final oldValue = prefs.getJsonList(keyName) ?? [];
-      final newValue = [...oldValue,newElement];
+      final newValue = [...oldValue, newElement];
       await prefs.setJsonList(keyName, newValue);
       return const Result.success(true);
-    } catch(e) {
+    } catch (e) {
       debugPrint(e.toString());
       return Result.failure(e);
     }
@@ -47,5 +52,4 @@ class LocalRepository extends _$LocalRepository {
   List<VerifiedPurchase> fetchVerifiedPurchases() {
     return _fetchList(PrefsKey.verifiedPurchases, VerifiedPurchase.fromJson);
   }
-
 }

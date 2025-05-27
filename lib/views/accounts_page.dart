@@ -15,42 +15,41 @@ class AccountPage extends ConsumerWidget {
     final notifier = ref.watch(currentUserNotifierProvider.notifier);
     return Scaffold(
       appBar: AppBar(title: const Text("アカウントページ")),
-      body: AsyncScreen(asyncValue: asyncValue, data: (state) {
-        return ListView(
-          children: [
-            ListTile(
-              title: Text("認証情報: ${state.currentAuthStateString()}"),
-            ),
-            ListTile(
-              title: SelectableText("ユーザーID: ${state.currentUid()}"),
-            ),
-            (() {
-              final publicUser = state.publicUser;
-              if (publicUser == null || !publicUser.isInappropriate()) {
-                return const SizedBox.shrink();
-              }
-              return ListTile(
-                title: Text(
-                  "非表示の理由: \n${publicUser.inappropriateReason(state.currentUid())}",
-                  style: const TextStyle(color: Colors.red),
-                ),
-              );
-            })(),
-            state.isLoggedIn()
-                ? ListTile(
+      body: AsyncScreen(
+        asyncValue: asyncValue,
+        data: (state) {
+          return ListView(
+            children: [
+              ListTile(title: Text("認証情報: ${state.currentAuthStateString()}")),
+              ListTile(title: SelectableText("ユーザーID: ${state.currentUid()}")),
+              (() {
+                final publicUser = state.publicUser;
+                if (publicUser == null || !publicUser.isInappropriate()) {
+                  return const SizedBox.shrink();
+                }
+                return ListTile(
+                  title: Text(
+                    "非表示の理由: \n${publicUser.inappropriateReason(state.currentUid())}",
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                );
+              })(),
+              state.isLoggedIn()
+                  ? ListTile(
                     title: const Text("ログアウトする"),
                     onTap: notifier.onLogoutButtonPressed,
                   )
-                : const SizedBox.shrink(),
-            state.isLoggedIn()
-                ? ListTile(
+                  : const SizedBox.shrink(),
+              state.isLoggedIn()
+                  ? ListTile(
                     title: const Text("ユーザーを消去する"),
                     onTap: () => Get.toNamed(ReauthenticateToDeletePage.path),
                   )
-                : const SizedBox.shrink(),
-          ],
-        );
-      }),
+                  : const SizedBox.shrink(),
+            ],
+          );
+        },
+      ),
     );
   }
 }

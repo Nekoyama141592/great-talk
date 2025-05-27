@@ -31,15 +31,18 @@ class PurchasesNotifier extends _$PurchasesNotifier {
       if (details.isError || !details.isPurchased) continue;
       final result = await PurchasesCore.verifyPurchase(details);
       await result.when(
-          success: (res) => _onVerifySuccess(details, res),
-          failure: _onVerifyFailed);
+        success: (res) => _onVerifySuccess(details, res),
+        failure: _onVerifyFailed,
+      );
     }
     await _updateVerifiedPurchases();
     UIHelper.showFlutterToast('購入情報の検証が完了しました');
   }
 
   Future<void> _onVerifySuccess(
-      PurchaseDetails details, VerifiedPurchase res) async {
+    PurchaseDetails details,
+    VerifiedPurchase res,
+  ) async {
     await PurchasesCore.completePurchase(details);
     await PurchasesCore.acknowledge(details);
     await _save(res);

@@ -17,10 +17,10 @@ class PurchasesCore {
       purchaseID: json['purchaseID'],
       productID: json['productID'],
       verificationData: PurchaseVerificationData(
-        localVerificationData: json['verificationData']
-            ['localVerificationData'],
-        serverVerificationData: json['verificationData']
-            ['serverVerificationData'],
+        localVerificationData:
+            json['verificationData']['localVerificationData'],
+        serverVerificationData:
+            json['verificationData']['serverVerificationData'],
         source: json['verificationData']['source'],
       ),
       transactionDate: json['transactionDate'],
@@ -30,7 +30,7 @@ class PurchasesCore {
 
   static String basicItemId() => kMonthSubscriptionId;
   static String _premiumItenId() => kPremiumSubscriptionId;
-      
+
   static List<String> _itemIds() => [basicItemId(), _premiumItenId()];
   static Set<String> productIds() {
     final identifiers = _itemIds();
@@ -40,21 +40,23 @@ class PurchasesCore {
   static List<ProductDetails> mockProducts() {
     return [
       ProductDetails(
-          id: basicItemId(),
-          title: PurchasesConstants.monthTitle,
-          description: "一月ごとに課金されます",
-          price: "¥${PurchasesConstants.monthPrice.floor()}",
-          rawPrice: PurchasesConstants.monthPrice,
-          currencyCode: "JPY",
-          currencySymbol: "¥"),
+        id: basicItemId(),
+        title: PurchasesConstants.monthTitle,
+        description: "一月ごとに課金されます",
+        price: "¥${PurchasesConstants.monthPrice.floor()}",
+        rawPrice: PurchasesConstants.monthPrice,
+        currencyCode: "JPY",
+        currencySymbol: "¥",
+      ),
       ProductDetails(
-          id: _premiumItenId(),
-          title: PurchasesConstants.annualTitle,
-          description: "一年ごとに課金されます",
-          price: "¥${PurchasesConstants.annualPrice.floor()}",
-          rawPrice: PurchasesConstants.annualPrice,
-          currencyCode: "JPY",
-          currencySymbol: "¥"),
+        id: _premiumItenId(),
+        title: PurchasesConstants.annualTitle,
+        description: "一年ごとに課金されます",
+        price: "¥${PurchasesConstants.annualPrice.floor()}",
+        rawPrice: PurchasesConstants.annualPrice,
+        currencyCode: "JPY",
+        currencySymbol: "¥",
+      ),
     ];
   }
 
@@ -75,7 +77,8 @@ class PurchasesCore {
   }
 
   static FutureResult<VerifiedPurchase> verifyPurchase(
-      PurchaseDetails purchaseDetails) async {
+    PurchaseDetails purchaseDetails,
+  ) async {
     final repository = PurchasesRepository();
     return Platform.isAndroid
         ? await repository.verifyAndroidReceipt(purchaseDetails)
@@ -92,7 +95,9 @@ class PurchasesCore {
   }
 
   static PurchaseParam param(
-      ProductDetails newDetails, List<VerifiedPurchase>? purchases) {
+    ProductDetails newDetails,
+    List<VerifiedPurchase>? purchases,
+  ) {
     if (Platform.isAndroid) {
       final oldSubscription = _getOldSubscription(newDetails, purchases);
       return GooglePlayPurchaseParam(
@@ -105,8 +110,9 @@ class PurchasesCore {
   }
 
   static GooglePlayPurchaseDetails? _getOldSubscription(
-      ProductDetails productDetails,
-      List<VerifiedPurchase>? verifiedPurchases) {
+    ProductDetails productDetails,
+    List<VerifiedPurchase>? verifiedPurchases,
+  ) {
     GooglePlayPurchaseDetails? oldSubscription;
     if (verifiedPurchases == null) return oldSubscription;
     final purchases =
@@ -118,7 +124,8 @@ class PurchasesCore {
   }
 
   static ChangeSubscriptionParam? _changeParam(
-      GooglePlayPurchaseDetails? oldDetails) {
+    GooglePlayPurchaseDetails? oldDetails,
+  ) {
     return (oldDetails != null)
         ? ChangeSubscriptionParam(oldPurchaseDetails: oldDetails)
         : null;

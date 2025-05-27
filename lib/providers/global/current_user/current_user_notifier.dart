@@ -27,7 +27,8 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   @override
   Future<CurrentUserState> build() async {
     final authUser = FirebaseAuth.instance.currentUser;
-    final authUserData = authUser != null ? AuthUser.fromFirebaseAuthUser(authUser) : null;
+    final authUserData =
+        authUser != null ? AuthUser.fromFirebaseAuthUser(authUser) : null;
 
     final initialState = CurrentUserState(
       authUser: authUserData,
@@ -72,7 +73,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   Future<void> onAppleButtonPressed() async {
-    final repository = ref.read(firebaseAuthRepositoryProvider); // RiverpodでRepositoryを取得
+    final repository = ref.read(
+      firebaseAuthRepositoryProvider,
+    ); // RiverpodでRepositoryを取得
     final result = await repository.signInWithApple();
     await result.when(
       success: (user) => onLoginSuccess(user),
@@ -83,7 +86,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   Future<void> onGoogleButtonPressed() async {
-    final repository = ref.read(firebaseAuthRepositoryProvider); // RiverpodでRepositoryを取得
+    final repository = ref.read(
+      firebaseAuthRepositoryProvider,
+    ); // RiverpodでRepositoryを取得
     final result = await repository.signInWithGoogle();
     await result.when(
       success: (user) => onLoginSuccess(user),
@@ -117,7 +122,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
         UIHelper.showFlutterToast("ユーザーが作成されました");
       },
       failure: (e) {
-        UIHelper.showErrorFlutterToast("データベースにユーザーを作成できませんでした: ${e.toString()}");
+        UIHelper.showErrorFlutterToast(
+          "データベースにユーザーを作成できませんでした: ${e.toString()}",
+        );
       },
     );
   }
@@ -135,7 +142,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
         _updateState(state.value!.copyWith(privateUser: newPrivateUser));
       },
       failure: (e) {
-        UIHelper.showErrorFlutterToast("データベースにプライベートユーザーを作成できませんでした: ${e.toString()}");
+        UIHelper.showErrorFlutterToast(
+          "データベースにプライベートユーザーを作成できませんでした: ${e.toString()}",
+        );
       },
     );
   }
@@ -169,7 +178,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
               base64Image = base64Encode(image);
             }
           }
-          _updateState(state.value!.copyWith(publicUser: user, base64: base64Image));
+          _updateState(
+            state.value!.copyWith(publicUser: user, base64: base64Image),
+          );
         } else {
           await _createPublicUser();
         }
@@ -190,18 +201,20 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
       success: (res) async {
         final data = res.data();
         if (res.exists && data != null) {
-          _updateState(state.value!.copyWith(privateUser: PrivateUser.fromJson(data)));
+          _updateState(
+            state.value!.copyWith(privateUser: PrivateUser.fromJson(data)),
+          );
         } else {
           await _createPrivateUser();
         }
       },
       failure: (e) {
-        UIHelper.showErrorFlutterToast("プライベートユーザーデータの取得に失敗しました: ${e.toString()}");
+        UIHelper.showErrorFlutterToast(
+          "プライベートユーザーデータの取得に失敗しました: ${e.toString()}",
+        );
       },
     );
   }
-
-  
 
   void onLogoutButtonPressed() async {
     UIHelper.cupertinoAlertDialog("ログアウトしますが本当によろしいですか？", () => _signOut());
@@ -212,7 +225,14 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final result = await repository.signOut();
     result.when(
       success: (_) {
-        _updateState(const CurrentUserState(authUser: null, publicUser: null, privateUser: null, base64: null)); // 状態をリセット
+        _updateState(
+          const CurrentUserState(
+            authUser: null,
+            publicUser: null,
+            privateUser: null,
+            base64: null,
+          ),
+        ); // 状態をリセット
         Get.toNamed(LogoutedPage.path);
       },
       failure: (e) {
@@ -235,7 +255,10 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final repository = ref.read(firebaseAuthRepositoryProvider);
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) return;
-    final result = await repository.reauthenticateWithCredential(user, credential);
+    final result = await repository.reauthenticateWithCredential(
+      user,
+      credential,
+    );
     result.when(
       success: (_) {
         _showDeleteUserDialog();
@@ -247,7 +270,10 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   void _showDeleteUserDialog() {
-    UIHelper.cupertinoAlertDialog("ユーザーを削除しますが本当によろしいですか？", () => _deletePublicUser());
+    UIHelper.cupertinoAlertDialog(
+      "ユーザーを削除しますが本当によろしいですか？",
+      () => _deletePublicUser(),
+    );
   }
 
   Future<void> _deletePublicUser() async {
@@ -262,7 +288,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
         await _deleteAuthUser();
       },
       failure: (e) {
-        UIHelper.showErrorFlutterToast("データベースからユーザーを削除できませんでした: ${e.toString()}");
+        UIHelper.showErrorFlutterToast(
+          "データベースからユーザーを削除できませんでした: ${e.toString()}",
+        );
       },
     );
   }
@@ -274,11 +302,20 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final result = await firebaseAuthRepository.deleteUser(user);
     result.when(
       success: (_) {
-        _updateState(const CurrentUserState(authUser: null, publicUser: null, privateUser: null, base64: null)); // 状態をリセット
+        _updateState(
+          const CurrentUserState(
+            authUser: null,
+            publicUser: null,
+            privateUser: null,
+            base64: null,
+          ),
+        ); // 状態をリセット
         Get.toNamed(UserDeletedPage.path);
       },
       failure: (e) {
-        UIHelper.showErrorFlutterToast("Firebase Auth からユーザーを削除できませんでした: ${e.toString()}");
+        UIHelper.showErrorFlutterToast(
+          "Firebase Auth からユーザーを削除できませんでした: ${e.toString()}",
+        );
       },
     );
   }
@@ -288,7 +325,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     if (publicUser == null) return;
     final fileName = publicUser.typedImage().value;
     final request = DeleteObjectRequest(object: fileName);
-    await ref.read(awsS3RepositoryProvider).deleteObject(request); // RiverpodでRepositoryを取得
+    await ref
+        .read(awsS3RepositoryProvider)
+        .deleteObject(request); // RiverpodでRepositoryを取得
   }
 
   Future<void> updateUser(String userName, String bio, String fileName) async {
@@ -309,7 +348,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     if (image != null) {
       newBase64 = base64Encode(image);
     }
-    _updateState(state.value!.copyWith(publicUser: updatedUser, base64: newBase64));
+    _updateState(
+      state.value!.copyWith(publicUser: updatedUser, base64: newBase64),
+    );
 
     final firestoreRepository = ref.read(firestoreRepositoryProvider);
     final docRef = DocRefCore.user(user.uid);

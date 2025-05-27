@@ -13,7 +13,7 @@ class BookmarkCategoriesPage extends ConsumerWidget {
   const BookmarkCategoriesPage({super.key});
   static const path = "/bookmarkCategory";
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final inputController = useTextEditingController();
     final asyncValue = ref.watch(tokensNotifierProvider);
     final notifier = ref.watch(tokensNotifierProvider.notifier);
@@ -23,46 +23,49 @@ class BookmarkCategoriesPage extends ConsumerWidget {
         onTap: () {
           FocusScope.of(context).unfocus();
         },
-        child: AsyncScreen(asyncValue: asyncValue, data: (state) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: fullHeight(context) * 0.7,
-                  child: ListView.builder(
-                    itemCount: state.bookmarkCategoryTokens.length,
-                    itemBuilder: (context, index) {
-                      final category = state.bookmarkCategoryTokens[index];
-                      return ListTile(
-                        onTap:
-                            () => Get.toNamed(
-                              BookmarksPage.generatePath(category.id),
-                            ),
-                        title: Text(category.title),
-                        trailing: InkWell(
+        child: AsyncScreen(
+          asyncValue: asyncValue,
+          data: (state) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: fullHeight(context) * 0.7,
+                    child: ListView.builder(
+                      itemCount: state.bookmarkCategoryTokens.length,
+                      itemBuilder: (context, index) {
+                        final category = state.bookmarkCategoryTokens[index];
+                        return ListTile(
                           onTap:
-                              () => notifier
-                                  .onBookmarkCategoryDeleteButtonPressed(
-                                    category,
-                                  ),
-                          child: const Icon(Icons.delete),
-                        ),
-                      );
-                    },
+                              () => Get.toNamed(
+                                BookmarksPage.generatePath(category.id),
+                              ),
+                          title: Text(category.title),
+                          trailing: InkWell(
+                            onTap:
+                                () => notifier
+                                    .onBookmarkCategoryDeleteButtonPressed(
+                                      category,
+                                    ),
+                            child: const Icon(Icons.delete),
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-                RoundedInputField(
-                  controller: inputController,
-                  send:
-                      () => notifier.createBookmarkCategory(
-                        context,
-                        inputController,
-                      ),
-                ),
-              ],
-            ),
-          );
-        })
+                  RoundedInputField(
+                    controller: inputController,
+                    send:
+                        () => notifier.createBookmarkCategory(
+                          context,
+                          inputController,
+                        ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

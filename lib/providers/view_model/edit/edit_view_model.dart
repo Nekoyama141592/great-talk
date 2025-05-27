@@ -25,13 +25,14 @@ part 'edit_view_model.g.dart';
 
 @riverpod
 class EditViewModel extends _$EditViewModel {
-  CurrentUserState? _currentUserState() => ref.read(currentUserNotifierProvider).value;
+  CurrentUserState? _currentUserState() =>
+      ref.read(currentUserNotifierProvider).value;
   @override
   FutureOr<EditState> build() {
     final user = _currentUserState()?.publicUser;
     final bio = user?.bioValue ?? "";
     final userName = user?.nameValue ?? "";
-    final  base64 = _currentUserState()?.base64;
+    final base64 = _currentUserState()?.base64;
     return EditState(
       bio: bio,
       userName: userName,
@@ -60,8 +61,7 @@ class EditViewModel extends _$EditViewModel {
   /// 初期化
   void init() {
     final base64 = _currentUserState()?.base64;
-    if (state.value?.base64 != null &&
-        base64 != null) {
+    if (state.value?.base64 != null && base64 != null) {
       state = AsyncData(state.value!.copyWith(base64: base64));
     }
   }
@@ -151,7 +151,9 @@ class EditViewModel extends _$EditViewModel {
     final result = await repository.createDoc(docRef, json);
     result.when(
       success: (_) {
-        ref.read(currentUserNotifierProvider.notifier).updateUser(userName, bio, fileName);
+        ref
+            .read(currentUserNotifierProvider.notifier)
+            .updateUser(userName, bio, fileName);
         Get.back();
         Get.back();
         UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");

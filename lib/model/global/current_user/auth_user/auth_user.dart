@@ -15,6 +15,10 @@ abstract class AuthUser with _$AuthUser {
   factory AuthUser.fromJson(Map<String, dynamic> json) =>
       _$AuthUserFromJson(json);
   factory AuthUser.fromFirebaseAuthUser(User user) {
-    return AuthUser(uid: user.uid, isAnonymous: user.isAnonymous,emailVerified: user.emailVerified);
+    return AuthUser(
+      uid: user.uid,
+      isAnonymous: user.isAnonymous,
+      emailVerified: user.emailVerified,
+    );
   }
 }

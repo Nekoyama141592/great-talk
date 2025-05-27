@@ -7,7 +7,6 @@ import 'package:great_talk/model/global/current_user/auth_user/auth_user.dart';
 part 'current_user_state.freezed.dart';
 part 'current_user_state.g.dart';
 
-
 @freezed
 abstract class CurrentUserState with _$CurrentUserState {
   const CurrentUserState._();
@@ -42,6 +41,7 @@ abstract class CurrentUserState with _$CurrentUserState {
         return "未ログイン"; // 修正: 未ログイン状態
     }
   }
+
   bool isAdmin() => privateUser?.isAdmin ?? false;
   bool isOfficial() => publicUser?.isOfficial ?? false;
 

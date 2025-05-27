@@ -17,20 +17,23 @@ class ProductList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(productsViewModelProvider);
     final notifier = ref.read(productsViewModelProvider.notifier);
-    return AsyncScreen(asyncValue: asyncValue, data: (state) {
-      
-      final productList =
-          state.products.map((ProductDetails productDetails) {
-            final descriptions = productDetails.id == kMonthSubscriptionId ?
-            const [
-                    PlanDescription(text: '無制限のチャット'),
-                    PlanDescription(text: 'コピー可能な説明や返答'),
-                  ] : [
-                    const PlanDescription(text: 'ベーシックプランの全ての機能'),
-                    const PlanDescription(text: "モデルの性能が向上!"),
-                    const PlanDescription(text: '画像を生成するAI'),
-                  ];
-            final String planName = getPlanName(productDetails.id);
+    return AsyncScreen(
+      asyncValue: asyncValue,
+      data: (state) {
+        final productList =
+            state.products.map((ProductDetails productDetails) {
+              final descriptions =
+                  productDetails.id == kMonthSubscriptionId
+                      ? const [
+                        PlanDescription(text: '無制限のチャット'),
+                        PlanDescription(text: 'コピー可能な説明や返答'),
+                      ]
+                      : [
+                        const PlanDescription(text: 'ベーシックプランの全ての機能'),
+                        const PlanDescription(text: "モデルの性能が向上!"),
+                        const PlanDescription(text: '画像を生成するAI'),
+                      ];
+              final String planName = getPlanName(productDetails.id);
               return Container(
                 margin: const EdgeInsets.all(16.0),
                 padding: const EdgeInsets.all(16.0),
@@ -47,13 +50,19 @@ class ProductList extends ConsumerWidget {
                     BasicBoldText("${productDetails.price}/月"),
                     const BasicHeightBox(),
                     ...descriptions,
-                    PurchaseButton(isPurchased: state.isPurchased(productDetails.id), onPressed: () => notifier.onPurchaseButtonPressed(productDetails))
+                    PurchaseButton(
+                      isPurchased: state.isPurchased(productDetails.id),
+                      onPressed:
+                          () =>
+                              notifier.onPurchaseButtonPressed(productDetails),
+                    ),
                   ],
                 ),
               );
-          }).toList();
+            }).toList();
 
-      return Card(child: Column(children: productList));
-    });
+        return Card(child: Column(children: productList));
+      },
+    );
   }
 }

@@ -27,31 +27,28 @@ class RefreshScreen extends HookWidget {
       return refreshController.dispose;
     }, []);
     final qDocInfoList = state.qDocInfoList;
-      if (qDocInfoList.isEmpty) {
-        return ReloadScreen(
-          onReload: onReload,
-          reloadMsg: reloadMsg,
-        );
-      }
-      return SmartRefresher(
-        controller: refreshController,
-        enablePullDown: false, // trueだとiosもAndroidも反応しなくなる
-        enablePullUp: true,
-        header: const WaterDropHeader(),
-        onLoading: () => onLoading(refreshController),
-        child:
-            child ??
-            GridView.builder(
-              itemCount: qDocInfoList.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 0.5,
-              ),
-              itemBuilder: (c, i) {
-                final qDocInfo = qDocInfoList[i];
-                return PostCard(qDocInfo: qDocInfo);
-              },
+    if (qDocInfoList.isEmpty) {
+      return ReloadScreen(onReload: onReload, reloadMsg: reloadMsg);
+    }
+    return SmartRefresher(
+      controller: refreshController,
+      enablePullDown: false, // trueだとiosもAndroidも反応しなくなる
+      enablePullUp: true,
+      header: const WaterDropHeader(),
+      onLoading: () => onLoading(refreshController),
+      child:
+          child ??
+          GridView.builder(
+            itemCount: qDocInfoList.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 0.5,
             ),
-      );
+            itemBuilder: (c, i) {
+              final qDocInfo = qDocInfoList[i];
+              return PostCard(qDocInfo: qDocInfo);
+            },
+          ),
+    );
   }
 }

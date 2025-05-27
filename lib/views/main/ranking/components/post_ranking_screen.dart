@@ -10,9 +10,18 @@ class PostRankingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(docsViewModelProvider(DocsType.rankingPosts));
-    final notifier = ref.read(docsViewModelProvider(DocsType.rankingPosts).notifier);
-    return AsyncScreen(asyncValue: asyncValue, data: (state) {
-      return RefreshScreen(state: state, onReload:notifier.onReload, onLoading:notifier.onLoading);
-    });
+    final notifier = ref.read(
+      docsViewModelProvider(DocsType.rankingPosts).notifier,
+    );
+    return AsyncScreen(
+      asyncValue: asyncValue,
+      data: (state) {
+        return RefreshScreen(
+          state: state,
+          onReload: notifier.onReload,
+          onLoading: notifier.onLoading,
+        );
+      },
+    );
   }
 }

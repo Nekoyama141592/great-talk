@@ -18,6 +18,7 @@ class PurchasesRepository {
       return false;
     }
   }
+
   Future<List<ProductDetails>?> queryProductDetails() async {
     try {
       final identifiers = PurchasesCore.productIds();
@@ -38,9 +39,9 @@ class PurchasesRepository {
     }
   }
 
-
   FutureResult<VerifiedPurchase> verifyAndroidReceipt(
-      PurchaseDetails purchaseDetails) async {
+    PurchaseDetails purchaseDetails,
+  ) async {
     try {
       const name = 'verifyAndroidReceipt';
       final request = ReceiptRequest(purchaseDetails: purchaseDetails.toJson());
@@ -53,7 +54,8 @@ class PurchasesRepository {
   }
 
   FutureResult<VerifiedPurchase> verifyIOSReceipt(
-      PurchaseDetails purchaseDetails) async {
+    PurchaseDetails purchaseDetails,
+  ) async {
     try {
       const name = 'verifyIOSReceipt';
       final request = ReceiptRequest(purchaseDetails: purchaseDetails.toJson());

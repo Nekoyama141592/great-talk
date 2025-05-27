@@ -38,7 +38,8 @@ class ChatPage extends HookConsumerWidget {
     final postId = Get.parameters['postId']!;
     final chatStateAsync = ref.watch(chatViewModelProvider(uid, postId));
     final chatNotifier = ref.read(chatViewModelProvider(uid, postId).notifier);
-    final isAdmin = ref.watch(currentUserNotifierProvider).value?.isAdmin() ?? false;
+    final isAdmin =
+        ref.watch(currentUserNotifierProvider).value?.isAdmin() ?? false;
     final inputController = useTextEditingController();
     final scrollController = useScrollController();
 
@@ -72,24 +73,19 @@ class ChatPage extends HookConsumerWidget {
                 title: EllipsisText(post.typedTitle().value),
                 actions: [
                   // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示
-                  if (post.uid == currentUserId || isAdmin) // `CurrentUserController`は依存関係が不明なため残置
+                  if (post.uid == currentUserId ||
+                      isAdmin) // `CurrentUserController`は依存関係が不明なため残置
                     DeletePostButton(onTap: chatNotifier.onDeleteButtonPressed)
                   else
                     AppBarAction(
                       onTap:
-                          () => ref.read(postLogicProvider.notifier) .onReportButtonPressed(
-                            context,
-                            post,
-                          ),
+                          () => ref
+                              .read(postLogicProvider.notifier)
+                              .onReportButtonPressed(context, post),
                       child: const Icon(Icons.report),
                     ),
-                  PostLikeButton(
-                    isHorizontal: true,
-                    post: post,
-                  ),
-                  MenuButton(
-                    onMenuPressed: chatNotifier.onMenuPressed,
-                  ),
+                  PostLikeButton(isHorizontal: true, post: post),
+                  MenuButton(onMenuPressed: chatNotifier.onMenuPressed),
                 ],
               ),
               body: SingleChildScrollView(

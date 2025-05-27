@@ -13,33 +13,35 @@ class MutePostsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(docsViewModelProvider(DocsType.mutePosts));
-    final notifier = ref.watch(docsViewModelProvider(DocsType.mutePosts).notifier);
-    
+    final notifier = ref.watch(
+      docsViewModelProvider(DocsType.mutePosts).notifier,
+    );
+
     return Scaffold(
       appBar: AppBar(title: const Text("ミュートしている投稿一覧")),
-      body: AsyncScreen(asyncValue: asyncValue, data: (state) {
-        final qDocInfoList = state.qDocInfoList;
-        return RefreshScreen(
-        state: state,
-        onLoading: notifier.onLoading,
-        onReload: notifier.onReload,
-        child: ListView.builder(
-            itemCount: qDocInfoList.length,
-            itemBuilder: (c, i) {
-              final post = Post.fromJson(
-                qDocInfoList[i].qDoc.data(),
-              );
-              final uint8list =
-                  qDocInfoList[i].userImage;
-              return MutePostCard(
-                post: post,
-                uint8list: uint8list,
-                onTap: notifier.onMutePostCardTap,
-              );
-            },
-          ),
-      );
-      })
+      body: AsyncScreen(
+        asyncValue: asyncValue,
+        data: (state) {
+          final qDocInfoList = state.qDocInfoList;
+          return RefreshScreen(
+            state: state,
+            onLoading: notifier.onLoading,
+            onReload: notifier.onReload,
+            child: ListView.builder(
+              itemCount: qDocInfoList.length,
+              itemBuilder: (c, i) {
+                final post = Post.fromJson(qDocInfoList[i].qDoc.data());
+                final uint8list = qDocInfoList[i].userImage;
+                return MutePostCard(
+                  post: post,
+                  uint8list: uint8list,
+                  onTap: notifier.onMutePostCardTap,
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -77,6 +77,7 @@ abstract class VerifiedPurchase with _$VerifiedPurchase {
       throw Error();
     }
   }
+
   String get originalTransactionId =>
       Platform.isIOS
           ? _iosReceipt.original_transaction_id

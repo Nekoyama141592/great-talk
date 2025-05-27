@@ -37,7 +37,9 @@ extension SharedPreferencesExtension on SharedPreferences {
   }
 
   Future<void> setJsonList(
-      String key, List<Map<String, dynamic>> jsonList) async {
+    String key,
+    List<Map<String, dynamic>> jsonList,
+  ) async {
     final jsonString = json.encode(jsonList);
     await setString(key, jsonString);
   }

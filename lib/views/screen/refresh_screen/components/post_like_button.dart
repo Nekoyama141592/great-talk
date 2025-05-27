@@ -17,42 +17,45 @@ class PostLikeButton extends HookConsumerWidget {
   final bool isHorizontal;
   final Post post;
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final copyPost = useState(post);
     final asyncValue = ref.watch(tokensNotifierProvider);
-    
-    return AsyncScreen(asyncValue: asyncValue, data: (state) {
-      final isLiked = state.likePostIds.contains(post.postId);
-      final children = [
-      isLiked
-          ? InkWell(
-            child: const Icon(Icons.favorite, color: Colors.red),
-            onTap:
-                () => ref.read(postLogicProvider.notifier).onUnLikeButtonPressed(
-                  copyPost,
-                  post,
-                ),
-          )
-          : InkWell(
-            child: const Icon(Icons.favorite),
-            onTap:
-                () => ref.read(postLogicProvider.notifier).onLikeButtonPressed(
-                  copyPost,
-                  post,
-                ),
+
+    return AsyncScreen(
+      asyncValue: asyncValue,
+      data: (state) {
+        final isLiked = state.likePostIds.contains(post.postId);
+        final children = [
+          isLiked
+              ? InkWell(
+                child: const Icon(Icons.favorite, color: Colors.red),
+                onTap:
+                    () => ref
+                        .read(postLogicProvider.notifier)
+                        .onUnLikeButtonPressed(copyPost, post),
+              )
+              : InkWell(
+                child: const Icon(Icons.favorite),
+                onTap:
+                    () => ref
+                        .read(postLogicProvider.notifier)
+                        .onLikeButtonPressed(copyPost, post),
+              ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              isHorizontal ? copyPost.value.likeCount.formatNumber() : "",
+            ),
           ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Text(
-          isHorizontal ? copyPost.value.likeCount.formatNumber() : "",
-        ),
-      ),
-    ];
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
-      child:
-          isHorizontal ? Row(children: children) : Column(children: children),
+        ];
+        return Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child:
+              isHorizontal
+                  ? Row(children: children)
+                  : Column(children: children),
+        );
+      },
     );
-    });
   }
 }

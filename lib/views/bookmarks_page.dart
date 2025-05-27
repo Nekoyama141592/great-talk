@@ -13,12 +13,21 @@ class BookmarksPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(docsViewModelProvider(DocsType.bookmarks));
-    final notifier = ref.read(docsViewModelProvider(DocsType.bookmarks).notifier);
+    final notifier = ref.read(
+      docsViewModelProvider(DocsType.bookmarks).notifier,
+    );
     return BasicPage(
       appBarText: "投稿一覧",
-      child: AsyncScreen(asyncValue: asyncValue, data: (state) {
-        return RefreshScreen(state: state, onReload: notifier.onReload, onLoading:notifier.onLoading);
-      })
+      child: AsyncScreen(
+        asyncValue: asyncValue,
+        data: (state) {
+          return RefreshScreen(
+            state: state,
+            onReload: notifier.onReload,
+            onLoading: notifier.onLoading,
+          );
+        },
+      ),
     );
   }
 }

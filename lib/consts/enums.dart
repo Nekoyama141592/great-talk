@@ -16,7 +16,7 @@ enum PrefsKey {
   latestReceipt,
   needFirstMessage,
   // Repository
-  verifiedPurchases
+  verifiedPurchases,
 }
 
 enum SearchTarget { post, user }

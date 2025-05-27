@@ -32,82 +32,87 @@ class PostCard extends ConsumerWidget {
         child: AsyncScreen(
           asyncValue: asyncValue,
           data: (state) {
-          if (state.isDeletedPost(post.postId)) {
-            return MosaicCard(
-              child: MosaicPostChild(
-                msg: "この投稿はあなたによって削除されました。",
-                post: post,
-                title: "削除された投稿",
-              ),
-            );
-          }
-          if (state.isMutingPost(post.postId) ||
-              state.isMutingUser(post.uid)) {
-            return MosaicCard(
-              child: MosaicPostChild(
-                msg: "あなたはこの投稿、もしくはその投稿者をミュートしています。",
-                post: post,
-                title: "制限されている投稿",
-              ),
-            );
-          }
-          if (post.isInappropriate()) {
-            final authUid = ref.read(streamAuthUidProvider).value;
-            return MosaicCard(
-              child: MosaicPostChild(
-                msg: post.inappropriateReason(authUid),
-                post: post,
-                title: "不適切なコンテンツ",
-              ),
-            );
-          }
-          return GestureDetector(
-            onTap: () => ref.read(postLogicProvider.notifier).onPostCardPressed(post),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.primary,
+            if (state.isDeletedPost(post.postId)) {
+              return MosaicCard(
+                child: MosaicPostChild(
+                  msg: "この投稿はあなたによって削除されました。",
+                  post: post,
+                  title: "削除された投稿",
                 ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CircleImage(
-                      onTap: () => ref.read(postLogicProvider.notifier).onPostCardPressed(post),
-                      uint8list: uint8list,
-                    ),
+              );
+            }
+            if (state.isMutingPost(post.postId) ||
+                state.isMutingUser(post.uid)) {
+              return MosaicCard(
+                child: MosaicPostChild(
+                  msg: "あなたはこの投稿、もしくはその投稿者をミュートしています。",
+                  post: post,
+                  title: "制限されている投稿",
+                ),
+              );
+            }
+            if (post.isInappropriate()) {
+              final authUid = ref.read(streamAuthUidProvider).value;
+              return MosaicCard(
+                child: MosaicPostChild(
+                  msg: post.inappropriateReason(authUid),
+                  post: post,
+                  title: "不適切なコンテンツ",
+                ),
+              );
+            }
+            return GestureDetector(
+              onTap:
+                  () => ref
+                      .read(postLogicProvider.notifier)
+                      .onPostCardPressed(post),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.primary,
                   ),
-                  EllipsisText(post.typedTitle().value),
-                  TextButton(
-                    onPressed:
-                        () =>
-                            Get.toNamed(UserProfilePage.generatePath(post.uid)),
-                    child: EllipsisText(
-                      "by ${publicUser.nameValue}",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleImage(
+                        onTap:
+                            () => ref
+                                .read(postLogicProvider.notifier)
+                                .onPostCardPressed(post),
+                        uint8list: uint8list,
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Row(
-                      children: [
-                        PostLikeButton(
-                          isHorizontal: false,
-                          post: post,
+                    EllipsisText(post.typedTitle().value),
+                    TextButton(
+                      onPressed:
+                          () => Get.toNamed(
+                            UserProfilePage.generatePath(post.uid),
+                          ),
+                      child: EllipsisText(
+                        "by ${publicUser.nameValue}",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
-                        const Spacer(),
-                        PostMsgButton(isHorizontal: false, post: post),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                    Center(
+                      child: Row(
+                        children: [
+                          PostLikeButton(isHorizontal: false, post: post),
+                          const Spacer(),
+                          PostMsgButton(isHorizontal: false, post: post),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        }),
+            );
+          },
+        ),
       ),
     );
   }

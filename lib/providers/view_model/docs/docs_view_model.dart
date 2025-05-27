@@ -41,8 +41,10 @@ class DocsViewModel extends _$DocsViewModel {
       final passiveUser = await _getPassiveUser();
       if (passiveUser != null) {
         final image = await _getImageFromUser(passiveUser);
-        initialState =
-            initialState.copyWith(passiveUser: passiveUser, uint8list: image);
+        initialState = initialState.copyWith(
+          passiveUser: passiveUser,
+          uint8list: image,
+        );
       }
     }
 
@@ -55,7 +57,8 @@ class DocsViewModel extends _$DocsViewModel {
   // DI
   String _currentUid() => ref.read(streamAuthUidProvider).value!;
   TokensNotifier _tokensNotifier() => ref.read(tokensNotifierProvider.notifier);
-  TokensState _tokensState() => ref.read(tokensNotifierProvider).value ?? TokensState();
+  TokensState _tokensState() =>
+      ref.read(tokensNotifierProvider).value ?? TokensState();
   final _repository = FirestoreRepository();
 
   // Query
@@ -63,8 +66,8 @@ class DocsViewModel extends _$DocsViewModel {
     switch (type) {
       case DocsType.bookmarks:
         final token = _tokensState().bookmarkCategoryTokens.firstWhere(
-              (element) => element.id == Get.parameters["categoryId"],
-            );
+          (element) => element.id == Get.parameters["categoryId"],
+        );
         return QueryCore.bookmarks(token);
       case DocsType.feeds:
         return QueryCore.timelines(DocRefCore.user(_currentUid()));
@@ -130,9 +133,10 @@ class DocsViewModel extends _$DocsViewModel {
       if (currentState.isTimeline) {
         await _onLoadingTimeline(refreshController);
       } else {
-        final elements = await _setQuery()
-            .startAfterDocument(currentState.qDocInfoList.last.qDoc)
-            .get();
+        final elements =
+            await _setQuery()
+                .startAfterDocument(currentState.qDocInfoList.last.qDoc)
+                .get();
         await _addAllDocs(elements.docs);
       }
     } catch (e) {
@@ -156,17 +160,20 @@ class DocsViewModel extends _$DocsViewModel {
     if (state.value?.qDocInfoList.isEmpty ?? true) return;
     final currentState = state.value!;
     try {
-      final elements = await _setQuery()
-          .endBeforeDocument(currentState.qDocInfoList.first.qDoc)
-          .get();
+      final elements =
+          await _setQuery()
+              .endBeforeDocument(currentState.qDocInfoList.first.qDoc)
+              .get();
       await _insertAllDocs(elements.docs);
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
     }
   }
 
-  Future<void> _updateDocInfoList(List<QDoc> elements,
-      {bool front = false}) async {
+  Future<void> _updateDocInfoList(
+    List<QDoc> elements, {
+    bool front = false,
+  }) async {
     if (state.isLoading || elements.isEmpty) return;
     final currentState = state.value!;
     final currentDocs = currentState.qDocInfoList;
@@ -177,13 +184,17 @@ class DocsViewModel extends _$DocsViewModel {
 
     final newQDocInfoList = await _createQDocInfoList(newElements);
     if (front) {
-      state = AsyncValue.data(currentState.copyWith(
-        qDocInfoList: [...newQDocInfoList.reversed, ...currentDocs],
-      ));
+      state = AsyncValue.data(
+        currentState.copyWith(
+          qDocInfoList: [...newQDocInfoList.reversed, ...currentDocs],
+        ),
+      );
     } else {
-      state = AsyncValue.data(currentState.copyWith(
-        qDocInfoList: [...currentDocs, ...newQDocInfoList],
-      ));
+      state = AsyncValue.data(
+        currentState.copyWith(
+          qDocInfoList: [...currentDocs, ...newQDocInfoList],
+        ),
+      );
     }
   }
 
@@ -193,19 +204,22 @@ class DocsViewModel extends _$DocsViewModel {
     final fetchedUsers = await _getUsersByUids(uids.toList());
     final userMap = {for (final user in fetchedUsers) user.uid: user};
 
-    final newQDocInfoList =
-        await Future.wait(elements.where((element) {
-      final uid = element.data()['uid'];
-      return userMap.containsKey(uid);
-    }).map((element) async {
-      final publicUser = userMap[element.data()['uid']]!;
-      final userImage = await _getImageFromDoc(element);
-      return QDocInfo(
-        publicUser: publicUser,
-        qDoc: element,
-        userImage: userImage,
-      );
-    }));
+    final newQDocInfoList = await Future.wait(
+      elements
+          .where((element) {
+            final uid = element.data()['uid'];
+            return userMap.containsKey(uid);
+          })
+          .map((element) async {
+            final publicUser = userMap[element.data()['uid']]!;
+            final userImage = await _getImageFromDoc(element);
+            return QDocInfo(
+              publicUser: publicUser,
+              qDoc: element,
+              userImage: userImage,
+            );
+          }),
+    );
     return newQDocInfoList;
   }
 
@@ -223,13 +237,17 @@ class DocsViewModel extends _$DocsViewModel {
   Future<Uint8List?> _getImageFromDoc(Doc doc) async {
     final detectedImage = DetectedImage.fromJson(doc['image']);
     return FileUtility.getS3Image(
-        detectedImage.bucketName, detectedImage.value);
+      detectedImage.bucketName,
+      detectedImage.value,
+    );
   }
 
   Future<Uint8List?> _getImageFromUser(PublicUser user) async {
     final detectedImage = user.typedImage();
     return FileUtility.getS3Image(
-        detectedImage.bucketName, detectedImage.value);
+      detectedImage.bucketName,
+      detectedImage.value,
+    );
   }
 
   Future<List<PublicUser>> _getUsersByUids(List<String> uids) async {
@@ -237,8 +255,7 @@ class DocsViewModel extends _$DocsViewModel {
     final query = QueryCore.usersByWhereIn(uids);
     final result = await _repository.getDocs(query);
     return result.when(
-      success: (res) =>
-          res.map((e) => PublicUser.fromJson(e.data())).toList(),
+      success: (res) => res.map((e) => PublicUser.fromJson(e.data())).toList(),
       failure: (_) => [],
     );
   }
@@ -273,14 +290,18 @@ class DocsViewModel extends _$DocsViewModel {
 
   Future<void> unMutePost(Post post) async {
     final postId = post.postId;
-    final deleteToken =
-        _tokensState().mutePostTokens.firstWhere((e) => e.postId == postId);
+    final deleteToken = _tokensState().mutePostTokens.firstWhere(
+      (e) => e.postId == postId,
+    );
     _tokensNotifier().removeMutePost(deleteToken);
 
-    final newQDocInfoList = state.value!.qDocInfoList
-        .where((e) => Post.fromJson(e.qDoc.data()).postId != postId)
-        .toList();
-    state = AsyncValue.data(state.value!.copyWith(qDocInfoList: newQDocInfoList));
+    final newQDocInfoList =
+        state.value!.qDocInfoList
+            .where((e) => Post.fromJson(e.qDoc.data()).postId != postId)
+            .toList();
+    state = AsyncValue.data(
+      state.value!.copyWith(qDocInfoList: newQDocInfoList),
+    );
 
     final tokenRef = DocRefCore.token(_currentUid(), deleteToken.tokenId);
     await _repository.deleteDoc(tokenRef);
@@ -308,15 +329,18 @@ class DocsViewModel extends _$DocsViewModel {
   }
 
   Future<void> unMuteUser(String passiveUid) async {
-    final deleteToken = _tokensState()
-        .muteUserTokens
-        .firstWhere((e) => e.passiveUid == passiveUid);
+    final deleteToken = _tokensState().muteUserTokens.firstWhere(
+      (e) => e.passiveUid == passiveUid,
+    );
     _tokensNotifier().removeMuteUser(deleteToken);
 
-    final newQDocInfoList = state.value!.qDocInfoList
-        .where((e) => PublicUser.fromJson(e.qDoc.data()).uid != passiveUid)
-        .toList();
-    state = AsyncValue.data(state.value!.copyWith(qDocInfoList: newQDocInfoList));
+    final newQDocInfoList =
+        state.value!.qDocInfoList
+            .where((e) => PublicUser.fromJson(e.qDoc.data()).uid != passiveUid)
+            .toList();
+    state = AsyncValue.data(
+      state.value!.copyWith(qDocInfoList: newQDocInfoList),
+    );
 
     final tokenRef = DocRefCore.token(_currentUid(), deleteToken.tokenId);
     await _repository.deleteDoc(tokenRef);
@@ -353,8 +377,9 @@ class DocsViewModel extends _$DocsViewModel {
   }
 
   Future<void> _follow(PublicUser passiveUser) async {
-    final newUser =
-        passiveUser.copyWith(followerCount: passiveUser.followerCount + 1);
+    final newUser = passiveUser.copyWith(
+      followerCount: passiveUser.followerCount + 1,
+    );
     state = AsyncValue.data(state.value!.copyWith(passiveUser: newUser));
 
     final tokenId = randomString();
@@ -386,13 +411,14 @@ class DocsViewModel extends _$DocsViewModel {
   }
 
   Future<void> _unfollow(PublicUser passiveUser) async {
-    final newUser =
-        passiveUser.copyWith(followerCount: passiveUser.followerCount - 1);
+    final newUser = passiveUser.copyWith(
+      followerCount: passiveUser.followerCount - 1,
+    );
     state = AsyncValue.data(state.value!.copyWith(passiveUser: newUser));
 
-    final deleteToken = _tokensState()
-        .followingTokens
-        .firstWhere((element) => element.passiveUid == _uid!);
+    final deleteToken = _tokensState().followingTokens.firstWhere(
+      (element) => element.passiveUid == _uid!,
+    );
     _tokensNotifier().removeFollowing(deleteToken);
 
     final tokenRef = DocRefCore.token(_currentUid(), deleteToken.tokenId);

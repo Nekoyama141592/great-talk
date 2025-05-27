@@ -11,16 +11,25 @@ class NewPostsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(docsViewModelProvider(DocsType.newPosts));
-    final notifier = ref.read(docsViewModelProvider(DocsType.newPosts).notifier);
+    final notifier = ref.read(
+      docsViewModelProvider(DocsType.newPosts).notifier,
+    );
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: notifier.onRefresh,
         backgroundColor: kSecondaryColor,
         child: const Icon(Icons.refresh),
       ),
-      body: AsyncScreen(asyncValue: asyncValue, data: (state) {
-        return RefreshScreen(state: state, onReload:notifier.onReload, onLoading:notifier.onLoading);
-      })
+      body: AsyncScreen(
+        asyncValue: asyncValue,
+        data: (state) {
+          return RefreshScreen(
+            state: state,
+            onReload: notifier.onReload,
+            onLoading: notifier.onLoading,
+          );
+        },
+      ),
     );
   }
 }

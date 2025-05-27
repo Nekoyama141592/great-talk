@@ -45,50 +45,54 @@ class UserCard extends ConsumerWidget {
               )
               : AsyncScreen(
                 asyncValue: asyncValue,
-                data: (state) =>
-                  state.isMutingUser(publicUser.uid)
-                        ? MosaicCard(
-                          child: MosaicUserChild(
-                            publicUser: publicUser,
-                            msg: "あなたはこのユーザーをミュートしています。",
-                            title: "ミュートしている",
-                          ),
-                        )
-                        : Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8.0,
-                            horizontal: 16.0,
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Theme.of(context).primaryColor,
+                data:
+                    (state) =>
+                        state.isMutingUser(publicUser.uid)
+                            ? MosaicCard(
+                              child: MosaicUserChild(
+                                publicUser: publicUser,
+                                msg: "あなたはこのユーザーをミュートしています。",
+                                title: "ミュートしている",
+                              ),
+                            )
+                            : Container(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                                horizontal: 16.0,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: InkWell(
+                                onTap:
+                                    () => Get.toNamed(
+                                      UserProfilePage.generatePath(
+                                        publicUser.uid,
+                                      ),
+                                    ),
+                                child: Row(
+                                  children: [
+                                    CircleImage(uint8list: uint8list),
+                                    const BasicWidthBox(),
+                                    Expanded(
+                                      child: EllipsisText(publicUser.nameValue),
+                                    ),
+                                    const BasicWidthBox(),
+                                    const Icon(Icons.people),
+                                    const BasicWidthBox(),
+                                    BasicBoldText(
+                                      publicUser.followerCount.toString(),
+                                    ),
+                                    const BasicWidthBox(),
+                                    if (publicUser.isOfficial)
+                                      const OfficialMark(),
+                                  ],
+                                ),
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: InkWell(
-                            onTap:
-                                () => Get.toNamed(
-                                  UserProfilePage.generatePath(publicUser.uid),
-                                ),
-                            child: Row(
-                              children: [
-                                CircleImage(uint8list: uint8list),
-                                const BasicWidthBox(),
-                                Expanded(
-                                  child: EllipsisText(publicUser.nameValue),
-                                ),
-                                const BasicWidthBox(),
-                                const Icon(Icons.people),
-                                const BasicWidthBox(),
-                                BasicBoldText(
-                                  publicUser.followerCount.toString(),
-                                ),
-                                const BasicWidthBox(),
-                                if (publicUser.isOfficial) const OfficialMark(),
-                              ],
-                            ),
-                          ),
-                        ),
               ),
     );
   }

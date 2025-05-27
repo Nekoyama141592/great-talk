@@ -11,8 +11,15 @@ class FeedsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(docsViewModelProvider(DocsType.feeds));
     final notifier = ref.read(docsViewModelProvider(DocsType.feeds).notifier);
-    return AsyncScreen(asyncValue: asyncValue, data: (state) {
-      return RefreshScreen(state: state, onReload:notifier.onReload, onLoading:notifier.onLoading);
-    });
+    return AsyncScreen(
+      asyncValue: asyncValue,
+      data: (state) {
+        return RefreshScreen(
+          state: state,
+          onReload: notifier.onReload,
+          onLoading: notifier.onLoading,
+        );
+      },
+    );
   }
 }

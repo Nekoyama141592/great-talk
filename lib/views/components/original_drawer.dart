@@ -33,7 +33,6 @@ class OriginalDrawer extends ConsumerWidget {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: ListView(
         children: [
-          
           asyncValue.when(
             data: (state) {
               final user = state.publicUser;
@@ -50,9 +49,7 @@ class OriginalDrawer extends ConsumerWidget {
                         Row(
                           children: [
                             if (image != null)
-                              CircleImage(
-                                uint8list: base64Decode(image),
-                              ),
+                              CircleImage(uint8list: base64Decode(image)),
                             const BasicWidthBox(),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,12 +81,14 @@ class OriginalDrawer extends ConsumerWidget {
                 );
               }
             },
-            loading: () => const DrawerHeader(
-              child: Center(child: CircularProgressIndicator()),
-            ),
-            error: (err, stack) => DrawerHeader(
-              child: Center(child: Text("ユーザー情報の取得に失敗しました")),
-            ),
+            loading:
+                () => const DrawerHeader(
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+            error:
+                (err, stack) => DrawerHeader(
+                  child: Center(child: Text("ユーザー情報の取得に失敗しました")),
+                ),
           ),
           ListTile(
             title: const Text("アカウント情報"),
@@ -110,28 +109,28 @@ class OriginalDrawer extends ConsumerWidget {
             onTap: () => Get.toNamed(BookmarkCategoriesPage.path),
           ),
           ListTile(
-              title: const Text("テーマ切り替え"),
-              trailing: CupertinoSwitch(
-                value: settingState.isDarkTheme,
-                onChanged:
-                    ref.read(localSettingProvider.notifier).onThemeSwichChanged,
-              ),
+            title: const Text("テーマ切り替え"),
+            trailing: CupertinoSwitch(
+              value: settingState.isDarkTheme,
+              onChanged:
+                  ref.read(localSettingProvider.notifier).onThemeSwichChanged,
             ),
-           ListTile(
-              title: const Text("最初のメッセージを受け取る"),
-              trailing: CupertinoSwitch(
-                value: settingState.needFirstMessage,
-                onChanged:
-                    ref
-                        .read(localSettingProvider.notifier)
-                        .onNeedFirstMessageSwichChanged,
-              ),
-            ),
-          if (isAdmin) ListTile(
-                      title: const Text("管理者専用ページ"),
-                      onTap: () => Get.toNamed(AdminPage.path),
-                    
           ),
+          ListTile(
+            title: const Text("最初のメッセージを受け取る"),
+            trailing: CupertinoSwitch(
+              value: settingState.needFirstMessage,
+              onChanged:
+                  ref
+                      .read(localSettingProvider.notifier)
+                      .onNeedFirstMessageSwichChanged,
+            ),
+          ),
+          if (isAdmin)
+            ListTile(
+              title: const Text("管理者専用ページ"),
+              onTap: () => Get.toNamed(AdminPage.path),
+            ),
         ],
       ),
     );

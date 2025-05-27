@@ -13,32 +13,36 @@ class MuteUsersPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(docsViewModelProvider(DocsType.muteUsers));
-    final notifier = ref.read(docsViewModelProvider(DocsType.muteUsers).notifier);
+    final notifier = ref.read(
+      docsViewModelProvider(DocsType.muteUsers).notifier,
+    );
     return Scaffold(
       appBar: AppBar(title: const Text("ミュートしているユーザー一覧")),
-      body: AsyncScreen(asyncValue: asyncValue, data: (state) {
-        final qDocInfoList = state.qDocInfoList;
-       return RefreshScreen(
-        state: state,
-        onLoading: notifier.onLoading,
-        onReload: notifier.onReload,
-        child: ListView.builder(
-            itemCount: qDocInfoList.length,
-            itemBuilder: (c, i) {
-              final passiveUser = PublicUser.fromJson(
-                qDocInfoList[i].qDoc.data(),
-              );
-              final uint8list =
-                  qDocInfoList[i].userImage;
-              return MuteUserCard(
-                passiveUser: passiveUser,
-                uint8list: uint8list,
-                onMuteUserCardTap: notifier.onMuteUserCardTap,
-              );
-            },
-          )
-      );
-      })
+      body: AsyncScreen(
+        asyncValue: asyncValue,
+        data: (state) {
+          final qDocInfoList = state.qDocInfoList;
+          return RefreshScreen(
+            state: state,
+            onLoading: notifier.onLoading,
+            onReload: notifier.onReload,
+            child: ListView.builder(
+              itemCount: qDocInfoList.length,
+              itemBuilder: (c, i) {
+                final passiveUser = PublicUser.fromJson(
+                  qDocInfoList[i].qDoc.data(),
+                );
+                final uint8list = qDocInfoList[i].userImage;
+                return MuteUserCard(
+                  passiveUser: passiveUser,
+                  uint8list: uint8list,
+                  onMuteUserCardTap: notifier.onMuteUserCardTap,
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -37,5 +37,6 @@ class DocsState {
       isTimeline: isTimeline ?? this.isTimeline, // 追加
     );
   }
+
   String? passiveUid() => passiveUser?.uid;
 }

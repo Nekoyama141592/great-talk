@@ -12,14 +12,15 @@ String _$localRepositoryHash() => r'6d1dc1ec52f6aa8c393cd21bac6b9a88461e1c80';
 @ProviderFor(LocalRepository)
 final localRepositoryProvider =
     AutoDisposeNotifierProvider<LocalRepository, void>.internal(
-  LocalRepository.new,
-  name: r'localRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$localRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      LocalRepository.new,
+      name: r'localRepositoryProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$localRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$LocalRepository = AutoDisposeNotifier<void>;
 // ignore_for_file: type=lint

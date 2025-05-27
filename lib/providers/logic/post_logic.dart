@@ -49,10 +49,7 @@ class PostLogic extends _$PostLogic {
     Get.toNamed(ChatPage.generatePath(post.uid, post.postId));
   }
 
-  void onReportButtonPressed(
-    BuildContext context,
-    Post post,
-  ) {
+  void onReportButtonPressed(BuildContext context, Post post) {
     final posterUid = post.uid;
     final currentUid = _currentUid;
     if (currentUid == null) {
@@ -66,22 +63,23 @@ class PostLogic extends _$PostLogic {
 
     showCupertinoModalPopup(
       context: context,
-      builder: (innerContext) => CupertinoActionSheet(
-        actions: [
-          CupertinoActionSheetAction(
-            onPressed: () => _mutePost(innerContext, post, currentUid),
-            child: const BasicBoldText("投稿をミュート"),
+      builder:
+          (innerContext) => CupertinoActionSheet(
+            actions: [
+              CupertinoActionSheetAction(
+                onPressed: () => _mutePost(innerContext, post, currentUid),
+                child: const BasicBoldText("投稿をミュート"),
+              ),
+              CupertinoActionSheetAction(
+                onPressed: () => _muteUser(innerContext, post, currentUid),
+                child: const BasicBoldText("ユーザーをミュート"),
+              ),
+              CupertinoActionSheetAction(
+                onPressed: () => Navigator.pop(innerContext),
+                child: const BasicBoldText(cancelText),
+              ),
+            ],
           ),
-          CupertinoActionSheetAction(
-            onPressed: () => _muteUser(innerContext, post, currentUid),
-            child: const BasicBoldText("ユーザーをミュート"),
-          ),
-          CupertinoActionSheetAction(
-            onPressed: () => Navigator.pop(innerContext),
-            child: const BasicBoldText(cancelText),
-          ),
-        ],
-      ),
     );
   }
 
@@ -226,8 +224,9 @@ class PostLogic extends _$PostLogic {
   }
 
   Future<void> _unLikePost(Post post, String currentUid) async {
-    final deleteToken = _tokensState?.likePostTokens
-        .firstWhere((element) => element.postId == post.postId);
+    final deleteToken = _tokensState?.likePostTokens.firstWhere(
+      (element) => element.postId == post.postId,
+    );
     if (deleteToken == null) return;
 
     _tokensNotifier.removeLikePost(deleteToken);
