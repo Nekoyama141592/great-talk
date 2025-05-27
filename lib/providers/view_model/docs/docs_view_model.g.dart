@@ -6,7 +6,7 @@ part of 'docs_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$docsViewModelHash() => r'7c4c59952e72bf51b11bb2c82ee31d2550de325f';
+String _$docsViewModelHash() => r'3ae4597c7c2505f9f8019356df8883d9d5b4993c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -32,8 +32,9 @@ class _SystemHash {
 abstract class _$DocsViewModel
     extends BuildlessAutoDisposeAsyncNotifier<DocsState> {
   late final DocsType type;
+  late final String? passiveUid;
 
-  FutureOr<DocsState> build(DocsType type);
+  FutureOr<DocsState> build(DocsType type, {String? passiveUid});
 }
 
 /// See also [DocsViewModel].
@@ -46,15 +47,15 @@ class DocsViewModelFamily extends Family<AsyncValue<DocsState>> {
   const DocsViewModelFamily();
 
   /// See also [DocsViewModel].
-  DocsViewModelProvider call(DocsType type) {
-    return DocsViewModelProvider(type);
+  DocsViewModelProvider call(DocsType type, {String? passiveUid}) {
+    return DocsViewModelProvider(type, passiveUid: passiveUid);
   }
 
   @override
   DocsViewModelProvider getProviderOverride(
     covariant DocsViewModelProvider provider,
   ) {
-    return call(provider.type);
+    return call(provider.type, passiveUid: provider.passiveUid);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -76,9 +77,12 @@ class DocsViewModelFamily extends Family<AsyncValue<DocsState>> {
 class DocsViewModelProvider
     extends AutoDisposeAsyncNotifierProviderImpl<DocsViewModel, DocsState> {
   /// See also [DocsViewModel].
-  DocsViewModelProvider(DocsType type)
+  DocsViewModelProvider(DocsType type, {String? passiveUid})
     : this._internal(
-        () => DocsViewModel()..type = type,
+        () =>
+            DocsViewModel()
+              ..type = type
+              ..passiveUid = passiveUid,
         from: docsViewModelProvider,
         name: r'docsViewModelProvider',
         debugGetCreateSourceHash:
@@ -89,6 +93,7 @@ class DocsViewModelProvider
         allTransitiveDependencies:
             DocsViewModelFamily._allTransitiveDependencies,
         type: type,
+        passiveUid: passiveUid,
       );
 
   DocsViewModelProvider._internal(
@@ -99,13 +104,15 @@ class DocsViewModelProvider
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.type,
+    required this.passiveUid,
   }) : super.internal();
 
   final DocsType type;
+  final String? passiveUid;
 
   @override
   FutureOr<DocsState> runNotifierBuild(covariant DocsViewModel notifier) {
-    return notifier.build(type);
+    return notifier.build(type, passiveUid: passiveUid);
   }
 
   @override
@@ -113,13 +120,17 @@ class DocsViewModelProvider
     return ProviderOverride(
       origin: this,
       override: DocsViewModelProvider._internal(
-        () => create()..type = type,
+        () =>
+            create()
+              ..type = type
+              ..passiveUid = passiveUid,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         type: type,
+        passiveUid: passiveUid,
       ),
     );
   }
@@ -132,13 +143,16 @@ class DocsViewModelProvider
 
   @override
   bool operator ==(Object other) {
-    return other is DocsViewModelProvider && other.type == type;
+    return other is DocsViewModelProvider &&
+        other.type == type &&
+        other.passiveUid == passiveUid;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, type.hashCode);
+    hash = _SystemHash.combine(hash, passiveUid.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -149,6 +163,9 @@ class DocsViewModelProvider
 mixin DocsViewModelRef on AutoDisposeAsyncNotifierProviderRef<DocsState> {
   /// The parameter `type` of this provider.
   DocsType get type;
+
+  /// The parameter `passiveUid` of this provider.
+  String? get passiveUid;
 }
 
 class _DocsViewModelProviderElement
@@ -158,6 +175,8 @@ class _DocsViewModelProviderElement
 
   @override
   DocsType get type => (origin as DocsViewModelProvider).type;
+  @override
+  String? get passiveUid => (origin as DocsViewModelProvider).passiveUid;
 }
 
 // ignore_for_file: type=lint

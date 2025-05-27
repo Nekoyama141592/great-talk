@@ -29,16 +29,15 @@ part 'docs_view_model.g.dart';
 
 @riverpod
 class DocsViewModel extends _$DocsViewModel {
-  // Get.parametersからuidを取得するために必要
-  String? get _uid => Get.parameters['uid'];
+  String? get _uid => state.value?.passiveUser?.uid;
 
   @override
-  FutureOr<DocsState> build(DocsType type) async {
+  FutureOr<DocsState> build(DocsType type,{String? passiveUid}) async {
     final isTimeline = type == DocsType.bookmarks || type == DocsType.feeds;
     var initialState = DocsState(isTimeline: isTimeline);
 
     if (type == DocsType.userProfiles) {
-      final passiveUser = await _getPassiveUser();
+      final passiveUser = await _getPassiveUser(passiveUid);
       if (passiveUser != null) {
         final image = await _getImageFromUser(passiveUser);
         initialState = initialState.copyWith(
@@ -349,11 +348,16 @@ class DocsViewModel extends _$DocsViewModel {
   }
 
   // User Profile
-  Future<PublicUser?> _getPassiveUser() async {
-    final ref = DocRefCore.user(_uid!);
+  Future<PublicUser?> _getPassiveUser(String? passiveUid) async {
+    if (passiveUid == null) return null;
+    final ref = DocRefCore.user(passiveUid);
     final result = await _repository.getDoc(ref);
     return result.when(
-      success: (res) => res.exists ? PublicUser.fromJson(res.data()!) : null,
+      success: (res) {
+        final data = res.data();
+        if (data == null) return null;
+        return PublicUser.fromJson(data);
+      },
       failure: (_) {
         UIHelper.showErrorFlutterToast("ユーザー情報の取得に失敗しました");
         return null;
