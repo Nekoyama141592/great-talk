@@ -9,7 +9,9 @@ import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/logic/post/post_logic.dart';
+import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/providers/view_model/chat/chat_view_model.dart';
+import 'package:great_talk/ui_core/chat_ui_core.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/views/chat/components/menu_button.dart';
 import 'package:great_talk/views/chat/components/msg_card.dart';
@@ -77,7 +79,7 @@ class ChatPage extends HookConsumerWidget {
                   // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示
                   if (post.uid == currentUserId ||
                       isAdmin) // `CurrentUserController`は依存関係が不明なため残置
-                    DeletePostButton(onTap:() => chatNotifier.onDeleteButtonPressed(context))
+                    DeletePostButton(onTap:() => chatNotifier.onDeleteButtonPressed(RouterLogic.back(context)))
                   else
                     AppBarAction(
                       onTap:
@@ -87,7 +89,9 @@ class ChatPage extends HookConsumerWidget {
                       child: const Icon(Icons.report),
                     ),
                   PostLikeButton(isHorizontal: true, post: post),
-                  MenuButton(onMenuPressed: chatNotifier.onMenuPressed),
+                  MenuButton(
+                    onMenuPressed: () => ChatUiCore.onMenuPressed(context: context, post: post, cleanLocalMessage: chatNotifier.cleanLocalMessage)
+                  ),
                 ],
               ),
               body: SingleChildScrollView(
@@ -143,7 +147,7 @@ class ChatPage extends HookConsumerWidget {
                             controller: inputController,
                             send:
                                 () => chatNotifier.onSendPressed(
-                                  context,
+                                  FocusScope.of(context).unfocus,
                                   inputController,
                                   scrollController,
                                 ),

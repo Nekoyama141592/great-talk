@@ -6,7 +6,6 @@ import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
-import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/infrastructure/chat_gpt_sdk_client.dart';
 import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
@@ -53,7 +52,7 @@ class ChatViewModel extends _$ChatViewModel {
 
   /// メッセージ送信ボタンが押されたときの処理
   Future<void> onSendPressed(
-    BuildContext context, // or Navigator
+    void Function() unFocus, // or Navigator
     TextEditingController inputController,
     ScrollController scrollController,
   ) async {
@@ -64,15 +63,7 @@ class ChatViewModel extends _$ChatViewModel {
       );
       return;
     }
-    FocusScope.of(context).unfocus();
-
-    // TODO: 元のControllerにあった利用制限チェックをここに実装
-    // final chatCountToday = await getChatCount();
-    // if (isLimitExceeded(chatCountToday)) {
-    //   // サブスクページに遷移させるなどの処理
-    //   return;
-    // }
-
+    unFocus.call();
     // APIを実行
     await execute(scrollController, text, inputController);
   }
@@ -199,7 +190,7 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   /// チャット履歴をクリアする
-  Future<void> cleanLocalMessage() async {
+  Future<void> cleanLocalMessageWithChange() async {
     final currentState = state.value;
     if (currentState == null || currentState.messages.isEmpty) return;
 
@@ -369,68 +360,19 @@ class ChatViewModel extends _$ChatViewModel {
     });
   }
 
-  void onMenuPressed(BuildContext context) async {
-    UIHelper.showPopup(
-      context: context,
-      builder: (innerContext) {
-        return CupertinoActionSheet(
-          actions: [
-            CupertinoActionSheetAction(
-              onPressed: () {
-                Navigator.pop(innerContext);
+  
 
-                _cleanLocalMessage();
-              },
-              child: const Text("会話履歴を削除"),
-            ),
-            CupertinoActionSheetAction(
-              onPressed: () {
-                Navigator.pop(innerContext);
-
-                onDescriptionButtonPressed(context);
-              },
-              child: const Text("情報を見る"),
-            ),
-            CupertinoActionSheetAction(
-              onPressed: () => Navigator.pop(innerContext),
-              child: const Text("戻る"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void onDeleteButtonPressed(BuildContext context) async {
+  void onDeleteButtonPressed(void back) async {
     final deletePost = state.value?.post;
 
     if (deletePost == null) return;
 
-    ref.read(postLogicProvider.notifier).deletePost(context, deletePost);
+    ref.read(postLogicProvider.notifier).deletePost(back,deletePost);
   }
 
-  void onDescriptionButtonPressed(BuildContext context) => _showDescriptionDialog(context);
+  
 
-  void _showDescriptionDialog(BuildContext context) {
-    final post = state.value?.post;
-
-    if (post == null) return;
-
-    final title = "タイトル:\n${post.typedTitle().value}";
-
-    final systemPrompt =
-        "システムプロンプト:\n${post.typedCustomCompleteText().systemPrompt}";
-
-    String msgText = "累計メッセージ数:\n${post.msgCount.formatNumber()}";
-
-    UIHelper.simpleAlertDialog(
-      context,
-      "$title\n\n$systemPrompt\n\n$msgText",
-      needsSubscribing: true,
-    );
-  }
-
-  Future<void> _cleanLocalMessage() async {
+  Future<void> cleanLocalMessage() async {
     final stateValue = state.value;
     if (stateValue == null) return;
     final messages = stateValue.messages;
