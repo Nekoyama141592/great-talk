@@ -5,7 +5,7 @@ import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
-import 'package:great_talk/ui_core/texts.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
@@ -19,7 +19,6 @@ import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_use
 import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
-import 'package:great_talk/views/chat/chat_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -44,54 +43,18 @@ class PostLogic extends _$PostLogic {
       ref.read(tokensNotifierProvider.notifier);
   String? get _currentUid => FirebaseAuth.instance.currentUser?.uid;
 
-  void onReportButtonPressed(BuildContext context, Post post) {
-    final posterUid = post.uid;
-    final currentUid = _currentUid;
-    if (currentUid == null) {
-      UIHelper.showFlutterToast("ログインが必要です");
-      return;
-    }
-    if (currentUid == posterUid) {
-      UIHelper.showFlutterToast("自分の投稿を報告したり、ミュートしたりすることはできません。");
-      return;
-    }
-
-    showCupertinoModalPopup(
-      context: context,
-      builder:
-          (innerContext) => CupertinoActionSheet(
-            actions: [
-              CupertinoActionSheetAction(
-                onPressed: () => _mutePost(innerContext, post, currentUid),
-                child: const BasicBoldText("投稿をミュート"),
-              ),
-              CupertinoActionSheetAction(
-                onPressed: () => _muteUser(innerContext, post, currentUid),
-                child: const BasicBoldText("ユーザーをミュート"),
-              ),
-              CupertinoActionSheetAction(
-                onPressed: () => Navigator.pop(innerContext),
-                child: const BasicBoldText(cancelText),
-              ),
-            ],
-          ),
-    );
-  }
-
-  Future<void> _mutePost(
-    BuildContext innerContext,
+  FutureResult<bool> mutePost(
     Post post,
     String currentUid,
   ) async {
     if (_tokensState?.mutePostIds.contains(post.postId) ?? false) {
-      UIHelper.showFlutterToast("すでにこの投稿をミュートしています");
-      Navigator.pop(innerContext);
-      return;
+      return const Result.failure('すでにこの投稿をミュートしています');
     }
     final tokenId = randomString();
     final now = Timestamp.now();
     final postId = post.postId;
     final postRef = post.typedRef();
+    final tokenRef = DocRefCore.token(currentUid, tokenId);
     final mutePostToken = MutePostToken(
       activeUid: currentUid,
       createdAt: now,
@@ -101,36 +64,24 @@ class PostLogic extends _$PostLogic {
       tokenType: TokenType.mutePost.name,
     );
     _tokensNotifier.addMutePost(mutePostToken);
-    final tokenRef = DocRefCore.token(currentUid, tokenId);
-    await _firestoreRepository.createDoc(tokenRef, mutePostToken.toJson());
-
+    final postMuteRef = DocRefCore.postMute(postRef, currentUid);
     final postMute = PostMute(
       activeUid: currentUid,
       createdAt: now,
       postId: postId,
       postRef: postRef,
     );
-    final postMuteRef = DocRefCore.postMute(postRef, currentUid);
-    await _firestoreRepository.createDoc(postMuteRef, postMute.toJson());
-
-    if (innerContext.mounted) {
-      Navigator.pop(innerContext); // Close ActionSheet
-      if (Navigator.canPop(innerContext)) {
-        Navigator.pop(innerContext); // Close post detail page etc.
-      }
-    }
+    final requests = [FirestoreRequest(tokenRef, mutePostToken.toJson()),FirestoreRequest(postMuteRef, postMute.toJson())];
+    return await _firestoreRepository.createDocs(requests);
   }
 
-  Future<void> _muteUser(
-    BuildContext innerContext,
+  FutureResult<bool> muteUser(
     Post post,
     String currentUid,
   ) async {
     final passiveUid = post.uid;
     if (_tokensState?.muteUids.contains(passiveUid) ?? false) {
-      UIHelper.showFlutterToast("すでにこのユーザーをミュートしています");
-      Navigator.pop(innerContext);
-      return;
+      return const Result.failure('すでにこのユーザーをミュートしています');
     }
     final tokenId = randomString();
     final now = Timestamp.now();
@@ -145,8 +96,6 @@ class PostLogic extends _$PostLogic {
     );
     _tokensNotifier.addMuteUser(muteUserToken);
     final tokenRef = DocRefCore.token(currentUid, tokenId);
-    await _firestoreRepository.createDoc(tokenRef, muteUserToken.toJson());
-
     final userMute = UserMute(
       activeUserRef: DocRefCore.user(currentUid),
       activeUid: currentUid,
@@ -155,13 +104,11 @@ class PostLogic extends _$PostLogic {
       passiveUserRef: passiveUserRef,
     );
     final userMuteRef = DocRefCore.userMute(passiveUid, currentUid);
-    await _firestoreRepository.createDoc(userMuteRef, userMute.toJson());
-    if (innerContext.mounted) {
-      Navigator.pop(innerContext); // Close ActionSheet
-      if (Navigator.canPop(innerContext)) {
-        Navigator.pop(innerContext); // Close post detail page etc.
-      }
-    }
+    final requests = [
+      FirestoreRequest(tokenRef, muteUserToken.toJson()),
+      FirestoreRequest(userMuteRef, userMute.toJson()),
+    ];
+    return await _firestoreRepository.createDocs(requests);
   }
 
   void onLikeButtonPressed(ValueNotifier<Post> copyPost, Post post) async {

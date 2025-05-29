@@ -4,6 +4,11 @@ import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
+class FirestoreRequest {
+  FirestoreRequest(this.docRef, this.data);
+  final DocRef docRef;
+  final Map<String,dynamic> data;
+}
 class FirestoreRepository {
   FirestoreClient get client => FirestoreClient();
   // count
@@ -71,6 +76,19 @@ class FirestoreRepository {
   FutureResult<bool> deleteDoc(DocRef ref) async {
     try {
       await client.deleteDoc(ref);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return Result.failure(e);
+    }
+  }
+  FutureResult<bool> createDocs(List<FirestoreRequest> requestList) async {
+    try {
+      final batch = FirebaseFirestore.instance.batch();
+      for (final request in requestList) {
+        batch.set(request.docRef, request.data);
+      }
+      await batch.commit();
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());

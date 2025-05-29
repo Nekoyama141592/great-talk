@@ -12,6 +12,7 @@ import 'package:great_talk/providers/logic/post/post_logic.dart';
 import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/providers/view_model/chat/chat_view_model.dart';
 import 'package:great_talk/ui_core/chat_ui_core.dart';
+import 'package:great_talk/ui_core/post_ui_core.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/views/chat/components/menu_button.dart';
 import 'package:great_talk/views/chat/components/msg_card.dart';
@@ -77,15 +78,25 @@ class ChatPage extends HookConsumerWidget {
                 title: EllipsisText(post.typedTitle().value),
                 actions: [
                   // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示
-                  if (post.uid == currentUserId ||
-                      isAdmin) // `CurrentUserController`は依存関係が不明なため残置
+                  if (post.uid == currentUserId || isAdmin)
                     DeletePostButton(onTap: chatNotifier.onDeleteButtonPressed)
                   else
                     AppBarAction(
-                      onTap:
-                          () => ref
-                              .read(postLogicProvider.notifier)
-                              .onReportButtonPressed(context, post),
+                      onTap: () {
+                        final notifier = ref
+                              .read(postLogicProvider.notifier);
+                        PostUiCore.onReportButtonPressed(
+                          context: context, 
+                          mutePost: (innerContext) async {
+                            final result = await notifier.mutePost(post, currentUserId);
+                            result.when(success: (_) => RouterLogic.back(innerContext), failure: (_) {});
+                          }, 
+                          muteUser: (innerContext) async {
+                            final result = await notifier.muteUser(post, currentUserId);
+                            result.when(success: (_) => RouterLogic.back(innerContext), failure: (_) {});
+                          }
+                        );
+                      },
                       child: const Icon(Icons.report),
                     ),
                   PostLikeButton(isHorizontal: true, post: post),
