@@ -5,7 +5,6 @@ import 'package:great_talk/providers/global/local_setting/local_setting.dart';
 import 'package:great_talk/themes/themes.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-
 class MyAppPage extends ConsumerWidget {
   const MyAppPage({super.key});
   @override

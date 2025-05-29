@@ -10,6 +10,7 @@ import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/loading_page.dart';
 import 'package:great_talk/views/main/my_home_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 @RoutePage()
 class FirstPage extends ConsumerWidget {
   const FirstPage({super.key});

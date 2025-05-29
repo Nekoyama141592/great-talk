@@ -42,8 +42,11 @@ class MuteUsersPage extends ConsumerWidget {
                   uint8list: uint8list,
                   onMuteUserCardTap: () async {
                     final result = await notifier.unMuteUser(passiveUser.uid);
-                    result.when(success: (_) => RouterLogic.back(context), failure: (_) => UIHelper.showErrorFlutterToast('失敗しました'));
-                  }
+                    result.when(
+                      success: (_) => RouterLogic.back(context),
+                      failure: (_) => UIHelper.showErrorFlutterToast('失敗しました'),
+                    );
+                  },
                 );
               },
             ),

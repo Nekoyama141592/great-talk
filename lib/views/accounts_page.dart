@@ -43,17 +43,20 @@ class AccountPage extends ConsumerWidget {
                     title: const Text("ログアウトする"),
                     onTap: () {
                       UIHelper.cupertinoAlertDialog(
-                        context, 
-                        "ログアウトしますが本当によろしいですか？", 
+                        context,
+                        "ログアウトしますが本当によろしいですか？",
                         () async {
                           final result = await notifier.signOut();
-                          result.when(success: (_) {
-                            RouterLogic.pushPath(context, LogoutedPage.path);
-                          }, failure: (_) {
-                            UIHelper.showErrorFlutterToast("ログアウトできませんでした}");
-                            RouterLogic.back(context);
-                          });
-                        }
+                          result.when(
+                            success: (_) {
+                              RouterLogic.pushPath(context, LogoutedPage.path);
+                            },
+                            failure: (_) {
+                              UIHelper.showErrorFlutterToast("ログアウトできませんでした}");
+                              RouterLogic.back(context);
+                            },
+                          );
+                        },
                       );
                     },
                   )

@@ -360,8 +360,6 @@ class ChatViewModel extends _$ChatViewModel {
     });
   }
 
-  
-
   void onDeleteButtonPressed() async {
     final deletePost = state.value?.post;
 
@@ -369,8 +367,6 @@ class ChatViewModel extends _$ChatViewModel {
 
     ref.read(postLogicProvider.notifier).deletePost(deletePost);
   }
-
-  
 
   Future<void> cleanLocalMessage() async {
     final stateValue = state.value;

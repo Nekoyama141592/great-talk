@@ -8,10 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
 class UserProfilePage extends ConsumerWidget {
-  const UserProfilePage({
-    super.key,
-    @PathParam('uid') this.uid = ''
-  });
+  const UserProfilePage({super.key, @PathParam('uid') this.uid = ''});
   final String uid;
   static const path = "/users/:uid";
   static String generatePath(String uid) => "/users/$uid";

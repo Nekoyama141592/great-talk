@@ -228,7 +228,6 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     return result;
   }
 
-
   FutureResult<bool> deletePublicUser() async {
     final user = state.value?.publicUser;
     if (user == null) {
@@ -240,7 +239,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     late Result<bool> authResult;
     await result.when(
       success: (_) async => authResult = await _deleteAuthUser(),
-      failure: (e) async => authResult = const Result.failure('データベースからユーザーを削除できませんでした'),
+      failure:
+          (e) async =>
+              authResult = const Result.failure('データベースからユーザーを削除できませんでした'),
     );
     return authResult;
   }

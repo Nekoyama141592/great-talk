@@ -2,7 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:great_talk/ui_core/texts.dart';
 
 class PostUiCore {
-  static void onReportButtonPressed({required BuildContext context,required void Function(BuildContext) mutePost,required void Function(BuildContext) muteUser}) {
+  static void onReportButtonPressed({
+    required BuildContext context,
+    required void Function(BuildContext) mutePost,
+    required void Function(BuildContext) muteUser,
+  }) {
     showCupertinoModalPopup(
       context: context,
       builder:

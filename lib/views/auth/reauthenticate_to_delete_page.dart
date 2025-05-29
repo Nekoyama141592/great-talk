@@ -21,23 +21,37 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
         body: LoginScreen(
           onAppleButtonPressed: () async {
             final result = await notifier.reauthenticateWithAppleToDelete();
-            result.when(success: (_) async {
-              final deleteResult = await notifier.deletePublicUser();
-              deleteResult.when(
-                success: (_) => RouterLogic.pushPath(context, UserDeletedPage.path), 
-                failure: (_) => UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした")
-              );
-            }, failure: (_) => UIHelper.showErrorFlutterToast("Appleでの再認証に失敗しました"));
+            result.when(
+              success: (_) async {
+                final deleteResult = await notifier.deletePublicUser();
+                deleteResult.when(
+                  success:
+                      (_) =>
+                          RouterLogic.pushPath(context, UserDeletedPage.path),
+                  failure:
+                      (_) => UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした"),
+                );
+              },
+              failure:
+                  (_) => UIHelper.showErrorFlutterToast("Appleでの再認証に失敗しました"),
+            );
           },
           onGoogleButtonPressed: () async {
             final result = await notifier.reauthenticateWithGoogleToDelete();
-            result.when(success: (_) async {
-              final deleteResult = await notifier.deletePublicUser();
-              deleteResult.when(
-                success: (_) => RouterLogic.pushPath(context, UserDeletedPage.path), 
-                failure: (_) => UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした")
-              );
-            }, failure: (_) => UIHelper.showErrorFlutterToast("Googleでの再認証に失敗しました"));
+            result.when(
+              success: (_) async {
+                final deleteResult = await notifier.deletePublicUser();
+                deleteResult.when(
+                  success:
+                      (_) =>
+                          RouterLogic.pushPath(context, UserDeletedPage.path),
+                  failure:
+                      (_) => UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした"),
+                );
+              },
+              failure:
+                  (_) => UIHelper.showErrorFlutterToast("Googleでの再認証に失敗しました"),
+            );
           },
           title: "ユーザーの削除には再認証が必要です",
         ),

@@ -74,7 +74,10 @@ class PostCard extends ConsumerWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: CircleImage(
                       onTap:
-                          () => RouterLogic.pushPath(context, ChatPage.generatePath(post.uid, post.postId)),
+                          () => RouterLogic.pushPath(
+                            context,
+                            ChatPage.generatePath(post.uid, post.postId),
+                          ),
                       uint8list: uint8list,
                     ),
                   ),
@@ -82,7 +85,7 @@ class PostCard extends ConsumerWidget {
                   TextButton(
                     onPressed:
                         () => RouterLogic.pushPath(
-                          context, 
+                          context,
                           UserProfilePage.generatePath(post.uid),
                         ),
                     child: EllipsisText(

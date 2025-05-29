@@ -7,8 +7,9 @@ import 'package:great_talk/typedefs/firestore_typedef.dart';
 class FirestoreRequest {
   FirestoreRequest(this.docRef, this.data);
   final DocRef docRef;
-  final Map<String,dynamic> data;
+  final Map<String, dynamic> data;
 }
+
 class FirestoreRepository {
   FirestoreClient get client => FirestoreClient();
   // count
@@ -82,6 +83,7 @@ class FirestoreRepository {
       return Result.failure(e);
     }
   }
+
   FutureResult<bool> createDocs(List<FirestoreRequest> requestList) async {
     try {
       final batch = FirebaseFirestore.instance.batch();
@@ -95,6 +97,7 @@ class FirestoreRepository {
       return Result.failure(e);
     }
   }
+
   FutureResult<bool> deleteDocs(List<DocRef> docRefList) async {
     try {
       final batch = FirebaseFirestore.instance.batch();

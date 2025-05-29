@@ -37,20 +37,21 @@ class UIHelper {
   ) {
     showDialog(
       context: context,
-      builder: (innerContext) => CupertinoAlertDialog(
-        content: Text(msg),
-        actions: [
-          CupertinoDialogAction(
-            onPressed: () => RouterLogic.back(innerContext),
-            child: const Text(cancelText),
+      builder:
+          (innerContext) => CupertinoAlertDialog(
+            content: Text(msg),
+            actions: [
+              CupertinoDialogAction(
+                onPressed: () => RouterLogic.back(innerContext),
+                child: const Text(cancelText),
+              ),
+              CupertinoDialogAction(
+                isDestructiveAction: true,
+                onPressed: positiveAction,
+                child: const Text(okText),
+              ),
+            ],
           ),
-          CupertinoDialogAction(
-            isDestructiveAction: true,
-            onPressed: positiveAction,
-            child: const Text(okText),
-          ),
-        ],
-      ),
     );
   }
 
@@ -63,26 +64,29 @@ class UIHelper {
     const style = TextStyle(fontSize: 20);
     showDialog(
       context: context,
-      builder: (innerContext) => AlertDialog(
-        content: SizedBox(
-          height: MediaQuery.of(innerContext).size.height * 0.8,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                (needsSubscribing ?? false)
-                    ? SubscribedCopyableText(data: msg, style: style)
-                    : SelectableText(msg, style: style),
-                const Divider(),
-                TextButton(
-                  onPressed: positiveAction ?? () =>  RouterLogic.back(innerContext),
-                  child: const Text(okText, style: style),
+      builder:
+          (innerContext) => AlertDialog(
+            content: SizedBox(
+              height: MediaQuery.of(innerContext).size.height * 0.8,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    (needsSubscribing ?? false)
+                        ? SubscribedCopyableText(data: msg, style: style)
+                        : SelectableText(msg, style: style),
+                    const Divider(),
+                    TextButton(
+                      onPressed:
+                          positiveAction ??
+                          () => RouterLogic.back(innerContext),
+                      child: const Text(okText, style: style),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
     );
   }
 }

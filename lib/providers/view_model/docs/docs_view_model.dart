@@ -291,7 +291,7 @@ class DocsViewModel extends _$DocsViewModel {
 
     final tokenRef = DocRefCore.token(_currentUid(), deleteToken.tokenId);
     final postMuteRef = DocRefCore.postMute(post.typedRef(), _currentUid());
-    final docRefList = [tokenRef,postMuteRef];
+    final docRefList = [tokenRef, postMuteRef];
     return await _repository.deleteDocs(docRefList);
   }
 
@@ -323,7 +323,7 @@ class DocsViewModel extends _$DocsViewModel {
 
     final tokenRef = DocRefCore.token(_currentUid(), deleteToken.tokenId);
     final userMuteRef = DocRefCore.userMute(passiveUid, _currentUid());
-    final docRefList = [tokenRef,userMuteRef];
+    final docRefList = [tokenRef, userMuteRef];
     return await _repository.deleteDocs(docRefList);
   }
 

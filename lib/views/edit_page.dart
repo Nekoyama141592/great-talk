@@ -96,9 +96,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
         final result = await notifier.onPositiveButtonPressed();
         result.when(
           success: (_) {
-            ref
-                .read(currentUserNotifierProvider.notifier)
-                .updateUser();
+            ref.read(currentUserNotifierProvider.notifier).updateUser();
             RouterLogic.back(context);
             RouterLogic.back(context);
             UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");

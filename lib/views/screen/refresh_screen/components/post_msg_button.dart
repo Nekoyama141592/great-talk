@@ -17,8 +17,7 @@ class PostMsgButton extends ConsumerWidget {
     final children = [
       InkWell(
         child: const Icon(Icons.comment),
-        onTap:
-            () => RouterLogic.toChatPage(context, post)
+        onTap: () => RouterLogic.toChatPage(context, post),
       ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),

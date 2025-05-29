@@ -69,7 +69,7 @@ class UserCard extends ConsumerWidget {
                               child: InkWell(
                                 onTap:
                                     () => RouterLogic.pushPath(
-                                      context, 
+                                      context,
                                       UserProfilePage.generatePath(
                                         publicUser.uid,
                                       ),

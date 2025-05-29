@@ -4,7 +4,7 @@ import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 
 class ChatUiCore {
-  static void onDescriptionButtonPressed(BuildContext context,Post post) {
+  static void onDescriptionButtonPressed(BuildContext context, Post post) {
     final title = "タイトル:\n${post.typedTitle().value}";
 
     final systemPrompt =
@@ -18,7 +18,12 @@ class ChatUiCore {
       needsSubscribing: true,
     );
   }
-  static void onMenuPressed({required BuildContext context,required Post post,required void Function() cleanLocalMessage,}) async {
+
+  static void onMenuPressed({
+    required BuildContext context,
+    required Post post,
+    required void Function() cleanLocalMessage,
+  }) async {
     UIHelper.showPopup(
       context: context,
       builder: (innerContext) {

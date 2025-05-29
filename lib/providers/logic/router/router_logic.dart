@@ -4,13 +4,15 @@ import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/views/chat/chat_page.dart';
 
 class RouterLogic {
-  static void pushPath(BuildContext context,String path) {
+  static void pushPath(BuildContext context, String path) {
     context.router.pushPath(path);
   }
+
   static void back(BuildContext context) {
     context.router.back();
   }
-  static void toChatPage(BuildContext context,Post post) {
+
+  static void toChatPage(BuildContext context, Post post) {
     pushPath(context, ChatPage.generatePath(post.uid, post.postId));
   }
 }

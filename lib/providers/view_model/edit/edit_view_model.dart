@@ -117,7 +117,11 @@ class EditViewModel extends _$EditViewModel {
       final result = await AWSS3Repository().putObject(request);
       await result.when(
         success: (res) async {
-          updateUserResult = await _createUserUpdateLog(fileName, userName, bio);
+          updateUserResult = await _createUserUpdateLog(
+            fileName,
+            userName,
+            bio,
+          );
         },
         failure: (e) {
           updateUserResult = const Result.failure("画像のアップロードが失敗しました");
@@ -126,7 +130,11 @@ class EditViewModel extends _$EditViewModel {
       );
     } else {
       // 写真がそのまま場合の処理
-      updateUserResult = await _createUserUpdateLog(publicUser.typedImage().value, userName, bio);
+      updateUserResult = await _createUserUpdateLog(
+        publicUser.typedImage().value,
+        userName,
+        bio,
+      );
     }
     // 完了時はstateを元に戻す
     state = AsyncData(s.copyWith(isPicked: false));

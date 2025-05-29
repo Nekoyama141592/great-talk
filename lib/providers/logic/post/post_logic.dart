@@ -43,10 +43,7 @@ class PostLogic extends _$PostLogic {
       ref.read(tokensNotifierProvider.notifier);
   String? get _currentUid => FirebaseAuth.instance.currentUser?.uid;
 
-  FutureResult<bool> mutePost(
-    Post post,
-    String currentUid,
-  ) async {
+  FutureResult<bool> mutePost(Post post, String currentUid) async {
     if (_tokensState?.mutePostIds.contains(post.postId) ?? false) {
       return const Result.failure('すでにこの投稿をミュートしています');
     }
@@ -71,14 +68,14 @@ class PostLogic extends _$PostLogic {
       postId: postId,
       postRef: postRef,
     );
-    final requests = [FirestoreRequest(tokenRef, mutePostToken.toJson()),FirestoreRequest(postMuteRef, postMute.toJson())];
+    final requests = [
+      FirestoreRequest(tokenRef, mutePostToken.toJson()),
+      FirestoreRequest(postMuteRef, postMute.toJson()),
+    ];
     return await _firestoreRepository.createDocs(requests);
   }
 
-  FutureResult<bool> muteUser(
-    Post post,
-    String currentUid,
-  ) async {
+  FutureResult<bool> muteUser(Post post, String currentUid) async {
     final passiveUid = post.uid;
     if (_tokensState?.muteUids.contains(passiveUid) ?? false) {
       return const Result.failure('すでにこのユーザーをミュートしています');

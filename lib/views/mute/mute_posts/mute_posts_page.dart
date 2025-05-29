@@ -41,11 +41,14 @@ class MutePostsPage extends ConsumerWidget {
                   uint8list: uint8list,
                   onTap: () async {
                     final result = await notifier.onMutePostCardTap(post);
-                    result.when(success: (_) {
-                      RouterLogic.back(context);
-                    }, failure: (e) {
-                      UIHelper.showErrorFlutterToast('失敗しました');
-                    });
+                    result.when(
+                      success: (_) {
+                        RouterLogic.back(context);
+                      },
+                      failure: (e) {
+                        UIHelper.showErrorFlutterToast('失敗しました');
+                      },
+                    );
                   },
                 );
               },

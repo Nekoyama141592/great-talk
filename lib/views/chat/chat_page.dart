@@ -83,18 +83,29 @@ class ChatPage extends HookConsumerWidget {
                   else
                     AppBarAction(
                       onTap: () {
-                        final notifier = ref
-                              .read(postLogicProvider.notifier);
+                        final notifier = ref.read(postLogicProvider.notifier);
                         PostUiCore.onReportButtonPressed(
-                          context: context, 
+                          context: context,
                           mutePost: (innerContext) async {
-                            final result = await notifier.mutePost(post, currentUserId);
-                            result.when(success: (_) => RouterLogic.back(innerContext), failure: (_) {});
-                          }, 
+                            final result = await notifier.mutePost(
+                              post,
+                              currentUserId,
+                            );
+                            result.when(
+                              success: (_) => RouterLogic.back(innerContext),
+                              failure: (_) {},
+                            );
+                          },
                           muteUser: (innerContext) async {
-                            final result = await notifier.muteUser(post, currentUserId);
-                            result.when(success: (_) => RouterLogic.back(innerContext), failure: (_) {});
-                          }
+                            final result = await notifier.muteUser(
+                              post,
+                              currentUserId,
+                            );
+                            result.when(
+                              success: (_) => RouterLogic.back(innerContext),
+                              failure: (_) {},
+                            );
+                          },
                         );
                       },
                       child: const Icon(Icons.report),
@@ -104,8 +115,12 @@ class ChatPage extends HookConsumerWidget {
                   MenuButton(
                     onMenuPressed: () {
                       RouterLogic.back(context);
-                      ChatUiCore.onMenuPressed(context: context, post: post, cleanLocalMessage: chatNotifier.cleanLocalMessage);
-                    }
+                      ChatUiCore.onMenuPressed(
+                        context: context,
+                        post: post,
+                        cleanLocalMessage: chatNotifier.cleanLocalMessage,
+                      );
+                    },
                   ),
                 ],
               ),

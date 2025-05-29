@@ -18,21 +18,27 @@ class LoginPage extends ConsumerWidget {
         body: LoginScreen(
           onAppleButtonPressed: () async {
             final result = await controller.onAppleButtonPressed();
-            result.when(success: (user) {
-              UIHelper.showFlutterToast('ログインに成功しました');
-              controller.onLoginSuccess(user);
-            }, failure: (_) {
-               UIHelper.showErrorFlutterToast("ログインに失敗しました");
-            });
+            result.when(
+              success: (user) {
+                UIHelper.showFlutterToast('ログインに成功しました');
+                controller.onLoginSuccess(user);
+              },
+              failure: (_) {
+                UIHelper.showErrorFlutterToast("ログインに失敗しました");
+              },
+            );
           },
           onGoogleButtonPressed: () async {
             final result = await controller.onGoogleButtonPressed();
-            result.when(success: (user) {
-              UIHelper.showFlutterToast('ログインに成功しました');
-              controller.onLoginSuccess(user);
-            }, failure: (_) {
-               UIHelper.showErrorFlutterToast("ログインに失敗しました");
-            });
+            result.when(
+              success: (user) {
+                UIHelper.showFlutterToast('ログインに成功しました');
+                controller.onLoginSuccess(user);
+              },
+              failure: (_) {
+                UIHelper.showErrorFlutterToast("ログインに失敗しました");
+              },
+            );
           },
           title: "ログイン",
         ),
