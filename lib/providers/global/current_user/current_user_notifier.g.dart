@@ -64,7 +64,7 @@ final awsS3RepositoryProvider = Provider<AWSS3Repository>.internal(
 // ignore: unused_element
 typedef AwsS3RepositoryRef = ProviderRef<AWSS3Repository>;
 String _$currentUserNotifierHash() =>
-    r'5ce9af0af472f674f1250617afa0f3a01eaf24f4';
+    r'e3d887743aee69c151a3fc864e1f5cc01039bbe3';
 
 /// See also [CurrentUserNotifier].
 @ProviderFor(CurrentUserNotifier)

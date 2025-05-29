@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chatgpt_stream.dart';
+part of 'prefs_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatStreamHash() => r'178593c95ce6d3d56feb44ecad07a31cbf3ae0f7';
+String _$prefsHash() => r'b7c728a0168cd134b610f7b55c226c07253afd56';
 
-/// See also [chatStream].
-@ProviderFor(chatStream)
-final chatStreamProvider = AutoDisposeStreamProvider<String>.internal(
-  chatStream,
-  name: r'chatStreamProvider',
+/// See also [prefs].
+@ProviderFor(prefs)
+final prefsProvider = Provider<SharedPreferences>.internal(
+  prefs,
+  name: r'prefsProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$chatStreamHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$prefsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef ChatStreamRef = AutoDisposeStreamProviderRef<String>;
+typedef PrefsRef = ProviderRef<SharedPreferences>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

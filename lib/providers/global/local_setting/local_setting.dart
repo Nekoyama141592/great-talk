@@ -1,6 +1,6 @@
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/model/global/local_setting/local_setting_state.dart';
-import 'package:great_talk/providers/overrides/prefs_provider.dart';
+import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'local_setting.g.dart';

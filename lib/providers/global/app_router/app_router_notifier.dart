@@ -4,4 +4,4 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'app_router_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
-AppRouter appRouter(Ref ref) => AppRouter();
+Raw<AppRouter> appRouter(Ref ref) => AppRouter();

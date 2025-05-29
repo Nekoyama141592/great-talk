@@ -6,7 +6,7 @@ import 'package:great_talk/flavors.dart';
 import 'package:great_talk/gen/firebase_options_dev.dart' as dev;
 import 'package:great_talk/gen/firebase_options_prod.dart' as prod;
 import 'package:great_talk/my_app.dart';
-import 'package:great_talk/providers/overrides/prefs_provider.dart';
+import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RunApp {
