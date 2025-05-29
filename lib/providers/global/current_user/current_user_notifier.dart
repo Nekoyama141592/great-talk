@@ -1,23 +1,19 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
-import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/model/global/current_user/auth_user/auth_user.dart';
 import 'package:great_talk/model/global/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
-import 'package:great_talk/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
-import 'package:great_talk/views/auth/logouted_page.dart';
-import 'package:great_talk/views/auth/user_deleted_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -73,37 +69,23 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     _updateState(state.value!.copyWith(authUser: newAuthUser));
   }
 
-  Future<void> onAppleButtonPressed(BuildContext context) async {
+  FutureResult<User> onAppleButtonPressed() async {
     final repository = ref.read(
       firebaseAuthRepositoryProvider,
     ); // RiverpodでRepositoryを取得
     final result = await repository.signInWithApple();
-    await result.when(
-      success: (user) => onLoginSuccess(context, user),
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("Apple ログインに失敗しました: ${e.toString()}");
-      },
-    );
+    return result;
   }
 
-  Future<void> onGoogleButtonPressed(BuildContext context) async {
+  FutureResult<User> onGoogleButtonPressed() async {
     final repository = ref.read(
       firebaseAuthRepositoryProvider,
     ); // RiverpodでRepositoryを取得
     final result = await repository.signInWithGoogle();
-    await result.when(
-      success: (user) => onLoginSuccess(context, user),
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("Google ログインに失敗しました: ${e.toString()}");
-      },
-    );
+    return result;
   }
 
-  Future<void> onLoginSuccess(BuildContext context,User user) async {
-    RouterLogic.back(context);
-    UIHelper.showFlutterToast("ログインに成功しました");
-    await user.reload();
-    setAuthUser(user);
+  Future<void> onLoginSuccess(User user) async {
     await _fetchData();
   }
 
@@ -217,122 +199,71 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
   }
 
-  void onLogoutButtonPressed(BuildContext context) async {
-    UIHelper.cupertinoAlertDialog(context, "ログアウトしますが本当によろしいですか？", () => _signOut(context));
-  }
-
-  Future<void> _signOut(BuildContext context) async {
+  FutureResult<bool> signOut() async {
     final repository = ref.read(firebaseAuthRepositoryProvider);
     final result = await repository.signOut();
-    result.when(
-      success: (_) {
-        _updateState(
-          const CurrentUserState(
-            authUser: null,
-            publicUser: null,
-            privateUser: null,
-            base64: null,
-          ),
-        ); // 状態をリセット
-        RouterLogic.pushPath(context, LogoutedPage.path);
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("ログアウトできませんでした: ${e.toString()}");
-      },
-    );
+    return result;
   }
 
-  Future<void> reauthenticateWithAppleToDelete(BuildContext context) async {
+  FutureResult<bool> reauthenticateWithAppleToDelete() async {
     final credential = await CredentialComposer.appleCredential();
-    if (!context.mounted) return;
-    await _reauthenticateToDelete(context, credential);
+    return await _reauthenticateToDelete(credential);
   }
 
-  Future<void> reauthenticateWithGoogleToDelete(BuildContext context) async {
+  FutureResult<bool> reauthenticateWithGoogleToDelete() async {
     final credential = await CredentialComposer.googleCredential();
-    if (!context.mounted) return;
-    await _reauthenticateToDelete(context, credential);
+    return await _reauthenticateToDelete(credential);
   }
 
-  Future<void> _reauthenticateToDelete(BuildContext context,AuthCredential credential) async {
+  FutureResult<bool> _reauthenticateToDelete(AuthCredential credential) async {
     final repository = ref.read(firebaseAuthRepositoryProvider);
     final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return;
+    if (user == null) {
+      return const Result.failure('ログインしてください');
+    }
     final result = await repository.reauthenticateWithCredential(
       user,
       credential,
     );
-    result.when(
-      success: (_) {
-        _showDeleteUserDialog(context);
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("再認証に失敗しました: ${e.toString()}");
-      },
-    );
+    return result;
   }
 
-  void _showDeleteUserDialog(BuildContext context) {
-    UIHelper.cupertinoAlertDialog(
-      context,
-      "ユーザーを削除しますが本当によろしいですか？",
-      () => _deletePublicUser(context),
-    );
-  }
 
-  Future<void> _deletePublicUser(BuildContext context) async {
+  FutureResult<bool> deletePublicUser() async {
     final user = state.value?.publicUser;
-    if (user == null) return;
+    if (user == null) {
+      return const Result.failure('ログインしてください');
+    }
     final firestoreRepository = ref.read(firestoreRepositoryProvider);
     final refDoc = user.typedRef();
     final result = await firestoreRepository.deleteDoc(refDoc);
+    late Result<bool> authResult;
     await result.when(
-      success: (_) async {
-        await _removeImage();
-        await _deleteAuthUser(context);
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast(
-          "データベースからユーザーを削除できませんでした: ${e.toString()}",
-        );
-      },
+      success: (_) async => authResult = await _deleteAuthUser(),
+      failure: (e) async => authResult = const Result.failure('データベースからユーザーを削除できませんでした'),
     );
+    return authResult;
   }
 
-  Future<void> _deleteAuthUser(BuildContext context) async {
+  FutureResult<bool> _deleteAuthUser() async {
     final firebaseAuthRepository = ref.read(firebaseAuthRepositoryProvider);
     final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return;
+    if (user == null) {
+      return const Result.failure('ログインしてください');
+    }
     final result = await firebaseAuthRepository.deleteUser(user);
-    result.when(
-      success: (_) {
-        _updateState(
-          const CurrentUserState(
-            authUser: null,
-            publicUser: null,
-            privateUser: null,
-            base64: null,
-          ),
-        ); // 状態をリセット
-        RouterLogic.pushPath(context, UserDeletedPage.path);
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast(
-          "Firebase Auth からユーザーを削除できませんでした: ${e.toString()}",
-        );
-      },
-    );
+    return result;
   }
-
-  Future<void> _removeImage() async {
-    final publicUser = state.value?.publicUser;
-    if (publicUser == null) return;
-    final fileName = publicUser.typedImage().value;
-    final request = DeleteObjectRequest(object: fileName);
-    await ref
-        .read(awsS3RepositoryProvider)
-        .deleteObject(request); // RiverpodでRepositoryを取得
-  }
+  // TODO: Cloud Function
+  // Future<void> _removeImage() async {
+  //   final publicUser = state.value?.publicUser;
+  //   if (publicUser == null) return;
+  //   final fileName = publicUser.typedImage().value;
+  //   final request = DeleteObjectRequest(object: fileName);
+  //   await ref
+  //       .read(awsS3RepositoryProvider)
+  //       .deleteObject(request); // RiverpodでRepositoryを取得
+  // }
 
   Future<void> updateUser() async {
     await _getPublicUser();

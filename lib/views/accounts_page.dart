@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/views/auth/logouted_page.dart';
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -39,7 +41,21 @@ class AccountPage extends ConsumerWidget {
               state.isLoggedIn()
                   ? ListTile(
                     title: const Text("ログアウトする"),
-                    onTap: () => notifier.onLogoutButtonPressed(context),
+                    onTap: () {
+                      UIHelper.cupertinoAlertDialog(
+                        context, 
+                        "ログアウトしますが本当によろしいですか？", 
+                        () async {
+                          final result = await notifier.signOut();
+                          result.when(success: (_) {
+                            RouterLogic.pushPath(context, LogoutedPage.path);
+                          }, failure: (_) {
+                            UIHelper.showErrorFlutterToast("ログアウトできませんでした}");
+                            RouterLogic.back(context);
+                          });
+                        }
+                      );
+                    },
                   )
                   : const SizedBox.shrink(),
               state.isLoggedIn()
