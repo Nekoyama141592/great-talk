@@ -14,13 +14,13 @@ class MuteUserCard extends StatelessWidget {
   });
   final PublicUser passiveUser;
   final Uint8List? uint8list;
-  final void Function(BuildContext, String) onMuteUserCardTap;
+  final void Function() onMuteUserCardTap;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: CircleImage(uint8list: uint8list),
       title: EllipsisText(passiveUser.nameValue),
-      onTap: () => onMuteUserCardTap(context, passiveUser.uid),
+      onTap: onMuteUserCardTap,
     );
   }
 }

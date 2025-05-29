@@ -2,12 +2,10 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
-import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
@@ -20,6 +18,7 @@ import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/utility/file_utility.dart';
@@ -275,19 +274,7 @@ class DocsViewModel extends _$DocsViewModel {
     return [];
   }
 
-  void onMutePostCardTap(BuildContext context,Post post) async {
-    UIHelper.cupertinoAlertDialog(
-      context,
-      "ミュートを解除しますがよろしいですか？",
-      () async {
-        await unMutePost(post);
-        if (!context.mounted) return;
-        RouterLogic.back(context);
-      },
-    );
-  }
-
-  Future<void> unMutePost(Post post) async {
+  FutureResult<bool> onMutePostCardTap(Post post) async {
     final postId = post.postId;
     final deleteToken = _tokensState().mutePostTokens.firstWhere(
       (e) => e.postId == postId,
@@ -303,9 +290,9 @@ class DocsViewModel extends _$DocsViewModel {
     );
 
     final tokenRef = DocRefCore.token(_currentUid(), deleteToken.tokenId);
-    await _repository.deleteDoc(tokenRef);
     final postMuteRef = DocRefCore.postMute(post.typedRef(), _currentUid());
-    await _repository.deleteDoc(postMuteRef);
+    final docRefList = [tokenRef,postMuteRef];
+    return await _repository.deleteDocs(docRefList);
   }
 
   // Mute User
@@ -320,19 +307,7 @@ class DocsViewModel extends _$DocsViewModel {
     return [];
   }
 
-  void onMuteUserCardTap(BuildContext context,String passiveUid) {
-    UIHelper.cupertinoAlertDialog(
-      context,
-      "ミュートを解除しますがよろしいですか？",
-      () async {
-        await unMuteUser(passiveUid);
-        if (!context.mounted) return;
-        RouterLogic.back(context);
-      },
-    );
-  }
-
-  Future<void> unMuteUser(String passiveUid) async {
+  FutureResult<bool> unMuteUser(String passiveUid) async {
     final deleteToken = _tokensState().muteUserTokens.firstWhere(
       (e) => e.passiveUid == passiveUid,
     );
@@ -347,9 +322,9 @@ class DocsViewModel extends _$DocsViewModel {
     );
 
     final tokenRef = DocRefCore.token(_currentUid(), deleteToken.tokenId);
-    await _repository.deleteDoc(tokenRef);
     final userMuteRef = DocRefCore.userMute(passiveUid, _currentUid());
-    await _repository.deleteDoc(userMuteRef);
+    final docRefList = [tokenRef,userMuteRef];
+    return await _repository.deleteDocs(docRefList);
   }
 
   // User Profile

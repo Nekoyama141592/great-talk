@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/repository/result/result.dart';
@@ -70,6 +71,19 @@ class FirestoreRepository {
   FutureResult<bool> deleteDoc(DocRef ref) async {
     try {
       await client.deleteDoc(ref);
+      return const Result.success(true);
+    } catch (e) {
+      debugPrint(e.toString());
+      return Result.failure(e);
+    }
+  }
+  FutureResult<bool> deleteDocs(List<DocRef> docRefList) async {
+    try {
+      final batch = FirebaseFirestore.instance.batch();
+      for (final docRef in docRefList) {
+        batch.delete(docRef);
+      }
+      await batch.commit();
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());

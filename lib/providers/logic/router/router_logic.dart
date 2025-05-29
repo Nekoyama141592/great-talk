@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/views/chat/chat_page.dart';
 
 class RouterLogic {
   static void pushPath(BuildContext context,String path) {
@@ -7,5 +9,8 @@ class RouterLogic {
   }
   static void back(BuildContext context) {
     context.router.back();
+  }
+  static void toChatPage(BuildContext context,Post post) {
+    pushPath(context, ChatPage.generatePath(post.uid, post.postId));
   }
 }
