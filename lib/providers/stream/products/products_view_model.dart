@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:great_talk/core/purchases_core.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/model/view_model_state/purchases/purchases_state.dart';
@@ -14,10 +13,11 @@ part 'products_view_model.g.dart';
 
 @Riverpod(keepAlive: true)
 class ProductsViewModel extends _$ProductsViewModel {
-  late ProviderSubscription<List<VerifiedPurchase>> subscription;
+  late ProviderSubscription<List<VerifiedPurchase>> _subscription;
   @override
   FutureOr<PurchasesState> build() async {
-    subscription = ref.listen(purchasesNotifierProvider, _onListen);
+    _subscription = ref.listen(purchasesNotifierProvider, _onListen);
+    ref.onDispose(_subscription.close);
     return _fetch();
   }
 

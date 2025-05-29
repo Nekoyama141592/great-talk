@@ -11,10 +11,11 @@ part 'purchases_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
 class PurchasesNotifier extends _$PurchasesNotifier {
-  late StreamSubscription<List<PurchaseDetails>> subscription;
+  late StreamSubscription<List<PurchaseDetails>> _subscription;
   @override
   List<VerifiedPurchase> build() {
-    subscription = _getSubscription();
+    _subscription = _getSubscription();
+    ref.onDispose(() => _subscription.cancel());
     return _fetchPurchases();
   }
 

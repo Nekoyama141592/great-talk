@@ -27,10 +27,8 @@ class RoundedButton extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(defaultPadding(context)),
         child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(
-              buttonColor ?? Theme.of(context).primaryColor,
-            ),
+          style: TextButton.styleFrom(
+            backgroundColor: buttonColor ?? Theme.of(context).primaryColor,
           ),
           onPressed: press,
           child:

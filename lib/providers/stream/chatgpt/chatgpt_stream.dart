@@ -49,18 +49,15 @@ Stream<String> chatStream(Ref ref) {
               // ストリームが完了したらコントローラーを閉じる
               controller.close();
               client.close(); // Clientを閉じる
-              print('Stream done.');
             },
             onError: (e, stackTrace) {
               // エラーハンドリング
-              print('Stream error: $e');
               controller.addError(e, stackTrace);
               controller.close();
               client.close(); // Clientを閉じる
             },
           );
     } catch (e, stackTrace) {
-      print('Fetch error: $e');
       controller.addError(e, stackTrace);
       controller.close();
       client.close(); // Clientを閉じる
@@ -72,7 +69,6 @@ Stream<String> chatStream(Ref ref) {
 
   // ref.onDisposeを使って、Providerが破棄されるときにリソースをクリーンアップ
   ref.onDispose(() {
-    print('Provider disposed. Closing controller and client.');
     if (!controller.isClosed) {
       controller.close();
     }

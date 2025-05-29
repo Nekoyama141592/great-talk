@@ -10,7 +10,6 @@ ThemeData lightThemeData(BuildContext context) {
     focusColor: Colors.black,
     cardColor: kContentColorLightTheme.withValues(alpha: 0.87),
     colorScheme: const ColorScheme.light().copyWith(
-      onBackground: kPrimaryColor,
       primary: kSecondaryColor, // CupertinoActionSheetActionのTextカラー
       secondary: kSecondaryColor, // TextButtonの色
       tertiary: kAccentColorLightTheme,
@@ -27,7 +26,6 @@ ThemeData darkThemeData(BuildContext context) {
     focusColor: Colors.white,
     cardColor: kContentColorDarkTheme,
     colorScheme: const ColorScheme.dark().copyWith(
-      onBackground: kSecondaryColor,
       primary: kPrimaryColor,
       secondary: kPrimaryColor,
       tertiary: kAccentColorDarkTheme,
