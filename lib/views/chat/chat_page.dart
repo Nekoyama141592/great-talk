@@ -79,7 +79,7 @@ class ChatPage extends HookConsumerWidget {
                   // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示
                   if (post.uid == currentUserId ||
                       isAdmin) // `CurrentUserController`は依存関係が不明なため残置
-                    DeletePostButton(onTap:() => chatNotifier.onDeleteButtonPressed(RouterLogic.back(context)))
+                    DeletePostButton(onTap: chatNotifier.onDeleteButtonPressed)
                   else
                     AppBarAction(
                       onTap:
@@ -89,8 +89,12 @@ class ChatPage extends HookConsumerWidget {
                       child: const Icon(Icons.report),
                     ),
                   PostLikeButton(isHorizontal: true, post: post),
+                  //
                   MenuButton(
-                    onMenuPressed: () => ChatUiCore.onMenuPressed(context: context, post: post, cleanLocalMessage: chatNotifier.cleanLocalMessage)
+                    onMenuPressed: () {
+                      RouterLogic.back(context);
+                      ChatUiCore.onMenuPressed(context: context, post: post, cleanLocalMessage: chatNotifier.cleanLocalMessage);
+                    }
                   ),
                 ],
               ),

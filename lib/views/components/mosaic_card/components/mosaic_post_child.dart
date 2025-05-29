@@ -42,7 +42,7 @@ class MosaicPostChild extends ConsumerWidget {
                 ? InkWell(
                   onTap:
                       () =>
-                          ref.read(postLogicProvider.notifier).deletePost(context, post),
+                          ref.read(postLogicProvider.notifier).deletePost(post),
                   child: const Icon(Icons.delete, color: Colors.white),
                 )
                 : const SizedBox.shrink();

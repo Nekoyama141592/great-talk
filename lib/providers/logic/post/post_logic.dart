@@ -238,22 +238,18 @@ class PostLogic extends _$PostLogic {
     await _firestoreRepository.deleteDoc(postLikeRef);
   }
 
-  void deletePost(BuildContext context,Post deletePost) {
-    UIHelper.cupertinoAlertDialog(context,"投稿を削除しますが本当によろしいですか?", () async {
-      RouterLogic.back(context);
-      final result = await _firestoreRepository.deleteDoc(deletePost.ref);
-      await result.when(
-        success: (_) async {
-          _tokensNotifier.addDeletePostId(deletePost.postId);
-          RouterLogic.back(context);
-          await _removePostImage(deletePost.typedImage());
-          UIHelper.showErrorFlutterToast("投稿を削除しました。");
-        },
-        failure: (e) {
-          UIHelper.showErrorFlutterToast("投稿を削除することができませんでした。");
-        },
-      );
-    });
+  void deletePost(Post deletePost) async {
+    final result = await _firestoreRepository.deleteDoc(deletePost.ref);
+    await result.when(
+      success: (_) async {
+        _tokensNotifier.addDeletePostId(deletePost.postId);
+        await _removePostImage(deletePost.typedImage());
+        UIHelper.showErrorFlutterToast("投稿を削除しました。");
+      },
+      failure: (e) {
+        UIHelper.showErrorFlutterToast("投稿を削除することができませんでした。");
+      },
+    );
   }
 
   Future<void> _removePostImage(DetectedImage image) async {

@@ -362,12 +362,12 @@ class ChatViewModel extends _$ChatViewModel {
 
   
 
-  void onDeleteButtonPressed(void back) async {
+  void onDeleteButtonPressed() async {
     final deletePost = state.value?.post;
 
     if (deletePost == null) return;
 
-    ref.read(postLogicProvider.notifier).deletePost(back,deletePost);
+    ref.read(postLogicProvider.notifier).deletePost(deletePost);
   }
 
   
