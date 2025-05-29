@@ -26,9 +26,9 @@ class GradientScreen extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             colors: [
-              color.withOpacity(0.9),
-              color.withOpacity(0.4),
-              color.withOpacity(0.1),
+              color.withValues(alpha: 0.9),
+              color.withValues(alpha: 0.4),
+              color.withValues(alpha: 0.1),
             ],
           ),
         ),
