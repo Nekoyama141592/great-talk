@@ -11,7 +11,7 @@ import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
-import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/repository/firestore/firestore_repository.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -4,7 +4,7 @@ import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart
 import 'package:great_talk/model/view_model_state/purchases/purchases_state.dart';
 import 'package:great_talk/providers/global/purchases/purchases_notifier.dart';
 import 'package:great_talk/repository/local/local_repository.dart';
-import 'package:great_talk/repository/purchases_repository.dart';
+import 'package:great_talk/repository/purchases/purchases_repository.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -27,15 +27,15 @@ class ProductsViewModel extends _$ProductsViewModel {
     state = AsyncData(stateValue.copyWith(verifiedPurchases: after));
   }
 
-  PurchasesRepository get repository => PurchasesRepository();
+  PurchasesRepository get _repository => ref.read(purchasesRepositoryProvider);
 
   Future<PurchasesState> _fetch() async {
     final mockProducts = PurchasesCore.mockProducts();
-    final storeConnected = await repository.isAvailable();
+    final storeConnected = await _repository.isAvailable();
     if (!storeConnected) {
       return PurchasesState(storeConnected: false, products: mockProducts);
     }
-    final res = await repository.queryProductDetails();
+    final res = await _repository.queryProductDetails();
     final products = (res != null && res.isNotEmpty) ? res : mockProducts;
     final verifiedPurchases = _fetchPurchases();
     return PurchasesState(
@@ -62,7 +62,7 @@ class ProductsViewModel extends _$ProductsViewModel {
       state.value?.verifiedPurchases,
     );
     await UIHelper.showFlutterToast("情報を取得しています。 \nしばらくお待ちください。");
-    final result = await repository.buyNonConsumable(purchaseParam);
+    final result = await _repository.buyNonConsumable(purchaseParam);
     result.when(success: _onPurchaseSuccess, failure: _onPurchaseFailed);
   }
 
@@ -78,6 +78,6 @@ class ProductsViewModel extends _$ProductsViewModel {
       UIHelper.showErrorFlutterToast('Google Playに接続ができません');
       return;
     }
-    await repository.restorePurchases();
+    await _repository.restorePurchases();
   }
 }

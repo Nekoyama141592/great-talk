@@ -9,7 +9,7 @@ import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
-import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/repository/firestore/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/utility/new_content.dart';

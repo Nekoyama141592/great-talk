@@ -16,7 +16,7 @@ import 'package:great_talk/model/database_schema/detected_image/detected_image.d
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/database_schema/user_update_log/user_update_log.dart';
 import 'package:great_talk/repository/aws_s3_repository.dart';
-import 'package:great_talk/repository/firestore_repository.dart';
+import 'package:great_talk/repository/firestore/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:great_talk/model/view_model_state/edit/edit_state.dart';

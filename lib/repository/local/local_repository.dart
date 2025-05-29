@@ -13,7 +13,7 @@ class LocalRepository extends _$LocalRepository {
   @override
   void build() {}
 
-  SharedPreferences get prefs => ref.read(prefsProvider);
+  SharedPreferences get _prefs => ref.read(prefsProvider);
 
   List<T> _fetchList<T>(
     PrefsKey key,
@@ -21,7 +21,7 @@ class LocalRepository extends _$LocalRepository {
   ) {
     try {
       final keyName = key.name;
-      final jsonList = prefs.getJsonList(keyName) ?? [];
+      final jsonList = _prefs.getJsonList(keyName) ?? [];
       return jsonList.map((e) => fromJson(e)).toList();
     } catch (e) {
       debugPrint(e.toString());
@@ -35,9 +35,9 @@ class LocalRepository extends _$LocalRepository {
   ) async {
     try {
       final keyName = key.name;
-      final oldValue = prefs.getJsonList(keyName) ?? [];
+      final oldValue = _prefs.getJsonList(keyName) ?? [];
       final newValue = [...oldValue, newElement];
-      await prefs.setJsonList(keyName, newValue);
+      await _prefs.setJsonList(keyName, newValue);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());

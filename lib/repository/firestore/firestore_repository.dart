@@ -3,12 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class FirestoreRequest {
-  FirestoreRequest(this.docRef, this.data);
-  final DocRef docRef;
-  final Map<String, dynamic> data;
-}
+part 'firestore_repository.g.dart';
+
+@riverpod
+FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository(); 
 
 class FirestoreRepository {
   FirestoreClient get client => FirestoreClient();
@@ -155,4 +156,10 @@ class FirestoreRepository {
       return [];
     }
   }
+}
+
+class FirestoreRequest {
+  FirestoreRequest(this.docRef, this.data);
+  final DocRef docRef;
+  final Map<String, dynamic> data;
 }

@@ -5,7 +5,13 @@ import 'package:great_talk/infrastructure/cloud_functions/on_call_client.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/request/receipt_request.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/repository/result/result.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+part 'purchases_repository.g.dart';
+
+@riverpod
+PurchasesRepository purchasesRepository(Ref ref) => PurchasesRepository();
 
 class PurchasesRepository {
   InAppPurchase get inAppPurchase => InAppPurchase.instance;

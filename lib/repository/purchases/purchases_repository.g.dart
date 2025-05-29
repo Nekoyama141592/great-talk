@@ -1,27 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'local_repository.dart';
+part of 'purchases_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localRepositoryHash() => r'643f3e04249eceea6f362991a6e42590a1a34f18';
+String _$purchasesRepositoryHash() =>
+    r'52ea26347bd7a77b4ea99a4dc65f43de1096528a';
 
-/// See also [LocalRepository].
-@ProviderFor(LocalRepository)
-final localRepositoryProvider =
-    AutoDisposeNotifierProvider<LocalRepository, void>.internal(
-      LocalRepository.new,
-      name: r'localRepositoryProvider',
+/// See also [purchasesRepository].
+@ProviderFor(purchasesRepository)
+final purchasesRepositoryProvider =
+    AutoDisposeProvider<PurchasesRepository>.internal(
+      purchasesRepository,
+      name: r'purchasesRepositoryProvider',
       debugGetCreateSourceHash:
           const bool.fromEnvironment('dart.vm.product')
               ? null
-              : _$localRepositoryHash,
+              : _$purchasesRepositoryHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$LocalRepository = AutoDisposeNotifier<void>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef PurchasesRepositoryRef = AutoDisposeProviderRef<PurchasesRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
