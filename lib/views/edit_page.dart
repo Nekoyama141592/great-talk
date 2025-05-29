@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/model/view_model_state/edit/edit_state.dart';
+import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
+import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/providers/view_model/edit/edit_view_model.dart';
 import 'package:great_talk/ui_core/form_ui_core.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/common/forms_screen.dart';
 import 'package:great_talk/views/components/circle_image/components/s3_image.dart';
 import 'package:great_talk/views/create_post/components/form_label.dart';
@@ -87,11 +90,23 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
 
   Widget _positiveButton(EditState data, EditViewModel notifier) {
     return ElevatedButton(
-      onPressed: () {
-        if (formKey.currentState!.validate()) {
-          formKey.currentState!.save();
-          notifier.onPositiveButtonPressed(context);
-        }
+      onPressed: () async {
+        if (!formKey.currentState!.validate()) return;
+        formKey.currentState!.save();
+        final result = await notifier.onPositiveButtonPressed();
+        result.when(
+          success: (_) {
+            ref
+                .read(currentUserNotifierProvider.notifier)
+                .updateUser();
+            RouterLogic.back(context);
+            RouterLogic.back(context);
+            UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
+          },
+          failure: (e) {
+            UIHelper.showErrorFlutterToast("プロフィールを更新できませんでした");
+          },
+        );
       },
       child: const Text("更新する"),
     );

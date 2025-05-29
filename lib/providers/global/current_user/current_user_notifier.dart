@@ -334,31 +334,8 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
         .deleteObject(request); // RiverpodでRepositoryを取得
   }
 
-  Future<void> updateUser(String userName, String bio, String fileName) async {
-    final user = state.value?.publicUser;
-    if (user == null) return;
-
-    final updatedUser = user.copyWith(
-      bio: user.typedBio().copyWith(value: bio).toJson(),
-      userName: user.typedUserName().copyWith(value: userName).toJson(),
-      image: user.typedImage().copyWith(value: fileName).toJson(),
-    );
-
-    String? newBase64;
-    final image = await FileUtility.getS3Image(
-      user.typedImage().bucketName,
-      fileName,
-    );
-    if (image != null) {
-      newBase64 = base64Encode(image);
-    }
-    _updateState(
-      state.value!.copyWith(publicUser: updatedUser, base64: newBase64),
-    );
-
-    final firestoreRepository = ref.read(firestoreRepositoryProvider);
-    final docRef = DocRefCore.user(user.uid);
-    await firestoreRepository.updateDoc(docRef, updatedUser.toJson());
+  Future<void> updateUser() async {
+    await _getPublicUser();
   }
 }
 

@@ -1,11 +1,10 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/model/global/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/core/maps.dart';
@@ -80,14 +79,15 @@ class EditViewModel extends _$EditViewModel {
   }
 
   /// プロフィール更新ボタン押下時
-  Future<void> onPositiveButtonPressed(BuildContext context) async {
+  FutureResult<bool> onPositiveButtonPressed() async {
     final s = state.value;
     final uid = ref.read(streamAuthUidProvider).value;
-    if (s == null || uid == null) return;
+    if (s == null || uid == null) {
+      return const Result.failure('もう一度お試しください.');
+    }
     final base64 = s.base64;
     if (base64 == null) {
-      await UIHelper.showErrorFlutterToast("アイコンをタップしてプロフィール画像をアップロードしてください");
-      return;
+      return const Result.failure("アイコンをタップしてプロフィール画像をアップロードしてください");
     }
     final userName = s.userName;
     final bio = s.bio;
@@ -95,16 +95,18 @@ class EditViewModel extends _$EditViewModel {
         bio.isEmpty ||
         userName.invalidField ||
         userName == noName) {
-      await UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
-      return;
+      return const Result.failure("条件を満たしていないものがあります");
     }
-    if (state.isLoading) return; // 二重リクエスト防止
+    if (state.isLoading) {
+      return const Result.failure("通信中...");
+    }
     state = const AsyncLoading();
     final publicUser = _currentUserState()?.publicUser;
     if (publicUser == null) {
       state = AsyncData(s);
-      return;
+      return const Result.failure("ユーザーが見つかりません");
     }
+    late Result<bool> updateUserResult;
     if (s.isPicked) {
       final fileName = AWSS3Utility.profileObject(uid);
       final uint8list = base64;
@@ -115,29 +117,29 @@ class EditViewModel extends _$EditViewModel {
       final result = await AWSS3Repository().putObject(request);
       await result.when(
         success: (res) async {
-          await _createUserUpdateLog(context, fileName, userName, bio);
+          updateUserResult = await _createUserUpdateLog(fileName, userName, bio);
         },
         failure: (e) {
-          UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
+          updateUserResult = const Result.failure("画像のアップロードが失敗しました");
           state = AsyncData(s);
         },
       );
     } else {
       // 写真がそのまま場合の処理
-      await _createUserUpdateLog(context, publicUser.typedImage().value, userName, bio);
+      updateUserResult = await _createUserUpdateLog(publicUser.typedImage().value, userName, bio);
     }
     // 完了時はstateを元に戻す
     state = AsyncData(s.copyWith(isPicked: false));
+    return updateUserResult;
   }
 
-  Future<void> _createUserUpdateLog(
-    BuildContext context,
+  FutureResult<bool> _createUserUpdateLog(
     String fileName,
     String userName,
     String bio,
   ) async {
     final uid = ref.read(streamAuthUidProvider).value;
-    if (uid == null) return;
+    if (uid == null) return const Result.failure('ログインしてください.');
     final repository = FirestoreRepository();
     final newUpdateLog = UserUpdateLog(
       logCreatedAt: Timestamp.now(),
@@ -151,18 +153,6 @@ class EditViewModel extends _$EditViewModel {
     final docRef = DocRefCore.userUpdateLog(uid);
     final json = newUpdateLog.toJson();
     final result = await repository.createDoc(docRef, json);
-    result.when(
-      success: (_) {
-        ref
-            .read(currentUserNotifierProvider.notifier)
-            .updateUser(userName, bio, fileName);
-        RouterLogic.back(context);
-        RouterLogic.back(context);
-        UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("プロフィールを更新できませんでした");
-      },
-    );
+    return result;
   }
 }
