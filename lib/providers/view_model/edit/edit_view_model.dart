@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:great_talk/model/global/current_user/current_user_state.dart';
+import 'package:great_talk/model/global/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/repository/result/result.dart';

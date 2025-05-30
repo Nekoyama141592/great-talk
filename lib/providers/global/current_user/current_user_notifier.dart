@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:great_talk/model/global/current_user/current_user_state.dart';
+import 'package:great_talk/model/global/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';

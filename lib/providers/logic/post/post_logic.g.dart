@@ -43,7 +43,7 @@ final awsS3RepositoryProvider = Provider<AWSS3Repository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AwsS3RepositoryRef = ProviderRef<AWSS3Repository>;
-String _$postLogicHash() => r'd08e7ca2a50b2eb4bcfdc669b1b633b80353331b';
+String _$postLogicHash() => r'dde48734a73854990695bf7d7dd5ef2967b55f4d';
 
 /// See also [PostLogic].
 @ProviderFor(PostLogic)
