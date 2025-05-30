@@ -11,7 +11,7 @@ import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_pos
 import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/model/database_schema/tokens/report_post_token/report_post_token.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
-import 'package:great_talk/repository/firestore/firestore_repository.dart';
+import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 
 part 'tokens_notifier.g.dart';
 

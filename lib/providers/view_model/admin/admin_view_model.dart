@@ -1,5 +1,5 @@
 import 'package:great_talk/model/view_model_state/admin/admin_state.dart';
-import 'package:great_talk/repository/firestore/firestore_repository.dart';
+import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'admin_view_model.g.dart';

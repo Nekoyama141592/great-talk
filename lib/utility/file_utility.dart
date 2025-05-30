@@ -6,7 +6,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/database_schema/image_info/original_image_info.dart';
 import 'package:great_talk/model/rest_api/get_object/request/get_object_request.dart';
-import 'package:great_talk/repository/on_call/on_call_repository.dart';
+import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';

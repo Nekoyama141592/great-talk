@@ -22,7 +22,7 @@ import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
-import 'package:great_talk/repository/firestore/firestore_repository.dart';
+import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 part 'chat_view_model.g.dart';
 
