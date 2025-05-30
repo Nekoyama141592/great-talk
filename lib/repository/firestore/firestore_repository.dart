@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'firestore_repository.g.dart';
 
 @riverpod
-FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository(); 
+FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository();
 
 class FirestoreRepository {
   FirestoreClient get client => FirestoreClient();

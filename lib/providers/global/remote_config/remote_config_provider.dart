@@ -14,7 +14,8 @@ class RemoteConfigNotifier extends _$RemoteConfigNotifier {
   // キーの設定をprivateなgetterに変更
   String get _maintenanceModeKey => RemoteConfigConstants.maintenanceModeKey;
   String get _maintenanceMsgKey => RemoteConfigConstants.maintenanceMsgKey;
-  String get _forcedUpdateVersionKey => RemoteConfigConstants.forcedUpdateVersionKey;
+  String get _forcedUpdateVersionKey =>
+      RemoteConfigConstants.forcedUpdateVersionKey;
   String get _forcedUpdateMsgKey => RemoteConfigConstants.forcedUpdateMsgKey;
   String get _basicModelKey => RemoteConfigConstants.basicModelKey;
   String get _premiumModelKey => RemoteConfigConstants.premiumModelKey;
@@ -27,7 +28,6 @@ class RemoteConfigNotifier extends _$RemoteConfigNotifier {
         minimumFetchInterval: const Duration(seconds: 15),
       ),
     );
-
 
     await remoteConfig.setDefaults({
       _maintenanceModeKey: false,
@@ -43,8 +43,13 @@ class RemoteConfigNotifier extends _$RemoteConfigNotifier {
     ref.onDispose(_subscription.cancel);
     return _getState(remoteConfig);
   }
-  StreamSubscription<RemoteConfigUpdate> _getSubscription(FirebaseRemoteConfig remoteConfig) {
-    return remoteConfig.onConfigUpdated.listen((RemoteConfigUpdate update) async {
+
+  StreamSubscription<RemoteConfigUpdate> _getSubscription(
+    FirebaseRemoteConfig remoteConfig,
+  ) {
+    return remoteConfig.onConfigUpdated.listen((
+      RemoteConfigUpdate update,
+    ) async {
       state = await AsyncValue.guard(() async {
         await remoteConfig.activate();
         return _getState(remoteConfig);
@@ -62,5 +67,4 @@ class RemoteConfigNotifier extends _$RemoteConfigNotifier {
       premiumModel: remoteConfig.getString(_premiumModelKey),
     );
   }
-  
 }

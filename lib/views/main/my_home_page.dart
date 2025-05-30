@@ -33,7 +33,8 @@ class MyHomePage extends HookConsumerWidget {
               ? AppBar(
                 title: BasicBoldText(appName),
                 shape: appBarShape(context),
-              ): null,
+              )
+              : null,
       floatingActionButton: MainFloatingActionButton(
         isShow:
             pageIndex.value == rankingIndex || pageIndex.value == feedsIndex,

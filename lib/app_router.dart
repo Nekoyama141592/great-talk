@@ -21,25 +21,25 @@ part 'app_router.gr.dart';
 class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes {
-    return  [
-    AutoRoute(page: FirstRoute.page, path: FirstPage.path, initial: true),
-    AutoRoute(page: LoginRoute.page, path: LoginPage.path),
-    AutoRoute(page: AccountRoute.page, path: AccountPage.path),
-    AutoRoute(page: AdminRoute.page, path: AdminPage.path),
-    AutoRoute(page: ChatRoute.page, path: ChatPage.path),
-    AutoRoute(page: CreatePostRoute.page, path: CreatePostPage.path),
-    AutoRoute(page: EditProfileRoute.page, path: EditProfilePage.path),
-    AutoRoute(page: LogoutedRoute.page, path: LogoutedPage.path),
-    AutoRoute(page: MuteUsersRoute.page, path: MuteUsersPage.path),
-    AutoRoute(page: MutePostsRoute.page, path: MutePostsPage.path),
-    AutoRoute(
-      page: ReauthenticateToDeleteRoute.page,
-      path: ReauthenticateToDeletePage.path,
-    ),
-    AutoRoute(page: SubscribeRoute.page, path: SubscribePage.path),
-    AutoRoute(page: UserDeletedRoute.page, path: UserDeletedPage.path),
-    AutoRoute(page: UserProfileRoute.page, path: UserProfilePage.path),
-    AutoRoute(page: GenerateImageRoute.page, path: GenerateImagePage.path),
-  ];
+    return [
+      AutoRoute(page: FirstRoute.page, path: FirstPage.path, initial: true),
+      AutoRoute(page: LoginRoute.page, path: LoginPage.path),
+      AutoRoute(page: AccountRoute.page, path: AccountPage.path),
+      AutoRoute(page: AdminRoute.page, path: AdminPage.path),
+      AutoRoute(page: ChatRoute.page, path: ChatPage.path),
+      AutoRoute(page: CreatePostRoute.page, path: CreatePostPage.path),
+      AutoRoute(page: EditProfileRoute.page, path: EditProfilePage.path),
+      AutoRoute(page: LogoutedRoute.page, path: LogoutedPage.path),
+      AutoRoute(page: MuteUsersRoute.page, path: MuteUsersPage.path),
+      AutoRoute(page: MutePostsRoute.page, path: MutePostsPage.path),
+      AutoRoute(
+        page: ReauthenticateToDeleteRoute.page,
+        path: ReauthenticateToDeletePage.path,
+      ),
+      AutoRoute(page: SubscribeRoute.page, path: SubscribePage.path),
+      AutoRoute(page: UserDeletedRoute.page, path: UserDeletedPage.path),
+      AutoRoute(page: UserProfileRoute.page, path: UserProfilePage.path),
+      AutoRoute(page: GenerateImageRoute.page, path: GenerateImagePage.path),
+    ];
   }
 }
