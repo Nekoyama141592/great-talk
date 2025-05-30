@@ -25,25 +25,25 @@ final firestoreRepositoryProvider = Provider<FirestoreRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FirestoreRepositoryRef = ProviderRef<FirestoreRepository>;
-String _$awsS3RepositoryHash() => r'86bb9b2fc7cdf708bc28a6e00e8ee1b1693bb392';
+String _$onCallRepositoryHash() => r'afb5b31009eda8c9838bf4d9cfd1c7113bef58a0';
 
-/// See also [awsS3Repository].
-@ProviderFor(awsS3Repository)
-final awsS3RepositoryProvider = Provider<AWSS3Repository>.internal(
-  awsS3Repository,
-  name: r'awsS3RepositoryProvider',
+/// See also [onCallRepository].
+@ProviderFor(onCallRepository)
+final onCallRepositoryProvider = Provider<OnCallRepository>.internal(
+  onCallRepository,
+  name: r'onCallRepositoryProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$awsS3RepositoryHash,
+          : _$onCallRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AwsS3RepositoryRef = ProviderRef<AWSS3Repository>;
-String _$postLogicHash() => r'dde48734a73854990695bf7d7dd5ef2967b55f4d';
+typedef OnCallRepositoryRef = ProviderRef<OnCallRepository>;
+String _$postLogicHash() => r'1b04636a9121f258b418a44c4544a6b21783d023';
 
 /// See also [PostLogic].
 @ProviderFor(PostLogic)

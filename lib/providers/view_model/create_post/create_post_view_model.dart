@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:great_talk/model/view_model_state/create_post/create_post_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/repository/on_call_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
-import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/file_utility.dart';
@@ -158,7 +158,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     try {
       final postId = randomString();
       final fileName = AWSS3Utility.postObject(currentUid, postId);
-      final repository = AWSS3Repository();
+      final repository = OnCallRepository();
       final request = PutObjectRequest.fromUint8List(
         uint8list: base64Decode(pickedImage),
         fileName: fileName,

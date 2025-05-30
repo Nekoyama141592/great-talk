@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/model/global/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
+import 'package:great_talk/repository/on_call_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/form_consts.dart';
@@ -15,7 +16,6 @@ import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/database_schema/user_update_log/user_update_log.dart';
-import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/utility/file_utility.dart';
@@ -114,7 +114,7 @@ class EditViewModel extends _$EditViewModel {
         uint8list: base64Decode(uint8list),
         fileName: fileName,
       );
-      final result = await AWSS3Repository().putObject(request);
+      final result = await OnCallRepository().putObject(request);
       await result.when(
         success: (res) async {
           updateUserResult = await _createUserUpdateLog(

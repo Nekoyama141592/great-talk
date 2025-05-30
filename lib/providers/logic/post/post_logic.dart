@@ -5,6 +5,7 @@ import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
+import 'package:great_talk/repository/on_call_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
@@ -17,7 +18,6 @@ import 'package:great_talk/model/database_schema/tokens/like_post_token/like_pos
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
-import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firestore/firestore_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -28,7 +28,7 @@ part 'post_logic.g.dart';
 FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository();
 
 @Riverpod(keepAlive: true)
-AWSS3Repository awsS3Repository(Ref ref) => AWSS3Repository();
+OnCallRepository onCallRepository(Ref ref) => OnCallRepository();
 
 @riverpod
 class PostLogic extends _$PostLogic {
@@ -37,7 +37,7 @@ class PostLogic extends _$PostLogic {
 
   FirestoreRepository get _firestoreRepository =>
       ref.read(firestoreRepositoryProvider);
-  AWSS3Repository get _awsS3Repository => ref.read(awsS3RepositoryProvider);
+  OnCallRepository get _onCallRepository => ref.read(onCallRepositoryProvider);
   TokensState? get _tokensState => ref.read(tokensNotifierProvider).value;
   TokensNotifier get _tokensNotifier =>
       ref.read(tokensNotifierProvider.notifier);
@@ -193,6 +193,6 @@ class PostLogic extends _$PostLogic {
 
   Future<void> _removePostImage(DetectedImage image) async {
     final request = DeleteObjectRequest(object: image.value);
-    await _awsS3Repository.deleteObject(request);
+    await _onCallRepository.deleteObject(request);
   }
 }

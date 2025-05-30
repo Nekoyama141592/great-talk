@@ -45,11 +45,11 @@ final firestoreRepositoryProvider = Provider<FirestoreRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FirestoreRepositoryRef = ProviderRef<FirestoreRepository>;
-String _$awsS3RepositoryHash() => r'24b051611f9c51b2fd4ab263528846b59dc3c105';
+String _$awsS3RepositoryHash() => r'b1426d77b66b4deb4928c989895ca3382e8c1abc';
 
 /// See also [awsS3Repository].
 @ProviderFor(awsS3Repository)
-final awsS3RepositoryProvider = Provider<AWSS3Repository>.internal(
+final awsS3RepositoryProvider = Provider<OnCallRepository>.internal(
   awsS3Repository,
   name: r'awsS3RepositoryProvider',
   debugGetCreateSourceHash:
@@ -62,7 +62,7 @@ final awsS3RepositoryProvider = Provider<AWSS3Repository>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AwsS3RepositoryRef = ProviderRef<AWSS3Repository>;
+typedef AwsS3RepositoryRef = ProviderRef<OnCallRepository>;
 String _$currentUserNotifierHash() =>
     r'16c6d4a3c5bcc87bfc9f0aae4bbf66dfcf24eb09';
 

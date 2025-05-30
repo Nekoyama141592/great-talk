@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:great_talk/model/global/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/repository/on_call_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/database_schema/private_user/private_user.dart';
-import 'package:great_talk/repository/aws_s3_repository.dart';
 import 'package:great_talk/repository/firebase_auth_repository.dart';
 import 'package:great_talk/repository/firestore/firestore_repository.dart';
 import 'package:great_talk/utility/file_utility.dart';
@@ -265,6 +265,6 @@ FirestoreRepository firestoreRepository(Ref ref) {
 }
 
 @Riverpod(keepAlive: true)
-AWSS3Repository awsS3Repository(Ref ref) {
-  return AWSS3Repository();
+OnCallRepository awsS3Repository(Ref ref) {
+  return OnCallRepository();
 }
