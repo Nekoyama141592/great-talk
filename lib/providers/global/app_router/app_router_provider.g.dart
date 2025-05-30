@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_router_notifier.dart';
+part of 'app_router_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appRouterHash() => r'9ef2ee218086b41ec585ffa1b0ed6b63ebdbb7d8';
+String _$appRouterHash() => r'babffb8e22cefce44520192b1132c6d68d9f20a5';
 
 /// See also [appRouter].
 @ProviderFor(appRouter)

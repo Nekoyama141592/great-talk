@@ -225,6 +225,22 @@ class LogoutedRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MaintenancePage]
+class MaintenanceRoute extends PageRouteInfo<void> {
+  const MaintenanceRoute({List<PageRouteInfo>? children})
+    : super(MaintenanceRoute.name, initialChildren: children);
+
+  static const String name = 'MaintenanceRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MaintenancePage();
+    },
+  );
+}
+
+/// generated route for
 /// [MutePostsPage]
 class MutePostsRoute extends PageRouteInfo<void> {
   const MutePostsRoute({List<PageRouteInfo>? children})

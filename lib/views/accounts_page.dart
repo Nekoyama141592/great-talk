@@ -28,39 +28,41 @@ class AccountPage extends ConsumerWidget {
           final isLoggedIn = state != null && !state.isAnonymous;
           return ListView(
             children: [
-              ListTile(title: Text("認証情報: ${AuthCore.currentAuthStateString(state)}")),
+              ListTile(
+                title: Text("認証情報: ${AuthCore.currentAuthStateString(state)}"),
+              ),
               ListTile(title: SelectableText("ユーザーID: $uid")),
               if (isLoggedIn) ...[
                 ListTile(
-                    title: const Text("ログアウトする"),
-                    onTap: () {
-                      UIHelper.cupertinoAlertDialog(
+                  title: const Text("ログアウトする"),
+                  onTap: () {
+                    UIHelper.cupertinoAlertDialog(
+                      context,
+                      "ログアウトしますが本当によろしいですか？",
+                      () async {
+                        final result = await notifier.signOut();
+                        result.when(
+                          success: (_) {
+                            RouterLogic.pushPath(context, LogoutedPage.path);
+                          },
+                          failure: (_) {
+                            UIHelper.showErrorFlutterToast("ログアウトできませんでした}");
+                            RouterLogic.back(context);
+                          },
+                        );
+                      },
+                    );
+                  },
+                ),
+                ListTile(
+                  title: const Text("ユーザーを消去する"),
+                  onTap:
+                      () => RouterLogic.pushPath(
                         context,
-                        "ログアウトしますが本当によろしいですか？",
-                        () async {
-                          final result = await notifier.signOut();
-                          result.when(
-                            success: (_) {
-                              RouterLogic.pushPath(context, LogoutedPage.path);
-                            },
-                            failure: (_) {
-                              UIHelper.showErrorFlutterToast("ログアウトできませんでした}");
-                              RouterLogic.back(context);
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  ListTile(
-                    title: const Text("ユーザーを消去する"),
-                    onTap:
-                        () => RouterLogic.pushPath(
-                          context,
-                          ReauthenticateToDeletePage.path,
-                        ),
-                  )
-              ]
+                        ReauthenticateToDeletePage.path,
+                      ),
+                ),
+              ],
             ],
           );
         },
