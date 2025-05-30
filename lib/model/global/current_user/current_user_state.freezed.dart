@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CurrentUserState {
 
- AuthUser? get authUser; PublicUser? get publicUser; PrivateUser? get privateUser; String? get base64;
+ PublicUser? get publicUser; PrivateUser? get privateUser; String? get base64;
 /// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $CurrentUserStateCopyWith<CurrentUserState> get copyWith => _$CurrentUserStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CurrentUserState&&(identical(other.authUser, authUser) || other.authUser == authUser)&&(identical(other.publicUser, publicUser) || other.publicUser == publicUser)&&(identical(other.privateUser, privateUser) || other.privateUser == privateUser)&&(identical(other.base64, base64) || other.base64 == base64));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CurrentUserState&&(identical(other.publicUser, publicUser) || other.publicUser == publicUser)&&(identical(other.privateUser, privateUser) || other.privateUser == privateUser)&&(identical(other.base64, base64) || other.base64 == base64));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,authUser,publicUser,privateUser,base64);
+int get hashCode => Object.hash(runtimeType,publicUser,privateUser,base64);
 
 @override
 String toString() {
-  return 'CurrentUserState(authUser: $authUser, publicUser: $publicUser, privateUser: $privateUser, base64: $base64)';
+  return 'CurrentUserState(publicUser: $publicUser, privateUser: $privateUser, base64: $base64)';
 }
 
 
@@ -49,11 +49,11 @@ abstract mixin class $CurrentUserStateCopyWith<$Res>  {
   factory $CurrentUserStateCopyWith(CurrentUserState value, $Res Function(CurrentUserState) _then) = _$CurrentUserStateCopyWithImpl;
 @useResult
 $Res call({
- AuthUser? authUser, PublicUser? publicUser, PrivateUser? privateUser, String? base64
+ PublicUser? publicUser, PrivateUser? privateUser, String? base64
 });
 
 
-$AuthUserCopyWith<$Res>? get authUser;$PublicUserCopyWith<$Res>? get publicUser;$PrivateUserCopyWith<$Res>? get privateUser;
+$PublicUserCopyWith<$Res>? get publicUser;$PrivateUserCopyWith<$Res>? get privateUser;
 
 }
 /// @nodoc
@@ -66,28 +66,15 @@ class _$CurrentUserStateCopyWithImpl<$Res>
 
 /// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? authUser = freezed,Object? publicUser = freezed,Object? privateUser = freezed,Object? base64 = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? publicUser = freezed,Object? privateUser = freezed,Object? base64 = freezed,}) {
   return _then(_self.copyWith(
-authUser: freezed == authUser ? _self.authUser : authUser // ignore: cast_nullable_to_non_nullable
-as AuthUser?,publicUser: freezed == publicUser ? _self.publicUser : publicUser // ignore: cast_nullable_to_non_nullable
+publicUser: freezed == publicUser ? _self.publicUser : publicUser // ignore: cast_nullable_to_non_nullable
 as PublicUser?,privateUser: freezed == privateUser ? _self.privateUser : privateUser // ignore: cast_nullable_to_non_nullable
 as PrivateUser?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
 /// Create a copy of CurrentUserState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$AuthUserCopyWith<$Res>? get authUser {
-    if (_self.authUser == null) {
-    return null;
-  }
-
-  return $AuthUserCopyWith<$Res>(_self.authUser!, (value) {
-    return _then(_self.copyWith(authUser: value));
-  });
-}/// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -119,10 +106,9 @@ $PrivateUserCopyWith<$Res>? get privateUser {
 @JsonSerializable()
 
 class _CurrentUserState extends CurrentUserState {
-  const _CurrentUserState({this.authUser, this.publicUser, this.privateUser, this.base64}): super._();
+  const _CurrentUserState({this.publicUser, this.privateUser, this.base64}): super._();
   factory _CurrentUserState.fromJson(Map<String, dynamic> json) => _$CurrentUserStateFromJson(json);
 
-@override final  AuthUser? authUser;
 @override final  PublicUser? publicUser;
 @override final  PrivateUser? privateUser;
 @override final  String? base64;
@@ -140,16 +126,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CurrentUserState&&(identical(other.authUser, authUser) || other.authUser == authUser)&&(identical(other.publicUser, publicUser) || other.publicUser == publicUser)&&(identical(other.privateUser, privateUser) || other.privateUser == privateUser)&&(identical(other.base64, base64) || other.base64 == base64));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CurrentUserState&&(identical(other.publicUser, publicUser) || other.publicUser == publicUser)&&(identical(other.privateUser, privateUser) || other.privateUser == privateUser)&&(identical(other.base64, base64) || other.base64 == base64));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,authUser,publicUser,privateUser,base64);
+int get hashCode => Object.hash(runtimeType,publicUser,privateUser,base64);
 
 @override
 String toString() {
-  return 'CurrentUserState(authUser: $authUser, publicUser: $publicUser, privateUser: $privateUser, base64: $base64)';
+  return 'CurrentUserState(publicUser: $publicUser, privateUser: $privateUser, base64: $base64)';
 }
 
 
@@ -160,11 +146,11 @@ abstract mixin class _$CurrentUserStateCopyWith<$Res> implements $CurrentUserSta
   factory _$CurrentUserStateCopyWith(_CurrentUserState value, $Res Function(_CurrentUserState) _then) = __$CurrentUserStateCopyWithImpl;
 @override @useResult
 $Res call({
- AuthUser? authUser, PublicUser? publicUser, PrivateUser? privateUser, String? base64
+ PublicUser? publicUser, PrivateUser? privateUser, String? base64
 });
 
 
-@override $AuthUserCopyWith<$Res>? get authUser;@override $PublicUserCopyWith<$Res>? get publicUser;@override $PrivateUserCopyWith<$Res>? get privateUser;
+@override $PublicUserCopyWith<$Res>? get publicUser;@override $PrivateUserCopyWith<$Res>? get privateUser;
 
 }
 /// @nodoc
@@ -177,10 +163,9 @@ class __$CurrentUserStateCopyWithImpl<$Res>
 
 /// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? authUser = freezed,Object? publicUser = freezed,Object? privateUser = freezed,Object? base64 = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? publicUser = freezed,Object? privateUser = freezed,Object? base64 = freezed,}) {
   return _then(_CurrentUserState(
-authUser: freezed == authUser ? _self.authUser : authUser // ignore: cast_nullable_to_non_nullable
-as AuthUser?,publicUser: freezed == publicUser ? _self.publicUser : publicUser // ignore: cast_nullable_to_non_nullable
+publicUser: freezed == publicUser ? _self.publicUser : publicUser // ignore: cast_nullable_to_non_nullable
 as PublicUser?,privateUser: freezed == privateUser ? _self.privateUser : privateUser // ignore: cast_nullable_to_non_nullable
 as PrivateUser?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -188,18 +173,6 @@ as String?,
 }
 
 /// Create a copy of CurrentUserState
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$AuthUserCopyWith<$Res>? get authUser {
-    if (_self.authUser == null) {
-    return null;
-  }
-
-  return $AuthUserCopyWith<$Res>(_self.authUser!, (value) {
-    return _then(_self.copyWith(authUser: value));
-  });
-}/// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

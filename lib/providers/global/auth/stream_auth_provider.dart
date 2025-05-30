@@ -13,6 +13,5 @@ Stream<String?> streamAuthUid(Ref ref) {
 
 @Riverpod(keepAlive: true)
 Stream<User?> streamAuth(Ref ref) {
-  final userStream = FirebaseAuth.instance.authStateChanges();
-  return userStream;
+  return FirebaseAuth.instance.authStateChanges();
 }

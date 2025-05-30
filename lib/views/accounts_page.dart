@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:great_talk/core/auth_core.dart';
+import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
@@ -15,31 +17,21 @@ class AccountPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncValue = ref.watch(currentUserNotifierProvider);
-    final notifier = ref.watch(currentUserNotifierProvider.notifier);
+    final authStream = ref.watch(streamAuthProvider);
+    final notifier = ref.read(currentUserNotifierProvider.notifier);
     return Scaffold(
       appBar: AppBar(title: const Text("アカウントページ")),
       body: AsyncScreen(
-        asyncValue: asyncValue,
+        asyncValue: authStream,
         data: (state) {
+          final uid = state?.uid ?? '';
+          final isLoggedIn = state != null && !state.isAnonymous;
           return ListView(
             children: [
-              ListTile(title: Text("認証情報: ${state.currentAuthStateString()}")),
-              ListTile(title: SelectableText("ユーザーID: ${state.currentUid()}")),
-              (() {
-                final publicUser = state.publicUser;
-                if (publicUser == null || !publicUser.isInappropriate()) {
-                  return const SizedBox.shrink();
-                }
-                return ListTile(
-                  title: Text(
-                    "非表示の理由: \n${publicUser.inappropriateReason(state.currentUid())}",
-                    style: const TextStyle(color: Colors.red),
-                  ),
-                );
-              })(),
-              state.isLoggedIn()
-                  ? ListTile(
+              ListTile(title: Text("認証情報: ${AuthCore.currentAuthStateString(state)}")),
+              ListTile(title: SelectableText("ユーザーID: $uid")),
+              if (isLoggedIn) ...[
+                ListTile(
                     title: const Text("ログアウトする"),
                     onTap: () {
                       UIHelper.cupertinoAlertDialog(
@@ -59,10 +51,8 @@ class AccountPage extends ConsumerWidget {
                         },
                       );
                     },
-                  )
-                  : const SizedBox.shrink(),
-              state.isLoggedIn()
-                  ? ListTile(
+                  ),
+                  ListTile(
                     title: const Text("ユーザーを消去する"),
                     onTap:
                         () => RouterLogic.pushPath(
@@ -70,7 +60,7 @@ class AccountPage extends ConsumerWidget {
                           ReauthenticateToDeletePage.path,
                         ),
                   )
-                  : const SizedBox.shrink(),
+              ]
             ],
           );
         },

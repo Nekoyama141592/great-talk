@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:great_talk/consts/enums.dart';
@@ -19,10 +19,8 @@ part 'tokens_notifier.g.dart';
 class TokensNotifier extends _$TokensNotifier {
   @override
   Future<TokensState> build() async {
-    // onInitと_distributeTokensのロジックをここに統合
-    final uid = FirebaseAuth.instance.currentUser?.uid;
+    final uid = ref.watch(streamAuthUidProvider).value;
     if (uid == null) {
-      // ユーザーが認証されていない場合は初期状態で返す
       return TokensState();
     }
 
@@ -60,12 +58,10 @@ class TokensNotifier extends _$TokensNotifier {
     );
   }
 
-  // 状態を安全に更新するためのヘルパー
   void _updateState(TokensState newState) {
     state = AsyncValue.data(newState);
   }
 
-  // 現在の状態を取得するためのゲッター (state.valueがnullの場合を考慮)
   TokensState get _currentState => state.valueOrNull ?? TokensState();
 
   void addDeletePostId(String postId) {

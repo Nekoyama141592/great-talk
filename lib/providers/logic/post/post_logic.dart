@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
+import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
@@ -41,7 +41,7 @@ class PostLogic extends _$PostLogic {
   TokensState? get _tokensState => ref.read(tokensNotifierProvider).value;
   TokensNotifier get _tokensNotifier =>
       ref.read(tokensNotifierProvider.notifier);
-  String? get _currentUid => FirebaseAuth.instance.currentUser?.uid;
+  String? get _currentUid => ref.read(streamAuthUidProvider).value;
 
   FutureResult<bool> mutePost(Post post, String currentUid) async {
     if (_tokensState?.mutePostIds.contains(post.postId) ?? false) {

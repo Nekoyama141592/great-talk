@@ -8,10 +8,6 @@ part of 'current_user_state.dart';
 
 _CurrentUserState _$CurrentUserStateFromJson(Map<String, dynamic> json) =>
     _CurrentUserState(
-      authUser:
-          json['authUser'] == null
-              ? null
-              : AuthUser.fromJson(json['authUser'] as Map<String, dynamic>),
       publicUser:
           json['publicUser'] == null
               ? null
@@ -27,7 +23,6 @@ _CurrentUserState _$CurrentUserStateFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$CurrentUserStateToJson(_CurrentUserState instance) =>
     <String, dynamic>{
-      'authUser': instance.authUser,
       'publicUser': instance.publicUser,
       'privateUser': instance.privateUser,
       'base64': instance.base64,

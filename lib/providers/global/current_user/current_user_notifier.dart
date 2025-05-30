@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:great_talk/model/global/current_user/auth_user/auth_user.dart';
 import 'package:great_talk/model/global/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
@@ -23,19 +22,14 @@ part 'current_user_notifier.g.dart'; // 自動生成されるファイル
 class CurrentUserNotifier extends _$CurrentUserNotifier {
   @override
   Future<CurrentUserState> build() async {
-    final authUser = FirebaseAuth.instance.currentUser;
-    final authUserData =
-        authUser != null ? AuthUser.fromFirebaseAuthUser(authUser) : null;
-
     final initialState = CurrentUserState(
-      authUser: authUserData,
       publicUser: null,
       privateUser: null,
       base64: null,
     );
 
     state = AsyncData(initialState); // 初期状態を設定
-
+    final authUserData = ref.watch(streamAuthProvider).value;
     if (authUserData == null || authUserData.isAnonymous) {
       // 匿名ユーザーまたは未ログインの場合は、データをフェッチせずに終了
       if (authUserData == null) {
@@ -53,20 +47,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     state = AsyncData(newState);
   }
 
-  Future<void> _createAnonymousUser() async {
+  FutureResult<User> _createAnonymousUser() async {
     final repository = FirebaseAuthRepository();
-    final result = await repository.signInAnonymously();
-    result.when(
-      success: (user) => setAuthUser(user),
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("匿名ログインに失敗しました: ${e.toString()}");
-      },
-    );
-  }
-
-  void setAuthUser(User user) {
-    final newAuthUser = AuthUser.fromFirebaseAuthUser(user);
-    _updateState(state.value!.copyWith(authUser: newAuthUser));
+    return await repository.signInAnonymously();
   }
 
   FutureResult<User> onAppleButtonPressed() async {
@@ -217,7 +200,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
 
   FutureResult<bool> _reauthenticateToDelete(AuthCredential credential) async {
     final repository = ref.read(firebaseAuthRepositoryProvider);
-    final user = FirebaseAuth.instance.currentUser;
+    final user = ref.read(streamAuthProvider).value;
     if (user == null) {
       return const Result.failure('ログインしてください');
     }
@@ -248,7 +231,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
 
   FutureResult<bool> _deleteAuthUser() async {
     final firebaseAuthRepository = ref.read(firebaseAuthRepositoryProvider);
-    final user = FirebaseAuth.instance.currentUser;
+    final user = ref.read(streamAuthProvider).value;
     if (user == null) {
       return const Result.failure('ログインしてください');
     }
@@ -271,7 +254,6 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 }
 
-// リポジトリのプロバイダを定義（これは元のコードにはありませんでしたが、依存性注入のために必要です）
 @Riverpod(keepAlive: true)
 FirebaseAuthRepository firebaseAuthRepository(Ref ref) {
   return FirebaseAuthRepository();
