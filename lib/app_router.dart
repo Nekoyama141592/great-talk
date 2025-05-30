@@ -20,7 +20,8 @@ part 'app_router.gr.dart';
 @AutoRouterConfig(replaceInRouteName: 'Page,Route')
 class AppRouter extends RootStackRouter {
   @override
-  List<AutoRoute> get routes => [
+  List<AutoRoute> get routes {
+    return  [
     AutoRoute(page: FirstRoute.page, path: FirstPage.path, initial: true),
     AutoRoute(page: LoginRoute.page, path: LoginPage.path),
     AutoRoute(page: AccountRoute.page, path: AccountPage.path),
@@ -40,4 +41,5 @@ class AppRouter extends RootStackRouter {
     AutoRoute(page: UserProfileRoute.page, path: UserProfilePage.path),
     AutoRoute(page: GenerateImageRoute.page, path: GenerateImagePage.path),
   ];
+  }
 }
