@@ -1,13 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/remote_config/remote_config_provider.dart';
 import 'package:great_talk/providers/global/terms/terms_notifier.dart';
 import 'package:great_talk/views/check_page/components/maintenance_page.dart';
 import 'package:great_talk/views/check_page/components/required_update_page.dart';
 import 'package:great_talk/views/check_page/components/terms_page.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
-import 'package:great_talk/views/loading_page.dart';
 import 'package:great_talk/views/main/my_home_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,7 +15,6 @@ class FirstPage extends ConsumerWidget {
   static const path = '/';
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userStream = ref.watch(streamAuthUidProvider);
     final remoteConfigState = ref.watch(remoteConfigNotifierProvider);
     final localState = ref.watch(termsNotifierProvider);
     return AsyncScreen(
@@ -32,12 +29,7 @@ class FirstPage extends ConsumerWidget {
         if (!localState) {
           return const TermsPage();
         }
-        return AsyncScreen(
-          asyncValue: userStream,
-          data: (uid) {
-            return uid != null ? MyHomePage() : const LoadingPage();
-          },
-        );
+        return MyHomePage();
       },
     );
   }

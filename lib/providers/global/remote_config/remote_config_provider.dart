@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:great_talk/model/global/remote_config/remote_config_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -7,10 +9,18 @@ part 'remote_config_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class RemoteConfigNotifier extends _$RemoteConfigNotifier {
+  late StreamSubscription<RemoteConfigUpdate> _subscription;
+  FirebaseRemoteConfig _getConfig() => FirebaseRemoteConfig.instance;
+  // キーの設定をprivateなgetterに変更
+  String get _maintenanceModeKey => RemoteConfigConstants.maintenanceModeKey;
+  String get _maintenanceMsgKey => RemoteConfigConstants.maintenanceMsgKey;
+  String get _forcedUpdateVersionKey => RemoteConfigConstants.forcedUpdateVersionKey;
+  String get _forcedUpdateMsgKey => RemoteConfigConstants.forcedUpdateMsgKey;
+  String get _basicModelKey => RemoteConfigConstants.basicModelKey;
+  String get _premiumModelKey => RemoteConfigConstants.premiumModelKey;
   @override
   FutureOr<RemoteConfigState> build() async {
-    final remoteConfig = FirebaseRemoteConfig.instance;
-
+    final remoteConfig = _getConfig();
     await remoteConfig.setConfigSettings(
       RemoteConfigSettings(
         fetchTimeout: const Duration(minutes: 1),
@@ -18,45 +28,39 @@ class RemoteConfigNotifier extends _$RemoteConfigNotifier {
       ),
     );
 
-    // キーの設定
-    final maintenanceModeKey = RemoteConfigConstants.maintenanceModeKey;
-    final maintenanceMsgKey = RemoteConfigConstants.maintenanceMsgKey;
-    final forcedUpdateVersionKey = RemoteConfigConstants.forcedUpdateVersionKey;
-    final forcedUpdateMsgKey = RemoteConfigConstants.forcedUpdateMsgKey;
-    const basicModelKey = RemoteConfigConstants.basicModelKey;
-    const premiumModelKey = RemoteConfigConstants.premiumModelKey;
 
     await remoteConfig.setDefaults({
-      maintenanceModeKey: false,
-      maintenanceMsgKey: RemoteConfigConstants.maintenanceMsg,
-      forcedUpdateVersionKey: RemoteConfigConstants.appVersion,
-      forcedUpdateMsgKey: RemoteConfigConstants.forcedUpdateMsg,
-      basicModelKey: RemoteConfigConstants.basicModel,
-      premiumModelKey: RemoteConfigConstants.premiumModel,
+      _maintenanceModeKey: false,
+      _maintenanceMsgKey: RemoteConfigConstants.maintenanceMsg,
+      _forcedUpdateVersionKey: RemoteConfigConstants.appVersion,
+      _forcedUpdateMsgKey: RemoteConfigConstants.forcedUpdateMsg,
+      _basicModelKey: RemoteConfigConstants.basicModel,
+      _premiumModelKey: RemoteConfigConstants.premiumModel,
     });
 
     await remoteConfig.fetchAndActivate();
+    _subscription = _getSubscription(remoteConfig);
+    ref.onDispose(_subscription.cancel);
+    return _getState(remoteConfig);
+  }
+  StreamSubscription<RemoteConfigUpdate> _getSubscription(FirebaseRemoteConfig remoteConfig) {
+    return remoteConfig.onConfigUpdated.listen((RemoteConfigUpdate update) async {
+      state = await AsyncValue.guard(() async {
+        await remoteConfig.activate();
+        return _getState(remoteConfig);
+      });
+    });
+  }
 
-    final maintenanceMode = remoteConfig.getBool(maintenanceModeKey);
-    final maintenanceMsg =
-        maintenanceMode
-            ? remoteConfig.getString(maintenanceMsgKey)
-            : RemoteConfigConstants.maintenanceMsg;
-    final forcedUpdateVersion = remoteConfig.getInt(forcedUpdateVersionKey);
-    final forcedUpdateMsg =
-        (RemoteConfigConstants.appVersion < forcedUpdateVersion)
-            ? remoteConfig.getString(forcedUpdateMsgKey)
-            : RemoteConfigConstants.forcedUpdateMsg;
-    final basicModel = remoteConfig.getString(basicModelKey);
-    final premiumModel = remoteConfig.getString(premiumModelKey);
-
+  RemoteConfigState _getState(FirebaseRemoteConfig remoteConfig) {
     return RemoteConfigState(
-      maintenanceMode: maintenanceMode,
-      maintenanceMsg: maintenanceMsg,
-      forcedUpdateVersion: forcedUpdateVersion,
-      forcedUpdateMsg: forcedUpdateMsg,
-      basicModel: basicModel,
-      premiumModel: premiumModel,
+      maintenanceMode: remoteConfig.getBool(_maintenanceModeKey),
+      maintenanceMsg: remoteConfig.getString(_maintenanceMsgKey),
+      forcedUpdateVersion: remoteConfig.getInt(_forcedUpdateVersionKey),
+      forcedUpdateMsg: remoteConfig.getString(_forcedUpdateMsgKey),
+      basicModel: remoteConfig.getString(_basicModelKey),
+      premiumModel: remoteConfig.getString(_premiumModelKey),
     );
   }
+  
 }

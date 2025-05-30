@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/global/notification/notification_provider.dart';
 import 'package:great_talk/providers/global/purchases/purchases_notifier.dart';
 import 'package:great_talk/providers/stream/products/products_view_model.dart';
@@ -20,6 +21,7 @@ class MyHomePage extends HookConsumerWidget {
   const MyHomePage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(currentUserNotifierProvider);
     ref.watch(purchasesNotifierProvider);
     ref.watch(productsViewModelProvider);
     ref.watch(notificationProvider);
@@ -27,12 +29,11 @@ class MyHomePage extends HookConsumerWidget {
     final PageController pageController = usePageController();
     return Scaffold(
       appBar:
-          pageIndex.value == rankingIndex
-              ? null
-              : AppBar(
+          pageIndex.value != rankingIndex
+              ? AppBar(
                 title: BasicBoldText(appName),
                 shape: appBarShape(context),
-              ),
+              ): null,
       floatingActionButton: MainFloatingActionButton(
         isShow:
             pageIndex.value == rankingIndex || pageIndex.value == feedsIndex,

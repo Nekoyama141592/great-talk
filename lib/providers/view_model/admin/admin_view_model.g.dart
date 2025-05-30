@@ -6,7 +6,7 @@ part of 'admin_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$adminViewModelHash() => r'ba6872a9cc607961f726b202fb682ed5076f1697';
+String _$adminViewModelHash() => r'ac7bbaedacb2ff1dc1f0b1ed000dfa4e79c1359c';
 
 /// See also [AdminViewModel].
 @ProviderFor(AdminViewModel)
