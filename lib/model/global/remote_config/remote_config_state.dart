@@ -9,7 +9,6 @@ part 'remote_config_state.g.dart';
 abstract class RemoteConfigState with _$RemoteConfigState {
   const RemoteConfigState._();
   const factory RemoteConfigState({
-    @Default(ChatLimitPerDay()) ChatLimitPerDay chatLimitPerDay,
     @Default(false) bool maintenanceMode,
     @Default('') String maintenanceMsg,
     @Default(0) int forcedUpdateVersion,

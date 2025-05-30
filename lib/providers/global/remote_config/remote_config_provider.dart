@@ -9,7 +9,6 @@ part 'remote_config_provider.g.dart';
 class RemoteConfigNotifier extends _$RemoteConfigNotifier {
   @override
   FutureOr<RemoteConfigState> build() async {
-    return RemoteConfigState();
     final remoteConfig = FirebaseRemoteConfig.instance;
 
     await remoteConfig.setConfigSettings(
@@ -20,9 +19,6 @@ class RemoteConfigNotifier extends _$RemoteConfigNotifier {
     );
 
     // キーの設定
-    const freeLimitPerDayKey = RemoteConfigConstants.freeLimitPerDayKey;
-    const basicLimitPerDayKey = RemoteConfigConstants.basicLimitPerDayKey;
-    const premiumLimitPerDayKey = RemoteConfigConstants.premiumLimitPerDayKey;
     final maintenanceModeKey = RemoteConfigConstants.maintenanceModeKey;
     final maintenanceMsgKey = RemoteConfigConstants.maintenanceMsgKey;
     final forcedUpdateVersionKey = RemoteConfigConstants.forcedUpdateVersionKey;
@@ -31,9 +27,6 @@ class RemoteConfigNotifier extends _$RemoteConfigNotifier {
     const premiumModelKey = RemoteConfigConstants.premiumModelKey;
 
     await remoteConfig.setDefaults({
-      freeLimitPerDayKey: RemoteConfigConstants.freeLimitPerDay,
-      basicLimitPerDayKey: RemoteConfigConstants.basicLimitPerDay,
-      premiumLimitPerDayKey: RemoteConfigConstants.premiumLimitPerDay,
       maintenanceModeKey: false,
       maintenanceMsgKey: RemoteConfigConstants.maintenanceMsg,
       forcedUpdateVersionKey: RemoteConfigConstants.appVersion,
