@@ -5,7 +5,7 @@ import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
-import 'package:great_talk/repository/on_call_repository.dart';
+import 'package:great_talk/repository/on_call/on_call_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';

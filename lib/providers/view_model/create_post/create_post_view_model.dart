@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:great_talk/model/view_model_state/create_post/create_post_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
-import 'package:great_talk/repository/on_call_repository.dart';
+import 'package:great_talk/repository/on_call/on_call_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';

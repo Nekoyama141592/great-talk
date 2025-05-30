@@ -1,5 +1,5 @@
 import 'package:great_talk/model/view_model_state/generate_image/generate_image_state.dart';
-import 'package:great_talk/repository/on_call_repository.dart';
+import 'package:great_talk/repository/on_call/on_call_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'generate_image_view_model.g.dart';
 
