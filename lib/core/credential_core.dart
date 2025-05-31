@@ -4,7 +4,7 @@ import 'package:great_talk/run_app.dart';
 import 'package:great_talk/flavors.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-class CredentialComposer {
+class CredentialCore {
   static Future<OAuthCredential> appleCredential() async {
     final appleCredential = await SignInWithApple.getAppleIDCredential(
       scopes: [

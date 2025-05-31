@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:great_talk/infrastructure/credential_composer.dart';
+import 'package:great_talk/core/credential_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'firebase_auth_client.g.dart';
@@ -13,13 +13,13 @@ class FirebaseAuthClient {
   }
 
   Future<UserCredential?> signinWithApple() async {
-    final credential = await CredentialComposer.appleCredential();
+    final credential = await CredentialCore.appleCredential();
     final result = await FirebaseAuth.instance.signInWithCredential(credential);
     return result;
   }
 
   Future<UserCredential?> signInWithGoogle() async {
-    final credential = await CredentialComposer.googleCredential();
+    final credential = await CredentialCore.googleCredential();
     final result = await FirebaseAuth.instance.signInWithCredential(credential);
     return result;
   }
