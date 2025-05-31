@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
@@ -140,7 +141,7 @@ class PostLogic {
   }
 
   Future<void> _unLikePost(Post post, String currentUid) async {
-    final deleteToken = _tokensState?.likePostTokens.firstWhere(
+    final deleteToken = _tokensState?.likePostTokens.firstWhereOrNull(
       (element) => element.postId == post.postId,
     );
     if (deleteToken == null) return;
