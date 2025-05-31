@@ -16,44 +16,43 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'post_logic.g.dart';
 
 @riverpod
-PostLogic postLogic(Ref ref) => PostLogic(ref);
+PostLogic postLogic(Ref ref) => PostLogic(firestoreRepository: ref.watch(firestoreRepositoryProvider),onCallRepository: ref.watch(onCallRepositoryProvider));
 
 class PostLogic {
-  // TODO: 良くないので修正
-  PostLogic(this.ref);
-  final Ref ref;
-
-  FirestoreRepository get _firestoreRepository =>
-      ref.read(firestoreRepositoryProvider);
-  OnCallRepository get _onCallRepository => ref.read(onCallRepositoryProvider);
+  PostLogic({
+    required this.firestoreRepository,
+    required this.onCallRepository
+  });
+  final FirestoreRepository firestoreRepository;
+  final OnCallRepository onCallRepository;
 
   FutureResult<bool> mutePost(Post post, String currentUid,MutePostToken token) async {
     final postMute = PostMute.fromPost(post, currentUid);
-    return await _firestoreRepository.createMutePostInfo(currentUid, post, token, postMute);
+    return await firestoreRepository.createMutePostInfo(currentUid, post, token, postMute);
   }
 
   FutureResult<bool> muteUser(Post post, String currentUid,MuteUserToken token) async {
     final passiveUid = post.uid;
     final userMute = UserMute.fromPost(currentUid, post);
-    return await _firestoreRepository.createMuteUserInfo(currentUid, passiveUid, token, userMute);
+    return await firestoreRepository.createMuteUserInfo(currentUid, passiveUid, token, userMute);
   }
 
 
   FutureResult<bool> onLikeButtonPressed(String currentUid,LikePostToken token,Post post) async {
     final postLike = PostLike.fromPost(post, currentUid);
-    return _firestoreRepository.createLikePostInfo(currentUid, post, token, postLike);
+    return firestoreRepository.createLikePostInfo(currentUid, post, token, postLike);
   }
 
   FutureResult<bool> onUnLikeButtonPressed(String currentUid,String tokenId,Post post) {
-    return _firestoreRepository.deleteLikePostInfo(currentUid, post, tokenId);
+    return firestoreRepository.deleteLikePostInfo(currentUid, post, tokenId);
   }
 
   FutureResult<bool> deletePost(Post post) {
-    return _firestoreRepository.deletePost(post);
+    return firestoreRepository.deletePost(post);
   }
 
   Future<void> _removePostImage(DetectedImage image) async {
     final request = DeleteObjectRequest(object: image.value);
-    await _onCallRepository.deleteObject(request);
+    await onCallRepository.deleteObject(request);
   }
 }
