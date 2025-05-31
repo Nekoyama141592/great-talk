@@ -50,12 +50,12 @@ class PurchasesNotifier extends _$PurchasesNotifier {
   }
 
   Future<void> _save(VerifiedPurchase res) async {
-    final localRepository = ref.read(localRepositoryProvider.notifier);
+    final localRepository = ref.read(localRepositoryProvider);
     await localRepository.addVerifiedPurchase(res);
   }
 
   List<VerifiedPurchase> _fetchPurchases() {
-    final localRepository = ref.read(localRepositoryProvider.notifier);
+    final localRepository = ref.read(localRepositoryProvider);
     return localRepository.fetchVerifiedPurchases();
   }
 

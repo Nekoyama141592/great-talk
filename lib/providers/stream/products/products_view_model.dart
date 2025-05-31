@@ -46,7 +46,7 @@ class ProductsViewModel extends _$ProductsViewModel {
   }
 
   List<VerifiedPurchase> _fetchPurchases() {
-    final localRepository = ref.read(localRepositoryProvider.notifier);
+    final localRepository = ref.read(localRepositoryProvider);
     return localRepository.fetchVerifiedPurchases();
   }
 

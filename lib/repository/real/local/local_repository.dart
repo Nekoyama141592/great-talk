@@ -4,16 +4,17 @@ import 'package:great_talk/extensions/shared_preferences_extension.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'local_repository.g.dart';
 
 @riverpod
-class LocalRepository extends _$LocalRepository {
-  @override
-  void build() {}
+LocalRepository localRepository(Ref ref) => LocalRepository(ref.watch(prefsProvider));
 
-  SharedPreferences get _prefs => ref.read(prefsProvider);
+class LocalRepository {
+  LocalRepository(this.prefs);
+  final SharedPreferences prefs;
 
   List<T> _fetchList<T>(
     PrefsKey key,
@@ -21,7 +22,7 @@ class LocalRepository extends _$LocalRepository {
   ) {
     try {
       final keyName = key.name;
-      final jsonList = _prefs.getJsonList(keyName) ?? [];
+      final jsonList = prefs.getJsonList(keyName) ?? [];
       return jsonList.map((e) => fromJson(e)).toList();
     } catch (e) {
       debugPrint(e.toString());
@@ -35,9 +36,9 @@ class LocalRepository extends _$LocalRepository {
   ) async {
     try {
       final keyName = key.name;
-      final oldValue = _prefs.getJsonList(keyName) ?? [];
+      final oldValue = prefs.getJsonList(keyName) ?? [];
       final newValue = [...oldValue, newElement];
-      await _prefs.setJsonList(keyName, newValue);
+      await prefs.setJsonList(keyName, newValue);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
