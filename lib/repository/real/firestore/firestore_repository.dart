@@ -51,6 +51,10 @@ class FirestoreRepository {
     final docRef = DocRefCore.privateUser(uid);
     return _createDoc(docRef, json);
   }
+  FutureResult<bool> createUserUpdateLog(String uid, Map<String,dynamic> json) async {
+    final docRef = DocRefCore.userUpdateLog(uid);
+    return _createDoc(docRef, json);
+  }
 
   FutureResult<bool> _updateDoc(DocRef ref, Map<String,dynamic> json) async {
     try {

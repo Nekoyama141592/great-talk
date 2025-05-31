@@ -158,9 +158,8 @@ class EditViewModel extends _$EditViewModel {
       image: DetectedImage(value: fileName).toJson(),
       userRef: DocRefCore.user(uid),
     );
-    final docRef = DocRefCore.userUpdateLog(uid);
     final json = newUpdateLog.toJson();
-    final result = await repository.createDoc(docRef, json);
+    final result = await repository.createUserUpdateLog(uid, json);
     return result;
   }
 }
