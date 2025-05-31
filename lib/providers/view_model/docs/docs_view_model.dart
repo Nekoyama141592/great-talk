@@ -58,7 +58,7 @@ class DocsViewModel extends _$DocsViewModel {
   TokensNotifier _tokensNotifier() => ref.read(tokensNotifierProvider.notifier);
   TokensState _tokensState() =>
       ref.read(tokensNotifierProvider).value ?? TokensState();
-  final _repository = FirestoreRepository();
+  FirestoreRepository get _repository => ref.read(firestoreRepositoryProvider);
 
   // Query
   MapQuery _setQuery() {

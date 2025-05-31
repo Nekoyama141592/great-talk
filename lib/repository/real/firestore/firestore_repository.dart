@@ -20,10 +20,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'firestore_repository.g.dart';
 
 @riverpod
-FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository();
+FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository(ref.watch(firestoreClientProvider));
 
 class FirestoreRepository {
-  FirestoreClient get client => FirestoreClient();
+  FirestoreRepository(this.client);
+  final FirestoreClient client;
   // count
   Future<int?> _count(MapQuery query) async {
     try {

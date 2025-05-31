@@ -205,8 +205,9 @@ class ChatViewModel extends _$ChatViewModel {
   // 以下、元のControllerから移植したヘルパーメソッド群
 
   Future<Post?> _fetchPost(String uid, String postId) async {
-    final ref = DocRefCore.post(uid, postId);
-    final result = await FirestoreRepository().getDoc(ref);
+    final docRef = DocRefCore.post(uid, postId);
+    final repository = ref.read(firestoreRepositoryProvider);
+    final result = await repository.getDoc(docRef);
     return result.when(
       success: (doc) => doc.exists ? Post.fromJson(doc.data()!) : null,
       failure: (e) => null,

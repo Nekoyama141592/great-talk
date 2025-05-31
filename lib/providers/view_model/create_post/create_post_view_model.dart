@@ -198,7 +198,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     String fileName,
     CreatePostState postState,
   ) async {
-    final repository = FirestoreRepository();
+    final repository = ref.read(firestoreRepositoryProvider);
     final uid = ref.read(streamAuthUidProvider).value;
     if (uid == null) return false;
 

@@ -150,7 +150,7 @@ class EditViewModel extends _$EditViewModel {
   ) async {
     final uid = ref.read(streamAuthUidProvider).value;
     if (uid == null) return const Result.failure('ログインしてください.');
-    final repository = FirestoreRepository();
+    final repository = ref.read(firestoreRepositoryProvider);
     final newUpdateLog = UserUpdateLog(
       logCreatedAt: Timestamp.now(),
       searchToken: returnSearchToken(userName),

@@ -1,5 +1,10 @@
 import 'package:great_talk/typedefs/firestore_typedef.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+part 'firestore_client.g.dart';
 
+@riverpod
+FirestoreClient firestoreClient(Ref ref) => FirestoreClient(); 
 class FirestoreClient {
   Future<int> count(MapQuery query) async {
     final snapshot = await query.count().get();
