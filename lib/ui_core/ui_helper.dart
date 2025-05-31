@@ -5,6 +5,7 @@ import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/views/common/custom_snack_bar.dart';
 import 'package:great_talk/views/common/subscribed_copyable_text.dart';
 
 class UIHelper {
@@ -30,8 +31,10 @@ class UIHelper {
     );
   }
 
-  static void showSnackBar(BuildContext context,String msg) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+  static void showSnackBar(BuildContext context, String msg) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      CustomSnackBar.blue(context, msg)
+    );
   }
 
   static void cupertinoAlertDialog(
