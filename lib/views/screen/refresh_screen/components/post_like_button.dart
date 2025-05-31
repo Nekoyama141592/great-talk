@@ -31,14 +31,14 @@ class PostLikeButton extends HookConsumerWidget {
                 child: const Icon(Icons.favorite, color: Colors.red),
                 onTap:
                     () => ref
-                        .read(postLogicProvider.notifier)
+                        .read(postLogicProvider)
                         .onUnLikeButtonPressed(copyPost, post),
               )
               : InkWell(
                 child: const Icon(Icons.favorite),
                 onTap:
                     () => ref
-                        .read(postLogicProvider.notifier)
+                        .read(postLogicProvider)
                         .onLikeButtonPressed(copyPost, post),
               ),
           Padding(

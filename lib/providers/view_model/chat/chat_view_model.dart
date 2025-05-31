@@ -351,7 +351,7 @@ class ChatViewModel extends _$ChatViewModel {
 
     if (deletePost == null) return;
 
-    ref.read(postLogicProvider.notifier).deletePost(deletePost);
+    ref.read(postLogicProvider).deletePost(deletePost);
   }
 
   Future<void> cleanLocalMessage() async {

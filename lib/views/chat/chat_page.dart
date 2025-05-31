@@ -83,7 +83,7 @@ class ChatPage extends HookConsumerWidget {
                   else
                     AppBarAction(
                       onTap: () {
-                        final notifier = ref.read(postLogicProvider.notifier);
+                        final notifier = ref.read(postLogicProvider);
                         PostUiCore.onReportButtonPressed(
                           context: context,
                           mutePost: (innerContext) async {

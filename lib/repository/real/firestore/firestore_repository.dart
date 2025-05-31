@@ -5,7 +5,13 @@ import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/model/database_schema/post_like/post_like.dart';
+import 'package:great_talk/model/database_schema/post_mute/post_mute.dart';
 import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
+import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
+import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -101,6 +107,34 @@ class FirestoreRepository {
     final requestList = [
       FirestoreRequest(tokenRef, followingToken.toJson()),
       FirestoreRequest(followerRef, follower.toJson()),
+    ];
+    return _createDocs(requestList);
+  }
+  FutureResult<bool> createMuteUserInfo(String currentUid,String passiveUid, String tokenId,MuteUserToken muteUserToken,UserMute userMute) async {
+    final tokenRef = DocRefCore.token(currentUid, tokenId);
+    final userMuteRef = DocRefCore.userMute(passiveUid, currentUid);
+    final requests = [
+      FirestoreRequest(tokenRef, muteUserToken.toJson()),
+      FirestoreRequest(userMuteRef, userMute.toJson()),
+    ];
+    return _createDocs(requests);
+  }
+  FutureResult<bool> createMutePostInfo(String currentUid,Post post, String tokenId,MutePostToken mutePostToken,PostMute postMute) async {
+    final tokenRef = DocRefCore.token(currentUid, tokenId);
+    final postMuteRef = DocRefCore.postMute(DocRefCore.post(post.uid, post.postId), currentUid);
+    final requestList = [
+      FirestoreRequest(tokenRef, mutePostToken.toJson()),
+      FirestoreRequest(postMuteRef, postMute.toJson()),
+    ];
+    return _createDocs(requestList);
+  }
+  FutureResult<bool> createLikePostInfo(String currentUid,Post post, String tokenId,LikePostToken likePostToken, PostLike postLike) async {
+    final tokenRef = DocRefCore.token(currentUid, tokenId);
+    final postRef = post.typedRef();
+    final postLikeRef = DocRefCore.postLike(postRef, currentUid);
+    final requestList = [
+      FirestoreRequest(tokenRef, likePostToken.toJson()),
+      FirestoreRequest(postLikeRef, postLike.toJson()),
     ];
     return _createDocs(requestList);
   }

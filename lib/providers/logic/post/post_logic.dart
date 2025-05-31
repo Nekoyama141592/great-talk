@@ -24,16 +24,13 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'post_logic.g.dart';
 
-@Riverpod(keepAlive: true)
-FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository();
-
-@Riverpod(keepAlive: true)
-OnCallRepository onCallRepository(Ref ref) => OnCallRepository();
-
 @riverpod
-class PostLogic extends _$PostLogic {
-  @override
-  void build() {} // state()は使わないのでvoidでOK
+PostLogic postLogic(Ref ref) => PostLogic(ref);
+
+class PostLogic {
+  // TODO: 良くないので修正
+  PostLogic(this.ref);
+  final Ref ref;
 
   FirestoreRepository get _firestoreRepository =>
       ref.read(firestoreRepositoryProvider);
@@ -51,7 +48,6 @@ class PostLogic extends _$PostLogic {
     final now = Timestamp.now();
     final postId = post.postId;
     final postRef = post.typedRef();
-    final tokenRef = DocRefCore.token(currentUid, tokenId);
     final mutePostToken = MutePostToken(
       activeUid: currentUid,
       createdAt: now,
@@ -61,18 +57,14 @@ class PostLogic extends _$PostLogic {
       tokenType: TokenType.mutePost.name,
     );
     _tokensNotifier.addMutePost(mutePostToken);
-    final postMuteRef = DocRefCore.postMute(postRef, currentUid);
     final postMute = PostMute(
       activeUid: currentUid,
       createdAt: now,
       postId: postId,
       postRef: postRef,
     );
-    final requests = [
-      FirestoreRequest(tokenRef, mutePostToken.toJson()),
-      FirestoreRequest(postMuteRef, postMute.toJson()),
-    ];
-    return await _firestoreRepository.createDocs(requests);
+    
+    return await _firestoreRepository.createMutePostInfo(currentUid, post, tokenId, mutePostToken, postMute);
   }
 
   FutureResult<bool> muteUser(Post post, String currentUid) async {
@@ -92,7 +84,6 @@ class PostLogic extends _$PostLogic {
       tokenType: TokenType.muteUser.name,
     );
     _tokensNotifier.addMuteUser(muteUserToken);
-    final tokenRef = DocRefCore.token(currentUid, tokenId);
     final userMute = UserMute(
       activeUserRef: DocRefCore.user(currentUid),
       activeUid: currentUid,
@@ -100,12 +91,8 @@ class PostLogic extends _$PostLogic {
       passiveUid: passiveUid,
       passiveUserRef: passiveUserRef,
     );
-    final userMuteRef = DocRefCore.userMute(passiveUid, currentUid);
-    final requests = [
-      FirestoreRequest(tokenRef, muteUserToken.toJson()),
-      FirestoreRequest(userMuteRef, userMute.toJson()),
-    ];
-    return await _firestoreRepository.createDocs(requests);
+    
+    return await _firestoreRepository.createMuteUserInfo(currentUid, passiveUid, tokenId, muteUserToken, userMute);
   }
 
   void onLikeButtonPressed(ValueNotifier<Post> copyPost, Post post) async {
@@ -136,8 +123,6 @@ class PostLogic extends _$PostLogic {
       tokenType: TokenType.likePost.name,
     );
     _tokensNotifier.addLikePost(likePostToken);
-    final tokenRef = DocRefCore.token(currentUid, tokenId);
-
     final postLike = PostLike(
       activeUid: currentUid,
       createdAt: now,
@@ -145,12 +130,7 @@ class PostLogic extends _$PostLogic {
       postRef: postRef,
       postId: postId,
     );
-    final postLikeRef = DocRefCore.postLike(postRef, currentUid);
-    final requestList = [
-      FirestoreRequest(tokenRef, likePostToken.toJson()),
-      FirestoreRequest(postLikeRef, postLike.toJson()),
-    ];
-    await _firestoreRepository.createDocs(requestList);
+    await _firestoreRepository.createLikePostInfo(currentUid, post, tokenId, likePostToken, postLike);
   }
 
   void onUnLikeButtonPressed(ValueNotifier<Post> copyPost, Post post) async {
