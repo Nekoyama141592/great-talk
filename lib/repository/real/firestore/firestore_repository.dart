@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:great_talk/core/firestore/collection_group_core.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
@@ -16,7 +17,8 @@ class FirestoreRepository {
   // count
   Future<int?> countUsers() async {
     try {
-      final count = await client.countUsers();
+      final query = CollectionGroupCore.users;
+      final count = await client.count(query);
       return count;
     } catch (e) {
       debugPrint(e.toString());
@@ -26,7 +28,8 @@ class FirestoreRepository {
 
   Future<int?> countPosts() async {
     try {
-      final count = await client.countPosts();
+      final query = CollectionGroupCore.posts;
+      final count = await client.count(query);
       return count;
     } catch (e) {
       debugPrint(e.toString());
@@ -36,17 +39,8 @@ class FirestoreRepository {
 
   Future<int?> countMessages() async {
     try {
-      final count = await client.countMessages();
-      return count;
-    } catch (e) {
-      debugPrint(e.toString());
-      return null;
-    }
-  }
-
-  Future<int?> countSearchLogs() async {
-    try {
-      final count = await client.countSearchLogs();
+      final query = CollectionGroupCore.messages;
+      final count = await client.count(query);
       return count;
     } catch (e) {
       debugPrint(e.toString());

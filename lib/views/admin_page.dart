@@ -32,8 +32,6 @@ class AdminPage extends HookConsumerWidget {
                     "累計メッセージ数 ${state.messageCount}",
                     style: style,
                   ),
-                  const Divider(),
-                  SelectableText("累計検索数 ${state.searchCount}", style: style),
                 ],
               ),
           loading: () => const Center(child: CircularProgressIndicator()),

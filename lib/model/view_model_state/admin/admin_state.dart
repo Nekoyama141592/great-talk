@@ -9,7 +9,6 @@ abstract class AdminState with _$AdminState {
     required int userCount,
     required int postCount,
     required int messageCount,
-    required int searchCount,
   }) = _AdminState;
   factory AdminState.fromJson(Map<String, dynamic> json) =>
       _$AdminStateFromJson(json);

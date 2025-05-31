@@ -9,14 +9,13 @@ class AdminViewModel extends _$AdminViewModel {
   FirestoreRepository get _repository => ref.read(firestoreRepositoryProvider);
   @override
   FutureOr<AdminState> build() async {
-    final [userCount, postCount, messageCount, searchCount] = await Future.wait(
-      [_countUsers(), _countPosts(), _countMessages(), _countSearchLogs()],
+    final [userCount, postCount, messageCount] = await Future.wait(
+      [_countUsers(), _countPosts(), _countMessages()],
     );
     return AdminState(
       userCount: userCount,
       postCount: postCount,
       messageCount: messageCount,
-      searchCount: searchCount,
     );
   }
 
@@ -32,11 +31,6 @@ class AdminViewModel extends _$AdminViewModel {
 
   Future<int> _countMessages() async {
     final result = await _repository.countMessages();
-    return result ?? 0;
-  }
-
-  Future<int> _countSearchLogs() async {
-    final result = await _repository.countSearchLogs();
     return result ?? 0;
   }
 }

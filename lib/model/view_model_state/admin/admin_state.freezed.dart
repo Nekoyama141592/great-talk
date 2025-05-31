@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AdminState {
 
- int get userCount; int get postCount; int get messageCount; int get searchCount;
+ int get userCount; int get postCount; int get messageCount;
 /// Create a copy of AdminState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $AdminStateCopyWith<AdminState> get copyWith => _$AdminStateCopyWithImpl<AdminSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AdminState&&(identical(other.userCount, userCount) || other.userCount == userCount)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.messageCount, messageCount) || other.messageCount == messageCount)&&(identical(other.searchCount, searchCount) || other.searchCount == searchCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AdminState&&(identical(other.userCount, userCount) || other.userCount == userCount)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.messageCount, messageCount) || other.messageCount == messageCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userCount,postCount,messageCount,searchCount);
+int get hashCode => Object.hash(runtimeType,userCount,postCount,messageCount);
 
 @override
 String toString() {
-  return 'AdminState(userCount: $userCount, postCount: $postCount, messageCount: $messageCount, searchCount: $searchCount)';
+  return 'AdminState(userCount: $userCount, postCount: $postCount, messageCount: $messageCount)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $AdminStateCopyWith<$Res>  {
   factory $AdminStateCopyWith(AdminState value, $Res Function(AdminState) _then) = _$AdminStateCopyWithImpl;
 @useResult
 $Res call({
- int userCount, int postCount, int messageCount, int searchCount
+ int userCount, int postCount, int messageCount
 });
 
 
@@ -66,12 +66,11 @@ class _$AdminStateCopyWithImpl<$Res>
 
 /// Create a copy of AdminState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userCount = null,Object? postCount = null,Object? messageCount = null,Object? searchCount = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userCount = null,Object? postCount = null,Object? messageCount = null,}) {
   return _then(_self.copyWith(
 userCount: null == userCount ? _self.userCount : userCount // ignore: cast_nullable_to_non_nullable
 as int,postCount: null == postCount ? _self.postCount : postCount // ignore: cast_nullable_to_non_nullable
 as int,messageCount: null == messageCount ? _self.messageCount : messageCount // ignore: cast_nullable_to_non_nullable
-as int,searchCount: null == searchCount ? _self.searchCount : searchCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -83,13 +82,12 @@ as int,
 @JsonSerializable()
 
 class _AdminState implements AdminState {
-  const _AdminState({required this.userCount, required this.postCount, required this.messageCount, required this.searchCount});
+  const _AdminState({required this.userCount, required this.postCount, required this.messageCount});
   factory _AdminState.fromJson(Map<String, dynamic> json) => _$AdminStateFromJson(json);
 
 @override final  int userCount;
 @override final  int postCount;
 @override final  int messageCount;
-@override final  int searchCount;
 
 /// Create a copy of AdminState
 /// with the given fields replaced by the non-null parameter values.
@@ -104,16 +102,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AdminState&&(identical(other.userCount, userCount) || other.userCount == userCount)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.messageCount, messageCount) || other.messageCount == messageCount)&&(identical(other.searchCount, searchCount) || other.searchCount == searchCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AdminState&&(identical(other.userCount, userCount) || other.userCount == userCount)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.messageCount, messageCount) || other.messageCount == messageCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userCount,postCount,messageCount,searchCount);
+int get hashCode => Object.hash(runtimeType,userCount,postCount,messageCount);
 
 @override
 String toString() {
-  return 'AdminState(userCount: $userCount, postCount: $postCount, messageCount: $messageCount, searchCount: $searchCount)';
+  return 'AdminState(userCount: $userCount, postCount: $postCount, messageCount: $messageCount)';
 }
 
 
@@ -124,7 +122,7 @@ abstract mixin class _$AdminStateCopyWith<$Res> implements $AdminStateCopyWith<$
   factory _$AdminStateCopyWith(_AdminState value, $Res Function(_AdminState) _then) = __$AdminStateCopyWithImpl;
 @override @useResult
 $Res call({
- int userCount, int postCount, int messageCount, int searchCount
+ int userCount, int postCount, int messageCount
 });
 
 
@@ -141,12 +139,11 @@ class __$AdminStateCopyWithImpl<$Res>
 
 /// Create a copy of AdminState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userCount = null,Object? postCount = null,Object? messageCount = null,Object? searchCount = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userCount = null,Object? postCount = null,Object? messageCount = null,}) {
   return _then(_AdminState(
 userCount: null == userCount ? _self.userCount : userCount // ignore: cast_nullable_to_non_nullable
 as int,postCount: null == postCount ? _self.postCount : postCount // ignore: cast_nullable_to_non_nullable
 as int,messageCount: null == messageCount ? _self.messageCount : messageCount // ignore: cast_nullable_to_non_nullable
-as int,searchCount: null == searchCount ? _self.searchCount : searchCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
