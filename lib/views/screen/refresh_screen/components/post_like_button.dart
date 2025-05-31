@@ -36,7 +36,7 @@ class PostLikeButton extends HookConsumerWidget {
                     () async {
                       final user = ref.read(streamAuthProvider).value;
                       if (user == null || !user.emailVerified) {
-                        UIHelper.showErrorFlutterToast('ログインしてください');
+                        UIHelper.showSnackBar(context,'ログインしてください');
                         return;
                       }
                       final currentUid = user.uid;
@@ -59,7 +59,7 @@ class PostLikeButton extends HookConsumerWidget {
                     () async {
                       final user = ref.read(streamAuthProvider).value;
                       if (user == null || !user.emailVerified) {
-                        UIHelper.showErrorFlutterToast('ログインしてください');
+                        UIHelper.showSnackBar(context,'ログインしてください');
                         return;
                       }
                       final currentUid = user.uid;
