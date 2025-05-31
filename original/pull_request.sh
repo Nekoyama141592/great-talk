@@ -7,8 +7,8 @@
 ## TODO: 新しいブランチ名を入力
 branch_name=""
 
-git checkout develop
-git pull origin develop
+git checkout main
+git pull origin main
 git checkout -b "${branch_name}"
 git commit -m 'make pull request' --allow-empty
 git push --set-upstream origin "${branch_name}"
