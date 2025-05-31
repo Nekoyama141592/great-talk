@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/providers/logic/router/router_logic.dart';
+import 'package:great_talk/core/router_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PostMsgButton extends ConsumerWidget {
@@ -17,7 +17,7 @@ class PostMsgButton extends ConsumerWidget {
     final children = [
       InkWell(
         child: const Icon(Icons.comment),
-        onTap: () => RouterLogic.toChatPage(context, post),
+        onTap: () => RouterCore.toChatPage(context, post),
       ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),

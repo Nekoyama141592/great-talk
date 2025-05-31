@@ -10,7 +10,7 @@ import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/usecase/post/post_usecase.dart';
-import 'package:great_talk/providers/logic/router/router_logic.dart';
+import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/providers/view_model/chat/chat_view_model.dart';
 import 'package:great_talk/ui_core/chat_ui_core.dart';
 import 'package:great_talk/ui_core/post_ui_core.dart';
@@ -92,7 +92,7 @@ class ChatPage extends HookConsumerWidget {
                         result.when(
                           success: (_) async {
                             UIHelper.showSuccessSnackBar(context, "投稿を削除しました。");
-                            RouterLogic.back(context);
+                            RouterCore.back(context);
                           },
                           failure: (e) {
                             // 失敗したら元に戻す
@@ -118,7 +118,7 @@ class ChatPage extends HookConsumerWidget {
                                 .read(tokensNotifierProvider.notifier)
                                 .addMutePost(post);
                             if (token == null) {
-                              RouterLogic.back(innerContext);
+                              RouterCore.back(innerContext);
                               return;
                             }
                             final result = await notifier.mutePost(
@@ -127,7 +127,7 @@ class ChatPage extends HookConsumerWidget {
                               token,
                             );
                             result.when(
-                              success: (_) => RouterLogic.back(innerContext),
+                              success: (_) => RouterCore.back(innerContext),
                               failure: (_) {},
                             );
                           },
@@ -136,7 +136,7 @@ class ChatPage extends HookConsumerWidget {
                                 .read(tokensNotifierProvider.notifier)
                                 .addMuteUser(post);
                             if (token == null) {
-                              RouterLogic.back(innerContext);
+                              RouterCore.back(innerContext);
                               return;
                             }
                             final result = await notifier.muteUser(
@@ -145,7 +145,7 @@ class ChatPage extends HookConsumerWidget {
                               token,
                             );
                             result.when(
-                              success: (_) => RouterLogic.back(innerContext),
+                              success: (_) => RouterCore.back(innerContext),
                               failure: (_) {},
                             );
                           },
@@ -157,7 +157,7 @@ class ChatPage extends HookConsumerWidget {
                   //
                   MenuButton(
                     onMenuPressed: () {
-                      RouterLogic.back(context);
+                      RouterCore.back(context);
                       ChatUiCore.onMenuPressed(
                         context: context,
                         post: post,

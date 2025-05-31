@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart' as fluttertoast;
 import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/providers/logic/router/router_logic.dart';
+import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/views/common/custom_snack_bar.dart';
 import 'package:great_talk/views/common/subscribed_copyable_text.dart';
@@ -55,7 +55,7 @@ class UIHelper {
             content: Text(msg),
             actions: [
               CupertinoDialogAction(
-                onPressed: () => RouterLogic.back(innerContext),
+                onPressed: () => RouterCore.back(innerContext),
                 child: const Text(cancelText),
               ),
               CupertinoDialogAction(
@@ -92,7 +92,7 @@ class UIHelper {
                     TextButton(
                       onPressed:
                           positiveAction ??
-                          () => RouterLogic.back(innerContext),
+                          () => RouterCore.back(innerContext),
                       child: const Text(okText, style: style),
                     ),
                   ],

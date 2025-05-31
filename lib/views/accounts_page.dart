@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/auth_core.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
-import 'package:great_talk/providers/logic/router/router_logic.dart';
+import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/auth/logouted_page.dart';
@@ -43,11 +43,11 @@ class AccountPage extends ConsumerWidget {
                         final result = await notifier.signOut();
                         result.when(
                           success: (_) {
-                            RouterLogic.pushPath(context, LogoutedPage.path);
+                            RouterCore.pushPath(context, LogoutedPage.path);
                           },
                           failure: (_) {
                             UIHelper.showErrorFlutterToast("ログアウトできませんでした}");
-                            RouterLogic.back(context);
+                            RouterCore.back(context);
                           },
                         );
                       },
@@ -57,7 +57,7 @@ class AccountPage extends ConsumerWidget {
                 ListTile(
                   title: const Text("ユーザーを消去する"),
                   onTap:
-                      () => RouterLogic.pushPath(
+                      () => RouterCore.pushPath(
                         context,
                         ReauthenticateToDeletePage.path,
                       ),

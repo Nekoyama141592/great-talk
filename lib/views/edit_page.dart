@@ -5,7 +5,7 @@ import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/extensions/string_extension.dart';
 import 'package:great_talk/model/view_model_state/edit/edit_state.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
-import 'package:great_talk/providers/logic/router/router_logic.dart';
+import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/providers/view_model/edit/edit_view_model.dart';
 import 'package:great_talk/ui_core/form_ui_core.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
@@ -97,8 +97,8 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
         result.when(
           success: (_) {
             ref.read(currentUserNotifierProvider.notifier).updateUser();
-            RouterLogic.back(context);
-            RouterLogic.back(context);
+            RouterCore.back(context);
+            RouterCore.back(context);
             UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
           },
           failure: (e) {

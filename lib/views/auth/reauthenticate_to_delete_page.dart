@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
-import 'package:great_talk/providers/logic/router/router_logic.dart';
+import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/auth/user_deleted_page.dart';
 import 'package:great_talk/views/screen/login_screen.dart';
@@ -27,7 +27,7 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                 deleteResult.when(
                   success:
                       (_) =>
-                          RouterLogic.pushPath(context, UserDeletedPage.path),
+                          RouterCore.pushPath(context, UserDeletedPage.path),
                   failure:
                       (_) => UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした"),
                 );
@@ -44,7 +44,7 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                 deleteResult.when(
                   success:
                       (_) =>
-                          RouterLogic.pushPath(context, UserDeletedPage.path),
+                          RouterCore.pushPath(context, UserDeletedPage.path),
                   failure:
                       (_) => UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした"),
                 );
