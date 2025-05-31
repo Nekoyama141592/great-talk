@@ -33,10 +33,4 @@ class DocRefCore {
       user(uid).collection('userMutes').doc(currentUid);
   static DocRef token(String currentUid, String tokenId) =>
       ColRefCore.tokens(currentUid).doc(tokenId);
-  static DocRef message(
-    String posterUid,
-    String postId,
-    String currentUid,
-    String messageId,
-  ) => ColRefCore.messages(posterUid, postId, currentUid).doc(messageId);
 }

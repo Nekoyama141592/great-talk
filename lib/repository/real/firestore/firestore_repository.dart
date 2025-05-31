@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:great_talk/core/firestore/collection_group_core.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -51,20 +52,15 @@ class FirestoreRepository {
     final docRef = DocRefCore.privateUser(uid);
     return _createDoc(docRef, json);
   }
+  FutureResult<bool> createPost(String uid, String postId,Map<String,dynamic> json) async {
+    final docRef = DocRefCore.post(uid, postId);
+    return _createDoc(docRef, json);
+  }
   FutureResult<bool> createUserUpdateLog(String uid, Map<String,dynamic> json) async {
     final docRef = DocRefCore.userUpdateLog(uid);
     return _createDoc(docRef, json);
   }
 
-  FutureResult<bool> _updateDoc(DocRef ref, Map<String,dynamic> json) async {
-    try {
-      await client.updateDoc(ref, json);
-      return const Result.success(true);
-    } catch (e) {
-      debugPrint(e.toString());
-      return Result.failure(e);
-    }
-  }
 
   FutureResult<bool> _deleteDoc(DocRef ref) async {
     try {
@@ -79,8 +75,12 @@ class FirestoreRepository {
     final docRef = DocRefCore.user(uid);
     return _deleteDoc(docRef);
   }
+  FutureResult<bool> deletePost(Post post) {
+    final docRef = DocRefCore.post(post.uid, post.postId);
+    return _deleteDoc(docRef);
+  }
 
-  FutureResult<bool> _createDocs(List<FirestoreRequest> requestList) async {
+  FutureResult<bool> createDocs(List<FirestoreRequest> requestList) async {
     try {
       final batch = FirebaseFirestore.instance.batch();
       for (final request in requestList) {
@@ -106,6 +106,31 @@ class FirestoreRepository {
       debugPrint(e.toString());
       return Result.failure(e);
     }
+  }
+  FutureResult<bool> deleteFollowInfoList(String currentUid,String passiveUid, String tokenId) async {
+    final followerRef = DocRefCore.follower(currentUid, passiveUid);
+    final tokenRef = DocRefCore.token(currentUid, tokenId);
+    final docRefList = [followerRef,tokenRef];
+    return _deleteDocs(docRefList);
+  }
+  FutureResult<bool> deleteMuteUserInfo(String currentUid,String passiveUid, String tokenId) async {
+    final tokenRef = DocRefCore.token(currentUid, tokenId);
+    final userMuteRef = DocRefCore.userMute(passiveUid, currentUid);
+    final docRefList = [tokenRef, userMuteRef];
+    return _deleteDocs(docRefList);
+  }
+  FutureResult<bool> deleteMutePostInfo(String currentUid,Post post, String tokenId) async {
+    final tokenRef = DocRefCore.token(currentUid, tokenId);
+    final postMuteRef = DocRefCore.postMute(DocRefCore.post(post.uid, post.postId), currentUid);
+    final docRefList = [tokenRef, postMuteRef];
+    return _deleteDocs(docRefList);
+  }
+  FutureResult<bool> deleteLikePostInfo(String currentUid,Post post, String tokenId) async {
+    final tokenRef = DocRefCore.token(currentUid, tokenId);
+    final postRef = post.typedRef();
+    final postLikeRef = DocRefCore.postLike(postRef, currentUid);
+    final docRefList = [tokenRef, postLikeRef];
+    return _deleteDocs(docRefList);
   }
 
   FutureResult<Doc> getDoc(DocRef ref) async {

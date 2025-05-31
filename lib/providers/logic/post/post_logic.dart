@@ -137,7 +137,6 @@ class PostLogic extends _$PostLogic {
     );
     _tokensNotifier.addLikePost(likePostToken);
     final tokenRef = DocRefCore.token(currentUid, tokenId);
-    await _firestoreRepository.createDoc(tokenRef, likePostToken.toJson());
 
     final postLike = PostLike(
       activeUid: currentUid,
@@ -147,7 +146,11 @@ class PostLogic extends _$PostLogic {
       postId: postId,
     );
     final postLikeRef = DocRefCore.postLike(postRef, currentUid);
-    await _firestoreRepository.createDoc(postLikeRef, postLike.toJson());
+    final requestList = [
+      FirestoreRequest(tokenRef, likePostToken.toJson()),
+      FirestoreRequest(postLikeRef, postLike.toJson()),
+    ];
+    await _firestoreRepository.createDocs(requestList);
   }
 
   void onUnLikeButtonPressed(ValueNotifier<Post> copyPost, Post post) async {
@@ -170,15 +173,11 @@ class PostLogic extends _$PostLogic {
 
     _tokensNotifier.removeLikePost(deleteToken);
     final tokenId = deleteToken.tokenId;
-    final tokenRef = DocRefCore.token(currentUid, tokenId);
-    await _firestoreRepository.deleteDoc(tokenRef);
-    final postRef = post.typedRef();
-    final postLikeRef = DocRefCore.postLike(postRef, currentUid);
-    await _firestoreRepository.deleteDoc(postLikeRef);
+    await _firestoreRepository.deleteLikePostInfo(currentUid, post, tokenId);
   }
 
   void deletePost(Post deletePost) async {
-    final result = await _firestoreRepository.deleteDoc(deletePost.ref);
+    final result = await _firestoreRepository.deletePost(deletePost);
     await result.when(
       success: (_) async {
         _tokensNotifier.addDeletePostId(deletePost.postId);

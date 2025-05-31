@@ -244,7 +244,6 @@ class ChatViewModel extends _$ChatViewModel {
     final newMessages = List<TextMessage>.from(state.value!.messages)
       ..add(textMessage);
     state = AsyncData(state.value!.copyWith(messages: newMessages));
-    _createTextMsgDoc(textMessage);
   }
 
   void _addEmptyMessage() {
@@ -322,25 +321,12 @@ class ChatViewModel extends _$ChatViewModel {
     await ref.read(prefsProvider).setString(post.postId, jsonString);
   }
 
-  Future<void> _createTextMsgDoc(TextMessage message) async {
-    await FirestoreRepository().createDoc(
-      message.typedMessageRef(),
-      message.toJson(),
-    );
-  }
-
   TextMessage _newTextMessage(String content, String senderUid) {
     final post = state.value!.post;
     return TextMessage(
       id: randomString(),
       createdAt: Timestamp.now(),
       messageType: MessageType.text.name,
-      messageRef: DocRefCore.message(
-        post.uid,
-        post.postId,
-        senderUid,
-        randomString(),
-      ),
       postRef: post.typedRef(),
       text: DetectedText(value: content).toJson(),
       posterUid: post.uid,

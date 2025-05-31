@@ -15,7 +15,6 @@ abstract class TextMessage with _$TextMessage {
     required dynamic createdAt,
     required String id,
     required String messageType,
-    dynamic messageRef,
     dynamic postRef,
     required String posterUid,
     required String senderUid,
@@ -33,7 +32,6 @@ abstract class TextMessage with _$TextMessage {
   );
 
   Timestamp typedCreatedAt() => createdAt as Timestamp;
-  DocRef typedMessageRef() => messageRef as DocRef;
   DetectedText typedText() => DetectedText.fromJson(text);
   Timestamp typedUpdatedAtAt() => createdAt as Timestamp;
 

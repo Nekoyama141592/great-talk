@@ -29,7 +29,7 @@ part 'docs_view_model.g.dart';
 
 @riverpod
 class DocsViewModel extends _$DocsViewModel {
-  String? get _uid => state.value?.passiveUser?.uid;
+  String? get _passiveUid => state.value?.passiveUser?.uid;
 
   @override
   FutureOr<DocsState> build(DocsType type, {String? passiveUid}) async {
@@ -288,11 +288,9 @@ class DocsViewModel extends _$DocsViewModel {
     state = AsyncValue.data(
       state.value!.copyWith(qDocInfoList: newQDocInfoList),
     );
-
-    final tokenRef = DocRefCore.token(_currentUid(), deleteToken.tokenId);
-    final postMuteRef = DocRefCore.postMute(post.typedRef(), _currentUid());
-    final docRefList = [tokenRef, postMuteRef];
-    return await _repository.deleteDocs(docRefList);
+    final currentUid = _currentUid();
+    
+    return await _repository.deleteMutePostInfo(currentUid, post,deleteToken.tokenId);
   }
 
   // Mute User
@@ -320,11 +318,9 @@ class DocsViewModel extends _$DocsViewModel {
     state = AsyncValue.data(
       state.value!.copyWith(qDocInfoList: newQDocInfoList),
     );
-
-    final tokenRef = DocRefCore.token(_currentUid(), deleteToken.tokenId);
-    final userMuteRef = DocRefCore.userMute(passiveUid, _currentUid());
-    final docRefList = [tokenRef, userMuteRef];
-    return await _repository.deleteDocs(docRefList);
+    final currentUid = _currentUid();
+    final tokenId = deleteToken.tokenId;
+    return await _repository.deleteMuteUserInfo(currentUid, passiveUid, tokenId);
   }
 
   // User Profile
@@ -370,23 +366,26 @@ class DocsViewModel extends _$DocsViewModel {
     final now = Timestamp.now();
     final followingToken = FollowingToken(
       createdAt: now,
-      passiveUid: _uid!,
+      passiveUid: _passiveUid!,
       tokenId: tokenId,
       passiveUserRef: passiveUser.ref,
       tokenType: TokenType.following.name,
     );
     _tokensNotifier().addFollowing(followingToken);
 
-    final tokenRef = DocRefCore.token(_currentUid(), tokenId);
-    await _repository.createDoc(tokenRef, followingToken.toJson());
-
     final follower = Follower(
       activeUserRef: DocRefCore.user(_currentUid()),
       createdAt: now,
       passiveUserRef: passiveUser.typedRef(),
+
     );
-    final followerRef = DocRefCore.follower(_currentUid(), _uid!);
-    await _repository.createDoc(followerRef, follower.toJson());
+    final tokenRef = DocRefCore.token(_currentUid(), tokenId);
+    final followerRef = DocRefCore.follower(_currentUid(), _passiveUid!);
+    final requests = [
+      FirestoreRequest(tokenRef, followingToken.toJson()),
+      FirestoreRequest(followerRef, follower.toJson()),
+    ];
+    await _repository.createDocs(requests);
   }
 
   void onUnFollowPressed() async {
@@ -401,15 +400,13 @@ class DocsViewModel extends _$DocsViewModel {
     state = AsyncValue.data(state.value!.copyWith(passiveUser: newUser));
 
     final deleteToken = _tokensState().followingTokens.firstWhere(
-      (element) => element.passiveUid == _uid!,
+      (element) => element.passiveUid == _passiveUid!,
     );
     _tokensNotifier().removeFollowing(deleteToken);
-
-    final tokenRef = DocRefCore.token(_currentUid(), deleteToken.tokenId);
-    await _repository.deleteDoc(tokenRef);
-    final followerRef = DocRefCore.follower(_currentUid(), _uid!);
-    await _repository.deleteDoc(followerRef);
+    final currentUid = _currentUid();
+    final passiveUid = _passiveUid;
+    await _repository.deleteFollowInfoList(currentUid, passiveUid!,deleteToken.tokenId);
   }
 
-  bool isMyProfile() => _uid == _currentUid();
+  bool isMyProfile() => _passiveUid == _currentUid();
 }
