@@ -1,10 +1,8 @@
-import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/model/database_schema/post_mute/post_mute.dart';
-import 'package:great_talk/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
@@ -18,16 +16,13 @@ part 'post_logic.g.dart';
 @riverpod
 PostLogic postLogic(Ref ref) => PostLogic(
   firestoreRepository: ref.watch(firestoreRepositoryProvider),
-  onCallRepository: ref.watch(onCallRepositoryProvider),
 );
 
 class PostLogic {
   PostLogic({
     required this.firestoreRepository,
-    required this.onCallRepository,
   });
   final FirestoreRepository firestoreRepository;
-  final OnCallRepository onCallRepository;
 
   FutureResult<bool> mutePost(
     Post post,
@@ -85,7 +80,7 @@ class PostLogic {
   }
 
   Future<void> _removePostImage(DetectedImage image) async {
-    final request = DeleteObjectRequest(object: image.value);
-    await onCallRepository.deleteObject(request);
+    // final request = DeleteObjectRequest(object: image.value);
+    // await onCallRepository.deleteObject(request);
   }
 }
