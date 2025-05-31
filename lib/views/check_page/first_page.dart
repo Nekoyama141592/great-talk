@@ -12,8 +12,6 @@ class FirstPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isAgreedToTerms = ref.watch(termsNotifierProvider);
-    return Scaffold(
-      body: isAgreedToTerms ? MyHomePage() : const TermsPage()
-    );
+    return Scaffold(body: isAgreedToTerms ? MyHomePage() : const TermsPage());
   }
 }

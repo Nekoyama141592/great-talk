@@ -5,6 +5,7 @@ import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/views/common/custom_snack_bar.dart';
 import 'package:great_talk/views/common/subscribed_copyable_text.dart';
 
 class UIHelper {
@@ -28,6 +29,18 @@ class UIHelper {
       timeInSecForIosWeb: timeInSecForIosWeb,
       backgroundColor: kErrorColor,
     );
+  }
+
+  static void _showSnackBar(BuildContext context, SnackBar snackBar) {
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  static void showSuccessSnackBar(BuildContext context, String msg) {
+    _showSnackBar(context, CustomSnackBar.success(context, msg));
+  }
+
+  static void showFailureSnackBar(BuildContext context, String msg) {
+    _showSnackBar(context, CustomSnackBar.failure(context, msg));
   }
 
   static void cupertinoAlertDialog(

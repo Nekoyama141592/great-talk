@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:great_talk/model/global/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
-import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
@@ -11,15 +10,15 @@ import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/repository/real/firebase_auth/firebase_auth_repository.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
-import 'package:great_talk/utility/file_utility.dart';
+import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:great_talk/utility/new_content.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'current_user_notifier.g.dart'; // 自動生成されるファイル
 
 @Riverpod(keepAlive: true)
 class CurrentUserNotifier extends _$CurrentUserNotifier {
+  FirebaseAuthRepository get _firebaseAuthRepository => ref.read(firebaseAuthRepositoryProvider);
   @override
   Future<CurrentUserState> build() async {
     final initialState = CurrentUserState(
@@ -48,8 +47,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   FutureResult<User> _createAnonymousUser() async {
-    final repository = FirebaseAuthRepository();
-    return await repository.signInAnonymously();
+    return await _firebaseAuthRepository.signInAnonymously();
   }
 
   FutureResult<User> onAppleButtonPressed() async {
@@ -137,7 +135,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
           final bucketName = user.typedImage().bucketName;
           final fileName = user.typedImage().value;
           if (bucketName.isNotEmpty && fileName.isNotEmpty) {
-            final image = await FileUtility.getS3Image(bucketName, fileName);
+            final image = await ref.read(fileUseCaseProvider).getS3Image(bucketName, fileName);
             if (image != null) {
               base64Image = base64Encode(image);
             }
@@ -235,29 +233,10 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final result = await firebaseAuthRepository.deleteUser(user);
     return result;
   }
-  // TODO: Cloud Function
-  // Future<void> _removeImage() async {
-  //   final publicUser = state.value?.publicUser;
-  //   if (publicUser == null) return;
-  //   final fileName = publicUser.typedImage().value;
-  //   final request = DeleteObjectRequest(object: fileName);
-  //   await ref
-  //       .read(awsS3RepositoryProvider)
-  //       .deleteObject(request); // RiverpodでRepositoryを取得
-  // }
+
+  Future<void> _removeUserImage() async {}
 
   Future<void> updateUser() async {
     await _getPublicUser();
   }
-}
-
-@Riverpod(keepAlive: true)
-FirebaseAuthRepository firebaseAuthRepository(Ref ref) {
-  return FirebaseAuthRepository();
-}
-
-
-@Riverpod(keepAlive: true)
-OnCallRepository awsS3Repository(Ref ref) {
-  return OnCallRepository();
 }

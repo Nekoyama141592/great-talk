@@ -6,7 +6,7 @@ part of 'post_logic.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postLogicHash() => r'08e389555d7eba57c8d45f846a9ac7efcafa1251';
+String _$postLogicHash() => r'48e293698a56ac721ce07ea324f130105485defa';
 
 /// See also [postLogic].
 @ProviderFor(postLogic)

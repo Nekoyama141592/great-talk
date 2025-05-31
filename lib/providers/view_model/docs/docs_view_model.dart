@@ -21,7 +21,7 @@ import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/utility/file_utility.dart';
+import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -229,7 +229,7 @@ class DocsViewModel extends _$DocsViewModel {
 
   Future<Uint8List?> _getImageFromDoc(Doc doc) async {
     final detectedImage = DetectedImage.fromJson(doc['image']);
-    return FileUtility.getS3Image(
+    return ref.read(fileUseCaseProvider).getS3Image(
       detectedImage.bucketName,
       detectedImage.value,
     );
@@ -237,7 +237,7 @@ class DocsViewModel extends _$DocsViewModel {
 
   Future<Uint8List?> _getImageFromUser(PublicUser user) async {
     final detectedImage = user.typedImage();
-    return FileUtility.getS3Image(
+    return ref.read(fileUseCaseProvider).getS3Image(
       detectedImage.bucketName,
       detectedImage.value,
     );
@@ -289,8 +289,12 @@ class DocsViewModel extends _$DocsViewModel {
       state.value!.copyWith(qDocInfoList: newQDocInfoList),
     );
     final currentUid = _currentUid();
-    
-    return await _repository.deleteMutePostInfo(currentUid, post,deleteToken.tokenId);
+
+    return await _repository.deleteMutePostInfo(
+      currentUid,
+      post,
+      deleteToken.tokenId,
+    );
   }
 
   // Mute User
@@ -320,7 +324,11 @@ class DocsViewModel extends _$DocsViewModel {
     );
     final currentUid = _currentUid();
     final tokenId = deleteToken.tokenId;
-    return await _repository.deleteMuteUserInfo(currentUid, passiveUid, tokenId);
+    return await _repository.deleteMuteUserInfo(
+      currentUid,
+      passiveUid,
+      tokenId,
+    );
   }
 
   // User Profile
@@ -377,10 +385,15 @@ class DocsViewModel extends _$DocsViewModel {
       activeUserRef: DocRefCore.user(currentUid),
       createdAt: now,
       passiveUserRef: passiveUser.typedRef(),
-
     );
     final passiveUid = _passiveUid!;
-    await _repository.createFollowInfo(currentUid, passiveUid, tokenId, followingToken, follower);
+    await _repository.createFollowInfo(
+      currentUid,
+      passiveUid,
+      tokenId,
+      followingToken,
+      follower,
+    );
   }
 
   void onUnFollowPressed() async {
@@ -400,7 +413,11 @@ class DocsViewModel extends _$DocsViewModel {
     _tokensNotifier().removeFollowing(deleteToken);
     final currentUid = _currentUid();
     final passiveUid = _passiveUid;
-    await _repository.deleteFollowInfoList(currentUid, passiveUid!,deleteToken.tokenId);
+    await _repository.deleteFollowInfoList(
+      currentUid,
+      passiveUid!,
+      deleteToken.tokenId,
+    );
   }
 
   bool isMyProfile() => _passiveUid == _currentUid();

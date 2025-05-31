@@ -8,6 +8,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'open_ai_client_part.dart';
 
+
 @RestApi()
 abstract class OpenAIClient {
   factory OpenAIClient(OriginalDio dio) = _OpenAIClient;

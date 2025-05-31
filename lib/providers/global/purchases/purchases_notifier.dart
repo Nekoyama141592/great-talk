@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:great_talk/core/purchases_core.dart';
 import 'package:great_talk/extensions/purchase_details_extension.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
+import 'package:great_talk/providers/usecase/purchases/purchases_usecase.dart';
 import 'package:great_talk/repository/real/local/local_repository.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -30,7 +31,7 @@ class PurchasesNotifier extends _$PurchasesNotifier {
     for (int i = 0; i < detailsList.length; i++) {
       final details = detailsList[i];
       if (details.isError || !details.isPurchased) continue;
-      final result = await PurchasesCore.verifyPurchase(details);
+      final result = await ref.read(purchasesUsecaseProvider).verifyPurchase(details);
       await result.when(
         success: (res) => _onVerifySuccess(details, res),
         failure: _onVerifyFailed,

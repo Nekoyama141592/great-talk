@@ -1,5 +1,6 @@
 import 'dart:async';
-
+import 'package:collection/collection.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -64,11 +65,20 @@ class TokensNotifier extends _$TokensNotifier {
 
   TokensState get _currentState => state.valueOrNull ?? TokensState();
 
-  void addDeletePostId(String postId) {
+  String addDeletePostId(String postId) {
     final newState = _currentState.copyWith(
       deletePostIds: [..._currentState.deletePostIds, postId],
     );
     _updateState(newState);
+    return postId;
+  }
+
+  String removeDeletePostId(String postId) {
+    final newState = _currentState.copyWith(
+      deletePostIds: [..._currentState.deletePostIds]..remove(postId),
+    );
+    _updateState(newState);
+    return postId;
   }
 
   void addFollowing(FollowingToken followingToken) {
@@ -87,27 +97,38 @@ class TokensNotifier extends _$TokensNotifier {
     _updateState(newState);
   }
 
-  void addLikePost(LikePostToken likePostToken) {
+  LikePostToken? addLikePost(String currentUid, Post post) {
+    final token = LikePostToken.fromPost(post, currentUid);
     final newState = _currentState.copyWith(
-      likePostTokens: [..._currentState.likePostTokens, likePostToken],
+      likePostTokens: [..._currentState.likePostTokens, token],
     );
     _updateState(newState);
+    return token;
   }
 
-  void removeLikePost(LikePostToken likePostToken) {
+  LikePostToken? removeLikePost(String postId) {
+    final deleteToken = state.value?.likePostTokens.firstWhereOrNull(
+      (element) => element.postId == postId,
+    );
+    if (deleteToken == null) return null;
     final newList =
         _currentState.likePostTokens
-            .where((token) => token.postId != likePostToken.postId)
+            .where((token) => token.postId != postId)
             .toList();
     final newState = _currentState.copyWith(likePostTokens: newList);
     _updateState(newState);
+    return deleteToken;
   }
 
-  void addMutePost(MutePostToken mutePostToken) {
+  MutePostToken? addMutePost(Post post) {
+    final currentUid = ref.read(streamAuthUidProvider).value;
+    if (currentUid == null) return null;
+    final token = MutePostToken.fromPost(post, currentUid);
     final newState = _currentState.copyWith(
-      mutePostTokens: [..._currentState.mutePostTokens, mutePostToken],
+      mutePostTokens: [..._currentState.mutePostTokens, token],
     );
     _updateState(newState);
+    return token;
   }
 
   void removeMutePost(MutePostToken mutePostToken) {
@@ -119,11 +140,15 @@ class TokensNotifier extends _$TokensNotifier {
     _updateState(newState);
   }
 
-  void addMuteUser(MuteUserToken muteUserToken) {
+  MuteUserToken? addMuteUser(Post post) {
+    final currentUid = ref.read(streamAuthUidProvider).value;
+    if (currentUid == null) return null;
+    final token = MuteUserToken.fromPost(currentUid, post);
     final newState = _currentState.copyWith(
-      muteUserTokens: [..._currentState.muteUserTokens, muteUserToken],
+      muteUserTokens: [..._currentState.muteUserTokens, token],
     );
     _updateState(newState);
+    return token;
   }
 
   void removeMuteUser(MuteUserToken muteUserToken) {

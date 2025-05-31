@@ -18,7 +18,7 @@ import 'package:great_talk/model/rest_api/put_object/request/put_object_request.
 import 'package:great_talk/model/database_schema/user_update_log/user_update_log.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
-import 'package:great_talk/utility/file_utility.dart';
+import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:great_talk/model/view_model_state/edit/edit_state.dart';
 
 part 'edit_view_model.g.dart';
@@ -43,11 +43,12 @@ class EditViewModel extends _$EditViewModel {
 
   /// 画像選択時の処理
   Future<void> onImagePickButtonPressed() async {
-    final result = await FileUtility.getCompressedImage();
+    final useCase = ref.read(fileUseCaseProvider);
+    final result = await useCase.getCompressedImage();
     if (result == null) return;
-    final info = await FileUtility.getImageInfo(result);
+    final info = await useCase.getImageInfo(result);
     if (info.isNotSquare) {
-      UIHelper.showErrorFlutterToast(FileUtility.squareImageRequestMsg);
+      UIHelper.showErrorFlutterToast(useCase.squareImageRequestMsg);
       return;
     }
     if (info.isSmall) {
@@ -114,7 +115,8 @@ class EditViewModel extends _$EditViewModel {
         uint8list: base64Decode(uint8list),
         fileName: fileName,
       );
-      final result = await OnCallRepository().putObject(request);
+      final repository = ref.read(onCallRepositoryProvider);
+      final result = await repository.putObject(request);
       await result.when(
         success: (res) async {
           updateUserResult = await _createUserUpdateLog(

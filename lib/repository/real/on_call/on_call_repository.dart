@@ -18,16 +18,17 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'on_call_repository.g.dart';
 
-@Riverpod(keepAlive: true)
-OnCallRepository onCallRepository(Ref ref) => OnCallRepository();
+@riverpod
+OnCallRepository onCallRepository(Ref ref) => OnCallRepository(ref.watch(onCallClientProvider));
 
 class OnCallRepository {
-  OnCallClient get _client => OnCallClient();
+  OnCallRepository(this.client);
+  final OnCallClient client;
 
   FutureResult<PutObjectResponse> putObject(PutObjectRequest request) async {
     try {
       const name = 'putObjectV2';
-      final result = await _client.call(name, request.toJson());
+      final result = await client.call(name, request.toJson());
       final res = PutObjectResponse.fromJson(result);
       return Result.success(res);
     } catch (e) {
@@ -38,7 +39,7 @@ class OnCallRepository {
   FutureResult<Uint8List> getObject(GetObjectRequest request) async {
     try {
       const name = 'getObjectV2';
-      final result = await _client.call(name, request.toJson());
+      final result = await client.call(name, request.toJson());
       final res = GetObjectResponse.fromJson(result);
       final base64Image = res.base64Image;
       final image = base64Decode(base64Image);
@@ -53,7 +54,7 @@ class OnCallRepository {
   ) async {
     try {
       const name = 'deleteObjectV2';
-      final result = await _client.call(name, request.toJson());
+      final result = await client.call(name, request.toJson());
       final res = DeleteObjectResponse.fromJson(result);
       return Result.success(res);
     } catch (e) {
@@ -68,7 +69,7 @@ class OnCallRepository {
     try {
       const name = 'generateImage';
       final request = GenerateImageRequest(prompt: prompt, size: size);
-      final result = await _client.call(name, request.toJson());
+      final result = await client.call(name, request.toJson());
       final res = GenerateImageResponse.fromJson(result);
       return res;
     } catch (e) {

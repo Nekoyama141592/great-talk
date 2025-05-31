@@ -1,5 +1,11 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:great_talk/core/firestore/json_core.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+part 'on_call_client.g.dart';
+
+@riverpod
+OnCallClient onCallClient(Ref ref) => OnCallClient();
 
 class OnCallClient {
   HttpsCallable _httpsCallable(String functionName) =>

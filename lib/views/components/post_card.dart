@@ -61,50 +61,51 @@ class PostCard extends ConsumerWidget {
                 ),
               );
             }
-            return Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).colorScheme.primary,
+            return InkWell(
+              onTap: () {
+                RouterLogic.pushPath(
+                  context,
+                  ChatPage.generatePath(post.uid, post.postId),
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CircleImage(
-                      onTap:
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleImage(uint8list: uint8list),
+                    ),
+                    EllipsisText(post.typedTitle().value),
+                    TextButton(
+                      onPressed:
                           () => RouterLogic.pushPath(
                             context,
-                            ChatPage.generatePath(post.uid, post.postId),
+                            UserProfilePage.generatePath(post.uid),
                           ),
-                      uint8list: uint8list,
-                    ),
-                  ),
-                  EllipsisText(post.typedTitle().value),
-                  TextButton(
-                    onPressed:
-                        () => RouterLogic.pushPath(
-                          context,
-                          UserProfilePage.generatePath(post.uid),
+                      child: EllipsisText(
+                        "by ${publicUser.nameValue}",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
-                    child: EllipsisText(
-                      "by ${publicUser.nameValue}",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Row(
-                      children: [
-                        PostLikeButton(isHorizontal: false, post: post),
-                        const Spacer(),
-                        PostMsgButton(isHorizontal: false, post: post),
-                      ],
+                    Center(
+                      child: Row(
+                        children: [
+                          PostLikeButton(isHorizontal: false, post: post),
+                          const Spacer(),
+                          PostMsgButton(isHorizontal: false, post: post),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },

@@ -7,7 +7,7 @@ part of 'generate_image_view_model.dart';
 // **************************************************************************
 
 String _$generateImageViewModelHash() =>
-    r'5afd410b6b64f5b6389dd6f3656b326456d2b29a';
+    r'698cbf5e0ea58c3641527c7ed02bac6351a3a14d';
 
 /// See also [GenerateImageViewModel].
 @ProviderFor(GenerateImageViewModel)

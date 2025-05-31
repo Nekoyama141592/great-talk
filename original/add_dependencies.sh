@@ -6,6 +6,7 @@ packages=(
   "chat_gpt_sdk"
   "cloud_firestore"
   "cloud_functions"
+  "collection"
   "cupertino_icons"
   "dio"
   "firebase_auth"

@@ -12,7 +12,7 @@ class GenerateImageViewModel extends _$GenerateImageViewModel {
 
   void onGenerateButtonPressed(String prompt, String size) async {
     if (prompt.isEmpty || size.isEmpty) return;
-    final repository = OnCallRepository();
+    final repository = ref.read(onCallRepositoryProvider);
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final result = await repository.generateImage(prompt, size);

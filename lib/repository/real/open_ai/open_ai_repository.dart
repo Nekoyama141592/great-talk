@@ -1,19 +1,19 @@
 import 'package:great_talk/infrastructure/open_ai/open_ai_client.dart';
-import 'package:great_talk/infrastructure/open_ai/original_dio.dart';
 import 'package:great_talk/model/rest_api/open_ai/generata_image/generate_image_request/generate_image_request.dart';
 import 'package:great_talk/model/rest_api/open_ai/generata_image/generate_image_response/generate_image_response.dart';
 import 'package:great_talk/model/rest_api/open_ai/generate_text/generate_text_request/generate_text_response.dart';
 import 'package:great_talk/model/rest_api/open_ai/generate_text/generate_text_response/generate_text_request.dart';
+import 'package:great_talk/providers/client/open_ai/open_ai_client_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/utility/env_utility.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+@riverpod
+OpenAIRepository openAIRepository(Ref ref) => OpenAIRepository(ref.watch(openAIClientProvider)); 
 
 class OpenAIRepository {
-  OpenAIClient get client => OpenAIClient(
-    OriginalDio.withOptions(
-      baseUrl: "https://api.openai.com/v1",
-      token: EnvUtility().openAiApiKey,
-    ),
-  );
+  OpenAIRepository(this.client);
+  final OpenAIClient client;
 
   FutureResult<GenerateImageResponse> generateImage(
     GenerateImageRequest request,
