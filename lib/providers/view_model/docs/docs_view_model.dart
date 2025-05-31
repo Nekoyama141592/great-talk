@@ -289,8 +289,12 @@ class DocsViewModel extends _$DocsViewModel {
       state.value!.copyWith(qDocInfoList: newQDocInfoList),
     );
     final currentUid = _currentUid();
-    
-    return await _repository.deleteMutePostInfo(currentUid, post,deleteToken.tokenId);
+
+    return await _repository.deleteMutePostInfo(
+      currentUid,
+      post,
+      deleteToken.tokenId,
+    );
   }
 
   // Mute User
@@ -320,7 +324,11 @@ class DocsViewModel extends _$DocsViewModel {
     );
     final currentUid = _currentUid();
     final tokenId = deleteToken.tokenId;
-    return await _repository.deleteMuteUserInfo(currentUid, passiveUid, tokenId);
+    return await _repository.deleteMuteUserInfo(
+      currentUid,
+      passiveUid,
+      tokenId,
+    );
   }
 
   // User Profile
@@ -377,10 +385,15 @@ class DocsViewModel extends _$DocsViewModel {
       activeUserRef: DocRefCore.user(currentUid),
       createdAt: now,
       passiveUserRef: passiveUser.typedRef(),
-
     );
     final passiveUid = _passiveUid!;
-    await _repository.createFollowInfo(currentUid, passiveUid, tokenId, followingToken, follower);
+    await _repository.createFollowInfo(
+      currentUid,
+      passiveUid,
+      tokenId,
+      followingToken,
+      follower,
+    );
   }
 
   void onUnFollowPressed() async {
@@ -400,7 +413,11 @@ class DocsViewModel extends _$DocsViewModel {
     _tokensNotifier().removeFollowing(deleteToken);
     final currentUid = _currentUid();
     final passiveUid = _passiveUid;
-    await _repository.deleteFollowInfoList(currentUid, passiveUid!,deleteToken.tokenId);
+    await _repository.deleteFollowInfoList(
+      currentUid,
+      passiveUid!,
+      deleteToken.tokenId,
+    );
   }
 
   bool isMyProfile() => _passiveUid == _currentUid();

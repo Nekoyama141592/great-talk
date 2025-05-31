@@ -256,7 +256,6 @@ FirebaseAuthRepository firebaseAuthRepository(Ref ref) {
   return FirebaseAuthRepository();
 }
 
-
 @Riverpod(keepAlive: true)
 OnCallRepository awsS3Repository(Ref ref) {
   return OnCallRepository();

@@ -17,13 +17,14 @@ abstract class UserMute with _$UserMute {
   }) = _UserMute;
   factory UserMute.fromJson(Map<String, dynamic> json) =>
       _$UserMuteFromJson(json);
-  factory UserMute.fromPost(String currentUid,Post post) {
+  factory UserMute.fromPost(String currentUid, Post post) {
     final passiveUid = post.uid;
     return UserMute(
       activeUid: currentUid,
       activeUserRef: DocRefCore.user(currentUid),
       createdAt: FieldValue.serverTimestamp(),
       passiveUid: passiveUid,
-      passiveUserRef: DocRefCore.user(passiveUid));
-  } 
+      passiveUserRef: DocRefCore.user(passiveUid),
+    );
+  }
 }

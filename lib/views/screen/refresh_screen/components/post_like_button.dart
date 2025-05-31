@@ -32,55 +32,61 @@ class PostLikeButton extends HookConsumerWidget {
           isLiked
               ? InkWell(
                 child: const Icon(Icons.favorite, color: Colors.red),
-                onTap:
-                    () async {
-                      final user = ref.read(streamAuthProvider).value;
-                      if (user == null || !user.emailVerified) {
-                        UIHelper.showSuccessSnackBar(context,'ログインしてください');
-                        return;
-                      }
-                      final currentUid = user.uid;
-                      final deleteToken = notifier().removeLikePost(postId);
-                      if (deleteToken == null) return;
-                      likeCount.value--; // 表示する数字を1つ下げる
-                      final result = await ref
-                        .read(postLogicProvider)
-                        .onUnLikeButtonPressed(currentUid,deleteToken.tokenId, post);
-                      result.when(success: (_) {}, failure: (_) {
-                        UIHelper.showErrorFlutterToast('通信に失敗しました');
-                        likeCount.value++; // 元に戻す
-                        notifier().addLikePost(currentUid, post);
-                      });
+                onTap: () async {
+                  final user = ref.read(streamAuthProvider).value;
+                  if (user == null || !user.emailVerified) {
+                    UIHelper.showSuccessSnackBar(context, 'ログインしてください');
+                    return;
+                  }
+                  final currentUid = user.uid;
+                  final deleteToken = notifier().removeLikePost(postId);
+                  if (deleteToken == null) return;
+                  likeCount.value--; // 表示する数字を1つ下げる
+                  final result = await ref
+                      .read(postLogicProvider)
+                      .onUnLikeButtonPressed(
+                        currentUid,
+                        deleteToken.tokenId,
+                        post,
+                      );
+                  result.when(
+                    success: (_) {},
+                    failure: (_) {
+                      UIHelper.showErrorFlutterToast('通信に失敗しました');
+                      likeCount.value++; // 元に戻す
+                      notifier().addLikePost(currentUid, post);
                     },
+                  );
+                },
               )
               : InkWell(
                 child: const Icon(Icons.favorite),
-                onTap:
-                    () async {
-                      final user = ref.read(streamAuthProvider).value;
-                      if (user == null || !user.emailVerified) {
-                        UIHelper.showSuccessSnackBar(context,'ログインしてください');
-                        return;
-                      }
-                      final currentUid = user.uid;
-                      final token = notifier().addLikePost(currentUid, post);
-                      if (token == null) return;
-                      likeCount.value++; // 表示する数字を1つ上げる
-                      final result = await ref
-                        .read(postLogicProvider)
-                        .onLikeButtonPressed(currentUid,token, post);
-                      result.when(success: (_) {}, failure: (_) {
-                        UIHelper.showErrorFlutterToast('通信に失敗しました');
-                        likeCount.value--; // 元に戻す
-                        notifier().removeLikePost(postId);
-                      });
+                onTap: () async {
+                  final user = ref.read(streamAuthProvider).value;
+                  if (user == null || !user.emailVerified) {
+                    UIHelper.showSuccessSnackBar(context, 'ログインしてください');
+                    return;
+                  }
+                  final currentUid = user.uid;
+                  final token = notifier().addLikePost(currentUid, post);
+                  if (token == null) return;
+                  likeCount.value++; // 表示する数字を1つ上げる
+                  final result = await ref
+                      .read(postLogicProvider)
+                      .onLikeButtonPressed(currentUid, token, post);
+                  result.when(
+                    success: (_) {},
+                    failure: (_) {
+                      UIHelper.showErrorFlutterToast('通信に失敗しました');
+                      likeCount.value--; // 元に戻す
+                      notifier().removeLikePost(postId);
                     },
+                  );
+                },
               ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              isHorizontal ? likeCount.value.formatNumber() : "",
-            ),
+            child: Text(isHorizontal ? likeCount.value.formatNumber() : ""),
           ),
         ];
         return Padding(

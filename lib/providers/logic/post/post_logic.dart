@@ -16,34 +16,67 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'post_logic.g.dart';
 
 @riverpod
-PostLogic postLogic(Ref ref) => PostLogic(firestoreRepository: ref.watch(firestoreRepositoryProvider),onCallRepository: ref.watch(onCallRepositoryProvider));
+PostLogic postLogic(Ref ref) => PostLogic(
+  firestoreRepository: ref.watch(firestoreRepositoryProvider),
+  onCallRepository: ref.watch(onCallRepositoryProvider),
+);
 
 class PostLogic {
   PostLogic({
     required this.firestoreRepository,
-    required this.onCallRepository
+    required this.onCallRepository,
   });
   final FirestoreRepository firestoreRepository;
   final OnCallRepository onCallRepository;
 
-  FutureResult<bool> mutePost(Post post, String currentUid,MutePostToken token) async {
+  FutureResult<bool> mutePost(
+    Post post,
+    String currentUid,
+    MutePostToken token,
+  ) async {
     final postMute = PostMute.fromPost(post, currentUid);
-    return await firestoreRepository.createMutePostInfo(currentUid, post, token, postMute);
+    return await firestoreRepository.createMutePostInfo(
+      currentUid,
+      post,
+      token,
+      postMute,
+    );
   }
 
-  FutureResult<bool> muteUser(Post post, String currentUid,MuteUserToken token) async {
+  FutureResult<bool> muteUser(
+    Post post,
+    String currentUid,
+    MuteUserToken token,
+  ) async {
     final passiveUid = post.uid;
     final userMute = UserMute.fromPost(currentUid, post);
-    return await firestoreRepository.createMuteUserInfo(currentUid, passiveUid, token, userMute);
+    return await firestoreRepository.createMuteUserInfo(
+      currentUid,
+      passiveUid,
+      token,
+      userMute,
+    );
   }
 
-
-  FutureResult<bool> onLikeButtonPressed(String currentUid,LikePostToken token,Post post) async {
+  FutureResult<bool> onLikeButtonPressed(
+    String currentUid,
+    LikePostToken token,
+    Post post,
+  ) async {
     final postLike = PostLike.fromPost(post, currentUid);
-    return firestoreRepository.createLikePostInfo(currentUid, post, token, postLike);
+    return firestoreRepository.createLikePostInfo(
+      currentUid,
+      post,
+      token,
+      postLike,
+    );
   }
 
-  FutureResult<bool> onUnLikeButtonPressed(String currentUid,String tokenId,Post post) {
+  FutureResult<bool> onUnLikeButtonPressed(
+    String currentUid,
+    String tokenId,
+    Post post,
+  ) {
     return firestoreRepository.deleteLikePostInfo(currentUid, post, tokenId);
   }
 

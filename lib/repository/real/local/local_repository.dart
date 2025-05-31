@@ -10,7 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'local_repository.g.dart';
 
 @riverpod
-LocalRepository localRepository(Ref ref) => LocalRepository(ref.watch(prefsProvider));
+LocalRepository localRepository(Ref ref) =>
+    LocalRepository(ref.watch(prefsProvider));
 
 class LocalRepository {
   LocalRepository(this.prefs);

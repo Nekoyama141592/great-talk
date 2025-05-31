@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
@@ -73,6 +72,7 @@ class TokensNotifier extends _$TokensNotifier {
     _updateState(newState);
     return postId;
   }
+
   String removeDeletePostId(String postId) {
     final newState = _currentState.copyWith(
       deletePostIds: [..._currentState.deletePostIds]..remove(postId),
@@ -97,7 +97,7 @@ class TokensNotifier extends _$TokensNotifier {
     _updateState(newState);
   }
 
-  LikePostToken? addLikePost(String currentUid,Post post) {
+  LikePostToken? addLikePost(String currentUid, Post post) {
     final token = LikePostToken.fromPost(post, currentUid);
     final newState = _currentState.copyWith(
       likePostTokens: [..._currentState.likePostTokens, token],

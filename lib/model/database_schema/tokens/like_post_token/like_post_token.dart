@@ -20,7 +20,7 @@ abstract class LikePostToken with _$LikePostToken {
   }) = _LikePostToken;
   factory LikePostToken.fromJson(Map<String, dynamic> json) =>
       _$LikePostTokenFromJson(json);
-  factory LikePostToken.fromPost(Post post,String currentUid) {
+  factory LikePostToken.fromPost(Post post, String currentUid) {
     return LikePostToken(
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),

@@ -81,21 +81,32 @@ class ChatPage extends HookConsumerWidget {
                 actions: [
                   // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示
                   if (post.uid == currentUserId || isAdmin)
-                    DeletePostButton(onTap: () async {
-                      ref.read(tokensNotifierProvider.notifier).addDeletePostId(postId); // 楽観的に追加する
-                      final result = await ref.read(postLogicProvider).deletePost(post);
-                      result.when(
-                      success: (_) async {
-                        UIHelper.showSuccessSnackBar(context, "投稿を削除しました。");
-                        RouterLogic.back(context);
+                    DeletePostButton(
+                      onTap: () async {
+                        ref
+                            .read(tokensNotifierProvider.notifier)
+                            .addDeletePostId(postId); // 楽観的に追加する
+                        final result = await ref
+                            .read(postLogicProvider)
+                            .deletePost(post);
+                        result.when(
+                          success: (_) async {
+                            UIHelper.showSuccessSnackBar(context, "投稿を削除しました。");
+                            RouterLogic.back(context);
+                          },
+                          failure: (e) {
+                            // 失敗したら元に戻す
+                            ref
+                                .read(tokensNotifierProvider.notifier)
+                                .removeDeletePostId(postId);
+                            UIHelper.showFailureSnackBar(
+                              context,
+                              "投稿を削除することができませんでした。",
+                            );
+                          },
+                        );
                       },
-                      failure: (e) {
-                        // 失敗したら元に戻す
-                        ref.read(tokensNotifierProvider.notifier).removeDeletePostId(postId);
-                        UIHelper.showFailureSnackBar(context, "投稿を削除することができませんでした。");
-                      },
-                    );
-                    })
+                    )
                   else
                     AppBarAction(
                       onTap: () {
@@ -103,7 +114,9 @@ class ChatPage extends HookConsumerWidget {
                         PostUiCore.onReportButtonPressed(
                           context: context,
                           mutePost: (innerContext) async {
-                            final token = ref.read(tokensNotifierProvider.notifier).addMutePost(post);
+                            final token = ref
+                                .read(tokensNotifierProvider.notifier)
+                                .addMutePost(post);
                             if (token == null) {
                               RouterLogic.back(innerContext);
                               return;
@@ -111,7 +124,7 @@ class ChatPage extends HookConsumerWidget {
                             final result = await notifier.mutePost(
                               post,
                               currentUserId,
-                              token
+                              token,
                             );
                             result.when(
                               success: (_) => RouterLogic.back(innerContext),
@@ -119,7 +132,9 @@ class ChatPage extends HookConsumerWidget {
                             );
                           },
                           muteUser: (innerContext) async {
-                            final token = ref.read(tokensNotifierProvider.notifier).addMuteUser(post);
+                            final token = ref
+                                .read(tokensNotifierProvider.notifier)
+                                .addMuteUser(post);
                             if (token == null) {
                               RouterLogic.back(innerContext);
                               return;
@@ -127,7 +142,7 @@ class ChatPage extends HookConsumerWidget {
                             final result = await notifier.muteUser(
                               post,
                               currentUserId,
-                              token
+                              token,
                             );
                             result.when(
                               success: (_) => RouterLogic.back(innerContext),

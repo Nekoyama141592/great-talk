@@ -16,7 +16,7 @@ abstract class PostLike with _$PostLike {
   }) = _PostLike;
   factory PostLike.fromJson(Map<String, dynamic> json) =>
       _$PostLikeFromJson(json);
-  factory PostLike.fromPost(Post post,String currentUid) {
+  factory PostLike.fromPost(Post post, String currentUid) {
     return PostLike(
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),

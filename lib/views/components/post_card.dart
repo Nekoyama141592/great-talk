@@ -64,9 +64,9 @@ class PostCard extends ConsumerWidget {
             return InkWell(
               onTap: () {
                 RouterLogic.pushPath(
-                context,
-                ChatPage.generatePath(post.uid, post.postId),
-              );
+                  context,
+                  ChatPage.generatePath(post.uid, post.postId),
+                );
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -79,9 +79,7 @@ class PostCard extends ConsumerWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: CircleImage(
-                        uint8list: uint8list,
-                      ),
+                      child: CircleImage(uint8list: uint8list),
                     ),
                     EllipsisText(post.typedTitle().value),
                     TextButton(

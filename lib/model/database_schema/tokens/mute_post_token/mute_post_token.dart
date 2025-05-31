@@ -19,7 +19,7 @@ abstract class MutePostToken with _$MutePostToken {
   }) = _MutePostToken;
   factory MutePostToken.fromJson(Map<String, dynamic> json) =>
       _$MutePostTokenFromJson(json);
-  factory MutePostToken.fromPost(Post post,String currentUid) {
+  factory MutePostToken.fromPost(Post post, String currentUid) {
     return MutePostToken(
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),

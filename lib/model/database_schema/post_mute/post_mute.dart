@@ -15,11 +15,12 @@ abstract class PostMute with _$PostMute {
   }) = _PostMute;
   factory PostMute.fromJson(Map<String, dynamic> json) =>
       _$PostMuteFromJson(json);
-  factory PostMute.fromPost(Post post,String currentUid) {
+  factory PostMute.fromPost(Post post, String currentUid) {
     return PostMute(
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),
       postRef: post.ref,
-      postId: post.postId);
-  } 
+      postId: post.postId,
+    );
+  }
 }
