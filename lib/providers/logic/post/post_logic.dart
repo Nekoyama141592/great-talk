@@ -35,28 +35,9 @@ class PostLogic {
   TokensNotifier get _tokensNotifier =>
       ref.read(tokensNotifierProvider.notifier);
 
-  FutureResult<bool> mutePost(Post post, String currentUid) async {
-    final tokenId = randomString();
-    final now = Timestamp.now();
-    final postId = post.postId;
-    final postRef = post.typedRef();
-    final mutePostToken = MutePostToken(
-      activeUid: currentUid,
-      createdAt: now,
-      postId: postId,
-      postRef: postRef,
-      tokenId: tokenId,
-      tokenType: TokenType.mutePost.name,
-    );
-    _tokensNotifier.addMutePost(mutePostToken);
-    final postMute = PostMute(
-      activeUid: currentUid,
-      createdAt: now,
-      postId: postId,
-      postRef: postRef,
-    );
-    
-    return await _firestoreRepository.createMutePostInfo(currentUid, post, tokenId, mutePostToken, postMute);
+  FutureResult<bool> mutePost(Post post, String currentUid,MutePostToken token) async {
+    final postMute = PostMute.fromPost(post, currentUid);
+    return await _firestoreRepository.createMutePostInfo(currentUid, post, token, postMute);
   }
 
   FutureResult<bool> muteUser(Post post, String currentUid) async {

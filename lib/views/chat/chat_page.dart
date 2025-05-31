@@ -8,6 +8,7 @@ import 'package:great_talk/model/database_schema/text_message/text_message.dart'
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
+import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/logic/post/post_logic.dart';
 import 'package:great_talk/providers/logic/router/router_logic.dart';
 import 'package:great_talk/providers/view_model/chat/chat_view_model.dart';
@@ -87,9 +88,12 @@ class ChatPage extends HookConsumerWidget {
                         PostUiCore.onReportButtonPressed(
                           context: context,
                           mutePost: (innerContext) async {
+                            final token = ref.read(tokensNotifierProvider.notifier).addMutePost(post);
+                            if (token == null) return;
                             final result = await notifier.mutePost(
                               post,
                               currentUserId,
+                              token
                             );
                             result.when(
                               success: (_) => RouterLogic.back(innerContext),

@@ -112,11 +112,15 @@ class TokensNotifier extends _$TokensNotifier {
     return deleteToken;
   }
 
-  void addMutePost(MutePostToken mutePostToken) {
+  MutePostToken? addMutePost(Post post) {
+    final currentUid = ref.read(streamAuthUidProvider).value;
+    if (currentUid == null) return null;
+    final token = MutePostToken.fromPost(post, currentUid);
     final newState = _currentState.copyWith(
-      mutePostTokens: [..._currentState.mutePostTokens, mutePostToken],
+      mutePostTokens: [..._currentState.mutePostTokens, token],
     );
     _updateState(newState);
+    return token;
   }
 
   void removeMutePost(MutePostToken mutePostToken) {
