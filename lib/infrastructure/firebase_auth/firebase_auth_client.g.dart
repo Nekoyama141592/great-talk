@@ -1,28 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'current_user_notifier.dart';
+part of 'firebase_auth_client.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentUserNotifierHash() =>
-    r'38ed31c31675325661d1dbc305f6ab128837918e';
+String _$firebaseAuthClientHash() =>
+    r'71784e37b582a579fcca6c07538798c5bc52dae0';
 
-/// See also [CurrentUserNotifier].
-@ProviderFor(CurrentUserNotifier)
-final currentUserNotifierProvider =
-    AsyncNotifierProvider<CurrentUserNotifier, CurrentUserState>.internal(
-      CurrentUserNotifier.new,
-      name: r'currentUserNotifierProvider',
+/// See also [firebaseAuthClient].
+@ProviderFor(firebaseAuthClient)
+final firebaseAuthClientProvider =
+    AutoDisposeProvider<FirebaseAuthClient>.internal(
+      firebaseAuthClient,
+      name: r'firebaseAuthClientProvider',
       debugGetCreateSourceHash:
           const bool.fromEnvironment('dart.vm.product')
               ? null
-              : _$currentUserNotifierHash,
+              : _$firebaseAuthClientHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$CurrentUserNotifier = AsyncNotifier<CurrentUserState>;
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef FirebaseAuthClientRef = AutoDisposeProviderRef<FirebaseAuthClient>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,5 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:great_talk/infrastructure/credential_composer.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+part 'firebase_auth_client.g.dart';
+@riverpod
+FirebaseAuthClient firebaseAuthClient(Ref ref) => FirebaseAuthClient();
 
 class FirebaseAuthClient {
   Future<UserCredential> signInAnonymously() async {

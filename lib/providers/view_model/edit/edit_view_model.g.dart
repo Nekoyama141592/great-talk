@@ -6,7 +6,7 @@ part of 'edit_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$editViewModelHash() => r'eea7d09dedf4580209909e01af0a996a716e55cc';
+String _$editViewModelHash() => r'48ea055b324f6ebf6ab6ea89ed6b29cd7e7eb45c';
 
 /// See also [EditViewModel].
 @ProviderFor(EditViewModel)

@@ -1,28 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'on_call_repository.dart';
+part of 'on_call_client.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$onCallRepositoryHash() => r'46026753869f1b141be4354a543aac63d0a1d2ab';
+String _$onCallClientHash() => r'44cc3a55852f35e51e361fd806b7805dfc82aba0';
 
-/// See also [onCallRepository].
-@ProviderFor(onCallRepository)
-final onCallRepositoryProvider = AutoDisposeProvider<OnCallRepository>.internal(
-  onCallRepository,
-  name: r'onCallRepositoryProvider',
+/// See also [onCallClient].
+@ProviderFor(onCallClient)
+final onCallClientProvider = AutoDisposeProvider<OnCallClient>.internal(
+  onCallClient,
+  name: r'onCallClientProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$onCallRepositoryHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$onCallClientHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef OnCallRepositoryRef = AutoDisposeProviderRef<OnCallRepository>;
+typedef OnCallClientRef = AutoDisposeProviderRef<OnCallClient>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -11,7 +11,7 @@ import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
-import 'package:great_talk/utility/file_utility.dart';
+import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
@@ -215,7 +215,7 @@ class ChatViewModel extends _$ChatViewModel {
 
   Future<Uint8List?> _fetchPostImage(Post post) async {
     final detectedImage = post.typedImage();
-    return FileUtility.getS3Image(
+    return ref.read(fileUseCaseProvider).getS3Image(
       detectedImage.bucketName,
       detectedImage.value,
     );

@@ -6,19 +6,25 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/database_schema/image_info/original_image_info.dart';
 import 'package:great_talk/model/rest_api/get_object/request/get_object_request.dart';
+import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+part 'file_usecase.g.dart';
 
-class FileUtility {
-  FileUtility() {
-    _fetchPrefs();
-  }
-  static SharedPreferences? prefs;
-  static Future<Uint8List?> getCompressedImage() async {
+@riverpod
+FileUseCase fileUseCase(Ref ref) => FileUseCase(prefs: ref.watch(prefsProvider), repository: ref.watch(onCallRepositoryProvider));
+
+class FileUseCase {
+  FileUseCase({required this.prefs,required this.repository});
+  final SharedPreferences prefs;
+  final OnCallRepository repository;
+  Future<Uint8List?> getCompressedImage() async {
     final xFile = await _pickImage();
     final croppedFile = await _cropImage(xFile);
     final jpgFile = await _convertToJpg(croppedFile);
@@ -26,7 +32,7 @@ class FileUtility {
     return compressedImage;
   }
 
-  static Future<Uint8List?> getS3Image(
+  Future<Uint8List?> getS3Image(
     String bucketName,
     String fileName,
   ) async {
@@ -36,7 +42,6 @@ class FileUtility {
     Uint8List? uint8List = _getCachedUint8List(fileName); // キャッシュされている画像を取得.
     // キャッシュされていない場合、S3から取得.
     if (uint8List == null) {
-      final repository = OnCallRepository();
       final request = GetObjectRequest(object: fileName);
       final result = await repository.getObject(request);
       result.when(
@@ -52,29 +57,18 @@ class FileUtility {
     return uint8List;
   }
 
-  static Future<void> _fetchPrefs() async =>
-      prefs ??= await SharedPreferences.getInstance();
 
-  static Future<void> _cacheUint8List(String fileName, Uint8List data) async {
-    if (prefs == null) {
-      _fetchPrefs();
-      return;
-    }
+  Future<void> _cacheUint8List(String fileName, Uint8List data) async {
     final base64String = base64Encode(data);
-    await prefs!.setString(fileName, base64String);
+    await prefs.setString(fileName, base64String);
   }
 
-  static Uint8List? _getCachedUint8List(String fileName) {
-    if (prefs == null) {
-      _fetchPrefs();
-      return null;
-    } else {
-      final base64String = prefs!.getString(fileName);
-      return base64String == null ? null : base64Decode(base64String);
-    }
+  Uint8List? _getCachedUint8List(String fileName) {
+    final base64String = prefs.getString(fileName);
+    return base64String == null ? null : base64Decode(base64String);
   }
 
-  static Future<Uint8List?> _compressImage(File? jpgFile) async {
+  Future<Uint8List?> _compressImage(File? jpgFile) async {
     if (jpgFile == null) {
       return null;
     }
@@ -87,7 +81,7 @@ class FileUtility {
     return result;
   }
 
-  static Future<File?> _convertToJpg(CroppedFile? croppedFile) async {
+  Future<File?> _convertToJpg(CroppedFile? croppedFile) async {
     if (croppedFile == null) {
       return null;
     }
@@ -103,7 +97,7 @@ class FileUtility {
     }
   }
 
-  static Future<CroppedFile?> _cropImage(XFile? xFile) async {
+  Future<CroppedFile?> _cropImage(XFile? xFile) async {
     if (xFile == null) {
       return null;
     }
@@ -115,13 +109,13 @@ class FileUtility {
     return result;
   }
 
-  static Future<XFile?> _pickImage() async {
+  Future<XFile?> _pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     return image;
   }
 
-  static Future<OriginalImageInfo> getImageInfo(Uint8List imageBytes) async {
+  Future<OriginalImageInfo> getImageInfo(Uint8List imageBytes) async {
     ui.Codec codec1 = await ui.instantiateImageCodec(imageBytes);
     ui.FrameInfo frameInfo1 = await codec1.getNextFrame();
     int width = frameInfo1.image.width;
@@ -129,7 +123,7 @@ class FileUtility {
     return OriginalImageInfo(height: height, width: width);
   }
 
-  static String get squareImageRequestMsg =>
+  String get squareImageRequestMsg =>
       Platform.isIOS
           ? FormConsts.iosSquareImageRequestMsg
           : FormConsts.androidSquareImageRequestMsg;

@@ -11,7 +11,7 @@ import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
-import 'package:great_talk/utility/file_utility.dart';
+import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:great_talk/utility/new_content.dart';
 import 'package:great_talk/ui_core/validator/post_validator.dart';
 
@@ -96,12 +96,13 @@ class CreatePostViewModel extends _$CreatePostViewModel {
 
   // 画像選択処理
   Future<void> onImagePickButtonPressed() async {
-    final result = await FileUtility.getCompressedImage();
+    final usecase = ref.read(fileUseCaseProvider);
+    final result = await usecase.getCompressedImage();
     if (result == null) return;
 
-    final info = await FileUtility.getImageInfo(result);
+    final info = await usecase.getImageInfo(result);
     if (info.isNotSquare) {
-      UIHelper.showErrorFlutterToast(FileUtility.squareImageRequestMsg);
+      UIHelper.showErrorFlutterToast(usecase.squareImageRequestMsg);
       return;
     }
     if (info.isSmall) {
@@ -158,7 +159,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     try {
       final postId = randomString();
       final fileName = AWSS3Utility.postObject(currentUid, postId);
-      final repository = OnCallRepository();
+      final repository = ref.read(onCallRepositoryProvider);
       final request = PutObjectRequest.fromUint8List(
         uint8list: base64Decode(pickedImage),
         fileName: fileName,

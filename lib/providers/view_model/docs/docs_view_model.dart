@@ -21,7 +21,7 @@ import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/utility/file_utility.dart';
+import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -229,7 +229,7 @@ class DocsViewModel extends _$DocsViewModel {
 
   Future<Uint8List?> _getImageFromDoc(Doc doc) async {
     final detectedImage = DetectedImage.fromJson(doc['image']);
-    return FileUtility.getS3Image(
+    return ref.read(fileUseCaseProvider).getS3Image(
       detectedImage.bucketName,
       detectedImage.value,
     );
@@ -237,7 +237,7 @@ class DocsViewModel extends _$DocsViewModel {
 
   Future<Uint8List?> _getImageFromUser(PublicUser user) async {
     final detectedImage = user.typedImage();
-    return FileUtility.getS3Image(
+    return ref.read(fileUseCaseProvider).getS3Image(
       detectedImage.bucketName,
       detectedImage.value,
     );
