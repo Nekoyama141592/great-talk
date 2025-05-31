@@ -41,9 +41,6 @@ class PostLogic {
   String? get _currentUid => ref.read(streamAuthUidProvider).value;
 
   FutureResult<bool> mutePost(Post post, String currentUid) async {
-    if (_tokensState?.mutePostIds.contains(post.postId) ?? false) {
-      return const Result.failure('すでにこの投稿をミュートしています');
-    }
     final tokenId = randomString();
     final now = Timestamp.now();
     final postId = post.postId;
@@ -69,9 +66,6 @@ class PostLogic {
 
   FutureResult<bool> muteUser(Post post, String currentUid) async {
     final passiveUid = post.uid;
-    if (_tokensState?.muteUids.contains(passiveUid) ?? false) {
-      return const Result.failure('すでにこのユーザーをミュートしています');
-    }
     final tokenId = randomString();
     final now = Timestamp.now();
     final passiveUserRef = DocRefCore.user(passiveUid);
