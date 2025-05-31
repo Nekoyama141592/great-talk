@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/core/firestore/collection_group_core.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
@@ -15,9 +16,8 @@ FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository();
 class FirestoreRepository {
   FirestoreClient get client => FirestoreClient();
   // count
-  Future<int?> countUsers() async {
+  Future<int?> _count(MapQuery query) async {
     try {
-      final query = CollectionGroupCore.users;
       final count = await client.count(query);
       return count;
     } catch (e) {
@@ -26,30 +26,14 @@ class FirestoreRepository {
     }
   }
 
-  Future<int?> countPosts() async {
-    try {
-      final query = CollectionGroupCore.posts;
-      final count = await client.count(query);
-      return count;
-    } catch (e) {
-      debugPrint(e.toString());
-      return null;
-    }
-  }
+  Future<int?> countUsers() => _count(CollectionGroupCore.users);
 
-  Future<int?> countMessages() async {
-    try {
-      final query = CollectionGroupCore.messages;
-      final count = await client.count(query);
-      return count;
-    } catch (e) {
-      debugPrint(e.toString());
-      return null;
-    }
-  }
+  Future<int?> countPosts() => _count(CollectionGroupCore.posts);
+
+  Future<int?> countMessages() => _count(CollectionGroupCore.messages);
 
   // write
-  FutureResult<bool> createDoc(DocRef ref, SDMap json) async {
+  FutureResult<bool> _createDoc(DocRef ref, Map<String,dynamic> json) async {
     try {
       await client.createDoc(ref, json);
       return const Result.success(true);
@@ -59,7 +43,16 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<bool> updateDoc(DocRef ref, SDMap json) async {
+  FutureResult<bool> createPublicUser(String uid, Map<String,dynamic> json) async {
+    final docRef = DocRefCore.user(uid);
+    return _createDoc(docRef, json);
+  }
+  FutureResult<bool> createPrivateUser(String uid, Map<String,dynamic> json) async {
+    final docRef = DocRefCore.privateUser(uid);
+    return _createDoc(docRef, json);
+  }
+
+  FutureResult<bool> _updateDoc(DocRef ref, Map<String,dynamic> json) async {
     try {
       await client.updateDoc(ref, json);
       return const Result.success(true);
@@ -69,7 +62,7 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<bool> deleteDoc(DocRef ref) async {
+  FutureResult<bool> _deleteDoc(DocRef ref) async {
     try {
       await client.deleteDoc(ref);
       return const Result.success(true);
@@ -78,8 +71,12 @@ class FirestoreRepository {
       return Result.failure(e);
     }
   }
+  FutureResult<bool> deletePublicUser(String uid) {
+    final docRef = DocRefCore.user(uid);
+    return _deleteDoc(docRef);
+  }
 
-  FutureResult<bool> createDocs(List<FirestoreRequest> requestList) async {
+  FutureResult<bool> _createDocs(List<FirestoreRequest> requestList) async {
     try {
       final batch = FirebaseFirestore.instance.batch();
       for (final request in requestList) {
@@ -93,7 +90,7 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<bool> deleteDocs(List<DocRef> docRefList) async {
+  FutureResult<bool> _deleteDocs(List<DocRef> docRefList) async {
     try {
       final batch = FirebaseFirestore.instance.batch();
       for (final docRef in docRefList) {
@@ -108,7 +105,6 @@ class FirestoreRepository {
   }
 
   FutureResult<Doc> getDoc(DocRef ref) async {
-    final client = FirestoreClient();
     try {
       final Doc doc = await client.getDoc(ref);
       return Result.success(doc);
@@ -118,7 +114,6 @@ class FirestoreRepository {
   }
 
   FutureResult<List<QDoc>> getDocs(MapQuery query) async {
-    final client = FirestoreClient();
     try {
       final qSnapshot = await client.getDocs(query);
       final qDocs = qSnapshot.docs;
@@ -141,7 +136,6 @@ class FirestoreRepository {
   }
 
   Future<List<QDoc>> getDocsWithList(MapQuery query) async {
-    final client = FirestoreClient();
     try {
       final qSnapshot = await client.getDocs(query);
       final qDocs = qSnapshot.docs;

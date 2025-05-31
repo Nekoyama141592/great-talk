@@ -79,9 +79,8 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final uid = _getCurrentUid();
     if (uid == null) return;
     final newUser = NewContent.newUser(uid);
-    final refDoc = DocRefCore.user(uid);
     final json = newUser.toJson();
-    final result = await repository.createDoc(refDoc, json);
+    final result = await repository.createPublicUser(uid, json);
     result.when(
       success: (_) {
         _updateState(state.value!.copyWith(publicUser: newUser));
@@ -100,9 +99,8 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     if (uid == null) return;
     final repository = ref.read(firestoreRepositoryProvider);
     final newPrivateUser = NewContent.newPrivateUser(uid);
-    final refDoc = DocRefCore.privateUser(uid);
     final json = newPrivateUser.toJson();
-    final result = await repository.createDoc(refDoc, json);
+    final result = await repository.createPrivateUser(uid, json);
     result.when(
       success: (_) {
         _updateState(state.value!.copyWith(privateUser: newPrivateUser));
@@ -217,8 +215,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
       return const Result.failure('ログインしてください');
     }
     final firestoreRepository = ref.read(firestoreRepositoryProvider);
-    final refDoc = user.typedRef();
-    final result = await firestoreRepository.deleteDoc(refDoc);
+    final result = await firestoreRepository.deletePublicUser(user.uid);
     late Result<bool> authResult;
     await result.when(
       success: (_) async => authResult = await _deleteAuthUser(),
@@ -259,10 +256,6 @@ FirebaseAuthRepository firebaseAuthRepository(Ref ref) {
   return FirebaseAuthRepository();
 }
 
-@Riverpod(keepAlive: true)
-FirestoreRepository firestoreRepository(Ref ref) {
-  return FirestoreRepository();
-}
 
 @Riverpod(keepAlive: true)
 OnCallRepository awsS3Repository(Ref ref) {
