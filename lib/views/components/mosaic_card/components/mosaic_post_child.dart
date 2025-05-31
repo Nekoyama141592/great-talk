@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
-import 'package:great_talk/providers/logic/post/post_logic.dart';
+import 'package:great_talk/providers/usecase/post/post_usecase.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
@@ -46,7 +46,7 @@ class MosaicPostChild extends ConsumerWidget {
                         .read(tokensNotifierProvider.notifier)
                         .addDeletePostId(postId); // 楽観的に追加する
                     final result = await ref
-                        .read(postLogicProvider)
+                        .read(postUsecaseProvider)
                         .deletePost(post);
                     result.when(
                       success: (_) async {

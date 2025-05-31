@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'post_logic.dart';
+part of 'post_usecase.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postLogicHash() => r'48e293698a56ac721ce07ea324f130105485defa';
+String _$postUsecaseHash() => r'922262b3a0a73567667d8de2d96cd973d5627528';
 
-/// See also [postLogic].
-@ProviderFor(postLogic)
-final postLogicProvider = AutoDisposeProvider<PostLogic>.internal(
-  postLogic,
-  name: r'postLogicProvider',
+/// See also [postUsecase].
+@ProviderFor(postUsecase)
+final postUsecaseProvider = AutoDisposeProvider<PostUsecase>.internal(
+  postUsecase,
+  name: r'postUsecaseProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$postLogicHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$postUsecaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef PostLogicRef = AutoDisposeProviderRef<PostLogic>;
+typedef PostUsecaseRef = AutoDisposeProviderRef<PostUsecase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

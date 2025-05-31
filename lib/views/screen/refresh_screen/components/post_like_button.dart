@@ -5,7 +5,7 @@ import 'package:great_talk/extensions/number_format_extension.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
-import 'package:great_talk/providers/logic/post/post_logic.dart';
+import 'package:great_talk/providers/usecase/post/post_usecase.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -43,7 +43,7 @@ class PostLikeButton extends HookConsumerWidget {
                   if (deleteToken == null) return;
                   likeCount.value--; // 表示する数字を1つ下げる
                   final result = await ref
-                      .read(postLogicProvider)
+                      .read(postUsecaseProvider)
                       .onUnLikeButtonPressed(
                         currentUid,
                         deleteToken.tokenId,
@@ -72,7 +72,7 @@ class PostLikeButton extends HookConsumerWidget {
                   if (token == null) return;
                   likeCount.value++; // 表示する数字を1つ上げる
                   final result = await ref
-                      .read(postLogicProvider)
+                      .read(postUsecaseProvider)
                       .onLikeButtonPressed(currentUid, token, post);
                   result.when(
                     success: (_) {},

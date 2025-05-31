@@ -11,15 +11,15 @@ import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'post_logic.g.dart';
+part 'post_usecase.g.dart';
 
 @riverpod
-PostLogic postLogic(Ref ref) => PostLogic(
+PostUsecase postUsecase(Ref ref) => PostUsecase(
   firestoreRepository: ref.watch(firestoreRepositoryProvider),
 );
 
-class PostLogic {
-  PostLogic({
+class PostUsecase {
+  PostUsecase({
     required this.firestoreRepository,
   });
   final FirestoreRepository firestoreRepository;
