@@ -6,7 +6,7 @@ part of 'purchases_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$purchasesNotifierHash() => r'4b4f80ddf266c7d6f533a81ef55e476844af5717';
+String _$purchasesNotifierHash() => r'59089434654fa7a48efef20cc2ac3472285d9800';
 
 /// See also [PurchasesNotifier].
 @ProviderFor(PurchasesNotifier)

@@ -11,11 +11,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'purchases_repository.g.dart';
 
 @riverpod
-PurchasesRepository purchasesRepository(Ref ref) => PurchasesRepository();
+PurchasesRepository purchasesRepository(Ref ref) => PurchasesRepository(ref.watch(onCallClientProvider));
 
 class PurchasesRepository {
+  PurchasesRepository(this.client);
+  final OnCallClient client;
   InAppPurchase get inAppPurchase => InAppPurchase.instance;
-  OnCallClient get _client => OnCallClient();
   Future<bool> isAvailable() async {
     try {
       return inAppPurchase.isAvailable();
@@ -51,7 +52,7 @@ class PurchasesRepository {
     try {
       const name = 'verifyAndroidReceipt';
       final request = ReceiptRequest(purchaseDetails: purchaseDetails.toJson());
-      final result = await _client.call(name, request.toJson());
+      final result = await client.call(name, request.toJson());
       final res = VerifiedPurchase.fromJson(result);
       return Result.success(res);
     } catch (e) {
@@ -65,7 +66,7 @@ class PurchasesRepository {
     try {
       const name = 'verifyIOSReceipt';
       final request = ReceiptRequest(purchaseDetails: purchaseDetails.toJson());
-      final result = await _client.call(name, request.toJson());
+      final result = await client.call(name, request.toJson());
       final res = VerifiedPurchase.fromJson(result);
       return Result.success(res);
     } catch (e) {
