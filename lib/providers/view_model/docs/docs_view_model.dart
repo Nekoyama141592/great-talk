@@ -372,20 +372,15 @@ class DocsViewModel extends _$DocsViewModel {
       tokenType: TokenType.following.name,
     );
     _tokensNotifier().addFollowing(followingToken);
-
+    final currentUid = _currentUid();
     final follower = Follower(
-      activeUserRef: DocRefCore.user(_currentUid()),
+      activeUserRef: DocRefCore.user(currentUid),
       createdAt: now,
       passiveUserRef: passiveUser.typedRef(),
 
     );
-    final tokenRef = DocRefCore.token(_currentUid(), tokenId);
-    final followerRef = DocRefCore.follower(_currentUid(), _passiveUid!);
-    final requests = [
-      FirestoreRequest(tokenRef, followingToken.toJson()),
-      FirestoreRequest(followerRef, follower.toJson()),
-    ];
-    await _repository.createDocs(requests);
+    final passiveUid = _passiveUid!;
+    await _repository.createFollowInfo(currentUid, passiveUid, tokenId, followingToken, follower);
   }
 
   void onUnFollowPressed() async {

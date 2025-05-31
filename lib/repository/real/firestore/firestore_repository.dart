@@ -3,7 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:great_talk/core/firestore/collection_group_core.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
+import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -80,7 +82,7 @@ class FirestoreRepository {
     return _deleteDoc(docRef);
   }
 
-  FutureResult<bool> createDocs(List<FirestoreRequest> requestList) async {
+  FutureResult<bool> _createDocs(List<FirestoreRequest> requestList) async {
     try {
       final batch = FirebaseFirestore.instance.batch();
       for (final request in requestList) {
@@ -92,6 +94,15 @@ class FirestoreRepository {
       debugPrint(e.toString());
       return Result.failure(e);
     }
+  }
+  FutureResult<bool> createFollowInfo(String currentUid,String passiveUid, String tokenId,FollowingToken followingToken,Follower follower) async {
+    final tokenRef = DocRefCore.token(currentUid, tokenId);
+    final followerRef = DocRefCore.follower(currentUid, passiveUid);
+    final requestList = [
+      FirestoreRequest(tokenRef, followingToken.toJson()),
+      FirestoreRequest(followerRef, follower.toJson()),
+    ];
+    return _createDocs(requestList);
   }
 
   FutureResult<bool> _deleteDocs(List<DocRef> docRefList) async {
