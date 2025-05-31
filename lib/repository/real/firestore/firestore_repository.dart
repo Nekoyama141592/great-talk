@@ -110,11 +110,11 @@ class FirestoreRepository {
     ];
     return _createDocs(requestList);
   }
-  FutureResult<bool> createMuteUserInfo(String currentUid,String passiveUid, String tokenId,MuteUserToken muteUserToken,UserMute userMute) async {
-    final tokenRef = DocRefCore.token(currentUid, tokenId);
+  FutureResult<bool> createMuteUserInfo(String currentUid,String passiveUid, MuteUserToken token,UserMute userMute) async {
+    final tokenRef = DocRefCore.token(currentUid, token.tokenId);
     final userMuteRef = DocRefCore.userMute(passiveUid, currentUid);
     final requests = [
-      FirestoreRequest(tokenRef, muteUserToken.toJson()),
+      FirestoreRequest(tokenRef, token.toJson()),
       FirestoreRequest(userMuteRef, userMute.toJson()),
     ];
     return _createDocs(requests);

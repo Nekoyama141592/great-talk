@@ -89,7 +89,10 @@ class ChatPage extends HookConsumerWidget {
                           context: context,
                           mutePost: (innerContext) async {
                             final token = ref.read(tokensNotifierProvider.notifier).addMutePost(post);
-                            if (token == null) return;
+                            if (token == null) {
+                              RouterLogic.back(innerContext);
+                              return;
+                            }
                             final result = await notifier.mutePost(
                               post,
                               currentUserId,
@@ -101,9 +104,15 @@ class ChatPage extends HookConsumerWidget {
                             );
                           },
                           muteUser: (innerContext) async {
+                            final token = ref.read(tokensNotifierProvider.notifier).addMuteUser(post);
+                            if (token == null) {
+                              RouterLogic.back(innerContext);
+                              return;
+                            }
                             final result = await notifier.muteUser(
                               post,
                               currentUserId,
+                              token
                             );
                             result.when(
                               success: (_) => RouterLogic.back(innerContext),

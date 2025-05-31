@@ -1,11 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
@@ -40,29 +36,10 @@ class PostLogic {
     return await _firestoreRepository.createMutePostInfo(currentUid, post, token, postMute);
   }
 
-  FutureResult<bool> muteUser(Post post, String currentUid) async {
+  FutureResult<bool> muteUser(Post post, String currentUid,MuteUserToken token) async {
     final passiveUid = post.uid;
-    final tokenId = randomString();
-    final now = Timestamp.now();
-    final passiveUserRef = DocRefCore.user(passiveUid);
-    final muteUserToken = MuteUserToken(
-      activeUid: currentUid,
-      createdAt: now,
-      passiveUid: passiveUid,
-      passiveUserRef: passiveUserRef,
-      tokenId: tokenId,
-      tokenType: TokenType.muteUser.name,
-    );
-    _tokensNotifier.addMuteUser(muteUserToken);
-    final userMute = UserMute(
-      activeUserRef: DocRefCore.user(currentUid),
-      activeUid: currentUid,
-      createdAt: now,
-      passiveUid: passiveUid,
-      passiveUserRef: passiveUserRef,
-    );
-    
-    return await _firestoreRepository.createMuteUserInfo(currentUid, passiveUid, tokenId, muteUserToken, userMute);
+    final userMute = UserMute.fromPost(currentUid, post);
+    return await _firestoreRepository.createMuteUserInfo(currentUid, passiveUid, token, userMute);
   }
 
 
