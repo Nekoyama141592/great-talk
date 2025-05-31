@@ -15,6 +15,7 @@ import 'package:great_talk/providers/view_model/chat/chat_view_model.dart';
 import 'package:great_talk/ui_core/chat_ui_core.dart';
 import 'package:great_talk/ui_core/post_ui_core.dart';
 import 'package:great_talk/ui_core/texts.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/chat/components/menu_button.dart';
 import 'package:great_talk/views/chat/components/msg_card.dart';
 import 'package:great_talk/views/components/app_bar_action.dart';
@@ -80,7 +81,21 @@ class ChatPage extends HookConsumerWidget {
                 actions: [
                   // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示
                   if (post.uid == currentUserId || isAdmin)
-                    DeletePostButton(onTap: chatNotifier.onDeleteButtonPressed)
+                    DeletePostButton(onTap: () async {
+                      ref.read(tokensNotifierProvider.notifier).addDeletePostId(postId); // 楽観的に追加する
+                      final result = await ref.read(postLogicProvider).deletePost(post);
+                      result.when(
+                      success: (_) async {
+                        UIHelper.showSuccessSnackBar(context, "投稿を削除しました。");
+                        RouterLogic.back(context);
+                      },
+                      failure: (e) {
+                        // 失敗したら元に戻す
+                        ref.read(tokensNotifierProvider.notifier).removeDeletePostId(postId);
+                        UIHelper.showFailureSnackBar(context, "投稿を削除することができませんでした。");
+                      },
+                    );
+                    })
                   else
                     AppBarAction(
                       onTap: () {

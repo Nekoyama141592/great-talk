@@ -10,7 +10,6 @@ import 'package:great_talk/infrastructure/chat_gpt_sdk_client.dart';
 import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
-import 'package:great_talk/providers/logic/post/post_logic.dart';
 import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 import 'package:great_talk/utility/file_utility.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -344,14 +343,6 @@ class ChatViewModel extends _$ChatViewModel {
         );
       }
     });
-  }
-
-  void onDeleteButtonPressed() async {
-    final deletePost = state.value?.post;
-
-    if (deletePost == null) return;
-
-    ref.read(postLogicProvider).deletePost(deletePost);
   }
 
   Future<void> cleanLocalMessage() async {

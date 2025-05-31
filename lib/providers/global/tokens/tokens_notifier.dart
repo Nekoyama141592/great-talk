@@ -66,11 +66,19 @@ class TokensNotifier extends _$TokensNotifier {
 
   TokensState get _currentState => state.valueOrNull ?? TokensState();
 
-  void addDeletePostId(String postId) {
+  String addDeletePostId(String postId) {
     final newState = _currentState.copyWith(
       deletePostIds: [..._currentState.deletePostIds, postId],
     );
     _updateState(newState);
+    return postId;
+  }
+  String removeDeletePostId(String postId) {
+    final newState = _currentState.copyWith(
+      deletePostIds: [..._currentState.deletePostIds]..remove(postId),
+    );
+    _updateState(newState);
+    return postId;
   }
 
   void addFollowing(FollowingToken followingToken) {

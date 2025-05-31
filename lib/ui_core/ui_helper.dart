@@ -31,10 +31,16 @@ class UIHelper {
     );
   }
 
-  static void showSnackBar(BuildContext context, String msg) {
+  static void _showSnackBar(BuildContext context,SnackBar snackBar) {
     ScaffoldMessenger.of(context).showSnackBar(
-      CustomSnackBar.blue(context, msg)
+      snackBar
     );
+  }
+  static void showSuccessSnackBar(BuildContext context, String msg) {
+    _showSnackBar(context, CustomSnackBar.success(context, msg));
+  }
+  static void showFailureSnackBar(BuildContext context, String msg) {
+    _showSnackBar(context, CustomSnackBar.failure(context, msg));
   }
 
   static void cupertinoAlertDialog(

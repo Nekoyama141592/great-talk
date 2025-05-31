@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomSnackBar {
-  static SnackBar blue(BuildContext context, String msg) {
+  static SnackBar success(BuildContext context,String msg) {
+    const color = Colors.blue;
+    return _basic(context, msg, color);
+  }
+  static SnackBar failure(BuildContext context,String msg) {
+    const color = Colors.red;
+    return _basic(context, msg, color);
+  }
+  static SnackBar _basic(BuildContext context,String msg,Color color) {
     return SnackBar(
         content: Center(
           child: Text(

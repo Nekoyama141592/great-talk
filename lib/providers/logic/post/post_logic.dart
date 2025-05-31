@@ -1,7 +1,5 @@
-import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
@@ -28,8 +26,6 @@ class PostLogic {
   FirestoreRepository get _firestoreRepository =>
       ref.read(firestoreRepositoryProvider);
   OnCallRepository get _onCallRepository => ref.read(onCallRepositoryProvider);
-  TokensNotifier get _tokensNotifier =>
-      ref.read(tokensNotifierProvider.notifier);
 
   FutureResult<bool> mutePost(Post post, String currentUid,MutePostToken token) async {
     final postMute = PostMute.fromPost(post, currentUid);
@@ -52,18 +48,8 @@ class PostLogic {
     return _firestoreRepository.deleteLikePostInfo(currentUid, post, tokenId);
   }
 
-  void deletePost(Post deletePost) async {
-    final result = await _firestoreRepository.deletePost(deletePost);
-    await result.when(
-      success: (_) async {
-        _tokensNotifier.addDeletePostId(deletePost.postId);
-        await _removePostImage(deletePost.typedImage());
-        UIHelper.showErrorFlutterToast("投稿を削除しました。");
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("投稿を削除することができませんでした。");
-      },
-    );
+  FutureResult<bool> deletePost(Post post) {
+    return _firestoreRepository.deletePost(post);
   }
 
   Future<void> _removePostImage(DetectedImage image) async {

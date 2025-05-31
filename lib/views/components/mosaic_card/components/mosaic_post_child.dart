@@ -37,12 +37,25 @@ class MosaicPostChild extends ConsumerWidget {
         const BasicHeightBox(),
         asyncValue.when(
           data: (state) {
+            final postId = post.postId;
             return (isMine || isAdmin) &&
                     !state.deletePostIds.contains(post.postId)
                 ? InkWell(
                   onTap:
-                      () =>
-                          ref.read(postLogicProvider).deletePost(post),
+                      () async {
+                        ref.read(tokensNotifierProvider.notifier).addDeletePostId(postId); // 楽観的に追加する
+                      final result = await ref.read(postLogicProvider).deletePost(post);
+                      result.when(
+                      success: (_) async {
+                        UIHelper.showSuccessSnackBar(context, "投稿を削除しました。");
+                      },
+                      failure: (e) {
+                        // 失敗したら元に戻す
+                        ref.read(tokensNotifierProvider.notifier).removeDeletePostId(postId);
+                        UIHelper.showFailureSnackBar(context, "投稿を削除することができませんでした。");
+                      },
+                    );
+                      },
                   child: const Icon(Icons.delete, color: Colors.white),
                 )
                 : const SizedBox.shrink();
