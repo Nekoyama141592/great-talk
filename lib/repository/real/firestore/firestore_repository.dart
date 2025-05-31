@@ -128,12 +128,12 @@ class FirestoreRepository {
     ];
     return _createDocs(requestList);
   }
-  FutureResult<bool> createLikePostInfo(String currentUid,Post post, String tokenId,LikePostToken likePostToken, PostLike postLike) async {
-    final tokenRef = DocRefCore.token(currentUid, tokenId);
+  FutureResult<bool> createLikePostInfo(String currentUid,Post post, LikePostToken token, PostLike postLike) async {
+    final tokenRef = DocRefCore.token(currentUid, token.tokenId);
     final postRef = post.typedRef();
     final postLikeRef = DocRefCore.postLike(postRef, currentUid);
     final requestList = [
-      FirestoreRequest(tokenRef, likePostToken.toJson()),
+      FirestoreRequest(tokenRef, token.toJson()),
       FirestoreRequest(postLikeRef, postLike.toJson()),
     ];
     return _createDocs(requestList);

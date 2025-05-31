@@ -1,10 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/strings.dart';
-import 'package:great_talk/model/global/tokens/tokens_state.dart';
-import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
@@ -36,10 +32,8 @@ class PostLogic {
   FirestoreRepository get _firestoreRepository =>
       ref.read(firestoreRepositoryProvider);
   OnCallRepository get _onCallRepository => ref.read(onCallRepositoryProvider);
-  TokensState? get _tokensState => ref.read(tokensNotifierProvider).value;
   TokensNotifier get _tokensNotifier =>
       ref.read(tokensNotifierProvider.notifier);
-  String? get _currentUid => ref.read(streamAuthUidProvider).value;
 
   FutureResult<bool> mutePost(Post post, String currentUid) async {
     final tokenId = randomString();
@@ -90,65 +84,14 @@ class PostLogic {
     return await _firestoreRepository.createMuteUserInfo(currentUid, passiveUid, tokenId, muteUserToken, userMute);
   }
 
-  void onLikeButtonPressed(ValueNotifier<Post> copyPost, Post post) async {
-    final currentUid = _currentUid;
-    if (currentUid == null) {
-      UIHelper.showFlutterToast("ログインが必要です");
-      return;
-    }
-    copyPost.value = copyPost.value.copyWith(
-      likeCount: copyPost.value.likeCount + 1,
-    );
-    await _likePost(post, currentUid);
+
+  FutureResult<bool> onLikeButtonPressed(String currentUid,LikePostToken token,Post post) async {
+    final postLike = PostLike.fromPost(post, currentUid);
+    return _firestoreRepository.createLikePostInfo(currentUid, post, token, postLike);
   }
 
-  Future<void> _likePost(Post post, String currentUid) async {
-    final String tokenId = randomString();
-    final Timestamp now = Timestamp.now();
-    final String passiveUid = post.uid;
-    final postRef = post.ref;
-    final postId = post.postId;
-    final likePostToken = LikePostToken(
-      activeUid: currentUid,
-      createdAt: now,
-      passiveUid: passiveUid,
-      postRef: postRef,
-      postId: postId,
-      tokenId: tokenId,
-      tokenType: TokenType.likePost.name,
-    );
-    _tokensNotifier.addLikePost(likePostToken);
-    final postLike = PostLike(
-      activeUid: currentUid,
-      createdAt: now,
-      passiveUid: passiveUid,
-      postRef: postRef,
-      postId: postId,
-    );
-    await _firestoreRepository.createLikePostInfo(currentUid, post, tokenId, likePostToken, postLike);
-  }
-
-  void onUnLikeButtonPressed(ValueNotifier<Post> copyPost, Post post) async {
-    final currentUid = _currentUid;
-    if (currentUid == null) {
-      UIHelper.showFlutterToast("ログインが必要です");
-      return;
-    }
-    copyPost.value = copyPost.value.copyWith(
-      likeCount: copyPost.value.likeCount - 1,
-    );
-    await _unLikePost(post, currentUid);
-  }
-
-  Future<void> _unLikePost(Post post, String currentUid) async {
-    final deleteToken = _tokensState?.likePostTokens.firstWhereOrNull(
-      (element) => element.postId == post.postId,
-    );
-    if (deleteToken == null) return;
-
-    _tokensNotifier.removeLikePost(deleteToken);
-    final tokenId = deleteToken.tokenId;
-    await _firestoreRepository.deleteLikePostInfo(currentUid, post, tokenId);
+  FutureResult<bool> onUnLikeButtonPressed(String currentUid,String tokenId,Post post) {
+    return _firestoreRepository.deleteLikePostInfo(currentUid, post, tokenId);
   }
 
   void deletePost(Post deletePost) async {

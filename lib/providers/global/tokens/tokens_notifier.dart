@@ -1,5 +1,7 @@
-import 'dart:async';
 
+import 'dart:async';
+import 'package:collection/collection.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -87,20 +89,27 @@ class TokensNotifier extends _$TokensNotifier {
     _updateState(newState);
   }
 
-  void addLikePost(LikePostToken likePostToken) {
+  LikePostToken? addLikePost(String currentUid,Post post) {
+    final token = LikePostToken.fromPost(post, currentUid);
     final newState = _currentState.copyWith(
-      likePostTokens: [..._currentState.likePostTokens, likePostToken],
+      likePostTokens: [..._currentState.likePostTokens, token],
     );
     _updateState(newState);
+    return token;
   }
 
-  void removeLikePost(LikePostToken likePostToken) {
+  LikePostToken? removeLikePost(String postId) {
+    final deleteToken = state.value?.likePostTokens.firstWhereOrNull(
+      (element) => element.postId == postId,
+    );
+    if (deleteToken == null) return null;
     final newList =
         _currentState.likePostTokens
-            .where((token) => token.postId != likePostToken.postId)
+            .where((token) => token.postId != postId)
             .toList();
     final newState = _currentState.copyWith(likePostTokens: newList);
     _updateState(newState);
+    return deleteToken;
   }
 
   void addMutePost(MutePostToken mutePostToken) {

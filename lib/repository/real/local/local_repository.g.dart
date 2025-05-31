@@ -6,7 +6,7 @@ part of 'local_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localRepositoryHash() => r'84a8c5c225e2ac0331e4d380fa56c322a3991d67';
+String _$localRepositoryHash() => r'0ae6906044ee85ac9d17a71c57cbf5585d591adf';
 
 /// See also [localRepository].
 @ProviderFor(localRepository)
