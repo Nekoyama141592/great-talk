@@ -198,10 +198,10 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     CreatePostState postState,
   ) async {
     final repository = FirestoreRepository();
-    final currentUid = ref.read(streamAuthUidProvider).value;
-    if (currentUid == null) return false;
+    final uid = ref.read(streamAuthUidProvider).value;
+    if (uid == null) return false;
 
-    final postRef = DocRefCore.post(currentUid, postId);
+    final postRef = DocRefCore.post(uid, postId);
     final customCompleteText =
         NewContent.newCustomCompleteText(
             postState.systemPrompt,
@@ -220,10 +220,10 @@ class CreatePostViewModel extends _$CreatePostViewModel {
       postId,
       postRef,
       customCompleteText,
-      currentUid,
+      uid,
     );
     final json = newPost.toJson();
-    final result = await repository.createDoc(postRef, json);
+    final result = await repository.createPost(uid, postId, json);
 
     return result.when(
       success: (_) {
