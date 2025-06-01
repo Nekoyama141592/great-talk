@@ -87,7 +87,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final repository = ref.read(firestoreRepositoryProvider);
     var publicUser = await repository.getPublicUser(uid);
     publicUser ??= await _createPublicUser(uid);
-    return publicUser; 
+    return publicUser;
   }
 
   Future<PrivateUser?> _getPrivateUser(String uid) async {
@@ -102,7 +102,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final bucketName = publicUser.typedImage().bucketName;
     final fileName = publicUser.typedImage().value;
     if (bucketName.isEmpty || fileName.isEmpty) return null;
-    final image = await ref.read(fileUseCaseProvider).getS3Image(bucketName, fileName);
+    final image = await ref
+        .read(fileUseCaseProvider)
+        .getS3Image(bucketName, fileName);
     if (image == null) return null;
     return base64Encode(image);
   }
@@ -161,7 +163,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     state = await AsyncValue.guard(() async {
       final publicUser = await _getPublicUser(uid);
       final base64 = await _getBase64Image(publicUser);
-      return stateValue.copyWith(publicUser: publicUser,base64: base64);
+      return stateValue.copyWith(publicUser: publicUser, base64: base64);
     });
   }
 }

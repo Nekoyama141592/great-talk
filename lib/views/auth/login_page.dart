@@ -24,7 +24,9 @@ class LoginPage extends ConsumerWidget {
                 UIHelper.showSuccessSnackBar(context, 'Appleログインに成功しました');
                 RouterCore.back(context);
               },
-              failure: (_) => UIHelper.showFailureSnackBar(context, "Appleログインに失敗しました")
+              failure:
+                  (_) =>
+                      UIHelper.showFailureSnackBar(context, "Appleログインに失敗しました"),
             );
           },
           onGoogleButtonPressed: () async {
@@ -34,7 +36,11 @@ class LoginPage extends ConsumerWidget {
                 UIHelper.showSuccessSnackBar(context, 'Googleログインに成功しました');
                 RouterCore.back(context);
               },
-              failure: (_) => UIHelper.showFailureSnackBar(context, "Googleログインに失敗しました")
+              failure:
+                  (_) => UIHelper.showFailureSnackBar(
+                    context,
+                    "Googleログインに失敗しました",
+                  ),
             );
           },
           title: "ログイン",

@@ -10,6 +10,7 @@ class FirestoreService {
   Future<void> set(DocRef docRef, Map<String, dynamic> json) async {
     await docRef.set(json);
   }
+
   // DocRef
   DocRef get publicV1 => instance.collection('public').doc('v1');
   DocRef get privateV1 => instance.collection('private').doc('v1');
