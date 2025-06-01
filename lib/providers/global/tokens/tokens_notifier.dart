@@ -19,13 +19,13 @@ part 'tokens_notifier.g.dart';
 class TokensNotifier extends _$TokensNotifier {
   @override
   Future<TokensState> build() async {
-    final uid = ref.watch(streamAuthUidProvider).value;
-    if (uid == null) {
+    final user = ref.watch(streamAuthProvider).value;
+    if (user == null || user.isAnonymous) {
       return TokensState();
     }
 
     final repository = ref.read(firestoreRepositoryProvider);
-
+    final uid = user.uid;
     final allTokensData = await repository.getTokens(uid);
 
     return TokensState(
