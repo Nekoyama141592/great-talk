@@ -1,22 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:great_talk/core/credential_core.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/infrastructure/firebase_auth/firebase_auth_client.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'firebase_auth_repository.g.dart';
 
+@Riverpod(keepAlive: true)
+FirebaseAuth firebaseAuth(Ref ref) => FirebaseAuth.instance;
 @riverpod
-FirebaseAuthRepository firebaseAuthRepository(Ref ref) => FirebaseAuthRepository(ref.watch(firebaseAuthClientProvider));
+FirebaseAuthRepository firebaseAuthRepository(Ref ref) => FirebaseAuthRepository(ref.watch(firebaseAuthProvider));
 
 class FirebaseAuthRepository {
-  FirebaseAuthRepository(this.client);
-  FirebaseAuthClient client;
+  FirebaseAuthRepository(this.instance);
+  FirebaseAuth instance;
 
   FutureResult<User> signInAnonymously() async {
     try {
-      final res = await client.signInAnonymously();
+      final res = await instance.signInAnonymously();
       final user = res.user;
       const e = 'user not found.';
       if (user == null) {
@@ -32,12 +34,14 @@ class FirebaseAuthRepository {
 
   FutureResult<User> signInWithApple() async {
     try {
-      final res = await client.signinWithApple();
-      if (res == null || res.user == null) {
+      final credential = await CredentialCore.appleCredential();
+      final res = await instance.signInWithCredential(credential);
+      final user = res.user;
+      if (user == null) {
         const e = 'Signin Failed.';
         return Result.failure(e);
       } else {
-        return Result.success(res.user!);
+        return Result.success(user);
       }
     } on FirebaseAuthException catch (e) {
       _manageErrorCredential(e);
@@ -47,12 +51,14 @@ class FirebaseAuthRepository {
 
   FutureResult<User> signInWithGoogle() async {
     try {
-      final res = await client.signInWithGoogle();
-      if (res == null || res.user == null) {
+      final credential = await CredentialCore.googleCredential();
+      final res = await instance.signInWithCredential(credential);
+      final user = res.user;
+      if (user == null) {
         const e = 'Signin Failed.';
         return Result.failure(e);
       } else {
-        return Result.success(res.user!);
+        return Result.success(user);
       }
     } on FirebaseAuthException catch (e) {
       _manageErrorCredential(e);
@@ -62,7 +68,7 @@ class FirebaseAuthRepository {
 
   FutureResult<bool> signOut() async {
     try {
-      await client.signOut();
+      await instance.signOut();
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
@@ -71,11 +77,12 @@ class FirebaseAuthRepository {
   }
 
   FutureResult<bool> reauthenticateWithCredential(
-    User user,
     AuthCredential credential,
   ) async {
     try {
-      await client.reauthenticateWithCredential(user, credential);
+      final user = instance.currentUser;
+      if (user == null) return const Result.failure('ログインしてください');
+      await user.reauthenticateWithCredential(credential);
       return const Result.success(true);
     } on FirebaseAuthException catch (e) {
       final String errorCode = e.code;
@@ -97,9 +104,11 @@ class FirebaseAuthRepository {
     }
   }
 
-  FutureResult<bool> deleteUser(User user) async {
+  FutureResult<bool> deleteUser() async {
     try {
-      await client.deleteUser(user);
+      final user = instance.currentUser;
+      if (user == null) return const Result.failure('ログインしてください');
+      await user.delete();
       return const Result.success(true);
     } on FirebaseAuthException catch (e) {
       final String errorCode = e.code;

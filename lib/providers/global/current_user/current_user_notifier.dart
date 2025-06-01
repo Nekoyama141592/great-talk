@@ -196,12 +196,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
 
   FutureResult<bool> _reauthenticateToDelete(AuthCredential credential) async {
     final repository = ref.read(firebaseAuthRepositoryProvider);
-    final user = ref.read(streamAuthProvider).value;
-    if (user == null) {
-      return const Result.failure('ログインしてください');
-    }
     final result = await repository.reauthenticateWithCredential(
-      user,
       credential,
     );
     return result;
@@ -226,11 +221,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
 
   FutureResult<bool> _deleteAuthUser() async {
     final firebaseAuthRepository = ref.read(firebaseAuthRepositoryProvider);
-    final user = ref.read(streamAuthProvider).value;
-    if (user == null) {
-      return const Result.failure('ログインしてください');
-    }
-    final result = await firebaseAuthRepository.deleteUser(user);
+    final result = await firebaseAuthRepository.deleteUser();
     return result;
   }
 

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/core/firestore/collection_group_core.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
-import 'package:great_talk/infrastructure/firestore/firestore_client.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
@@ -19,17 +18,19 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'firestore_repository.g.dart';
 
+@Riverpod(keepAlive: true)
+FirebaseFirestore firebaseFirestore(Ref ref) => FirebaseFirestore.instance;
 @riverpod
-FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository(ref.watch(firestoreClientProvider));
+FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository(ref.watch(firebaseFirestoreProvider));
 
 class FirestoreRepository {
-  FirestoreRepository(this.client);
-  final FirestoreClient client;
+  FirestoreRepository(this.instance);
+  final FirebaseFirestore instance;
   // count
   Future<int?> _count(MapQuery query) async {
     try {
-      final count = await client.count(query);
-      return count;
+      final snapshot = await query.count().get();
+      return snapshot.count ?? 0;
     } catch (e) {
       debugPrint(e.toString());
       return null;
@@ -43,9 +44,9 @@ class FirestoreRepository {
   Future<int?> countMessages() => _count(CollectionGroupCore.messages);
 
   // write
-  FutureResult<bool> _createDoc(DocRef ref, Map<String, dynamic> json) async {
+  FutureResult<bool> _createDoc(DocRef docRef, Map<String, dynamic> json) async {
     try {
-      await client.createDoc(ref, json);
+      await docRef.set(json);
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
@@ -86,9 +87,9 @@ class FirestoreRepository {
     return _createDoc(docRef, json);
   }
 
-  FutureResult<bool> _deleteDoc(DocRef ref) async {
+  FutureResult<bool> _deleteDoc(DocRef docRef) async {
     try {
-      await client.deleteDoc(ref);
+      await docRef.delete();
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
@@ -247,9 +248,9 @@ class FirestoreRepository {
     return _deleteDocs(docRefList);
   }
 
-  FutureResult<Doc> getDoc(DocRef ref) async {
+  FutureResult<Doc> getDoc(DocRef docRef) async {
     try {
-      final Doc doc = await client.getDoc(ref);
+      final Doc doc = await docRef.get();
       return Result.success(doc);
     } catch (e) {
       return Result.failure(e);
@@ -258,7 +259,7 @@ class FirestoreRepository {
 
   FutureResult<List<QDoc>> getDocs(MapQuery query) async {
     try {
-      final qSnapshot = await client.getDocs(query);
+      final qSnapshot = await query.get();
       final qDocs = qSnapshot.docs;
       return Result.success(qDocs);
     } catch (e) {
@@ -267,9 +268,8 @@ class FirestoreRepository {
   }
 
   Future<List<QDoc>?> getDocsOrNull(MapQuery query) async {
-    final client = FirestoreClient();
     try {
-      final qSnapshot = await client.getDocs(query);
+      final qSnapshot = await query.get();
       final qDocs = qSnapshot.docs;
       return qDocs;
     } catch (e) {
@@ -280,7 +280,7 @@ class FirestoreRepository {
 
   Future<List<QDoc>> getDocsWithList(MapQuery query) async {
     try {
-      final qSnapshot = await client.getDocs(query);
+      final qSnapshot = await query.get();
       final qDocs = qSnapshot.docs;
       return qDocs;
     } catch (e) {

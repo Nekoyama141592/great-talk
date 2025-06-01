@@ -7,7 +7,7 @@ part of 'current_user_notifier.dart';
 // **************************************************************************
 
 String _$currentUserNotifierHash() =>
-    r'10fc9fc59e475b3d66cc4e855bf4abbe250af862';
+    r'f366d7a42d9eda3e9823af88de42aaad1dc3e315';
 
 /// See also [CurrentUserNotifier].
 @ProviderFor(CurrentUserNotifier)
