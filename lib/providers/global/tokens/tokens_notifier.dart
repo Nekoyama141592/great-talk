@@ -25,7 +25,7 @@ class TokensNotifier extends _$TokensNotifier {
     }
 
     final repository = ref.read(firestoreRepositoryProvider);
-    
+
     final allTokensData = await repository.getTokens(uid);
 
     return TokensState(

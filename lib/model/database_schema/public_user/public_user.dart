@@ -13,7 +13,7 @@ abstract class PublicUser with _$PublicUser {
   const PublicUser._();
   factory PublicUser({
     @Default("") String accountName,
-    required Map<String,dynamic> bio,
+    required Map<String, dynamic> bio,
     @Default(0) int blockCount,
     required dynamic createdAt,
     @Default("") String ethAddress,
@@ -22,21 +22,22 @@ abstract class PublicUser with _$PublicUser {
     @Default(false) bool isNFTicon,
     @Default(false) bool isOfficial,
     @Default(false) bool isSuspended,
-    @Default([]) List<Map<String,dynamic>> links,
+    @Default([]) List<Map<String, dynamic>> links,
     @Default(0) int muteCount,
     @Default(0) int postCount,
     // required dynamic ref, // TODO: 対応
     @Default(0) int reportCount,
     @Default(0.0) double score,
-    @Default({}) Map<String,dynamic> searchToken,
+    @Default({}) Map<String, dynamic> searchToken,
     required String uid,
     required dynamic updatedAt,
-    required Map<String,dynamic> image,
-    required Map<String,dynamic> userName,
-    @Default([]) List<Map<String,dynamic>> walletAddresses,
+    required Map<String, dynamic> image,
+    required Map<String, dynamic> userName,
+    @Default([]) List<Map<String, dynamic>> walletAddresses,
   }) = _PublicUser;
 
-  factory PublicUser.fromJson(Map<String,dynamic> json) => _$PublicUserFromJson(json);
+  factory PublicUser.fromJson(Map<String, dynamic> json) =>
+      _$PublicUserFromJson(json);
   factory PublicUser.fromRegister(
     String uid, {
     String? userName,

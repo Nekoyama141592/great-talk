@@ -20,9 +20,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'firestore_repository.g.dart';
 
 @riverpod
-FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository(
-  service: ref.watch(firestoreServiceProvider),
-);
+FirestoreRepository firestoreRepository(Ref ref) =>
+    FirestoreRepository(service: ref.watch(firestoreServiceProvider));
 
 class FirestoreRepository {
   FirestoreRepository({required this.service});
@@ -45,7 +44,10 @@ class FirestoreRepository {
   Future<int?> countMessages() => _count(service.messagesCollectionGroup());
 
   // write
-  FutureResult<bool> _createDoc(DocRef docRef, Map<String, dynamic> json) async {
+  FutureResult<bool> _createDoc(
+    DocRef docRef,
+    Map<String, dynamic> json,
+  ) async {
     try {
       await docRef.set(json);
       return const Result.success(true);
@@ -258,6 +260,7 @@ class FirestoreRepository {
       return null;
     }
   }
+
   Future<PrivateUser?> getPrivateUser(String uid) async {
     try {
       final docRef = service.privateUser(uid);
@@ -268,6 +271,7 @@ class FirestoreRepository {
       return null;
     }
   }
+
   Future<Post?> getPost(String uid, String postId) async {
     try {
       final docRef = service.post(uid, postId);
@@ -307,7 +311,9 @@ class FirestoreRepository {
     try {
       final query = service.usersByWhereIn(uids);
       final qSnapshot = await query.get();
-      return qSnapshot.docs.map((doc) => PublicUser.fromJson(doc.data())).toList();
+      return qSnapshot.docs
+          .map((doc) => PublicUser.fromJson(doc.data()))
+          .toList();
     } catch (e) {
       return [];
     }

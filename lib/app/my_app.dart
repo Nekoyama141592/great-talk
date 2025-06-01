@@ -16,7 +16,9 @@ class MyApp extends ConsumerWidget {
       routerConfig: appRouter.config(),
       title: F.title,
       theme:
-          state.isDarkTheme ? ThemeUiCore.dark(context) : ThemeUiCore.light(context),
+          state.isDarkTheme
+              ? ThemeUiCore.dark(context)
+              : ThemeUiCore.light(context),
     );
   }
 }

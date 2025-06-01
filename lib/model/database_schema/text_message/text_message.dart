@@ -20,11 +20,11 @@ abstract class TextMessage with _$TextMessage {
     // dynamic postRef, // TODO: 対応
     required String posterUid,
     required String senderUid,
-    required Map<String,dynamic> text,
+    required Map<String, dynamic> text,
   }) = _TextMessage;
   factory TextMessage.fromJson(Map<String, dynamic> json) =>
       _$TextMessageFromJson(json);
-  factory TextMessage.instance(String content,Post post,String currentUid) {
+  factory TextMessage.instance(String content, Post post, String currentUid) {
     return TextMessage(
       id: randomString(),
       createdAt: Timestamp.now(),

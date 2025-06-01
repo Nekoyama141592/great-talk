@@ -9,7 +9,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'firebase_auth_repository.g.dart';
 
 @riverpod
-FirebaseAuthRepository firebaseAuthRepository(Ref ref) => FirebaseAuthRepository(ref.watch(firebaseAuthProvider));
+FirebaseAuthRepository firebaseAuthRepository(Ref ref) =>
+    FirebaseAuthRepository(ref.watch(firebaseAuthProvider));
 
 class FirebaseAuthRepository {
   FirebaseAuthRepository(this.instance);

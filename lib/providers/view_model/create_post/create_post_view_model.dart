@@ -133,7 +133,9 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     final uid = ref.read(streamAuthUidProvider).value;
     if (uid == null) return false;
 
-    final customCompleteText = CustomCompleteText(systemPrompt: postState.systemPrompt.trim());
+    final customCompleteText = CustomCompleteText(
+      systemPrompt: postState.systemPrompt.trim(),
+    );
 
     final newPost = Post.fromRegister(
       postState.systemPrompt.trim(),

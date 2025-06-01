@@ -228,18 +228,16 @@ class DocsViewModel extends _$DocsViewModel {
 
   Future<Uint8List?> _getImageFromDoc(Doc doc) async {
     final detectedImage = DetectedImage.fromJson(doc['image']);
-    return ref.read(fileUseCaseProvider).getS3Image(
-      detectedImage.bucketName,
-      detectedImage.value,
-    );
+    return ref
+        .read(fileUseCaseProvider)
+        .getS3Image(detectedImage.bucketName, detectedImage.value);
   }
 
   Future<Uint8List?> _getImageFromUser(PublicUser user) async {
     final detectedImage = user.typedImage();
-    return ref.read(fileUseCaseProvider).getS3Image(
-      detectedImage.bucketName,
-      detectedImage.value,
-    );
+    return ref
+        .read(fileUseCaseProvider)
+        .getS3Image(detectedImage.bucketName, detectedImage.value);
   }
 
   Future<List<QDoc>> _timelinesToPostsResult(List<QDoc> fetchedDocs) {

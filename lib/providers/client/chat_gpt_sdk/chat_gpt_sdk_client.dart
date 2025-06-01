@@ -14,4 +14,4 @@ OpenAI chatGptSdkClient(Ref ref) {
     ),
     enableLog: true,
   );
-} 
+}

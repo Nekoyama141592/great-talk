@@ -147,7 +147,12 @@ class EditViewModel extends _$EditViewModel {
     final uid = ref.read(streamAuthUidProvider).value;
     if (uid == null) return const Result.failure('ログインしてください.');
     final repository = ref.read(firestoreRepositoryProvider);
-    final newUpdateLog = UserUpdateLog.fromRegister(uid, userName, bio, fileName);
+    final newUpdateLog = UserUpdateLog.fromRegister(
+      uid,
+      userName,
+      bio,
+      fileName,
+    );
     final json = newUpdateLog.toJson();
     final result = await repository.createUserUpdateLog(uid, json);
     return result;

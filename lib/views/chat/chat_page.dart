@@ -73,7 +73,7 @@ class ChatPage extends HookConsumerWidget {
           final bool isGenerating = data.isGenerating;
           final String currentUserId =
               ref.watch(streamAuthUidProvider).value ?? "";
-    
+
           return Scaffold(
             appBar: AppBar(
               title: EllipsisText(post.typedTitle().value),
@@ -197,7 +197,7 @@ class ChatPage extends HookConsumerWidget {
                           final String text = message.typedText().value;
                           final bool isMyMessage =
                               message.senderUid == currentUserId;
-    
+
                           return MsgCard(
                             isMyMsg: isMyMessage,
                             isAnotherDay: isAnotherDay(messages, index),

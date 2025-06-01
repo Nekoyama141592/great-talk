@@ -18,8 +18,7 @@ class FirestoreService {
       postRef.collection('postLikes').doc(activeUid);
   DocRef postReport(DocRef postRef, String currentUid) =>
       postRef.collection('postReports').doc(currentUid);
-  DocRef post(String uid, String postId) =>
-    postsColRef(uid).doc(postId);
+  DocRef post(String uid, String postId) => postsColRef(uid).doc(postId);
   DocRef userUpdateLog(String uid) =>
       user(uid).collection('userUpdateLogs').doc();
   DocRef postMute(DocRef postRef, String currentUid) =>
@@ -49,7 +48,7 @@ class FirestoreService {
       postsQuery().orderBy('msgCount', descending: true);
   MapQuery postsByNewest() =>
       postsQuery().orderBy('createdAt', descending: true);
-  MapQuery timelinesQuery(String  uid) => timelinesColRef(
+  MapQuery timelinesQuery(String uid) => timelinesColRef(
     user(uid),
   ).orderBy('createdAt', descending: true).limit(whereInLimit);
   MapQuery timelinePostsQuery(List<String> timelinePostIds) =>

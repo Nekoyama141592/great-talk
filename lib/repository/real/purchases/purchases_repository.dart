@@ -12,7 +12,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'purchases_repository.g.dart';
 
 @riverpod
-PurchasesRepository purchasesRepository(Ref ref) => PurchasesRepository(ref.watch(cloudFunctionsClientProvider));
+PurchasesRepository purchasesRepository(Ref ref) =>
+    PurchasesRepository(ref.watch(cloudFunctionsClientProvider));
 
 class PurchasesRepository {
   PurchasesRepository(this.client);

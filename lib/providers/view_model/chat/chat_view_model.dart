@@ -208,10 +208,9 @@ class ChatViewModel extends _$ChatViewModel {
 
   Future<Uint8List?> _fetchPostImage(Post post) async {
     final detectedImage = post.typedImage();
-    return ref.read(fileUseCaseProvider).getS3Image(
-      detectedImage.bucketName,
-      detectedImage.value,
-    );
+    return ref
+        .read(fileUseCaseProvider)
+        .getS3Image(detectedImage.bucketName, detectedImage.value);
   }
 
   Future<List<TextMessage>> _getLocalMessages(String postId) async {

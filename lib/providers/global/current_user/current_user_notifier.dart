@@ -16,7 +16,8 @@ part 'current_user_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
 class CurrentUserNotifier extends _$CurrentUserNotifier {
-  FirebaseAuthRepository get _firebaseAuthRepository => ref.read(firebaseAuthRepositoryProvider);
+  FirebaseAuthRepository get _firebaseAuthRepository =>
+      ref.read(firebaseAuthRepositoryProvider);
   @override
   Future<CurrentUserState> build() async {
     final initialState = CurrentUserState(
@@ -68,7 +69,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     await _fetchData();
   }
 
-  String? _getCurrentUid() => ref.read(streamAuthUidProvider).value;
+  String? _getCurrentUid() => ref.watch(streamAuthUidProvider).value;
 
   Future<void> _createPublicUser() async {
     final repository = ref.read(firestoreRepositoryProvider);
@@ -127,17 +128,19 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
       await _createPublicUser();
     } else {
       String? base64Image;
-          final bucketName = publicUser.typedImage().bucketName;
-          final fileName = publicUser.typedImage().value;
-          if (bucketName.isNotEmpty && fileName.isNotEmpty) {
-            final image = await ref.read(fileUseCaseProvider).getS3Image(bucketName, fileName);
-            if (image != null) {
-              base64Image = base64Encode(image);
-            }
-          }
-     _updateState(
-            state.value!.copyWith(publicUser: publicUser, base64: base64Image),
-          );
+      final bucketName = publicUser.typedImage().bucketName;
+      final fileName = publicUser.typedImage().value;
+      if (bucketName.isNotEmpty && fileName.isNotEmpty) {
+        final image = await ref
+            .read(fileUseCaseProvider)
+            .getS3Image(bucketName, fileName);
+        if (image != null) {
+          base64Image = base64Encode(image);
+        }
+      }
+      _updateState(
+        state.value!.copyWith(publicUser: publicUser, base64: base64Image),
+      );
     }
   }
 
@@ -171,9 +174,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
 
   FutureResult<bool> _reauthenticateToDelete(AuthCredential credential) async {
     final repository = ref.read(firebaseAuthRepositoryProvider);
-    final result = await repository.reauthenticateWithCredential(
-      credential,
-    );
+    final result = await repository.reauthenticateWithCredential(credential);
     return result;
   }
 

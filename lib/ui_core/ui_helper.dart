@@ -91,8 +91,7 @@ class UIHelper {
                     const Divider(),
                     TextButton(
                       onPressed:
-                          positiveAction ??
-                          () => RouterCore.back(innerContext),
+                          positiveAction ?? () => RouterCore.back(innerContext),
                       child: const Text(okText, style: style),
                     ),
                   ],

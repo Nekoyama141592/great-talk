@@ -31,7 +31,9 @@ class PurchasesNotifier extends _$PurchasesNotifier {
     for (int i = 0; i < detailsList.length; i++) {
       final details = detailsList[i];
       if (details.isError || !details.isPurchased) continue;
-      final result = await ref.read(purchasesUsecaseProvider).verifyPurchase(details);
+      final result = await ref
+          .read(purchasesUsecaseProvider)
+          .verifyPurchase(details);
       await result.when(
         success: (res) => _onVerifySuccess(details, res),
         failure: _onVerifyFailed,

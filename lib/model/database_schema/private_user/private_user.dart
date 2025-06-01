@@ -22,7 +22,7 @@ abstract class PrivateUser with _$PrivateUser {
   }) = _PrivateUser;
   factory PrivateUser.fromJson(Map<String, dynamic> json) =>
       _$PrivateUserFromJson(json);
-  factory PrivateUser.fromUid(String uid)  {
+  factory PrivateUser.fromUid(String uid) {
     final now = FieldValue.serverTimestamp();
     return PrivateUser(
       accessToken: randomString(),

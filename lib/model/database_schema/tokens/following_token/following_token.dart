@@ -19,9 +19,7 @@ abstract class FollowingToken with _$FollowingToken {
   }) = _FollowingToken;
   factory FollowingToken.fromJson(Map<String, dynamic> json) =>
       _$FollowingTokenFromJson(json);
-  factory FollowingToken.fromUid(
-    String passiveUid,
-  ) {
+  factory FollowingToken.fromUid(String passiveUid) {
     final tokenId = randomString();
     final now = FieldValue.serverTimestamp();
     return FollowingToken(

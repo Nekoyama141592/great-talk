@@ -20,7 +20,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'on_call_repository.g.dart';
 
 @riverpod
-OnCallRepository onCallRepository(Ref ref) => OnCallRepository(ref.watch(cloudFunctionsClientProvider));
+OnCallRepository onCallRepository(Ref ref) =>
+    OnCallRepository(ref.watch(cloudFunctionsClientProvider));
 
 class OnCallRepository {
   OnCallRepository(this.client);

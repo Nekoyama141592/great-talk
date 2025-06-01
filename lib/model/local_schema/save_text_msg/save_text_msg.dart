@@ -13,7 +13,7 @@ abstract class SaveTextMsg with _$SaveTextMsg {
     required String messageType,
     required String posterUid,
     required String senderUid,
-    required Map<String,dynamic> text,
+    required Map<String, dynamic> text,
   }) = _SaveTextMsg;
   factory SaveTextMsg.fromJson(Map<String, dynamic> json) =>
       _$SaveTextMsgFromJson(json);

@@ -9,7 +9,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'purchases_usecase.g.dart';
 
 @riverpod
-PurchasesUsecase purchasesUsecase(Ref ref) => PurchasesUsecase(ref.watch(purchasesRepositoryProvider));
+PurchasesUsecase purchasesUsecase(Ref ref) =>
+    PurchasesUsecase(ref.watch(purchasesRepositoryProvider));
 
 class PurchasesUsecase {
   PurchasesUsecase(this.repository);

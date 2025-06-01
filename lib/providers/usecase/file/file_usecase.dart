@@ -18,10 +18,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'file_usecase.g.dart';
 
 @riverpod
-FileUseCase fileUseCase(Ref ref) => FileUseCase(prefs: ref.watch(prefsProvider), repository: ref.watch(onCallRepositoryProvider));
+FileUseCase fileUseCase(Ref ref) => FileUseCase(
+  prefs: ref.watch(prefsProvider),
+  repository: ref.watch(onCallRepositoryProvider),
+);
 
 class FileUseCase {
-  FileUseCase({required this.prefs,required this.repository});
+  FileUseCase({required this.prefs, required this.repository});
   final SharedPreferences prefs;
   final OnCallRepository repository;
   Future<Uint8List?> getCompressedImage() async {
@@ -32,10 +35,7 @@ class FileUseCase {
     return compressedImage;
   }
 
-  Future<Uint8List?> getS3Image(
-    String bucketName,
-    String fileName,
-  ) async {
+  Future<Uint8List?> getS3Image(String bucketName, String fileName) async {
     if (fileName.isEmpty) {
       return null;
     }
@@ -56,7 +56,6 @@ class FileUseCase {
     }
     return uint8List;
   }
-
 
   Future<void> _cacheUint8List(String fileName, Uint8List data) async {
     final base64String = base64Encode(data);

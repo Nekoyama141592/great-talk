@@ -9,7 +9,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 @riverpod
-OpenAIRepository openAIRepository(Ref ref) => OpenAIRepository(ref.watch(openAIClientProvider)); 
+OpenAIRepository openAIRepository(Ref ref) =>
+    OpenAIRepository(ref.watch(openAIClientProvider));
 
 class OpenAIRepository {
   OpenAIRepository(this.client);

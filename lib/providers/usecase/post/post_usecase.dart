@@ -14,14 +14,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'post_usecase.g.dart';
 
 @riverpod
-PostUsecase postUsecase(Ref ref) => PostUsecase(
-  firestoreRepository: ref.watch(firestoreRepositoryProvider),
-);
+PostUsecase postUsecase(Ref ref) =>
+    PostUsecase(firestoreRepository: ref.watch(firestoreRepositoryProvider));
 
 class PostUsecase {
-  PostUsecase({
-    required this.firestoreRepository,
-  });
+  PostUsecase({required this.firestoreRepository});
   final FirestoreRepository firestoreRepository;
 
   FutureResult<bool> mutePost(

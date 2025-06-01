@@ -16,15 +16,12 @@ abstract class Follower with _$Follower {
   }) = _Follower;
   factory Follower.fromJson(Map<String, dynamic> json) =>
       _$FollowerFromJson(json);
-  factory Follower.fromUid(
-    String currentUid,
-    String passiveUid,
-  ) {
+  factory Follower.fromUid(String currentUid, String passiveUid) {
     final now = FieldValue.serverTimestamp();
     return Follower(
       activeUid: currentUid,
       createdAt: now,
-      passiveUid: passiveUid
+      passiveUid: passiveUid,
     );
   }
   Timestamp typedCreatedAt() => createdAt as Timestamp;

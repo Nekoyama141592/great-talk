@@ -7,8 +7,8 @@ part 'open_ai_client_provider.g.dart';
 
 @riverpod
 OpenAIClient openAIClient(Ref ref) => OpenAIClient(
-    OriginalDio.withOptions(
-      baseUrl: "https://api.openai.com/v1",
-      token: EnvCore().openAiApiKey,
-    ),
-  );
+  OriginalDio.withOptions(
+    baseUrl: "https://api.openai.com/v1",
+    token: EnvCore().openAiApiKey,
+  ),
+);

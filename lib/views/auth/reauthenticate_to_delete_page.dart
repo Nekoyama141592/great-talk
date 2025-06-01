@@ -26,8 +26,7 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                 final deleteResult = await notifier.deletePublicUser();
                 deleteResult.when(
                   success:
-                      (_) =>
-                          RouterCore.pushPath(context, UserDeletedPage.path),
+                      (_) => RouterCore.pushPath(context, UserDeletedPage.path),
                   failure:
                       (_) => UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした"),
                 );
@@ -43,8 +42,7 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                 final deleteResult = await notifier.deletePublicUser();
                 deleteResult.when(
                   success:
-                      (_) =>
-                          RouterCore.pushPath(context, UserDeletedPage.path),
+                      (_) => RouterCore.pushPath(context, UserDeletedPage.path),
                   failure:
                       (_) => UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした"),
                 );
