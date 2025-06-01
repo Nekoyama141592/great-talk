@@ -6,10 +6,5 @@ class ColRefCore {
   static ColRef posts(String uid) => DocRefCore.user(uid).collection('posts');
   static ColRef tokens(String currentUid) =>
       DocRefCore.privateUser(currentUid).collection("tokens");
-  static ColRef messages(String posterUid, String postId, String currentUid) =>
-      DocRefCore.post(
-        posterUid,
-        postId,
-      ).collection('senders/$currentUid/messages');
   static ColRef timelines(DocRef userRef) => userRef.collection('timelines');
 }

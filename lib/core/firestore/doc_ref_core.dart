@@ -12,13 +12,6 @@ class DocRefCore {
       user(passiveUid).collection('followers').doc(currentUid);
   static DocRef privateUser(String currentUid) =>
       privateV1.collection('privateUsers').doc(currentUid);
-  static DocRef searchLog(String currentUid) =>
-      privateUser(
-        currentUid,
-      ).collection('searchLogs').doc(); // privateUserを作成してなくても作成できる
-  // 実際は使わない
-  static DocRef originalContent(String contentId) =>
-      _instance.collection('originalContents').doc(contentId);
   static DocRef postLike(DocRef postRef, String activeUid) =>
       postRef.collection('postLikes').doc(activeUid);
   static DocRef postReport(DocRef postRef, String currentUid) =>
