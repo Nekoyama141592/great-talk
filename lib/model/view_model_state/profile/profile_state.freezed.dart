@@ -93,8 +93,8 @@ $PublicUserCopyWith<$Res>? get user {
 /// @nodoc
 @JsonSerializable()
 
-class _ProfileState implements ProfileState {
-  const _ProfileState({required this.user, required this.base64, required final  List<UserPost> userPosts}): _userPosts = userPosts;
+class _ProfileState extends ProfileState {
+  const _ProfileState({required this.user, required this.base64, required final  List<UserPost> userPosts}): _userPosts = userPosts,super._();
   factory _ProfileState.fromJson(Map<String, dynamic> json) => _$ProfileStateFromJson(json);
 
 @override final  PublicUser? user;

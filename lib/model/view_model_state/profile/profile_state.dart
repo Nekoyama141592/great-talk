@@ -8,6 +8,7 @@ part 'profile_state.g.dart';
 
 @freezed
 abstract class ProfileState with _$ProfileState {
+  const ProfileState._();
   const factory ProfileState({
     required PublicUser? user,
     required String? base64,
