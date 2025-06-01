@@ -108,7 +108,7 @@ class FirestoreRepository {
 
   FutureResult<bool> _createDocs(List<FirestoreRequest> requestList) async {
     try {
-      final batch = FirebaseFirestore.instance.batch();
+      final batch = instance.batch();
       for (final request in requestList) {
         batch.set(request.docRef, request.data);
       }
@@ -187,7 +187,7 @@ class FirestoreRepository {
 
   FutureResult<bool> _deleteDocs(List<DocRef> docRefList) async {
     try {
-      final batch = FirebaseFirestore.instance.batch();
+      final batch = instance.batch();
       for (final docRef in docRefList) {
         batch.delete(docRef);
       }
