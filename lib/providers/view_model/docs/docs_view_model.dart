@@ -1,12 +1,9 @@
 import 'dart:async';
 import 'dart:typed_data';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
-import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
@@ -320,7 +317,7 @@ class DocsViewModel extends _$DocsViewModel {
 
   // User Profile
   Future<PublicUser?> _getPassiveUser(String? passiveUid) async {
-    if (passiveUid == null) return null;;
+    if (passiveUid == null) return null;
     final result = await _repository.getPublicUser(passiveUid);
     return result;
   }
@@ -345,28 +342,14 @@ class DocsViewModel extends _$DocsViewModel {
       followerCount: passiveUser.followerCount + 1,
     );
     state = AsyncValue.data(state.value!.copyWith(passiveUser: newUser));
-
-    final tokenId = randomString();
-    final now = Timestamp.now();
-    final followingToken = FollowingToken(
-      createdAt: now,
-      passiveUid: _passiveUid!,
-      tokenId: tokenId,
-      passiveUserRef: passiveUser.ref,
-      tokenType: TokenType.following.name,
-    );
+    final passiveUid = passiveUser.uid;
+    final followingToken = FollowingToken.fromUid(passiveUid);
     _tokensNotifier().addFollowing(followingToken);
     final currentUid = _currentUid();
-    final follower = Follower(
-      activeUserRef: DocRefCore.user(currentUid),
-      createdAt: now,
-      passiveUserRef: passiveUser.typedRef(),
-    );
-    final passiveUid = _passiveUid!;
+    final follower = Follower.fromUid(currentUid, passiveUid);
     await _repository.createFollowInfo(
       currentUid,
       passiveUid,
-      tokenId,
       followingToken,
       follower,
     );

@@ -126,11 +126,10 @@ class FirestoreRepository {
   FutureResult<bool> createFollowInfo(
     String currentUid,
     String passiveUid,
-    String tokenId,
     FollowingToken followingToken,
     Follower follower,
   ) async {
-    final tokenRef = DocRefCore.token(currentUid, tokenId);
+    final tokenRef = DocRefCore.token(currentUid, followingToken.tokenId);
     final followerRef = DocRefCore.follower(currentUid, passiveUid);
     final requestList = [
       FirestoreRequest(tokenRef, followingToken.toJson()),
