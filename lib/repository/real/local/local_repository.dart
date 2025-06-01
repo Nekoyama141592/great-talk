@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/extensions/shared_preferences_extension.dart';
+import 'package:great_talk/extension/shared_preferences_extension.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 import 'package:great_talk/repository/result/result.dart';

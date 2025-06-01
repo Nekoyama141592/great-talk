@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/typedefs/firestore_typedef.dart';
+import 'package:great_talk/typedef/firestore_typedef.dart';
 
 class FirestoreService {
   FirestoreService(this.instance);

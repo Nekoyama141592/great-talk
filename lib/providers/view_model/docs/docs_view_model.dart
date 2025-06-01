@@ -16,7 +16,7 @@ import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/typedefs/firestore_typedef.dart';
+import 'package:great_talk/typedef/firestore_typedef.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

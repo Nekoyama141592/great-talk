@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 import 'package:great_talk/consts/purchases_constants.dart';
-import 'package:great_talk/extensions/purchase_details_extension.dart';
+import 'package:great_talk/extension/purchase_details_extension.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';

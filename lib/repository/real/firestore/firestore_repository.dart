@@ -13,7 +13,7 @@ import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_pos
 import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/typedefs/firestore_typedef.dart';
+import 'package:great_talk/typedef/firestore_typedef.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

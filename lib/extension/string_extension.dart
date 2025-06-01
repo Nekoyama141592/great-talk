@@ -1,5 +1,5 @@
 import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/extensions/double_extensions.dart';
+import 'package:great_talk/extension/double_extensions.dart';
 
 extension StringExtension on String {
   // double toDouble() => double.parse(this);

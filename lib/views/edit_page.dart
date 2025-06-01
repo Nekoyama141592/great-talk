@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/extensions/string_extension.dart';
+import 'package:great_talk/extension/string_extension.dart';
 import 'package:great_talk/model/view_model_state/edit/edit_state.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/router_core.dart';

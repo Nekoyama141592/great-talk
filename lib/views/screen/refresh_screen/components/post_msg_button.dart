@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/extensions/number_format_extension.dart';
+import 'package:great_talk/extension/number_format_extension.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/core/router_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

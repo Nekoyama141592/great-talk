@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/core/router_core.dart';
-import 'package:great_talk/extensions/string_extension.dart';
+import 'package:great_talk/extension/string_extension.dart';
 import 'package:great_talk/model/view_model_state/create_post/create_post_state.dart';
 import 'package:great_talk/providers/view_model/create_post/create_post_view_model.dart';
 import 'package:great_talk/ui_core/form_ui_core.dart';
