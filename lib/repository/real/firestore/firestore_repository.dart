@@ -57,20 +57,32 @@ class FirestoreRepository {
     }
   }
 
-  FutureResult<bool> createPublicUser(
+  Future<PublicUser?> createPublicUser(
     String uid,
     Map<String, dynamic> json,
   ) async {
     final docRef = service.user(uid);
-    return _createDoc(docRef, json);
+    try {
+      await service.set(docRef, json);
+      return PublicUser.fromJson(json);
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
   }
 
-  FutureResult<bool> createPrivateUser(
+  Future<PrivateUser?> createPrivateUser(
     String uid,
     Map<String, dynamic> json,
   ) async {
     final docRef = service.privateUser(uid);
-    return _createDoc(docRef, json);
+    try {
+      await service.set(docRef, json);
+      return PrivateUser.fromJson(json);
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
   }
 
   FutureResult<bool> createPost(

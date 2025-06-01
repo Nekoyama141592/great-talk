@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/screen/login_screen.dart';
@@ -19,25 +20,21 @@ class LoginPage extends ConsumerWidget {
           onAppleButtonPressed: () async {
             final result = await controller.onAppleButtonPressed();
             result.when(
-              success: (user) {
-                UIHelper.showFlutterToast('ログインに成功しました');
-                controller.onLoginSuccess(user);
+              success: (_) {
+                UIHelper.showSuccessSnackBar(context, 'Appleログインに成功しました');
+                RouterCore.back(context);
               },
-              failure: (_) {
-                UIHelper.showErrorFlutterToast("ログインに失敗しました");
-              },
+              failure: (_) => UIHelper.showFailureSnackBar(context, "Appleログインに失敗しました")
             );
           },
           onGoogleButtonPressed: () async {
             final result = await controller.onGoogleButtonPressed();
             result.when(
-              success: (user) {
-                UIHelper.showFlutterToast('ログインに成功しました');
-                controller.onLoginSuccess(user);
+              success: (_) {
+                UIHelper.showSuccessSnackBar(context, 'Googleログインに成功しました');
+                RouterCore.back(context);
               },
-              failure: (_) {
-                UIHelper.showErrorFlutterToast("ログインに失敗しました");
-              },
+              failure: (_) => UIHelper.showFailureSnackBar(context, "Googleログインに失敗しました")
             );
           },
           title: "ログイン",

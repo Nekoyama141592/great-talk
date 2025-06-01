@@ -5,7 +5,6 @@ import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/global/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/core/credential_core.dart';
 import 'package:great_talk/repository/real/firebase_auth/firebase_auth_repository.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
@@ -20,29 +19,17 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
       ref.read(firebaseAuthRepositoryProvider);
   @override
   Future<CurrentUserState> build() async {
-    final initialState = CurrentUserState(
-      publicUser: null,
-      privateUser: null,
-      base64: null,
-    );
-
-    state = AsyncData(initialState); // 初期状態を設定
+    final initialState = CurrentUserState();
     final authUserData = ref.watch(streamAuthProvider).value;
-    if (authUserData == null || authUserData.isAnonymous) {
-      // 匿名ユーザーまたは未ログインの場合は、データをフェッチせずに終了
-      if (authUserData == null) {
-        await _createAnonymousUser(); // 匿名ユーザーを作成
-      }
-      return state.value!;
+    if (authUserData == null) {
+      await _createAnonymousUser(); // 匿名ユーザーを作成
+      return initialState;
+    }
+    if (authUserData.isAnonymous) {
+      return initialState;
     }
 
-    await _fetchData(); // ログイン済みユーザーの場合はデータをフェッチ
-    return state.value!;
-  }
-
-  // 状態を更新するためのヘルパーメソッド
-  void _updateState(CurrentUserState newState) {
-    state = AsyncData(newState);
+    return _fetchData();
   }
 
   FutureResult<User> _createAnonymousUser() async {
@@ -65,95 +52,59 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     return result;
   }
 
-  Future<void> onLoginSuccess(User user) async {
-    await _fetchData();
-  }
-
   String? _getCurrentUid() => ref.watch(streamAuthUidProvider).value;
 
-  Future<void> _createPublicUser() async {
+  Future<PublicUser?> _createPublicUser(String uid) {
     final repository = ref.read(firestoreRepositoryProvider);
-    final uid = _getCurrentUid();
-    if (uid == null) return;
     final newUser = PublicUser.fromRegister(uid);
     final json = newUser.toJson();
-    final result = await repository.createPublicUser(uid, json);
-    result.when(
-      success: (_) {
-        _updateState(state.value!.copyWith(publicUser: newUser));
-        UIHelper.showFlutterToast("ユーザーが作成されました");
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast(
-          "データベースにユーザーを作成できませんでした: ${e.toString()}",
-        );
-      },
-    );
+    return repository.createPublicUser(uid, json);
   }
 
-  Future<void> _createPrivateUser() async {
-    final uid = _getCurrentUid();
-    if (uid == null) return;
+  Future<PrivateUser?> _createPrivateUser(String uid) {
     final repository = ref.read(firestoreRepositoryProvider);
     final newPrivateUser = PrivateUser.fromUid(uid);
     final json = newPrivateUser.toJson();
-    final result = await repository.createPrivateUser(uid, json);
-    result.when(
-      success: (_) {
-        _updateState(state.value!.copyWith(privateUser: newPrivateUser));
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast(
-          "データベースにプライベートユーザーを作成できませんでした: ${e.toString()}",
-        );
-      },
+    return repository.createPrivateUser(uid, json);
+  }
+
+  Future<CurrentUserState> _fetchData() async {
+    final uid = _getCurrentUid();
+    if (uid == null) {
+      return CurrentUserState();
+    }
+    final publicUser = await _getPublicUser(uid);
+    final privateUser = await _getPrivateUser(uid);
+    final base64 = await _getBase64Image(publicUser);
+    return CurrentUserState(
+      publicUser: publicUser,
+      privateUser: privateUser,
+      base64: base64,
     );
   }
 
-  Future<void> _fetchData() async {
-    if (_getCurrentUid() == null) {
-      // UIDがない場合は処理をスキップ
-      return;
-    }
-    await _getPublicUser();
-    await _getPrivateUser();
+  Future<PublicUser?> _getPublicUser(String uid) async {
+    final repository = ref.read(firestoreRepositoryProvider);
+    var publicUser = await repository.getPublicUser(uid);
+    publicUser ??= await _createPublicUser(uid);
+    return publicUser; 
   }
 
-  Future<void> _getPublicUser() async {
-    final uid = _getCurrentUid();
-    if (uid == null) return;
+  Future<PrivateUser?> _getPrivateUser(String uid) async {
     final repository = ref.read(firestoreRepositoryProvider);
-    final publicUser = await repository.getPublicUser(uid);
-    if (publicUser == null) {
-      await _createPublicUser();
-    } else {
-      String? base64Image;
-      final bucketName = publicUser.typedImage().bucketName;
-      final fileName = publicUser.typedImage().value;
-      if (bucketName.isNotEmpty && fileName.isNotEmpty) {
-        final image = await ref
-            .read(fileUseCaseProvider)
-            .getS3Image(bucketName, fileName);
-        if (image != null) {
-          base64Image = base64Encode(image);
-        }
-      }
-      _updateState(
-        state.value!.copyWith(publicUser: publicUser, base64: base64Image),
-      );
-    }
+    var privateUser = await repository.getPrivateUser(uid);
+    privateUser ??= await _createPrivateUser(uid);
+    return privateUser;
   }
 
-  Future<void> _getPrivateUser() async {
-    final uid = _getCurrentUid();
-    if (uid == null) return;
-    final repository = ref.read(firestoreRepositoryProvider);
-    final privateUser = await repository.getPrivateUser(uid);
-    if (privateUser == null) {
-      await _createPrivateUser();
-    } else {
-      _updateState(state.value!.copyWith(privateUser: privateUser));
-    }
+  Future<String?> _getBase64Image(PublicUser? publicUser) async {
+    if (publicUser == null) return null;
+    final bucketName = publicUser.typedImage().bucketName;
+    final fileName = publicUser.typedImage().value;
+    if (bucketName.isEmpty || fileName.isEmpty) return null;
+    final image = await ref.read(fileUseCaseProvider).getS3Image(bucketName, fileName);
+    if (image == null) return null;
+    return base64Encode(image);
   }
 
   FutureResult<bool> signOut() async {
@@ -204,6 +155,13 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   Future<void> _removeUserImage() async {}
 
   Future<void> updateUser() async {
-    await _getPublicUser();
+    final uid = ref.read(streamAuthUidProvider).value;
+    final stateValue = state.value;
+    if (uid == null || stateValue == null) return;
+    state = await AsyncValue.guard(() async {
+      final publicUser = await _getPublicUser(uid);
+      final base64 = await _getBase64Image(publicUser);
+      return stateValue.copyWith(publicUser: publicUser,base64: base64);
+    });
   }
 }
