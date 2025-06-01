@@ -15,7 +15,7 @@ class FeedsPage extends ConsumerWidget {
       asyncValue: asyncValue,
       data: (state) {
         return RefreshScreen(
-          qDocInfoList: state.qDocInfoList,
+          userPosts: state.userPosts,
           onLoading: notifier.onLoading,
         );
       },

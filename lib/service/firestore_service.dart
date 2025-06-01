@@ -32,6 +32,7 @@ class FirestoreService {
       user(uid).collection('userMutes').doc(currentUid);
   DocRef token(String currentUid, String tokenId) =>
       tokensColRef(currentUid).doc(tokenId);
+  DocRef timelinesDocRef(String currentUid,String postId) => timelinesColRef(user(currentUid)).doc(postId);
   // ColRef
   ColRef usersColRef() => publicV1.collection('users');
   ColRef postsColRef(String uid) => user(uid).collection('posts');

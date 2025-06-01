@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/providers/view_model/docs/docs_view_model.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
@@ -15,16 +14,11 @@ class NewPostsScreen extends ConsumerWidget {
       docsViewModelProvider(DocsType.newPosts).notifier,
     );
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: notifier.onRefresh,
-        backgroundColor: kSecondaryColor,
-        child: const Icon(Icons.refresh),
-      ),
       body: AsyncScreen(
         asyncValue: asyncValue,
         data: (state) {
           return RefreshScreen(
-            qDocInfoList: state.qDocInfoList,
+            userPosts: state.userPosts,
             onLoading: notifier.onLoading,
           );
         },

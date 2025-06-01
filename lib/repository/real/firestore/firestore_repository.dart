@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:great_talk/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/providers/service/firestore/firestore_service_provider.dart';
 import 'package:great_talk/service/firestore_service.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
@@ -295,6 +296,10 @@ class FirestoreRepository {
     }
   }
 
+  Future<QSnapshot> _getDocs(MapQuery query) {
+    return query.get();
+  }
+
   Future<List<Map<String, dynamic>>> getTokens(String uid) async {
     try {
       final query = service.tokensColRef(uid);
@@ -307,12 +312,12 @@ class FirestoreRepository {
     }
   }
 
-  Future<List<QDoc>> getTimelinePosts(List<String> postIds) async {
+  Future<List<Post>> getTimelinePosts(List<String> postIds) async {
     if (postIds.isEmpty) return [];
     try {
       final query = service.timelinePostsQuery(postIds);
-      final qSnapshot = await query.get();
-      return qSnapshot.docs;
+      final qSnapshot = await _getDocs(query);
+      return qSnapshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch (e) {
       return [];
     }
@@ -322,7 +327,7 @@ class FirestoreRepository {
     if (uids.isEmpty) return [];
     try {
       final query = service.usersByWhereIn(uids);
-      final qSnapshot = await query.get();
+      final qSnapshot = await _getDocs(query);
       return qSnapshot.docs
           .map((doc) => PublicUser.fromJson(doc.data()))
           .toList();
@@ -335,7 +340,7 @@ class FirestoreRepository {
   Future<List<Post>> getUserPosts(String uid) async {
     try {
       final query = service.userPostsByNewest(uid);
-      final qshot = await query.get();
+      final qshot = await _getDocs(query);
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch (e) {
       debugPrint(e.toString());
@@ -402,6 +407,48 @@ class FirestoreRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
     } catch (e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+
+  Future<List<Timeline>> getTimelines(String currentUid) async {
+    try {
+      final qshot = await service.timelinesQuery(currentUid).get();
+      final timelines = qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
+      final sorted = [...timelines]..sort((a, b) => (b.createdAt).compareTo(a.createdAt));
+      return sorted;
+    } catch(e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+
+  Future<List<Post>> getPosts(MapQuery query) async {
+    try {
+      final qshot = await query.get();
+      return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
+    } catch(e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+  Future<List<Post>> getMorePosts(MapQuery query,Post lastPost) async {
+    try {
+      final doc = await _getPostDoc(lastPost.uid, lastPost.postId);
+      final qshot = await query.startAfterDocument(doc).get();
+      return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
+    } catch(e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+  Future<List<Timeline>> getMoreTimelines(MapQuery query,String currentUid,Timeline lastTimeline) async {
+    try {
+      final doc = await service.timelinesDocRef(currentUid, lastTimeline.postId).get();
+      final qshot = await query.startAfterDocument(doc).get();
+      return qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
+    } catch(e) {
       debugPrint(e.toString());
       return [];
     }

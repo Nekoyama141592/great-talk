@@ -6,7 +6,7 @@ part of 'docs_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$docsViewModelHash() => r'f414e9c263a118b8e7a139d1331971bcc80bd0c2';
+String _$docsViewModelHash() => r'5a20584548aaf1684ddc492b4882f14b1894a081';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,10 +30,10 @@ class _SystemHash {
 }
 
 abstract class _$DocsViewModel
-    extends BuildlessAutoDisposeAsyncNotifier<DocsState> {
+    extends BuildlessAutoDisposeAsyncNotifier<PostsState> {
   late final DocsType type;
 
-  FutureOr<DocsState> build(DocsType type);
+  FutureOr<PostsState> build(DocsType type);
 }
 
 /// See also [DocsViewModel].
@@ -41,7 +41,7 @@ abstract class _$DocsViewModel
 const docsViewModelProvider = DocsViewModelFamily();
 
 /// See also [DocsViewModel].
-class DocsViewModelFamily extends Family<AsyncValue<DocsState>> {
+class DocsViewModelFamily extends Family<AsyncValue<PostsState>> {
   /// See also [DocsViewModel].
   const DocsViewModelFamily();
 
@@ -74,7 +74,7 @@ class DocsViewModelFamily extends Family<AsyncValue<DocsState>> {
 
 /// See also [DocsViewModel].
 class DocsViewModelProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<DocsViewModel, DocsState> {
+    extends AutoDisposeAsyncNotifierProviderImpl<DocsViewModel, PostsState> {
   /// See also [DocsViewModel].
   DocsViewModelProvider(DocsType type)
     : this._internal(
@@ -104,7 +104,7 @@ class DocsViewModelProvider
   final DocsType type;
 
   @override
-  FutureOr<DocsState> runNotifierBuild(covariant DocsViewModel notifier) {
+  FutureOr<PostsState> runNotifierBuild(covariant DocsViewModel notifier) {
     return notifier.build(type);
   }
 
@@ -125,7 +125,7 @@ class DocsViewModelProvider
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<DocsViewModel, DocsState>
+  AutoDisposeAsyncNotifierProviderElement<DocsViewModel, PostsState>
   createElement() {
     return _DocsViewModelProviderElement(this);
   }
@@ -146,13 +146,13 @@ class DocsViewModelProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin DocsViewModelRef on AutoDisposeAsyncNotifierProviderRef<DocsState> {
+mixin DocsViewModelRef on AutoDisposeAsyncNotifierProviderRef<PostsState> {
   /// The parameter `type` of this provider.
   DocsType get type;
 }
 
 class _DocsViewModelProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<DocsViewModel, DocsState>
+    extends AutoDisposeAsyncNotifierProviderElement<DocsViewModel, PostsState>
     with DocsViewModelRef {
   _DocsViewModelProviderElement(super.provider);
 

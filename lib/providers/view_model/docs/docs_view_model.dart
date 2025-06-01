@@ -1,14 +1,14 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/model/view_model_state/common/user_post/user_post.dart';
+import 'package:great_talk/model/view_model_state/posts/posts_state.dart';
 import 'package:great_talk/providers/service/firestore/firestore_service_provider.dart';
-import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/database_schema/q_doc_info/q_doc_info.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
-import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
@@ -24,9 +24,8 @@ part 'docs_view_model.g.dart';
 @riverpod
 class DocsViewModel extends _$DocsViewModel {
   @override
-  FutureOr<DocsState> build(DocsType type) async {
-    final docsState = await _fetchInitialDocs();
-    return docsState;
+  FutureOr<PostsState> build(DocsType type) {
+    return _fetchData();
   }
 
   // DI
@@ -40,8 +39,10 @@ class DocsViewModel extends _$DocsViewModel {
   MapQuery _setQuery() {
     final service = ref.read(firestoreServiceProvider);
     switch (type) {
+      // TODO: 分ける
       case DocsType.feeds:
         return service.timelinesQuery(_currentUid());
+      // TODO: 分ける
       case DocsType.mutePosts:
         return service.postsByWhereIn(_createRequestPostIds());
       case DocsType.newPosts:
@@ -51,34 +52,38 @@ class DocsViewModel extends _$DocsViewModel {
     }
   }
 
-  Future<DocsState> _fetchInitialDocs() async {
+  Future<PostsState> _fetchData() async {
     if ((type == DocsType.mutePosts && _createRequestPostIds().isEmpty)) {
-      return DocsState();
+      return PostsState();
     }
     try {
       if (type == DocsType.feeds) {
-        final result = await _setQuery().get();
-        final postResult = await _timelinesToPostsResult(result.docs);
-        final newQDocInfoList = await _createQDocInfoList(postResult);
-        return DocsState(
-          indexDocs: result.docs,
-          qDocInfoList: newQDocInfoList,
+        final currentUid = ref.read(streamAuthUidProvider).value;
+        if (currentUid == null) return PostsState();
+        final timelines = await _repository.getTimelines(currentUid);
+        print(timelines.length);
+        final postIds = timelines.map((e) => e.postId).toList();
+        final posts = await _timelinesToPostsResult(postIds);
+        final userPosts = await _createUserPosts(posts);
+        return PostsState(
+          timelines: timelines,
+          userPosts: userPosts,
         );
       } else {
-        final elements = await _setQuery().get();
-        final newQDocInfoList = await _createQDocInfoList(elements.docs);
-        return DocsState(qDocInfoList: newQDocInfoList);
+        final posts = await _repository.getPosts(_setQuery());
+        final newQDocInfoList = await _createUserPosts(posts);
+        return PostsState(userPosts: newQDocInfoList);
       }
     } catch (e, st) {
       state = AsyncValue.error(e, st);
-      return DocsState();
+      return PostsState();
     }
   }
 
   Future<void> onLoading(RefreshController refreshController) async {
     if (state.isLoading) return;
     if ((type == DocsType.mutePosts && _createRequestPostIds().isEmpty) ||
-        (state.value?.qDocInfoList.isEmpty ?? true)) {
+        (state.value?.userPosts.isEmpty ?? true)) {
       refreshController.loadComplete();
       return;
     }
@@ -88,11 +93,10 @@ class DocsViewModel extends _$DocsViewModel {
       if (type == DocsType.feeds) {
         await _onLoadingTimeline(refreshController);
       } else {
-        final elements =
-            await _setQuery()
-                .startAfterDocument(currentState.qDocInfoList.last.qDoc)
-                .get();
-        await _addAllDocs(elements.docs);
+        final lastPost = currentState.userPosts.last.post;
+        final posts =
+            await _repository.getMorePosts(_setQuery(),lastPost);
+        _updateDocInfoList(_sortedPosts(posts));
       }
     } catch (e) {
       UIHelper.showErrorFlutterToast("データの取得に失敗しました");
@@ -102,109 +106,90 @@ class DocsViewModel extends _$DocsViewModel {
   }
 
   Future<void> _onLoadingTimeline(RefreshController refreshController) async {
+    final currentUid = ref.read(streamAuthUidProvider).value;
+    if (currentUid == null) return;
     final currentState = state.value!;
-    final result =
-        await _setQuery().startAfterDocument(currentState.indexDocs.last).get();
-    final newIndexDocs = [...currentState.indexDocs, ...result.docs];
-    final postResult = await _timelinesToPostsResult(result.docs);
-    await _addAllDocs(postResult);
-    state = AsyncValue.data(currentState.copyWith(indexDocs: newIndexDocs));
-  }
-
-  Future<void> onRefresh() async {
-    if (state.value?.qDocInfoList.isEmpty ?? true) return;
-    final currentState = state.value!;
-    try {
-      final elements =
-          await _setQuery()
-              .endBeforeDocument(currentState.qDocInfoList.first.qDoc)
-              .get();
-      await _insertAllDocs(elements.docs);
-    } catch (e) {
-      UIHelper.showErrorFlutterToast("失敗しました");
-    }
+    final lastTimeline = currentState.timelines.last;
+    final timelines = await _repository.getMoreTimelines(_setQuery(),currentUid,lastTimeline);
+    final postIds = timelines.map((e) => e.postId).toList();
+    final postResult = await _timelinesToPostsResult(postIds);
+    final newUserPosts = await _createUserPosts(postResult);
+    final userPost = [...currentState.userPosts,...newUserPosts];
+    final newTimelines = [...currentState.timelines, ...timelines];
+    state = AsyncValue.data(currentState.copyWith(timelines: newTimelines,userPosts: userPost));
   }
 
   Future<void> _updateDocInfoList(
-    List<QDoc> elements, {
+    List<Post> posts, {
     bool front = false,
   }) async {
-    if (state.isLoading || elements.isEmpty) return;
+    if (state.isLoading || posts.isEmpty) return;
     final currentState = state.value!;
-    final currentDocs = currentState.qDocInfoList;
-    final docIds = currentDocs.map((e) => e.qDoc.id).toSet();
-    final newElements = elements.where((e) => !docIds.contains(e.id)).toList();
+    final currentPosts = currentState.userPosts;
+    final docIds = currentPosts.map((e) => e.post.postId).toSet();
+    final newElements = posts.where((e) => !docIds.contains(e.postId)).toList();
 
     if (newElements.isEmpty) return;
 
-    final newQDocInfoList = await _createQDocInfoList(newElements);
+    final newQDocInfoList = await _createUserPosts(newElements);
     if (front) {
       state = AsyncValue.data(
         currentState.copyWith(
-          qDocInfoList: [...newQDocInfoList.reversed, ...currentDocs],
+          userPosts: [...newQDocInfoList.reversed, ...currentPosts],
         ),
       );
     } else {
       state = AsyncValue.data(
         currentState.copyWith(
-          qDocInfoList: [...currentDocs, ...newQDocInfoList],
+          userPosts: [...currentPosts, ...newQDocInfoList],
         ),
       );
     }
   }
 
-  Future<List<QDocInfo>> _createQDocInfoList(List<QDoc> elements) async {
-    if (elements.isEmpty) return [];
-    final uids = elements.map((e) => e.data()['uid'] as String).toList();
+  Future<List<UserPost>> _createUserPosts(List<Post> posts) async {
+    final sorted = _sortedPosts(posts);
+    final uids = sorted.map((e) => e.uid).toList();
     final fetchedUsers = await _repository.getUsersByUids(uids);
     final userMap = {for (final user in fetchedUsers) user.uid: user};
 
     final newQDocInfoList = await Future.wait(
-      elements
+      sorted
           .where((element) {
-            final uid = element.data()['uid'];
+            final uid = element.uid;
             return userMap.containsKey(uid);
           })
           .map((element) async {
-            final publicUser = userMap[element.data()['uid']]!;
+            final publicUser = userMap[element.uid]!;
             final userImage = await _getImageFromDoc(element);
-            return QDocInfo(
-              publicUser: publicUser,
-              qDoc: element,
-              userImage: userImage,
+            return UserPost(
+              user: publicUser,
+              post:  element,
+              base64:userImage != null ? base64Encode(userImage) : null,
             );
           }),
     );
     return newQDocInfoList;
   }
 
-  Future<void> _addAllDocs(List<QDoc> elements) async =>
-      await _updateDocInfoList(_sortedDocs(elements));
-
-  Future<void> _insertAllDocs(List<QDoc> elements) async =>
-      await _updateDocInfoList(_sortedDocs(elements), front: true);
-
-  List<QDoc> _sortedDocs(List<QDoc> elements) {
-    if (elements.isEmpty) return [];
-    return elements..sort((a, b) => (b["createdAt"]).compareTo(a["createdAt"]));
+  List<Post> _sortedPosts(List<Post> posts) {
+    return posts..sort((a, b) => (b.createdAt).compareTo(a.createdAt));
   }
 
-  Future<Uint8List?> _getImageFromDoc(Doc doc) async {
-    final detectedImage = DetectedImage.fromJson(doc['image']);
+  Future<Uint8List?> _getImageFromDoc(Post post) async {
+    final detectedImage = post.typedImage();
     return ref
         .read(fileUseCaseProvider)
         .getS3Image(detectedImage.bucketName, detectedImage.value);
   }
 
-  Future<List<QDoc>> _timelinesToPostsResult(List<QDoc> fetchedDocs) {
-    final postIds =
-        fetchedDocs.map((e) => e.data()["postId"] as String).toList();
+  Future<List<Post>> _timelinesToPostsResult(List<String> postIds)  {
     return _repository.getTimelinePosts(postIds);
   }
 
   // Mute Post
   List<String> _createRequestPostIds() {
-    final currentDocsLength = state.value?.qDocInfoList.length ?? 0;
+    final currentDocsLength = state.value?.userPosts.length ?? 0;
     final mutePostIds = _tokensState().mutePostIds;
     if (mutePostIds.length > currentDocsLength) {
       final remaining = mutePostIds.length - currentDocsLength;
@@ -222,11 +207,11 @@ class DocsViewModel extends _$DocsViewModel {
     _tokensNotifier().removeMutePost(deleteToken);
 
     final newQDocInfoList =
-        state.value!.qDocInfoList
-            .where((e) => Post.fromJson(e.qDoc.data()).postId != postId)
+        state.value!.userPosts
+            .where((e) => e.post.postId != postId)
             .toList();
     state = AsyncValue.data(
-      state.value!.copyWith(qDocInfoList: newQDocInfoList),
+      state.value!.copyWith(userPosts: newQDocInfoList),
     );
     final currentUid = _currentUid();
 
