@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/model/global/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
@@ -8,12 +7,9 @@ import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/core/maps.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/extensions/string_extension.dart';
-import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/database_schema/user_update_log/user_update_log.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
@@ -151,15 +147,7 @@ class EditViewModel extends _$EditViewModel {
     final uid = ref.read(streamAuthUidProvider).value;
     if (uid == null) return const Result.failure('ログインしてください.');
     final repository = ref.read(firestoreRepositoryProvider);
-    final newUpdateLog = UserUpdateLog(
-      logCreatedAt: Timestamp.now(),
-      searchToken: returnSearchToken(userName),
-      stringBio: bio.trim(),
-      stringUserName: userName.trim(),
-      uid: uid,
-      image: DetectedImage(value: fileName).toJson(),
-      userRef: DocRefCore.user(uid),
-    );
+    final newUpdateLog = UserUpdateLog.fromRegister(uid, userName, bio, fileName);
     final json = newUpdateLog.toJson();
     final result = await repository.createUserUpdateLog(uid, json);
     return result;
