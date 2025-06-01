@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/flavors.dart';
+import 'package:great_talk/app/flavors.dart';
 import 'package:great_talk/providers/global/app_router/app_router_provider.dart';
 import 'package:great_talk/providers/global/local_setting/local_setting.dart';
 import 'package:great_talk/ui_core/theme_ui_core.dart';

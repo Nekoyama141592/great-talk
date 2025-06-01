@@ -1,7 +1,7 @@
 import 'package:great_talk/env/env_interface.dart';
 import 'package:great_talk/env/dev_env.dart';
 import 'package:great_talk/env/prod_env.dart';
-import 'package:great_talk/flavors.dart';
+import 'package:great_talk/app/flavors.dart';
 
 class EnvCore implements EnvInterface {
   EnvInterface get env {
