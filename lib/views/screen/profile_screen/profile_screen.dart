@@ -21,13 +21,11 @@ class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({
     super.key,
     required this.state,
-    required this.onReload,
     required this.onLoading,
     required this.follow,
     required this.unFollow,
   });
   final DocsState state;
-  final void Function()? onReload;
   final void Function(RefreshController) onLoading;
   final void Function()? follow;
   final void Function()? unFollow;
@@ -94,7 +92,6 @@ class ProfileScreen extends ConsumerWidget {
       ),
       child: RefreshScreen(
         state: state,
-        onReload: onReload,
         onLoading: onLoading,
       ),
     );

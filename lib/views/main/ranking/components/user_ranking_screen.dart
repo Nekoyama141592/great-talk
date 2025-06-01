@@ -21,7 +21,6 @@ class UserRankingScreen extends ConsumerWidget {
         final qDocInfoList = state.qDocInfoList;
         return RefreshScreen(
           state: state,
-          onReload: notifier.onReload,
           onLoading: notifier.onLoading,
           child: ListView.builder(
             itemCount: qDocInfoList.length,

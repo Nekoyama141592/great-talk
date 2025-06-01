@@ -105,12 +105,6 @@ class DocsViewModel extends _$DocsViewModel {
     }
   }
 
-  Future<void> onReload() async {
-    state = const AsyncValue.loading();
-    final newState = await _fetchInitialDocs(state.value ?? DocsState());
-    state = AsyncValue.data(newState);
-  }
-
   Future<void> onLoading(RefreshController refreshController) async {
     if (state.isLoading) return;
     if ((type == DocsType.mutePosts && _createRequestPostIds().isEmpty) ||

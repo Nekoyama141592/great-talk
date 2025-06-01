@@ -18,7 +18,6 @@ class PostRankingScreen extends ConsumerWidget {
       data: (state) {
         return RefreshScreen(
           state: state,
-          onReload: notifier.onReload,
           onLoading: notifier.onLoading,
         );
       },

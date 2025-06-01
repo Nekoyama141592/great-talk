@@ -27,7 +27,6 @@ class UserProfilePage extends ConsumerWidget {
           return ProfileScreen(
             state: state,
             onLoading: notifier.onLoading,
-            onReload: notifier.onReload,
             follow: notifier.onFollowPressed,
             unFollow: notifier.onUnFollowPressed,
           );
