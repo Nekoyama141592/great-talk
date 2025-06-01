@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/model/database_schema/user_post/user_post.dart';
 import 'package:great_talk/model/view_model_state/profile/profile_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
@@ -25,14 +26,22 @@ class ProfileViewModel extends _$ProfileViewModel {
   Future<ProfileState> _fetchData() async {
     final user = await _fetchUser();
     final base64 = await _getImageFromUser(user);
-    final posts = await _fetchPosts();
-    return ProfileState(user: user, base64: base64, posts: posts);
+    final userPosts = await _fetchUserPosts(user,base64);
+    return ProfileState(user: user, base64: base64, userPosts: userPosts);
   }
 
   Future<PublicUser?> _fetchUser() async {
     return _repository.getPublicUser(passiveUid);
   }
 
+  Future<String?> _getImageFromPost(Post post) async {
+    final detectedImage = post.typedImage();
+    final image = await ref
+        .read(fileUseCaseProvider)
+        .getS3Image(detectedImage.bucketName, detectedImage.value);
+    if (image == null) return null;
+    return base64Encode(image);
+  }
   Future<String?> _getImageFromUser(PublicUser? user) async {
     if (user == null) return null;
     final detectedImage = user.typedImage();
@@ -43,9 +52,30 @@ class ProfileViewModel extends _$ProfileViewModel {
     return base64Encode(image);
   }
 
-  Future<List<Post>> _fetchPosts() {
-    return _repository.getUserPosts(passiveUid);
+  Future<List<UserPost>> _fetchUserPosts(PublicUser? user,String? base64) async {
+    final posts = await _repository.getUserPosts(passiveUid);
+    final userPosts = await _postsToUserPosts(posts, user, base64);
+    return userPosts;
   }
+
+  Future<List<UserPost>> _postsToUserPosts(List<Post> posts, PublicUser? user, String? base64) async {
+    final uids = posts.map((e) => e.uid).toSet(); 
+    final fetchedUsers = await _repository.getUsersByUids(uids.toList());
+    final userMap = {for (final user in fetchedUsers) user.uid: user};
+    final futures = posts.where((post) {
+      return userMap.containsKey(post.uid);
+    }).map((post) async {
+      final userImageBase64 = await _getImageFromPost(post);
+      return UserPost(
+        post: post,
+        user: userMap[post.uid]!,
+        base64: userImageBase64,
+      );
+  }).toList();
+
+  final results = await Future.wait(futures);
+  return results;
+}
 
   // TODO: 実装
   void onReload() async {}
@@ -127,8 +157,10 @@ class ProfileViewModel extends _$ProfileViewModel {
     final uid = ref.read(streamAuthUidProvider).value;
     if (stateValue == null || uid == null) return;
     state = await AsyncValue.guard(() async {
-      final posts = await _repository.getUserOldPosts(uid, stateValue.posts);
-      return stateValue.copyWith(posts: posts);
+      final oldPosts = stateValue.userPosts.map((e) => e.post).toList();
+      final posts = await _repository.getUserOldPosts(uid, oldPosts);
+      final userPosts = await _postsToUserPosts(posts, stateValue.user,stateValue.base64);
+      return stateValue.copyWith(userPosts: userPosts);
     });
     controller.loadComplete();
   }

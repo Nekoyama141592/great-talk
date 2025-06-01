@@ -15,7 +15,7 @@ import 'package:great_talk/views/components/official_mark.dart';
 import 'package:great_talk/views/screen/gradient_screen.dart';
 import 'package:great_talk/views/screen/profile_screen/components/edit_button.dart';
 import 'package:great_talk/views/screen/profile_screen/components/follow_button.dart';
-import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
+import 'package:great_talk/views/screen/refresh_screen/posts_refresh_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -95,10 +95,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
         ),
       ),
-      child: RefreshScreen(
-        qDocInfoList: [], // TODO: state.posts
-        onLoading: onLoading,
-      ),
+      child: PostsRefreshScreen(userPosts: state.userPosts, onLoading: onLoading)
     );
   }
 }

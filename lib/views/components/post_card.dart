@@ -1,11 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/doubles.dart';
 import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/database_schema/q_doc_info/q_doc_info.dart';
 import 'package:great_talk/views/chat/chat_page.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
@@ -17,13 +19,13 @@ import 'package:great_talk/views/user_profile_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PostCard extends ConsumerWidget {
-  const PostCard({super.key, required this.qDocInfo});
-  final QDocInfo qDocInfo;
+  const PostCard({super.key, required this.post,required this.base64,required this.publicUser});
+  final Post post;
+  final String? base64;
+  final PublicUser? publicUser;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final post = Post.fromJson(qDocInfo.qDoc.data());
-    final uint8list = qDocInfo.userImage;
-    final publicUser = qDocInfo.publicUser;
+    final uint8list = base64 != null ? base64Decode(base64!) : null;
     final asyncValue = ref.watch(tokensNotifierProvider);
     // 不適切なら弾く
     return InkWell(
@@ -89,7 +91,7 @@ class PostCard extends ConsumerWidget {
                             UserProfilePage.generatePath(post.uid),
                           ),
                       child: EllipsisText(
-                        "by ${publicUser.nameValue}",
+                        "by ${publicUser?.nameValue ?? ''}",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                         ),
