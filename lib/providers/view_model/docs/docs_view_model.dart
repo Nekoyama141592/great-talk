@@ -92,7 +92,7 @@ class DocsViewModel extends _$DocsViewModel {
 
     final currentState = state.value!;
     try {
-      if (currentState.isTimeline) {
+      if (type == DocsType.feeds) {
         await _onLoadingTimeline(refreshController);
       } else {
         final elements =
