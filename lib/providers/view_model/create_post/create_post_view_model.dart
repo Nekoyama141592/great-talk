@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:great_talk/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/view_model_state/create_post/create_post_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
@@ -13,7 +14,6 @@ import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/utility/aws_s3_utility.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:great_talk/utility/new_content.dart';
-import 'package:great_talk/ui_core/validator/post_validator.dart';
 
 part 'create_post_view_model.g.dart';
 
@@ -25,7 +25,6 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     return const CreatePostState();
   }
 
-  // セッターメソッド群 (whenDataを使い安全に更新)
   void setTitle(String? value) {
     if (value == null) return;
     state.whenData((s) => state = AsyncValue.data(s.copyWith(title: value)));
@@ -42,55 +41,6 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     if (value == null) return;
     state.whenData(
       (s) => state = AsyncValue.data(s.copyWith(description: value)),
-    );
-  }
-
-  void setTemperature(String? value) {
-    if (value == null) return;
-    state.whenData(
-      (s) =>
-          state = AsyncValue.data(
-            s.copyWith(
-              temperature:
-                  double.tryParse(value) ?? FormConsts.defaultTemperature,
-            ),
-          ),
-    );
-  }
-
-  void setTopP(String? value) {
-    if (value == null) return;
-    state.whenData(
-      (s) =>
-          state = AsyncValue.data(
-            s.copyWith(topP: double.tryParse(value) ?? FormConsts.defaultTopP),
-          ),
-    );
-  }
-
-  void setPresencePenalty(String? value) {
-    if (value == null) return;
-    state.whenData(
-      (s) =>
-          state = AsyncValue.data(
-            s.copyWith(
-              presencePenalty:
-                  double.tryParse(value) ?? FormConsts.defaultPresencePenalty,
-            ),
-          ),
-    );
-  }
-
-  void setFrequencyPenalty(String? value) {
-    if (value == null) return;
-    state.whenData(
-      (s) =>
-          state = AsyncValue.data(
-            s.copyWith(
-              frequencyPenalty:
-                  double.tryParse(value) ?? FormConsts.defaultFrequencyPenalty,
-            ),
-          ),
     );
   }
 
@@ -129,24 +79,6 @@ class CreatePostViewModel extends _$CreatePostViewModel {
       UIHelper.showErrorFlutterToast("アイコンをタップして画像をアップロードしてください");
       return false;
     }
-    if (PostValidator.isInValidPost(
-      currentState.description,
-      currentState.systemPrompt,
-      currentState.title,
-      currentState.temperature.toString(),
-      currentState.topP.toString(),
-      currentState.presencePenalty.toString(),
-      currentState.frequencyPenalty.toString(),
-    )) {
-      UIHelper.showErrorFlutterToast("条件を満たしていないものがあります");
-      return false;
-    }
-    if ((currentState.temperature != FormConsts.defaultTemperature) &&
-        (currentState.topP != FormConsts.defaultTopP)) {
-      UIHelper.showErrorFlutterToast("temperatureとtopPはどちらか一方しか変更できません");
-      return false;
-    }
-
     final currentUid = ref.read(streamAuthUidProvider).value;
     if (currentUid == null) {
       UIHelper.showErrorFlutterToast("ログインが必要です");
@@ -203,15 +135,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     if (uid == null) return false;
 
     final postRef = DocRefCore.post(uid, postId);
-    final customCompleteText =
-        NewContent.newCustomCompleteText(
-            postState.systemPrompt,
-            postState.temperature.toString(),
-            postState.topP.toString(),
-            postState.presencePenalty.toString(),
-            postState.frequencyPenalty.toString(),
-          ).toJson()
-          ..removeWhere((key, value) => value == null);
+    final customCompleteText = CustomCompleteText(systemPrompt: postState.systemPrompt.trim());
 
     final newPost = NewContent.newPost(
       postState.systemPrompt.trim(),
@@ -220,7 +144,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
       fileName,
       postId,
       postRef,
-      customCompleteText,
+      customCompleteText.toJson(),
       uid,
     );
     final json = newPost.toJson();

@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/typedefs/firestore_typedef.dart';
 part 'custom_complete_text.freezed.dart';
 part 'custom_complete_text.g.dart';
 
@@ -8,11 +7,7 @@ abstract class CustomCompleteText with _$CustomCompleteText {
   const CustomCompleteText._();
   const factory CustomCompleteText({
     required String systemPrompt,
-    double? temperature,
-    double? topP,
-    double? presencePenalty,
-    double? frequencyPenalty,
   }) = _CustomCompleteText;
-  factory CustomCompleteText.fromJson(SDMap json) =>
+  factory CustomCompleteText.fromJson(Map<String, dynamic> json) =>
       _$CustomCompleteTextFromJson(json);
 }

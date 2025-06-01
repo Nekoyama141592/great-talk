@@ -256,18 +256,13 @@ class ChatViewModel extends _$ChatViewModel {
     final post = state.value!.post;
     final requestMessages = _toRequestMessages();
     requestMessages.insert(0, _systemMsg(post));
-    final completeText = post.typedCustomCompleteText();
     final model = RemoteConfigConstants.basicModel;
     final uid = ref.read(streamAuthUidProvider).value;
 
     return ChatCompleteText(
       model: ChatModelFromValue(model: model),
       messages: requestMessages.map((e) => e.toJson()).toList(),
-      temperature: completeText.temperature,
-      topP: completeText.topP,
       maxToken: _adjustMaxToken(),
-      presencePenalty: completeText.presencePenalty,
-      frequencyPenalty: completeText.frequencyPenalty,
       user: uid,
     );
   }

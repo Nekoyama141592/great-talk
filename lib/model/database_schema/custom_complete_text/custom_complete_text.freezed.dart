@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CustomCompleteText {
 
- String get systemPrompt; double? get temperature; double? get topP; double? get presencePenalty; double? get frequencyPenalty;
+ String get systemPrompt;
 /// Create a copy of CustomCompleteText
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $CustomCompleteTextCopyWith<CustomCompleteText> get copyWith => _$CustomComplete
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomCompleteText&&(identical(other.systemPrompt, systemPrompt) || other.systemPrompt == systemPrompt)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&(identical(other.topP, topP) || other.topP == topP)&&(identical(other.presencePenalty, presencePenalty) || other.presencePenalty == presencePenalty)&&(identical(other.frequencyPenalty, frequencyPenalty) || other.frequencyPenalty == frequencyPenalty));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomCompleteText&&(identical(other.systemPrompt, systemPrompt) || other.systemPrompt == systemPrompt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,systemPrompt,temperature,topP,presencePenalty,frequencyPenalty);
+int get hashCode => Object.hash(runtimeType,systemPrompt);
 
 @override
 String toString() {
-  return 'CustomCompleteText(systemPrompt: $systemPrompt, temperature: $temperature, topP: $topP, presencePenalty: $presencePenalty, frequencyPenalty: $frequencyPenalty)';
+  return 'CustomCompleteText(systemPrompt: $systemPrompt)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $CustomCompleteTextCopyWith<$Res>  {
   factory $CustomCompleteTextCopyWith(CustomCompleteText value, $Res Function(CustomCompleteText) _then) = _$CustomCompleteTextCopyWithImpl;
 @useResult
 $Res call({
- String systemPrompt, double? temperature, double? topP, double? presencePenalty, double? frequencyPenalty
+ String systemPrompt
 });
 
 
@@ -66,14 +66,10 @@ class _$CustomCompleteTextCopyWithImpl<$Res>
 
 /// Create a copy of CustomCompleteText
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? systemPrompt = null,Object? temperature = freezed,Object? topP = freezed,Object? presencePenalty = freezed,Object? frequencyPenalty = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? systemPrompt = null,}) {
   return _then(_self.copyWith(
 systemPrompt: null == systemPrompt ? _self.systemPrompt : systemPrompt // ignore: cast_nullable_to_non_nullable
-as String,temperature: freezed == temperature ? _self.temperature : temperature // ignore: cast_nullable_to_non_nullable
-as double?,topP: freezed == topP ? _self.topP : topP // ignore: cast_nullable_to_non_nullable
-as double?,presencePenalty: freezed == presencePenalty ? _self.presencePenalty : presencePenalty // ignore: cast_nullable_to_non_nullable
-as double?,frequencyPenalty: freezed == frequencyPenalty ? _self.frequencyPenalty : frequencyPenalty // ignore: cast_nullable_to_non_nullable
-as double?,
+as String,
   ));
 }
 
@@ -84,14 +80,10 @@ as double?,
 @JsonSerializable()
 
 class _CustomCompleteText extends CustomCompleteText {
-  const _CustomCompleteText({required this.systemPrompt, this.temperature, this.topP, this.presencePenalty, this.frequencyPenalty}): super._();
+  const _CustomCompleteText({required this.systemPrompt}): super._();
   factory _CustomCompleteText.fromJson(Map<String, dynamic> json) => _$CustomCompleteTextFromJson(json);
 
 @override final  String systemPrompt;
-@override final  double? temperature;
-@override final  double? topP;
-@override final  double? presencePenalty;
-@override final  double? frequencyPenalty;
 
 /// Create a copy of CustomCompleteText
 /// with the given fields replaced by the non-null parameter values.
@@ -106,16 +98,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomCompleteText&&(identical(other.systemPrompt, systemPrompt) || other.systemPrompt == systemPrompt)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&(identical(other.topP, topP) || other.topP == topP)&&(identical(other.presencePenalty, presencePenalty) || other.presencePenalty == presencePenalty)&&(identical(other.frequencyPenalty, frequencyPenalty) || other.frequencyPenalty == frequencyPenalty));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomCompleteText&&(identical(other.systemPrompt, systemPrompt) || other.systemPrompt == systemPrompt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,systemPrompt,temperature,topP,presencePenalty,frequencyPenalty);
+int get hashCode => Object.hash(runtimeType,systemPrompt);
 
 @override
 String toString() {
-  return 'CustomCompleteText(systemPrompt: $systemPrompt, temperature: $temperature, topP: $topP, presencePenalty: $presencePenalty, frequencyPenalty: $frequencyPenalty)';
+  return 'CustomCompleteText(systemPrompt: $systemPrompt)';
 }
 
 
@@ -126,7 +118,7 @@ abstract mixin class _$CustomCompleteTextCopyWith<$Res> implements $CustomComple
   factory _$CustomCompleteTextCopyWith(_CustomCompleteText value, $Res Function(_CustomCompleteText) _then) = __$CustomCompleteTextCopyWithImpl;
 @override @useResult
 $Res call({
- String systemPrompt, double? temperature, double? topP, double? presencePenalty, double? frequencyPenalty
+ String systemPrompt
 });
 
 
@@ -143,14 +135,10 @@ class __$CustomCompleteTextCopyWithImpl<$Res>
 
 /// Create a copy of CustomCompleteText
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? systemPrompt = null,Object? temperature = freezed,Object? topP = freezed,Object? presencePenalty = freezed,Object? frequencyPenalty = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? systemPrompt = null,}) {
   return _then(_CustomCompleteText(
 systemPrompt: null == systemPrompt ? _self.systemPrompt : systemPrompt // ignore: cast_nullable_to_non_nullable
-as String,temperature: freezed == temperature ? _self.temperature : temperature // ignore: cast_nullable_to_non_nullable
-as double?,topP: freezed == topP ? _self.topP : topP // ignore: cast_nullable_to_non_nullable
-as double?,presencePenalty: freezed == presencePenalty ? _self.presencePenalty : presencePenalty // ignore: cast_nullable_to_non_nullable
-as double?,frequencyPenalty: freezed == frequencyPenalty ? _self.frequencyPenalty : frequencyPenalty // ignore: cast_nullable_to_non_nullable
-as double?,
+as String,
   ));
 }
 

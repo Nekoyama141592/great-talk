@@ -13,14 +13,6 @@ abstract class CreatePostState with _$CreatePostState {
     @Default(FormConsts.defaultSystemPrompt) String systemPrompt,
     // 説明
     @Default('') String description,
-    // Temperature
-    @Default(FormConsts.defaultTemperature) double temperature,
-    // Top P
-    @Default(FormConsts.defaultTopP) double topP,
-    // Presence Penalty
-    @Default(FormConsts.defaultPresencePenalty) double presencePenalty,
-    // Frequency Penalty
-    @Default(FormConsts.defaultFrequencyPenalty) double frequencyPenalty,
     String? pickedImage,
   }) = _CreatePostState;
 

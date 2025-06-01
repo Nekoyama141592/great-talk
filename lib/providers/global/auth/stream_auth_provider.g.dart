@@ -6,7 +6,7 @@ part of 'stream_auth_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$streamAuthUidHash() => r'36c79485caf31f5a79b8d9a590d15e2411a5c3b3';
+String _$streamAuthUidHash() => r'8fff1931d7221fa1968f2e309f9044616ef934d5';
 
 /// See also [streamAuthUid].
 @ProviderFor(streamAuthUid)
@@ -24,7 +24,7 @@ final streamAuthUidProvider = StreamProvider<String?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef StreamAuthUidRef = StreamProviderRef<String?>;
-String _$streamAuthHash() => r'a6e9f576156a7bcd1cfe5df914f055ea1fe46aac';
+String _$streamAuthHash() => r'9056cc56d041801601f1a81bcc8e6e9c0e22806b';
 
 /// See also [streamAuth].
 @ProviderFor(streamAuth)
