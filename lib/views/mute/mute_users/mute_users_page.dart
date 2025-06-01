@@ -7,7 +7,7 @@ import 'package:great_talk/providers/view_model/docs/docs_view_model.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/mute/mute_users/component/mute_user_card.dart';
-import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
+import 'package:great_talk/views/screen/refresh_screen/users_refresh_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
@@ -26,8 +26,8 @@ class MuteUsersPage extends ConsumerWidget {
         asyncValue: asyncValue,
         data: (state) {
           final qDocInfoList = state.qDocInfoList;
-          return RefreshScreen(
-            qDocInfoList: state.qDocInfoList,
+          return UsersRefreshScreen(
+            users: qDocInfoList.map((e) => PublicUser.fromJson(e.qDoc.data())).toList(),
             onLoading: notifier.onLoading,
             child: ListView.builder(
               itemCount: qDocInfoList.length,

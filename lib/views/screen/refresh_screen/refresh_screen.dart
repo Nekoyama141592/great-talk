@@ -12,11 +12,9 @@ class RefreshScreen extends HookWidget {
     super.key,
     required this.qDocInfoList,
     required this.onLoading,
-    this.child,
   });
   final List<QDocInfo> qDocInfoList;
   final void Function(RefreshController) onLoading;
-  final Widget? child;
   @override
   Widget build(BuildContext context) {
     RefreshController refreshController = RefreshController();
@@ -34,7 +32,6 @@ class RefreshScreen extends HookWidget {
       header: const WaterDropHeader(),
       onLoading: () => onLoading(refreshController),
       child:
-          child ??
           GridView.builder(
             itemCount: qDocInfoList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
