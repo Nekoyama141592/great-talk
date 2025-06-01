@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 import 'package:great_talk/core/strings.dart';
-import 'package:great_talk/providers/stream/products/products_view_model.dart';
+import 'package:great_talk/providers/view_model/products/products_view_model.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';

@@ -4,7 +4,7 @@ import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/global/notification/notification_provider.dart';
 import 'package:great_talk/providers/global/purchases/purchases_notifier.dart';
-import 'package:great_talk/providers/stream/products/products_view_model.dart';
+import 'package:great_talk/providers/view_model/products/products_view_model.dart';
 import 'package:great_talk/views/common/bottom_navigation_bar_elements.dart';
 import 'package:great_talk/ui_core/others.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

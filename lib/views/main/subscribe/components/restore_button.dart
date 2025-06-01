@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/providers/stream/products/products_view_model.dart';
+import 'package:great_talk/providers/view_model/products/products_view_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RestoreButton extends ConsumerWidget {
