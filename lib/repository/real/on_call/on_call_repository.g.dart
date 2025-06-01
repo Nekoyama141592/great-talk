@@ -6,7 +6,7 @@ part of 'on_call_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$onCallRepositoryHash() => r'46026753869f1b141be4354a543aac63d0a1d2ab';
+String _$onCallRepositoryHash() => r'145638f10d623d222697daad3bacaed7f2d17f10';
 
 /// See also [onCallRepository].
 @ProviderFor(onCallRepository)

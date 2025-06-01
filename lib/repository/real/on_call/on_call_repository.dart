@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:great_talk/infrastructure/cloud_functions/on_call_client.dart';
+import 'package:great_talk/infrastructure/cloud_functions/cloud_functions_client.dart';
 import 'package:great_talk/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
 import 'package:great_talk/model/rest_api/generate_image/request/generate_image_request.dart';
@@ -12,6 +12,7 @@ import 'package:great_talk/model/rest_api/get_object/request/get_object_request.
 import 'package:great_talk/model/rest_api/get_object/response/get_object_response.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/rest_api/put_object/response/put_object_response.dart';
+import 'package:great_talk/providers/client/cloud_functions/cloud_functions_client_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -19,11 +20,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'on_call_repository.g.dart';
 
 @riverpod
-OnCallRepository onCallRepository(Ref ref) => OnCallRepository(ref.watch(onCallClientProvider));
+OnCallRepository onCallRepository(Ref ref) => OnCallRepository(ref.watch(cloudFunctionsClientProvider));
 
 class OnCallRepository {
   OnCallRepository(this.client);
-  final OnCallClient client;
+  final CloudFunctionsClient client;
 
   FutureResult<PutObjectResponse> putObject(PutObjectRequest request) async {
     try {
