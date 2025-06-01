@@ -7,7 +7,7 @@ import 'package:great_talk/providers/global/current_user/current_user_notifier.d
 import 'package:great_talk/providers/global/local_setting/local_setting.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/extension/number_format_extension.dart';
-import 'package:great_talk/utility/style_utility.dart';
+import 'package:great_talk/ui_core/style_utility.dart';
 import 'package:great_talk/views/accounts_page.dart';
 import 'package:great_talk/views/admin_page.dart';
 import 'package:great_talk/views/auth/login_page.dart';
@@ -42,7 +42,7 @@ class OriginalDrawer extends ConsumerWidget {
                       children: [
                         EllipsisText(
                           user.nameValue,
-                          style: StyleUtility.bold25(),
+                          style: StyleUiCore.bold25(),
                         ),
                         const BasicHeightBox(),
                         Row(

@@ -6,7 +6,7 @@ part of 'open_ai_client_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$openAIClientHash() => r'dc6f081402f90ebde479a54f50eb337f99a4335e';
+String _$openAIClientHash() => r'2414ea63d10f0355a6539ddd4c12ea7d53f2799d';
 
 /// See also [openAIClient].
 @ProviderFor(openAIClient)

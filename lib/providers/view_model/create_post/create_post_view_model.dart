@@ -11,7 +11,7 @@ import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
-import 'package:great_talk/utility/aws_s3_utility.dart';
+import 'package:great_talk/core/aws_s3_core.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 
 part 'create_post_view_model.g.dart';
@@ -89,7 +89,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
 
     try {
       final postId = randomString();
-      final fileName = AWSS3Utility.postObject(currentUid, postId);
+      final fileName = AWSS3Core.postObject(currentUid, postId);
       final repository = ref.read(onCallRepositoryProvider);
       final request = PutObjectRequest.fromUint8List(
         uint8list: base64Decode(pickedImage),

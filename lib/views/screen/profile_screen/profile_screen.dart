@@ -6,7 +6,7 @@ import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/extension/number_format_extension.dart';
 import 'package:great_talk/extension/string_extension.dart';
-import 'package:great_talk/utility/style_utility.dart';
+import 'package:great_talk/ui_core/style_utility.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/official_mark.dart';
@@ -42,7 +42,7 @@ class ProfileScreen extends ConsumerWidget {
           child: const Icon(Icons.arrow_back, size: 30.0),
         ),
       ),
-      EllipsisText(passiveUser?.nameValue ?? '', style: StyleUtility.bold25()),
+      EllipsisText(passiveUser?.nameValue ?? '', style: StyleUiCore.bold25()),
       Row(
         children: [
           CircleImage(uint8list: state.uint8list),

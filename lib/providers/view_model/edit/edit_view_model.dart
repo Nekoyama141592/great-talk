@@ -13,7 +13,7 @@ import 'package:great_talk/extension/string_extension.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/database_schema/user_update_log/user_update_log.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
-import 'package:great_talk/utility/aws_s3_utility.dart';
+import 'package:great_talk/core/aws_s3_core.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:great_talk/model/view_model_state/edit/edit_state.dart';
 
@@ -105,7 +105,7 @@ class EditViewModel extends _$EditViewModel {
     }
     late Result<bool> updateUserResult;
     if (s.isPicked) {
-      final fileName = AWSS3Utility.profileObject(uid);
+      final fileName = AWSS3Core.profileObject(uid);
       final uint8list = base64;
       final request = PutObjectRequest.fromUint8List(
         uint8list: base64Decode(uint8list),

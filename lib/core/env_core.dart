@@ -3,7 +3,7 @@ import 'package:great_talk/env/dev_env.dart';
 import 'package:great_talk/env/prod_env.dart';
 import 'package:great_talk/flavors.dart';
 
-class EnvUtility implements EnvInterface {
+class EnvCore implements EnvInterface {
   EnvInterface get env {
     final flavor = F.appFlavor!;
     switch (flavor) {

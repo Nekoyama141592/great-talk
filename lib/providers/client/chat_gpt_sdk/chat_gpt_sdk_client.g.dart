@@ -6,7 +6,7 @@ part of 'chat_gpt_sdk_client.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatGptSdkClientHash() => r'cbb2b57c5b4b8298ae28a24b313988317f5b9a65';
+String _$chatGptSdkClientHash() => r'6ae8269af8c3ed42583631b08d774c8f150bd57d';
 
 /// See also [chatGptSdkClient].
 @ProviderFor(chatGptSdkClient)
