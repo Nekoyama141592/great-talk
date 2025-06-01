@@ -122,5 +122,14 @@ class ProfileViewModel extends _$ProfileViewModel {
     ref.read(tokensNotifierProvider.notifier).addFollowing(passiveUid);
   }
 
-  void onLoading(RefreshController controller) async {}
+  void onLoading(RefreshController controller) async {
+    final stateValue = state.value;
+    final uid = ref.read(streamAuthUidProvider).value;
+    if (stateValue == null || uid == null) return;
+    state = await AsyncValue.guard(() async {
+      final posts = await _repository.getUserOldPosts(uid, stateValue.posts);
+      return stateValue.copyWith(posts: posts);
+    });
+    controller.loadComplete();
+  }
 }
