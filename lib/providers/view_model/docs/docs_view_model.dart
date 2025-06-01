@@ -64,14 +64,15 @@ class DocsViewModel extends _$DocsViewModel {
         return FirestoreService.timelinesQuery(_currentUid());
       case DocsType.mutePosts:
         return FirestoreService.postsByWhereIn(_createRequestPostIds());
-      case DocsType.muteUsers:
-        return FirestoreService.usersByWhereIn(_createRequestUids());
       case DocsType.newPosts:
         return FirestoreService.postsByNewest();
       case DocsType.rankingPosts:
         return FirestoreService.postsByMsgCount();
       case DocsType.userProfiles:
         return FirestoreService.userPostsByNewest(passiveUid!);
+      // User
+      case DocsType.muteUsers:
+        return FirestoreService.usersByWhereIn(_createRequestUids());
       case DocsType.rankingUsers:
         return FirestoreService.usersByFollowerCount();
     }
