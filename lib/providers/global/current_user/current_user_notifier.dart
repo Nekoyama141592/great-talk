@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:great_talk/model/database_schema/private_user/private_user.dart';
+import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/global/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
@@ -8,10 +10,9 @@ import 'package:great_talk/core/credential_core.dart';
 import 'package:great_talk/repository/real/firebase_auth/firebase_auth_repository.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
-import 'package:great_talk/utility/new_content.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'current_user_notifier.g.dart'; // 自動生成されるファイル
+part 'current_user_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
 class CurrentUserNotifier extends _$CurrentUserNotifier {
@@ -73,7 +74,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final repository = ref.read(firestoreRepositoryProvider);
     final uid = _getCurrentUid();
     if (uid == null) return;
-    final newUser = NewContent.newUser(uid);
+    final newUser = PublicUser.fromRegister(uid);
     final json = newUser.toJson();
     final result = await repository.createPublicUser(uid, json);
     result.when(
@@ -93,7 +94,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final uid = _getCurrentUid();
     if (uid == null) return;
     final repository = ref.read(firestoreRepositoryProvider);
-    final newPrivateUser = NewContent.newPrivateUser(uid);
+    final newPrivateUser = PrivateUser.fromUid(uid);
     final json = newPrivateUser.toJson();
     final result = await repository.createPrivateUser(uid, json);
     result.when(

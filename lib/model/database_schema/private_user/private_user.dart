@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'private_user.freezed.dart';
@@ -21,5 +24,15 @@ abstract class PrivateUser with _$PrivateUser {
   }) = _PrivateUser;
   factory PrivateUser.fromJson(Map<String, dynamic> json) =>
       _$PrivateUserFromJson(json);
+  factory PrivateUser.fromUid(String uid)  {
+    final now = FieldValue.serverTimestamp();
+    return PrivateUser(
+      accessToken: randomString(),
+      createdAt: now,
+      ref: DocRefCore.privateUser(uid),
+      uid: uid,
+      updatedAt: now,
+    );
+  }
   DocRef typedRef() => ref as DocRef;
 }

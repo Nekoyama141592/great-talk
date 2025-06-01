@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/core/maps.dart';
 import 'package:great_talk/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
@@ -36,7 +38,30 @@ abstract class Post with _$Post {
     required dynamic updatedAt,
     @Default(0) int userCount,
   }) = _Post;
-  factory Post.fromJson(SDMap json) => _$PostFromJson(json);
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+  factory Post.fromRegister(
+    String systemPrompt,
+    String title,
+    String description,
+    String fileName,
+    String postId,
+    Map<String, dynamic> customCompleteText,
+    String uid,
+  ) {
+    final now = FieldValue.serverTimestamp();
+    return Post(
+      createdAt: now,
+      customCompleteText: customCompleteText,
+      description: DetectedText(value: description).toJson(),
+      image: DetectedImage(value: fileName).toJson(),
+      postId: postId,
+      ref: DocRefCore.post(uid, postId),
+      searchToken: returnSearchToken(title),
+      title: DetectedText(value: title).toJson(),
+      updatedAt: now,
+      uid: uid,
+    );
+  }
   Timestamp typedCreatedAt() => createdAt as Timestamp;
   DetectedText typedDescription() => DetectedText.fromJson(description);
   DetectedImage typedImage() => DetectedImage.fromJson(image);
