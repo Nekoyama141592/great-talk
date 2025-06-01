@@ -27,10 +27,10 @@ class FirestoreService {
   static DocRef token(String currentUid, String tokenId) =>
       tokensColRef(currentUid).doc(tokenId);
   // ColRef
-  static ColRef usersColRef() => FirestoreService.publicV1.collection('users');
-  static ColRef postsColRef(String uid) => FirestoreService.user(uid).collection('posts');
+  static ColRef usersColRef() => publicV1.collection('users');
+  static ColRef postsColRef(String uid) => user(uid).collection('posts');
   static ColRef tokensColRef(String currentUid) =>
-      FirestoreService.privateUser(currentUid).collection("tokens");
+      privateUser(currentUid).collection("tokens");
   static ColRef timelinesColRef(DocRef userRef) => userRef.collection('timelines');
   // Query
   // 基本
@@ -48,7 +48,7 @@ class FirestoreService {
   static MapQuery postsByNewest() =>
       postsQuery().orderBy('createdAt', descending: true);
   static MapQuery timelinesQuery(String  uid) => timelinesColRef(
-    FirestoreService.user(uid),
+    user(uid),
   ).orderBy('createdAt', descending: true).limit(whereInLimit);
   static MapQuery timelinePostsQuery(List<String> timelinePostIds) =>
       postsQuery().where('postId', whereIn: timelinePostIds);
