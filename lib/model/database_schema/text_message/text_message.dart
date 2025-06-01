@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/extensions/custom_date_time_formatting.dart';
 import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
-import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'text_message.freezed.dart';
 part 'text_message.g.dart';
@@ -18,7 +17,7 @@ abstract class TextMessage with _$TextMessage {
     dynamic postRef,
     required String posterUid,
     required String senderUid,
-    required SDMap text,
+    required Map<String,dynamic> text,
   }) = _TextMessage;
   factory TextMessage.fromJson(Map<String, dynamic> json) =>
       _$TextMessageFromJson(json);

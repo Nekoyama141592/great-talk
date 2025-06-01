@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Post {
 
- int get bookmarkCount; dynamic get createdAt; SDMap get customCompleteText; SDMap get description; List<SDMap> get exampleTexts; String get genre; List<String> get hashTags; SDMap get image; int get impressionCount; int get likeCount; List<SDMap> get links; int get msgCount; int get muteCount; String get postId; dynamic get ref; int get reportCount; double get score; SDMap get searchToken; SDMap get title; String get uid; dynamic get updatedAt; int get userCount;
+ int get bookmarkCount; dynamic get createdAt; Map<String,dynamic> get customCompleteText; Map<String,dynamic> get description; List<Map<String,dynamic>> get exampleTexts; String get genre; List<String> get hashTags; Map<String,dynamic> get image; int get impressionCount; int get likeCount; List<Map<String,dynamic>> get links; int get msgCount; int get muteCount; String get postId; dynamic get ref; int get reportCount; double get score; Map<String,dynamic> get searchToken; Map<String,dynamic> get title; String get uid; dynamic get updatedAt; int get userCount;
 /// Create a copy of Post
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $PostCopyWith<$Res>  {
   factory $PostCopyWith(Post value, $Res Function(Post) _then) = _$PostCopyWithImpl;
 @useResult
 $Res call({
- int bookmarkCount, dynamic createdAt, SDMap customCompleteText, SDMap description, List<SDMap> exampleTexts, String genre, List<String> hashTags, SDMap image, int impressionCount, int likeCount, List<SDMap> links, int msgCount, int muteCount, String postId, dynamic ref, int reportCount, double score, SDMap searchToken, SDMap title, String uid, dynamic updatedAt, int userCount
+ int bookmarkCount, dynamic createdAt, Map<String,dynamic> customCompleteText, Map<String,dynamic> description, List<Map<String,dynamic>> exampleTexts, String genre, List<String> hashTags, Map<String,dynamic> image, int impressionCount, int likeCount, List<Map<String,dynamic>> links, int msgCount, int muteCount, String postId, dynamic ref, int reportCount, double score, Map<String,dynamic> searchToken, Map<String,dynamic> title, String uid, dynamic updatedAt, int userCount
 });
 
 
@@ -71,23 +71,23 @@ class _$PostCopyWithImpl<$Res>
 bookmarkCount: null == bookmarkCount ? _self.bookmarkCount : bookmarkCount // ignore: cast_nullable_to_non_nullable
 as int,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,customCompleteText: null == customCompleteText ? _self.customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
-as SDMap,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as SDMap,exampleTexts: null == exampleTexts ? _self.exampleTexts : exampleTexts // ignore: cast_nullable_to_non_nullable
-as List<SDMap>,genre: null == genre ? _self.genre : genre // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,exampleTexts: null == exampleTexts ? _self.exampleTexts : exampleTexts // ignore: cast_nullable_to_non_nullable
+as List<Map<String,dynamic>>,genre: null == genre ? _self.genre : genre // ignore: cast_nullable_to_non_nullable
 as String,hashTags: null == hashTags ? _self.hashTags : hashTags // ignore: cast_nullable_to_non_nullable
 as List<String>,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as SDMap,impressionCount: null == impressionCount ? _self.impressionCount : impressionCount // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,impressionCount: null == impressionCount ? _self.impressionCount : impressionCount // ignore: cast_nullable_to_non_nullable
 as int,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
 as int,links: null == links ? _self.links : links // ignore: cast_nullable_to_non_nullable
-as List<SDMap>,msgCount: null == msgCount ? _self.msgCount : msgCount // ignore: cast_nullable_to_non_nullable
+as List<Map<String,dynamic>>,msgCount: null == msgCount ? _self.msgCount : msgCount // ignore: cast_nullable_to_non_nullable
 as int,muteCount: null == muteCount ? _self.muteCount : muteCount // ignore: cast_nullable_to_non_nullable
 as int,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,ref: freezed == ref ? _self.ref : ref // ignore: cast_nullable_to_non_nullable
 as dynamic,reportCount: null == reportCount ? _self.reportCount : reportCount // ignore: cast_nullable_to_non_nullable
 as int,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
 as double,searchToken: null == searchToken ? _self.searchToken : searchToken // ignore: cast_nullable_to_non_nullable
-as SDMap,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as SDMap,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as dynamic,userCount: null == userCount ? _self.userCount : userCount // ignore: cast_nullable_to_non_nullable
 as int,
@@ -101,27 +101,27 @@ as int,
 @JsonSerializable()
 
 class _Post extends Post {
-  const _Post({this.bookmarkCount = 0, required this.createdAt, required final  SDMap customCompleteText, required final  SDMap description, final  List<SDMap> exampleTexts = const [], this.genre = "", final  List<String> hashTags = const [], required final  SDMap image, this.impressionCount = 0, this.likeCount = 0, final  List<SDMap> links = const [], this.msgCount = 0, this.muteCount = 0, required this.postId, required this.ref, this.reportCount = 0, this.score = 0.0, required final  SDMap searchToken, required final  SDMap title, required this.uid, required this.updatedAt, this.userCount = 0}): _customCompleteText = customCompleteText,_description = description,_exampleTexts = exampleTexts,_hashTags = hashTags,_image = image,_links = links,_searchToken = searchToken,_title = title,super._();
+  const _Post({this.bookmarkCount = 0, required this.createdAt, required final  Map<String,dynamic> customCompleteText, required final  Map<String,dynamic> description, final  List<Map<String,dynamic>> exampleTexts = const [], this.genre = "", final  List<String> hashTags = const [], required final  Map<String,dynamic> image, this.impressionCount = 0, this.likeCount = 0, final  List<Map<String,dynamic>> links = const [], this.msgCount = 0, this.muteCount = 0, required this.postId, required this.ref, this.reportCount = 0, this.score = 0.0, required final  Map<String,dynamic> searchToken, required final  Map<String,dynamic> title, required this.uid, required this.updatedAt, this.userCount = 0}): _customCompleteText = customCompleteText,_description = description,_exampleTexts = exampleTexts,_hashTags = hashTags,_image = image,_links = links,_searchToken = searchToken,_title = title,super._();
   factory _Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
 @override@JsonKey() final  int bookmarkCount;
 @override final  dynamic createdAt;
- final  SDMap _customCompleteText;
-@override SDMap get customCompleteText {
+ final  Map<String,dynamic> _customCompleteText;
+@override Map<String,dynamic> get customCompleteText {
   if (_customCompleteText is EqualUnmodifiableMapView) return _customCompleteText;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_customCompleteText);
 }
 
- final  SDMap _description;
-@override SDMap get description {
+ final  Map<String,dynamic> _description;
+@override Map<String,dynamic> get description {
   if (_description is EqualUnmodifiableMapView) return _description;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_description);
 }
 
- final  List<SDMap> _exampleTexts;
-@override@JsonKey() List<SDMap> get exampleTexts {
+ final  List<Map<String,dynamic>> _exampleTexts;
+@override@JsonKey() List<Map<String,dynamic>> get exampleTexts {
   if (_exampleTexts is EqualUnmodifiableListView) return _exampleTexts;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_exampleTexts);
@@ -135,8 +135,8 @@ class _Post extends Post {
   return EqualUnmodifiableListView(_hashTags);
 }
 
- final  SDMap _image;
-@override SDMap get image {
+ final  Map<String,dynamic> _image;
+@override Map<String,dynamic> get image {
   if (_image is EqualUnmodifiableMapView) return _image;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_image);
@@ -144,8 +144,8 @@ class _Post extends Post {
 
 @override@JsonKey() final  int impressionCount;
 @override@JsonKey() final  int likeCount;
- final  List<SDMap> _links;
-@override@JsonKey() List<SDMap> get links {
+ final  List<Map<String,dynamic>> _links;
+@override@JsonKey() List<Map<String,dynamic>> get links {
   if (_links is EqualUnmodifiableListView) return _links;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_links);
@@ -157,15 +157,15 @@ class _Post extends Post {
 @override final  dynamic ref;
 @override@JsonKey() final  int reportCount;
 @override@JsonKey() final  double score;
- final  SDMap _searchToken;
-@override SDMap get searchToken {
+ final  Map<String,dynamic> _searchToken;
+@override Map<String,dynamic> get searchToken {
   if (_searchToken is EqualUnmodifiableMapView) return _searchToken;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_searchToken);
 }
 
- final  SDMap _title;
-@override SDMap get title {
+ final  Map<String,dynamic> _title;
+@override Map<String,dynamic> get title {
   if (_title is EqualUnmodifiableMapView) return _title;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_title);
@@ -208,7 +208,7 @@ abstract mixin class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   factory _$PostCopyWith(_Post value, $Res Function(_Post) _then) = __$PostCopyWithImpl;
 @override @useResult
 $Res call({
- int bookmarkCount, dynamic createdAt, SDMap customCompleteText, SDMap description, List<SDMap> exampleTexts, String genre, List<String> hashTags, SDMap image, int impressionCount, int likeCount, List<SDMap> links, int msgCount, int muteCount, String postId, dynamic ref, int reportCount, double score, SDMap searchToken, SDMap title, String uid, dynamic updatedAt, int userCount
+ int bookmarkCount, dynamic createdAt, Map<String,dynamic> customCompleteText, Map<String,dynamic> description, List<Map<String,dynamic>> exampleTexts, String genre, List<String> hashTags, Map<String,dynamic> image, int impressionCount, int likeCount, List<Map<String,dynamic>> links, int msgCount, int muteCount, String postId, dynamic ref, int reportCount, double score, Map<String,dynamic> searchToken, Map<String,dynamic> title, String uid, dynamic updatedAt, int userCount
 });
 
 
@@ -230,23 +230,23 @@ class __$PostCopyWithImpl<$Res>
 bookmarkCount: null == bookmarkCount ? _self.bookmarkCount : bookmarkCount // ignore: cast_nullable_to_non_nullable
 as int,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,customCompleteText: null == customCompleteText ? _self._customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
-as SDMap,description: null == description ? _self._description : description // ignore: cast_nullable_to_non_nullable
-as SDMap,exampleTexts: null == exampleTexts ? _self._exampleTexts : exampleTexts // ignore: cast_nullable_to_non_nullable
-as List<SDMap>,genre: null == genre ? _self.genre : genre // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,description: null == description ? _self._description : description // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,exampleTexts: null == exampleTexts ? _self._exampleTexts : exampleTexts // ignore: cast_nullable_to_non_nullable
+as List<Map<String,dynamic>>,genre: null == genre ? _self.genre : genre // ignore: cast_nullable_to_non_nullable
 as String,hashTags: null == hashTags ? _self._hashTags : hashTags // ignore: cast_nullable_to_non_nullable
 as List<String>,image: null == image ? _self._image : image // ignore: cast_nullable_to_non_nullable
-as SDMap,impressionCount: null == impressionCount ? _self.impressionCount : impressionCount // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,impressionCount: null == impressionCount ? _self.impressionCount : impressionCount // ignore: cast_nullable_to_non_nullable
 as int,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
 as int,links: null == links ? _self._links : links // ignore: cast_nullable_to_non_nullable
-as List<SDMap>,msgCount: null == msgCount ? _self.msgCount : msgCount // ignore: cast_nullable_to_non_nullable
+as List<Map<String,dynamic>>,msgCount: null == msgCount ? _self.msgCount : msgCount // ignore: cast_nullable_to_non_nullable
 as int,muteCount: null == muteCount ? _self.muteCount : muteCount // ignore: cast_nullable_to_non_nullable
 as int,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,ref: freezed == ref ? _self.ref : ref // ignore: cast_nullable_to_non_nullable
 as dynamic,reportCount: null == reportCount ? _self.reportCount : reportCount // ignore: cast_nullable_to_non_nullable
 as int,score: null == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
 as double,searchToken: null == searchToken ? _self._searchToken : searchToken // ignore: cast_nullable_to_non_nullable
-as SDMap,title: null == title ? _self._title : title // ignore: cast_nullable_to_non_nullable
-as SDMap,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,title: null == title ? _self._title : title // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as dynamic,userCount: null == userCount ? _self.userCount : userCount // ignore: cast_nullable_to_non_nullable
 as int,

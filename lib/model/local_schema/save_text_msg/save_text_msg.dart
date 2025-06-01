@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
-import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'save_text_msg.freezed.dart';
 part 'save_text_msg.g.dart';
@@ -14,7 +13,7 @@ abstract class SaveTextMsg with _$SaveTextMsg {
     required String messageType,
     required String posterUid,
     required String senderUid,
-    required SDMap text,
+    required Map<String,dynamic> text,
   }) = _SaveTextMsg;
   factory SaveTextMsg.fromJson(Map<String, dynamic> json) =>
       _$SaveTextMsgFromJson(json);

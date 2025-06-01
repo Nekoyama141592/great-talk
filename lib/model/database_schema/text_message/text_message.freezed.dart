@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TextMessage {
 
- dynamic get createdAt; String get id; String get messageType; dynamic get postRef; String get posterUid; String get senderUid; SDMap get text;
+ dynamic get createdAt; String get id; String get messageType; dynamic get postRef; String get posterUid; String get senderUid; Map<String,dynamic> get text;
 /// Create a copy of TextMessage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $TextMessageCopyWith<$Res>  {
   factory $TextMessageCopyWith(TextMessage value, $Res Function(TextMessage) _then) = _$TextMessageCopyWithImpl;
 @useResult
 $Res call({
- dynamic createdAt, String id, String messageType, dynamic postRef, String posterUid, String senderUid, SDMap text
+ dynamic createdAt, String id, String messageType, dynamic postRef, String posterUid, String senderUid, Map<String,dynamic> text
 });
 
 
@@ -75,7 +75,7 @@ as String,postRef: freezed == postRef ? _self.postRef : postRef // ignore: cast_
 as dynamic,posterUid: null == posterUid ? _self.posterUid : posterUid // ignore: cast_nullable_to_non_nullable
 as String,senderUid: null == senderUid ? _self.senderUid : senderUid // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
-as SDMap,
+as Map<String,dynamic>,
   ));
 }
 
@@ -86,7 +86,7 @@ as SDMap,
 @JsonSerializable()
 
 class _TextMessage extends TextMessage {
-  const _TextMessage({required this.createdAt, required this.id, required this.messageType, this.postRef, required this.posterUid, required this.senderUid, required final  SDMap text}): _text = text,super._();
+  const _TextMessage({required this.createdAt, required this.id, required this.messageType, this.postRef, required this.posterUid, required this.senderUid, required final  Map<String,dynamic> text}): _text = text,super._();
   factory _TextMessage.fromJson(Map<String, dynamic> json) => _$TextMessageFromJson(json);
 
 @override final  dynamic createdAt;
@@ -95,8 +95,8 @@ class _TextMessage extends TextMessage {
 @override final  dynamic postRef;
 @override final  String posterUid;
 @override final  String senderUid;
- final  SDMap _text;
-@override SDMap get text {
+ final  Map<String,dynamic> _text;
+@override Map<String,dynamic> get text {
   if (_text is EqualUnmodifiableMapView) return _text;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_text);
@@ -136,7 +136,7 @@ abstract mixin class _$TextMessageCopyWith<$Res> implements $TextMessageCopyWith
   factory _$TextMessageCopyWith(_TextMessage value, $Res Function(_TextMessage) _then) = __$TextMessageCopyWithImpl;
 @override @useResult
 $Res call({
- dynamic createdAt, String id, String messageType, dynamic postRef, String posterUid, String senderUid, SDMap text
+ dynamic createdAt, String id, String messageType, dynamic postRef, String posterUid, String senderUid, Map<String,dynamic> text
 });
 
 
@@ -162,7 +162,7 @@ as String,postRef: freezed == postRef ? _self.postRef : postRef // ignore: cast_
 as dynamic,posterUid: null == posterUid ? _self.posterUid : posterUid // ignore: cast_nullable_to_non_nullable
 as String,senderUid: null == senderUid ? _self.senderUid : senderUid // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self._text : text // ignore: cast_nullable_to_non_nullable
-as SDMap,
+as Map<String,dynamic>,
   ));
 }
 

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserUpdateLog {
 
- dynamic get logCreatedAt; SDMap get searchToken; String get stringBio; String get stringUserName; String get uid; SDMap get image; dynamic get userRef;
+ dynamic get logCreatedAt; Map<String,dynamic> get searchToken; String get stringBio; String get stringUserName; String get uid; Map<String,dynamic> get image; dynamic get userRef;
 /// Create a copy of UserUpdateLog
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $UserUpdateLogCopyWith<$Res>  {
   factory $UserUpdateLogCopyWith(UserUpdateLog value, $Res Function(UserUpdateLog) _then) = _$UserUpdateLogCopyWithImpl;
 @useResult
 $Res call({
- dynamic logCreatedAt, SDMap searchToken, String stringBio, String stringUserName, String uid, SDMap image, dynamic userRef
+ dynamic logCreatedAt, Map<String,dynamic> searchToken, String stringBio, String stringUserName, String uid, Map<String,dynamic> image, dynamic userRef
 });
 
 
@@ -70,11 +70,11 @@ class _$UserUpdateLogCopyWithImpl<$Res>
   return _then(_self.copyWith(
 logCreatedAt: freezed == logCreatedAt ? _self.logCreatedAt : logCreatedAt // ignore: cast_nullable_to_non_nullable
 as dynamic,searchToken: null == searchToken ? _self.searchToken : searchToken // ignore: cast_nullable_to_non_nullable
-as SDMap,stringBio: null == stringBio ? _self.stringBio : stringBio // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,stringBio: null == stringBio ? _self.stringBio : stringBio // ignore: cast_nullable_to_non_nullable
 as String,stringUserName: null == stringUserName ? _self.stringUserName : stringUserName // ignore: cast_nullable_to_non_nullable
 as String,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as SDMap,userRef: freezed == userRef ? _self.userRef : userRef // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,userRef: freezed == userRef ? _self.userRef : userRef // ignore: cast_nullable_to_non_nullable
 as dynamic,
   ));
 }
@@ -86,12 +86,12 @@ as dynamic,
 @JsonSerializable()
 
 class _UserUpdateLog implements UserUpdateLog {
-  const _UserUpdateLog({required this.logCreatedAt, required final  SDMap searchToken, required this.stringBio, required this.stringUserName, required this.uid, required final  SDMap image, required this.userRef}): _searchToken = searchToken,_image = image;
+  const _UserUpdateLog({required this.logCreatedAt, required final  Map<String,dynamic> searchToken, required this.stringBio, required this.stringUserName, required this.uid, required final  Map<String,dynamic> image, required this.userRef}): _searchToken = searchToken,_image = image;
   factory _UserUpdateLog.fromJson(Map<String, dynamic> json) => _$UserUpdateLogFromJson(json);
 
 @override final  dynamic logCreatedAt;
- final  SDMap _searchToken;
-@override SDMap get searchToken {
+ final  Map<String,dynamic> _searchToken;
+@override Map<String,dynamic> get searchToken {
   if (_searchToken is EqualUnmodifiableMapView) return _searchToken;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_searchToken);
@@ -100,8 +100,8 @@ class _UserUpdateLog implements UserUpdateLog {
 @override final  String stringBio;
 @override final  String stringUserName;
 @override final  String uid;
- final  SDMap _image;
-@override SDMap get image {
+ final  Map<String,dynamic> _image;
+@override Map<String,dynamic> get image {
   if (_image is EqualUnmodifiableMapView) return _image;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_image);
@@ -142,7 +142,7 @@ abstract mixin class _$UserUpdateLogCopyWith<$Res> implements $UserUpdateLogCopy
   factory _$UserUpdateLogCopyWith(_UserUpdateLog value, $Res Function(_UserUpdateLog) _then) = __$UserUpdateLogCopyWithImpl;
 @override @useResult
 $Res call({
- dynamic logCreatedAt, SDMap searchToken, String stringBio, String stringUserName, String uid, SDMap image, dynamic userRef
+ dynamic logCreatedAt, Map<String,dynamic> searchToken, String stringBio, String stringUserName, String uid, Map<String,dynamic> image, dynamic userRef
 });
 
 
@@ -163,11 +163,11 @@ class __$UserUpdateLogCopyWithImpl<$Res>
   return _then(_UserUpdateLog(
 logCreatedAt: freezed == logCreatedAt ? _self.logCreatedAt : logCreatedAt // ignore: cast_nullable_to_non_nullable
 as dynamic,searchToken: null == searchToken ? _self._searchToken : searchToken // ignore: cast_nullable_to_non_nullable
-as SDMap,stringBio: null == stringBio ? _self.stringBio : stringBio // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,stringBio: null == stringBio ? _self.stringBio : stringBio // ignore: cast_nullable_to_non_nullable
 as String,stringUserName: null == stringUserName ? _self.stringUserName : stringUserName // ignore: cast_nullable_to_non_nullable
 as String,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,image: null == image ? _self._image : image // ignore: cast_nullable_to_non_nullable
-as SDMap,userRef: freezed == userRef ? _self.userRef : userRef // ignore: cast_nullable_to_non_nullable
+as Map<String,dynamic>,userRef: freezed == userRef ? _self.userRef : userRef // ignore: cast_nullable_to_non_nullable
 as dynamic,
   ));
 }
