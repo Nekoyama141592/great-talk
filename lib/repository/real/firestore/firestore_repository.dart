@@ -11,6 +11,7 @@ import 'package:great_talk/model/database_schema/tokens/like_post_token/like_pos
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
+import 'package:great_talk/providers/client/firebase_firestore/firebase_firestore_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,8 +19,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'firestore_repository.g.dart';
 
-@Riverpod(keepAlive: true)
-FirebaseFirestore firebaseFirestore(Ref ref) => FirebaseFirestore.instance;
 @riverpod
 FirestoreRepository firestoreRepository(Ref ref) => FirestoreRepository(ref.watch(firebaseFirestoreProvider));
 

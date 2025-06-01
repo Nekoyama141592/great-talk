@@ -1,14 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/credential_core.dart';
+import 'package:great_talk/providers/client/firebath_auth/firebase_auth_provider.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'firebase_auth_repository.g.dart';
 
-@Riverpod(keepAlive: true)
-FirebaseAuth firebaseAuth(Ref ref) => FirebaseAuth.instance;
 @riverpod
 FirebaseAuthRepository firebaseAuthRepository(Ref ref) => FirebaseAuthRepository(ref.watch(firebaseAuthProvider));
 
