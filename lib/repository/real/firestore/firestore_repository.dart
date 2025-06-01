@@ -343,22 +343,41 @@ class FirestoreRepository {
     }
   }
 
-  Future<Doc?> _getPostDoc(String uid,String postId) async {
-    try {
-      final docRef = service.post(uid, postId);
-      return docRef.get();
-    } catch(e) {
-      debugPrint(e.toString());
-      return null;
-    }
+  Future<Doc> _getPostDoc(String uid,String postId) async {
+    final docRef = service.post(uid, postId);
+    return docRef.get();
   }
-  Future<List<Post>> getUserOldPosts(Post lastPost) async {
+  Future<List<Post>> getMoreUserPosts(Post lastPost) async {
     try {
       final doc = await _getPostDoc(lastPost.uid, lastPost.postId);
-      if (doc == null) return [];
       final query = service.userPostsByNewest(lastPost.uid).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
+    } catch (e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+  Future<Doc> _getUserDoc(String uid) async {
+    final docRef = service.user(uid);
+    return docRef.get();
+  }
+  Future<List<PublicUser>> getRankingUsers() async {
+    try {
+      final query = service.usersByFollowerCount();
+      final qshot = await query.get();
+      return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
+    } catch (e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+  Future<List<PublicUser>> getMoreRankingUsers(PublicUser lastUser) async {
+    try {
+      final doc = await _getUserDoc(lastUser.uid);
+      final query = service.usersByFollowerCount().startAfterDocument(doc);;
+      final qshot = await query.get();
+      return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
     } catch (e) {
       debugPrint(e.toString());
       return [];

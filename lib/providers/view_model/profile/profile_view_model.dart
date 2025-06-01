@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
-import 'package:great_talk/model/database_schema/user_post/user_post.dart';
+import 'package:great_talk/model/view_model_state/common/user_post/user_post.dart';
 import 'package:great_talk/model/view_model_state/profile/profile_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
@@ -152,11 +152,10 @@ class ProfileViewModel extends _$ProfileViewModel {
 
   void onLoading(RefreshController controller) async {
     final stateValue = state.value;
-    final uid = ref.read(streamAuthUidProvider).value;
-    if (uid == null || stateValue == null) return;
+    if (stateValue == null) return;
     state = await AsyncValue.guard(() async {
       final oldPosts = stateValue.posts();
-      final posts = await _repository.getUserOldPosts(oldPosts.last);
+      final posts = await _repository.getMoreUserPosts(oldPosts.last);
       final newPosts = [...oldPosts,...posts];
       final userPosts = await _postsToUserPosts(newPosts);
       return stateValue.copyWith(userPosts: userPosts);

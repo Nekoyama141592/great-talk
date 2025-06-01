@@ -48,7 +48,7 @@ class FirestoreService {
   MapQuery postsByWhereIn(List<String> postIds) =>
       postsQuery().where('postId', whereIn: postIds);
   MapQuery userPostsByNewest(String uid) =>
-      userPostsQuery(uid).orderBy("createdAt", descending: true).limit(1);
+      userPostsQuery(uid).orderBy("createdAt", descending: true);
   MapQuery postsByMsgCount() =>
       postsQuery().orderBy('msgCount', descending: true);
   MapQuery postsByNewest() =>

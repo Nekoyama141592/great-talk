@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class UsersRefreshScreen extends HookWidget {
   const UsersRefreshScreen({
     super.key,
-    required this.users,
+    required this.isEmpty,
     required this.onLoading,
     required this.child
   });
-  final List<PublicUser> users;
+  final bool isEmpty;
   final void Function(RefreshController) onLoading;
   final Widget child;
   @override
@@ -20,7 +19,7 @@ class UsersRefreshScreen extends HookWidget {
       refreshController = RefreshController();
       return refreshController.dispose;
     }, []);
-    if (users.isEmpty) {
+    if (isEmpty) {
       return Align(alignment: Alignment.center, child: const Text('データがありません'));
     }
     return SmartRefresher(

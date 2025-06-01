@@ -52,8 +52,6 @@ class DocsViewModel extends _$DocsViewModel {
       // User
       case DocsType.muteUsers:
         return service.usersByWhereIn(_createRequestUids());
-      case DocsType.rankingUsers:
-        return service.usersByFollowerCount();
     }
   }
 
