@@ -26,7 +26,6 @@ enum TokenType { following, likePost, mutePost, muteUser, reportPost }
 enum DocsType {
   feeds,
   mutePosts,
-  muteUsers,
   newPosts,
   rankingPosts,
 }

@@ -150,12 +150,17 @@ class TokensNotifier extends _$TokensNotifier {
     return token;
   }
 
-  void removeMuteUser(MuteUserToken muteUserToken) {
+  MuteUserToken? removeMuteUser(String passiveUid) {
+    final deleteToken = ref.read(tokensNotifierProvider).value?.muteUserTokens.firstWhereOrNull(
+      (e) => e.passiveUid == passiveUid,
+    );
+    if (deleteToken == null) return null;
     final newList =
         _currentState.muteUserTokens
-            .where((token) => token.passiveUid != muteUserToken.passiveUid)
+            .where((token) => token.passiveUid != deleteToken.passiveUid)
             .toList();
     final newState = _currentState.copyWith(muteUserTokens: newList);
     _updateState(newState);
+    return deleteToken;
   }
 }

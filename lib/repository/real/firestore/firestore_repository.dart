@@ -375,7 +375,30 @@ class FirestoreRepository {
   Future<List<PublicUser>> getMoreRankingUsers(PublicUser lastUser) async {
     try {
       final doc = await _getUserDoc(lastUser.uid);
-      final query = service.usersByFollowerCount().startAfterDocument(doc);;
+      final query = service.usersByFollowerCount().startAfterDocument(doc);
+      final qshot = await query.get();
+      return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
+    } catch (e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+  Future<List<PublicUser>> getMuteUsers(List<String> requestUids) async {
+    if (requestUids.isEmpty) return [];
+    try {
+      final query = service.usersByWhereIn(requestUids);
+      final qshot = await query.get();
+      return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
+    } catch (e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+  Future<List<PublicUser>> getMoreMuteUsers(List<String> requestUids,PublicUser lastUser) async {
+    if (requestUids.isEmpty) return [];
+    try {
+      final doc = await _getUserDoc(lastUser.uid);
+      final query = service.usersByWhereIn(requestUids).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
     } catch (e) {

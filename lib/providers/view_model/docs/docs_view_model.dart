@@ -6,7 +6,6 @@ import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/providers/service/firestore/firestore_service_provider.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/database_schema/q_doc_info/q_doc_info.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
 import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
@@ -49,18 +48,13 @@ class DocsViewModel extends _$DocsViewModel {
         return service.postsByNewest();
       case DocsType.rankingPosts:
         return service.postsByMsgCount();
-      // User
-      case DocsType.muteUsers:
-        return service.usersByWhereIn(_createRequestUids());
     }
   }
 
   Future<DocsState> _fetchInitialDocs() async {
-    if ((type == DocsType.mutePosts && _createRequestPostIds().isEmpty) ||
-        (type == DocsType.muteUsers && _createRequestUids().isEmpty)) {
+    if ((type == DocsType.mutePosts && _createRequestPostIds().isEmpty)) {
       return DocsState();
     }
-
     try {
       if (type == DocsType.feeds) {
         final result = await _setQuery().get();
@@ -84,7 +78,6 @@ class DocsViewModel extends _$DocsViewModel {
   Future<void> onLoading(RefreshController refreshController) async {
     if (state.isLoading) return;
     if ((type == DocsType.mutePosts && _createRequestPostIds().isEmpty) ||
-        (type == DocsType.muteUsers && _createRequestUids().isEmpty) ||
         (state.value?.qDocInfoList.isEmpty ?? true)) {
       refreshController.loadComplete();
       return;
@@ -241,40 +234,6 @@ class DocsViewModel extends _$DocsViewModel {
       currentUid,
       post,
       deleteToken.tokenId,
-    );
-  }
-
-  // Mute User
-  List<String> _createRequestUids() {
-    final currentDocsLength = state.value?.qDocInfoList.length ?? 0;
-    final muteUids = _tokensState().muteUids;
-    if (muteUids.length > currentDocsLength) {
-      final remaining = muteUids.length - currentDocsLength;
-      final limit = remaining >= whereInLimit ? whereInLimit : remaining;
-      return muteUids.sublist(currentDocsLength, currentDocsLength + limit);
-    }
-    return [];
-  }
-
-  FutureResult<bool> unMuteUser(String passiveUid) async {
-    final deleteToken = _tokensState().muteUserTokens.firstWhere(
-      (e) => e.passiveUid == passiveUid,
-    );
-    _tokensNotifier().removeMuteUser(deleteToken);
-
-    final newQDocInfoList =
-        state.value!.qDocInfoList
-            .where((e) => PublicUser.fromJson(e.qDoc.data()).uid != passiveUid)
-            .toList();
-    state = AsyncValue.data(
-      state.value!.copyWith(qDocInfoList: newQDocInfoList),
-    );
-    final currentUid = _currentUid();
-    final tokenId = deleteToken.tokenId;
-    return await _repository.deleteMuteUserInfo(
-      currentUid,
-      passiveUid,
-      tokenId,
     );
   }
 }
