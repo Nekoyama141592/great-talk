@@ -27,11 +27,6 @@ _TokensState _$TokensStateFromJson(Map<String, dynamic> json) => _TokensState(
           ?.map((e) => MuteUserToken.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const <MuteUserToken>[],
-  reportPostTokens:
-      (json['reportPostTokens'] as List<dynamic>?)
-          ?.map((e) => ReportPostToken.fromJson(e as Map<String, dynamic>))
-          .toList() ??
-      const <ReportPostToken>[],
   deletePostIds:
       (json['deletePostIds'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -45,6 +40,5 @@ Map<String, dynamic> _$TokensStateToJson(_TokensState instance) =>
       'likePostTokens': instance.likePostTokens,
       'mutePostTokens': instance.mutePostTokens,
       'muteUserTokens': instance.muteUserTokens,
-      'reportPostTokens': instance.reportPostTokens,
       'deletePostIds': instance.deletePostIds,
     };

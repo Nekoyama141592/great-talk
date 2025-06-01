@@ -9,7 +9,6 @@ import 'package:great_talk/model/database_schema/tokens/following_token/followin
 import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
-import 'package:great_talk/model/database_schema/tokens/report_post_token/report_post_token.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 
@@ -48,11 +47,6 @@ class TokensNotifier extends _$TokensNotifier {
           allTokensData
               .where((map) => map['tokenType'] == TokenType.mutePost.name)
               .map((map) => MutePostToken.fromJson(map))
-              .toList(),
-      reportPostTokens:
-          allTokensData
-              .where((map) => map['tokenType'] == TokenType.reportPost.name)
-              .map((map) => ReportPostToken.fromJson(map))
               .toList(),
     );
   }
@@ -155,13 +149,6 @@ class TokensNotifier extends _$TokensNotifier {
             .where((token) => token.passiveUid != muteUserToken.passiveUid)
             .toList();
     final newState = _currentState.copyWith(muteUserTokens: newList);
-    _updateState(newState);
-  }
-
-  void addReportPost(ReportPostToken reportPostToken) {
-    final newState = _currentState.copyWith(
-      reportPostTokens: [..._currentState.reportPostTokens, reportPostToken],
-    );
     _updateState(newState);
   }
 }
