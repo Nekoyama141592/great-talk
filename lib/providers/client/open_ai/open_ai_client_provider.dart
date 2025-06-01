@@ -1,5 +1,5 @@
 import 'package:great_talk/infrastructure/open_ai/open_ai_client.dart';
-import 'package:great_talk/infrastructure/open_ai/original_dio.dart';
+import 'package:great_talk/infrastructure/original_dio.dart';
 import 'package:great_talk/utility/env_utility.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
