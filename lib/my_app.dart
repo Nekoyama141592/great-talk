@@ -5,8 +5,8 @@ import 'package:great_talk/providers/global/local_setting/local_setting.dart';
 import 'package:great_talk/theme/themes.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class MyAppPage extends ConsumerWidget {
-  const MyAppPage({super.key});
+class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(localSettingProvider);
