@@ -342,10 +342,21 @@ class FirestoreRepository {
       return [];
     }
   }
-  Future<List<Post>> getUserOldPosts(String uid,List<Post> posts) async {
+
+  Future<Doc?> _getPostDoc(String uid,String postId) async {
     try {
-      final values = posts.map((e) => e.toJson()).toList();
-      final query = service.userPostsByNewest(uid).startAfter(values);
+      final docRef = service.post(uid, postId);
+      return docRef.get();
+    } catch(e) {
+      debugPrint(e.toString());
+      return null;
+    }
+  }
+  Future<List<Post>> getUserOldPosts(Post lastPost) async {
+    try {
+      final doc = await _getPostDoc(lastPost.uid, lastPost.postId);
+      if (doc == null) return [];
+      final query = service.userPostsByNewest(lastPost.uid).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch (e) {

@@ -76,17 +76,7 @@ class ProfileViewModel extends _$ProfileViewModel {
   final results = await Future.wait(futures);
   return results;
 }
-  void onReload() async {
-    final stateValue = state.value;
-    final uid = ref.read(streamAuthUidProvider).value;
-    if (uid == null || stateValue == null) return;
-    state = await AsyncValue.guard(() async {
-      final oldPosts = stateValue.posts();
-      final newPosts = await _repository.getUserOldPosts(uid, oldPosts);
-      final userPosts = await _postsToUserPosts(newPosts);
-      return stateValue.copyWith(userPosts: userPosts);
-    });
-  }
+  
   // Follow/Unfollow
   FutureResult<bool> onFollowPressed() async {
     final currentUid = ref.read(streamAuthUidProvider).value;
@@ -163,11 +153,12 @@ class ProfileViewModel extends _$ProfileViewModel {
   void onLoading(RefreshController controller) async {
     final stateValue = state.value;
     final uid = ref.read(streamAuthUidProvider).value;
-    if (stateValue == null || uid == null) return;
+    if (uid == null || stateValue == null) return;
     state = await AsyncValue.guard(() async {
-      final oldPosts = stateValue.userPosts.map((e) => e.post).toList();
-      final posts = await _repository.getUserOldPosts(uid, oldPosts);
-      final userPosts = await _postsToUserPosts(posts);
+      final oldPosts = stateValue.posts();
+      final posts = await _repository.getUserOldPosts(oldPosts.last);
+      final newPosts = [...oldPosts,...posts];
+      final userPosts = await _postsToUserPosts(newPosts);
       return stateValue.copyWith(userPosts: userPosts);
     });
     controller.loadComplete();
