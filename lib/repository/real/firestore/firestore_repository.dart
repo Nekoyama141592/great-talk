@@ -176,7 +176,7 @@ class FirestoreRepository {
     PostLike postLike,
   ) async {
     final tokenRef = FirestoreService.token(currentUid, token.tokenId);
-    final postRef = post.typedRef();
+    final postRef = FirestoreService.post(post.uid, post.postId);
     final postLikeRef = FirestoreService.postLike(postRef, currentUid);
     final requestList = [
       FirestoreRequest(tokenRef, token.toJson()),
@@ -241,7 +241,7 @@ class FirestoreRepository {
     String tokenId,
   ) async {
     final tokenRef = FirestoreService.token(currentUid, tokenId);
-    final postRef = post.typedRef();
+    final postRef = FirestoreService.post(post.uid, post.postId);
     final postLikeRef = FirestoreService.postLike(postRef, currentUid);
     final docRefList = [tokenRef, postLikeRef];
     return _deleteDocs(docRefList);

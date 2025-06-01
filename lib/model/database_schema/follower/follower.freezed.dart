@@ -16,7 +16,9 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Follower {
 
- dynamic get activeUserRef; dynamic get createdAt; dynamic get passiveUserRef;
+// required dynamic activeUserRef, // TODO: 対応
+ String get activeUid;// TODO: 新規追加対応
+ dynamic get createdAt; String get passiveUid;
 /// Create a copy of Follower
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +31,16 @@ $FollowerCopyWith<Follower> get copyWith => _$FollowerCopyWithImpl<Follower>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Follower&&const DeepCollectionEquality().equals(other.activeUserRef, activeUserRef)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&const DeepCollectionEquality().equals(other.passiveUserRef, passiveUserRef));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Follower&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(activeUserRef),const DeepCollectionEquality().hash(createdAt),const DeepCollectionEquality().hash(passiveUserRef));
+int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid);
 
 @override
 String toString() {
-  return 'Follower(activeUserRef: $activeUserRef, createdAt: $createdAt, passiveUserRef: $passiveUserRef)';
+  return 'Follower(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid)';
 }
 
 
@@ -49,7 +51,7 @@ abstract mixin class $FollowerCopyWith<$Res>  {
   factory $FollowerCopyWith(Follower value, $Res Function(Follower) _then) = _$FollowerCopyWithImpl;
 @useResult
 $Res call({
- dynamic activeUserRef, dynamic createdAt, dynamic passiveUserRef
+ String activeUid, dynamic createdAt, String passiveUid
 });
 
 
@@ -66,12 +68,12 @@ class _$FollowerCopyWithImpl<$Res>
 
 /// Create a copy of Follower
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? activeUserRef = freezed,Object? createdAt = freezed,Object? passiveUserRef = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,}) {
   return _then(_self.copyWith(
-activeUserRef: freezed == activeUserRef ? _self.activeUserRef : activeUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as dynamic,passiveUserRef: freezed == passiveUserRef ? _self.passiveUserRef : passiveUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,
+activeUid: null == activeUid ? _self.activeUid : activeUid // ignore: cast_nullable_to_non_nullable
+as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as dynamic,passiveUid: null == passiveUid ? _self.passiveUid : passiveUid // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -82,12 +84,14 @@ as dynamic,
 @JsonSerializable()
 
 class _Follower extends Follower {
-  const _Follower({required this.activeUserRef, required this.createdAt, required this.passiveUserRef}): super._();
+  const _Follower({required this.activeUid, required this.createdAt, required this.passiveUid}): super._();
   factory _Follower.fromJson(Map<String, dynamic> json) => _$FollowerFromJson(json);
 
-@override final  dynamic activeUserRef;
+// required dynamic activeUserRef, // TODO: 対応
+@override final  String activeUid;
+// TODO: 新規追加対応
 @override final  dynamic createdAt;
-@override final  dynamic passiveUserRef;
+@override final  String passiveUid;
 
 /// Create a copy of Follower
 /// with the given fields replaced by the non-null parameter values.
@@ -102,16 +106,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Follower&&const DeepCollectionEquality().equals(other.activeUserRef, activeUserRef)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&const DeepCollectionEquality().equals(other.passiveUserRef, passiveUserRef));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Follower&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(activeUserRef),const DeepCollectionEquality().hash(createdAt),const DeepCollectionEquality().hash(passiveUserRef));
+int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid);
 
 @override
 String toString() {
-  return 'Follower(activeUserRef: $activeUserRef, createdAt: $createdAt, passiveUserRef: $passiveUserRef)';
+  return 'Follower(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid)';
 }
 
 
@@ -122,7 +126,7 @@ abstract mixin class _$FollowerCopyWith<$Res> implements $FollowerCopyWith<$Res>
   factory _$FollowerCopyWith(_Follower value, $Res Function(_Follower) _then) = __$FollowerCopyWithImpl;
 @override @useResult
 $Res call({
- dynamic activeUserRef, dynamic createdAt, dynamic passiveUserRef
+ String activeUid, dynamic createdAt, String passiveUid
 });
 
 
@@ -139,12 +143,12 @@ class __$FollowerCopyWithImpl<$Res>
 
 /// Create a copy of Follower
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? activeUserRef = freezed,Object? createdAt = freezed,Object? passiveUserRef = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,}) {
   return _then(_Follower(
-activeUserRef: freezed == activeUserRef ? _self.activeUserRef : activeUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as dynamic,passiveUserRef: freezed == passiveUserRef ? _self.passiveUserRef : passiveUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,
+activeUid: null == activeUid ? _self.activeUid : activeUid // ignore: cast_nullable_to_non_nullable
+as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as dynamic,passiveUid: null == passiveUid ? _self.passiveUid : passiveUid // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

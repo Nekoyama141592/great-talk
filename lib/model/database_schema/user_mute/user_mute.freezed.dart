@@ -16,7 +16,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserMute {
 
- String get activeUid; dynamic get activeUserRef; dynamic get createdAt; String get passiveUid; dynamic get passiveUserRef;
+ String get activeUid;// required dynamic activeUserRef, // TODO: 対応
+ dynamic get createdAt; String get passiveUid;
 /// Create a copy of UserMute
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +30,16 @@ $UserMuteCopyWith<UserMute> get copyWith => _$UserMuteCopyWithImpl<UserMute>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserMute&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.activeUserRef, activeUserRef)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&const DeepCollectionEquality().equals(other.passiveUserRef, passiveUserRef));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserMute&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(activeUserRef),const DeepCollectionEquality().hash(createdAt),passiveUid,const DeepCollectionEquality().hash(passiveUserRef));
+int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid);
 
 @override
 String toString() {
-  return 'UserMute(activeUid: $activeUid, activeUserRef: $activeUserRef, createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef)';
+  return 'UserMute(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid)';
 }
 
 
@@ -49,7 +50,7 @@ abstract mixin class $UserMuteCopyWith<$Res>  {
   factory $UserMuteCopyWith(UserMute value, $Res Function(UserMute) _then) = _$UserMuteCopyWithImpl;
 @useResult
 $Res call({
- String activeUid, dynamic activeUserRef, dynamic createdAt, String passiveUid, dynamic passiveUserRef
+ String activeUid, dynamic createdAt, String passiveUid
 });
 
 
@@ -66,14 +67,12 @@ class _$UserMuteCopyWithImpl<$Res>
 
 /// Create a copy of UserMute
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? activeUid = null,Object? activeUserRef = freezed,Object? createdAt = freezed,Object? passiveUid = null,Object? passiveUserRef = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,}) {
   return _then(_self.copyWith(
 activeUid: null == activeUid ? _self.activeUid : activeUid // ignore: cast_nullable_to_non_nullable
-as String,activeUserRef: freezed == activeUserRef ? _self.activeUserRef : activeUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,passiveUid: null == passiveUid ? _self.passiveUid : passiveUid // ignore: cast_nullable_to_non_nullable
-as String,passiveUserRef: freezed == passiveUserRef ? _self.passiveUserRef : passiveUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,
+as String,
   ));
 }
 
@@ -84,14 +83,13 @@ as dynamic,
 @JsonSerializable()
 
 class _UserMute implements UserMute {
-  const _UserMute({required this.activeUid, required this.activeUserRef, required this.createdAt, required this.passiveUid, required this.passiveUserRef});
+  const _UserMute({required this.activeUid, required this.createdAt, required this.passiveUid});
   factory _UserMute.fromJson(Map<String, dynamic> json) => _$UserMuteFromJson(json);
 
 @override final  String activeUid;
-@override final  dynamic activeUserRef;
+// required dynamic activeUserRef, // TODO: 対応
 @override final  dynamic createdAt;
 @override final  String passiveUid;
-@override final  dynamic passiveUserRef;
 
 /// Create a copy of UserMute
 /// with the given fields replaced by the non-null parameter values.
@@ -106,16 +104,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserMute&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.activeUserRef, activeUserRef)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&const DeepCollectionEquality().equals(other.passiveUserRef, passiveUserRef));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserMute&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(activeUserRef),const DeepCollectionEquality().hash(createdAt),passiveUid,const DeepCollectionEquality().hash(passiveUserRef));
+int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid);
 
 @override
 String toString() {
-  return 'UserMute(activeUid: $activeUid, activeUserRef: $activeUserRef, createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef)';
+  return 'UserMute(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid)';
 }
 
 
@@ -126,7 +124,7 @@ abstract mixin class _$UserMuteCopyWith<$Res> implements $UserMuteCopyWith<$Res>
   factory _$UserMuteCopyWith(_UserMute value, $Res Function(_UserMute) _then) = __$UserMuteCopyWithImpl;
 @override @useResult
 $Res call({
- String activeUid, dynamic activeUserRef, dynamic createdAt, String passiveUid, dynamic passiveUserRef
+ String activeUid, dynamic createdAt, String passiveUid
 });
 
 
@@ -143,14 +141,12 @@ class __$UserMuteCopyWithImpl<$Res>
 
 /// Create a copy of UserMute
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? activeUid = null,Object? activeUserRef = freezed,Object? createdAt = freezed,Object? passiveUid = null,Object? passiveUserRef = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,}) {
   return _then(_UserMute(
 activeUid: null == activeUid ? _self.activeUid : activeUid // ignore: cast_nullable_to_non_nullable
-as String,activeUserRef: freezed == activeUserRef ? _self.activeUserRef : activeUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,passiveUid: null == passiveUid ? _self.passiveUid : passiveUid // ignore: cast_nullable_to_non_nullable
-as String,passiveUserRef: freezed == passiveUserRef ? _self.passiveUserRef : passiveUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,
+as String,
   ));
 }
 

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/service/firestore_service.dart';
 import 'package:great_talk/core/maps.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 
@@ -16,7 +15,7 @@ abstract class UserUpdateLog with _$UserUpdateLog {
     required String stringUserName,
     required String uid,
     required Map<String,dynamic> image,
-    required dynamic userRef,
+    // required dynamic userRef, // TODO: 対応
   }) = _UserUpdateLog;
   factory UserUpdateLog.fromJson(Map<String,dynamic> json) => _$UserUpdateLogFromJson(json);
   factory UserUpdateLog.fromRegister(String uid,String userName,String bio,String fileName) {
@@ -27,7 +26,6 @@ abstract class UserUpdateLog with _$UserUpdateLog {
       stringUserName: userName.trim(),
       uid: uid,
       image: DetectedImage(value: fileName).toJson(),
-      userRef: FirestoreService.user(uid),
     );
   }
 }

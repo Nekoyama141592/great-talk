@@ -16,7 +16,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MuteUserToken {
 
- String get activeUid; dynamic get createdAt; String get passiveUid; dynamic get passiveUserRef; String get tokenId; String get tokenType;
+ String get activeUid; dynamic get createdAt; String get passiveUid;// required dynamic passiveUserRef, // TODO: 対応
+ String get tokenId; String get tokenType;
 /// Create a copy of MuteUserToken
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +30,16 @@ $MuteUserTokenCopyWith<MuteUserToken> get copyWith => _$MuteUserTokenCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MuteUserToken&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&const DeepCollectionEquality().equals(other.passiveUserRef, passiveUserRef)&&(identical(other.tokenId, tokenId) || other.tokenId == tokenId)&&(identical(other.tokenType, tokenType) || other.tokenType == tokenType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MuteUserToken&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&(identical(other.tokenId, tokenId) || other.tokenId == tokenId)&&(identical(other.tokenType, tokenType) || other.tokenType == tokenType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid,const DeepCollectionEquality().hash(passiveUserRef),tokenId,tokenType);
+int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid,tokenId,tokenType);
 
 @override
 String toString() {
-  return 'MuteUserToken(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
+  return 'MuteUserToken(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, tokenId: $tokenId, tokenType: $tokenType)';
 }
 
 
@@ -49,7 +50,7 @@ abstract mixin class $MuteUserTokenCopyWith<$Res>  {
   factory $MuteUserTokenCopyWith(MuteUserToken value, $Res Function(MuteUserToken) _then) = _$MuteUserTokenCopyWithImpl;
 @useResult
 $Res call({
- String activeUid, dynamic createdAt, String passiveUid, dynamic passiveUserRef, String tokenId, String tokenType
+ String activeUid, dynamic createdAt, String passiveUid, String tokenId, String tokenType
 });
 
 
@@ -66,13 +67,12 @@ class _$MuteUserTokenCopyWithImpl<$Res>
 
 /// Create a copy of MuteUserToken
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,Object? passiveUserRef = freezed,Object? tokenId = null,Object? tokenType = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,Object? tokenId = null,Object? tokenType = null,}) {
   return _then(_self.copyWith(
 activeUid: null == activeUid ? _self.activeUid : activeUid // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,passiveUid: null == passiveUid ? _self.passiveUid : passiveUid // ignore: cast_nullable_to_non_nullable
-as String,passiveUserRef: freezed == passiveUserRef ? _self.passiveUserRef : passiveUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,tokenId: null == tokenId ? _self.tokenId : tokenId // ignore: cast_nullable_to_non_nullable
+as String,tokenId: null == tokenId ? _self.tokenId : tokenId // ignore: cast_nullable_to_non_nullable
 as String,tokenType: null == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -85,13 +85,13 @@ as String,
 @JsonSerializable()
 
 class _MuteUserToken implements MuteUserToken {
-  const _MuteUserToken({required this.activeUid, required this.createdAt, required this.passiveUid, required this.passiveUserRef, required this.tokenId, required this.tokenType});
+  const _MuteUserToken({required this.activeUid, required this.createdAt, required this.passiveUid, required this.tokenId, required this.tokenType});
   factory _MuteUserToken.fromJson(Map<String, dynamic> json) => _$MuteUserTokenFromJson(json);
 
 @override final  String activeUid;
 @override final  dynamic createdAt;
 @override final  String passiveUid;
-@override final  dynamic passiveUserRef;
+// required dynamic passiveUserRef, // TODO: 対応
 @override final  String tokenId;
 @override final  String tokenType;
 
@@ -108,16 +108,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MuteUserToken&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&const DeepCollectionEquality().equals(other.passiveUserRef, passiveUserRef)&&(identical(other.tokenId, tokenId) || other.tokenId == tokenId)&&(identical(other.tokenType, tokenType) || other.tokenType == tokenType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MuteUserToken&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&(identical(other.tokenId, tokenId) || other.tokenId == tokenId)&&(identical(other.tokenType, tokenType) || other.tokenType == tokenType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid,const DeepCollectionEquality().hash(passiveUserRef),tokenId,tokenType);
+int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid,tokenId,tokenType);
 
 @override
 String toString() {
-  return 'MuteUserToken(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
+  return 'MuteUserToken(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, tokenId: $tokenId, tokenType: $tokenType)';
 }
 
 
@@ -128,7 +128,7 @@ abstract mixin class _$MuteUserTokenCopyWith<$Res> implements $MuteUserTokenCopy
   factory _$MuteUserTokenCopyWith(_MuteUserToken value, $Res Function(_MuteUserToken) _then) = __$MuteUserTokenCopyWithImpl;
 @override @useResult
 $Res call({
- String activeUid, dynamic createdAt, String passiveUid, dynamic passiveUserRef, String tokenId, String tokenType
+ String activeUid, dynamic createdAt, String passiveUid, String tokenId, String tokenType
 });
 
 
@@ -145,13 +145,12 @@ class __$MuteUserTokenCopyWithImpl<$Res>
 
 /// Create a copy of MuteUserToken
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,Object? passiveUserRef = freezed,Object? tokenId = null,Object? tokenType = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,Object? tokenId = null,Object? tokenType = null,}) {
   return _then(_MuteUserToken(
 activeUid: null == activeUid ? _self.activeUid : activeUid // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,passiveUid: null == passiveUid ? _self.passiveUid : passiveUid // ignore: cast_nullable_to_non_nullable
-as String,passiveUserRef: freezed == passiveUserRef ? _self.passiveUserRef : passiveUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,tokenId: null == tokenId ? _self.tokenId : tokenId // ignore: cast_nullable_to_non_nullable
+as String,tokenId: null == tokenId ? _self.tokenId : tokenId // ignore: cast_nullable_to_non_nullable
 as String,tokenType: null == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
 as String,
   ));

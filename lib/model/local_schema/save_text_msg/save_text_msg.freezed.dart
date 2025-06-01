@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SaveTextMsg {
 
- DateTime get createdAt; String get id; String get messageType; String get posterUid; String get senderUid; Map<String,dynamic> get text;
+ DateTime get createdAt; String get id; String get messageType; String get posterUid; String get senderUid; Map<String, dynamic> get text;
 /// Create a copy of SaveTextMsg
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $SaveTextMsgCopyWith<$Res>  {
   factory $SaveTextMsgCopyWith(SaveTextMsg value, $Res Function(SaveTextMsg) _then) = _$SaveTextMsgCopyWithImpl;
 @useResult
 $Res call({
- DateTime createdAt, String id, String messageType, String posterUid, String senderUid, Map<String,dynamic> text
+ DateTime createdAt, String id, String messageType, String posterUid, String senderUid, Map<String, dynamic> text
 });
 
 
@@ -74,7 +74,7 @@ as String,messageType: null == messageType ? _self.messageType : messageType // 
 as String,posterUid: null == posterUid ? _self.posterUid : posterUid // ignore: cast_nullable_to_non_nullable
 as String,senderUid: null == senderUid ? _self.senderUid : senderUid // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
-as Map<String,dynamic>,
+as Map<String, dynamic>,
   ));
 }
 
@@ -85,7 +85,7 @@ as Map<String,dynamic>,
 @JsonSerializable()
 
 class _SaveTextMsg extends SaveTextMsg {
-  const _SaveTextMsg({required this.createdAt, required this.id, required this.messageType, required this.posterUid, required this.senderUid, required final  Map<String,dynamic> text}): _text = text,super._();
+  const _SaveTextMsg({required this.createdAt, required this.id, required this.messageType, required this.posterUid, required this.senderUid, required final  Map<String, dynamic> text}): _text = text,super._();
   factory _SaveTextMsg.fromJson(Map<String, dynamic> json) => _$SaveTextMsgFromJson(json);
 
 @override final  DateTime createdAt;
@@ -93,8 +93,8 @@ class _SaveTextMsg extends SaveTextMsg {
 @override final  String messageType;
 @override final  String posterUid;
 @override final  String senderUid;
- final  Map<String,dynamic> _text;
-@override Map<String,dynamic> get text {
+ final  Map<String, dynamic> _text;
+@override Map<String, dynamic> get text {
   if (_text is EqualUnmodifiableMapView) return _text;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableMapView(_text);
@@ -134,7 +134,7 @@ abstract mixin class _$SaveTextMsgCopyWith<$Res> implements $SaveTextMsgCopyWith
   factory _$SaveTextMsgCopyWith(_SaveTextMsg value, $Res Function(_SaveTextMsg) _then) = __$SaveTextMsgCopyWithImpl;
 @override @useResult
 $Res call({
- DateTime createdAt, String id, String messageType, String posterUid, String senderUid, Map<String,dynamic> text
+ DateTime createdAt, String id, String messageType, String posterUid, String senderUid, Map<String, dynamic> text
 });
 
 
@@ -159,7 +159,7 @@ as String,messageType: null == messageType ? _self.messageType : messageType // 
 as String,posterUid: null == posterUid ? _self.posterUid : posterUid // ignore: cast_nullable_to_non_nullable
 as String,senderUid: null == senderUid ? _self.senderUid : senderUid // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self._text : text // ignore: cast_nullable_to_non_nullable
-as Map<String,dynamic>,
+as Map<String, dynamic>,
   ));
 }
 

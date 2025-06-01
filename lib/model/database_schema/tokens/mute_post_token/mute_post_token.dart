@@ -13,7 +13,7 @@ abstract class MutePostToken with _$MutePostToken {
     required String activeUid,
     required dynamic createdAt,
     required String postId,
-    required dynamic postRef,
+    // required dynamic postRef, // TODO: 対応
     required String tokenId,
     required String tokenType,
   }) = _MutePostToken;
@@ -23,7 +23,7 @@ abstract class MutePostToken with _$MutePostToken {
     return MutePostToken(
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),
-      postRef: post.typedRef(),
+      // postRef: post.typedRef(),
       postId: post.postId,
       tokenId: randomString(),
       tokenType: TokenType.mutePost.name,

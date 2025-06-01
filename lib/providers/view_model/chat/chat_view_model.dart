@@ -13,11 +13,8 @@ import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
-import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/strings.dart';
-import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
@@ -313,15 +310,7 @@ class ChatViewModel extends _$ChatViewModel {
 
   TextMessage _newTextMessage(String content, String senderUid) {
     final post = state.value!.post;
-    return TextMessage(
-      id: randomString(),
-      createdAt: Timestamp.now(),
-      messageType: MessageType.text.name,
-      postRef: post.typedRef(),
-      text: DetectedText(value: content).toJson(),
-      posterUid: post.uid,
-      senderUid: senderUid,
-    );
+    return TextMessage.instance(content, post, senderUid);
   }
 
   void _scrollToBottom(ScrollController scrollController) {

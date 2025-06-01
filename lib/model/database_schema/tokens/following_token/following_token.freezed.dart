@@ -16,7 +16,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FollowingToken implements DiagnosticableTreeMixin {
 
- dynamic get createdAt; String get passiveUid; dynamic get passiveUserRef; String get tokenId; String get tokenType;
+ dynamic get createdAt; String get passiveUid;// required dynamic passiveUserRef, // TODO: 対応
+ String get tokenId; String get tokenType;
 /// Create a copy of FollowingToken
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,21 +31,21 @@ $FollowingTokenCopyWith<FollowingToken> get copyWith => _$FollowingTokenCopyWith
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'FollowingToken'))
-    ..add(DiagnosticsProperty('createdAt', createdAt))..add(DiagnosticsProperty('passiveUid', passiveUid))..add(DiagnosticsProperty('passiveUserRef', passiveUserRef))..add(DiagnosticsProperty('tokenId', tokenId))..add(DiagnosticsProperty('tokenType', tokenType));
+    ..add(DiagnosticsProperty('createdAt', createdAt))..add(DiagnosticsProperty('passiveUid', passiveUid))..add(DiagnosticsProperty('tokenId', tokenId))..add(DiagnosticsProperty('tokenType', tokenType));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FollowingToken&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&const DeepCollectionEquality().equals(other.passiveUserRef, passiveUserRef)&&(identical(other.tokenId, tokenId) || other.tokenId == tokenId)&&(identical(other.tokenType, tokenType) || other.tokenType == tokenType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FollowingToken&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&(identical(other.tokenId, tokenId) || other.tokenId == tokenId)&&(identical(other.tokenType, tokenType) || other.tokenType == tokenType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(createdAt),passiveUid,const DeepCollectionEquality().hash(passiveUserRef),tokenId,tokenType);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(createdAt),passiveUid,tokenId,tokenType);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'FollowingToken(createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
+  return 'FollowingToken(createdAt: $createdAt, passiveUid: $passiveUid, tokenId: $tokenId, tokenType: $tokenType)';
 }
 
 
@@ -55,7 +56,7 @@ abstract mixin class $FollowingTokenCopyWith<$Res>  {
   factory $FollowingTokenCopyWith(FollowingToken value, $Res Function(FollowingToken) _then) = _$FollowingTokenCopyWithImpl;
 @useResult
 $Res call({
- dynamic createdAt, String passiveUid, dynamic passiveUserRef, String tokenId, String tokenType
+ dynamic createdAt, String passiveUid, String tokenId, String tokenType
 });
 
 
@@ -72,12 +73,11 @@ class _$FollowingTokenCopyWithImpl<$Res>
 
 /// Create a copy of FollowingToken
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? createdAt = freezed,Object? passiveUid = null,Object? passiveUserRef = freezed,Object? tokenId = null,Object? tokenType = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? createdAt = freezed,Object? passiveUid = null,Object? tokenId = null,Object? tokenType = null,}) {
   return _then(_self.copyWith(
 createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,passiveUid: null == passiveUid ? _self.passiveUid : passiveUid // ignore: cast_nullable_to_non_nullable
-as String,passiveUserRef: freezed == passiveUserRef ? _self.passiveUserRef : passiveUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,tokenId: null == tokenId ? _self.tokenId : tokenId // ignore: cast_nullable_to_non_nullable
+as String,tokenId: null == tokenId ? _self.tokenId : tokenId // ignore: cast_nullable_to_non_nullable
 as String,tokenType: null == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -90,12 +90,12 @@ as String,
 @JsonSerializable()
 
 class _FollowingToken extends FollowingToken with DiagnosticableTreeMixin {
-  const _FollowingToken({required this.createdAt, required this.passiveUid, required this.passiveUserRef, required this.tokenId, required this.tokenType}): super._();
+  const _FollowingToken({required this.createdAt, required this.passiveUid, required this.tokenId, required this.tokenType}): super._();
   factory _FollowingToken.fromJson(Map<String, dynamic> json) => _$FollowingTokenFromJson(json);
 
 @override final  dynamic createdAt;
 @override final  String passiveUid;
-@override final  dynamic passiveUserRef;
+// required dynamic passiveUserRef, // TODO: 対応
 @override final  String tokenId;
 @override final  String tokenType;
 
@@ -113,21 +113,21 @@ Map<String, dynamic> toJson() {
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'FollowingToken'))
-    ..add(DiagnosticsProperty('createdAt', createdAt))..add(DiagnosticsProperty('passiveUid', passiveUid))..add(DiagnosticsProperty('passiveUserRef', passiveUserRef))..add(DiagnosticsProperty('tokenId', tokenId))..add(DiagnosticsProperty('tokenType', tokenType));
+    ..add(DiagnosticsProperty('createdAt', createdAt))..add(DiagnosticsProperty('passiveUid', passiveUid))..add(DiagnosticsProperty('tokenId', tokenId))..add(DiagnosticsProperty('tokenType', tokenType));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FollowingToken&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&const DeepCollectionEquality().equals(other.passiveUserRef, passiveUserRef)&&(identical(other.tokenId, tokenId) || other.tokenId == tokenId)&&(identical(other.tokenType, tokenType) || other.tokenType == tokenType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FollowingToken&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&(identical(other.tokenId, tokenId) || other.tokenId == tokenId)&&(identical(other.tokenType, tokenType) || other.tokenType == tokenType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(createdAt),passiveUid,const DeepCollectionEquality().hash(passiveUserRef),tokenId,tokenType);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(createdAt),passiveUid,tokenId,tokenType);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'FollowingToken(createdAt: $createdAt, passiveUid: $passiveUid, passiveUserRef: $passiveUserRef, tokenId: $tokenId, tokenType: $tokenType)';
+  return 'FollowingToken(createdAt: $createdAt, passiveUid: $passiveUid, tokenId: $tokenId, tokenType: $tokenType)';
 }
 
 
@@ -138,7 +138,7 @@ abstract mixin class _$FollowingTokenCopyWith<$Res> implements $FollowingTokenCo
   factory _$FollowingTokenCopyWith(_FollowingToken value, $Res Function(_FollowingToken) _then) = __$FollowingTokenCopyWithImpl;
 @override @useResult
 $Res call({
- dynamic createdAt, String passiveUid, dynamic passiveUserRef, String tokenId, String tokenType
+ dynamic createdAt, String passiveUid, String tokenId, String tokenType
 });
 
 
@@ -155,12 +155,11 @@ class __$FollowingTokenCopyWithImpl<$Res>
 
 /// Create a copy of FollowingToken
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? createdAt = freezed,Object? passiveUid = null,Object? passiveUserRef = freezed,Object? tokenId = null,Object? tokenType = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? createdAt = freezed,Object? passiveUid = null,Object? tokenId = null,Object? tokenType = null,}) {
   return _then(_FollowingToken(
 createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,passiveUid: null == passiveUid ? _self.passiveUid : passiveUid // ignore: cast_nullable_to_non_nullable
-as String,passiveUserRef: freezed == passiveUserRef ? _self.passiveUserRef : passiveUserRef // ignore: cast_nullable_to_non_nullable
-as dynamic,tokenId: null == tokenId ? _self.tokenId : tokenId // ignore: cast_nullable_to_non_nullable
+as String,tokenId: null == tokenId ? _self.tokenId : tokenId // ignore: cast_nullable_to_non_nullable
 as String,tokenType: null == tokenType ? _self.tokenType : tokenType // ignore: cast_nullable_to_non_nullable
 as String,
   ));

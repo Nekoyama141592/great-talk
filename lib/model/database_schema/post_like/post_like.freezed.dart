@@ -16,7 +16,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostLike {
 
- String get activeUid; dynamic get createdAt; String get passiveUid; dynamic get postRef; String get postId;
+ String get activeUid; dynamic get createdAt; String get passiveUid;// required dynamic postRef, // TODO: 対応
+ String get postId;
 /// Create a copy of PostLike
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +30,16 @@ $PostLikeCopyWith<PostLike> get copyWith => _$PostLikeCopyWithImpl<PostLike>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostLike&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&const DeepCollectionEquality().equals(other.postRef, postRef)&&(identical(other.postId, postId) || other.postId == postId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostLike&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&(identical(other.postId, postId) || other.postId == postId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid,const DeepCollectionEquality().hash(postRef),postId);
+int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid,postId);
 
 @override
 String toString() {
-  return 'PostLike(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, postRef: $postRef, postId: $postId)';
+  return 'PostLike(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, postId: $postId)';
 }
 
 
@@ -49,7 +50,7 @@ abstract mixin class $PostLikeCopyWith<$Res>  {
   factory $PostLikeCopyWith(PostLike value, $Res Function(PostLike) _then) = _$PostLikeCopyWithImpl;
 @useResult
 $Res call({
- String activeUid, dynamic createdAt, String passiveUid, dynamic postRef, String postId
+ String activeUid, dynamic createdAt, String passiveUid, String postId
 });
 
 
@@ -66,13 +67,12 @@ class _$PostLikeCopyWithImpl<$Res>
 
 /// Create a copy of PostLike
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,Object? postRef = freezed,Object? postId = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,Object? postId = null,}) {
   return _then(_self.copyWith(
 activeUid: null == activeUid ? _self.activeUid : activeUid // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,passiveUid: null == passiveUid ? _self.passiveUid : passiveUid // ignore: cast_nullable_to_non_nullable
-as String,postRef: freezed == postRef ? _self.postRef : postRef // ignore: cast_nullable_to_non_nullable
-as dynamic,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
+as String,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -84,13 +84,13 @@ as String,
 @JsonSerializable()
 
 class _PostLike implements PostLike {
-  const _PostLike({required this.activeUid, required this.createdAt, required this.passiveUid, required this.postRef, required this.postId});
+  const _PostLike({required this.activeUid, required this.createdAt, required this.passiveUid, required this.postId});
   factory _PostLike.fromJson(Map<String, dynamic> json) => _$PostLikeFromJson(json);
 
 @override final  String activeUid;
 @override final  dynamic createdAt;
 @override final  String passiveUid;
-@override final  dynamic postRef;
+// required dynamic postRef, // TODO: 対応
 @override final  String postId;
 
 /// Create a copy of PostLike
@@ -106,16 +106,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostLike&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&const DeepCollectionEquality().equals(other.postRef, postRef)&&(identical(other.postId, postId) || other.postId == postId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostLike&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.passiveUid, passiveUid) || other.passiveUid == passiveUid)&&(identical(other.postId, postId) || other.postId == postId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid,const DeepCollectionEquality().hash(postRef),postId);
+int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),passiveUid,postId);
 
 @override
 String toString() {
-  return 'PostLike(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, postRef: $postRef, postId: $postId)';
+  return 'PostLike(activeUid: $activeUid, createdAt: $createdAt, passiveUid: $passiveUid, postId: $postId)';
 }
 
 
@@ -126,7 +126,7 @@ abstract mixin class _$PostLikeCopyWith<$Res> implements $PostLikeCopyWith<$Res>
   factory _$PostLikeCopyWith(_PostLike value, $Res Function(_PostLike) _then) = __$PostLikeCopyWithImpl;
 @override @useResult
 $Res call({
- String activeUid, dynamic createdAt, String passiveUid, dynamic postRef, String postId
+ String activeUid, dynamic createdAt, String passiveUid, String postId
 });
 
 
@@ -143,13 +143,12 @@ class __$PostLikeCopyWithImpl<$Res>
 
 /// Create a copy of PostLike
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,Object? postRef = freezed,Object? postId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? passiveUid = null,Object? postId = null,}) {
   return _then(_PostLike(
 activeUid: null == activeUid ? _self.activeUid : activeUid // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,passiveUid: null == passiveUid ? _self.passiveUid : passiveUid // ignore: cast_nullable_to_non_nullable
-as String,postRef: freezed == postRef ? _self.postRef : postRef // ignore: cast_nullable_to_non_nullable
-as dynamic,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
+as String,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

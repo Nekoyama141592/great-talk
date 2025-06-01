@@ -10,12 +10,10 @@ _PostMute _$PostMuteFromJson(Map<String, dynamic> json) => _PostMute(
   activeUid: json['activeUid'] as String,
   createdAt: json['createdAt'],
   postId: json['postId'] as String,
-  postRef: json['postRef'],
 );
 
 Map<String, dynamic> _$PostMuteToJson(_PostMute instance) => <String, dynamic>{
   'activeUid': instance.activeUid,
   'createdAt': instance.createdAt,
   'postId': instance.postId,
-  'postRef': instance.postRef,
 };

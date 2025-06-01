@@ -16,7 +16,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PrivateUser {
 
- String? get accessToken; dynamic get createdAt; String get ethAddress; String? get fcmToken; String get gender; String get ipAddress; bool get isAdmin; dynamic get ref; String get uid; dynamic get updatedAt;
+ String? get accessToken; dynamic get createdAt; String get ethAddress; String? get fcmToken; String get gender; String get ipAddress; bool get isAdmin;// required dynamic ref, // TODO: 対応
+ String get uid; dynamic get updatedAt;
 /// Create a copy of PrivateUser
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +30,16 @@ $PrivateUserCopyWith<PrivateUser> get copyWith => _$PrivateUserCopyWithImpl<Priv
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrivateUser&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.ipAddress, ipAddress) || other.ipAddress == ipAddress)&&(identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin)&&const DeepCollectionEquality().equals(other.ref, ref)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrivateUser&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.ipAddress, ipAddress) || other.ipAddress == ipAddress)&&(identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,accessToken,const DeepCollectionEquality().hash(createdAt),ethAddress,fcmToken,gender,ipAddress,isAdmin,const DeepCollectionEquality().hash(ref),uid,const DeepCollectionEquality().hash(updatedAt));
+int get hashCode => Object.hash(runtimeType,accessToken,const DeepCollectionEquality().hash(createdAt),ethAddress,fcmToken,gender,ipAddress,isAdmin,uid,const DeepCollectionEquality().hash(updatedAt));
 
 @override
 String toString() {
-  return 'PrivateUser(accessToken: $accessToken, createdAt: $createdAt, ethAddress: $ethAddress, fcmToken: $fcmToken, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, ref: $ref, uid: $uid, updatedAt: $updatedAt)';
+  return 'PrivateUser(accessToken: $accessToken, createdAt: $createdAt, ethAddress: $ethAddress, fcmToken: $fcmToken, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, uid: $uid, updatedAt: $updatedAt)';
 }
 
 
@@ -49,7 +50,7 @@ abstract mixin class $PrivateUserCopyWith<$Res>  {
   factory $PrivateUserCopyWith(PrivateUser value, $Res Function(PrivateUser) _then) = _$PrivateUserCopyWithImpl;
 @useResult
 $Res call({
- String? accessToken, dynamic createdAt, String ethAddress, String? fcmToken, String gender, String ipAddress, bool isAdmin, dynamic ref, String uid, dynamic updatedAt
+ String? accessToken, dynamic createdAt, String ethAddress, String? fcmToken, String gender, String ipAddress, bool isAdmin, String uid, dynamic updatedAt
 });
 
 
@@ -66,7 +67,7 @@ class _$PrivateUserCopyWithImpl<$Res>
 
 /// Create a copy of PrivateUser
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? accessToken = freezed,Object? createdAt = freezed,Object? ethAddress = null,Object? fcmToken = freezed,Object? gender = null,Object? ipAddress = null,Object? isAdmin = null,Object? ref = freezed,Object? uid = null,Object? updatedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? accessToken = freezed,Object? createdAt = freezed,Object? ethAddress = null,Object? fcmToken = freezed,Object? gender = null,Object? ipAddress = null,Object? isAdmin = null,Object? uid = null,Object? updatedAt = freezed,}) {
   return _then(_self.copyWith(
 accessToken: freezed == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
@@ -75,8 +76,7 @@ as String,fcmToken: freezed == fcmToken ? _self.fcmToken : fcmToken // ignore: c
 as String?,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String,ipAddress: null == ipAddress ? _self.ipAddress : ipAddress // ignore: cast_nullable_to_non_nullable
 as String,isAdmin: null == isAdmin ? _self.isAdmin : isAdmin // ignore: cast_nullable_to_non_nullable
-as bool,ref: freezed == ref ? _self.ref : ref // ignore: cast_nullable_to_non_nullable
-as dynamic,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
+as bool,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as dynamic,
   ));
@@ -89,7 +89,7 @@ as dynamic,
 @JsonSerializable()
 
 class _PrivateUser extends PrivateUser {
-  const _PrivateUser({this.accessToken = "", required this.createdAt, this.ethAddress = "", this.fcmToken = "", this.gender = "", this.ipAddress = "", this.isAdmin = false, required this.ref, required this.uid, required this.updatedAt}): super._();
+  const _PrivateUser({this.accessToken = "", required this.createdAt, this.ethAddress = "", this.fcmToken = "", this.gender = "", this.ipAddress = "", this.isAdmin = false, required this.uid, required this.updatedAt}): super._();
   factory _PrivateUser.fromJson(Map<String, dynamic> json) => _$PrivateUserFromJson(json);
 
 @override@JsonKey() final  String? accessToken;
@@ -99,7 +99,7 @@ class _PrivateUser extends PrivateUser {
 @override@JsonKey() final  String gender;
 @override@JsonKey() final  String ipAddress;
 @override@JsonKey() final  bool isAdmin;
-@override final  dynamic ref;
+// required dynamic ref, // TODO: 対応
 @override final  String uid;
 @override final  dynamic updatedAt;
 
@@ -116,16 +116,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrivateUser&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.ipAddress, ipAddress) || other.ipAddress == ipAddress)&&(identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin)&&const DeepCollectionEquality().equals(other.ref, ref)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrivateUser&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.ipAddress, ipAddress) || other.ipAddress == ipAddress)&&(identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,accessToken,const DeepCollectionEquality().hash(createdAt),ethAddress,fcmToken,gender,ipAddress,isAdmin,const DeepCollectionEquality().hash(ref),uid,const DeepCollectionEquality().hash(updatedAt));
+int get hashCode => Object.hash(runtimeType,accessToken,const DeepCollectionEquality().hash(createdAt),ethAddress,fcmToken,gender,ipAddress,isAdmin,uid,const DeepCollectionEquality().hash(updatedAt));
 
 @override
 String toString() {
-  return 'PrivateUser(accessToken: $accessToken, createdAt: $createdAt, ethAddress: $ethAddress, fcmToken: $fcmToken, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, ref: $ref, uid: $uid, updatedAt: $updatedAt)';
+  return 'PrivateUser(accessToken: $accessToken, createdAt: $createdAt, ethAddress: $ethAddress, fcmToken: $fcmToken, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, uid: $uid, updatedAt: $updatedAt)';
 }
 
 
@@ -136,7 +136,7 @@ abstract mixin class _$PrivateUserCopyWith<$Res> implements $PrivateUserCopyWith
   factory _$PrivateUserCopyWith(_PrivateUser value, $Res Function(_PrivateUser) _then) = __$PrivateUserCopyWithImpl;
 @override @useResult
 $Res call({
- String? accessToken, dynamic createdAt, String ethAddress, String? fcmToken, String gender, String ipAddress, bool isAdmin, dynamic ref, String uid, dynamic updatedAt
+ String? accessToken, dynamic createdAt, String ethAddress, String? fcmToken, String gender, String ipAddress, bool isAdmin, String uid, dynamic updatedAt
 });
 
 
@@ -153,7 +153,7 @@ class __$PrivateUserCopyWithImpl<$Res>
 
 /// Create a copy of PrivateUser
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? accessToken = freezed,Object? createdAt = freezed,Object? ethAddress = null,Object? fcmToken = freezed,Object? gender = null,Object? ipAddress = null,Object? isAdmin = null,Object? ref = freezed,Object? uid = null,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? accessToken = freezed,Object? createdAt = freezed,Object? ethAddress = null,Object? fcmToken = freezed,Object? gender = null,Object? ipAddress = null,Object? isAdmin = null,Object? uid = null,Object? updatedAt = freezed,}) {
   return _then(_PrivateUser(
 accessToken: freezed == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
@@ -162,8 +162,7 @@ as String,fcmToken: freezed == fcmToken ? _self.fcmToken : fcmToken // ignore: c
 as String?,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String,ipAddress: null == ipAddress ? _self.ipAddress : ipAddress // ignore: cast_nullable_to_non_nullable
 as String,isAdmin: null == isAdmin ? _self.isAdmin : isAdmin // ignore: cast_nullable_to_non_nullable
-as bool,ref: freezed == ref ? _self.ref : ref // ignore: cast_nullable_to_non_nullable
-as dynamic,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
+as bool,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as dynamic,
   ));

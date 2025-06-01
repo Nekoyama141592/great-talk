@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/service/firestore_service.dart';
 import 'package:great_talk/core/maps.dart';
 import 'package:great_talk/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'post.freezed.dart';
 part 'post.g.dart';
@@ -29,7 +27,7 @@ abstract class Post with _$Post {
     @Default(0) int msgCount,
     @Default(0) int muteCount,
     required String postId,
-    required dynamic ref,
+    // required dynamic ref, // TODO: 対応
     @Default(0) int reportCount,
     @Default(0.0) double score,
     required Map<String,dynamic> searchToken,
@@ -55,7 +53,6 @@ abstract class Post with _$Post {
       description: DetectedText(value: description).toJson(),
       image: DetectedImage(value: fileName).toJson(),
       postId: postId,
-      ref: FirestoreService.post(uid, postId),
       searchToken: returnSearchToken(title),
       title: DetectedText(value: title).toJson(),
       updatedAt: now,
@@ -65,7 +62,6 @@ abstract class Post with _$Post {
   Timestamp typedCreatedAt() => createdAt as Timestamp;
   DetectedText typedDescription() => DetectedText.fromJson(description);
   DetectedImage typedImage() => DetectedImage.fromJson(image);
-  DocRef typedRef() => ref as DocRef;
   DetectedText typedTitle() => DetectedText.fromJson(title);
   Timestamp typedUpdatedAtAt() => updatedAt as Timestamp;
   bool isInappropriate() =>

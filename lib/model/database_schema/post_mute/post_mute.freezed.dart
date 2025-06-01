@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostMute {
 
- String get activeUid; dynamic get createdAt; String get postId; dynamic get postRef;
+ String get activeUid; dynamic get createdAt; String get postId;
 /// Create a copy of PostMute
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $PostMuteCopyWith<PostMute> get copyWith => _$PostMuteCopyWithImpl<PostMute>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostMute&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.postId, postId) || other.postId == postId)&&const DeepCollectionEquality().equals(other.postRef, postRef));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostMute&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.postId, postId) || other.postId == postId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),postId,const DeepCollectionEquality().hash(postRef));
+int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),postId);
 
 @override
 String toString() {
-  return 'PostMute(activeUid: $activeUid, createdAt: $createdAt, postId: $postId, postRef: $postRef)';
+  return 'PostMute(activeUid: $activeUid, createdAt: $createdAt, postId: $postId)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $PostMuteCopyWith<$Res>  {
   factory $PostMuteCopyWith(PostMute value, $Res Function(PostMute) _then) = _$PostMuteCopyWithImpl;
 @useResult
 $Res call({
- String activeUid, dynamic createdAt, String postId, dynamic postRef
+ String activeUid, dynamic createdAt, String postId
 });
 
 
@@ -66,13 +66,12 @@ class _$PostMuteCopyWithImpl<$Res>
 
 /// Create a copy of PostMute
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? postId = null,Object? postRef = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? postId = null,}) {
   return _then(_self.copyWith(
 activeUid: null == activeUid ? _self.activeUid : activeUid // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
-as String,postRef: freezed == postRef ? _self.postRef : postRef // ignore: cast_nullable_to_non_nullable
-as dynamic,
+as String,
   ));
 }
 
@@ -83,13 +82,12 @@ as dynamic,
 @JsonSerializable()
 
 class _PostMute implements PostMute {
-  const _PostMute({required this.activeUid, required this.createdAt, required this.postId, required this.postRef});
+  const _PostMute({required this.activeUid, required this.createdAt, required this.postId});
   factory _PostMute.fromJson(Map<String, dynamic> json) => _$PostMuteFromJson(json);
 
 @override final  String activeUid;
 @override final  dynamic createdAt;
 @override final  String postId;
-@override final  dynamic postRef;
 
 /// Create a copy of PostMute
 /// with the given fields replaced by the non-null parameter values.
@@ -104,16 +102,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostMute&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.postId, postId) || other.postId == postId)&&const DeepCollectionEquality().equals(other.postRef, postRef));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostMute&&(identical(other.activeUid, activeUid) || other.activeUid == activeUid)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.postId, postId) || other.postId == postId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),postId,const DeepCollectionEquality().hash(postRef));
+int get hashCode => Object.hash(runtimeType,activeUid,const DeepCollectionEquality().hash(createdAt),postId);
 
 @override
 String toString() {
-  return 'PostMute(activeUid: $activeUid, createdAt: $createdAt, postId: $postId, postRef: $postRef)';
+  return 'PostMute(activeUid: $activeUid, createdAt: $createdAt, postId: $postId)';
 }
 
 
@@ -124,7 +122,7 @@ abstract mixin class _$PostMuteCopyWith<$Res> implements $PostMuteCopyWith<$Res>
   factory _$PostMuteCopyWith(_PostMute value, $Res Function(_PostMute) _then) = __$PostMuteCopyWithImpl;
 @override @useResult
 $Res call({
- String activeUid, dynamic createdAt, String postId, dynamic postRef
+ String activeUid, dynamic createdAt, String postId
 });
 
 
@@ -141,13 +139,12 @@ class __$PostMuteCopyWithImpl<$Res>
 
 /// Create a copy of PostMute
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? postId = null,Object? postRef = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? activeUid = null,Object? createdAt = freezed,Object? postId = null,}) {
   return _then(_PostMute(
 activeUid: null == activeUid ? _self.activeUid : activeUid // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
-as String,postRef: freezed == postRef ? _self.postRef : postRef // ignore: cast_nullable_to_non_nullable
-as dynamic,
+as String,
   ));
 }
 

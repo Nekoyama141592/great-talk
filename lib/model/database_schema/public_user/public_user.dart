@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/service/firestore_service.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 part 'public_user.freezed.dart';
 part 'public_user.g.dart';
@@ -27,7 +25,7 @@ abstract class PublicUser with _$PublicUser {
     @Default([]) List<Map<String,dynamic>> links,
     @Default(0) int muteCount,
     @Default(0) int postCount,
-    required dynamic ref,
+    // required dynamic ref, // TODO: 対応
     @Default(0) int reportCount,
     @Default(0.0) double score,
     @Default({}) Map<String,dynamic> searchToken,
@@ -52,7 +50,6 @@ abstract class PublicUser with _$PublicUser {
           bio != null
               ? DetectedText(value: bio).toJson()
               : const DetectedText().toJson(),
-      ref: FirestoreService.user(uid),
       uid: uid,
       updatedAt: now,
       image:
@@ -68,7 +65,6 @@ abstract class PublicUser with _$PublicUser {
   DetectedText typedBio() => DetectedText.fromJson(bio);
   Timestamp typedCreatedAt() => createdAt as Timestamp;
   DetectedImage typedImage() => DetectedImage.fromJson(image);
-  DocRef typedRef() => ref as DocRef;
   Timestamp typedUpdatedAtAt() => updatedAt as Timestamp;
   DetectedText typedUserName() => DetectedText.fromJson(userName);
 
