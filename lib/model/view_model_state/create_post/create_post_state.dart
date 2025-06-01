@@ -6,6 +6,7 @@ part 'create_post_state.g.dart';
 
 @freezed
 abstract class CreatePostState with _$CreatePostState {
+  const CreatePostState._();
   const factory CreatePostState({
     // タイトル
     @Default('') String title,

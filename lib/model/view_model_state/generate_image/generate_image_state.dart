@@ -5,6 +5,7 @@ part 'generate_image_state.g.dart';
 
 @freezed
 abstract class GenerateImageState with _$GenerateImageState {
+  const GenerateImageState._();
   const factory GenerateImageState({
     @Default('') String prompt,
     @Default('') String size,

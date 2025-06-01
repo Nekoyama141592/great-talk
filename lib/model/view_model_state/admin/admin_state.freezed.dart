@@ -81,8 +81,8 @@ as int,
 /// @nodoc
 @JsonSerializable()
 
-class _AdminState implements AdminState {
-  const _AdminState({required this.userCount, required this.postCount, required this.messageCount});
+class _AdminState extends AdminState {
+  const _AdminState({required this.userCount, required this.postCount, required this.messageCount}): super._();
   factory _AdminState.fromJson(Map<String, dynamic> json) => _$AdminStateFromJson(json);
 
 @override final  int userCount;

@@ -96,8 +96,8 @@ $PostCopyWith<$Res> get post {
 /// @nodoc
 @JsonSerializable()
 
-class _ChatState implements ChatState {
-  const _ChatState({this.isGenerating = false, final  List<TextMessage> messages = const [], required this.post, this.postImage, this.isPicked = false, this.pickedImage, this.realtimeRes = ""}): _messages = messages;
+class _ChatState extends ChatState {
+  const _ChatState({this.isGenerating = false, final  List<TextMessage> messages = const [], required this.post, this.postImage, this.isPicked = false, this.pickedImage, this.realtimeRes = ""}): _messages = messages,super._();
   factory _ChatState.fromJson(Map<String, dynamic> json) => _$ChatStateFromJson(json);
 
 /// AIが応答を生成中かどうか

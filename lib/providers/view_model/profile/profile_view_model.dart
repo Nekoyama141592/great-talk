@@ -54,11 +54,11 @@ class ProfileViewModel extends _$ProfileViewModel {
 
   Future<List<UserPost>> _fetchUserPosts(PublicUser? user,String? base64) async {
     final posts = await _repository.getUserPosts(passiveUid);
-    final userPosts = await _postsToUserPosts(posts, user, base64);
+    final userPosts = await _postsToUserPosts(posts);
     return userPosts;
   }
 
-  Future<List<UserPost>> _postsToUserPosts(List<Post> posts, PublicUser? user, String? base64) async {
+  Future<List<UserPost>> _postsToUserPosts(List<Post> posts) async {
     final uids = posts.map((e) => e.uid).toSet(); 
     final fetchedUsers = await _repository.getUsersByUids(uids.toList());
     final userMap = {for (final user in fetchedUsers) user.uid: user};
@@ -76,9 +76,17 @@ class ProfileViewModel extends _$ProfileViewModel {
   final results = await Future.wait(futures);
   return results;
 }
-
-  // TODO: 実装
-  void onReload() async {}
+  void onReload() async {
+    final stateValue = state.value;
+    final uid = ref.read(streamAuthUidProvider).value;
+    if (uid == null || stateValue == null) return;
+    state = await AsyncValue.guard(() async {
+      final oldPosts = stateValue.posts();
+      final newPosts = await _repository.getUserOldPosts(uid, oldPosts);
+      final userPosts = await _postsToUserPosts(newPosts);
+      return stateValue.copyWith(userPosts: userPosts);
+    });
+  }
   // Follow/Unfollow
   FutureResult<bool> onFollowPressed() async {
     final currentUid = ref.read(streamAuthUidProvider).value;
@@ -159,7 +167,7 @@ class ProfileViewModel extends _$ProfileViewModel {
     state = await AsyncValue.guard(() async {
       final oldPosts = stateValue.userPosts.map((e) => e.post).toList();
       final posts = await _repository.getUserOldPosts(uid, oldPosts);
-      final userPosts = await _postsToUserPosts(posts, stateValue.user,stateValue.base64);
+      final userPosts = await _postsToUserPosts(posts);
       return stateValue.copyWith(userPosts: userPosts);
     });
     controller.loadComplete();

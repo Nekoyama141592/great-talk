@@ -81,8 +81,8 @@ as String?,
 /// @nodoc
 @JsonSerializable()
 
-class _GenerateImageState implements GenerateImageState {
-  const _GenerateImageState({this.prompt = '', this.size = '', this.base64});
+class _GenerateImageState extends GenerateImageState {
+  const _GenerateImageState({this.prompt = '', this.size = '', this.base64}): super._();
   factory _GenerateImageState.fromJson(Map<String, dynamic> json) => _$GenerateImageStateFromJson(json);
 
 @override@JsonKey() final  String prompt;

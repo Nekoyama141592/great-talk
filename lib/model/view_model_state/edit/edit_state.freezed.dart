@@ -82,8 +82,8 @@ as bool,
 /// @nodoc
 @JsonSerializable()
 
-class _EditState implements EditState {
-  const _EditState({required this.bio, required this.userName, required this.base64, this.isPicked = false});
+class _EditState extends EditState {
+  const _EditState({required this.bio, required this.userName, required this.base64, this.isPicked = false}): super._();
   factory _EditState.fromJson(Map<String, dynamic> json) => _$EditStateFromJson(json);
 
 @override final  String bio;

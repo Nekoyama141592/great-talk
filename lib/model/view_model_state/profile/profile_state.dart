@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/database_schema/user_post/user_post.dart';
 
@@ -14,4 +15,5 @@ abstract class ProfileState with _$ProfileState {
   }) = _ProfileState;
   factory ProfileState.fromJson(Map<String, dynamic> json) =>
       _$ProfileStateFromJson(json);
+  List<Post> posts() => userPosts.map((e) => e.post).toList();
 }

@@ -17,7 +17,7 @@ class PurchasesState {
   PurchasesState copyWith({
     List<VerifiedPurchase>? verifiedPurchases,
     List<ProductDetails>? products,
-    bool? storeConnected,
+    bool? storeConnected
   }) {
     return PurchasesState(
       verifiedPurchases: verifiedPurchases ?? this.verifiedPurchases,

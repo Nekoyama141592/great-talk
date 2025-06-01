@@ -6,6 +6,7 @@ part 'chat_state.g.dart';
 
 @freezed
 abstract class ChatState with _$ChatState {
+  const ChatState._();
   const factory ChatState({
     /// AIが応答を生成中かどうか
     @Default(false) bool isGenerating,

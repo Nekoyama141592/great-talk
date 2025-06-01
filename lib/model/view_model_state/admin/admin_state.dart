@@ -5,6 +5,7 @@ part 'admin_state.g.dart';
 
 @freezed
 abstract class AdminState with _$AdminState {
+  const AdminState._();
   const factory AdminState({
     required int userCount,
     required int postCount,

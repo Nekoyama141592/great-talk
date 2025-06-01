@@ -85,8 +85,8 @@ as String?,
 /// @nodoc
 @JsonSerializable()
 
-class _CreatePostState implements CreatePostState {
-  const _CreatePostState({this.title = '', this.systemPrompt = FormConsts.defaultSystemPrompt, this.description = '', this.pickedImage});
+class _CreatePostState extends CreatePostState {
+  const _CreatePostState({this.title = '', this.systemPrompt = FormConsts.defaultSystemPrompt, this.description = '', this.pickedImage}): super._();
   factory _CreatePostState.fromJson(Map<String, dynamic> json) => _$CreatePostStateFromJson(json);
 
 // タイトル

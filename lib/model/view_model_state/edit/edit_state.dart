@@ -5,6 +5,7 @@ part 'edit_state.g.dart';
 
 @freezed
 abstract class EditState with _$EditState {
+  const EditState._();
   const factory EditState({
     required String bio,
     required String userName,
