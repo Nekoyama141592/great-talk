@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/flavors.dart';
 import 'package:great_talk/providers/global/app_router/app_router_provider.dart';
 import 'package:great_talk/providers/global/local_setting/local_setting.dart';
-import 'package:great_talk/theme/themes.dart';
+import 'package:great_talk/ui_core/theme_ui_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class MyApp extends ConsumerWidget {
@@ -16,7 +16,7 @@ class MyApp extends ConsumerWidget {
       routerConfig: appRouter.config(),
       title: F.title,
       theme:
-          state.isDarkTheme ? darkThemeData(context) : lightThemeData(context),
+          state.isDarkTheme ? ThemeUiCore.dark(context) : ThemeUiCore.light(context),
     );
   }
 }
