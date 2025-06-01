@@ -16,7 +16,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
@@ -205,13 +204,9 @@ class ChatViewModel extends _$ChatViewModel {
   // 以下、元のControllerから移植したヘルパーメソッド群
 
   Future<Post?> _fetchPost(String uid, String postId) async {
-    final docRef = DocRefCore.post(uid, postId);
     final repository = ref.read(firestoreRepositoryProvider);
-    final result = await repository.getDoc(docRef);
-    return result.when(
-      success: (doc) => doc.exists ? Post.fromJson(doc.data()!) : null,
-      failure: (e) => null,
-    );
+    final result = await repository.getPost(uid, postId);
+    return result;
   }
 
   Future<Uint8List?> _fetchPostImage(Post post) async {

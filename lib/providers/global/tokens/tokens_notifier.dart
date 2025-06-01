@@ -5,7 +5,6 @@ import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/core/firestore/col_ref_core.dart';
 import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
@@ -26,9 +25,8 @@ class TokensNotifier extends _$TokensNotifier {
     }
 
     final repository = ref.read(firestoreRepositoryProvider);
-    final tokensColRef = ColRefCore.tokens(uid);
-    final res = await repository.getDocsOrNull(tokensColRef);
-    final allTokensData = res?.map((doc) => doc.data()).toList() ?? [];
+    
+    final allTokensData = await repository.getTokens(uid);
 
     return TokensState(
       followingTokens:

@@ -193,8 +193,8 @@ class DocsViewModel extends _$DocsViewModel {
 
   Future<List<QDocInfo>> _createQDocInfoList(List<QDoc> elements) async {
     if (elements.isEmpty) return [];
-    final uids = elements.map((e) => e.data()['uid'] as String).toSet();
-    final fetchedUsers = await _getUsersByUids(uids.toList());
+    final uids = elements.map((e) => e.data()['uid'] as String).toList();
+    final fetchedUsers = await _repository.getUsersByUids(uids);
     final userMap = {for (final user in fetchedUsers) user.uid: user};
 
     final newQDocInfoList = await Future.wait(
@@ -243,23 +243,10 @@ class DocsViewModel extends _$DocsViewModel {
     );
   }
 
-  Future<List<PublicUser>> _getUsersByUids(List<String> uids) async {
-    if (uids.isEmpty) return [];
-    final query = QueryCore.usersByWhereIn(uids);
-    final result = await _repository.getDocs(query);
-    return result.when(
-      success: (res) => res.map((e) => PublicUser.fromJson(e.data())).toList(),
-      failure: (_) => [],
-    );
-  }
-
-  Future<List<QDoc>> _timelinesToPostsResult(List<QDoc> fetchedDocs) async {
-    if (fetchedDocs.isEmpty) return [];
+  Future<List<QDoc>> _timelinesToPostsResult(List<QDoc> fetchedDocs) {
     final postIds =
         fetchedDocs.map((e) => e.data()["postId"] as String).toList();
-    if (postIds.isEmpty) return [];
-    final query = QueryCore.timelinePosts(postIds);
-    return await _repository.getDocsWithList(query);
+    return _repository.getTimelinePosts(postIds);
   }
 
   // Mute Post
@@ -333,20 +320,9 @@ class DocsViewModel extends _$DocsViewModel {
 
   // User Profile
   Future<PublicUser?> _getPassiveUser(String? passiveUid) async {
-    if (passiveUid == null) return null;
-    final ref = DocRefCore.user(passiveUid);
-    final result = await _repository.getDoc(ref);
-    return result.when(
-      success: (res) {
-        final data = res.data();
-        if (data == null) return null;
-        return PublicUser.fromJson(data);
-      },
-      failure: (_) {
-        UIHelper.showErrorFlutterToast("ユーザー情報の取得に失敗しました");
-        return null;
-      },
-    );
+    if (passiveUid == null) return null;;
+    final result = await _repository.getPublicUser(passiveUid);
+    return result;
   }
 
   // Follow/Unfollow

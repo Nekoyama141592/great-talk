@@ -4,10 +4,7 @@ import 'package:great_talk/model/global/current_user/current_user/current_user_s
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/core/credential_core.dart';
-import 'package:great_talk/model/database_schema/public_user/public_user.dart';
-import 'package:great_talk/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/repository/real/firebase_auth/firebase_auth_repository.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
@@ -124,58 +121,35 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final uid = _getCurrentUid();
     if (uid == null) return;
     final repository = ref.read(firestoreRepositoryProvider);
-    final refDoc = DocRefCore.user(uid);
-    final result = await repository.getDoc(refDoc);
-    await result.when(
-      success: (res) async {
-        final data = res.data();
-        if (res.exists && data != null) {
-          final user = PublicUser.fromJson(data);
-          String? base64Image;
-          final bucketName = user.typedImage().bucketName;
-          final fileName = user.typedImage().value;
+    final publicUser = await repository.getPublicUser(uid);
+    if (publicUser == null) {
+      await _createPublicUser();
+    } else {
+      String? base64Image;
+          final bucketName = publicUser.typedImage().bucketName;
+          final fileName = publicUser.typedImage().value;
           if (bucketName.isNotEmpty && fileName.isNotEmpty) {
             final image = await ref.read(fileUseCaseProvider).getS3Image(bucketName, fileName);
             if (image != null) {
               base64Image = base64Encode(image);
             }
           }
-          _updateState(
-            state.value!.copyWith(publicUser: user, base64: base64Image),
+     _updateState(
+            state.value!.copyWith(publicUser: publicUser, base64: base64Image),
           );
-        } else {
-          await _createPublicUser();
-        }
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("公開ユーザーデータの取得に失敗しました: ${e.toString()}");
-      },
-    );
+    }
   }
 
   Future<void> _getPrivateUser() async {
     final uid = _getCurrentUid();
     if (uid == null) return;
     final repository = ref.read(firestoreRepositoryProvider);
-    final refDoc = DocRefCore.privateUser(uid);
-    final result = await repository.getDoc(refDoc);
-    await result.when(
-      success: (res) async {
-        final data = res.data();
-        if (res.exists && data != null) {
-          _updateState(
-            state.value!.copyWith(privateUser: PrivateUser.fromJson(data)),
-          );
-        } else {
-          await _createPrivateUser();
-        }
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast(
-          "プライベートユーザーデータの取得に失敗しました: ${e.toString()}",
-        );
-      },
-    );
+    final privateUser = await repository.getPrivateUser(uid);
+    if (privateUser == null) {
+      await _createPrivateUser();
+    } else {
+      _updateState(state.value!.copyWith(privateUser: privateUser));
+    }
   }
 
   FutureResult<bool> signOut() async {

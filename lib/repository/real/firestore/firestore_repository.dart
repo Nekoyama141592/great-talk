@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:great_talk/core/firestore/col_ref_core.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/model/database_schema/post_mute/post_mute.dart';
+import 'package:great_talk/model/database_schema/private_user/private_user.dart';
+import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
@@ -247,41 +250,66 @@ class FirestoreRepository {
     return _deleteDocs(docRefList);
   }
 
-  FutureResult<Doc> getDoc(DocRef docRef) async {
+  Future<PublicUser?> getPublicUser(String uid) async {
     try {
-      final Doc doc = await docRef.get();
-      return Result.success(doc);
+      final docRef = DocRefCore.user(uid);
+      final doc = await docRef.get();
+      return PublicUser.fromJson(doc.data() as Map<String, dynamic>);
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return null;
     }
   }
-
-  FutureResult<List<QDoc>> getDocs(MapQuery query) async {
+  Future<PrivateUser?> getPrivateUser(String uid) async {
     try {
-      final qSnapshot = await query.get();
-      final qDocs = qSnapshot.docs;
-      return Result.success(qDocs);
+      final docRef = DocRefCore.privateUser(uid);
+      final doc = await docRef.get();
+      return PrivateUser.fromJson(doc.data() as Map<String, dynamic>);
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return null;
     }
   }
-
-  Future<List<QDoc>?> getDocsOrNull(MapQuery query) async {
+  Future<Post?> getPost(String uid, String postId) async {
     try {
-      final qSnapshot = await query.get();
-      final qDocs = qSnapshot.docs;
-      return qDocs;
+      final docRef = DocRefCore.post(uid, postId);
+      final doc = await docRef.get();
+      return Post.fromJson(doc.data() as Map<String, dynamic>);
     } catch (e) {
       debugPrint(e.toString());
       return null;
     }
   }
 
-  Future<List<QDoc>> getDocsWithList(MapQuery query) async {
+  Future<List<Map<String, dynamic>>> getTokens(String uid) async {
     try {
+      final query = ColRefCore.tokens(uid);
       final qSnapshot = await query.get();
       final qDocs = qSnapshot.docs;
-      return qDocs;
+      return qDocs.map((doc) => doc.data()).toList();
+    } catch (e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+
+  Future<List<QDoc>> getTimelinePosts(List<String> postIds) async {
+    if (postIds.isEmpty) return [];
+    try {
+      final query = QueryCore.timelinePosts(postIds);
+      final qSnapshot = await query.get();
+      return qSnapshot.docs;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  Future<List<PublicUser>> getUsersByUids(List<String> uids) async {
+    if (uids.isEmpty) return [];
+    try {
+      final query = QueryCore.usersByWhereIn(uids);
+      final qSnapshot = await query.get();
+      return qSnapshot.docs.map((doc) => PublicUser.fromJson(doc.data())).toList();
     } catch (e) {
       return [];
     }
