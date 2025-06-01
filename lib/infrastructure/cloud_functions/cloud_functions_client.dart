@@ -1,5 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:great_talk/core/firestore/json_core.dart';
+import 'package:great_talk/core/json_core.dart';
 class CloudFunctionsClient {
   HttpsCallable _httpsCallable(String functionName) =>
       FirebaseFunctions.instance.httpsCallable(
