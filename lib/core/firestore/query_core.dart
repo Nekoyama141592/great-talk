@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/core/firestore/col_ref_core.dart';
+import 'package:great_talk/core/firestore/doc_ref_core.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class QueryCore {
@@ -19,8 +20,8 @@ class QueryCore {
       posts().orderBy('msgCount', descending: true);
   static MapQuery postsByNewest() =>
       posts().orderBy('createdAt', descending: true);
-  static MapQuery timelines(DocRef userRef) => ColRefCore.timelines(
-    userRef,
+  static MapQuery timelines(String  uid) => ColRefCore.timelines(
+    DocRefCore.user(uid),
   ).orderBy('createdAt', descending: true).limit(whereInLimit);
   static MapQuery timelinePosts(List<String> timelinePostIds) =>
       posts().where('postId', whereIn: timelinePostIds);

@@ -64,7 +64,7 @@ class DocsViewModel extends _$DocsViewModel {
   MapQuery _setQuery() {
     switch (type) {
       case DocsType.feeds:
-        return QueryCore.timelines(DocRefCore.user(_currentUid()));
+        return QueryCore.timelines(_currentUid());
       case DocsType.mutePosts:
         return QueryCore.postsByWhereIn(_createRequestPostIds());
       case DocsType.muteUsers:
