@@ -327,6 +327,18 @@ class FirestoreRepository {
           .map((doc) => PublicUser.fromJson(doc.data()))
           .toList();
     } catch (e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+
+  Future<List<Post>> getUserPosts(String uid) async {
+    try {
+      final query = service.userPostsByNewest(uid);
+      final qshot = await query.get();
+      return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
+    } catch (e) {
+      debugPrint(e.toString());
       return [];
     }
   }

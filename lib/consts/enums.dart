@@ -29,6 +29,5 @@ enum DocsType {
   muteUsers,
   newPosts,
   rankingPosts,
-  userProfiles,
   rankingUsers,
 }

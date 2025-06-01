@@ -27,7 +27,7 @@ class MuteUsersPage extends ConsumerWidget {
         data: (state) {
           final qDocInfoList = state.qDocInfoList;
           return RefreshScreen(
-            state: state,
+            qDocInfoList: state.qDocInfoList,
             onLoading: notifier.onLoading,
             child: ListView.builder(
               itemCount: qDocInfoList.length,

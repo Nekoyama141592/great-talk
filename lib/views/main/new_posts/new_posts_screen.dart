@@ -24,7 +24,7 @@ class NewPostsScreen extends ConsumerWidget {
         asyncValue: asyncValue,
         data: (state) {
           return RefreshScreen(
-            state: state,
+            qDocInfoList: state.qDocInfoList,
             onLoading: notifier.onLoading,
           );
         },

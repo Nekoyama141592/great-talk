@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/providers/view_model/docs/docs_view_model.dart';
+import 'package:great_talk/providers/view_model/profile/profile_view_model.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/screen/profile_screen/profile_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,18 +13,15 @@ class UserProfilePage extends ConsumerWidget {
   static String generatePath(String uid) => "/users/$uid";
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncValue = ref.watch(
-      docsViewModelProvider(DocsType.userProfiles, passiveUid: uid),
-    );
-    final notifier = ref.read(
-      docsViewModelProvider(DocsType.userProfiles).notifier,
-    );
+    final asyncValue = ref.watch(profileViewModelProvider(uid));
+    final notifier = ref.read(profileViewModelProvider(uid).notifier);
     return Scaffold(
       body: AsyncScreen(
         asyncValue: asyncValue,
         data: (state) {
           return ProfileScreen(
             state: state,
+            passiveUid: uid,
             onLoading: notifier.onLoading,
             follow: notifier.onFollowPressed,
             unFollow: notifier.onUnFollowPressed,

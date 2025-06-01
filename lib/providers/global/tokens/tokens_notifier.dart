@@ -73,20 +73,27 @@ class TokensNotifier extends _$TokensNotifier {
     return postId;
   }
 
-  void addFollowing(FollowingToken followingToken) {
+  FollowingToken addFollowing(String passiveUid) {
+    final followingToken = FollowingToken.fromUid(passiveUid);
     final newState = _currentState.copyWith(
       followingTokens: [..._currentState.followingTokens, followingToken],
     );
     _updateState(newState);
+    return followingToken;
   }
 
-  void removeFollowing(FollowingToken followingToken) {
+  FollowingToken? removeFollowing(String uid) {
+    final deleteToken = state.value?.followingTokens.firstWhereOrNull(
+      (element) => element.passiveUid == uid,
+    );
+    if (deleteToken == null) return null;
     final newList =
         _currentState.followingTokens
-            .where((token) => token.passiveUid != followingToken.passiveUid)
+            .where((token) => token.tokenId == deleteToken.tokenId)
             .toList();
     final newState = _currentState.copyWith(followingTokens: newList);
     _updateState(newState);
+    return deleteToken;
   }
 
   LikePostToken? addLikePost(String currentUid, Post post) {

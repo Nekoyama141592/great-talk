@@ -5,11 +5,9 @@ import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/providers/service/firestore/firestore_service_provider.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/database_schema/q_doc_info/q_doc_info.dart';
-import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
 import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
@@ -26,26 +24,10 @@ part 'docs_view_model.g.dart';
 
 @riverpod
 class DocsViewModel extends _$DocsViewModel {
-  String? get _passiveUid => state.value?.passiveUser?.uid;
-
   @override
-  FutureOr<DocsState> build(DocsType type, {String? passiveUid}) async {
+  FutureOr<DocsState> build(DocsType type) async {
     final isTimeline = type == DocsType.feeds;
     var initialState = DocsState(isTimeline: isTimeline);
-
-    if (type == DocsType.userProfiles) {
-      final passiveUser = await _getPassiveUser(passiveUid);
-      if (passiveUser != null) {
-        final image = await _getImageFromUser(passiveUser);
-        initialState = initialState.copyWith(
-          passiveUser: passiveUser,
-          uint8list: image,
-        );
-      }
-    }
-
-    // `build`メソッド内で初期データを取得
-    state = AsyncValue.loading();
     final docsState = await _fetchInitialDocs(initialState);
     return docsState;
   }
@@ -69,8 +51,6 @@ class DocsViewModel extends _$DocsViewModel {
         return service.postsByNewest();
       case DocsType.rankingPosts:
         return service.postsByMsgCount();
-      case DocsType.userProfiles:
-        return service.userPostsByNewest(passiveUid!);
       // User
       case DocsType.muteUsers:
         return service.usersByWhereIn(_createRequestUids());
@@ -227,13 +207,6 @@ class DocsViewModel extends _$DocsViewModel {
         .getS3Image(detectedImage.bucketName, detectedImage.value);
   }
 
-  Future<Uint8List?> _getImageFromUser(PublicUser user) async {
-    final detectedImage = user.typedImage();
-    return ref
-        .read(fileUseCaseProvider)
-        .getS3Image(detectedImage.bucketName, detectedImage.value);
-  }
-
   Future<List<QDoc>> _timelinesToPostsResult(List<QDoc> fetchedDocs) {
     final postIds =
         fetchedDocs.map((e) => e.data()["postId"] as String).toList();
@@ -308,70 +281,4 @@ class DocsViewModel extends _$DocsViewModel {
       tokenId,
     );
   }
-
-  // User Profile
-  Future<PublicUser?> _getPassiveUser(String? passiveUid) async {
-    if (passiveUid == null) return null;
-    final result = await _repository.getPublicUser(passiveUid);
-    return result;
-  }
-
-  // Follow/Unfollow
-  void onFollowPressed() async {
-    if (state.value?.passiveUser == null) return;
-    final passiveUser = state.value!.passiveUser!;
-    if (passiveUser.uid == _currentUid()) {
-      UIHelper.showFlutterToast("自分をフォローすることはできません。");
-      return;
-    }
-    if (_tokensState().followingUids.length >= followLimit) {
-      UIHelper.showFlutterToast("フォローできるのは$followLimit人までです。");
-      return;
-    }
-    await _follow(passiveUser);
-  }
-
-  Future<void> _follow(PublicUser passiveUser) async {
-    final newUser = passiveUser.copyWith(
-      followerCount: passiveUser.followerCount + 1,
-    );
-    state = AsyncValue.data(state.value!.copyWith(passiveUser: newUser));
-    final passiveUid = passiveUser.uid;
-    final followingToken = FollowingToken.fromUid(passiveUid);
-    _tokensNotifier().addFollowing(followingToken);
-    final currentUid = _currentUid();
-    final follower = Follower.fromUid(currentUid, passiveUid);
-    await _repository.createFollowInfo(
-      currentUid,
-      passiveUid,
-      followingToken,
-      follower,
-    );
-  }
-
-  void onUnFollowPressed() async {
-    if (state.value?.passiveUser == null) return;
-    await _unfollow(state.value!.passiveUser!);
-  }
-
-  Future<void> _unfollow(PublicUser passiveUser) async {
-    final newUser = passiveUser.copyWith(
-      followerCount: passiveUser.followerCount - 1,
-    );
-    state = AsyncValue.data(state.value!.copyWith(passiveUser: newUser));
-
-    final deleteToken = _tokensState().followingTokens.firstWhere(
-      (element) => element.passiveUid == _passiveUid!,
-    );
-    _tokensNotifier().removeFollowing(deleteToken);
-    final currentUid = _currentUid();
-    final passiveUid = _passiveUid;
-    await _repository.deleteFollowInfoList(
-      currentUid,
-      passiveUid!,
-      deleteToken.tokenId,
-    );
-  }
-
-  bool isMyProfile() => _passiveUid == _currentUid();
 }

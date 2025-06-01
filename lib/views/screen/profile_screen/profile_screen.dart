@@ -1,6 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/router_core.dart';
-import 'package:great_talk/model/view_model_state/docs/docs_state.dart';
+import 'package:great_talk/model/view_model_state/profile/profile_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/ui_core/texts.dart';
@@ -21,17 +23,20 @@ class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({
     super.key,
     required this.state,
+    required this.passiveUid,
     required this.onLoading,
     required this.follow,
     required this.unFollow,
   });
-  final DocsState state;
+  final ProfileState state;
+  final String passiveUid;
   final void Function(RefreshController) onLoading;
   final void Function()? follow;
   final void Function()? unFollow;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final passiveUser = state.passiveUser;
+    final passiveUser = state.user;
+    final image = state.base64;
     final children = <Widget>[
       Align(
         alignment: Alignment.centerLeft,
@@ -43,7 +48,7 @@ class ProfileScreen extends ConsumerWidget {
       EllipsisText(passiveUser?.nameValue ?? '', style: StyleUiCore.bold25()),
       Row(
         children: [
-          CircleImage(uint8list: state.uint8list),
+          if (image != null) CircleImage(uint8list: base64Decode(image)),
           const BasicWidthBox(),
           Text("フォロー ${passiveUser?.followingCount.formatNumber() ?? 0}"),
           const BasicWidthBox(),
@@ -74,7 +79,7 @@ class ProfileScreen extends ConsumerWidget {
                           .watch(tokensNotifierProvider)
                           .value
                           ?.followingUids
-                          .contains(state.passiveUid()) ??
+                          .contains(passiveUid) ??
                       false;
                   return passiveUser?.uid ==
                           ref.watch(streamAuthUidProvider).value
@@ -91,7 +96,7 @@ class ProfileScreen extends ConsumerWidget {
         ),
       ),
       child: RefreshScreen(
-        state: state,
+        qDocInfoList: [], // TODO: state.posts
         onLoading: onLoading,
       ),
     );
