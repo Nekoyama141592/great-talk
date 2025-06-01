@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:great_talk/consts/colors.dart';
 
 class MosaicCard extends StatelessWidget {
   const MosaicCard({super.key, required this.child});
@@ -11,7 +12,7 @@ class MosaicCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.5),
+            color: Colors.grey.withAlpha(alpha50),
             spreadRadius: 3,
             blurRadius: 7,
             offset: const Offset(0, 3),

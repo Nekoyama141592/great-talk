@@ -9,3 +9,12 @@ const kContentColorDarkTheme = Color(0xFF1D1D35);
 const kContentColorLightTheme = Color(0xFFF5FCF9);
 const kAccentColorDarkTheme = Color(0xFFf9dc5c);
 const kAccentColorLightTheme = Color(0xFFff715b);
+
+const int alpha10 = 26;
+const int alpha40 = 102;
+const int alpha50 = 128;
+const int alpha60 = 153;
+const int alpha70 = 179;
+const int alpha80 = 204;
+const int alpha87 = 221;
+const int alpha90 = 230;

@@ -8,7 +8,7 @@ ThemeData lightThemeData(BuildContext context) {
     appBarTheme: const AppBarTheme(color: kContentColorLightTheme),
     scaffoldBackgroundColor: Colors.white,
     focusColor: Colors.black,
-    cardColor: kContentColorLightTheme.withValues(alpha: 0.87),
+    cardColor: kContentColorLightTheme.withAlpha(alpha87),
     colorScheme: const ColorScheme.light().copyWith(
       primary: kSecondaryColor, // CupertinoActionSheetActionのTextカラー
       secondary: kSecondaryColor, // TextButtonの色
@@ -22,7 +22,7 @@ ThemeData darkThemeData(BuildContext context) {
   return ThemeData.dark().copyWith(
     primaryColor: kPrimaryColor,
     appBarTheme: const AppBarTheme(color: kContentColorDarkTheme),
-    scaffoldBackgroundColor: kContentColorDarkTheme.withValues(alpha: 0.87),
+    scaffoldBackgroundColor: kContentColorDarkTheme.withAlpha(alpha87),
     focusColor: Colors.white,
     cardColor: kContentColorDarkTheme,
     colorScheme: const ColorScheme.dark().copyWith(

@@ -20,7 +20,7 @@ class RoundedInputField extends StatelessWidget {
           // これも要素
           keyboardType: TextInputType.emailAddress,
           controller: controller,
-          cursorColor: Theme.of(context).highlightColor.withValues(alpha: 0.7),
+          cursorColor: Theme.of(context).highlightColor.withAlpha(alpha70),
           decoration: InputDecoration(
             suffixIcon: InkWell(
               onTap: send,

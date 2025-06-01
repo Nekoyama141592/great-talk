@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:great_talk/consts/colors.dart';
 
 class CustomSnackBar {
   static SnackBar success(BuildContext context, String msg) {
@@ -23,7 +24,7 @@ class CustomSnackBar {
           ),
         ),
       ),
-      backgroundColor: Colors.blueAccent.withValues(alpha: 0.9),
+      backgroundColor: Colors.blueAccent.withAlpha(alpha90),
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       margin: const EdgeInsets.all(15.0),

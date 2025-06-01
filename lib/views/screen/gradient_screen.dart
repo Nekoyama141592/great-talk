@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/core/doubles.dart';
 
 class GradientScreen extends StatelessWidget {
@@ -26,9 +27,9 @@ class GradientScreen extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             colors: [
-              color.withValues(alpha: 0.9),
-              color.withValues(alpha: 0.4),
-              color.withValues(alpha: 0.1),
+              color.withAlpha(alpha90),
+              color.withAlpha(alpha40),
+              color.withAlpha(alpha10),
             ],
           ),
         ),
