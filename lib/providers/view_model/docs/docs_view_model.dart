@@ -26,9 +26,7 @@ part 'docs_view_model.g.dart';
 class DocsViewModel extends _$DocsViewModel {
   @override
   FutureOr<DocsState> build(DocsType type) async {
-    final isTimeline = type == DocsType.feeds;
-    var initialState = DocsState(isTimeline: isTimeline);
-    final docsState = await _fetchInitialDocs(initialState);
+    final docsState = await _fetchInitialDocs();
     return docsState;
   }
 
@@ -59,29 +57,29 @@ class DocsViewModel extends _$DocsViewModel {
     }
   }
 
-  Future<DocsState> _fetchInitialDocs(DocsState currentState) async {
+  Future<DocsState> _fetchInitialDocs() async {
     if ((type == DocsType.mutePosts && _createRequestPostIds().isEmpty) ||
         (type == DocsType.muteUsers && _createRequestUids().isEmpty)) {
-      return currentState;
+      return DocsState();
     }
 
     try {
-      if (currentState.isTimeline) {
+      if (type == DocsType.feeds) {
         final result = await _setQuery().get();
         final postResult = await _timelinesToPostsResult(result.docs);
         final newQDocInfoList = await _createQDocInfoList(postResult);
-        return currentState.copyWith(
+        return DocsState(
           indexDocs: result.docs,
           qDocInfoList: newQDocInfoList,
         );
       } else {
         final elements = await _setQuery().get();
         final newQDocInfoList = await _createQDocInfoList(elements.docs);
-        return currentState.copyWith(qDocInfoList: newQDocInfoList);
+        return DocsState(qDocInfoList: newQDocInfoList);
       }
     } catch (e, st) {
       state = AsyncValue.error(e, st);
-      return currentState;
+      return DocsState();
     }
   }
 
