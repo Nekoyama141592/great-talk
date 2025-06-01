@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/service/firestore_service.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 
@@ -26,7 +26,7 @@ abstract class MuteUserToken with _$MuteUserToken {
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),
       passiveUid: passiveUid,
-      passiveUserRef: DocRefCore.user(passiveUid),
+      passiveUserRef: FirestoreService.user(passiveUid),
       tokenId: randomString(),
       tokenType: TokenType.mutePost.name,
     );

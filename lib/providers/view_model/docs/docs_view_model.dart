@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/core/firestore/query_core.dart';
+import 'package:great_talk/service/firestore_service.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
@@ -61,19 +61,19 @@ class DocsViewModel extends _$DocsViewModel {
   MapQuery _setQuery() {
     switch (type) {
       case DocsType.feeds:
-        return QueryCore.timelines(_currentUid());
+        return FirestoreService.timelinesQuery(_currentUid());
       case DocsType.mutePosts:
-        return QueryCore.postsByWhereIn(_createRequestPostIds());
+        return FirestoreService.postsByWhereIn(_createRequestPostIds());
       case DocsType.muteUsers:
-        return QueryCore.usersByWhereIn(_createRequestUids());
+        return FirestoreService.usersByWhereIn(_createRequestUids());
       case DocsType.newPosts:
-        return QueryCore.postsByNewest();
+        return FirestoreService.postsByNewest();
       case DocsType.rankingPosts:
-        return QueryCore.postsByMsgCount();
+        return FirestoreService.postsByMsgCount();
       case DocsType.userProfiles:
-        return QueryCore.userPostsByNewest(passiveUid!);
+        return FirestoreService.userPostsByNewest(passiveUid!);
       case DocsType.rankingUsers:
-        return QueryCore.usersByFollowerCount();
+        return FirestoreService.usersByFollowerCount();
     }
   }
 

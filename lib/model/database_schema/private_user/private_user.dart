@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/service/firestore_service.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
@@ -29,7 +29,7 @@ abstract class PrivateUser with _$PrivateUser {
     return PrivateUser(
       accessToken: randomString(),
       createdAt: now,
-      ref: DocRefCore.privateUser(uid),
+      ref: FirestoreService.privateUser(uid),
       uid: uid,
       updatedAt: now,
     );

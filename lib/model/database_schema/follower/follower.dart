@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/service/firestore_service.dart';
 
 part 'follower.freezed.dart';
 part 'follower.g.dart';
@@ -21,9 +21,9 @@ abstract class Follower with _$Follower {
   ) {
     final now = FieldValue.serverTimestamp();
     return Follower(
-      activeUserRef: DocRefCore.user(currentUid),
+      activeUserRef: FirestoreService.user(currentUid),
       createdAt: now,
-      passiveUserRef: DocRefCore.user(passiveUid),
+      passiveUserRef: FirestoreService.user(passiveUid),
     );
   }
   Timestamp typedCreatedAt() => createdAt as Timestamp;

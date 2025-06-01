@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/service/firestore_service.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
@@ -52,7 +52,7 @@ abstract class PublicUser with _$PublicUser {
           bio != null
               ? DetectedText(value: bio).toJson()
               : const DetectedText().toJson(),
-      ref: DocRefCore.user(uid),
+      ref: FirestoreService.user(uid),
       uid: uid,
       updatedAt: now,
       image:

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/service/firestore_service.dart';
 import 'package:great_talk/core/strings.dart';
 
 part 'following_token.freezed.dart';
@@ -29,7 +29,7 @@ abstract class FollowingToken with _$FollowingToken {
       createdAt: now,
       passiveUid: passiveUid,
       tokenId: tokenId,
-      passiveUserRef: DocRefCore.user(passiveUid),
+      passiveUserRef: FirestoreService.user(passiveUid),
       tokenType: TokenType.following.name,
     );
   }

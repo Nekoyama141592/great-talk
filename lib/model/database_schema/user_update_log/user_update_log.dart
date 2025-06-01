@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/service/firestore_service.dart';
 import 'package:great_talk/core/maps.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 
@@ -27,7 +27,7 @@ abstract class UserUpdateLog with _$UserUpdateLog {
       stringUserName: userName.trim(),
       uid: uid,
       image: DetectedImage(value: fileName).toJson(),
-      userRef: DocRefCore.user(uid),
+      userRef: FirestoreService.user(uid),
     );
   }
 }
