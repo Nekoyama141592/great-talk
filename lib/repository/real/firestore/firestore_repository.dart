@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:great_talk/core/firestore/collection_group_core.dart';
 import 'package:great_talk/core/firestore/doc_ref_core.dart';
+import 'package:great_talk/core/firestore/query_core.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
@@ -36,11 +36,11 @@ class FirestoreRepository {
     }
   }
 
-  Future<int?> countUsers() => _count(CollectionGroupCore.users);
+  Future<int?> countUsers() => _count(QueryCore.usersCollectionGroup());
 
-  Future<int?> countPosts() => _count(CollectionGroupCore.posts);
+  Future<int?> countPosts() => _count(QueryCore.postsCollectionGroup());
 
-  Future<int?> countMessages() => _count(CollectionGroupCore.messages);
+  Future<int?> countMessages() => _count(QueryCore.messagesCollectionGroup());
 
   // write
   FutureResult<bool> _createDoc(DocRef docRef, Map<String, dynamic> json) async {

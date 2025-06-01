@@ -1,14 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/core/firestore/col_ref_core.dart';
-import 'package:great_talk/core/firestore/collection_group_core.dart';
 import 'package:great_talk/typedefs/firestore_typedef.dart';
 
 class QueryCore {
+  static final _instance = FirebaseFirestore.instance;
   // 基本
   static MapQuery users() => ColRefCore.users().limit(oneTimeReadCount);
   static MapQuery userPosts(String uid) =>
       ColRefCore.posts(uid).limit(oneTimeReadCount);
-  static MapQuery posts() => CollectionGroupCore.posts.limit(oneTimeReadCount);
+  static MapQuery posts() => postsCollectionGroup().limit(oneTimeReadCount);
   // カスタム
   static MapQuery postsByWhereIn(List<String> postIds) =>
       posts().where('postId', whereIn: postIds);
@@ -28,4 +29,9 @@ class QueryCore {
 
   static MapQuery usersByFollowerCount() =>
       users().orderBy('followerCount', descending: true);
+  // CollectionGroup
+  static MapQuery usersCollectionGroup() => _instance.collectionGroup('users');
+  static MapQuery postsCollectionGroup() => _instance.collectionGroup('posts');
+  // 全部消す.
+  static MapQuery messagesCollectionGroup() => _instance.collectionGroup('messages');
 }
