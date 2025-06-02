@@ -27,11 +27,9 @@ class EditProfilePage extends ConsumerStatefulWidget {
 
 class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   final formKey = GlobalKey<FormState>();
-  late double deviceHeight;
 
   @override
   Widget build(BuildContext context) {
-    deviceHeight = MediaQuery.of(context).size.height;
     final editState = ref.watch(editViewModelProvider);
     final notifier = ref.read(editViewModelProvider.notifier);
 
@@ -52,7 +50,7 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
 
   Widget _editForm(EditState data, EditViewModel notifier) {
     return SizedBox(
-      height: deviceHeight * 0.50,
+      height: MediaQuery.of(context).size.height * 0.50,
       child: Form(
         key: formKey,
         child: SingleChildScrollView(
