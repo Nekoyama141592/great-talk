@@ -348,13 +348,13 @@ class FirestoreRepository {
     }
   }
 
-  Future<Doc> _getPostDoc(String uid,String postId) async {
-    final docRef = service.post(uid, postId);
+  Future<Doc> _getPostDoc(Post post) async {
+    final docRef = service.post(post.uid, post.postId);
     return docRef.get();
   }
   Future<List<Post>> getMoreUserPosts(Post lastPost) async {
     try {
-      final doc = await _getPostDoc(lastPost.uid, lastPost.postId);
+      final doc = await _getPostDoc(lastPost);
       final query = service.userPostsByNewest(lastPost.uid).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
@@ -435,7 +435,7 @@ class FirestoreRepository {
   }
   Future<List<Post>> getMorePosts(MapQuery query,Post lastPost) async {
     try {
-      final doc = await _getPostDoc(lastPost.uid, lastPost.postId);
+      final doc = await _getPostDoc(lastPost);
       final qshot = await query.startAfterDocument(doc).get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch(e) {
@@ -449,6 +449,29 @@ class FirestoreRepository {
       final query = service.timelinesQuery(currentUid);
       final qshot = await query.startAfterDocument(doc).get();
       return qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
+    } catch(e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+  Future<List<Post>> getMutePosts(List<String> postIds) async {
+    if (postIds.isEmpty) return [];
+    try {
+      final query = service.postsByWhereIn(postIds);
+      final qshot = await query.get();
+      return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
+    } catch(e) {
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+  Future<List<Post>> getMoreMutePosts(List<String> postIds,Post lastPost) async {
+    if (postIds.isEmpty) return [];
+    try {
+      final doc = await _getPostDoc(lastPost);
+      final query = service.postsByWhereIn(postIds).startAfterDocument(doc);
+      final qshot = await query.get();
+      return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch(e) {
       debugPrint(e.toString());
       return [];

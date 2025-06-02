@@ -25,6 +25,7 @@ class PostsUseCase {
     return posts..sort((a, b) => (b.createdAt).compareTo(a.createdAt));
   }
   Future<List<UserPost>> createUserPosts(List<Post> posts) async {
+    if (posts.isEmpty) return [];
     final sorted = sortedPosts(posts);
     final uids = sorted.map((e) => e.uid).toList();
     final fetchedUsers = await repository.getUsersByUids(uids);
@@ -47,4 +48,5 @@ class PostsUseCase {
     );
     return userPosts;
   }
+  
 }

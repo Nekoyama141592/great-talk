@@ -15,8 +15,9 @@ class TimelinesViewModel extends _$TimelinesViewModel {
   FirestoreRepository get _repository => _useCase.repository;
 
   Future<TimelinesState> _fetchData() async {
-    final currentUid = ref.read(streamAuthUidProvider).value;
-    if (currentUid == null) return TimelinesState();
+    final user = ref.read(streamAuthProvider).value;
+    if (user == null || user.isAnonymous) return TimelinesState();
+    final currentUid = user.uid;
     final timelines = await _repository.getTimelines(currentUid);
     final postIds = timelines.map((e) => e.postId).toList();
     final posts = await _timelinesToPostsResult(postIds);
@@ -30,8 +31,9 @@ class TimelinesViewModel extends _$TimelinesViewModel {
     return _repository.getTimelinePosts(postIds);
   }
   Future<void> onLoading(RefreshController refreshController) async {
-    final currentUid = ref.read(streamAuthUidProvider).value;
-    if (currentUid == null) return;
+    final user = ref.read(streamAuthProvider).value;
+    if (user == null || user.isAnonymous) return;
+    final currentUid = user.uid;
     final currentState = state.value!;
     final lastTimeline = currentState.timelines.last;
     final timelines = await _repository.getMoreTimelines(currentUid,lastTimeline);
