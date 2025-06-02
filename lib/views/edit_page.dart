@@ -115,11 +115,11 @@ class EditProfilePage extends HookConsumerWidget {
                   if (context.mounted) {
                     RouterCore.back(context);
                     RouterCore.back(context);
-                    UIHelper.showFlutterToast("プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
+                    UIHelper.showSuccessSnackBar(context, "プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
                   }
                 },
                 failure: (e) {
-                  UIHelper.showErrorFlutterToast("プロフィールを更新できませんでした");
+                  UIHelper.showFailureSnackBar(context, "プロフィールを更新できませんでした");
                 },
               );
             },
