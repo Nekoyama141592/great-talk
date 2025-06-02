@@ -4,7 +4,6 @@ import 'dart:typed_data';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
 import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
@@ -12,9 +11,10 @@ import 'package:great_talk/providers/client/chat_gpt_sdk/chat_gpt_sdk_client.dar
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
+import 'package:great_talk/repository/real/local/local_repository.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
-import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
@@ -52,12 +52,6 @@ class ChatViewModel extends _$ChatViewModel {
     ScrollController scrollController,
   ) async {
     final text = inputController.text;
-    if (text.isEmpty || text.length > FormConsts.maxMessageLimit) {
-      UIHelper.showErrorFlutterToast(
-        "メッセージは1文字以上、${FormConsts.maxMessageLimit}文字以内で入力してください。",
-      );
-      return;
-    }
     unFocus.call();
     // APIを実行
     await execute(scrollController, text, inputController);
@@ -183,23 +177,6 @@ class ChatViewModel extends _$ChatViewModel {
       ),
     );
   }
-
-  /// チャット履歴をクリアする
-  Future<void> cleanLocalMessageWithChange() async {
-    final currentState = state.value;
-    if (currentState == null || currentState.messages.isEmpty) return;
-
-    // メッセージリストを空にする
-    state = AsyncData(currentState.copyWith(messages: []));
-    await ref.read(prefsProvider).remove(currentState.post.postId);
-    UIHelper.showFlutterToast(clearChatMsg);
-
-    // 説明メッセージを再追加
-    state = AsyncData(_processDescriptionMessage(state.value!));
-  }
-
-  // 以下、元のControllerから移植したヘルパーメソッド群
-
   Future<Post?> _fetchPost(String uid, String postId) async {
     final repository = ref.read(firestoreRepositoryProvider);
     final result = await repository.getPost(uid, postId);
@@ -324,16 +301,12 @@ class ChatViewModel extends _$ChatViewModel {
     });
   }
 
-  Future<void> cleanLocalMessage() async {
-    final stateValue = state.value;
-    if (stateValue == null) return;
+  FutureResult<bool> cleanLocalMessage() async {
+    final stateValue = state.value!;
     final messages = stateValue.messages;
 
     state = AsyncData(stateValue.copyWith(messages: messages));
 
-    UIHelper.showFlutterToast(clearChatMsg);
-
-    final prefs = ref.read(prefsProvider);
-    await prefs.remove(postId);
+    return await ref.read(localRepositoryProvider).removeChatLog(postId);
   }
 }

@@ -6,7 +6,6 @@ import 'package:great_talk/providers/global/purchases/purchases_notifier.dart';
 import 'package:great_talk/repository/real/local/local_repository.dart';
 import 'package:great_talk/repository/real/purchases/purchases_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -65,12 +64,7 @@ class ProductsViewModel extends _$ProductsViewModel {
     return result;
   }
 
-  void onRestoreButtonPressed() async {
-    final storeConnected = state.value?.storeConnected ?? false;
-    if (!storeConnected) {
-      UIHelper.showErrorFlutterToast('Google Playに接続ができません');
-      return;
-    }
-    await _repository.restorePurchases();
+  FutureResult<bool> onRestoreButtonPressed() {
+    return _repository.restorePurchases();
   }
 }

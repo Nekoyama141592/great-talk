@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/providers/view_model/products/products_view_model.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RestoreButton extends ConsumerWidget {
@@ -11,10 +12,12 @@ class RestoreButton extends ConsumerWidget {
       child: Container(
         alignment: Alignment.bottomRight,
         child: TextButton(
-          onPressed:
-              ref
+          onPressed: () async {
+            final result = await ref
                   .read(productsViewModelProvider.notifier)
-                  .onRestoreButtonPressed,
+                  .onRestoreButtonPressed();
+            result.when(success: (_) => UIHelper.showSuccessSnackBar(context, '購入の検証が成功しました'), failure: (msg) => UIHelper.showFailureSnackBar(context, msg.toString()));
+          },
           child: Text(
             '購入を復元',
             style: TextStyle(

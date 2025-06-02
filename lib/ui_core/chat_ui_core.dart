@@ -22,7 +22,7 @@ class ChatUiCore {
   static void onMenuPressed({
     required BuildContext context,
     required Post post,
-    required void Function() cleanLocalMessage,
+    required void Function(BuildContext context) cleanLocalMessage,
   }) async {
     UIHelper.showPopup(
       context: context,
@@ -31,9 +31,7 @@ class ChatUiCore {
           actions: [
             CupertinoActionSheetAction(
               onPressed: () {
-                Navigator.pop(innerContext);
-
-                cleanLocalMessage();
+                cleanLocalMessage(innerContext);
               },
               child: const Text("会話履歴を削除"),
             ),

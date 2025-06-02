@@ -82,7 +82,8 @@ class PurchasesRepository {
       await inAppPurchase.restorePurchases();
       return const Result.success(true);
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return Result.failure('購入の復元が失敗しました');
     }
   }
 }

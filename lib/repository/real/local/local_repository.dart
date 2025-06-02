@@ -54,4 +54,14 @@ class LocalRepository {
   List<VerifiedPurchase> fetchVerifiedPurchases() {
     return _fetchList(PrefsKey.verifiedPurchases, VerifiedPurchase.fromJson);
   }
+
+  FutureResult<bool> removeChatLog(String postId) async {
+    try {
+      await prefs.remove(postId);
+      return const Result.success(true);
+    } catch(e) {
+      debugPrint(e.toString());
+      return const Result.failure('削除が失敗しました');
+    }
+  }
 }
