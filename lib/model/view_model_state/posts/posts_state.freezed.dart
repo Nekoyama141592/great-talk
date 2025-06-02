@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostsState {
 
- List<UserPost> get userPosts; List<Timeline> get timelines;
+ List<UserPost> get userPosts;
 /// Create a copy of PostsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $PostsStateCopyWith<PostsState> get copyWith => _$PostsStateCopyWithImpl<PostsSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostsState&&const DeepCollectionEquality().equals(other.userPosts, userPosts)&&const DeepCollectionEquality().equals(other.timelines, timelines));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostsState&&const DeepCollectionEquality().equals(other.userPosts, userPosts));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(userPosts),const DeepCollectionEquality().hash(timelines));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(userPosts));
 
 @override
 String toString() {
-  return 'PostsState(userPosts: $userPosts, timelines: $timelines)';
+  return 'PostsState(userPosts: $userPosts)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $PostsStateCopyWith<$Res>  {
   factory $PostsStateCopyWith(PostsState value, $Res Function(PostsState) _then) = _$PostsStateCopyWithImpl;
 @useResult
 $Res call({
- List<UserPost> userPosts, List<Timeline> timelines
+ List<UserPost> userPosts
 });
 
 
@@ -66,11 +66,10 @@ class _$PostsStateCopyWithImpl<$Res>
 
 /// Create a copy of PostsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userPosts = null,Object? timelines = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userPosts = null,}) {
   return _then(_self.copyWith(
 userPosts: null == userPosts ? _self.userPosts : userPosts // ignore: cast_nullable_to_non_nullable
-as List<UserPost>,timelines: null == timelines ? _self.timelines : timelines // ignore: cast_nullable_to_non_nullable
-as List<Timeline>,
+as List<UserPost>,
   ));
 }
 
@@ -81,7 +80,7 @@ as List<Timeline>,
 @JsonSerializable()
 
 class _PostsState extends PostsState {
-  const _PostsState({final  List<UserPost> userPosts = const [], final  List<Timeline> timelines = const []}): _userPosts = userPosts,_timelines = timelines,super._();
+  const _PostsState({final  List<UserPost> userPosts = const []}): _userPosts = userPosts,super._();
   factory _PostsState.fromJson(Map<String, dynamic> json) => _$PostsStateFromJson(json);
 
  final  List<UserPost> _userPosts;
@@ -89,13 +88,6 @@ class _PostsState extends PostsState {
   if (_userPosts is EqualUnmodifiableListView) return _userPosts;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_userPosts);
-}
-
- final  List<Timeline> _timelines;
-@override@JsonKey() List<Timeline> get timelines {
-  if (_timelines is EqualUnmodifiableListView) return _timelines;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_timelines);
 }
 
 
@@ -112,16 +104,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostsState&&const DeepCollectionEquality().equals(other._userPosts, _userPosts)&&const DeepCollectionEquality().equals(other._timelines, _timelines));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostsState&&const DeepCollectionEquality().equals(other._userPosts, _userPosts));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_userPosts),const DeepCollectionEquality().hash(_timelines));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_userPosts));
 
 @override
 String toString() {
-  return 'PostsState(userPosts: $userPosts, timelines: $timelines)';
+  return 'PostsState(userPosts: $userPosts)';
 }
 
 
@@ -132,7 +124,7 @@ abstract mixin class _$PostsStateCopyWith<$Res> implements $PostsStateCopyWith<$
   factory _$PostsStateCopyWith(_PostsState value, $Res Function(_PostsState) _then) = __$PostsStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<UserPost> userPosts, List<Timeline> timelines
+ List<UserPost> userPosts
 });
 
 
@@ -149,11 +141,10 @@ class __$PostsStateCopyWithImpl<$Res>
 
 /// Create a copy of PostsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userPosts = null,Object? timelines = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userPosts = null,}) {
   return _then(_PostsState(
 userPosts: null == userPosts ? _self._userPosts : userPosts // ignore: cast_nullable_to_non_nullable
-as List<UserPost>,timelines: null == timelines ? _self._timelines : timelines // ignore: cast_nullable_to_non_nullable
-as List<Timeline>,
+as List<UserPost>,
   ));
 }
 

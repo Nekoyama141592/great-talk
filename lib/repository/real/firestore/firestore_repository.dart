@@ -443,9 +443,10 @@ class FirestoreRepository {
       return [];
     }
   }
-  Future<List<Timeline>> getMoreTimelines(MapQuery query,String currentUid,Timeline lastTimeline) async {
+  Future<List<Timeline>> getMoreTimelines(String currentUid,Timeline lastTimeline) async {
     try {
       final doc = await service.timelinesDocRef(currentUid, lastTimeline.postId).get();
+      final query = service.timelinesQuery(currentUid);
       final qshot = await query.startAfterDocument(doc).get();
       return qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
     } catch(e) {

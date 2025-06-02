@@ -24,7 +24,6 @@ enum SearchTarget { post, user }
 enum TokenType { following, likePost, mutePost, muteUser, reportPost }
 
 enum DocsType {
-  feeds,
   mutePosts,
   newPosts,
   rankingPosts,
