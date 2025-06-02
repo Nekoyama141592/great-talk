@@ -5,7 +5,7 @@ import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/model/view_model_state/profile/profile_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/providers/view_model/refresh_interface.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/extension/number_format_extension.dart';
 import 'package:great_talk/extension/string_extension.dart';
@@ -24,13 +24,13 @@ class ProfileScreen extends ConsumerWidget {
     super.key,
     required this.state,
     required this.passiveUid,
-    required this.onLoading,
+    required this.notifier,
     required this.follow,
     required this.unFollow,
   });
   final ProfileState state;
   final String passiveUid;
-  final FutureResult<bool> Function() onLoading;
+  final RefreshInterface Function() notifier;
   final void Function()? follow;
   final void Function()? unFollow;
   @override
@@ -95,7 +95,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
         ),
       ),
-      child: PostsRefreshScreen(userPosts: state.userPosts, onLoading: onLoading)
+      child: PostsRefreshScreen(userPosts: state.userPosts, notifier: notifier,)
     );
   }
 }

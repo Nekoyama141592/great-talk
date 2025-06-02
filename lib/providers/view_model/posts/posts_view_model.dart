@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:great_talk/model/view_model_state/posts/posts_state.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/providers/usecase/posts/posts_use_case.dart';
+import 'package:great_talk/providers/view_model/refresh_interface.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -9,7 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'posts_view_model.g.dart';
 
 @riverpod
-class PostsViewModel extends _$PostsViewModel {
+class PostsViewModel extends _$PostsViewModel implements RefreshInterface {
   @override
   FutureOr<PostsState> build(bool isRankingPosts) {
     return _fetchData();
@@ -23,7 +24,7 @@ class PostsViewModel extends _$PostsViewModel {
     final userPosts = await _useCase.createUserPosts(posts);
     return PostsState(userPosts: userPosts);
   }
-
+  @override
   FutureResult<bool> onLoading() async {
     final currentState = state.value!;
     final lastPost = currentState.userPosts.last.post;

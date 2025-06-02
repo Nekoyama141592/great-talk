@@ -8,6 +8,7 @@ import 'package:great_talk/model/view_model_state/profile/profile_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
+import 'package:great_talk/providers/view_model/refresh_interface.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -15,7 +16,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'profile_view_model.g.dart';
 
 @riverpod
-class ProfileViewModel extends _$ProfileViewModel {
+class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
   FirestoreRepository get _repository => ref.read(firestoreRepositoryProvider);
   @override
   FutureOr<ProfileState> build(String passiveUid) {
@@ -148,7 +149,7 @@ class ProfileViewModel extends _$ProfileViewModel {
     state = AsyncValue.data(state.value!.copyWith(user: newUser));
     ref.read(tokensNotifierProvider.notifier).addFollowing(passiveUid);
   }
-
+  @override
   FutureResult<bool> onLoading() async {
     final stateValue = state.value!;
     state = await AsyncValue.guard(() async {

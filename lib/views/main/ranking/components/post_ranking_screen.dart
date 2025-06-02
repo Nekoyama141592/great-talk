@@ -9,7 +9,7 @@ class PostRankingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(postsViewModelProvider(true));
-    final notifier = ref.read(
+    PostsViewModel notifier() => ref.read(
       postsViewModelProvider(true).notifier,
     );
     return AsyncScreen(
@@ -17,7 +17,7 @@ class PostRankingScreen extends ConsumerWidget {
       data: (state) {
         return PostsRefreshScreen(
           userPosts: state.userPosts,
-          onLoading: notifier.onLoading,
+          notifier: notifier,
         );
       },
     );

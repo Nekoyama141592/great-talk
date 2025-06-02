@@ -21,7 +21,7 @@ class MutePostsPage extends ConsumerWidget {
         data: (state) {
           return PostsRefreshScreen(
             userPosts: state.userPosts,
-            onLoading: notifier().onLoading,
+            notifier: notifier,
           );
         },
       ),

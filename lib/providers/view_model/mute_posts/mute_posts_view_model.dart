@@ -5,13 +5,14 @@ import 'package:great_talk/model/view_model_state/posts/posts_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/usecase/posts/posts_use_case.dart';
+import 'package:great_talk/providers/view_model/refresh_interface.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'mute_posts_view_model.g.dart';
 
 @riverpod
-class MutePostsViewModel extends _$MutePostsViewModel {
+class MutePostsViewModel extends _$MutePostsViewModel implements RefreshInterface {
   PostsUseCase get _useCase => ref.read(postsUseCaseProvider);
   FirestoreRepository get _repository => _useCase.repository;
   TokensNotifier _tokensNotifier() => ref.read(tokensNotifierProvider.notifier);
@@ -63,6 +64,7 @@ class MutePostsViewModel extends _$MutePostsViewModel {
       deleteToken.tokenId,
     );
   }
+  @override
   FutureResult<bool> onLoading() async {
     final currentState = state.value!;
     final lastPost = currentState.userPosts.last.post;
