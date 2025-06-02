@@ -166,7 +166,7 @@ class ChatPage extends HookConsumerWidget {
                         result.when(success: (_) {
                           UIHelper.showSuccessSnackBar(context, clearChatMsg);
                         }, failure: (msg) {
-                          UIHelper.showFailureSnackBar(context, msg.toString());
+                          UIHelper.showFailureSnackBar(context, msg);
                         });
                       },
                     );

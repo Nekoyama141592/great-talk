@@ -60,7 +60,7 @@ class ProductList extends ConsumerWidget {
                               result.when(success: (_) {
                                 UIHelper.showSuccessSnackBar(context, '購入が成功しました');
                               }, failure: (msg) {
-                                UIHelper.showFailureSnackBar(context, msg.toString());
+                                UIHelper.showFailureSnackBar(context, msg);
                               });
                             }
                     ),

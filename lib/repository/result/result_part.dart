@@ -1,13 +1,7 @@
-// coverage:ignore-file
-// GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'result.dart';
-
-// **************************************************************************
-// FreezedGenerator
-// **************************************************************************
 
 T _$identity<T>(T value) => value;
 
@@ -20,17 +14,17 @@ mixin _$Result<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function(Object e) failure,
+    required TResult Function(String e) failure,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function(Object e)? failure,
+    TResult? Function(String e)? failure,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function(Object e)? failure,
+    TResult Function(String e)? failure,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -143,7 +137,7 @@ class _$SuccessImpl<T> implements Success<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function(Object e) failure,
+    required TResult Function(String e) failure,
   }) {
     return success(value);
   }
@@ -152,7 +146,7 @@ class _$SuccessImpl<T> implements Success<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function(Object e)? failure,
+    TResult? Function(String e)? failure,
   }) {
     return success?.call(value);
   }
@@ -161,7 +155,7 @@ class _$SuccessImpl<T> implements Success<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function(Object e)? failure,
+    TResult Function(String e)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -221,7 +215,7 @@ abstract class _$$FailureImplCopyWith<T, $Res> {
     $Res Function(_$FailureImpl<T>) then,
   ) = __$$FailureImplCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({Object e});
+  $Res call({String e});
 }
 
 /// @nodoc
@@ -237,7 +231,7 @@ class __$$FailureImplCopyWithImpl<T, $Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? e = null}) {
+  $Res call({String? e = null}) {
     return _then(_$FailureImpl<T>(null == e ? _value.e : e));
   }
 }
@@ -248,7 +242,7 @@ class _$FailureImpl<T> implements Failure<T> {
   const _$FailureImpl(this.e);
 
   @override
-  final Object e;
+  final String e;
 
   @override
   String toString() {
@@ -279,7 +273,7 @@ class _$FailureImpl<T> implements Failure<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T value) success,
-    required TResult Function(Object e) failure,
+    required TResult Function(String e) failure,
   }) {
     return failure(e);
   }
@@ -288,7 +282,7 @@ class _$FailureImpl<T> implements Failure<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T value)? success,
-    TResult? Function(Object e)? failure,
+    TResult? Function(String e)? failure,
   }) {
     return failure?.call(e);
   }
@@ -297,7 +291,7 @@ class _$FailureImpl<T> implements Failure<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T value)? success,
-    TResult Function(Object e)? failure,
+    TResult Function(String e)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -339,7 +333,7 @@ class _$FailureImpl<T> implements Failure<T> {
 }
 
 abstract class Failure<T> implements Result<T> {
-  const factory Failure(final Object e) = _$FailureImpl<T>;
+  const factory Failure(final String e) = _$FailureImpl<T>;
 
   Object get e;
 

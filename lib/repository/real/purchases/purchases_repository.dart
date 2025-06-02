@@ -59,7 +59,8 @@ class PurchasesRepository {
       final res = VerifiedPurchase.fromJson(result);
       return Result.success(res);
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return Result.failure('レシート検証が失敗しました');
     }
   }
 
@@ -73,7 +74,8 @@ class PurchasesRepository {
       final res = VerifiedPurchase.fromJson(result);
       return Result.success(res);
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return Result.failure('レシート検証が失敗しました');
     }
   }
 

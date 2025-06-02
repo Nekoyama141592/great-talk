@@ -79,7 +79,7 @@ class CreatePostPage extends ConsumerWidget {
         UIHelper.showFailureSnackBar(context, '投稿の作成に成功しました');
         RouterCore.back(context);
       }, failure: (msg) {
-        UIHelper.showFailureSnackBar(context, msg.toString());
+        UIHelper.showFailureSnackBar(context, msg);
       });
     }
 

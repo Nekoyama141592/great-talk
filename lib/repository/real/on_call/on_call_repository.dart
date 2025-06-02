@@ -34,7 +34,8 @@ class OnCallRepository {
       final res = PutObjectResponse.fromJson(result);
       return Result.success(res);
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return Result.failure('画像のアップロードが失敗しました');
     }
   }
 
@@ -47,7 +48,8 @@ class OnCallRepository {
       final image = base64Decode(base64Image);
       return Result.success(image);
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return Result.failure('画像の取得が失敗しました');
     }
   }
 
@@ -60,7 +62,8 @@ class OnCallRepository {
       final res = DeleteObjectResponse.fromJson(result);
       return Result.success(res);
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return Result.failure('画像の削除が失敗しました');
     }
   }
 

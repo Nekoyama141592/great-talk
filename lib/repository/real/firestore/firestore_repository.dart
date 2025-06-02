@@ -54,7 +54,7 @@ class FirestoreRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
-      return Result.failure(e);
+      return Result.failure('作成が失敗しました');
     }
   }
 
@@ -109,7 +109,7 @@ class FirestoreRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
-      return Result.failure(e);
+      return Result.failure('削除が失敗しました');
     }
   }
 
@@ -133,7 +133,7 @@ class FirestoreRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
-      return Result.failure(e);
+      return Result.failure('作成が失敗しました');
     }
   }
 
@@ -211,7 +211,7 @@ class FirestoreRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
-      return Result.failure(e);
+      return Result.failure('削除が失敗しました');
     }
   }
 

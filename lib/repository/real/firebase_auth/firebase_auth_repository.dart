@@ -27,7 +27,7 @@ class FirebaseAuthRepository {
       }
     } catch (e) {
       debugPrint(e.toString());
-      return Result.failure(e);
+      return Result.failure('匿名ログインが失敗しました');
     }
   }
 
@@ -43,8 +43,9 @@ class FirebaseAuthRepository {
         return Result.success(user);
       }
     } on FirebaseAuthException catch (e) {
-      _manageErrorCredential(e);
-      return Result.failure(e);
+      debugPrint(e.toString());
+      final msg = _manageErrorCredential(e);
+      return Result.failure(msg);
     }
   }
 
@@ -60,8 +61,9 @@ class FirebaseAuthRepository {
         return Result.success(user);
       }
     } on FirebaseAuthException catch (e) {
-      _manageErrorCredential(e);
-      return Result.failure(e);
+      debugPrint(e.toString());
+      final msg = _manageErrorCredential(e);
+      return Result.failure(msg);
     }
   }
 
@@ -71,7 +73,7 @@ class FirebaseAuthRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
-      return Result.failure(e);
+      return Result.failure('ログアウトが失敗しました');
     }
   }
 

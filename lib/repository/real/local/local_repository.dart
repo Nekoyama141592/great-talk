@@ -43,7 +43,7 @@ class LocalRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint(e.toString());
-      return Result.failure(e);
+      return Result.failure('追加が失敗しました');
     }
   }
 

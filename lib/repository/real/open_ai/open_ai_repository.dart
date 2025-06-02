@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:great_talk/infrastructure/open_ai/open_ai_client.dart';
 import 'package:great_talk/model/rest_api/open_ai/generata_image/generate_image_request/generate_image_request.dart';
 import 'package:great_talk/model/rest_api/open_ai/generata_image/generate_image_response/generate_image_response.dart';
@@ -23,7 +24,8 @@ class OpenAIRepository {
       final response = await client.generateImage(request);
       return Result.success(response);
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return Result.failure('画像の生成が失敗しました');
     }
   }
 
@@ -34,7 +36,8 @@ class OpenAIRepository {
       final response = await client.generateText(request);
       return Result.success(response);
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return Result.failure('テキストの生成が失敗しました');
     }
   }
 }

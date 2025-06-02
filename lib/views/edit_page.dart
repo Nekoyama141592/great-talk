@@ -97,7 +97,7 @@ class EditProfilePage extends HookConsumerWidget {
           result.when(success: (_) {
             UIHelper.showSuccessSnackBar(context, '画像の取得が成功しました');
           }, failure: (msg) {
-            UIHelper.showFailureSnackBar(context, msg.toString());
+            UIHelper.showFailureSnackBar(context, msg);
           });
         }
 

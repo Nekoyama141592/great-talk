@@ -32,7 +32,7 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                 );
               },
               failure:
-                  (msg) => UIHelper.showFailureSnackBar(context,msg.toString()),
+                  (msg) => UIHelper.showFailureSnackBar(context,msg),
             );
           },
           onGoogleButtonPressed: () async {
@@ -44,7 +44,7 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                   success:
                       (_) => RouterCore.pushPath(context, UserDeletedPage.path),
                   failure:
-                      (msg) => UIHelper.showFailureSnackBar(context,msg.toString()),
+                      (msg) => UIHelper.showFailureSnackBar(context,msg),
                 );
               },
               failure:

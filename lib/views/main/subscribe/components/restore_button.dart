@@ -16,7 +16,7 @@ class RestoreButton extends ConsumerWidget {
             final result = await ref
                   .read(productsViewModelProvider.notifier)
                   .onRestoreButtonPressed();
-            result.when(success: (_) => UIHelper.showSuccessSnackBar(context, '購入の検証が成功しました'), failure: (msg) => UIHelper.showFailureSnackBar(context, msg.toString()));
+            result.when(success: (_) => UIHelper.showSuccessSnackBar(context, '購入の検証が成功しました'), failure: (msg) => UIHelper.showFailureSnackBar(context, msg));
           },
           child: Text(
             '購入を復元',
