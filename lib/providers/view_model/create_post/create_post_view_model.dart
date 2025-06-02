@@ -5,6 +5,7 @@ import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/view_model_state/create_post/create_post_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
@@ -68,70 +69,53 @@ class CreatePostViewModel extends _$CreatePostViewModel {
   }
 
   // 投稿ボタン押下時の処理
-  Future<bool> onPositiveButtonPressed() async {
-    if (state.isLoading) return false; // 二重リクエストを防止
+  FutureResult<bool> onPositiveButtonPressed() async {
+    if (state.isLoading) {
+      return const Result.failure('ロード中です');
+    }
 
-    final currentState = state.value;
-    if (currentState == null) return false;
+    final currentState = state.value!;
     final pickedImage = currentState.pickedImage;
     if (pickedImage == null) {
-      UIHelper.showErrorFlutterToast("アイコンをタップして画像をアップロードしてください");
-      return false;
+      return const Result.failure('アイコンをタップして画像をアップロードしてください');
     }
     final currentUid = ref.read(streamAuthUidProvider).value;
     if (currentUid == null) {
-      UIHelper.showErrorFlutterToast("ログインが必要です");
-      return false;
+      return const Result.failure('ログインが必要です');
     }
 
     // ローディング状態に設定
     state = const AsyncValue.loading();
 
-    try {
-      final postId = randomString();
-      final fileName = AWSS3Core.postObject(currentUid, postId);
-      final repository = ref.read(onCallRepositoryProvider);
-      final request = PutObjectRequest.fromUint8List(
-        uint8list: base64Decode(pickedImage),
-        fileName: fileName,
-      );
-      final result = await repository.putObject(request);
+    final postId = randomString();
+    final fileName = AWSS3Core.postObject(currentUid, postId);
+    final repository = ref.read(onCallRepositoryProvider);
+    final request = PutObjectRequest.fromUint8List(
+      uint8list: base64Decode(pickedImage),
+      fileName: fileName,
+    );
+    final putObjectResult = await repository.putObject(request);
 
-      final success = await result.when<Future<bool>>(
-        success:
-            (res) async => await _createPost(postId, fileName, currentState),
-        failure: (e) async {
-          UIHelper.showErrorFlutterToast("画像のアップロードが失敗しました");
-          return false;
-        },
-      );
-
-      if (success) {
-        _resetState(); // 成功したら状態をリセット
-        return true;
-      } else {
-        // 失敗したら元の状態に戻す
-        state = AsyncValue.data(currentState);
-        return false;
-      }
-    } catch (e, st) {
-      UIHelper.showErrorFlutterToast("投稿処理中にエラーが発生しました: $e");
-      // エラー状態にし、元のデータを保持する
-      state = AsyncValue.error(e, st);
-      // 復帰できるように元のデータで上書き
-      state = AsyncValue.data(currentState);
-      return false;
-    }
+    final createPostResult = await putObjectResult.when<FutureResult<bool>>(
+      success:
+          (res) => _createPost(postId, fileName, currentState),
+      failure: (e) async {
+        return const Result.failure('画像のアップロードが失敗しました');
+      },
+    );
+    return createPostResult;
   }
 
-  Future<bool> _createPost(
+  FutureResult<bool> _createPost(
     String postId,
     String fileName,
     CreatePostState postState,
   ) async {
     final repository = ref.read(firestoreRepositoryProvider);
     final uid = ref.read(streamAuthUidProvider).value;
-    if (uid == null) return false;
+    if (uid == null) {
+      return const Result.failure('ログインしてください');
+    }
 
     final customCompleteText = CustomCompleteText(
       systemPrompt: postState.systemPrompt.trim(),
@@ -149,19 +133,6 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     final json = newPost.toJson();
     final result = await repository.createPost(uid, postId, json);
 
-    return result.when(
-      success: (_) {
-        UIHelper.showFlutterToast("投稿が作成できました！");
-        return true;
-      },
-      failure: (e) {
-        UIHelper.showErrorFlutterToast("投稿が作成できませんでした");
-        return false;
-      },
-    );
-  }
-
-  void _resetState() {
-    state = const AsyncValue.data(CreatePostState());
+    return result;
   }
 }

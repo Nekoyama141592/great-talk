@@ -30,13 +30,6 @@ class _EditProfilePageState extends ConsumerState<EditProfilePage> {
   late double deviceHeight;
 
   @override
-  void initState() {
-    super.initState();
-    // initState内で直接notifierを呼び出す場合は一手間必要
-    Future.microtask(() => ref.read(editViewModelProvider.notifier).init());
-  }
-
-  @override
   Widget build(BuildContext context) {
     deviceHeight = MediaQuery.of(context).size.height;
     final editState = ref.watch(editViewModelProvider);
