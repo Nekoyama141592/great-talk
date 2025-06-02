@@ -26,7 +26,7 @@ class FirebaseAuthRepository {
         return Result.success(user);
       }
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('signInAnonymously: ${e.toString()}');
       return Result.failure('匿名ログインが失敗しました');
     }
   }
@@ -43,7 +43,7 @@ class FirebaseAuthRepository {
         return Result.success(user);
       }
     } on FirebaseAuthException catch (e) {
-      debugPrint(e.toString());
+      debugPrint('signInWithApple: ${e.toString()}');
       final msg = _manageErrorCredential(e);
       return Result.failure(msg);
     }
@@ -61,7 +61,7 @@ class FirebaseAuthRepository {
         return Result.success(user);
       }
     } on FirebaseAuthException catch (e) {
-      debugPrint(e.toString());
+      debugPrint('signInWithGoogle: ${e.toString()}');
       final msg = _manageErrorCredential(e);
       return Result.failure(msg);
     }
@@ -72,7 +72,7 @@ class FirebaseAuthRepository {
       await instance.signOut();
       return const Result.success(true);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('signOut: ${e.toString()}');
       return Result.failure('ログアウトが失敗しました');
     }
   }
@@ -86,7 +86,7 @@ class FirebaseAuthRepository {
       await user.reauthenticateWithCredential(credential);
       return const Result.success(true);
     } on FirebaseAuthException catch (e) {
-      debugPrint(e.toString());
+      debugPrint('reauthenticateWithCredential: ${e.toString()}');
       final String errorCode = e.code;
       String msg = '';
       switch (errorCode) {
@@ -112,7 +112,7 @@ class FirebaseAuthRepository {
       return const Result.success(true);
     } on FirebaseAuthException catch (e) {
       final String errorCode = e.code;
-      debugPrint(errorCode);
+      debugPrint('deleteUser: $errorCode');
       String msg = '';
       switch (errorCode) {
         case 'requires-recent-login':

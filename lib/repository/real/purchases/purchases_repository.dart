@@ -23,7 +23,7 @@ class PurchasesRepository {
     try {
       return inAppPurchase.isAvailable();
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('isAvailable: ${e.toString()}');
       return false;
     }
   }
@@ -34,7 +34,7 @@ class PurchasesRepository {
       final res = await inAppPurchase.queryProductDetails(identifiers);
       return res.productDetails;
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('queryProductDetails: ${e.toString()}');
       return null;
     }
   }
@@ -44,7 +44,7 @@ class PurchasesRepository {
       await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       return const Result.success(true);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('buyNonConsumable: ${e.toString()}');
       return Result.failure('購入が失敗しました');
     }
   }
@@ -59,7 +59,7 @@ class PurchasesRepository {
       final res = VerifiedPurchase.fromJson(result);
       return Result.success(res);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('verifyAndroidReceipt: ${e.toString()}');
       return Result.failure('レシート検証が失敗しました');
     }
   }
@@ -74,7 +74,7 @@ class PurchasesRepository {
       final res = VerifiedPurchase.fromJson(result);
       return Result.success(res);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('verifyIOSReceipt: ${e.toString()}');
       return Result.failure('レシート検証が失敗しました');
     }
   }
@@ -84,7 +84,7 @@ class PurchasesRepository {
       await inAppPurchase.restorePurchases();
       return const Result.success(true);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('restorePurchases: ${e.toString()}');
       return Result.failure('購入の復元が失敗しました');
     }
   }

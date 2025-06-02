@@ -33,7 +33,7 @@ class FirestoreRepository {
       final snapshot = await query.count().get();
       return snapshot.count ?? 0;
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('_count: ${e.toString()}');
       return null;
     }
   }
@@ -53,7 +53,7 @@ class FirestoreRepository {
       await docRef.set(json);
       return const Result.success(true);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('_createDoc: ${e.toString()}');
       return Result.failure('作成が失敗しました');
     }
   }
@@ -67,7 +67,7 @@ class FirestoreRepository {
       await docRef.set(json);
       return PublicUser.fromJson(json);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('createPublicUser: ${e.toString()}');
       return null;
     }
   }
@@ -81,7 +81,7 @@ class FirestoreRepository {
       await docRef.set(json);
       return PrivateUser.fromJson(json);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('createPrivateUser: ${e.toString()}');
       return null;
     }
   }
@@ -108,7 +108,7 @@ class FirestoreRepository {
       await docRef.delete();
       return const Result.success(true);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('_deleteDoc: ${e.toString()}');
       return Result.failure('削除が失敗しました');
     }
   }
@@ -132,7 +132,7 @@ class FirestoreRepository {
       await batch.commit();
       return const Result.success(true);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('_createDocs: ${e.toString()}');
       return Result.failure('作成が失敗しました');
     }
   }
@@ -210,7 +210,7 @@ class FirestoreRepository {
       await batch.commit();
       return const Result.success(true);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('_deleteDocs: ${e.toString()}');
       return Result.failure('削除が失敗しました');
     }
   }
@@ -269,7 +269,7 @@ class FirestoreRepository {
       final doc = await docRef.get();
       return PublicUser.fromJson(doc.data() as Map<String, dynamic>);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('getPublicUser: ${e.toString()}');
       return null;
     }
   }
@@ -280,7 +280,7 @@ class FirestoreRepository {
       final doc = await docRef.get();
       return PrivateUser.fromJson(doc.data() as Map<String, dynamic>);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('getPrivateUser: ${e.toString()}');
       return null;
     }
   }
@@ -291,7 +291,7 @@ class FirestoreRepository {
       final doc = await docRef.get();
       return Post.fromJson(doc.data() as Map<String, dynamic>);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('getPost: ${e.toString()}');
       return null;
     }
   }
@@ -307,7 +307,7 @@ class FirestoreRepository {
       final qDocs = qSnapshot.docs;
       return qDocs.map((doc) => doc.data()).toList();
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('getTokens: ${e.toString()}');
       return [];
     }
   }
@@ -319,6 +319,7 @@ class FirestoreRepository {
       final qSnapshot = await _getDocs(query);
       return qSnapshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch (e) {
+      debugPrint('getTimelinePosts: ${e.toString()}'); // Added debugPrint here
       return [];
     }
   }
@@ -332,7 +333,7 @@ class FirestoreRepository {
           .map((doc) => PublicUser.fromJson(doc.data()))
           .toList();
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('getUsersByUids: ${e.toString()}');
       return [];
     }
   }
@@ -343,7 +344,7 @@ class FirestoreRepository {
       final qshot = await _getDocs(query);
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('getUserPosts: ${e.toString()}');
       return [];
     }
   }
@@ -359,7 +360,7 @@ class FirestoreRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('getMoreUserPosts: ${e.toString()}');
       return [];
     }
   }
@@ -373,7 +374,7 @@ class FirestoreRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('getRankingUsers: ${e.toString()}');
       return [];
     }
   }
@@ -384,7 +385,7 @@ class FirestoreRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('getMoreRankingUsers: ${e.toString()}');
       return [];
     }
   }
@@ -395,7 +396,7 @@ class FirestoreRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('getMuteUsers: ${e.toString()}');
       return [];
     }
   }
@@ -407,7 +408,7 @@ class FirestoreRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('getMoreMuteUsers: ${e.toString()}');
       return [];
     }
   }
@@ -419,7 +420,7 @@ class FirestoreRepository {
       final sorted = [...timelines]..sort((a, b) => (b.createdAt).compareTo(a.createdAt));
       return sorted;
     } catch(e) {
-      debugPrint(e.toString());
+      debugPrint('getTimelines: ${e.toString()}');
       return [];
     }
   }
@@ -432,7 +433,7 @@ class FirestoreRepository {
       final qshot = await _postsQuery(isRankingPosts).get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch(e) {
-      debugPrint(e.toString());
+      debugPrint('getPosts: ${e.toString()}');
       return [];
     }
   }
@@ -442,7 +443,7 @@ class FirestoreRepository {
       final qshot = await _postsQuery(isRankingPosts).startAfterDocument(doc).get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch(e) {
-      debugPrint(e.toString());
+      debugPrint('getMorePosts: ${e.toString()}');
       return [];
     }
   }
@@ -453,7 +454,7 @@ class FirestoreRepository {
       final qshot = await query.startAfterDocument(doc).get();
       return qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
     } catch(e) {
-      debugPrint(e.toString());
+      debugPrint('getMoreTimelines: ${e.toString()}');
       return [];
     }
   }
@@ -464,7 +465,7 @@ class FirestoreRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch(e) {
-      debugPrint(e.toString());
+      debugPrint('getMutePosts: ${e.toString()}');
       return [];
     }
   }
@@ -476,7 +477,7 @@ class FirestoreRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch(e) {
-      debugPrint(e.toString());
+      debugPrint('getMoreMutePosts: ${e.toString()}');
       return [];
     }
   }

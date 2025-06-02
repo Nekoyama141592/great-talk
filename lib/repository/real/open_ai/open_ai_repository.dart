@@ -24,7 +24,7 @@ class OpenAIRepository {
       final response = await client.generateImage(request);
       return Result.success(response);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('generateImage: ${e.toString()}'); // Modified line
       return Result.failure('画像の生成が失敗しました');
     }
   }
@@ -36,7 +36,7 @@ class OpenAIRepository {
       final response = await client.generateText(request);
       return Result.success(response);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('generateText: ${e.toString()}'); // Modified line
       return Result.failure('テキストの生成が失敗しました');
     }
   }

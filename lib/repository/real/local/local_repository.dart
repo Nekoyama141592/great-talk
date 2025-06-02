@@ -26,7 +26,7 @@ class LocalRepository {
       final jsonList = prefs.getJsonList(keyName) ?? [];
       return jsonList.map((e) => fromJson(e)).toList();
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('_fetchList: ${e.toString()}');
       return [];
     }
   }
@@ -42,7 +42,7 @@ class LocalRepository {
       await prefs.setJsonList(keyName, newValue);
       return const Result.success(true);
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint('_addElement: ${e.toString()}');
       return Result.failure('追加が失敗しました');
     }
   }
@@ -60,7 +60,7 @@ class LocalRepository {
       await prefs.remove(postId);
       return const Result.success(true);
     } catch(e) {
-      debugPrint(e.toString());
+      debugPrint('removeChatLog: ${e.toString()}');
       return const Result.failure('削除が失敗しました');
     }
   }
