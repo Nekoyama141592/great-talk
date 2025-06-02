@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'docs_view_model.dart';
+part of 'posts_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$docsViewModelHash() => r'ac84cb9497ee5e50b85357ea7e921f21e4f8d860';
+String _$postsViewModelHash() => r'5b732aaaf2661a1eb402dafea6dc697c03157efe';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,30 +29,30 @@ class _SystemHash {
   }
 }
 
-abstract class _$DocsViewModel
+abstract class _$PostsViewModel
     extends BuildlessAutoDisposeAsyncNotifier<PostsState> {
   late final bool isRankingPosts;
 
   FutureOr<PostsState> build(bool isRankingPosts);
 }
 
-/// See also [DocsViewModel].
-@ProviderFor(DocsViewModel)
-const docsViewModelProvider = DocsViewModelFamily();
+/// See also [PostsViewModel].
+@ProviderFor(PostsViewModel)
+const postsViewModelProvider = PostsViewModelFamily();
 
-/// See also [DocsViewModel].
-class DocsViewModelFamily extends Family<AsyncValue<PostsState>> {
-  /// See also [DocsViewModel].
-  const DocsViewModelFamily();
+/// See also [PostsViewModel].
+class PostsViewModelFamily extends Family<AsyncValue<PostsState>> {
+  /// See also [PostsViewModel].
+  const PostsViewModelFamily();
 
-  /// See also [DocsViewModel].
-  DocsViewModelProvider call(bool isRankingPosts) {
-    return DocsViewModelProvider(isRankingPosts);
+  /// See also [PostsViewModel].
+  PostsViewModelProvider call(bool isRankingPosts) {
+    return PostsViewModelProvider(isRankingPosts);
   }
 
   @override
-  DocsViewModelProvider getProviderOverride(
-    covariant DocsViewModelProvider provider,
+  PostsViewModelProvider getProviderOverride(
+    covariant PostsViewModelProvider provider,
   ) {
     return call(provider.isRankingPosts);
   }
@@ -69,29 +69,29 @@ class DocsViewModelFamily extends Family<AsyncValue<PostsState>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'docsViewModelProvider';
+  String? get name => r'postsViewModelProvider';
 }
 
-/// See also [DocsViewModel].
-class DocsViewModelProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<DocsViewModel, PostsState> {
-  /// See also [DocsViewModel].
-  DocsViewModelProvider(bool isRankingPosts)
+/// See also [PostsViewModel].
+class PostsViewModelProvider
+    extends AutoDisposeAsyncNotifierProviderImpl<PostsViewModel, PostsState> {
+  /// See also [PostsViewModel].
+  PostsViewModelProvider(bool isRankingPosts)
     : this._internal(
-        () => DocsViewModel()..isRankingPosts = isRankingPosts,
-        from: docsViewModelProvider,
-        name: r'docsViewModelProvider',
+        () => PostsViewModel()..isRankingPosts = isRankingPosts,
+        from: postsViewModelProvider,
+        name: r'postsViewModelProvider',
         debugGetCreateSourceHash:
             const bool.fromEnvironment('dart.vm.product')
                 ? null
-                : _$docsViewModelHash,
-        dependencies: DocsViewModelFamily._dependencies,
+                : _$postsViewModelHash,
+        dependencies: PostsViewModelFamily._dependencies,
         allTransitiveDependencies:
-            DocsViewModelFamily._allTransitiveDependencies,
+            PostsViewModelFamily._allTransitiveDependencies,
         isRankingPosts: isRankingPosts,
       );
 
-  DocsViewModelProvider._internal(
+  PostsViewModelProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -104,15 +104,15 @@ class DocsViewModelProvider
   final bool isRankingPosts;
 
   @override
-  FutureOr<PostsState> runNotifierBuild(covariant DocsViewModel notifier) {
+  FutureOr<PostsState> runNotifierBuild(covariant PostsViewModel notifier) {
     return notifier.build(isRankingPosts);
   }
 
   @override
-  Override overrideWith(DocsViewModel Function() create) {
+  Override overrideWith(PostsViewModel Function() create) {
     return ProviderOverride(
       origin: this,
-      override: DocsViewModelProvider._internal(
+      override: PostsViewModelProvider._internal(
         () => create()..isRankingPosts = isRankingPosts,
         from: from,
         name: null,
@@ -125,14 +125,14 @@ class DocsViewModelProvider
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<DocsViewModel, PostsState>
+  AutoDisposeAsyncNotifierProviderElement<PostsViewModel, PostsState>
   createElement() {
-    return _DocsViewModelProviderElement(this);
+    return _PostsViewModelProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is DocsViewModelProvider &&
+    return other is PostsViewModelProvider &&
         other.isRankingPosts == isRankingPosts;
   }
 
@@ -147,18 +147,18 @@ class DocsViewModelProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin DocsViewModelRef on AutoDisposeAsyncNotifierProviderRef<PostsState> {
+mixin PostsViewModelRef on AutoDisposeAsyncNotifierProviderRef<PostsState> {
   /// The parameter `isRankingPosts` of this provider.
   bool get isRankingPosts;
 }
 
-class _DocsViewModelProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<DocsViewModel, PostsState>
-    with DocsViewModelRef {
-  _DocsViewModelProviderElement(super.provider);
+class _PostsViewModelProviderElement
+    extends AutoDisposeAsyncNotifierProviderElement<PostsViewModel, PostsState>
+    with PostsViewModelRef {
+  _PostsViewModelProviderElement(super.provider);
 
   @override
-  bool get isRankingPosts => (origin as DocsViewModelProvider).isRankingPosts;
+  bool get isRankingPosts => (origin as PostsViewModelProvider).isRankingPosts;
 }
 
 // ignore_for_file: type=lint

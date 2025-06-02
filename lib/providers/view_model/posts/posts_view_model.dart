@@ -6,10 +6,10 @@ import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'docs_view_model.g.dart';
+part 'posts_view_model.g.dart';
 
 @riverpod
-class DocsViewModel extends _$DocsViewModel {
+class PostsViewModel extends _$PostsViewModel {
   @override
   FutureOr<PostsState> build(bool isRankingPosts) {
     return _fetchData();
