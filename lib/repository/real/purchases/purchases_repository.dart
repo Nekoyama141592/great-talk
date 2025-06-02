@@ -44,7 +44,8 @@ class PurchasesRepository {
       await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       return const Result.success(true);
     } catch (e) {
-      return Result.failure(e);
+      debugPrint(e.toString());
+      return Result.failure('購入が失敗しました');
     }
   }
 

@@ -3,6 +3,7 @@ import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/providers/view_model/products/products_view_model.dart';
 import 'package:great_talk/ui_core/texts.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/main/subscribe/components/plan_description.dart';
@@ -53,8 +54,15 @@ class ProductList extends ConsumerWidget {
                     PurchaseButton(
                       isPurchased: state.isPurchased(productDetails.id),
                       onPressed:
-                          () =>
-                              notifier.onPurchaseButtonPressed(productDetails),
+                          () async {
+                              UIHelper.showSuccessSnackBar(context, '情報を取得しています。 \nしばらくお待ちください。');
+                              final result = await notifier.onPurchaseButtonPressed(productDetails);
+                              result.when(success: (_) {
+                                UIHelper.showSuccessSnackBar(context, '購入が成功しました');
+                              }, failure: (msg) {
+                                UIHelper.showFailureSnackBar(context, msg.toString());
+                              });
+                            }
                     ),
                   ],
                 ),

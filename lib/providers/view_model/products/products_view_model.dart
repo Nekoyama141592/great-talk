@@ -5,6 +5,7 @@ import 'package:great_talk/model/view_model_state/purchases/purchases_state.dart
 import 'package:great_talk/providers/global/purchases/purchases_notifier.dart';
 import 'package:great_talk/repository/real/local/local_repository.dart';
 import 'package:great_talk/repository/real/purchases/purchases_repository.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -50,26 +51,18 @@ class ProductsViewModel extends _$ProductsViewModel {
     return localRepository.fetchVerifiedPurchases();
   }
 
-  void onPurchaseButtonPressed(ProductDetails details) async {
+  FutureResult<bool> onPurchaseButtonPressed(ProductDetails details) async {
     final storeConnected = state.value?.storeConnected ?? false;
     if (!storeConnected) {
-      UIHelper.showErrorFlutterToast('Google Playに接続ができません');
-      return;
+      return const Result.failure('ストアに接続ができませんでした');
     }
     await PurchasesCore.cancelTransctions();
     final purchaseParam = PurchasesCore.param(
       details,
       state.value?.verifiedPurchases,
     );
-    await UIHelper.showFlutterToast("情報を取得しています。 \nしばらくお待ちください。");
     final result = await _repository.buyNonConsumable(purchaseParam);
-    result.when(success: _onPurchaseSuccess, failure: _onPurchaseFailed);
-  }
-
-  Future<void> _onPurchaseSuccess(bool res) async {}
-
-  Future<void> _onPurchaseFailed(Object e) async {
-    UIHelper.showFlutterToast("もう一度ボタンを押してください");
+    return result;
   }
 
   void onRestoreButtonPressed() async {
