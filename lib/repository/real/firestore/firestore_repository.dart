@@ -64,7 +64,7 @@ class FirestoreRepository {
   ) async {
     final docRef = service.user(uid);
     try {
-      await service.set(docRef, json);
+      await docRef.set(json);
       return PublicUser.fromJson(json);
     } catch (e) {
       debugPrint(e.toString());
@@ -78,7 +78,7 @@ class FirestoreRepository {
   ) async {
     final docRef = service.privateUser(uid);
     try {
-      await service.set(docRef, json);
+      await docRef.set(json);
       return PrivateUser.fromJson(json);
     } catch (e) {
       debugPrint(e.toString());
@@ -424,19 +424,22 @@ class FirestoreRepository {
     }
   }
 
-  Future<List<Post>> getPosts(MapQuery query) async {
+  MapQuery _postsQuery(bool isRankingPosts) {
+    return isRankingPosts ? service.postsByMsgCount() : service.postsByNewest();
+  }
+  Future<List<Post>> getPosts(bool isRankingPosts) async {
     try {
-      final qshot = await query.get();
+      final qshot = await _postsQuery(isRankingPosts).get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch(e) {
       debugPrint(e.toString());
       return [];
     }
   }
-  Future<List<Post>> getMorePosts(MapQuery query,Post lastPost) async {
+  Future<List<Post>> getMorePosts(bool isRankingPosts,Post lastPost) async {
     try {
       final doc = await _getPostDoc(lastPost);
-      final qshot = await query.startAfterDocument(doc).get();
+      final qshot = await _postsQuery(isRankingPosts).startAfterDocument(doc).get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch(e) {
       debugPrint(e.toString());

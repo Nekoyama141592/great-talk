@@ -19,11 +19,4 @@ enum PrefsKey {
   verifiedPurchases,
 }
 
-enum SearchTarget { post, user }
-
 enum TokenType { following, likePost, mutePost, muteUser, reportPost }
-
-enum DocsType {
-  newPosts,
-  rankingPosts,
-}

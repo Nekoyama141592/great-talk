@@ -6,7 +6,7 @@ part of 'docs_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$docsViewModelHash() => r'd60f85ee5565d9a7eb88b32ec33271330ab6f2dd';
+String _$docsViewModelHash() => r'ac84cb9497ee5e50b85357ea7e921f21e4f8d860';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,9 +31,9 @@ class _SystemHash {
 
 abstract class _$DocsViewModel
     extends BuildlessAutoDisposeAsyncNotifier<PostsState> {
-  late final DocsType type;
+  late final bool isRankingPosts;
 
-  FutureOr<PostsState> build(DocsType type);
+  FutureOr<PostsState> build(bool isRankingPosts);
 }
 
 /// See also [DocsViewModel].
@@ -46,15 +46,15 @@ class DocsViewModelFamily extends Family<AsyncValue<PostsState>> {
   const DocsViewModelFamily();
 
   /// See also [DocsViewModel].
-  DocsViewModelProvider call(DocsType type) {
-    return DocsViewModelProvider(type);
+  DocsViewModelProvider call(bool isRankingPosts) {
+    return DocsViewModelProvider(isRankingPosts);
   }
 
   @override
   DocsViewModelProvider getProviderOverride(
     covariant DocsViewModelProvider provider,
   ) {
-    return call(provider.type);
+    return call(provider.isRankingPosts);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -76,9 +76,9 @@ class DocsViewModelFamily extends Family<AsyncValue<PostsState>> {
 class DocsViewModelProvider
     extends AutoDisposeAsyncNotifierProviderImpl<DocsViewModel, PostsState> {
   /// See also [DocsViewModel].
-  DocsViewModelProvider(DocsType type)
+  DocsViewModelProvider(bool isRankingPosts)
     : this._internal(
-        () => DocsViewModel()..type = type,
+        () => DocsViewModel()..isRankingPosts = isRankingPosts,
         from: docsViewModelProvider,
         name: r'docsViewModelProvider',
         debugGetCreateSourceHash:
@@ -88,7 +88,7 @@ class DocsViewModelProvider
         dependencies: DocsViewModelFamily._dependencies,
         allTransitiveDependencies:
             DocsViewModelFamily._allTransitiveDependencies,
-        type: type,
+        isRankingPosts: isRankingPosts,
       );
 
   DocsViewModelProvider._internal(
@@ -98,14 +98,14 @@ class DocsViewModelProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.type,
+    required this.isRankingPosts,
   }) : super.internal();
 
-  final DocsType type;
+  final bool isRankingPosts;
 
   @override
   FutureOr<PostsState> runNotifierBuild(covariant DocsViewModel notifier) {
-    return notifier.build(type);
+    return notifier.build(isRankingPosts);
   }
 
   @override
@@ -113,13 +113,13 @@ class DocsViewModelProvider
     return ProviderOverride(
       origin: this,
       override: DocsViewModelProvider._internal(
-        () => create()..type = type,
+        () => create()..isRankingPosts = isRankingPosts,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        type: type,
+        isRankingPosts: isRankingPosts,
       ),
     );
   }
@@ -132,13 +132,14 @@ class DocsViewModelProvider
 
   @override
   bool operator ==(Object other) {
-    return other is DocsViewModelProvider && other.type == type;
+    return other is DocsViewModelProvider &&
+        other.isRankingPosts == isRankingPosts;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, type.hashCode);
+    hash = _SystemHash.combine(hash, isRankingPosts.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -147,8 +148,8 @@ class DocsViewModelProvider
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin DocsViewModelRef on AutoDisposeAsyncNotifierProviderRef<PostsState> {
-  /// The parameter `type` of this provider.
-  DocsType get type;
+  /// The parameter `isRankingPosts` of this provider.
+  bool get isRankingPosts;
 }
 
 class _DocsViewModelProviderElement
@@ -157,7 +158,7 @@ class _DocsViewModelProviderElement
   _DocsViewModelProviderElement(super.provider);
 
   @override
-  DocsType get type => (origin as DocsViewModelProvider).type;
+  bool get isRankingPosts => (origin as DocsViewModelProvider).isRankingPosts;
 }
 
 // ignore_for_file: type=lint
