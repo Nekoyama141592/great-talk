@@ -3,7 +3,7 @@ import 'package:great_talk/model/view_model_state/timelines/timelines_state.dart
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/usecase/posts/posts_use_case.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'timelines_view_model.g.dart';
 
@@ -30,9 +30,11 @@ class TimelinesViewModel extends _$TimelinesViewModel {
   Future<List<Post>> _timelinesToPostsResult(List<String> postIds)  {
     return _repository.getTimelinePosts(postIds);
   }
-  Future<void> onLoading(RefreshController refreshController) async {
+  FutureResult<bool> onLoading() async {
     final user = ref.read(streamAuthProvider).value;
-    if (user == null || user.isAnonymous) return;
+    if (user == null || user.isAnonymous) {
+      return const Result.failure('ログインしてください');
+    }
     final currentUid = user.uid;
     final currentState = state.value!;
     final lastTimeline = currentState.timelines.last;
@@ -43,5 +45,6 @@ class TimelinesViewModel extends _$TimelinesViewModel {
     final userPost = [...currentState.userPosts,...newUserPosts];
     final newTimelines = [...currentState.timelines, ...timelines];
     state = AsyncValue.data(currentState.copyWith(timelines: newTimelines,userPosts: userPost));
+    return const Result.success(true);
   }
 }

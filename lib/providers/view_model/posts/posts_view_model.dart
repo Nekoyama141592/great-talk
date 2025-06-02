@@ -3,7 +3,7 @@ import 'package:great_talk/model/view_model_state/posts/posts_state.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/providers/usecase/posts/posts_use_case.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'posts_view_model.g.dart';
@@ -24,18 +24,14 @@ class PostsViewModel extends _$PostsViewModel {
     return PostsState(userPosts: userPosts);
   }
 
-  Future<void> onLoading(RefreshController refreshController) async {
-    if (state.value?.userPosts.isEmpty ?? true) {
-      refreshController.loadComplete();
-      return;
-    }
+  FutureResult<bool> onLoading() async {
     final currentState = state.value!;
     final lastPost = currentState.userPosts.last.post;
     final posts =
           await _repository.getMorePosts(isRankingPosts,lastPost);
     final sorted = _useCase.sortedPosts(posts);
     _addPosts(sorted);
-    refreshController.loadComplete();
+    return const Result.success(true);
   }
   Future<void> _addPosts(List<Post> posts) async {
     if (state.isLoading || posts.isEmpty) return;

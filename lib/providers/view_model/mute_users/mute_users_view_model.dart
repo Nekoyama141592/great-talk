@@ -5,7 +5,6 @@ import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/usecase/user/user_use_case_provider.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'mute_users_view_model.g.dart';
 
@@ -35,9 +34,8 @@ class MuteUsersViewModel extends _$MuteUsersViewModel {
     return [];
   }
 
-  void onLoading(RefreshController controller) async {
-    final stateValue = state.value;
-    if (stateValue == null) return;
+  FutureResult<bool> onLoading() async {
+    final stateValue = state.value!;
     state = await AsyncValue.guard(() async {
       final oldUsers = stateValue.users();
       final users = await _repository.getMoreMuteUsers(_createRequestUids(),oldUsers.last);
@@ -45,7 +43,7 @@ class MuteUsersViewModel extends _$MuteUsersViewModel {
       final imageUsers = await ref.read(userUseCaseProvider).usersToImageUsers(newUsers);
       return stateValue.copyWith(imageUsers: imageUsers);
     });
-    controller.loadComplete();
+    return const Result.success(true);
   }
 
   FutureResult<bool> unMuteUser(String passiveUid) async {

@@ -7,7 +7,6 @@ import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/usecase/posts/posts_use_case.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'mute_posts_view_model.g.dart';
 
@@ -64,18 +63,14 @@ class MutePostsViewModel extends _$MutePostsViewModel {
       deleteToken.tokenId,
     );
   }
-  Future<void> onLoading(RefreshController refreshController) async {
-    if (state.value?.userPosts.isEmpty ?? true) {
-      refreshController.loadComplete();
-      return;
-    }
+  FutureResult<bool> onLoading() async {
     final currentState = state.value!;
     final lastPost = currentState.userPosts.last.post;
     final posts =
           await _repository.getMoreMutePosts(_createRequestPostIds(), lastPost);
     final sorted = _useCase.sortedPosts(posts);
     _addPosts(sorted);
-    refreshController.loadComplete();
+    return const Result.success(true);
   }
   Future<void> _addPosts(List<Post> posts) async {
     if (state.isLoading || posts.isEmpty) return;

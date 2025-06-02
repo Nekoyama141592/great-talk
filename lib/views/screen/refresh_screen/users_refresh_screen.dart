@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class UsersRefreshScreen extends HookWidget {
@@ -10,7 +12,7 @@ class UsersRefreshScreen extends HookWidget {
     required this.child
   });
   final bool isEmpty;
-  final void Function(RefreshController) onLoading;
+  final FutureResult<bool> Function() onLoading;
   final Widget child;
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,11 @@ class UsersRefreshScreen extends HookWidget {
       enablePullDown: false, // trueだとiosもAndroidも反応しなくなる
       enablePullUp: true,
       header: const WaterDropHeader(),
-      onLoading: () => onLoading(refreshController),
+      onLoading: () async {
+        final result = await onLoading();
+        result.when(success: (_) => UIHelper.showSuccessSnackBar(context, '追加の読み込みが完了しました'), failure: (_) => UIHelper.showFailureSnackBar(context, '追加の読み込みが失敗しました'));
+        refreshController.loadComplete();
+      },
       child: child
     );
   }

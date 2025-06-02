@@ -5,6 +5,7 @@ import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/model/view_model_state/profile/profile_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/extension/number_format_extension.dart';
 import 'package:great_talk/extension/string_extension.dart';
@@ -17,7 +18,6 @@ import 'package:great_talk/views/screen/profile_screen/components/edit_button.da
 import 'package:great_talk/views/screen/profile_screen/components/follow_button.dart';
 import 'package:great_talk/views/screen/refresh_screen/posts_refresh_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({
@@ -30,7 +30,7 @@ class ProfileScreen extends ConsumerWidget {
   });
   final ProfileState state;
   final String passiveUid;
-  final void Function(RefreshController) onLoading;
+  final FutureResult<bool> Function() onLoading;
   final void Function()? follow;
   final void Function()? unFollow;
   @override

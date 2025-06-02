@@ -10,7 +10,6 @@ import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'profile_view_model.g.dart';
@@ -150,9 +149,8 @@ class ProfileViewModel extends _$ProfileViewModel {
     ref.read(tokensNotifierProvider.notifier).addFollowing(passiveUid);
   }
 
-  void onLoading(RefreshController controller) async {
-    final stateValue = state.value;
-    if (stateValue == null) return;
+  FutureResult<bool> onLoading() async {
+    final stateValue = state.value!;
     state = await AsyncValue.guard(() async {
       final oldPosts = stateValue.posts();
       final posts = await _repository.getMoreUserPosts(oldPosts.last);
@@ -160,6 +158,6 @@ class ProfileViewModel extends _$ProfileViewModel {
       final userPosts = await _postsToUserPosts(newPosts);
       return stateValue.copyWith(userPosts: userPosts);
     });
-    controller.loadComplete();
+    return const Result.success(true);
   }
 }
