@@ -36,8 +36,9 @@ class PostsRefreshScreen extends HookWidget {
               childAspectRatio: 0.5,
             ),
             itemBuilder: (c, i) {
-              final info = userPosts[i];
-              return PostCard(post: info.post, base64: info.base64, publicUser: info.user);
+              final userPost = userPosts[i];
+              final base64 = userPost.base64;
+              return PostCard(post: userPost.post,base64: base64,publicUser: userPost.user,);
             },
           ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/providers/view_model/posts/posts_view_model.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
-import 'package:great_talk/views/screen/refresh_screen/refresh_screen.dart';
+import 'package:great_talk/views/screen/refresh_screen/posts_refresh_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NewPostsScreen extends ConsumerWidget {
@@ -16,7 +16,7 @@ class NewPostsScreen extends ConsumerWidget {
       body: AsyncScreen(
         asyncValue: asyncValue,
         data: (state) {
-          return RefreshScreen(
+          return PostsRefreshScreen(
             userPosts: state.userPosts,
             onLoading: notifier.onLoading,
           );
