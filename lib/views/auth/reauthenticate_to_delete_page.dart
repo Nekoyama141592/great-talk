@@ -28,11 +28,11 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                   success:
                       (_) => RouterCore.pushPath(context, UserDeletedPage.path),
                   failure:
-                      (_) => UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした"),
+                      (_) => UIHelper.showFailureSnackBar(context, "ユーザーを削除できませんでした"),
                 );
               },
               failure:
-                  (_) => UIHelper.showErrorFlutterToast("Appleでの再認証に失敗しました"),
+                  (msg) => UIHelper.showFailureSnackBar(context,msg.toString()),
             );
           },
           onGoogleButtonPressed: () async {
@@ -44,11 +44,11 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                   success:
                       (_) => RouterCore.pushPath(context, UserDeletedPage.path),
                   failure:
-                      (_) => UIHelper.showErrorFlutterToast("ユーザーを削除できませんでした"),
+                      (msg) => UIHelper.showFailureSnackBar(context,msg.toString()),
                 );
               },
               failure:
-                  (_) => UIHelper.showErrorFlutterToast("Googleでの再認証に失敗しました"),
+                  (_) => UIHelper.showFailureSnackBar(context,"Googleでの再認証に失敗しました"),
             );
           },
           title: "ユーザーの削除には再認証が必要です",

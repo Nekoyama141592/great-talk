@@ -52,7 +52,7 @@ class PostLikeButton extends HookConsumerWidget {
                   result.when(
                     success: (_) {},
                     failure: (_) {
-                      UIHelper.showErrorFlutterToast('通信に失敗しました');
+                      UIHelper.showFailureSnackBar(context,'通信に失敗しました');
                       likeCount.value++; // 元に戻す
                       notifier().addLikePost(currentUid, post);
                     },
@@ -77,7 +77,7 @@ class PostLikeButton extends HookConsumerWidget {
                   result.when(
                     success: (_) {},
                     failure: (_) {
-                      UIHelper.showErrorFlutterToast('通信に失敗しました');
+                      UIHelper.showFailureSnackBar(context,('通信に失敗しました'));
                       likeCount.value--; // 元に戻す
                       notifier().removeLikePost(postId);
                     },

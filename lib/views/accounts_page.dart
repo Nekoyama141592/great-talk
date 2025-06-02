@@ -46,7 +46,7 @@ class AccountPage extends ConsumerWidget {
                             RouterCore.pushPath(context, LogoutedPage.path);
                           },
                           failure: (_) {
-                            UIHelper.showErrorFlutterToast("ログアウトできませんでした}");
+                            UIHelper.showFailureSnackBar(context,"ログアウトできませんでした}");
                             RouterCore.back(context);
                           },
                         );

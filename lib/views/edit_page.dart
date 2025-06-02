@@ -74,16 +74,17 @@ class EditProfilePage extends HookConsumerWidget {
 
         Widget editForm() {
           return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.50,
             child: Form(
               key: formKey,
               child: SingleChildScrollView(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    const SizedBox(height: 16.0,),
                     ...userNameTextField(),
+                    const SizedBox(height: 16.0,),
                     ...bioTextField(),
                   ],
                 ),
@@ -91,16 +92,27 @@ class EditProfilePage extends HookConsumerWidget {
             ),
           );
         }
+        void onImageTap() async {
+          final result = await notifier().onImagePickButtonPressed();
+          result.when(success: (_) {
+            UIHelper.showSuccessSnackBar(context, '画像の取得が成功しました');
+          }, failure: (msg) {
+            UIHelper.showFailureSnackBar(context, msg.toString());
+          });
+        }
 
         Widget imageWidget() {
           final base64 = editModelData.base64;
           final uint8list = base64 != null ? base64Decode(base64) : null;
           return uint8list != null
               ? InkWell(
-                  onTap: notifier().onImagePickButtonPressed,
-                  child: S3Image(uint8list: uint8list, height: 40.0, width: 40.0),
+                  onTap: onImageTap,
+                  child: S3Image(uint8list: uint8list, height: 128, width: 128),
                 )
-              : const SizedBox.shrink();
+              : InkWell(
+                onTap: onImageTap,
+                child: const Icon(Icons.image)
+              );
         }
 
         Widget positiveButton() {
@@ -112,11 +124,9 @@ class EditProfilePage extends HookConsumerWidget {
               result.when(
                 success: (_) {
                   ref.read(currentUserNotifierProvider.notifier).updateUser();
-                  if (context.mounted) {
-                    RouterCore.back(context);
-                    RouterCore.back(context);
-                    UIHelper.showSuccessSnackBar(context, "プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
-                  }
+                  RouterCore.back(context);
+                  RouterCore.back(context);
+                  UIHelper.showSuccessSnackBar(context, "プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
                 },
                 failure: (e) {
                   UIHelper.showFailureSnackBar(context, "プロフィールを更新できませんでした");
@@ -131,7 +141,9 @@ class EditProfilePage extends HookConsumerWidget {
           appBarText: "ユーザー情報を編集",
           children: [
             editForm(),
+            const SizedBox(height: 16.0,),
             imageWidget(),
+            const SizedBox(height: 16.0,),
             positiveButton(),
           ],
         );

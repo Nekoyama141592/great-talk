@@ -8,7 +8,6 @@ import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/core/strings.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/extension/string_extension.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/database_schema/user_update_log/user_update_log.dart';
@@ -38,21 +37,20 @@ class EditViewModel extends _$EditViewModel {
   }
 
   /// 画像選択時の処理
-  Future<void> onImagePickButtonPressed() async {
+  FutureResult<bool> onImagePickButtonPressed() async {
     final useCase = ref.read(fileUseCaseProvider);
     final result = await useCase.getCompressedImage();
-    if (result == null) return;
+    if (result == null) return const Result.failure('画像が取得できませんでした');
     final info = await useCase.getImageInfo(result);
     if (info.isNotSquare) {
-      UIHelper.showErrorFlutterToast(useCase.squareImageRequestMsg);
-      return;
+      return Result.failure(useCase.squareImageRequestMsg);
     }
     if (info.isSmall) {
-      UIHelper.showErrorFlutterToast(FormConsts.bigImageRequestMsg);
-      return;
+      return const Result.failure(FormConsts.bigImageRequestMsg);
     }
     final base64 = base64Encode(result);
     state = AsyncData(state.value!.copyWith(base64: base64, isPicked: true));
+    return Result.success(true);
   }
 
   /// 初期化

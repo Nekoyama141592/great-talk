@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/credential_core.dart';
 import 'package:great_talk/providers/client/firebath_auth/firebase_auth_provider.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -85,22 +84,21 @@ class FirebaseAuthRepository {
       await user.reauthenticateWithCredential(credential);
       return const Result.success(true);
     } on FirebaseAuthException catch (e) {
+      debugPrint(e.toString());
       final String errorCode = e.code;
-      debugPrint(errorCode);
+      String msg = '';
       switch (errorCode) {
         case 'user-mismatch':
-          await UIHelper.showErrorFlutterToast(
-            "認証情報がことなります。現在のユーザーと同じ方法で認証してください。",
-          );
+          msg = '認証情報がことなります。現在のユーザーと同じ方法で認証してください。';
           break;
         case 'user-not-found':
-          await UIHelper.showErrorFlutterToast("ユーザーが見つかりません。");
+          msg = 'ユーザーが見つかりません。';
           break;
         case 'invalid-credential':
-          await UIHelper.showErrorFlutterToast("クレデンシャルが不正、もしくは期限切れです。");
+          msg = 'クレデンシャルが不正、もしくは期限切れです。';
           break;
       }
-      return Result.failure(e);
+      return Result.failure(msg);
     }
   }
 
@@ -113,28 +111,27 @@ class FirebaseAuthRepository {
     } on FirebaseAuthException catch (e) {
       final String errorCode = e.code;
       debugPrint(errorCode);
+      String msg = '';
       switch (errorCode) {
         case 'requires-recent-login':
-          await UIHelper.showErrorFlutterToast("再認証が必要です。");
+          msg = '再認証が必要です。';
           break;
       }
-      return Result.failure(e);
+      return Result.failure(msg);
     }
   }
 
-  void _manageErrorCredential(FirebaseAuthException e) async {
+  String _manageErrorCredential(FirebaseAuthException e) {
     final String errorCode = e.code;
-    debugPrint(errorCode);
     switch (errorCode) {
       case 'account-exists-with-different-credential':
-        await UIHelper.showErrorFlutterToast("同じメールアドレスを持つアカウントが存在します。");
-        break;
+        return '同じメールアドレスを持つアカウントが存在します。';
       case 'invalid-credential':
-        await UIHelper.showErrorFlutterToast("クレデンシャルが不正、もしくは期限切れです。");
-        break;
+        return 'クレデンシャルが不正、もしくは期限切れです。';
       case 'user-disabled':
-        await UIHelper.showErrorFlutterToast('ユーザーが無効化されています。');
-        break;
+        return 'ユーザーが無効化されています。';
+      default:
+        return 'エラーが発生しました';
     }
   }
 }
