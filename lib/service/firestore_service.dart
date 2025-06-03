@@ -10,30 +10,30 @@ class FirestoreService {
   // DocRef
   DocRef get publicV1 => instance.collection('public').doc('v1');
   DocRef get privateV1 => instance.collection('private').doc('v1');
-  DocRef user(String uid) => usersColRef().doc(uid);
-  DocRef follower(String currentUid, String passiveUid) =>
-      user(passiveUid).collection('followers').doc(currentUid);
-  DocRef privateUser(String currentUid) =>
+  DocRef userDocRef(String uid) => usersColRef().doc(uid);
+  DocRef followerDocRef(String currentUid, String passiveUid) =>
+      userDocRef(passiveUid).collection('followers').doc(currentUid);
+  DocRef privateUserDocRef(String currentUid) =>
       privateV1.collection('privateUsers').doc(currentUid);
-  DocRef postLike(DocRef postRef, String activeUid) =>
+  DocRef postLikeDocRef(DocRef postRef, String activeUid) =>
       postRef.collection('postLikes').doc(activeUid);
-  DocRef postReport(DocRef postRef, String currentUid) =>
+  DocRef postReportDocRef(DocRef postRef, String currentUid) =>
       postRef.collection('postReports').doc(currentUid);
-  DocRef post(String uid, String postId) => postsColRef(uid).doc(postId);
-  DocRef userUpdateLog(String uid) =>
-      user(uid).collection('userUpdateLogs').doc();
-  DocRef postMute(DocRef postRef, String currentUid) =>
+  DocRef postDocRef(String uid, String postId) => postsColRef(uid).doc(postId);
+  DocRef userUpdateLogDocRef(String uid) =>
+      userDocRef(uid).collection('userUpdateLogs').doc();
+  DocRef postMuteDocRef(DocRef postRef, String currentUid) =>
       postRef.collection('postMutes').doc(currentUid);
-  DocRef userMute(String uid, String currentUid) =>
-      user(uid).collection('userMutes').doc(currentUid);
-  DocRef token(String currentUid, String tokenId) =>
+  DocRef userMuteDocRef(String uid, String currentUid) =>
+      userDocRef(uid).collection('userMutes').doc(currentUid);
+  DocRef tokenDocRef(String currentUid, String tokenId) =>
       tokensColRef(currentUid).doc(tokenId);
-  DocRef timelinesDocRef(String currentUid,String postId) => timelinesColRef(user(currentUid)).doc(postId);
+  DocRef timelinesDocRef(String currentUid,String postId) => timelinesColRef(userDocRef(currentUid)).doc(postId);
   // ColRef
   ColRef usersColRef() => publicV1.collection('users');
-  ColRef postsColRef(String uid) => user(uid).collection('posts');
+  ColRef postsColRef(String uid) => userDocRef(uid).collection('posts');
   ColRef tokensColRef(String currentUid) =>
-      privateUser(currentUid).collection("tokens");
+      privateUserDocRef(currentUid).collection("tokens");
   ColRef timelinesColRef(DocRef userRef) => userRef.collection('timelines');
   // Query
   // 基本
@@ -51,7 +51,7 @@ class FirestoreService {
   MapQuery postsByNewest() =>
       postsQuery().orderBy('createdAt', descending: true);
   MapQuery timelinesQuery(String uid) => timelinesColRef(
-    user(uid),
+    userDocRef(uid),
   ).orderBy('createdAt', descending: true).limit(whereInLimit);
   MapQuery timelinePostsQuery(List<String> timelinePostIds) =>
       postsQuery().where('postId', whereIn: timelinePostIds);
