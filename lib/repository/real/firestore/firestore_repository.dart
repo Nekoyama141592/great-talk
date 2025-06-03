@@ -1,7 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/model/database_schema/timeline/timeline.dart';
-import 'package:great_talk/providers/service/firestore/firestore_service_provider.dart';
-import 'package:great_talk/service/firestore_service.dart';
+import 'package:great_talk/providers/client/firebase_firestore/firebase_firestore_provider.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
@@ -22,11 +23,70 @@ part 'firestore_repository.g.dart';
 
 @riverpod
 FirestoreRepository firestoreRepository(Ref ref) =>
-    FirestoreRepository(service: ref.watch(firestoreServiceProvider));
+    FirestoreRepository(instance: ref.watch(firebaseFirestoreProvider));
 
 class FirestoreRepository {
-  FirestoreRepository({required this.service});
-  final FirestoreService service;
+  FirestoreRepository({required this.instance});
+  final FirebaseFirestore instance;
+  WriteBatch _getBatch() => instance.batch();
+
+  // DocRef
+  DocRef get publicV1 => instance.collection('public').doc('v1');
+  DocRef get privateV1 => instance.collection('private').doc('v1');
+  DocRef userDocRef(String uid) => usersColRef().doc(uid);
+  DocRef followerDocRef(String currentUid, String passiveUid) =>
+      userDocRef(passiveUid).collection('followers').doc(currentUid);
+  DocRef privateUserDocRef(String currentUid) =>
+      privateV1.collection('privateUsers').doc(currentUid);
+  DocRef postLikeDocRef(DocRef postRef, String activeUid) =>
+      postRef.collection('postLikes').doc(activeUid);
+  DocRef postReportDocRef(DocRef postRef, String currentUid) =>
+      postRef.collection('postReports').doc(currentUid);
+  DocRef postDocRef(String uid, String postId) => postsColRef(uid).doc(postId);
+  DocRef userUpdateLogDocRef(String uid) =>
+      userDocRef(uid).collection('userUpdateLogs').doc();
+  DocRef postMuteDocRef(DocRef postRef, String currentUid) =>
+      postRef.collection('postMutes').doc(currentUid);
+  DocRef userMuteDocRef(String uid, String currentUid) =>
+      userDocRef(uid).collection('userMutes').doc(currentUid);
+  DocRef tokenDocRef(String currentUid, String tokenId) =>
+      tokensColRef(currentUid).doc(tokenId);
+  DocRef timelinesDocRef(String currentUid,String postId) => timelinesColRef(userDocRef(currentUid)).doc(postId);
+  // ColRef
+  ColRef usersColRef() => publicV1.collection('users');
+  ColRef postsColRef(String uid) => userDocRef(uid).collection('posts');
+  ColRef tokensColRef(String currentUid) =>
+      privateUserDocRef(currentUid).collection("tokens");
+  ColRef timelinesColRef(DocRef userRef) => userRef.collection('timelines');
+  // Query
+  MapQuery usersQuery() => usersColRef().limit(oneTimeReadCount);
+  MapQuery userPostsQuery(String uid) =>
+      postsColRef(uid).limit(oneTimeReadCount);
+  MapQuery postsQuery() => postsCollectionGroup().limit(oneTimeReadCount);
+  MapQuery postsByWhereIn(List<String> postIds) =>
+      postsQuery().where('postId', whereIn: postIds);
+  MapQuery userPostsByNewest(String uid) =>
+      userPostsQuery(uid).orderBy("createdAt", descending: true);
+  MapQuery postsByMsgCount() =>
+      postsQuery().orderBy('msgCount', descending: true);
+  MapQuery postsByNewest() =>
+      postsQuery().orderBy('createdAt', descending: true);
+  MapQuery timelinesQuery(String uid) => timelinesColRef(
+    userDocRef(uid),
+  ).orderBy('createdAt', descending: true).limit(whereInLimit);
+  MapQuery timelinePostsQuery(List<String> timelinePostIds) =>
+      postsQuery().where('postId', whereIn: timelinePostIds);
+  MapQuery usersByWhereIn(List<String> uids) =>
+      usersQuery().where('uid', whereIn: uids);
+
+  MapQuery usersByFollowerCount() =>
+      usersQuery().orderBy('followerCount', descending: true);
+  // CollectionGroup
+  MapQuery usersCollectionGroup() => instance.collectionGroup('users');
+  MapQuery postsCollectionGroup() => instance.collectionGroup('posts');
+  // 全部消す.
+  MapQuery messagesCollectionGroup() => instance.collectionGroup('messages');
+  MapQuery searchLogsCollectionGroup() => instance.collectionGroup('searchLogs');
   // count
   Future<int?> _count(MapQuery query) async {
     try {
@@ -38,11 +98,11 @@ class FirestoreRepository {
     }
   }
 
-  Future<int?> countUsers() => _count(service.usersCollectionGroup());
+  Future<int?> countUsers() => _count(usersCollectionGroup());
 
-  Future<int?> countPosts() => _count(service.postsCollectionGroup());
+  Future<int?> countPosts() => _count(postsCollectionGroup());
 
-  Future<int?> countMessages() => _count(service.messagesCollectionGroup());
+  Future<int?> countMessages() => _count(messagesCollectionGroup());
 
   // write
   FutureResult<bool> _createDoc(
@@ -62,7 +122,7 @@ class FirestoreRepository {
     String uid,
     Map<String, dynamic> json,
   ) async {
-    final docRef = service.userDocRef(uid);
+    final docRef = userDocRef(uid);
     try {
       await docRef.set(json);
       return PublicUser.fromJson(json);
@@ -76,7 +136,7 @@ class FirestoreRepository {
     String uid,
     Map<String, dynamic> json,
   ) async {
-    final docRef = service.privateUserDocRef(uid);
+    final docRef = privateUserDocRef(uid);
     try {
       await docRef.set(json);
       return PrivateUser.fromJson(json);
@@ -91,7 +151,7 @@ class FirestoreRepository {
     String postId,
     Map<String, dynamic> json,
   ) async {
-    final docRef = service.postDocRef(uid, postId);
+    final docRef = postDocRef(uid, postId);
     return _createDoc(docRef, json);
   }
 
@@ -99,7 +159,7 @@ class FirestoreRepository {
     String uid,
     Map<String, dynamic> json,
   ) async {
-    final docRef = service.userUpdateLogDocRef(uid);
+    final docRef = userUpdateLogDocRef(uid);
     return _createDoc(docRef, json);
   }
 
@@ -114,18 +174,18 @@ class FirestoreRepository {
   }
 
   FutureResult<bool> deletePublicUser(String uid) {
-    final docRef = service.userDocRef(uid);
+    final docRef = userDocRef(uid);
     return _deleteDoc(docRef);
   }
 
   FutureResult<bool> deletePost(Post post) {
-    final docRef = service.postDocRef(post.uid, post.postId);
+    final docRef = postDocRef(post.uid, post.postId);
     return _deleteDoc(docRef);
   }
 
   FutureResult<bool> _createDocs(List<FirestoreRequest> requestList) async {
     try {
-      final batch = service.batch();
+      final batch = _getBatch();
       for (final request in requestList) {
         batch.set(request.docRef, request.data);
       }
@@ -143,8 +203,8 @@ class FirestoreRepository {
     FollowingToken followingToken,
     Follower follower,
   ) async {
-    final tokenRef = service.tokenDocRef(currentUid, followingToken.tokenId);
-    final followerRef = service.followerDocRef(currentUid, passiveUid);
+    final tokenRef = tokenDocRef(currentUid, followingToken.tokenId);
+    final followerRef = followerDocRef(currentUid, passiveUid);
     final requestList = [
       FirestoreRequest(tokenRef, followingToken.toJson()),
       FirestoreRequest(followerRef, follower.toJson()),
@@ -158,8 +218,8 @@ class FirestoreRepository {
     MuteUserToken token,
     UserMute userMute,
   ) async {
-    final tokenRef = service.tokenDocRef(currentUid, token.tokenId);
-    final userMuteRef = service.userMuteDocRef(passiveUid, currentUid);
+    final tokenRef = tokenDocRef(currentUid, token.tokenId);
+    final userMuteRef = userMuteDocRef(passiveUid, currentUid);
     final requests = [
       FirestoreRequest(tokenRef, token.toJson()),
       FirestoreRequest(userMuteRef, userMute.toJson()),
@@ -173,9 +233,9 @@ class FirestoreRepository {
     MutePostToken token,
     PostMute postMute,
   ) async {
-    final tokenRef = service.tokenDocRef(currentUid, token.tokenId);
-    final postMuteRef = service.postMuteDocRef(
-      service.postDocRef(post.uid, post.postId),
+    final tokenRef = tokenDocRef(currentUid, token.tokenId);
+    final postMuteRef = postMuteDocRef(
+      postDocRef(post.uid, post.postId),
       currentUid,
     );
     final requestList = [
@@ -191,9 +251,9 @@ class FirestoreRepository {
     LikePostToken token,
     PostLike postLike,
   ) async {
-    final tokenRef = service.tokenDocRef(currentUid, token.tokenId);
-    final postRef = service.postDocRef(post.uid, post.postId);
-    final postLikeRef = service.postLikeDocRef(postRef, currentUid);
+    final tokenRef = tokenDocRef(currentUid, token.tokenId);
+    final postRef = postDocRef(post.uid, post.postId);
+    final postLikeRef = postLikeDocRef(postRef, currentUid);
     final requestList = [
       FirestoreRequest(tokenRef, token.toJson()),
       FirestoreRequest(postLikeRef, postLike.toJson()),
@@ -203,7 +263,7 @@ class FirestoreRepository {
 
   FutureResult<bool> _deleteDocs(List<DocRef> docRefList) async {
     try {
-      final batch = service.batch();
+      final batch = _getBatch();
       for (final docRef in docRefList) {
         batch.delete(docRef);
       }
@@ -220,8 +280,8 @@ class FirestoreRepository {
     String passiveUid,
     String tokenId,
   ) async {
-    final followerRef = service.followerDocRef(currentUid, passiveUid);
-    final tokenRef = service.tokenDocRef(currentUid, tokenId);
+    final followerRef = followerDocRef(currentUid, passiveUid);
+    final tokenRef = tokenDocRef(currentUid, tokenId);
     final docRefList = [followerRef, tokenRef];
     return _deleteDocs(docRefList);
   }
@@ -231,8 +291,8 @@ class FirestoreRepository {
     String passiveUid,
     String tokenId,
   ) async {
-    final tokenRef = service.tokenDocRef(currentUid, tokenId);
-    final userMuteRef = service.userMuteDocRef(passiveUid, currentUid);
+    final tokenRef = tokenDocRef(currentUid, tokenId);
+    final userMuteRef = userMuteDocRef(passiveUid, currentUid);
     final docRefList = [tokenRef, userMuteRef];
     return _deleteDocs(docRefList);
   }
@@ -242,9 +302,9 @@ class FirestoreRepository {
     Post post,
     String tokenId,
   ) async {
-    final tokenRef = service.tokenDocRef(currentUid, tokenId);
-    final postMuteRef = service.postMuteDocRef(
-      service.postDocRef(post.uid, post.postId),
+    final tokenRef = tokenDocRef(currentUid, tokenId);
+    final postMuteRef = postMuteDocRef(
+      postDocRef(post.uid, post.postId),
       currentUid,
     );
     final docRefList = [tokenRef, postMuteRef];
@@ -256,16 +316,16 @@ class FirestoreRepository {
     Post post,
     String tokenId,
   ) async {
-    final tokenRef = service.tokenDocRef(currentUid, tokenId);
-    final postRef = service.postDocRef(post.uid, post.postId);
-    final postLikeRef = service.postLikeDocRef(postRef, currentUid);
+    final tokenRef = tokenDocRef(currentUid, tokenId);
+    final postRef = postDocRef(post.uid, post.postId);
+    final postLikeRef = postLikeDocRef(postRef, currentUid);
     final docRefList = [tokenRef, postLikeRef];
     return _deleteDocs(docRefList);
   }
 
   Future<PublicUser?> getPublicUser(String uid) async {
     try {
-      final docRef = service.userDocRef(uid);
+      final docRef = userDocRef(uid);
       final doc = await docRef.get();
       return PublicUser.fromJson(doc.data() as Map<String, dynamic>);
     } catch (e) {
@@ -276,7 +336,7 @@ class FirestoreRepository {
 
   Future<PrivateUser?> getPrivateUser(String uid) async {
     try {
-      final docRef = service.privateUserDocRef(uid);
+      final docRef = privateUserDocRef(uid);
       final doc = await docRef.get();
       return PrivateUser.fromJson(doc.data() as Map<String, dynamic>);
     } catch (e) {
@@ -287,7 +347,7 @@ class FirestoreRepository {
 
   Future<Post?> getPost(String uid, String postId) async {
     try {
-      final docRef = service.postDocRef(uid, postId);
+      final docRef = postDocRef(uid, postId);
       final doc = await docRef.get();
       return Post.fromJson(doc.data() as Map<String, dynamic>);
     } catch (e) {
@@ -302,7 +362,7 @@ class FirestoreRepository {
 
   Future<List<Map<String, dynamic>>> getTokens(String uid) async {
     try {
-      final query = service.tokensColRef(uid);
+      final query = tokensColRef(uid);
       final qSnapshot = await query.get();
       final qDocs = qSnapshot.docs;
       return qDocs.map((doc) => doc.data()).toList();
@@ -315,7 +375,7 @@ class FirestoreRepository {
   Future<List<Post>> getTimelinePosts(List<String> postIds) async {
     if (postIds.isEmpty) return [];
     try {
-      final query = service.timelinePostsQuery(postIds);
+      final query = timelinePostsQuery(postIds);
       final qSnapshot = await _getDocs(query);
       return qSnapshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch (e) {
@@ -327,7 +387,7 @@ class FirestoreRepository {
   Future<List<PublicUser>> getUsersByUids(List<String> uids) async {
     if (uids.isEmpty) return [];
     try {
-      final query = service.usersByWhereIn(uids);
+      final query = usersByWhereIn(uids);
       final qSnapshot = await _getDocs(query);
       return qSnapshot.docs
           .map((doc) => PublicUser.fromJson(doc.data()))
@@ -340,7 +400,7 @@ class FirestoreRepository {
 
   Future<List<Post>> getUserPosts(String uid) async {
     try {
-      final query = service.userPostsByNewest(uid);
+      final query = userPostsByNewest(uid);
       final qshot = await _getDocs(query);
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch (e) {
@@ -350,13 +410,13 @@ class FirestoreRepository {
   }
 
   Future<Doc> _getPostDoc(Post post) async {
-    final docRef = service.postDocRef(post.uid, post.postId);
+    final docRef = postDocRef(post.uid, post.postId);
     return docRef.get();
   }
   Future<List<Post>> getMoreUserPosts(Post lastPost) async {
     try {
       final doc = await _getPostDoc(lastPost);
-      final query = service.userPostsByNewest(lastPost.uid).startAfterDocument(doc);
+      final query = userPostsByNewest(lastPost.uid).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch (e) {
@@ -365,12 +425,12 @@ class FirestoreRepository {
     }
   }
   Future<Doc> _getUserDoc(String uid) async {
-    final docRef = service.userDocRef(uid);
+    final docRef = userDocRef(uid);
     return docRef.get();
   }
   Future<List<PublicUser>> getRankingUsers() async {
     try {
-      final query = service.usersByFollowerCount();
+      final query = usersByFollowerCount();
       final qshot = await query.get();
       return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
     } catch (e) {
@@ -381,7 +441,7 @@ class FirestoreRepository {
   Future<List<PublicUser>> getMoreRankingUsers(PublicUser lastUser) async {
     try {
       final doc = await _getUserDoc(lastUser.uid);
-      final query = service.usersByFollowerCount().startAfterDocument(doc);
+      final query = usersByFollowerCount().startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
     } catch (e) {
@@ -392,7 +452,7 @@ class FirestoreRepository {
   Future<List<PublicUser>> getMuteUsers(List<String> requestUids) async {
     if (requestUids.isEmpty) return [];
     try {
-      final query = service.usersByWhereIn(requestUids);
+      final query = usersByWhereIn(requestUids);
       final qshot = await query.get();
       return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
     } catch (e) {
@@ -404,7 +464,7 @@ class FirestoreRepository {
     if (requestUids.isEmpty) return [];
     try {
       final doc = await _getUserDoc(lastUser.uid);
-      final query = service.usersByWhereIn(requestUids).startAfterDocument(doc);
+      final query = usersByWhereIn(requestUids).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
     } catch (e) {
@@ -415,7 +475,7 @@ class FirestoreRepository {
 
   Future<List<Timeline>> getTimelines(String currentUid) async {
     try {
-      final qshot = await service.timelinesQuery(currentUid).get();
+      final qshot = await timelinesQuery(currentUid).get();
       final timelines = qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
       final sorted = [...timelines]..sort((a, b) => (b.createdAt).compareTo(a.createdAt));
       return sorted;
@@ -426,7 +486,7 @@ class FirestoreRepository {
   }
 
   MapQuery _postsQuery(bool isRankingPosts) {
-    return isRankingPosts ? service.postsByMsgCount() : service.postsByNewest();
+    return isRankingPosts ? postsByMsgCount() : postsByNewest();
   }
   Future<List<Post>> getPosts(bool isRankingPosts) async {
     try {
@@ -449,8 +509,8 @@ class FirestoreRepository {
   }
   Future<List<Timeline>> getMoreTimelines(String currentUid,Timeline lastTimeline) async {
     try {
-      final doc = await service.timelinesDocRef(currentUid, lastTimeline.postId).get();
-      final query = service.timelinesQuery(currentUid);
+      final doc = await timelinesDocRef(currentUid, lastTimeline.postId).get();
+      final query = timelinesQuery(currentUid);
       final qshot = await query.startAfterDocument(doc).get();
       return qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
     } catch(e) {
@@ -461,7 +521,7 @@ class FirestoreRepository {
   Future<List<Post>> getMutePosts(List<String> postIds) async {
     if (postIds.isEmpty) return [];
     try {
-      final query = service.postsByWhereIn(postIds);
+      final query = postsByWhereIn(postIds);
       final qshot = await query.get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch(e) {
@@ -473,7 +533,7 @@ class FirestoreRepository {
     if (postIds.isEmpty) return [];
     try {
       final doc = await _getPostDoc(lastPost);
-      final query = service.postsByWhereIn(postIds).startAfterDocument(doc);
+      final query = postsByWhereIn(postIds).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
     } catch(e) {
