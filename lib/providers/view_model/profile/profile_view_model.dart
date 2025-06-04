@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
@@ -39,8 +37,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     final image = await ref
         .read(fileUseCaseProvider)
         .getS3Image(detectedImage.bucketName, detectedImage.value);
-    if (image == null) return null;
-    return base64Encode(image);
+    return image;
   }
   Future<String?> _getImageFromUser(PublicUser? user) async {
     if (user == null) return null;
@@ -48,8 +45,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     final image = await ref
         .read(fileUseCaseProvider)
         .getS3Image(detectedImage.bucketName, detectedImage.value);
-    if (image == null) return null;
-    return base64Encode(image);
+    return image;
   }
 
   Future<List<UserPost>> _fetchUserPosts(PublicUser? user,String? base64) async {

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/view_model_state/common/image_user/image_user.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
@@ -15,7 +13,7 @@ class UserUseCase {
     final futures = users.map((user) async {
       final detectedImage = user.typedImage();
       final base64 = await fileUseCase.getS3Image(detectedImage.bucketName,detectedImage.value);
-      return ImageUser(user: user, base64: base64 != null ? base64Encode(base64) : null);
+      return ImageUser(user: user, base64: base64);
     }).toList();
     return Future.wait(futures);
   }

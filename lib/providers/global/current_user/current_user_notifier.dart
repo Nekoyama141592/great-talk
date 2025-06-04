@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:great_talk/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
@@ -105,8 +104,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final image = await ref
         .read(fileUseCaseProvider)
         .getS3Image(bucketName, fileName);
-    if (image == null) return null;
-    return base64Encode(image);
+    return image;
   }
 
   FutureResult<bool> signOut() async {

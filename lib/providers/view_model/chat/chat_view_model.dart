@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,7 +37,7 @@ class ChatViewModel extends _$ChatViewModel {
     // 初期状態を生成
     final initialState = ChatState(
       post: post,
-      postImage: postImage != null ? base64Encode(postImage) : null,
+      postImage: postImage,
       messages: localMessages,
     );
     // 初回メッセージ（説明文）が必要な場合は追加して状態を更新
@@ -183,7 +182,7 @@ class ChatViewModel extends _$ChatViewModel {
     return result;
   }
 
-  Future<Uint8List?> _fetchPostImage(Post post) async {
+  Future<String?> _fetchPostImage(Post post) async {
     final detectedImage = post.typedImage();
     return ref
         .read(fileUseCaseProvider)
