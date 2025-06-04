@@ -1,5 +1,4 @@
-import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
+import 'package:great_talk/repository/real/local/local_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'terms_notifier.g.dart';
@@ -8,13 +7,11 @@ part 'terms_notifier.g.dart';
 class TermsNotifier extends _$TermsNotifier {
   @override
   bool build() {
-    final prefs = ref.read(prefsProvider);
-    return prefs.getBool(PrefsKey.isAgreedToTerms.name) ?? false;
+    return ref.read(localRepositoryProvider).getIsAgreedToTerms();
   }
 
   void onAgreeButtonPressed() async {
     state = true;
-    final prefs = ref.read(prefsProvider);
-    await prefs.setBool(PrefsKey.isAgreedToTerms.name, true);
+    await ref.read(localRepositoryProvider).setIsAgreedToTerms(true);
   }
 }

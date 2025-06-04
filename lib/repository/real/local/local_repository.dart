@@ -64,4 +64,62 @@ class LocalRepository {
       return const Result.failure('削除が失敗しました');
     }
   }
+
+  bool? _getBool(PrefsKey key) {
+    try {
+      return prefs.getBool(key.name);
+    } catch(e) {
+      debugPrint(e.toString());
+      return null;
+    }
+  }
+  String? _getString(String keyName) {
+    try {
+      return prefs.getString(keyName);
+    } catch(e) {
+      debugPrint(e.toString());
+      return null;
+    }
+  }
+  Future<void> _setString(String keyName,String value) {
+    try {
+      return prefs.setString(keyName,value);
+    } catch(e) {
+      debugPrint(e.toString());
+      return Future.error('記録が失敗しました');
+    }
+  }
+  Future<void> _setBool(PrefsKey key,bool value) async {
+    try {
+      await prefs.setBool(key.name,value);
+    } catch(e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  bool getIsDarkTheme() {
+    return _getBool(PrefsKey.isDarkTheme) ?? true;
+  }
+  Future<void> setIsDarkTheme(bool value) {
+    return _setBool(PrefsKey.isDarkTheme,value);
+  }
+  bool getNeedFirstMessage() {
+    return _getBool(PrefsKey.needFirstMessage) ?? true;
+  }
+  Future<void> setNeedFirstMessage(bool value) {
+    return _setBool(PrefsKey.needFirstMessage,value);
+  }
+  bool getIsAgreedToTerms() {
+    return _getBool(PrefsKey.isAgreedToTerms) ?? false;
+  }
+  Future<void> setIsAgreedToTerms(bool value) {
+    return _setBool(PrefsKey.isAgreedToTerms,value);
+  }
+
+  String? getImage(String fileName) {
+    return _getString(fileName);
+  }
+  Future<void> setImage(String fileName,String value) async {
+    return _setString(fileName,value);
+  }
 }

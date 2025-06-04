@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:great_talk/infrastructure/cloud_functions/cloud_functions_client.dart';
@@ -39,14 +36,13 @@ class OnCallRepository {
     }
   }
 
-  FutureResult<Uint8List> getObject(GetObjectRequest request) async {
+  FutureResult<String> getObject(GetObjectRequest request) async {
     try {
       const name = 'getObjectV2';
       final result = await client.call(name, request.toJson());
       final res = GetObjectResponse.fromJson(result);
       final base64Image = res.base64Image;
-      final image = base64Decode(base64Image);
-      return Result.success(image);
+      return Result.success(base64Image);
     } catch (e) {
       debugPrint('getObject: ${e.toString()}');
       return Result.failure('画像の取得が失敗しました');

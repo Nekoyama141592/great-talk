@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
@@ -6,7 +5,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/database_schema/image_info/original_image_info.dart';
 import 'package:great_talk/model/rest_api/get_object/request/get_object_request.dart';
-import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
+import 'package:great_talk/repository/real/local/local_repository.dart';
 import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image/image.dart' as img;
@@ -14,18 +13,17 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 part 'file_usecase.g.dart';
 
 @riverpod
 FileUseCase fileUseCase(Ref ref) => FileUseCase(
-  prefs: ref.watch(prefsProvider),
+  localRepository: ref.watch(localRepositoryProvider),
   repository: ref.watch(onCallRepositoryProvider),
 );
 
 class FileUseCase {
-  FileUseCase({required this.prefs, required this.repository});
-  final SharedPreferences prefs;
+  FileUseCase({required this.localRepository, required this.repository});
+  final LocalRepository localRepository;
   final OnCallRepository repository;
   Future<Uint8List?> getCompressedImage() async {
     final xFile = await _pickImage();
@@ -35,36 +33,34 @@ class FileUseCase {
     return compressedImage;
   }
 
-  Future<Uint8List?> getS3Image(String bucketName, String fileName) async {
+  Future<String?> getS3Image(String bucketName, String fileName) async {
     if (fileName.isEmpty) {
       return null;
     }
-    Uint8List? uint8List = _getCachedUint8List(fileName); // キャッシュされている画像を取得.
+    String? image = _getCachedUint8List(fileName); // キャッシュされている画像を取得.
     // キャッシュされていない場合、S3から取得.
-    if (uint8List == null) {
+    if (image == null) {
       final request = GetObjectRequest(object: fileName);
       final result = await repository.getObject(request);
       result.when(
         success: (res) {
-          uint8List = res;
+          image = res;
           _cacheUint8List(fileName, res); // 画像を非同期でキャッシュする.
         },
         failure: (e) {
-          uint8List = null;
+          image = null;
         },
       );
     }
-    return uint8List;
+    return image;
   }
 
-  Future<void> _cacheUint8List(String fileName, Uint8List data) async {
-    final base64String = base64Encode(data);
-    await prefs.setString(fileName, base64String);
+  Future<void> _cacheUint8List(String fileName, String data) {
+    return localRepository.setImage(fileName,data);
   }
 
-  Uint8List? _getCachedUint8List(String fileName) {
-    final base64String = prefs.getString(fileName);
-    return base64String == null ? null : base64Decode(base64String);
+  String? _getCachedUint8List(String fileName) {
+    return localRepository.getImage(fileName);
   }
 
   Future<Uint8List?> _compressImage(File? jpgFile) async {
