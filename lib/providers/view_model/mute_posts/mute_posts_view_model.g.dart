@@ -7,7 +7,7 @@ part of 'mute_posts_view_model.dart';
 // **************************************************************************
 
 String _$mutePostsViewModelHash() =>
-    r'd448bdda2d7eff2746924e6d2fc1eaf4656f5aa3';
+    r'e8704694bbe57293ae22cfe6728a9e9b76318331';
 
 /// See also [MutePostsViewModel].
 @ProviderFor(MutePostsViewModel)

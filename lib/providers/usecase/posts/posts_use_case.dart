@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/view_model_state/common/user_post/user_post.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
@@ -18,8 +16,7 @@ class PostsUseCase {
   Future<String?> _getImageFromPost(Post post) async {
     final detectedImage = post.typedImage();
     final image = await fileUseCase.getS3Image(detectedImage.bucketName, detectedImage.value);
-    if (image == null) return null;
-    return base64Encode(image);
+    return image;
   }
   List<Post> sortedPosts(List<Post> posts) {
     return posts..sort((a, b) => (b.createdAt).compareTo(a.createdAt));

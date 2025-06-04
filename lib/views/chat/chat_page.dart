@@ -31,8 +31,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class ChatPage extends HookConsumerWidget {
   const ChatPage({
     super.key,
-    @PathParam('uid') this.uid = '',
-    @PathParam('postId') this.postId = '',
+    @pathParam this.uid = '',
+    @pathParam this.postId = '',
   });
 
   final String uid;

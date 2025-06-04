@@ -6,7 +6,7 @@ part of 'local_setting.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localSettingHash() => r'0f3ce46014266c482ed8974366b97f22009c33b6';
+String _$localSettingHash() => r'4f61419ecd92eaa6e2d88c383583b00fe6108983';
 
 /// See also [LocalSetting].
 @ProviderFor(LocalSetting)

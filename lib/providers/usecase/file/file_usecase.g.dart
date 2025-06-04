@@ -6,7 +6,7 @@ part of 'file_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fileUseCaseHash() => r'ca508f5a33285e1406021be8e9ca5b82381590b3';
+String _$fileUseCaseHash() => r'37efcf19ae99e76f15a68427689d9f077fae3ff9';
 
 /// See also [fileUseCase].
 @ProviderFor(fileUseCase)
