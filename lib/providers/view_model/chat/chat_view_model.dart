@@ -8,6 +8,7 @@ import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/client/chat_gpt_sdk/chat_gpt_sdk_client.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/global/purchases/purchases_notifier.dart';
 import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:great_talk/repository/real/local/local_repository.dart';
@@ -50,6 +51,10 @@ class ChatViewModel extends _$ChatViewModel {
     TextEditingController inputController,
     ScrollController scrollController,
   ) async {
+    if (!ref.read(purchasesNotifierProvider.notifier).isSubscribing()) {
+      UIHelper.showErrorFlutterToast('有料課金してください');
+      return;
+    }
     final text = inputController.text;
     unFocus.call();
     // APIを実行
