@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 import 'package:great_talk/core/purchases_core.dart';
 import 'package:great_talk/extension/purchase_details_extension.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
@@ -73,4 +74,5 @@ class PurchasesNotifier extends _$PurchasesNotifier {
   }
 
   bool isSubscribing() => state.any((e) => e.isValid());
+  bool isPremiumSubscribing() => state.where((e) => e.productId == kPremiumSubscriptionId).any((e) => e.isValid());
 }

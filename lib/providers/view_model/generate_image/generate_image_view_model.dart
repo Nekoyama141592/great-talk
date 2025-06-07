@@ -14,7 +14,7 @@ class GenerateImageViewModel extends _$GenerateImageViewModel {
 
   void onGenerateButtonPressed(String prompt, String size) async {
     if (!ref.read(purchasesNotifierProvider.notifier).isSubscribing()) {
-      UIHelper.showErrorFlutterToast('有料課金してください');
+      UIHelper.showErrorFlutterToast('有料プランに加入する必要があります');
       return;
     }
     if (prompt.isEmpty || size.isEmpty) return;

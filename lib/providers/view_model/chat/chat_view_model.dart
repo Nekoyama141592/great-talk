@@ -52,7 +52,7 @@ class ChatViewModel extends _$ChatViewModel {
     ScrollController scrollController,
   ) async {
     if (!ref.read(purchasesNotifierProvider.notifier).isSubscribing()) {
-      UIHelper.showErrorFlutterToast('有料課金してください');
+      UIHelper.showErrorFlutterToast('有料プランに加入する必要があります');
       return;
     }
     final text = inputController.text;
@@ -233,7 +233,7 @@ class ChatViewModel extends _$ChatViewModel {
     final post = state.value!.post;
     final requestMessages = _toRequestMessages();
     requestMessages.insert(0, _systemMsg(post));
-    final model = RemoteConfigConstants.basicModel;
+    final model = ref.read(purchasesNotifierProvider.notifier).isPremiumSubscribing() ? RemoteConfigConstants.premiumModel :  RemoteConfigConstants.basicModel;
     final uid = ref.read(streamAuthUidProvider).value;
 
     return ChatCompleteText(
