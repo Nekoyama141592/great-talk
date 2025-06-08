@@ -3,12 +3,12 @@ import 'package:great_talk/consts/colors.dart';
 
 class CustomSnackBar {
   static SnackBar success(BuildContext context, String msg) {
-    const color = Colors.blue;
+    const color = Colors.blueAccent;
     return _basic(context, msg, color);
   }
 
   static SnackBar failure(BuildContext context, String msg) {
-    const color = Colors.red;
+    const color = Colors.redAccent;
     return _basic(context, msg, color);
   }
 
@@ -24,7 +24,7 @@ class CustomSnackBar {
           ),
         ),
       ),
-      backgroundColor: Colors.blueAccent.withAlpha(alpha90),
+      backgroundColor: color.withAlpha(alpha90),
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       margin: const EdgeInsets.all(15.0),
