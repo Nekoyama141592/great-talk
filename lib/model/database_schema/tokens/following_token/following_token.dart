@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/core/id_core.dart';
 
 part 'following_token.freezed.dart';
 part 'following_token.g.dart';
@@ -20,7 +20,7 @@ abstract class FollowingToken with _$FollowingToken {
   factory FollowingToken.fromJson(Map<String, dynamic> json) =>
       _$FollowingTokenFromJson(json);
   factory FollowingToken.fromUid(String passiveUid) {
-    final tokenId = randomString();
+    final tokenId = IdCore.randomString();
     final now = FieldValue.serverTimestamp();
     return FollowingToken(
       createdAt: now,

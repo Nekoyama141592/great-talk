@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/core/id_core.dart';
 
 part 'private_user.freezed.dart';
 part 'private_user.g.dart';
@@ -25,7 +25,7 @@ abstract class PrivateUser with _$PrivateUser {
   factory PrivateUser.fromUid(String uid) {
     final now = FieldValue.serverTimestamp();
     return PrivateUser(
-      accessToken: randomString(),
+      accessToken: IdCore.randomString(),
       createdAt: now,
       uid: uid,
       updatedAt: now,

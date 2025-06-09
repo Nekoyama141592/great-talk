@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/enums.dart';
-import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/core/id_core.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 
 part 'like_post_token.freezed.dart';
@@ -27,7 +27,7 @@ abstract class LikePostToken with _$LikePostToken {
       passiveUid: post.uid,
       // postRef: post.typedRef(),
       postId: post.postId,
-      tokenId: randomString(),
+      tokenId: IdCore.randomString(),
       tokenType: TokenType.likePost.name,
     );
   }

@@ -2,12 +2,6 @@
 import 'package:great_talk/app/flavors.dart';
 import 'package:great_talk/model/local_schema/chat_user_metadata/chat_user_metadata.dart';
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
-import 'package:uuid/uuid.dart';
-
-String randomString() {
-  const uuid = Uuid();
-  return uuid.v4();
-}
 
 final appName = F.title;
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:great_talk/core/id_core.dart';
 import 'package:great_talk/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/view_model_state/create_post/create_post_state.dart';
@@ -8,7 +9,6 @@ import 'package:great_talk/providers/repository/api/api_repository_provider.dart
 import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
@@ -87,7 +87,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     // ローディング状態に設定
     state = const AsyncValue.loading();
 
-    final postId = randomString();
+    final postId = IdCore.randomString();
     final fileName = AWSS3Core.postObject(currentUid, postId);
     final repository = ref.read(apiRepositoryProvider);
     final request = PutObjectRequest.fromUint8List(
