@@ -1,6 +1,7 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:great_talk/infrastructure/cloud_functions/cloud_functions_client.dart';
+import 'package:great_talk/core/json_core.dart';
 import 'package:great_talk/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
 import 'package:great_talk/model/rest_api/generate_image/request/generate_image_request.dart';
@@ -9,57 +10,77 @@ import 'package:great_talk/model/rest_api/get_object/request/get_object_request.
 import 'package:great_talk/model/rest_api/get_object/response/get_object_response.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/rest_api/put_object/response/put_object_response.dart';
-import 'package:great_talk/providers/client/cloud_functions/cloud_functions_client_provider.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/providers/global/infrastructure/firebase_functions/firebase_functions_provider.dart';
+import 'package:great_talk/repository/result/result.dart' as rs;
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:great_talk/extension/purchase_details_extension.dart';
+import 'package:great_talk/model/rest_api/verify_purchase/request/receipt_request.dart';
+import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 
 part 'on_call_repository.g.dart';
 
 @riverpod
 OnCallRepository onCallRepository(Ref ref) =>
-    OnCallRepository(ref.watch(cloudFunctionsClientProvider));
+    OnCallRepository(ref.watch(firebaseFunctionsProvider));
 
 class OnCallRepository {
   OnCallRepository(this.client);
-  final CloudFunctionsClient client;
+  final FirebaseFunctions client;
 
-  FutureResult<PutObjectResponse> putObject(PutObjectRequest request) async {
+  HttpsCallable _httpsCallable(String functionName) =>
+      client.httpsCallable(
+        functionName,
+        options: HttpsCallableOptions(
+          timeout: const Duration(seconds: 300),
+        ),
+      );
+  Future<Map<String, dynamic>> _call(
+      String name, Map<String, dynamic> request) async {
+    final callable = _httpsCallable(name);
+    final result = await callable.call(request);
+    final data = result.data;
+    final decoded = JsonCore.encodeDecode(data);
+    return decoded;
+  }
+
+  rs.FutureResult<PutObjectResponse> putObject(PutObjectRequest request) async {
     try {
       const name = 'putObjectV2';
-      final result = await client.call(name, request.toJson());
+      final result = await _call(name, request.toJson());
       final res = PutObjectResponse.fromJson(result);
-      return Result.success(res);
+      return rs.Result.success(res);
     } catch (e) {
       debugPrint('putObject: ${e.toString()}');
-      return Result.failure('画像のアップロードが失敗しました');
+      return rs.Result.failure('画像のアップロードが失敗しました');
     }
   }
 
-  FutureResult<String> getObject(GetObjectRequest request) async {
+  rs.FutureResult<String> getObject(GetObjectRequest request) async {
     try {
       const name = 'getObjectV2';
-      final result = await client.call(name, request.toJson());
+      final result = await _call(name, request.toJson());
       final res = GetObjectResponse.fromJson(result);
       final base64Image = res.base64Image;
-      return Result.success(base64Image);
+      return rs.Result.success(base64Image);
     } catch (e) {
       debugPrint('getObject: ${e.toString()}');
-      return Result.failure('画像の取得が失敗しました');
+      return rs.Result.failure('画像の取得が失敗しました');
     }
   }
 
-  FutureResult<DeleteObjectResponse> deleteObject(
+  rs.FutureResult<DeleteObjectResponse> deleteObject(
     DeleteObjectRequest request,
   ) async {
     try {
       const name = 'deleteObjectV2';
-      final result = await client.call(name, request.toJson());
+      final result = await _call(name, request.toJson());
       final res = DeleteObjectResponse.fromJson(result);
-      return Result.success(res);
+      return rs.Result.success(res);
     } catch (e) {
       debugPrint('deleteObject: ${e.toString()}');
-      return Result.failure('画像の削除が失敗しました');
+      return rs.Result.failure('画像の削除が失敗しました');
     }
   }
 
@@ -70,12 +91,41 @@ class OnCallRepository {
     try {
       const name = 'generateImage';
       final request = GenerateImageRequest(prompt: prompt, size: size);
-      final result = await client.call(name, request.toJson());
+      final result = await _call(name, request.toJson());
       final res = GenerateImageResponse.fromJson(result);
       return res;
     } catch (e) {
       debugPrint('generateImage: ${e.toString()}');
       return null;
+    }
+  }
+  rs.FutureResult<VerifiedPurchase> verifyAndroidReceipt(
+    PurchaseDetails purchaseDetails,
+  ) async {
+    try {
+      const name = 'verifyAndroidReceipt';
+      final request = ReceiptRequest(purchaseDetails: purchaseDetails.toJson());
+      final result = await _call(name, request.toJson());
+      final res = VerifiedPurchase.fromJson(result);
+      return rs.Result.success(res);
+    } catch (e) {
+      debugPrint('verifyAndroidReceipt: ${e.toString()}');
+      return rs.Result.failure('レシート検証が失敗しました');
+    }
+  }
+
+  rs.FutureResult<VerifiedPurchase> verifyIOSReceipt(
+    PurchaseDetails purchaseDetails,
+  ) async {
+    try {
+      const name = 'verifyIOSReceipt';
+      final request = ReceiptRequest(purchaseDetails: purchaseDetails.toJson());
+      final result = await _call(name, request.toJson());
+      final res = VerifiedPurchase.fromJson(result);
+      return rs.Result.success(res);
+    } catch (e) {
+      debugPrint('verifyIOSReceipt: ${e.toString()}');
+      return rs.Result.failure('レシート検証が失敗しました');
     }
   }
 }
