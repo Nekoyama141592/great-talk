@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/colors.dart';
-import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/core/size_core.dart';
 
 class EllipsisText extends Text {
   final String text;
@@ -47,7 +47,7 @@ class TabText extends StatelessWidget {
       style: TextStyle(
         color: Theme.of(context).focusColor,
         fontWeight: FontWeight.bold,
-        fontSize: defaultTabTextSize(context),
+        fontSize: SizeCore.defaultTabTextSize(context),
       ),
     );
   }

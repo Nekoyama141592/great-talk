@@ -22,4 +22,6 @@ class EnvCore implements EnvInterface {
 
   @override
   String get openAiApiKey => env.openAiApiKey;
+
+  static bool isProd() => F.appFlavor == Flavor.prod;
 }

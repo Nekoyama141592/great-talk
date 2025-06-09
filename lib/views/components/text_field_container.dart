@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/core/size_core.dart';
 
 class TextFieldContainer extends StatelessWidget {
   const TextFieldContainer({super.key, required this.child});
@@ -11,7 +11,7 @@ class TextFieldContainer extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Center(
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: defaultPadding(context)),
+        margin: EdgeInsets.symmetric(vertical: SizeCore.defaultPadding(context)),
         width: size.width * 0.9,
         decoration: BoxDecoration(
           border: Border.all(color: Theme.of(context).focusColor),

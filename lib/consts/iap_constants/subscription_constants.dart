@@ -1,17 +1,17 @@
-import 'package:great_talk/core/bools.dart';
+import 'package:great_talk/core/env_core.dart';
 
 final String kWeekSubscriptionId =
-    EnvironmentChecker.isProd() ? 'subscription_week' : "dev_subscription_week";
+    EnvCore.isProd() ? 'subscription_week' : "dev_subscription_week";
 final String kMonthSubscriptionId =
-    EnvironmentChecker.isProd()
+    EnvCore.isProd()
         ? 'subscription_month'
         : "dev_subscription_month";
 final String kAnnualSubscriptionId =
-    EnvironmentChecker.isProd()
+    EnvCore.isProd()
         ? 'subscription_annual'
         : "dev_subscription_annual";
 final String kPremiumSubscriptionId =
-    EnvironmentChecker.isProd() ? 'premium_month' : "dev_premium_month";
+    EnvCore.isProd() ? 'premium_month' : "dev_premium_month";
 final List<String> kProductIds = <String>[
   kMonthSubscriptionId,
   kPremiumSubscriptionId,

@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/core/size_core.dart';
 
 class S3Image extends StatelessWidget {
   const S3Image({super.key, this.width, this.height, required this.uint8list});
@@ -16,8 +16,8 @@ class S3Image extends StatelessWidget {
       ),
       child: ClipOval(
         child: SizedBox(
-          width: width ?? userImageSize(context),
-          height: height ?? userImageSize(context),
+          width: width ?? SizeCore.userImageSize(context),
+          height: height ?? SizeCore.userImageSize(context),
           child: Align(
             alignment: Alignment.center,
             child: Image.memory(uint8list),

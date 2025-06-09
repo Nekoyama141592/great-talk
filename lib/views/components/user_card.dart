@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/core/size_core.dart';
 import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/notifier/tokens/tokens_notifier.dart';
@@ -28,11 +28,11 @@ class UserCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(tokensNotifierProvider);
     return Padding(
-      padding: EdgeInsets.all(defaultPadding(context)),
+      padding: EdgeInsets.all(SizeCore.defaultPadding(context)),
       child:
           (publicUser.isInappropriate())
               ? SizedBox(
-                height: userImageSize(context),
+                height: SizeCore.userImageSize(context),
                 child: MosaicCard(
                   child: MosaicUserChild(
                     publicUser: publicUser,

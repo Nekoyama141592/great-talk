@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/core/size_core.dart';
 import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
@@ -30,7 +30,7 @@ class PostCard extends ConsumerWidget {
     // 不適切なら弾く
     return InkWell(
       child: Padding(
-        padding: EdgeInsets.all(defaultPadding(context)),
+        padding: EdgeInsets.all(SizeCore.defaultPadding(context)),
         child: AsyncScreen(
           asyncValue: asyncValue,
           data: (state) {

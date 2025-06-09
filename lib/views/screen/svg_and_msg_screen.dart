@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/core/size_core.dart';
 import 'package:great_talk/views/screen/gradient_screen.dart';
 
 class SvgAndMsgScreen extends StatelessWidget {
@@ -23,11 +23,11 @@ class SvgAndMsgScreen extends StatelessWidget {
       body: GradientScreen(
         top: const SizedBox.shrink(),
         header: Padding(
-          padding: EdgeInsets.all(defaultPadding(context)),
+          padding: EdgeInsets.all(SizeCore.defaultPadding(context)),
           child: Text(
             title,
             style: TextStyle(
-              fontSize: defaultHeaderTextSize(context),
+              fontSize: SizeCore.defaultHeaderTextSize(context),
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -35,19 +35,19 @@ class SvgAndMsgScreen extends StatelessWidget {
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: defaultPadding(context)),
+            padding: EdgeInsets.symmetric(vertical: SizeCore.defaultPadding(context)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SvgPicture.asset(svgPath, height: size.height * 0.3),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    vertical: defaultPadding(context),
+                    vertical: SizeCore.defaultPadding(context),
                   ),
                   child: Text(
                     msg,
                     style: TextStyle(
-                      fontSize: defaultHeaderTextSize(context) * 1.25,
+                      fontSize: SizeCore.defaultHeaderTextSize(context) * 1.25,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

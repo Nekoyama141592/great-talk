@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/core/doubles.dart';
+import 'package:great_talk/core/size_core.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
@@ -180,7 +180,7 @@ class ChatPage extends HookConsumerWidget {
                 children: [
                   const BasicHeightBox(),
                   SizedBox(
-                    height: chatScreenHeight(context),
+                    height: SizeCore.chatScreenHeight(context),
                     child: ListView.builder(
                       controller: scrollController,
                       itemCount: messages.length,
