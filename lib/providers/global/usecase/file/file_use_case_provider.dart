@@ -15,7 +15,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'file_usecase.g.dart';
+part 'file_use_case_provider.g.dart';
 
 @riverpod
 FileUseCase fileUseCase(Ref ref) => FileUseCase(

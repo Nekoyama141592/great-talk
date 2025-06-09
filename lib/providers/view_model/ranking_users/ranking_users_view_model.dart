@@ -1,6 +1,6 @@
 import 'package:great_talk/model/view_model_state/ranking_users/ranking_users_state.dart';
 import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
-import 'package:great_talk/providers/usecase/user/user_use_case_provider.dart';
+import 'package:great_talk/providers/global/usecase/user/user_use_case_provider.dart';
 import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

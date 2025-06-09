@@ -11,7 +11,7 @@ import 'package:great_talk/repository/database_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'post_usecase.g.dart';
+part 'post_use_case_provider.g.dart';
 
 @riverpod
 PostUsecase postUsecase(Ref ref) =>

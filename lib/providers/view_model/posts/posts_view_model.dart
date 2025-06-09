@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:great_talk/model/view_model_state/posts/posts_state.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/providers/usecase/posts/posts_use_case.dart';
+import 'package:great_talk/providers/global/usecase/posts/posts_use_case_provider.dart';
 import 'package:great_talk/providers/view_model/refresh_interface.dart';
 import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';

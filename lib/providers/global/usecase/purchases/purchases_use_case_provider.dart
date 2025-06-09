@@ -7,7 +7,7 @@ import 'package:great_talk/repository/result/result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'purchases_usecase.g.dart';
+part 'purchases_use_case_provider.g.dart';
 
 @riverpod
 PurchasesUsecase purchasesUsecase(Ref ref) =>

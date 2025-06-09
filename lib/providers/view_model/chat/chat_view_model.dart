@@ -9,7 +9,7 @@ import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dar
 import 'package:great_talk/providers/global/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/providers/repository/local/local_repository_provider.dart';
-import 'package:great_talk/providers/usecase/file/file_usecase.dart';
+import 'package:great_talk/providers/global/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';

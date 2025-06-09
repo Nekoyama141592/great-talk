@@ -9,7 +9,7 @@ import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/core/credential_core.dart';
 import 'package:great_talk/repository/auth_repository.dart';
 import 'package:great_talk/repository/database_repository.dart';
-import 'package:great_talk/providers/usecase/file/file_usecase.dart';
+import 'package:great_talk/providers/global/usecase/file/file_use_case_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'current_user_notifier.g.dart';

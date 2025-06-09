@@ -5,7 +5,7 @@ import 'package:great_talk/extension/purchase_details_extension.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/providers/global/stream/purchase/purchase_stream_provider.dart';
 import 'package:great_talk/providers/repository/purchase/purchase_repository_provider.dart';
-import 'package:great_talk/providers/usecase/purchases/purchases_usecase.dart';
+import 'package:great_talk/providers/global/usecase/purchases/purchases_use_case_provider.dart';
 import 'package:great_talk/providers/repository/local/local_repository_provider.dart';
 import 'package:great_talk/repository/purchase_repository.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';

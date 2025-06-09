@@ -13,7 +13,7 @@ import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/core/aws_s3_core.dart';
-import 'package:great_talk/providers/usecase/file/file_usecase.dart';
+import 'package:great_talk/providers/global/usecase/file/file_use_case_provider.dart';
 
 part 'create_post_view_model.g.dart';
 

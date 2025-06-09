@@ -6,7 +6,7 @@ import 'package:great_talk/model/view_model_state/profile/profile_state.dart';
 import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
-import 'package:great_talk/providers/usecase/file/file_usecase.dart';
+import 'package:great_talk/providers/global/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/providers/view_model/refresh_interface.dart';
 import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
