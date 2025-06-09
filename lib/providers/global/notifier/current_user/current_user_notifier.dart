@@ -137,8 +137,6 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     return result;
   }
 
-  Future<void> _removeUserImage() async {}
-
   Future<void> updateUser() async {
     final uid = ref.read(streamAuthUidProvider).value;
     final stateValue = state.value;

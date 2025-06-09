@@ -1,6 +1,5 @@
 import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/model/database_schema/post_mute/post_mute.dart';
@@ -26,9 +25,9 @@ class PostUsecase {
     Post post,
     String currentUid,
     MutePostToken token,
-  ) async {
+  ) {
     final postMute = PostMute.fromPost(post, currentUid);
-    return await firestoreRepository.createMutePostInfo(
+    return firestoreRepository.createMutePostInfo(
       currentUid,
       post,
       token,
@@ -40,10 +39,10 @@ class PostUsecase {
     Post post,
     String currentUid,
     MuteUserToken token,
-  ) async {
+  ) {
     final passiveUid = post.uid;
     final userMute = UserMute.fromPost(currentUid, post);
-    return await firestoreRepository.createMuteUserInfo(
+    return firestoreRepository.createMuteUserInfo(
       currentUid,
       passiveUid,
       token,
@@ -55,7 +54,7 @@ class PostUsecase {
     String currentUid,
     LikePostToken token,
     Post post,
-  ) async {
+  ) {
     final postLike = PostLike.fromPost(post, currentUid);
     return firestoreRepository.createLikePostInfo(
       currentUid,
@@ -75,10 +74,5 @@ class PostUsecase {
 
   FutureResult<bool> deletePost(Post post) {
     return firestoreRepository.deletePost(post);
-  }
-
-  Future<void> _removePostImage(DetectedImage image) async {
-    // final request = DeleteObjectRequest(object: image.value);
-    // await onCallRepository.deleteObject(request);
   }
 }
