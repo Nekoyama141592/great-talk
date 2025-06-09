@@ -8,6 +8,7 @@ import 'package:great_talk/providers/global/usecase/posts/posts_use_case_provide
 import 'package:great_talk/providers/view_model/refresh_interface.dart';
 import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/use_case/posts_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'mute_posts_view_model.g.dart';
 
