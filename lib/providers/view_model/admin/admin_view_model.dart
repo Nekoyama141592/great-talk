@@ -1,12 +1,13 @@
 import 'package:great_talk/model/view_model_state/admin/admin_state.dart';
-import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
+import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
+import 'package:great_talk/repository/database_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'admin_view_model.g.dart';
 
 @riverpod
 class AdminViewModel extends _$AdminViewModel {
-  FirestoreRepository get _repository => ref.read(firestoreRepositoryProvider);
+  DatabaseRepository get _repository => ref.read(databaseRepositoryProvider);
   @override
   FutureOr<AdminState> build() async {
     final [userCount, postCount, messageCount] = await Future.wait([

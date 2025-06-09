@@ -1,17 +1,18 @@
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/view_model_state/common/user_post/user_post.dart';
+import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
-import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
+import 'package:great_talk/repository/database_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'posts_use_case.g.dart';
 
 @riverpod
-PostsUseCase postsUseCase(Ref ref) => PostsUseCase(ref.watch(firestoreRepositoryProvider),ref.watch(fileUseCaseProvider));
+PostsUseCase postsUseCase(Ref ref) => PostsUseCase(repository: ref.watch(databaseRepositoryProvider), fileUseCase:ref.watch(fileUseCaseProvider));
 
 class PostsUseCase {
-  PostsUseCase(this.repository,this.fileUseCase);
-  final FirestoreRepository repository;
+  PostsUseCase({required this.repository,required this.fileUseCase});
+  final DatabaseRepository repository;
   final FileUseCase fileUseCase;
   Future<String?> _getImageFromPost(Post post) async {
     final detectedImage = post.typedImage();

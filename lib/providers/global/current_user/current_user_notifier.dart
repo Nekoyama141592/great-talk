@@ -3,10 +3,12 @@ import 'package:great_talk/model/database_schema/private_user/private_user.dart'
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/global/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/repository/auth/auth_repository_provider.dart';
+import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/core/credential_core.dart';
-import 'package:great_talk/repository/real/firebase_auth/firebase_auth_repository.dart';
-import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
+import 'package:great_talk/repository/auth_repository.dart';
+import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -14,8 +16,8 @@ part 'current_user_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
 class CurrentUserNotifier extends _$CurrentUserNotifier {
-  FirebaseAuthRepository get _firebaseAuthRepository =>
-      ref.read(firebaseAuthRepositoryProvider);
+  AuthRepository get _authRepository => ref.watch(authRepositoryProvider);
+  DatabaseRepository get _databaseRepository => ref.watch(databaseRepositoryProvider);
   @override
   Future<CurrentUserState> build() async {
     final initialState = CurrentUserState();
@@ -31,40 +33,30 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     return _fetchData();
   }
 
-  FutureResult<User> _createAnonymousUser() async {
-    return await _firebaseAuthRepository.signInAnonymously();
+  FutureResult<User> _createAnonymousUser() {
+    return _authRepository.signInAnonymously();
   }
 
-  FutureResult<User> onAppleButtonPressed() async {
-    final repository = ref.read(
-      firebaseAuthRepositoryProvider,
-    ); // RiverpodでRepositoryを取得
-    final result = await repository.signInWithApple();
-    return result;
+  FutureResult<User> onAppleButtonPressed() {
+    return _authRepository.signInWithApple();
   }
 
-  FutureResult<User> onGoogleButtonPressed() async {
-    final repository = ref.read(
-      firebaseAuthRepositoryProvider,
-    ); // RiverpodでRepositoryを取得
-    final result = await repository.signInWithGoogle();
-    return result;
+  FutureResult<User> onGoogleButtonPressed() {
+    return _authRepository.signInWithGoogle();
   }
 
   String? _getCurrentUid() => ref.watch(streamAuthUidProvider).value;
 
   Future<PublicUser?> _createPublicUser(String uid) {
-    final repository = ref.read(firestoreRepositoryProvider);
     final newUser = PublicUser.fromRegister(uid);
     final json = newUser.toJson();
-    return repository.createPublicUser(uid, json);
+    return _databaseRepository.createPublicUser(uid, json);
   }
 
   Future<PrivateUser?> _createPrivateUser(String uid) {
-    final repository = ref.read(firestoreRepositoryProvider);
     final newPrivateUser = PrivateUser.fromUid(uid);
     final json = newPrivateUser.toJson();
-    return repository.createPrivateUser(uid, json);
+    return _databaseRepository.createPrivateUser(uid, json);
   }
 
   Future<CurrentUserState> _fetchData() async {
@@ -83,15 +75,13 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   Future<PublicUser?> _getPublicUser(String uid) async {
-    final repository = ref.read(firestoreRepositoryProvider);
-    var publicUser = await repository.getPublicUser(uid);
+    var publicUser = await _databaseRepository.getPublicUser(uid);
     publicUser ??= await _createPublicUser(uid);
     return publicUser;
   }
 
   Future<PrivateUser?> _getPrivateUser(String uid) async {
-    final repository = ref.read(firestoreRepositoryProvider);
-    var privateUser = await repository.getPrivateUser(uid);
+    var privateUser = await _databaseRepository.getPrivateUser(uid);
     privateUser ??= await _createPrivateUser(uid);
     return privateUser;
   }
@@ -108,8 +98,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   FutureResult<bool> signOut() async {
-    final repository = ref.read(firebaseAuthRepositoryProvider);
-    final result = await repository.signOut();
+    final result = await _authRepository.signOut();
     return result;
   }
 
@@ -120,13 +109,11 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
 
   FutureResult<bool> reauthenticateWithGoogleToDelete() async {
     final credential = await CredentialCore.googleCredential();
-    return await _reauthenticateToDelete(credential);
+    return _reauthenticateToDelete(credential);
   }
 
-  FutureResult<bool> _reauthenticateToDelete(AuthCredential credential) async {
-    final repository = ref.read(firebaseAuthRepositoryProvider);
-    final result = await repository.reauthenticateWithCredential(credential);
-    return result;
+  FutureResult<bool> _reauthenticateToDelete(AuthCredential credential) {
+    return _authRepository.reauthenticateWithCredential(credential);
   }
 
   FutureResult<bool> deletePublicUser() async {
@@ -134,8 +121,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     if (user == null) {
       return const Result.failure('ログインしてください');
     }
-    final firestoreRepository = ref.read(firestoreRepositoryProvider);
-    final result = await firestoreRepository.deletePublicUser(user.uid);
+    final result = await _databaseRepository.deletePublicUser(user.uid);
     late Result<bool> authResult;
     await result.when(
       success: (_) async => authResult = await _deleteAuthUser(),
@@ -147,8 +133,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   FutureResult<bool> _deleteAuthUser() async {
-    final firebaseAuthRepository = ref.read(firebaseAuthRepositoryProvider);
-    final result = await firebaseAuthRepository.deleteUser();
+    final result = await _authRepository.deleteUser();
     return result;
   }
 

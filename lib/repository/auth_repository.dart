@@ -1,18 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/credential_core.dart';
-import 'package:great_talk/providers/client/firebath_auth/firebase_auth_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'firebase_auth_repository.g.dart';
 
-@riverpod
-FirebaseAuthRepository firebaseAuthRepository(Ref ref) =>
-    FirebaseAuthRepository(ref.watch(firebaseAuthProvider));
-
-class FirebaseAuthRepository {
-  FirebaseAuthRepository(this.instance);
+class AuthRepository {
+  AuthRepository(this.instance);
   FirebaseAuth instance;
 
   FutureResult<User> signInAnonymously() async {

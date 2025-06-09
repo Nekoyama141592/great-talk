@@ -1,4 +1,4 @@
-import 'package:great_talk/repository/real/local/local_repository.dart';
+import 'package:great_talk/providers/repository/local/local_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'terms_notifier.g.dart';

@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:great_talk/model/global/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
-import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
+import 'package:great_talk/providers/repository/api/api_repository_provider.dart';
+import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/form_consts.dart';
@@ -11,7 +12,6 @@ import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/extension/string_extension.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/database_schema/user_update_log/user_update_log.dart';
-import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/core/aws_s3_core.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:great_talk/model/view_model_state/edit/edit_state.dart';
@@ -109,7 +109,7 @@ class EditViewModel extends _$EditViewModel {
         uint8list: base64Decode(uint8list),
         fileName: fileName,
       );
-      final repository = ref.read(onCallRepositoryProvider);
+      final repository = ref.read(apiRepositoryProvider);
       final result = await repository.putObject(request);
       await result.when(
         success: (res) async {
@@ -144,7 +144,7 @@ class EditViewModel extends _$EditViewModel {
   ) async {
     final uid = ref.read(streamAuthUidProvider).value;
     if (uid == null) return const Result.failure('ログインしてください.');
-    final repository = ref.read(firestoreRepositoryProvider);
+    final repository = ref.read(databaseRepositoryProvider);
     final newUpdateLog = UserUpdateLog.fromRegister(
       uid,
       userName,

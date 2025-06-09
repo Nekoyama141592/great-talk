@@ -4,14 +4,14 @@ import 'package:great_talk/model/database_schema/custom_complete_text/custom_com
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/view_model_state/create_post/create_post_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
-import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
+import 'package:great_talk/providers/repository/api/api_repository_provider.dart';
+import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
-import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/core/aws_s3_core.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 
@@ -89,7 +89,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
 
     final postId = randomString();
     final fileName = AWSS3Core.postObject(currentUid, postId);
-    final repository = ref.read(onCallRepositoryProvider);
+    final repository = ref.read(apiRepositoryProvider);
     final request = PutObjectRequest.fromUint8List(
       uint8list: base64Decode(pickedImage),
       fileName: fileName,
@@ -111,7 +111,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     String fileName,
     CreatePostState postState,
   ) async {
-    final repository = ref.read(firestoreRepositoryProvider);
+    final repository = ref.read(databaseRepositoryProvider);
     final uid = ref.read(streamAuthUidProvider).value;
     if (uid == null) {
       return const Result.failure('ログインしてください');

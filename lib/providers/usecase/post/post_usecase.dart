@@ -1,3 +1,4 @@
+import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
@@ -7,7 +8,7 @@ import 'package:great_talk/model/database_schema/tokens/like_post_token/like_pos
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
-import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
+import 'package:great_talk/repository/database_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,11 +16,11 @@ part 'post_usecase.g.dart';
 
 @riverpod
 PostUsecase postUsecase(Ref ref) =>
-    PostUsecase(firestoreRepository: ref.watch(firestoreRepositoryProvider));
+    PostUsecase(firestoreRepository: ref.watch(databaseRepositoryProvider));
 
 class PostUsecase {
   PostUsecase({required this.firestoreRepository});
-  final FirestoreRepository firestoreRepository;
+  final DatabaseRepository firestoreRepository;
 
   FutureResult<bool> mutePost(
     Post post,

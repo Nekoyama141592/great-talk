@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/model/database_schema/timeline/timeline.dart';
-import 'package:great_talk/providers/client/firebase_firestore/firebase_firestore_provider.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
@@ -16,17 +15,9 @@ import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_use
 import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/typedef/firestore_typedef.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'firestore_repository.g.dart';
-
-@riverpod
-FirestoreRepository firestoreRepository(Ref ref) =>
-    FirestoreRepository(instance: ref.watch(firebaseFirestoreProvider));
-
-class FirestoreRepository {
-  FirestoreRepository({required this.instance});
+class DatabaseRepository {
+  DatabaseRepository({required this.instance});
   final FirebaseFirestore instance;
   WriteBatch _getBatch() => instance.batch();
 

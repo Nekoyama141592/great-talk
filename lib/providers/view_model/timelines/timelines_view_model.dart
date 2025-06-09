@@ -3,7 +3,7 @@ import 'package:great_talk/model/view_model_state/timelines/timelines_state.dart
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/usecase/posts/posts_use_case.dart';
 import 'package:great_talk/providers/view_model/refresh_interface.dart';
-import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
+import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'timelines_view_model.g.dart';
@@ -13,7 +13,7 @@ class TimelinesViewModel extends _$TimelinesViewModel implements RefreshInterfac
   @override
   FutureOr<TimelinesState> build() => _fetchData();
   PostsUseCase get _useCase => ref.read(postsUseCaseProvider);
-  FirestoreRepository get _repository => _useCase.repository;
+  DatabaseRepository get _repository => _useCase.repository;
 
   Future<TimelinesState> _fetchData() async {
     final user = ref.read(streamAuthProvider).value;

@@ -7,7 +7,7 @@ part of 'ranking_users_view_model.dart';
 // **************************************************************************
 
 String _$rankingUsersViewModelHash() =>
-    r'faac6379610a3ad7fe9609c00e5b0514c0e6acb7';
+    r'fa234d8e31fd0b94f6d712e4f96d51ad8f569b7d';
 
 /// See also [RankingUsersViewModel].
 @ProviderFor(RankingUsersViewModel)

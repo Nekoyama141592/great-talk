@@ -10,14 +10,14 @@ import 'package:great_talk/providers/client/chat_gpt_sdk/chat_gpt_sdk_client.dar
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/purchases/purchases_notifier.dart';
 import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
+import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
+import 'package:great_talk/providers/repository/local/local_repository_provider.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
-import 'package:great_talk/repository/real/local/local_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
-import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 part 'chat_view_model.g.dart';
 
@@ -182,7 +182,7 @@ class ChatViewModel extends _$ChatViewModel {
     );
   }
   Future<Post?> _fetchPost(String uid, String postId) async {
-    final repository = ref.read(firestoreRepositoryProvider);
+    final repository = ref.read(databaseRepositoryProvider);
     final result = await repository.getPost(uid, postId);
     return result;
   }

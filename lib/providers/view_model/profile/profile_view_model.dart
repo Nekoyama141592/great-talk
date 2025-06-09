@@ -5,9 +5,10 @@ import 'package:great_talk/model/view_model_state/common/user_post/user_post.dar
 import 'package:great_talk/model/view_model_state/profile/profile_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
+import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
 import 'package:great_talk/providers/view_model/refresh_interface.dart';
-import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
+import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,7 +16,7 @@ part 'profile_view_model.g.dart';
 
 @riverpod
 class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
-  FirestoreRepository get _repository => ref.read(firestoreRepositoryProvider);
+  DatabaseRepository get _repository => ref.read(databaseRepositoryProvider);
   @override
   FutureOr<ProfileState> build(String passiveUid) {
     return _fetchData();

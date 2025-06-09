@@ -2,16 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/extension/shared_preferences_extension.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
-import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-part 'local_repository.g.dart';
-
-@riverpod
-LocalRepository localRepository(Ref ref) =>
-    LocalRepository(ref.watch(prefsProvider));
 
 class LocalRepository {
   LocalRepository(this.prefs);

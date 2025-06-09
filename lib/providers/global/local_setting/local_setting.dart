@@ -1,5 +1,5 @@
 import 'package:great_talk/model/global/local_setting/local_setting_state.dart';
-import 'package:great_talk/repository/real/local/local_repository.dart';
+import 'package:great_talk/providers/repository/local/local_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'local_setting.g.dart';

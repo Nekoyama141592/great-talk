@@ -2,8 +2,9 @@ import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/model/view_model_state/mute_users/mute_users_state.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
+import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/providers/usecase/user/user_use_case_provider.dart';
-import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
+import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'mute_users_view_model.g.dart';
@@ -11,7 +12,7 @@ part 'mute_users_view_model.g.dart';
 @riverpod
 class MuteUsersViewModel extends _$MuteUsersViewModel {
 
-  FirestoreRepository get _repository => ref.read(firestoreRepositoryProvider);
+  DatabaseRepository get _repository => ref.read(databaseRepositoryProvider);
   @override
   FutureOr<MuteUsersState> build() {
     return _fetchData();

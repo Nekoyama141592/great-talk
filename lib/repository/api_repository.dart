@@ -10,23 +10,15 @@ import 'package:great_talk/model/rest_api/get_object/request/get_object_request.
 import 'package:great_talk/model/rest_api/get_object/response/get_object_response.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/rest_api/put_object/response/put_object_response.dart';
-import 'package:great_talk/providers/global/infrastructure/firebase_functions/firebase_functions_provider.dart';
 import 'package:great_talk/repository/result/result.dart' as rs;
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/extension/purchase_details_extension.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/request/receipt_request.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 
-part 'on_call_repository.g.dart';
 
-@riverpod
-OnCallRepository onCallRepository(Ref ref) =>
-    OnCallRepository(ref.watch(firebaseFunctionsProvider));
-
-class OnCallRepository {
-  OnCallRepository(this.client);
+class ApiRepository {
+  ApiRepository(this.client);
   final FirebaseFunctions client;
 
   HttpsCallable _httpsCallable(String functionName) =>

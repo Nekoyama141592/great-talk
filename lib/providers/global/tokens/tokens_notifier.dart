@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:great_talk/consts/enums.dart';
@@ -10,7 +11,6 @@ import 'package:great_talk/model/database_schema/tokens/like_post_token/like_pos
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/model/global/tokens/tokens_state.dart';
-import 'package:great_talk/repository/real/firestore/firestore_repository.dart';
 
 part 'tokens_notifier.g.dart';
 
@@ -23,7 +23,7 @@ class TokensNotifier extends _$TokensNotifier {
       return TokensState();
     }
 
-    final repository = ref.read(firestoreRepositoryProvider);
+    final repository = ref.read(databaseRepositoryProvider);
     final uid = user.uid;
     final allTokensData = await repository.getTokens(uid);
 

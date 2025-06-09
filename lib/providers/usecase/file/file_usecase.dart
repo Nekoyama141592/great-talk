@@ -5,8 +5,10 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/database_schema/image_info/original_image_info.dart';
 import 'package:great_talk/model/rest_api/get_object/request/get_object_request.dart';
-import 'package:great_talk/repository/real/local/local_repository.dart';
-import 'package:great_talk/repository/real/on_call/on_call_repository.dart';
+import 'package:great_talk/providers/repository/api/api_repository_provider.dart';
+import 'package:great_talk/providers/repository/local/local_repository_provider.dart';
+import 'package:great_talk/repository/local_repository.dart';
+import 'package:great_talk/repository/api_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_cropper/image_cropper.dart';
@@ -18,13 +20,13 @@ part 'file_usecase.g.dart';
 @riverpod
 FileUseCase fileUseCase(Ref ref) => FileUseCase(
   localRepository: ref.watch(localRepositoryProvider),
-  repository: ref.watch(onCallRepositoryProvider),
+  repository: ref.watch(apiRepositoryProvider),
 );
 
 class FileUseCase {
   FileUseCase({required this.localRepository, required this.repository});
   final LocalRepository localRepository;
-  final OnCallRepository repository;
+  final ApiRepository repository;
   Future<Uint8List?> getCompressedImage() async {
     final xFile = await _pickImage();
     final croppedFile = await _cropImage(xFile);
