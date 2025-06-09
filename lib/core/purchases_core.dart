@@ -58,8 +58,6 @@ class PurchasesCore {
     ];
   }
 
-  static InAppPurchase get inAppPurchase => InAppPurchase.instance;
-  static Stream<List<PurchaseDetails>> stream() => inAppPurchase.purchaseStream;
   static Future<void> completePurchase(PurchaseDetails purchaseDetails) async {
     if (!purchaseDetails.pendingCompletePurchase) return;
     await inAppPurchase.completePurchase(purchaseDetails);
