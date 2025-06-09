@@ -7,4 +7,4 @@ part 'api_repository_provider.g.dart';
 
 @riverpod
 ApiRepository apiRepository(Ref ref) =>
-    ApiRepository(ref.watch(firebaseFunctionsProvider));
+    ApiRepository(ref.read(firebaseFunctionsProvider));

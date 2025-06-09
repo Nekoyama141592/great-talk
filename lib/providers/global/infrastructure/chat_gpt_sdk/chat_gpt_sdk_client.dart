@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'chat_gpt_sdk_client.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 OpenAI chatGptSdkClient(Ref ref) {
   return OpenAI.instance.build(
     token: EnvCore().openAiApiKey,

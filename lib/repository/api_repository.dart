@@ -16,7 +16,6 @@ import 'package:great_talk/extension/purchase_details_extension.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/request/receipt_request.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 
-
 class ApiRepository {
   ApiRepository(this.client);
   final FirebaseFunctions client;

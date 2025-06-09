@@ -6,4 +6,4 @@ part 'local_repository_provider.g.dart';
 
 @riverpod
 LocalRepository localRepository(Ref ref) =>
-    LocalRepository(ref.watch(prefsProvider));
+    LocalRepository(ref.read(prefsProvider));

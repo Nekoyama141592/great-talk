@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'open_ai_client_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 OpenAIClient openAIClient(Ref ref) => OpenAIClient(
   OriginalDio.withOptions(
     baseUrl: "https://api.openai.com/v1",

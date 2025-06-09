@@ -6,7 +6,7 @@ part of 'purchases_usecase.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$purchasesUsecaseHash() => r'739e3a4e0483cdce0c6496ad5fec6cf7da18b386';
+String _$purchasesUsecaseHash() => r'5e2190c3ab60968a868b3193bf9562c2e708fc57';
 
 /// See also [purchasesUsecase].
 @ProviderFor(purchasesUsecase)

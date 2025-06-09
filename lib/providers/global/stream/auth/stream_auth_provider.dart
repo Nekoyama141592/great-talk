@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:great_talk/providers/client/firebath_auth/firebase_auth_provider.dart';
+import 'package:great_talk/providers/global/infrastructure/firebath_auth/firebase_auth_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'stream_auth_provider.g.dart';

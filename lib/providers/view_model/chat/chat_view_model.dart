@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
 import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
-import 'package:great_talk/providers/client/chat_gpt_sdk/chat_gpt_sdk_client.dart';
+import 'package:great_talk/providers/global/infrastructure/chat_gpt_sdk/chat_gpt_sdk_client.dart';
 import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';

@@ -6,7 +6,7 @@ part of 'terms_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$termsNotifierHash() => r'b40fd9266ebfcd4ebe52be9a980ddcc54990b339';
+String _$termsNotifierHash() => r'07907ccaabab51c758a66db71af28db30de89bd9';
 
 /// See also [TermsNotifier].
 @ProviderFor(TermsNotifier)

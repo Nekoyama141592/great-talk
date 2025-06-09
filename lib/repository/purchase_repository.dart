@@ -5,7 +5,8 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 
 
 class PurchaseRepository {
-  InAppPurchase get inAppPurchase => InAppPurchase.instance;
+  PurchaseRepository(this.inAppPurchase);
+  InAppPurchase inAppPurchase;
   Future<bool> isAvailable() async {
     try {
       return inAppPurchase.isAvailable();
