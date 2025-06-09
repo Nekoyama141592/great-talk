@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:great_talk/providers/global/remote_config/remote_config_provider.dart';
+import 'package:great_talk/providers/global/notifier/remote_config/remote_config_provider.dart';
 import 'package:great_talk/views/accounts_page.dart';
 import 'package:great_talk/views/admin_page.dart';
 import 'package:great_talk/views/auth/login_page.dart';

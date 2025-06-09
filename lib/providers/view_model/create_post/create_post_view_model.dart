@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:great_talk/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/view_model_state/create_post/create_post_state.dart';
-import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/repository/api/api_repository_provider.dart';
 import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';

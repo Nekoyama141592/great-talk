@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -23,7 +23,7 @@ class TokensNotifier extends _$TokensNotifier {
       return TokensState();
     }
 
-    final repository = ref.read(databaseRepositoryProvider);
+    final repository = ref.watch(databaseRepositoryProvider);
     final uid = user.uid;
     final allTokensData = await repository.getTokens(uid);
 

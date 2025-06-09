@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/providers/global/remote_config/remote_config_provider.dart';
+import 'package:great_talk/providers/global/notifier/remote_config/remote_config_provider.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

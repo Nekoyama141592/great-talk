@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/extension/string_extension.dart';
-import 'package:great_talk/providers/global/current_user/current_user_notifier.dart';
+import 'package:great_talk/providers/global/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/router_core.dart';
 import 'package:great_talk/providers/view_model/edit/edit_view_model.dart';
 import 'package:great_talk/ui_core/form_ui_core.dart';

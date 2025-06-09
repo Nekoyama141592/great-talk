@@ -1,5 +1,5 @@
 import 'package:great_talk/model/view_model_state/generate_image/generate_image_state.dart';
-import 'package:great_talk/providers/global/purchases/purchases_notifier.dart';
+import 'package:great_talk/providers/global/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/providers/repository/api/api_repository_provider.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

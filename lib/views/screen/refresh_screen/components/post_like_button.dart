@@ -3,8 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:great_talk/extension/number_format_extension.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
-import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
+import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/global/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/usecase/post/post_usecase.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';

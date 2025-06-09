@@ -1,7 +1,7 @@
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/model/view_model_state/mute_users/mute_users_state.dart';
-import 'package:great_talk/providers/global/auth/stream_auth_provider.dart';
-import 'package:great_talk/providers/global/tokens/tokens_notifier.dart';
+import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
+import 'package:great_talk/providers/global/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/providers/usecase/user/user_use_case_provider.dart';
 import 'package:great_talk/repository/database_repository.dart';

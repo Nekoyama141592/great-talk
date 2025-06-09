@@ -7,7 +7,7 @@ part 'terms_notifier.g.dart';
 class TermsNotifier extends _$TermsNotifier {
   @override
   bool build() {
-    return ref.read(localRepositoryProvider).getIsAgreedToTerms();
+    return ref.watch(localRepositoryProvider).getIsAgreedToTerms();
   }
 
   void onAgreeButtonPressed() async {
