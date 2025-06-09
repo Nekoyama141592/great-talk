@@ -1,6 +1,15 @@
 import 'package:great_talk/consts/form_consts.dart';
 
-List<String> returnSearchWords(String searchTerm) {
+class SearchCore {
+  static Map<String, dynamic> returnSearchToken(String searchTerm) {
+  final searchWords = returnSearchWords(searchTerm);
+  Map<String, dynamic> searchToken = {};
+  for (final word in searchWords) {
+    searchToken[word] = true;
+  }
+  return searchToken;
+}
+  static List<String> returnSearchWords(String searchTerm) {
   List<String> afterSplit = searchTerm.split('');
   afterSplit.removeWhere(
     (element) => FormConsts.notUseOnField.contains(element),
@@ -25,4 +34,5 @@ List<String> returnSearchWords(String searchTerm) {
     }
   }
   return searchWords;
+}
 }
