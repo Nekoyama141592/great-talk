@@ -7,7 +7,7 @@ part of 'remote_config_provider.dart';
 // **************************************************************************
 
 String _$remoteConfigNotifierHash() =>
-    r'4f16819347544a2ce8c32ff49412e2e521d3783c';
+    r'236c34d3ba5babeca94c383d2072bdbf1dc277ea';
 
 /// See also [RemoteConfigNotifier].
 @ProviderFor(RemoteConfigNotifier)
