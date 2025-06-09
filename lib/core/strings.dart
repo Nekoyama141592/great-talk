@@ -1,6 +1,5 @@
 // packages
 import 'package:great_talk/app/flavors.dart';
-import 'package:great_talk/model/local_schema/chat_user_metadata/chat_user_metadata.dart';
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 
 final appName = F.title;
@@ -20,10 +19,6 @@ String getPlanName(String productId) {
   return msg;
 }
 
-String? mapMetadataToLastAnswer(Map<String, dynamic>? mapMetadata) =>
-    mapMetadata == null
-        ? null
-        : ChatUserMetadata.fromJson(mapMetadata).lastAnswer;
 // msg
 const String clearChatMsg = "チャット履歴を全て削除しました";
 const String calculateFailedMsg = '計算結果が取得できませんでした';
