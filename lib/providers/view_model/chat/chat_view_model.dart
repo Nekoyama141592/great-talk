@@ -33,50 +33,43 @@ class ChatViewModel extends _$ChatViewModel {
 
     // 投稿画像とローカルのチャット履歴を取得
     final postImage = await _fetchPostImage(post);
-    final localMessages = await _getLocalMessages(post.postId);
+    final localMessages = _getLocalMessages(post.postId);
 
-    // 初期状態を生成
-    final initialState = ChatState(
+    return ChatState(
       post: post,
       postImage: postImage,
       messages: localMessages,
     );
-    // 初回メッセージ（説明文）が必要な場合は追加して状態を更新
-    return _processDescriptionMessage(initialState);
   }
 
   /// メッセージ送信ボタンが押されたときの処理
-  Future<void> onSendPressed(
+  FutureResult<bool> onSendPressed(
     void Function() unFocus, // or Navigator
     TextEditingController inputController,
     ScrollController scrollController,
   ) async {
     if (!ref.read(purchasesNotifierProvider.notifier).isSubscribing()) {
-      UIHelper.showErrorFlutterToast('有料プランに加入する必要があります');
-      return;
+      return const Result.failure('有料プランに加入する必要があります');
     }
     final text = inputController.text;
     unFocus.call();
     // APIを実行
-    await execute(scrollController, text, inputController);
+    return execute(scrollController, text, inputController);
   }
 
   /// メッセージ送信の実行ロジック
-  Future<void> execute(
+  FutureResult<bool> execute(
     ScrollController scrollController,
     String content,
     TextEditingController inputController,
   ) async {
-    // state.valueはAsyncValue<ChatState>なので、.valueで中身を取り出す
-    final currentState = state.value;
-    if (currentState == null || currentState.isGenerating) return;
+    final currentState = state.value!;
+    if (currentState.isGenerating) {
+      return const Result.failure('応答を生成中です');
+    }
 
     // 状態を「生成中」に更新
     state = AsyncData(currentState.copyWith(isGenerating: true));
-
-    // チャット回数などを更新
-    // await _setValues();
-
     // 自分のメッセージをリストに追加
     _addMyMessage(content);
     // AIの返信用の空メッセージをリストに追加
@@ -85,15 +78,15 @@ class ChatViewModel extends _$ChatViewModel {
     _scrollToBottom(scrollController);
 
     // リクエストを作成
-    final request = await _createChatRequest(content);
+    final request = _createChatRequest(content);
     inputController.clear();
 
     // SSEをリッスンし、リアルタイムで状態を更新
-    await _listenAndUpdate(request, scrollController);
+    return _listenAndUpdate(request, scrollController);
   }
 
   /// SSEストリームをリッスンし、状態を更新する
-  Future<void> _listenAndUpdate(
+  FutureResult<bool> _listenAndUpdate(
     ChatCompleteText request,
     ScrollController scrollController,
   ) async {
@@ -134,16 +127,16 @@ class ChatViewModel extends _$ChatViewModel {
         }
       }
       _onSseDone(fullResponse);
+      return const Result.success(true);
     } catch (e) {
       _onSseError(e);
-      UIHelper.showErrorFlutterToast("エラーが発生しました: $e");
+      return const Result.failure('エラーが発生しました');
     }
   }
 
   /// SSEストリームが正常に完了したときの処理
   void _onSseDone(String finalResponse) {
-    if (state.value == null) return;
-    final currentMessages = List<TextMessage>.from(state.value!.messages);
+    final currentMessages = [...state.value!.messages];
     // 最後尾の空メッセージを、完成したAIの応答で置き換える
     currentMessages.last = _newTextMessage(
       finalResponse,
@@ -163,7 +156,6 @@ class ChatViewModel extends _$ChatViewModel {
   /// SSEストリームでエラーが発生したときの処理
   void _onSseError(Object error) {
     if (state.value == null) return;
-    // await setChatCount(false); // チャット回数を元に戻す場合
 
     // 生成に失敗したメッセージ（自分とAIの空メッセージ）を削除
     final currentMessages = List<TextMessage>.from(state.value!.messages);
@@ -181,20 +173,19 @@ class ChatViewModel extends _$ChatViewModel {
       ),
     );
   }
-  Future<Post?> _fetchPost(String uid, String postId) async {
+  Future<Post?> _fetchPost(String uid, String postId) {
     final repository = ref.read(databaseRepositoryProvider);
-    final result = await repository.getPost(uid, postId);
-    return result;
+    return repository.getPost(uid, postId);
   }
 
-  Future<String?> _fetchPostImage(Post post) async {
+  Future<String?> _fetchPostImage(Post post) {
     final detectedImage = post.typedImage();
     return ref
         .read(fileUseCaseProvider)
         .getS3Image(detectedImage.bucketName, detectedImage.value);
   }
 
-  Future<List<TextMessage>> _getLocalMessages(String postId) async {
+  List<TextMessage> _getLocalMessages(String postId) {
     final jsonString = ref.read(prefsProvider).getString(postId) ?? "";
     if (jsonString.isNotEmpty) {
       final List<dynamic> decodedJson = jsonDecode(jsonString);
@@ -203,10 +194,6 @@ class ChatViewModel extends _$ChatViewModel {
           .toList();
     }
     return [];
-  }
-
-  ChatState _processDescriptionMessage(ChatState currentState) {
-    return currentState;
   }
 
   void _addMyMessage(String content) {
@@ -229,7 +216,7 @@ class ChatViewModel extends _$ChatViewModel {
     );
   }
 
-  Future<ChatCompleteText> _createChatRequest(String content) async {
+  ChatCompleteText _createChatRequest(String content) {
     final post = state.value!.post;
     final requestMessages = _toRequestMessages();
     requestMessages.insert(0, _systemMsg(post));

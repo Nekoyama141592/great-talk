@@ -226,11 +226,16 @@ class ChatPage extends HookConsumerWidget {
                         RoundedInputField(
                           controller: inputController,
                           send:
-                              () => chatNotifier.onSendPressed(
+                              () async {
+                                final result = await chatNotifier.onSendPressed(
                                 FocusScope.of(context).unfocus,
                                 inputController,
                                 scrollController,
-                              ),
+                              );
+                              result.when(
+                                success: (_) => UIHelper.showSuccessSnackBar(context,'応答の生成に成功しました'),
+                                failure: (msg) => UIHelper.showFailureSnackBar(context,msg));
+                              }
                         ),
                       ],
                     )
