@@ -3,8 +3,9 @@ import 'package:great_talk/core/purchases_core.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/model/view_model_state/purchases/purchases_state.dart';
 import 'package:great_talk/providers/global/purchases/purchases_notifier.dart';
+import 'package:great_talk/providers/repository/purchase/purchase_repository_provider.dart';
 import 'package:great_talk/repository/real/local/local_repository.dart';
-import 'package:great_talk/repository/real/purchases/purchases_repository.dart';
+import 'package:great_talk/repository/purchase_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -27,7 +28,7 @@ class ProductsViewModel extends _$ProductsViewModel {
     state = AsyncData(stateValue.copyWith(verifiedPurchases: after));
   }
 
-  PurchasesRepository get _repository => ref.read(purchasesRepositoryProvider);
+  PurchaseRepository get _repository => ref.read(purchaseRepositoryProvider);
 
   Future<PurchasesState> _fetch() async {
     final mockProducts = PurchasesCore.mockProducts();

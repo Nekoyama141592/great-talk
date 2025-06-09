@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/purchases_core.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-part 'purchases_repository.g.dart';
 
-@riverpod
-PurchasesRepository purchasesRepository(Ref ref) => PurchasesRepository();
 
-class PurchasesRepository {
-  PurchasesRepository();
+class PurchaseRepository {
   InAppPurchase get inAppPurchase => InAppPurchase.instance;
   Future<bool> isAvailable() async {
     try {
