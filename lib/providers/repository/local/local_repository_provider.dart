@@ -5,5 +5,4 @@ import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 part 'local_repository_provider.g.dart';
 
 @riverpod
-LocalRepository localRepository(Ref ref) =>
-    LocalRepository(ref.read(prefsProvider));
+LocalRepository localRepository(Ref ref) => LocalRepository(ref.read(prefsProvider));
