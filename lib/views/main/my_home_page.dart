@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/providers/global/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/global/notification/notification_provider.dart';
 import 'package:great_talk/providers/global/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/providers/view_model/products/products_view_model.dart';
+import 'package:great_talk/ui_core/flavor_ui_core.dart';
 import 'package:great_talk/views/common/bottom_navigation_bar_elements.dart';
 import 'package:great_talk/ui_core/others.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -31,7 +31,7 @@ class MyHomePage extends HookConsumerWidget {
       appBar:
           pageIndex.value != rankingIndex
               ? AppBar(
-                title: BasicBoldText(appName),
+                title: BasicBoldText(FlavorUiCore.appName()),
                 shape: appBarShape(context),
               )
               : null,

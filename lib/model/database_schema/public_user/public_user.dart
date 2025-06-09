@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/consts/msg_constants.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
 
@@ -71,7 +71,7 @@ abstract class PublicUser with _$PublicUser {
 
   String get bioValue => typedBio().value;
   String get nameValue =>
-      typedUserName().value.isEmpty ? noName : typedUserName().value;
+      typedUserName().value.isEmpty ? MsgConstants.noName : typedUserName().value;
   bool get hasNoBio => bioValue.isEmpty;
   bool isInappropriate() =>
       typedImage().moderationLabels.isNotEmpty ||

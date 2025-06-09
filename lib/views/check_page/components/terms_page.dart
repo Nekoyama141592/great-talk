@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/strings.dart';
+import 'package:great_talk/consts/msg_constants.dart';
 import 'package:great_talk/core/url_redirector.dart';
 import 'package:great_talk/providers/global/notifier/terms/terms_notifier.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
@@ -23,16 +23,16 @@ class TermsPage extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(wrongInfoMsg, style: style),
+                  Text(MsgConstants.wrongInfoMsg, style: style),
                   const Divider(),
                   TextButton(
                     onPressed: () async => await UrlRedirector.toTosPage(),
-                    child: Text(tosText, style: style),
+                    child: Text(MsgConstants.tosText, style: style),
                   ),
                   const Divider(),
                   TextButton(
                     onPressed: () async => await UrlRedirector.toPrivacyPage(),
-                    child: Text(privacyPolicyText, style: style),
+                    child: Text(MsgConstants.privacyPolicyText, style: style),
                   ),
                   const Divider(),
                   RoundedButton(
@@ -40,7 +40,7 @@ class TermsPage extends ConsumerWidget {
                         ref
                             .read(termsNotifierProvider.notifier)
                             .onAgreeButtonPressed,
-                    text: agreeText,
+                    text: MsgConstants.agreeText,
                   ),
                 ],
               ),

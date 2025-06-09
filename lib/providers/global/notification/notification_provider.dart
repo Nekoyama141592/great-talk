@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:great_talk/core/strings.dart'; // 元のコードのimportを維持
+import 'package:great_talk/ui_core/flavor_ui_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -110,7 +110,7 @@ class Notification extends _$Notification with WidgetsBindingObserver {
     const message = "今日も面白いAIが投稿されてないか探してみましょう！";
     await plugin.periodicallyShow(
       0,
-      appName, // `great_talk/core/strings.dart` からのインポート
+      FlavorUiCore.appName(),
       message,
       RepeatInterval.daily,
       const NotificationDetails(
