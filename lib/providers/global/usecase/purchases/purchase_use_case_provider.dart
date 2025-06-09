@@ -7,4 +7,3 @@ part 'purchase_use_case_provider.g.dart';
 @riverpod
 PurchaseUseCase purchaseUseCase(Ref ref) =>
     PurchaseUseCase(ref.watch(apiRepositoryProvider));
-

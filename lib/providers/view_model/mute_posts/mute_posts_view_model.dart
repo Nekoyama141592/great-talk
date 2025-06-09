@@ -13,7 +13,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'mute_posts_view_model.g.dart';
 
 @riverpod
-class MutePostsViewModel extends _$MutePostsViewModel implements RefreshInterface {
+class MutePostsViewModel extends _$MutePostsViewModel
+    implements RefreshInterface {
   PostsUseCase get _useCase => ref.read(postsUseCaseProvider);
   DatabaseRepository get _repository => _useCase.repository;
   TokensNotifier _tokensNotifier() => ref.read(tokensNotifierProvider.notifier);
@@ -28,6 +29,7 @@ class MutePostsViewModel extends _$MutePostsViewModel implements RefreshInterfac
     final userPosts = await _useCase.createUserPosts(posts);
     return PostsState(userPosts: userPosts);
   }
+
   // Mute Post
   List<String> _createRequestPostIds() {
     final currentDocsLength = state.value?.userPosts.length ?? 0;
@@ -52,12 +54,8 @@ class MutePostsViewModel extends _$MutePostsViewModel implements RefreshInterfac
     _tokensNotifier().removeMutePost(deleteToken);
 
     final newQDocInfoList =
-        state.value!.userPosts
-            .where((e) => e.post.postId != postId)
-            .toList();
-    state = AsyncValue.data(
-      state.value!.copyWith(userPosts: newQDocInfoList),
-    );
+        state.value!.userPosts.where((e) => e.post.postId != postId).toList();
+    state = AsyncValue.data(state.value!.copyWith(userPosts: newQDocInfoList));
 
     return await _repository.deleteMutePostInfo(
       currentUid,
@@ -65,16 +63,20 @@ class MutePostsViewModel extends _$MutePostsViewModel implements RefreshInterfac
       deleteToken.tokenId,
     );
   }
+
   @override
   FutureResult<bool> onLoading() async {
     final currentState = state.value!;
     final lastPost = currentState.userPosts.last.post;
-    final posts =
-          await _repository.getMoreMutePosts(_createRequestPostIds(), lastPost);
+    final posts = await _repository.getMoreMutePosts(
+      _createRequestPostIds(),
+      lastPost,
+    );
     final sorted = _useCase.sortedPosts(posts);
     _addPosts(sorted);
     return const Result.success(true);
   }
+
   Future<void> _addPosts(List<Post> posts) async {
     if (state.isLoading || posts.isEmpty) return;
     final currentState = state.value!;
@@ -84,9 +86,7 @@ class MutePostsViewModel extends _$MutePostsViewModel implements RefreshInterfac
 
     final newQDocInfoList = await _useCase.createUserPosts(newElements);
     state = AsyncValue.data(
-      currentState.copyWith(
-        userPosts: [...currentPosts, ...newQDocInfoList],
-      ),
+      currentState.copyWith(userPosts: [...currentPosts, ...newQDocInfoList]),
     );
   }
 }

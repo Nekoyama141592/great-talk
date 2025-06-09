@@ -6,13 +6,11 @@ part 'local_setting.g.dart';
 
 @Riverpod(keepAlive: true)
 class LocalSetting extends _$LocalSetting {
-  
   @override
   LocalSettingState build() {
     final repository = ref.watch(localRepositoryProvider);
     final isDarkTheme = repository.getIsDarkTheme();
-    final needFirstMessage =
-        repository.getNeedFirstMessage();
+    final needFirstMessage = repository.getNeedFirstMessage();
     return LocalSettingState(
       isDarkTheme: isDarkTheme,
       needFirstMessage: needFirstMessage,

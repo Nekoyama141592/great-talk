@@ -4,17 +4,22 @@ import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/use_case/file_use_case.dart';
 
 class PostsUseCase {
-  PostsUseCase({required this.repository,required this.fileUseCase});
+  PostsUseCase({required this.repository, required this.fileUseCase});
   final DatabaseRepository repository;
   final FileUseCase fileUseCase;
   Future<String?> _getImageFromPost(Post post) async {
     final detectedImage = post.typedImage();
-    final image = await fileUseCase.getS3Image(detectedImage.bucketName, detectedImage.value);
+    final image = await fileUseCase.getS3Image(
+      detectedImage.bucketName,
+      detectedImage.value,
+    );
     return image;
   }
+
   List<Post> sortedPosts(List<Post> posts) {
     return posts..sort((a, b) => (b.createdAt).compareTo(a.createdAt));
   }
+
   Future<List<UserPost>> createUserPosts(List<Post> posts) async {
     if (posts.isEmpty) return [];
     final sorted = sortedPosts(posts);
@@ -30,14 +35,9 @@ class PostsUseCase {
           .map((element) async {
             final publicUser = userMap[element.uid]!;
             final userImage = await _getImageFromPost(element);
-            return UserPost(
-              user: publicUser,
-              post:  element,
-              base64:userImage,
-            );
+            return UserPost(user: publicUser, post: element, base64: userImage);
           }),
     );
     return userPosts;
   }
-  
 }

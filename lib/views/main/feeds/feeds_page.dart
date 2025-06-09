@@ -9,7 +9,8 @@ class FeedsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(timelinesViewModelProvider);
-    TimelinesViewModel notifier() => ref.read(timelinesViewModelProvider.notifier);
+    TimelinesViewModel notifier() =>
+        ref.read(timelinesViewModelProvider.notifier);
     return AsyncScreen(
       asyncValue: asyncValue,
       data: (state) {

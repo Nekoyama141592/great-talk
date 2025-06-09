@@ -97,8 +97,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     final putObjectResult = await repository.putObject(request);
 
     final createPostResult = await putObjectResult.when<FutureResult<bool>>(
-      success:
-          (res) => _createPost(postId, fileName, currentState),
+      success: (res) => _createPost(postId, fileName, currentState),
       failure: (e) async {
         return const Result.failure('画像のアップロードが失敗しました');
       },

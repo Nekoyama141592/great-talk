@@ -16,7 +16,9 @@ class RankingUsersViewModel extends _$RankingUsersViewModel {
 
   Future<RankingUsersState> _fetchData() async {
     final users = await _repository.getRankingUsers();
-    final imageUsers = await ref.read(userUseCaseProvider).usersToImageUsers(users);
+    final imageUsers = await ref
+        .read(userUseCaseProvider)
+        .usersToImageUsers(users);
     return RankingUsersState(imageUsers: imageUsers);
   }
 
@@ -25,8 +27,10 @@ class RankingUsersViewModel extends _$RankingUsersViewModel {
     state = await AsyncValue.guard(() async {
       final oldUsers = stateValue.users();
       final users = await _repository.getMoreRankingUsers(oldUsers.last);
-      final newUsers = [...oldUsers,...users];
-      final imageUsers = await ref.read(userUseCaseProvider).usersToImageUsers(newUsers);
+      final newUsers = [...oldUsers, ...users];
+      final imageUsers = await ref
+          .read(userUseCaseProvider)
+          .usersToImageUsers(newUsers);
       return stateValue.copyWith(imageUsers: imageUsers);
     });
     return const Result.success(true);

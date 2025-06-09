@@ -8,7 +8,8 @@ part 'remote_config_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class RemoteConfigNotifier extends _$RemoteConfigNotifier {
-  RemoteConfigRepository get _repository => ref.watch(remoteConfigRepositoryProvider);
+  RemoteConfigRepository get _repository =>
+      ref.watch(remoteConfigRepositoryProvider);
   @override
   FutureOr<RemoteConfigState> build() async {
     await _repository.init();

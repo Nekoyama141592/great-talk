@@ -19,7 +19,12 @@ import 'package:great_talk/views/user_profile_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PostCard extends ConsumerWidget {
-  const PostCard({super.key, required this.post,required this.base64,required this.publicUser});
+  const PostCard({
+    super.key,
+    required this.post,
+    required this.base64,
+    required this.publicUser,
+  });
   final Post post;
   final String? base64;
   final PublicUser? publicUser;

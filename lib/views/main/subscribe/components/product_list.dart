@@ -34,7 +34,9 @@ class ProductList extends ConsumerWidget {
                         const PlanDescription(text: "モデルの性能が向上!"),
                         const PlanDescription(text: '画像を生成するAI'),
                       ];
-              final String planName =ProductUiCore.getPlanName(productDetails.id);
+              final String planName = ProductUiCore.getPlanName(
+                productDetails.id,
+              );
               return Container(
                 margin: const EdgeInsets.all(16.0),
                 padding: const EdgeInsets.all(16.0),
@@ -53,16 +55,26 @@ class ProductList extends ConsumerWidget {
                     ...descriptions,
                     PurchaseButton(
                       isPurchased: state.isPurchased(productDetails.id),
-                      onPressed:
-                          () async {
-                              ToastUiCore.showSuccessSnackBar(context, '情報を取得しています。 \nしばらくお待ちください。');
-                              final result = await notifier.onPurchaseButtonPressed(productDetails);
-                              result.when(success: (_) {
-                                ToastUiCore.showSuccessSnackBar(context, '購入が成功しました');
-                              }, failure: (msg) {
-                                ToastUiCore.showFailureSnackBar(context, msg);
-                              });
-                            }
+                      onPressed: () async {
+                        ToastUiCore.showSuccessSnackBar(
+                          context,
+                          '情報を取得しています。 \nしばらくお待ちください。',
+                        );
+                        final result = await notifier.onPurchaseButtonPressed(
+                          productDetails,
+                        );
+                        result.when(
+                          success: (_) {
+                            ToastUiCore.showSuccessSnackBar(
+                              context,
+                              '購入が成功しました',
+                            );
+                          },
+                          failure: (msg) {
+                            ToastUiCore.showFailureSnackBar(context, msg);
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),

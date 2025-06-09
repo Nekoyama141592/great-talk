@@ -8,10 +8,10 @@ part 'mute_users_state.g.dart';
 @freezed
 abstract class MuteUsersState with _$MuteUsersState {
   const MuteUsersState._();
-  const factory MuteUsersState({
-    required List<ImageUser> imageUsers,
-  }) = _MuteUsersState;
+  const factory MuteUsersState({required List<ImageUser> imageUsers}) =
+      _MuteUsersState;
   factory MuteUsersState.fromJson(Map<String, dynamic> json) =>
       _$MuteUsersStateFromJson(json);
-  List<PublicUser> users() => imageUsers.map((e) => e.user).whereType<PublicUser>().toList();
+  List<PublicUser> users() =>
+      imageUsers.map((e) => e.user).whereType<PublicUser>().toList();
 }

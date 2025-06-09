@@ -20,15 +20,14 @@ class ApiRepository {
   ApiRepository(this.client);
   final FirebaseFunctions client;
 
-  HttpsCallable _httpsCallable(String functionName) =>
-      client.httpsCallable(
-        functionName,
-        options: HttpsCallableOptions(
-          timeout: const Duration(seconds: 300),
-        ),
-      );
+  HttpsCallable _httpsCallable(String functionName) => client.httpsCallable(
+    functionName,
+    options: HttpsCallableOptions(timeout: const Duration(seconds: 300)),
+  );
   Future<Map<String, dynamic>> _call(
-      String name, Map<String, dynamic> request) async {
+    String name,
+    Map<String, dynamic> request,
+  ) async {
     final callable = _httpsCallable(name);
     final result = await callable.call(request);
     final data = result.data;
@@ -90,6 +89,7 @@ class ApiRepository {
       return null;
     }
   }
+
   rs.FutureResult<VerifiedPurchase> verifyAndroidReceipt(
     PurchaseDetails purchaseDetails,
   ) async {

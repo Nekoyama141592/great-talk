@@ -10,7 +10,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'timelines_view_model.g.dart';
 
 @riverpod
-class TimelinesViewModel extends _$TimelinesViewModel implements RefreshInterface {
+class TimelinesViewModel extends _$TimelinesViewModel
+    implements RefreshInterface {
   @override
   FutureOr<TimelinesState> build() => _fetchData();
   PostsUseCase get _useCase => ref.read(postsUseCaseProvider);
@@ -24,14 +25,13 @@ class TimelinesViewModel extends _$TimelinesViewModel implements RefreshInterfac
     final postIds = timelines.map((e) => e.postId).toList();
     final posts = await _timelinesToPostsResult(postIds);
     final userPosts = await _useCase.createUserPosts(posts);
-    return TimelinesState(
-      timelines: timelines,
-      userPosts: userPosts,
-    );
+    return TimelinesState(timelines: timelines, userPosts: userPosts);
   }
-  Future<List<Post>> _timelinesToPostsResult(List<String> postIds)  {
+
+  Future<List<Post>> _timelinesToPostsResult(List<String> postIds) {
     return _repository.getTimelinePosts(postIds);
   }
+
   @override
   FutureResult<bool> onLoading() async {
     final user = ref.read(streamAuthProvider).value;
@@ -41,13 +41,18 @@ class TimelinesViewModel extends _$TimelinesViewModel implements RefreshInterfac
     final currentUid = user.uid;
     final currentState = state.value!;
     final lastTimeline = currentState.timelines.last;
-    final timelines = await _repository.getMoreTimelines(currentUid,lastTimeline);
+    final timelines = await _repository.getMoreTimelines(
+      currentUid,
+      lastTimeline,
+    );
     final postIds = timelines.map((e) => e.postId).toList();
     final postResult = await _timelinesToPostsResult(postIds);
     final newUserPosts = await _useCase.createUserPosts(postResult);
-    final userPost = [...currentState.userPosts,...newUserPosts];
+    final userPost = [...currentState.userPosts, ...newUserPosts];
     final newTimelines = [...currentState.timelines, ...timelines];
-    state = AsyncValue.data(currentState.copyWith(timelines: newTimelines,userPosts: userPost));
+    state = AsyncValue.data(
+      currentState.copyWith(timelines: newTimelines, userPosts: userPost),
+    );
     return const Result.success(true);
   }
 }

@@ -9,7 +9,7 @@ class UsersRefreshScreen extends HookWidget {
     super.key,
     required this.isEmpty,
     required this.onLoading,
-    required this.child
+    required this.child,
   });
   final bool isEmpty;
   final FutureResult<bool> Function() onLoading;
@@ -31,10 +31,15 @@ class UsersRefreshScreen extends HookWidget {
       header: const WaterDropHeader(),
       onLoading: () async {
         final result = await onLoading();
-        result.when(success: (_) => ToastUiCore.showSuccessSnackBar(context, '追加の読み込みが完了しました'), failure: (_) => ToastUiCore.showFailureSnackBar(context, '追加の読み込みが失敗しました'));
+        result.when(
+          success:
+              (_) => ToastUiCore.showSuccessSnackBar(context, '追加の読み込みが完了しました'),
+          failure:
+              (_) => ToastUiCore.showFailureSnackBar(context, '追加の読み込みが失敗しました'),
+        );
         refreshController.loadComplete();
       },
-      child: child
+      child: child,
     );
   }
 }

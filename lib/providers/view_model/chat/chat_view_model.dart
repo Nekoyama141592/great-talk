@@ -32,11 +32,7 @@ class ChatViewModel extends _$ChatViewModel {
     final postImage = await _fetchPostImage(post);
     final localMessages = _getLocalMessages(post.postId);
 
-    return ChatState(
-      post: post,
-      postImage: postImage,
-      messages: localMessages,
-    );
+    return ChatState(post: post, postImage: postImage, messages: localMessages);
   }
 
   /// メッセージ送信ボタンが押されたときの処理
@@ -170,6 +166,7 @@ class ChatViewModel extends _$ChatViewModel {
       ),
     );
   }
+
   Future<Post?> _fetchPost(String uid, String postId) {
     final repository = ref.read(databaseRepositoryProvider);
     return repository.getPost(uid, postId);
@@ -210,7 +207,10 @@ class ChatViewModel extends _$ChatViewModel {
     final post = state.value!.post;
     final requestMessages = _toRequestMessages();
     requestMessages.insert(0, _systemMsg(post));
-    final model = ref.read(purchasesNotifierProvider.notifier).isPremiumSubscribing() ? RemoteConfigConstants.premiumModel :  RemoteConfigConstants.basicModel;
+    final model =
+        ref.read(purchasesNotifierProvider.notifier).isPremiumSubscribing()
+            ? RemoteConfigConstants.premiumModel
+            : RemoteConfigConstants.basicModel;
     final uid = ref.read(streamAuthUidProvider).value;
 
     return ChatCompleteText(
@@ -260,7 +260,9 @@ class ChatViewModel extends _$ChatViewModel {
     final stateValue = state.value;
     if (stateValue == null) return;
     final postId = stateValue.post.postId;
-    await ref.read(localRepositoryProvider).setMessages(postId, stateValue.messages);
+    await ref
+        .read(localRepositoryProvider)
+        .setMessages(postId, stateValue.messages);
   }
 
   TextMessage _newTextMessage(String content, String senderUid) {

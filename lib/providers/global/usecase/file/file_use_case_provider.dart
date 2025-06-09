@@ -10,4 +10,3 @@ FileUseCase fileUseCase(Ref ref) => FileUseCase(
   localRepository: ref.watch(localRepositoryProvider),
   repository: ref.watch(apiRepositoryProvider),
 );
-

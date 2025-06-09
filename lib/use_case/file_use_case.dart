@@ -11,6 +11,7 @@ import 'package:image/image.dart' as img;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+
 class FileUseCase {
   FileUseCase({required this.localRepository, required this.repository});
   final LocalRepository localRepository;
@@ -46,7 +47,7 @@ class FileUseCase {
   }
 
   Future<void> _cacheUint8List(String fileName, String data) {
-    return localRepository.setImage(fileName,data);
+    return localRepository.setImage(fileName, data);
   }
 
   String? _getCachedUint8List(String fileName) {

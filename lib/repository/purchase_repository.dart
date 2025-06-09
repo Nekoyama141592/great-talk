@@ -7,9 +7,12 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
-
 class PurchaseRepository {
-  PurchaseRepository({required this.inAppPurchase,required this.client,required this.wrapper});
+  PurchaseRepository({
+    required this.inAppPurchase,
+    required this.client,
+    required this.wrapper,
+  });
   final InAppPurchase inAppPurchase;
   final BillingClient client;
   final SKPaymentQueueWrapper wrapper;
@@ -21,7 +24,7 @@ class PurchaseRepository {
       for (final tx in transactions) {
         await wrapper.finishTransaction(tx);
       }
-    } catch(e) {
+    } catch (e) {
       debugPrint('cancelTransactions: ${e.toString()}');
     }
   }
@@ -30,10 +33,11 @@ class PurchaseRepository {
     if (!details.pendingCompletePurchase) return;
     try {
       await inAppPurchase.completePurchase(details);
-    } catch(e) {
+    } catch (e) {
       debugPrint('completePurchase: ${e.toString()}');
     }
   }
+
   Future<bool> isAvailable() async {
     try {
       return inAppPurchase.isAvailable();
@@ -50,7 +54,7 @@ class PurchaseRepository {
       final serverVerificationData =
           details.verificationData.serverVerificationData;
       await client.acknowledgePurchase(serverVerificationData);
-    } catch(e) {
+    } catch (e) {
       debugPrint('acknowledge: ${e.toString()}');
     }
   }
@@ -75,7 +79,6 @@ class PurchaseRepository {
       return Result.failure('購入が失敗しました');
     }
   }
-
 
   FutureResult<bool> restorePurchases() async {
     try {

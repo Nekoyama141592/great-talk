@@ -8,7 +8,7 @@ part 'image_user.g.dart';
 abstract class ImageUser with _$ImageUser {
   const factory ImageUser({
     required PublicUser? user,
-    required String? base64
+    required String? base64,
   }) = _ImageUser;
   factory ImageUser.fromJson(Map<String, dynamic> json) =>
       _$ImageUserFromJson(json);

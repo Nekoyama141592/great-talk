@@ -27,7 +27,7 @@ abstract class UserUpdateLog with _$UserUpdateLog {
   ) {
     return UserUpdateLog(
       logCreatedAt: FieldValue.serverTimestamp(),
-      searchToken:SearchCore. returnSearchToken(userName),
+      searchToken: SearchCore.returnSearchToken(userName),
       stringBio: bio.trim(),
       stringUserName: userName.trim(),
       uid: uid,

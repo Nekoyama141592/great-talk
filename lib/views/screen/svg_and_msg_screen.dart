@@ -35,7 +35,9 @@ class SvgAndMsgScreen extends StatelessWidget {
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: SizeCore.defaultPadding(context)),
+            padding: EdgeInsets.symmetric(
+              vertical: SizeCore.defaultPadding(context),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

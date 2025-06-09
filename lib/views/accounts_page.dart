@@ -46,7 +46,10 @@ class AccountPage extends ConsumerWidget {
                             RouteCore.pushPath(context, LogoutedPage.path);
                           },
                           failure: (_) {
-                            ToastUiCore.showFailureSnackBar(context,"ログアウトできませんでした}");
+                            ToastUiCore.showFailureSnackBar(
+                              context,
+                              "ログアウトできませんでした}",
+                            );
                             RouteCore.back(context);
                           },
                         );

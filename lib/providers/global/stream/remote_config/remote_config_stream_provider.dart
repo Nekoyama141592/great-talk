@@ -6,4 +6,5 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'remote_config_stream_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-Stream<RemoteConfigUpdate> remoteConfigStream(Ref ref) => ref.watch(firebaseRemoteConfigProvider).onConfigUpdated;
+Stream<RemoteConfigUpdate> remoteConfigStream(Ref ref) =>
+    ref.watch(firebaseRemoteConfigProvider).onConfigUpdated;

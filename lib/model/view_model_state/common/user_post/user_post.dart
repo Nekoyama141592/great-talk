@@ -10,7 +10,7 @@ abstract class UserPost with _$UserPost {
   const factory UserPost({
     required Post post,
     required PublicUser? user,
-    required String? base64
+    required String? base64,
   }) = _UserPost;
   factory UserPost.fromJson(Map<String, dynamic> json) =>
       _$UserPostFromJson(json);

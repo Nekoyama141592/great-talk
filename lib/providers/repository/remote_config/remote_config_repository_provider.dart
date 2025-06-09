@@ -6,4 +6,5 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'remote_config_repository_provider.g.dart';
 
 @riverpod
-RemoteConfigRepository remoteConfigRepository(Ref ref) => RemoteConfigRepository(ref.watch(firebaseRemoteConfigProvider));
+RemoteConfigRepository remoteConfigRepository(Ref ref) =>
+    RemoteConfigRepository(ref.watch(firebaseRemoteConfigProvider));

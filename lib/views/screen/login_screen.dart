@@ -21,7 +21,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: SizeCore.defaultPadding(context)),
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeCore.defaultPadding(context),
+      ),
       child: Center(
         child: SingleChildScrollView(
           child: Column(

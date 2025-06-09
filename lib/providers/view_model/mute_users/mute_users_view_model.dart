@@ -11,7 +11,6 @@ part 'mute_users_view_model.g.dart';
 
 @riverpod
 class MuteUsersViewModel extends _$MuteUsersViewModel {
-
   DatabaseRepository get _repository => ref.read(databaseRepositoryProvider);
   @override
   FutureOr<MuteUsersState> build() {
@@ -20,9 +19,12 @@ class MuteUsersViewModel extends _$MuteUsersViewModel {
 
   Future<MuteUsersState> _fetchData() async {
     final users = await _repository.getMuteUsers(_createRequestUids());
-    final imageUsers = await ref.read(userUseCaseProvider).usersToImageUsers(users);
+    final imageUsers = await ref
+        .read(userUseCaseProvider)
+        .usersToImageUsers(users);
     return MuteUsersState(imageUsers: imageUsers);
   }
+
   // Mute User
   List<String> _createRequestUids() {
     final currentDocsLength = state.value?.imageUsers.length ?? 0;
@@ -39,9 +41,14 @@ class MuteUsersViewModel extends _$MuteUsersViewModel {
     final stateValue = state.value!;
     state = await AsyncValue.guard(() async {
       final oldUsers = stateValue.users();
-      final users = await _repository.getMoreMuteUsers(_createRequestUids(),oldUsers.last);
-      final newUsers = [...oldUsers,...users];
-      final imageUsers = await ref.read(userUseCaseProvider).usersToImageUsers(newUsers);
+      final users = await _repository.getMoreMuteUsers(
+        _createRequestUids(),
+        oldUsers.last,
+      );
+      final newUsers = [...oldUsers, ...users];
+      final imageUsers = await ref
+          .read(userUseCaseProvider)
+          .usersToImageUsers(newUsers);
       return stateValue.copyWith(imageUsers: imageUsers);
     });
     return const Result.success(true);
@@ -52,7 +59,9 @@ class MuteUsersViewModel extends _$MuteUsersViewModel {
     if (currentUid == null) {
       return const Result.failure('ログインしてください');
     }
-    final deleteToken = ref.read(tokensNotifierProvider.notifier).removeMuteUser(passiveUid);
+    final deleteToken = ref
+        .read(tokensNotifierProvider.notifier)
+        .removeMuteUser(passiveUid);
     if (deleteToken == null) {
       return const Result.failure('ユーザーが見つかりませんでした');
     }
@@ -60,9 +69,7 @@ class MuteUsersViewModel extends _$MuteUsersViewModel {
         state.value!.imageUsers
             .where((e) => e.user?.uid != passiveUid)
             .toList();
-    state = AsyncValue.data(
-      state.value!.copyWith(imageUsers: newImageUsers),
-    );
+    state = AsyncValue.data(state.value!.copyWith(imageUsers: newImageUsers));
     final tokenId = deleteToken.tokenId;
     return await _repository.deleteMuteUserInfo(
       currentUid,

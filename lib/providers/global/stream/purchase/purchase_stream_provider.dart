@@ -6,4 +6,5 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'purchase_stream_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-Stream<List<PurchaseDetails>> purchaseStream(Ref ref) => ref.watch(inAppPurchaseProvider).purchaseStream;
+Stream<List<PurchaseDetails>> purchaseStream(Ref ref) =>
+    ref.watch(inAppPurchaseProvider).purchaseStream;

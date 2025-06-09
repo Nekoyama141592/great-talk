@@ -33,10 +33,7 @@ class RemoteConfigRepository {
   }
 
   Future<void> init() {
-    return Future.wait([
-      _setConfigSettings(),
-      _setDefaults()
-    ]);
+    return Future.wait([_setConfigSettings(), _setDefaults()]);
   }
 
   Future<bool> fetchAndActivate() {

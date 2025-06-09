@@ -11,7 +11,7 @@ abstract class TimelinesState with _$TimelinesState {
   const TimelinesState._();
   const factory TimelinesState({
     @Default([]) List<UserPost> userPosts,
-    @Default([]) List<Timeline> timelines
+    @Default([]) List<Timeline> timelines,
   }) = _TimelinesState;
   factory TimelinesState.fromJson(Map<String, dynamic> json) =>
       _$TimelinesStateFromJson(json);

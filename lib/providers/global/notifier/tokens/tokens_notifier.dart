@@ -151,9 +151,11 @@ class TokensNotifier extends _$TokensNotifier {
   }
 
   MuteUserToken? removeMuteUser(String passiveUid) {
-    final deleteToken = ref.read(tokensNotifierProvider).value?.muteUserTokens.firstWhereOrNull(
-      (e) => e.passiveUid == passiveUid,
-    );
+    final deleteToken = ref
+        .read(tokensNotifierProvider)
+        .value
+        ?.muteUserTokens
+        .firstWhereOrNull((e) => e.passiveUid == passiveUid);
     if (deleteToken == null) return null;
     final newList =
         _currentState.muteUserTokens

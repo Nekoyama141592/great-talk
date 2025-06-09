@@ -95,7 +95,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
         ),
       ),
-      child: PostsRefreshScreen(userPosts: state.userPosts, notifier: notifier,)
+      child: PostsRefreshScreen(userPosts: state.userPosts, notifier: notifier),
     );
   }
 }

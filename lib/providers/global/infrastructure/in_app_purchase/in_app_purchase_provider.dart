@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'in_app_purchase_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-InAppPurchase inAppPurchase(Ref ref) => InAppPurchase.instance; 
+InAppPurchase inAppPurchase(Ref ref) => InAppPurchase.instance;
 
 @Riverpod(keepAlive: true)
 BillingClient billingClient(Ref ref) => BillingClient((_) {}, (__) {});

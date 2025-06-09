@@ -25,8 +25,10 @@ class LoginPage extends ConsumerWidget {
                 RouteCore.back(context);
               },
               failure:
-                  (_) =>
-                      ToastUiCore.showFailureSnackBar(context, "Appleログインに失敗しました"),
+                  (_) => ToastUiCore.showFailureSnackBar(
+                    context,
+                    "Appleログインに失敗しました",
+                  ),
             );
           },
           onGoogleButtonPressed: () async {

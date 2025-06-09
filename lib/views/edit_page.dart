@@ -33,7 +33,10 @@ class EditProfilePage extends HookConsumerWidget {
       data: (editModelData) {
         List<Widget> userNameTextField() {
           return [
-            const FormLabel(title: "ニックネーム", helpMsg: FormConsts.userNameHelpMsg),
+            const FormLabel(
+              title: "ニックネーム",
+              helpMsg: FormConsts.userNameHelpMsg,
+            ),
             OriginalForm(
               initialValue: editModelData.userName,
               keyboardType: TextInputType.text,
@@ -42,7 +45,10 @@ class EditProfilePage extends HookConsumerWidget {
                 if (value == null || value.length < FormConsts.nGramIndex) {
                   return "${FormConsts.nGramIndex}文字以上の入力を行なってください";
                 } else if (value.length > FormConsts.maxUserNameLimit) {
-                  return FormConsts.textLimitMsg(FormConsts.maxUserNameLimit, value);
+                  return FormConsts.textLimitMsg(
+                    FormConsts.maxUserNameLimit,
+                    value,
+                  );
                 } else if (value.invalidField) {
                   return FormUiCore.invalidFieldMsg;
                 }
@@ -82,9 +88,9 @@ class EditProfilePage extends HookConsumerWidget {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 16.0,),
+                    const SizedBox(height: 16.0),
                     ...userNameTextField(),
-                    const SizedBox(height: 16.0,),
+                    const SizedBox(height: 16.0),
                     ...bioTextField(),
                   ],
                 ),
@@ -92,13 +98,17 @@ class EditProfilePage extends HookConsumerWidget {
             ),
           );
         }
+
         void onImageTap() async {
           final result = await notifier().onImagePickButtonPressed();
-          result.when(success: (_) {
-            ToastUiCore.showSuccessSnackBar(context, '画像の取得が成功しました');
-          }, failure: (msg) {
-            ToastUiCore.showFailureSnackBar(context, msg);
-          });
+          result.when(
+            success: (_) {
+              ToastUiCore.showSuccessSnackBar(context, '画像の取得が成功しました');
+            },
+            failure: (msg) {
+              ToastUiCore.showFailureSnackBar(context, msg);
+            },
+          );
         }
 
         Widget imageWidget() {
@@ -106,13 +116,10 @@ class EditProfilePage extends HookConsumerWidget {
           final uint8list = base64 != null ? base64Decode(base64) : null;
           return uint8list != null
               ? InkWell(
-                  onTap: onImageTap,
-                  child: S3Image(uint8list: uint8list, height: 128, width: 128),
-                )
-              : InkWell(
                 onTap: onImageTap,
-                child: const Icon(Icons.image)
-              );
+                child: S3Image(uint8list: uint8list, height: 128, width: 128),
+              )
+              : InkWell(onTap: onImageTap, child: const Icon(Icons.image));
         }
 
         Widget positiveButton() {
@@ -126,7 +133,10 @@ class EditProfilePage extends HookConsumerWidget {
                   ref.read(currentUserNotifierProvider.notifier).updateUser();
                   RouteCore.back(context);
                   RouteCore.back(context);
-                  ToastUiCore.showSuccessSnackBar(context, "プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。");
+                  ToastUiCore.showSuccessSnackBar(
+                    context,
+                    "プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。",
+                  );
                 },
                 failure: (e) {
                   ToastUiCore.showFailureSnackBar(context, "プロフィールを更新できませんでした");
@@ -141,9 +151,9 @@ class EditProfilePage extends HookConsumerWidget {
           appBarText: "ユーザー情報を編集",
           children: [
             editForm(),
-            const SizedBox(height: 16.0,),
+            const SizedBox(height: 16.0),
             imageWidget(),
-            const SizedBox(height: 16.0,),
+            const SizedBox(height: 16.0),
             positiveButton(),
           ],
         );

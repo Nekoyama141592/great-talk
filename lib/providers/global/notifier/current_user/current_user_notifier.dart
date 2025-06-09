@@ -17,7 +17,8 @@ part 'current_user_notifier.g.dart';
 @Riverpod(keepAlive: true)
 class CurrentUserNotifier extends _$CurrentUserNotifier {
   AuthRepository get _authRepository => ref.watch(authRepositoryProvider);
-  DatabaseRepository get _databaseRepository => ref.watch(databaseRepositoryProvider);
+  DatabaseRepository get _databaseRepository =>
+      ref.watch(databaseRepositoryProvider);
   @override
   Future<CurrentUserState> build() async {
     final initialState = CurrentUserState();

@@ -25,16 +25,17 @@ class PostsViewModel extends _$PostsViewModel implements RefreshInterface {
     final userPosts = await _useCase.createUserPosts(posts);
     return PostsState(userPosts: userPosts);
   }
+
   @override
   FutureResult<bool> onLoading() async {
     final currentState = state.value!;
     final lastPost = currentState.userPosts.last.post;
-    final posts =
-          await _repository.getMorePosts(isRankingPosts,lastPost);
+    final posts = await _repository.getMorePosts(isRankingPosts, lastPost);
     final sorted = _useCase.sortedPosts(posts);
     _addPosts(sorted);
     return const Result.success(true);
   }
+
   Future<void> _addPosts(List<Post> posts) async {
     if (state.isLoading || posts.isEmpty) return;
     final currentState = state.value!;
@@ -44,9 +45,7 @@ class PostsViewModel extends _$PostsViewModel implements RefreshInterface {
 
     final newQDocInfoList = await _useCase.createUserPosts(newElements);
     state = AsyncValue.data(
-      currentState.copyWith(
-        userPosts: [...currentPosts, ...newQDocInfoList],
-      ),
+      currentState.copyWith(userPosts: [...currentPosts, ...newQDocInfoList]),
     );
   }
 }

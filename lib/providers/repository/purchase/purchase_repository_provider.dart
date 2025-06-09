@@ -8,5 +8,5 @@ part 'purchase_repository_provider.g.dart';
 PurchaseRepository purchaseRepository(Ref ref) => PurchaseRepository(
   inAppPurchase: ref.read(inAppPurchaseProvider),
   client: ref.read(billingClientProvider),
-  wrapper: ref.read(sKPaymentQueueWrapperProvider)
+  wrapper: ref.read(sKPaymentQueueWrapperProvider),
 );

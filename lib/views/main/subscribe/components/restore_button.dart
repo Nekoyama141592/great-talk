@@ -13,10 +13,16 @@ class RestoreButton extends ConsumerWidget {
         alignment: Alignment.bottomRight,
         child: TextButton(
           onPressed: () async {
-            final result = await ref
-                  .read(productsViewModelProvider.notifier)
-                  .onRestoreButtonPressed();
-            result.when(success: (_) => ToastUiCore.showSuccessSnackBar(context, '購入の検証が成功しました'), failure: (msg) => ToastUiCore.showFailureSnackBar(context, msg));
+            final result =
+                await ref
+                    .read(productsViewModelProvider.notifier)
+                    .onRestoreButtonPressed();
+            result.when(
+              success:
+                  (_) =>
+                      ToastUiCore.showSuccessSnackBar(context, '購入の検証が成功しました'),
+              failure: (msg) => ToastUiCore.showFailureSnackBar(context, msg),
+            );
           },
           child: Text(
             '購入を復元',

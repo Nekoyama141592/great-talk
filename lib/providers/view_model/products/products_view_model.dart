@@ -20,7 +20,9 @@ class ProductsViewModel extends _$ProductsViewModel {
 
   PurchaseRepository get _repository => ref.read(purchaseRepositoryProvider);
 
-  Future<PurchasesState> _fetch(List<VerifiedPurchase> verifiedPurchases) async {
+  Future<PurchasesState> _fetch(
+    List<VerifiedPurchase> verifiedPurchases,
+  ) async {
     final mockProducts = PurchasesCore.mockProducts();
     final storeConnected = await _repository.isAvailable();
     if (!storeConnected) {
@@ -34,7 +36,6 @@ class ProductsViewModel extends _$ProductsViewModel {
       storeConnected: storeConnected,
     );
   }
-
 
   FutureResult<bool> onPurchaseButtonPressed(ProductDetails details) async {
     final storeConnected = state.value?.storeConnected ?? false;

@@ -42,7 +42,8 @@ class DatabaseRepository {
       userDocRef(uid).collection('userMutes').doc(currentUid);
   DocRef tokenDocRef(String currentUid, String tokenId) =>
       tokensColRef(currentUid).doc(tokenId);
-  DocRef timelinesDocRef(String currentUid,String postId) => timelinesColRef(userDocRef(currentUid)).doc(postId);
+  DocRef timelinesDocRef(String currentUid, String postId) =>
+      timelinesColRef(userDocRef(currentUid)).doc(postId);
   // ColRef
   ColRef usersColRef() => publicV1.collection('users');
   ColRef postsColRef(String uid) => userDocRef(uid).collection('posts');
@@ -77,7 +78,8 @@ class DatabaseRepository {
   MapQuery postsCollectionGroup() => instance.collectionGroup('posts');
   // 全部消す.
   MapQuery messagesCollectionGroup() => instance.collectionGroup('messages');
-  MapQuery searchLogsCollectionGroup() => instance.collectionGroup('searchLogs');
+  MapQuery searchLogsCollectionGroup() =>
+      instance.collectionGroup('searchLogs');
   // count
   Future<int?> _count(MapQuery query) async {
     try {
@@ -404,6 +406,7 @@ class DatabaseRepository {
     final docRef = postDocRef(post.uid, post.postId);
     return docRef.get();
   }
+
   Future<List<Post>> getMoreUserPosts(Post lastPost) async {
     try {
       final doc = await _getPostDoc(lastPost);
@@ -415,10 +418,12 @@ class DatabaseRepository {
       return [];
     }
   }
+
   Future<Doc> _getUserDoc(String uid) async {
     final docRef = userDocRef(uid);
     return docRef.get();
   }
+
   Future<List<PublicUser>> getRankingUsers() async {
     try {
       final query = usersByFollowerCount();
@@ -429,6 +434,7 @@ class DatabaseRepository {
       return [];
     }
   }
+
   Future<List<PublicUser>> getMoreRankingUsers(PublicUser lastUser) async {
     try {
       final doc = await _getUserDoc(lastUser.uid);
@@ -440,6 +446,7 @@ class DatabaseRepository {
       return [];
     }
   }
+
   Future<List<PublicUser>> getMuteUsers(List<String> requestUids) async {
     if (requestUids.isEmpty) return [];
     try {
@@ -451,7 +458,11 @@ class DatabaseRepository {
       return [];
     }
   }
-  Future<List<PublicUser>> getMoreMuteUsers(List<String> requestUids,PublicUser lastUser) async {
+
+  Future<List<PublicUser>> getMoreMuteUsers(
+    List<String> requestUids,
+    PublicUser lastUser,
+  ) async {
     if (requestUids.isEmpty) return [];
     try {
       final doc = await _getUserDoc(lastUser.uid);
@@ -467,10 +478,12 @@ class DatabaseRepository {
   Future<List<Timeline>> getTimelines(String currentUid) async {
     try {
       final qshot = await timelinesQuery(currentUid).get();
-      final timelines = qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
-      final sorted = [...timelines]..sort((a, b) => (b.createdAt).compareTo(a.createdAt));
+      final timelines =
+          qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
+      final sorted = [...timelines]
+        ..sort((a, b) => (b.createdAt).compareTo(a.createdAt));
       return sorted;
-    } catch(e) {
+    } catch (e) {
       debugPrint('getTimelines: ${e.toString()}');
       return [];
     }
@@ -479,55 +492,67 @@ class DatabaseRepository {
   MapQuery _postsQuery(bool isRankingPosts) {
     return isRankingPosts ? postsByMsgCount() : postsByNewest();
   }
+
   Future<List<Post>> getPosts(bool isRankingPosts) async {
     try {
       final qshot = await _postsQuery(isRankingPosts).get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
-    } catch(e) {
+    } catch (e) {
       debugPrint('getPosts: ${e.toString()}');
       return [];
     }
   }
-  Future<List<Post>> getMorePosts(bool isRankingPosts,Post lastPost) async {
+
+  Future<List<Post>> getMorePosts(bool isRankingPosts, Post lastPost) async {
     try {
       final doc = await _getPostDoc(lastPost);
-      final qshot = await _postsQuery(isRankingPosts).startAfterDocument(doc).get();
+      final qshot =
+          await _postsQuery(isRankingPosts).startAfterDocument(doc).get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
-    } catch(e) {
+    } catch (e) {
       debugPrint('getMorePosts: ${e.toString()}');
       return [];
     }
   }
-  Future<List<Timeline>> getMoreTimelines(String currentUid,Timeline lastTimeline) async {
+
+  Future<List<Timeline>> getMoreTimelines(
+    String currentUid,
+    Timeline lastTimeline,
+  ) async {
     try {
       final doc = await timelinesDocRef(currentUid, lastTimeline.postId).get();
       final query = timelinesQuery(currentUid);
       final qshot = await query.startAfterDocument(doc).get();
       return qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
-    } catch(e) {
+    } catch (e) {
       debugPrint('getMoreTimelines: ${e.toString()}');
       return [];
     }
   }
+
   Future<List<Post>> getMutePosts(List<String> postIds) async {
     if (postIds.isEmpty) return [];
     try {
       final query = postsByWhereIn(postIds);
       final qshot = await query.get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
-    } catch(e) {
+    } catch (e) {
       debugPrint('getMutePosts: ${e.toString()}');
       return [];
     }
   }
-  Future<List<Post>> getMoreMutePosts(List<String> postIds,Post lastPost) async {
+
+  Future<List<Post>> getMoreMutePosts(
+    List<String> postIds,
+    Post lastPost,
+  ) async {
     if (postIds.isEmpty) return [];
     try {
       final doc = await _getPostDoc(lastPost);
       final query = postsByWhereIn(postIds).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
-    } catch(e) {
+    } catch (e) {
       debugPrint('getMoreMutePosts: ${e.toString()}');
       return [];
     }

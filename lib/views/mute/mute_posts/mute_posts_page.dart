@@ -12,7 +12,8 @@ class MutePostsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(mutePostsViewModelProvider);
-    MutePostsViewModel notifier() => ref.read(mutePostsViewModelProvider.notifier);
+    MutePostsViewModel notifier() =>
+        ref.read(mutePostsViewModelProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: const Text("ミュートしている投稿一覧")),

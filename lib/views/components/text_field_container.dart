@@ -11,7 +11,9 @@ class TextFieldContainer extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Center(
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: SizeCore.defaultPadding(context)),
+        margin: EdgeInsets.symmetric(
+          vertical: SizeCore.defaultPadding(context),
+        ),
         width: size.width * 0.9,
         decoration: BoxDecoration(
           border: Border.all(color: Theme.of(context).focusColor),

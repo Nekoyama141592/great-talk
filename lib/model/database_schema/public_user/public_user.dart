@@ -71,7 +71,9 @@ abstract class PublicUser with _$PublicUser {
 
   String get bioValue => typedBio().value;
   String get nameValue =>
-      typedUserName().value.isEmpty ? MsgConstants.noName : typedUserName().value;
+      typedUserName().value.isEmpty
+          ? MsgConstants.noName
+          : typedUserName().value;
   bool get hasNoBio => bioValue.isEmpty;
   bool isInappropriate() =>
       typedImage().moderationLabels.isNotEmpty ||

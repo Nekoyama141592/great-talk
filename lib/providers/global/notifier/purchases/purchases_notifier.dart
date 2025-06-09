@@ -23,7 +23,9 @@ class PurchasesNotifier extends _$PurchasesNotifier {
 
   PurchaseRepository get _repository => ref.read(purchaseRepositoryProvider);
 
-  Future<List<VerifiedPurchase>> _onListen(List<PurchaseDetails> detailsList) async {
+  Future<List<VerifiedPurchase>> _onListen(
+    List<PurchaseDetails> detailsList,
+  ) async {
     ToastUiCore.showFlutterToast('購入情報を検証しています');
     for (int i = 0; i < detailsList.length; i++) {
       final details = detailsList[i];
@@ -60,5 +62,9 @@ class PurchasesNotifier extends _$PurchasesNotifier {
   }
 
   bool isSubscribing() => state.value?.any((e) => e.isValid()) ?? false;
-  bool isPremiumSubscribing() => state.value?.where((e) => e.productId == kPremiumSubscriptionId).any((e) => e.isValid()) ?? false;
+  bool isPremiumSubscribing() =>
+      state.value
+          ?.where((e) => e.productId == kPremiumSubscriptionId)
+          .any((e) => e.isValid()) ??
+      false;
 }

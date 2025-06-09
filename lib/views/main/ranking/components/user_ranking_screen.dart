@@ -12,9 +12,7 @@ class UserRankingScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(rankingUsersViewModelProvider);
-    final notifier = ref.read(
-      rankingUsersViewModelProvider.notifier,
-    );
+    final notifier = ref.read(rankingUsersViewModelProvider.notifier);
     return AsyncScreen(
       asyncValue: asyncValue,
       data: (state) {
@@ -29,7 +27,9 @@ class UserRankingScreen extends ConsumerWidget {
               final publicUser = imageUser.user;
               final base64 = imageUser.base64;
               final uint8list = base64 != null ? base64Decode(base64) : null;
-              return publicUser != null ? UserCard(publicUser: publicUser, uint8list: uint8list) : const SizedBox.shrink();
+              return publicUser != null
+                  ? UserCard(publicUser: publicUser, uint8list: uint8list)
+                  : const SizedBox.shrink();
             },
           ),
         );

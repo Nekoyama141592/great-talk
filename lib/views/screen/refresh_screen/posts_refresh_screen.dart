@@ -31,22 +31,30 @@ class PostsRefreshScreen extends HookWidget {
       header: const WaterDropHeader(),
       onLoading: () async {
         final result = await notifier().onLoading();
-        result.when(success: (_) => ToastUiCore.showSuccessSnackBar(context, '追加の読み込みが完了しました'), failure: (_) => ToastUiCore.showFailureSnackBar(context, '追加の読み込みが失敗しました'));
+        result.when(
+          success:
+              (_) => ToastUiCore.showSuccessSnackBar(context, '追加の読み込みが完了しました'),
+          failure:
+              (_) => ToastUiCore.showFailureSnackBar(context, '追加の読み込みが失敗しました'),
+        );
         refreshController.loadComplete();
       },
-      child:
-          GridView.builder(
-            itemCount: userPosts.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              childAspectRatio: 0.5,
-            ),
-            itemBuilder: (c, i) {
-              final userPost = userPosts[i];
-              final base64 = userPost.base64;
-              return PostCard(post: userPost.post,base64: base64,publicUser: userPost.user,);
-            },
-          ),
+      child: GridView.builder(
+        itemCount: userPosts.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 0.5,
+        ),
+        itemBuilder: (c, i) {
+          final userPost = userPosts[i];
+          final base64 = userPost.base64;
+          return PostCard(
+            post: userPost.post,
+            base64: base64,
+            publicUser: userPost.user,
+          );
+        },
+      ),
     );
   }
 }

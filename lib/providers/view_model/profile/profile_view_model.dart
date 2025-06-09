@@ -25,7 +25,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
   Future<ProfileState> _fetchData() async {
     final user = await _fetchUser();
     final base64 = await _getImageFromUser(user);
-    final userPosts = await _fetchUserPosts(user,base64);
+    final userPosts = await _fetchUserPosts(user, base64);
     return ProfileState(user: user, base64: base64, userPosts: userPosts);
   }
 
@@ -40,6 +40,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
         .getS3Image(detectedImage.bucketName, detectedImage.value);
     return image;
   }
+
   Future<String?> _getImageFromUser(PublicUser? user) async {
     if (user == null) return null;
     final detectedImage = user.typedImage();
@@ -49,31 +50,38 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     return image;
   }
 
-  Future<List<UserPost>> _fetchUserPosts(PublicUser? user,String? base64) async {
+  Future<List<UserPost>> _fetchUserPosts(
+    PublicUser? user,
+    String? base64,
+  ) async {
     final posts = await _repository.getUserPosts(passiveUid);
     final userPosts = await _postsToUserPosts(posts);
     return userPosts;
   }
 
   Future<List<UserPost>> _postsToUserPosts(List<Post> posts) async {
-    final uids = posts.map((e) => e.uid).toSet(); 
+    final uids = posts.map((e) => e.uid).toSet();
     final fetchedUsers = await _repository.getUsersByUids(uids.toList());
     final userMap = {for (final user in fetchedUsers) user.uid: user};
-    final futures = posts.where((post) {
-      return userMap.containsKey(post.uid);
-    }).map((post) async {
-      final userImageBase64 = await _getImageFromPost(post);
-      return UserPost(
-        post: post,
-        user: userMap[post.uid]!,
-        base64: userImageBase64,
-      );
-  }).toList();
+    final futures =
+        posts
+            .where((post) {
+              return userMap.containsKey(post.uid);
+            })
+            .map((post) async {
+              final userImageBase64 = await _getImageFromPost(post);
+              return UserPost(
+                post: post,
+                user: userMap[post.uid]!,
+                base64: userImageBase64,
+              );
+            })
+            .toList();
 
-  final results = await Future.wait(futures);
-  return results;
-}
-  
+    final results = await Future.wait(futures);
+    return results;
+  }
+
   // Follow/Unfollow
   FutureResult<bool> onFollowPressed() async {
     final currentUid = ref.read(streamAuthUidProvider).value;
@@ -146,13 +154,14 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     state = AsyncValue.data(state.value!.copyWith(user: newUser));
     ref.read(tokensNotifierProvider.notifier).addFollowing(passiveUid);
   }
+
   @override
   FutureResult<bool> onLoading() async {
     final stateValue = state.value!;
     state = await AsyncValue.guard(() async {
       final oldPosts = stateValue.posts();
       final posts = await _repository.getMoreUserPosts(oldPosts.last);
-      final newPosts = [...oldPosts,...posts];
+      final newPosts = [...oldPosts, ...posts];
       final userPosts = await _postsToUserPosts(newPosts);
       return stateValue.copyWith(userPosts: userPosts);
     });

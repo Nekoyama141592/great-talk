@@ -47,14 +47,17 @@ class LocalRepository {
   }
 
   List<VerifiedPurchase> fetchVerifiedPurchases() {
-    return _fetchList(PrefsKey.verifiedPurchases.name, VerifiedPurchase.fromJson);
+    return _fetchList(
+      PrefsKey.verifiedPurchases.name,
+      VerifiedPurchase.fromJson,
+    );
   }
 
   FutureResult<bool> removeChatLog(String postId) async {
     try {
       await prefs.remove(postId);
       return const Result.success(true);
-    } catch(e) {
+    } catch (e) {
       debugPrint('removeChatLog: ${e.toString()}');
       return const Result.failure('削除が失敗しました');
     }
@@ -63,31 +66,34 @@ class LocalRepository {
   bool? _getBool(PrefsKey key) {
     try {
       return prefs.getBool(key.name);
-    } catch(e) {
+    } catch (e) {
       debugPrint(e.toString());
       return null;
     }
   }
+
   String? _getString(String keyName) {
     try {
       return prefs.getString(keyName);
-    } catch(e) {
+    } catch (e) {
       debugPrint(e.toString());
       return null;
     }
   }
-  Future<void> _setString(String keyName,String value) {
+
+  Future<void> _setString(String keyName, String value) {
     try {
-      return prefs.setString(keyName,value);
-    } catch(e) {
+      return prefs.setString(keyName, value);
+    } catch (e) {
       debugPrint(e.toString());
       return Future.error('記録が失敗しました');
     }
   }
-  Future<void> _setBool(PrefsKey key,bool value) async {
+
+  Future<void> _setBool(PrefsKey key, bool value) async {
     try {
-      await prefs.setBool(key.name,value);
-    } catch(e) {
+      await prefs.setBool(key.name, value);
+    } catch (e) {
       debugPrint(e.toString());
     }
   }
@@ -95,37 +101,45 @@ class LocalRepository {
   bool getIsDarkTheme() {
     return _getBool(PrefsKey.isDarkTheme) ?? true;
   }
+
   Future<void> setIsDarkTheme(bool value) {
-    return _setBool(PrefsKey.isDarkTheme,value);
+    return _setBool(PrefsKey.isDarkTheme, value);
   }
+
   bool getNeedFirstMessage() {
     return _getBool(PrefsKey.needFirstMessage) ?? true;
   }
+
   Future<void> setNeedFirstMessage(bool value) {
-    return _setBool(PrefsKey.needFirstMessage,value);
+    return _setBool(PrefsKey.needFirstMessage, value);
   }
+
   bool getIsAgreedToTerms() {
     return _getBool(PrefsKey.isAgreedToTerms) ?? false;
   }
+
   Future<void> setIsAgreedToTerms(bool value) {
-    return _setBool(PrefsKey.isAgreedToTerms,value);
+    return _setBool(PrefsKey.isAgreedToTerms, value);
   }
 
   String? getImage(String fileName) {
     return _getString(fileName);
   }
-  Future<void> setImage(String fileName,String value) {
-    return _setString(fileName,value);
+
+  Future<void> setImage(String fileName, String value) {
+    return _setString(fileName, value);
   }
 
-  Future<void> setMessages(String postId,List<TextMessage> messages) {
-    final objectList =
-        messages.map(SaveTextMsg.fromTextMessage).toList();
+  Future<void> setMessages(String postId, List<TextMessage> messages) {
+    final objectList = messages.map(SaveTextMsg.fromTextMessage).toList();
     final value = jsonEncode(objectList);
     return _setString(postId, value);
   }
 
   List<TextMessage> getMessages(String postId) {
-    return _fetchList(postId,(e) => TextMessage.fromSaveTextMsg(SaveTextMsg.fromJson(e)));
+    return _fetchList(
+      postId,
+      (e) => TextMessage.fromSaveTextMsg(SaveTextMsg.fromJson(e)),
+    );
   }
 }

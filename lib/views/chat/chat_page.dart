@@ -91,7 +91,10 @@ class ChatPage extends HookConsumerWidget {
                           .deletePost(post);
                       result.when(
                         success: (_) async {
-                          ToastUiCore.showSuccessSnackBar(context, "投稿を削除しました。");
+                          ToastUiCore.showSuccessSnackBar(
+                            context,
+                            "投稿を削除しました。",
+                          );
                           RouteCore.back(context);
                         },
                         failure: (e) {
@@ -163,11 +166,17 @@ class ChatPage extends HookConsumerWidget {
                       post: post,
                       cleanLocalMessage: (innerContext) async {
                         final result = await chatNotifier.cleanLocalMessage();
-                        result.when(success: (_) {
-                          ToastUiCore.showSuccessSnackBar(context, MsgConstants.clearChatMsg);
-                        }, failure: (msg) {
-                          ToastUiCore.showFailureSnackBar(context, msg);
-                        });
+                        result.when(
+                          success: (_) {
+                            ToastUiCore.showSuccessSnackBar(
+                              context,
+                              MsgConstants.clearChatMsg,
+                            );
+                          },
+                          failure: (msg) {
+                            ToastUiCore.showFailureSnackBar(context, msg);
+                          },
+                        );
                       },
                     );
                   },
@@ -225,17 +234,25 @@ class ChatPage extends HookConsumerWidget {
                         const BasicWidthBox(),
                         RoundedInputField(
                           controller: inputController,
-                          send:
-                              () async {
-                                final result = await chatNotifier.onSendPressed(
-                                FocusScope.of(context).unfocus,
-                                inputController,
-                                scrollController,
-                              );
-                              result.when(
-                                success: (_) => ToastUiCore.showSuccessSnackBar(context,'応答の生成に成功しました'),
-                                failure: (msg) => ToastUiCore.showFailureSnackBar(context,msg));
-                              }
+                          send: () async {
+                            final result = await chatNotifier.onSendPressed(
+                              FocusScope.of(context).unfocus,
+                              inputController,
+                              scrollController,
+                            );
+                            result.when(
+                              success:
+                                  (_) => ToastUiCore.showSuccessSnackBar(
+                                    context,
+                                    '応答の生成に成功しました',
+                                  ),
+                              failure:
+                                  (msg) => ToastUiCore.showFailureSnackBar(
+                                    context,
+                                    msg,
+                                  ),
+                            );
+                          },
                         ),
                       ],
                     )

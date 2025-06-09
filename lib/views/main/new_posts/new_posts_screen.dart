@@ -9,9 +9,8 @@ class NewPostsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(postsViewModelProvider(false));
-    PostsViewModel notifier() => ref.read(
-      postsViewModelProvider(false).notifier,
-    );
+    PostsViewModel notifier() =>
+        ref.read(postsViewModelProvider(false).notifier);
     return Scaffold(
       body: AsyncScreen(
         asyncValue: asyncValue,

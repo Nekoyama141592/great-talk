@@ -43,7 +43,11 @@ class MuteUsersPage extends ConsumerWidget {
                     final result = await notifier.unMuteUser(passiveUser.uid);
                     result.when(
                       success: (_) => RouteCore.back(context),
-                      failure: (_) => ToastUiCore.showFailureSnackBar(context,'失敗しました'),
+                      failure:
+                          (_) => ToastUiCore.showFailureSnackBar(
+                            context,
+                            '失敗しました',
+                          ),
                     );
                   },
                 );

@@ -8,10 +8,10 @@ part 'ranking_users_state.g.dart';
 @freezed
 abstract class RankingUsersState with _$RankingUsersState {
   const RankingUsersState._();
-  const factory RankingUsersState({
-    required List<ImageUser> imageUsers
-  }) = _ImageUser;
+  const factory RankingUsersState({required List<ImageUser> imageUsers}) =
+      _ImageUser;
   factory RankingUsersState.fromJson(Map<String, dynamic> json) =>
       _$ImageUserFromJson(json);
-  List<PublicUser> users() => imageUsers.map((e) => e.user).whereType<PublicUser>().toList();
+  List<PublicUser> users() =>
+      imageUsers.map((e) => e.user).whereType<PublicUser>().toList();
 }

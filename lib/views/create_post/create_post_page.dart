@@ -39,30 +39,27 @@ class CreatePostPage extends ConsumerWidget {
 
       return imageBytes == null
           ? Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: viewModel.onImagePickButtonPressed,
-                  child: const Icon(Icons.image, size: 100.0),
-                ),
-                const SizedBox(width: 16),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(FormConsts.imageLabel),
-                    ToGeneratePageButton()
-                  ],
-                ),
-              ],
-            )
-          : InkWell(
-              onTap: viewModel.onImagePickButtonPressed,
-              child: SizedBox(
-                width: 100.0,
-                height: 100.0,
-                child: Image.memory(imageBytes),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: viewModel.onImagePickButtonPressed,
+                child: const Icon(Icons.image, size: 100.0),
               ),
-            );
+              const SizedBox(width: 16),
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [Text(FormConsts.imageLabel), ToGeneratePageButton()],
+              ),
+            ],
+          )
+          : InkWell(
+            onTap: viewModel.onImagePickButtonPressed,
+            child: SizedBox(
+              width: 100.0,
+              height: 100.0,
+              child: Image.memory(imageBytes),
+            ),
+          );
     }
 
     // 送信ボタン押下時の処理
@@ -72,15 +69,19 @@ class CreatePostPage extends ConsumerWidget {
         return;
       }
       form.save();
-      final result = await ref
-          .read(createPostViewModelProvider.notifier)
-          .onPositiveButtonPressed();
-      result.when(success: (_) {
-        ToastUiCore.showFailureSnackBar(context, '投稿の作成に成功しました');
-        RouteCore.back(context);
-      }, failure: (msg) {
-        ToastUiCore.showFailureSnackBar(context, msg);
-      });
+      final result =
+          await ref
+              .read(createPostViewModelProvider.notifier)
+              .onPositiveButtonPressed();
+      result.when(
+        success: (_) {
+          ToastUiCore.showFailureSnackBar(context, '投稿の作成に成功しました');
+          RouteCore.back(context);
+        },
+        failure: (msg) {
+          ToastUiCore.showFailureSnackBar(context, msg);
+        },
+      );
     }
 
     // 送信ボタンウィジェット
@@ -133,8 +134,9 @@ class CreatePostPage extends ConsumerWidget {
           initialValue: state?.description ?? '',
           keyboardType: TextInputType.multiline,
           maxLines: null,
-          decoration:
-              const InputDecoration(hintText: FormConsts.hintDescription),
+          decoration: const InputDecoration(
+            hintText: FormConsts.hintDescription,
+          ),
           onSaved: viewModel.setDescription,
           validator: (value) {
             if (value!.isEmpty) {

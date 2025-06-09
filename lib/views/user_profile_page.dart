@@ -14,7 +14,8 @@ class UserProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(profileViewModelProvider(uid));
-    ProfileViewModel notifier() => ref.read(profileViewModelProvider(uid).notifier);
+    ProfileViewModel notifier() =>
+        ref.read(profileViewModelProvider(uid).notifier);
     return Scaffold(
       body: AsyncScreen(
         asyncValue: asyncValue,
