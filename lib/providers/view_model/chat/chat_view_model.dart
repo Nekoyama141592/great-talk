@@ -1,15 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
-import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/providers/global/infrastructure/chat_gpt_sdk/chat_gpt_sdk_client.dart';
 import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/notifier/purchases/purchases_notifier.dart';
-import 'package:great_talk/providers/overrides/prefs/prefs_provider.dart';
 import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/providers/repository/local/local_repository_provider.dart';
 import 'package:great_talk/providers/usecase/file/file_usecase.dart';
@@ -186,14 +183,7 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   List<TextMessage> _getLocalMessages(String postId) {
-    final jsonString = ref.read(prefsProvider).getString(postId) ?? "";
-    if (jsonString.isNotEmpty) {
-      final List<dynamic> decodedJson = jsonDecode(jsonString);
-      return decodedJson
-          .map((e) => TextMessage.fromSaveTextMsg(SaveTextMsg.fromJson(e)))
-          .toList();
-    }
-    return [];
+    return ref.read(localRepositoryProvider).getMessages(postId);
   }
 
   void _addMyMessage(String content) {
@@ -267,12 +257,10 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   Future<void> _setLocalMessage() async {
-    if (state.value == null) return;
-    final post = state.value!.post;
-    final objectList =
-        state.value!.messages.map(SaveTextMsg.fromTextMessage).toList();
-    final jsonString = jsonEncode(objectList);
-    await ref.read(prefsProvider).setString(post.postId, jsonString);
+    final stateValue = state.value;
+    if (stateValue == null) return;
+    final postId = stateValue.post.postId;
+    await ref.read(localRepositoryProvider).setMessages(postId, stateValue.messages);
   }
 
   TextMessage _newTextMessage(String content, String senderUid) {

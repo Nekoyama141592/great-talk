@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/extension/shared_preferences_extension.dart';
+import 'package:great_talk/model/database_schema/text_message/text_message.dart';
+import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,11 +14,10 @@ class LocalRepository {
   final SharedPreferences prefs;
 
   List<T> _fetchList<T>(
-    PrefsKey key,
+    String keyName,
     T Function(Map<String, dynamic>) fromJson,
   ) {
     try {
-      final keyName = key.name;
       final jsonList = prefs.getJsonList(keyName) ?? [];
       return jsonList.map((e) => fromJson(e)).toList();
     } catch (e) {
@@ -44,7 +47,7 @@ class LocalRepository {
   }
 
   List<VerifiedPurchase> fetchVerifiedPurchases() {
-    return _fetchList(PrefsKey.verifiedPurchases, VerifiedPurchase.fromJson);
+    return _fetchList(PrefsKey.verifiedPurchases.name, VerifiedPurchase.fromJson);
   }
 
   FutureResult<bool> removeChatLog(String postId) async {
@@ -111,7 +114,18 @@ class LocalRepository {
   String? getImage(String fileName) {
     return _getString(fileName);
   }
-  Future<void> setImage(String fileName,String value) async {
+  Future<void> setImage(String fileName,String value) {
     return _setString(fileName,value);
+  }
+
+  Future<void> setMessages(String postId,List<TextMessage> messages) {
+    final objectList =
+        messages.map(SaveTextMsg.fromTextMessage).toList();
+    final value = jsonEncode(objectList);
+    return _setString(postId, value);
+  }
+
+  List<TextMessage> getMessages(String postId) {
+    return _fetchList(postId,(e) => TextMessage.fromSaveTextMsg(SaveTextMsg.fromJson(e)));
   }
 }
