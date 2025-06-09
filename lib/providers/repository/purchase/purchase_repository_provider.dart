@@ -5,4 +5,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'purchase_repository_provider.g.dart';
 
 @riverpod
-PurchaseRepository purchaseRepository(Ref ref) => PurchaseRepository(ref.read(inAppPurchaseProvider));
+PurchaseRepository purchaseRepository(Ref ref) => PurchaseRepository(
+  inAppPurchase: ref.read(inAppPurchaseProvider),
+  client: ref.read(billingClientProvider),
+  wrapper: ref.read(sKPaymentQueueWrapperProvider)
+);

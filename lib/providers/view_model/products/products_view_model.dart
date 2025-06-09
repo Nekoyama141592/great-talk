@@ -41,7 +41,7 @@ class ProductsViewModel extends _$ProductsViewModel {
     if (!storeConnected) {
       return const Result.failure('ストアに接続ができませんでした');
     }
-    await PurchasesCore.cancelTransctions();
+    await _repository.cancelTransctions();
     final purchaseParam = PurchasesCore.param(
       details,
       state.value?.verifiedPurchases,

@@ -7,7 +7,7 @@ part of 'purchase_repository_provider.dart';
 // **************************************************************************
 
 String _$purchaseRepositoryHash() =>
-    r'f38c0f83221d175325178e43cb8f5aef03fed7cd';
+    r'a88eba8999b421354bfcb1b7522bfed987e316a5';
 
 /// See also [purchaseRepository].
 @ProviderFor(purchaseRepository)

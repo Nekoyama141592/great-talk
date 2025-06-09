@@ -101,7 +101,7 @@ class ApiRepository {
       return rs.Result.success(res);
     } catch (e) {
       debugPrint('verifyAndroidReceipt: ${e.toString()}');
-      return rs.Result.failure('レシート検証が失敗しました');
+      return rs.Result.failure('購入の検証が失敗しました');
     }
   }
 
@@ -116,7 +116,7 @@ class ApiRepository {
       return rs.Result.success(res);
     } catch (e) {
       debugPrint('verifyIOSReceipt: ${e.toString()}');
-      return rs.Result.failure('レシート検証が失敗しました');
+      return rs.Result.failure('購入の検証が失敗しました');
     }
   }
 }

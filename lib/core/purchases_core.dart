@@ -2,12 +2,9 @@ import 'dart:io';
 
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 import 'package:great_talk/consts/purchases_constants.dart';
-import 'package:great_talk/extension/purchase_details_extension.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
 class PurchasesCore {
   static PurchaseDetails purchaseDetailsFromJson(Map<String, dynamic> json) {
@@ -56,29 +53,6 @@ class PurchasesCore {
         currencySymbol: "¥",
       ),
     ];
-  }
-
-  static Future<void> completePurchase(PurchaseDetails purchaseDetails) async {
-    if (!purchaseDetails.pendingCompletePurchase) return;
-    await inAppPurchase.completePurchase(purchaseDetails);
-  }
-
-  static Future<void> acknowledge(PurchaseDetails details) async {
-    if (!Platform.isAndroid || details.isPending) return;
-    // 承認を行う.行わないと払い戻しが行われる.
-    final client = BillingClient((_) {}, (__) {});
-    final serverVerificationData =
-        details.verificationData.serverVerificationData;
-    await client.acknowledgePurchase(serverVerificationData);
-  }
-
-  static Future<void> cancelTransctions() async {
-    if (!Platform.isIOS) return;
-    final wrapper = SKPaymentQueueWrapper();
-    final transactions = await wrapper.transactions();
-    for (final tx in transactions) {
-      await wrapper.finishTransaction(tx);
-    }
   }
 
   static PurchaseParam param(
