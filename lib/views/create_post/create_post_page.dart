@@ -3,11 +3,11 @@ import 'dart:typed_data';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/extension/string_extension.dart';
 import 'package:great_talk/providers/view_model/create_post/create_post_view_model.dart';
 import 'package:great_talk/ui_core/form_ui_core.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/common/forms_screen.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 import 'package:great_talk/views/create_post/components/form_label.dart';
@@ -76,10 +76,10 @@ class CreatePostPage extends ConsumerWidget {
           .read(createPostViewModelProvider.notifier)
           .onPositiveButtonPressed();
       result.when(success: (_) {
-        UIHelper.showFailureSnackBar(context, '投稿の作成に成功しました');
-        RouterCore.back(context);
+        ToastUiCore.showFailureSnackBar(context, '投稿の作成に成功しました');
+        RouteCore.back(context);
       }, failure: (msg) {
-        UIHelper.showFailureSnackBar(context, msg);
+        ToastUiCore.showFailureSnackBar(context, msg);
       });
     }
 
@@ -213,7 +213,7 @@ class ToGeneratePageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => RouterCore.pushPath(context, GenerateImagePage.path),
+      onPressed: () => RouteCore.pushPath(context, GenerateImagePage.path),
       child: Text(
         "画像を生成する",
         style: TextStyle(color: Theme.of(context).colorScheme.tertiary),

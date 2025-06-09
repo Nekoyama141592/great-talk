@@ -9,7 +9,7 @@ import 'package:great_talk/providers/repository/api/api_repository_provider.dart
 import 'package:great_talk/providers/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/core/aws_s3_core.dart';
@@ -52,11 +52,11 @@ class CreatePostViewModel extends _$CreatePostViewModel {
 
     final info = await usecase.getImageInfo(result);
     if (info.isNotSquare) {
-      UIHelper.showErrorFlutterToast(usecase.squareImageRequestMsg);
+      ToastUiCore.showErrorFlutterToast(usecase.squareImageRequestMsg);
       return;
     }
     if (info.isSmall) {
-      UIHelper.showErrorFlutterToast(FormConsts.bigImageRequestMsg);
+      ToastUiCore.showErrorFlutterToast(FormConsts.bigImageRequestMsg);
       return;
     }
     // state内のpickedImageを更新

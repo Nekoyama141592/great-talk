@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/auth_core.dart';
 import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/providers/global/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/auth/logouted_page.dart';
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
@@ -36,18 +36,18 @@ class AccountPage extends ConsumerWidget {
                 ListTile(
                   title: const Text("ログアウトする"),
                   onTap: () {
-                    UIHelper.cupertinoAlertDialog(
+                    ToastUiCore.cupertinoAlertDialog(
                       context,
                       "ログアウトしますが本当によろしいですか？",
                       () async {
                         final result = await notifier.signOut();
                         result.when(
                           success: (_) {
-                            RouterCore.pushPath(context, LogoutedPage.path);
+                            RouteCore.pushPath(context, LogoutedPage.path);
                           },
                           failure: (_) {
-                            UIHelper.showFailureSnackBar(context,"ログアウトできませんでした}");
-                            RouterCore.back(context);
+                            ToastUiCore.showFailureSnackBar(context,"ログアウトできませんでした}");
+                            RouteCore.back(context);
                           },
                         );
                       },
@@ -57,7 +57,7 @@ class AccountPage extends ConsumerWidget {
                 ListTile(
                   title: const Text("ユーザーを消去する"),
                   onTap:
-                      () => RouterCore.pushPath(
+                      () => RouteCore.pushPath(
                         context,
                         ReauthenticateToDeletePage.path,
                       ),

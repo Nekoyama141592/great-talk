@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/extension/number_format_extension.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 
 class ChatUiCore {
   static void onDescriptionButtonPressed(BuildContext context, Post post) {
@@ -12,7 +12,7 @@ class ChatUiCore {
 
     String msgText = "累計メッセージ数:\n${post.msgCount.formatNumber()}";
 
-    UIHelper.simpleAlertDialog(
+    ToastUiCore.simpleAlertDialog(
       context,
       "$title\n\n$systemPrompt\n\n$msgText",
       needsSubscribing: true,
@@ -24,7 +24,7 @@ class ChatUiCore {
     required Post post,
     required void Function(BuildContext context) cleanLocalMessage,
   }) async {
-    UIHelper.showPopup(
+    ToastUiCore.showPopup(
       context: context,
       builder: (innerContext) {
         return CupertinoActionSheet(

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart' as fluttertoast;
 import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/consts/msg_constants.dart';
 import 'package:great_talk/views/common/custom_snack_bar.dart';
 import 'package:great_talk/views/common/subscribed_copyable_text.dart';
 
-class UIHelper {
+class ToastUiCore {
   static void showPopup({
     required BuildContext context,
     required Widget Function(BuildContext) builder,
@@ -55,7 +55,7 @@ class UIHelper {
             content: Text(msg),
             actions: [
               CupertinoDialogAction(
-                onPressed: () => RouterCore.back(innerContext),
+                onPressed: () => RouteCore.back(innerContext),
                 child: const Text(MsgConstants.cancelText),
               ),
               CupertinoDialogAction(
@@ -91,7 +91,7 @@ class UIHelper {
                     const Divider(),
                     TextButton(
                       onPressed:
-                          positiveAction ?? () => RouterCore.back(innerContext),
+                          positiveAction ?? () => RouteCore.back(innerContext),
                       child: const Text(MsgConstants.okText, style: style),
                     ),
                   ],

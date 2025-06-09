@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
 
@@ -23,7 +23,7 @@ class MosaicUserChild extends StatelessWidget {
         BoldWhiteText(title),
         const BasicWidthBox(),
         InkWell(
-          onTap: () => UIHelper.simpleAlertDialog(context, msg),
+          onTap: () => ToastUiCore.simpleAlertDialog(context, msg),
           child: const Icon(Icons.info, color: Colors.white),
         ),
       ],

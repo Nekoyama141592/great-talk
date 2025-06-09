@@ -1,7 +1,7 @@
 import 'package:great_talk/model/view_model_state/generate_image/generate_image_state.dart';
 import 'package:great_talk/providers/global/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/providers/repository/api/api_repository_provider.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'generate_image_view_model.g.dart';
 
@@ -14,7 +14,7 @@ class GenerateImageViewModel extends _$GenerateImageViewModel {
 
   void onGenerateButtonPressed(String prompt, String size) async {
     if (!ref.read(purchasesNotifierProvider.notifier).isSubscribing()) {
-      UIHelper.showErrorFlutterToast('有料プランに加入する必要があります');
+      ToastUiCore.showErrorFlutterToast('有料プランに加入する必要があります');
       return;
     }
     if (prompt.isEmpty || size.isEmpty) return;

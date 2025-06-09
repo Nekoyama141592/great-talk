@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/size_core.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/notifier/tokens/tokens_notifier.dart';
@@ -65,7 +65,7 @@ class PostCard extends ConsumerWidget {
             }
             return InkWell(
               onTap: () {
-                RouterCore.pushPath(
+                RouteCore.pushPath(
                   context,
                   ChatPage.generatePath(post.uid, post.postId),
                 );
@@ -86,7 +86,7 @@ class PostCard extends ConsumerWidget {
                     EllipsisText(post.typedTitle().value),
                     TextButton(
                       onPressed:
-                          () => RouterCore.pushPath(
+                          () => RouteCore.pushPath(
                             context,
                             UserProfilePage.generatePath(post.uid),
                           ),

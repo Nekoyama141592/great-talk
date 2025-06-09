@@ -18,7 +18,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 part 'chat_view_model.g.dart';
 
 @riverpod
@@ -97,17 +97,17 @@ class ChatViewModel extends _$ChatViewModel {
           StreamTransformer.fromHandlers(
             handleError: (err, stackTrace, sink) {
               if (err is OpenAIAuthError) {
-                UIHelper.showFlutterToast(
+                ToastUiCore.showFlutterToast(
                   "OpenAIの認証でエラーが発生しました。運営の対応をお待ちください。",
                 );
               }
               if (err is OpenAIRateLimitError) {
-                UIHelper.showFlutterToast(
+                ToastUiCore.showFlutterToast(
                   "RateLimitエラーが発生しました。しばらく待ってからお試しください。",
                 );
               }
               if (err is OpenAIServerError) {
-                UIHelper.showFlutterToast(
+                ToastUiCore.showFlutterToast(
                   "OpenAIのサーバーでエラーが発生しました。しばらく待ってからお試しください。",
                 );
               }

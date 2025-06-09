@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/views/chat/chat_page.dart';
 
-class RouterCore {
+class RouteCore {
   static void pushPath(BuildContext context, String path) {
     context.router.pushPath(path);
   }

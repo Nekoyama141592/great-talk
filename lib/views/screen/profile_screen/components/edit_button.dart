@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 import 'package:great_talk/views/edit_page.dart';
 
@@ -11,7 +11,7 @@ class EditButton extends StatelessWidget {
       buttonColor: Theme.of(context).colorScheme.primary,
       text: "編集する",
       textColor: Colors.white,
-      press: () => RouterCore.pushPath(context, EditProfilePage.path),
+      press: () => RouteCore.pushPath(context, EditProfilePage.path),
     );
   }
 }

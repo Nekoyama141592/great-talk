@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 
 class FormLabel extends StatelessWidget {
@@ -15,7 +15,7 @@ class FormLabel extends StatelessWidget {
           Text(title),
           const BasicHeightBox(),
           InkWell(
-            onTap: () => UIHelper.simpleAlertDialog(context, helpMsg),
+            onTap: () => ToastUiCore.simpleAlertDialog(context, helpMsg),
             child: const Icon(Icons.help),
           ),
         ],

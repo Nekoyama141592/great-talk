@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/model/view_model_state/profile/profile_state.dart';
 import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/notifier/tokens/tokens_notifier.dart';
@@ -41,7 +41,7 @@ class ProfileScreen extends ConsumerWidget {
       Align(
         alignment: Alignment.centerLeft,
         child: InkWell(
-          onTap: () => RouterCore.back(context),
+          onTap: () => RouteCore.back(context),
           child: const Icon(Icons.arrow_back, size: 30.0),
         ),
       ),

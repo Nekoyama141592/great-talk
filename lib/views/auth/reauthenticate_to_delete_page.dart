@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:great_talk/providers/global/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/core/router_core.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/core/route_core.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/auth/user_deleted_page.dart';
 import 'package:great_talk/views/screen/login_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -26,13 +26,13 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                 final deleteResult = await notifier.deletePublicUser();
                 deleteResult.when(
                   success:
-                      (_) => RouterCore.pushPath(context, UserDeletedPage.path),
+                      (_) => RouteCore.pushPath(context, UserDeletedPage.path),
                   failure:
-                      (_) => UIHelper.showFailureSnackBar(context, "ユーザーを削除できませんでした"),
+                      (_) => ToastUiCore.showFailureSnackBar(context, "ユーザーを削除できませんでした"),
                 );
               },
               failure:
-                  (msg) => UIHelper.showFailureSnackBar(context,msg),
+                  (msg) => ToastUiCore.showFailureSnackBar(context,msg),
             );
           },
           onGoogleButtonPressed: () async {
@@ -42,13 +42,13 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                 final deleteResult = await notifier.deletePublicUser();
                 deleteResult.when(
                   success:
-                      (_) => RouterCore.pushPath(context, UserDeletedPage.path),
+                      (_) => RouteCore.pushPath(context, UserDeletedPage.path),
                   failure:
-                      (msg) => UIHelper.showFailureSnackBar(context,msg),
+                      (msg) => ToastUiCore.showFailureSnackBar(context,msg),
                 );
               },
               failure:
-                  (_) => UIHelper.showFailureSnackBar(context,"Googleでの再認証に失敗しました"),
+                  (_) => ToastUiCore.showFailureSnackBar(context,"Googleでの再認証に失敗しました"),
             );
           },
           title: "ユーザーの削除には再認証が必要です",

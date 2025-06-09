@@ -6,7 +6,7 @@ import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/usecase/post/post_usecase.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -35,7 +35,7 @@ class PostLikeButton extends HookConsumerWidget {
                 onTap: () async {
                   final user = ref.read(streamAuthProvider).value;
                   if (user == null || !user.emailVerified) {
-                    UIHelper.showSuccessSnackBar(context, 'ログインしてください');
+                    ToastUiCore.showSuccessSnackBar(context, 'ログインしてください');
                     return;
                   }
                   final currentUid = user.uid;
@@ -52,7 +52,7 @@ class PostLikeButton extends HookConsumerWidget {
                   result.when(
                     success: (_) {},
                     failure: (_) {
-                      UIHelper.showFailureSnackBar(context,'通信に失敗しました');
+                      ToastUiCore.showFailureSnackBar(context,'通信に失敗しました');
                       likeCount.value++; // 元に戻す
                       notifier().addLikePost(currentUid, post);
                     },
@@ -64,7 +64,7 @@ class PostLikeButton extends HookConsumerWidget {
                 onTap: () async {
                   final user = ref.read(streamAuthProvider).value;
                   if (user == null || !user.emailVerified) {
-                    UIHelper.showSuccessSnackBar(context, 'ログインしてください');
+                    ToastUiCore.showSuccessSnackBar(context, 'ログインしてください');
                     return;
                   }
                   final currentUid = user.uid;
@@ -77,7 +77,7 @@ class PostLikeButton extends HookConsumerWidget {
                   result.when(
                     success: (_) {},
                     failure: (_) {
-                      UIHelper.showFailureSnackBar(context,('通信に失敗しました'));
+                      ToastUiCore.showFailureSnackBar(context,('通信に失敗しました'));
                       likeCount.value--; // 元に戻す
                       notifier().removeLikePost(postId);
                     },

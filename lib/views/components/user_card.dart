@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:great_talk/core/size_core.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/providers/global/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/ui_core/texts.dart';
@@ -68,7 +68,7 @@ class UserCard extends ConsumerWidget {
                               ),
                               child: InkWell(
                                 onTap:
-                                    () => RouterCore.pushPath(
+                                    () => RouteCore.pushPath(
                                       context,
                                       UserProfilePage.generatePath(
                                         publicUser.uid,

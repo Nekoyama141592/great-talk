@@ -8,7 +8,7 @@ import 'package:great_talk/providers/repository/purchase/purchase_repository_pro
 import 'package:great_talk/providers/usecase/purchases/purchases_usecase.dart';
 import 'package:great_talk/providers/repository/local/local_repository_provider.dart';
 import 'package:great_talk/repository/purchase_repository.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'purchases_notifier.g.dart';
@@ -24,7 +24,7 @@ class PurchasesNotifier extends _$PurchasesNotifier {
   PurchaseRepository get _repository => ref.read(purchaseRepositoryProvider);
 
   Future<List<VerifiedPurchase>> _onListen(List<PurchaseDetails> detailsList) async {
-    UIHelper.showFlutterToast('購入情報を検証しています');
+    ToastUiCore.showFlutterToast('購入情報を検証しています');
     for (int i = 0; i < detailsList.length; i++) {
       final details = detailsList[i];
       if (details.isError || !details.isPurchased) continue;
@@ -36,7 +36,7 @@ class PurchasesNotifier extends _$PurchasesNotifier {
         failure: _onVerifyFailed,
       );
     }
-    UIHelper.showFlutterToast('購入情報の検証が完了しました');
+    ToastUiCore.showFlutterToast('購入情報の検証が完了しました');
     return _fetchPurchases();
   }
 
@@ -56,7 +56,7 @@ class PurchasesNotifier extends _$PurchasesNotifier {
 
   Future<void> _onVerifyFailed(String msg) async {
     // 失敗した時の処理.
-    UIHelper.showErrorFlutterToast(msg);
+    ToastUiCore.showErrorFlutterToast(msg);
   }
 
   bool isSubscribing() => state.value?.any((e) => e.isValid()) ?? false;

@@ -4,7 +4,7 @@ import 'package:great_talk/providers/global/notifier/current_user/current_user_n
 import 'package:great_talk/providers/global/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/usecase/post/post_usecase.dart';
 import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,7 +31,7 @@ class MosaicPostChild extends ConsumerWidget {
         BoldWhiteText(title),
         const BasicHeightBox(),
         InkWell(
-          onTap: () => UIHelper.simpleAlertDialog(context, msg),
+          onTap: () => ToastUiCore.simpleAlertDialog(context, msg),
           child: const Icon(Icons.info, color: Colors.white),
         ),
         const BasicHeightBox(),
@@ -50,14 +50,14 @@ class MosaicPostChild extends ConsumerWidget {
                         .deletePost(post);
                     result.when(
                       success: (_) async {
-                        UIHelper.showSuccessSnackBar(context, "投稿を削除しました。");
+                        ToastUiCore.showSuccessSnackBar(context, "投稿を削除しました。");
                       },
                       failure: (e) {
                         // 失敗したら元に戻す
                         ref
                             .read(tokensNotifierProvider.notifier)
                             .removeDeletePostId(postId);
-                        UIHelper.showFailureSnackBar(
+                        ToastUiCore.showFailureSnackBar(
                           context,
                           "投稿を削除することができませんでした。",
                         );

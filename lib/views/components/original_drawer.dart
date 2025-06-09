@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/providers/global/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/global/notifier/local_setting/local_setting.dart';
 import 'package:great_talk/ui_core/texts.dart';
@@ -67,7 +67,7 @@ class OriginalDrawer extends ConsumerWidget {
                       ],
                     ),
                     onTap: () {
-                      RouterCore.pushPath(
+                      RouteCore.pushPath(
                         context,
                         UserProfilePage.generatePath(user.uid),
                       );
@@ -78,7 +78,7 @@ class OriginalDrawer extends ConsumerWidget {
                 return ListTile(
                   title: const Text("ログインする"),
                   onTap: () {
-                    RouterCore.pushPath(context, LoginPage.path);
+                    RouteCore.pushPath(context, LoginPage.path);
                   },
                 );
               }
@@ -95,16 +95,16 @@ class OriginalDrawer extends ConsumerWidget {
           ListTile(
             title: const Text("アカウント情報"),
             onTap: () {
-              RouterCore.pushPath(context, AccountPage.path);
+              RouteCore.pushPath(context, AccountPage.path);
             },
           ),
           ListTile(
             title: const Text("ミュートしているユーザー"),
-            onTap: () => RouterCore.pushPath(context, MuteUsersPage.path),
+            onTap: () => RouteCore.pushPath(context, MuteUsersPage.path),
           ),
           ListTile(
             title: const Text("ミュートしている投稿"),
-            onTap: () => RouterCore.pushPath(context, MutePostsPage.path),
+            onTap: () => RouteCore.pushPath(context, MutePostsPage.path),
           ),
           ListTile(
             title: const Text("テーマ切り替え"),
@@ -127,7 +127,7 @@ class OriginalDrawer extends ConsumerWidget {
           if (isAdmin)
             ListTile(
               title: const Text("管理者専用ページ"),
-              onTap: () => RouterCore.pushPath(context, AdminPage.path),
+              onTap: () => RouteCore.pushPath(context, AdminPage.path),
             ),
         ],
       ),

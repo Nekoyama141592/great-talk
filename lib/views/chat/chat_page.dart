@@ -11,12 +11,12 @@ import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dar
 import 'package:great_talk/providers/global/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/providers/global/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/providers/usecase/post/post_usecase.dart';
-import 'package:great_talk/core/router_core.dart';
+import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/providers/view_model/chat/chat_view_model.dart';
 import 'package:great_talk/ui_core/chat_ui_core.dart';
 import 'package:great_talk/ui_core/post_ui_core.dart';
 import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/ui_core/ui_helper.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/chat/components/menu_button.dart';
 import 'package:great_talk/views/chat/components/msg_card.dart';
 import 'package:great_talk/views/components/app_bar_action.dart';
@@ -91,15 +91,15 @@ class ChatPage extends HookConsumerWidget {
                           .deletePost(post);
                       result.when(
                         success: (_) async {
-                          UIHelper.showSuccessSnackBar(context, "投稿を削除しました。");
-                          RouterCore.back(context);
+                          ToastUiCore.showSuccessSnackBar(context, "投稿を削除しました。");
+                          RouteCore.back(context);
                         },
                         failure: (e) {
                           // 失敗したら元に戻す
                           ref
                               .read(tokensNotifierProvider.notifier)
                               .removeDeletePostId(postId);
-                          UIHelper.showFailureSnackBar(
+                          ToastUiCore.showFailureSnackBar(
                             context,
                             "投稿を削除することができませんでした。",
                           );
@@ -118,7 +118,7 @@ class ChatPage extends HookConsumerWidget {
                               .read(tokensNotifierProvider.notifier)
                               .addMutePost(post);
                           if (token == null) {
-                            RouterCore.back(innerContext);
+                            RouteCore.back(innerContext);
                             return;
                           }
                           final result = await notifier.mutePost(
@@ -127,7 +127,7 @@ class ChatPage extends HookConsumerWidget {
                             token,
                           );
                           result.when(
-                            success: (_) => RouterCore.back(innerContext),
+                            success: (_) => RouteCore.back(innerContext),
                             failure: (_) {},
                           );
                         },
@@ -136,7 +136,7 @@ class ChatPage extends HookConsumerWidget {
                               .read(tokensNotifierProvider.notifier)
                               .addMuteUser(post);
                           if (token == null) {
-                            RouterCore.back(innerContext);
+                            RouteCore.back(innerContext);
                             return;
                           }
                           final result = await notifier.muteUser(
@@ -145,7 +145,7 @@ class ChatPage extends HookConsumerWidget {
                             token,
                           );
                           result.when(
-                            success: (_) => RouterCore.back(innerContext),
+                            success: (_) => RouteCore.back(innerContext),
                             failure: (_) {},
                           );
                         },
@@ -157,16 +157,16 @@ class ChatPage extends HookConsumerWidget {
                 //
                 MenuButton(
                   onMenuPressed: () {
-                    RouterCore.back(context);
+                    RouteCore.back(context);
                     ChatUiCore.onMenuPressed(
                       context: context,
                       post: post,
                       cleanLocalMessage: (innerContext) async {
                         final result = await chatNotifier.cleanLocalMessage();
                         result.when(success: (_) {
-                          UIHelper.showSuccessSnackBar(context, MsgConstants.clearChatMsg);
+                          ToastUiCore.showSuccessSnackBar(context, MsgConstants.clearChatMsg);
                         }, failure: (msg) {
-                          UIHelper.showFailureSnackBar(context, msg);
+                          ToastUiCore.showFailureSnackBar(context, msg);
                         });
                       },
                     );
@@ -233,8 +233,8 @@ class ChatPage extends HookConsumerWidget {
                                 scrollController,
                               );
                               result.when(
-                                success: (_) => UIHelper.showSuccessSnackBar(context,'応答の生成に成功しました'),
-                                failure: (msg) => UIHelper.showFailureSnackBar(context,msg));
+                                success: (_) => ToastUiCore.showSuccessSnackBar(context,'応答の生成に成功しました'),
+                                failure: (msg) => ToastUiCore.showFailureSnackBar(context,msg));
                               }
                         ),
                       ],
