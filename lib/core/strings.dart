@@ -1,23 +1,7 @@
 // packages
 import 'package:great_talk/app/flavors.dart';
-import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 
 final appName = F.title;
-
-String getPlanName(String productId) {
-  String msg = "";
-  if (productId == kAnnualSubscriptionId) {
-    msg = 'ベーシックプラン（年間）';
-  } else if (productId == kMonthSubscriptionId) {
-    msg = 'ベーシックプラン';
-  } else if (productId == kWeekSubscriptionId) {
-    msg = 'ベーシックプラン（週間）';
-  } else {
-    msg = "プレミアムプラン";
-  }
-
-  return msg;
-}
 
 // msg
 const String clearChatMsg = "チャット履歴を全て削除しました";

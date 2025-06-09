@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
-import 'package:great_talk/core/strings.dart';
 import 'package:great_talk/providers/view_model/products/products_view_model.dart';
+import 'package:great_talk/ui_core/product_ui_core.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/ui_helper.dart';
 import 'package:great_talk/views/common/async_screen/async_screen.dart';
@@ -34,7 +34,7 @@ class ProductList extends ConsumerWidget {
                         const PlanDescription(text: "モデルの性能が向上!"),
                         const PlanDescription(text: '画像を生成するAI'),
                       ];
-              final String planName = getPlanName(productDetails.id);
+              final String planName =ProductUiCore.getPlanName(productDetails.id);
               return Container(
                 margin: const EdgeInsets.all(16.0),
                 padding: const EdgeInsets.all(16.0),
