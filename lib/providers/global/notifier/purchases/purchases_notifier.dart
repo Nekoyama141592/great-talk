@@ -16,7 +16,7 @@ part 'purchases_notifier.g.dart';
 @Riverpod(keepAlive: true)
 class PurchasesNotifier extends _$PurchasesNotifier {
   @override
-  FutureOr<List<VerifiedPurchase>> build() async {
+  FutureOr<List<VerifiedPurchase>> build() {
     final detailsList = ref.watch(purchaseStreamProvider).value ?? [];
     return _onListen(detailsList);
   }
