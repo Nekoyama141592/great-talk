@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/auth_core.dart';
-import 'package:great_talk/providers/global/stream/auth/stream_auth_provider.dart';
+import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/route_core.dart';
-import 'package:great_talk/providers/global/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/auth/logouted_page.dart';
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';

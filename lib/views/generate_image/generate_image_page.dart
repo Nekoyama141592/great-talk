@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/consts/generate_image_constants.dart';
-import 'package:great_talk/providers/view_model/generate_image/generate_image_view_model.dart';
+import 'package:great_talk/provider/view_model/generate_image/generate_image_view_model.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/basic_page.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';

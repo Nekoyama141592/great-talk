@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/msg_constants.dart';
 import 'package:great_talk/core/url_redirector.dart';
-import 'package:great_talk/providers/global/notifier/terms/terms_notifier.dart';
+import 'package:great_talk/provider/keep_alive/notifier/terms/terms_notifier.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

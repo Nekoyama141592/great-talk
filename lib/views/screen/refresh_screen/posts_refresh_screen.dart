@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/model/view_model_state/common/user_post/user_post.dart';
-import 'package:great_talk/providers/view_model/refresh_interface.dart';
+import 'package:great_talk/provider/view_model/refresh_interface.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/components/post_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

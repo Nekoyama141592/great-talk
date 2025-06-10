@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import 'package:great_talk/providers/global/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/auth/user_deleted_page.dart';

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/extension/string_extension.dart';
-import 'package:great_talk/providers/view_model/create_post/create_post_view_model.dart';
+import 'package:great_talk/provider/view_model/create_post/create_post_view_model.dart';
 import 'package:great_talk/ui_core/form_ui_core.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/common/forms_screen.dart';

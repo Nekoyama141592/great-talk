@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
-import 'package:great_talk/providers/view_model/products/products_view_model.dart';
+import 'package:great_talk/provider/view_model/products/products_view_model.dart';
 import 'package:great_talk/ui_core/product_ui_core.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
