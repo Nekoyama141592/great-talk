@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RemoteConfigState {
 
- bool get maintenanceMode; String get maintenanceMsg; int get forcedUpdateVersion; String get forcedUpdateMsg; String get basicModel; String get premiumModel;
+ String get maintenanceMsg; int get forcedUpdateVersion;
 /// Create a copy of RemoteConfigState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $RemoteConfigStateCopyWith<RemoteConfigState> get copyWith => _$RemoteConfigStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RemoteConfigState&&(identical(other.maintenanceMode, maintenanceMode) || other.maintenanceMode == maintenanceMode)&&(identical(other.maintenanceMsg, maintenanceMsg) || other.maintenanceMsg == maintenanceMsg)&&(identical(other.forcedUpdateVersion, forcedUpdateVersion) || other.forcedUpdateVersion == forcedUpdateVersion)&&(identical(other.forcedUpdateMsg, forcedUpdateMsg) || other.forcedUpdateMsg == forcedUpdateMsg)&&(identical(other.basicModel, basicModel) || other.basicModel == basicModel)&&(identical(other.premiumModel, premiumModel) || other.premiumModel == premiumModel));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RemoteConfigState&&(identical(other.maintenanceMsg, maintenanceMsg) || other.maintenanceMsg == maintenanceMsg)&&(identical(other.forcedUpdateVersion, forcedUpdateVersion) || other.forcedUpdateVersion == forcedUpdateVersion));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,maintenanceMode,maintenanceMsg,forcedUpdateVersion,forcedUpdateMsg,basicModel,premiumModel);
+int get hashCode => Object.hash(runtimeType,maintenanceMsg,forcedUpdateVersion);
 
 @override
 String toString() {
-  return 'RemoteConfigState(maintenanceMode: $maintenanceMode, maintenanceMsg: $maintenanceMsg, forcedUpdateVersion: $forcedUpdateVersion, forcedUpdateMsg: $forcedUpdateMsg, basicModel: $basicModel, premiumModel: $premiumModel)';
+  return 'RemoteConfigState(maintenanceMsg: $maintenanceMsg, forcedUpdateVersion: $forcedUpdateVersion)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $RemoteConfigStateCopyWith<$Res>  {
   factory $RemoteConfigStateCopyWith(RemoteConfigState value, $Res Function(RemoteConfigState) _then) = _$RemoteConfigStateCopyWithImpl;
 @useResult
 $Res call({
- bool maintenanceMode, String maintenanceMsg, int forcedUpdateVersion, String forcedUpdateMsg, String basicModel, String premiumModel
+ String maintenanceMsg, int forcedUpdateVersion
 });
 
 
@@ -66,15 +66,11 @@ class _$RemoteConfigStateCopyWithImpl<$Res>
 
 /// Create a copy of RemoteConfigState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? maintenanceMode = null,Object? maintenanceMsg = null,Object? forcedUpdateVersion = null,Object? forcedUpdateMsg = null,Object? basicModel = null,Object? premiumModel = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? maintenanceMsg = null,Object? forcedUpdateVersion = null,}) {
   return _then(_self.copyWith(
-maintenanceMode: null == maintenanceMode ? _self.maintenanceMode : maintenanceMode // ignore: cast_nullable_to_non_nullable
-as bool,maintenanceMsg: null == maintenanceMsg ? _self.maintenanceMsg : maintenanceMsg // ignore: cast_nullable_to_non_nullable
+maintenanceMsg: null == maintenanceMsg ? _self.maintenanceMsg : maintenanceMsg // ignore: cast_nullable_to_non_nullable
 as String,forcedUpdateVersion: null == forcedUpdateVersion ? _self.forcedUpdateVersion : forcedUpdateVersion // ignore: cast_nullable_to_non_nullable
-as int,forcedUpdateMsg: null == forcedUpdateMsg ? _self.forcedUpdateMsg : forcedUpdateMsg // ignore: cast_nullable_to_non_nullable
-as String,basicModel: null == basicModel ? _self.basicModel : basicModel // ignore: cast_nullable_to_non_nullable
-as String,premiumModel: null == premiumModel ? _self.premiumModel : premiumModel // ignore: cast_nullable_to_non_nullable
-as String,
+as int,
   ));
 }
 
@@ -85,15 +81,11 @@ as String,
 @JsonSerializable()
 
 class _RemoteConfigState extends RemoteConfigState {
-  const _RemoteConfigState({this.maintenanceMode = false, this.maintenanceMsg = '', this.forcedUpdateVersion = 0, this.forcedUpdateMsg = '', this.basicModel = '', this.premiumModel = ''}): super._();
+  const _RemoteConfigState({this.maintenanceMsg = '', this.forcedUpdateVersion = 0}): super._();
   factory _RemoteConfigState.fromJson(Map<String, dynamic> json) => _$RemoteConfigStateFromJson(json);
 
-@override@JsonKey() final  bool maintenanceMode;
 @override@JsonKey() final  String maintenanceMsg;
 @override@JsonKey() final  int forcedUpdateVersion;
-@override@JsonKey() final  String forcedUpdateMsg;
-@override@JsonKey() final  String basicModel;
-@override@JsonKey() final  String premiumModel;
 
 /// Create a copy of RemoteConfigState
 /// with the given fields replaced by the non-null parameter values.
@@ -108,16 +100,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RemoteConfigState&&(identical(other.maintenanceMode, maintenanceMode) || other.maintenanceMode == maintenanceMode)&&(identical(other.maintenanceMsg, maintenanceMsg) || other.maintenanceMsg == maintenanceMsg)&&(identical(other.forcedUpdateVersion, forcedUpdateVersion) || other.forcedUpdateVersion == forcedUpdateVersion)&&(identical(other.forcedUpdateMsg, forcedUpdateMsg) || other.forcedUpdateMsg == forcedUpdateMsg)&&(identical(other.basicModel, basicModel) || other.basicModel == basicModel)&&(identical(other.premiumModel, premiumModel) || other.premiumModel == premiumModel));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RemoteConfigState&&(identical(other.maintenanceMsg, maintenanceMsg) || other.maintenanceMsg == maintenanceMsg)&&(identical(other.forcedUpdateVersion, forcedUpdateVersion) || other.forcedUpdateVersion == forcedUpdateVersion));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,maintenanceMode,maintenanceMsg,forcedUpdateVersion,forcedUpdateMsg,basicModel,premiumModel);
+int get hashCode => Object.hash(runtimeType,maintenanceMsg,forcedUpdateVersion);
 
 @override
 String toString() {
-  return 'RemoteConfigState(maintenanceMode: $maintenanceMode, maintenanceMsg: $maintenanceMsg, forcedUpdateVersion: $forcedUpdateVersion, forcedUpdateMsg: $forcedUpdateMsg, basicModel: $basicModel, premiumModel: $premiumModel)';
+  return 'RemoteConfigState(maintenanceMsg: $maintenanceMsg, forcedUpdateVersion: $forcedUpdateVersion)';
 }
 
 
@@ -128,7 +120,7 @@ abstract mixin class _$RemoteConfigStateCopyWith<$Res> implements $RemoteConfigS
   factory _$RemoteConfigStateCopyWith(_RemoteConfigState value, $Res Function(_RemoteConfigState) _then) = __$RemoteConfigStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool maintenanceMode, String maintenanceMsg, int forcedUpdateVersion, String forcedUpdateMsg, String basicModel, String premiumModel
+ String maintenanceMsg, int forcedUpdateVersion
 });
 
 
@@ -145,15 +137,11 @@ class __$RemoteConfigStateCopyWithImpl<$Res>
 
 /// Create a copy of RemoteConfigState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? maintenanceMode = null,Object? maintenanceMsg = null,Object? forcedUpdateVersion = null,Object? forcedUpdateMsg = null,Object? basicModel = null,Object? premiumModel = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? maintenanceMsg = null,Object? forcedUpdateVersion = null,}) {
   return _then(_RemoteConfigState(
-maintenanceMode: null == maintenanceMode ? _self.maintenanceMode : maintenanceMode // ignore: cast_nullable_to_non_nullable
-as bool,maintenanceMsg: null == maintenanceMsg ? _self.maintenanceMsg : maintenanceMsg // ignore: cast_nullable_to_non_nullable
+maintenanceMsg: null == maintenanceMsg ? _self.maintenanceMsg : maintenanceMsg // ignore: cast_nullable_to_non_nullable
 as String,forcedUpdateVersion: null == forcedUpdateVersion ? _self.forcedUpdateVersion : forcedUpdateVersion // ignore: cast_nullable_to_non_nullable
-as int,forcedUpdateMsg: null == forcedUpdateMsg ? _self.forcedUpdateMsg : forcedUpdateMsg // ignore: cast_nullable_to_non_nullable
-as String,basicModel: null == basicModel ? _self.basicModel : basicModel // ignore: cast_nullable_to_non_nullable
-as String,premiumModel: null == premiumModel ? _self.premiumModel : premiumModel // ignore: cast_nullable_to_non_nullable
-as String,
+as int,
   ));
 }
 

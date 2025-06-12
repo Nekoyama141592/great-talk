@@ -1,4 +1,4 @@
 class ChatConstants {
-  static const basicPostConsumePoint = 1;
-  static const officialPostConsumePoint = 3;
+  static const basicModel = 'o3-mini-2025-01-31';
+  static const proModel = 'o3-2025-04-16';
 }

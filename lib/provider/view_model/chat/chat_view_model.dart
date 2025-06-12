@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:great_talk/consts/remote_config_constants.dart';
+import 'package:great_talk/consts/chat_constants.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/provider/keep_alive/infrastructure/chat_gpt_sdk/chat_gpt_sdk_client.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
@@ -25,9 +25,8 @@ class ChatViewModel extends _$ChatViewModel {
     // 投稿データを非同期で取得
     final post = await _fetchPost(uid, postId);
     if (post == null) {
-      throw Exception('Post with ID $postId not found for user $uid');
+      throw Exception('情報が取得できませんでした');
     }
-
     // 投稿画像とローカルのチャット履歴を取得
     final postImage = await _fetchPostImage(post);
     final localMessages = _getLocalMessages(post.postId);
@@ -209,14 +208,12 @@ class ChatViewModel extends _$ChatViewModel {
     requestMessages.insert(0, _systemMsg(post));
     final model =
         ref.read(purchasesNotifierProvider.notifier).isPremiumSubscribing()
-            ? RemoteConfigConstants.premiumModel
-            : RemoteConfigConstants.basicModel;
+            ? ChatConstants.proModel : ChatConstants.basicModel;
     final uid = ref.read(streamAuthUidProvider).value;
 
     return ChatCompleteText(
       model: ChatModelFromValue(model: model),
       messages: requestMessages.map((e) => e.toJson()).toList(),
-      maxToken: _adjustMaxToken(),
       user: uid,
     );
   }
@@ -244,16 +241,6 @@ class ChatViewModel extends _$ChatViewModel {
   Messages _systemMsg(Post post) {
     final content = post.typedCustomCompleteText().systemPrompt;
     return Messages(role: Role.system, content: content);
-  }
-
-  int _adjustMaxToken() {
-    const maxRequestLength = ChatGPTConstants.maxRequestLength;
-    final maxToken = 4000; // 仮の値
-    final result =
-        state.value!.messages.length < maxRequestLength
-            ? maxToken ~/ (maxRequestLength - 1)
-            : maxToken;
-    return result.clamp(1, 4096);
   }
 
   Future<void> _setLocalMessage() async {

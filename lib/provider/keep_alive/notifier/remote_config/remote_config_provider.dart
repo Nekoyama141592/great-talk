@@ -20,12 +20,8 @@ class RemoteConfigNotifier extends _$RemoteConfigNotifier {
 
   RemoteConfigState _getState() {
     return RemoteConfigState(
-      maintenanceMode: _repository.getMaintenanceMode(),
       maintenanceMsg: _repository.getMaintenanceMsg(),
       forcedUpdateVersion: _repository.getForcedUpdateVersion(),
-      forcedUpdateMsg: _repository.getForcedUpdateMsg(),
-      basicModel: _repository.getBasicModel(),
-      premiumModel: _repository.getPremiumModel(),
     );
   }
 }

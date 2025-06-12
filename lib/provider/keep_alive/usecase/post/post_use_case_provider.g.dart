@@ -6,11 +6,11 @@ part of 'post_use_case_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postUsecaseHash() => r'974ac14930c0fe473cf41b06b0e091b098e19219';
+String _$postUsecaseHash() => r'a7b20deabda73d554bc04fc25fd888e60124dbf4';
 
 /// See also [postUsecase].
 @ProviderFor(postUsecase)
-final postUsecaseProvider = AutoDisposeProvider<PostUsecase>.internal(
+final postUsecaseProvider = AutoDisposeProvider<PostUseCase>.internal(
   postUsecase,
   name: r'postUsecaseProvider',
   debugGetCreateSourceHash:
@@ -21,6 +21,6 @@ final postUsecaseProvider = AutoDisposeProvider<PostUsecase>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef PostUsecaseRef = AutoDisposeProviderRef<PostUsecase>;
+typedef PostUsecaseRef = AutoDisposeProviderRef<PostUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

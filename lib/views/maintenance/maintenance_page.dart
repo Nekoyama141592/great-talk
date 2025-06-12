@@ -18,9 +18,7 @@ class MaintenancePage extends ConsumerWidget {
         child: AsyncScreen(
           asyncValue: asyncValue,
           data: (state) {
-            final isMaintenance = state.maintenanceMode;
-            final text =
-                isMaintenance ? state.maintenanceMsg : state.forcedUpdateMsg;
+            final text = state.maintenanceMsg;
             return Align(
               alignment: Alignment.center,
               child: BasicBoldText(text),
