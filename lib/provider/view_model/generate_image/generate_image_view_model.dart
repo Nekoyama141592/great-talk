@@ -13,8 +13,9 @@ class GenerateImageViewModel extends _$GenerateImageViewModel {
   }
 
   void onGenerateButtonPressed(String prompt, String size) async {
-    if (!ref.read(purchasesNotifierProvider.notifier).isSubscribing()) {
-      ToastUiCore.showErrorFlutterToast('有料プランに加入する必要があります');
+    final isPremiumSubscribing = ref.read(purchasesNotifierProvider).value?.isPremiumSubscribing() ?? false;
+    if (!isPremiumSubscribing) {
+      ToastUiCore.showErrorFlutterToast('プレミアムプランに加入する必要があります');
       return;
     }
     if (prompt.isEmpty || size.isEmpty) return;

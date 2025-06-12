@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 import 'package:great_talk/extension/purchase_details_extension.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
+import 'package:great_talk/model/view_model_state/purchases_state/purchase_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/purchase/purchase_stream_provider.dart';
 import 'package:great_talk/provider/repository/purchase/purchase_repository_provider.dart';
 import 'package:great_talk/provider/keep_alive/usecase/purchases/purchase_use_case_provider.dart';
@@ -16,10 +16,15 @@ part 'purchases_notifier.g.dart';
 @Riverpod(keepAlive: true)
 class PurchasesNotifier extends _$PurchasesNotifier {
   @override
-  FutureOr<List<VerifiedPurchase>> build() {
+  FutureOr<PurchaseState> build() => _fetchData();
+  
+  FutureOr<PurchaseState> _fetchData() async {
     final detailsList = ref.watch(purchaseStreamProvider).value ?? [];
-    return _onListen(detailsList);
+    final purchases = await _onListen(detailsList);
+    return PurchaseState(verifiedPurchases: purchases);
   }
+
+
 
   PurchaseRepository get _repository => ref.read(purchaseRepositoryProvider);
 
@@ -60,11 +65,4 @@ class PurchasesNotifier extends _$PurchasesNotifier {
     // 失敗した時の処理.
     ToastUiCore.showErrorFlutterToast(msg);
   }
-
-  bool isSubscribing() => state.value?.any((e) => e.isValid()) ?? false;
-  bool isPremiumSubscribing() =>
-      state.value
-          ?.where((e) => e.productId == kPremiumSubscriptionId)
-          .any((e) => e.isValid()) ??
-      false;
 }

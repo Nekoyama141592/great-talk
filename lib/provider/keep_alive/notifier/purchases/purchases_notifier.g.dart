@@ -6,12 +6,12 @@ part of 'purchases_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$purchasesNotifierHash() => r'2837c67cd81fa2c56c4b882e23be4f1bbbe5f24d';
+String _$purchasesNotifierHash() => r'6164bcec28c30d40daee18114f481a963a922147';
 
 /// See also [PurchasesNotifier].
 @ProviderFor(PurchasesNotifier)
 final purchasesNotifierProvider =
-    AsyncNotifierProvider<PurchasesNotifier, List<VerifiedPurchase>>.internal(
+    AsyncNotifierProvider<PurchasesNotifier, PurchaseState>.internal(
       PurchasesNotifier.new,
       name: r'purchasesNotifierProvider',
       debugGetCreateSourceHash:
@@ -22,6 +22,6 @@ final purchasesNotifierProvider =
       allTransitiveDependencies: null,
     );
 
-typedef _$PurchasesNotifier = AsyncNotifier<List<VerifiedPurchase>>;
+typedef _$PurchasesNotifier = AsyncNotifier<PurchaseState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

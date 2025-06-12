@@ -14,7 +14,7 @@ part 'products_view_model.g.dart';
 class ProductsViewModel extends _$ProductsViewModel {
   @override
   FutureOr<PurchasesState> build() async {
-    final value = ref.watch(purchasesNotifierProvider).value ?? [];
+    final value = ref.watch(purchasesNotifierProvider).value?.verifiedPurchases ?? [];
     return _fetch(value);
   }
 

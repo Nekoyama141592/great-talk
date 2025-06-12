@@ -40,7 +40,8 @@ class ChatViewModel extends _$ChatViewModel {
     TextEditingController inputController,
     ScrollController scrollController,
   ) async {
-    if (!ref.read(purchasesNotifierProvider.notifier).isSubscribing()) {
+    final isSubscribing = ref.read(purchasesNotifierProvider).value?.isSubscribing() ?? false;
+    if (!isSubscribing) {
       return const Result.failure('有料プランに加入する必要があります');
     }
     final text = inputController.text;
@@ -207,7 +208,7 @@ class ChatViewModel extends _$ChatViewModel {
     final requestMessages = _toRequestMessages();
     requestMessages.insert(0, _systemMsg(post));
     final model =
-        ref.read(purchasesNotifierProvider.notifier).isPremiumSubscribing()
+        ref.read(purchasesNotifierProvider).value?.isPremiumSubscribing() ?? false
             ? ChatConstants.proModel : ChatConstants.basicModel;
     final uid = ref.read(streamAuthUidProvider).value;
 
