@@ -48,8 +48,7 @@ class EditViewModel extends _$EditViewModel {
     if (info.isSmall) {
       return const Result.failure(FormConsts.bigImageRequestMsg);
     }
-    final base64 = base64Encode(result);
-    state = AsyncData(state.value!.copyWith(base64: base64, isPicked: true));
+    state = AsyncData(state.value!.copyWith(base64: result, isPicked: true));
     return Result.success(true);
   }
 

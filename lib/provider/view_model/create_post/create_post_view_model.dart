@@ -63,7 +63,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     state.whenData(
       (s) =>
           state = AsyncValue.data(
-            s.copyWith(pickedImage: base64Encode(result)),
+            s.copyWith(pickedImage: result),
           ),
     );
   }

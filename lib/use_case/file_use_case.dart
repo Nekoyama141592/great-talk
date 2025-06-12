@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
@@ -16,12 +17,12 @@ class FileUseCase {
   FileUseCase({required this.localRepository, required this.repository});
   final LocalRepository localRepository;
   final ApiRepository repository;
-  Future<Uint8List?> getCompressedImage() async {
+  Future<String?> getCompressedImage() async {
     final xFile = await _pickImage();
     final croppedFile = await _cropImage(xFile);
     final jpgFile = await _convertToJpg(croppedFile);
     final compressedImage = await _compressImage(jpgFile);
-    return compressedImage;
+    return compressedImage != null ? base64Encode(compressedImage) : null;
   }
 
   Future<String?> getS3Image(String bucketName, String fileName) async {
@@ -55,9 +56,7 @@ class FileUseCase {
   }
 
   Future<Uint8List?> _compressImage(File? jpgFile) async {
-    if (jpgFile == null) {
-      return null;
-    }
+    if (jpgFile == null) return null;
     final result = await FlutterImageCompress.compressWithFile(
       jpgFile.path,
       minWidth: FormConsts.minImageWidth,
@@ -101,11 +100,12 @@ class FileUseCase {
     return image;
   }
 
-  Future<OriginalImageInfo> getImageInfo(Uint8List imageBytes) async {
-    ui.Codec codec1 = await ui.instantiateImageCodec(imageBytes);
-    ui.FrameInfo frameInfo1 = await codec1.getNextFrame();
-    int width = frameInfo1.image.width;
-    int height = frameInfo1.image.height;
+  Future<OriginalImageInfo> getImageInfo(String base64Image) async {
+    final imageBytes = base64Decode(base64Image);
+    final codec1 = await ui.instantiateImageCodec(imageBytes);
+    final frameInfo1 = await codec1.getNextFrame();
+    final width = frameInfo1.image.width;
+    final height = frameInfo1.image.height;
     return OriginalImageInfo(height: height, width: width);
   }
 
