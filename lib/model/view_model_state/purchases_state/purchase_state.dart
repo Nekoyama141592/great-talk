@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:great_talk/consts/chat_constants.dart';
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 
@@ -12,12 +13,10 @@ abstract class PurchaseState with _$PurchaseState {
       {required List<VerifiedPurchase> verifiedPurchases}) = _PurchaseState;
   factory PurchaseState.fromJson(Map<String, dynamic> json) =>
       _$PurchaseStateFromJson(json);
-  bool isSubscribing() => true;
+  bool isSubscribing() => verifiedPurchases.any((e) => e.isValid());
   bool isPremiumSubscribing() =>
-      false;
-  // bool isSubscribing() => verifiedPurchases.any((e) => e.isValid());
-  // bool isPremiumSubscribing() =>
-  //     verifiedPurchases
-  //         .where((e) => e.productId == kPremiumSubscriptionId)
-  //         .any((e) => e.isValid());
+      verifiedPurchases
+          .where((e) => e.productId == kPremiumSubscriptionId)
+          .any((e) => e.isValid());
+  String model() => isPremiumSubscribing() ? ChatConstants.proModel : ChatConstants.basicModel;
 }

@@ -64,7 +64,8 @@ class ChatViewModel extends _$ChatViewModel {
       final role = e.role(postId);
       return GenerateTextRequestMessage(role: role, content: e.typedText().value);
     }).toList()..insert(0, GenerateTextRequestMessage.system(state.value!.post.typedDescription().value));
-    final request = GenerateTextRequest.fromMessages(ChatConstants.basicModel, requestMessages);
+    final model = ref.read(purchasesNotifierProvider).value?.model() ?? ChatConstants.basicModel;
+    final request = GenerateTextRequest.fromMessages(model, requestMessages);
     final oldState = state.value!;
     state = AsyncValue.loading();
     final result = await ref.read(apiRepositoryProvider).generateText(request);
@@ -133,9 +134,7 @@ class ChatViewModel extends _$ChatViewModel {
 
   FutureResult<bool> cleanLocalMessage() {
     final stateValue = state.value!;
-    final messages = stateValue.messages;
-
-    state = AsyncData(stateValue.copyWith(messages: messages));
+    state = AsyncData(stateValue.copyWith(messages: []));
 
     return ref.read(localRepositoryProvider).removeChatLog(postId);
   }

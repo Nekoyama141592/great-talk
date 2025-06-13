@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/provider/keep_alive/notifier/local_setting/local_setting.dart';
+import 'package:great_talk/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/extension/number_format_extension.dart';
 import 'package:great_talk/ui_core/style_utility.dart';
@@ -28,6 +29,7 @@ class OriginalDrawer extends ConsumerWidget {
     final currentUser = asyncValue.value;
     final isAdmin = currentUser?.isAdmin() ?? false;
     final image = currentUser?.base64;
+    final purchaseState = ref.watch(purchasesNotifierProvider).value;
     return Drawer(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: ListView(
@@ -101,6 +103,9 @@ class OriginalDrawer extends ConsumerWidget {
           ListTile(
             title: const Text("ミュートしているユーザー"),
             onTap: () => RouteCore.pushPath(context, MuteUsersPage.path),
+          ),
+          ListTile(
+            title: Text("モデル: ${purchaseState?.model() ?? ''}"),
           ),
           ListTile(
             title: const Text("ミュートしている投稿"),

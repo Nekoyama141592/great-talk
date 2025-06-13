@@ -31,6 +31,7 @@ class ChatUiCore {
           actions: [
             CupertinoActionSheetAction(
               onPressed: () {
+                Navigator.pop(innerContext);
                 cleanLocalMessage(innerContext);
               },
               child: const Text("会話履歴を削除"),
