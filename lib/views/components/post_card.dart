@@ -9,7 +9,7 @@ import 'package:great_talk/provider/keep_alive/notifier/tokens/tokens_notifier.d
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/views/chat/chat_page.dart';
-import 'package:great_talk/views/common/async_screen/async_screen.dart';
+import 'package:great_talk/views/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/views/components/circle_image/circle_image.dart';
 import 'package:great_talk/views/components/mosaic_card/components/mosaic_post_child.dart';
 import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';

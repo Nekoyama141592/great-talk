@@ -7,7 +7,7 @@ import 'package:great_talk/provider/keep_alive/notifier/current_user/current_use
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/auth/logouted_page.dart';
 import 'package:great_talk/views/auth/reauthenticate_to_delete_page.dart';
-import 'package:great_talk/views/common/async_screen/async_screen.dart';
+import 'package:great_talk/views/common/async_page/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()

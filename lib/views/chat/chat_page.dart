@@ -19,7 +19,7 @@ import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/chat/components/menu_button.dart';
 import 'package:great_talk/views/chat/components/msg_card.dart';
-import 'package:great_talk/views/common/async_screen/async_screen.dart';
+import 'package:great_talk/views/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/views/components/app_bar_action.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/views/common/async_screen/error_screen.dart';
+import 'package:great_talk/views/common/async_page/async_screen/error_screen.dart';
 import 'package:great_talk/views/screen/loading_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

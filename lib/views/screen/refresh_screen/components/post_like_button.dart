@@ -7,7 +7,7 @@ import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.
 import 'package:great_talk/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/provider/keep_alive/usecase/post/post_use_case_provider.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
-import 'package:great_talk/views/common/async_screen/async_screen.dart';
+import 'package:great_talk/views/common/async_page/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PostLikeButton extends HookConsumerWidget {

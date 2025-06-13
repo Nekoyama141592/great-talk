@@ -4,7 +4,7 @@ import 'package:great_talk/provider/view_model/products/products_view_model.dart
 import 'package:great_talk/ui_core/product_ui_core.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
-import 'package:great_talk/views/common/async_screen/async_screen.dart';
+import 'package:great_talk/views/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/main/subscribe/components/plan_description.dart';
 import 'package:great_talk/views/main/subscribe/components/purchase_button.dart';
