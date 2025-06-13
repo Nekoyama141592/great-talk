@@ -91,7 +91,7 @@ class ToastUiCore {
                     const Divider(),
                     TextButton(
                       onPressed:
-                          positiveAction ?? () => RouteCore.back(innerContext),
+                          positiveAction ?? () => Navigator.pop(innerContext),
                       child: const Text(MsgConstants.okText, style: style),
                     ),
                   ],
