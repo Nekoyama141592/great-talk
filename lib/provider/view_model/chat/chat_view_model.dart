@@ -43,6 +43,9 @@ class ChatViewModel extends _$ChatViewModel {
     if (!isSubscribing) {
       return const Result.failure('有料プランに加入する必要があります');
     }
+    if (state.isLoading) {
+      return const Result.failure('ロード中です');
+    }
     return execute(scrollController,text);
   }
 
@@ -62,7 +65,11 @@ class ChatViewModel extends _$ChatViewModel {
       return GenerateTextRequestMessage(role: role, content: e.typedText().value);
     }).toList()..insert(0, GenerateTextRequestMessage.system(state.value!.post.typedDescription().value));
     final request = GenerateTextRequest.fromMessages(ChatConstants.basicModel, requestMessages);
-    return ref.read(apiRepositoryProvider).generateText(request);
+    final oldState = state.value!;
+    state = AsyncValue.loading();
+    final result = await ref.read(apiRepositoryProvider).generateText(request);
+    state = AsyncData(oldState);
+    return result;
   }
 
 
