@@ -18,19 +18,27 @@ abstract class TextMessage with _$TextMessage {
     required String id,
     required String messageType,
     // dynamic postRef, // TODO: 対応
-    required String posterUid,
+    // required String posterUid, // TODO: 対応
     required String senderUid,
     required Map<String, dynamic> text,
   }) = _TextMessage;
   factory TextMessage.fromJson(Map<String, dynamic> json) =>
       _$TextMessageFromJson(json);
-  factory TextMessage.instance(String content, Post post, String currentUid) {
+  factory TextMessage.assistant(String content, Post post) {
     return TextMessage(
       id: IdCore.randomString(),
       createdAt: Timestamp.now(),
       messageType: MessageType.text.name,
       text: DetectedText(value: content).toJson(),
-      posterUid: post.uid,
+      senderUid: post.postId,
+    );
+  }
+  factory TextMessage.user(String content, String currentUid) {
+    return TextMessage(
+      id: IdCore.randomString(),
+      createdAt: Timestamp.now(),
+      messageType: MessageType.text.name,
+      text: DetectedText(value: content).toJson(),
       senderUid: currentUid,
     );
   }
@@ -39,7 +47,6 @@ abstract class TextMessage with _$TextMessage {
     id: stm.id,
     messageType: stm.messageType,
     senderUid: stm.senderUid,
-    posterUid: stm.posterUid,
     text: DetectedText.fromJson(stm.text).toJson(),
   );
 
@@ -49,4 +56,8 @@ abstract class TextMessage with _$TextMessage {
 
   DateTime get createdAtDateTime => typedCreatedAt().toDate();
   String timeCreatedAt() => createdAtDateTime.timeString();
+
+  String role(String postId) {
+    return senderUid == postId ? 'assistant' : 'user';
+  }
 }

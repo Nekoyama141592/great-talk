@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GenerateTextRequest {
 
- String get model; List<Map<String, dynamic>> get messages; List<Map<String, dynamic>>? get tools; Map<String, dynamic>? get tool_choice;
+ String get model; List<Map<String, dynamic>> get messages;
 /// Create a copy of GenerateTextRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $GenerateTextRequestCopyWith<GenerateTextRequest> get copyWith => _$GenerateText
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GenerateTextRequest&&(identical(other.model, model) || other.model == model)&&const DeepCollectionEquality().equals(other.messages, messages)&&const DeepCollectionEquality().equals(other.tools, tools)&&const DeepCollectionEquality().equals(other.tool_choice, tool_choice));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GenerateTextRequest&&(identical(other.model, model) || other.model == model)&&const DeepCollectionEquality().equals(other.messages, messages));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,model,const DeepCollectionEquality().hash(messages),const DeepCollectionEquality().hash(tools),const DeepCollectionEquality().hash(tool_choice));
+int get hashCode => Object.hash(runtimeType,model,const DeepCollectionEquality().hash(messages));
 
 @override
 String toString() {
-  return 'GenerateTextRequest(model: $model, messages: $messages, tools: $tools, tool_choice: $tool_choice)';
+  return 'GenerateTextRequest(model: $model, messages: $messages)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $GenerateTextRequestCopyWith<$Res>  {
   factory $GenerateTextRequestCopyWith(GenerateTextRequest value, $Res Function(GenerateTextRequest) _then) = _$GenerateTextRequestCopyWithImpl;
 @useResult
 $Res call({
- String model, List<Map<String, dynamic>> messages, List<Map<String, dynamic>>? tools, Map<String, dynamic>? tool_choice
+ String model, List<Map<String, dynamic>> messages
 });
 
 
@@ -66,13 +66,11 @@ class _$GenerateTextRequestCopyWithImpl<$Res>
 
 /// Create a copy of GenerateTextRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? model = null,Object? messages = null,Object? tools = freezed,Object? tool_choice = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? model = null,Object? messages = null,}) {
   return _then(_self.copyWith(
 model: null == model ? _self.model : model // ignore: cast_nullable_to_non_nullable
 as String,messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
-as List<Map<String, dynamic>>,tools: freezed == tools ? _self.tools : tools // ignore: cast_nullable_to_non_nullable
-as List<Map<String, dynamic>>?,tool_choice: freezed == tool_choice ? _self.tool_choice : tool_choice // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,
+as List<Map<String, dynamic>>,
   ));
 }
 
@@ -83,7 +81,7 @@ as Map<String, dynamic>?,
 @JsonSerializable()
 
 class _GenerateTextRequest implements GenerateTextRequest {
-  const _GenerateTextRequest({required this.model, required final  List<Map<String, dynamic>> messages, final  List<Map<String, dynamic>>? tools, final  Map<String, dynamic>? tool_choice}): _messages = messages,_tools = tools,_tool_choice = tool_choice;
+  const _GenerateTextRequest({required this.model, required final  List<Map<String, dynamic>> messages}): _messages = messages;
   factory _GenerateTextRequest.fromJson(Map<String, dynamic> json) => _$GenerateTextRequestFromJson(json);
 
 @override final  String model;
@@ -92,24 +90,6 @@ class _GenerateTextRequest implements GenerateTextRequest {
   if (_messages is EqualUnmodifiableListView) return _messages;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_messages);
-}
-
- final  List<Map<String, dynamic>>? _tools;
-@override List<Map<String, dynamic>>? get tools {
-  final value = _tools;
-  if (value == null) return null;
-  if (_tools is EqualUnmodifiableListView) return _tools;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(value);
-}
-
- final  Map<String, dynamic>? _tool_choice;
-@override Map<String, dynamic>? get tool_choice {
-  final value = _tool_choice;
-  if (value == null) return null;
-  if (_tool_choice is EqualUnmodifiableMapView) return _tool_choice;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(value);
 }
 
 
@@ -126,16 +106,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GenerateTextRequest&&(identical(other.model, model) || other.model == model)&&const DeepCollectionEquality().equals(other._messages, _messages)&&const DeepCollectionEquality().equals(other._tools, _tools)&&const DeepCollectionEquality().equals(other._tool_choice, _tool_choice));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GenerateTextRequest&&(identical(other.model, model) || other.model == model)&&const DeepCollectionEquality().equals(other._messages, _messages));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,model,const DeepCollectionEquality().hash(_messages),const DeepCollectionEquality().hash(_tools),const DeepCollectionEquality().hash(_tool_choice));
+int get hashCode => Object.hash(runtimeType,model,const DeepCollectionEquality().hash(_messages));
 
 @override
 String toString() {
-  return 'GenerateTextRequest(model: $model, messages: $messages, tools: $tools, tool_choice: $tool_choice)';
+  return 'GenerateTextRequest(model: $model, messages: $messages)';
 }
 
 
@@ -146,7 +126,7 @@ abstract mixin class _$GenerateTextRequestCopyWith<$Res> implements $GenerateTex
   factory _$GenerateTextRequestCopyWith(_GenerateTextRequest value, $Res Function(_GenerateTextRequest) _then) = __$GenerateTextRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String model, List<Map<String, dynamic>> messages, List<Map<String, dynamic>>? tools, Map<String, dynamic>? tool_choice
+ String model, List<Map<String, dynamic>> messages
 });
 
 
@@ -163,13 +143,11 @@ class __$GenerateTextRequestCopyWithImpl<$Res>
 
 /// Create a copy of GenerateTextRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? model = null,Object? messages = null,Object? tools = freezed,Object? tool_choice = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? model = null,Object? messages = null,}) {
   return _then(_GenerateTextRequest(
 model: null == model ? _self.model : model // ignore: cast_nullable_to_non_nullable
 as String,messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
-as List<Map<String, dynamic>>,tools: freezed == tools ? _self._tools : tools // ignore: cast_nullable_to_non_nullable
-as List<Map<String, dynamic>>?,tool_choice: freezed == tool_choice ? _self._tool_choice : tool_choice // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,
+as List<Map<String, dynamic>>,
   ));
 }
 

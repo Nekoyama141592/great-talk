@@ -19,6 +19,7 @@ import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/chat/components/menu_button.dart';
 import 'package:great_talk/views/chat/components/msg_card.dart';
+import 'package:great_talk/views/common/async_screen/async_screen.dart';
 import 'package:great_talk/views/components/app_bar_action.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
@@ -60,18 +61,11 @@ class ChatPage extends HookConsumerWidget {
     }
 
     return Scaffold(
-      // AsyncValue.when を使って、ローディング・エラー・データ表示を切り替える
-      body: chatStateAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error:
-            (err, stack) => Scaffold(
-              appBar: AppBar(),
-              body: Center(child: Text('エラーが発生しました: $stack')),
-            ),
+      body: AsyncScreen(
+        asyncValue: chatStateAsync,
         data: (ChatState data) {
           final Post post = data.post;
           final List<TextMessage> messages = data.messages;
-          final bool isGenerating = data.isGenerating;
           final String currentUserId =
               ref.watch(streamAuthUidProvider).value ?? "";
 
@@ -160,7 +154,6 @@ class ChatPage extends HookConsumerWidget {
                 //
                 MenuButton(
                   onMenuPressed: () {
-                    RouteCore.back(context);
                     ChatUiCore.onMenuPressed(
                       context: context,
                       post: post,
@@ -194,22 +187,8 @@ class ChatPage extends HookConsumerWidget {
                       controller: scrollController,
                       itemCount: messages.length,
                       itemBuilder: ((context, index) {
-                        // 生成中のメッセージかどうかを判定
-                        final bool isGeneratingMsg =
-                            isGenerating && index == messages.length - 1;
                         final image = data.postImage;
-                        if (isGeneratingMsg) {
-                          // AIがメッセージを生成中の表示
-                          return MsgCard(
-                            isMyMsg: false,
-                            isAnotherDay: isAnotherDay(messages, index),
-                            text: data.realtimeRes, // リアルタイムで更新されるテキスト
-                            createdAt: messages[index].typedCreatedAt(),
-                            postImage:
-                                image != null ? base64Decode(image) : null,
-                          );
-                        } else {
-                          // 通常のメッセージ表示
+                        // 通常のメッセージ表示
                           final message = messages[index];
                           final String text = message.typedText().value;
                           final bool isMyMessage =
@@ -223,13 +202,10 @@ class ChatPage extends HookConsumerWidget {
                             postImage:
                                 image != null ? base64Decode(image) : null,
                           );
-                        }
                       }),
                     ),
                   ),
-                  // メッセージ生成中でなければ入力フィールドを表示
-                  if (!isGenerating)
-                    Row(
+                  Row(
                       children: [
                         const BasicWidthBox(),
                         RoundedInputField(
@@ -242,26 +218,26 @@ class ChatPage extends HookConsumerWidget {
                             );
                             result.when(
                               success:
-                                  (_) {
+                                  (res) {
                                     ToastUiCore.showSuccessSnackBar(
                                     context,
                                     '応答の生成に成功しました',
                                   );
                                   inputController.clear();
-                                  chatNotifier().onSuccess();
+                                  chatNotifier().onSuccess(res);
                                   },
-                              failure:
-                                  (msg) => ToastUiCore.showFailureSnackBar(
-                                    context,
-                                    msg,
-                                  ),
+                              failure: (msg) {
+                                     ToastUiCore.showFailureSnackBar(
+                                        context,
+                                        msg,
+                                      );
+                                    chatNotifier().onFailure();
+                                  }
                             );
                           },
                         ),
                       ],
                     )
-                  else
-                    const SizedBox.shrink(), // 生成中は非表示
                 ],
               ),
             ),

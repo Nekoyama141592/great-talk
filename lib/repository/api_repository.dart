@@ -4,10 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:great_talk/core/json_core.dart';
 import 'package:great_talk/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
-import 'package:great_talk/model/rest_api/generate_image/request/generate_image_request.dart';
-import 'package:great_talk/model/rest_api/generate_image/response/generate_image_response.dart';
+import 'package:great_talk/model/rest_api/open_ai/generate_image/request/generate_image_request.dart';
+import 'package:great_talk/model/rest_api/open_ai/generate_image/response/generate_image_response.dart';
 import 'package:great_talk/model/rest_api/get_object/request/get_object_request.dart';
 import 'package:great_talk/model/rest_api/get_object/response/get_object_response.dart';
+import 'package:great_talk/model/rest_api/open_ai/generate_text/request/generate_text_request.dart';
+import 'package:great_talk/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/rest_api/put_object/response/put_object_response.dart';
 import 'package:great_talk/repository/result/result.dart' as rs;
@@ -89,12 +91,12 @@ class ApiRepository {
       return null;
     }
   }
-  rs.FutureResult<Map<String,dynamic>?> generateText() async {
+  rs.FutureResult<GenerateTextResponse> generateText(GenerateTextRequest request) async {
     try {
       const name = 'generateTextV2';
-      final requestData = <String,dynamic>{};
+      final requestData = request.toJson();
       final result = await _call(name, requestData);
-      final res = result;
+      final res = GenerateTextResponse.fromJson(result);
       return rs.Result.success(res);
     } catch (e) {
       debugPrint('generateText: ${e.toString()}');

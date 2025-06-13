@@ -8,16 +8,11 @@ part 'chat_state.g.dart';
 abstract class ChatState with _$ChatState {
   const ChatState._();
   const factory ChatState({
-    /// AIが応答を生成中かどうか
-    @Default(false) bool isGenerating,
-
-    /// チャットのメッセージリスト
     @Default([]) List<TextMessage> messages,
     required Post post,
     String? postImage,
     @Default(false) bool isPicked,
     String? pickedImage,
-    @Default("") String realtimeRes,
   }) = _ChatState;
 
   factory ChatState.fromJson(Map<String, dynamic> json) =>

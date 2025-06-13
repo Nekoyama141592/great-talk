@@ -9,12 +9,10 @@ part of 'generate_text_response.dart';
 _GenerateTextResponse _$GenerateTextResponseFromJson(
   Map<String, dynamic> json,
 ) => _GenerateTextResponse(
-  choices:
-      (json['choices'] as List<dynamic>)
-          .map((e) => e as Map<String, dynamic>)
-          .toList(),
+  model: json['model'] as String,
+  content: json['content'] as String,
 );
 
 Map<String, dynamic> _$GenerateTextResponseToJson(
   _GenerateTextResponse instance,
-) => <String, dynamic>{'choices': instance.choices};
+) => <String, dynamic>{'model': instance.model, 'content': instance.content};

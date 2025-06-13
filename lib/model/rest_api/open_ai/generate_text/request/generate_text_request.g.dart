@@ -13,18 +13,8 @@ _GenerateTextRequest _$GenerateTextRequestFromJson(Map<String, dynamic> json) =>
           (json['messages'] as List<dynamic>)
               .map((e) => e as Map<String, dynamic>)
               .toList(),
-      tools:
-          (json['tools'] as List<dynamic>?)
-              ?.map((e) => e as Map<String, dynamic>)
-              .toList(),
-      tool_choice: json['tool_choice'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$GenerateTextRequestToJson(
   _GenerateTextRequest instance,
-) => <String, dynamic>{
-  'model': instance.model,
-  'messages': instance.messages,
-  'tools': instance.tools,
-  'tool_choice': instance.tool_choice,
-};
+) => <String, dynamic>{'model': instance.model, 'messages': instance.messages};

@@ -11,7 +11,6 @@ abstract class SaveTextMsg with _$SaveTextMsg {
     required DateTime createdAt,
     required String id,
     required String messageType,
-    required String posterUid,
     required String senderUid,
     required Map<String, dynamic> text,
   }) = _SaveTextMsg;
@@ -21,7 +20,6 @@ abstract class SaveTextMsg with _$SaveTextMsg {
     createdAt: textMessage.typedCreatedAt().toDate(),
     id: textMessage.id,
     messageType: textMessage.messageType,
-    posterUid: textMessage.posterUid,
     senderUid: textMessage.senderUid,
     text: textMessage.typedText().toJson(),
   );

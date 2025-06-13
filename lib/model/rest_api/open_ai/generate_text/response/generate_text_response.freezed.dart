@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GenerateTextResponse {
 
- List<Map<String, dynamic>> get choices;
+ String get model; String get content;
 /// Create a copy of GenerateTextResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $GenerateTextResponseCopyWith<GenerateTextResponse> get copyWith => _$GenerateTe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GenerateTextResponse&&const DeepCollectionEquality().equals(other.choices, choices));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GenerateTextResponse&&(identical(other.model, model) || other.model == model)&&(identical(other.content, content) || other.content == content));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(choices));
+int get hashCode => Object.hash(runtimeType,model,content);
 
 @override
 String toString() {
-  return 'GenerateTextResponse(choices: $choices)';
+  return 'GenerateTextResponse(model: $model, content: $content)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $GenerateTextResponseCopyWith<$Res>  {
   factory $GenerateTextResponseCopyWith(GenerateTextResponse value, $Res Function(GenerateTextResponse) _then) = _$GenerateTextResponseCopyWithImpl;
 @useResult
 $Res call({
- List<Map<String, dynamic>> choices
+ String model, String content
 });
 
 
@@ -66,10 +66,11 @@ class _$GenerateTextResponseCopyWithImpl<$Res>
 
 /// Create a copy of GenerateTextResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? choices = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? model = null,Object? content = null,}) {
   return _then(_self.copyWith(
-choices: null == choices ? _self.choices : choices // ignore: cast_nullable_to_non_nullable
-as List<Map<String, dynamic>>,
+model: null == model ? _self.model : model // ignore: cast_nullable_to_non_nullable
+as String,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -80,16 +81,11 @@ as List<Map<String, dynamic>>,
 @JsonSerializable()
 
 class _GenerateTextResponse implements GenerateTextResponse {
-  const _GenerateTextResponse({required final  List<Map<String, dynamic>> choices}): _choices = choices;
+  const _GenerateTextResponse({required this.model, required this.content});
   factory _GenerateTextResponse.fromJson(Map<String, dynamic> json) => _$GenerateTextResponseFromJson(json);
 
- final  List<Map<String, dynamic>> _choices;
-@override List<Map<String, dynamic>> get choices {
-  if (_choices is EqualUnmodifiableListView) return _choices;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_choices);
-}
-
+@override final  String model;
+@override final  String content;
 
 /// Create a copy of GenerateTextResponse
 /// with the given fields replaced by the non-null parameter values.
@@ -104,16 +100,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GenerateTextResponse&&const DeepCollectionEquality().equals(other._choices, _choices));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GenerateTextResponse&&(identical(other.model, model) || other.model == model)&&(identical(other.content, content) || other.content == content));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_choices));
+int get hashCode => Object.hash(runtimeType,model,content);
 
 @override
 String toString() {
-  return 'GenerateTextResponse(choices: $choices)';
+  return 'GenerateTextResponse(model: $model, content: $content)';
 }
 
 
@@ -124,7 +120,7 @@ abstract mixin class _$GenerateTextResponseCopyWith<$Res> implements $GenerateTe
   factory _$GenerateTextResponseCopyWith(_GenerateTextResponse value, $Res Function(_GenerateTextResponse) _then) = __$GenerateTextResponseCopyWithImpl;
 @override @useResult
 $Res call({
- List<Map<String, dynamic>> choices
+ String model, String content
 });
 
 
@@ -141,10 +137,11 @@ class __$GenerateTextResponseCopyWithImpl<$Res>
 
 /// Create a copy of GenerateTextResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? choices = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? model = null,Object? content = null,}) {
   return _then(_GenerateTextResponse(
-choices: null == choices ? _self._choices : choices // ignore: cast_nullable_to_non_nullable
-as List<Map<String, dynamic>>,
+model: null == model ? _self.model : model // ignore: cast_nullable_to_non_nullable
+as String,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

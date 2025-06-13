@@ -16,9 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatState {
 
-/// AIが応答を生成中かどうか
- bool get isGenerating;/// チャットのメッセージリスト
- List<TextMessage> get messages; Post get post; String? get postImage; bool get isPicked; String? get pickedImage; String get realtimeRes;
+ List<TextMessage> get messages; Post get post; String? get postImage; bool get isPicked; String? get pickedImage;
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -31,16 +29,16 @@ $ChatStateCopyWith<ChatState> get copyWith => _$ChatStateCopyWithImpl<ChatState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatState&&(identical(other.isGenerating, isGenerating) || other.isGenerating == isGenerating)&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.post, post) || other.post == post)&&(identical(other.postImage, postImage) || other.postImage == postImage)&&(identical(other.isPicked, isPicked) || other.isPicked == isPicked)&&(identical(other.pickedImage, pickedImage) || other.pickedImage == pickedImage)&&(identical(other.realtimeRes, realtimeRes) || other.realtimeRes == realtimeRes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatState&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.post, post) || other.post == post)&&(identical(other.postImage, postImage) || other.postImage == postImage)&&(identical(other.isPicked, isPicked) || other.isPicked == isPicked)&&(identical(other.pickedImage, pickedImage) || other.pickedImage == pickedImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isGenerating,const DeepCollectionEquality().hash(messages),post,postImage,isPicked,pickedImage,realtimeRes);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(messages),post,postImage,isPicked,pickedImage);
 
 @override
 String toString() {
-  return 'ChatState(isGenerating: $isGenerating, messages: $messages, post: $post, postImage: $postImage, isPicked: $isPicked, pickedImage: $pickedImage, realtimeRes: $realtimeRes)';
+  return 'ChatState(messages: $messages, post: $post, postImage: $postImage, isPicked: $isPicked, pickedImage: $pickedImage)';
 }
 
 
@@ -51,7 +49,7 @@ abstract mixin class $ChatStateCopyWith<$Res>  {
   factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) _then) = _$ChatStateCopyWithImpl;
 @useResult
 $Res call({
- bool isGenerating, List<TextMessage> messages, Post post, String? postImage, bool isPicked, String? pickedImage, String realtimeRes
+ List<TextMessage> messages, Post post, String? postImage, bool isPicked, String? pickedImage
 });
 
 
@@ -68,16 +66,14 @@ class _$ChatStateCopyWithImpl<$Res>
 
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isGenerating = null,Object? messages = null,Object? post = null,Object? postImage = freezed,Object? isPicked = null,Object? pickedImage = freezed,Object? realtimeRes = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? messages = null,Object? post = null,Object? postImage = freezed,Object? isPicked = null,Object? pickedImage = freezed,}) {
   return _then(_self.copyWith(
-isGenerating: null == isGenerating ? _self.isGenerating : isGenerating // ignore: cast_nullable_to_non_nullable
-as bool,messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
+messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
 as List<TextMessage>,post: null == post ? _self.post : post // ignore: cast_nullable_to_non_nullable
 as Post,postImage: freezed == postImage ? _self.postImage : postImage // ignore: cast_nullable_to_non_nullable
 as String?,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
 as bool,pickedImage: freezed == pickedImage ? _self.pickedImage : pickedImage // ignore: cast_nullable_to_non_nullable
-as String?,realtimeRes: null == realtimeRes ? _self.realtimeRes : realtimeRes // ignore: cast_nullable_to_non_nullable
-as String,
+as String?,
   ));
 }
 /// Create a copy of ChatState
@@ -97,14 +93,10 @@ $PostCopyWith<$Res> get post {
 @JsonSerializable()
 
 class _ChatState extends ChatState {
-  const _ChatState({this.isGenerating = false, final  List<TextMessage> messages = const [], required this.post, this.postImage, this.isPicked = false, this.pickedImage, this.realtimeRes = ""}): _messages = messages,super._();
+  const _ChatState({final  List<TextMessage> messages = const [], required this.post, this.postImage, this.isPicked = false, this.pickedImage}): _messages = messages,super._();
   factory _ChatState.fromJson(Map<String, dynamic> json) => _$ChatStateFromJson(json);
 
-/// AIが応答を生成中かどうか
-@override@JsonKey() final  bool isGenerating;
-/// チャットのメッセージリスト
  final  List<TextMessage> _messages;
-/// チャットのメッセージリスト
 @override@JsonKey() List<TextMessage> get messages {
   if (_messages is EqualUnmodifiableListView) return _messages;
   // ignore: implicit_dynamic_type
@@ -115,7 +107,6 @@ class _ChatState extends ChatState {
 @override final  String? postImage;
 @override@JsonKey() final  bool isPicked;
 @override final  String? pickedImage;
-@override@JsonKey() final  String realtimeRes;
 
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
@@ -130,16 +121,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatState&&(identical(other.isGenerating, isGenerating) || other.isGenerating == isGenerating)&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.post, post) || other.post == post)&&(identical(other.postImage, postImage) || other.postImage == postImage)&&(identical(other.isPicked, isPicked) || other.isPicked == isPicked)&&(identical(other.pickedImage, pickedImage) || other.pickedImage == pickedImage)&&(identical(other.realtimeRes, realtimeRes) || other.realtimeRes == realtimeRes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatState&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.post, post) || other.post == post)&&(identical(other.postImage, postImage) || other.postImage == postImage)&&(identical(other.isPicked, isPicked) || other.isPicked == isPicked)&&(identical(other.pickedImage, pickedImage) || other.pickedImage == pickedImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,isGenerating,const DeepCollectionEquality().hash(_messages),post,postImage,isPicked,pickedImage,realtimeRes);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_messages),post,postImage,isPicked,pickedImage);
 
 @override
 String toString() {
-  return 'ChatState(isGenerating: $isGenerating, messages: $messages, post: $post, postImage: $postImage, isPicked: $isPicked, pickedImage: $pickedImage, realtimeRes: $realtimeRes)';
+  return 'ChatState(messages: $messages, post: $post, postImage: $postImage, isPicked: $isPicked, pickedImage: $pickedImage)';
 }
 
 
@@ -150,7 +141,7 @@ abstract mixin class _$ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Re
   factory _$ChatStateCopyWith(_ChatState value, $Res Function(_ChatState) _then) = __$ChatStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isGenerating, List<TextMessage> messages, Post post, String? postImage, bool isPicked, String? pickedImage, String realtimeRes
+ List<TextMessage> messages, Post post, String? postImage, bool isPicked, String? pickedImage
 });
 
 
@@ -167,16 +158,14 @@ class __$ChatStateCopyWithImpl<$Res>
 
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isGenerating = null,Object? messages = null,Object? post = null,Object? postImage = freezed,Object? isPicked = null,Object? pickedImage = freezed,Object? realtimeRes = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? messages = null,Object? post = null,Object? postImage = freezed,Object? isPicked = null,Object? pickedImage = freezed,}) {
   return _then(_ChatState(
-isGenerating: null == isGenerating ? _self.isGenerating : isGenerating // ignore: cast_nullable_to_non_nullable
-as bool,messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
+messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
 as List<TextMessage>,post: null == post ? _self.post : post // ignore: cast_nullable_to_non_nullable
 as Post,postImage: freezed == postImage ? _self.postImage : postImage // ignore: cast_nullable_to_non_nullable
 as String?,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
 as bool,pickedImage: freezed == pickedImage ? _self.pickedImage : pickedImage // ignore: cast_nullable_to_non_nullable
-as String?,realtimeRes: null == realtimeRes ? _self.realtimeRes : realtimeRes // ignore: cast_nullable_to_non_nullable
-as String,
+as String?,
   ));
 }
 

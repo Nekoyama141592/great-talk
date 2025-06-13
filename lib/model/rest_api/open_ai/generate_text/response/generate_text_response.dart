@@ -6,7 +6,8 @@ part 'generate_text_response.g.dart';
 @freezed
 abstract class GenerateTextResponse with _$GenerateTextResponse {
   const factory GenerateTextResponse({
-    required List<Map<String, dynamic>> choices,
+    required String model,
+    required String content
   }) = _GenerateTextResponse;
   factory GenerateTextResponse.fromJson(Map<String, dynamic> json) =>
       _$GenerateTextResponseFromJson(json);

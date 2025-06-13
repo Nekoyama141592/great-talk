@@ -1,6 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:great_talk/consts/chat_constants.dart';
+import 'package:great_talk/model/rest_api/open_ai/generate_text/request/generate_text_request.dart';
+import 'package:great_talk/model/rest_api/open_ai/generate_text/request/message/generate_text_request_message.dart';
+import 'package:great_talk/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
 import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
@@ -26,12 +30,12 @@ class ChatViewModel extends _$ChatViewModel {
     // 投稿画像とローカルのチャット履歴を取得
     final postImage = await _fetchPostImage(post);
     final localMessages = _getLocalMessages(post.postId);
-
-    return ChatState(post: post, postImage: postImage, messages: localMessages);
+    final messages = localMessages.isEmpty ? [TextMessage.assistant(post.typedDescription().value, post)] : localMessages;
+    return ChatState(post: post, postImage: postImage, messages: messages);
   }
 
   /// メッセージ送信ボタンが押されたときの処理
-  FutureResult<Map<String,dynamic>?>  onSendPressed(
+  FutureResult<GenerateTextResponse> onSendPressed(
     String text,
     ScrollController scrollController,
   ) async {
@@ -39,28 +43,26 @@ class ChatViewModel extends _$ChatViewModel {
     if (!isSubscribing) {
       return const Result.failure('有料プランに加入する必要があります');
     }
-    // APIを実行
     return execute(scrollController,text);
   }
 
-  /// メッセージ送信の実行ロジック
-  FutureResult<Map<String,dynamic>?> execute(
+  void startLoading() {
+    state = AsyncValue.loading();
+  }
+
+  FutureResult<GenerateTextResponse> execute(
     ScrollController scrollController,
     String content,
   ) async {
-    final currentState = state.value!;
-    if (currentState.isGenerating) {
-      return const Result.failure('応答を生成中です');
-    }
-
-    // 状態を「生成中」に更新
-    state = AsyncData(currentState.copyWith(isGenerating: true));
-    // 自分のメッセージをリストに追加
-    _addMyMessage(content);
+    final messages = _addMyMessage(content);
     // UIを一番下にスクロール
     _scrollToBottom(scrollController);
-
-    return ref.read(apiRepositoryProvider).generateText();
+    final requestMessages = messages.map((e) {
+      final role = e.role(postId);
+      return GenerateTextRequestMessage(role: role, content: e.typedText().value);
+    }).toList()..insert(0, GenerateTextRequestMessage.system(state.value!.post.typedDescription().value));
+    final request = GenerateTextRequest.fromMessages(ChatConstants.basicModel, requestMessages);
+    return ref.read(apiRepositoryProvider).generateText(request);
   }
 
 
@@ -80,27 +82,34 @@ class ChatViewModel extends _$ChatViewModel {
     return ref.read(localRepositoryProvider).getMessages(postId);
   }
 
-  void _addMyMessage(String content) {
+  List<TextMessage> _addMyMessage(String content) {
     final uid = ref.read(streamAuthUidProvider).value;
-    if (uid == null) return;
-    final textMessage = _newTextMessage(content, uid);
+    if (uid == null) return state.value!.messages;
+    final textMessage = TextMessage.user(content, uid);
     final newMessages = List<TextMessage>.from(state.value!.messages)
       ..add(textMessage);
     state = AsyncData(state.value!.copyWith(messages: newMessages));
+    return newMessages;
   }
 
-  Future<void> onSuccess() async {
-    final stateValue = state.value;
-    if (stateValue == null) return;
-    final postId = stateValue.post.postId;
-    await ref
+  Future<void> onSuccess(GenerateTextResponse res) async {
+    final currentUid = ref.read(streamAuthUidProvider).value;
+    if (currentUid == null) return;
+    final stateValue = state.value!;
+    final post = stateValue.post;
+    final postId = post.postId;
+    final newMessage = TextMessage.assistant(res.content, post);
+    final newMessages= [...stateValue.messages,newMessage];
+    state = AsyncData(stateValue.copyWith(messages: newMessages));
+    return ref
         .read(localRepositoryProvider)
-        .setMessages(postId, stateValue.messages);
+        .setMessages(postId, newMessages);
   }
 
-  TextMessage _newTextMessage(String content, String senderUid) {
-    final post = state.value!.post;
-    return TextMessage.instance(content, post, senderUid);
+  void onFailure() {
+    final stateValue = state.value!;
+    final newMessages = [...stateValue.messages]..removeLast();
+    state = AsyncData(stateValue.copyWith(messages: newMessages));
   }
 
   void _scrollToBottom(ScrollController scrollController) {
