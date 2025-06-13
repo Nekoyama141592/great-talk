@@ -15,7 +15,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/chatgpt_contants.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
-import 'package:great_talk/ui_core/toast_ui_core.dart';
 part 'chat_view_model.g.dart';
 
 @riverpod
@@ -36,7 +35,6 @@ class ChatViewModel extends _$ChatViewModel {
 
   /// メッセージ送信ボタンが押されたときの処理
   FutureResult<bool> onSendPressed(
-    void Function() unFocus, // or Navigator
     TextEditingController inputController,
     ScrollController scrollController,
   ) async {
@@ -45,7 +43,6 @@ class ChatViewModel extends _$ChatViewModel {
       return const Result.failure('有料プランに加入する必要があります');
     }
     final text = inputController.text;
-    unFocus.call();
     // APIを実行
     return execute(scrollController, text, inputController);
   }
@@ -84,47 +81,26 @@ class ChatViewModel extends _$ChatViewModel {
     ScrollController scrollController,
   ) async {
     final client = ref.read(chatGptSdkClientProvider);
-    final stream = client
-        .onChatCompletionSSE(request: request)
-        .transform(
-          StreamTransformer.fromHandlers(
-            handleError: (err, stackTrace, sink) {
-              if (err is OpenAIAuthError) {
-                ToastUiCore.showFlutterToast(
-                  "OpenAIの認証でエラーが発生しました。運営の対応をお待ちください。",
-                );
-              }
-              if (err is OpenAIRateLimitError) {
-                ToastUiCore.showFlutterToast(
-                  "RateLimitエラーが発生しました。しばらく待ってからお試しください。",
-                );
-              }
-              if (err is OpenAIServerError) {
-                ToastUiCore.showFlutterToast(
-                  "OpenAIのサーバーでエラーが発生しました。しばらく待ってからお試しください。",
-                );
-              }
-            },
-          ),
-        );
-    String fullResponse = "";
-
-    try {
-      await for (final it in stream) {
-        final content =
-            ((it as ChatResponseSSE)).choices?.last.message?.content;
+          String fullResponse = "";
+    Result<bool> result = Result.success(true);
+    client
+        .onChatCompletionSSE(request: request).listen((it) {
+          final content =
+            it.choices?.last.message?.content;
         if (content != null && content.isNotEmpty) {
           fullResponse += content;
           state = AsyncData(state.value!.copyWith(realtimeRes: fullResponse));
           _scrollToBottom(scrollController);
         }
-      }
-      _onSseDone(fullResponse);
-      return const Result.success(true);
-    } catch (e) {
-      _onSseError(e);
-      return const Result.failure('エラーが発生しました');
-    }
+        },onDone: () {
+          _onSseDone(fullResponse);
+          result = Result.success(true);
+        },
+        onError: (e) {
+          _onSseError(e);
+          result = Result.failure('生成に失敗しました');
+        });
+    return result;
   }
 
   /// SSEストリームが正常に完了したときの処理

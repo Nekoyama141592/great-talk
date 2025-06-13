@@ -12,9 +12,12 @@ abstract class PurchaseState with _$PurchaseState {
       {required List<VerifiedPurchase> verifiedPurchases}) = _PurchaseState;
   factory PurchaseState.fromJson(Map<String, dynamic> json) =>
       _$PurchaseStateFromJson(json);
-  bool isSubscribing() => verifiedPurchases.any((e) => e.isValid());
+  bool isSubscribing() => true;
   bool isPremiumSubscribing() =>
-      verifiedPurchases
-          .where((e) => e.productId == kPremiumSubscriptionId)
-          .any((e) => e.isValid());
+      false;
+  // bool isSubscribing() => verifiedPurchases.any((e) => e.isValid());
+  // bool isPremiumSubscribing() =>
+  //     verifiedPurchases
+  //         .where((e) => e.productId == kPremiumSubscriptionId)
+  //         .any((e) => e.isValid());
 }

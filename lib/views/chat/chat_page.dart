@@ -235,8 +235,8 @@ class ChatPage extends HookConsumerWidget {
                         RoundedInputField(
                           controller: inputController,
                           send: () async {
+                            FocusScope.of(context).unfocus();
                             final result = await chatNotifier.onSendPressed(
-                              FocusScope.of(context).unfocus,
                               inputController,
                               scrollController,
                             );
