@@ -3,7 +3,6 @@
 packages=(
   "auto_route"
   "cached_network_image"
-  "chat_gpt_sdk"
   "cloud_firestore"
   "cloud_functions"
   "collection"

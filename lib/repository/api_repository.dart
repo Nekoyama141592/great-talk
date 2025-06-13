@@ -89,6 +89,18 @@ class ApiRepository {
       return null;
     }
   }
+  rs.FutureResult<Map<String,dynamic>?> generateText() async {
+    try {
+      const name = 'generateTextV2';
+      final requestData = <String,dynamic>{};
+      final result = await _call(name, requestData);
+      final res = result;
+      return rs.Result.success(res);
+    } catch (e) {
+      debugPrint('generateText: ${e.toString()}');
+      return rs.Result.failure('テキストの生成に失敗しました');
+    }
+  }
 
   rs.FutureResult<VerifiedPurchase> verifyAndroidReceipt(
     PurchaseDetails purchaseDetails,

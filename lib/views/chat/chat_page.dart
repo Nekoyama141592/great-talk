@@ -45,7 +45,7 @@ class ChatPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chatStateAsync = ref.watch(chatViewModelProvider(uid, postId));
-    final chatNotifier = ref.read(chatViewModelProvider(uid, postId).notifier);
+    ChatViewModel chatNotifier() => ref.read(chatViewModelProvider(uid, postId).notifier);
     final isAdmin =
         ref.watch(currentUserNotifierProvider).value?.isAdmin() ?? false;
     final inputController = useTextEditingController();
@@ -165,7 +165,7 @@ class ChatPage extends HookConsumerWidget {
                       context: context,
                       post: post,
                       cleanLocalMessage: (innerContext) async {
-                        final result = await chatNotifier.cleanLocalMessage();
+                        final result = await chatNotifier().cleanLocalMessage();
                         result.when(
                           success: (_) {
                             ToastUiCore.showSuccessSnackBar(
@@ -236,16 +236,20 @@ class ChatPage extends HookConsumerWidget {
                           controller: inputController,
                           send: () async {
                             FocusScope.of(context).unfocus();
-                            final result = await chatNotifier.onSendPressed(
-                              inputController,
+                            final result = await chatNotifier().onSendPressed(
+                              inputController.text,
                               scrollController,
                             );
                             result.when(
                               success:
-                                  (_) => ToastUiCore.showSuccessSnackBar(
+                                  (_) {
+                                    ToastUiCore.showSuccessSnackBar(
                                     context,
                                     '応答の生成に成功しました',
-                                  ),
+                                  );
+                                  inputController.clear();
+                                  chatNotifier().onSuccess();
+                                  },
                               failure:
                                   (msg) => ToastUiCore.showFailureSnackBar(
                                     context,
