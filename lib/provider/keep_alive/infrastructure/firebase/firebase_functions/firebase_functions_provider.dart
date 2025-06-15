@@ -6,4 +6,4 @@ part 'firebase_functions_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 FirebaseFunctions firebaseFunctions(Ref ref) =>
-    FirebaseFunctions.instance;
+    FirebaseFunctions.instanceFor(region: 'asia-northeast1');
