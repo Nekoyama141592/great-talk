@@ -1,3 +1,4 @@
+import 'package:great_talk/repository/api_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
@@ -9,8 +10,9 @@ import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/repository/database_repository.dart';
 
 class PostUseCase {
-  PostUseCase({required this.firestoreRepository});
+  PostUseCase({required this.firestoreRepository,required this.apiRepository});
   final DatabaseRepository firestoreRepository;
+  final ApiRepository apiRepository;
 
   FutureResult<bool> mutePost(
     Post post,
@@ -63,7 +65,12 @@ class PostUseCase {
     return firestoreRepository.deleteLikePostInfo(currentUid, post, tokenId);
   }
 
-  FutureResult<bool> deletePost(Post post) {
-    return firestoreRepository.deletePost(post);
+  FutureResult<bool> deletePost(Post post) async {
+    final result = await firestoreRepository.deletePost(post);
+    result.when(success: (_) {
+      final image = post.typedImage();
+      apiRepository.deleteObject(image);
+    },  failure: (_) {});
+    return result;
   }
 }

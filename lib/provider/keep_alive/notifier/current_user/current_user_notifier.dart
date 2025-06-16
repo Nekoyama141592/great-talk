@@ -3,6 +3,7 @@ import 'package:great_talk/model/database_schema/private_user/private_user.dart'
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/global/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
+import 'package:great_talk/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/provider/repository/auth/auth_repository_provider.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
@@ -130,6 +131,10 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
           (e) async =>
               authResult = const Result.failure('データベースからユーザーを削除できませんでした'),
     );
+    authResult.when(success: (_) {
+      final image = user.typedImage();
+      ref.read(apiRepositoryProvider).deleteObject(image);
+    }, failure: (_) {});
     return authResult;
   }
 

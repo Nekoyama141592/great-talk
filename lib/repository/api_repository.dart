@@ -2,6 +2,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:great_talk/core/json_core.dart';
+import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
 import 'package:great_talk/model/rest_api/open_ai/generate_image/request/generate_image_request.dart';
@@ -63,10 +64,11 @@ class ApiRepository {
   }
 
   rs.FutureResult<DeleteObjectResponse> deleteObject(
-    DeleteObjectRequest request,
+    DetectedImage image,
   ) async {
     try {
       const name = 'deleteObjectV2';
+      final request = DeleteObjectRequest(object: image.value);
       final result = await _call(name, request.toJson());
       final res = DeleteObjectResponse.fromJson(result);
       return rs.Result.success(res);
