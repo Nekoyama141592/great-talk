@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DeleteObjectResponse {
 
- String get base64Image;
+ int? get httpStatusCode;
 /// Create a copy of DeleteObjectResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $DeleteObjectResponseCopyWith<DeleteObjectResponse> get copyWith => _$DeleteObje
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteObjectResponse&&(identical(other.base64Image, base64Image) || other.base64Image == base64Image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeleteObjectResponse&&(identical(other.httpStatusCode, httpStatusCode) || other.httpStatusCode == httpStatusCode));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,base64Image);
+int get hashCode => Object.hash(runtimeType,httpStatusCode);
 
 @override
 String toString() {
-  return 'DeleteObjectResponse(base64Image: $base64Image)';
+  return 'DeleteObjectResponse(httpStatusCode: $httpStatusCode)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $DeleteObjectResponseCopyWith<$Res>  {
   factory $DeleteObjectResponseCopyWith(DeleteObjectResponse value, $Res Function(DeleteObjectResponse) _then) = _$DeleteObjectResponseCopyWithImpl;
 @useResult
 $Res call({
- String base64Image
+ int? httpStatusCode
 });
 
 
@@ -66,10 +66,10 @@ class _$DeleteObjectResponseCopyWithImpl<$Res>
 
 /// Create a copy of DeleteObjectResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? base64Image = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? httpStatusCode = freezed,}) {
   return _then(_self.copyWith(
-base64Image: null == base64Image ? _self.base64Image : base64Image // ignore: cast_nullable_to_non_nullable
-as String,
+httpStatusCode: freezed == httpStatusCode ? _self.httpStatusCode : httpStatusCode // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 
@@ -80,10 +80,10 @@ as String,
 @JsonSerializable()
 
 class _DeleteObjectResponse extends DeleteObjectResponse {
-  const _DeleteObjectResponse({required this.base64Image}): super._();
+  const _DeleteObjectResponse({required this.httpStatusCode}): super._();
   factory _DeleteObjectResponse.fromJson(Map<String, dynamic> json) => _$DeleteObjectResponseFromJson(json);
 
-@override final  String base64Image;
+@override final  int? httpStatusCode;
 
 /// Create a copy of DeleteObjectResponse
 /// with the given fields replaced by the non-null parameter values.
@@ -98,16 +98,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeleteObjectResponse&&(identical(other.base64Image, base64Image) || other.base64Image == base64Image));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeleteObjectResponse&&(identical(other.httpStatusCode, httpStatusCode) || other.httpStatusCode == httpStatusCode));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,base64Image);
+int get hashCode => Object.hash(runtimeType,httpStatusCode);
 
 @override
 String toString() {
-  return 'DeleteObjectResponse(base64Image: $base64Image)';
+  return 'DeleteObjectResponse(httpStatusCode: $httpStatusCode)';
 }
 
 
@@ -118,7 +118,7 @@ abstract mixin class _$DeleteObjectResponseCopyWith<$Res> implements $DeleteObje
   factory _$DeleteObjectResponseCopyWith(_DeleteObjectResponse value, $Res Function(_DeleteObjectResponse) _then) = __$DeleteObjectResponseCopyWithImpl;
 @override @useResult
 $Res call({
- String base64Image
+ int? httpStatusCode
 });
 
 
@@ -135,10 +135,10 @@ class __$DeleteObjectResponseCopyWithImpl<$Res>
 
 /// Create a copy of DeleteObjectResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? base64Image = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? httpStatusCode = freezed,}) {
   return _then(_DeleteObjectResponse(
-base64Image: null == base64Image ? _self.base64Image : base64Image // ignore: cast_nullable_to_non_nullable
-as String,
+httpStatusCode: freezed == httpStatusCode ? _self.httpStatusCode : httpStatusCode // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 

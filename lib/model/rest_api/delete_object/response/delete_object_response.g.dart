@@ -8,8 +8,10 @@ part of 'delete_object_response.dart';
 
 _DeleteObjectResponse _$DeleteObjectResponseFromJson(
   Map<String, dynamic> json,
-) => _DeleteObjectResponse(base64Image: json['base64Image'] as String);
+) => _DeleteObjectResponse(
+  httpStatusCode: (json['httpStatusCode'] as num?)?.toInt(),
+);
 
 Map<String, dynamic> _$DeleteObjectResponseToJson(
   _DeleteObjectResponse instance,
-) => <String, dynamic>{'base64Image': instance.base64Image};
+) => <String, dynamic>{'httpStatusCode': instance.httpStatusCode};

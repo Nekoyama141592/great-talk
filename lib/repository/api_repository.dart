@@ -71,6 +71,7 @@ class ApiRepository {
       final request = DeleteObjectRequest(object: image.value);
       final result = await _call(name, request.toJson());
       final res = DeleteObjectResponse.fromJson(result);
+      debugPrint('画像の削除が成功しました');
       return rs.Result.success(res);
     } catch (e) {
       debugPrint('deleteObject: ${e.toString()}');
