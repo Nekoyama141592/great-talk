@@ -15,7 +15,6 @@ abstract class UserUpdateLog with _$UserUpdateLog {
     required String stringUserName,
     required String uid,
     required Map<String, dynamic> image,
-    // required dynamic userRef, // TODO: 対応
   }) = _UserUpdateLog;
   factory UserUpdateLog.fromJson(Map<String, dynamic> json) =>
       _$UserUpdateLogFromJson(json);

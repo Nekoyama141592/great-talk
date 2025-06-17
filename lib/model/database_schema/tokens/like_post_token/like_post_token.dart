@@ -13,7 +13,6 @@ abstract class LikePostToken with _$LikePostToken {
     required String activeUid,
     required dynamic createdAt,
     required String passiveUid,
-    // required dynamic postRef, // TODO: 対応
     required String postId,
     required String tokenId,
     required String tokenType,

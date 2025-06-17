@@ -17,8 +17,6 @@ abstract class TextMessage with _$TextMessage {
     required dynamic createdAt,
     required String id,
     required String messageType,
-    // dynamic postRef, // TODO: 対応
-    // required String posterUid, // TODO: 対応
     required String senderUid,
     required Map<String, dynamic> text,
   }) = _TextMessage;

@@ -11,7 +11,6 @@ abstract class PostLike with _$PostLike {
     required String activeUid,
     required dynamic createdAt,
     required String passiveUid,
-    // required dynamic postRef, // TODO: 対応
     required String postId,
   }) = _PostLike;
   factory PostLike.fromJson(Map<String, dynamic> json) =>

@@ -25,7 +25,6 @@ abstract class PublicUser with _$PublicUser {
     @Default([]) List<Map<String, dynamic>> links,
     @Default(0) int muteCount,
     @Default(0) int postCount,
-    // required dynamic ref, // TODO: 対応
     @Default(0) int reportCount,
     @Default(0.0) double score,
     @Default({}) Map<String, dynamic> searchToken,

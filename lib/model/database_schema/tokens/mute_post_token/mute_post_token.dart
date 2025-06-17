@@ -13,7 +13,6 @@ abstract class MutePostToken with _$MutePostToken {
     required String activeUid,
     required dynamic createdAt,
     required String postId,
-    // required dynamic postRef, // TODO: 対応
     required String tokenId,
     required String tokenType,
   }) = _MutePostToken;

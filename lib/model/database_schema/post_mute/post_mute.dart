@@ -11,7 +11,6 @@ abstract class PostMute with _$PostMute {
     required String activeUid,
     required dynamic createdAt,
     required String postId,
-    // required dynamic postRef, // TODO: 対応
   }) = _PostMute;
   factory PostMute.fromJson(Map<String, dynamic> json) =>
       _$PostMuteFromJson(json);

@@ -16,7 +16,6 @@ abstract class PrivateUser with _$PrivateUser {
     @Default("") String gender,
     @Default("") String ipAddress,
     @Default(false) bool isAdmin,
-    // required dynamic ref, // TODO: 対応
     required String uid,
     required dynamic updatedAt,
   }) = _PrivateUser;

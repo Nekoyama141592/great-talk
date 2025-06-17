@@ -27,7 +27,6 @@ abstract class Post with _$Post {
     @Default(0) int msgCount,
     @Default(0) int muteCount,
     required String postId,
-    // required dynamic ref, // TODO: 対応
     @Default(0) int reportCount,
     @Default(0.0) double score,
     required Map<String, dynamic> searchToken,

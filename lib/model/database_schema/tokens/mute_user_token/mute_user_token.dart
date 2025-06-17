@@ -13,7 +13,7 @@ abstract class MuteUserToken with _$MuteUserToken {
     required String activeUid,
     required dynamic createdAt,
     required String passiveUid,
-    // required dynamic passiveUserRef, // TODO: 対応
+
     required String tokenId,
     required String tokenType,
   }) = _MuteUserToken;

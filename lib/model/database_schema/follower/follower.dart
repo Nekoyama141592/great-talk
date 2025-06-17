@@ -8,11 +8,9 @@ part 'follower.g.dart';
 abstract class Follower with _$Follower {
   const Follower._();
   const factory Follower({
-    // required dynamic activeUserRef, // TODO: 対応
-    required String activeUid, // TODO: 新規追加対応
+    required String activeUid,
     required dynamic createdAt,
-    required String passiveUid, // TODO: 新規追加対応
-    // required dynamic passiveUserRef, // TODO: 対応
+    required String passiveUid,
   }) = _Follower;
   factory Follower.fromJson(Map<String, dynamic> json) =>
       _$FollowerFromJson(json);

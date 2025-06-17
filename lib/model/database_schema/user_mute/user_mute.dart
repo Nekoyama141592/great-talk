@@ -9,10 +9,8 @@ part 'user_mute.g.dart';
 abstract class UserMute with _$UserMute {
   const factory UserMute({
     required String activeUid,
-    // required dynamic activeUserRef, // TODO: 対応
     required dynamic createdAt,
     required String passiveUid,
-    // required dynamic passiveUserRef, // TODO: 対応
   }) = _UserMute;
   factory UserMute.fromJson(Map<String, dynamic> json) =>
       _$UserMuteFromJson(json);

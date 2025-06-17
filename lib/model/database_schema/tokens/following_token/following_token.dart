@@ -13,7 +13,6 @@ abstract class FollowingToken with _$FollowingToken {
   const factory FollowingToken({
     required dynamic createdAt,
     required String passiveUid,
-    // required dynamic passiveUserRef, // TODO: 対応
     required String tokenId,
     required String tokenType,
   }) = _FollowingToken;
