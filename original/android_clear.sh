@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # 実行: source original/android_clear.sh
+
+rm -rf ~/.gradle/caches/
+
 flutter clean
 
 flutter pub cache repair
