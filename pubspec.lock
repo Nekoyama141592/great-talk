@@ -718,14 +718,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.4"
-  flutter_native_timezone:
+  flutter_native_timezone_latest:
     dependency: "direct main"
     description:
-      name: flutter_native_timezone
-      sha256: ed7bfb982f036243de1c068e269182a877100c994f05143c8b26a325e28c1b02
+      name: flutter_native_timezone_latest
+      sha256: "2f3cedd311d6f169652c631307dd33853317df2ff5e5f6812644daec2913439d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "1.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -944,14 +944,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.1.0"
-  image_gallery_saver:
-    dependency: "direct main"
-    description:
-      name: image_gallery_saver
-      sha256: "0aba74216a4d9b0561510cb968015d56b701ba1bd94aace26aacdd8ae5761816"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.3"
   image_picker:
     dependency: "direct main"
     description:

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:flutter_native_timezone_latest/flutter_native_timezone_latest.dart';
 import 'package:great_talk/ui_core/flavor_ui_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -56,7 +56,7 @@ class Notification extends _$Notification with WidgetsBindingObserver {
   /// タイムゾーンを設定する
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
-    final String timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
+    final String timeZoneName = await FlutterNativeTimezoneLatest.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZoneName));
   }
 
