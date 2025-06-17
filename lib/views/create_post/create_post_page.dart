@@ -75,7 +75,7 @@ class CreatePostPage extends ConsumerWidget {
               .onPositiveButtonPressed();
       result.when(
         success: (_) {
-          ToastUiCore.showFailureSnackBar(context, '投稿の作成に成功しました');
+          ToastUiCore.showSuccessSnackBar(context, '投稿の作成に成功しました');
           RouteCore.back(context);
         },
         failure: (msg) {
