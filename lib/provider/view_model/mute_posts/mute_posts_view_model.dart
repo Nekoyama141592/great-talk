@@ -72,8 +72,7 @@ class MutePostsViewModel extends _$MutePostsViewModel
       _createRequestPostIds(),
       lastPost,
     );
-    final sorted = _useCase.sortedPosts(posts);
-    _addPosts(sorted);
+    _addPosts(posts);
     return const Result.success(true);
   }
 
