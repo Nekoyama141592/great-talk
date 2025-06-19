@@ -16,8 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$FollowingToken implements DiagnosticableTreeMixin {
 
- dynamic get createdAt; String get passiveUid;// required dynamic passiveUserRef, // TODO: 対応
- String get tokenId; String get tokenType;
+ dynamic get createdAt; String get passiveUid; String get tokenId; String get tokenType;
 /// Create a copy of FollowingToken
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -95,7 +94,6 @@ class _FollowingToken extends FollowingToken with DiagnosticableTreeMixin {
 
 @override final  dynamic createdAt;
 @override final  String passiveUid;
-// required dynamic passiveUserRef, // TODO: 対応
 @override final  String tokenId;
 @override final  String tokenType;
 

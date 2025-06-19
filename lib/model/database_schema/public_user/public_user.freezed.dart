@@ -16,8 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PublicUser {
 
- String get accountName; Map<String, dynamic> get bio; int get blockCount; dynamic get createdAt; String get ethAddress; int get followerCount; int get followingCount; bool get isNFTicon; bool get isOfficial; bool get isSuspended; List<Map<String, dynamic>> get links; int get muteCount; int get postCount;// required dynamic ref, // TODO: 対応
- int get reportCount; double get score; Map<String, dynamic> get searchToken; String get uid; dynamic get updatedAt; Map<String, dynamic> get image; Map<String, dynamic> get userName; List<Map<String, dynamic>> get walletAddresses;
+ String get accountName; Map<String, dynamic> get bio; int get blockCount; dynamic get createdAt; String get ethAddress; int get followerCount; int get followingCount; bool get isNFTicon; bool get isOfficial; bool get isSuspended; List<Map<String, dynamic>> get links; int get muteCount; int get postCount; int get reportCount; double get score; Map<String, dynamic> get searchToken; String get uid; dynamic get updatedAt; Map<String, dynamic> get image; Map<String, dynamic> get userName; List<Map<String, dynamic>> get walletAddresses;
 /// Create a copy of PublicUser
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -129,7 +128,6 @@ class _PublicUser extends PublicUser {
 
 @override@JsonKey() final  int muteCount;
 @override@JsonKey() final  int postCount;
-// required dynamic ref, // TODO: 対応
 @override@JsonKey() final  int reportCount;
 @override@JsonKey() final  double score;
  final  Map<String, dynamic> _searchToken;

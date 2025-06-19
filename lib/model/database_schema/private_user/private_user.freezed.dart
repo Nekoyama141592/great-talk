@@ -16,8 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PrivateUser {
 
- String? get accessToken; dynamic get createdAt; String get ethAddress; String? get fcmToken; String get gender; String get ipAddress; bool get isAdmin;// required dynamic ref, // TODO: 対応
- String get uid; dynamic get updatedAt;
+ String? get accessToken; dynamic get createdAt; String get ethAddress; String? get fcmToken; String get gender; String get ipAddress; bool get isAdmin; String get uid; dynamic get updatedAt;
 /// Create a copy of PrivateUser
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -99,7 +98,6 @@ class _PrivateUser extends PrivateUser {
 @override@JsonKey() final  String gender;
 @override@JsonKey() final  String ipAddress;
 @override@JsonKey() final  bool isAdmin;
-// required dynamic ref, // TODO: 対応
 @override final  String uid;
 @override final  dynamic updatedAt;
 

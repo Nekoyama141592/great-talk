@@ -10,7 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'posts_view_model.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class PostsViewModel extends _$PostsViewModel implements RefreshInterface {
   @override
   FutureOr<PostsState> build(bool isRankingPosts) {

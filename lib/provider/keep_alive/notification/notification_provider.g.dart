@@ -30,7 +30,7 @@ final flutterLocalNotificationsPluginProvider =
 // ignore: unused_element
 typedef FlutterLocalNotificationsPluginRef =
     ProviderRef<FlutterLocalNotificationsPlugin>;
-String _$notificationHash() => r'68ae58858d7636970bcaf335b94e48d00873b8d1';
+String _$notificationHash() => r'216b45ac1b871adf2b231b4f7158420d1b91648b';
 
 /// 通知関連のロジックを管理するNotifier
 ///

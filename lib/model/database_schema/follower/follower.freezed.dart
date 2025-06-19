@@ -16,9 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Follower {
 
-// required dynamic activeUserRef, // TODO: 対応
- String get activeUid;// TODO: 新規追加対応
- dynamic get createdAt; String get passiveUid;
+ String get activeUid; dynamic get createdAt; String get passiveUid;
 /// Create a copy of Follower
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -87,9 +85,7 @@ class _Follower extends Follower {
   const _Follower({required this.activeUid, required this.createdAt, required this.passiveUid}): super._();
   factory _Follower.fromJson(Map<String, dynamic> json) => _$FollowerFromJson(json);
 
-// required dynamic activeUserRef, // TODO: 対応
 @override final  String activeUid;
-// TODO: 新規追加対応
 @override final  dynamic createdAt;
 @override final  String passiveUid;
 

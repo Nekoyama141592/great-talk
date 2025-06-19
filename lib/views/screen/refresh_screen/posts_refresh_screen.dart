@@ -11,9 +11,11 @@ class PostsRefreshScreen extends HookWidget {
     super.key,
     required this.userPosts,
     required this.notifier,
+    this.title
   });
   final List<UserPost> userPosts;
   final RefreshInterface Function() notifier;
+  final String? title;
   @override
   Widget build(BuildContext context) {
     RefreshController refreshController = RefreshController();
@@ -22,7 +24,7 @@ class PostsRefreshScreen extends HookWidget {
       return refreshController.dispose;
     }, []);
     if (userPosts.isEmpty) {
-      return Align(alignment: Alignment.center, child: const Text('データがありません'));
+      return Align(alignment: Alignment.center, child: Text(title ?? 'データがありません'));
     }
     return SmartRefresher(
       controller: refreshController,

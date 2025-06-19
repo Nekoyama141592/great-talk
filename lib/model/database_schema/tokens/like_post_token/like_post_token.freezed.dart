@@ -16,8 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LikePostToken {
 
- String get activeUid; dynamic get createdAt; String get passiveUid;// required dynamic postRef, // TODO: 対応
- String get postId; String get tokenId; String get tokenType;
+ String get activeUid; dynamic get createdAt; String get passiveUid; String get postId; String get tokenId; String get tokenType;
 /// Create a copy of LikePostToken
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -92,7 +91,6 @@ class _LikePostToken implements LikePostToken {
 @override final  String activeUid;
 @override final  dynamic createdAt;
 @override final  String passiveUid;
-// required dynamic postRef, // TODO: 対応
 @override final  String postId;
 @override final  String tokenId;
 @override final  String tokenType;

@@ -16,8 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Post {
 
- int get bookmarkCount; dynamic get createdAt; Map<String, dynamic> get customCompleteText; Map<String, dynamic> get description; List<Map<String, dynamic>> get exampleTexts; String get genre; List<String> get hashTags; Map<String, dynamic> get image; int get impressionCount; int get likeCount; List<Map<String, dynamic>> get links; int get msgCount; int get muteCount; String get postId;// required dynamic ref, // TODO: 対応
- int get reportCount; double get score; Map<String, dynamic> get searchToken; Map<String, dynamic> get title; String get uid; dynamic get updatedAt; int get userCount;
+ int get bookmarkCount; dynamic get createdAt; Map<String, dynamic> get customCompleteText; Map<String, dynamic> get description; List<Map<String, dynamic>> get exampleTexts; String get genre; List<String> get hashTags; Map<String, dynamic> get image; int get impressionCount; int get likeCount; List<Map<String, dynamic>> get links; int get msgCount; int get muteCount; String get postId; int get reportCount; double get score; Map<String, dynamic> get searchToken; Map<String, dynamic> get title; String get uid; dynamic get updatedAt; int get userCount;
 /// Create a copy of Post
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -154,7 +153,6 @@ class _Post extends Post {
 @override@JsonKey() final  int msgCount;
 @override@JsonKey() final  int muteCount;
 @override final  String postId;
-// required dynamic ref, // TODO: 対応
 @override@JsonKey() final  int reportCount;
 @override@JsonKey() final  double score;
  final  Map<String, dynamic> _searchToken;

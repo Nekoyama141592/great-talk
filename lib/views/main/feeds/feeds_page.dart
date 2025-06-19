@@ -17,6 +17,7 @@ class FeedsPage extends ConsumerWidget {
         return PostsRefreshScreen(
           userPosts: state.userPosts,
           notifier: notifier,
+          title: '人気ユーザーをフォローしてみましょう！',
         );
       },
     );

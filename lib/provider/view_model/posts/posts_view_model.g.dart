@@ -6,7 +6,7 @@ part of 'posts_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postsViewModelHash() => r'535aef431ba49fd6c0b7eed48c1bb27620615ffc';
+String _$postsViewModelHash() => r'ed41a1851377b464d723d0d0dff2ef2cff0fe533';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,8 +29,7 @@ class _SystemHash {
   }
 }
 
-abstract class _$PostsViewModel
-    extends BuildlessAutoDisposeAsyncNotifier<PostsState> {
+abstract class _$PostsViewModel extends BuildlessAsyncNotifier<PostsState> {
   late final bool isRankingPosts;
 
   FutureOr<PostsState> build(bool isRankingPosts);
@@ -74,7 +73,7 @@ class PostsViewModelFamily extends Family<AsyncValue<PostsState>> {
 
 /// See also [PostsViewModel].
 class PostsViewModelProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<PostsViewModel, PostsState> {
+    extends AsyncNotifierProviderImpl<PostsViewModel, PostsState> {
   /// See also [PostsViewModel].
   PostsViewModelProvider(bool isRankingPosts)
     : this._internal(
@@ -125,8 +124,7 @@ class PostsViewModelProvider
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<PostsViewModel, PostsState>
-  createElement() {
+  AsyncNotifierProviderElement<PostsViewModel, PostsState> createElement() {
     return _PostsViewModelProviderElement(this);
   }
 
@@ -147,13 +145,13 @@ class PostsViewModelProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin PostsViewModelRef on AutoDisposeAsyncNotifierProviderRef<PostsState> {
+mixin PostsViewModelRef on AsyncNotifierProviderRef<PostsState> {
   /// The parameter `isRankingPosts` of this provider.
   bool get isRankingPosts;
 }
 
 class _PostsViewModelProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<PostsViewModel, PostsState>
+    extends AsyncNotifierProviderElement<PostsViewModel, PostsState>
     with PostsViewModelRef {
   _PostsViewModelProviderElement(super.provider);
 

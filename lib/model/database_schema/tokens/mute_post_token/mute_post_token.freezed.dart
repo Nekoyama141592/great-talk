@@ -16,8 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MutePostToken {
 
- String get activeUid; dynamic get createdAt; String get postId;// required dynamic postRef, // TODO: 対応
- String get tokenId; String get tokenType;
+ String get activeUid; dynamic get createdAt; String get postId; String get tokenId; String get tokenType;
 /// Create a copy of MutePostToken
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -91,7 +90,6 @@ class _MutePostToken implements MutePostToken {
 @override final  String activeUid;
 @override final  dynamic createdAt;
 @override final  String postId;
-// required dynamic postRef, // TODO: 対応
 @override final  String tokenId;
 @override final  String tokenType;
 

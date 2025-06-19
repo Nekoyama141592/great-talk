@@ -16,8 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostLike {
 
- String get activeUid; dynamic get createdAt; String get passiveUid;// required dynamic postRef, // TODO: 対応
- String get postId;
+ String get activeUid; dynamic get createdAt; String get passiveUid; String get postId;
 /// Create a copy of PostLike
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -90,7 +89,6 @@ class _PostLike implements PostLike {
 @override final  String activeUid;
 @override final  dynamic createdAt;
 @override final  String passiveUid;
-// required dynamic postRef, // TODO: 対応
 @override final  String postId;
 
 /// Create a copy of PostLike

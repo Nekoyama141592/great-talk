@@ -16,8 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserMute {
 
- String get activeUid;// required dynamic activeUserRef, // TODO: 対応
- dynamic get createdAt; String get passiveUid;
+ String get activeUid; dynamic get createdAt; String get passiveUid;
 /// Create a copy of UserMute
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -87,7 +86,6 @@ class _UserMute implements UserMute {
   factory _UserMute.fromJson(Map<String, dynamic> json) => _$UserMuteFromJson(json);
 
 @override final  String activeUid;
-// required dynamic activeUserRef, // TODO: 対応
 @override final  dynamic createdAt;
 @override final  String passiveUid;
 

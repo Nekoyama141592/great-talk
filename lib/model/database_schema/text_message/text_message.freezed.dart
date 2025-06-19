@@ -16,9 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TextMessage {
 
- dynamic get createdAt; String get id; String get messageType;// dynamic postRef, // TODO: 対応
-// required String posterUid, // TODO: 対応
- String get senderUid; Map<String, dynamic> get text;
+ dynamic get createdAt; String get id; String get messageType; String get senderUid; Map<String, dynamic> get text;
 /// Create a copy of TextMessage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -92,8 +90,6 @@ class _TextMessage extends TextMessage {
 @override final  dynamic createdAt;
 @override final  String id;
 @override final  String messageType;
-// dynamic postRef, // TODO: 対応
-// required String posterUid, // TODO: 対応
 @override final  String senderUid;
  final  Map<String, dynamic> _text;
 @override Map<String, dynamic> get text {

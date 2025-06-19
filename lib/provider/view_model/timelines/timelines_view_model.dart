@@ -9,7 +9,7 @@ import 'package:great_talk/use_case/posts_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'timelines_view_model.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class TimelinesViewModel extends _$TimelinesViewModel
     implements RefreshInterface {
   @override
