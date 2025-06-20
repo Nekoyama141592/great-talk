@@ -1,7 +1,8 @@
+import 'package:great_talk/model/rest_api/open_ai/generate_image/response/generate_image_response.dart';
 import 'package:great_talk/model/view_model_state/generate_image/generate_image_state.dart';
 import 'package:great_talk/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/provider/repository/api/api_repository_provider.dart';
-import 'package:great_talk/ui_core/toast_ui_core.dart';
+import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'generate_image_view_model.g.dart';
 
@@ -12,20 +13,22 @@ class GenerateImageViewModel extends _$GenerateImageViewModel {
     return const GenerateImageState();
   }
 
-  void onGenerateButtonPressed(String prompt, String size) async {
+  FutureResult<GenerateImageResponse?> onGenerateButtonPressed(String prompt, String size) async {
     final isPremiumSubscribing = ref.read(purchasesNotifierProvider).value?.isPremiumSubscribing() ?? false;
     if (!isPremiumSubscribing) {
-      ToastUiCore.showErrorFlutterToast('プレミアムプランに加入する必要があります');
-      return;
+      return Result.failure('プレミアムプランに加入する必要があります');
     }
-    if (prompt.isEmpty || size.isEmpty) return;
+    if (prompt.isEmpty || size.isEmpty) {
+      return Result.failure('プロンプトを入力してください');
+    }
     final repository = ref.read(apiRepositoryProvider);
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() async {
-      final result = await repository.generateImage(prompt, size);
-      final base64 = result?.base64;
-      if (base64 == null) return const GenerateImageState();
-      return GenerateImageState(base64: base64);
-    });
+    return await repository.generateImage(prompt, size);
+  }
+
+  void onSuccess(GenerateImageResponse? res) {
+    if (res == null) return;
+    final base64 = res.base64;
+    final newValue = GenerateImageState(base64: base64);
+    state = AsyncData(newValue);
   }
 }

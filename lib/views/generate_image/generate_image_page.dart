@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/consts/generate_image_constants.dart';
 import 'package:great_talk/provider/view_model/generate_image/generate_image_view_model.dart';
+import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/views/components/basic_height_box.dart';
 import 'package:great_talk/views/components/basic_page.dart';
 import 'package:great_talk/views/components/basic_width_box.dart';
@@ -64,11 +65,16 @@ class GenerateImagePage extends HookConsumerWidget {
               const BasicHeightBox(),
               RoundedButton(
                 text: "生成する",
-                press: () {
-                  notifier().onGenerateButtonPressed(
+                press: () async {
+                  final result = await notifier().onGenerateButtonPressed(
                     promptController.text,
                     size.value,
                   );
+                  result.when(success: (res) {
+                    notifier().onSuccess(res);
+                  }, failure: (msg) {
+                    ToastUiCore.showFailureSnackBar(context, msg);
+                  });
                 },
               ),
             ],

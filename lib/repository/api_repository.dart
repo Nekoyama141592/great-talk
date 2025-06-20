@@ -79,7 +79,7 @@ class ApiRepository {
     }
   }
 
-  Future<GenerateImageResponse?> generateImage(
+  rs.FutureResult<GenerateImageResponse?> generateImage(
     String prompt,
     String size,
   ) async {
@@ -88,10 +88,10 @@ class ApiRepository {
       final request = GenerateImageRequest(prompt: prompt, size: size);
       final result = await _call(name, request.toJson());
       final res = GenerateImageResponse.fromJson(result);
-      return res;
+      return rs.Result.success(res);
     } catch (e) {
       debugPrint('generateImage: ${e.toString()}');
-      return null;
+      return rs.Result.failure('画像の生成に失敗しました');
     }
   }
   rs.FutureResult<GenerateTextResponse> generateText(GenerateTextRequest request) async {
