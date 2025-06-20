@@ -39,10 +39,6 @@ class ChatViewModel extends _$ChatViewModel {
     String text,
     ScrollController scrollController,
   ) async {
-    final isSubscribing = ref.read(purchasesNotifierProvider).value?.isSubscribing() ?? false;
-    if (!isSubscribing) {
-      return const Result.failure('有料プランに加入する必要があります');
-    }
     if (state.isLoading) {
       return const Result.failure('ロード中です');
     }
