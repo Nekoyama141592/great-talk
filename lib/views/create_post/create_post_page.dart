@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/extension/string_extension.dart';
+import 'package:great_talk/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/provider/view_model/create_post/create_post_view_model.dart';
 import 'package:great_talk/ui_core/form_ui_core.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
@@ -16,7 +17,6 @@ import 'package:great_talk/views/generate_image/generate_image_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
-// ConsumerWidgetに変更してStatefulWidgetとStateを削除
 class CreatePostPage extends ConsumerWidget {
   CreatePostPage({super.key});
   static const path = "/createPost";
@@ -29,8 +29,8 @@ class CreatePostPage extends ConsumerWidget {
     final deviceHeight = MediaQuery.of(context).size.height;
     final viewModel = ref.read(createPostViewModelProvider.notifier);
     final stateAsync = ref.watch(createPostViewModelProvider);
+    final purchaseState = ref.watch(purchasesNotifierProvider).value;
     final state = stateAsync.value;
-
     // 画像表示/選択ウィジェット
     Widget image() {
       final pickedImageBase64 = state?.pickedImage;
@@ -46,7 +46,7 @@ class CreatePostPage extends ConsumerWidget {
                 child: const Icon(Icons.image, size: 100.0),
               ),
               const SizedBox(width: 16),
-              const Column(
+              if(purchaseState?.isPremiumSubscribing() ?? false) const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [Text(FormConsts.imageLabel), ToGeneratePageButton()],
               ),
