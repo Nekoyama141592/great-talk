@@ -5,6 +5,7 @@ class PostUiCore {
   static void onReportButtonPressed({
     required BuildContext context,
     required void Function(BuildContext) mutePost,
+    required void Function(BuildContext) reportPost,
     required void Function(BuildContext) muteUser,
   }) {
     showCupertinoModalPopup(
@@ -15,6 +16,10 @@ class PostUiCore {
               CupertinoActionSheetAction(
                 onPressed: () => mutePost(innerContext),
                 child: const BasicBoldText("投稿をミュート"),
+              ),
+              CupertinoActionSheetAction(
+                onPressed: () => reportPost(innerContext),
+                child: const BasicBoldText("投稿を運営に報告,通報"),
               ),
               CupertinoActionSheetAction(
                 onPressed: () => muteUser(innerContext),

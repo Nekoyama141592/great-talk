@@ -60,6 +60,26 @@ class ChatPage extends HookConsumerWidget {
           messages[index - 1].createdAtDateTime.day;
     }
 
+    void mutePost(BuildContext innerContext,Post post) async {
+      final uid = ref.read(streamAuthUidProvider).value;
+      if (uid == null) return;
+      final token = ref
+          .read(tokensNotifierProvider.notifier)
+          .addMutePost(post);
+      if (token == null) return;
+      final result = await ref.read(postUsecaseProvider).mutePost(
+        post,
+        uid,
+        token,
+      );
+      result.when(
+        success: (_) {
+          RouteCore.back(innerContext);
+        },
+        failure: (_) {},
+      );
+    }
+
     return AsyncPage(
         asyncValue: chatStateAsync,
         data: (ChatState data) {
@@ -109,24 +129,8 @@ class ChatPage extends HookConsumerWidget {
                       final notifier = ref.read(postUsecaseProvider);
                       PostUiCore.onReportButtonPressed(
                         context: context,
-                        mutePost: (innerContext) async {
-                          final token = ref
-                              .read(tokensNotifierProvider.notifier)
-                              .addMutePost(post);
-                          if (token == null) {
-                            RouteCore.back(innerContext);
-                            return;
-                          }
-                          final result = await notifier.mutePost(
-                            post,
-                            currentUserId,
-                            token,
-                          );
-                          result.when(
-                            success: (_) => RouteCore.back(innerContext),
-                            failure: (_) {},
-                          );
-                        },
+                        mutePost: (innerContext) => mutePost(innerContext,post),
+                        reportPost: (innerContext) => mutePost(innerContext,post),
                         muteUser: (innerContext) async {
                           final token = ref
                               .read(tokensNotifierProvider.notifier)
