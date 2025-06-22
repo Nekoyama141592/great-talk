@@ -34,7 +34,7 @@ class ApiRepository {
     final callable = _httpsCallable(name);
     final result = await callable.call(request);
     final data = result.data;
-    final decoded = JsonCore.encodeDecode(data);
+    final decoded = JsonCore.cast(data);
     return decoded;
   }
 
