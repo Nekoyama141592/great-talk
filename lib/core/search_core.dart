@@ -20,6 +20,12 @@ class SearchCore {
       final x = element.toLowerCase();
       result += x;
     }
+    
+    // Handle empty result after filtering
+    if (result.isEmpty) {
+      return [];
+    }
+    
     // bi-gram
     final int length = result.length;
     const nGramIndex = FormConsts.nGramIndex;
