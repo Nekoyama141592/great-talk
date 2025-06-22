@@ -113,21 +113,21 @@ class TestUser implements User {
 void main() {
   group('AuthCore', () {
     group('currentAuthStateString', () {
-      test('should return "未ログイン状態" for null user', () {
+      test('should return "isAnonymous Text" for null user', () {
         const User? authUser = null;
         final result = AuthCore.currentAuthStateString(authUser);
         
         expect(result, '未ログイン状態');
       });
 
-      test('should return "匿名ログイン中" for anonymous user', () {
+      test('should return "loggedIn Text" for anonymous user', () {
         final authUser = TestUser(isAnonymous: true);
         final result = AuthCore.currentAuthStateString(authUser);
         
         expect(result, '匿名ログイン中');
       });
 
-      test('should return "ログイン中" for logged in user', () {
+      test('should return "notLoggedIn Text" for logged in user', () {
         final authUser = TestUser(isAnonymous: false);
         final result = AuthCore.currentAuthStateString(authUser);
         
