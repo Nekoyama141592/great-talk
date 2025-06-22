@@ -41,7 +41,6 @@ void main() {
       test('should represent annual savings percentage', () {
         final discountPercentage = PurchasesCore.calculate();
         
-        // Verify the calculation logic
         final monthlyTotal = PurchasesConstants.monthPrice * 12;
         final annualPrice = PurchasesConstants.annualPrice;
         final savings = monthlyTotal - annualPrice;

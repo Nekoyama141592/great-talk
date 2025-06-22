@@ -36,7 +36,6 @@ void main() {
         const searchTerm = 'test.word';
         final result = SearchCore.returnSearchToken(searchTerm);
         
-        // The dot should be filtered out based on FormConsts.notUseOnField
         expect(result.keys.any((key) => key.contains('.')), false);
       });
     });
@@ -75,7 +74,6 @@ void main() {
         const searchTerm = 'hel.lo';
         final result = SearchCore.returnSearchWords(searchTerm);
         
-        // Should be 'hello' after filtering '.'
         expect(result, ['he', 'el', 'll', 'lo']);
         expect(result.any((word) => word.contains('.')), false);
       });
@@ -84,7 +82,6 @@ void main() {
         const searchTerm = 'Hello*World!';
         final result = SearchCore.returnSearchWords(searchTerm);
         
-        // Should filter out '*' and convert to lowercase
         expect(result.every((word) => word == word.toLowerCase()), true);
         expect(result.any((word) => word.contains('*')), false);
       });
@@ -93,7 +90,6 @@ void main() {
         const searchTerm = 'te.st[wo]rd';
         final result = SearchCore.returnSearchWords(searchTerm);
         
-        // Should filter out '.', '[', ']' based on FormConsts.notUseOnField
         expect(result.any((word) => word.contains('.')), false);
         expect(result.any((word) => word.contains('[')), false);
         expect(result.any((word) => word.contains(']')), false);
@@ -124,7 +120,6 @@ void main() {
         const searchTerm = 'testing';
         final result = SearchCore.returnSearchWords(searchTerm);
         
-        // For 'testing' (7 chars), should generate 6 bi-grams
         expect(result.length, 6);
         expect(result, ['te', 'es', 'st', 'ti', 'in', 'ng']);
       });
@@ -133,7 +128,6 @@ void main() {
         const searchTerm = 'hello world';
         final result = SearchCore.returnSearchWords(searchTerm);
         
-        // Whitespace should be preserved unless it's in notUseOnField
         expect(result.any((word) => word.contains(' ')), true);
       });
     });

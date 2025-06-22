@@ -11,7 +11,6 @@ void main() {
         MaterialApp(
           home: Builder(
             builder: (context) {
-              // Override MediaQuery to provide consistent test data
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(size: screenSize),
                 child: Scaffold(
@@ -137,8 +136,6 @@ void main() {
       );
 
       final context = tester.element(find.byType(Scaffold));
-      
-      // Test proportional relationships
       final padding = SizeCore.defaultPadding(context);
       final searchPadding = SizeCore.searchScreenTopPadding(context);
       expect(searchPadding, padding * 7);

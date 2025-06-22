@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/core/auth_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// Simple test implementation of User interface
 class TestUser implements User {
   final bool _isAnonymous;
   
@@ -11,7 +10,6 @@ class TestUser implements User {
   @override
   bool get isAnonymous => _isAnonymous;
   
-  // All other methods throw UnimplementedError since they're not needed for testing
   @override
   String? get displayName => throw UnimplementedError();
   
@@ -144,7 +142,6 @@ void main() {
         
         expect(result, '未ログイン状態');
         
-        // Verify this corresponds to CurrentAuthState.notLoggedIn
         expect(result, isNot('匿名ログイン中'));
         expect(result, isNot('ログイン中'));
       });
@@ -155,7 +152,6 @@ void main() {
         
         expect(result, '匿名ログイン中');
         
-        // Verify this corresponds to CurrentAuthState.isAnonymous
         expect(result, isNot('未ログイン状態'));
         expect(result, isNot('ログイン中'));
       });
@@ -166,7 +162,6 @@ void main() {
         
         expect(result, 'ログイン中');
         
-        // Verify this corresponds to CurrentAuthState.loggedIn
         expect(result, isNot('未ログイン状態'));
         expect(result, isNot('匿名ログイン中'));
       });
@@ -228,7 +223,6 @@ void main() {
       });
 
       test('should handle transition between states', () {
-        // Test null to anonymous
         const User? nullUser = null;
         final anonymousUser = TestUser(isAnonymous: true);
         final loggedInUser = TestUser(isAnonymous: false);
@@ -241,7 +235,6 @@ void main() {
         expect(result2, '匿名ログイン中');
         expect(result3, 'ログイン中');
         
-        // All should be different
         expect(result1, isNot(equals(result2)));
         expect(result2, isNot(equals(result3)));
         expect(result1, isNot(equals(result3)));
@@ -258,12 +251,10 @@ void main() {
         final result2 = AuthCore.currentAuthStateString(anonymousUser);
         final result3 = AuthCore.currentAuthStateString(loggedInUser);
         
-        // All results should be non-empty Japanese strings
         expect(result1.isNotEmpty, true);
         expect(result2.isNotEmpty, true);
         expect(result3.isNotEmpty, true);
         
-        // Should contain Japanese characters
         expect(result1.contains('未'), true);
         expect(result2.contains('匿名'), true);
         expect(result3.contains('ログイン'), true);

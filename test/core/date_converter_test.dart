@@ -23,7 +23,7 @@ void main() {
       });
 
       test('should handle edge case dates', () {
-        const input = 20240229; // leap year
+        const input = 20240229;
         final result = DateConverter.intToDateTime(input);
         
         expect(result.year, 2024);
@@ -109,7 +109,6 @@ void main() {
       test('should handle multiple conversion cycles', () {
         const originalInt = 20240229;
         
-        // Multiple conversions
         final dateTime1 = DateConverter.intToDateTime(originalInt);
         final int1 = DateConverter.dateTimeToInt(dateTime1);
         final dateTime2 = DateConverter.intToDateTime(int1);
@@ -128,7 +127,6 @@ void main() {
         final currentTime = DateTime.now().millisecondsSinceEpoch;
         
         expect(result, isA<int>());
-        // Allow for small time difference (within 1 second)
         expect((result - currentTime).abs(), lessThan(1000));
       });
 
