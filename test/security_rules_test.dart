@@ -45,7 +45,147 @@ service cloud.firestore {
 }''';
 
 void main() {
-  group('Security Rules Test', () {
+  group('Security Rules Test with Email Verification', () {
+    group('when user email is verified', () {
+      late MockFirebaseAuth auth;
+      late FakeFirebaseFirestore firestore;
+      late String uid;
+
+      setUp(() async {
+        // isEmailVerified: true のモックユーザーを作成
+        final mockUser = MockUser(
+          isAnonymous: false,
+          uid: 'some_uid',
+          email: 'test@example.com',
+          displayName: 'Test User',
+          isEmailVerified: true, // メールアドレス認証済み
+        );
+        auth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
+        firestore = FakeFirebaseFirestore(
+          securityRules: securityRules,
+          authObject: auth.authForFakeFirestore,
+        );
+        uid = auth.currentUser!.uid;
+      });
+
+      test('should allow writing to own user document', () {
+        expect(
+          () => firestore.doc('public/v1/users/$uid').set({'name': 'abc'}),
+          returnsNormally,
+        );
+      });
+
+      test('should allow writing to own post document', () {
+        expect(
+          () => firestore
+              .doc('public/v1/users/$uid/posts/post123')
+              .set({'content': 'test post'}),
+          returnsNormally,
+        );
+      });
+
+      test('should allow liking a post (write to postLikes)', () {
+        expect(
+          () => firestore
+              .doc('public/v1/users/otheruser/posts/post123/postLikes/$uid')
+              .set({'liked': true}),
+          returnsNormally,
+        );
+      });
+
+       test('should allow read from own timeline', () {
+        expect(
+          () => firestore.doc('public/v1/users/$uid/timelines/post123').get(),
+          returnsNormally,
+        );
+      });
+
+      test('should allow writing to own private user document', () {
+        expect(
+          () => firestore
+              .doc('private/v1/privateUsers/$uid')
+              .set({'privateData': 'test'}),
+          returnsNormally,
+        );
+      });
+    });
+
+    group('when user email is not verified', () {
+      late MockFirebaseAuth auth;
+      late FakeFirebaseFirestore firestore;
+      late String uid;
+
+      setUp(() async {
+        // isEmailVerified: false のモックユーザーを作成
+        final mockUser = MockUser(
+          isAnonymous: false,
+          uid: 'some_uid',
+          email: 'test@example.com',
+          displayName: 'Test User',
+          isEmailVerified: false, // メールアドレス未認証
+        );
+        auth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
+        firestore = FakeFirebaseFirestore(
+          securityRules: securityRules,
+          authObject: auth.authForFakeFirestore,
+        );
+        uid = auth.currentUser!.uid;
+      });
+
+      test('should deny writing to own user document', () {
+        expect(
+          () => firestore.doc('public/v1/users/$uid').set({'name': 'abc'}),
+          throwsException,
+        );
+      });
+
+      test('should deny writing to own post document', () {
+        expect(
+          () => firestore
+              .doc('public/v1/users/$uid/posts/post123')
+              .set({'content': 'test post'}),
+          throwsException,
+        );
+      });
+
+      test('should deny liking a post (write to postLikes)', () {
+        expect(
+          () => firestore
+              .doc('public/v1/users/otheruser/posts/post123/postLikes/$uid')
+              .set({'liked': true}),
+          throwsException,
+        );
+      });
+
+      // 読み取りは認証さえしていれば通るはず
+      test('should allow reading user document even if email is not verified', () {
+         expect(
+          () => firestore.doc('public/v1/users/anyuser').get(),
+          returnsNormally,
+        );
+      });
+
+      // email_verified が read の条件になっている timeline は失敗する
+       test('should deny reading from own timeline if email is not verified', () {
+        expect(
+          () => firestore.doc('public/v1/users/$uid/timelines/post123').get(),
+          throwsException,
+        );
+      });
+
+
+      test('should deny writing to own private user document', () {
+        expect(
+          () => firestore
+              .doc('private/v1/privateUsers/$uid')
+              .set({'privateData': 'test'}),
+          throwsException,
+        );
+      });
+    });
+  });
+  // isEmailVerifiedがtrue
+  group('when user signInWithCustomToken', () {
     test('should allow access to own user document', () async {
       final auth = MockFirebaseAuth(mockUser: null);
       final firestore = FakeFirebaseFirestore(
