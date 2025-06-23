@@ -2,7 +2,7 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-final securityRules = '''
+const securityRules = '''
 service cloud.firestore {
   match /databases/{database}/documents {
     match /public/v1/users/{uid} {
