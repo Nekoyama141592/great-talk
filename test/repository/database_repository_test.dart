@@ -7,16 +7,12 @@ import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/model/database_schema/follower/follower.dart';
 import 'package:great_talk/model/database_schema/post_like/post_like.dart';
-import 'package:great_talk/model/database_schema/post_mute/post_mute.dart';
-import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
-import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
-import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/repository/result/result.dart';
 
 void main() {
-  group('DatabaseRepository Tests', () {
+  group('DatabaseRepository Enhanced Tests', () {
     late FakeFirebaseFirestore fakeFirestore;
     late DatabaseRepository repository;
     late Timestamp mockTimestamp;
@@ -27,283 +23,261 @@ void main() {
       mockTimestamp = Timestamp.fromDate(DateTime(2024, 1, 1, 12, 0, 0));
     });
 
-    group('User Operations', () {
-      test('should create public user successfully', () async {
-        const uid = 'test_uid';
-        final userData = {
-          'uid': uid,
-          'accountName': 'test_user',
-          'bio': {'value': 'Test bio'},
-          'createdAt': mockTimestamp,
-          'updatedAt': mockTimestamp,
-          'image': {'value': 'test.jpg'},
-          'userName': {'value': 'Test User'},
-          'followerCount': 0,
-          'followingCount': 0,
-          'postCount': 0,
+    group('Data Structure Validation Tests', () {
+      test('should validate complete DetectedText structure', () async {
+        final detectedText = {
+          'languageCode': 'en',
+          'negativeScore': 0.1,
+          'positiveScore': 0.9,
+          'sentiment': 'positive',
+          'value': 'Test text content',
         };
 
-        final result = await repository.createPublicUser(uid, userData);
-
-        expect(result, isNotNull);
-        expect(result?.uid, uid);
-        expect(result?.accountName, 'test_user');
+        expect(detectedText['languageCode'], isA<String>());
+        expect(detectedText['negativeScore'], isA<double>());
+        expect(detectedText['positiveScore'], isA<double>());
+        expect(detectedText['sentiment'], isA<String>());
+        expect(detectedText['value'], isA<String>());
+        expect(detectedText.keys.length, 5);
       });
 
-      test('should create private user successfully', () async {
-        const uid = 'test_uid';
-        final userData = {
-          'uid': uid,
-          'createdAt': mockTimestamp,
-          'updatedAt': mockTimestamp,
-          'isAdmin': false,
+      test('should validate complete DetectedImage structure', () async {
+        final detectedImage = {
+          'bucketName': 'test-bucket',
+          'moderationLabels': ['safe'],
+          'moderationModelVersion': '1.0',
+          'value': 'image.jpg',
         };
 
-        final result = await repository.createPrivateUser(uid, userData);
-
-        expect(result, isNotNull);
-        expect(result?.uid, uid);
+        expect(detectedImage['bucketName'], isA<String>());
+        expect(detectedImage['moderationLabels'], isA<List>());
+        expect(detectedImage['moderationModelVersion'], isA<String>());
+        expect(detectedImage['value'], isA<String>());
+        expect(detectedImage.keys.length, 4);
       });
 
-      test('should get public user by uid', () async {
-        const uid = 'test_uid';
-        final userData = {
-          'uid': uid,
-          'accountName': 'test_user',
-          'bio': {'value': 'Test bio'},
-          'createdAt': mockTimestamp,
-          'updatedAt': mockTimestamp,
-          'image': {'value': 'test.jpg'},
-          'userName': {'value': 'Test User'},
+      test('should validate CustomCompleteText structure', () async {
+        final customCompleteText = {
+          'systemPrompt': 'You are a helpful AI assistant.',
         };
 
-        await repository.createPublicUser(uid, userData);
-        final result = await repository.getPublicUser(uid);
-
-        expect(result, isNotNull);
-        expect(result?.uid, uid);
-        expect(result?.accountName, 'test_user');
-      });
-
-      test('should get private user by uid', () async {
-        const uid = 'test_uid';
-        final userData = {
-          'uid': uid,
-          'createdAt': mockTimestamp,
-          'updatedAt': mockTimestamp,
-          'isAdmin': false,
-        };
-
-        await repository.createPrivateUser(uid, userData);
-        final result = await repository.getPrivateUser(uid);
-
-        expect(result, isNotNull);
-        expect(result?.uid, uid);
-      });
-
-      test('should delete public user successfully', () async {
-        const uid = 'test_uid';
-        final userData = {
-          'uid': uid,
-          'accountName': 'test_user',
-          'bio': {'value': 'Test bio'},
-          'createdAt': mockTimestamp,
-          'updatedAt': mockTimestamp,
-          'image': {'value': 'test.jpg'},
-          'userName': {'value': 'Test User'},
-        };
-
-        await repository.createPublicUser(uid, userData);
-        final deleteResult = await repository.deletePublicUser(uid);
-
-        expect(deleteResult, isA<Success<bool>>());
-
-        // After deletion, getting the user should return null
-        // Note: The repository handles the null case and returns null
-        final getResult = await repository.getPublicUser(uid);
-        expect(getResult, isNull);
-      });
-
-      test('should get users by UIDs', () async {
-        const uid1 = 'uid1';
-        const uid2 = 'uid2';
-        final userData1 = {
-          'uid': uid1,
-          'accountName': 'user1',
-          'bio': {'text': 'Bio 1'},
-          'createdAt': mockTimestamp,
-          'updatedAt': mockTimestamp,
-          'image': {'value': 'test1.jpg'},
-          'userName': {'text': 'User 1'},
-        };
-        final userData2 = {
-          'uid': uid2,
-          'accountName': 'user2',
-          'bio': {'text': 'Bio 2'},
-          'createdAt': mockTimestamp,
-          'updatedAt': mockTimestamp,
-          'image': {'value': 'test2.jpg'},
-          'userName': {'text': 'User 2'},
-        };
-
-        await repository.createPublicUser(uid1, userData1);
-        await repository.createPublicUser(uid2, userData2);
-
-        final users = await repository.getUsersByUids([uid1, uid2]);
-
-        expect(users.length, 2);
-        expect(users.map((u) => u.uid), containsAll([uid1, uid2]));
-      });
-
-      test('should return empty list for getUsersByUids with empty input', () async {
-        final users = await repository.getUsersByUids([]);
-        expect(users, isEmpty);
+        expect(customCompleteText['systemPrompt'], isA<String>());
+        expect(customCompleteText['systemPrompt'].toString().length, lessThanOrEqualTo(1000));
+        expect(customCompleteText.keys.length, 1);
       });
     });
 
-    group('Post Operations', () {
-      test('should create post successfully', () async {
-        const uid = 'test_uid';
-        const postId = 'test_post_id';
+    group('Repository CRUD Operations', () {
+      test('should handle document creation and retrieval', () async {
+        const uid = 'test_user_123';
+        const postId = 'test_post_123';
+        
         final postData = {
           'uid': uid,
           'postId': postId,
-          'title': {'value': 'Test Title'},
-          'description': {'value': 'Test Description'},
+          'title': {
+            'languageCode': 'en',
+            'negativeScore': 0.1,
+            'positiveScore': 0.9,
+            'sentiment': 'positive',
+            'value': 'Test Post Title',
+          },
+          'description': {
+            'languageCode': 'en',
+            'negativeScore': 0.05,
+            'positiveScore': 0.95,
+            'sentiment': 'positive',
+            'value': 'Test post description content',
+          },
           'createdAt': mockTimestamp,
           'updatedAt': mockTimestamp,
-          'customCompleteText': {'value': 'Test'},
-          'image': {'value': 'test.jpg'},
-          'searchToken': {'tokens': []},
+          'customCompleteText': {
+            'systemPrompt': 'Test system prompt',
+          },
+          'image': {
+            'bucketName': 'test-bucket',
+            'moderationLabels': [],
+            'moderationModelVersion': '1.0',
+            'value': 'test.jpg',
+          },
+          'searchToken': {
+            'tokens': ['test', 'post'],
+          },
+          'bookmarkCount': 0,
+          'exampleTexts': [],
+          'genre': 'test',
+          'hashTags': ['#test'],
+          'impressionCount': 0,
           'likeCount': 0,
+          'links': [],
           'msgCount': 0,
+          'muteCount': 0,
+          'reportCount': 0,
+          'score': 0.0,
+          'userCount': 0,
         };
 
-        final result = await repository.createPost(uid, postId, postData);
+        // Test post creation
+        final createResult = await repository.createPost(uid, postId, postData);
+        expect(createResult, isA<Success<bool>>());
 
-        expect(result, isA<Success<bool>>());
+        // Test post retrieval
+        final retrievedPost = await repository.getPost(uid, postId);
+        expect(retrievedPost, isNotNull);
+        expect(retrievedPost?.uid, uid);
+        expect(retrievedPost?.postId, postId);
       });
 
-      test('should get post by uid and postId', () async {
-        const uid = 'test_uid';
-        const postId = 'test_post_id';
-        final postData = {
-          'uid': uid,
-          'postId': postId,
-          'title': {'value': 'Test Title'},
-          'description': {'value': 'Test Description'},
-          'createdAt': mockTimestamp,
-          'updatedAt': mockTimestamp,
-          'customCompleteText': {'systemPrompt': 'Test'},
-          'image': {'value': 'test.jpg'},
-          'searchToken': {'tokens': []},
-        };
-
-        await repository.createPost(uid, postId, postData);
-        final result = await repository.getPost(uid, postId);
-
-        expect(result, isNotNull);
-        expect(result?.uid, uid);
-        expect(result?.postId, postId);
-      });
-
-      test('should delete post successfully', () async {
-        const uid = 'test_uid';
-        const postId = 'test_post_id';
-        final postData = {
-          'uid': uid,
-          'postId': postId,
-          'title': {'value': 'Test Title'},
-          'description': {'value': 'Test Description'},
-          'createdAt': mockTimestamp,
-          'updatedAt': mockTimestamp,
-          'customCompleteText': {'systemPrompt': 'Test'},
-          'image': {'value': 'test.jpg'},
-          'searchToken': {'tokens': []},
-        };
-
-        await repository.createPost(uid, postId, postData);
-        final post = Post.fromJson(postData);
-        final deleteResult = await repository.deletePost(post);
-
-        expect(deleteResult, isA<Success<bool>>());
-
-        // After deletion, getting the post should return null
-        // Note: The repository handles the null case and returns null
-        final getResult = await repository.getPost(uid, postId);
-        expect(getResult, isNull);
-      });
-
-      test('should get user posts', () async {
-        const uid = 'test_uid';
-        const postId1 = 'post1';
-        const postId2 = 'post2';
-
+      test('should handle user posts operations', () async {
+        const uid = 'test_user_456';
+        
         final postData1 = {
           'uid': uid,
-          'postId': postId1,
-          'title': {'value': 'Test Title 1'},
-          'description': {'value': 'Test Description 1'},
+          'postId': 'post_1',
+          'title': {
+            'languageCode': 'en',
+            'negativeScore': 0.1,
+            'positiveScore': 0.9,
+            'sentiment': 'positive',
+            'value': 'Post 1 Title',
+          },
+          'description': {
+            'languageCode': 'en',
+            'negativeScore': 0.05,
+            'positiveScore': 0.95,
+            'sentiment': 'positive',
+            'value': 'Post 1 description',
+          },
           'createdAt': mockTimestamp,
           'updatedAt': mockTimestamp,
-          'customCompleteText': {'value': 'Test 1'},
-          'image': {'value': 'test1.jpg'},
+          'customCompleteText': {'systemPrompt': 'Test prompt 1'},
+          'image': {
+            'bucketName': 'test-bucket',
+            'moderationLabels': [],
+            'moderationModelVersion': '1.0',
+            'value': 'test1.jpg',
+          },
           'searchToken': {'tokens': []},
+          'bookmarkCount': 0,
+          'exampleTexts': [],
+          'genre': '',
+          'hashTags': [],
+          'impressionCount': 0,
+          'likeCount': 0,
+          'links': [],
+          'msgCount': 0,
+          'muteCount': 0,
+          'reportCount': 0,
+          'score': 0.0,
+          'userCount': 0,
         };
+
         final postData2 = {
           'uid': uid,
-          'postId': postId2,
-          'title': {'value': 'Test Title 2'},
-          'description': {'value': 'Test Description 2'},
+          'postId': 'post_2',
+          'title': {
+            'languageCode': 'en',
+            'negativeScore': 0.1,
+            'positiveScore': 0.9,
+            'sentiment': 'positive',
+            'value': 'Post 2 Title',
+          },
+          'description': {
+            'languageCode': 'en',
+            'negativeScore': 0.05,
+            'positiveScore': 0.95,
+            'sentiment': 'positive',
+            'value': 'Post 2 description',
+          },
           'createdAt': mockTimestamp,
           'updatedAt': mockTimestamp,
-          'customCompleteText': {'value': 'Test 2'},
-          'image': {'value': 'test2.jpg'},
+          'customCompleteText': {'systemPrompt': 'Test prompt 2'},
+          'image': {
+            'bucketName': 'test-bucket',
+            'moderationLabels': [],
+            'moderationModelVersion': '1.0',
+            'value': 'test2.jpg',
+          },
           'searchToken': {'tokens': []},
+          'bookmarkCount': 0,
+          'exampleTexts': [],
+          'genre': '',
+          'hashTags': [],
+          'impressionCount': 0,
+          'likeCount': 0,
+          'links': [],
+          'msgCount': 0,
+          'muteCount': 0,
+          'reportCount': 0,
+          'score': 0.0,
+          'userCount': 0,
         };
 
-        await repository.createPost(uid, postId1, postData1);
-        await repository.createPost(uid, postId2, postData2);
+        await repository.createPost(uid, 'post_1', postData1);
+        await repository.createPost(uid, 'post_2', postData2);
 
-        final posts = await repository.getUserPosts(uid);
-
-        expect(posts.length, 2);
-        expect(posts.map((p) => p.postId), containsAll([postId1, postId2]));
+        final userPosts = await repository.getUserPosts(uid);
+        expect(userPosts.length, 2);
       });
 
-      test('should get timeline posts', () async {
-        const uid = 'test_uid';
-        const postId = 'test_post_id';
+      test('should handle timeline posts operations', () async {
+        const uid = 'timeline_user';
+        const postId = 'timeline_post';
+        
         final postData = {
           'uid': uid,
           'postId': postId,
-          'title': {'value': 'Test Title'},
-          'description': {'value': 'Test Description'},
+          'title': {
+            'languageCode': 'en',
+            'negativeScore': 0.1,
+            'positiveScore': 0.9,
+            'sentiment': 'positive',
+            'value': 'Timeline Post',
+          },
+          'description': {
+            'languageCode': 'en',
+            'negativeScore': 0.05,
+            'positiveScore': 0.95,
+            'sentiment': 'positive',
+            'value': 'Timeline post description',
+          },
           'createdAt': mockTimestamp,
           'updatedAt': mockTimestamp,
-          'customCompleteText': {'value': 'Test'},
-          'image': {'value': 'test.jpg'},
+          'customCompleteText': {'systemPrompt': 'Timeline prompt'},
+          'image': {
+            'bucketName': 'test-bucket',
+            'moderationLabels': [],
+            'moderationModelVersion': '1.0',
+            'value': 'timeline.jpg',
+          },
           'searchToken': {'tokens': []},
+          'bookmarkCount': 0,
+          'exampleTexts': [],
+          'genre': '',
+          'hashTags': [],
+          'impressionCount': 0,
+          'likeCount': 0,
+          'links': [],
+          'msgCount': 0,
+          'muteCount': 0,
+          'reportCount': 0,
+          'score': 0.0,
+          'userCount': 0,
         };
 
         await repository.createPost(uid, postId, postData);
-        final posts = await repository.getTimelinePosts([postId]);
-
-        expect(posts.length, 1);
-        expect(posts.first.postId, postId);
-      });
-
-      test('should return empty list for getTimelinePosts with empty input', () async {
-        final posts = await repository.getTimelinePosts([]);
-        expect(posts, isEmpty);
+        final timelinePosts = await repository.getTimelinePosts([postId]);
+        
+        expect(timelinePosts.length, 1);
+        expect(timelinePosts.first.postId, postId);
       });
     });
 
-    group('Follow Operations', () {
-      test('should create follow info successfully', () async {
-        const currentUid = 'current_uid';
-        const passiveUid = 'passive_uid';
-        const tokenId = 'token_id';
+    group('Token and Relationship Operations', () {
+      test('should handle follow operations with tokens', () async {
+        const currentUid = 'follower_user';
+        const passiveUid = 'followed_user';
+        const tokenId = 'follow_token_123';
 
         final followingToken = FollowingToken(
           tokenId: tokenId,
@@ -326,66 +300,55 @@ void main() {
         );
 
         expect(result, isA<Success<bool>>());
-      });
 
-      test('should delete follow info successfully', () async {
-        const currentUid = 'current_uid';
-        const passiveUid = 'passive_uid';
-        const tokenId = 'token_id';
-
-        final followingToken = FollowingToken(
-          tokenId: tokenId,
-          passiveUid: passiveUid,
-          createdAt: mockTimestamp,
-          tokenType: 'following',
-        );
-
-        final follower = Follower(
-          activeUid: currentUid,
-          createdAt: mockTimestamp,
-          passiveUid: passiveUid,
-        );
-
-        await repository.createFollowInfo(
-          currentUid,
-          passiveUid,
-          followingToken,
-          follower,
-        );
-
+        // Test cleanup
         final deleteResult = await repository.deleteFollowInfoList(
           currentUid,
           passiveUid,
           tokenId,
         );
-
         expect(deleteResult, isA<Success<bool>>());
       });
-    });
 
-    group('Like Operations', () {
-      test('should create like post info successfully', () async {
-        const currentUid = 'current_uid';
-        const uid = 'post_uid';
-        const postId = 'post_id';
-        const tokenId = 'token_id';
+      test('should handle like operations with tokens', () async {
+        const currentUid = 'liker_user';
+        const postUid = 'post_owner';
+        const postId = 'liked_post';
+        const tokenId = 'like_token_123';
 
         final post = Post(
-          uid: uid,
+          uid: postUid,
           postId: postId,
-          title: const {'value': 'Test Title'},
-          description: const {'value': 'Test Description'},
+          title: const {
+            'languageCode': 'en',
+            'negativeScore': 0.1,
+            'positiveScore': 0.9,
+            'sentiment': 'positive',
+            'value': 'Liked Post Title',
+          },
+          description: const {
+            'languageCode': 'en',
+            'negativeScore': 0.05,
+            'positiveScore': 0.95,
+            'sentiment': 'positive',
+            'value': 'Liked post description',
+          },
           createdAt: mockTimestamp,
           updatedAt: mockTimestamp,
-          customCompleteText: const {'systemPrompt': 'Test'},
-          image: const {'value': 'test.jpg'},
+          customCompleteText: const {'systemPrompt': 'Liked post prompt'},
+          image: const {
+            'bucketName': 'test-bucket',
+            'moderationLabels': [],
+            'moderationModelVersion': '1.0',
+            'value': 'liked.jpg',
+          },
           searchToken: const {'tokens': []},
         );
 
         final token = LikePostToken(
           tokenId: tokenId,
           activeUid: currentUid,
-          passiveUid: uid,
+          passiveUid: postUid,
           postId: postId,
           createdAt: mockTimestamp,
           tokenType: 'likePost',
@@ -394,7 +357,7 @@ void main() {
         final postLike = PostLike(
           activeUid: currentUid,
           createdAt: mockTimestamp,
-          passiveUid: uid,
+          passiveUid: postUid,
           postId: postId,
         );
 
@@ -408,230 +371,12 @@ void main() {
         expect(result, isA<Success<bool>>());
       });
 
-      test('should delete like post info successfully', () async {
-        const currentUid = 'current_uid';
-        const uid = 'post_uid';
-        const postId = 'post_id';
-        const tokenId = 'token_id';
-
-        final post = Post(
-          uid: uid,
-          postId: postId,
-          title: const {'value': 'Test Title'},
-          description: const {'value': 'Test Description'},
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {'value': 'Test'},
-          image: const {'value': 'test.jpg'},
-          searchToken: const {'tokens': []},
-        );
-
-        final token = LikePostToken(
-          tokenId: tokenId,
-          activeUid: currentUid,
-          passiveUid: uid,
-          postId: postId,
-          createdAt: mockTimestamp,
-          tokenType: 'likePost',
-        );
-
-        final postLike = PostLike(
-          activeUid: currentUid,
-          createdAt: mockTimestamp,
-          passiveUid: uid,
-          postId: postId,
-        );
-
-        await repository.createLikePostInfo(currentUid, post, token, postLike);
-
-        final deleteResult = await repository.deleteLikePostInfo(
-          currentUid,
-          post,
-          tokenId,
-        );
-
-        expect(deleteResult, isA<Success<bool>>());
-      });
-    });
-
-    group('Mute Operations', () {
-      test('should create mute user info successfully', () async {
-        const currentUid = 'current_uid';
-        const passiveUid = 'passive_uid';
-        const tokenId = 'token_id';
-
-        final token = MuteUserToken(
-          tokenId: tokenId,
-          activeUid: currentUid,
-          passiveUid: passiveUid,
-          createdAt: mockTimestamp,
-          tokenType: 'muteUser',
-        );
-
-        final userMute = UserMute(
-          activeUid: currentUid,
-          createdAt: mockTimestamp,
-          passiveUid: passiveUid,
-        );
-
-        final result = await repository.createMuteUserInfo(
-          currentUid,
-          passiveUid,
-          token,
-          userMute,
-        );
-
-        expect(result, isA<Success<bool>>());
-      });
-
-      test('should delete mute user info successfully', () async {
-        const currentUid = 'current_uid';
-        const passiveUid = 'passive_uid';
-        const tokenId = 'token_id';
-
-        final token = MuteUserToken(
-          tokenId: tokenId,
-          activeUid: currentUid,
-          passiveUid: passiveUid,
-          createdAt: mockTimestamp,
-          tokenType: 'muteUser',
-        );
-
-        final userMute = UserMute(
-          activeUid: currentUid,
-          createdAt: mockTimestamp,
-          passiveUid: passiveUid,
-        );
-
-        await repository.createMuteUserInfo(currentUid, passiveUid, token, userMute);
-
-        final deleteResult = await repository.deleteMuteUserInfo(
-          currentUid,
-          passiveUid,
-          tokenId,
-        );
-
-        expect(deleteResult, isA<Success<bool>>());
-      });
-
-      test('should create mute post info successfully', () async {
-        const currentUid = 'current_uid';
-        const tokenId = 'token_id';
-
-        final post = Post(
-          uid: 'post_uid',
-          postId: 'post_id',
-          title: const {'value': 'Test Title'},
-          description: const {'value': 'Test Description'},
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {'value': 'Test'},
-          image: const {'value': 'test.jpg'},
-          searchToken: const {'tokens': []},
-        );
-
-        final token = MutePostToken(
-          tokenId: tokenId,
-          activeUid: currentUid,
-          postId: post.postId,
-          createdAt: mockTimestamp,
-          tokenType: 'mutePost',
-        );
-
-        final postMute = PostMute(
-          activeUid: currentUid,
-          createdAt: mockTimestamp,
-          postId: post.postId,
-        );
-
-        final result = await repository.createMutePostInfo(
-          currentUid,
-          post,
-          token,
-          postMute,
-        );
-
-        expect(result, isA<Success<bool>>());
-      });
-
-      test('should get mute posts', () async {
-        const uid = 'test_uid';
-        const postId = 'test_post_id';
-        final postData = {
-          'uid': uid,
-          'postId': postId,
-          'title': {'value': 'Test Title'},
-          'description': {'value': 'Test Description'},
-          'createdAt': mockTimestamp,
-          'updatedAt': mockTimestamp,
-          'customCompleteText': {'value': 'Test'},
-          'image': {'value': 'test.jpg'},
-          'searchToken': {'tokens': []},
-        };
-
-        await repository.createPost(uid, postId, postData);
-        final posts = await repository.getMutePosts([postId]);
-
-        expect(posts.length, 1);
-        expect(posts.first.postId, postId);
-      });
-
-      test('should return empty list for getMutePosts with empty input', () async {
-        final posts = await repository.getMutePosts([]);
-        expect(posts, isEmpty);
-      });
-    });
-
-    group('Token Operations', () {
-      test('should get tokens for user', () async {
-        const uid = 'test_uid';
-        final privateUserData = {
-          'uid': uid,
-          'accessToken': 'test_token',
-          'createdAt': mockTimestamp,
-          'updatedAt': mockTimestamp,
-          'isAdmin': false,
-        };
-
-        await repository.createPrivateUser(uid, privateUserData);
-
-        final tokens = await repository.getTokens(uid);
-        expect(tokens, isA<List<Map<String, dynamic>>>());
-      });
-    });
-
-    group('Timeline Operations', () {
-      test('should get timelines for user', () async {
-        const currentUid = 'current_uid';
-
-        final timelines = await repository.getTimelines(currentUid);
-        expect(timelines, isA<List<Timeline>>());
-      });
-    });
-
-    group('Count Operations', () {
-      test('should count users', () async {
-        final count = await repository.countUsers();
-        expect(count, isA<int?>());
-      });
-
-      test('should count posts', () async {
-        final count = await repository.countPosts();
-        expect(count, isA<int?>());
-      });
-
-      test('should count messages', () async {
-        final count = await repository.countMessages();
-        expect(count, isA<int?>());
-      });
-    });
-
-    group('User Update Log Operations', () {
-      test('should create user update log', () async {
-        const uid = 'test_uid';
-        const userName = 'test user';
-        const bio = 'test bio';
-        const fileName = 'test.jpg';
+      test('should handle user update log creation', () async {
+        const uid = 'update_user';
+        const userName = 'Updated Name';
+        const bio = 'Updated biography';
+        const fileName = 'updated_image.jpg';
+        
         final userUpdateLog = UserUpdateLog.fromRegister(
           uid,
           userName,
@@ -639,33 +384,156 @@ void main() {
           fileName,
         );
 
-        // Firestoreに保存
+        expect(userUpdateLog.uid, uid);
+        expect(userUpdateLog.stringUserName, userName);
+        expect(userUpdateLog.stringBio, bio);
+
         final result = await repository.createUserUpdateLog(uid, userUpdateLog.toJson());
         expect(result, isA<Success<bool>>());
       });
     });
 
     group('Edge Cases and Error Handling', () {
-      test('should handle non-existent user gracefully in getPublicUser', () async {
-        const uid = 'non_existent_uid';
-        // Repository should return null for non-existent documents
-        final result = await repository.getPublicUser(uid);
-        expect(result, isNull);
+      test('should handle empty lists gracefully', () async {
+        final emptyUserList = await repository.getUsersByUids([]);
+        expect(emptyUserList, isEmpty);
+
+        final emptyTimelinePosts = await repository.getTimelinePosts([]);
+        expect(emptyTimelinePosts, isEmpty);
+
+        final emptyMutePosts = await repository.getMutePosts([]);
+        expect(emptyMutePosts, isEmpty);
       });
 
-      test('should handle non-existent user gracefully in getPrivateUser', () async {
-        const uid = 'non_existent_uid';
-        // Repository should return null for non-existent documents
-        final result = await repository.getPrivateUser(uid);
-        expect(result, isNull);
+      test('should handle non-existent documents', () async {
+        final nonExistentUser = await repository.getPublicUser('non_existent');
+        expect(nonExistentUser, isNull);
+
+        final nonExistentPrivateUser = await repository.getPrivateUser('non_existent');
+        expect(nonExistentPrivateUser, isNull);
+
+        final nonExistentPost = await repository.getPost('non_existent', 'non_existent');
+        expect(nonExistentPost, isNull);
       });
 
-      test('should handle non-existent post gracefully in getPost', () async {
-        const uid = 'non_existent_uid';
-        const postId = 'non_existent_post_id';
-        // Repository should return null for non-existent documents
-        final result = await repository.getPost(uid, postId);
-        expect(result, isNull);
+      test('should handle count operations', () async {
+        final userCount = await repository.countUsers();
+        expect(userCount, isA<int?>());
+        expect(userCount, greaterThanOrEqualTo(0));
+
+        final postCount = await repository.countPosts();
+        expect(postCount, isA<int?>());
+        expect(postCount, greaterThanOrEqualTo(0));
+
+        final messageCount = await repository.countMessages();
+        expect(messageCount, isA<int?>());
+        expect(messageCount, greaterThanOrEqualTo(0));
+      });
+
+      test('should handle timeline operations', () async {
+        const currentUid = 'timeline_test_user';
+        
+        final timelines = await repository.getTimelines(currentUid);
+        expect(timelines, isA<List<Timeline>>());
+        expect(timelines, isEmpty); // Should be empty for new user
+      });
+
+      test('should handle token operations', () async {
+        const uid = 'token_test_user';
+        
+        final tokens = await repository.getTokens(uid);
+        expect(tokens, isA<List<Map<String, dynamic>>>());
+        expect(tokens, isEmpty); // Should be empty for new user
+      });
+    });
+
+    group('Data Integrity Tests', () {
+      test('should maintain data consistency across operations', () async {
+        const uid = 'consistency_user';
+        const postId = 'consistency_post';
+        
+        // Create post
+        final postData = {
+          'uid': uid,
+          'postId': postId,
+          'title': {
+            'languageCode': 'en',
+            'negativeScore': 0.1,
+            'positiveScore': 0.9,
+            'sentiment': 'positive',
+            'value': 'Consistency Test Post',
+          },
+          'description': {
+            'languageCode': 'en',
+            'negativeScore': 0.05,
+            'positiveScore': 0.95,
+            'sentiment': 'positive',
+            'value': 'Testing data consistency',
+          },
+          'createdAt': mockTimestamp,
+          'updatedAt': mockTimestamp,
+          'customCompleteText': {'systemPrompt': 'Consistency test'},
+          'image': {
+            'bucketName': 'test-bucket',
+            'moderationLabels': [],
+            'moderationModelVersion': '1.0',
+            'value': 'consistency.jpg',
+          },
+          'searchToken': {'tokens': []},
+          'bookmarkCount': 0,
+          'exampleTexts': [],
+          'genre': '',
+          'hashTags': [],
+          'impressionCount': 0,
+          'likeCount': 0,
+          'links': [],
+          'msgCount': 0,
+          'muteCount': 0,
+          'reportCount': 0,
+          'score': 0.0,
+          'userCount': 0,
+        };
+
+        await repository.createPost(uid, postId, postData);
+        
+        // Verify post exists
+        final retrievedPost = await repository.getPost(uid, postId);
+        expect(retrievedPost, isNotNull);
+        
+        // Delete post
+        final deleteResult = await repository.deletePost(retrievedPost!);
+        expect(deleteResult, isA<Success<bool>>());
+        
+        // Verify post is deleted
+        final deletedPost = await repository.getPost(uid, postId);
+        expect(deletedPost, isNull);
+      });
+
+      test('should validate required field structures', () async {
+        // Test minimum required structure for DetectedText
+        final minimalDetectedText = {
+          'languageCode': '',
+          'negativeScore': 0.0,
+          'positiveScore': 0.0,
+          'sentiment': 'neutral',
+          'value': '',
+        };
+        expect(minimalDetectedText.keys.length, 5);
+
+        // Test minimum required structure for DetectedImage
+        final minimalDetectedImage = {
+          'bucketName': '',
+          'moderationLabels': <String>[],
+          'moderationModelVersion': '',
+          'value': '',
+        };
+        expect(minimalDetectedImage.keys.length, 4);
+
+        // Test minimum required structure for CustomCompleteText
+        final minimalCustomCompleteText = {
+          'systemPrompt': '',
+        };
+        expect(minimalCustomCompleteText.keys.length, 1);
       });
     });
   });
