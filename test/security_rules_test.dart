@@ -5,8 +5,41 @@ import 'package:flutter_test/flutter_test.dart';
 final securityRules = '''
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /public/v1/users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+    match /public/v1/users/{uid} {
+      allow read: if request.auth != null;
+      allow write: if request.auth.uid == uid && request.auth.token.email_verified;
+
+      match /posts/{postId} {
+        allow read: if request.auth != null;
+        allow write: if request.auth.uid == uid && request.auth.token.email_verified;
+
+        match /postLikes/{activeUid} {
+          allow write: if request.auth.uid == activeUid && request.auth.token.email_verified;
+        }
+        match /postMutes/{activeUid} {
+          allow write: if request.auth.uid == activeUid && request.auth.token.email_verified;
+        }
+      }
+      match /followers/{activeUid} {
+        allow write: if request.auth.uid == activeUid && request.auth.token.email_verified;
+      }
+      match /userMutes/{activeUid} {
+        allow write: if request.auth.uid == activeUid && request.auth.token.email_verified;
+      }
+      match /userUpdateLogs/{id} {
+        allow write: if request.auth.uid == uid && request.auth.token.email_verified;
+      }
+      match /timelines/{postId} {
+        allow read: if request.auth.uid == uid && request.auth.token.email_verified;
+      }
+    }
+    match /private/v1/privateUsers/{uid} {
+      allow read: if request.auth.uid == uid && request.auth.token.email_verified;
+      allow write: if request.auth.uid == uid && request.auth.token.email_verified;
+
+      match /tokens/{tokenId} {
+        allow read, write: if request.auth.uid == uid && request.auth.token.email_verified;
+      }
     }
   }
 }''';
