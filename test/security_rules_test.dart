@@ -47,7 +47,7 @@ service cloud.firestore {
 void main() {
   group('Security Rules Test', () {
     test('should allow access to own user document', () async {
-      final auth = MockFirebaseAuth();
+      final auth = MockFirebaseAuth(mockUser: null);
       final firestore = FakeFirebaseFirestore(
         securityRules: securityRules,
         authObject: auth.authForFakeFirestore,
@@ -61,7 +61,7 @@ void main() {
     });
 
     test('should deny access to other user\'s document', () async {
-      final auth = MockFirebaseAuth();
+      final auth = MockFirebaseAuth(mockUser: null);
       final firestore = FakeFirebaseFirestore(
         securityRules: securityRules,
         authObject: auth.authForFakeFirestore,
@@ -74,7 +74,7 @@ void main() {
       );
     });
     test('should allow access to own post document', () async {
-      final auth = MockFirebaseAuth();
+      final auth = MockFirebaseAuth(mockUser: null);
       final firestore = FakeFirebaseFirestore(
         securityRules: securityRules,
         authObject: auth.authForFakeFirestore,
@@ -88,7 +88,7 @@ void main() {
     });
 
     test('should deny access to other user\'s post document', () async {
-      final auth = MockFirebaseAuth();
+      final auth = MockFirebaseAuth(mockUser: null);
       final firestore = FakeFirebaseFirestore(
         securityRules: securityRules,
         authObject: auth.authForFakeFirestore,
@@ -97,6 +97,202 @@ void main() {
 
       expect(
         () => firestore.doc('public/v1/users/abcdef/posts/post123').set({'content': 'test post'}),
+        throwsException,
+      );
+    });
+
+    test('should allow access to own postLikes document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      final credential = await auth.signInWithCustomToken('some token');
+      final uid = credential.user!.uid;
+      expect(
+        () => firestore.doc('public/v1/users/otheruser/posts/post123/postLikes/$uid').set({'liked': true}),
+        returnsNormally,
+      );
+    });
+
+    test('should deny access to other user\'s postLikes document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      await auth.signInWithCustomToken('some token');
+
+      expect(
+        () => firestore.doc('public/v1/users/otheruser/posts/post123/postLikes/abcdef').set({'liked': true}),
+        throwsException,
+      );
+    });
+
+    test('should allow access to own postMutes document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      final credential = await auth.signInWithCustomToken('some token');
+      final uid = credential.user!.uid;
+      expect(
+        () => firestore.doc('public/v1/users/otheruser/posts/post123/postMutes/$uid').set({'muted': true}),
+        returnsNormally,
+      );
+    });
+
+    test('should deny access to other user\'s postMutes document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      await auth.signInWithCustomToken('some token');
+
+      expect(
+        () => firestore.doc('public/v1/users/otheruser/posts/post123/postMutes/abcdef').set({'muted': true}),
+        throwsException,
+      );
+    });
+
+    test('should allow access to own followers document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      final credential = await auth.signInWithCustomToken('some token');
+      final uid = credential.user!.uid;
+      expect(
+        () => firestore.doc('public/v1/users/otheruser/followers/$uid').set({'following': true}),
+        returnsNormally,
+      );
+    });
+
+    test('should deny access to other user\'s followers document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      await auth.signInWithCustomToken('some token');
+
+      expect(
+        () => firestore.doc('public/v1/users/otheruser/followers/abcdef').set({'following': true}),
+        throwsException,
+      );
+    });
+
+    test('should allow access to own userMutes document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      final credential = await auth.signInWithCustomToken('some token');
+      final uid = credential.user!.uid;
+      expect(
+        () => firestore.doc('public/v1/users/otheruser/userMutes/$uid').set({'muted': true}),
+        returnsNormally,
+      );
+    });
+
+    test('should deny access to other user\'s userMutes document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      await auth.signInWithCustomToken('some token');
+
+      expect(
+        () => firestore.doc('public/v1/users/otheruser/userMutes/abcdef').set({'muted': true}),
+        throwsException,
+      );
+    });
+
+    test('should allow access to own timelines document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      final credential = await auth.signInWithCustomToken('some token');
+      final uid = credential.user!.uid;
+      expect(
+        () => firestore.doc('public/v1/users/$uid/timelines/post123').get(),
+        returnsNormally,
+      );
+    });
+
+    test('should deny access to other user\'s timelines document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      await auth.signInWithCustomToken('some token');
+
+      expect(
+        () => firestore.doc('public/v1/users/abcdef/timelines/post123').get(),
+        throwsException,
+      );
+    });
+
+    test('should allow access to own privateUsers document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      final credential = await auth.signInWithCustomToken('some token');
+      final uid = credential.user!.uid;
+      expect(
+        () => firestore.doc('private/v1/privateUsers/$uid').set({'privateData': 'test'}),
+        returnsNormally,
+      );
+    });
+
+    test('should deny access to other user\'s privateUsers document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      await auth.signInWithCustomToken('some token');
+
+      expect(
+        () => firestore.doc('private/v1/privateUsers/abcdef').set({'privateData': 'test'}),
+        throwsException,
+      );
+    });
+
+    test('should allow access to own tokens document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      final credential = await auth.signInWithCustomToken('some token');
+      final uid = credential.user!.uid;
+      expect(
+        () => firestore.doc('private/v1/privateUsers/$uid/tokens/token123').set({'token': 'test'}),
+        returnsNormally,
+      );
+    });
+
+    test('should deny access to other user\'s tokens document', () async {
+      final auth = MockFirebaseAuth(mockUser: null);
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      await auth.signInWithCustomToken('some token');
+
+      expect(
+        () => firestore.doc('private/v1/privateUsers/abcdef/tokens/token123').set({'token': 'test'}),
         throwsException,
       );
     });
