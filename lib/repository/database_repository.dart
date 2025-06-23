@@ -320,7 +320,9 @@ class DatabaseRepository {
     try {
       final docRef = userDocRef(uid);
       final doc = await docRef.get();
-      return PublicUser.fromJson(doc.data() as Map<String, dynamic>);
+      final data = doc.data();
+      if (data == null) return null;
+      return PublicUser.fromJson(data);
     } catch (e) {
       debugPrint('getPublicUser: ${e.toString()}');
       return null;
@@ -331,7 +333,9 @@ class DatabaseRepository {
     try {
       final docRef = privateUserDocRef(uid);
       final doc = await docRef.get();
-      return PrivateUser.fromJson(doc.data() as Map<String, dynamic>);
+      final data = doc.data();
+      if (data == null) return null;
+      return PrivateUser.fromJson(data);
     } catch (e) {
       debugPrint('getPrivateUser: ${e.toString()}');
       return null;
@@ -342,7 +346,9 @@ class DatabaseRepository {
     try {
       final docRef = postDocRef(uid, postId);
       final doc = await docRef.get();
-      return Post.fromJson(doc.data() as Map<String, dynamic>);
+      final data = doc.data();
+      if (data == null) return null;
+      return Post.fromJson(data);
     } catch (e) {
       debugPrint('getPost: ${e.toString()}');
       return null;
