@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
@@ -324,7 +325,14 @@ void main() {
 
         await prefs.setString(PrefsKey.verifiedPurchases.name, 'invalid_json');
 
+        // Suppress debug print during test
+        final originalDebugPrint = debugPrint;
+        debugPrint = (String? message, {int? wrapWidth}) {};
+
         final purchases = localRepository.fetchVerifiedPurchases();
+
+        // Restore original debug print
+        debugPrint = originalDebugPrint;
 
         expect(purchases, isEmpty);
       });
@@ -336,7 +344,14 @@ void main() {
         const postId = 'invalid_json_post';
         await prefs.setString(postId, 'invalid_json');
 
+        // Suppress debug print during test
+        final originalDebugPrint = debugPrint;
+        debugPrint = (String? message, {int? wrapWidth}) {};
+
         final messages = localRepository.getMessages(postId);
+
+        // Restore original debug print
+        debugPrint = originalDebugPrint;
 
         expect(messages, isEmpty);
       });
