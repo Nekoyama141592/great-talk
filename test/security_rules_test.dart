@@ -46,18 +46,12 @@ service cloud.firestore {
 
 void main() {
   group('Security Rules Test', () {
-    late MockFirebaseAuth auth;
-    late FakeFirebaseFirestore firestore;
-
-    setUp(() {
-      auth = MockFirebaseAuth();
-      firestore = FakeFirebaseFirestore(
+    test('should allow access to own user document', () async {
+      final auth = MockFirebaseAuth();
+      final firestore = FakeFirebaseFirestore(
         securityRules: securityRules,
         authObject: auth.authForFakeFirestore,
       );
-    });
-
-    test('should allow access to own user document', () async {
       final credential = await auth.signInWithCustomToken('some token');
       final uid = credential.user!.uid;
       expect(
@@ -67,10 +61,42 @@ void main() {
     });
 
     test('should deny access to other user\'s document', () async {
+      final auth = MockFirebaseAuth();
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
       await auth.signInWithCustomToken('some token');
 
       expect(
         () => firestore.doc('public/v1/users/abcdef').set({'name': 'abc'}),
+        throwsException,
+      );
+    });
+    test('should allow access to own post document', () async {
+      final auth = MockFirebaseAuth();
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      final credential = await auth.signInWithCustomToken('some token');
+      final uid = credential.user!.uid;
+      expect(
+        () => firestore.doc('public/v1/users/$uid/posts/post123').set({'content': 'test post'}),
+        returnsNormally,
+      );
+    });
+
+    test('should deny access to other user\'s post document', () async {
+      final auth = MockFirebaseAuth();
+      final firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
+        authObject: auth.authForFakeFirestore,
+      );
+      await auth.signInWithCustomToken('some token');
+
+      expect(
+        () => firestore.doc('public/v1/users/abcdef/posts/post123').set({'content': 'test post'}),
         throwsException,
       );
     });
