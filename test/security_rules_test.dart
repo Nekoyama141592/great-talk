@@ -1,12 +1,11 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
-// https://firebase.google.com/docs/rules/rules-and-auth#leverage_user_information_in_rules
-final authUidDescription = '''
+final securityRules = '''
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /users/{userId} {
+    match /public/v1/users/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
   }
@@ -14,29 +13,31 @@ service cloud.firestore {
 
 void main() {
   group('Security Rules Test', () {
-    test('should allow access to own user document', () async {
-      final auth = MockFirebaseAuth();
-      final firestore = FakeFirebaseFirestore(
-        securityRules: authUidDescription,
+    late MockFirebaseAuth auth;
+    late FakeFirebaseFirestore firestore;
+
+    setUp(() {
+      auth = MockFirebaseAuth();
+      firestore = FakeFirebaseFirestore(
+        securityRules: securityRules,
         authObject: auth.authForFakeFirestore,
       );
-      await auth.signInWithCustomToken('some token');
-      final uid = auth.currentUser!.uid;
+    });
+
+    test('should allow access to own user document', () async {
+      final credential = await auth.signInWithCustomToken('some token');
+      final uid = credential.user!.uid;
       expect(
-        () => firestore.doc('users/$uid').set({'name': 'abc'}),
+        () => firestore.doc('public/v1/users/$uid').set({'name': 'abc'}),
         returnsNormally,
       );
     });
 
     test('should deny access to other user\'s document', () async {
-      final auth = MockFirebaseAuth();
-      final firestore = FakeFirebaseFirestore(
-        securityRules: authUidDescription,
-        authObject: auth.authForFakeFirestore,
-      );
       await auth.signInWithCustomToken('some token');
+
       expect(
-        () => firestore.doc('users/abcdef').set({'name': 'abc'}),
+        () => firestore.doc('public/v1/users/abcdef').set({'name': 'abc'}),
         throwsException,
       );
     });
