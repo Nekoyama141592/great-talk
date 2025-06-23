@@ -118,7 +118,11 @@ class DatabaseRepository {
     final docRef = userDocRef(uid);
     try {
       await docRef.set(json);
-      return PublicUser.fromJson(json);
+      // Retrieve the document to ensure type safety
+      final doc = await docRef.get();
+      final data = doc.data();
+      if (data == null) return null;
+      return PublicUser.fromJson(Map<String, dynamic>.from(data));
     } catch (e) {
       debugPrint('createPublicUser: ${e.toString()}');
       return null;
@@ -132,7 +136,11 @@ class DatabaseRepository {
     final docRef = privateUserDocRef(uid);
     try {
       await docRef.set(json);
-      return PrivateUser.fromJson(json);
+      // Retrieve the document to ensure type safety
+      final doc = await docRef.get();
+      final data = doc.data();
+      if (data == null) return null;
+      return PrivateUser.fromJson(Map<String, dynamic>.from(data));
     } catch (e) {
       debugPrint('createPrivateUser: ${e.toString()}');
       return null;
@@ -322,7 +330,7 @@ class DatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      return PublicUser.fromJson(data);
+      return PublicUser.fromJson(Map<String, dynamic>.from(data));
     } catch (e) {
       debugPrint('getPublicUser: ${e.toString()}');
       return null;
@@ -335,7 +343,7 @@ class DatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      return PrivateUser.fromJson(data);
+      return PrivateUser.fromJson(Map<String, dynamic>.from(data));
     } catch (e) {
       debugPrint('getPrivateUser: ${e.toString()}');
       return null;
@@ -348,7 +356,7 @@ class DatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      return Post.fromJson(data);
+      return Post.fromJson(Map<String, dynamic>.from(data));
     } catch (e) {
       debugPrint('getPost: ${e.toString()}');
       return null;
@@ -376,7 +384,7 @@ class DatabaseRepository {
     try {
       final query = timelinePostsQuery(postIds);
       final qSnapshot = await _getDocs(query);
-      return qSnapshot.docs.map((e) => Post.fromJson(e.data())).toList();
+      return qSnapshot.docs.map((e) => Post.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getTimelinePosts: ${e.toString()}'); // Added debugPrint here
       return [];
@@ -401,7 +409,7 @@ class DatabaseRepository {
     try {
       final query = userPostsByNewest(uid);
       final qshot = await _getDocs(query);
-      return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
+      return qshot.docs.map((e) => Post.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getUserPosts: ${e.toString()}');
       return [];
@@ -418,7 +426,7 @@ class DatabaseRepository {
       final doc = await _getPostDoc(lastPost);
       final query = userPostsByNewest(lastPost.uid).startAfterDocument(doc);
       final qshot = await query.get();
-      return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
+      return qshot.docs.map((e) => Post.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getMoreUserPosts: ${e.toString()}');
       return [];
@@ -434,7 +442,7 @@ class DatabaseRepository {
     try {
       final query = usersByFollowerCount();
       final qshot = await query.get();
-      return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
+      return qshot.docs.map((e) => PublicUser.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getRankingUsers: ${e.toString()}');
       return [];
@@ -446,7 +454,7 @@ class DatabaseRepository {
       final doc = await _getUserDoc(lastUser.uid);
       final query = usersByFollowerCount().startAfterDocument(doc);
       final qshot = await query.get();
-      return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
+      return qshot.docs.map((e) => PublicUser.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getMoreRankingUsers: ${e.toString()}');
       return [];
@@ -458,7 +466,7 @@ class DatabaseRepository {
     try {
       final query = usersByWhereIn(requestUids);
       final qshot = await query.get();
-      return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
+      return qshot.docs.map((e) => PublicUser.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getMuteUsers: ${e.toString()}');
       return [];
@@ -474,7 +482,7 @@ class DatabaseRepository {
       final doc = await _getUserDoc(lastUser.uid);
       final query = usersByWhereIn(requestUids).startAfterDocument(doc);
       final qshot = await query.get();
-      return qshot.docs.map((e) => PublicUser.fromJson(e.data())).toList();
+      return qshot.docs.map((e) => PublicUser.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getMoreMuteUsers: ${e.toString()}');
       return [];
@@ -485,7 +493,7 @@ class DatabaseRepository {
     try {
       final qshot = await timelinesQuery(currentUid).get();
       final timelines =
-          qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
+          qshot.docs.map((e) => Timeline.fromJson(Map<String, dynamic>.from(e.data()))).toList();
       final sorted = [...timelines]
         ..sort((a, b) => (b.createdAt).compareTo(a.createdAt));
       return sorted;
@@ -502,7 +510,7 @@ class DatabaseRepository {
   Future<List<Post>> getPosts(bool isRankingPosts) async {
     try {
       final qshot = await _postsQuery(isRankingPosts).get();
-      return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
+      return qshot.docs.map((e) => Post.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getPosts: ${e.toString()}');
       return [];
@@ -514,7 +522,7 @@ class DatabaseRepository {
       final doc = await _getPostDoc(lastPost);
       final qshot =
           await _postsQuery(isRankingPosts).startAfterDocument(doc).get();
-      return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
+      return qshot.docs.map((e) => Post.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getMorePosts: ${e.toString()}');
       return [];
@@ -529,7 +537,7 @@ class DatabaseRepository {
       final doc = await timelinesDocRef(currentUid, lastTimeline.postId).get();
       final query = timelinesQuery(currentUid);
       final qshot = await query.startAfterDocument(doc).get();
-      return qshot.docs.map((e) => Timeline.fromJson(e.data())).toList();
+      return qshot.docs.map((e) => Timeline.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getMoreTimelines: ${e.toString()}');
       return [];
@@ -541,7 +549,7 @@ class DatabaseRepository {
     try {
       final query = postsByWhereIn(postIds);
       final qshot = await query.get();
-      return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
+      return qshot.docs.map((e) => Post.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getMutePosts: ${e.toString()}');
       return [];
@@ -557,7 +565,7 @@ class DatabaseRepository {
       final doc = await _getPostDoc(lastPost);
       final query = postsByWhereIn(postIds).startAfterDocument(doc);
       final qshot = await query.get();
-      return qshot.docs.map((e) => Post.fromJson(e.data())).toList();
+      return qshot.docs.map((e) => Post.fromJson(Map<String, dynamic>.from(e.data()))).toList();
     } catch (e) {
       debugPrint('getMoreMutePosts: ${e.toString()}');
       return [];
