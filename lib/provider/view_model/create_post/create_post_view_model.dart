@@ -61,10 +61,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     }
     // state内のpickedImageを更新
     state.whenData(
-      (s) =>
-          state = AsyncValue.data(
-            s.copyWith(pickedImage: result),
-          ),
+      (s) => state = AsyncValue.data(s.copyWith(pickedImage: result)),
     );
   }
 

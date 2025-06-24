@@ -4,21 +4,24 @@ import 'package:great_talk/core/search_core.dart';
 void main() {
   group('SearchCore', () {
     group('returnSearchToken', () {
-      test('should return map with search words as keys and true as values', () {
-        const searchTerm = 'hello';
-        final result = SearchCore.returnSearchToken(searchTerm);
-        
-        expect(result, isA<Map<String, dynamic>>());
-        expect(result['he'], true);
-        expect(result['el'], true);
-        expect(result['ll'], true);
-        expect(result['lo'], true);
-      });
+      test(
+        'should return map with search words as keys and true as values',
+        () {
+          const searchTerm = 'hello';
+          final result = SearchCore.returnSearchToken(searchTerm);
+
+          expect(result, isA<Map<String, dynamic>>());
+          expect(result['he'], true);
+          expect(result['el'], true);
+          expect(result['ll'], true);
+          expect(result['lo'], true);
+        },
+      );
 
       test('should handle single character input', () {
         const searchTerm = 'a';
         final result = SearchCore.returnSearchToken(searchTerm);
-        
+
         expect(result, isA<Map<String, dynamic>>());
         expect(result['a'], true);
         expect(result.length, 1);
@@ -27,7 +30,7 @@ void main() {
       test('should handle empty input', () {
         const searchTerm = '';
         final result = SearchCore.returnSearchToken(searchTerm);
-        
+
         expect(result, isA<Map<String, dynamic>>());
         expect(result.isEmpty, true);
       });
@@ -35,7 +38,7 @@ void main() {
       test('should handle input with special characters', () {
         const searchTerm = 'test.word';
         final result = SearchCore.returnSearchToken(searchTerm);
-        
+
         expect(result.keys.any((key) => key.contains('.')), false);
       });
     });
@@ -44,28 +47,28 @@ void main() {
       test('should return bi-gram tokens for normal input', () {
         const searchTerm = 'hello';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result, ['he', 'el', 'll', 'lo']);
       });
 
       test('should return single token for input shorter than nGramIndex', () {
         const searchTerm = 'a';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result, ['a']);
       });
 
       test('should return single token for input equal to nGramIndex', () {
         const searchTerm = 'ab';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result, ['ab']);
       });
 
       test('should convert input to lowercase', () {
         const searchTerm = 'HELLO';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result, ['he', 'el', 'll', 'lo']);
         expect(result.every((word) => word == word.toLowerCase()), true);
       });
@@ -73,7 +76,7 @@ void main() {
       test('should filter out special characters', () {
         const searchTerm = 'hel.lo';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result, ['he', 'el', 'll', 'lo']);
         expect(result.any((word) => word.contains('.')), false);
       });
@@ -81,7 +84,7 @@ void main() {
       test('should handle mixed case and special characters', () {
         const searchTerm = 'Hello*World!';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result.every((word) => word == word.toLowerCase()), true);
         expect(result.any((word) => word.contains('*')), false);
       });
@@ -89,7 +92,7 @@ void main() {
       test('should handle input with multiple special characters', () {
         const searchTerm = 'te.st[wo]rd';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result.any((word) => word.contains('.')), false);
         expect(result.any((word) => word.contains('[')), false);
         expect(result.any((word) => word.contains(']')), false);
@@ -98,28 +101,28 @@ void main() {
       test('should handle Unicode characters', () {
         const searchTerm = 'こんにちは';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result, ['こん', 'んに', 'にち', 'ちは']);
       });
 
       test('should handle empty string after filtering', () {
         const searchTerm = '....';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result, []);
       });
 
       test('should handle input with only special characters', () {
         const searchTerm = '.*[]';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result, []);
       });
 
       test('should generate correct number of bi-grams', () {
         const searchTerm = 'testing';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result.length, 6);
         expect(result, ['te', 'es', 'st', 'ti', 'in', 'ng']);
       });
@@ -127,7 +130,7 @@ void main() {
       test('should handle whitespace', () {
         const searchTerm = 'hello world';
         final result = SearchCore.returnSearchWords(searchTerm);
-        
+
         expect(result.any((word) => word.contains(' ')), true);
       });
     });

@@ -69,7 +69,7 @@ void main() {
         final result1 = 1234567890.formatNumber();
         final result2 = 1234567.formatNumber();
         final result3 = 1234.formatNumber();
-        
+
         expect(result1.split('.')[1][0], '2');
         expect(result2.split('.')[1][0], '2');
         expect(result3.split('.')[1][0], '2');
@@ -119,7 +119,7 @@ void main() {
       test('should format consistently regardless of input type', () {
         const intVal = 1500000;
         const doubleVal = 1500000.0;
-        
+
         expect(intVal.formatNumber(), doubleVal.formatNumber());
       });
     });
@@ -140,7 +140,7 @@ void main() {
       test('should handle infinity correctly', () {
         final infinityResult = double.infinity.formatNumber();
         final negInfinityResult = double.negativeInfinity.formatNumber();
-        
+
         expect(infinityResult.contains('Infinity'), true);
         expect(negInfinityResult.contains('Infinity'), true);
         expect(negInfinityResult.startsWith('-'), true);

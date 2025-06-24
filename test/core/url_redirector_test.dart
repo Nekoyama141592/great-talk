@@ -5,18 +5,24 @@ void main() {
   group('UrlRedirector', () {
     group('URI constants', () {
       test('should have correct privacy policy URI', () {
-        expect(UrlRedirector.privacyPolicyUri.toString(),
-            'https://impartial-literature-dfb.notion.site/2b71dbec76c64d80b16baefc8fc8485b');
+        expect(
+          UrlRedirector.privacyPolicyUri.toString(),
+          'https://impartial-literature-dfb.notion.site/2b71dbec76c64d80b16baefc8fc8485b',
+        );
       });
 
       test('should have correct EULA URI', () {
-        expect(UrlRedirector.eulaUri.toString(),
-            'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/');
+        expect(
+          UrlRedirector.eulaUri.toString(),
+          'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/',
+        );
       });
 
       test('should have correct Terms of Service URI', () {
-        expect(UrlRedirector.tosUri.toString(),
-            'https://impartial-literature-dfb.notion.site/AI-bccd27c2976242958409537ac1cbc31b?pvs=4');
+        expect(
+          UrlRedirector.tosUri.toString(),
+          'https://impartial-literature-dfb.notion.site/AI-bccd27c2976242958409537ac1cbc31b?pvs=4',
+        );
       });
     });
 
@@ -24,7 +30,10 @@ void main() {
       test('privacy policy URI should be valid', () {
         expect(UrlRedirector.privacyPolicyUri.isAbsolute, isTrue);
         expect(UrlRedirector.privacyPolicyUri.scheme, 'https');
-        expect(UrlRedirector.privacyPolicyUri.host, 'impartial-literature-dfb.notion.site');
+        expect(
+          UrlRedirector.privacyPolicyUri.host,
+          'impartial-literature-dfb.notion.site',
+        );
       });
 
       test('EULA URI should be valid', () {
@@ -36,7 +45,10 @@ void main() {
       test('Terms of Service URI should be valid', () {
         expect(UrlRedirector.tosUri.isAbsolute, isTrue);
         expect(UrlRedirector.tosUri.scheme, 'https');
-        expect(UrlRedirector.tosUri.host, 'impartial-literature-dfb.notion.site');
+        expect(
+          UrlRedirector.tosUri.host,
+          'impartial-literature-dfb.notion.site',
+        );
       });
     });
 
@@ -56,28 +68,37 @@ void main() {
 
     group('URL parsing', () {
       test('privacy policy URL should parse correctly', () {
-        const privacyUrl = "https://impartial-literature-dfb.notion.site/2b71dbec76c64d80b16baefc8fc8485b";
+        const privacyUrl =
+            "https://impartial-literature-dfb.notion.site/2b71dbec76c64d80b16baefc8fc8485b";
         final parsedUri = Uri.parse(privacyUrl);
-        
-        expect(parsedUri.toString(), equals(UrlRedirector.privacyPolicyUri.toString()));
+
+        expect(
+          parsedUri.toString(),
+          equals(UrlRedirector.privacyPolicyUri.toString()),
+        );
         expect(parsedUri.scheme, equals('https'));
         expect(parsedUri.host, equals('impartial-literature-dfb.notion.site'));
       });
 
       test('EULA URL should parse correctly', () {
-        const eulaUrl = "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/";
+        const eulaUrl =
+            "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/";
         final parsedUri = Uri.parse(eulaUrl);
-        
+
         expect(parsedUri.toString(), equals(UrlRedirector.eulaUri.toString()));
         expect(parsedUri.scheme, equals('https'));
         expect(parsedUri.host, equals('www.apple.com'));
-        expect(parsedUri.path, equals('/legal/internet-services/itunes/dev/stdeula/'));
+        expect(
+          parsedUri.path,
+          equals('/legal/internet-services/itunes/dev/stdeula/'),
+        );
       });
 
       test('ToS URL should parse correctly', () {
-        const tosUrl = "https://impartial-literature-dfb.notion.site/AI-bccd27c2976242958409537ac1cbc31b?pvs=4";
+        const tosUrl =
+            "https://impartial-literature-dfb.notion.site/AI-bccd27c2976242958409537ac1cbc31b?pvs=4";
         final parsedUri = Uri.parse(tosUrl);
-        
+
         expect(parsedUri.toString(), equals(UrlRedirector.tosUri.toString()));
         expect(parsedUri.scheme, equals('https'));
         expect(parsedUri.host, equals('impartial-literature-dfb.notion.site'));

@@ -46,7 +46,8 @@ class ChatPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chatStateAsync = ref.watch(chatViewModelProvider(uid, postId));
-    ChatViewModel chatNotifier() => ref.read(chatViewModelProvider(uid, postId).notifier);
+    ChatViewModel chatNotifier() =>
+        ref.read(chatViewModelProvider(uid, postId).notifier);
     final isAdmin =
         ref.watch(currentUserNotifierProvider).value?.isAdmin() ?? false;
     final inputController = useTextEditingController();
@@ -60,18 +61,14 @@ class ChatPage extends HookConsumerWidget {
           messages[index - 1].createdAtDateTime.day;
     }
 
-    void mutePost(BuildContext innerContext,Post post) async {
+    void mutePost(BuildContext innerContext, Post post) async {
       final uid = ref.read(streamAuthUidProvider).value;
       if (uid == null) return;
-      final token = ref
-          .read(tokensNotifierProvider.notifier)
-          .addMutePost(post);
+      final token = ref.read(tokensNotifierProvider.notifier).addMutePost(post);
       if (token == null) return;
-      final result = await ref.read(postUsecaseProvider).mutePost(
-        post,
-        uid,
-        token,
-      );
+      final result = await ref
+          .read(postUsecaseProvider)
+          .mutePost(post, uid, token);
       result.when(
         success: (_) {
           RouteCore.back(innerContext);
@@ -81,171 +78,164 @@ class ChatPage extends HookConsumerWidget {
     }
 
     return AsyncPage(
-        asyncValue: chatStateAsync,
-        data: (ChatState data) {
-          final Post post = data.post;
-          final List<TextMessage> messages = data.messages;
-          final String currentUserId =
-              ref.watch(streamAuthUidProvider).value ?? "";
+      asyncValue: chatStateAsync,
+      data: (ChatState data) {
+        final Post post = data.post;
+        final List<TextMessage> messages = data.messages;
+        final String currentUserId =
+            ref.watch(streamAuthUidProvider).value ?? "";
 
-          return Scaffold(
-            appBar: AppBar(
-              title: EllipsisText(post.typedTitle().value),
-              actions: [
-                // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示
-                if (post.uid == currentUserId || isAdmin)
-                  DeletePostButton(
-                    onTap: () async {
-                      ref
-                          .read(tokensNotifierProvider.notifier)
-                          .addDeletePostId(postId); // 楽観的に追加する
-                      final result = await ref
-                          .read(postUsecaseProvider)
-                          .deletePost(post);
-                      result.when(
-                        success: (_) async {
-                          ToastUiCore.showSuccessSnackBar(
-                            context,
-                            "投稿を削除しました。",
-                          );
-                          RouteCore.back(context);
-                        },
-                        failure: (e) {
-                          // 失敗したら元に戻す
-                          ref
-                              .read(tokensNotifierProvider.notifier)
-                              .removeDeletePostId(postId);
-                          ToastUiCore.showFailureSnackBar(
-                            context,
-                            "投稿を削除することができませんでした。",
-                          );
-                        },
-                      );
-                    },
-                  )
-                else
-                  AppBarAction(
-                    onTap: () {
-                      final notifier = ref.read(postUsecaseProvider);
-                      PostUiCore.onReportButtonPressed(
-                        context: context,
-                        mutePost: (innerContext) => mutePost(innerContext,post),
-                        reportPost: (innerContext) => mutePost(innerContext,post),
-                        muteUser: (innerContext) async {
-                          final token = ref
-                              .read(tokensNotifierProvider.notifier)
-                              .addMuteUser(post);
-                          if (token == null) {
-                            RouteCore.back(innerContext);
-                            return;
-                          }
-                          final result = await notifier.muteUser(
-                            post,
-                            currentUserId,
-                            token,
-                          );
-                          result.when(
-                            success: (_) => RouteCore.back(innerContext),
-                            failure: (_) {},
-                          );
-                        },
-                      );
-                    },
-                    child: const Icon(Icons.report),
-                  ),
-                PostLikeButton(isHorizontal: true, post: post),
-                //
-                MenuButton(
-                  onMenuPressed: () {
-                    ChatUiCore.onMenuPressed(
-                      context: context,
-                      post: post,
-                      cleanLocalMessage: (innerContext) async {
-                        final result = await chatNotifier().cleanLocalMessage();
-                        result.when(
-                          success: (_) {
-                            ToastUiCore.showSuccessSnackBar(
-                              context,
-                              MsgConstants.clearChatMsg,
-                            );
-                          },
-                          failure: (msg) {
-                            ToastUiCore.showFailureSnackBar(context, msg);
-                          },
+        return Scaffold(
+          appBar: AppBar(
+            title: EllipsisText(post.typedTitle().value),
+            actions: [
+              // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示
+              if (post.uid == currentUserId || isAdmin)
+                DeletePostButton(
+                  onTap: () async {
+                    ref
+                        .read(tokensNotifierProvider.notifier)
+                        .addDeletePostId(postId); // 楽観的に追加する
+                    final result = await ref
+                        .read(postUsecaseProvider)
+                        .deletePost(post);
+                    result.when(
+                      success: (_) async {
+                        ToastUiCore.showSuccessSnackBar(context, "投稿を削除しました。");
+                        RouteCore.back(context);
+                      },
+                      failure: (e) {
+                        // 失敗したら元に戻す
+                        ref
+                            .read(tokensNotifierProvider.notifier)
+                            .removeDeletePostId(postId);
+                        ToastUiCore.showFailureSnackBar(
+                          context,
+                          "投稿を削除することができませんでした。",
                         );
                       },
                     );
                   },
+                )
+              else
+                AppBarAction(
+                  onTap: () {
+                    final notifier = ref.read(postUsecaseProvider);
+                    PostUiCore.onReportButtonPressed(
+                      context: context,
+                      mutePost: (innerContext) => mutePost(innerContext, post),
+                      reportPost:
+                          (innerContext) => mutePost(innerContext, post),
+                      muteUser: (innerContext) async {
+                        final token = ref
+                            .read(tokensNotifierProvider.notifier)
+                            .addMuteUser(post);
+                        if (token == null) {
+                          RouteCore.back(innerContext);
+                          return;
+                        }
+                        final result = await notifier.muteUser(
+                          post,
+                          currentUserId,
+                          token,
+                        );
+                        result.when(
+                          success: (_) => RouteCore.back(innerContext),
+                          failure: (_) {},
+                        );
+                      },
+                    );
+                  },
+                  child: const Icon(Icons.report),
+                ),
+              PostLikeButton(isHorizontal: true, post: post),
+              //
+              MenuButton(
+                onMenuPressed: () {
+                  ChatUiCore.onMenuPressed(
+                    context: context,
+                    post: post,
+                    cleanLocalMessage: (innerContext) async {
+                      final result = await chatNotifier().cleanLocalMessage();
+                      result.when(
+                        success: (_) {
+                          ToastUiCore.showSuccessSnackBar(
+                            context,
+                            MsgConstants.clearChatMsg,
+                          );
+                        },
+                        failure: (msg) {
+                          ToastUiCore.showFailureSnackBar(context, msg);
+                        },
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const BasicHeightBox(),
+                SizedBox(
+                  height: SizeCore.chatScreenHeight(context),
+                  child: ListView.builder(
+                    controller: scrollController,
+                    itemCount: messages.length,
+                    itemBuilder: ((context, index) {
+                      final image = data.postImage;
+                      // 通常のメッセージ表示
+                      final message = messages[index];
+                      final String text = message.typedText().value;
+                      final bool isMyMessage =
+                          message.senderUid == currentUserId;
+
+                      return MsgCard(
+                        isMyMsg: isMyMessage,
+                        isAnotherDay: isAnotherDay(messages, index),
+                        text: text,
+                        createdAt: message.typedCreatedAt(),
+                        postImage: image != null ? base64Decode(image) : null,
+                      );
+                    }),
+                  ),
+                ),
+                Row(
+                  children: [
+                    const BasicWidthBox(),
+                    RoundedInputField(
+                      controller: inputController,
+                      send: () async {
+                        FocusScope.of(context).unfocus();
+                        final result = await chatNotifier().onSendPressed(
+                          inputController.text,
+                          scrollController,
+                        );
+                        result.when(
+                          success: (res) {
+                            ToastUiCore.showSuccessSnackBar(
+                              context,
+                              '応答の生成に成功しました',
+                            );
+                            inputController.clear();
+                            chatNotifier().onSuccess(res);
+                          },
+                          failure: (msg) {
+                            ToastUiCore.showFailureSnackBar(context, msg);
+                            chatNotifier().onFailure();
+                          },
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
-            body: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const BasicHeightBox(),
-                  SizedBox(
-                    height: SizeCore.chatScreenHeight(context),
-                    child: ListView.builder(
-                      controller: scrollController,
-                      itemCount: messages.length,
-                      itemBuilder: ((context, index) {
-                        final image = data.postImage;
-                        // 通常のメッセージ表示
-                          final message = messages[index];
-                          final String text = message.typedText().value;
-                          final bool isMyMessage =
-                              message.senderUid == currentUserId;
-
-                          return MsgCard(
-                            isMyMsg: isMyMessage,
-                            isAnotherDay: isAnotherDay(messages, index),
-                            text: text,
-                            createdAt: message.typedCreatedAt(),
-                            postImage:
-                                image != null ? base64Decode(image) : null,
-                          );
-                      }),
-                    ),
-                  ),
-                  Row(
-                      children: [
-                        const BasicWidthBox(),
-                        RoundedInputField(
-                          controller: inputController,
-                          send: () async {
-                            FocusScope.of(context).unfocus();
-                            final result = await chatNotifier().onSendPressed(
-                              inputController.text,
-                              scrollController,
-                            );
-                            result.when(
-                              success:
-                                  (res) {
-                                    ToastUiCore.showSuccessSnackBar(
-                                    context,
-                                    '応答の生成に成功しました',
-                                  );
-                                  inputController.clear();
-                                  chatNotifier().onSuccess(res);
-                                  },
-                              failure: (msg) {
-                                     ToastUiCore.showFailureSnackBar(
-                                        context,
-                                        msg,
-                                      );
-                                    chatNotifier().onFailure();
-                                  }
-                            );
-                          },
-                        ),
-                      ],
-                    )
-                ],
-              ),
-            ),
-          );
-        },
-      );
+          ),
+        );
+      },
+    );
   }
 }

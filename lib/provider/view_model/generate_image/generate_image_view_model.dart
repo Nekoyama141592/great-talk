@@ -13,8 +13,13 @@ class GenerateImageViewModel extends _$GenerateImageViewModel {
     return const GenerateImageState();
   }
 
-  FutureResult<GenerateImageResponse?> onGenerateButtonPressed(String prompt, String size) async {
-    final isPremiumSubscribing = ref.read(purchasesNotifierProvider).value?.isPremiumSubscribing() ?? false;
+  FutureResult<GenerateImageResponse?> onGenerateButtonPressed(
+    String prompt,
+    String size,
+  ) async {
+    final isPremiumSubscribing =
+        ref.read(purchasesNotifierProvider).value?.isPremiumSubscribing() ??
+        false;
     if (!isPremiumSubscribing) {
       return Result.failure('プレミアムプランに加入する必要があります');
     }

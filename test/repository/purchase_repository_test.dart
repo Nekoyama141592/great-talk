@@ -19,16 +19,22 @@ void main() {
         expect(result, true);
       });
 
-      test('should return false when in-app purchase is not available', () async {
-        repository.setMockAvailable(false);
+      test(
+        'should return false when in-app purchase is not available',
+        () async {
+          repository.setMockAvailable(false);
 
-        final result = await repository.isAvailable();
+          final result = await repository.isAvailable();
 
-        expect(result, false);
-      });
+          expect(result, false);
+        },
+      );
 
       test('should return false when exception occurs', () async {
-        repository.setMockException('isAvailable', Exception('Service unavailable'));
+        repository.setMockException(
+          'isAvailable',
+          Exception('Service unavailable'),
+        );
 
         final result = await repository.isAvailable();
 
@@ -54,7 +60,10 @@ void main() {
       });
 
       test('should return null when query fails', () async {
-        repository.setMockException('queryProductDetails', Exception('Query failed'));
+        repository.setMockException(
+          'queryProductDetails',
+          Exception('Query failed'),
+        );
 
         final result = await repository.queryProductDetails();
 
@@ -65,7 +74,11 @@ void main() {
     group('buyNonConsumable', () {
       test('should return success when purchase succeeds', () async {
         final purchaseParam = PurchaseParam(
-          productDetails: TestProductDetails('test_product', 'Test Product', '¥500'),
+          productDetails: TestProductDetails(
+            'test_product',
+            'Test Product',
+            '¥500',
+          ),
         );
 
         final result = await repository.buyNonConsumable(purchaseParam);
@@ -79,10 +92,17 @@ void main() {
 
       test('should return failure when purchase fails', () async {
         final purchaseParam = PurchaseParam(
-          productDetails: TestProductDetails('test_product', 'Test Product', '¥500'),
+          productDetails: TestProductDetails(
+            'test_product',
+            'Test Product',
+            '¥500',
+          ),
         );
 
-        repository.setMockException('buyNonConsumable', Exception('Purchase failed'));
+        repository.setMockException(
+          'buyNonConsumable',
+          Exception('Purchase failed'),
+        );
 
         final result = await repository.buyNonConsumable(purchaseParam);
 
@@ -103,7 +123,10 @@ void main() {
       });
 
       test('should return failure when restore fails', () async {
-        repository.setMockException('restorePurchases', Exception('Restore failed'));
+        repository.setMockException(
+          'restorePurchases',
+          Exception('Restore failed'),
+        );
 
         final result = await repository.restorePurchases();
 
@@ -113,29 +136,35 @@ void main() {
     });
 
     group('completePurchase', () {
-      test('should complete purchase when pendingCompletePurchase is true', () async {
-        final purchaseDetails = TestPurchaseDetails(
-          productID: 'test_product',
-          purchaseID: 'test_purchase',
-          pendingCompletePurchase: true,
-        );
+      test(
+        'should complete purchase when pendingCompletePurchase is true',
+        () async {
+          final purchaseDetails = TestPurchaseDetails(
+            productID: 'test_product',
+            purchaseID: 'test_purchase',
+            pendingCompletePurchase: true,
+          );
 
-        await repository.completePurchase(purchaseDetails);
+          await repository.completePurchase(purchaseDetails);
 
-        expect(repository.completePurchaseCalled, true);
-      });
+          expect(repository.completePurchaseCalled, true);
+        },
+      );
 
-      test('should not complete purchase when pendingCompletePurchase is false', () async {
-        final purchaseDetails = TestPurchaseDetails(
-          productID: 'test_product',
-          purchaseID: 'test_purchase',
-          pendingCompletePurchase: false,
-        );
+      test(
+        'should not complete purchase when pendingCompletePurchase is false',
+        () async {
+          final purchaseDetails = TestPurchaseDetails(
+            productID: 'test_product',
+            purchaseID: 'test_purchase',
+            pendingCompletePurchase: false,
+          );
 
-        await repository.completePurchase(purchaseDetails);
+          await repository.completePurchase(purchaseDetails);
 
-        expect(repository.completePurchaseCalled, false);
-      });
+          expect(repository.completePurchaseCalled, false);
+        },
+      );
 
       test('should handle exceptions gracefully', () async {
         final purchaseDetails = TestPurchaseDetails(
@@ -144,7 +173,10 @@ void main() {
           pendingCompletePurchase: true,
         );
 
-        repository.setMockException('completePurchase', Exception('Complete failed'));
+        repository.setMockException(
+          'completePurchase',
+          Exception('Complete failed'),
+        );
 
         // Should not throw
         await repository.completePurchase(purchaseDetails);
@@ -204,7 +236,10 @@ void main() {
         );
 
         repository.mockPlatform = 'android';
-        repository.setMockException('acknowledge', Exception('Acknowledge failed'));
+        repository.setMockException(
+          'acknowledge',
+          Exception('Acknowledge failed'),
+        );
 
         // Should not throw
         await repository.acknowledge(purchaseDetails);
@@ -231,7 +266,10 @@ void main() {
 
       test('should handle exceptions gracefully', () async {
         repository.mockPlatform = 'ios';
-        repository.setMockException('cancelTransactions', Exception('Cancel failed'));
+        repository.setMockException(
+          'cancelTransactions',
+          Exception('Cancel failed'),
+        );
 
         // Should not throw
         await repository.cancelTransctions();
@@ -283,15 +321,23 @@ void main() {
         final tests = [
           ('isAvailable', () => repository.isAvailable()),
           ('queryProductDetails', () => repository.queryProductDetails()),
-          ('buyNonConsumable', () => repository.buyNonConsumable(PurchaseParam(
-            productDetails: TestProductDetails('test', 'Test', '¥500'),
-          ))),
+          (
+            'buyNonConsumable',
+            () => repository.buyNonConsumable(
+              PurchaseParam(
+                productDetails: TestProductDetails('test', 'Test', '¥500'),
+              ),
+            ),
+          ),
           ('restorePurchases', () => repository.restorePurchases()),
         ];
 
         for (final (operation, method) in tests) {
-          repository.setMockException(operation, Exception('$operation failed'));
-          
+          repository.setMockException(
+            operation,
+            Exception('$operation failed'),
+          );
+
           // Should not throw exceptions
           expect(() async => await method(), returnsNormally);
         }
@@ -333,7 +379,7 @@ class TestablePurchaseRepository {
   List<ProductDetails> mockProducts = [];
   int mockTransactionCount = 0;
   String mockPlatform = 'ios';
-  
+
   // Test tracking variables
   bool completePurchaseCalled = false;
   bool acknowledgeCalled = false;
@@ -416,7 +462,7 @@ class TestablePurchaseRepository {
     if (mockPlatform != 'android' || details.status == PurchaseStatus.pending) {
       return;
     }
-    
+
     try {
       if (mockExceptions.containsKey('acknowledge')) {
         throw mockExceptions['acknowledge']!;
@@ -430,12 +476,12 @@ class TestablePurchaseRepository {
   Future<void> cancelTransctions() async {
     // Mock Platform.isIOS check
     if (mockPlatform != 'ios') return;
-    
+
     try {
       if (mockExceptions.containsKey('cancelTransactions')) {
         throw mockExceptions['cancelTransactions']!;
       }
-      
+
       // Simulate finishing transactions
       for (int i = 0; i < mockTransactionCount; i++) {
         finishTransactionCallCount++;
@@ -449,14 +495,14 @@ class TestablePurchaseRepository {
 // Test helper classes
 class TestProductDetails extends ProductDetails {
   TestProductDetails(String id, String title, String price)
-      : super(
-          id: id,
-          title: title,
-          description: 'Test product description',
-          price: price,
-          rawPrice: 500.0,
-          currencyCode: 'JPY',
-        );
+    : super(
+        id: id,
+        title: title,
+        description: 'Test product description',
+        price: price,
+        rawPrice: 500.0,
+        currencyCode: 'JPY',
+      );
 }
 
 class TestPurchaseDetails extends PurchaseDetails {
@@ -466,14 +512,14 @@ class TestPurchaseDetails extends PurchaseDetails {
     super.status = PurchaseStatus.purchased,
     bool pendingCompletePurchase = false,
   }) : super(
-          purchaseID: purchaseID,
-          transactionDate: '2024-01-01T00:00:00Z',
-          verificationData: PurchaseVerificationData(
-            localVerificationData: 'local_data',
-            serverVerificationData: 'server_data',
-            source: 'test',
-          ),
-        ) {
+         purchaseID: purchaseID,
+         transactionDate: '2024-01-01T00:00:00Z',
+         verificationData: PurchaseVerificationData(
+           localVerificationData: 'local_data',
+           serverVerificationData: 'server_data',
+           source: 'test',
+         ),
+       ) {
     this.pendingCompletePurchase = pendingCompletePurchase;
   }
 }

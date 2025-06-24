@@ -6,24 +6,21 @@ void main() {
   group('RoundedButton', () {
     testWidgets('should display text correctly', (WidgetTester tester) async {
       const buttonText = 'Test Button';
-      
+
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: RoundedButton(
-              text: buttonText,
-              press: () {},
-            ),
-          ),
+          home: Scaffold(body: RoundedButton(text: buttonText, press: () {})),
         ),
       );
 
       expect(find.text(buttonText), findsOneWidget);
     });
 
-    testWidgets('should call onPressed when tapped', (WidgetTester tester) async {
+    testWidgets('should call onPressed when tapped', (
+      WidgetTester tester,
+    ) async {
       bool wasPressed = false;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -43,14 +40,13 @@ void main() {
       expect(wasPressed, true);
     });
 
-    testWidgets('should not be tappable when press is null', (WidgetTester tester) async {
+    testWidgets('should not be tappable when press is null', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: RoundedButton(
-              text: 'Disabled Button',
-              press: null,
-            ),
+            body: RoundedButton(text: 'Disabled Button', press: null),
           ),
         ),
       );
@@ -63,10 +59,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: RoundedButton(
-              text: 'Default Width',
-              press: () {},
-            ),
+            body: RoundedButton(text: 'Default Width', press: () {}),
           ),
         ),
       );
@@ -74,13 +67,13 @@ void main() {
       final sizedBox = tester.widget<SizedBox>(find.byType(SizedBox));
       final mediaQuery = MediaQuery.of(tester.element(find.byType(Scaffold)));
       final expectedWidth = mediaQuery.size.width * 0.85; // default widthRate
-      
+
       expect(sizedBox.width, expectedWidth);
     });
 
     testWidgets('should use custom width rate', (WidgetTester tester) async {
       const customWidthRate = 0.5;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -96,13 +89,13 @@ void main() {
       final sizedBox = tester.widget<SizedBox>(find.byType(SizedBox));
       final mediaQuery = MediaQuery.of(tester.element(find.byType(Scaffold)));
       final expectedWidth = mediaQuery.size.width * customWidthRate;
-      
+
       expect(sizedBox.width, expectedWidth);
     });
 
     testWidgets('should use custom button color', (WidgetTester tester) async {
       const customColor = Colors.red;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -118,13 +111,15 @@ void main() {
       final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
       final buttonStyle = button.style!;
       final backgroundColor = buttonStyle.backgroundColor!.resolve({});
-      
+
       expect(backgroundColor, customColor);
     });
 
-    testWidgets('should display icon when provided', (WidgetTester tester) async {
+    testWidgets('should display icon when provided', (
+      WidgetTester tester,
+    ) async {
       const iconWidget = Icon(Icons.star);
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -141,7 +136,9 @@ void main() {
       expect(find.byType(Row), findsOneWidget);
     });
 
-    testWidgets('should not display Row when icon is null', (WidgetTester tester) async {
+    testWidgets('should not display Row when icon is null', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -179,32 +176,28 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: RoundedButton(
-              text: 'Rounded Button',
-              press: () {},
-            ),
+            body: RoundedButton(text: 'Rounded Button', press: () {}),
           ),
         ),
       );
 
       final clipRRect = tester.widget<ClipRRect>(find.byType(ClipRRect));
       expect(clipRRect.borderRadius, isA<BorderRadius>());
-      
+
       final borderRadius = clipRRect.borderRadius as BorderRadius;
       expect(borderRadius.topLeft.x, greaterThan(0));
     });
 
-    testWidgets('should work with different screen sizes', (WidgetTester tester) async {
+    testWidgets('should work with different screen sizes', (
+      WidgetTester tester,
+    ) async {
       // Test with small screen size
       await tester.binding.setSurfaceSize(const Size(300, 600));
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: RoundedButton(
-              text: 'Small Screen',
-              press: () {},
-            ),
+            body: RoundedButton(text: 'Small Screen', press: () {}),
           ),
         ),
       );
@@ -219,9 +212,11 @@ void main() {
       await tester.binding.setSurfaceSize(null);
     });
 
-    testWidgets('should handle multiple rapid taps', (WidgetTester tester) async {
+    testWidgets('should handle multiple rapid taps', (
+      WidgetTester tester,
+    ) async {
       int tapCount = 0;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -244,9 +239,11 @@ void main() {
       expect(tapCount, 5);
     });
 
-    testWidgets('should maintain state across rebuilds', (WidgetTester tester) async {
+    testWidgets('should maintain state across rebuilds', (
+      WidgetTester tester,
+    ) async {
       bool isPressed = false;
-      
+
       Widget buildButton() {
         return MaterialApp(
           home: Scaffold(
@@ -261,12 +258,12 @@ void main() {
       }
 
       await tester.pumpWidget(buildButton());
-      
+
       expect(find.text('Not Pressed'), findsOneWidget);
-      
+
       await tester.tap(find.byType(ElevatedButton));
       await tester.pumpWidget(buildButton());
-      
+
       expect(find.text('Pressed'), findsOneWidget);
     });
   });

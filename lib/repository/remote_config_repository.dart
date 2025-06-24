@@ -6,8 +6,7 @@ class RemoteConfigRepository {
   RemoteConfigRepository(this.instance);
   final FirebaseRemoteConfig instance;
   String get _maintenanceMsgKey => RemoteConfigCore.maintenanceMsgKey;
-  String get _forcedUpdateVersionKey =>
-      RemoteConfigCore.forcedUpdateVersionKey;
+  String get _forcedUpdateVersionKey => RemoteConfigCore.forcedUpdateVersionKey;
 
   Future<void> _setConfigSettings() {
     return instance.setConfigSettings(

@@ -4,18 +4,15 @@ import 'package:great_talk/views/create_post/components/form_label.dart';
 
 void main() {
   group('FormLabel', () {
-    testWidgets('should display title and help icon', (WidgetTester tester) async {
+    testWidgets('should display title and help icon', (
+      WidgetTester tester,
+    ) async {
       const title = 'Test Label';
       const helpMessage = 'This is a help message';
-      
+
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: FormLabel(
-              title: title,
-              helpMsg: helpMessage,
-            ),
-          ),
+          home: Scaffold(body: FormLabel(title: title, helpMsg: helpMessage)),
         ),
       );
 
@@ -23,14 +20,13 @@ void main() {
       expect(find.byIcon(Icons.help), findsOneWidget);
     });
 
-    testWidgets('should have correct layout structure', (WidgetTester tester) async {
+    testWidgets('should have correct layout structure', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: FormLabel(
-              title: 'Test Title',
-              helpMsg: 'Help message',
-            ),
+            body: FormLabel(title: 'Test Title', helpMsg: 'Help message'),
           ),
         ),
       );
@@ -38,7 +34,7 @@ void main() {
       expect(find.byType(Align), findsOneWidget);
       expect(find.byType(Row), findsOneWidget);
       expect(find.byType(InkWell), findsOneWidget);
-      
+
       final align = tester.widget<Align>(find.byType(Align));
       expect(align.alignment, Alignment.centerLeft);
     });
@@ -47,22 +43,21 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: FormLabel(
-              title: 'Test Title',
-              helpMsg: 'Help message',
-            ),
+            body: FormLabel(title: 'Test Title', helpMsg: 'Help message'),
           ),
         ),
       );
 
       expect(find.byType(InkWell), findsOneWidget);
-      
+
       // Verify that the InkWell has an onTap callback
       final inkWell = tester.widget<InkWell>(find.byType(InkWell));
       expect(inkWell.onTap, isNotNull);
     });
 
-    testWidgets('should display different titles correctly', (WidgetTester tester) async {
+    testWidgets('should display different titles correctly', (
+      WidgetTester tester,
+    ) async {
       final titles = [
         'フォーム名',
         'タイトル',
@@ -75,10 +70,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: FormLabel(
-                title: title,
-                helpMsg: 'Help for $title',
-              ),
+              body: FormLabel(title: title, helpMsg: 'Help for $title'),
             ),
           ),
         );
@@ -88,7 +80,9 @@ void main() {
       }
     });
 
-    testWidgets('should handle different help messages', (WidgetTester tester) async {
+    testWidgets('should handle different help messages', (
+      WidgetTester tester,
+    ) async {
       final helpMessages = [
         'Short help',
         'このフィールドは必須です。適切な値を入力してください。',
@@ -100,10 +94,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: FormLabel(
-                title: 'Test Title',
-                helpMsg: helpMsg,
-              ),
+              body: FormLabel(title: 'Test Title', helpMsg: helpMsg),
             ),
           ),
         );
@@ -113,15 +104,12 @@ void main() {
       }
     });
 
-    testWidgets('should handle empty strings gracefully', (WidgetTester tester) async {
+    testWidgets('should handle empty strings gracefully', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: FormLabel(
-              title: '',
-              helpMsg: '',
-            ),
-          ),
+          home: Scaffold(body: FormLabel(title: '', helpMsg: '')),
         ),
       );
 
@@ -129,10 +117,12 @@ void main() {
       expect(find.byIcon(Icons.help), findsOneWidget);
     });
 
-    testWidgets('should work with different screen sizes', (WidgetTester tester) async {
+    testWidgets('should work with different screen sizes', (
+      WidgetTester tester,
+    ) async {
       const title = 'Responsive Test';
       const helpMessage = 'Test help message';
-      
+
       final screenSizes = [
         const Size(400, 800), // Mobile
         const Size(768, 1024), // Tablet
@@ -141,20 +131,15 @@ void main() {
 
       for (final size in screenSizes) {
         await tester.binding.setSurfaceSize(size);
-        
+
         await tester.pumpWidget(
           const MaterialApp(
-            home: Scaffold(
-              body: FormLabel(
-                title: title,
-                helpMsg: helpMessage,
-              ),
-            ),
+            home: Scaffold(body: FormLabel(title: title, helpMsg: helpMessage)),
           ),
         );
 
         await tester.pumpAndSettle();
-        
+
         expect(find.text(title), findsOneWidget);
         expect(find.byIcon(Icons.help), findsOneWidget);
         expect(find.byType(Align), findsOneWidget);
@@ -164,7 +149,9 @@ void main() {
       await tester.binding.setSurfaceSize(null);
     });
 
-    testWidgets('should work within different parent layouts', (WidgetTester tester) async {
+    testWidgets('should work within different parent layouts', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -204,10 +191,7 @@ void main() {
         MaterialApp(
           theme: ThemeData.light(),
           home: const Scaffold(
-            body: FormLabel(
-              title: title,
-              helpMsg: helpMessage,
-            ),
+            body: FormLabel(title: title, helpMsg: helpMessage),
           ),
         ),
       );
@@ -220,10 +204,7 @@ void main() {
         MaterialApp(
           theme: ThemeData.dark(),
           home: const Scaffold(
-            body: FormLabel(
-              title: title,
-              helpMsg: helpMessage,
-            ),
+            body: FormLabel(title: title, helpMsg: helpMessage),
           ),
         ),
       );
@@ -232,10 +213,15 @@ void main() {
       expect(find.byIcon(Icons.help), findsOneWidget);
     });
 
-    testWidgets('should maintain layout consistency across different content', (WidgetTester tester) async {
+    testWidgets('should maintain layout consistency across different content', (
+      WidgetTester tester,
+    ) async {
       final testCases = [
         {'title': 'Short', 'help': 'Short'},
-        {'title': 'Very Long Title That Might Wrap', 'help': 'Very long help message'},
+        {
+          'title': 'Very Long Title That Might Wrap',
+          'help': 'Very long help message',
+        },
         {'title': '日本語タイトル', 'help': '日本語ヘルプメッセージ'},
         {'title': '🎯 Target Field', 'help': '📋 Help with emojis'},
       ];
@@ -257,27 +243,26 @@ void main() {
         expect(find.byType(Row), findsOneWidget);
         expect(find.byIcon(Icons.help), findsOneWidget);
         expect(find.text(testCase['title']!), findsOneWidget);
-        
+
         final align = tester.widget<Align>(find.byType(Align));
         expect(align.alignment, Alignment.centerLeft);
       }
     });
 
-    testWidgets('should have correct icon placement', (WidgetTester tester) async {
+    testWidgets('should have correct icon placement', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: FormLabel(
-              title: 'Test Title',
-              helpMsg: 'Test help',
-            ),
+            body: FormLabel(title: 'Test Title', helpMsg: 'Test help'),
           ),
         ),
       );
 
       final row = tester.widget<Row>(find.byType(Row));
       expect(row.children.length, 3); // title, height box, inkwell with icon
-      
+
       // The third child should be the InkWell with help icon
       final inkWell = row.children[2] as InkWell;
       final icon = inkWell.child as Icon;
@@ -299,11 +284,11 @@ void main() {
       // Verify the content is accessible
       expect(find.text('Accessible Label'), findsOneWidget);
       expect(find.byIcon(Icons.help), findsOneWidget);
-      
+
       // Verify tappable area for help
       final inkWellFinder = find.byType(InkWell);
       expect(inkWellFinder, findsOneWidget);
-      
+
       // Verify help icon is within the tappable area
       final helpIconFinder = find.descendant(
         of: inkWellFinder,
@@ -316,16 +301,13 @@ void main() {
       testWidgets('should handle long title text', (WidgetTester tester) async {
         const longTitle = 'Long Title Text';
         const helpMessage = 'Help for long title';
-        
+
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
               body: SizedBox(
                 width: 300,
-                child: FormLabel(
-                  title: longTitle,
-                  helpMsg: helpMessage,
-                ),
+                child: FormLabel(title: longTitle, helpMsg: helpMessage),
               ),
             ),
           ),
@@ -335,17 +317,16 @@ void main() {
         expect(find.byIcon(Icons.help), findsOneWidget);
       });
 
-      testWidgets('should handle special characters', (WidgetTester tester) async {
+      testWidgets('should handle special characters', (
+        WidgetTester tester,
+      ) async {
         const specialTitle = 'Title @#\$%';
         const specialHelp = 'Help @#\$%';
-        
+
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: FormLabel(
-                title: specialTitle,
-                helpMsg: specialHelp,
-              ),
+              body: FormLabel(title: specialTitle, helpMsg: specialHelp),
             ),
           ),
         );
@@ -354,31 +335,28 @@ void main() {
         expect(find.byIcon(Icons.help), findsOneWidget);
       });
 
-      testWidgets('should maintain state across rebuilds', (WidgetTester tester) async {
+      testWidgets('should maintain state across rebuilds', (
+        WidgetTester tester,
+      ) async {
         String title = 'Initial Title';
         String helpMsg = 'Initial Help';
-        
+
         Widget buildFormLabel() {
           return MaterialApp(
-            home: Scaffold(
-              body: FormLabel(
-                title: title,
-                helpMsg: helpMsg,
-              ),
-            ),
+            home: Scaffold(body: FormLabel(title: title, helpMsg: helpMsg)),
           );
         }
 
         await tester.pumpWidget(buildFormLabel());
         expect(find.text('Initial Title'), findsOneWidget);
-        
+
         // Change content and rebuild
         title = 'Updated Title';
         helpMsg = 'Updated Help';
         await tester.pumpWidget(buildFormLabel());
         expect(find.text('Updated Title'), findsOneWidget);
         expect(find.text('Initial Title'), findsNothing);
-        
+
         // Verify structure remains consistent
         expect(find.byType(Align), findsOneWidget);
         expect(find.byType(Row), findsOneWidget);

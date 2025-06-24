@@ -7,5 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'post_use_case_provider.g.dart';
 
 @riverpod
-PostUseCase postUsecase(Ref ref) =>
-    PostUseCase(firestoreRepository: ref.watch(databaseRepositoryProvider),apiRepository: ref.watch(apiRepositoryProvider));
+PostUseCase postUsecase(Ref ref) => PostUseCase(
+  firestoreRepository: ref.watch(databaseRepositoryProvider),
+  apiRepository: ref.watch(apiRepositoryProvider),
+);

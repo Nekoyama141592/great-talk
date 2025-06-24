@@ -9,10 +9,13 @@ void main() {
         expect(dateTime.timeString(), '09:05');
       });
 
-      test('should format hour and minute without leading zeros when not needed', () {
-        final dateTime = DateTime(2023, 5, 15, 14, 30);
-        expect(dateTime.timeString(), '14:30');
-      });
+      test(
+        'should format hour and minute without leading zeros when not needed',
+        () {
+          final dateTime = DateTime(2023, 5, 15, 14, 30);
+          expect(dateTime.timeString(), '14:30');
+        },
+      );
 
       test('should handle midnight correctly', () {
         final dateTime = DateTime(2023, 5, 15, 0, 0);
@@ -87,21 +90,21 @@ void main() {
 
       test('should handle weekday formatting correctly', () {
         final testDateTime = DateTime(2023, 5, 15);
-        
+
         expect(testDateTime.weekday, 1);
       });
 
       test('should return month/day format for dates within a year', () {
         final pastDate = DateTime(2023, 5, 15, 14, 30);
         final result = pastDate.japaneseDifference();
-        
+
         expect(result.contains('/'), true);
       });
 
       test('should return full date format for dates over a year ago', () {
         final testDate = DateTime(2020, 5, 15, 14, 30);
         final result = testDate.japaneseDifference();
-        
+
         expect(result.contains('2020'), true);
         expect(result.split('/').length, 3);
       });
@@ -110,7 +113,7 @@ void main() {
         final now = DateTime.now();
         final yesterday = now.subtract(const Duration(days: 1));
         final dayBeforeYesterday = now.subtract(const Duration(days: 2));
-        
+
         expect(yesterday.japaneseDifference(), '昨日');
         expect(dayBeforeYesterday.japaneseDifference(), '一昨日');
       });
@@ -118,7 +121,7 @@ void main() {
       test('should format month and day with proper padding in full date', () {
         final testDate = DateTime(2020, 5, 5, 14, 30);
         final result = testDate.japaneseDifference();
-        
+
         expect(result, '2020/05/05');
       });
 
@@ -126,7 +129,7 @@ void main() {
         final now = DateTime.now();
         final weekAgo = now.subtract(const Duration(days: 7));
         final result = weekAgo.japaneseDifference();
-        
+
         final weekdays = ['月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日', '日曜日'];
         expect(weekdays.contains(result), true);
       });
@@ -135,7 +138,7 @@ void main() {
         final now = DateTime.now();
         final yearAgo = now.subtract(const Duration(days: 365));
         final result = yearAgo.japaneseDifference();
-        
+
         expect(result.contains(yearAgo.month.toString()), true);
         expect(result.contains(yearAgo.day.toString()), true);
       });
@@ -143,7 +146,7 @@ void main() {
       test('should be consistent with timeString format for same day', () {
         final now = DateTime.now();
         final sameDay = DateTime(now.year, now.month, now.day, 14, 30);
-        
+
         expect(sameDay.japaneseDifference(), sameDay.timeString());
       });
     });
@@ -169,14 +172,14 @@ void main() {
       test('should maintain consistent formatting across different years', () {
         final date1 = DateTime(2020, 5, 15, 9, 30);
         final date2 = DateTime(2023, 5, 15, 9, 30);
-        
+
         expect(date1.timeString(), date2.timeString());
       });
 
       test('should handle time zone independent calculations', () {
         final utcDate = DateTime.utc(2023, 5, 15, 12, 0);
         final localDate = DateTime(2023, 5, 15, 12, 0);
-        
+
         expect(utcDate.timeString(), localDate.timeString());
       });
     });

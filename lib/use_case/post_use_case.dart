@@ -10,7 +10,7 @@ import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/repository/database_repository.dart';
 
 class PostUseCase {
-  PostUseCase({required this.firestoreRepository,required this.apiRepository});
+  PostUseCase({required this.firestoreRepository, required this.apiRepository});
   final DatabaseRepository firestoreRepository;
   final ApiRepository apiRepository;
 
@@ -67,10 +67,13 @@ class PostUseCase {
 
   FutureResult<bool> deletePost(Post post) async {
     final result = await firestoreRepository.deletePost(post);
-    result.when(success: (_) {
-      final image = post.typedImage();
-      apiRepository.deleteObject(image);
-    },  failure: (_) {});
+    result.when(
+      success: (_) {
+        final image = post.typedImage();
+        apiRepository.deleteObject(image);
+      },
+      failure: (_) {},
+    );
     return result;
   }
 }

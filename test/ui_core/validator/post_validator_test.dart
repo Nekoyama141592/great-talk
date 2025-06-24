@@ -76,7 +76,8 @@ void main() {
       });
 
       test('should return true when title contains invalid characters', () {
-        const invalidTitle = 'Title.with[invalid]*chars'; // Contains forbidden chars
+        const invalidTitle =
+            'Title.with[invalid]*chars'; // Contains forbidden chars
         const validDescription = 'Valid description';
         const validPrompt = 'Valid prompt';
 
@@ -191,7 +192,8 @@ void main() {
 
       test('should handle special characters in valid content', () {
         const titleWithSpecialChars = 'Title with émojis 🚀 and ñ';
-        const descriptionWithSpecialChars = 'Description with special chars: @#%&';
+        const descriptionWithSpecialChars =
+            'Description with special chars: @#%&';
         const promptWithSpecialChars = 'Prompt with unicode: αβγ';
 
         final result = PostValidator.isInValidPost(
@@ -247,19 +249,22 @@ void main() {
         expect(result, isFalse);
       });
 
-      test('should reject when exactly one character over description limit', () {
-        const validTitle = 'Valid Title';
-        final description = 'a' * (FormConsts.maxDescriptionLimit + 1);
-        const validPrompt = 'Valid prompt';
+      test(
+        'should reject when exactly one character over description limit',
+        () {
+          const validTitle = 'Valid Title';
+          final description = 'a' * (FormConsts.maxDescriptionLimit + 1);
+          const validPrompt = 'Valid prompt';
 
-        final result = PostValidator.isInValidPost(
-          description,
-          validPrompt,
-          validTitle,
-        );
+          final result = PostValidator.isInValidPost(
+            description,
+            validPrompt,
+            validTitle,
+          );
 
-        expect(result, isTrue);
-      });
+          expect(result, isTrue);
+        },
+      );
 
       test('should reject when exactly one character over prompt limit', () {
         const validTitle = 'Valid Title';
@@ -286,7 +291,7 @@ void main() {
       test('should validate against default system prompt correctly', () {
         const validTitle = 'Valid Title';
         const validDescription = 'Valid description';
-        
+
         final result = PostValidator.isInValidPost(
           validDescription,
           FormConsts.defaultSystemPrompt,

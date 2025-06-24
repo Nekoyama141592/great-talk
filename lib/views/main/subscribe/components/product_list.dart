@@ -17,7 +17,8 @@ class ProductList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(productsViewModelProvider);
-    ProductsViewModel notifier() => ref.read(productsViewModelProvider.notifier);
+    ProductsViewModel notifier() =>
+        ref.read(productsViewModelProvider.notifier);
     return AsyncScreen(
       asyncValue: asyncValue,
       data: (state) {

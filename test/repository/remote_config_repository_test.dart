@@ -21,7 +21,10 @@ void main() {
         expect(mockRemoteConfig.setConfigSettingsCalled, true);
         expect(mockRemoteConfig.setDefaultsCalled, true);
         expect(mockRemoteConfig.configSettings?.fetchTimeout.inMinutes, 1);
-        expect(mockRemoteConfig.configSettings?.minimumFetchInterval.inSeconds, 15);
+        expect(
+          mockRemoteConfig.configSettings?.minimumFetchInterval.inSeconds,
+          15,
+        );
       });
 
       test('should set correct default values', () async {
@@ -30,16 +33,22 @@ void main() {
         final prefix = Platform.isIOS ? 'ios' : 'android';
         final maintenanceKey = '${prefix}_maintenance_msg';
         final versionKey = '${prefix}_forced_update_version';
-        
+
         expect(mockRemoteConfig.defaults.containsKey(maintenanceKey), true);
         expect(mockRemoteConfig.defaults.containsKey(versionKey), true);
-        expect(mockRemoteConfig.defaults[maintenanceKey], RemoteConfigConstants.maintenanceMsg);
-        expect(mockRemoteConfig.defaults[versionKey], RemoteConfigConstants.appVersion);
+        expect(
+          mockRemoteConfig.defaults[maintenanceKey],
+          RemoteConfigConstants.maintenanceMsg,
+        );
+        expect(
+          mockRemoteConfig.defaults[versionKey],
+          RemoteConfigConstants.appVersion,
+        );
       });
 
       test('should handle exceptions during initialization', () async {
         mockRemoteConfig.throwOnSetConfigSettings = true;
-        
+
         expect(() => repository.init(), throwsException);
       });
     });
@@ -75,7 +84,7 @@ void main() {
         const expectedMessage = 'システムメンテナンス中です';
         final prefix = Platform.isIOS ? 'ios' : 'android';
         final key = '${prefix}_maintenance_msg';
-        
+
         // Initialize with defaults first
         await repository.init();
         mockRemoteConfig.setStringValue(key, expectedMessage);
@@ -88,7 +97,7 @@ void main() {
 
       test('should return default maintenance message when not set', () async {
         await repository.init();
-        
+
         final result = repository.getMaintenanceMsg();
 
         expect(result, RemoteConfigConstants.maintenanceMsg);
@@ -109,7 +118,7 @@ void main() {
         const expectedVersion = 250;
         final prefix = Platform.isIOS ? 'ios' : 'android';
         final key = '${prefix}_forced_update_version';
-        
+
         // Initialize with defaults first
         await repository.init();
         mockRemoteConfig.setIntValue(key, expectedVersion);
@@ -122,7 +131,7 @@ void main() {
 
       test('should return default version when not set', () async {
         await repository.init();
-        
+
         final result = repository.getForcedUpdateVersion();
 
         expect(result, RemoteConfigConstants.appVersion);
@@ -165,13 +174,16 @@ void main() {
       test('should retrieve updated values after fetch', () async {
         // Set initial values
         await repository.init();
-        
+
         final prefix = Platform.isIOS ? 'ios' : 'android';
-        
+
         // Update remote values
-        mockRemoteConfig.setStringValue('${prefix}_maintenance_msg', 'メンテナンス更新中');
+        mockRemoteConfig.setStringValue(
+          '${prefix}_maintenance_msg',
+          'メンテナンス更新中',
+        );
         mockRemoteConfig.setIntValue('${prefix}_forced_update_version', 300);
-        
+
         // Fetch and activate
         mockRemoteConfig.fetchAndActivateResult = true;
         await repository.fetchAndActivate();
@@ -187,26 +199,36 @@ void main() {
     group('Error handling', () {
       test('should handle various exception types gracefully', () async {
         final tests = [
-          ('setConfigSettings', () => mockRemoteConfig.throwOnSetConfigSettings = true),
+          (
+            'setConfigSettings',
+            () => mockRemoteConfig.throwOnSetConfigSettings = true,
+          ),
           ('setDefaults', () => mockRemoteConfig.throwOnSetDefaults = true),
-          ('fetchAndActivate', () => mockRemoteConfig.throwOnFetchAndActivate = true),
+          (
+            'fetchAndActivate',
+            () => mockRemoteConfig.throwOnFetchAndActivate = true,
+          ),
         ];
 
         for (final (operation, setup) in tests) {
           mockRemoteConfig.reset();
           setup();
-          
-          expect(() async {
-            switch (operation) {
-              case 'setConfigSettings':
-              case 'setDefaults':
-                await repository.init();
-                break;
-              case 'fetchAndActivate':
-                await repository.fetchAndActivate();
-                break;
-            }
-          }, throwsException, reason: '$operation should throw exception');
+
+          expect(
+            () async {
+              switch (operation) {
+                case 'setConfigSettings':
+                case 'setDefaults':
+                  await repository.init();
+                  break;
+                case 'fetchAndActivate':
+                  await repository.fetchAndActivate();
+                  break;
+              }
+            },
+            throwsException,
+            reason: '$operation should throw exception',
+          );
         }
       });
     });
@@ -238,7 +260,7 @@ class MockFirebaseRemoteConfig implements FirebaseRemoteConfig {
   final Map<String, dynamic> _values = {};
   final Map<String, dynamic> defaults = {};
   RemoteConfigSettings? configSettings;
-  
+
   bool setConfigSettingsCalled = false;
   bool setDefaultsCalled = false;
   bool fetchAndActivateCalled = false;
@@ -247,7 +269,7 @@ class MockFirebaseRemoteConfig implements FirebaseRemoteConfig {
   int getIntCallCount = 0;
   String? lastStringKey;
   String? lastIntKey;
-  
+
   bool throwOnSetConfigSettings = false;
   bool throwOnSetDefaults = false;
   bool throwOnFetchAndActivate = false;

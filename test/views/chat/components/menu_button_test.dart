@@ -7,7 +7,7 @@ void main() {
   group('MenuButton', () {
     testWidgets('should display menu icon', (WidgetTester tester) async {
       bool tapped = false;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -26,9 +26,11 @@ void main() {
       expect(tapped, false);
     });
 
-    testWidgets('should call onMenuPressed when tapped', (WidgetTester tester) async {
+    testWidgets('should call onMenuPressed when tapped', (
+      WidgetTester tester,
+    ) async {
       bool tapped = false;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -49,29 +51,27 @@ void main() {
 
     testWidgets('should have correct structure', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: MenuButton(
-              onMenuPressed: () {},
-            ),
-          ),
-        ),
+        MaterialApp(home: Scaffold(body: MenuButton(onMenuPressed: () {}))),
       );
 
       // Verify the widget structure
       expect(find.byType(AppBarAction), findsOneWidget);
-      
-      final appBarAction = tester.widget<AppBarAction>(find.byType(AppBarAction));
+
+      final appBarAction = tester.widget<AppBarAction>(
+        find.byType(AppBarAction),
+      );
       expect(appBarAction.onTap, isNotNull);
       expect(appBarAction.child, isA<Icon>());
-      
+
       final icon = appBarAction.child as Icon;
       expect(icon.icon, Icons.menu);
     });
 
-    testWidgets('should work with different callback functions', (WidgetTester tester) async {
+    testWidgets('should work with different callback functions', (
+      WidgetTester tester,
+    ) async {
       int tapCount = 0;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -100,13 +100,7 @@ void main() {
 
     testWidgets('should be a StatelessWidget', (WidgetTester tester) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: MenuButton(
-              onMenuPressed: () {},
-            ),
-          ),
-        ),
+        MaterialApp(home: Scaffold(body: MenuButton(onMenuPressed: () {}))),
       );
 
       expect(find.byType(MenuButton), findsOneWidget);
@@ -116,11 +110,7 @@ void main() {
       Widget buildMenuButton(ThemeData theme) {
         return MaterialApp(
           theme: theme,
-          home: Scaffold(
-            body: MenuButton(
-              onMenuPressed: () {},
-            ),
-          ),
+          home: Scaffold(body: MenuButton(onMenuPressed: () {})),
         );
       }
 
@@ -133,15 +123,13 @@ void main() {
       expect(find.byIcon(Icons.menu), findsOneWidget);
     });
 
-    testWidgets('should work in different layout contexts', (WidgetTester tester) async {
+    testWidgets('should work in different layout contexts', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            appBar: AppBar(
-              actions: [
-                MenuButton(onMenuPressed: () {}),
-              ],
-            ),
+            appBar: AppBar(actions: [MenuButton(onMenuPressed: () {})]),
             body: const Text('Test Body'),
           ),
         ),
@@ -151,10 +139,12 @@ void main() {
       expect(find.byIcon(Icons.menu), findsOneWidget);
     });
 
-    testWidgets('should maintain consistent behavior across rebuilds', (WidgetTester tester) async {
+    testWidgets('should maintain consistent behavior across rebuilds', (
+      WidgetTester tester,
+    ) async {
       int tapCount = 0;
       bool toggle = false;
-      
+
       Widget buildWidget() {
         return MaterialApp(
           home: Scaffold(
@@ -181,7 +171,7 @@ void main() {
       toggle = true;
       await tester.pumpWidget(buildWidget());
       expect(find.text('Toggle State'), findsOneWidget);
-      
+
       await tester.tap(find.byType(MenuButton));
       await tester.pump();
       expect(tapCount, 2);
@@ -189,15 +179,10 @@ void main() {
 
     testWidgets('should have proper key behavior', (WidgetTester tester) async {
       const key = Key('menu_button_key');
-      
+
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: MenuButton(
-              key: key,
-              onMenuPressed: () {},
-            ),
-          ),
+          home: Scaffold(body: MenuButton(key: key, onMenuPressed: () {})),
         ),
       );
 
@@ -205,7 +190,9 @@ void main() {
       expect(find.byType(MenuButton), findsOneWidget);
     });
 
-    testWidgets('should work within scrollable widgets', (WidgetTester tester) async {
+    testWidgets('should work within scrollable widgets', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

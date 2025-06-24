@@ -11,12 +11,12 @@ class TestPurchaseDetails extends PurchaseDetails {
     IAPError? error,
     bool pendingCompletePurchase = false,
   }) : super(
-          verificationData: PurchaseVerificationData(
-            localVerificationData: 'local_data',
-            serverVerificationData: 'server_data',
-            source: 'test_source',
-          ),
-        ) {
+         verificationData: PurchaseVerificationData(
+           localVerificationData: 'local_data',
+           serverVerificationData: 'server_data',
+           source: 'test_source',
+         ),
+       ) {
     this.pendingCompletePurchase = pendingCompletePurchase;
     if (error != null) {
       this.error = error;

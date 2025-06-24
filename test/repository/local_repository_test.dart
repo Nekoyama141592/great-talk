@@ -51,14 +51,17 @@ void main() {
         expect(fetchedPurchases.first.os, 'iOS');
       });
 
-      test('should return empty list when no verified purchases exist', () async {
-        final prefs = await SharedPreferences.getInstance();
-        localRepository = LocalRepository(prefs);
+      test(
+        'should return empty list when no verified purchases exist',
+        () async {
+          final prefs = await SharedPreferences.getInstance();
+          localRepository = LocalRepository(prefs);
 
-        final purchases = localRepository.fetchVerifiedPurchases();
+          final purchases = localRepository.fetchVerifiedPurchases();
 
-        expect(purchases, isEmpty);
-      });
+          expect(purchases, isEmpty);
+        },
+      );
 
       test('should handle multiple verified purchases', () async {
         final prefs = await SharedPreferences.getInstance();
@@ -108,16 +111,19 @@ void main() {
         expect(prefs.getString(postId), isNull);
       });
 
-      test('should return success even when removing non-existent chat log', () async {
-        final prefs = await SharedPreferences.getInstance();
-        localRepository = LocalRepository(prefs);
+      test(
+        'should return success even when removing non-existent chat log',
+        () async {
+          final prefs = await SharedPreferences.getInstance();
+          localRepository = LocalRepository(prefs);
 
-        const postId = 'non_existent_post_id';
+          const postId = 'non_existent_post_id';
 
-        final result = await localRepository.removeChatLog(postId);
+          final result = await localRepository.removeChatLog(postId);
 
-        expect(result, isA<Success<bool>>());
-      });
+          expect(result, isA<Success<bool>>());
+        },
+      );
     });
 
     group('Theme preferences', () {
@@ -273,8 +279,14 @@ void main() {
         final retrievedMessages = localRepository.getMessages(postId);
 
         expect(retrievedMessages, hasLength(2));
-        expect(retrievedMessages[0].text['value'], 'Hello, this is a test message');
-        expect(retrievedMessages[1].text['value'], 'Hello! How can I help you?');
+        expect(
+          retrievedMessages[0].text['value'],
+          'Hello, this is a test message',
+        );
+        expect(
+          retrievedMessages[1].text['value'],
+          'Hello! How can I help you?',
+        );
       });
 
       test('should handle single message', () async {
@@ -282,7 +294,10 @@ void main() {
         localRepository = LocalRepository(prefs);
 
         const postId = 'single_message_post';
-        final testMessage = TextMessage.user('Single test message', 'test_user_id');
+        final testMessage = TextMessage.user(
+          'Single test message',
+          'test_user_id',
+        );
 
         await localRepository.setMessages(postId, [testMessage]);
         final retrievedMessages = localRepository.getMessages(postId);
@@ -297,9 +312,7 @@ void main() {
 
         const postId = 'update_test_post';
         final testPost = createTestPost(postId);
-        final oldMessages = [
-          TextMessage.user('Old message', 'test_user_id'),
-        ];
+        final oldMessages = [TextMessage.user('Old message', 'test_user_id')];
 
         final newMessages = [
           TextMessage.user('New message 1', 'test_user_id'),

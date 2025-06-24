@@ -27,9 +27,7 @@ void main() {
           object: 'test.jpg',
         );
 
-        final responseData = {
-          'base64Image': 'uploaded_image_data',
-        };
+        final responseData = {'base64Image': 'uploaded_image_data'};
 
         repository.setMockResponse('putObjectV2', responseData);
 
@@ -61,13 +59,9 @@ void main() {
 
     group('getObject', () {
       test('should return success when download succeeds', () async {
-        final request = GetObjectRequest(
-          object: 'test.jpg',
-        );
+        final request = GetObjectRequest(object: 'test.jpg');
 
-        final responseData = {
-          'base64Image': 'base64imagedata',
-        };
+        final responseData = {'base64Image': 'base64imagedata'};
 
         repository.setMockResponse('getObjectV2', responseData);
 
@@ -83,11 +77,12 @@ void main() {
       });
 
       test('should return failure when download fails', () async {
-        final request = GetObjectRequest(
-          object: 'test.jpg',
-        );
+        final request = GetObjectRequest(object: 'test.jpg');
 
-        repository.setMockException('getObjectV2', Exception('Download failed'));
+        repository.setMockException(
+          'getObjectV2',
+          Exception('Download failed'),
+        );
 
         final result = await repository.getObject(request);
 
@@ -105,9 +100,7 @@ void main() {
           value: 'test.jpg',
         );
 
-        final responseData = {
-          'success': true,
-        };
+        final responseData = {'success': true};
 
         repository.setMockResponse('deleteObjectV2', responseData);
 
@@ -124,7 +117,10 @@ void main() {
           value: 'test.jpg',
         );
 
-        repository.setMockException('deleteObjectV2', Exception('Delete failed'));
+        repository.setMockException(
+          'deleteObjectV2',
+          Exception('Delete failed'),
+        );
 
         final result = await repository.deleteObject(image);
 
@@ -138,9 +134,7 @@ void main() {
         const prompt = 'A beautiful sunset';
         const size = '1024x1024';
 
-        final responseData = {
-          'base64': 'base64encodedimagedata',
-        };
+        final responseData = {'base64': 'base64encodedimagedata'};
 
         repository.setMockResponse('generateImage', responseData);
 
@@ -153,7 +147,10 @@ void main() {
         const prompt = 'A beautiful sunset';
         const size = '1024x1024';
 
-        repository.setMockException('generateImage', Exception('Generation failed'));
+        repository.setMockException(
+          'generateImage',
+          Exception('Generation failed'),
+        );
 
         final result = await repository.generateImage(prompt, size);
 
@@ -191,7 +188,10 @@ void main() {
           model: 'gpt-3.5-turbo',
         );
 
-        repository.setMockException('generateTextV2', Exception('Generation failed'));
+        repository.setMockException(
+          'generateTextV2',
+          Exception('Generation failed'),
+        );
 
         final result = await repository.generateText(request);
 
@@ -216,9 +216,7 @@ void main() {
       });
 
       test('should handle null response data', () async {
-        final request = GetObjectRequest(
-          object: 'test.jpg',
-        );
+        final request = GetObjectRequest(object: 'test.jpg');
 
         repository.setMockResponse('getObjectV2', null);
 
@@ -235,13 +233,13 @@ void main() {
           base64Image: 'base64data',
           object: 'test.jpg',
         );
-        
-        final getRequest = GetObjectRequest(
-          object: 'test.jpg',
-        );
+
+        final getRequest = GetObjectRequest(object: 'test.jpg');
 
         final textRequest = GenerateTextRequest(
-          messages: [{'role': 'user', 'content': 'Hello'}],
+          messages: [
+            {'role': 'user', 'content': 'Hello'},
+          ],
           model: 'gpt-3.5-turbo',
         );
 
@@ -249,16 +247,21 @@ void main() {
         repository.setMockResponse('getObjectV2', {'base64Image': 'data'});
         repository.setMockResponse('deleteObjectV2', {'success': true});
         repository.setMockResponse('generateImage', {'base64': 'base64data'});
-        repository.setMockResponse('generateTextV2', {'model': 'gpt-3.5-turbo', 'content': 'response'});
+        repository.setMockResponse('generateTextV2', {
+          'model': 'gpt-3.5-turbo',
+          'content': 'response',
+        });
 
         await repository.putObject(putRequest);
         await repository.getObject(getRequest);
-        await repository.deleteObject(DetectedImage(
-          bucketName: 'bucket',
-          moderationLabels: [],
-          moderationModelVersion: '1.0',
-          value: 'test.jpg',
-        ));
+        await repository.deleteObject(
+          DetectedImage(
+            bucketName: 'bucket',
+            moderationLabels: [],
+            moderationModelVersion: '1.0',
+            value: 'test.jpg',
+          ),
+        );
         await repository.generateImage('prompt', '1024x1024');
         await repository.generateText(textRequest);
 
@@ -293,8 +296,12 @@ void main() {
         repository.setMockResponse('verifyAndroidReceipt', responseData);
         repository.setMockResponse('verifyIOSReceipt', responseData);
 
-        final androidResult = await repository.verifyAndroidReceipt(mockPurchaseDetails);
-        final iosResult = await repository.verifyIOSReceipt(mockPurchaseDetails);
+        final androidResult = await repository.verifyAndroidReceipt(
+          mockPurchaseDetails,
+        );
+        final iosResult = await repository.verifyIOSReceipt(
+          mockPurchaseDetails,
+        );
 
         expect(androidResult, isA<rs.Success<VerifiedPurchase>>());
         expect(iosResult, isA<rs.Success<VerifiedPurchase>>());
@@ -303,11 +310,21 @@ void main() {
       test('should handle verification failure', () async {
         final mockPurchaseDetails = MockPurchaseDetails();
 
-        repository.setMockException('verifyAndroidReceipt', Exception('Verification failed'));
-        repository.setMockException('verifyIOSReceipt', Exception('Verification failed'));
+        repository.setMockException(
+          'verifyAndroidReceipt',
+          Exception('Verification failed'),
+        );
+        repository.setMockException(
+          'verifyIOSReceipt',
+          Exception('Verification failed'),
+        );
 
-        final androidResult = await repository.verifyAndroidReceipt(mockPurchaseDetails);
-        final iosResult = await repository.verifyIOSReceipt(mockPurchaseDetails);
+        final androidResult = await repository.verifyAndroidReceipt(
+          mockPurchaseDetails,
+        );
+        final iosResult = await repository.verifyIOSReceipt(
+          mockPurchaseDetails,
+        );
 
         expect(androidResult, isA<rs.Failure<VerifiedPurchase>>());
         expect(iosResult, isA<rs.Failure<VerifiedPurchase>>());
@@ -338,7 +355,7 @@ class TestableApiRepository {
     if (mockExceptions.containsKey(name)) {
       throw mockExceptions[name]!;
     }
-    
+
     final response = mockResponses[name] ?? {};
     if (response is String || response == null) {
       throw Exception('Invalid response type');
@@ -368,7 +385,9 @@ class TestableApiRepository {
     }
   }
 
-  rs.FutureResult<DeleteObjectResponse> deleteObject(DetectedImage image) async {
+  rs.FutureResult<DeleteObjectResponse> deleteObject(
+    DetectedImage image,
+  ) async {
     try {
       const name = 'deleteObjectV2';
       final request = {'object': image.value};
@@ -395,7 +414,9 @@ class TestableApiRepository {
     }
   }
 
-  rs.FutureResult<GenerateTextResponse> generateText(GenerateTextRequest request) async {
+  rs.FutureResult<GenerateTextResponse> generateText(
+    GenerateTextRequest request,
+  ) async {
     try {
       const name = 'generateTextV2';
       final requestData = request.toJson();
@@ -438,17 +459,17 @@ class TestableApiRepository {
 
 class MockPurchaseDetails extends PurchaseDetails {
   MockPurchaseDetails()
-      : super(
-          productID: 'test_product',
-          purchaseID: 'test_purchase_id',
-          transactionDate: '2024-01-01T00:00:00Z',
-          verificationData: PurchaseVerificationData(
-            localVerificationData: 'local_data',
-            serverVerificationData: 'server_data',
-            source: 'test',
-          ),
-          status: PurchaseStatus.purchased,
-        );
+    : super(
+        productID: 'test_product',
+        purchaseID: 'test_purchase_id',
+        transactionDate: '2024-01-01T00:00:00Z',
+        verificationData: PurchaseVerificationData(
+          localVerificationData: 'local_data',
+          serverVerificationData: 'server_data',
+          source: 'test',
+        ),
+        status: PurchaseStatus.purchased,
+      );
 
   Map<String, dynamic> toJson() {
     return {

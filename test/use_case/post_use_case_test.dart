@@ -12,7 +12,7 @@ import 'package:great_talk/use_case/post_use_case.dart';
 class FakeDatabaseRepository implements DatabaseRepository {
   bool shouldSucceed = true;
   String? errorMessage;
-  
+
   @override
   dynamic noSuchMethod(Invocation invocation) {
     if (shouldSucceed) {
@@ -77,7 +77,11 @@ void main() {
         );
 
         fakeFirestoreRepository.shouldSucceed = true;
-        final result = await postUseCase.mutePost(testPost, testCurrentUid, testToken);
+        final result = await postUseCase.mutePost(
+          testPost,
+          testCurrentUid,
+          testToken,
+        );
 
         expect(result, isA<Result<bool>>());
         result.when(
@@ -97,8 +101,12 @@ void main() {
 
         fakeFirestoreRepository.shouldSucceed = false;
         fakeFirestoreRepository.errorMessage = 'Mute failed';
-        
-        final result = await postUseCase.mutePost(testPost, testCurrentUid, testToken);
+
+        final result = await postUseCase.mutePost(
+          testPost,
+          testCurrentUid,
+          testToken,
+        );
 
         result.when(
           success: (_) => fail('Expected failure'),
@@ -118,7 +126,11 @@ void main() {
         );
 
         fakeFirestoreRepository.shouldSucceed = true;
-        final result = await postUseCase.muteUser(testPost, testCurrentUid, testToken);
+        final result = await postUseCase.muteUser(
+          testPost,
+          testCurrentUid,
+          testToken,
+        );
 
         result.when(
           success: (data) => expect(data, true),
@@ -137,8 +149,12 @@ void main() {
 
         fakeFirestoreRepository.shouldSucceed = false;
         fakeFirestoreRepository.errorMessage = 'User mute failed';
-        
-        final result = await postUseCase.muteUser(testPost, testCurrentUid, testToken);
+
+        final result = await postUseCase.muteUser(
+          testPost,
+          testCurrentUid,
+          testToken,
+        );
 
         result.when(
           success: (_) => fail('Expected failure'),
@@ -183,7 +199,7 @@ void main() {
 
         fakeFirestoreRepository.shouldSucceed = false;
         fakeFirestoreRepository.errorMessage = 'Like failed';
-        
+
         final result = await postUseCase.onLikeButtonPressed(
           testCurrentUid,
           testToken,
@@ -219,7 +235,7 @@ void main() {
 
         fakeFirestoreRepository.shouldSucceed = false;
         fakeFirestoreRepository.errorMessage = 'Unlike failed';
-        
+
         final result = await postUseCase.onUnLikeButtonPressed(
           testCurrentUid,
           testTokenId,
@@ -247,7 +263,7 @@ void main() {
       test('should handle delete post failure', () async {
         fakeFirestoreRepository.shouldSucceed = false;
         fakeFirestoreRepository.errorMessage = 'Delete failed';
-        
+
         final result = await postUseCase.deletePost(testPost);
 
         result.when(
@@ -263,7 +279,7 @@ void main() {
           firestoreRepository: fakeFirestoreRepository,
           apiRepository: fakeApiRepository,
         );
-        
+
         expect(useCase, isA<PostUseCase>());
         expect(useCase.firestoreRepository, equals(fakeFirestoreRepository));
         expect(useCase.apiRepository, equals(fakeApiRepository));
@@ -290,7 +306,9 @@ void main() {
       });
 
       test('should handle post with different uid', () async {
-        final postWithDifferentUid = testPost.copyWith(uid: 'different_uid_789');
+        final postWithDifferentUid = testPost.copyWith(
+          uid: 'different_uid_789',
+        );
         final testToken = MuteUserToken(
           activeUid: testCurrentUid,
           createdAt: DateTime.now(),
@@ -300,7 +318,11 @@ void main() {
         );
 
         fakeFirestoreRepository.shouldSucceed = true;
-        final result = await postUseCase.muteUser(postWithDifferentUid, testCurrentUid, testToken);
+        final result = await postUseCase.muteUser(
+          postWithDifferentUid,
+          testCurrentUid,
+          testToken,
+        );
 
         result.when(
           success: (data) => expect(data, true),

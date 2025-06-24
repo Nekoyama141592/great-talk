@@ -77,9 +77,9 @@ void main() {
 
       test('should allow writing to own post document', () {
         expect(
-          () => firestore
-              .doc('public/v1/users/$uid/posts/post123')
-              .set({'content': 'test post'}),
+          () => firestore.doc('public/v1/users/$uid/posts/post123').set({
+            'content': 'test post',
+          }),
           returnsNormally,
         );
       });
@@ -93,7 +93,7 @@ void main() {
         );
       });
 
-       test('should allow read from own timeline', () {
+      test('should allow read from own timeline', () {
         expect(
           () => firestore.doc('public/v1/users/$uid/timelines/post123').get(),
           returnsNormally,
@@ -102,9 +102,9 @@ void main() {
 
       test('should allow writing to own private user document', () {
         expect(
-          () => firestore
-              .doc('private/v1/privateUsers/$uid')
-              .set({'privateData': 'test'}),
+          () => firestore.doc('private/v1/privateUsers/$uid').set({
+            'privateData': 'test',
+          }),
           returnsNormally,
         );
       });
@@ -141,9 +141,9 @@ void main() {
 
       test('should deny writing to own post document', () {
         expect(
-          () => firestore
-              .doc('public/v1/users/$uid/posts/post123')
-              .set({'content': 'test post'}),
+          () => firestore.doc('public/v1/users/$uid/posts/post123').set({
+            'content': 'test post',
+          }),
           throwsException,
         );
       });
@@ -158,27 +158,32 @@ void main() {
       });
 
       // 読み取りは認証さえしていれば通るはず
-      test('should allow reading user document even if email is not verified', () {
-         expect(
-          () => firestore.doc('public/v1/users/anyuser').get(),
-          returnsNormally,
-        );
-      });
+      test(
+        'should allow reading user document even if email is not verified',
+        () {
+          expect(
+            () => firestore.doc('public/v1/users/anyuser').get(),
+            returnsNormally,
+          );
+        },
+      );
 
       // email_verified が read の条件になっている timeline は失敗する
-       test('should deny reading from own timeline if email is not verified', () {
-        expect(
-          () => firestore.doc('public/v1/users/$uid/timelines/post123').get(),
-          throwsException,
-        );
-      });
-
+      test(
+        'should deny reading from own timeline if email is not verified',
+        () {
+          expect(
+            () => firestore.doc('public/v1/users/$uid/timelines/post123').get(),
+            throwsException,
+          );
+        },
+      );
 
       test('should deny writing to own private user document', () {
         expect(
-          () => firestore
-              .doc('private/v1/privateUsers/$uid')
-              .set({'privateData': 'test'}),
+          () => firestore.doc('private/v1/privateUsers/$uid').set({
+            'privateData': 'test',
+          }),
           throwsException,
         );
       });
@@ -222,7 +227,9 @@ void main() {
       final credential = await auth.signInWithCustomToken('some token');
       final uid = credential.user!.uid;
       expect(
-        () => firestore.doc('public/v1/users/$uid/posts/post123').set({'content': 'test post'}),
+        () => firestore.doc('public/v1/users/$uid/posts/post123').set({
+          'content': 'test post',
+        }),
         returnsNormally,
       );
     });
@@ -236,7 +243,9 @@ void main() {
       await auth.signInWithCustomToken('some token');
 
       expect(
-        () => firestore.doc('public/v1/users/abcdef/posts/post123').set({'content': 'test post'}),
+        () => firestore.doc('public/v1/users/abcdef/posts/post123').set({
+          'content': 'test post',
+        }),
         throwsException,
       );
     });
@@ -250,7 +259,9 @@ void main() {
       final credential = await auth.signInWithCustomToken('some token');
       final uid = credential.user!.uid;
       expect(
-        () => firestore.doc('public/v1/users/otheruser/posts/post123/postLikes/$uid').set({'liked': true}),
+        () => firestore
+            .doc('public/v1/users/otheruser/posts/post123/postLikes/$uid')
+            .set({'liked': true}),
         returnsNormally,
       );
     });
@@ -264,7 +275,9 @@ void main() {
       await auth.signInWithCustomToken('some token');
 
       expect(
-        () => firestore.doc('public/v1/users/otheruser/posts/post123/postLikes/abcdef').set({'liked': true}),
+        () => firestore
+            .doc('public/v1/users/otheruser/posts/post123/postLikes/abcdef')
+            .set({'liked': true}),
         throwsException,
       );
     });
@@ -278,7 +291,9 @@ void main() {
       final credential = await auth.signInWithCustomToken('some token');
       final uid = credential.user!.uid;
       expect(
-        () => firestore.doc('public/v1/users/otheruser/posts/post123/postMutes/$uid').set({'muted': true}),
+        () => firestore
+            .doc('public/v1/users/otheruser/posts/post123/postMutes/$uid')
+            .set({'muted': true}),
         returnsNormally,
       );
     });
@@ -292,7 +307,9 @@ void main() {
       await auth.signInWithCustomToken('some token');
 
       expect(
-        () => firestore.doc('public/v1/users/otheruser/posts/post123/postMutes/abcdef').set({'muted': true}),
+        () => firestore
+            .doc('public/v1/users/otheruser/posts/post123/postMutes/abcdef')
+            .set({'muted': true}),
         throwsException,
       );
     });
@@ -306,7 +323,9 @@ void main() {
       final credential = await auth.signInWithCustomToken('some token');
       final uid = credential.user!.uid;
       expect(
-        () => firestore.doc('public/v1/users/otheruser/followers/$uid').set({'following': true}),
+        () => firestore.doc('public/v1/users/otheruser/followers/$uid').set({
+          'following': true,
+        }),
         returnsNormally,
       );
     });
@@ -320,7 +339,9 @@ void main() {
       await auth.signInWithCustomToken('some token');
 
       expect(
-        () => firestore.doc('public/v1/users/otheruser/followers/abcdef').set({'following': true}),
+        () => firestore.doc('public/v1/users/otheruser/followers/abcdef').set({
+          'following': true,
+        }),
         throwsException,
       );
     });
@@ -334,7 +355,9 @@ void main() {
       final credential = await auth.signInWithCustomToken('some token');
       final uid = credential.user!.uid;
       expect(
-        () => firestore.doc('public/v1/users/otheruser/userMutes/$uid').set({'muted': true}),
+        () => firestore.doc('public/v1/users/otheruser/userMutes/$uid').set({
+          'muted': true,
+        }),
         returnsNormally,
       );
     });
@@ -348,7 +371,9 @@ void main() {
       await auth.signInWithCustomToken('some token');
 
       expect(
-        () => firestore.doc('public/v1/users/otheruser/userMutes/abcdef').set({'muted': true}),
+        () => firestore.doc('public/v1/users/otheruser/userMutes/abcdef').set({
+          'muted': true,
+        }),
         throwsException,
       );
     });
@@ -390,7 +415,9 @@ void main() {
       final credential = await auth.signInWithCustomToken('some token');
       final uid = credential.user!.uid;
       expect(
-        () => firestore.doc('private/v1/privateUsers/$uid').set({'privateData': 'test'}),
+        () => firestore.doc('private/v1/privateUsers/$uid').set({
+          'privateData': 'test',
+        }),
         returnsNormally,
       );
     });
@@ -404,7 +431,9 @@ void main() {
       await auth.signInWithCustomToken('some token');
 
       expect(
-        () => firestore.doc('private/v1/privateUsers/abcdef').set({'privateData': 'test'}),
+        () => firestore.doc('private/v1/privateUsers/abcdef').set({
+          'privateData': 'test',
+        }),
         throwsException,
       );
     });
@@ -418,7 +447,9 @@ void main() {
       final credential = await auth.signInWithCustomToken('some token');
       final uid = credential.user!.uid;
       expect(
-        () => firestore.doc('private/v1/privateUsers/$uid/tokens/token123').set({'token': 'test'}),
+        () => firestore.doc('private/v1/privateUsers/$uid/tokens/token123').set(
+          {'token': 'test'},
+        ),
         returnsNormally,
       );
     });
@@ -432,7 +463,9 @@ void main() {
       await auth.signInWithCustomToken('some token');
 
       expect(
-        () => firestore.doc('private/v1/privateUsers/abcdef/tokens/token123').set({'token': 'test'}),
+        () => firestore
+            .doc('private/v1/privateUsers/abcdef/tokens/token123')
+            .set({'token': 'test'}),
         throwsException,
       );
     });

@@ -14,8 +14,8 @@ class MockFirebaseAuthWithExceptions extends MockFirebaseAuth {
     Map<String, FirebaseAuthException>? authExceptions,
     super.signedIn = false,
     super.mockUser,
-  })  : _signInException = signInException,
-        _signOutException = signOutException;
+  }) : _signInException = signInException,
+       _signOutException = signOutException;
 
   @override
   Future<UserCredential> signInAnonymously() async {
@@ -45,10 +45,12 @@ class MockUserWithExceptions extends MockUser {
     super.isAnonymous = false,
     super.isEmailVerified = false,
     Map<String, FirebaseAuthException>? authExceptions,
-  })  : _authExceptions = authExceptions;
+  }) : _authExceptions = authExceptions;
 
   @override
-  Future<UserCredential> reauthenticateWithCredential(AuthCredential? credential) async {
+  Future<UserCredential> reauthenticateWithCredential(
+    AuthCredential? credential,
+  ) async {
     if (_authExceptions?.containsKey('reauthenticateWithCredential') == true) {
       throw _authExceptions!['reauthenticateWithCredential']!;
     }
@@ -71,7 +73,10 @@ void main() {
 
     setUp(() {
       mockFirebaseAuth = MockFirebaseAuth();
-      authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
+      authRepository = AuthRepository(
+        mockFirebaseAuth,
+        enableDebugPrint: false,
+      );
     });
 
     group('signInAnonymously', () {
@@ -91,7 +96,10 @@ void main() {
         mockFirebaseAuth = MockFirebaseAuthWithExceptions(
           signInException: FirebaseAuthException(code: 'unknown'),
         );
-        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
+        authRepository = AuthRepository(
+          mockFirebaseAuth,
+          enableDebugPrint: false,
+        );
 
         final result = await authRepository.signInAnonymously();
 
@@ -124,7 +132,10 @@ void main() {
         mockFirebaseAuth = MockFirebaseAuthWithExceptions(
           signOutException: Exception('Sign out failed'),
         );
-        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
+        authRepository = AuthRepository(
+          mockFirebaseAuth,
+          enableDebugPrint: false,
+        );
 
         final result = await authRepository.signOut();
 
@@ -140,9 +151,14 @@ void main() {
 
     group('reauthenticateWithCredential', () {
       test('should return failure when user is not signed in', () async {
-        final credential = EmailAuthProvider.credential(email: 'test@example.com', password: 'password');
+        final credential = EmailAuthProvider.credential(
+          email: 'test@example.com',
+          password: 'password',
+        );
 
-        final result = await authRepository.reauthenticateWithCredential(credential);
+        final result = await authRepository.reauthenticateWithCredential(
+          credential,
+        );
 
         expect(result, isA<Failure<bool>>());
         result.when(
@@ -156,11 +172,19 @@ void main() {
       test('should return success when reauthentication succeeds', () async {
         final mockUser = MockUser(uid: 'test-uid', email: 'test@example.com');
         mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
+        authRepository = AuthRepository(
+          mockFirebaseAuth,
+          enableDebugPrint: false,
+        );
 
-        final credential = EmailAuthProvider.credential(email: 'test@example.com', password: 'password');
+        final credential = EmailAuthProvider.credential(
+          email: 'test@example.com',
+          password: 'password',
+        );
 
-        final result = await authRepository.reauthenticateWithCredential(credential);
+        final result = await authRepository.reauthenticateWithCredential(
+          credential,
+        );
 
         expect(result, isA<Success<bool>>());
         result.when(
@@ -171,71 +195,125 @@ void main() {
         );
       });
 
-      test('should return appropriate error message for user-mismatch', () async {
-        final mockUser = MockUserWithExceptions(
-          uid: 'test-uid',
-          email: 'test@example.com',
-          authExceptions: {'reauthenticateWithCredential': FirebaseAuthException(code: 'user-mismatch')},
-        );
-        mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
+      test(
+        'should return appropriate error message for user-mismatch',
+        () async {
+          final mockUser = MockUserWithExceptions(
+            uid: 'test-uid',
+            email: 'test@example.com',
+            authExceptions: {
+              'reauthenticateWithCredential': FirebaseAuthException(
+                code: 'user-mismatch',
+              ),
+            },
+          );
+          mockFirebaseAuth = MockFirebaseAuth(
+            mockUser: mockUser,
+            signedIn: true,
+          );
+          authRepository = AuthRepository(
+            mockFirebaseAuth,
+            enableDebugPrint: false,
+          );
 
-        final credential = EmailAuthProvider.credential(email: 'other@example.com', password: 'password');
+          final credential = EmailAuthProvider.credential(
+            email: 'other@example.com',
+            password: 'password',
+          );
 
-        final result = await authRepository.reauthenticateWithCredential(credential);
+          final result = await authRepository.reauthenticateWithCredential(
+            credential,
+          );
 
-        expect(result, isA<Failure<bool>>());
-        result.when(
-          success: (value) => fail('Expected failure but got success'),
-          failure: (msg) {
-            expect(msg, '認証情報がことなります。現在のユーザーと同じ方法で認証してください。');
-          },
-        );
-      });
+          expect(result, isA<Failure<bool>>());
+          result.when(
+            success: (value) => fail('Expected failure but got success'),
+            failure: (msg) {
+              expect(msg, '認証情報がことなります。現在のユーザーと同じ方法で認証してください。');
+            },
+          );
+        },
+      );
 
-      test('should return appropriate error message for user-not-found', () async {
-        final mockUser = MockUserWithExceptions(
-          uid: 'test-uid',
-          email: 'test@example.com',
-          authExceptions: {'reauthenticateWithCredential': FirebaseAuthException(code: 'user-not-found')},
-        );
-        mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
+      test(
+        'should return appropriate error message for user-not-found',
+        () async {
+          final mockUser = MockUserWithExceptions(
+            uid: 'test-uid',
+            email: 'test@example.com',
+            authExceptions: {
+              'reauthenticateWithCredential': FirebaseAuthException(
+                code: 'user-not-found',
+              ),
+            },
+          );
+          mockFirebaseAuth = MockFirebaseAuth(
+            mockUser: mockUser,
+            signedIn: true,
+          );
+          authRepository = AuthRepository(
+            mockFirebaseAuth,
+            enableDebugPrint: false,
+          );
 
-        final credential = EmailAuthProvider.credential(email: 'test@example.com', password: 'password');
+          final credential = EmailAuthProvider.credential(
+            email: 'test@example.com',
+            password: 'password',
+          );
 
-        final result = await authRepository.reauthenticateWithCredential(credential);
+          final result = await authRepository.reauthenticateWithCredential(
+            credential,
+          );
 
-        expect(result, isA<Failure<bool>>());
-        result.when(
-          success: (value) => fail('Expected failure but got success'),
-          failure: (msg) {
-            expect(msg, 'ユーザーが見つかりません。');
-          },
-        );
-      });
+          expect(result, isA<Failure<bool>>());
+          result.when(
+            success: (value) => fail('Expected failure but got success'),
+            failure: (msg) {
+              expect(msg, 'ユーザーが見つかりません。');
+            },
+          );
+        },
+      );
 
-      test('should return appropriate error message for invalid-credential', () async {
-        final mockUser = MockUserWithExceptions(
-          uid: 'test-uid',
-          email: 'test@example.com',
-          authExceptions: {'reauthenticateWithCredential': FirebaseAuthException(code: 'invalid-credential')},
-        );
-        mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
+      test(
+        'should return appropriate error message for invalid-credential',
+        () async {
+          final mockUser = MockUserWithExceptions(
+            uid: 'test-uid',
+            email: 'test@example.com',
+            authExceptions: {
+              'reauthenticateWithCredential': FirebaseAuthException(
+                code: 'invalid-credential',
+              ),
+            },
+          );
+          mockFirebaseAuth = MockFirebaseAuth(
+            mockUser: mockUser,
+            signedIn: true,
+          );
+          authRepository = AuthRepository(
+            mockFirebaseAuth,
+            enableDebugPrint: false,
+          );
 
-        final credential = EmailAuthProvider.credential(email: 'test@example.com', password: 'wrong-password');
+          final credential = EmailAuthProvider.credential(
+            email: 'test@example.com',
+            password: 'wrong-password',
+          );
 
-        final result = await authRepository.reauthenticateWithCredential(credential);
+          final result = await authRepository.reauthenticateWithCredential(
+            credential,
+          );
 
-        expect(result, isA<Failure<bool>>());
-        result.when(
-          success: (value) => fail('Expected failure but got success'),
-          failure: (msg) {
-            expect(msg, 'クレデンシャルが不正、もしくは期限切れです。');
-          },
-        );
-      });
+          expect(result, isA<Failure<bool>>());
+          result.when(
+            success: (value) => fail('Expected failure but got success'),
+            failure: (msg) {
+              expect(msg, 'クレデンシャルが不正、もしくは期限切れです。');
+            },
+          );
+        },
+      );
     });
 
     group('deleteUser', () {
@@ -254,7 +332,10 @@ void main() {
       test('should return success when user deletion succeeds', () async {
         final mockUser = MockUser(uid: 'test-uid', email: 'test@example.com');
         mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
+        authRepository = AuthRepository(
+          mockFirebaseAuth,
+          enableDebugPrint: false,
+        );
 
         final result = await authRepository.deleteUser();
 
@@ -267,25 +348,36 @@ void main() {
         );
       });
 
-      test('should return appropriate error message for requires-recent-login', () async {
-        final mockUser = MockUserWithExceptions(
-          uid: 'test-uid',
-          email: 'test@example.com',
-          authExceptions: {'delete': FirebaseAuthException(code: 'requires-recent-login')},
-        );
-        mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
+      test(
+        'should return appropriate error message for requires-recent-login',
+        () async {
+          final mockUser = MockUserWithExceptions(
+            uid: 'test-uid',
+            email: 'test@example.com',
+            authExceptions: {
+              'delete': FirebaseAuthException(code: 'requires-recent-login'),
+            },
+          );
+          mockFirebaseAuth = MockFirebaseAuth(
+            mockUser: mockUser,
+            signedIn: true,
+          );
+          authRepository = AuthRepository(
+            mockFirebaseAuth,
+            enableDebugPrint: false,
+          );
 
-        final result = await authRepository.deleteUser();
+          final result = await authRepository.deleteUser();
 
-        expect(result, isA<Failure<bool>>());
-        result.when(
-          success: (value) => fail('Expected failure but got success'),
-          failure: (msg) {
-            expect(msg, '再認証が必要です。');
-          },
-        );
-      });
+          expect(result, isA<Failure<bool>>());
+          result.when(
+            success: (value) => fail('Expected failure but got success'),
+            failure: (msg) {
+              expect(msg, '再認証が必要です。');
+            },
+          );
+        },
+      );
     });
   });
 }

@@ -7,7 +7,7 @@ part 'generate_text_response.g.dart';
 abstract class GenerateTextResponse with _$GenerateTextResponse {
   const factory GenerateTextResponse({
     required String model,
-    required String content
+    required String content,
   }) = _GenerateTextResponse;
   factory GenerateTextResponse.fromJson(Map<String, dynamic> json) =>
       _$GenerateTextResponseFromJson(json);

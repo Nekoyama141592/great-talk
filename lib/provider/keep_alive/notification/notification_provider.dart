@@ -56,7 +56,8 @@ class Notification extends _$Notification with WidgetsBindingObserver {
   /// タイムゾーンを設定する
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
-    final String timeZoneName = await FlutterNativeTimezoneLatest.getLocalTimezone();
+    final String timeZoneName =
+        await FlutterNativeTimezoneLatest.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZoneName));
   }
 

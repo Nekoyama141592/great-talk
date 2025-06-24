@@ -46,10 +46,14 @@ class CreatePostPage extends ConsumerWidget {
                 child: const Icon(Icons.image, size: 100.0),
               ),
               const SizedBox(width: 16),
-              if(purchaseState?.isPremiumSubscribing() ?? false) const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [Text(FormConsts.imageLabel), ToGeneratePageButton()],
-              ),
+              if (purchaseState?.isPremiumSubscribing() ?? false)
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(FormConsts.imageLabel),
+                    ToGeneratePageButton(),
+                  ],
+                ),
             ],
           )
           : InkWell(

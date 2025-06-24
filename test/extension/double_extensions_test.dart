@@ -66,7 +66,10 @@ void main() {
 
       test('should handle special double values', () {
         expect(double.infinity.roundToSecondDecimalPlace(), double.infinity);
-        expect(double.negativeInfinity.roundToSecondDecimalPlace(), double.negativeInfinity);
+        expect(
+          double.negativeInfinity.roundToSecondDecimalPlace(),
+          double.negativeInfinity,
+        );
         expect(double.nan.roundToSecondDecimalPlace().isNaN, true);
       });
 
@@ -74,8 +77,10 @@ void main() {
         // Verify that the implementation actually uses multiplier = 10 * 1 = 10
         // This means it rounds to 1 decimal place, not 2 as the comment suggests
         const testValue = 1.23456;
-        const expectedMultiplier = 10; // 10 * decimalPlaces where decimalPlaces = 1
-        final manualResult = (testValue * expectedMultiplier).round() / expectedMultiplier;
+        const expectedMultiplier =
+            10; // 10 * decimalPlaces where decimalPlaces = 1
+        final manualResult =
+            (testValue * expectedMultiplier).round() / expectedMultiplier;
         expect(testValue.roundToSecondDecimalPlace(), manualResult);
         expect(testValue.roundToSecondDecimalPlace(), 1.2);
       });

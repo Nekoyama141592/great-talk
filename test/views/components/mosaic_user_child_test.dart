@@ -22,10 +22,12 @@ void main() {
       );
     });
 
-    testWidgets('should display title and info icon', (WidgetTester tester) async {
+    testWidgets('should display title and info icon', (
+      WidgetTester tester,
+    ) async {
       const title = 'Test Title';
       const message = 'Test message';
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -42,7 +44,9 @@ void main() {
       expect(find.byIcon(Icons.info), findsOneWidget);
     });
 
-    testWidgets('should have correct layout structure', (WidgetTester tester) async {
+    testWidgets('should have correct layout structure', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -57,7 +61,7 @@ void main() {
 
       expect(find.byType(Row), findsOneWidget);
       expect(find.byType(InkWell), findsOneWidget);
-      
+
       final row = tester.widget<Row>(find.byType(Row));
       expect(row.mainAxisAlignment, MainAxisAlignment.center);
       expect(row.children.length, 3); // title, width box, inkwell
@@ -80,13 +84,10 @@ void main() {
       expect(icon.color, Colors.white);
     });
 
-    testWidgets('should display different titles correctly', (WidgetTester tester) async {
-      final titles = [
-        'ミュートしている',
-        '不適切なユーザー',
-        'ブロックされたユーザー',
-        'テストタイトル',
-      ];
+    testWidgets('should display different titles correctly', (
+      WidgetTester tester,
+    ) async {
+      final titles = ['ミュートしている', '不適切なユーザー', 'ブロックされたユーザー', 'テストタイトル'];
 
       for (final title in titles) {
         await tester.pumpWidget(
@@ -105,7 +106,9 @@ void main() {
       }
     });
 
-    testWidgets('should handle different message lengths', (WidgetTester tester) async {
+    testWidgets('should handle different message lengths', (
+      WidgetTester tester,
+    ) async {
       final messages = [
         'Short',
         'このユーザーは不適切なコンテンツを投稿したため、ミュートされています。',
@@ -131,7 +134,9 @@ void main() {
       }
     });
 
-    testWidgets('should handle different user properties', (WidgetTester tester) async {
+    testWidgets('should handle different user properties', (
+      WidgetTester tester,
+    ) async {
       final users = [
         PublicUser(
           uid: 'user1',
@@ -191,21 +196,19 @@ void main() {
       );
 
       expect(find.byType(InkWell), findsOneWidget);
-      
+
       // Verify that the InkWell has an onTap callback
       final inkWell = tester.widget<InkWell>(find.byType(InkWell));
       expect(inkWell.onTap, isNotNull);
     });
 
-    testWidgets('should handle empty strings gracefully', (WidgetTester tester) async {
+    testWidgets('should handle empty strings gracefully', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: MosaicUserChild(
-              publicUser: testUser,
-              msg: '',
-              title: '',
-            ),
+            body: MosaicUserChild(publicUser: testUser, msg: '', title: ''),
           ),
         ),
       );
@@ -214,10 +217,15 @@ void main() {
       expect(find.byIcon(Icons.info), findsOneWidget);
     });
 
-    testWidgets('should maintain layout consistency across different content', (WidgetTester tester) async {
+    testWidgets('should maintain layout consistency across different content', (
+      WidgetTester tester,
+    ) async {
       final testCases = [
         {'title': 'Short', 'msg': 'Short'},
-        {'title': 'Very Long Title That Might Wrap', 'msg': 'Very long message'},
+        {
+          'title': 'Very Long Title That Might Wrap',
+          'msg': 'Very long message',
+        },
         {'title': '日本語タイトル', 'msg': '日本語メッセージ'},
         {'title': '🚫 Emoji Title', 'msg': '⚠️ Emoji message'},
       ];
@@ -239,25 +247,27 @@ void main() {
         expect(find.byType(Row), findsOneWidget);
         expect(find.byIcon(Icons.info), findsOneWidget);
         expect(find.text(testCase['title']!), findsOneWidget);
-        
+
         final row = tester.widget<Row>(find.byType(Row));
         expect(row.mainAxisAlignment, MainAxisAlignment.center);
       }
     });
 
-    testWidgets('should work with different screen sizes', (WidgetTester tester) async {
+    testWidgets('should work with different screen sizes', (
+      WidgetTester tester,
+    ) async {
       const title = 'Responsive Test Title';
       const message = 'Test message for responsive design';
-      
+
       final screenSizes = [
         const Size(400, 800), // Mobile
-        const Size(768, 1024), // Tablet  
+        const Size(768, 1024), // Tablet
         const Size(1200, 800), // Desktop
       ];
 
       for (final size in screenSizes) {
         await tester.binding.setSurfaceSize(size);
-        
+
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -271,7 +281,7 @@ void main() {
         );
 
         await tester.pumpAndSettle();
-        
+
         expect(find.text(title), findsOneWidget);
         expect(find.byIcon(Icons.info), findsOneWidget);
         expect(find.byType(Row), findsOneWidget);
@@ -281,7 +291,9 @@ void main() {
       await tester.binding.setSurfaceSize(null);
     });
 
-    testWidgets('should work within different parent layouts', (WidgetTester tester) async {
+    testWidgets('should work within different parent layouts', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -354,15 +366,13 @@ void main() {
     });
 
     group('Edge cases', () {
-      testWidgets('should handle null-like values gracefully', (WidgetTester tester) async {
+      testWidgets('should handle null-like values gracefully', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: MosaicUserChild(
-                publicUser: testUser,
-                msg: '',
-                title: '',
-              ),
+              body: MosaicUserChild(publicUser: testUser, msg: '', title: ''),
             ),
           ),
         );
@@ -371,10 +381,13 @@ void main() {
         expect(find.byIcon(Icons.info), findsOneWidget);
       });
 
-      testWidgets('should handle very long text content', (WidgetTester tester) async {
+      testWidgets('should handle very long text content', (
+        WidgetTester tester,
+      ) async {
         const longTitle = 'Very Long Title';
-        const longMessage = 'This is a very long message that should be handled properly by the dialog system when the info icon is tapped.';
-        
+        const longMessage =
+            'This is a very long message that should be handled properly by the dialog system when the info icon is tapped.';
+
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(

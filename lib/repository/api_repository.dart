@@ -94,7 +94,10 @@ class ApiRepository {
       return rs.Result.failure('画像の生成に失敗しました');
     }
   }
-  rs.FutureResult<GenerateTextResponse> generateText(GenerateTextRequest request) async {
+
+  rs.FutureResult<GenerateTextResponse> generateText(
+    GenerateTextRequest request,
+  ) async {
     try {
       const name = 'generateTextV2';
       final requestData = request.toJson();
