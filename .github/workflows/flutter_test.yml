@@ -1,17 +1,58 @@
-name: flutter test
+name: Flutter CI
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
-    types: [opened, synchronize]
+    branches:
+      - main
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
+  # build-android:
+  #   runs-on: ubuntu-latest // build-iosとは異なる点に注意
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+
+  #     - name: Set up Flutter
+  #       uses: subosito/flutter-action@v2
+  #       with:
+  #         flutter-version: '3.22.1'
+
+  #     - name: Install dependencies
+  #       run: flutter pub get
+
+  #     - name: Analyze code
+  #       run: flutter analyze
+
+  #     - name: Run tests
+  #       run: flutter test
+
+      # - name: Build Android
+      #   run: flutter build apk --release
+
+  build-ios:
+    runs-on: macos-latest  // build-androidとは異なる点に注意
+
     steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - uses: ./.github/actions/install_flutter_dependencies
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.32.2'
 
-      - name: "Run tests"
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze code
+        run: flutter analyze
+
+      - name: Run tests
         run: flutter test
+
+      # - name: Build iOS
+      #   run: flutter build ios --no-codesign
