@@ -79,8 +79,9 @@ class AuthRepository {
       await user.reauthenticateWithCredential(credential);
       return const Result.success(true);
     } on FirebaseAuthException catch (e) {
-      if (enableDebugPrint)
+      if (enableDebugPrint) {
         debugPrint('reauthenticateWithCredential: ${e.toString()}');
+      }
       final String errorCode = e.code;
       String msg = '';
       switch (errorCode) {
