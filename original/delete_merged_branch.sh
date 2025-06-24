@@ -4,7 +4,7 @@
 # source original/delete_merged_branch.sh
 
 ## TODO: 古いブランチ名を入力
-branch_name="feature/widget_test"
+branch_name=""
 
 git checkout main
 git pull origin main
