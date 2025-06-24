@@ -7,23 +7,20 @@ import 'package:great_talk/repository/result/result.dart';
 class MockFirebaseAuthWithExceptions extends MockFirebaseAuth {
   final FirebaseAuthException? _signInException;
   final Exception? _signOutException;
-  final Map<String, FirebaseAuthException>? _authExceptions;
 
   MockFirebaseAuthWithExceptions({
     FirebaseAuthException? signInException,
     Exception? signOutException,
     Map<String, FirebaseAuthException>? authExceptions,
-    bool signedIn = false,
-    MockUser? mockUser,
+    super.signedIn = false,
+    super.mockUser,
   })  : _signInException = signInException,
-        _signOutException = signOutException,
-        _authExceptions = authExceptions,
-        super(signedIn: signedIn, mockUser: mockUser);
+        _signOutException = signOutException;
 
   @override
   Future<UserCredential> signInAnonymously() async {
     if (_signInException != null) {
-      throw _signInException!;
+      throw _signInException;
     }
     return super.signInAnonymously();
   }
@@ -31,7 +28,7 @@ class MockFirebaseAuthWithExceptions extends MockFirebaseAuth {
   @override
   Future<void> signOut() async {
     if (_signOutException != null) {
-      throw _signOutException!;
+      throw _signOutException;
     }
     return super.signOut();
   }
@@ -41,20 +38,14 @@ class MockUserWithExceptions extends MockUser {
   final Map<String, FirebaseAuthException>? _authExceptions;
 
   MockUserWithExceptions({
-    required String uid,
-    String? email,
-    String? displayName,
-    bool isAnonymous = false,
-    bool isEmailVerified = false,
+    required super.uid,
+    super.email,
+    super.displayName,
+    super.photoURL,
+    super.isAnonymous = false,
+    super.isEmailVerified = false,
     Map<String, FirebaseAuthException>? authExceptions,
-  })  : _authExceptions = authExceptions,
-        super(
-          uid: uid,
-          email: email,
-          displayName: displayName,
-          isAnonymous: isAnonymous,
-          isEmailVerified: isEmailVerified,
-        );
+  })  : _authExceptions = authExceptions;
 
   @override
   Future<UserCredential> reauthenticateWithCredential(AuthCredential? credential) async {
