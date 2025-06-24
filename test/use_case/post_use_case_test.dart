@@ -3,6 +3,7 @@ import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
 import 'package:great_talk/repository/api_repository.dart';
 import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
@@ -25,6 +26,10 @@ class FakeDatabaseRepository implements DatabaseRepository {
 class FakeApiRepository implements ApiRepository {
   @override
   dynamic noSuchMethod(Invocation invocation) {
+    if (invocation.memberName == #deleteObject) {
+      const response = DeleteObjectResponse(httpStatusCode: 200);
+      return Future.value(const Result.success(response));
+    }
     return Future.value(const Result.success({}));
   }
 }
