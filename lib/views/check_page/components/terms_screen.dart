@@ -13,38 +13,34 @@ class TermsScreen extends ConsumerWidget {
       color: Theme.of(context).focusColor,
       fontSize: 20.0,
     );
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.8,
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(MsgConstants.wrongInfoMsg, style: style),
-                  const Divider(),
-                  TextButton(
-                    onPressed: () async => await UrlRedirector.toTosPage(),
-                    child: Text(MsgConstants.tosText, style: style),
-                  ),
-                  const Divider(),
-                  TextButton(
-                    onPressed: () async => await UrlRedirector.toPrivacyPage(),
-                    child: Text(MsgConstants.privacyPolicyText, style: style),
-                  ),
-                  const Divider(),
-                  RoundedButton(
-                    press:
-                        ref
-                            .read(termsNotifierProvider.notifier)
-                            .onAgreeButtonPressed,
-                    text: MsgConstants.agreeText,
-                  ),
-                ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(MsgConstants.wrongInfoMsg, style: style),
+              const Divider(),
+              TextButton(
+                onPressed: () async => await UrlRedirector.toTosPage(),
+                child: Text(MsgConstants.tosText, style: style),
               ),
-            ),
+              const Divider(),
+              TextButton(
+                onPressed: () async => await UrlRedirector.toPrivacyPage(),
+                child: Text(MsgConstants.privacyPolicyText, style: style),
+              ),
+              const Divider(),
+              RoundedButton(
+                press:
+                    ref
+                        .read(termsNotifierProvider.notifier)
+                        .onAgreeButtonPressed,
+                text: MsgConstants.agreeText,
+              ),
+            ],
           ),
         ),
       ),
