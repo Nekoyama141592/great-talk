@@ -17,14 +17,12 @@ part 'purchases_notifier.g.dart';
 class PurchasesNotifier extends _$PurchasesNotifier {
   @override
   FutureOr<PurchaseState> build() => _fetchData();
-  
+
   FutureOr<PurchaseState> _fetchData() async {
     final detailsList = ref.watch(purchaseStreamProvider).value ?? [];
     final purchases = await _onListen(detailsList);
     return PurchaseState(verifiedPurchases: purchases);
   }
-
-
 
   PurchaseRepository get _repository => ref.read(purchaseRepositoryProvider);
 

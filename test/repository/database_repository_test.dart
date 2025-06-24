@@ -62,7 +62,10 @@ void main() {
         };
 
         expect(customCompleteText['systemPrompt'], isA<String>());
-        expect(customCompleteText['systemPrompt'].toString().length, lessThanOrEqualTo(1000));
+        expect(
+          customCompleteText['systemPrompt'].toString().length,
+          lessThanOrEqualTo(1000),
+        );
         expect(customCompleteText.keys.length, 1);
       });
     });
@@ -71,7 +74,7 @@ void main() {
       test('should handle document creation and retrieval', () async {
         const uid = 'test_user_123';
         const postId = 'test_post_123';
-        
+
         final postData = {
           'uid': uid,
           'postId': postId,
@@ -91,9 +94,7 @@ void main() {
           },
           'createdAt': mockTimestamp,
           'updatedAt': mockTimestamp,
-          'customCompleteText': {
-            'systemPrompt': 'Test system prompt',
-          },
+          'customCompleteText': {'systemPrompt': 'Test system prompt'},
           'image': {
             'bucketName': 'test-bucket',
             'moderationLabels': [],
@@ -130,7 +131,7 @@ void main() {
 
       test('should handle user posts operations', () async {
         const uid = 'test_user_456';
-        
+
         final postData1 = {
           'uid': uid,
           'postId': 'post_1',
@@ -223,7 +224,7 @@ void main() {
       test('should handle timeline posts operations', () async {
         const uid = 'timeline_user';
         const postId = 'timeline_post';
-        
+
         final postData = {
           'uid': uid,
           'postId': postId,
@@ -267,7 +268,7 @@ void main() {
 
         await repository.createPost(uid, postId, postData);
         final timelinePosts = await repository.getTimelinePosts([postId]);
-        
+
         expect(timelinePosts.length, 1);
         expect(timelinePosts.first.postId, postId);
       });
@@ -376,7 +377,7 @@ void main() {
         const userName = 'Updated Name';
         const bio = 'Updated biography';
         const fileName = 'updated_image.jpg';
-        
+
         final userUpdateLog = UserUpdateLog.fromRegister(
           uid,
           userName,
@@ -388,7 +389,10 @@ void main() {
         expect(userUpdateLog.stringUserName, userName);
         expect(userUpdateLog.stringBio, bio);
 
-        final result = await repository.createUserUpdateLog(uid, userUpdateLog.toJson());
+        final result = await repository.createUserUpdateLog(
+          uid,
+          userUpdateLog.toJson(),
+        );
         expect(result, isA<Success<bool>>());
       });
     });
@@ -409,10 +413,15 @@ void main() {
         final nonExistentUser = await repository.getPublicUser('non_existent');
         expect(nonExistentUser, isNull);
 
-        final nonExistentPrivateUser = await repository.getPrivateUser('non_existent');
+        final nonExistentPrivateUser = await repository.getPrivateUser(
+          'non_existent',
+        );
         expect(nonExistentPrivateUser, isNull);
 
-        final nonExistentPost = await repository.getPost('non_existent', 'non_existent');
+        final nonExistentPost = await repository.getPost(
+          'non_existent',
+          'non_existent',
+        );
         expect(nonExistentPost, isNull);
       });
 
@@ -432,7 +441,7 @@ void main() {
 
       test('should handle timeline operations', () async {
         const currentUid = 'timeline_test_user';
-        
+
         final timelines = await repository.getTimelines(currentUid);
         expect(timelines, isA<List<Timeline>>());
         expect(timelines, isEmpty); // Should be empty for new user
@@ -440,7 +449,7 @@ void main() {
 
       test('should handle token operations', () async {
         const uid = 'token_test_user';
-        
+
         final tokens = await repository.getTokens(uid);
         expect(tokens, isA<List<Map<String, dynamic>>>());
         expect(tokens, isEmpty); // Should be empty for new user
@@ -451,7 +460,7 @@ void main() {
       test('should maintain data consistency across operations', () async {
         const uid = 'consistency_user';
         const postId = 'consistency_post';
-        
+
         // Create post
         final postData = {
           'uid': uid,
@@ -495,15 +504,15 @@ void main() {
         };
 
         await repository.createPost(uid, postId, postData);
-        
+
         // Verify post exists
         final retrievedPost = await repository.getPost(uid, postId);
         expect(retrievedPost, isNotNull);
-        
+
         // Delete post
         final deleteResult = await repository.deletePost(retrievedPost!);
         expect(deleteResult, isA<Success<bool>>());
-        
+
         // Verify post is deleted
         final deletedPost = await repository.getPost(uid, postId);
         expect(deletedPost, isNull);
@@ -530,9 +539,7 @@ void main() {
         expect(minimalDetectedImage.keys.length, 4);
 
         // Test minimum required structure for CustomCompleteText
-        final minimalCustomCompleteText = {
-          'systemPrompt': '',
-        };
+        final minimalCustomCompleteText = {'systemPrompt': ''};
         expect(minimalCustomCompleteText.keys.length, 1);
       });
     });

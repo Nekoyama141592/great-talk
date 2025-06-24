@@ -16,18 +16,23 @@ class PostsUseCase {
     return image;
   }
 
-  List<Post> getSorted(List<Post> posts,bool isRankingPosts) {
+  List<Post> getSorted(List<Post> posts, bool isRankingPosts) {
     return isRankingPosts ? _sortByLikeCount(posts) : _sortByCreatedAt(posts);
   }
+
   List<Post> _sortByCreatedAt(List<Post> posts) {
-    return posts..sort((a, b) => (b.typedCreatedAt()).compareTo(a.typedCreatedAt()));
+    return posts
+      ..sort((a, b) => (b.typedCreatedAt()).compareTo(a.typedCreatedAt()));
   }
 
   List<Post> _sortByLikeCount(List<Post> posts) {
     return posts..sort((a, b) => (b.likeCount).compareTo(a.likeCount));
   }
 
-  Future<List<UserPost>> createUserPosts(List<Post> posts,{bool isRankingPosts = false}) async {
+  Future<List<UserPost>> createUserPosts(
+    List<Post> posts, {
+    bool isRankingPosts = false,
+  }) async {
     if (posts.isEmpty) return [];
     final sorted = getSorted(posts, isRankingPosts);
     final uids = sorted.map((e) => e.uid).toList();

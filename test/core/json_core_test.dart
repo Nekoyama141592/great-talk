@@ -7,7 +7,7 @@ void main() {
       test('should encode and decode a simple map', () {
         final input = {'name': 'John', 'age': 30};
         final result = JsonCore.cast(input);
-        
+
         expect(result, isA<Map<String, dynamic>>());
         expect(result['name'], 'John');
         expect(result['age'], 30);
@@ -18,15 +18,12 @@ void main() {
           'user': {
             'id': 123,
             'name': 'John Doe',
-            'settings': {
-              'theme': 'dark',
-              'notifications': true,
-            }
+            'settings': {'theme': 'dark', 'notifications': true},
           },
         };
-        
+
         final result = JsonCore.cast(input);
-        
+
         expect(result, isA<Map<String, dynamic>>());
         expect(result['user']['name'], 'John Doe');
         expect(result['user']['settings']['theme'], 'dark');
@@ -45,9 +42,9 @@ void main() {
           'unicode': '日本語 🚀 emoji',
           'symbols': '!@#\$%^&*()',
         };
-        
+
         final result = JsonCore.cast(input);
-        
+
         expect(result['special'], 'Hello "World" with \n newlines');
         expect(result['unicode'], '日本語 🚀 emoji');
         expect(result['symbols'], '!@#\$%^&*()');
@@ -62,9 +59,9 @@ void main() {
           'null': null,
           'map': {'nested': 'value'},
         };
-        
+
         final result = JsonCore.cast(input);
-        
+
         expect(result['string'], isA<String>());
         expect(result['int'], isA<int>());
         expect(result['double'], isA<double>());

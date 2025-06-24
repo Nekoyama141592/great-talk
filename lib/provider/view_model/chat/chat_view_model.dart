@@ -30,7 +30,10 @@ class ChatViewModel extends _$ChatViewModel {
     // 投稿画像とローカルのチャット履歴を取得
     final postImage = await _fetchPostImage(post);
     final localMessages = _getLocalMessages(post.postId);
-    final messages = localMessages.isEmpty ? [TextMessage.assistant(post.typedDescription().value, post)] : localMessages;
+    final messages =
+        localMessages.isEmpty
+            ? [TextMessage.assistant(post.typedDescription().value, post)]
+            : localMessages;
     return ChatState(post: post, postImage: postImage, messages: messages);
   }
 
@@ -42,7 +45,7 @@ class ChatViewModel extends _$ChatViewModel {
     if (state.isLoading) {
       return const Result.failure('ロード中です');
     }
-    return execute(scrollController,text);
+    return execute(scrollController, text);
   }
 
   void startLoading() {
@@ -56,11 +59,23 @@ class ChatViewModel extends _$ChatViewModel {
     final messages = _addMyMessage(content);
     // UIを一番下にスクロール
     _scrollToBottom(scrollController);
-    final requestMessages = messages.map((e) {
-      final role = e.role(postId);
-      return GenerateTextRequestMessage(role: role, content: e.typedText().value);
-    }).toList()..insert(0, GenerateTextRequestMessage.system(state.value!.post.typedDescription().value));
-    final model = ref.read(purchasesNotifierProvider).value?.model() ?? ChatConstants.basicModel;
+    final requestMessages =
+        messages.map((e) {
+            final role = e.role(postId);
+            return GenerateTextRequestMessage(
+              role: role,
+              content: e.typedText().value,
+            );
+          }).toList()
+          ..insert(
+            0,
+            GenerateTextRequestMessage.system(
+              state.value!.post.typedDescription().value,
+            ),
+          );
+    final model =
+        ref.read(purchasesNotifierProvider).value?.model() ??
+        ChatConstants.basicModel;
     final request = GenerateTextRequest.fromMessages(model, requestMessages);
     final oldState = state.value!;
     state = AsyncValue.loading();
@@ -68,7 +83,6 @@ class ChatViewModel extends _$ChatViewModel {
     state = AsyncData(oldState);
     return result;
   }
-
 
   Future<Post?> _fetchPost(String uid, String postId) {
     final repository = ref.read(databaseRepositoryProvider);
@@ -103,11 +117,9 @@ class ChatViewModel extends _$ChatViewModel {
     final post = stateValue.post;
     final postId = post.postId;
     final newMessage = TextMessage.assistant(res.content, post);
-    final newMessages= [...stateValue.messages,newMessage];
+    final newMessages = [...stateValue.messages, newMessage];
     state = AsyncData(stateValue.copyWith(messages: newMessages));
-    return ref
-        .read(localRepositoryProvider)
-        .setMessages(postId, newMessages);
+    return ref.read(localRepositoryProvider).setMessages(postId, newMessages);
   }
 
   void onFailure() {

@@ -24,12 +24,18 @@ void main() {
       });
 
       test('should throw FormatException for invalid strings', () {
-        expect(() => 'invalid'.toRoundToSecondDecimalPlace(), 
-               throwsA(isA<FormatException>()));
-        expect(() => ''.toRoundToSecondDecimalPlace(), 
-               throwsA(isA<FormatException>()));
-        expect(() => '3.14.15'.toRoundToSecondDecimalPlace(), 
-               throwsA(isA<FormatException>()));
+        expect(
+          () => 'invalid'.toRoundToSecondDecimalPlace(),
+          throwsA(isA<FormatException>()),
+        );
+        expect(
+          () => ''.toRoundToSecondDecimalPlace(),
+          throwsA(isA<FormatException>()),
+        );
+        expect(
+          () => '3.14.15'.toRoundToSecondDecimalPlace(),
+          throwsA(isA<FormatException>()),
+        );
       });
     });
 
@@ -38,11 +44,17 @@ void main() {
         expect('hello world'.removeNewlinesAndSpaces(), 'helloworld');
         expect('line1\nline2'.removeNewlinesAndSpaces(), 'line1line2');
         expect('  spaced  '.removeNewlinesAndSpaces(), 'spaced');
-        expect('mixed \n content \n here'.removeNewlinesAndSpaces(), 'mixedcontenthere');
+        expect(
+          'mixed \n content \n here'.removeNewlinesAndSpaces(),
+          'mixedcontenthere',
+        );
       });
 
       test('should handle strings without newlines or spaces', () {
-        expect('nospacesnewlines'.removeNewlinesAndSpaces(), 'nospacesnewlines');
+        expect(
+          'nospacesnewlines'.removeNewlinesAndSpaces(),
+          'nospacesnewlines',
+        );
         expect(''.removeNewlinesAndSpaces(), '');
         expect('a'.removeNewlinesAndSpaces(), 'a');
       });
@@ -54,19 +66,28 @@ void main() {
       });
 
       test('should handle mixed whitespace characters', () {
-        expect('tab\there'.removeNewlinesAndSpaces(), 'tab\there'); // tabs should remain
-        expect('carriage\rreturn'.removeNewlinesAndSpaces(), 'carriage\rreturn'); // CR should remain
+        expect(
+          'tab\there'.removeNewlinesAndSpaces(),
+          'tab\there',
+        ); // tabs should remain
+        expect(
+          'carriage\rreturn'.removeNewlinesAndSpaces(),
+          'carriage\rreturn',
+        ); // CR should remain
       });
     });
 
     group('invalidField', () {
-      test('should return true for strings containing forbidden characters', () {
-        expect('test.field'.invalidField, true);
-        expect('[bracket]'.invalidField, true);
-        expect('star*field'.invalidField, true);
-        expect('back`tick'.invalidField, true);
-        expect('complex[.]*field'.invalidField, true);
-      });
+      test(
+        'should return true for strings containing forbidden characters',
+        () {
+          expect('test.field'.invalidField, true);
+          expect('[bracket]'.invalidField, true);
+          expect('star*field'.invalidField, true);
+          expect('back`tick'.invalidField, true);
+          expect('complex[.]*field'.invalidField, true);
+        },
+      );
 
       test('should return false for valid strings', () {
         expect('validfield'.invalidField, false);
@@ -96,13 +117,16 @@ void main() {
         expect('contains`backtick'.invalidField, true);
       });
 
-      test('should handle Unicode and special characters not in forbidden list', () {
-        expect('こんにちは'.invalidField, false);
-        expect('test@email.com'.invalidField, true); // contains '.'
-        expect('test#hashtag'.invalidField, false);
-        expect('test&ampersand'.invalidField, false);
-        expect('test emoji 🚀'.invalidField, false);
-      });
+      test(
+        'should handle Unicode and special characters not in forbidden list',
+        () {
+          expect('こんにちは'.invalidField, false);
+          expect('test@email.com'.invalidField, true); // contains '.'
+          expect('test#hashtag'.invalidField, false);
+          expect('test&ampersand'.invalidField, false);
+          expect('test emoji 🚀'.invalidField, false);
+        },
+      );
     });
   });
 }

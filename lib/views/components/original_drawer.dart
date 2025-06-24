@@ -104,9 +104,7 @@ class OriginalDrawer extends ConsumerWidget {
             title: const Text("ミュートしているユーザー"),
             onTap: () => RouteCore.pushPath(context, MuteUsersPage.path),
           ),
-          ListTile(
-            title: Text("モデル: ${purchaseState?.model() ?? ''}"),
-          ),
+          ListTile(title: Text("モデル: ${purchaseState?.model() ?? ''}")),
           ListTile(
             title: const Text("ミュートしている投稿"),
             onTap: () => RouteCore.pushPath(context, MutePostsPage.path),

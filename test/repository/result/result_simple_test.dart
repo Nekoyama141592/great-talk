@@ -6,31 +6,31 @@ void main() {
     test('should handle success case correctly', () {
       const value = 'test value';
       final result = Result.success(value);
-      
+
       final output = result.when(
         success: (val) => 'Success: $val',
         failure: (error) => 'Error: $error',
       );
-      
+
       expect(output, 'Success: test value');
     });
 
     test('should handle failure case correctly', () {
       const errorMsg = 'Something went wrong';
       final result = Result<String>.failure(errorMsg);
-      
+
       final output = result.when(
         success: (val) => 'Success: $val',
         failure: (error) => 'Error: $error',
       );
-      
+
       expect(output, 'Error: Something went wrong');
     });
 
     test('should distinguish between success and failure types', () {
       final successResult = Result.success(42);
       final failureResult = Result<int>.failure('error');
-      
+
       expect(successResult, isA<Success<int>>());
       expect(failureResult, isA<Failure<int>>());
     });
@@ -39,14 +39,14 @@ void main() {
       FutureResult<String> successFuture() async {
         return Result.success('async success');
       }
-      
+
       FutureResult<String> failureFuture() async {
         return Result.failure('async error');
       }
-      
+
       final successResult = await successFuture();
       final failureResult = await failureFuture();
-      
+
       expect(successResult, isA<Success<String>>());
       expect(failureResult, isA<Failure<String>>());
     });
@@ -57,25 +57,25 @@ void main() {
         'age': 30,
         'hobbies': ['reading', 'coding'],
       };
-      
+
       final result = Result.success(complexData);
-      
+
       final isSuccess = result.when(
         success: (_) => true,
         failure: (_) => false,
       );
-      
+
       expect(isSuccess, true);
     });
 
     test('should handle null values', () {
       final result = Result<String?>.success(null);
-      
+
       final output = result.when(
         success: (val) => val == null ? 'null value' : 'not null',
         failure: (_) => 'error',
       );
-      
+
       expect(output, 'null value');
     });
   });

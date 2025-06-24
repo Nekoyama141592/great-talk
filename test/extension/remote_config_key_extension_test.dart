@@ -15,14 +15,17 @@ void main() {
       test('should add android prefix when running on Android', () {
         if (Platform.isAndroid) {
           const key = 'maintenance_message';
-          expect(key.toOsSpecificRemoteConfigKey, 'android_maintenance_message');
+          expect(
+            key.toOsSpecificRemoteConfigKey,
+            'android_maintenance_message',
+          );
         }
       });
 
       test('should handle empty string correctly', () {
         const key = '';
         final result = key.toOsSpecificRemoteConfigKey;
-        
+
         if (Platform.isIOS) {
           expect(result, 'ios_');
         } else {
@@ -33,7 +36,7 @@ void main() {
       test('should handle single character key', () {
         const key = 'a';
         final result = key.toOsSpecificRemoteConfigKey;
-        
+
         if (Platform.isIOS) {
           expect(result, 'ios_a');
         } else {
@@ -44,18 +47,24 @@ void main() {
       test('should handle long key names', () {
         const key = 'very_long_maintenance_message_key_with_multiple_words';
         final result = key.toOsSpecificRemoteConfigKey;
-        
+
         if (Platform.isIOS) {
-          expect(result, 'ios_very_long_maintenance_message_key_with_multiple_words');
+          expect(
+            result,
+            'ios_very_long_maintenance_message_key_with_multiple_words',
+          );
         } else {
-          expect(result, 'android_very_long_maintenance_message_key_with_multiple_words');
+          expect(
+            result,
+            'android_very_long_maintenance_message_key_with_multiple_words',
+          );
         }
       });
 
       test('should handle key with special characters', () {
         const key = 'key-with.special_characters123';
         final result = key.toOsSpecificRemoteConfigKey;
-        
+
         if (Platform.isIOS) {
           expect(result, 'ios_key-with.special_characters123');
         } else {
@@ -66,7 +75,7 @@ void main() {
       test('should handle key with numbers', () {
         const key = '123numeric456key789';
         final result = key.toOsSpecificRemoteConfigKey;
-        
+
         if (Platform.isIOS) {
           expect(result, 'ios_123numeric456key789');
         } else {
@@ -77,7 +86,7 @@ void main() {
       test('should handle snake_case keys', () {
         const key = 'maintenance_message_key';
         final result = key.toOsSpecificRemoteConfigKey;
-        
+
         if (Platform.isIOS) {
           expect(result, 'ios_maintenance_message_key');
         } else {
@@ -88,7 +97,7 @@ void main() {
       test('should handle camelCase keys', () {
         const key = 'maintenanceMessageKey';
         final result = key.toOsSpecificRemoteConfigKey;
-        
+
         if (Platform.isIOS) {
           expect(result, 'ios_maintenanceMessageKey');
         } else {
@@ -99,7 +108,7 @@ void main() {
       test('should handle kebab-case keys', () {
         const key = 'maintenance-message-key';
         final result = key.toOsSpecificRemoteConfigKey;
-        
+
         if (Platform.isIOS) {
           expect(result, 'ios_maintenance-message-key');
         } else {
@@ -110,9 +119,9 @@ void main() {
       test('should preserve original key content exactly', () {
         const key = 'Original_Key_With_CAPS_and_123';
         final result = key.toOsSpecificRemoteConfigKey;
-        
+
         expect(result.contains('Original_Key_With_CAPS_and_123'), true);
-        
+
         if (Platform.isIOS) {
           expect(result.startsWith('ios_'), true);
         } else {
@@ -124,7 +133,7 @@ void main() {
         const key = 'consistency_test_key';
         final result1 = key.toOsSpecificRemoteConfigKey;
         final result2 = key.toOsSpecificRemoteConfigKey;
-        
+
         expect(result1, equals(result2));
       });
 
@@ -134,12 +143,12 @@ void main() {
           'forced_update_version',
           'feature_flag_enabled',
           'api_endpoint_url',
-          'max_upload_size'
+          'max_upload_size',
         ];
-        
+
         for (final key in keys) {
           final result = key.toOsSpecificRemoteConfigKey;
-          
+
           if (Platform.isIOS) {
             expect(result, 'ios_$key');
           } else {
@@ -151,7 +160,7 @@ void main() {
       test('should handle unicode characters', () {
         const key = 'メンテナンス_メッセージ';
         final result = key.toOsSpecificRemoteConfigKey;
-        
+
         if (Platform.isIOS) {
           expect(result, 'ios_メンテナンス_メッセージ');
         } else {
@@ -162,7 +171,7 @@ void main() {
       test('should handle whitespace in keys', () {
         const key = 'key with spaces';
         final result = key.toOsSpecificRemoteConfigKey;
-        
+
         if (Platform.isIOS) {
           expect(result, 'ios_key with spaces');
         } else {
@@ -170,22 +179,34 @@ void main() {
         }
       });
 
-      test('should return different results for different platforms simulation', () {
-        const key = 'test_key';
-        final result = key.toOsSpecificRemoteConfigKey;
-        
-        expect(result.startsWith('ios_') || result.startsWith('android_'), true);
-        expect(result.endsWith('test_key'), true);
-      });
+      test(
+        'should return different results for different platforms simulation',
+        () {
+          const key = 'test_key';
+          final result = key.toOsSpecificRemoteConfigKey;
+
+          expect(
+            result.startsWith('ios_') || result.startsWith('android_'),
+            true,
+          );
+          expect(result.endsWith('test_key'), true);
+        },
+      );
     });
 
     group('platform consistency', () {
       test('should maintain proper prefix format', () {
-        const testKeys = ['a', 'test', 'long_key_name', '123', 'key-with-dashes'];
-        
+        const testKeys = [
+          'a',
+          'test',
+          'long_key_name',
+          '123',
+          'key-with-dashes',
+        ];
+
         for (final key in testKeys) {
           final result = key.toOsSpecificRemoteConfigKey;
-          
+
           if (Platform.isIOS) {
             expect(result.indexOf('ios_'), 0);
             expect(result.substring(4), key);
@@ -196,16 +217,19 @@ void main() {
         }
       });
 
-      test('should handle edge case where key already contains platform prefix', () {
-        const key = 'ios_already_prefixed';
-        final result = key.toOsSpecificRemoteConfigKey;
-        
-        if (Platform.isIOS) {
-          expect(result, 'ios_ios_already_prefixed');
-        } else {
-          expect(result, 'android_ios_already_prefixed');
-        }
-      });
+      test(
+        'should handle edge case where key already contains platform prefix',
+        () {
+          const key = 'ios_already_prefixed';
+          final result = key.toOsSpecificRemoteConfigKey;
+
+          if (Platform.isIOS) {
+            expect(result, 'ios_ios_already_prefixed');
+          } else {
+            expect(result, 'android_ios_already_prefixed');
+          }
+        },
+      );
     });
   });
 }

@@ -12,7 +12,7 @@ class AsyncPage<T> extends StatelessWidget {
     return asyncValue.when(
       data: data,
       error: (e, s) => Scaffold(body: ErrorScreen(e: e)),
-      loading: () => const Scaffold(body: LoadingScreen(),)
+      loading: () => const Scaffold(body: LoadingScreen()),
     );
   }
 }

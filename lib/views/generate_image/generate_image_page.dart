@@ -70,11 +70,14 @@ class GenerateImagePage extends HookConsumerWidget {
                     promptController.text,
                     size.value,
                   );
-                  result.when(success: (res) {
-                    notifier().onSuccess(res);
-                  }, failure: (msg) {
-                    ToastUiCore.showFailureSnackBar(context, msg);
-                  });
+                  result.when(
+                    success: (res) {
+                      notifier().onSuccess(res);
+                    },
+                    failure: (msg) {
+                      ToastUiCore.showFailureSnackBar(context, msg);
+                    },
+                  );
                 },
               ),
             ],

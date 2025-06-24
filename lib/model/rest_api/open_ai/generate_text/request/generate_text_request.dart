@@ -12,7 +12,10 @@ abstract class GenerateTextRequest with _$GenerateTextRequest {
   }) = _GenerateTextRequest;
   factory GenerateTextRequest.fromJson(Map<String, dynamic> json) =>
       _$GenerateTextRequestFromJson(json);
-  factory GenerateTextRequest.fromMessages(String model,List<GenerateTextRequestMessage> messages) {
+  factory GenerateTextRequest.fromMessages(
+    String model,
+    List<GenerateTextRequestMessage> messages,
+  ) {
     final values = messages.map((e) => e.toJson()).toList();
     return GenerateTextRequest(model: model, messages: values);
   }

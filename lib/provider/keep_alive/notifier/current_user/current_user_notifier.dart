@@ -131,10 +131,13 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
           (e) async =>
               authResult = const Result.failure('データベースからユーザーを削除できませんでした'),
     );
-    authResult.when(success: (_) {
-      final image = user.typedImage();
-      ref.read(apiRepositoryProvider).deleteObject(image);
-    }, failure: (_) {});
+    authResult.when(
+      success: (_) {
+        final image = user.typedImage();
+        ref.read(apiRepositoryProvider).deleteObject(image);
+      },
+      failure: (_) {},
+    );
     return authResult;
   }
 

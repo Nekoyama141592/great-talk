@@ -13,10 +13,7 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
-lib/gen/
-lib/env/
 mobileprovisions/
-lib/iap_constants/subscription_constants.dart
 json/
 txts/
 firebase_private_key/

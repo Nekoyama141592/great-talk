@@ -4,13 +4,11 @@ import 'package:great_talk/views/components/basic_page.dart';
 
 void main() {
   group('BasicPage', () {
-    testWidgets('should render with SafeArea and Scaffold', (WidgetTester tester) async {
+    testWidgets('should render with SafeArea and Scaffold', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: BasicPage(
-            child: Text('Test Content'),
-          ),
-        ),
+        const MaterialApp(home: BasicPage(child: Text('Test Content'))),
       );
 
       expect(find.byType(BasicPage), findsOneWidget);
@@ -19,7 +17,9 @@ void main() {
       expect(find.text('Test Content'), findsOneWidget);
     });
 
-    testWidgets('should render with AppBar when appBarText is provided', (WidgetTester tester) async {
+    testWidgets('should render with AppBar when appBarText is provided', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: BasicPage(
@@ -34,20 +34,20 @@ void main() {
       expect(find.text('Test Content'), findsOneWidget);
     });
 
-    testWidgets('should not render AppBar when appBarText is null', (WidgetTester tester) async {
+    testWidgets('should not render AppBar when appBarText is null', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: BasicPage(
-            child: Text('Test Content'),
-          ),
-        ),
+        const MaterialApp(home: BasicPage(child: Text('Test Content'))),
       );
 
       expect(find.byType(AppBar), findsNothing);
       expect(find.text('Test Content'), findsOneWidget);
     });
 
-    testWidgets('should render with FloatingActionButton when provided', (WidgetTester tester) async {
+    testWidgets('should render with FloatingActionButton when provided', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: BasicPage(
@@ -65,26 +65,22 @@ void main() {
       expect(find.text('Test Content'), findsOneWidget);
     });
 
-    testWidgets('should not render FloatingActionButton when not provided', (WidgetTester tester) async {
+    testWidgets('should not render FloatingActionButton when not provided', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: BasicPage(
-            child: Text('Test Content'),
-          ),
-        ),
+        const MaterialApp(home: BasicPage(child: Text('Test Content'))),
       );
 
       expect(find.byType(FloatingActionButton), findsNothing);
       expect(find.text('Test Content'), findsOneWidget);
     });
 
-    testWidgets('should apply correct padding to body', (WidgetTester tester) async {
+    testWidgets('should apply correct padding to body', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: BasicPage(
-            child: Text('Test Content'),
-          ),
-        ),
+        const MaterialApp(home: BasicPage(child: Text('Test Content'))),
       );
 
       final paddings = tester.widgetList<Padding>(find.byType(Padding));
@@ -94,14 +90,14 @@ void main() {
       expect(bodyPadding.padding, const EdgeInsets.all(16.0));
     });
 
-    testWidgets('should render child widget correctly', (WidgetTester tester) async {
+    testWidgets('should render child widget correctly', (
+      WidgetTester tester,
+    ) async {
       const key = Key('test_child');
-      
+
       await tester.pumpWidget(
         const MaterialApp(
-          home: BasicPage(
-            child: Text('Test Content', key: key),
-          ),
+          home: BasicPage(child: Text('Test Content', key: key)),
         ),
       );
 
@@ -109,7 +105,9 @@ void main() {
       expect(find.text('Test Content'), findsOneWidget);
     });
 
-    testWidgets('should work with complex child widgets', (WidgetTester tester) async {
+    testWidgets('should work with complex child widgets', (
+      WidgetTester tester,
+    ) async {
       final complexChild = Column(
         children: [
           const Text('Title'),
@@ -124,10 +122,7 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
-          home: BasicPage(
-            appBarText: 'Complex Page',
-            child: complexChild,
-          ),
+          home: BasicPage(appBarText: 'Complex Page', child: complexChild),
         ),
       );
 
@@ -139,15 +134,14 @@ void main() {
       expect(find.text('Item 2'), findsOneWidget);
     });
 
-    testWidgets('should handle AppBar with different text lengths', (WidgetTester tester) async {
+    testWidgets('should handle AppBar with different text lengths', (
+      WidgetTester tester,
+    ) async {
       const longTitle = 'This is a very long title that might overflow';
-      
+
       await tester.pumpWidget(
         const MaterialApp(
-          home: BasicPage(
-            appBarText: longTitle,
-            child: Text('Test Content'),
-          ),
+          home: BasicPage(appBarText: longTitle, child: Text('Test Content')),
         ),
       );
 
@@ -155,9 +149,11 @@ void main() {
       expect(find.byType(AppBar), findsOneWidget);
     });
 
-    testWidgets('should maintain widget structure with all parameters', (WidgetTester tester) async {
+    testWidgets('should maintain widget structure with all parameters', (
+      WidgetTester tester,
+    ) async {
       bool fabPressed = false;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: BasicPage(
@@ -183,36 +179,30 @@ void main() {
 
       await tester.tap(find.byType(FloatingActionButton));
       await tester.pump();
-      
+
       expect(fabPressed, true);
     });
 
-    testWidgets('should handle empty child content', (WidgetTester tester) async {
+    testWidgets('should handle empty child content', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: BasicPage(
-            child: SizedBox.shrink(),
-          ),
-        ),
+        const MaterialApp(home: BasicPage(child: SizedBox.shrink())),
       );
 
       expect(find.byType(BasicPage), findsOneWidget);
       expect(find.byType(SizedBox), findsOneWidget);
     });
 
-    testWidgets('should work with multiple BasicPage instances', (WidgetTester tester) async {
+    testWidgets('should work with multiple BasicPage instances', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: PageView(
             children: const [
-              BasicPage(
-                appBarText: 'Page 1',
-                child: Text('Content 1'),
-              ),
-              BasicPage(
-                appBarText: 'Page 2',
-                child: Text('Content 2'),
-              ),
+              BasicPage(appBarText: 'Page 1', child: Text('Content 1')),
+              BasicPage(appBarText: 'Page 2', child: Text('Content 2')),
             ],
           ),
         ),
@@ -222,16 +212,13 @@ void main() {
       expect(find.text('Content 1'), findsOneWidget);
     });
 
-    testWidgets('should have consistent key behavior', (WidgetTester tester) async {
+    testWidgets('should have consistent key behavior', (
+      WidgetTester tester,
+    ) async {
       const key = Key('basic_page_key');
-      
+
       await tester.pumpWidget(
-        const MaterialApp(
-          home: BasicPage(
-            key: key,
-            child: Text('Test'),
-          ),
-        ),
+        const MaterialApp(home: BasicPage(key: key, child: Text('Test'))),
       );
 
       expect(find.byKey(key), findsOneWidget);
@@ -240,24 +227,19 @@ void main() {
 
     testWidgets('should be a StatelessWidget', (WidgetTester tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: BasicPage(
-            child: Text('Test'),
-          ),
-        ),
+        const MaterialApp(home: BasicPage(child: Text('Test'))),
       );
 
       expect(find.byType(BasicPage), findsOneWidget);
     });
 
-    testWidgets('should handle theme changes properly', (WidgetTester tester) async {
+    testWidgets('should handle theme changes properly', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData.light(),
-          home: const BasicPage(
-            appBarText: 'Theme Test',
-            child: Text('Test'),
-          ),
+          home: const BasicPage(appBarText: 'Theme Test', child: Text('Test')),
         ),
       );
 
@@ -266,10 +248,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData.dark(),
-          home: const BasicPage(
-            appBarText: 'Theme Test',
-            child: Text('Test'),
-          ),
+          home: const BasicPage(appBarText: 'Theme Test', child: Text('Test')),
         ),
       );
 
