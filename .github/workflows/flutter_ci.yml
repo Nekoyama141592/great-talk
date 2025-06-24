@@ -9,36 +9,37 @@ on:
       - main
 
 jobs:
-  # build-android:
-  #   runs-on: ubuntu-latest
+  build-android:
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  #     - name: Set up Flutter
-  #       uses: subosito/flutter-action@v2
-  #       with:
-  #         flutter-version: '3.22.2'
-  #         channel: 'stable'
-  #         cache: true # Flutter SDKのキャッシュを有効化
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.32.2'
+          channel: 'stable'
+          cache: true
 
-  #     - name: Cache Pub dependencies
-  #       uses: actions/cache@v4
-  #       with:
-  #         path: ${{ env.PUB_CACHE }}
-  #         key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-pub-
+      # subosito/flutter-actionが設定する環境変数 PUB_CACHE を直接使用
+      - name: Cache Pub dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.PUB_CACHE }}
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
 
-  #     - name: Install dependencies
-  #       run: flutter pub get
+      - name: Install dependencies
+        run: flutter pub get
 
-  #     - name: Analyze code
-  #       run: flutter analyze
+      - name: Analyze code
+        run: flutter analyze
 
-  #     - name: Run tests
-  #       run: flutter test
+      - name: Run tests
+        run: flutter test
 
       # - name: Build Android
       #   run: flutter build apk --release
@@ -56,17 +57,10 @@ jobs:
           flutter-version: '3.32.2'
           channel: 'stable'
           cache: true
-
-      # Pubキャッシュのパスを取得・設定するステップ
-      - name: Get pub cache path
-        id: pub-cache
-        run: echo "dir=$(flutter pub cache path)" >> $GITHUB_OUTPUT
-
-      # Pubパッケージをキャッシュするステップ
       - name: Cache Pub dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ steps.pub-cache.outputs.dir }}
+          path: ${{ env.PUB_CACHE }}
           key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
             ${{ runner.os }}-pub-
