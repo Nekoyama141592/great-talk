@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/views/components/rounded_button.dart';
-import 'package:great_talk/views/edit_page.dart';
+import 'package:great_talk/views/edit/edit_page.dart';
 
 class EditButton extends StatelessWidget {
   const EditButton({super.key});
