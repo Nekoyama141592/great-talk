@@ -62,13 +62,13 @@
 ```
 
 ### **状態管理**
-- **Riverpod 2.6+**: hooks統合によるコード生成プロバイダー
+- **Riverpod+**: コード生成プロバイダー/状態管理や依存性注入
 - **リアクティブプログラミング**: ストリームベースのリアルタイム更新
 - **楽観的UI**: サーバー調整による即時フィードバック
 - **エラー境界**: ユーザーフレンドリーなメッセージによる包括的エラーハンドリング
 
 ### **コード生成パイプライン**
-- **Freezed**: copy/equalityメソッドを備えたイミュータブルデータクラス
+- **Freezed**: copy/toJson/fromJsonメソッドを備えたイミュータブルデータクラス
 - **Build Runner**: モデル・ネットワーキングの自動コード生成
 - **JSON シリアライゼーション**: 型安全なAPI通信
 - **Auto Route**: 型安全性を備えた生成ルーティング
@@ -175,46 +175,191 @@ flutter test test/use_case/
 ## 🔧 技術スタックハイライト
 
 ### **フロントエンド**
-- **Flutter** `3.7.2+` - クロスプラットフォームモバイルフレームワーク
-- **Riverpod** `2.6+` - 高度な状態管理
-- **Auto Route** `10+` - 型安全ナビゲーション
-- **Freezed** `3.0+` - イミュータブルデータクラス
+- **Flutter** - クロスプラットフォームモバイルフレームワーク
+- **Riverpod** - 高度な状態管理
+- **Auto Route** - 型安全ナビゲーション
+- **Freezed** - イミュータブルデータクラス
 
 ### **バックエンド・サービス**
 - **Firebase** - 認証、データベース、ストレージ、関数
-- **OpenAI API** - gpt-o3,o4-mini-high
+- **OpenAI API** - テキスト、画像生成
 - **AWS S3** - スケーラブル画像ストレージ
 - **Node.js** - ビジネスロジック用Cloud Functions
 
 ### **開発ツール**
 - **Build Runner** - コード生成自動化
 - **Custom Lint** - 一貫したコード品質
-- **CodeMagic** - CI/CDパイプライン
-- **Firebase Emulator** - ローカル開発環境
+- **GitHub Actions** - CIパイプライン
+- **CodeMagic** - CDパイプライン
 
 ---
 
 ## 📁 プロジェクト構成
 
+### 🏗️ **クリーンアーキテクチャ実装**
+
 ```
 lib/
-├── core/              # 共有ビジネスロジック・ユーティリティ
-├── model/             # JSON シリアライゼーション付きFreezedデータモデル
-├── repository/        # Resultパターン付きデータアクセス層
-├── use_case/          # ビジネスロジックユースケース
-├── provider/          # Riverpod状態管理プロバイダー
-├── views/             # UI画面・再利用可能コンポーネント
-├── infrastructure/    # 外部サービス統合
-├── extensions/        # Dart拡張メソッド
-└── themes/           # Material Designテーマ設定
-
-test/
-├── core/             # ビジネスロジックユニットテスト
-├── repository/       # モック付きデータ層テスト
-├── use_case/         # ビジネスロジックテスト
-├── views/            # ウィジェットテスト
-└── test_utils/       # テストヘルパー・モックプロバイダー
+├── app/                         # アプリケーション層
+│   ├── my_app.dart              # メインアプリケーションウィジェット
+│   ├── flavors.dart             # 環境設定管理（dev/prod）
+│   ├── router/                  # Auto Route ナビゲーション
+│   │   ├── app_router.dart      # ルート定義
+│   │   └── app_router.gr.dart   # 生成されたルーティングコード
+│   └── run_app.dart             # アプリケーション初期化ロジック
+│
+├── core/                        # 【ドメイン層】共有ビジネスロジック
+│   ├── auth_core.dart           # 認証ビジネスロジック
+│   ├── date_core.dart           # 日付・時刻ユーティリティ
+│   ├── id_core.dart             # ID生成ユーティリティ
+│   ├── json_core.dart           # JSON処理ユーティリティ
+│   ├── search_core.dart         # 検索機能ロジック
+│   ├── purchases_core.dart      # アプリ内課金ロジック
+│   ├── remote_config_core.dart  # 機能フラグ管理
+│   └── aws_s3_core.dart         # クラウドストレージ統合
+│
+├── model/                       # 【データ層】Freezedデータモデル
+│   ├── database_schema/         # Firestoreデータモデル
+│   │   ├── post/                # 投稿関連モデル
+│   │   ├── public_user/         # 公開ユーザー情報
+│   │   ├── private_user/        # プライベートユーザー情報
+│   │   ├── text_message/        # チャットメッセージ
+│   │   ├── bookmark/            # ブックマーク機能
+│   │   ├── follower/            # フォロワーシステム
+│   │   ├── post_like/           # いいね機能
+│   │   ├── user_mute/           # ミュート機能
+│   │   └── tokens/              # 各種トークンモデル
+│   ├── global/                  # グローバル状態モデル
+│   │   ├── current_user/        # 現在ユーザー状態
+│   │   ├── local_setting/       # ローカル設定
+│   │   ├── remote_config/       # リモート設定
+│   │   └── tokens/              # グローバルトークン
+│   ├── local_schema/            # ローカルストレージモデル
+│   ├── rest_api/                # REST API用モデル
+│   │   ├── open_ai/             # OpenAI API統合
+│   │   └── verify_purchase/     # 課金検証API
+│   └── view_model_state/        # UI状態管理モデル
+│
+├── repository/                       # 【データ層】Resultパターン実装
+│   ├── api_repository.dart           # REST API データソース
+│   ├── auth_repository.dart          # 認証データソース
+│   ├── database_repository.dart      # Firestoreデータベース操作
+│   ├── local_repository.dart         # ローカルストレージ操作
+│   ├── purchase_repository.dart      # アプリ内課金操作
+│   ├── remote_config_repository.dart # Firebase Remote Config
+│   └── result/                       # エラーハンドリングResult実装
+│
+├── use_case/                   # 【ドメイン層】ビジネスロジック
+│   ├── user_use_case.dart      # ユーザー関連操作
+│   ├── post_use_case.dart      # 投稿管理操作
+│   ├── posts_use_case.dart     # 投稿コレクション管理
+│   ├── purchase_use_case.dart  # 課金ワークフロー管理
+│   └── file_use_case.dart      # ファイル操作
+│
+├── provider/                  # 【プレゼンテーション層】Riverpod状態管理
+│   ├── keep_alive/            # 永続プロバイダー
+│   │   ├── infrastructure/    # Firebaseサービスプロバイダー
+│   │   ├── notifier/          # 状態ノティファイア
+│   │   ├── stream/            # ストリームプロバイダー
+│   │   └── usecase/           # ユースケースプロバイダー
+│   ├── view_model/            # 画面固有ビューモデル
+│   ├── repository/            # リポジトリプロバイダー
+│   └── stream/                # リアルタイムデータストリーム
+│
+├── views/                     # 【プレゼンテーション層】UI画面・コンポーネント
+│   ├── components/            # 再利用可能UIコンポーネント
+│   ├── chat/                  # チャット関連画面
+│   ├── auth/                  # 認証関連画面
+│   ├── create_post/           # 投稿作成画面
+│   ├── generate_image/        # 画像生成画面
+│   ├── common/                # 共通UI要素
+│   └── screen/                # 画面テンプレート・レイアウト
+│
+├── ui_core/                   # UIコアシステム
+│   ├── theme_ui_core.dart     # テーマ管理・デザインシステム
+│   ├── form_ui_core.dart      # フォームユーティリティ
+│   └── validator/             # バリデーションロジック
+│
+├── infrastructure/            # 外部サービス統合
+├── extensions/                # Dart拡張メソッド
+└── gen/                       # 自動生成ファイル
+    ├── assets.gen.dart        # アセット定義
+    └── firebase_options.dart  # Firebase設定
 ```
+
+### 🧪 **テストアーキテクチャ**
+
+```
+test/
+├── core/                      # コアビジネスロジック単体テスト
+│   ├── auth_core_test.dart    # 認証ロジックテスト
+│   ├── date_core_test.dart    # 日付処理テスト
+│   ├── id_core_test.dart      # ID生成テスト
+│   ├── json_core_test.dart    # JSON処理テスト
+│   └── search_core_test.dart  # 検索機能テスト
+│
+├── extension/                 # 拡張メソッドテスト
+│   ├── double_extension_test.dart
+│   └── string_extension_test.dart
+│
+├── repository/                # データ層テスト（モック使用）
+│   ├── database_repository_test.dart
+│   ├── auth_repository_test.dart
+│   └── result/                # Resultパターンテスト
+│
+├── use_case/                  # ビジネスロジックテスト
+│   ├── user_use_case_test.dart
+│   ├── post_use_case_test.dart
+│   └── purchase_use_case_test.dart
+│
+├── views/                     # UIコンポーネントテスト
+│   └── components/            # ウィジェット単体テスト
+│
+├── ui_core/                   # UIコアテスト
+│   └── validator/             # バリデーションテスト
+│
+└── test_utils/                # テストヘルパー・モックツール
+    ├── mock_providers.dart    # モックプロバイダー
+    └── test_helper.dart       # テストユーティリティ
+```
+
+### 🛠️ **設定・インフラストラクチャ**
+
+```
+├── android/                   # Android設定（マルチフレーバー対応）
+├── ios/                       # iOS設定（複数スキーム対応）
+├── web/, linux/, macos/, windows/ # マルチプラットフォーム対応
+├── cloud_functions_js/        # Node.js Cloud Functions
+├── firestore_rules/           # Firestoreセキュリティルール
+├── firebase_private_key/      # サービスアカウントキー
+├── pubspec.yaml              # 依存関係・ビルド設定
+├── analysis_options.yaml     # リント・コード解析ルール
+├── codemagic.yaml            # CI/CDパイプライン設定
+├── dev.env, prod.env         # 環境変数設定
+└── CLAUDE.md                 # Claude Code用プロジェクト指示書
+```
+
+### 🏛️ **アーキテクチャパターン**
+
+#### **1. クリーンアーキテクチャ実装**
+- **プレゼンテーション層**: Views + ViewModels（Riverpod）
+- **ドメイン層**: Use Cases + Core Logic
+- **データ層**: Repositories + Models
+
+#### **2. 状態管理戦略**
+- **Riverpod 2.x** コード生成ベース
+- **AsyncValue** ローディング状態管理
+- **StateNotifier** 複雑状態管理
+
+#### **3. エラーハンドリング**
+- **Resultパターン** 実装
+- **カスタムResult<T>** 型による一元的エラー処理
+
+#### **4. コード生成パイプライン**
+- **Freezed** イミュータブルデータクラス
+- **Riverpod Generator** プロバイダー生成
+- **Auto Route** ナビゲーション生成
+- **JSON Serializable** APIモデル生成
 
 ---
 
