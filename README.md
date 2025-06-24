@@ -77,6 +77,3 @@ great_talk/
 ├── pubspec.lock          # 依存関係ロックファイル
 └── README.md             # このREADMEファイル
 ```
-
-## イラスト素材
-https://storyset.com/
