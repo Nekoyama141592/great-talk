@@ -5,8 +5,8 @@ import 'package:great_talk/provider/keep_alive/notifier/terms/terms_notifier.dar
 import 'package:great_talk/views/components/rounded_button.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class TermsPage extends ConsumerWidget {
-  const TermsPage({super.key});
+class TermsScreen extends ConsumerWidget {
+  const TermsScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final style = TextStyle(
