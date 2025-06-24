@@ -10,16 +10,26 @@ on:
 
 jobs:
   # build-android:
-  #   runs-on: ubuntu-latest // build-iosとは異なる点に注意
+  #   runs-on: ubuntu-latest
 
   #   steps:
   #     - name: Checkout code
-  #       uses: actions/checkout@v2
+  #       uses: actions/checkout@v4
 
   #     - name: Set up Flutter
   #       uses: subosito/flutter-action@v2
   #       with:
-  #         flutter-version: '3.22.1'
+  #         flutter-version: '3.22.2'
+  #         channel: 'stable'
+  #         cache: true # Flutter SDKのキャッシュを有効化
+
+  #     - name: Cache Pub dependencies
+  #       uses: actions/cache@v4
+  #       with:
+  #         path: ${{ env.PUB_CACHE }}
+  #         key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-pub-
 
   #     - name: Install dependencies
   #       run: flutter pub get
@@ -34,16 +44,32 @@ jobs:
       #   run: flutter build apk --release
 
   build-ios:
-    runs-on: macos-latest  // build-androidとは異なる点に注意
+    runs-on: macos-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.2'
+          channel: 'stable'
+          cache: true
+
+      # Pubキャッシュのパスを取得・設定するステップ
+      - name: Get pub cache path
+        id: pub-cache
+        run: echo "dir=$(flutter pub cache path)" >> $GITHUB_OUTPUT
+
+      # Pubパッケージをキャッシュするステップ
+      - name: Cache Pub dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pub-cache.outputs.dir }}
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
 
       - name: Install dependencies
         run: flutter pub get
