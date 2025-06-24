@@ -71,7 +71,7 @@ void main() {
 
     setUp(() {
       mockFirebaseAuth = MockFirebaseAuth();
-      authRepository = AuthRepository(mockFirebaseAuth);
+      authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
     });
 
     group('signInAnonymously', () {
@@ -91,7 +91,7 @@ void main() {
         mockFirebaseAuth = MockFirebaseAuthWithExceptions(
           signInException: FirebaseAuthException(code: 'unknown'),
         );
-        authRepository = AuthRepository(mockFirebaseAuth);
+        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
 
         final result = await authRepository.signInAnonymously();
 
@@ -124,7 +124,7 @@ void main() {
         mockFirebaseAuth = MockFirebaseAuthWithExceptions(
           signOutException: Exception('Sign out failed'),
         );
-        authRepository = AuthRepository(mockFirebaseAuth);
+        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
 
         final result = await authRepository.signOut();
 
@@ -156,7 +156,7 @@ void main() {
       test('should return success when reauthentication succeeds', () async {
         final mockUser = MockUser(uid: 'test-uid', email: 'test@example.com');
         mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth);
+        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
 
         final credential = EmailAuthProvider.credential(email: 'test@example.com', password: 'password');
 
@@ -178,7 +178,7 @@ void main() {
           authExceptions: {'reauthenticateWithCredential': FirebaseAuthException(code: 'user-mismatch')},
         );
         mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth);
+        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
 
         final credential = EmailAuthProvider.credential(email: 'other@example.com', password: 'password');
 
@@ -200,7 +200,7 @@ void main() {
           authExceptions: {'reauthenticateWithCredential': FirebaseAuthException(code: 'user-not-found')},
         );
         mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth);
+        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
 
         final credential = EmailAuthProvider.credential(email: 'test@example.com', password: 'password');
 
@@ -222,7 +222,7 @@ void main() {
           authExceptions: {'reauthenticateWithCredential': FirebaseAuthException(code: 'invalid-credential')},
         );
         mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth);
+        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
 
         final credential = EmailAuthProvider.credential(email: 'test@example.com', password: 'wrong-password');
 
@@ -254,7 +254,7 @@ void main() {
       test('should return success when user deletion succeeds', () async {
         final mockUser = MockUser(uid: 'test-uid', email: 'test@example.com');
         mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth);
+        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
 
         final result = await authRepository.deleteUser();
 
@@ -274,7 +274,7 @@ void main() {
           authExceptions: {'delete': FirebaseAuthException(code: 'requires-recent-login')},
         );
         mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
-        authRepository = AuthRepository(mockFirebaseAuth);
+        authRepository = AuthRepository(mockFirebaseAuth, enableDebugPrint: false);
 
         final result = await authRepository.deleteUser();
 
