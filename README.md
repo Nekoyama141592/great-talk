@@ -51,13 +51,13 @@
 ### **クリーンアーキテクチャの基盤**
 ```
 ┌─────────────────┬─────────────────┬─────────────────┐
-│  プレゼンテーション │     ドメイン      │      データ       │
+│   Presentation  │     Domain      │      Data       │
 │   (UI/Views)    │   (Use Cases)   │   (Repository)  │
 ├─────────────────┼─────────────────┼─────────────────┤
-│ • Riverpod      │ • ビジネス        │ • Firebase      │
-│ • Auto Route    │   ロジック        │ • OpenAI API    │
-│ • カスタム        │ • バリデータ      │ • AWS S3        │
-│   ウィジェット    │ • 拡張機能        │ • ローカルストレージ │
+│ • Riverpod      │ • Business      │ • Firebase      │
+│ • Auto Route    │   Logic         │ • OpenAI API    │
+│ • Custom        │ • Validators    │ • AWS S3        │
+│   Widgets       │ • Extensions    │ • Local Storage │
 └─────────────────┴─────────────────┴─────────────────┘
 ```
 
