@@ -19,10 +19,7 @@ class UsernameField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const FormLabel(
-          title: "ニックネーム",
-          helpMsg: FormConsts.userNameHelpMsg,
-        ),
+        const FormLabel(title: "ニックネーム", helpMsg: FormConsts.userNameHelpMsg),
         OriginalForm(
           initialValue: initialValue,
           keyboardType: TextInputType.text,

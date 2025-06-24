@@ -29,7 +29,9 @@ void main() {
       expect(find.byType(TextFormField), findsNWidgets(3));
     });
 
-    testWidgets('should display initial values from state', (WidgetTester tester) async {
+    testWidgets('should display initial values from state', (
+      WidgetTester tester,
+    ) async {
       final formKey = GlobalKey<FormState>();
       final state = CreatePostState(
         systemPrompt: 'Test system prompt',
@@ -56,7 +58,9 @@ void main() {
       expect(find.text('Test title'), findsOneWidget);
     });
 
-    testWidgets('should have proper form structure', (WidgetTester tester) async {
+    testWidgets('should have proper form structure', (
+      WidgetTester tester,
+    ) async {
       final formKey = GlobalKey<FormState>();
 
       await tester.pumpWidget(
@@ -81,7 +85,9 @@ void main() {
       expect(form.key, formKey);
     });
 
-    testWidgets('should have correct height constraint', (WidgetTester tester) async {
+    testWidgets('should have correct height constraint', (
+      WidgetTester tester,
+    ) async {
       final formKey = GlobalKey<FormState>();
       const deviceHeight = 1000.0;
 
@@ -100,10 +106,9 @@ void main() {
       );
 
       final sizedBox = tester.widget<SizedBox>(
-        find.ancestor(
-          of: find.byType(Form),
-          matching: find.byType(SizedBox),
-        ).first,
+        find
+            .ancestor(of: find.byType(Form), matching: find.byType(SizedBox))
+            .first,
       );
       expect(sizedBox.height, deviceHeight * 0.50);
     });
@@ -128,7 +133,9 @@ void main() {
       expect(find.byType(SingleChildScrollView), findsOneWidget);
     });
 
-    testWidgets('should handle null state gracefully', (WidgetTester tester) async {
+    testWidgets('should handle null state gracefully', (
+      WidgetTester tester,
+    ) async {
       final formKey = GlobalKey<FormState>();
 
       await tester.pumpWidget(

@@ -26,9 +26,6 @@ class EditProfilePage extends HookConsumerWidget {
 
     return editStateAsync.when(
       data: (editModelData) {
-
-
-
         void onImageTap() async {
           final result = await notifier().onImagePickButtonPressed();
           result.when(
@@ -41,15 +38,10 @@ class EditProfilePage extends HookConsumerWidget {
           );
         }
 
-
-
         return FormsScreen(
           appBarText: "ユーザー情報を編集",
           children: [
-            EditProfileForm(
-              formKey: formKey,
-              editModelData: editModelData,
-            ),
+            EditProfileForm(formKey: formKey, editModelData: editModelData),
             const SizedBox(height: 16.0),
             ProfileImageWidget(
               base64Image: editModelData.base64,
@@ -72,7 +64,10 @@ class EditProfilePage extends HookConsumerWidget {
                     );
                   },
                   failure: (e) {
-                    ToastUiCore.showFailureSnackBar(context, "プロフィールを更新できませんでした");
+                    ToastUiCore.showFailureSnackBar(
+                      context,
+                      "プロフィールを更新できませんでした",
+                    );
                   },
                 );
               },

@@ -4,7 +4,9 @@ import 'package:great_talk/views/edit/components/username_field.dart';
 
 void main() {
   group('UsernameField', () {
-    testWidgets('should display username field with label', (WidgetTester tester) async {
+    testWidgets('should display username field with label', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -26,16 +28,15 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Form(
-              child: UsernameField(
-                initialValue: '',
-                onSaved: (value) {},
-              ),
+              child: UsernameField(initialValue: '', onSaved: (value) {}),
             ),
           ),
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       final validationResult = formField.validator!('a'); // Too short
       expect(validationResult, contains('文字以上の入力を行なってください'));
     });
@@ -45,16 +46,15 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Form(
-              child: UsernameField(
-                initialValue: '',
-                onSaved: (value) {},
-              ),
+              child: UsernameField(initialValue: '', onSaved: (value) {}),
             ),
           ),
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       final longText = 'a' * 101; // Assuming 100 is the limit
       final validationResult = formField.validator!(longText);
       expect(validationResult, isNotNull);
@@ -66,16 +66,15 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Form(
-              child: UsernameField(
-                initialValue: '',
-                onSaved: (value) {},
-              ),
+              child: UsernameField(initialValue: '', onSaved: (value) {}),
             ),
           ),
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       final validationResult = formField.validator!('Valid username');
       expect(validationResult, isNull);
     });
@@ -98,20 +97,21 @@ void main() {
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       formField.onSaved!('saved test value');
-      
+
       expect(savedValue, 'saved test value');
     });
 
-    testWidgets('should have help icon from FormLabel', (WidgetTester tester) async {
+    testWidgets('should have help icon from FormLabel', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: UsernameField(
-              initialValue: '',
-              onSaved: (value) {},
-            ),
+            body: UsernameField(initialValue: '', onSaved: (value) {}),
           ),
         ),
       );
@@ -123,10 +123,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: UsernameField(
-              initialValue: '',
-              onSaved: (value) {},
-            ),
+            body: UsernameField(initialValue: '', onSaved: (value) {}),
           ),
         ),
       );
@@ -138,10 +135,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: UsernameField(
-              initialValue: '',
-              onSaved: (value) {},
-            ),
+            body: UsernameField(initialValue: '', onSaved: (value) {}),
           ),
         ),
       );

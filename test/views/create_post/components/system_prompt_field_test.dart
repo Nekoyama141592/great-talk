@@ -4,7 +4,9 @@ import 'package:great_talk/views/create_post/components/system_prompt_field.dart
 
 void main() {
   group('SystemPromptField', () {
-    testWidgets('should display system prompt field with label', (WidgetTester tester) async {
+    testWidgets('should display system prompt field with label', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -26,16 +28,15 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Form(
-              child: SystemPromptField(
-                initialValue: '',
-                onSaved: (value) {},
-              ),
+              child: SystemPromptField(initialValue: '', onSaved: (value) {}),
             ),
           ),
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       final validationResult = formField.validator!('');
       expect(validationResult, '入力をしてください');
     });
@@ -45,16 +46,15 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Form(
-              child: SystemPromptField(
-                initialValue: '',
-                onSaved: (value) {},
-              ),
+              child: SystemPromptField(initialValue: '', onSaved: (value) {}),
             ),
           ),
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       final validationResult = formField.validator!('Valid system prompt');
       expect(validationResult, isNull);
     });
@@ -77,20 +77,21 @@ void main() {
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       formField.onSaved!('saved test value');
-      
+
       expect(savedValue, 'saved test value');
     });
 
-    testWidgets('should have help icon from FormLabel', (WidgetTester tester) async {
+    testWidgets('should have help icon from FormLabel', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: SystemPromptField(
-              initialValue: '',
-              onSaved: (value) {},
-            ),
+            body: SystemPromptField(initialValue: '', onSaved: (value) {}),
           ),
         ),
       );
@@ -102,10 +103,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: SystemPromptField(
-              initialValue: '',
-              onSaved: (value) {},
-            ),
+            body: SystemPromptField(initialValue: '', onSaved: (value) {}),
           ),
         ),
       );

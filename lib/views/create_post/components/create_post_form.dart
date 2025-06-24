@@ -34,7 +34,8 @@ class CreatePostForm extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SystemPromptField(
-                initialValue: state?.systemPrompt ?? FormConsts.defaultSystemPrompt,
+                initialValue:
+                    state?.systemPrompt ?? FormConsts.defaultSystemPrompt,
                 onSaved: viewModel.setSystemPrompt,
               ),
               DescriptionField(

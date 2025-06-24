@@ -4,7 +4,9 @@ import 'package:great_talk/views/create_post/components/description_field.dart';
 
 void main() {
   group('DescriptionField', () {
-    testWidgets('should display description field with label', (WidgetTester tester) async {
+    testWidgets('should display description field with label', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -26,16 +28,15 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Form(
-              child: DescriptionField(
-                initialValue: '',
-                onSaved: (value) {},
-              ),
+              child: DescriptionField(initialValue: '', onSaved: (value) {}),
             ),
           ),
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       final validationResult = formField.validator!('');
       expect(validationResult, '入力をしてください');
     });
@@ -45,16 +46,15 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: Form(
-              child: DescriptionField(
-                initialValue: '',
-                onSaved: (value) {},
-              ),
+              child: DescriptionField(initialValue: '', onSaved: (value) {}),
             ),
           ),
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       final validationResult = formField.validator!('Valid description');
       expect(validationResult, isNull);
     });
@@ -77,20 +77,21 @@ void main() {
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       formField.onSaved!('saved test value');
-      
+
       expect(savedValue, 'saved test value');
     });
 
-    testWidgets('should have help icon from FormLabel', (WidgetTester tester) async {
+    testWidgets('should have help icon from FormLabel', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DescriptionField(
-              initialValue: '',
-              onSaved: (value) {},
-            ),
+            body: DescriptionField(initialValue: '', onSaved: (value) {}),
           ),
         ),
       );
@@ -102,10 +103,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DescriptionField(
-              initialValue: '',
-              onSaved: (value) {},
-            ),
+            body: DescriptionField(initialValue: '', onSaved: (value) {}),
           ),
         ),
       );
@@ -113,14 +111,13 @@ void main() {
       expect(find.byType(Column), findsOneWidget);
     });
 
-    testWidgets('should handle empty initial value', (WidgetTester tester) async {
+    testWidgets('should handle empty initial value', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DescriptionField(
-              initialValue: '',
-              onSaved: (value) {},
-            ),
+            body: DescriptionField(initialValue: '', onSaved: (value) {}),
           ),
         ),
       );

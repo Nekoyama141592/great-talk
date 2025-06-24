@@ -4,7 +4,9 @@ import 'package:great_talk/views/create_post/components/submit_button_widget.dar
 
 void main() {
   group('SubmitButtonWidget', () {
-    testWidgets('should display submit button with text', (WidgetTester tester) async {
+    testWidgets('should display submit button with text', (
+      WidgetTester tester,
+    ) async {
       bool wasPressed = false;
 
       await tester.pumpWidget(
@@ -53,14 +55,13 @@ void main() {
       expect(wasPressed, false);
     });
 
-    testWidgets('should handle null onPressed callback', (WidgetTester tester) async {
+    testWidgets('should handle null onPressed callback', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: SubmitButtonWidget(
-              isLoading: false,
-              onPressed: null,
-            ),
+            body: SubmitButtonWidget(isLoading: false, onPressed: null),
           ),
         ),
       );
@@ -77,10 +78,7 @@ void main() {
         MaterialApp(
           theme: ThemeData(primaryColor: Colors.blue),
           home: Scaffold(
-            body: SubmitButtonWidget(
-              isLoading: false,
-              onPressed: () {},
-            ),
+            body: SubmitButtonWidget(isLoading: false, onPressed: () {}),
           ),
         ),
       );
@@ -97,10 +95,7 @@ void main() {
           MaterialApp(
             theme: theme,
             home: Scaffold(
-              body: SubmitButtonWidget(
-                isLoading: false,
-                onPressed: () {},
-              ),
+              body: SubmitButtonWidget(isLoading: false, onPressed: () {}),
             ),
           ),
         );

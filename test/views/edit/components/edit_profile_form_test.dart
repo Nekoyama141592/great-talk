@@ -18,10 +18,7 @@ void main() {
         ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: EditProfileForm(
-                formKey: formKey,
-                editModelData: editState,
-              ),
+              body: EditProfileForm(formKey: formKey, editModelData: editState),
             ),
           ),
         ),
@@ -32,7 +29,9 @@ void main() {
       expect(find.byType(TextFormField), findsNWidgets(2));
     });
 
-    testWidgets('should display initial values from state', (WidgetTester tester) async {
+    testWidgets('should display initial values from state', (
+      WidgetTester tester,
+    ) async {
       final formKey = GlobalKey<FormState>();
       final editState = EditState(
         userName: 'Initial Username',
@@ -44,10 +43,7 @@ void main() {
         ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: EditProfileForm(
-                formKey: formKey,
-                editModelData: editState,
-              ),
+              body: EditProfileForm(formKey: formKey, editModelData: editState),
             ),
           ),
         ),
@@ -57,7 +53,9 @@ void main() {
       expect(find.text('Initial Bio Text'), findsOneWidget);
     });
 
-    testWidgets('should have proper form structure', (WidgetTester tester) async {
+    testWidgets('should have proper form structure', (
+      WidgetTester tester,
+    ) async {
       final formKey = GlobalKey<FormState>();
       final editState = EditState(
         userName: 'Test User',
@@ -69,10 +67,7 @@ void main() {
         ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: EditProfileForm(
-                formKey: formKey,
-                editModelData: editState,
-              ),
+              body: EditProfileForm(formKey: formKey, editModelData: editState),
             ),
           ),
         ),
@@ -98,10 +93,7 @@ void main() {
         ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: EditProfileForm(
-                formKey: formKey,
-                editModelData: editState,
-              ),
+              body: EditProfileForm(formKey: formKey, editModelData: editState),
             ),
           ),
         ),
@@ -110,7 +102,9 @@ void main() {
       expect(find.byType(SingleChildScrollView), findsOneWidget);
     });
 
-    testWidgets('should have proper spacing between fields', (WidgetTester tester) async {
+    testWidgets('should have proper spacing between fields', (
+      WidgetTester tester,
+    ) async {
       final formKey = GlobalKey<FormState>();
       final editState = EditState(
         userName: 'Test User',
@@ -122,10 +116,7 @@ void main() {
         ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: EditProfileForm(
-                formKey: formKey,
-                editModelData: editState,
-              ),
+              body: EditProfileForm(formKey: formKey, editModelData: editState),
             ),
           ),
         ),
@@ -136,20 +127,13 @@ void main() {
 
     testWidgets('should validate form properly', (WidgetTester tester) async {
       final formKey = GlobalKey<FormState>();
-      final editState = EditState(
-        userName: '',
-        bio: '',
-        base64: null,
-      );
+      final editState = EditState(userName: '', bio: '', base64: null);
 
       await tester.pumpWidget(
         ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: EditProfileForm(
-                formKey: formKey,
-                editModelData: editState,
-              ),
+              body: EditProfileForm(formKey: formKey, editModelData: editState),
             ),
           ),
         ),
@@ -159,7 +143,9 @@ void main() {
       expect(formKey.currentState?.validate(), false);
     });
 
-    testWidgets('should handle different initial values', (WidgetTester tester) async {
+    testWidgets('should handle different initial values', (
+      WidgetTester tester,
+    ) async {
       final formKey = GlobalKey<FormState>();
       final editState = EditState(
         userName: '日本語ユーザー名',
@@ -171,10 +157,7 @@ void main() {
         ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: EditProfileForm(
-                formKey: formKey,
-                editModelData: editState,
-              ),
+              body: EditProfileForm(formKey: formKey, editModelData: editState),
             ),
           ),
         ),
@@ -196,10 +179,7 @@ void main() {
         ProviderScope(
           child: MaterialApp(
             home: Scaffold(
-              body: EditProfileForm(
-                formKey: formKey,
-                editModelData: editState,
-              ),
+              body: EditProfileForm(formKey: formKey, editModelData: editState),
             ),
           ),
         ),

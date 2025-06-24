@@ -4,7 +4,9 @@ import 'package:great_talk/views/edit/components/update_button_widget.dart';
 
 void main() {
   group('UpdateButtonWidget', () {
-    testWidgets('should display update button with text', (WidgetTester tester) async {
+    testWidgets('should display update button with text', (
+      WidgetTester tester,
+    ) async {
       bool wasPressed = false;
 
       await tester.pumpWidget(
@@ -32,11 +34,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           theme: ThemeData(primaryColor: Colors.blue),
-          home: Scaffold(
-            body: UpdateButtonWidget(
-              onPressed: () {},
-            ),
-          ),
+          home: Scaffold(body: UpdateButtonWidget(onPressed: () {})),
         ),
       );
 
@@ -51,11 +49,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             theme: theme,
-            home: Scaffold(
-              body: UpdateButtonWidget(
-                onPressed: () {},
-              ),
-            ),
+            home: Scaffold(body: UpdateButtonWidget(onPressed: () {})),
           ),
         );
 
@@ -90,15 +84,11 @@ void main() {
       expect(tapCount, 2);
     });
 
-    testWidgets('should use RoundedButton internally', (WidgetTester tester) async {
+    testWidgets('should use RoundedButton internally', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: UpdateButtonWidget(
-              onPressed: () {},
-            ),
-          ),
-        ),
+        MaterialApp(home: Scaffold(body: UpdateButtonWidget(onPressed: () {}))),
       );
 
       // RoundedButton creates an ElevatedButton internally
@@ -106,7 +96,9 @@ void main() {
       expect(find.text('更新する'), findsOneWidget);
     });
 
-    testWidgets('should maintain consistent appearance', (WidgetTester tester) async {
+    testWidgets('should maintain consistent appearance', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

@@ -4,14 +4,13 @@ import 'package:great_talk/views/edit/components/bio_field.dart';
 
 void main() {
   group('BioField', () {
-    testWidgets('should display bio field with label', (WidgetTester tester) async {
+    testWidgets('should display bio field with label', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: BioField(
-              initialValue: 'Initial bio',
-              onSaved: (value) {},
-            ),
+            body: BioField(initialValue: 'Initial bio', onSaved: (value) {}),
           ),
         ),
       );
@@ -25,36 +24,32 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: Form(
-              child: BioField(
-                initialValue: '',
-                onSaved: (value) {},
-              ),
-            ),
+            body: Form(child: BioField(initialValue: '', onSaved: (value) {})),
           ),
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       final validationResult = formField.validator!('');
       expect(validationResult, '入力を行なってください');
     });
 
-    testWidgets('should validate text length limit', (WidgetTester tester) async {
+    testWidgets('should validate text length limit', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: Form(
-              child: BioField(
-                initialValue: '',
-                onSaved: (value) {},
-              ),
-            ),
+            body: Form(child: BioField(initialValue: '', onSaved: (value) {})),
           ),
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       final longText = 'a' * 1001; // Assuming 1000 is the limit
       final validationResult = formField.validator!(longText);
       expect(validationResult, isNotNull);
@@ -65,17 +60,14 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: Form(
-              child: BioField(
-                initialValue: '',
-                onSaved: (value) {},
-              ),
-            ),
+            body: Form(child: BioField(initialValue: '', onSaved: (value) {})),
           ),
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       final validationResult = formField.validator!('Valid bio text');
       expect(validationResult, isNull);
     });
@@ -98,21 +90,20 @@ void main() {
         ),
       );
 
-      final formField = tester.widget<TextFormField>(find.byType(TextFormField));
+      final formField = tester.widget<TextFormField>(
+        find.byType(TextFormField),
+      );
       formField.onSaved!('saved test value');
-      
+
       expect(savedValue, 'saved test value');
     });
 
-    testWidgets('should have help icon from FormLabel', (WidgetTester tester) async {
+    testWidgets('should have help icon from FormLabel', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: BioField(
-              initialValue: '',
-              onSaved: (value) {},
-            ),
-          ),
+          home: Scaffold(body: BioField(initialValue: '', onSaved: (value) {})),
         ),
       );
 
@@ -122,27 +113,19 @@ void main() {
     testWidgets('should display as Column layout', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: BioField(
-              initialValue: '',
-              onSaved: (value) {},
-            ),
-          ),
+          home: Scaffold(body: BioField(initialValue: '', onSaved: (value) {})),
         ),
       );
 
       expect(find.byType(Column), findsOneWidget);
     });
 
-    testWidgets('should handle empty initial value', (WidgetTester tester) async {
+    testWidgets('should handle empty initial value', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: BioField(
-              initialValue: '',
-              onSaved: (value) {},
-            ),
-          ),
+          home: Scaffold(body: BioField(initialValue: '', onSaved: (value) {})),
         ),
       );
 

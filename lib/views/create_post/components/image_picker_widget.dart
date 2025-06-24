@@ -27,31 +27,28 @@ class ImagePickerWidget extends ConsumerWidget {
 
     return imageBytes == null
         ? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: viewModel.onImagePickButtonPressed,
-                child: const Icon(Icons.image, size: 100.0),
-              ),
-              const SizedBox(width: 16),
-              if (isPremiumSubscribing)
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(FormConsts.imageLabel),
-                    ToGeneratePageButton(),
-                  ],
-                ),
-            ],
-          )
-        : InkWell(
-            onTap: viewModel.onImagePickButtonPressed,
-            child: SizedBox(
-              width: 100.0,
-              height: 100.0,
-              child: Image.memory(imageBytes),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: viewModel.onImagePickButtonPressed,
+              child: const Icon(Icons.image, size: 100.0),
             ),
-          );
+            const SizedBox(width: 16),
+            if (isPremiumSubscribing)
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [Text(FormConsts.imageLabel), ToGeneratePageButton()],
+              ),
+          ],
+        )
+        : InkWell(
+          onTap: viewModel.onImagePickButtonPressed,
+          child: SizedBox(
+            width: 100.0,
+            height: 100.0,
+            child: Image.memory(imageBytes),
+          ),
+        );
   }
 }
 
