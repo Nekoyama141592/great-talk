@@ -10,7 +10,7 @@ import 'package:great_talk/views/auth/user_deleted_page.dart';
 import 'package:great_talk/views/maintenance/maintenance_page.dart';
 import 'package:great_talk/views/check_page/first_page.dart';
 import 'package:great_talk/views/create_post/create_post_page.dart';
-import 'package:great_talk/views/edit_page.dart';
+import 'package:great_talk/views/edit/edit_page.dart';
 import 'package:great_talk/views/generate_image/generate_image_page.dart';
 import 'package:great_talk/views/main/subscribe/subscribe_page.dart';
 import 'package:great_talk/views/mute/mute_posts/mute_posts_page.dart';
