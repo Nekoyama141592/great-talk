@@ -4,8 +4,9 @@ import 'package:great_talk/core/credential_core.dart';
 import 'package:great_talk/repository/result/result.dart';
 
 class AuthRepository {
-  AuthRepository(this.instance);
+  AuthRepository(this.instance, {this.enableDebugPrint = true});
   FirebaseAuth instance;
+  final bool enableDebugPrint;
 
   FutureResult<User> signInAnonymously() async {
     try {
@@ -18,7 +19,7 @@ class AuthRepository {
         return Result.success(user);
       }
     } catch (e) {
-      debugPrint('signInAnonymously: ${e.toString()}');
+      if (enableDebugPrint) debugPrint('signInAnonymously: ${e.toString()}');
       return Result.failure('匿名ログインが失敗しました');
     }
   }
@@ -35,7 +36,7 @@ class AuthRepository {
         return Result.success(user);
       }
     } on FirebaseAuthException catch (e) {
-      debugPrint('signInWithApple: ${e.toString()}');
+      if (enableDebugPrint) debugPrint('signInWithApple: ${e.toString()}');
       final msg = _manageErrorCredential(e);
       return Result.failure(msg);
     }
@@ -53,7 +54,7 @@ class AuthRepository {
         return Result.success(user);
       }
     } on FirebaseAuthException catch (e) {
-      debugPrint('signInWithGoogle: ${e.toString()}');
+      if (enableDebugPrint) debugPrint('signInWithGoogle: ${e.toString()}');
       final msg = _manageErrorCredential(e);
       return Result.failure(msg);
     }
@@ -64,7 +65,7 @@ class AuthRepository {
       await instance.signOut();
       return const Result.success(true);
     } catch (e) {
-      debugPrint('signOut: ${e.toString()}');
+      if (enableDebugPrint) debugPrint('signOut: ${e.toString()}');
       return Result.failure('ログアウトが失敗しました');
     }
   }
@@ -78,7 +79,7 @@ class AuthRepository {
       await user.reauthenticateWithCredential(credential);
       return const Result.success(true);
     } on FirebaseAuthException catch (e) {
-      debugPrint('reauthenticateWithCredential: ${e.toString()}');
+      if (enableDebugPrint) debugPrint('reauthenticateWithCredential: ${e.toString()}');
       final String errorCode = e.code;
       String msg = '';
       switch (errorCode) {
@@ -104,7 +105,7 @@ class AuthRepository {
       return const Result.success(true);
     } on FirebaseAuthException catch (e) {
       final String errorCode = e.code;
-      debugPrint('deleteUser: $errorCode');
+      if (enableDebugPrint) debugPrint('deleteUser: $errorCode');
       String msg = '';
       switch (errorCode) {
         case 'requires-recent-login':
