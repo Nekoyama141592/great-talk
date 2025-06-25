@@ -6,7 +6,7 @@ import 'package:great_talk/core/size_core.dart';
 import 'package:great_talk/consts/msg_constants.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/model/database_schema/text_message/text_message.dart';
-import 'package:great_talk/model/view_model_state/chat/chat_state.dart';
+import 'package:great_talk/presentation/state/chat/chat_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/provider/keep_alive/notifier/tokens/tokens_notifier.dart';

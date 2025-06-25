@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/model/view_model_state/edit/edit_state.dart';
-import 'package:great_talk/views/edit/components/edit_profile_form.dart';
+import 'package:great_talk/presentation/state/edit/edit_state.dart';
+import 'package:great_talk/presentation/page/edit/components/edit_profile_form.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {

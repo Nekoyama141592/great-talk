@@ -1,5 +1,5 @@
 import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/view_model_state/common/user_post/user_post.dart';
+import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/use_case/file_use_case.dart';
 

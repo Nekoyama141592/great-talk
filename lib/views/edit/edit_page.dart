@@ -1,15 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/provider/view_model/edit/edit_view_model.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
-import 'package:great_talk/views/common/forms_screen.dart';
-import 'package:great_talk/views/edit/components/edit_profile_form.dart';
-import 'package:great_talk/views/edit/components/profile_image_widget.dart';
-import 'package:great_talk/views/edit/components/update_button_widget.dart';
-import 'package:great_talk/views/loading_page.dart';
+import 'package:great_talk/presentation/page/common/forms_screen.dart';
+import 'package:great_talk/presentation/page/edit/components/edit_profile_form.dart';
+import 'package:great_talk/presentation/page/edit/components/profile_image_widget.dart';
+import 'package:great_talk/presentation/page/edit/components/update_button_widget.dart';
+import 'package:great_talk/presentation/page/loading_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
