@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/views/components/circle_image/components/s3_image.dart';
+import 'package:great_talk/presentation/component/circle_image/components/s3_image.dart';
 
 void main() {
   group('S3Image', () {
