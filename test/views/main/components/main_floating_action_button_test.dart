@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/consts/colors.dart';
-import 'package:great_talk/views/main/components/main_floating_action_button.dart';
+import 'package:great_talk/presentation/page/main/components/main_floating_action_button.dart';
 
 void main() {
   group('MainFloatingActionButton', () {

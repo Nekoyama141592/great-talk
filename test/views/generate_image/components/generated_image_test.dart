@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/views/generate_image/components/generated_image.dart';
+import 'package:great_talk/presentation/page/generate_image/components/generated_image.dart';
 
 void main() {
   group('GeneratedImage', () {

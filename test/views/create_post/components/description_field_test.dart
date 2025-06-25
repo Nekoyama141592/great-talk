@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/views/create_post/components/description_field.dart';
+import 'package:great_talk/presentation/page/create_post/components/description_field.dart';
 
 void main() {
   group('DescriptionField', () {

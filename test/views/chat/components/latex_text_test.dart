@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gpt_markdown/gpt_markdown.dart';
-import 'package:great_talk/views/chat/components/latex_text.dart';
+import 'package:great_talk/presentation/page/chat/components/latex_text.dart';
 
 void main() {
   group('LatexText', () {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/views/chat/components/delete_post_button.dart';
-import 'package:great_talk/views/components/app_bar_action.dart';
+import 'package:great_talk/presentation/page/chat/components/delete_post_button.dart';
+import 'package:great_talk/presentation/component/app_bar_action.dart';
 
 void main() {
   group('DeletePostButton', () {

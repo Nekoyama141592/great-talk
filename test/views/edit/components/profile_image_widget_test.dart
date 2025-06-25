@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/views/edit/components/profile_image_widget.dart';
+import 'package:great_talk/presentation/page/edit/components/profile_image_widget.dart';
 
 void main() {
   group('ProfileImageWidget', () {
