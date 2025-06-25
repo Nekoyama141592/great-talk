@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/views/edit/components/username_field.dart';
+import 'package:great_talk/presentation/page/edit/components/username_field.dart';
 
 void main() {
   group('UsernameField', () {

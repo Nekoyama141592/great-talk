@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/views/edit/components/update_button_widget.dart';
+import 'package:great_talk/presentation/page/edit/components/update_button_widget.dart';
 
 void main() {
   group('UpdateButtonWidget', () {

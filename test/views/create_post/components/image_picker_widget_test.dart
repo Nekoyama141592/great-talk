@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/model/view_model_state/create_post/create_post_state.dart';
-import 'package:great_talk/views/create_post/components/image_picker_widget.dart';
+import 'package:great_talk/presentation/state/create_post/create_post_state.dart';
+import 'package:great_talk/presentation/page/create_post/components/image_picker_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {

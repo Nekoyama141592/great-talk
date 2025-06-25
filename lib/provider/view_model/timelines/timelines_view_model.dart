@@ -1,5 +1,5 @@
 import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/view_model_state/timelines/timelines_state.dart';
+import 'package:great_talk/presentation/state/timelines/timelines_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/provider/keep_alive/usecase/posts/posts_use_case_provider.dart';
 import 'package:great_talk/provider/view_model/refresh_interface.dart';

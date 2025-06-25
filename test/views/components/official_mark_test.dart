@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/views/components/official_mark.dart';
+import 'package:great_talk/presentation/component/official_mark.dart';
 
 void main() {
   group('OfficialMark', () {

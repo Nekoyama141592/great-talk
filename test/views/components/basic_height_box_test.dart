@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/views/components/basic_height_box.dart';
+import 'package:great_talk/presentation/component/basic_height_box.dart';
 
 void main() {
   group('BasicHeightBox', () {

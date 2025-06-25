@@ -1,5 +1,5 @@
 import 'package:great_talk/model/database_schema/public_user/public_user.dart';
-import 'package:great_talk/model/view_model_state/common/image_user/image_user.dart';
+import 'package:great_talk/presentation/state/common/image_user/image_user.dart';
 import 'package:great_talk/use_case/file_use_case.dart';
 
 class UserUseCase {

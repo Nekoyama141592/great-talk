@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/views/components/mosaic_card/mosaic_card.dart';
+import 'package:great_talk/presentation/component/mosaic_card/mosaic_card.dart';
 import 'package:great_talk/consts/colors.dart';
 
 void main() {
