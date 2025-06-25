@@ -21,15 +21,9 @@ abstract class IDatabaseRepository {
   Future<int?> countMessages();
 
   // User creation
-  Future<PublicUser?> createPublicUser(
-    String uid,
-    Map<String, dynamic> json,
-  );
+  Future<PublicUser?> createPublicUser(String uid, Map<String, dynamic> json);
 
-  Future<PrivateUser?> createPrivateUser(
-    String uid,
-    Map<String, dynamic> json,
-  );
+  Future<PrivateUser?> createPrivateUser(String uid, Map<String, dynamic> json);
 
   // User operations
   Future<PublicUser?> getPublicUser(String uid);
@@ -47,10 +41,7 @@ abstract class IDatabaseRepository {
   FutureResult<bool> deletePost(Post post);
 
   // User update logs
-  FutureResult<bool> createUserUpdateLog(
-    String uid,
-    Map<String, dynamic> json,
-  );
+  FutureResult<bool> createUserUpdateLog(String uid, Map<String, dynamic> json);
 
   // Follow operations
   FutureResult<bool> createFollowInfo(
@@ -135,8 +126,5 @@ abstract class IDatabaseRepository {
   Future<List<Post>> getPosts(bool isRankingPosts);
   Future<List<Post>> getMorePosts(bool isRankingPosts, Post lastPost);
   Future<List<Post>> getMutePosts(List<String> postIds);
-  Future<List<Post>> getMoreMutePosts(
-    List<String> postIds,
-    Post lastPost,
-  );
+  Future<List<Post>> getMoreMutePosts(List<String> postIds, Post lastPost);
 }
