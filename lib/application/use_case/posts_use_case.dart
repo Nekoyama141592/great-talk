@@ -1,7 +1,7 @@
 import 'package:great_talk/domain/entity/post/post.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 import 'package:great_talk/repository/database_repository.dart';
-import 'package:great_talk/domain/use_case/file_use_case.dart';
+import 'package:great_talk/application/use_case/file_use_case.dart';
 
 class PostsUseCase {
   PostsUseCase({required this.repository, required this.fileUseCase});
