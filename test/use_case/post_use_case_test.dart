@@ -7,7 +7,7 @@ import 'package:great_talk/model/rest_api/delete_object/response/delete_object_r
 import 'package:great_talk/repository/api_repository.dart';
 import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/application/use_case/post_use_case.dart';
+import 'package:great_talk/application/use_case/post/post_use_case.dart';
 
 class FakeDatabaseRepository implements DatabaseRepository {
   bool shouldSucceed = true;

@@ -5,7 +5,7 @@ import 'package:great_talk/provider/keep_alive/usecase/posts/posts_use_case_prov
 import 'package:great_talk/provider/view_model/refresh_interface.dart';
 import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/application/use_case/posts_use_case.dart';
+import 'package:great_talk/application/use_case/posts/posts_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'posts_view_model.g.dart';

@@ -1,6 +1,6 @@
 import 'package:great_talk/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
-import 'package:great_talk/application/use_case/post_use_case.dart';
+import 'package:great_talk/application/use_case/post/post_use_case.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
