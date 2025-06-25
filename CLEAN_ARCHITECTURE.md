@@ -8,7 +8,7 @@ lib/
   │   ├── entity/
   │   ├── value/
   │   ├── repository/
-  │   ├── usecase/
+  │   ├── use_case/
   │   └── factory/
   ├── application/
   │   └── usecase/
