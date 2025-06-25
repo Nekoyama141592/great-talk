@@ -3,7 +3,7 @@ import 'package:great_talk/model/rest_api/get_object/request/get_object_request.
 import 'package:great_talk/repository/local_repository.dart';
 import 'package:great_talk/repository/api_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/use_case/file_use_case.dart';
+import 'package:great_talk/domain/use_case/file_use_case.dart';
 
 class FakeLocalRepository implements LocalRepository {
   final Map<String, String> _cache = {};

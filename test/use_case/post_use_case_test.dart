@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
-import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
-import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/domain/entity/post/post.dart';
+import 'package:great_talk/domain/entity/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/domain/entity/tokens/mute_post_token/mute_post_token.dart';
+import 'package:great_talk/domain/entity/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
 import 'package:great_talk/repository/api_repository.dart';
 import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/use_case/post_use_case.dart';
+import 'package:great_talk/domain/use_case/post_use_case.dart';
 
 class FakeDatabaseRepository implements DatabaseRepository {
   bool shouldSucceed = true;

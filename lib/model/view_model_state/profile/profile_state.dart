@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/post/post.dart';
+import 'package:great_talk/domain/entity/public_user/public_user.dart';
 import 'package:great_talk/model/view_model_state/common/user_post/user_post.dart';
 
 part 'profile_state.freezed.dart';

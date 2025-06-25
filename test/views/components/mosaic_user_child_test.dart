@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/presentation/component/mosaic_card/components/mosaic_user_child.dart';
-import 'package:great_talk/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/public_user/public_user.dart';
 
 void main() {
   group('MosaicUserChild', () {

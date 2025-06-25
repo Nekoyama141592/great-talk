@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/domain/entity/detected_image/detected_image.dart';
 import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
 import 'package:great_talk/model/rest_api/put_object/response/put_object_response.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
