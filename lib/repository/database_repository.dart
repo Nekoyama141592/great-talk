@@ -14,7 +14,18 @@ import 'package:great_talk/domain/entity/tokens/mute_post_token/mute_post_token.
 import 'package:great_talk/domain/entity/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/domain/entity/user_mute/user_mute.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/typedef/firestore_typedef.dart';
+
+typedef QSnapshot = QuerySnapshot<Map<String, dynamic>>;
+typedef QDoc = QueryDocumentSnapshot<Map<String, dynamic>>;
+typedef Doc = DocumentSnapshot<Map<String, dynamic>>;
+
+typedef FutureQSnapshot = Future<QSnapshot>;
+typedef FutureDoc = Future<Doc>;
+
+typedef DocRef = DocumentReference<Map<String, dynamic>>;
+typedef ColRef = CollectionReference<Map<String, dynamic>>;
+
+typedef MapQuery = Query<Map<String, dynamic>>;
 
 class DatabaseRepository {
   DatabaseRepository({required this.instance});
