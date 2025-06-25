@@ -9,6 +9,7 @@ lib/
   │   ├── value/ # ドメインエンティティで使用するバリューオブジェクトを定義
   │   ├── repository/ # 外部リソースにアクセスするレポジトリのインターフェースを定義
   │   ├── use_case/ # アプリケーションの機能に関するユースケースのインターフェースを定義
+  │   └── factory/
   ├── application/
   │   └── usecase/
   ├── infrastructure/
