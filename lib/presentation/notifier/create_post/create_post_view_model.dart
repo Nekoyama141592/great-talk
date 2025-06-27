@@ -8,6 +8,7 @@ import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.
 import 'package:great_talk/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/ui_core/image_ui_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/consts/form_consts.dart';
@@ -52,7 +53,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
 
     final info = await usecase.imageInfo(result);
     if (info.isNotSquare) {
-      ToastUiCore.showErrorFlutterToast(usecase.squareImageRequestMsg);
+      ToastUiCore.showErrorFlutterToast(ImageUiCore.squareImageRequestMsg);
       return;
     }
     if (info.isSmall) {

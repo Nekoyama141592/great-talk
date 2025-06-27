@@ -108,9 +108,4 @@ class FileUseCase {
     final height = frameInfo1.image.height;
     return OriginalImageInfo(height: height, width: width);
   }
-
-  String get squareImageRequestMsg =>
-      Platform.isIOS
-          ? FormConsts.iosSquareImageRequestMsg
-          : FormConsts.androidSquareImageRequestMsg;
 }
