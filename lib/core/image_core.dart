@@ -9,6 +9,7 @@ import 'package:image/image.dart' as img;
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+
 class ImageCore {
   static Future<OriginalImageInfo> imageInfo(String base64Image) async {
     final imageBytes = base64Decode(base64Image);
@@ -18,6 +19,7 @@ class ImageCore {
     final height = frameInfo1.image.height;
     return OriginalImageInfo(height: height, width: width);
   }
+
   static Future<String?> getCompressedImage() async {
     final xFile = await _pickImage();
     final croppedFile = await _cropImage(xFile);
@@ -25,6 +27,7 @@ class ImageCore {
     final compressedImage = await _compressImage(jpgFile);
     return compressedImage != null ? base64Encode(compressedImage) : null;
   }
+
   static Future<Uint8List?> _compressImage(File? jpgFile) async {
     if (jpgFile == null) return null;
     final result = await FlutterImageCompress.compressWithFile(

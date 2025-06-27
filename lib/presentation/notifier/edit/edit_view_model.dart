@@ -38,7 +38,8 @@ class EditViewModel extends _$EditViewModel {
   }
 
   /// 画像選択時の処理
-  FutureResult<bool> onImagePickButtonPressed() async {;
+  FutureResult<bool> onImagePickButtonPressed() async {
+    ;
     final result = await ImageCore.getCompressedImage();
     if (result == null) return const Result.failure('画像が取得できませんでした');
     final info = await ImageCore.imageInfo(result);
