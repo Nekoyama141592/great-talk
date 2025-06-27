@@ -9,7 +9,7 @@ class PostsUseCase {
   final FileUseCase fileUseCase;
   Future<String?> _getImageFromPost(Post post) async {
     final detectedImage = post.typedImage();
-    final image = await fileUseCase.getS3Image(
+    final image = await fileUseCase.getObject(
       detectedImage.bucketName,
       detectedImage.value,
     );

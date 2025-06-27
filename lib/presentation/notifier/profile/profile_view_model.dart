@@ -37,7 +37,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     final detectedImage = post.typedImage();
     final image = await ref
         .read(fileUseCaseProvider)
-        .getS3Image(detectedImage.bucketName, detectedImage.value);
+        .getObject(detectedImage.bucketName, detectedImage.value);
     return image;
   }
 
@@ -46,7 +46,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     final detectedImage = user.typedImage();
     final image = await ref
         .read(fileUseCaseProvider)
-        .getS3Image(detectedImage.bucketName, detectedImage.value);
+        .getObject(detectedImage.bucketName, detectedImage.value);
     return image;
   }
 

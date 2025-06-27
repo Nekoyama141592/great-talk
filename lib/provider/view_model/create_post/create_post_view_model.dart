@@ -50,7 +50,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     final result = await usecase.getCompressedImage();
     if (result == null) return;
 
-    final info = await usecase.getImageInfo(result);
+    final info = await usecase.imageInfo(result);
     if (info.isNotSquare) {
       ToastUiCore.showErrorFlutterToast(usecase.squareImageRequestMsg);
       return;

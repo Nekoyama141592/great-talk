@@ -93,7 +93,7 @@ class ChatViewModel extends _$ChatViewModel {
     final detectedImage = post.typedImage();
     return ref
         .read(fileUseCaseProvider)
-        .getS3Image(detectedImage.bucketName, detectedImage.value);
+        .getObject(detectedImage.bucketName, detectedImage.value);
   }
 
   List<TextMessage> _getLocalMessages(String postId) {

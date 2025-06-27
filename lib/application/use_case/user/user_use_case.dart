@@ -9,7 +9,7 @@ class UserUseCase {
     final futures =
         users.map((user) async {
           final detectedImage = user.typedImage();
-          final base64 = await fileUseCase.getS3Image(
+          final base64 = await fileUseCase.getObject(
             detectedImage.bucketName,
             detectedImage.value,
           );

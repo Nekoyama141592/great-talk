@@ -41,7 +41,7 @@ class EditViewModel extends _$EditViewModel {
     final useCase = ref.read(fileUseCaseProvider);
     final result = await useCase.getCompressedImage();
     if (result == null) return const Result.failure('画像が取得できませんでした');
-    final info = await useCase.getImageInfo(result);
+    final info = await useCase.imageInfo(result);
     if (info.isNotSquare) {
       return Result.failure(useCase.squareImageRequestMsg);
     }

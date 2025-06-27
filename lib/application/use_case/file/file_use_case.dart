@@ -25,7 +25,7 @@ class FileUseCase {
     return compressedImage != null ? base64Encode(compressedImage) : null;
   }
 
-  Future<String?> getS3Image(String bucketName, String fileName) async {
+  Future<String?> getObject(String bucketName, String fileName) async {
     if (fileName.isEmpty) {
       return null;
     }
@@ -100,7 +100,7 @@ class FileUseCase {
     return image;
   }
 
-  Future<OriginalImageInfo> getImageInfo(String base64Image) async {
+  Future<OriginalImageInfo> imageInfo(String base64Image) async {
     final imageBytes = base64Decode(base64Image);
     final codec1 = await ui.instantiateImageCodec(imageBytes);
     final frameInfo1 = await codec1.getNextFrame();
