@@ -16,7 +16,7 @@ class PostsUseCase {
     return image;
   }
 
-  List<Post> getSorted(List<Post> posts, bool isRankingPosts) {
+  List<Post> _getSorted(List<Post> posts, bool isRankingPosts) {
     return isRankingPosts ? _sortByLikeCount(posts) : _sortByCreatedAt(posts);
   }
 
@@ -34,7 +34,7 @@ class PostsUseCase {
     bool isRankingPosts = false,
   }) async {
     if (posts.isEmpty) return [];
-    final sorted = getSorted(posts, isRankingPosts);
+    final sorted = _getSorted(posts, isRankingPosts);
     final uids = sorted.map((e) => e.uid).toList();
     final fetchedUsers = await repository.getUsersByUids(uids);
     final userMap = {for (final user in fetchedUsers) user.uid: user};
