@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:great_talk/util/size_core.dart';
-import 'package:great_talk/util/route_core.dart';
+import 'package:great_talk/core/util/size_core.dart';
+import 'package:great_talk/core/util/route_core.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/ui_core/texts.dart';

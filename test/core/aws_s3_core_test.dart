@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/util/aws_s3_core.dart';
+import 'package:great_talk/core/util/aws_s3_core.dart';
 
 void main() {
   group('AWSS3Core', () {

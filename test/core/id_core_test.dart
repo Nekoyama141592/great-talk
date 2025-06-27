@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/util/id_core.dart';
+import 'package:great_talk/core/util/id_core.dart';
 
 void main() {
   group('IdCore', () {

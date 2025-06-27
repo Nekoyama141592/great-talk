@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/extension/number_format_extension.dart';
+import 'package:great_talk/core/extension/number_format_extension.dart';
 
 void main() {
   group('NumberFormatExtension', () {

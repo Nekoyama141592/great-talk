@@ -7,7 +7,7 @@ import 'package:great_talk/provider/repository/api/api_repository_provider.dart'
 import 'package:great_talk/provider/repository/auth/auth_repository_provider.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
-import 'package:great_talk/util/credential_core.dart';
+import 'package:great_talk/core/util/credential_core.dart';
 import 'package:great_talk/infrastructure/repository/auth_repository.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/provider/keep_alive/usecase/file/file_use_case_provider.dart';

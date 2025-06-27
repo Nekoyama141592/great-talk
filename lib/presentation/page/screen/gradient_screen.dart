@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/colors.dart';
-import 'package:great_talk/util/size_core.dart';
+import 'package:great_talk/core/util/size_core.dart';
 
 class GradientScreen extends StatelessWidget {
   const GradientScreen({

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:great_talk/util/purchases_core.dart';
-import 'package:great_talk/extension/purchase_details_extension.dart';
+import 'package:great_talk/core/util/purchases_core.dart';
+import 'package:great_talk/core/extension/purchase_details_extension.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';

@@ -10,7 +10,7 @@ import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/r
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart' as rs;
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:great_talk/extension/purchase_details_extension.dart';
+import 'package:great_talk/core/extension/purchase_details_extension.dart';
 
 void main() {
   group('ApiRepository Tests', () {

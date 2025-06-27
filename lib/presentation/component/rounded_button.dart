@@ -1,6 +1,6 @@
 // material
 import 'package:flutter/material.dart';
-import 'package:great_talk/util/size_core.dart';
+import 'package:great_talk/core/util/size_core.dart';
 import 'package:great_talk/ui_core/texts.dart';
 
 class RoundedButton extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/util/search_core.dart';
+import 'package:great_talk/core/util/search_core.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 
 part 'user_update_log.freezed.dart';

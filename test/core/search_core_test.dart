@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/util/search_core.dart';
+import 'package:great_talk/core/util/search_core.dart';
 
 void main() {
   group('SearchCore', () {

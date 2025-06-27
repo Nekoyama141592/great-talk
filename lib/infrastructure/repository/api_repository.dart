@@ -1,7 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:great_talk/util/json_core.dart';
+import 'package:great_talk/core/util/json_core.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
@@ -15,7 +15,7 @@ import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_
 import 'package:great_talk/infrastructure/model/rest_api/put_object/response/put_object_response.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart' as rs;
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:great_talk/extension/purchase_details_extension.dart';
+import 'package:great_talk/core/extension/purchase_details_extension.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/request/receipt_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 

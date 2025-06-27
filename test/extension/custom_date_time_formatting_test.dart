@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/extension/custom_date_time_formatting.dart';
+import 'package:great_talk/core/extension/custom_date_time_formatting.dart';
 
 void main() {
   group('CustomDateTimeFormatting', () {

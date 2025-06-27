@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:great_talk/extension/purchase_details_extension.dart';
+import 'package:great_talk/core/extension/purchase_details_extension.dart';
 
 class TestPurchaseDetails extends PurchaseDetails {
   TestPurchaseDetails({

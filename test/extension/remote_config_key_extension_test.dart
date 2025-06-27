@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/extension/remote_config_key_extension.dart';
+import 'package:great_talk/core/extension/remote_config_key_extension.dart';
 
 void main() {
   group('RemoteConfigKeyExtension', () {

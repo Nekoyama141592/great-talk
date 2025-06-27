@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/util/credential_core.dart';
+import 'package:great_talk/core/util/credential_core.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 class AuthRepository {

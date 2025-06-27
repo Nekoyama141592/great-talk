@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/util/route_core.dart';
+import 'package:great_talk/core/util/route_core.dart';
 import 'package:great_talk/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/presentation/page/screen/login_screen.dart';

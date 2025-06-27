@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/extension/number_format_extension.dart';
+import 'package:great_talk/core/extension/number_format_extension.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
-import 'package:great_talk/util/route_core.dart';
+import 'package:great_talk/core/util/route_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PostMsgButton extends ConsumerWidget {

@@ -1,5 +1,5 @@
 import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/extension/string_extension.dart';
+import 'package:great_talk/core/extension/string_extension.dart';
 
 class PostValidator {
   static bool isInValidPost(String description, String prompt, String title) {

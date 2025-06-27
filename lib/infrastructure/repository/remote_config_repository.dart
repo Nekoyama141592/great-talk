@@ -1,6 +1,6 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:great_talk/consts/remote_config_constants.dart';
-import 'package:great_talk/util/remote_config_core.dart';
+import 'package:great_talk/core/util/remote_config_core.dart';
 
 class RemoteConfigRepository {
   RemoteConfigRepository(this.instance);

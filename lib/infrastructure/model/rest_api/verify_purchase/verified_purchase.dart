@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/util/date_core.dart';
-import 'package:great_talk/util/purchases_core.dart';
+import 'package:great_talk/core/util/date_core.dart';
+import 'package:great_talk/core/util/purchases_core.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/response/android_receipt_response/android_receipt_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/response/ios_receipt_response/ios_receipt_response.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';

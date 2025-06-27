@@ -1,4 +1,4 @@
-import 'package:great_talk/extension/remote_config_key_extension.dart';
+import 'package:great_talk/core/extension/remote_config_key_extension.dart';
 
 class RemoteConfigCore {
   // key

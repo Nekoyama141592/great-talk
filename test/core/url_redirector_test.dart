@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/util/url_redirector.dart';
+import 'package:great_talk/core/util/url_redirector.dart';
 
 void main() {
   group('UrlRedirector', () {
