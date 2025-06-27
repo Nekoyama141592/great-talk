@@ -1,4 +1,4 @@
-import 'package:great_talk/domain/database_schema/text_message/text_message.dart';
+import 'package:great_talk/domain/entity/database_schema/text_message/text_message.dart';
 import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/repository/result/result.dart';
 

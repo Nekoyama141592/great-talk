@@ -11,7 +11,7 @@ import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/consts/msg_constants.dart';
 import 'package:great_talk/extension/string_extension.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
-import 'package:great_talk/domain/database_schema/user_update_log/user_update_log.dart';
+import 'package:great_talk/domain/entity/database_schema/user_update_log/user_update_log.dart';
 import 'package:great_talk/core/aws_s3_core.dart';
 import 'package:great_talk/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/presentation/state/edit/edit_state.dart';
