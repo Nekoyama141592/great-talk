@@ -329,13 +329,9 @@ test/
 ├── android/                   # Android設定（マルチフレーバー対応）
 ├── ios/                       # iOS設定（複数スキーム対応）
 ├── web/, linux/, macos/, windows/ # マルチプラットフォーム対応
-├── cloud_functions_js/        # Node.js Cloud Functions
 ├── firestore_rules/           # Firestoreセキュリティルール
-├── firebase_private_key/      # サービスアカウントキー
 ├── pubspec.yaml              # 依存関係・ビルド設定
 ├── analysis_options.yaml     # リント・コード解析ルール
-├── codemagic.yaml            # CI/CDパイプライン設定
-├── dev.env, prod.env         # 環境変数設定
 └── CLAUDE.md                 # Claude Code用プロジェクト指示書
 ```
 
