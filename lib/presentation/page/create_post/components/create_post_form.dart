@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/presentation/state/create_post/create_post_state.dart';
-import 'package:great_talk/provider/view_model/create_post/create_post_view_model.dart';
+import 'package:great_talk/core/provider/view_model/create_post/create_post_view_model.dart';
 import 'package:great_talk/presentation/page/create_post/components/description_field.dart';
 import 'package:great_talk/presentation/page/create_post/components/system_prompt_field.dart';
 import 'package:great_talk/presentation/page/create_post/components/title_field.dart';

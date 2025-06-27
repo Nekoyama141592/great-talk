@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/provider/keep_alive/notification/notification_provider.dart';
-import 'package:great_talk/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
-import 'package:great_talk/provider/view_model/products/products_view_model.dart';
+import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/core/provider/keep_alive/notification/notification_provider.dart';
+import 'package:great_talk/core/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
+import 'package:great_talk/core/provider/view_model/products/products_view_model.dart';
 import 'package:great_talk/presentation/common/flavor_ui_core.dart';
 import 'package:great_talk/presentation/page/common/bottom_navigation_bar_elements.dart';
 import 'package:great_talk/presentation/common/others.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
-import 'package:great_talk/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
-import 'package:great_talk/provider/keep_alive/usecase/post/delete_post/delete_post_use_case_provider.dart';
+import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
+import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
+import 'package:great_talk/core/provider/keep_alive/usecase/post/delete_post/delete_post_use_case_provider.dart';
 import 'package:great_talk/presentation/common/texts.dart';
 import 'package:great_talk/presentation/common/toast_ui_core.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';

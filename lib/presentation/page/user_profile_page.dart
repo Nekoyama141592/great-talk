@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/provider/view_model/profile/profile_view_model.dart';
+import 'package:great_talk/core/provider/view_model/profile/profile_view_model.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/presentation/page/screen/profile_screen/profile_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
