@@ -46,7 +46,7 @@ class MosaicPostChild extends ConsumerWidget {
                         .read(tokensNotifierProvider.notifier)
                         .addDeletePostId(postId); // 楽観的に追加する
                     final result = await ref
-                        .read(postUsecaseProvider)
+                        .read(deletePostUseCaseProvider)
                         .deletePost(post);
                     result.when(
                       success: (_) async {

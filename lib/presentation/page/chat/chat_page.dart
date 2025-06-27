@@ -67,7 +67,7 @@ class ChatPage extends HookConsumerWidget {
       final token = ref.read(tokensNotifierProvider.notifier).addMutePost(post);
       if (token == null) return;
       final result = await ref
-          .read(postUsecaseProvider)
+          .read(mutePostUseCaseProvider)
           .mutePost(post, uid, token);
       result.when(
         success: (_) {
@@ -97,7 +97,7 @@ class ChatPage extends HookConsumerWidget {
                         .read(tokensNotifierProvider.notifier)
                         .addDeletePostId(postId); // 楽観的に追加する
                     final result = await ref
-                        .read(postUsecaseProvider)
+                        .read(deletePostUseCaseProvider)
                         .deletePost(post);
                     result.when(
                       success: (_) async {
@@ -120,7 +120,7 @@ class ChatPage extends HookConsumerWidget {
               else
                 AppBarAction(
                   onTap: () {
-                    final notifier = ref.read(postUsecaseProvider);
+                    final muteUserNotifier = ref.read(muteUserUseCaseProvider);
                     PostUiCore.onReportButtonPressed(
                       context: context,
                       mutePost: (innerContext) => mutePost(innerContext, post),
@@ -134,7 +134,7 @@ class ChatPage extends HookConsumerWidget {
                           RouteCore.back(innerContext);
                           return;
                         }
-                        final result = await notifier.muteUser(
+                        final result = await muteUserNotifier.muteUser(
                           post,
                           currentUserId,
                           token,

@@ -43,8 +43,8 @@ class PostLikeButton extends HookConsumerWidget {
                   if (deleteToken == null) return;
                   likeCount.value--; // 表示する数字を1つ下げる
                   final result = await ref
-                      .read(postUsecaseProvider)
-                      .onUnLikeButtonPressed(
+                      .read(likePostUseCaseProvider)
+                      .unLikePost(
                         currentUid,
                         deleteToken.tokenId,
                         post,
@@ -72,8 +72,8 @@ class PostLikeButton extends HookConsumerWidget {
                   if (token == null) return;
                   likeCount.value++; // 表示する数字を1つ上げる
                   final result = await ref
-                      .read(postUsecaseProvider)
-                      .onLikeButtonPressed(currentUid, token, post);
+                      .read(likePostUseCaseProvider)
+                      .likePost(currentUid, token, post);
                   result.when(
                     success: (_) {},
                     failure: (_) {
