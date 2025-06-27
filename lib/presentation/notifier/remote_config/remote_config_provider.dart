@@ -1,7 +1,7 @@
 import 'package:great_talk/presentation/state/remote_config/remote_config_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/remote_config/remote_config_stream_provider.dart';
 import 'package:great_talk/provider/repository/remote_config/remote_config_repository_provider.dart';
-import 'package:great_talk/repository/remote_config_repository.dart';
+import 'package:great_talk/infrastructure/repository/remote_config_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'remote_config_provider.g.dart';

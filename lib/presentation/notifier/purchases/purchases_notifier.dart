@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:great_talk/extension/purchase_details_extension.dart';
-import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
+import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/presentation/state/purchases_state/purchase_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/purchase/purchase_stream_provider.dart';
 import 'package:great_talk/provider/repository/purchase/purchase_repository_provider.dart';
 import 'package:great_talk/provider/keep_alive/usecase/purchases/purchase_use_case_provider.dart';
 import 'package:great_talk/provider/repository/local/local_repository_provider.dart';
-import 'package:great_talk/repository/purchase_repository.dart';
+import 'package:great_talk/infrastructure/repository/purchase_repository.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

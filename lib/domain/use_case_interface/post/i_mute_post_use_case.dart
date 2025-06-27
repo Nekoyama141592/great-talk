@@ -1,6 +1,6 @@
-import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 /// Abstract interface for post muting operations.
 /// Handles muting posts to prevent them from appearing in user feeds.

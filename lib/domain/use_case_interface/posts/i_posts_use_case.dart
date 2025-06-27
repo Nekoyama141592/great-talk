@@ -1,4 +1,4 @@
-import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 
 /// Abstract interface for posts processing operations.

@@ -2,18 +2,18 @@ import 'dart:convert';
 
 import 'package:great_talk/core/id_core.dart';
 import 'package:great_talk/core/image_core.dart';
-import 'package:great_talk/model/database_schema/custom_complete_text/custom_complete_text.dart';
-import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/presentation/state/create_post/create_post_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/ui_core/image_ui_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
+import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/core/aws_s3_core.dart';
 
 part 'create_post_view_model.g.dart';

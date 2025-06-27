@@ -1,15 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:great_talk/model/database_schema/private_user/private_user.dart';
-import 'package:great_talk/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
+import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/presentation/state/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/provider/repository/auth/auth_repository_provider.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/core/credential_core.dart';
-import 'package:great_talk/repository/auth_repository.dart';
-import 'package:great_talk/repository/database_repository.dart';
+import 'package:great_talk/infrastructure/repository/auth_repository.dart';
+import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

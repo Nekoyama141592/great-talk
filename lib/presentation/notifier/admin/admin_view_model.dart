@@ -1,6 +1,6 @@
 import 'package:great_talk/presentation/state/admin/admin_state.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
-import 'package:great_talk/repository/database_repository.dart';
+import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'admin_view_model.g.dart';

@@ -1,5 +1,5 @@
 import 'package:great_talk/provider/keep_alive/infrastructure/firebase/firebase_remote_config/firebase_remote_config_provider.dart';
-import 'package:great_talk/repository/remote_config_repository.dart';
+import 'package:great_talk/infrastructure/repository/remote_config_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

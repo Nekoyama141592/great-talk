@@ -4,8 +4,8 @@ import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/provider/keep_alive/usecase/user/user_use_case_provider.dart';
-import 'package:great_talk/repository/database_repository.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/repository/database_repository.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'mute_users_view_model.g.dart';
 

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/consts/chat_constants.dart';
-import 'package:great_talk/model/rest_api/open_ai/generate_text/request/generate_text_request.dart';
-import 'package:great_talk/model/rest_api/open_ai/generate_text/request/message/generate_text_request_message.dart';
-import 'package:great_talk/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
+import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/generate_text_request.dart';
+import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/message/generate_text_request_message.dart';
+import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
 import 'package:great_talk/presentation/state/chat/chat_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/purchases/purchases_notifier.dart';
@@ -12,10 +12,10 @@ import 'package:great_talk/provider/repository/api/api_repository_provider.dart'
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/provider/repository/local/local_repository_provider.dart';
 import 'package:great_talk/provider/keep_alive/usecase/file/file_use_case_provider.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/database_schema/text_message/text_message.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
 part 'chat_view_model.g.dart';
 
 @riverpod

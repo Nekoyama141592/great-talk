@@ -15,11 +15,10 @@ analyzer:
     - "lib/consts/env_keys.dart"
     - "lib/infrastructure/firestore/mocks/mock_q_doc.dart"
     - "lib/infrastructure/firestore/mocks/mock_doc.dart"
-    - "lib/model/database_schema/moderation_label/moderation_label.dart"
-    - "lib/model/rest_api/verify_purchase/response/ios_receipt_response/ios_receipt_response.dart"
-    - "lib/model/rest_api/verify_purchase/response/ios_receipt_response/pending_renewal_info/pending_renewal_info.dart"
+    - "lib/infrastructure/model/database_schema/moderation_label/moderation_label.dart"
+    - "lib/infrastructure/model/rest_api/verify_purchase/response/ios_receipt_response/ios_receipt_response.dart"
+    - "lib/infrastructure/model/rest_api/verify_purchase/response/ios_receipt_response/pending_renewal_info/pending_renewal_info.dart"
     - "lib/model/rest_api/open_ai/generate_text/generate_text_response/generate_text_request.dart"
-    - "lib/domain/entity/moderation_label/moderation_label.dart"
     - "test/repository/auth_repository_test.dart"
   errors:
     invalid_annotation_target: ignore

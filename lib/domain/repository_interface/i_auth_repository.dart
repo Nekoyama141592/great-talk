@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 /// Abstract interface for authentication operations including
 /// sign-in, sign-out, and user account management.

@@ -1,13 +1,13 @@
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/presentation/state/tokens/tokens_state.dart';
 import 'package:great_talk/presentation/state/posts/posts_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/provider/keep_alive/usecase/posts/posts_use_case_provider.dart';
 import 'package:great_talk/provider/view_model/refresh_interface.dart';
-import 'package:great_talk/repository/database_repository.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/repository/database_repository.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/posts/posts_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'mute_posts_view_model.g.dart';

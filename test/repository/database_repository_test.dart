@@ -1,15 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:great_talk/model/database_schema/user_update_log/user_update_log.dart';
-import 'package:great_talk/repository/database_repository.dart';
-import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/database_schema/timeline/timeline.dart';
-import 'package:great_talk/model/database_schema/follower/follower.dart';
-import 'package:great_talk/model/database_schema/post_like/post_like.dart';
-import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
-import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log.dart';
+import 'package:great_talk/infrastructure/repository/database_repository.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
+import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 void main() {
   group('DatabaseRepository Enhanced Tests', () {

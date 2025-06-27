@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/model/rest_api/get_object/request/get_object_request.dart';
-import 'package:great_talk/repository/local_repository.dart';
-import 'package:great_talk/repository/api_repository.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/rest_api/get_object/request/get_object_request.dart';
+import 'package:great_talk/infrastructure/repository/local_repository.dart';
+import 'package:great_talk/infrastructure/repository/api_repository.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/file/file_use_case.dart';
 
 class FakeLocalRepository implements LocalRepository {

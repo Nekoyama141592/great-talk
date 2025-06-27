@@ -1,8 +1,8 @@
 import 'package:great_talk/presentation/state/ranking_users/ranking_users_state.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/provider/keep_alive/usecase/user/user_use_case_provider.dart';
-import 'package:great_talk/repository/database_repository.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/repository/database_repository.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'ranking_users_view_model.g.dart';
 

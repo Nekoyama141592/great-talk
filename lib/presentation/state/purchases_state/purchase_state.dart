@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/chat_constants.dart';
 import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
-import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
+import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 
 part 'purchase_state.freezed.dart';
 part 'purchase_state.g.dart';

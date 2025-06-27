@@ -1,6 +1,6 @@
-import 'package:great_talk/model/database_schema/follower/follower.dart';
-import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 import 'package:great_talk/presentation/state/profile/profile_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
@@ -8,8 +8,8 @@ import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/provider/view_model/refresh_interface.dart';
-import 'package:great_talk/repository/database_repository.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/repository/database_repository.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'profile_view_model.g.dart';

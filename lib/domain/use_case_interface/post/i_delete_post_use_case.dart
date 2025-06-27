@@ -1,5 +1,5 @@
-import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 /// Abstract interface for post deletion operations.
 /// Handles deleting posts from the database and cleaning up associated images.
