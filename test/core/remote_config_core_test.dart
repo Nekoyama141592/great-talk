@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/core/remote_config_core.dart';
+import 'package:great_talk/util/remote_config_core.dart';
 
 void main() {
   group('RemoteConfigCore', () {

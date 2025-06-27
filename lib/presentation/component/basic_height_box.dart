@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/size_core.dart';
+import 'package:great_talk/util/size_core.dart';
 
 class BasicHeightBox extends StatelessWidget {
   const BasicHeightBox({super.key});

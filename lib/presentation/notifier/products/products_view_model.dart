@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:great_talk/core/purchases_core.dart';
+import 'package:great_talk/util/purchases_core.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/presentation/state/purchases/purchases_state.dart';
 import 'package:great_talk/presentation/notifier/purchases/purchases_notifier.dart';

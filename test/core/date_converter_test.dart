@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/core/date_converter.dart';
+import 'package:great_talk/util/date_converter.dart';
 
 void main() {
   group('DateConverter', () {

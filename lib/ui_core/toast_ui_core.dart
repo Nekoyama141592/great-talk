@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart' as fluttertoast;
 import 'package:great_talk/consts/colors.dart';
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/core/route_core.dart';
+import 'package:great_talk/util/route_core.dart';
 import 'package:great_talk/consts/msg_constants.dart';
 import 'package:great_talk/presentation/page/common/custom_snack_bar.dart';
 import 'package:great_talk/presentation/page/common/subscribed_copyable_text.dart';

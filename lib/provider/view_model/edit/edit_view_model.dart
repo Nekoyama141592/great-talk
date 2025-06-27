@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:great_talk/core/image_core.dart';
+import 'package:great_talk/util/image_core.dart';
 import 'package:great_talk/presentation/state/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
@@ -14,7 +14,7 @@ import 'package:great_talk/consts/msg_constants.dart';
 import 'package:great_talk/extension/string_extension.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log.dart';
-import 'package:great_talk/core/aws_s3_core.dart';
+import 'package:great_talk/util/aws_s3_core.dart';
 import 'package:great_talk/presentation/state/edit/edit_state.dart';
 
 part 'edit_view_model.g.dart';

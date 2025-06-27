@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/route_core.dart';
+import 'package:great_talk/util/route_core.dart';
 import 'package:great_talk/presentation/state/profile/profile_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/provider/keep_alive/notifier/tokens/tokens_notifier.dart';

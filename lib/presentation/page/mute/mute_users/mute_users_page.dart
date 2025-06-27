@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:great_talk/core/route_core.dart';
+import 'package:great_talk/util/route_core.dart';
 import 'package:great_talk/provider/view_model/mute_users/mute_users_view_model.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';

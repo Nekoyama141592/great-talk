@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/url_redirector.dart';
+import 'package:great_talk/util/url_redirector.dart';
 import 'package:great_talk/presentation/page/main/subscribe/components/policy_button.dart';
 
 class PolicyButtons extends StatelessWidget {

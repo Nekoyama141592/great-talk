@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/route_core.dart';
+import 'package:great_talk/util/route_core.dart';
 import 'package:great_talk/presentation/component/rounded_button.dart';
 import 'package:great_talk/presentation/page/edit/edit_page.dart';
 

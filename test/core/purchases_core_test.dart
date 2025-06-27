@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/core/purchases_core.dart';
+import 'package:great_talk/util/purchases_core.dart';
 import 'package:great_talk/consts/purchases_constants.dart';
 
 void main() {

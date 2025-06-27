@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/core/date_core.dart';
+import 'package:great_talk/util/date_core.dart';
 
 void main() {
   group('DateCore', () {

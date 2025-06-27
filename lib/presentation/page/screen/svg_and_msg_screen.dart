@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:great_talk/core/size_core.dart';
+import 'package:great_talk/util/size_core.dart';
 import 'package:great_talk/presentation/page/screen/gradient_screen.dart';
 
 class SvgAndMsgScreen extends StatelessWidget {
