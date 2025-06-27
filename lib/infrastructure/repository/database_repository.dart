@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:great_talk/consts/firestore_constant.dart';
+import 'package:great_talk/consts/logic/firestore_constant.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';

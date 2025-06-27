@@ -9,8 +9,8 @@ import 'package:great_talk/core/provider/repository/database/database_repository
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/presentation/common/image_ui_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/consts/msg_constants.dart';
+import 'package:great_talk/consts/ui/form_consts.dart';
+import 'package:great_talk/consts/ui/msg_constants.dart';
 import 'package:great_talk/core/extension/string_extension.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log.dart';

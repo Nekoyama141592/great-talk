@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/core/util/purchases_core.dart';
-import 'package:great_talk/consts/purchases_constants.dart';
+import 'package:great_talk/consts/ui/purchase_constants.dart';
 
 void main() {
   group('PurchasesCore', () {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/colors.dart';
+import 'package:great_talk/consts/ui/colors.dart';
 
 class CustomSnackBar {
   static SnackBar success(BuildContext context, String msg) {

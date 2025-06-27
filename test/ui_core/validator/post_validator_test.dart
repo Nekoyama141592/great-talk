@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/consts/form_consts.dart';
+import 'package:great_talk/consts/ui/form_consts.dart';
 import 'package:great_talk/presentation/common/validator/post_validator.dart';
 
 void main() {

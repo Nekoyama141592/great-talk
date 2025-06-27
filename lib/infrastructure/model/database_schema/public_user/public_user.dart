@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/consts/moderate_constant.dart';
-import 'package:great_talk/consts/msg_constants.dart';
+import 'package:great_talk/consts/logic/moderate_constant.dart';
+import 'package:great_talk/consts/ui/msg_constants.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 

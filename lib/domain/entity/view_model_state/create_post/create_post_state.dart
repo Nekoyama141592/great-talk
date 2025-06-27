@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/consts/form_consts.dart';
+import 'package:great_talk/consts/ui/form_consts.dart';
 
 part 'create_post_state.freezed.dart';
 part 'create_post_state.g.dart';

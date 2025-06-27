@@ -1,4 +1,4 @@
-import 'package:great_talk/consts/form_consts.dart';
+import 'package:great_talk/consts/ui/form_consts.dart';
 import 'package:great_talk/core/extension/string_extension.dart';
 
 class PostValidator {
