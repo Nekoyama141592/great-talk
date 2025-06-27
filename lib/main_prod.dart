@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:great_talk/app/run_app.dart';
-import 'app/flavors.dart';
+import 'package:great_talk/application/app/run_app.dart';
+import 'application/app/flavors.dart';
 
 void main() async {
   await runZonedGuarded(

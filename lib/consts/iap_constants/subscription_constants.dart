@@ -1,4 +1,4 @@
-import 'package:great_talk/app/flavors.dart';
+import 'package:great_talk/application/app/flavors.dart';
 
 final isProd = F.appFlavor == Flavor.prod;
 final String kWeekSubscriptionId =
