@@ -1,63 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/like_post_use_case.dart';
 import 'package:great_talk/domain/entity/post/post.dart';
 import 'package:great_talk/domain/entity/post_like/post_like.dart';
 import 'package:great_talk/domain/entity/tokens/like_post_token/like_post_token.dart';
+import '../../repository/fake/fake_database_repository.dart';
 
-class FakeDatabaseRepository implements DatabaseRepository {
-  bool shouldSucceed = true;
-  String? errorMessage;
-  Map<String, dynamic> capturedArguments = {};
-
-  @override
-  FutureResult<bool> createLikePostInfo(
-    String currentUid,
-    Post post,
-    LikePostToken token,
-    PostLike postLike,
-  ) async {
-    capturedArguments = {
-      'method': 'createLikePostInfo',
-      'currentUid': currentUid,
-      'post': post,
-      'token': token,
-      'postLike': postLike,
-    };
-
-    if (shouldSucceed) {
-      return const Result.success(true);
-    } else {
-      return Result.failure(errorMessage ?? 'Database error');
-    }
-  }
-
-  @override
-  FutureResult<bool> deleteLikePostInfo(
-    String currentUid,
-    Post post,
-    String tokenId,
-  ) async {
-    capturedArguments = {
-      'method': 'deleteLikePostInfo',
-      'currentUid': currentUid,
-      'post': post,
-      'tokenId': tokenId,
-    };
-
-    if (shouldSucceed) {
-      return const Result.success(true);
-    } else {
-      return Result.failure(errorMessage ?? 'Database error');
-    }
-  }
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) {
-    return Future.value(const Result.success({}));
-  }
-}
+// Using shared FakeDatabaseRepository
 
 void main() {
   group('LikePostUseCase', () {

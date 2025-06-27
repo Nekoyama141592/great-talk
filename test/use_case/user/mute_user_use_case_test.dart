@@ -1,42 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/application/use_case/user/mute_user_use_case.dart';
 import 'package:great_talk/domain/entity/post/post.dart';
 import 'package:great_talk/domain/entity/user_mute/user_mute.dart';
 import 'package:great_talk/domain/entity/tokens/mute_user_token/mute_user_token.dart';
+import '../../repository/fake/fake_database_repository.dart';
 
-class FakeDatabaseRepository implements DatabaseRepository {
-  bool shouldSucceed = true;
-  String? errorMessage;
-  Map<String, dynamic> capturedArguments = {};
-
-  @override
-  FutureResult<bool> createMuteUserInfo(
-    String currentUid,
-    String passiveUid,
-    MuteUserToken token,
-    UserMute userMute,
-  ) async {
-    capturedArguments = {
-      'currentUid': currentUid,
-      'passiveUid': passiveUid,
-      'token': token,
-      'userMute': userMute,
-    };
-
-    if (shouldSucceed) {
-      return const Result.success(true);
-    } else {
-      return Result.failure(errorMessage ?? 'Database error');
-    }
-  }
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) {
-    return Future.value(const Result.success({}));
-  }
-}
+// Using shared FakeDatabaseRepository
 
 void main() {
   group('MuteUserUseCase', () {
@@ -122,6 +92,7 @@ void main() {
         );
 
         final capturedArgs = fakeDatabaseRepository.capturedArguments;
+        expect(capturedArgs['method'], equals('createMuteUserInfo'));
         expect(capturedArgs['currentUid'], equals(testCurrentUid));
         expect(capturedArgs['passiveUid'], equals(testPassiveUid));
         expect(capturedArgs['token'], equals(testToken));

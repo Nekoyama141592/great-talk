@@ -1,36 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/api_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/delete_post_use_case.dart';
 import 'package:great_talk/domain/entity/post/post.dart';
 import 'package:great_talk/domain/entity/detected_image/detected_image.dart';
 import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
+import '../../repository/fake/fake_database_repository.dart';
 
-class FakeDatabaseRepository implements DatabaseRepository {
-  bool shouldSucceed = true;
-  String? errorMessage;
-  Map<String, dynamic> capturedArguments = {};
-
-  @override
-  FutureResult<bool> deletePost(Post post) async {
-    capturedArguments = {
-      'method': 'deletePost',
-      'post': post,
-    };
-
-    if (shouldSucceed) {
-      return const Result.success(true);
-    } else {
-      return Result.failure(errorMessage ?? 'Database error');
-    }
-  }
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) {
-    return Future.value(const Result.success({}));
-  }
-}
+// Using shared FakeDatabaseRepository
 
 class FakeApiRepository implements ApiRepository {
   bool shouldSucceed = true;
