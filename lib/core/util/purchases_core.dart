@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
+import 'package:great_talk/presentation/common/purchase_ui_core.dart';
 import 'package:great_talk/consts/purchases_constants.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -23,8 +23,8 @@ class PurchasesCore {
     )..pendingCompletePurchase = json['pendingCompletePurchase'] ?? false;
   }
 
-  static String basicItemId() => kMonthSubscriptionId;
-  static String _premiumItenId() => kPremiumSubscriptionId;
+  static String basicItemId() => PurchaseUiCore.kMonthSubscriptionId;
+  static String _premiumItenId() => PurchaseUiCore.kPremiumSubscriptionId;
 
   static List<String> _itemIds() => [basicItemId(), _premiumItenId()];
   static Set<String> productIds() {

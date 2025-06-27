@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
+import 'package:great_talk/presentation/common/purchase_ui_core.dart';
 import 'package:great_talk/core/provider/view_model/products/products_view_model.dart';
 import 'package:great_talk/presentation/common/product_ui_core.dart';
 import 'package:great_talk/presentation/common/texts.dart';
@@ -25,7 +25,7 @@ class ProductList extends ConsumerWidget {
         final productList =
             state.products.map((ProductDetails productDetails) {
               final descriptions =
-                  productDetails.id == kMonthSubscriptionId
+                  productDetails.id == PurchaseUiCore.kMonthSubscriptionId
                       ? const [
                         PlanDescription(text: '無制限のチャット'),
                         PlanDescription(text: 'コピー可能な説明や返答'),

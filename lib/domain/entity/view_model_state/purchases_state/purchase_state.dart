@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/chat_constants.dart';
-import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
+import 'package:great_talk/presentation/common/purchase_ui_core.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 
 part 'purchase_state.freezed.dart';
@@ -16,7 +16,7 @@ abstract class PurchaseState with _$PurchaseState {
       _$PurchaseStateFromJson(json);
   bool isSubscribing() => verifiedPurchases.any((e) => e.isValid());
   bool isPremiumSubscribing() => verifiedPurchases
-      .where((e) => e.productId == kPremiumSubscriptionId)
+      .where((e) => e.productId == PurchaseUiCore.kPremiumSubscriptionId)
       .any((e) => e.isValid());
   String model() =>
       isPremiumSubscribing()
