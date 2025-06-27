@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
@@ -336,7 +335,7 @@ void main() {
         final prefs = await SharedPreferences.getInstance();
         localRepository = LocalRepository(prefs);
 
-        await prefs.setString(PrefsKey.verifiedPurchases.name, 'invalid_json');
+        await prefs.setString('verifiedPurchases', 'invalid_json');
 
         // Suppress debug print during test
         final originalDebugPrint = debugPrint;

@@ -1,14 +1,26 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/extension/shared_preferences_extension.dart';
 import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/infrastructure/model/local_schema/save_text_msg/save_text_msg.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+enum PrefsKey {
+  // ${contentId}で各々のChat履歴
+  // ${fileName}でキャッシュされた画像
+  chatCountToday,
+  initialPeople,
+  isAgreedToTerms,
+  isDarkTheme,
+  isV3initialized,
+  lastChatDate,
+  latestReceipt,
+  needFirstMessage,
+  // Repository
+  verifiedPurchases,
+}
 class LocalRepository {
   LocalRepository(this.prefs);
   final SharedPreferences prefs;

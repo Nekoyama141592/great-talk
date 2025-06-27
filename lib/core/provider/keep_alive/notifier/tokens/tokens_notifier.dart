@@ -5,7 +5,7 @@ import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_prov
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:great_talk/consts/enums.dart';
+import 'package:great_talk/domain/value/token_type.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
