@@ -8,8 +8,8 @@ void main() {
       test('should calculate discount percentage correctly', () {
         final result = PurchasesCore.calculate();
         const expectedX =
-            PurchasesConstants.annualPrice /
-            (PurchasesConstants.monthPrice * 12);
+            PurchaseConstants.annualPrice /
+            (PurchaseConstants.monthPrice * 12);
         const expectedY = 1.0 - expectedX;
         final expectedZ = (expectedY * 100).round();
 
@@ -43,8 +43,8 @@ void main() {
       test('should represent annual savings percentage', () {
         final discountPercentage = PurchasesCore.calculate();
 
-        final monthlyTotal = PurchasesConstants.monthPrice * 12;
-        final annualPrice = PurchasesConstants.annualPrice;
+        final monthlyTotal = PurchaseConstants.monthPrice * 12;
+        final annualPrice = PurchaseConstants.annualPrice;
         final savings = monthlyTotal - annualPrice;
         final savingsPercentage = (savings / monthlyTotal * 100).round();
 
@@ -60,8 +60,8 @@ void main() {
 
         // Verify the intermediate calculation matches expected behavior
         final x =
-            PurchasesConstants.annualPrice /
-            (PurchasesConstants.monthPrice * 12);
+            PurchaseConstants.annualPrice /
+            (PurchaseConstants.monthPrice * 12);
         final y = 1.0 - x;
         final z = (y * 100).round();
 
@@ -78,8 +78,8 @@ void main() {
         expect(discountPercentage, lessThan(50));
 
         // Annual plan should be cheaper than monthly
-        final monthlyTotal = PurchasesConstants.monthPrice * 12;
-        final annualPrice = PurchasesConstants.annualPrice;
+        final monthlyTotal = PurchaseConstants.monthPrice * 12;
+        final annualPrice = PurchaseConstants.annualPrice;
         expect(annualPrice, lessThan(monthlyTotal));
       });
 
@@ -100,8 +100,8 @@ void main() {
         final result = PurchasesCore.calculate();
 
         // Calculate step by step to verify rounding
-        const monthTotal = PurchasesConstants.monthPrice * 12; // 11760
-        const annual = PurchasesConstants.annualPrice; // 7980
+        const monthTotal = PurchaseConstants.monthPrice * 12; // 11760
+        const annual = PurchaseConstants.annualPrice; // 7980
         const ratio = annual / monthTotal; // 0.6785714...
         const discount = 1.0 - ratio; // 0.3214285...
         final percentage = (discount * 100).round(); // 32
@@ -128,8 +128,8 @@ void main() {
 
         // Recalculate with high precision
         const x =
-            PurchasesConstants.annualPrice /
-            (PurchasesConstants.monthPrice * 12);
+            PurchaseConstants.annualPrice /
+            (PurchaseConstants.monthPrice * 12);
         expect(x, closeTo(0.6785714285714286, 0.0000000001));
 
         const y = 1.0 - x;

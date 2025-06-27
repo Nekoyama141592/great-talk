@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:great_talk/presentation/common/purchase_ui_core.dart';
-import 'package:great_talk/consts/purchases_constants.dart';
+import 'package:great_talk/consts/purchase_constants.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
@@ -36,19 +36,19 @@ class PurchasesCore {
     return [
       ProductDetails(
         id: basicItemId(),
-        title: PurchasesConstants.monthTitle,
+        title: PurchaseConstants.monthTitle,
         description: "一月ごとに課金されます",
-        price: "¥${PurchasesConstants.monthPrice.floor()}",
-        rawPrice: PurchasesConstants.monthPrice,
+        price: "¥${PurchaseConstants.monthPrice.floor()}",
+        rawPrice: PurchaseConstants.monthPrice,
         currencyCode: "JPY",
         currencySymbol: "¥",
       ),
       ProductDetails(
         id: _premiumItenId(),
-        title: PurchasesConstants.annualTitle,
+        title: PurchaseConstants.annualTitle,
         description: "一年ごとに課金されます",
-        price: "¥${PurchasesConstants.annualPrice.floor()}",
-        rawPrice: PurchasesConstants.annualPrice,
+        price: "¥${PurchaseConstants.annualPrice.floor()}",
+        rawPrice: PurchaseConstants.annualPrice,
         currencyCode: "JPY",
         currencySymbol: "¥",
       ),
@@ -94,7 +94,7 @@ class PurchasesCore {
 
   static int calculate() {
     final x =
-        PurchasesConstants.annualPrice / (PurchasesConstants.monthPrice * 12);
+        PurchaseConstants.annualPrice / (PurchaseConstants.monthPrice * 12);
     final y = 1.0 - x; // 17.00004
     final z = (y * 100).round(); // 17を返したい
     return z;
