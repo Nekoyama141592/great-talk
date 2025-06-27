@@ -95,7 +95,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     if (bucketName.isEmpty || fileName.isEmpty) return null;
     final image = await ref
         .read(fileUseCaseProvider)
-        .getS3Image(bucketName, fileName);
+        .getObject(bucketName, fileName);
     return image;
   }
 

@@ -5,7 +5,7 @@ import 'package:great_talk/extension/number_format_extension.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
-import 'package:great_talk/provider/keep_alive/usecase/post/post_use_case_provider.dart';
+import 'package:great_talk/provider/keep_alive/usecase/post/like_post/like_post_use_case_provider.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -43,12 +43,8 @@ class PostLikeButton extends HookConsumerWidget {
                   if (deleteToken == null) return;
                   likeCount.value--; // 表示する数字を1つ下げる
                   final result = await ref
-                      .read(postUsecaseProvider)
-                      .onUnLikeButtonPressed(
-                        currentUid,
-                        deleteToken.tokenId,
-                        post,
-                      );
+                      .read(likePostUseCaseProvider)
+                      .unLikePost(currentUid, deleteToken.tokenId, post);
                   result.when(
                     success: (_) {},
                     failure: (_) {
@@ -72,8 +68,8 @@ class PostLikeButton extends HookConsumerWidget {
                   if (token == null) return;
                   likeCount.value++; // 表示する数字を1つ上げる
                   final result = await ref
-                      .read(postUsecaseProvider)
-                      .onLikeButtonPressed(currentUid, token, post);
+                      .read(likePostUseCaseProvider)
+                      .likePost(currentUid, token, post);
                   result.when(
                     success: (_) {},
                     failure: (_) {

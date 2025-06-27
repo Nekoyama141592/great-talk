@@ -102,46 +102,18 @@ class ChatRouteArgs {
 
 /// generated route for
 /// [CreatePostPage]
-class CreatePostRoute extends PageRouteInfo<CreatePostRouteArgs> {
-  CreatePostRoute({Key? key, List<PageRouteInfo>? children})
-    : super(
-        CreatePostRoute.name,
-        args: CreatePostRouteArgs(key: key),
-        initialChildren: children,
-      );
+class CreatePostRoute extends PageRouteInfo<void> {
+  const CreatePostRoute({List<PageRouteInfo>? children})
+    : super(CreatePostRoute.name, initialChildren: children);
 
   static const String name = 'CreatePostRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<CreatePostRouteArgs>(
-        orElse: () => const CreatePostRouteArgs(),
-      );
-      return CreatePostPage(key: args.key);
+      return const CreatePostPage();
     },
   );
-}
-
-class CreatePostRouteArgs {
-  const CreatePostRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'CreatePostRouteArgs{key: $key}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! CreatePostRouteArgs) return false;
-    return key == other.key;
-  }
-
-  @override
-  int get hashCode => key.hashCode;
 }
 
 /// generated route for

@@ -3,7 +3,7 @@ import 'package:great_talk/model/rest_api/get_object/request/get_object_request.
 import 'package:great_talk/repository/local_repository.dart';
 import 'package:great_talk/repository/api_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/use_case/file_use_case.dart';
+import 'package:great_talk/application/use_case/file/file_use_case.dart';
 
 class FakeLocalRepository implements LocalRepository {
   final Map<String, String> _cache = {};
@@ -70,7 +70,7 @@ void main() {
       const testImageData = 'base64encodedimagedata';
 
       test('should return null when fileName is empty', () async {
-        final result = await fileUseCase.getS3Image(testBucketName, '');
+        final result = await fileUseCase.getObject(testBucketName, '');
 
         expect(result, isNull);
       });
@@ -78,7 +78,7 @@ void main() {
       test('should return cached image when available', () async {
         fakeLocalRepository._cache[testFileName] = testImageData;
 
-        final result = await fileUseCase.getS3Image(
+        final result = await fileUseCase.getObject(
           testBucketName,
           testFileName,
         );
@@ -92,7 +92,7 @@ void main() {
           fakeApiRepository.shouldSucceed = true;
           fakeApiRepository.responseData = testImageData;
 
-          final result = await fileUseCase.getS3Image(
+          final result = await fileUseCase.getObject(
             testBucketName,
             testFileName,
           );
@@ -109,7 +109,7 @@ void main() {
         fakeApiRepository.shouldSucceed = false;
         fakeApiRepository.errorMessage = 'Network error';
 
-        final result = await fileUseCase.getS3Image(
+        final result = await fileUseCase.getObject(
           testBucketName,
           testFileName,
         );
@@ -142,7 +142,7 @@ void main() {
         fakeApiRepository.responseData = testImageData;
 
         // First call - should fetch from API and cache
-        final firstResult = await fileUseCase.getS3Image(
+        final firstResult = await fileUseCase.getObject(
           testBucketName,
           testFileName,
         );
@@ -152,7 +152,7 @@ void main() {
         fakeApiRepository.shouldSucceed = false;
 
         // Second call - should use cache
-        final secondResult = await fileUseCase.getS3Image(
+        final secondResult = await fileUseCase.getObject(
           testBucketName,
           testFileName,
         );
@@ -168,7 +168,7 @@ void main() {
         fakeLocalRepository.shouldThrowError = true;
 
         expect(
-          () => fileUseCase.getS3Image(testBucketName, testFileName),
+          () => fileUseCase.getObject(testBucketName, testFileName),
           throwsA(isA<Exception>()),
         );
       });
@@ -177,7 +177,7 @@ void main() {
         fakeApiRepository.shouldSucceed = false;
         fakeApiRepository.errorMessage = 'API error';
 
-        final result = await fileUseCase.getS3Image(
+        final result = await fileUseCase.getObject(
           testBucketName,
           testFileName,
         );
@@ -191,7 +191,7 @@ void main() {
         const result = 'test_data';
         fakeLocalRepository._cache['test.jpg'] = result;
 
-        final actual = await fileUseCase.getS3Image('', 'test.jpg');
+        final actual = await fileUseCase.getObject('', 'test.jpg');
 
         expect(actual, equals(result));
       });
@@ -202,7 +202,7 @@ void main() {
 
         fakeLocalRepository._cache[specialFileName] = testData;
 
-        final result = await fileUseCase.getS3Image('bucket', specialFileName);
+        final result = await fileUseCase.getObject('bucket', specialFileName);
 
         expect(result, equals(testData));
       });

@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:great_talk/core/image_core.dart';
 import 'package:great_talk/presentation/state/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/ui_core/image_ui_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/consts/msg_constants.dart';
@@ -13,7 +15,6 @@ import 'package:great_talk/extension/string_extension.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/model/database_schema/user_update_log/user_update_log.dart';
 import 'package:great_talk/core/aws_s3_core.dart';
-import 'package:great_talk/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/presentation/state/edit/edit_state.dart';
 
 part 'edit_view_model.g.dart';
@@ -38,12 +39,11 @@ class EditViewModel extends _$EditViewModel {
 
   /// 画像選択時の処理
   FutureResult<bool> onImagePickButtonPressed() async {
-    final useCase = ref.read(fileUseCaseProvider);
-    final result = await useCase.getCompressedImage();
+    final result = await ImageCore.getCompressedImage();
     if (result == null) return const Result.failure('画像が取得できませんでした');
-    final info = await useCase.getImageInfo(result);
+    final info = await ImageCore.imageInfo(result);
     if (info.isNotSquare) {
-      return Result.failure(useCase.squareImageRequestMsg);
+      return Result.failure(ImageUiCore.squareImageRequestMsg);
     }
     if (info.isSmall) {
       return const Result.failure(FormConsts.bigImageRequestMsg);

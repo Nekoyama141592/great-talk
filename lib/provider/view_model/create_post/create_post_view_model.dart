@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:great_talk/core/id_core.dart';
+import 'package:great_talk/core/image_core.dart';
 import 'package:great_talk/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/model/database_schema/post/post.dart';
 import 'package:great_talk/presentation/state/create_post/create_post_state.dart';
@@ -8,12 +9,12 @@ import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.
 import 'package:great_talk/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/ui_core/image_ui_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/core/aws_s3_core.dart';
-import 'package:great_talk/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 
 part 'create_post_view_model.g.dart';
 
@@ -46,13 +47,12 @@ class CreatePostViewModel extends _$CreatePostViewModel {
 
   // 画像選択処理
   Future<void> onImagePickButtonPressed() async {
-    final usecase = ref.read(fileUseCaseProvider);
-    final result = await usecase.getCompressedImage();
+    final result = await ImageCore.getCompressedImage();
     if (result == null) return;
 
-    final info = await usecase.getImageInfo(result);
+    final info = await ImageCore.imageInfo(result);
     if (info.isNotSquare) {
-      ToastUiCore.showErrorFlutterToast(usecase.squareImageRequestMsg);
+      ToastUiCore.showErrorFlutterToast(ImageUiCore.squareImageRequestMsg);
       return;
     }
     if (info.isSmall) {

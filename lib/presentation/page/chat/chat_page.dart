@@ -10,7 +10,9 @@ import 'package:great_talk/presentation/state/chat/chat_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
-import 'package:great_talk/provider/keep_alive/usecase/post/post_use_case_provider.dart';
+import 'package:great_talk/provider/keep_alive/usecase/post/mute_post/mute_post_use_case_provider.dart';
+import 'package:great_talk/provider/keep_alive/usecase/user/mute_user/mute_user_use_case_provider.dart';
+import 'package:great_talk/provider/keep_alive/usecase/post/delete_post/delete_post_use_case_provider.dart';
 import 'package:great_talk/core/route_core.dart';
 import 'package:great_talk/provider/view_model/chat/chat_view_model.dart';
 import 'package:great_talk/ui_core/chat_ui_core.dart';
@@ -67,7 +69,7 @@ class ChatPage extends HookConsumerWidget {
       final token = ref.read(tokensNotifierProvider.notifier).addMutePost(post);
       if (token == null) return;
       final result = await ref
-          .read(postUsecaseProvider)
+          .read(mutePostUseCaseProvider)
           .mutePost(post, uid, token);
       result.when(
         success: (_) {
@@ -97,7 +99,7 @@ class ChatPage extends HookConsumerWidget {
                         .read(tokensNotifierProvider.notifier)
                         .addDeletePostId(postId); // 楽観的に追加する
                     final result = await ref
-                        .read(postUsecaseProvider)
+                        .read(deletePostUseCaseProvider)
                         .deletePost(post);
                     result.when(
                       success: (_) async {
@@ -120,7 +122,7 @@ class ChatPage extends HookConsumerWidget {
               else
                 AppBarAction(
                   onTap: () {
-                    final notifier = ref.read(postUsecaseProvider);
+                    final muteUserNotifier = ref.read(muteUserUseCaseProvider);
                     PostUiCore.onReportButtonPressed(
                       context: context,
                       mutePost: (innerContext) => mutePost(innerContext, post),
@@ -134,7 +136,7 @@ class ChatPage extends HookConsumerWidget {
                           RouteCore.back(innerContext);
                           return;
                         }
-                        final result = await notifier.muteUser(
+                        final result = await muteUserNotifier.muteUser(
                           post,
                           currentUserId,
                           token,
