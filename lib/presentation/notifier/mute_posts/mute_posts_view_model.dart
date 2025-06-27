@@ -1,4 +1,4 @@
-import 'package:great_talk/consts/logic/firestore_constant.dart';
+import 'package:great_talk/core/constant/firestore_constant.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/presentation/state/tokens/tokens_state.dart';
 import 'package:great_talk/presentation/state/posts/posts_state.dart';

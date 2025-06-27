@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/ui/colors.dart';
+import 'package:great_talk/presentation/constant/colors.dart';
 import 'package:great_talk/core/util/route_core.dart';
 import 'package:great_talk/presentation/page/create_post/create_post_page.dart';
 

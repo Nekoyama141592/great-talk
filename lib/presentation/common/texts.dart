@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/ui/colors.dart';
+import 'package:great_talk/presentation/constant/colors.dart';
 import 'package:great_talk/core/util/size_core.dart';
 
 class EllipsisText extends Text {

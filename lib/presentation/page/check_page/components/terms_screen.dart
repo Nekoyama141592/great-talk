@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/ui/msg_constants.dart';
+import 'package:great_talk/presentation/constant/msg_constants.dart';
 import 'package:great_talk/core/util/url_redirector.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/terms/terms_notifier.dart';
 import 'package:great_talk/presentation/component/rounded_button.dart';

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:great_talk/consts/ui/form_consts.dart';
+import 'package:great_talk/presentation/constant/form_consts.dart';
 
 class ImageUiCore {
   static String get squareImageRequestMsg =>

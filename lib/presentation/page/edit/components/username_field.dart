@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/ui/form_consts.dart';
+import 'package:great_talk/presentation/constant/form_consts.dart';
 import 'package:great_talk/core/extension/string_extension.dart';
 import 'package:great_talk/presentation/common/form_ui_core.dart';
 import 'package:great_talk/presentation/page/create_post/components/form_label.dart';

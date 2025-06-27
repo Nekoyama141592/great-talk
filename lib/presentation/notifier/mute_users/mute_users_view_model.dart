@@ -1,4 +1,4 @@
-import 'package:great_talk/consts/logic/firestore_constant.dart';
+import 'package:great_talk/core/constant/firestore_constant.dart';
 import 'package:great_talk/presentation/state/mute_users/mute_users_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';

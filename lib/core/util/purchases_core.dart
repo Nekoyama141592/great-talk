@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:great_talk/presentation/common/purchase_ui_core.dart';
-import 'package:great_talk/consts/ui/purchase_constants.dart';
+import 'package:great_talk/presentation/constant/purchase_constants.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';

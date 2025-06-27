@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart' as fluttertoast;
-import 'package:great_talk/consts/ui/colors.dart';
-import 'package:great_talk/consts/ui/toast_constant.dart';
+import 'package:great_talk/presentation/constant/colors.dart';
+import 'package:great_talk/presentation/constant/toast_constant.dart';
 import 'package:great_talk/core/util/route_core.dart';
-import 'package:great_talk/consts/ui/msg_constants.dart';
+import 'package:great_talk/presentation/constant/msg_constants.dart';
 import 'package:great_talk/presentation/page/common/custom_snack_bar.dart';
 import 'package:great_talk/presentation/page/common/subscribed_copyable_text.dart';
 

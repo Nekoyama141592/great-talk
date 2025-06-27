@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:great_talk/consts/ui/form_consts.dart';
+import 'package:great_talk/presentation/constant/form_consts.dart';
 import 'package:great_talk/infrastructure/model/database_schema/image_info/original_image_info.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_cropper/image_cropper.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/ui/tab_constant.dart';
+import 'package:great_talk/presentation/constant/tab_constant.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/notification/notification_provider.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/purchases/purchases_notifier.dart';

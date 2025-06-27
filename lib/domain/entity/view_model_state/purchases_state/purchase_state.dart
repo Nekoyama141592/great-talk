@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/consts/logic/chat_constants.dart';
+import 'package:great_talk/core/constant/chat_constants.dart';
 import 'package:great_talk/presentation/common/purchase_ui_core.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 

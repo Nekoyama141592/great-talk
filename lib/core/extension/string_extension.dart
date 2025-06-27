@@ -1,4 +1,4 @@
-import 'package:great_talk/consts/ui/form_consts.dart';
+import 'package:great_talk/presentation/constant/form_consts.dart';
 import 'package:great_talk/core/extension/double_extensions.dart';
 
 extension StringExtension on String {

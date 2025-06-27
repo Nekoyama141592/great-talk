@@ -12,7 +12,7 @@ import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/presentation/common/image_ui_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/presentation/common/toast_ui_core.dart';
-import 'package:great_talk/consts/ui/form_consts.dart';
+import 'package:great_talk/presentation/constant/form_consts.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/core/util/aws_s3_core.dart';
 
