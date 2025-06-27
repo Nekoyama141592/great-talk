@@ -3,19 +3,19 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 
 class PurchaseUiCore {
   static bool get _isProd => F.appFlavor == Flavor.prod;
-  
+
   static String get kWeekSubscriptionId =>
       _isProd ? 'subscription_week' : "dev_subscription_week";
-      
+
   static String get kMonthSubscriptionId =>
       _isProd ? 'subscription_month' : "dev_subscription_month";
-      
+
   static String get kAnnualSubscriptionId =>
       _isProd ? 'subscription_annual' : "dev_subscription_annual";
-      
+
   static String get kPremiumSubscriptionId =>
       _isProd ? 'premium_month' : "dev_premium_month";
-      
+
   static List<String> get kProductIds => <String>[
     kMonthSubscriptionId,
     kPremiumSubscriptionId,

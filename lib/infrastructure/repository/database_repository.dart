@@ -62,10 +62,12 @@ class DatabaseRepository {
       privateUserDocRef(currentUid).collection("tokens");
   ColRef timelinesColRef(DocRef userRef) => userRef.collection('timelines');
   // Query
-  MapQuery usersQuery() => usersColRef().limit(FirestoreConstant.oneTimeReadCount);
+  MapQuery usersQuery() =>
+      usersColRef().limit(FirestoreConstant.oneTimeReadCount);
   MapQuery userPostsQuery(String uid) =>
       postsColRef(uid).limit(FirestoreConstant.oneTimeReadCount);
-  MapQuery postsQuery() => postsCollectionGroup().limit(FirestoreConstant.oneTimeReadCount);
+  MapQuery postsQuery() =>
+      postsCollectionGroup().limit(FirestoreConstant.oneTimeReadCount);
   MapQuery postsByWhereIn(List<String> postIds) =>
       postsQuery().where('postId', whereIn: postIds);
   MapQuery userPostsByNewest(String uid) =>
@@ -74,9 +76,9 @@ class DatabaseRepository {
       postsQuery().orderBy('msgCount', descending: true);
   MapQuery postsByNewest() =>
       postsQuery().orderBy('createdAt', descending: true);
-  MapQuery timelinesQuery(String uid) => timelinesColRef(
-    userDocRef(uid),
-  ).orderBy('createdAt', descending: true).limit(FirestoreConstant.whereInLimit);
+  MapQuery timelinesQuery(String uid) => timelinesColRef(userDocRef(uid))
+      .orderBy('createdAt', descending: true)
+      .limit(FirestoreConstant.whereInLimit);
   MapQuery timelinePostsQuery(List<String> timelinePostIds) =>
       postsQuery().where('postId', whereIn: timelinePostIds);
   MapQuery usersByWhereIn(List<String> uids) =>

@@ -31,7 +31,10 @@ class MuteUsersViewModel extends _$MuteUsersViewModel {
     final muteUids = ref.read(tokensNotifierProvider).value?.muteUids ?? [];
     if (muteUids.length > currentDocsLength) {
       final remaining = muteUids.length - currentDocsLength;
-      final limit = remaining >= FirestoreConstant.whereInLimit ? FirestoreConstant.whereInLimit : remaining;
+      final limit =
+          remaining >= FirestoreConstant.whereInLimit
+              ? FirestoreConstant.whereInLimit
+              : remaining;
       return muteUids.sublist(currentDocsLength, currentDocsLength + limit);
     }
     return [];

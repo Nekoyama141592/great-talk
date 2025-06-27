@@ -37,7 +37,8 @@ class MyHomePage extends HookConsumerWidget {
               : null,
       floatingActionButton: MainFloatingActionButton(
         isShow:
-            pageIndex.value == TabConstant.rankingIndex || pageIndex.value == TabConstant.feedsIndex,
+            pageIndex.value == TabConstant.rankingIndex ||
+            pageIndex.value == TabConstant.feedsIndex,
       ),
       drawer: const OriginalDrawer(),
       bottomNavigationBar: BottomNavigationBar(

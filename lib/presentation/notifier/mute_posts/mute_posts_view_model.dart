@@ -36,7 +36,10 @@ class MutePostsViewModel extends _$MutePostsViewModel
     final mutePostIds = _tokensState().mutePostIds;
     if (mutePostIds.length > currentDocsLength) {
       final remaining = mutePostIds.length - currentDocsLength;
-      final limit = remaining >= FirestoreConstant.whereInLimit ? FirestoreConstant.whereInLimit : remaining;
+      final limit =
+          remaining >= FirestoreConstant.whereInLimit
+              ? FirestoreConstant.whereInLimit
+              : remaining;
       return mutePostIds.sublist(currentDocsLength, currentDocsLength + limit);
     }
     return [];

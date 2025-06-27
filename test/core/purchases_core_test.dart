@@ -8,8 +8,7 @@ void main() {
       test('should calculate discount percentage correctly', () {
         final result = PurchasesCore.calculate();
         const expectedX =
-            PurchaseConstants.annualPrice /
-            (PurchaseConstants.monthPrice * 12);
+            PurchaseConstants.annualPrice / (PurchaseConstants.monthPrice * 12);
         const expectedY = 1.0 - expectedX;
         final expectedZ = (expectedY * 100).round();
 
@@ -60,8 +59,7 @@ void main() {
 
         // Verify the intermediate calculation matches expected behavior
         final x =
-            PurchaseConstants.annualPrice /
-            (PurchaseConstants.monthPrice * 12);
+            PurchaseConstants.annualPrice / (PurchaseConstants.monthPrice * 12);
         final y = 1.0 - x;
         final z = (y * 100).round();
 
@@ -128,8 +126,7 @@ void main() {
 
         // Recalculate with high precision
         const x =
-            PurchaseConstants.annualPrice /
-            (PurchaseConstants.monthPrice * 12);
+            PurchaseConstants.annualPrice / (PurchaseConstants.monthPrice * 12);
         expect(x, closeTo(0.6785714285714286, 0.0000000001));
 
         const y = 1.0 - x;

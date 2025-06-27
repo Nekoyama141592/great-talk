@@ -13,8 +13,8 @@ class MockFirebaseAuthWithExceptions extends MockFirebaseAuth {
     Map<String, FirebaseAuthException>? authExceptions,
     super.signedIn = false,
     super.mockUser,
-  })  : _signInException = signInException,
-        _signOutException = signOutException;
+  }) : _signInException = signInException,
+       _signOutException = signOutException;
 
   @override
   Future<UserCredential> signInAnonymously() async {
