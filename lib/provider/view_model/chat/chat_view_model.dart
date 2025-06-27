@@ -14,8 +14,8 @@ import 'package:great_talk/provider/repository/local/local_repository_provider.d
 import 'package:great_talk/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:great_talk/domain/entity/database_schema/post/post.dart';
-import 'package:great_talk/domain/entity/database_schema/text_message/text_message.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/model/database_schema/text_message/text_message.dart';
 part 'chat_view_model.g.dart';
 
 @riverpod

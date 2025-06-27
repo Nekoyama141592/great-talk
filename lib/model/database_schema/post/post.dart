@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/ints.dart';
 import 'package:great_talk/core/search_core.dart';
-import 'package:great_talk/domain/entity/database_schema/custom_complete_text/custom_complete_text.dart';
-import 'package:great_talk/domain/entity/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/domain/entity/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
 
 part 'post.freezed.dart';
 part 'post.g.dart';

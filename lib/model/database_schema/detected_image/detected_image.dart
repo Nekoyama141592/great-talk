@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/domain/entity/database_schema/moderation_label/moderation_label.dart';
+import 'package:great_talk/model/database_schema/moderation_label/moderation_label.dart';
 
 part 'detected_image.freezed.dart';
 part 'detected_image.g.dart';

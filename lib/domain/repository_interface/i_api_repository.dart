@@ -1,4 +1,4 @@
-import 'package:great_talk/domain/entity/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
 import 'package:great_talk/model/rest_api/get_object/request/get_object_request.dart';
 import 'package:great_talk/model/rest_api/open_ai/generate_image/response/generate_image_response.dart';

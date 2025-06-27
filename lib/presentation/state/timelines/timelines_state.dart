@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/domain/entity/database_schema/post/post.dart';
-import 'package:great_talk/domain/entity/database_schema/timeline/timeline.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 
 part 'timelines_state.freezed.dart';

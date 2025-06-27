@@ -1,7 +1,7 @@
 import 'package:great_talk/repository/result/result.dart';
-import 'package:great_talk/domain/entity/database_schema/post/post.dart';
-import 'package:great_talk/domain/entity/database_schema/tokens/mute_user_token/mute_user_token.dart';
-import 'package:great_talk/domain/entity/database_schema/user_mute/user_mute.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/repository/database_repository.dart';
 
 class MuteUserUseCase {

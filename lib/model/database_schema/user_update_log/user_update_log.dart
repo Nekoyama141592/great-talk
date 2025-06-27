@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/search_core.dart';
-import 'package:great_talk/domain/entity/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 
 part 'user_update_log.freezed.dart';
 part 'user_update_log.g.dart';

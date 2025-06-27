@@ -5,8 +5,8 @@ import 'package:great_talk/repository/api_repository.dart';
 import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/delete_post_use_case.dart';
-import 'package:great_talk/domain/entity/database_schema/post/post.dart';
-import 'package:great_talk/domain/entity/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
 
 class FakeApiRepository implements ApiRepository {

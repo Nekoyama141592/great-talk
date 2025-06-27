@@ -3,9 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/consts/enums.dart';
 import 'package:great_talk/core/id_core.dart';
 import 'package:great_talk/extension/custom_date_time_formatting.dart';
-import 'package:great_talk/domain/entity/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/domain/entity/database_schema/post/post.dart';
-import 'package:great_talk/domain/entity/local_schema/save_text_msg/save_text_msg.dart';
+import 'package:great_talk/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/model/database_schema/post/post.dart';
+import 'package:great_talk/model/local_schema/save_text_msg/save_text_msg.dart';
 
 part 'text_message.freezed.dart';
 part 'text_message.g.dart';

@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/domain/entity/database_schema/tokens/following_token/following_token.dart';
-import 'package:great_talk/domain/entity/database_schema/tokens/like_post_token/like_post_token.dart';
-import 'package:great_talk/domain/entity/database_schema/tokens/mute_post_token/mute_post_token.dart';
-import 'package:great_talk/domain/entity/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/model/database_schema/tokens/following_token/following_token.dart';
+import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
+import 'package:great_talk/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 
 part 'tokens_state.freezed.dart';
 part 'tokens_state.g.dart';
