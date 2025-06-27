@@ -1,15 +1,15 @@
-import 'package:great_talk/domain/entity/follower/follower.dart';
-import 'package:great_talk/domain/entity/post/post.dart';
-import 'package:great_talk/domain/entity/post_like/post_like.dart';
-import 'package:great_talk/domain/entity/post_mute/post_mute.dart';
-import 'package:great_talk/domain/entity/private_user/private_user.dart';
-import 'package:great_talk/domain/entity/public_user/public_user.dart';
-import 'package:great_talk/domain/entity/timeline/timeline.dart';
-import 'package:great_talk/domain/entity/tokens/following_token/following_token.dart';
-import 'package:great_talk/domain/entity/tokens/like_post_token/like_post_token.dart';
-import 'package:great_talk/domain/entity/tokens/mute_post_token/mute_post_token.dart';
-import 'package:great_talk/domain/entity/tokens/mute_user_token/mute_user_token.dart';
-import 'package:great_talk/domain/entity/user_mute/user_mute.dart';
+import 'package:great_talk/domain/database_schema/follower/follower.dart';
+import 'package:great_talk/domain/database_schema/post/post.dart';
+import 'package:great_talk/domain/database_schema/post_like/post_like.dart';
+import 'package:great_talk/domain/database_schema/post_mute/post_mute.dart';
+import 'package:great_talk/domain/database_schema/private_user/private_user.dart';
+import 'package:great_talk/domain/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/database_schema/timeline/timeline.dart';
+import 'package:great_talk/domain/database_schema/tokens/following_token/following_token.dart';
+import 'package:great_talk/domain/database_schema/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/domain/database_schema/tokens/mute_post_token/mute_post_token.dart';
+import 'package:great_talk/domain/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/domain/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/repository/result/result.dart';
 
 /// Abstract interface for database operations including user management,

@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/repository/database_repository.dart';
 import 'package:great_talk/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/mute_post_use_case.dart';
-import 'package:great_talk/domain/entity/post/post.dart';
-import 'package:great_talk/domain/entity/tokens/mute_post_token/mute_post_token.dart';
+import 'package:great_talk/domain/database_schema/post/post.dart';
+import 'package:great_talk/domain/database_schema/tokens/mute_post_token/mute_post_token.dart';
 
 void main() {
   group('MutePostUseCase', () {

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/domain/entity/public_user/public_user.dart';
+import 'package:great_talk/domain/database_schema/public_user/public_user.dart';
 import 'package:great_talk/model/view_model_state/common/image_user/image_user.dart';
 
 part 'ranking_users_state.freezed.dart';

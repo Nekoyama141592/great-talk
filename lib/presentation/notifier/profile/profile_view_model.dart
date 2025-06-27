@@ -1,6 +1,6 @@
-import 'package:great_talk/domain/entity/follower/follower.dart';
-import 'package:great_talk/domain/entity/post/post.dart';
-import 'package:great_talk/domain/entity/public_user/public_user.dart';
+import 'package:great_talk/domain/database_schema/follower/follower.dart';
+import 'package:great_talk/domain/database_schema/post/post.dart';
+import 'package:great_talk/domain/database_schema/public_user/public_user.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 import 'package:great_talk/presentation/state/profile/profile_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';

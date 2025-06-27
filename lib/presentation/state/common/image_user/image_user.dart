@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/domain/entity/public_user/public_user.dart';
+import 'package:great_talk/domain/database_schema/public_user/public_user.dart';
 
 part 'image_user.freezed.dart';
 part 'image_user.g.dart';

@@ -4,7 +4,7 @@ import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:great_talk/consts/form_consts.dart';
-import 'package:great_talk/domain/entity/image_info/original_image_info.dart';
+import 'package:great_talk/domain/database_schema/image_info/original_image_info.dart';
 import 'package:great_talk/model/rest_api/get_object/request/get_object_request.dart';
 import 'package:great_talk/repository/local_repository.dart';
 import 'package:great_talk/repository/api_repository.dart';

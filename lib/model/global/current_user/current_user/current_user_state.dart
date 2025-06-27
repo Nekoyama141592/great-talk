@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/domain/entity/private_user/private_user.dart';
-import 'package:great_talk/domain/entity/public_user/public_user.dart';
+import 'package:great_talk/domain/database_schema/private_user/private_user.dart';
+import 'package:great_talk/domain/database_schema/public_user/public_user.dart';
 part 'current_user_state.freezed.dart';
 part 'current_user_state.g.dart';
 

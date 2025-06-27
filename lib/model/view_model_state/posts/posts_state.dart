@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/domain/entity/post/post.dart';
+import 'package:great_talk/domain/database_schema/post/post.dart';
 import 'package:great_talk/model/view_model_state/common/user_post/user_post.dart';
 
 part 'posts_state.freezed.dart';

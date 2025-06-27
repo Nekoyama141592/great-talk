@@ -1,5 +1,5 @@
 import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/domain/entity/post/post.dart';
+import 'package:great_talk/domain/database_schema/post/post.dart';
 import 'package:great_talk/presentation/state/tokens/tokens_state.dart';
 import 'package:great_talk/presentation/state/posts/posts_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';

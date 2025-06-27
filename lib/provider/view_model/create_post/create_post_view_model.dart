@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:great_talk/core/id_core.dart';
-import 'package:great_talk/domain/entity/custom_complete_text/custom_complete_text.dart';
-import 'package:great_talk/domain/entity/post/post.dart';
+import 'package:great_talk/domain/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/domain/database_schema/post/post.dart';
 import 'package:great_talk/presentation/state/create_post/create_post_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/provider/repository/api/api_repository_provider.dart';

@@ -5,7 +5,7 @@ import 'package:great_talk/provider/keep_alive/notifier/tokens/tokens_notifier.d
 import 'package:great_talk/provider/keep_alive/usecase/post/delete_post/delete_post_use_case_provider.dart';
 import 'package:great_talk/ui_core/texts.dart';
 import 'package:great_talk/ui_core/toast_ui_core.dart';
-import 'package:great_talk/domain/entity/post/post.dart';
+import 'package:great_talk/domain/database_schema/post/post.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
