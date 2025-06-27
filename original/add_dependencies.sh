@@ -7,7 +7,6 @@ packages=(
   "cloud_functions"
   "collection"
   "cupertino_icons"
-  "dio"
   "firebase_auth"
   "firebase_core"
   "firebase_crashlytics"

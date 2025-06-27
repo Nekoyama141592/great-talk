@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/ints.dart';
-import 'package:great_talk/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/provider/keep_alive/notification/notification_provider.dart';
-import 'package:great_talk/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
-import 'package:great_talk/provider/view_model/products/products_view_model.dart';
-import 'package:great_talk/ui_core/flavor_ui_core.dart';
+import 'package:great_talk/presentation/constant/tab_constant.dart';
+import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/core/provider/keep_alive/notification/notification_provider.dart';
+import 'package:great_talk/core/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
+import 'package:great_talk/core/provider/view_model/products/products_view_model.dart';
+import 'package:great_talk/presentation/common/flavor_ui_core.dart';
 import 'package:great_talk/presentation/page/common/bottom_navigation_bar_elements.dart';
-import 'package:great_talk/ui_core/others.dart';
+import 'package:great_talk/presentation/common/others.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/ui_core/texts.dart';
+import 'package:great_talk/presentation/common/texts.dart';
 import 'package:great_talk/presentation/component/original_drawer.dart';
 import 'package:great_talk/presentation/page/main/components/main_floating_action_button.dart';
 import 'package:great_talk/presentation/page/main/feeds/feeds_page.dart';
@@ -29,7 +29,7 @@ class MyHomePage extends HookConsumerWidget {
     final PageController pageController = usePageController();
     return Scaffold(
       appBar:
-          pageIndex.value != rankingIndex
+          pageIndex.value != TabConstant.rankingIndex
               ? AppBar(
                 title: BasicBoldText(FlavorUiCore.appName()),
                 shape: appBarShape(context),
@@ -37,7 +37,8 @@ class MyHomePage extends HookConsumerWidget {
               : null,
       floatingActionButton: MainFloatingActionButton(
         isShow:
-            pageIndex.value == rankingIndex || pageIndex.value == feedsIndex,
+            pageIndex.value == TabConstant.rankingIndex ||
+            pageIndex.value == TabConstant.feedsIndex,
       ),
       drawer: const OriginalDrawer(),
       bottomNavigationBar: BottomNavigationBar(

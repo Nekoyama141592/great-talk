@@ -1,4 +1,4 @@
-import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
+import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class PurchasesState {

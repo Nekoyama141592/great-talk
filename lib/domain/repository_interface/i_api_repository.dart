@@ -1,13 +1,13 @@
-import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
-import 'package:great_talk/model/rest_api/get_object/request/get_object_request.dart';
-import 'package:great_talk/model/rest_api/open_ai/generate_image/response/generate_image_response.dart';
-import 'package:great_talk/model/rest_api/open_ai/generate_text/request/generate_text_request.dart';
-import 'package:great_talk/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
-import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
-import 'package:great_talk/model/rest_api/put_object/response/put_object_response.dart';
-import 'package:great_talk/model/rest_api/verify_purchase/verified_purchase.dart';
-import 'package:great_talk/repository/result/result.dart' as rs;
+import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
+import 'package:great_talk/infrastructure/model/rest_api/get_object/request/get_object_request.dart';
+import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_image/response/generate_image_response.dart';
+import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/generate_text_request.dart';
+import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
+import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
+import 'package:great_talk/infrastructure/model/rest_api/put_object/response/put_object_response.dart';
+import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart' as rs;
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 /// Abstract interface for API operations including image handling,

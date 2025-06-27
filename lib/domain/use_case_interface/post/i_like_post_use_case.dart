@@ -1,6 +1,6 @@
-import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/database_schema/tokens/like_post_token/like_post_token.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 /// Abstract interface for post like/unlike operations.
 /// Handles liking and unliking posts in the database.

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/core/json_core.dart';
+import 'package:great_talk/core/util/json_core.dart';
 
 void main() {
   group('JsonCore', () {

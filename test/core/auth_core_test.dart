@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/core/auth_core.dart';
+import 'package:great_talk/core/util/auth_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class TestUser implements User {

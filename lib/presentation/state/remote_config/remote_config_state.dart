@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/consts/remote_config_constants.dart';
+import 'package:great_talk/presentation/constant/remote_config_constants.dart';
 
 part 'remote_config_state.freezed.dart';
 part 'remote_config_state.g.dart';

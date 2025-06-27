@@ -1,6 +1,6 @@
-import 'package:great_talk/model/rest_api/get_object/request/get_object_request.dart';
-import 'package:great_talk/repository/local_repository.dart';
-import 'package:great_talk/repository/api_repository.dart';
+import 'package:great_talk/infrastructure/model/rest_api/get_object/request/get_object_request.dart';
+import 'package:great_talk/infrastructure/repository/local_repository.dart';
+import 'package:great_talk/infrastructure/repository/api_repository.dart';
 
 class FileUseCase {
   FileUseCase({required this.localRepository, required this.repository});

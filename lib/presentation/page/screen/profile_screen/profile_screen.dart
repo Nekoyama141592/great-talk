@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/route_core.dart';
+import 'package:great_talk/core/util/route_core.dart';
 import 'package:great_talk/presentation/state/profile/profile_state.dart';
-import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
-import 'package:great_talk/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
-import 'package:great_talk/provider/view_model/refresh_interface.dart';
-import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/extension/number_format_extension.dart';
-import 'package:great_talk/extension/string_extension.dart';
-import 'package:great_talk/ui_core/style_utility.dart';
+import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
+import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
+import 'package:great_talk/core/provider/view_model/refresh_interface.dart';
+import 'package:great_talk/presentation/common/texts.dart';
+import 'package:great_talk/core/extension/number_format_extension.dart';
+import 'package:great_talk/core/extension/string_extension.dart';
+import 'package:great_talk/presentation/common/style_utility.dart';
 import 'package:great_talk/presentation/component/basic_width_box.dart';
 import 'package:great_talk/presentation/component/circle_image/circle_image.dart';
 import 'package:great_talk/presentation/component/official_mark.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/size_core.dart';
+import 'package:great_talk/core/util/size_core.dart';
 import 'package:great_talk/presentation/page/common/ranking_tab_bar_elements.dart';
 import 'package:great_talk/presentation/page/main/ranking/components/post_ranking_screen.dart';
 import 'package:great_talk/presentation/page/main/ranking/components/user_ranking_screen.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/iap_constants/subscription_constants.dart';
-import 'package:great_talk/provider/view_model/products/products_view_model.dart';
-import 'package:great_talk/ui_core/product_ui_core.dart';
-import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/ui_core/toast_ui_core.dart';
+import 'package:great_talk/presentation/common/purchase_ui_core.dart';
+import 'package:great_talk/core/provider/view_model/products/products_view_model.dart';
+import 'package:great_talk/presentation/common/product_ui_core.dart';
+import 'package:great_talk/presentation/common/texts.dart';
+import 'package:great_talk/presentation/common/toast_ui_core.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:great_talk/presentation/page/main/subscribe/components/plan_description.dart';
@@ -25,7 +25,7 @@ class ProductList extends ConsumerWidget {
         final productList =
             state.products.map((ProductDetails productDetails) {
               final descriptions =
-                  productDetails.id == kMonthSubscriptionId
+                  productDetails.id == PurchaseUiCore.kMonthSubscriptionId
                       ? const [
                         PlanDescription(text: '無制限のチャット'),
                         PlanDescription(text: 'コピー可能な説明や返答'),

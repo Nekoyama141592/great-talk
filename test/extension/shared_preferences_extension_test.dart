@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/extension/shared_preferences_extension.dart';
+import 'package:great_talk/core/extension/shared_preferences_extension.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {

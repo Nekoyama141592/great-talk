@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/repository/auth_repository.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/repository/auth_repository.dart';
 
 class MockFirebaseAuthWithExceptions extends MockFirebaseAuth {
   final FirebaseAuthException? _signInException;
@@ -20,7 +19,7 @@ class MockFirebaseAuthWithExceptions extends MockFirebaseAuth {
   @override
   Future<UserCredential> signInAnonymously() async {
     if (_signInException != null) {
-      throw _signInException;
+      throw _signInException!;
     }
     return super.signInAnonymously();
   }
@@ -83,7 +82,6 @@ void main() {
       test('should return success when anonymous sign in succeeds', () async {
         final result = await authRepository.signInAnonymously();
 
-        expect(result, isA<Success<User>>());
         result.when(
           success: (user) {
             expect(user.isAnonymous, true);
@@ -103,7 +101,6 @@ void main() {
 
         final result = await authRepository.signInAnonymously();
 
-        expect(result, isA<Failure<User>>());
         result.when(
           success: (user) => fail('Expected failure but got success'),
           failure: (msg) {
@@ -119,7 +116,6 @@ void main() {
 
         final result = await authRepository.signOut();
 
-        expect(result, isA<Success<bool>>());
         result.when(
           success: (value) {
             expect(value, true);
@@ -139,7 +135,6 @@ void main() {
 
         final result = await authRepository.signOut();
 
-        expect(result, isA<Failure<bool>>());
         result.when(
           success: (value) => fail('Expected failure but got success'),
           failure: (msg) {
@@ -160,7 +155,6 @@ void main() {
           credential,
         );
 
-        expect(result, isA<Failure<bool>>());
         result.when(
           success: (value) => fail('Expected failure but got success'),
           failure: (msg) {
@@ -186,7 +180,6 @@ void main() {
           credential,
         );
 
-        expect(result, isA<Success<bool>>());
         result.when(
           success: (value) {
             expect(value, true);
@@ -225,7 +218,6 @@ void main() {
             credential,
           );
 
-          expect(result, isA<Failure<bool>>());
           result.when(
             success: (value) => fail('Expected failure but got success'),
             failure: (msg) {
@@ -265,7 +257,6 @@ void main() {
             credential,
           );
 
-          expect(result, isA<Failure<bool>>());
           result.when(
             success: (value) => fail('Expected failure but got success'),
             failure: (msg) {
@@ -305,7 +296,6 @@ void main() {
             credential,
           );
 
-          expect(result, isA<Failure<bool>>());
           result.when(
             success: (value) => fail('Expected failure but got success'),
             failure: (msg) {
@@ -320,7 +310,6 @@ void main() {
       test('should return failure when user is not signed in', () async {
         final result = await authRepository.deleteUser();
 
-        expect(result, isA<Failure<bool>>());
         result.when(
           success: (value) => fail('Expected failure but got success'),
           failure: (msg) {
@@ -339,7 +328,6 @@ void main() {
 
         final result = await authRepository.deleteUser();
 
-        expect(result, isA<Success<bool>>());
         result.when(
           success: (value) {
             expect(value, true);
@@ -369,7 +357,6 @@ void main() {
 
           final result = await authRepository.deleteUser();
 
-          expect(result, isA<Failure<bool>>());
           result.when(
             success: (value) => fail('Expected failure but got success'),
             failure: (msg) {

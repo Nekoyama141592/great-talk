@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:great_talk/repository/api_repository.dart';
-import 'package:great_talk/repository/database_repository.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/repository/api_repository.dart';
+import 'package:great_talk/infrastructure/repository/database_repository.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/delete_post_use_case.dart';
-import 'package:great_talk/model/database_schema/post/post.dart';
-import 'package:great_talk/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/model/rest_api/delete_object/response/delete_object_response.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
 
 class FakeApiRepository implements ApiRepository {
   bool shouldSucceed = true;

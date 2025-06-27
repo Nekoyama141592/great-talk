@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/size_core.dart';
+import 'package:great_talk/core/util/size_core.dart';
 
 class TextFieldContainer extends StatelessWidget {
   const TextFieldContainer({super.key, required this.child});

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/extension/double_extensions.dart';
+import 'package:great_talk/core/extension/double_extensions.dart';
 
 void main() {
   group('DoubleRoundingExtension', () {

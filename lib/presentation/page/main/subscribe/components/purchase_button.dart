@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/colors.dart';
+import 'package:great_talk/presentation/constant/colors.dart';
 import 'package:great_talk/presentation/component/rounded_button.dart';
 
 class PurchaseButton extends StatelessWidget {

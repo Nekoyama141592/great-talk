@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/size_core.dart';
+import 'package:great_talk/core/util/size_core.dart';
 
 class S3Image extends StatelessWidget {
   const S3Image({super.key, this.width, this.height, required this.uint8list});

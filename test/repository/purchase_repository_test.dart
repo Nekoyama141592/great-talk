@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/repository/result/result.dart';
+import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 void main() {

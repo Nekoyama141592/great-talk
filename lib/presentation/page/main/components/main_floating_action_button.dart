@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/colors.dart';
-import 'package:great_talk/core/route_core.dart';
+import 'package:great_talk/presentation/constant/colors.dart';
+import 'package:great_talk/core/util/route_core.dart';
 import 'package:great_talk/presentation/page/create_post/create_post_page.dart';
 
 class MainFloatingActionButton extends StatelessWidget {

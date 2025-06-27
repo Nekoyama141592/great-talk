@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/extension/string_extension.dart';
+import 'package:great_talk/core/extension/string_extension.dart';
 
 void main() {
   group('StringExtension', () {
