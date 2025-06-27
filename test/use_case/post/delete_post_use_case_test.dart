@@ -17,11 +17,8 @@ class FakeApiRepository implements ApiRepository {
 
   @override
   FutureResult<DeleteObjectResponse> deleteObject(DetectedImage image) async {
-    capturedArguments = {
-      'method': 'deleteObject',
-      'image': image,
-    };
-    
+    capturedArguments = {'method': 'deleteObject', 'image': image};
+
     if (shouldSucceed) {
       deletedObjects.add(image.value);
       return const Result.success(DeleteObjectResponse(httpStatusCode: 200));
@@ -91,12 +88,19 @@ void main() {
 
       test('should return success when deleting post succeeds', () async {
         // First create the post in fake Firestore
-        await databaseRepository.createPost(testPost.uid, testPost.postId, testPost.toJson());
-        
+        await databaseRepository.createPost(
+          testPost.uid,
+          testPost.postId,
+          testPost.toJson(),
+        );
+
         // Verify post exists before deletion
-        final existingPost = await databaseRepository.getPost(testPost.uid, testPost.postId);
+        final existingPost = await databaseRepository.getPost(
+          testPost.uid,
+          testPost.postId,
+        );
         expect(existingPost, isNotNull);
-        
+
         fakeApiRepository.shouldSucceed = true;
 
         final result = await deletePostUseCase.deletePost(testPost);
@@ -106,54 +110,77 @@ void main() {
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('Expected success but got failure: $error'),
         );
-        
+
         // Verify post was actually deleted
-        final deletedPost = await databaseRepository.getPost(testPost.uid, testPost.postId);
-        expect(deletedPost, isNull);
-      });
-
-      test('should delete associated image when database deletion succeeds', () async {
-        // Create post in fake Firestore first
-        await databaseRepository.createPost(testPost.uid, testPost.postId, testPost.toJson());
-        
-        fakeApiRepository.shouldSucceed = true;
-
-        await deletePostUseCase.deletePost(testPost);
-
-        final capturedArgs = fakeApiRepository.capturedArguments;
-        expect(capturedArgs['method'], equals('deleteObject'));
-        expect(capturedArgs['image'], isA<DetectedImage>());
-        expect(fakeApiRepository.deletedObjects, contains('test_image.jpg'));
-      });
-
-      test('should still return success even if image deletion fails', () async {
-        // Create post in fake Firestore first
-        await databaseRepository.createPost(testPost.uid, testPost.postId, testPost.toJson());
-        
-        fakeApiRepository.shouldSucceed = false;
-        fakeApiRepository.errorMessage = 'S3 deletion failed';
-
-        final result = await deletePostUseCase.deletePost(testPost);
-
-        expect(result, isA<Result<bool>>());
-        result.when(
-          success: (value) => expect(value, isTrue),
-          failure: (error) => fail('Expected success but got failure: $error'),
+        final deletedPost = await databaseRepository.getPost(
+          testPost.uid,
+          testPost.postId,
         );
-        
-        // Verify post was still deleted from database
-        final deletedPost = await databaseRepository.getPost(testPost.uid, testPost.postId);
         expect(deletedPost, isNull);
       });
+
+      test(
+        'should delete associated image when database deletion succeeds',
+        () async {
+          // Create post in fake Firestore first
+          await databaseRepository.createPost(
+            testPost.uid,
+            testPost.postId,
+            testPost.toJson(),
+          );
+
+          fakeApiRepository.shouldSucceed = true;
+
+          await deletePostUseCase.deletePost(testPost);
+
+          final capturedArgs = fakeApiRepository.capturedArguments;
+          expect(capturedArgs['method'], equals('deleteObject'));
+          expect(capturedArgs['image'], isA<DetectedImage>());
+          expect(fakeApiRepository.deletedObjects, contains('test_image.jpg'));
+        },
+      );
+
+      test(
+        'should still return success even if image deletion fails',
+        () async {
+          // Create post in fake Firestore first
+          await databaseRepository.createPost(
+            testPost.uid,
+            testPost.postId,
+            testPost.toJson(),
+          );
+
+          fakeApiRepository.shouldSucceed = false;
+          fakeApiRepository.errorMessage = 'S3 deletion failed';
+
+          final result = await deletePostUseCase.deletePost(testPost);
+
+          expect(result, isA<Result<bool>>());
+          result.when(
+            success: (value) => expect(value, isTrue),
+            failure:
+                (error) => fail('Expected success but got failure: $error'),
+          );
+
+          // Verify post was still deleted from database
+          final deletedPost = await databaseRepository.getPost(
+            testPost.uid,
+            testPost.postId,
+          );
+          expect(deletedPost, isNull);
+        },
+      );
 
       test('should handle post with empty image data', () async {
-        final postWithEmptyImage = testPost.copyWith(
-          image: {},
-        );
-        
+        final postWithEmptyImage = testPost.copyWith(image: {});
+
         // Create post in fake Firestore first
-        await databaseRepository.createPost(postWithEmptyImage.uid, postWithEmptyImage.postId, postWithEmptyImage.toJson());
-        
+        await databaseRepository.createPost(
+          postWithEmptyImage.uid,
+          postWithEmptyImage.postId,
+          postWithEmptyImage.toJson(),
+        );
+
         fakeApiRepository.shouldSucceed = true;
 
         final result = await deletePostUseCase.deletePost(postWithEmptyImage);
@@ -163,9 +190,12 @@ void main() {
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('Expected success but got failure: $error'),
         );
-        
+
         // Verify post was deleted
-        final deletedPost = await databaseRepository.getPost(postWithEmptyImage.uid, postWithEmptyImage.postId);
+        final deletedPost = await databaseRepository.getPost(
+          postWithEmptyImage.uid,
+          postWithEmptyImage.postId,
+        );
         expect(deletedPost, isNull);
       });
 
@@ -178,10 +208,14 @@ void main() {
             'moderationModelVersion': 'test_version',
           },
         );
-        
+
         // Create post in fake Firestore first
-        await databaseRepository.createPost(postWithNullFileName.uid, postWithNullFileName.postId, postWithNullFileName.toJson());
-        
+        await databaseRepository.createPost(
+          postWithNullFileName.uid,
+          postWithNullFileName.postId,
+          postWithNullFileName.toJson(),
+        );
+
         fakeApiRepository.shouldSucceed = true;
 
         final result = await deletePostUseCase.deletePost(postWithNullFileName);
@@ -191,9 +225,12 @@ void main() {
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('Expected success but got failure: $error'),
         );
-        
+
         // Verify post was deleted
-        final deletedPost = await databaseRepository.getPost(postWithNullFileName.uid, postWithNullFileName.postId);
+        final deletedPost = await databaseRepository.getPost(
+          postWithNullFileName.uid,
+          postWithNullFileName.postId,
+        );
         expect(deletedPost, isNull);
       });
 
@@ -206,13 +243,19 @@ void main() {
             'moderationModelVersion': 'test_version',
           },
         );
-        
+
         // Create post in fake Firestore first
-        await databaseRepository.createPost(postWithDifferentImage.uid, postWithDifferentImage.postId, postWithDifferentImage.toJson());
-        
+        await databaseRepository.createPost(
+          postWithDifferentImage.uid,
+          postWithDifferentImage.postId,
+          postWithDifferentImage.toJson(),
+        );
+
         fakeApiRepository.shouldSucceed = true;
 
-        final result = await deletePostUseCase.deletePost(postWithDifferentImage);
+        final result = await deletePostUseCase.deletePost(
+          postWithDifferentImage,
+        );
 
         expect(result, isA<Result<bool>>());
         result.when(
@@ -220,10 +263,16 @@ void main() {
           failure: (error) => fail('Expected success but got failure: $error'),
         );
 
-        expect(fakeApiRepository.deletedObjects, contains('different_image.png'));
-        
+        expect(
+          fakeApiRepository.deletedObjects,
+          contains('different_image.png'),
+        );
+
         // Verify post was deleted
-        final deletedPost = await databaseRepository.getPost(postWithDifferentImage.uid, postWithDifferentImage.postId);
+        final deletedPost = await databaseRepository.getPost(
+          postWithDifferentImage.uid,
+          postWithDifferentImage.postId,
+        );
         expect(deletedPost, isNull);
       });
 
@@ -237,10 +286,14 @@ void main() {
           impressionCount: 10000,
           bookmarkCount: 200,
         );
-        
+
         // Create post in fake Firestore first
-        await databaseRepository.createPost(postWithHighCounts.uid, postWithHighCounts.postId, postWithHighCounts.toJson());
-        
+        await databaseRepository.createPost(
+          postWithHighCounts.uid,
+          postWithHighCounts.postId,
+          postWithHighCounts.toJson(),
+        );
+
         fakeApiRepository.shouldSucceed = true;
 
         final result = await deletePostUseCase.deletePost(postWithHighCounts);
@@ -250,30 +303,40 @@ void main() {
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('Expected success but got failure: $error'),
         );
-        
+
         // Verify post was deleted
-        final deletedPost = await databaseRepository.getPost(postWithHighCounts.uid, postWithHighCounts.postId);
+        final deletedPost = await databaseRepository.getPost(
+          postWithHighCounts.uid,
+          postWithHighCounts.postId,
+        );
         expect(deletedPost, isNull);
       });
 
-      test('should return success when trying to delete non-existent post', () async {
-        // Don't create the post, just try to delete it
-        // Note: Firestore allows deleting non-existent documents without error
-        
-        fakeApiRepository.shouldSucceed = true;
+      test(
+        'should return success when trying to delete non-existent post',
+        () async {
+          // Don't create the post, just try to delete it
+          // Note: Firestore allows deleting non-existent documents without error
 
-        final result = await deletePostUseCase.deletePost(testPost);
+          fakeApiRepository.shouldSucceed = true;
 
-        expect(result, isA<Result<bool>>());
-        result.when(
-          success: (value) => expect(value, isTrue),
-          failure: (error) => fail('Expected success but got failure: $error'),
-        );
-        
-        // Verify that the post still doesn't exist after "deletion"
-        final stillNonExistent = await databaseRepository.getPost(testPost.uid, testPost.postId);
-        expect(stillNonExistent, isNull);
-      });
+          final result = await deletePostUseCase.deletePost(testPost);
+
+          expect(result, isA<Result<bool>>());
+          result.when(
+            success: (value) => expect(value, isTrue),
+            failure:
+                (error) => fail('Expected success but got failure: $error'),
+          );
+
+          // Verify that the post still doesn't exist after "deletion"
+          final stillNonExistent = await databaseRepository.getPost(
+            testPost.uid,
+            testPost.postId,
+          );
+          expect(stillNonExistent, isNull);
+        },
+      );
     });
 
     group('constructor', () {
@@ -321,8 +384,12 @@ void main() {
         );
 
         // Create post in fake Firestore first
-        await databaseRepository.createPost(post.uid, post.postId, post.toJson());
-        
+        await databaseRepository.createPost(
+          post.uid,
+          post.postId,
+          post.toJson(),
+        );
+
         fakeApiRepository.shouldSucceed = true;
 
         final future1 = deletePostUseCase.deletePost(post);
@@ -333,7 +400,7 @@ void main() {
         // First deletion should succeed, second should fail since post is already deleted
         expect(results[0], isA<Result<bool>>());
         expect(results[1], isA<Result<bool>>());
-        
+
         // At least one should succeed
         bool hasSuccess = false;
         for (final result in results) {
@@ -345,51 +412,64 @@ void main() {
         expect(hasSuccess, isTrue);
       });
 
-      test('should handle posts with special characters in image value', () async {
-        final postWithSpecialChars = Post(
-          postId: 'special_chars_post',
-          uid: 'owner_uid',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Special chars test description',
-          },
-          image: const {
-            'value': 'image@#\$%^&*()_+.jpg',
-            'bucketName': 'test_bucket',
-            'moderationLabels': [],
-            'moderationModelVersion': 'test_version',
-          },
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Special Chars Test Post',
-          },
-        );
+      test(
+        'should handle posts with special characters in image value',
+        () async {
+          final postWithSpecialChars = Post(
+            postId: 'special_chars_post',
+            uid: 'owner_uid',
+            createdAt: mockTimestamp,
+            updatedAt: mockTimestamp,
+            customCompleteText: const {},
+            description: const {
+              'languageCode': 'en',
+              'negativeScore': 0.05,
+              'positiveScore': 0.95,
+              'sentiment': 'positive',
+              'value': 'Special chars test description',
+            },
+            image: const {
+              'value': 'image@#\$%^&*()_+.jpg',
+              'bucketName': 'test_bucket',
+              'moderationLabels': [],
+              'moderationModelVersion': 'test_version',
+            },
+            searchToken: const {},
+            title: const {
+              'languageCode': 'en',
+              'negativeScore': 0.1,
+              'positiveScore': 0.9,
+              'sentiment': 'positive',
+              'value': 'Special Chars Test Post',
+            },
+          );
 
-        // Create post in fake Firestore first
-        await databaseRepository.createPost(postWithSpecialChars.uid, postWithSpecialChars.postId, postWithSpecialChars.toJson());
-        
-        fakeApiRepository.shouldSucceed = true;
+          // Create post in fake Firestore first
+          await databaseRepository.createPost(
+            postWithSpecialChars.uid,
+            postWithSpecialChars.postId,
+            postWithSpecialChars.toJson(),
+          );
 
-        final result = await deletePostUseCase.deletePost(postWithSpecialChars);
+          fakeApiRepository.shouldSucceed = true;
 
-        expect(result, isA<Result<bool>>());
-        result.when(
-          success: (value) => expect(value, isTrue),
-          failure: (error) => fail('Expected success but got failure: $error'),
-        );
+          final result = await deletePostUseCase.deletePost(
+            postWithSpecialChars,
+          );
 
-        expect(fakeApiRepository.deletedObjects, contains('image@#\$%^&*()_+.jpg'));
-      });
+          expect(result, isA<Result<bool>>());
+          result.when(
+            success: (value) => expect(value, isTrue),
+            failure:
+                (error) => fail('Expected success but got failure: $error'),
+          );
+
+          expect(
+            fakeApiRepository.deletedObjects,
+            contains('image@#\$%^&*()_+.jpg'),
+          );
+        },
+      );
 
       test('should handle posts with very long image values', () async {
         final longFileName = 'very_long_file_name_' * 10 + '.jpg';
@@ -423,8 +503,12 @@ void main() {
         );
 
         // Create post in fake Firestore first
-        await databaseRepository.createPost(postWithLongFileName.uid, postWithLongFileName.postId, postWithLongFileName.toJson());
-        
+        await databaseRepository.createPost(
+          postWithLongFileName.uid,
+          postWithLongFileName.postId,
+          postWithLongFileName.toJson(),
+        );
+
         fakeApiRepository.shouldSucceed = true;
 
         final result = await deletePostUseCase.deletePost(postWithLongFileName);

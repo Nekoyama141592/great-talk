@@ -80,20 +80,21 @@ void main() {
         // Verify token was created in fake Firestore
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         expect(tokens.isNotEmpty, isTrue);
-        expect(tokens.any((token) => token['tokenId'] == 'test_token_id'), isTrue);
+        expect(
+          tokens.any((token) => token['tokenId'] == 'test_token_id'),
+          isTrue,
+        );
       });
 
       test('should create PostLike from post and currentUid', () async {
-        await likePostUseCase.likePost(
-          testCurrentUid,
-          testToken,
-          testPost,
-        );
+        await likePostUseCase.likePost(testCurrentUid, testToken, testPost);
 
         // Verify PostLike was created by checking if the like collection exists
         // In a real app, we'd verify the PostLike document exists in the post's subcollection
         final tokens = await databaseRepository.getTokens(testCurrentUid);
-        final createdToken = tokens.firstWhere((token) => token['tokenId'] == 'test_token_id');
+        final createdToken = tokens.firstWhere(
+          (token) => token['tokenId'] == 'test_token_id',
+        );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['postId'], equals(testPost.postId));
       });
@@ -189,7 +190,7 @@ void main() {
           tokenType: 'like_post',
           createdAt: mockTimestamp,
         );
-        
+
         await likePostUseCase.likePost(testCurrentUid, token, testPost);
 
         final result = await likePostUseCase.unLikePost(
@@ -318,12 +319,12 @@ void main() {
 
         expect(result1, isA<Result<bool>>());
         expect(result2, isA<Result<bool>>());
-        
+
         result1.when(
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('First like failed: $error'),
         );
-        
+
         result2.when(
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('Second like failed: $error'),
@@ -371,19 +372,27 @@ void main() {
         );
 
         // Like the post
-        final likeResult = await likePostUseCase.likePost('test_user', token, post);
-        
+        final likeResult = await likePostUseCase.likePost(
+          'test_user',
+          token,
+          post,
+        );
+
         // Unlike the post
-        final unlikeResult = await likePostUseCase.unLikePost('test_user', 'like_unlike_token', post);
+        final unlikeResult = await likePostUseCase.unLikePost(
+          'test_user',
+          'like_unlike_token',
+          post,
+        );
 
         expect(likeResult, isA<Result<bool>>());
         expect(unlikeResult, isA<Result<bool>>());
-        
+
         likeResult.when(
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('Like failed: $error'),
         );
-        
+
         unlikeResult.when(
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('Unlike failed: $error'),
@@ -391,7 +400,10 @@ void main() {
 
         // Verify token was removed after unlike
         final finalTokens = await databaseRepository.getTokens('test_user');
-        expect(finalTokens.any((token) => token['tokenId'] == 'like_unlike_token'), isFalse);
+        expect(
+          finalTokens.any((token) => token['tokenId'] == 'like_unlike_token'),
+          isFalse,
+        );
       });
     });
   });

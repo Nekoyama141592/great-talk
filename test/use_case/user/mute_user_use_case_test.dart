@@ -79,33 +79,32 @@ void main() {
         // Verify token was created in fake Firestore
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         expect(tokens.isNotEmpty, isTrue);
-        expect(tokens.any((token) => token['tokenId'] == 'test_token_id'), isTrue);
+        expect(
+          tokens.any((token) => token['tokenId'] == 'test_token_id'),
+          isTrue,
+        );
       });
 
       test('should extract passiveUid from post.uid', () async {
-        await muteUserUseCase.muteUser(
-          testPost,
-          testCurrentUid,
-          testToken,
-        );
+        await muteUserUseCase.muteUser(testPost, testCurrentUid, testToken);
 
         // Verify token was created with correct data
         final tokens = await databaseRepository.getTokens(testCurrentUid);
-        final createdToken = tokens.firstWhere((token) => token['tokenId'] == 'test_token_id');
+        final createdToken = tokens.firstWhere(
+          (token) => token['tokenId'] == 'test_token_id',
+        );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['passiveUid'], equals(testPost.uid));
       });
 
       test('should create UserMute from currentUid and post', () async {
-        await muteUserUseCase.muteUser(
-          testPost,
-          testCurrentUid,
-          testToken,
-        );
+        await muteUserUseCase.muteUser(testPost, testCurrentUid, testToken);
 
         // Verify token was created with correct relationships
         final tokens = await databaseRepository.getTokens(testCurrentUid);
-        final createdToken = tokens.firstWhere((token) => token['tokenId'] == 'test_token_id');
+        final createdToken = tokens.firstWhere(
+          (token) => token['tokenId'] == 'test_token_id',
+        );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['passiveUid'], equals(testPost.uid));
         expect(createdToken['tokenType'], equals('mute_user'));
@@ -152,7 +151,7 @@ void main() {
 
       test('should handle same user muting themselves', () async {
         const sameUid = 'same_user_uid';
-        
+
         final selfPost = testPost.copyWith(uid: sameUid);
         final selfToken = testToken.copyWith(
           activeUid: sameUid,
@@ -173,7 +172,9 @@ void main() {
 
         // Verify token relationships
         final tokens = await databaseRepository.getTokens(sameUid);
-        final createdToken = tokens.firstWhere((token) => token['tokenId'] == selfToken.tokenId);
+        final createdToken = tokens.firstWhere(
+          (token) => token['tokenId'] == selfToken.tokenId,
+        );
         expect(createdToken['activeUid'], equals(sameUid));
         expect(createdToken['passiveUid'], equals(sameUid));
       });
@@ -193,44 +194,58 @@ void main() {
     group('edge cases', () {
       test('should handle multiple user mutes by same user', () async {
         const muterUid = 'active_muter';
-        
-        final users = ['user1', 'user2', 'user3'];
-        final posts = users.map((uid) => Post(
-          postId: 'post_by_$uid',
-          uid: uid,
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Post by $uid',
-          },
-          image: const {},
-          searchToken: const {},
-          title: {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Title by $uid',
-          },
-        )).toList();
 
-        final tokens = users.map((uid) => MuteUserToken(
-          tokenId: 'mute_${uid}_token',
-          activeUid: muterUid,
-          passiveUid: uid,
-          tokenType: 'mute_user',
-          createdAt: mockTimestamp,
-        )).toList();
+        final users = ['user1', 'user2', 'user3'];
+        final posts =
+            users
+                .map(
+                  (uid) => Post(
+                    postId: 'post_by_$uid',
+                    uid: uid,
+                    createdAt: mockTimestamp,
+                    updatedAt: mockTimestamp,
+                    customCompleteText: const {},
+                    description: {
+                      'languageCode': 'en',
+                      'negativeScore': 0.05,
+                      'positiveScore': 0.95,
+                      'sentiment': 'positive',
+                      'value': 'Post by $uid',
+                    },
+                    image: const {},
+                    searchToken: const {},
+                    title: {
+                      'languageCode': 'en',
+                      'negativeScore': 0.1,
+                      'positiveScore': 0.9,
+                      'sentiment': 'positive',
+                      'value': 'Title by $uid',
+                    },
+                  ),
+                )
+                .toList();
+
+        final tokens =
+            users
+                .map(
+                  (uid) => MuteUserToken(
+                    tokenId: 'mute_${uid}_token',
+                    activeUid: muterUid,
+                    passiveUid: uid,
+                    tokenType: 'mute_user',
+                    createdAt: mockTimestamp,
+                  ),
+                )
+                .toList();
 
         // Mute all users
         final results = <Result<bool>>[];
         for (int i = 0; i < users.length; i++) {
-          final result = await muteUserUseCase.muteUser(posts[i], muterUid, tokens[i]);
+          final result = await muteUserUseCase.muteUser(
+            posts[i],
+            muterUid,
+            tokens[i],
+          );
           results.add(result);
         }
 
@@ -247,7 +262,10 @@ void main() {
         final userTokens = await databaseRepository.getTokens(muterUid);
         expect(userTokens.length, greaterThanOrEqualTo(3));
         for (final user in users) {
-          expect(userTokens.any((token) => token['tokenId'] == 'mute_${user}_token'), isTrue);
+          expect(
+            userTokens.any((token) => token['tokenId'] == 'mute_${user}_token'),
+            isTrue,
+          );
         }
       });
 
@@ -297,7 +315,11 @@ void main() {
           createdAt: mockTimestamp,
         );
 
-        final result = await muteUserUseCase.muteUser(complexPost, 'muting_user', complexToken);
+        final result = await muteUserUseCase.muteUser(
+          complexPost,
+          'muting_user',
+          complexToken,
+        );
 
         expect(result, isA<Result<bool>>());
         result.when(
@@ -307,51 +329,62 @@ void main() {
 
         // Verify token was created
         final tokens = await databaseRepository.getTokens('muting_user');
-        expect(tokens.any((token) => token['tokenId'] == 'complex_mute_token'), isTrue);
+        expect(
+          tokens.any((token) => token['tokenId'] == 'complex_mute_token'),
+          isTrue,
+        );
       });
 
       test('should handle rapid sequential mute operations', () async {
         const rapidMuter = 'rapid_muter';
         const targetUser = 'target_user';
-        
-        final posts = List.generate(5, (index) => Post(
-          postId: 'rapid_post_$index',
-          uid: targetUser,
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Rapid test post $index',
-          },
-          image: const {},
-          searchToken: const {},
-          title: {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Rapid Test $index',
-          },
-        ));
 
-        final tokens = List.generate(5, (index) => MuteUserToken(
-          tokenId: 'rapid_mute_token_$index',
-          activeUid: rapidMuter,
-          passiveUid: targetUser,
-          tokenType: 'mute_user',
-          createdAt: mockTimestamp,
-        ));
+        final posts = List.generate(
+          5,
+          (index) => Post(
+            postId: 'rapid_post_$index',
+            uid: targetUser,
+            createdAt: mockTimestamp,
+            updatedAt: mockTimestamp,
+            customCompleteText: const {},
+            description: {
+              'languageCode': 'en',
+              'negativeScore': 0.05,
+              'positiveScore': 0.95,
+              'sentiment': 'positive',
+              'value': 'Rapid test post $index',
+            },
+            image: const {},
+            searchToken: const {},
+            title: {
+              'languageCode': 'en',
+              'negativeScore': 0.1,
+              'positiveScore': 0.9,
+              'sentiment': 'positive',
+              'value': 'Rapid Test $index',
+            },
+          ),
+        );
+
+        final tokens = List.generate(
+          5,
+          (index) => MuteUserToken(
+            tokenId: 'rapid_mute_token_$index',
+            activeUid: rapidMuter,
+            passiveUid: targetUser,
+            tokenType: 'mute_user',
+            createdAt: mockTimestamp,
+          ),
+        );
 
         // Execute mutes rapidly
         final futures = <Future<Result<bool>>>[];
         for (int i = 0; i < 5; i++) {
-          futures.add(muteUserUseCase.muteUser(posts[i], rapidMuter, tokens[i]));
+          futures.add(
+            muteUserUseCase.muteUser(posts[i], rapidMuter, tokens[i]),
+          );
         }
-        
+
         final results = await Future.wait(futures);
 
         // Verify all operations completed successfully
@@ -366,11 +399,13 @@ void main() {
         // Verify all tokens were created (some might be duplicates due to same target user)
         final userTokens = await databaseRepository.getTokens(rapidMuter);
         expect(userTokens.isNotEmpty, isTrue);
-        
+
         // Check that at least some tokens were created
         bool hasAtLeastOneToken = false;
         for (int i = 0; i < 5; i++) {
-          if (userTokens.any((token) => token['tokenId'] == 'rapid_mute_token_$i')) {
+          if (userTokens.any(
+            (token) => token['tokenId'] == 'rapid_mute_token_$i',
+          )) {
             hasAtLeastOneToken = true;
             break;
           }
@@ -382,7 +417,7 @@ void main() {
         // User A mutes User B, then User B mutes User A
         const userA = 'user_a';
         const userB = 'user_b';
-        
+
         final postByB = Post(
           postId: 'post_by_b',
           uid: userB,
@@ -448,19 +483,27 @@ void main() {
         );
 
         // A mutes B
-        final resultAMutesB = await muteUserUseCase.muteUser(postByB, userA, tokenAMutesB);
-        
+        final resultAMutesB = await muteUserUseCase.muteUser(
+          postByB,
+          userA,
+          tokenAMutesB,
+        );
+
         // B mutes A
-        final resultBMutesA = await muteUserUseCase.muteUser(postByA, userB, tokenBMutesA);
+        final resultBMutesA = await muteUserUseCase.muteUser(
+          postByA,
+          userB,
+          tokenBMutesA,
+        );
 
         expect(resultAMutesB, isA<Result<bool>>());
         expect(resultBMutesA, isA<Result<bool>>());
-        
+
         resultAMutesB.when(
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('A muting B failed: $error'),
         );
-        
+
         resultBMutesA.when(
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('B muting A failed: $error'),
@@ -469,7 +512,7 @@ void main() {
         // Verify both tokens were created
         final tokensA = await databaseRepository.getTokens(userA);
         final tokensB = await databaseRepository.getTokens(userB);
-        
+
         expect(tokensA.any((token) => token['tokenId'] == 'a_mutes_b'), isTrue);
         expect(tokensB.any((token) => token['tokenId'] == 'b_mutes_a'), isTrue);
       });

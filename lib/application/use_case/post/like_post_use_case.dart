@@ -22,11 +22,7 @@ class LikePostUseCase {
     );
   }
 
-  FutureResult<bool> unLikePost(
-    String currentUid,
-    String tokenId,
-    Post post,
-  ) {
+  FutureResult<bool> unLikePost(String currentUid, String tokenId, Post post) {
     return firestoreRepository.deleteLikePostInfo(currentUid, post, tokenId);
   }
 }

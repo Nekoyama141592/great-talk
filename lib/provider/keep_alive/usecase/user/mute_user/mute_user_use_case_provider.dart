@@ -6,6 +6,5 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'mute_user_use_case_provider.g.dart';
 
 @riverpod
-MuteUserUseCase muteUserUseCase(Ref ref) => MuteUserUseCase(
-  firestoreRepository: ref.watch(databaseRepositoryProvider),
-);
+MuteUserUseCase muteUserUseCase(Ref ref) =>
+    MuteUserUseCase(firestoreRepository: ref.watch(databaseRepositoryProvider));

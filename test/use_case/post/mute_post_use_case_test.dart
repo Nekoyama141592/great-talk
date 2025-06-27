@@ -78,19 +78,20 @@ void main() {
         // Verify token was created in fake Firestore
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         expect(tokens.isNotEmpty, isTrue);
-        expect(tokens.any((token) => token['tokenId'] == 'test_token_id'), isTrue);
+        expect(
+          tokens.any((token) => token['tokenId'] == 'test_token_id'),
+          isTrue,
+        );
       });
 
       test('should create PostMute from post and currentUid', () async {
-        await mutePostUseCase.mutePost(
-          testPost,
-          testCurrentUid,
-          testToken,
-        );
+        await mutePostUseCase.mutePost(testPost, testCurrentUid, testToken);
 
         // Verify token was created with correct data
         final tokens = await databaseRepository.getTokens(testCurrentUid);
-        final createdToken = tokens.firstWhere((token) => token['tokenId'] == 'test_token_id');
+        final createdToken = tokens.firstWhere(
+          (token) => token['tokenId'] == 'test_token_id',
+        );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['postId'], equals(testPost.postId));
       });
@@ -235,17 +236,25 @@ void main() {
           createdAt: mockTimestamp,
         );
 
-        final result1 = await mutePostUseCase.mutePost(post1, 'test_user', token1);
-        final result2 = await mutePostUseCase.mutePost(post2, 'test_user', token2);
+        final result1 = await mutePostUseCase.mutePost(
+          post1,
+          'test_user',
+          token1,
+        );
+        final result2 = await mutePostUseCase.mutePost(
+          post2,
+          'test_user',
+          token2,
+        );
 
         expect(result1, isA<Result<bool>>());
         expect(result2, isA<Result<bool>>());
-        
+
         result1.when(
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('First mute failed: $error'),
         );
-        
+
         result2.when(
           success: (value) => expect(value, isTrue),
           failure: (error) => fail('Second mute failed: $error'),
@@ -253,8 +262,14 @@ void main() {
 
         // Verify both tokens were created
         final tokens = await databaseRepository.getTokens('test_user');
-        expect(tokens.any((token) => token['tokenId'] == 'mute_token_1'), isTrue);
-        expect(tokens.any((token) => token['tokenId'] == 'mute_token_2'), isTrue);
+        expect(
+          tokens.any((token) => token['tokenId'] == 'mute_token_1'),
+          isTrue,
+        );
+        expect(
+          tokens.any((token) => token['tokenId'] == 'mute_token_2'),
+          isTrue,
+        );
         expect(tokens.length, greaterThanOrEqualTo(2));
       });
 
@@ -301,7 +316,11 @@ void main() {
           createdAt: mockTimestamp,
         );
 
-        final result = await mutePostUseCase.mutePost(specialPost, 'test_user', specialToken);
+        final result = await mutePostUseCase.mutePost(
+          specialPost,
+          'test_user',
+          specialToken,
+        );
 
         expect(result, isA<Result<bool>>());
         result.when(
@@ -311,48 +330,61 @@ void main() {
 
         // Verify token was created
         final tokens = await databaseRepository.getTokens('test_user');
-        expect(tokens.any((token) => token['tokenId'] == 'special_mute_token'), isTrue);
+        expect(
+          tokens.any((token) => token['tokenId'] == 'special_mute_token'),
+          isTrue,
+        );
       });
 
       test('should handle same user muting multiple posts', () async {
         const testUser = 'multi_mute_user';
-        
-        final posts = List.generate(3, (index) => Post(
-          postId: 'multi_post_$index',
-          uid: 'owner_$index',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Multi mute test description $index',
-          },
-          image: const {},
-          searchToken: const {},
-          title: {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Multi Mute Test Post $index',
-          },
-        ));
 
-        final tokens = List.generate(3, (index) => MutePostToken(
-          tokenId: 'multi_mute_token_$index',
-          postId: 'multi_post_$index',
-          activeUid: testUser,
-          tokenType: 'mute_post',
-          createdAt: mockTimestamp,
-        ));
+        final posts = List.generate(
+          3,
+          (index) => Post(
+            postId: 'multi_post_$index',
+            uid: 'owner_$index',
+            createdAt: mockTimestamp,
+            updatedAt: mockTimestamp,
+            customCompleteText: const {},
+            description: {
+              'languageCode': 'en',
+              'negativeScore': 0.05,
+              'positiveScore': 0.95,
+              'sentiment': 'positive',
+              'value': 'Multi mute test description $index',
+            },
+            image: const {},
+            searchToken: const {},
+            title: {
+              'languageCode': 'en',
+              'negativeScore': 0.1,
+              'positiveScore': 0.9,
+              'sentiment': 'positive',
+              'value': 'Multi Mute Test Post $index',
+            },
+          ),
+        );
+
+        final tokens = List.generate(
+          3,
+          (index) => MutePostToken(
+            tokenId: 'multi_mute_token_$index',
+            postId: 'multi_post_$index',
+            activeUid: testUser,
+            tokenType: 'mute_post',
+            createdAt: mockTimestamp,
+          ),
+        );
 
         // Mute all posts
         final results = <Result<bool>>[];
         for (int i = 0; i < 3; i++) {
-          final result = await mutePostUseCase.mutePost(posts[i], testUser, tokens[i]);
+          final result = await mutePostUseCase.mutePost(
+            posts[i],
+            testUser,
+            tokens[i],
+          );
           results.add(result);
         }
 
@@ -369,7 +401,12 @@ void main() {
         final userTokens = await databaseRepository.getTokens(testUser);
         expect(userTokens.length, greaterThanOrEqualTo(3));
         for (int i = 0; i < 3; i++) {
-          expect(userTokens.any((token) => token['tokenId'] == 'multi_mute_token_$i'), isTrue);
+          expect(
+            userTokens.any(
+              (token) => token['tokenId'] == 'multi_mute_token_$i',
+            ),
+            isTrue,
+          );
         }
       });
     });

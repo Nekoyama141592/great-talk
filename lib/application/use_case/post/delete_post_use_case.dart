@@ -4,7 +4,10 @@ import 'package:great_talk/domain/entity/post/post.dart';
 import 'package:great_talk/repository/database_repository.dart';
 
 class DeletePostUseCase {
-  DeletePostUseCase({required this.firestoreRepository, required this.apiRepository});
+  DeletePostUseCase({
+    required this.firestoreRepository,
+    required this.apiRepository,
+  });
   final DatabaseRepository firestoreRepository;
   final ApiRepository apiRepository;
 
