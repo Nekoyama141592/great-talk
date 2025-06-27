@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
-import 'package:great_talk/ui_core/toast_ui_core.dart';
+import 'package:great_talk/presentation/common/toast_ui_core.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class UsersRefreshScreen extends HookWidget {

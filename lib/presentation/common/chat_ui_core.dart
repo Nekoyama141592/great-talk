@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/core/extension/number_format_extension.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
-import 'package:great_talk/ui_core/toast_ui_core.dart';
+import 'package:great_talk/presentation/common/toast_ui_core.dart';
 
 class ChatUiCore {
   static void onDescriptionButtonPressed(BuildContext context, Post post) {

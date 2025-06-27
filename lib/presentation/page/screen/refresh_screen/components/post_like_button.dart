@@ -6,7 +6,7 @@ import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/provider/keep_alive/usecase/post/like_post/like_post_use_case_provider.dart';
-import 'package:great_talk/ui_core/toast_ui_core.dart';
+import 'package:great_talk/presentation/common/toast_ui_core.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

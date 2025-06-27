@@ -7,7 +7,7 @@ import 'package:great_talk/presentation/notifier/current_user/current_user_notif
 import 'package:great_talk/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
-import 'package:great_talk/ui_core/image_ui_core.dart';
+import 'package:great_talk/presentation/common/image_ui_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/consts/msg_constants.dart';

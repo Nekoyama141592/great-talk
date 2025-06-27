@@ -15,10 +15,10 @@ import 'package:great_talk/provider/keep_alive/usecase/user/mute_user/mute_user_
 import 'package:great_talk/provider/keep_alive/usecase/post/delete_post/delete_post_use_case_provider.dart';
 import 'package:great_talk/core/util/route_core.dart';
 import 'package:great_talk/provider/view_model/chat/chat_view_model.dart';
-import 'package:great_talk/ui_core/chat_ui_core.dart';
-import 'package:great_talk/ui_core/post_ui_core.dart';
-import 'package:great_talk/ui_core/texts.dart';
-import 'package:great_talk/ui_core/toast_ui_core.dart';
+import 'package:great_talk/presentation/common/chat_ui_core.dart';
+import 'package:great_talk/presentation/common/post_ui_core.dart';
+import 'package:great_talk/presentation/common/texts.dart';
+import 'package:great_talk/presentation/common/toast_ui_core.dart';
 import 'package:great_talk/presentation/page/chat/components/menu_button.dart';
 import 'package:great_talk/presentation/page/chat/components/msg_card.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_page.dart';

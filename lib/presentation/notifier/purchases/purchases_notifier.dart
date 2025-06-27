@@ -8,7 +8,7 @@ import 'package:great_talk/provider/repository/purchase/purchase_repository_prov
 import 'package:great_talk/provider/keep_alive/usecase/purchases/purchase_use_case_provider.dart';
 import 'package:great_talk/provider/repository/local/local_repository_provider.dart';
 import 'package:great_talk/infrastructure/repository/purchase_repository.dart';
-import 'package:great_talk/ui_core/toast_ui_core.dart';
+import 'package:great_talk/presentation/common/toast_ui_core.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'purchases_notifier.g.dart';

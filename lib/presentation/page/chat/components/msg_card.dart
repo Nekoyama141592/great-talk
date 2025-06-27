@@ -2,8 +2,8 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/extension/custom_date_time_formatting.dart';
-import 'package:great_talk/ui_core/padding_core.dart';
-import 'package:great_talk/ui_core/text_core.dart';
+import 'package:great_talk/presentation/common/padding_core.dart';
+import 'package:great_talk/presentation/common/text_core.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:great_talk/presentation/component/circle_image/circle_image.dart';
 

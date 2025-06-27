@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/util/route_core.dart';
 import 'package:great_talk/provider/view_model/edit/edit_view_model.dart';
-import 'package:great_talk/ui_core/toast_ui_core.dart';
+import 'package:great_talk/presentation/common/toast_ui_core.dart';
 import 'package:great_talk/presentation/page/common/forms_screen.dart';
 import 'package:great_talk/presentation/page/edit/components/edit_profile_form.dart';
 import 'package:great_talk/presentation/page/edit/components/profile_image_widget.dart';

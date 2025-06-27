@@ -9,9 +9,9 @@ import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.
 import 'package:great_talk/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
-import 'package:great_talk/ui_core/image_ui_core.dart';
+import 'package:great_talk/presentation/common/image_ui_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:great_talk/ui_core/toast_ui_core.dart';
+import 'package:great_talk/presentation/common/toast_ui_core.dart';
 import 'package:great_talk/consts/form_consts.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/core/util/aws_s3_core.dart';

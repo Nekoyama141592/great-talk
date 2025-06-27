@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart'; // flutter_hooksをインポ�
 import 'package:great_talk/core/util/route_core.dart';
 import 'package:great_talk/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/provider/view_model/create_post/create_post_view_model.dart';
-import 'package:great_talk/ui_core/toast_ui_core.dart';
+import 'package:great_talk/presentation/common/toast_ui_core.dart';
 import 'package:great_talk/presentation/page/common/forms_screen.dart';
 import 'package:great_talk/presentation/page/create_post/components/create_post_form.dart';
 import 'package:great_talk/presentation/page/create_post/components/image_picker_widget.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:great_talk/ui_core/texts.dart';
+import 'package:great_talk/presentation/common/texts.dart';
 
 class PostUiCore {
   static void onReportButtonPressed({
