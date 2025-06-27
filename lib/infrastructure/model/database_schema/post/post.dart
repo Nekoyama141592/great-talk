@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/consts/moderate_constant.dart';
 import 'package:great_talk/core/util/search_core.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
@@ -65,7 +65,7 @@ abstract class Post with _$Post {
   Timestamp typedUpdatedAtAt() => updatedAt as Timestamp;
   bool isInappropriate() =>
       typedImage().moderationLabels.isNotEmpty ||
-      typedDescription().negativeScore > negativeLimit;
+      typedDescription().negativeScore > ModerateConstant.negativeLimit;
 
   String inappropriateReason(String? currentUid) {
     String reason = "";
@@ -73,7 +73,7 @@ abstract class Post with _$Post {
     final titleNS = typedTitle().negativeScore;
     final descriptionNS = typedDescription().negativeScore;
     final isMe = uid == currentUid;
-    if (titleNS > negativeLimit) {
+    if (titleNS > ModerateConstant.negativeLimit) {
       reason += "・タイトルがネガティブです。\n";
       if (isMe) {
         reason += "(ネガティブスコア: $titleNS)\n(タイトル: ${typedTitle().value})\n";
@@ -89,7 +89,7 @@ abstract class Post with _$Post {
         reason += "(理由: $concatenatedNames)\n";
       }
     }
-    if (descriptionNS > negativeLimit) {
+    if (descriptionNS > ModerateConstant.negativeLimit) {
       reason += "・説明文がネガティブです。\n";
       if (isMe) {
         reason +=

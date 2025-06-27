@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart' as fluttertoast;
 import 'package:great_talk/consts/colors.dart';
-import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/consts/toast_constant.dart';
 import 'package:great_talk/core/util/route_core.dart';
 import 'package:great_talk/consts/msg_constants.dart';
 import 'package:great_talk/presentation/page/common/custom_snack_bar.dart';
@@ -19,14 +19,14 @@ class ToastUiCore {
   static Future<void> showFlutterToast(String msg) async {
     await fluttertoast.Fluttertoast.showToast(
       msg: msg,
-      timeInSecForIosWeb: timeInSecForIosWeb,
+      timeInSecForIosWeb: ToastConstant.timeInSecForIosWeb,
     );
   }
 
   static Future<void> showErrorFlutterToast(String msg) async {
     await fluttertoast.Fluttertoast.showToast(
       msg: msg,
-      timeInSecForIosWeb: timeInSecForIosWeb,
+      timeInSecForIosWeb: ToastConstant.timeInSecForIosWeb,
       backgroundColor: kErrorColor,
     );
   }

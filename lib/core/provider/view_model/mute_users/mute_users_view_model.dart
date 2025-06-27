@@ -1,4 +1,4 @@
-import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/consts/firestore_constant.dart';
 import 'package:great_talk/presentation/state/mute_users/mute_users_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
@@ -31,7 +31,7 @@ class MuteUsersViewModel extends _$MuteUsersViewModel {
     final muteUids = ref.read(tokensNotifierProvider).value?.muteUids ?? [];
     if (muteUids.length > currentDocsLength) {
       final remaining = muteUids.length - currentDocsLength;
-      final limit = remaining >= whereInLimit ? whereInLimit : remaining;
+      final limit = remaining >= FirestoreConstant.whereInLimit ? FirestoreConstant.whereInLimit : remaining;
       return muteUids.sublist(currentDocsLength, currentDocsLength + limit);
     }
     return [];

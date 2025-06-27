@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/consts/moderate_constant.dart';
 import 'package:great_talk/consts/msg_constants.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
@@ -76,8 +76,8 @@ abstract class PublicUser with _$PublicUser {
   bool get hasNoBio => bioValue.isEmpty;
   bool isInappropriate() =>
       typedImage().moderationLabels.isNotEmpty ||
-      typedBio().negativeScore > negativeLimit ||
-      typedUserName().negativeScore > negativeLimit;
+      typedBio().negativeScore > ModerateConstant.negativeLimit ||
+      typedUserName().negativeScore > ModerateConstant.negativeLimit;
   String inappropriateReason(String? currentUid) {
     String reason = "";
     final bioNS = typedBio().negativeScore;
@@ -94,11 +94,11 @@ abstract class PublicUser with _$PublicUser {
         reason += "(理由: $concatenatedNames)\n";
       }
     }
-    if (bioNS > negativeLimit) {
+    if (bioNS > ModerateConstant.negativeLimit) {
       reason += "・紹介文がネガティブです。\n";
       if (isMe) reason += "(ネガティブスコア: $bioNS)\n(紹介文: ${typedBio().value})\n";
     }
-    if (userNameNS > negativeLimit) {
+    if (userNameNS > ModerateConstant.negativeLimit) {
       reason += "・ユーザー名がネガティブです。\n";
       if (isMe) {
         reason += "(ネガティブスコア: $userNameNS)\n(ユーザー名: $nameValue)\n";

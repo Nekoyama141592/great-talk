@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/consts/firestore_constant.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
@@ -62,10 +62,10 @@ class DatabaseRepository {
       privateUserDocRef(currentUid).collection("tokens");
   ColRef timelinesColRef(DocRef userRef) => userRef.collection('timelines');
   // Query
-  MapQuery usersQuery() => usersColRef().limit(oneTimeReadCount);
+  MapQuery usersQuery() => usersColRef().limit(FirestoreConstant.oneTimeReadCount);
   MapQuery userPostsQuery(String uid) =>
-      postsColRef(uid).limit(oneTimeReadCount);
-  MapQuery postsQuery() => postsCollectionGroup().limit(oneTimeReadCount);
+      postsColRef(uid).limit(FirestoreConstant.oneTimeReadCount);
+  MapQuery postsQuery() => postsCollectionGroup().limit(FirestoreConstant.oneTimeReadCount);
   MapQuery postsByWhereIn(List<String> postIds) =>
       postsQuery().where('postId', whereIn: postIds);
   MapQuery userPostsByNewest(String uid) =>
@@ -76,7 +76,7 @@ class DatabaseRepository {
       postsQuery().orderBy('createdAt', descending: true);
   MapQuery timelinesQuery(String uid) => timelinesColRef(
     userDocRef(uid),
-  ).orderBy('createdAt', descending: true).limit(whereInLimit);
+  ).orderBy('createdAt', descending: true).limit(FirestoreConstant.whereInLimit);
   MapQuery timelinePostsQuery(List<String> timelinePostIds) =>
       postsQuery().where('postId', whereIn: timelinePostIds);
   MapQuery usersByWhereIn(List<String> uids) =>

@@ -1,4 +1,4 @@
-import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/consts/firestore_constant.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/presentation/state/tokens/tokens_state.dart';
 import 'package:great_talk/presentation/state/posts/posts_state.dart';
@@ -36,7 +36,7 @@ class MutePostsViewModel extends _$MutePostsViewModel
     final mutePostIds = _tokensState().mutePostIds;
     if (mutePostIds.length > currentDocsLength) {
       final remaining = mutePostIds.length - currentDocsLength;
-      final limit = remaining >= whereInLimit ? whereInLimit : remaining;
+      final limit = remaining >= FirestoreConstant.whereInLimit ? FirestoreConstant.whereInLimit : remaining;
       return mutePostIds.sublist(currentDocsLength, currentDocsLength + limit);
     }
     return [];

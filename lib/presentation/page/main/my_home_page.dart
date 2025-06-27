@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/consts/ints.dart';
+import 'package:great_talk/consts/tab_constant.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/notification/notification_provider.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
@@ -29,7 +29,7 @@ class MyHomePage extends HookConsumerWidget {
     final PageController pageController = usePageController();
     return Scaffold(
       appBar:
-          pageIndex.value != rankingIndex
+          pageIndex.value != TabConstant.rankingIndex
               ? AppBar(
                 title: BasicBoldText(FlavorUiCore.appName()),
                 shape: appBarShape(context),
@@ -37,7 +37,7 @@ class MyHomePage extends HookConsumerWidget {
               : null,
       floatingActionButton: MainFloatingActionButton(
         isShow:
-            pageIndex.value == rankingIndex || pageIndex.value == feedsIndex,
+            pageIndex.value == TabConstant.rankingIndex || pageIndex.value == TabConstant.feedsIndex,
       ),
       drawer: const OriginalDrawer(),
       bottomNavigationBar: BottomNavigationBar(
