@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:great_talk/core/image_core.dart';
 import 'package:great_talk/presentation/state/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
@@ -14,7 +15,6 @@ import 'package:great_talk/extension/string_extension.dart';
 import 'package:great_talk/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/domain/entity/database_schema/user_update_log/user_update_log.dart';
 import 'package:great_talk/core/aws_s3_core.dart';
-import 'package:great_talk/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/presentation/state/edit/edit_state.dart';
 
 part 'edit_view_model.g.dart';
@@ -38,11 +38,10 @@ class EditViewModel extends _$EditViewModel {
   }
 
   /// 画像選択時の処理
-  FutureResult<bool> onImagePickButtonPressed() async {
-    final useCase = ref.read(fileUseCaseProvider);
-    final result = await useCase.getCompressedImage();
+  FutureResult<bool> onImagePickButtonPressed() async {;
+    final result = await ImageCore.getCompressedImage();
     if (result == null) return const Result.failure('画像が取得できませんでした');
-    final info = await useCase.imageInfo(result);
+    final info = await ImageCore.imageInfo(result);
     if (info.isNotSquare) {
       return Result.failure(ImageUiCore.squareImageRequestMsg);
     }
