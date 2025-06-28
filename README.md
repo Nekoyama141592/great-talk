@@ -101,10 +101,10 @@ flutterfire configure
 ### **開発コマンド**
 ```bash
 # 開発ビルドを実行
-flutter run --flavor dev -t lib/main_dev.dart
+flutter run --flavor dev
 
 # 本番ビルドを実行
-flutter run --flavor prod -t lib/main_prod.dart
+flutter run --flavor prod
 
 # コード生成（監視モード）
 flutter pub run build_runner watch --delete-conflicting-outputs

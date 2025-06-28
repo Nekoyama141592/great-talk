@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/state/posts/posts_state.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/posts/posts_use_case_provider.dart';
@@ -21,6 +22,8 @@ class PostsViewModel extends _$PostsViewModel implements RefreshInterface {
   DatabaseRepository get _repository => _useCase.repository;
 
   Future<PostsState> _fetchData() async {
+    final user = ref.watch(streamAuthProvider).value;
+    if (user == null) return PostsState();
     final posts = await _repository.getPosts(isRankingPosts);
     final userPosts = await _useCase.createUserPosts(
       posts,
