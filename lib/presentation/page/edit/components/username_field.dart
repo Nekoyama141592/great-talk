@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/presentation/constant/form_consts.dart';
 import 'package:great_talk/core/extension/string_extension.dart';
-import 'package:great_talk/presentation/common/form_ui_core.dart';
+import 'package:great_talk/presentation/util/form_ui_util.dart';
 import 'package:great_talk/presentation/page/create_post/components/form_label.dart';
 import 'package:great_talk/presentation/page/create_post/components/original_form.dart';
 
@@ -33,7 +33,7 @@ class UsernameField extends StatelessWidget {
                 value,
               );
             } else if (value.invalidField) {
-              return FormUiCore.invalidFieldMsg;
+              return FormUiUtil.invalidFieldMsg;
             }
             return null;
           },

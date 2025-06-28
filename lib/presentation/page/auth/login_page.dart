@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/util/route_core.dart';
+import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/screen/login_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -21,11 +21,11 @@ class LoginPage extends ConsumerWidget {
             final result = await controller.onAppleButtonPressed();
             result.when(
               success: (_) {
-                ToastUiCore.showSuccessSnackBar(context, 'Appleログインに成功しました');
-                RouteCore.back(context);
+                ToastUiUtil.showSuccessSnackBar(context, 'Appleログインに成功しました');
+                RouteUtil.back(context);
               },
               failure:
-                  (_) => ToastUiCore.showFailureSnackBar(
+                  (_) => ToastUiUtil.showFailureSnackBar(
                     context,
                     "Appleログインに失敗しました",
                   ),
@@ -35,11 +35,11 @@ class LoginPage extends ConsumerWidget {
             final result = await controller.onGoogleButtonPressed();
             result.when(
               success: (_) {
-                ToastUiCore.showSuccessSnackBar(context, 'Googleログインに成功しました');
-                RouteCore.back(context);
+                ToastUiUtil.showSuccessSnackBar(context, 'Googleログインに成功しました');
+                RouteUtil.back(context);
               },
               failure:
-                  (_) => ToastUiCore.showFailureSnackBar(
+                  (_) => ToastUiUtil.showFailureSnackBar(
                     context,
                     "Googleログインに失敗しました",
                   ),

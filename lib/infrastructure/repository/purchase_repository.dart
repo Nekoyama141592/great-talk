@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/util/purchases_core.dart';
+import 'package:great_talk/core/util/purchases_util.dart';
 import 'package:great_talk/core/extension/purchase_details_extension.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -67,7 +67,7 @@ class PurchaseRepository implements IPurchaseRepository {
   @override
   Future<List<ProductDetails>?> queryProductDetails() async {
     try {
-      final identifiers = PurchasesCore.productIds();
+      final identifiers = PurchasesUtil.productIds();
       final res = await inAppPurchase.queryProductDetails(identifiers);
       return res.productDetails;
     } catch (e) {

@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/util/size_core.dart';
-import 'package:great_talk/core/util/route_core.dart';
+import 'package:great_talk/core/util/size_util.dart';
+import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
-import 'package:great_talk/presentation/common/texts.dart';
+import 'package:great_talk/presentation/util/texts.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/presentation/page/chat/chat_page.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
@@ -35,7 +35,7 @@ class PostCard extends ConsumerWidget {
     // 不適切なら弾く
     return InkWell(
       child: Padding(
-        padding: EdgeInsets.all(SizeCore.defaultPadding(context)),
+        padding: EdgeInsets.all(SizeUtil.defaultPadding(context)),
         child: AsyncScreen(
           asyncValue: asyncValue,
           data: (state) {
@@ -70,7 +70,7 @@ class PostCard extends ConsumerWidget {
             }
             return InkWell(
               onTap: () {
-                RouteCore.pushPath(
+                RouteUtil.pushPath(
                   context,
                   ChatPage.generatePath(post.uid, post.postId),
                 );
@@ -91,7 +91,7 @@ class PostCard extends ConsumerWidget {
                     EllipsisText(post.typedTitle().value),
                     TextButton(
                       onPressed:
-                          () => RouteCore.pushPath(
+                          () => RouteUtil.pushPath(
                             context,
                             UserProfilePage.generatePath(post.uid),
                           ),

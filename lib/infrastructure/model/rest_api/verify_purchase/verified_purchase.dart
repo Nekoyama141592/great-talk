@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/core/util/date_core.dart';
-import 'package:great_talk/core/util/purchases_core.dart';
+import 'package:great_talk/core/util/date_util.dart';
+import 'package:great_talk/core/util/purchases_util.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/response/android_receipt_response/android_receipt_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/response/ios_receipt_response/ios_receipt_response.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -30,7 +30,7 @@ abstract class VerifiedPurchase with _$VerifiedPurchase {
   IOSReceiptResponse get _iosReceipt =>
       IOSReceiptResponse.fromJson(verifiedReceipt);
   PurchaseDetails typedPurchaseDetails() {
-    return PurchasesCore.purchaseDetailsFromJson(purchaseDetails);
+    return PurchasesUtil.purchaseDetailsFromJson(purchaseDetails);
   }
 
   String get productId {
@@ -48,8 +48,8 @@ abstract class VerifiedPurchase with _$VerifiedPurchase {
   }
 
   bool _isNotExpired() {
-    final expireTime = DateCore.milliSecondsToDateTime(expiryTimeMillis);
-    return DateCore.isFuture(expireTime);
+    final expireTime = DateUtil.milliSecondsToDateTime(expiryTimeMillis);
+    return DateUtil.isFuture(expireTime);
   }
 
   bool _isValidPurchase() {

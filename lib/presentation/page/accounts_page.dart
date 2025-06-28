@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/util/auth_core.dart';
+import 'package:great_talk/core/util/auth_util.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
-import 'package:great_talk/core/util/route_core.dart';
+import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/auth/logouted_page.dart';
 import 'package:great_talk/presentation/page/auth/reauthenticate_to_delete_page.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
@@ -29,28 +29,28 @@ class AccountPage extends ConsumerWidget {
           return ListView(
             children: [
               ListTile(
-                title: Text("認証情報: ${AuthCore.currentAuthStateString(state)}"),
+                title: Text("認証情報: ${AuthUtil.currentAuthStateString(state)}"),
               ),
               ListTile(title: SelectableText("ユーザーID: $uid")),
               if (isLoggedIn) ...[
                 ListTile(
                   title: const Text("ログアウトする"),
                   onTap: () {
-                    ToastUiCore.cupertinoAlertDialog(
+                    ToastUiUtil.cupertinoAlertDialog(
                       context,
                       "ログアウトしますが本当によろしいですか？",
                       () async {
                         final result = await notifier.signOut();
                         result.when(
                           success: (_) {
-                            RouteCore.pushPath(context, LogoutedPage.path);
+                            RouteUtil.pushPath(context, LogoutedPage.path);
                           },
                           failure: (_) {
-                            ToastUiCore.showFailureSnackBar(
+                            ToastUiUtil.showFailureSnackBar(
                               context,
                               "ログアウトできませんでした}",
                             );
-                            RouteCore.back(context);
+                            RouteUtil.back(context);
                           },
                         );
                       },
@@ -60,7 +60,7 @@ class AccountPage extends ConsumerWidget {
                 ListTile(
                   title: const Text("ユーザーを消去する"),
                   onTap:
-                      () => RouteCore.pushPath(
+                      () => RouteUtil.pushPath(
                         context,
                         ReauthenticateToDeletePage.path,
                       ),

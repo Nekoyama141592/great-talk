@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:great_talk/core/util/size_core.dart';
+import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/page/screen/gradient_screen.dart';
 
 class SvgAndMsgScreen extends StatelessWidget {
@@ -23,11 +23,11 @@ class SvgAndMsgScreen extends StatelessWidget {
       body: GradientScreen(
         top: const SizedBox.shrink(),
         header: Padding(
-          padding: EdgeInsets.all(SizeCore.defaultPadding(context)),
+          padding: EdgeInsets.all(SizeUtil.defaultPadding(context)),
           child: Text(
             title,
             style: TextStyle(
-              fontSize: SizeCore.defaultHeaderTextSize(context),
+              fontSize: SizeUtil.defaultHeaderTextSize(context),
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -36,7 +36,7 @@ class SvgAndMsgScreen extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Padding(
             padding: EdgeInsets.symmetric(
-              vertical: SizeCore.defaultPadding(context),
+              vertical: SizeUtil.defaultPadding(context),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,12 +44,12 @@ class SvgAndMsgScreen extends StatelessWidget {
                 SvgPicture.asset(svgPath, height: size.height * 0.3),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    vertical: SizeCore.defaultPadding(context),
+                    vertical: SizeUtil.defaultPadding(context),
                   ),
                   child: Text(
                     msg,
                     style: TextStyle(
-                      fontSize: SizeCore.defaultHeaderTextSize(context) * 1.25,
+                      fontSize: SizeUtil.defaultHeaderTextSize(context) * 1.25,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

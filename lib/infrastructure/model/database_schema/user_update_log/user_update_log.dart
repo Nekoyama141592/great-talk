@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/core/util/search_core.dart';
+import 'package:great_talk/core/util/search_util.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 
 part 'user_update_log.freezed.dart';
@@ -26,7 +26,7 @@ abstract class UserUpdateLog with _$UserUpdateLog {
   ) {
     return UserUpdateLog(
       logCreatedAt: FieldValue.serverTimestamp(),
-      searchToken: SearchCore.returnSearchToken(userName),
+      searchToken: SearchUtil.returnSearchToken(userName),
       stringBio: bio.trim(),
       stringUserName: userName.trim(),
       uid: uid,

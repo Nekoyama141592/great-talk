@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/presentation/constant/colors.dart';
-import 'package:great_talk/core/util/route_core.dart';
+import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/presentation/page/create_post/create_post_page.dart';
 
 class MainFloatingActionButton extends StatelessWidget {
@@ -11,7 +11,7 @@ class MainFloatingActionButton extends StatelessWidget {
     if (isShow) {
       return FloatingActionButton(
         backgroundColor: kPrimaryColor,
-        onPressed: () => RouteCore.pushPath(context, CreatePostPage.path),
+        onPressed: () => RouteUtil.pushPath(context, CreatePostPage.path),
         child: const Icon(Icons.new_label),
       );
     } else {

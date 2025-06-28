@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:great_talk/presentation/constant/colors.dart';
-import 'package:great_talk/core/util/size_core.dart';
+import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:great_talk/presentation/component/rounded_button.dart';
 
@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: SizeCore.defaultPadding(context),
+        horizontal: SizeUtil.defaultPadding(context),
       ),
       child: Center(
         child: SingleChildScrollView(
@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
               ),
               SvgPicture.asset(
                 'assets/svgs/login-bro.svg',
-                height: SizeCore.fullHeight(context) * 0.30,
+                height: SizeUtil.fullHeight(context) * 0.30,
               ),
               // with custom text
               RoundedButton(

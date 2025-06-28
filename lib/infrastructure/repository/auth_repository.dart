@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/util/credential_core.dart';
+import 'package:great_talk/core/util/credential_util.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/domain/repository_interface/i_auth_repository.dart';
 
@@ -20,6 +20,9 @@ class AuthRepository implements IAuthRepository {
       } else {
         return Result.success(user);
       }
+    } on FirebaseAuthException catch (e) {
+      if (enableDebugPrint) debugPrint('signInAnonymously: ${e.toString()}');
+      return Result.failure('匿名ログインが失敗しました');
     } catch (e) {
       if (enableDebugPrint) debugPrint('signInAnonymously: ${e.toString()}');
       return Result.failure('匿名ログインが失敗しました');
@@ -29,7 +32,7 @@ class AuthRepository implements IAuthRepository {
   @override
   FutureResult<User> signInWithApple() async {
     try {
-      final credential = await CredentialCore.appleCredential();
+      final credential = await CredentialUtil.appleCredential();
       final res = await instance.signInWithCredential(credential);
       final user = res.user;
       if (user == null) {
@@ -48,7 +51,7 @@ class AuthRepository implements IAuthRepository {
   @override
   FutureResult<User> signInWithGoogle() async {
     try {
-      final credential = await CredentialCore.googleCredential();
+      final credential = await CredentialUtil.googleCredential();
       final res = await instance.signInWithCredential(credential);
       final user = res.user;
       if (user == null) {
@@ -69,6 +72,9 @@ class AuthRepository implements IAuthRepository {
     try {
       await instance.signOut();
       return const Result.success(true);
+    } on FirebaseAuthException catch (e) {
+      if (enableDebugPrint) debugPrint('signOut: ${e.toString()}');
+      return Result.failure('ログアウトが失敗しました');
     } catch (e) {
       if (enableDebugPrint) debugPrint('signOut: ${e.toString()}');
       return Result.failure('ログアウトが失敗しました');

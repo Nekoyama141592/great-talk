@@ -1,13 +1,13 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:great_talk/presentation/constant/remote_config_constants.dart';
-import 'package:great_talk/core/util/remote_config_core.dart';
+import 'package:great_talk/core/util/remote_config_util.dart';
 import 'package:great_talk/domain/repository_interface/i_remote_config_repository.dart';
 
 class RemoteConfigRepository implements IRemoteConfigRepository {
   RemoteConfigRepository(this.instance);
   final FirebaseRemoteConfig instance;
-  String get _maintenanceMsgKey => RemoteConfigCore.maintenanceMsgKey;
-  String get _forcedUpdateVersionKey => RemoteConfigCore.forcedUpdateVersionKey;
+  String get _maintenanceMsgKey => RemoteConfigUtil.maintenanceMsgKey;
+  String get _forcedUpdateVersionKey => RemoteConfigUtil.forcedUpdateVersionKey;
 
   Future<void> _setConfigSettings() {
     return instance.setConfigSettings(

@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/util/route_core.dart';
+import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/local_setting/local_setting.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
-import 'package:great_talk/presentation/common/texts.dart';
+import 'package:great_talk/presentation/util/texts.dart';
 import 'package:great_talk/core/extension/number_format_extension.dart';
-import 'package:great_talk/presentation/common/style_utility.dart';
+import 'package:great_talk/presentation/util/style_utility.dart';
 import 'package:great_talk/presentation/page/accounts_page.dart';
 import 'package:great_talk/presentation/page/admin_page.dart';
 import 'package:great_talk/presentation/page/auth/login_page.dart';
@@ -44,7 +44,7 @@ class OriginalDrawer extends ConsumerWidget {
                       children: [
                         EllipsisText(
                           user.nameValue,
-                          style: StyleUiCore.bold25(),
+                          style: StyleUiUtil.bold25(),
                         ),
                         const BasicHeightBox(),
                         Row(
@@ -69,7 +69,7 @@ class OriginalDrawer extends ConsumerWidget {
                       ],
                     ),
                     onTap: () {
-                      RouteCore.pushPath(
+                      RouteUtil.pushPath(
                         context,
                         UserProfilePage.generatePath(user.uid),
                       );
@@ -80,7 +80,7 @@ class OriginalDrawer extends ConsumerWidget {
                 return ListTile(
                   title: const Text("ログインする"),
                   onTap: () {
-                    RouteCore.pushPath(context, LoginPage.path);
+                    RouteUtil.pushPath(context, LoginPage.path);
                   },
                 );
               }
@@ -97,17 +97,17 @@ class OriginalDrawer extends ConsumerWidget {
           ListTile(
             title: const Text("アカウント情報"),
             onTap: () {
-              RouteCore.pushPath(context, AccountPage.path);
+              RouteUtil.pushPath(context, AccountPage.path);
             },
           ),
           ListTile(
             title: const Text("ミュートしているユーザー"),
-            onTap: () => RouteCore.pushPath(context, MuteUsersPage.path),
+            onTap: () => RouteUtil.pushPath(context, MuteUsersPage.path),
           ),
           ListTile(title: Text("モデル: ${purchaseState?.model() ?? ''}")),
           ListTile(
             title: const Text("ミュートしている投稿"),
-            onTap: () => RouteCore.pushPath(context, MutePostsPage.path),
+            onTap: () => RouteUtil.pushPath(context, MutePostsPage.path),
           ),
           ListTile(
             title: const Text("テーマ切り替え"),
@@ -130,7 +130,7 @@ class OriginalDrawer extends ConsumerWidget {
           if (isAdmin)
             ListTile(
               title: const Text("管理者専用ページ"),
-              onTap: () => RouteCore.pushPath(context, AdminPage.path),
+              onTap: () => RouteUtil.pushPath(context, AdminPage.path),
             ),
         ],
       ),

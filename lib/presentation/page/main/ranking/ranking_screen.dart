@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/util/size_core.dart';
+import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/page/common/ranking_tab_bar_elements.dart';
 import 'package:great_talk/presentation/page/main/ranking/components/post_ranking_screen.dart';
 import 'package:great_talk/presentation/page/main/ranking/components/user_ranking_screen.dart';
@@ -14,7 +14,7 @@ class RankingScreen extends StatelessWidget {
         appBar: AppBar(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(SizeCore.defaultPadding(context) * 2),
+              bottom: Radius.circular(SizeUtil.defaultPadding(context) * 2),
             ),
           ),
           bottom: TabBar(

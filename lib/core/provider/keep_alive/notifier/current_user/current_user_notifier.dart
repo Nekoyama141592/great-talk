@@ -7,7 +7,7 @@ import 'package:great_talk/core/provider/repository/api/api_repository_provider.
 import 'package:great_talk/core/provider/repository/auth/auth_repository_provider.dart';
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
-import 'package:great_talk/core/util/credential_core.dart';
+import 'package:great_talk/core/util/credential_util.dart';
 import 'package:great_talk/infrastructure/repository/auth_repository.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/file/file_use_case_provider.dart';
@@ -105,12 +105,12 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   FutureResult<bool> reauthenticateWithAppleToDelete() async {
-    final credential = await CredentialCore.appleCredential();
+    final credential = await CredentialUtil.appleCredential();
     return await _reauthenticateToDelete(credential);
   }
 
   FutureResult<bool> reauthenticateWithGoogleToDelete() async {
-    final credential = await CredentialCore.googleCredential();
+    final credential = await CredentialUtil.googleCredential();
     return _reauthenticateToDelete(credential);
   }
 

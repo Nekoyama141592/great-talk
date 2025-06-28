@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:great_talk/core/util/purchases_core.dart';
+import 'package:great_talk/core/util/purchases_util.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/presentation/state/purchases/purchases_state.dart';
 import 'package:great_talk/presentation/notifier/purchases/purchases_notifier.dart';
@@ -24,7 +24,7 @@ class ProductsViewModel extends _$ProductsViewModel {
   Future<PurchasesState> _fetch(
     List<VerifiedPurchase> verifiedPurchases,
   ) async {
-    final mockProducts = PurchasesCore.mockProducts();
+    final mockProducts = PurchasesUtil.mockProducts();
     final storeConnected = await _repository.isAvailable();
     if (!storeConnected) {
       return PurchasesState(storeConnected: false, products: mockProducts);
@@ -44,7 +44,7 @@ class ProductsViewModel extends _$ProductsViewModel {
       return const Result.failure('ストアに接続ができませんでした');
     }
     await _repository.cancelTransctions();
-    final purchaseParam = PurchasesCore.param(
+    final purchaseParam = PurchasesUtil.param(
       details,
       state.value?.verifiedPurchases,
     );

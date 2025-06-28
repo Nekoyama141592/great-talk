@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:great_talk/core/util/route_core.dart';
+import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/core/provider/view_model/mute_users/mute_users_view_model.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/presentation/page/mute/mute_users/component/mute_user_card.dart';
 import 'package:great_talk/presentation/page/screen/refresh_screen/users_refresh_screen.dart';
@@ -42,9 +42,9 @@ class MuteUsersPage extends ConsumerWidget {
                   onMuteUserCardTap: () async {
                     final result = await notifier.unMuteUser(passiveUser.uid);
                     result.when(
-                      success: (_) => RouteCore.back(context),
+                      success: (_) => RouteUtil.back(context),
                       failure:
-                          (_) => ToastUiCore.showFailureSnackBar(
+                          (_) => ToastUiUtil.showFailureSnackBar(
                             context,
                             '失敗しました',
                           ),

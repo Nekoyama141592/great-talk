@@ -6,7 +6,7 @@ import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/post/like_post/like_post_use_case_provider.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -35,7 +35,7 @@ class PostLikeButton extends HookConsumerWidget {
                 onTap: () async {
                   final user = ref.read(streamAuthProvider).value;
                   if (user == null || !user.emailVerified) {
-                    ToastUiCore.showSuccessSnackBar(context, 'ログインしてください');
+                    ToastUiUtil.showSuccessSnackBar(context, 'ログインしてください');
                     return;
                   }
                   final currentUid = user.uid;
@@ -48,7 +48,7 @@ class PostLikeButton extends HookConsumerWidget {
                   result.when(
                     success: (_) {},
                     failure: (_) {
-                      ToastUiCore.showFailureSnackBar(context, '通信に失敗しました');
+                      ToastUiUtil.showFailureSnackBar(context, '通信に失敗しました');
                       likeCount.value++; // 元に戻す
                       notifier().addLikePost(currentUid, post);
                     },
@@ -60,7 +60,7 @@ class PostLikeButton extends HookConsumerWidget {
                 onTap: () async {
                   final user = ref.read(streamAuthProvider).value;
                   if (user == null || !user.emailVerified) {
-                    ToastUiCore.showSuccessSnackBar(context, 'ログインしてください');
+                    ToastUiUtil.showSuccessSnackBar(context, 'ログインしてください');
                     return;
                   }
                   final currentUid = user.uid;
@@ -73,7 +73,7 @@ class PostLikeButton extends HookConsumerWidget {
                   result.when(
                     success: (_) {},
                     failure: (_) {
-                      ToastUiCore.showFailureSnackBar(context, ('通信に失敗しました'));
+                      ToastUiUtil.showFailureSnackBar(context, ('通信に失敗しました'));
                       likeCount.value--; // 元に戻す
                       notifier().removeLikePost(postId);
                     },

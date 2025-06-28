@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class UsersRefreshScreen extends HookWidget {
@@ -33,9 +33,9 @@ class UsersRefreshScreen extends HookWidget {
         final result = await onLoading();
         result.when(
           success:
-              (_) => ToastUiCore.showSuccessSnackBar(context, '追加の読み込みが完了しました'),
+              (_) => ToastUiUtil.showSuccessSnackBar(context, '追加の読み込みが完了しました'),
           failure:
-              (_) => ToastUiCore.showFailureSnackBar(context, '追加の読み込みが失敗しました'),
+              (_) => ToastUiUtil.showFailureSnackBar(context, '追加の読み込みが失敗しました'),
         );
         refreshController.loadComplete();
       },

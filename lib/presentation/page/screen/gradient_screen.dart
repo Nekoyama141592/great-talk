@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/presentation/constant/colors.dart';
-import 'package:great_talk/core/util/size_core.dart';
+import 'package:great_talk/core/util/size_util.dart';
 
 class GradientScreen extends StatelessWidget {
   const GradientScreen({
@@ -18,7 +18,7 @@ class GradientScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final circular = SizeCore.defaultPadding(context) * 2;
+    final circular = SizeUtil.defaultPadding(context) * 2;
     final color = baseColor ?? Theme.of(context).primaryColor;
     return SafeArea(
       child: Container(

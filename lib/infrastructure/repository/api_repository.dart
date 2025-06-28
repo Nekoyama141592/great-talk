@@ -1,7 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:great_talk/core/util/json_core.dart';
+import 'package:great_talk/core/util/json_util.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
@@ -35,7 +35,7 @@ class ApiRepository implements IApiRepository {
     final callable = _httpsCallable(name);
     final result = await callable.call(request);
     final data = result.data;
-    final decoded = JsonCore.cast(data);
+    final decoded = JsonUtil.cast(data);
     return decoded;
   }
 
@@ -46,7 +46,7 @@ class ApiRepository implements IApiRepository {
       final result = await _call(name, request.toJson());
       final res = PutObjectResponse.fromJson(result);
       return rs.Result.success(res);
-    } catch (e) {
+    } on FirebaseFunctionsException catch (e) {
       debugPrint('putObject: ${e.toString()}');
       return rs.Result.failure('画像のアップロードが失敗しました');
     }
@@ -60,7 +60,7 @@ class ApiRepository implements IApiRepository {
       final res = GetObjectResponse.fromJson(result);
       final base64Image = res.base64Image;
       return rs.Result.success(base64Image);
-    } catch (e) {
+    } on FirebaseFunctionsException catch (e) {
       debugPrint('getObject: ${e.toString()}');
       return rs.Result.failure('画像の取得が失敗しました');
     }
@@ -77,7 +77,7 @@ class ApiRepository implements IApiRepository {
       final res = DeleteObjectResponse.fromJson(result);
       debugPrint('画像の削除が成功しました');
       return rs.Result.success(res);
-    } catch (e) {
+    } on FirebaseFunctionsException catch (e) {
       debugPrint('deleteObject: ${e.toString()}');
       return rs.Result.failure('画像の削除が失敗しました');
     }
@@ -94,7 +94,7 @@ class ApiRepository implements IApiRepository {
       final result = await _call(name, request.toJson());
       final res = GenerateImageResponse.fromJson(result);
       return rs.Result.success(res);
-    } catch (e) {
+    } on FirebaseFunctionsException catch (e) {
       debugPrint('generateImage: ${e.toString()}');
       return rs.Result.failure('画像の生成に失敗しました');
     }
@@ -110,7 +110,7 @@ class ApiRepository implements IApiRepository {
       final result = await _call(name, requestData);
       final res = GenerateTextResponse.fromJson(result);
       return rs.Result.success(res);
-    } catch (e) {
+    } on FirebaseFunctionsException catch (e) {
       debugPrint('generateText: ${e.toString()}');
       return rs.Result.failure('テキストの生成に失敗しました');
     }
@@ -126,7 +126,7 @@ class ApiRepository implements IApiRepository {
       final result = await _call(name, request.toJson());
       final res = VerifiedPurchase.fromJson(result);
       return rs.Result.success(res);
-    } catch (e) {
+    } on FirebaseFunctionsException catch (e) {
       debugPrint('verifyAndroidReceipt: ${e.toString()}');
       return rs.Result.failure('購入の検証が失敗しました');
     }
@@ -142,7 +142,7 @@ class ApiRepository implements IApiRepository {
       final result = await _call(name, request.toJson());
       final res = VerifiedPurchase.fromJson(result);
       return rs.Result.success(res);
-    } catch (e) {
+    } on FirebaseFunctionsException catch (e) {
       debugPrint('verifyIOSReceipt: ${e.toString()}');
       return rs.Result.failure('購入の検証が失敗しました');
     }

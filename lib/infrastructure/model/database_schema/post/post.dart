@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/constant/moderate_constant.dart';
-import 'package:great_talk/core/util/search_core.dart';
+import 'package:great_talk/core/util/search_util.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
@@ -52,7 +52,7 @@ abstract class Post with _$Post {
       description: DetectedText(value: description).toJson(),
       image: DetectedImage(value: fileName).toJson(),
       postId: postId,
-      searchToken: SearchCore.returnSearchToken(title),
+      searchToken: SearchUtil.returnSearchToken(title),
       title: DetectedText(value: title).toJson(),
       updatedAt: now,
       uid: uid,

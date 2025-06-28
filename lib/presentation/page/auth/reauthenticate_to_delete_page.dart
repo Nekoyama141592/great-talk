@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/core/util/route_core.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/core/util/route_util.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/auth/user_deleted_page.dart';
 import 'package:great_talk/presentation/page/screen/login_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -26,15 +26,15 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                 final deleteResult = await notifier.deletePublicUser();
                 deleteResult.when(
                   success:
-                      (_) => RouteCore.pushPath(context, UserDeletedPage.path),
+                      (_) => RouteUtil.pushPath(context, UserDeletedPage.path),
                   failure:
-                      (_) => ToastUiCore.showFailureSnackBar(
+                      (_) => ToastUiUtil.showFailureSnackBar(
                         context,
                         "ユーザーを削除できませんでした",
                       ),
                 );
               },
-              failure: (msg) => ToastUiCore.showFailureSnackBar(context, msg),
+              failure: (msg) => ToastUiUtil.showFailureSnackBar(context, msg),
             );
           },
           onGoogleButtonPressed: () async {
@@ -44,13 +44,13 @@ class ReauthenticateToDeletePage extends ConsumerWidget {
                 final deleteResult = await notifier.deletePublicUser();
                 deleteResult.when(
                   success:
-                      (_) => RouteCore.pushPath(context, UserDeletedPage.path),
+                      (_) => RouteUtil.pushPath(context, UserDeletedPage.path),
                   failure:
-                      (msg) => ToastUiCore.showFailureSnackBar(context, msg),
+                      (msg) => ToastUiUtil.showFailureSnackBar(context, msg),
                 );
               },
               failure:
-                  (_) => ToastUiCore.showFailureSnackBar(
+                  (_) => ToastUiUtil.showFailureSnackBar(
                     context,
                     "Googleでの再認証に失敗しました",
                   ),

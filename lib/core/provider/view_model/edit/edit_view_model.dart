@@ -1,20 +1,20 @@
 import 'dart:convert';
 
-import 'package:great_talk/core/util/image_core.dart';
+import 'package:great_talk/core/util/image_util.dart';
 import 'package:great_talk/presentation/state/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
-import 'package:great_talk/presentation/common/image_ui_core.dart';
+import 'package:great_talk/presentation/util/image_ui_util.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/presentation/constant/form_consts.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
 import 'package:great_talk/core/extension/string_extension.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log.dart';
-import 'package:great_talk/core/util/aws_s3_core.dart';
+import 'package:great_talk/core/util/aws_s3_util.dart';
 import 'package:great_talk/presentation/state/edit/edit_state.dart';
 
 part 'edit_view_model.g.dart';
@@ -39,11 +39,11 @@ class EditViewModel extends _$EditViewModel {
 
   /// 画像選択時の処理
   FutureResult<bool> onImagePickButtonPressed() async {
-    final result = await ImageCore.getCompressedImage();
+    final result = await ImageUtil.getCompressedImage();
     if (result == null) return const Result.failure('画像が取得できませんでした');
-    final info = await ImageCore.imageInfo(result);
+    final info = await ImageUtil.imageInfo(result);
     if (info.isNotSquare) {
-      return Result.failure(ImageUiCore.squareImageRequestMsg);
+      return Result.failure(ImageUiUtil.squareImageRequestMsg);
     }
     if (info.isSmall) {
       return const Result.failure(FormConsts.bigImageRequestMsg);
@@ -102,7 +102,7 @@ class EditViewModel extends _$EditViewModel {
     }
     late Result<bool> updateUserResult;
     if (s.isPicked) {
-      final fileName = AWSS3Core.profileObject(uid);
+      final fileName = AWSS3Util.profileObject(uid);
       final uint8list = base64;
       final request = PutObjectRequest.fromUint8List(
         uint8list: base64Decode(uint8list),
