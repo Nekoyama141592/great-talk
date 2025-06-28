@@ -13,46 +13,6 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('Bottom Navigation Tests', () {
-    testWidgets('terms screen appears first and can be agreed to', (
-      WidgetTester tester,
-    ) async {
-      // Set up the test environment
-      F.appFlavor = Flavor.dev;
-
-      // Initialize Firebase for testing
-      await Firebase.initializeApp(
-        options: RunApp.getFirebaseOption(F.appFlavor),
-      );
-
-      // Create the app widget
-      final app = ProviderScope(
-        overrides: [
-          prefsProvider.overrideWithValue(
-            await SharedPreferences.getInstance(),
-          ),
-        ],
-        child: const MyApp(),
-      );
-
-      await tester.pumpWidget(app);
-      await tester.pumpAndSettle();
-      await tester.pumpAndSettle(const Duration(seconds: 3));
-
-      // Verify TermsScreen is displayed initially
-      expect(find.text('上記の内容、利用規約、プライバシーポリシーに同意する'), findsOneWidget);
-      expect(find.text('利用規約'), findsOneWidget);
-      expect(find.text('プライバシーポリシー'), findsOneWidget);
-
-      // Tap agree button
-      await tester.tap(find.text('上記の内容、利用規約、プライバシーポリシーに同意する'));
-      await tester.pumpAndSettle();
-      await tester.pumpAndSettle(const Duration(seconds: 2));
-
-      // Verify that we're now on MyHomePage with BottomNavigationBar
-      expect(find.byType(BottomNavigationBar), findsOneWidget);
-      expect(find.text('人気'), findsOneWidget);
-      expect(find.text('ホーム'), findsOneWidget);
-    });
     late Widget app;
 
     setUpAll(() async {
@@ -89,6 +49,29 @@ void main() {
         await tester.pumpAndSettle(const Duration(seconds: 5));
       }
     }
+    testWidgets('terms screen appears first and can be agreed to', (
+      WidgetTester tester,
+    ) async {
+
+      await tester.pumpWidget(app);
+      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      // Verify TermsScreen is displayed initially
+      expect(find.text('上記の内容、利用規約、プライバシーポリシーに同意する'), findsOneWidget);
+      expect(find.text('利用規約'), findsOneWidget);
+      expect(find.text('プライバシーポリシー'), findsOneWidget);
+
+      // Tap agree button
+      await tester.tap(find.text('上記の内容、利用規約、プライバシーポリシーに同意する'));
+      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 2));
+
+      // Verify that we're now on MyHomePage with BottomNavigationBar
+      expect(find.byType(BottomNavigationBar), findsOneWidget);
+      expect(find.text('人気'), findsOneWidget);
+      expect(find.text('ホーム'), findsOneWidget);
+    });
 
     testWidgets('bottom navigation bar shows all tabs', (
       WidgetTester tester,
