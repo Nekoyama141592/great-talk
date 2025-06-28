@@ -282,7 +282,7 @@ lib/
 │   ├── notifier/                     # Riverpod状態管理ノティファイア
 │   ├── state/                        # UI状態モデル
 │   │   └── common/                   # 共通状態
-│   └── common/                       # 共通プレゼンテーション要素
+│   └── util/                       # 共通プレゼンテーション要素
 │
 ├── core/                             # 【共有層】横断的関心事・ユーティリティ
 │   ├── provider/                     # Riverpod状態管理プロバイダー
@@ -295,14 +295,14 @@ lib/
 │   │   ├── repository/               # リポジトリプロバイダー
 │   │   └── stream/                   # リアルタイムデータストリーム
 │   ├── util/                         # コアユーティリティ
-│   │   ├── auth_core.dart            # 認証ビジネスロジック
-│   │   ├── date_core.dart            # 日付・時刻ユーティリティ
-│   │   ├── id_core.dart              # ID生成ユーティリティ
-│   │   ├── json_core.dart            # JSON処理ユーティリティ
-│   │   ├── search_core.dart          # 検索機能ロジック
-│   │   ├── purchases_core.dart       # アプリ内課金ロジック
-│   │   ├── remote_config_core.dart   # 機能フラグ管理
-│   │   └── aws_s3_core.dart          # クラウドストレージ統合
+│   │   ├── auth_util.dart            # 認証ビジネスロジック
+│   │   ├── date_util.dart            # 日付・時刻ユーティリティ
+│   │   ├── id_util.dart              # ID生成ユーティリティ
+│   │   ├── json_util.dart            # JSON処理ユーティリティ
+│   │   ├── search_util.dart          # 検索機能ロジック
+│   │   ├── purchases_util.dart       # アプリ内課金ロジック
+│   │   ├── remote_config_util.dart   # 機能フラグ管理
+│   │   └── aws_s3_util.dart          # クラウドストレージ統合
 │   ├── extension/                    # Dart拡張メソッド
 │   ├── constant/                     # 定数
 │   └── theme/                        # テーマ管理・デザインシステム
