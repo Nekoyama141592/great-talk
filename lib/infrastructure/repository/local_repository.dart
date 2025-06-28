@@ -39,19 +39,16 @@ class LocalRepository implements ILocalRepository {
         try {
           return fromJson(e);
         } catch (error) {
-          throw LocalException.jsonParse(
-            'Failed to parse JSON for key "$keyName": $error',
-          );
+          debugPrint('_fetchList: JSON parse error for key "$keyName": $error');
+          return null;
         }
-      }).toList();
+      }).where((item) => item != null).cast<T>().toList();
     } on LocalException catch (e) {
       debugPrint('_fetchList: ${e.toString()}');
       return [];
     } catch (error) {
-      debugPrint('_fetchList: Unexpected error - $error');
-      throw LocalException.fetch(
-        'Failed to fetch list for key "$keyName": $error',
-      );
+      debugPrint('_fetchList: Error accessing key "$keyName": $error');
+      return [];
     }
   }
 
