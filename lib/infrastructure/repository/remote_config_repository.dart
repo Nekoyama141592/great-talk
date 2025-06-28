@@ -1,8 +1,9 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:great_talk/presentation/constant/remote_config_constants.dart';
 import 'package:great_talk/core/util/remote_config_core.dart';
+import 'package:great_talk/domain/repository_interface/i_remote_config_repository.dart';
 
-class RemoteConfigRepository {
+class RemoteConfigRepository implements IRemoteConfigRepository {
   RemoteConfigRepository(this.instance);
   final FirebaseRemoteConfig instance;
   String get _maintenanceMsgKey => RemoteConfigCore.maintenanceMsgKey;
@@ -24,14 +25,18 @@ class RemoteConfigRepository {
     });
   }
 
+  @override
   Future<void> init() {
     return Future.wait([_setConfigSettings(), _setDefaults()]);
   }
 
+  @override
   Future<bool> fetchAndActivate() {
     return instance.fetchAndActivate();
   }
 
+  @override
   String getMaintenanceMsg() => instance.getString(_maintenanceMsgKey);
+  @override
   int getForcedUpdateVersion() => instance.getInt(_forcedUpdateVersionKey);
 }

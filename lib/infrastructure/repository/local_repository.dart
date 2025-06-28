@@ -7,6 +7,7 @@ import 'package:great_talk/infrastructure/model/local_schema/save_text_msg/save_
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:great_talk/domain/repository_interface/i_local_repository.dart';
 
 enum PrefsKey {
   // ${contentId}で各々のChat履歴
@@ -23,7 +24,7 @@ enum PrefsKey {
   verifiedPurchases,
 }
 
-class LocalRepository {
+class LocalRepository implements ILocalRepository {
   LocalRepository(this.prefs);
   final SharedPreferences prefs;
 
@@ -56,10 +57,12 @@ class LocalRepository {
     }
   }
 
+  @override
   FutureResult<bool> addVerifiedPurchase(VerifiedPurchase value) {
     return _addElement(PrefsKey.verifiedPurchases, value.toJson());
   }
 
+  @override
   List<VerifiedPurchase> fetchVerifiedPurchases() {
     return _fetchList(
       PrefsKey.verifiedPurchases.name,
@@ -67,6 +70,7 @@ class LocalRepository {
     );
   }
 
+  @override
   FutureResult<bool> removeChatLog(String postId) async {
     try {
       await prefs.remove(postId);
@@ -112,44 +116,54 @@ class LocalRepository {
     }
   }
 
+  @override
   bool getIsDarkTheme() {
     return _getBool(PrefsKey.isDarkTheme) ?? true;
   }
 
+  @override
   Future<void> setIsDarkTheme(bool value) {
     return _setBool(PrefsKey.isDarkTheme, value);
   }
 
+  @override
   bool getNeedFirstMessage() {
     return _getBool(PrefsKey.needFirstMessage) ?? true;
   }
 
+  @override
   Future<void> setNeedFirstMessage(bool value) {
     return _setBool(PrefsKey.needFirstMessage, value);
   }
 
+  @override
   bool getIsAgreedToTerms() {
     return _getBool(PrefsKey.isAgreedToTerms) ?? false;
   }
 
+  @override
   Future<void> setIsAgreedToTerms(bool value) {
     return _setBool(PrefsKey.isAgreedToTerms, value);
   }
 
+  @override
   String? getImage(String fileName) {
     return _getString(fileName);
   }
 
+  @override
   Future<void> setImage(String fileName, String value) {
     return _setString(fileName, value);
   }
 
+  @override
   Future<void> setMessages(String postId, List<TextMessage> messages) {
     final objectList = messages.map(SaveTextMsg.fromTextMessage).toList();
     final value = jsonEncode(objectList);
     return _setString(postId, value);
   }
 
+  @override
   List<TextMessage> getMessages(String postId) {
     return _fetchList(
       postId,

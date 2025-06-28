@@ -1,12 +1,14 @@
 import 'package:great_talk/infrastructure/model/rest_api/get_object/request/get_object_request.dart';
 import 'package:great_talk/infrastructure/repository/local_repository.dart';
 import 'package:great_talk/infrastructure/repository/api_repository.dart';
+import 'package:great_talk/domain/use_case_interface/file/i_file_use_case.dart';
 
-class FileUseCase {
+class FileUseCase implements IFileUseCase {
   FileUseCase({required this.localRepository, required this.repository});
   final LocalRepository localRepository;
   final ApiRepository repository;
 
+  @override
   Future<String?> getObject(String bucketName, String fileName) async {
     if (fileName.isEmpty) {
       return null;

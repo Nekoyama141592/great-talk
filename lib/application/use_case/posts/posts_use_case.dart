@@ -2,8 +2,9 @@ import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/application/use_case/file/file_use_case.dart';
+import 'package:great_talk/domain/use_case_interface/posts/i_posts_use_case.dart';
 
-class PostsUseCase {
+class PostsUseCase implements IPostsUseCase {
   PostsUseCase({required this.repository, required this.fileUseCase});
   final DatabaseRepository repository;
   final FileUseCase fileUseCase;
@@ -29,6 +30,7 @@ class PostsUseCase {
     return posts..sort((a, b) => (b.likeCount).compareTo(a.likeCount));
   }
 
+  @override
   Future<List<UserPost>> createUserPosts(
     List<Post> posts, {
     bool isRankingPosts = false,
