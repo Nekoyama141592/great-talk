@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 import 'package:great_talk/core/provider/view_model/refresh_interface.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/component/post_card.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -38,9 +38,9 @@ class PostsRefreshScreen extends HookWidget {
         final result = await notifier().onLoading();
         result.when(
           success:
-              (_) => ToastUiCore.showSuccessSnackBar(context, '追加の読み込みが完了しました'),
+              (_) => ToastUiUtil.showSuccessSnackBar(context, '追加の読み込みが完了しました'),
           failure:
-              (_) => ToastUiCore.showFailureSnackBar(context, '追加の読み込みが失敗しました'),
+              (_) => ToastUiUtil.showFailureSnackBar(context, '追加の読み込みが失敗しました'),
         );
         refreshController.loadComplete();
       },

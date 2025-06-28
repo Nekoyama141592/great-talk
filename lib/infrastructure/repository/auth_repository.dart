@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/util/credential_core.dart';
+import 'package:great_talk/core/util/credential_util.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/domain/repository_interface/i_auth_repository.dart';
 
@@ -32,7 +32,7 @@ class AuthRepository implements IAuthRepository {
   @override
   FutureResult<User> signInWithApple() async {
     try {
-      final credential = await CredentialCore.appleCredential();
+      final credential = await CredentialUtil.appleCredential();
       final res = await instance.signInWithCredential(credential);
       final user = res.user;
       if (user == null) {
@@ -51,7 +51,7 @@ class AuthRepository implements IAuthRepository {
   @override
   FutureResult<User> signInWithGoogle() async {
     try {
-      final credential = await CredentialCore.googleCredential();
+      final credential = await CredentialUtil.googleCredential();
       final res = await instance.signInWithCredential(credential);
       final user = res.user;
       if (user == null) {

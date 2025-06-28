@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/presentation/common/purchase_ui_core.dart';
+import 'package:great_talk/presentation/util/purchase_ui_util.dart';
 import 'package:great_talk/core/provider/view_model/products/products_view_model.dart';
-import 'package:great_talk/presentation/common/product_ui_core.dart';
-import 'package:great_talk/presentation/common/texts.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/product_ui_util.dart';
+import 'package:great_talk/presentation/util/texts.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:great_talk/presentation/page/main/subscribe/components/plan_description.dart';
@@ -25,7 +25,7 @@ class ProductList extends ConsumerWidget {
         final productList =
             state.products.map((ProductDetails productDetails) {
               final descriptions =
-                  productDetails.id == PurchaseUiCore.kMonthSubscriptionId
+                  productDetails.id == PurchaseUiUtil.kMonthSubscriptionId
                       ? const [
                         PlanDescription(text: '無制限のチャット'),
                         PlanDescription(text: 'コピー可能な説明や返答'),
@@ -35,7 +35,7 @@ class ProductList extends ConsumerWidget {
                         const PlanDescription(text: "モデルの性能が向上!"),
                         const PlanDescription(text: '画像を生成するAI'),
                       ];
-              final String planName = ProductUiCore.getPlanName(
+              final String planName = ProductUiUtil.getPlanName(
                 productDetails.id,
               );
               return Container(
@@ -57,7 +57,7 @@ class ProductList extends ConsumerWidget {
                     PurchaseButton(
                       isPurchased: state.isPurchased(productDetails.id),
                       onPressed: () async {
-                        ToastUiCore.showSuccessSnackBar(
+                        ToastUiUtil.showSuccessSnackBar(
                           context,
                           '情報を取得しています。 \nしばらくお待ちください。',
                         );
@@ -66,13 +66,13 @@ class ProductList extends ConsumerWidget {
                         );
                         result.when(
                           success: (_) {
-                            ToastUiCore.showSuccessSnackBar(
+                            ToastUiUtil.showSuccessSnackBar(
                               context,
                               '購入が成功しました',
                             );
                           },
                           failure: (msg) {
-                            ToastUiCore.showFailureSnackBar(context, msg);
+                            ToastUiUtil.showFailureSnackBar(context, msg);
                           },
                         );
                       },

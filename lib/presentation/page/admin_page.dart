@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/util/size_core.dart';
+import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/constant/remote_config_constants.dart';
 import 'package:great_talk/core/provider/view_model/admin/admin_view_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,7 +16,7 @@ class AdminPage extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("管理者専用ページ")),
       body: Padding(
-        padding: EdgeInsets.all(SizeCore.defaultPadding(context)),
+        padding: EdgeInsets.all(SizeUtil.defaultPadding(context)),
         child: asyncValue.when(
           data:
               (state) => ListView(

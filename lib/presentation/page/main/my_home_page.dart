@@ -4,11 +4,11 @@ import 'package:great_talk/core/provider/keep_alive/notifier/current_user/curren
 import 'package:great_talk/core/provider/keep_alive/notification/notification_provider.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/core/provider/view_model/products/products_view_model.dart';
-import 'package:great_talk/presentation/common/flavor_ui_core.dart';
+import 'package:great_talk/presentation/util/flavor_ui_util.dart';
 import 'package:great_talk/presentation/page/common/bottom_navigation_bar_elements.dart';
-import 'package:great_talk/presentation/common/others.dart';
+import 'package:great_talk/presentation/util/others.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/presentation/common/texts.dart';
+import 'package:great_talk/presentation/util/texts.dart';
 import 'package:great_talk/presentation/component/original_drawer.dart';
 import 'package:great_talk/presentation/page/main/components/main_floating_action_button.dart';
 import 'package:great_talk/presentation/page/main/feeds/feeds_page.dart';
@@ -31,7 +31,7 @@ class MyHomePage extends HookConsumerWidget {
       appBar:
           pageIndex.value != TabConstant.rankingIndex
               ? AppBar(
-                title: BasicBoldText(FlavorUiCore.appName()),
+                title: BasicBoldText(FlavorUiUtil.appName()),
                 shape: appBarShape(context),
               )
               : null,

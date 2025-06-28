@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/presentation/constant/form_consts.dart';
-import 'package:great_talk/presentation/common/validator/post_validator.dart';
+import 'package:great_talk/presentation/util/validator/post_validator.dart';
 
 void main() {
   group('PostValidator', () {

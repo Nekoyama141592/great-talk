@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:great_talk/core/util/id_core.dart';
-import 'package:great_talk/core/util/image_core.dart';
+import 'package:great_talk/core/util/id_util.dart';
+import 'package:great_talk/core/util/image_util.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/presentation/state/create_post/create_post_state.dart';
@@ -9,12 +9,12 @@ import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_prov
 import 'package:great_talk/core/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
-import 'package:great_talk/presentation/common/image_ui_core.dart';
+import 'package:great_talk/presentation/util/image_ui_util.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/constant/form_consts.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
-import 'package:great_talk/core/util/aws_s3_core.dart';
+import 'package:great_talk/core/util/aws_s3_util.dart';
 
 part 'create_post_view_model.g.dart';
 
@@ -47,16 +47,16 @@ class CreatePostViewModel extends _$CreatePostViewModel {
 
   // 画像選択処理
   Future<void> onImagePickButtonPressed() async {
-    final result = await ImageCore.getCompressedImage();
+    final result = await ImageUtil.getCompressedImage();
     if (result == null) return;
 
-    final info = await ImageCore.imageInfo(result);
+    final info = await ImageUtil.imageInfo(result);
     if (info.isNotSquare) {
-      ToastUiCore.showErrorFlutterToast(ImageUiCore.squareImageRequestMsg);
+      ToastUiUtil.showErrorFlutterToast(ImageUiUtil.squareImageRequestMsg);
       return;
     }
     if (info.isSmall) {
-      ToastUiCore.showErrorFlutterToast(FormConsts.bigImageRequestMsg);
+      ToastUiUtil.showErrorFlutterToast(FormConsts.bigImageRequestMsg);
       return;
     }
     // state内のpickedImageを更新
@@ -84,8 +84,8 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     // ローディング状態に設定
     state = const AsyncValue.loading();
 
-    final postId = IdCore.randomString();
-    final fileName = AWSS3Core.postObject(currentUid, postId);
+    final postId = IdUtil.randomString();
+    final fileName = AWSS3Util.postObject(currentUid, postId);
     final repository = ref.read(apiRepositoryProvider);
     final request = PutObjectRequest.fromUint8List(
       uint8list: base64Decode(pickedImage),

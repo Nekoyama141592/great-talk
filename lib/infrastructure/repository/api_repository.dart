@@ -1,7 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'package:great_talk/core/util/json_core.dart';
+import 'package:great_talk/core/util/json_util.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
@@ -35,7 +35,7 @@ class ApiRepository implements IApiRepository {
     final callable = _httpsCallable(name);
     final result = await callable.call(request);
     final data = result.data;
-    final decoded = JsonCore.cast(data);
+    final decoded = JsonUtil.cast(data);
     return decoded;
   }
 

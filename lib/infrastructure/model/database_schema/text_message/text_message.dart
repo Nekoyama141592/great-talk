@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/domain/value/message_type.dart';
-import 'package:great_talk/core/util/id_core.dart';
+import 'package:great_talk/core/util/id_util.dart';
 import 'package:great_talk/core/extension/custom_date_time_formatting.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
@@ -24,7 +24,7 @@ abstract class TextMessage with _$TextMessage {
       _$TextMessageFromJson(json);
   factory TextMessage.assistant(String content, Post post) {
     return TextMessage(
-      id: IdCore.randomString(),
+      id: IdUtil.randomString(),
       createdAt: Timestamp.now(),
       messageType: MessageType.text.name,
       text: DetectedText(value: content).toJson(),
@@ -33,7 +33,7 @@ abstract class TextMessage with _$TextMessage {
   }
   factory TextMessage.user(String content, String currentUid) {
     return TextMessage(
-      id: IdCore.randomString(),
+      id: IdUtil.randomString(),
       createdAt: Timestamp.now(),
       messageType: MessageType.text.name,
       text: DetectedText(value: content).toJson(),

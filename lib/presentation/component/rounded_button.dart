@@ -1,7 +1,7 @@
 // material
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/util/size_core.dart';
-import 'package:great_talk/presentation/common/texts.dart';
+import 'package:great_talk/core/util/size_util.dart';
+import 'package:great_talk/presentation/util/texts.dart';
 
 class RoundedButton extends StatelessWidget {
   const RoundedButton({
@@ -25,7 +25,7 @@ class RoundedButton extends StatelessWidget {
     return SizedBox(
       width: size.width * widthRate,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(SizeCore.defaultPadding(context)),
+        borderRadius: BorderRadius.circular(SizeUtil.defaultPadding(context)),
         child: ElevatedButton(
           style: TextButton.styleFrom(
             backgroundColor: buttonColor ?? Theme.of(context).primaryColor,

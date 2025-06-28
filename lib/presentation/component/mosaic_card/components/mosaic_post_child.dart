@@ -3,8 +3,8 @@ import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_prov
 import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/post/delete_post/delete_post_use_case_provider.dart';
-import 'package:great_talk/presentation/common/texts.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/texts.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,7 +31,7 @@ class MosaicPostChild extends ConsumerWidget {
         BoldWhiteText(title),
         const BasicHeightBox(),
         InkWell(
-          onTap: () => ToastUiCore.simpleAlertDialog(context, msg),
+          onTap: () => ToastUiUtil.simpleAlertDialog(context, msg),
           child: const Icon(Icons.info, color: Colors.white),
         ),
         const BasicHeightBox(),
@@ -50,14 +50,14 @@ class MosaicPostChild extends ConsumerWidget {
                         .deletePost(post);
                     result.when(
                       success: (_) async {
-                        ToastUiCore.showSuccessSnackBar(context, "投稿を削除しました。");
+                        ToastUiUtil.showSuccessSnackBar(context, "投稿を削除しました。");
                       },
                       failure: (e) {
                         // 失敗したら元に戻す
                         ref
                             .read(tokensNotifierProvider.notifier)
                             .removeDeletePostId(postId);
-                        ToastUiCore.showFailureSnackBar(
+                        ToastUiUtil.showFailureSnackBar(
                           context,
                           "投稿を削除することができませんでした。",
                         );

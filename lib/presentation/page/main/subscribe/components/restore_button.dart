@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/provider/view_model/products/products_view_model.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class RestoreButton extends ConsumerWidget {
@@ -20,8 +20,8 @@ class RestoreButton extends ConsumerWidget {
             result.when(
               success:
                   (_) =>
-                      ToastUiCore.showSuccessSnackBar(context, '購入の検証が成功しました'),
-              failure: (msg) => ToastUiCore.showFailureSnackBar(context, msg),
+                      ToastUiUtil.showSuccessSnackBar(context, '購入の検証が成功しました'),
+              failure: (msg) => ToastUiUtil.showFailureSnackBar(context, msg),
             );
           },
           child: Text(

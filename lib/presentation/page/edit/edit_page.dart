@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/core/util/route_core.dart';
+import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/core/provider/view_model/edit/edit_view_model.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/common/forms_screen.dart';
 import 'package:great_talk/presentation/page/edit/components/edit_profile_form.dart';
 import 'package:great_talk/presentation/page/edit/components/profile_image_widget.dart';
@@ -30,10 +30,10 @@ class EditProfilePage extends HookConsumerWidget {
           final result = await notifier().onImagePickButtonPressed();
           result.when(
             success: (_) {
-              ToastUiCore.showSuccessSnackBar(context, '画像の取得が成功しました');
+              ToastUiUtil.showSuccessSnackBar(context, '画像の取得が成功しました');
             },
             failure: (msg) {
-              ToastUiCore.showFailureSnackBar(context, msg);
+              ToastUiUtil.showFailureSnackBar(context, msg);
             },
           );
         }
@@ -56,15 +56,15 @@ class EditProfilePage extends HookConsumerWidget {
                 result.when(
                   success: (_) {
                     ref.read(currentUserNotifierProvider.notifier).updateUser();
-                    RouteCore.back(context);
-                    RouteCore.back(context);
-                    ToastUiCore.showSuccessSnackBar(
+                    RouteUtil.back(context);
+                    RouteUtil.back(context);
+                    ToastUiUtil.showSuccessSnackBar(
                       context,
                       "プロフィールを更新できました！変更が完全に反映されるまで時間がかかります。",
                     );
                   },
                   failure: (e) {
-                    ToastUiCore.showFailureSnackBar(
+                    ToastUiUtil.showFailureSnackBar(
                       context,
                       "プロフィールを更新できませんでした",
                     );

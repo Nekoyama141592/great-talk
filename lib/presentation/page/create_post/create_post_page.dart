@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart'; // flutter_hooksをインポート
-import 'package:great_talk/core/util/route_core.dart';
+import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/core/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/core/provider/view_model/create_post/create_post_view_model.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/common/forms_screen.dart';
 import 'package:great_talk/presentation/page/create_post/components/create_post_form.dart';
 import 'package:great_talk/presentation/page/create_post/components/image_picker_widget.dart';
@@ -39,11 +39,11 @@ class CreatePostPage extends HookConsumerWidget {
               .onPositiveButtonPressed();
       result.when(
         success: (_) {
-          ToastUiCore.showSuccessSnackBar(context, '投稿の作成に成功しました');
-          RouteCore.back(context);
+          ToastUiUtil.showSuccessSnackBar(context, '投稿の作成に成功しました');
+          RouteUtil.back(context);
         },
         failure: (msg) {
-          ToastUiCore.showFailureSnackBar(context, msg);
+          ToastUiUtil.showFailureSnackBar(context, msg);
         },
       );
     }

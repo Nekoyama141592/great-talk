@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/core/util/size_core.dart';
+import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
@@ -13,12 +13,12 @@ import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notif
 import 'package:great_talk/core/provider/keep_alive/usecase/post/mute_post/mute_post_use_case_provider.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/user/mute_user/mute_user_use_case_provider.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/post/delete_post/delete_post_use_case_provider.dart';
-import 'package:great_talk/core/util/route_core.dart';
+import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/core/provider/view_model/chat/chat_view_model.dart';
-import 'package:great_talk/presentation/common/chat_ui_core.dart';
-import 'package:great_talk/presentation/common/post_ui_core.dart';
-import 'package:great_talk/presentation/common/texts.dart';
-import 'package:great_talk/presentation/common/toast_ui_core.dart';
+import 'package:great_talk/presentation/util/chat_ui_util.dart';
+import 'package:great_talk/presentation/util/post_ui_util.dart';
+import 'package:great_talk/presentation/util/texts.dart';
+import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/chat/components/menu_button.dart';
 import 'package:great_talk/presentation/page/chat/components/msg_card.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_page.dart';
@@ -73,7 +73,7 @@ class ChatPage extends HookConsumerWidget {
           .mutePost(post, uid, token);
       result.when(
         success: (_) {
-          RouteCore.back(innerContext);
+          RouteUtil.back(innerContext);
         },
         failure: (_) {},
       );
@@ -103,15 +103,15 @@ class ChatPage extends HookConsumerWidget {
                         .deletePost(post);
                     result.when(
                       success: (_) async {
-                        ToastUiCore.showSuccessSnackBar(context, "投稿を削除しました。");
-                        RouteCore.back(context);
+                        ToastUiUtil.showSuccessSnackBar(context, "投稿を削除しました。");
+                        RouteUtil.back(context);
                       },
                       failure: (e) {
                         // 失敗したら元に戻す
                         ref
                             .read(tokensNotifierProvider.notifier)
                             .removeDeletePostId(postId);
-                        ToastUiCore.showFailureSnackBar(
+                        ToastUiUtil.showFailureSnackBar(
                           context,
                           "投稿を削除することができませんでした。",
                         );
@@ -123,7 +123,7 @@ class ChatPage extends HookConsumerWidget {
                 AppBarAction(
                   onTap: () {
                     final muteUserNotifier = ref.read(muteUserUseCaseProvider);
-                    PostUiCore.onReportButtonPressed(
+                    PostUiUtil.onReportButtonPressed(
                       context: context,
                       mutePost: (innerContext) => mutePost(innerContext, post),
                       reportPost:
@@ -133,7 +133,7 @@ class ChatPage extends HookConsumerWidget {
                             .read(tokensNotifierProvider.notifier)
                             .addMuteUser(post);
                         if (token == null) {
-                          RouteCore.back(innerContext);
+                          RouteUtil.back(innerContext);
                           return;
                         }
                         final result = await muteUserNotifier.muteUser(
@@ -142,7 +142,7 @@ class ChatPage extends HookConsumerWidget {
                           token,
                         );
                         result.when(
-                          success: (_) => RouteCore.back(innerContext),
+                          success: (_) => RouteUtil.back(innerContext),
                           failure: (_) {},
                         );
                       },
@@ -154,20 +154,20 @@ class ChatPage extends HookConsumerWidget {
               //
               MenuButton(
                 onMenuPressed: () {
-                  ChatUiCore.onMenuPressed(
+                  ChatUiUtil.menu(
                     context: context,
                     post: post,
                     cleanLocalMessage: (innerContext) async {
                       final result = await chatNotifier().cleanLocalMessage();
                       result.when(
                         success: (_) {
-                          ToastUiCore.showSuccessSnackBar(
+                          ToastUiUtil.showSuccessSnackBar(
                             context,
                             MsgConstants.clearChatMsg,
                           );
                         },
                         failure: (msg) {
-                          ToastUiCore.showFailureSnackBar(context, msg);
+                          ToastUiUtil.showFailureSnackBar(context, msg);
                         },
                       );
                     },
@@ -182,7 +182,7 @@ class ChatPage extends HookConsumerWidget {
               children: [
                 const BasicHeightBox(),
                 SizedBox(
-                  height: SizeCore.chatScreenHeight(context),
+                  height: SizeUtil.chatScreenHeight(context),
                   child: ListView.builder(
                     controller: scrollController,
                     itemCount: messages.length,
@@ -217,7 +217,7 @@ class ChatPage extends HookConsumerWidget {
                         );
                         result.when(
                           success: (res) {
-                            ToastUiCore.showSuccessSnackBar(
+                            ToastUiUtil.showSuccessSnackBar(
                               context,
                               '応答の生成に成功しました',
                             );
@@ -225,7 +225,7 @@ class ChatPage extends HookConsumerWidget {
                             chatNotifier().onSuccess(res);
                           },
                           failure: (msg) {
-                            ToastUiCore.showFailureSnackBar(context, msg);
+                            ToastUiUtil.showFailureSnackBar(context, msg);
                             chatNotifier().onFailure();
                           },
                         );
