@@ -20,7 +20,7 @@ class AuthRepository implements IAuthRepository {
       } else {
         return Result.success(user);
       }
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       if (enableDebugPrint) debugPrint('signInAnonymously: ${e.toString()}');
       return Result.failure('匿名ログインが失敗しました');
     }
@@ -69,7 +69,7 @@ class AuthRepository implements IAuthRepository {
     try {
       await instance.signOut();
       return const Result.success(true);
-    } catch (e) {
+    } on FirebaseAuthException catch (e) {
       if (enableDebugPrint) debugPrint('signOut: ${e.toString()}');
       return Result.failure('ログアウトが失敗しました');
     }
