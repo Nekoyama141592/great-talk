@@ -19,7 +19,7 @@ class MockFirebaseAuthWithExceptions extends MockFirebaseAuth {
   @override
   Future<UserCredential> signInAnonymously() async {
     if (_signInException != null) {
-      throw _signInException!;
+      throw _signInException;
     }
     return super.signInAnonymously();
   }

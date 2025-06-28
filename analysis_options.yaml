@@ -19,6 +19,6 @@ analyzer:
     - "lib/infrastructure/model/rest_api/verify_purchase/response/ios_receipt_response/ios_receipt_response.dart"
     - "lib/infrastructure/model/rest_api/verify_purchase/response/ios_receipt_response/pending_renewal_info/pending_renewal_info.dart"
     - "lib/model/rest_api/open_ai/generate_text/generate_text_response/generate_text_request.dart"
-    - "test/repository/auth_repository_test.dart"
+    - "test/infrastructure/repository/auth_repository_test.dart"
   errors:
     invalid_annotation_target: ignore
