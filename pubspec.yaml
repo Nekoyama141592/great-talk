@@ -93,7 +93,6 @@ flavorizr:
   app:
     android:
       flavorDimensions: "flavor-type"
-    ios:
 
   flavors:
     dev:

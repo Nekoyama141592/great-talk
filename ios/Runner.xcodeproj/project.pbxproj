@@ -561,7 +561,7 @@
 			baseConfigurationReference = 85ADBFEF11D9DD7ACB84E0A4 /* prodRelease.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -633,7 +633,7 @@
 			baseConfigurationReference = 494B6BE76EB45BB9D2BEEC1D /* verificationRelease.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -705,7 +705,7 @@
 			baseConfigurationReference = 2C0B74D259F95DA7FB8194C4 /* prodProfile.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -775,7 +775,7 @@
 			baseConfigurationReference = 2FB69B6E2D863B9A8E91C918 /* verificationDebug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1084,7 +1084,7 @@
 			baseConfigurationReference = FCFACDAAA42153EEF41E1B6E /* devRelease.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1228,7 +1228,7 @@
 			baseConfigurationReference = 01454EDA0B12FF9D5415EB5F /* prodDebug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1303,7 +1303,7 @@
 			baseConfigurationReference = 5F32DDC421D5DC50F5FFADA6 /* devProfile.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1373,7 +1373,7 @@
 			baseConfigurationReference = 1F88F939529D2594EF73051C /* verificationProfile.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1482,127 +1482,73 @@
 		};
 		D8AF6A2D299D0ACF00C6AA19 /* Debug-verification */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FBF40C22160015F0BC21CF7 /* Pods-Runner.debug-verification.xcconfig */;
+			baseConfigurationReference = 2FB69B6E2D863B9A8E91C918 /* verificationDebug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Debug-verification";
 		};
 		D8AF6A2E299D0ACF00C6AA19 /* Profile-verification */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FD0F163D7BB3900D3934C717 /* Pods-Runner.profile-verification.xcconfig */;
+			baseConfigurationReference = 1F88F939529D2594EF73051C /* verificationProfile.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Profile-verification";
 		};
 		D8AF6A2F299D0ACF00C6AA19 /* Release-verification */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F0B2496E0EB6F7A32586CD0 /* Pods-Runner.release-verification.xcconfig */;
+			baseConfigurationReference = 494B6BE76EB45BB9D2BEEC1D /* verificationRelease.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-verification";
 		};
 		D8E570CB297A799900175D07 /* Debug-dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD2A8590E785C4461DA02F48 /* Pods-Runner.debug-dev.xcconfig */;
+			baseConfigurationReference = AEEA61F2C4E227366250DABB /* devDebug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Debug-dev";
 		};
 		D8E570CC297A799900175D07 /* Profile-dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE9174CA88C36793CCFAFE34 /* Pods-Runner.profile-dev.xcconfig */;
+			baseConfigurationReference = 5F32DDC421D5DC50F5FFADA6 /* devProfile.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Profile-dev";
 		};
 		D8E570CD297A799900175D07 /* Release-dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC56D55BC19FDEEB453C36D4 /* Pods-Runner.release-dev.xcconfig */;
+			baseConfigurationReference = FCFACDAAA42153EEF41E1B6E /* devRelease.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-dev";
 		};
 		D8E570CE297A799900175D07 /* Debug-prod */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 995BDADC45B32820A661F860 /* Pods-Runner.debug-prod.xcconfig */;
+			baseConfigurationReference = 01454EDA0B12FF9D5415EB5F /* prodDebug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Debug-prod";
 		};
 		D8E570CF297A799900175D07 /* Profile-prod */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7336A26F164C4AA54810F584 /* Pods-Runner.profile-prod.xcconfig */;
+			baseConfigurationReference = 2C0B74D259F95DA7FB8194C4 /* prodProfile.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Profile-prod";
 		};
 		D8E570D0297A799900175D07 /* Release-prod */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C85A5F952523DB027637220 /* Pods-Runner.release-prod.xcconfig */;
+			baseConfigurationReference = 85ADBFEF11D9DD7ACB84E0A4 /* prodRelease.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z6C5BQY9P3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.firebaseapp.greatTalk;
-				PRODUCT_NAME = great_talk;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = "Release-prod";
 		};
@@ -1611,7 +1557,7 @@
 			baseConfigurationReference = AEEA61F2C4E227366250DABB /* devDebug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSET_PREFIX)AppIcon";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

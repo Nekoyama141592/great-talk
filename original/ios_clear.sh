@@ -21,4 +21,4 @@ pod install
 cd ..
 
 # アプリ実行
-flutter run --flavor dev -t lib/main_dev.dart
+flutter run --flavor dev
