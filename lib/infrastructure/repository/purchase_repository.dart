@@ -6,8 +6,9 @@ import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
+import 'package:great_talk/domain/repository_interface/i_purchase_repository.dart';
 
-class PurchaseRepository {
+class PurchaseRepository implements IPurchaseRepository {
   PurchaseRepository({
     required this.inAppPurchase,
     required this.client,
@@ -17,6 +18,7 @@ class PurchaseRepository {
   final BillingClient client;
   final SKPaymentQueueWrapper wrapper;
 
+  @override
   Future<void> cancelTransctions() async {
     if (!Platform.isIOS) return;
     try {
@@ -29,6 +31,7 @@ class PurchaseRepository {
     }
   }
 
+  @override
   Future<void> completePurchase(PurchaseDetails details) async {
     if (!details.pendingCompletePurchase) return;
     try {
@@ -38,6 +41,7 @@ class PurchaseRepository {
     }
   }
 
+  @override
   Future<bool> isAvailable() async {
     try {
       return inAppPurchase.isAvailable();
@@ -47,6 +51,7 @@ class PurchaseRepository {
     }
   }
 
+  @override
   Future<void> acknowledge(PurchaseDetails details) async {
     if (!Platform.isAndroid || details.isPending) return;
     try {
@@ -59,6 +64,7 @@ class PurchaseRepository {
     }
   }
 
+  @override
   Future<List<ProductDetails>?> queryProductDetails() async {
     try {
       final identifiers = PurchasesCore.productIds();
@@ -70,6 +76,7 @@ class PurchaseRepository {
     }
   }
 
+  @override
   FutureResult<bool> buyNonConsumable(PurchaseParam purchaseParam) async {
     try {
       await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
@@ -80,6 +87,7 @@ class PurchaseRepository {
     }
   }
 
+  @override
   FutureResult<bool> restorePurchases() async {
     try {
       await inAppPurchase.restorePurchases();

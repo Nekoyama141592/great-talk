@@ -18,8 +18,9 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:great_talk/core/extension/purchase_details_extension.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/request/receipt_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
+import 'package:great_talk/domain/repository_interface/i_api_repository.dart';
 
-class ApiRepository {
+class ApiRepository implements IApiRepository {
   ApiRepository(this.client);
   final FirebaseFunctions client;
 
@@ -38,6 +39,7 @@ class ApiRepository {
     return decoded;
   }
 
+  @override
   rs.FutureResult<PutObjectResponse> putObject(PutObjectRequest request) async {
     try {
       const name = 'putObjectV2';
@@ -50,6 +52,7 @@ class ApiRepository {
     }
   }
 
+  @override
   rs.FutureResult<String> getObject(GetObjectRequest request) async {
     try {
       const name = 'getObjectV2';
@@ -63,6 +66,7 @@ class ApiRepository {
     }
   }
 
+  @override
   rs.FutureResult<DeleteObjectResponse> deleteObject(
     DetectedImage image,
   ) async {
@@ -79,6 +83,7 @@ class ApiRepository {
     }
   }
 
+  @override
   rs.FutureResult<GenerateImageResponse?> generateImage(
     String prompt,
     String size,
@@ -95,6 +100,7 @@ class ApiRepository {
     }
   }
 
+  @override
   rs.FutureResult<GenerateTextResponse> generateText(
     GenerateTextRequest request,
   ) async {
@@ -110,6 +116,7 @@ class ApiRepository {
     }
   }
 
+  @override
   rs.FutureResult<VerifiedPurchase> verifyAndroidReceipt(
     PurchaseDetails purchaseDetails,
   ) async {
@@ -125,6 +132,7 @@ class ApiRepository {
     }
   }
 
+  @override
   rs.FutureResult<VerifiedPurchase> verifyIOSReceipt(
     PurchaseDetails purchaseDetails,
   ) async {

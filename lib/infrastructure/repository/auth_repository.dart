@@ -2,12 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/credential_core.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/domain/repository_interface/i_auth_repository.dart';
 
-class AuthRepository {
+class AuthRepository implements IAuthRepository {
   AuthRepository(this.instance, {this.enableDebugPrint = true});
   FirebaseAuth instance;
   final bool enableDebugPrint;
 
+  @override
   FutureResult<User> signInAnonymously() async {
     try {
       final res = await instance.signInAnonymously();
@@ -24,6 +26,7 @@ class AuthRepository {
     }
   }
 
+  @override
   FutureResult<User> signInWithApple() async {
     try {
       final credential = await CredentialCore.appleCredential();
@@ -42,6 +45,7 @@ class AuthRepository {
     }
   }
 
+  @override
   FutureResult<User> signInWithGoogle() async {
     try {
       final credential = await CredentialCore.googleCredential();
@@ -60,6 +64,7 @@ class AuthRepository {
     }
   }
 
+  @override
   FutureResult<bool> signOut() async {
     try {
       await instance.signOut();
@@ -70,6 +75,7 @@ class AuthRepository {
     }
   }
 
+  @override
   FutureResult<bool> reauthenticateWithCredential(
     AuthCredential credential,
   ) async {
@@ -99,6 +105,7 @@ class AuthRepository {
     }
   }
 
+  @override
   FutureResult<bool> deleteUser() async {
     try {
       final user = instance.currentUser;
