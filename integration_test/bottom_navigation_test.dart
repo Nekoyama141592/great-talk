@@ -49,10 +49,10 @@ void main() {
         await tester.pumpAndSettle(const Duration(seconds: 5));
       }
     }
+
     testWidgets('terms screen appears first and can be agreed to', (
       WidgetTester tester,
     ) async {
-
       await tester.pumpWidget(app);
       await tester.pumpAndSettle();
       await tester.pumpAndSettle(const Duration(seconds: 3));
