@@ -81,10 +81,12 @@ void main() {
 
       test('should convert users to ImageUsers with base64 images', () async {
         // Mock file use case to return base64 images
-        when(mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'))
-            .thenAnswer((_) async => 'base64_image_1');
-        when(mockFileUseCase.getObject('test-bucket', 'user2_image.jpg'))
-            .thenAnswer((_) async => 'base64_image_2');
+        when(
+          mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'),
+        ).thenAnswer((_) async => 'base64_image_1');
+        when(
+          mockFileUseCase.getObject('test-bucket', 'user2_image.jpg'),
+        ).thenAnswer((_) async => 'base64_image_2');
 
         final result = await userUseCase.usersToImageUsers(testUsers);
 
@@ -95,8 +97,12 @@ void main() {
         expect(result[1].base64, equals('base64_image_2'));
 
         // Verify file use case was called with correct parameters
-        verify(mockFileUseCase.getObject('test-bucket', 'user1_image.jpg')).called(1);
-        verify(mockFileUseCase.getObject('test-bucket', 'user2_image.jpg')).called(1);
+        verify(
+          mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'),
+        ).called(1);
+        verify(
+          mockFileUseCase.getObject('test-bucket', 'user2_image.jpg'),
+        ).called(1);
       });
 
       test('should handle empty user list', () async {
@@ -113,10 +119,11 @@ void main() {
         ];
 
         // Mock empty bucket name and value
-        when(mockFileUseCase.getObject('', ''))
-            .thenAnswer((_) async => null);
+        when(mockFileUseCase.getObject('', '')).thenAnswer((_) async => null);
 
-        final result = await userUseCase.usersToImageUsers(usersWithEmptyImages);
+        final result = await userUseCase.usersToImageUsers(
+          usersWithEmptyImages,
+        );
 
         expect(result, hasLength(2));
         expect(result[0].user?.uid, equals('user_1'));
@@ -129,10 +136,12 @@ void main() {
       });
 
       test('should handle null responses from file use case', () async {
-        when(mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'))
-            .thenAnswer((_) async => null);
-        when(mockFileUseCase.getObject('test-bucket', 'user2_image.jpg'))
-            .thenAnswer((_) async => null);
+        when(
+          mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'),
+        ).thenAnswer((_) async => null);
+        when(
+          mockFileUseCase.getObject('test-bucket', 'user2_image.jpg'),
+        ).thenAnswer((_) async => null);
 
         final result = await userUseCase.usersToImageUsers(testUsers);
 
@@ -144,8 +153,9 @@ void main() {
       });
 
       test('should handle single user', () async {
-        when(mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'))
-            .thenAnswer((_) async => 'single_user_image');
+        when(
+          mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'),
+        ).thenAnswer((_) async => 'single_user_image');
 
         final result = await userUseCase.usersToImageUsers([testUsers[0]]);
 
@@ -157,25 +167,23 @@ void main() {
       test('should handle users with different bucket names', () async {
         final usersWithDifferentBuckets = [
           testUsers[0].copyWith(
-            image: const {
-              'bucketName': 'bucket-1',
-              'value': 'image1.jpg',
-            },
+            image: const {'bucketName': 'bucket-1', 'value': 'image1.jpg'},
           ),
           testUsers[1].copyWith(
-            image: const {
-              'bucketName': 'bucket-2',
-              'value': 'image2.jpg',
-            },
+            image: const {'bucketName': 'bucket-2', 'value': 'image2.jpg'},
           ),
         ];
 
-        when(mockFileUseCase.getObject('bucket-1', 'image1.jpg'))
-            .thenAnswer((_) async => 'image_from_bucket_1');
-        when(mockFileUseCase.getObject('bucket-2', 'image2.jpg'))
-            .thenAnswer((_) async => 'image_from_bucket_2');
+        when(
+          mockFileUseCase.getObject('bucket-1', 'image1.jpg'),
+        ).thenAnswer((_) async => 'image_from_bucket_1');
+        when(
+          mockFileUseCase.getObject('bucket-2', 'image2.jpg'),
+        ).thenAnswer((_) async => 'image_from_bucket_2');
 
-        final result = await userUseCase.usersToImageUsers(usersWithDifferentBuckets);
+        final result = await userUseCase.usersToImageUsers(
+          usersWithDifferentBuckets,
+        );
 
         expect(result, hasLength(2));
         expect(result[0].base64, equals('image_from_bucket_1'));
@@ -185,24 +193,35 @@ void main() {
         verify(mockFileUseCase.getObject('bucket-2', 'image2.jpg')).called(1);
       });
 
-      test('should handle successful file operations with some failures', () async {
-        when(mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'))
-            .thenAnswer((_) async => null); // Simulating a failed operation that returns null
-        when(mockFileUseCase.getObject('test-bucket', 'user2_image.jpg'))
-            .thenAnswer((_) async => 'user2_image');
+      test(
+        'should handle successful file operations with some failures',
+        () async {
+          when(
+            mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'),
+          ).thenAnswer(
+            (_) async => null,
+          ); // Simulating a failed operation that returns null
+          when(
+            mockFileUseCase.getObject('test-bucket', 'user2_image.jpg'),
+          ).thenAnswer((_) async => 'user2_image');
 
-        final result = await userUseCase.usersToImageUsers(testUsers);
+          final result = await userUseCase.usersToImageUsers(testUsers);
 
-        expect(result, hasLength(2));
-        expect(result[0].user?.uid, equals('user_1'));
-        expect(result[0].base64, isNull); // Failed to load image
-        expect(result[1].user?.uid, equals('user_2'));
-        expect(result[1].base64, equals('user2_image')); // Successfully loaded image
-      });
+          expect(result, hasLength(2));
+          expect(result[0].user?.uid, equals('user_1'));
+          expect(result[0].base64, isNull); // Failed to load image
+          expect(result[1].user?.uid, equals('user_2'));
+          expect(
+            result[1].base64,
+            equals('user2_image'),
+          ); // Successfully loaded image
+        },
+      );
 
       test('should preserve user data in ImageUser objects', () async {
-        when(mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'))
-            .thenAnswer((_) async => 'test_image');
+        when(
+          mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'),
+        ).thenAnswer((_) async => 'test_image');
 
         final result = await userUseCase.usersToImageUsers([testUsers[0]]);
 
@@ -218,8 +237,9 @@ void main() {
 
       test('should handle concurrent image loading', () async {
         // Create more users to test concurrent loading
-        final moreUsers = List.generate(5, (index) => 
-          PublicUser(
+        final moreUsers = List.generate(
+          5,
+          (index) => PublicUser(
             uid: 'user_$index',
             bio: {
               'languageCode': 'en',
@@ -246,8 +266,9 @@ void main() {
 
         // Mock responses for all users
         for (int i = 0; i < 5; i++) {
-          when(mockFileUseCase.getObject('test-bucket', 'user${i}_image.jpg'))
-              .thenAnswer((_) async => 'image_$i');
+          when(
+            mockFileUseCase.getObject('test-bucket', 'user${i}_image.jpg'),
+          ).thenAnswer((_) async => 'image_$i');
         }
 
         final result = await userUseCase.usersToImageUsers(moreUsers);
@@ -260,7 +281,9 @@ void main() {
 
         // Verify all file calls were made
         for (int i = 0; i < 5; i++) {
-          verify(mockFileUseCase.getObject('test-bucket', 'user${i}_image.jpg')).called(1);
+          verify(
+            mockFileUseCase.getObject('test-bucket', 'user${i}_image.jpg'),
+          ).called(1);
         }
       });
     });

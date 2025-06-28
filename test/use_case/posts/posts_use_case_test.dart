@@ -50,10 +50,7 @@ void main() {
               'sentiment': 'positive',
               'value': 'First test post',
             },
-            image: const {
-              'bucketName': 'test-bucket',
-              'value': 'image1.jpg',
-            },
+            image: const {'bucketName': 'test-bucket', 'value': 'image1.jpg'},
             searchToken: const {},
             title: const {
               'languageCode': 'en',
@@ -77,10 +74,7 @@ void main() {
               'sentiment': 'positive',
               'value': 'Second test post',
             },
-            image: const {
-              'bucketName': 'test-bucket',
-              'value': 'image2.jpg',
-            },
+            image: const {'bucketName': 'test-bucket', 'value': 'image2.jpg'},
             searchToken: const {},
             title: const {
               'languageCode': 'en',
@@ -146,66 +140,77 @@ void main() {
         expect(result, isEmpty);
       });
 
-      test('should create user posts with correct sorting by created date', () async {
-        // Mock file use case to return base64 images
-        when(mockFileUseCase.getObject('test-bucket', 'image1.jpg'))
-            .thenAnswer((_) async => 'base64_image_1');
-        when(mockFileUseCase.getObject('test-bucket', 'image2.jpg'))
-            .thenAnswer((_) async => 'base64_image_2');
+      test(
+        'should create user posts with correct sorting by created date',
+        () async {
+          // Mock file use case to return base64 images
+          when(
+            mockFileUseCase.getObject('test-bucket', 'image1.jpg'),
+          ).thenAnswer((_) async => 'base64_image_1');
+          when(
+            mockFileUseCase.getObject('test-bucket', 'image2.jpg'),
+          ).thenAnswer((_) async => 'base64_image_2');
 
-        // Add users to fake firestore
-        for (final user in testUsers) {
-          await fakeFirestore
-              .collection('public')
-              .doc('v1')
-              .collection('users')
-              .doc(user.uid)
-              .set(user.toJson());
-        }
+          // Add users to fake firestore
+          for (final user in testUsers) {
+            await fakeFirestore
+                .collection('public')
+                .doc('v1')
+                .collection('users')
+                .doc(user.uid)
+                .set(user.toJson());
+          }
 
-        final result = await postsUseCase.createUserPosts(testPosts);
+          final result = await postsUseCase.createUserPosts(testPosts);
 
-        expect(result, hasLength(2));
-        // Should be sorted by created date (newest first)
-        expect(result[0].post.postId, equals('post_2'));
-        expect(result[1].post.postId, equals('post_1'));
-        expect(result[0].base64, equals('base64_image_2'));
-        expect(result[1].base64, equals('base64_image_1'));
-        expect(result[0].user?.uid, equals('user_2'));
-        expect(result[1].user?.uid, equals('user_1'));
-      });
+          expect(result, hasLength(2));
+          // Should be sorted by created date (newest first)
+          expect(result[0].post.postId, equals('post_2'));
+          expect(result[1].post.postId, equals('post_1'));
+          expect(result[0].base64, equals('base64_image_2'));
+          expect(result[1].base64, equals('base64_image_1'));
+          expect(result[0].user?.uid, equals('user_2'));
+          expect(result[1].user?.uid, equals('user_1'));
+        },
+      );
 
-      test('should create user posts with correct sorting by like count when ranking', () async {
-        when(mockFileUseCase.getObject('test-bucket', 'image1.jpg'))
-            .thenAnswer((_) async => 'base64_image_1');
-        when(mockFileUseCase.getObject('test-bucket', 'image2.jpg'))
-            .thenAnswer((_) async => 'base64_image_2');
+      test(
+        'should create user posts with correct sorting by like count when ranking',
+        () async {
+          when(
+            mockFileUseCase.getObject('test-bucket', 'image1.jpg'),
+          ).thenAnswer((_) async => 'base64_image_1');
+          when(
+            mockFileUseCase.getObject('test-bucket', 'image2.jpg'),
+          ).thenAnswer((_) async => 'base64_image_2');
 
-        for (final user in testUsers) {
-          await fakeFirestore
-              .collection('public')
-              .doc('v1')
-              .collection('users')
-              .doc(user.uid)
-              .set(user.toJson());
-        }
+          for (final user in testUsers) {
+            await fakeFirestore
+                .collection('public')
+                .doc('v1')
+                .collection('users')
+                .doc(user.uid)
+                .set(user.toJson());
+          }
 
-        final result = await postsUseCase.createUserPosts(
-          testPosts,
-          isRankingPosts: true,
-        );
+          final result = await postsUseCase.createUserPosts(
+            testPosts,
+            isRankingPosts: true,
+          );
 
-        expect(result, hasLength(2));
-        // Should be sorted by like count (highest first)
-        expect(result[0].post.postId, equals('post_2')); // 20 likes
-        expect(result[1].post.postId, equals('post_1')); // 10 likes
-        expect(result[0].post.likeCount, equals(20));
-        expect(result[1].post.likeCount, equals(10));
-      });
+          expect(result, hasLength(2));
+          // Should be sorted by like count (highest first)
+          expect(result[0].post.postId, equals('post_2')); // 20 likes
+          expect(result[1].post.postId, equals('post_1')); // 10 likes
+          expect(result[0].post.likeCount, equals(20));
+          expect(result[1].post.likeCount, equals(10));
+        },
+      );
 
       test('should handle posts with missing users', () async {
-        when(mockFileUseCase.getObject('test-bucket', 'image1.jpg'))
-            .thenAnswer((_) async => 'base64_image_1');
+        when(
+          mockFileUseCase.getObject('test-bucket', 'image1.jpg'),
+        ).thenAnswer((_) async => 'base64_image_1');
 
         // Only add one user to firestore
         await fakeFirestore
@@ -224,10 +229,12 @@ void main() {
       });
 
       test('should handle null image from file use case', () async {
-        when(mockFileUseCase.getObject('test-bucket', 'image1.jpg'))
-            .thenAnswer((_) async => null);
-        when(mockFileUseCase.getObject('test-bucket', 'image2.jpg'))
-            .thenAnswer((_) async => null);
+        when(
+          mockFileUseCase.getObject('test-bucket', 'image1.jpg'),
+        ).thenAnswer((_) async => null);
+        when(
+          mockFileUseCase.getObject('test-bucket', 'image2.jpg'),
+        ).thenAnswer((_) async => null);
 
         for (final user in testUsers) {
           await fakeFirestore
@@ -252,8 +259,7 @@ void main() {
         ];
 
         // Mock empty bucket name and value
-        when(mockFileUseCase.getObject('', ''))
-            .thenAnswer((_) async => null);
+        when(mockFileUseCase.getObject('', '')).thenAnswer((_) async => null);
 
         for (final user in testUsers) {
           await fakeFirestore
@@ -271,8 +277,9 @@ void main() {
       });
 
       test('should handle single post', () async {
-        when(mockFileUseCase.getObject('test-bucket', 'image1.jpg'))
-            .thenAnswer((_) async => 'base64_image_1');
+        when(
+          mockFileUseCase.getObject('test-bucket', 'image1.jpg'),
+        ).thenAnswer((_) async => 'base64_image_1');
 
         await fakeFirestore
             .collection('public')
@@ -295,10 +302,12 @@ void main() {
           testPosts[1].copyWith(likeCount: 15),
         ];
 
-        when(mockFileUseCase.getObject('test-bucket', 'image1.jpg'))
-            .thenAnswer((_) async => 'base64_image_1');
-        when(mockFileUseCase.getObject('test-bucket', 'image2.jpg'))
-            .thenAnswer((_) async => 'base64_image_2');
+        when(
+          mockFileUseCase.getObject('test-bucket', 'image1.jpg'),
+        ).thenAnswer((_) async => 'base64_image_1');
+        when(
+          mockFileUseCase.getObject('test-bucket', 'image2.jpg'),
+        ).thenAnswer((_) async => 'base64_image_2');
 
         for (final user in testUsers) {
           await fakeFirestore
@@ -326,10 +335,12 @@ void main() {
           testPosts[1].copyWith(likeCount: 0),
         ];
 
-        when(mockFileUseCase.getObject('test-bucket', 'image1.jpg'))
-            .thenAnswer((_) async => 'base64_image_1');
-        when(mockFileUseCase.getObject('test-bucket', 'image2.jpg'))
-            .thenAnswer((_) async => 'base64_image_2');
+        when(
+          mockFileUseCase.getObject('test-bucket', 'image1.jpg'),
+        ).thenAnswer((_) async => 'base64_image_1');
+        when(
+          mockFileUseCase.getObject('test-bucket', 'image2.jpg'),
+        ).thenAnswer((_) async => 'base64_image_2');
 
         for (final user in testUsers) {
           await fakeFirestore

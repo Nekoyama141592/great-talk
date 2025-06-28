@@ -35,11 +35,11 @@ void main() {
             'verificationData': {
               'localVerificationData': 'local_data',
               'serverVerificationData': 'server_data',
-              'source': 'Test'
+              'source': 'Test',
             },
             'transactionDate': '2024-01-01T00:00:00.000Z',
             'status': 'purchased',
-            'pendingCompletePurchase': false
+            'pendingCompletePurchase': false,
           },
           verifiedReceipt: const {
             'expires_date': '2025-01-01 00:00:00 Etc/GMT',
@@ -50,7 +50,8 @@ void main() {
             'is_trial_period': 'false',
             'original_purchase_date': '2024-01-01 00:00:00 Etc/GMT',
             'original_purchase_date_ms': '1704067200000',
-            'original_purchase_date_pst': '2023-12-31 16:00:00 America/Los_Angeles',
+            'original_purchase_date_pst':
+                '2023-12-31 16:00:00 America/Los_Angeles',
             'original_transaction_id': 'original_txn_id',
             'product_id': 'test_product_id',
             'purchase_date': '2024-01-01 00:00:00 Etc/GMT',
@@ -59,51 +60,77 @@ void main() {
             'quantity': '1',
             'subscription_group_identifier': 'test_group',
             'transaction_id': 'test_txn_id',
-            'web_order_line_item_id': 'test_line_item'
+            'web_order_line_item_id': 'test_line_item',
           },
           uid: 'test_user_id',
           os: 'iOS',
         );
       });
 
-      test('should call verifyAndroidReceipt when platform is Android', () async {
-        when(mockApiRepository.verifyAndroidReceipt(any))
-            .thenAnswer((_) async => Result.success(testVerifiedPurchase));
-        when(mockApiRepository.verifyIOSReceipt(any))
-            .thenAnswer((_) async => Result.success(testVerifiedPurchase));
+      test(
+        'should call verifyAndroidReceipt when platform is Android',
+        () async {
+          when(
+            mockApiRepository.verifyAndroidReceipt(any),
+          ).thenAnswer((_) async => Result.success(testVerifiedPurchase));
+          when(
+            mockApiRepository.verifyIOSReceipt(any),
+          ).thenAnswer((_) async => Result.success(testVerifiedPurchase));
 
-        final result = await purchaseUseCase.verifyPurchase(mockPurchaseDetails);
+          final result = await purchaseUseCase.verifyPurchase(
+            mockPurchaseDetails,
+          );
 
-        if (Platform.isAndroid) {
-          verify(mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails)).called(1);
-          verifyNever(mockApiRepository.verifyIOSReceipt(mockPurchaseDetails));
-        } else {
-          verify(mockApiRepository.verifyIOSReceipt(mockPurchaseDetails)).called(1);
-          verifyNever(mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails));
-        }
+          if (Platform.isAndroid) {
+            verify(
+              mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
+            ).called(1);
+            verifyNever(
+              mockApiRepository.verifyIOSReceipt(mockPurchaseDetails),
+            );
+          } else {
+            verify(
+              mockApiRepository.verifyIOSReceipt(mockPurchaseDetails),
+            ).called(1);
+            verifyNever(
+              mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
+            );
+          }
 
-        result.when(
-          success: (verifiedPurchase) {
-            expect(verifiedPurchase.productId, equals('test_product_id'));
-            expect(verifiedPurchase.uid, equals('test_user_id'));
-          },
-          failure: (error) => fail('Expected success but got failure: $error'),
-        );
-      });
+          result.when(
+            success: (verifiedPurchase) {
+              expect(verifiedPurchase.productId, equals('test_product_id'));
+              expect(verifiedPurchase.uid, equals('test_user_id'));
+            },
+            failure:
+                (error) => fail('Expected success but got failure: $error'),
+          );
+        },
+      );
 
       test('should call verifyIOSReceipt when platform is iOS', () async {
-        when(mockApiRepository.verifyAndroidReceipt(any))
-            .thenAnswer((_) async => Result.success(testVerifiedPurchase));
-        when(mockApiRepository.verifyIOSReceipt(any))
-            .thenAnswer((_) async => Result.success(testVerifiedPurchase));
+        when(
+          mockApiRepository.verifyAndroidReceipt(any),
+        ).thenAnswer((_) async => Result.success(testVerifiedPurchase));
+        when(
+          mockApiRepository.verifyIOSReceipt(any),
+        ).thenAnswer((_) async => Result.success(testVerifiedPurchase));
 
-        final result = await purchaseUseCase.verifyPurchase(mockPurchaseDetails);
+        final result = await purchaseUseCase.verifyPurchase(
+          mockPurchaseDetails,
+        );
 
         if (!Platform.isAndroid) {
-          verify(mockApiRepository.verifyIOSReceipt(mockPurchaseDetails)).called(1);
-          verifyNever(mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails));
+          verify(
+            mockApiRepository.verifyIOSReceipt(mockPurchaseDetails),
+          ).called(1);
+          verifyNever(
+            mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
+          );
         } else {
-          verify(mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails)).called(1);
+          verify(
+            mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
+          ).called(1);
           verifyNever(mockApiRepository.verifyIOSReceipt(mockPurchaseDetails));
         }
 
@@ -118,26 +145,35 @@ void main() {
 
       test('should return failure when verification fails', () async {
         const errorMessage = 'Verification failed';
-        when(mockApiRepository.verifyAndroidReceipt(any))
-            .thenAnswer((_) async => Result.failure(errorMessage));
-        when(mockApiRepository.verifyIOSReceipt(any))
-            .thenAnswer((_) async => Result.failure(errorMessage));
+        when(
+          mockApiRepository.verifyAndroidReceipt(any),
+        ).thenAnswer((_) async => Result.failure(errorMessage));
+        when(
+          mockApiRepository.verifyIOSReceipt(any),
+        ).thenAnswer((_) async => Result.failure(errorMessage));
 
-        final result = await purchaseUseCase.verifyPurchase(mockPurchaseDetails);
+        final result = await purchaseUseCase.verifyPurchase(
+          mockPurchaseDetails,
+        );
 
         result.when(
-          success: (verifiedPurchase) => fail('Expected failure but got success'),
+          success:
+              (verifiedPurchase) => fail('Expected failure but got success'),
           failure: (error) => expect(error, equals(errorMessage)),
         );
       });
 
       test('should handle successful verification', () async {
-        when(mockApiRepository.verifyAndroidReceipt(any))
-            .thenAnswer((_) async => Result.success(testVerifiedPurchase));
-        when(mockApiRepository.verifyIOSReceipt(any))
-            .thenAnswer((_) async => Result.success(testVerifiedPurchase));
+        when(
+          mockApiRepository.verifyAndroidReceipt(any),
+        ).thenAnswer((_) async => Result.success(testVerifiedPurchase));
+        when(
+          mockApiRepository.verifyIOSReceipt(any),
+        ).thenAnswer((_) async => Result.success(testVerifiedPurchase));
 
-        final result = await purchaseUseCase.verifyPurchase(mockPurchaseDetails);
+        final result = await purchaseUseCase.verifyPurchase(
+          mockPurchaseDetails,
+        );
 
         result.when(
           success: (verifiedPurchase) {
@@ -168,11 +204,11 @@ void main() {
             'verificationData': {
               'localVerificationData': 'local_data',
               'serverVerificationData': 'server_data',
-              'source': 'Test'
+              'source': 'Test',
             },
             'transactionDate': '2024-01-01T00:00:00.000Z',
             'status': 'purchased',
-            'pendingCompletePurchase': false
+            'pendingCompletePurchase': false,
           },
           verifiedReceipt: const {
             'expires_date': '2025-01-01 00:00:00 Etc/GMT',
@@ -183,7 +219,8 @@ void main() {
             'is_trial_period': 'false',
             'original_purchase_date': '2024-01-01 00:00:00 Etc/GMT',
             'original_purchase_date_ms': '1704067200000',
-            'original_purchase_date_pst': '2023-12-31 16:00:00 America/Los_Angeles',
+            'original_purchase_date_pst':
+                '2023-12-31 16:00:00 America/Los_Angeles',
             'original_transaction_id': 'original_txn_id',
             'product_id': 'cross_platform_product',
             'purchase_date': '2024-01-01 00:00:00 Etc/GMT',
@@ -192,32 +229,45 @@ void main() {
             'quantity': '1',
             'subscription_group_identifier': 'test_group',
             'transaction_id': 'test_txn_id',
-            'web_order_line_item_id': 'test_line_item'
+            'web_order_line_item_id': 'test_line_item',
           },
           uid: 'cross_platform_user',
           os: 'iOS',
         );
 
         // Mock both platform methods
-        when(mockApiRepository.verifyAndroidReceipt(any))
-            .thenAnswer((_) async => Result.success(testVerifiedPurchase));
-        when(mockApiRepository.verifyIOSReceipt(any))
-            .thenAnswer((_) async => Result.success(testVerifiedPurchase));
+        when(
+          mockApiRepository.verifyAndroidReceipt(any),
+        ).thenAnswer((_) async => Result.success(testVerifiedPurchase));
+        when(
+          mockApiRepository.verifyIOSReceipt(any),
+        ).thenAnswer((_) async => Result.success(testVerifiedPurchase));
 
-        final result = await purchaseUseCase.verifyPurchase(mockPurchaseDetails);
+        final result = await purchaseUseCase.verifyPurchase(
+          mockPurchaseDetails,
+        );
 
         // Should call the appropriate method based on current platform
         if (Platform.isAndroid) {
-          verify(mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails)).called(1);
+          verify(
+            mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
+          ).called(1);
           verifyNever(mockApiRepository.verifyIOSReceipt(mockPurchaseDetails));
         } else {
-          verify(mockApiRepository.verifyIOSReceipt(mockPurchaseDetails)).called(1);
-          verifyNever(mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails));
+          verify(
+            mockApiRepository.verifyIOSReceipt(mockPurchaseDetails),
+          ).called(1);
+          verifyNever(
+            mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
+          );
         }
 
         result.when(
           success: (verifiedPurchase) {
-            expect(verifiedPurchase.productId, equals('cross_platform_product'));
+            expect(
+              verifiedPurchase.productId,
+              equals('cross_platform_product'),
+            );
             expect(verifiedPurchase.uid, equals('cross_platform_user'));
           },
           failure: (error) => fail('Expected success but got failure: $error'),
