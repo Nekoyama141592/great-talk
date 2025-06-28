@@ -316,36 +316,101 @@ lib/
 
 ```
 test/
-├── core/                      # コアビジネスロジック単体テスト
-│   ├── auth_core_test.dart    # 認証ロジックテスト
-│   ├── date_core_test.dart    # 日付処理テスト
-│   ├── id_core_test.dart      # ID生成テスト
-│   ├── json_core_test.dart    # JSON処理テスト
-│   └── search_core_test.dart  # 検索機能テスト
+├── application/               # アプリケーション層テスト
+│   └── use_case/             # ユースケース実装テスト（モック使用）
+│       ├── file_use_case_test.dart
+│       ├── post/             # 投稿関連ユースケーステスト
+│       │   ├── delete_post_use_case_test.dart
+│       │   ├── like_post_use_case_test.dart
+│       │   └── mute_post_use_case_test.dart
+│       ├── posts/            # 投稿コレクション管理テスト
+│       │   └── posts_use_case_test.dart
+│       ├── purchase/         # 課金ワークフローテスト
+│       │   └── purchase_use_case_test.dart
+│       └── user/             # ユーザー操作テスト
+│           ├── mute_user_use_case_test.dart
+│           └── user_use_case_test.dart
 │
-├── extension/                 # 拡張メソッドテスト
-│   ├── double_extension_test.dart
-│   └── string_extension_test.dart
+├── core/                     # コア機能・ユーティリティテスト
+│   ├── extension/            # 拡張メソッドテスト
+│   │   ├── custom_date_time_formatting_test.dart
+│   │   ├── double_extensions_test.dart
+│   │   ├── number_format_extension_test.dart
+│   │   ├── purchase_details_extension_test.dart
+│   │   ├── remote_config_key_extension_test.dart
+│   │   ├── shared_preferences_extension_test.dart
+│   │   └── string_extension_test.dart
+│   └── util/                 # コアユーティリティテスト
+│       ├── auth_core_test.dart        # 認証ロジックテスト
+│       ├── aws_s3_core_test.dart      # AWS S3統合テスト
+│       ├── date_converter_test.dart   # 日付変換テスト
+│       ├── date_core_test.dart        # 日付処理テスト
+│       ├── id_core_test.dart          # ID生成テスト
+│       ├── json_core_test.dart        # JSON処理テスト
+│       ├── purchases_core_test.dart   # 課金ロジックテスト
+│       ├── remote_config_core_test.dart # リモート設定テスト
+│       ├── search_core_test.dart      # 検索機能テスト
+│       ├── size_core_test.dart        # サイズ計算テスト
+│       └── url_redirector_test.dart   # URL処理テスト
 │
-├── repository/                # データ層テスト（モック使用）
-│   ├── database_repository_test.dart
-│   ├── auth_repository_test.dart
-│   └── result/                # Resultパターンテスト
+├── infrastructure/           # インフラストラクチャ層テスト
+│   └── repository/          # リポジトリ実装テスト（モック使用）
+│       ├── api_repository_test.dart
+│       ├── auth_repository_test.dart
+│       ├── database_repository_test.dart
+│       ├── local_repository_test.dart
+│       ├── purchase_repository_test.dart
+│       ├── remote_config_repository_test.dart
+│       └── result/          # Resultパターンテスト
+│           └── result_simple_test.dart
 │
-├── use_case/                  # ビジネスロジックテスト
-│   ├── user_use_case_test.dart
-│   ├── post_use_case_test.dart
-│   └── purchase_use_case_test.dart
+├── presentation/            # プレゼンテーション層テスト
+│   ├── ui_core/            # UIコアテスト
+│   │   └── validator/      # バリデーションテスト
+│   │       └── post_validator_test.dart
+│   └── views/              # UIコンポーネント・ページテスト
+│       ├── chat/           # チャット画面テスト
+│       │   └── components/ # チャット関連コンポーネント
+│       │       ├── delete_post_button_test.dart
+│       │       ├── latex_text_test.dart
+│       │       └── menu_button_test.dart
+│       ├── components/     # 共通UIコンポーネントテスト
+│       │   ├── app_bar_action_test.dart
+│       │   ├── basic_height_box_test.dart
+│       │   ├── basic_page_test.dart
+│       │   ├── basic_width_box_test.dart
+│       │   ├── circle_image_test.dart
+│       │   ├── form_label_test.dart
+│       │   ├── mosaic_card_test.dart
+│       │   ├── mosaic_user_child_test.dart
+│       │   ├── official_mark_test.dart
+│       │   ├── rounded_button_test.dart
+│       │   ├── rounded_input_field_test.dart
+│       │   ├── s3_image_test.dart
+│       │   └── text_field_container_test.dart
+│       ├── create_post/    # 投稿作成画面テスト
+│       │   └── components/
+│       │       ├── create_post_form_test.dart
+│       │       ├── description_field_test.dart
+│       │       ├── image_picker_widget_test.dart
+│       │       ├── submit_button_widget_test.dart
+│       │       ├── system_prompt_field_test.dart
+│       │       └── title_field_test.dart
+│       ├── edit/           # プロフィール編集画面テスト
+│       │   └── components/
+│       │       ├── bio_field_test.dart
+│       │       ├── edit_profile_form_test.dart
+│       │       ├── profile_image_widget_test.dart
+│       │       ├── update_button_widget_test.dart
+│       │       └── username_field_test.dart
+│       ├── generate_image/ # 画像生成画面テスト
+│       │   └── components/
+│       │       └── generated_image_test.dart
+│       └── main/           # メイン画面テスト
+│           └── components/
+│               └── main_floating_action_button_test.dart
 │
-├── views/                     # UIコンポーネントテスト
-│   └── components/            # ウィジェット単体テスト
-│
-├── ui_core/                   # UIコアテスト
-│   └── validator/             # バリデーションテスト
-│
-└── test_utils/                # テストヘルパー・モックツール
-    ├── mock_providers.dart    # モックプロバイダー
-    └── test_helper.dart       # テストユーティリティ
+└── security_rules_test.dart  # Firebaseセキュリティルールテスト
 ```
 
 ### 🛠️ **設定・インフラストラクチャ**
