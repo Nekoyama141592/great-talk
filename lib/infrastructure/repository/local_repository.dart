@@ -35,14 +35,20 @@ class LocalRepository implements ILocalRepository {
   ) {
     try {
       final jsonList = prefs.getJsonList(keyName) ?? [];
-      return jsonList.map((e) {
-        try {
-          return fromJson(e);
-        } catch (error) {
-          debugPrint('_fetchList: JSON parse error for key "$keyName": $error');
-          return null;
-        }
-      }).where((item) => item != null).cast<T>().toList();
+      return jsonList
+          .map((e) {
+            try {
+              return fromJson(e);
+            } catch (error) {
+              debugPrint(
+                '_fetchList: JSON parse error for key "$keyName": $error',
+              );
+              return null;
+            }
+          })
+          .where((item) => item != null)
+          .cast<T>()
+          .toList();
     } on LocalException catch (e) {
       debugPrint('_fetchList: ${e.toString()}');
       return [];
