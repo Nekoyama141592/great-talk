@@ -1,0 +1,21 @@
+android {
+    flavorDimensions += "flavor-type"
+
+    productFlavors {
+        dev {
+            dimension "flavor-type"
+            applicationId "com.firebaseapp.great_talk_dev"
+            resValue "string", "app_name", "ShareAI Dev"
+        }
+        verification {
+            dimension "flavor-type"
+            applicationId "com.firebaseapp.great_talk_verification"
+            resValue "string", "app_name", "ShareAI Verification"
+        }
+        prod {
+            dimension "flavor-type"
+            applicationId "com.firebaseapp.great_talk"
+            resValue "string", "app_name", "ShareAI"
+        }
+    }
+}

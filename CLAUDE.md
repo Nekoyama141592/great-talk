@@ -7,10 +7,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Running the Application
 ```bash
 # Development environment
-flutter run --flavor dev -t lib/main_dev.dart
+flutter run --flavor dev
 
 # Production environment  
-flutter run --flavor prod -t lib/main_prod.dart
+flutter run --flavor prod
 ```
 
 ### Building the Application

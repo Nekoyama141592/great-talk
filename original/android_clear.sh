@@ -10,4 +10,4 @@ flutter pub cache repair
 
 flutter pub get
 
-flutter run --flavor dev -t lib/main_dev.dart
+flutter run --flavor dev
