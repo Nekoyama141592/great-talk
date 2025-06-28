@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:great_talk/core/exception/local_exception.dart';
 import 'package:great_talk/core/extension/shared_preferences_extension.dart';
 import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/infrastructure/model/local_schema/save_text_msg/save_text_msg.dart';
@@ -34,10 +35,23 @@ class LocalRepository implements ILocalRepository {
   ) {
     try {
       final jsonList = prefs.getJsonList(keyName) ?? [];
-      return jsonList.map((e) => fromJson(e)).toList();
-    } catch (e) {
+      return jsonList.map((e) {
+        try {
+          return fromJson(e);
+        } catch (error) {
+          throw LocalException.jsonParse(
+            'Failed to parse JSON for key "$keyName": $error',
+          );
+        }
+      }).toList();
+    } on LocalException catch (e) {
       debugPrint('_fetchList: ${e.toString()}');
       return [];
+    } catch (error) {
+      debugPrint('_fetchList: Unexpected error - $error');
+      throw LocalException.fetch(
+        'Failed to fetch list for key "$keyName": $error',
+      );
     }
   }
 
@@ -51,9 +65,14 @@ class LocalRepository implements ILocalRepository {
       final newValue = [...oldValue, newElement];
       await prefs.setJsonList(keyName, newValue);
       return const Result.success(true);
-    } catch (e) {
+    } on LocalException catch (e) {
       debugPrint('_addElement: ${e.toString()}');
-      return Result.failure('追加が失敗しました');
+      return Result.failure('追加が失敗しました: ${e.code}');
+    } catch (error) {
+      debugPrint('_addElement: Unexpected error - $error');
+      throw LocalException.add(
+        'Failed to add element for key "${key.name}": $error',
+      );
     }
   }
 
@@ -75,44 +94,70 @@ class LocalRepository implements ILocalRepository {
     try {
       await prefs.remove(postId);
       return const Result.success(true);
-    } catch (e) {
+    } on LocalException catch (e) {
       debugPrint('removeChatLog: ${e.toString()}');
-      return const Result.failure('削除が失敗しました');
+      return Result.failure('削除が失敗しました: ${e.code}');
+    } catch (error) {
+      debugPrint('removeChatLog: Unexpected error - $error');
+      throw LocalException.remove(
+        'Failed to remove chat log for postId "$postId": $error',
+      );
     }
   }
 
   bool? _getBool(PrefsKey key) {
     try {
       return prefs.getBool(key.name);
-    } catch (e) {
-      debugPrint(e.toString());
+    } on LocalException catch (e) {
+      debugPrint('_getBool: ${e.toString()}');
       return null;
+    } catch (error) {
+      debugPrint('_getBool: Unexpected error - $error');
+      throw LocalException.getBool(
+        'Failed to get bool for key "${key.name}": $error',
+      );
     }
   }
 
   String? _getString(String keyName) {
     try {
       return prefs.getString(keyName);
-    } catch (e) {
-      debugPrint(e.toString());
+    } on LocalException catch (e) {
+      debugPrint('_getString: ${e.toString()}');
       return null;
+    } catch (error) {
+      debugPrint('_getString: Unexpected error - $error');
+      throw LocalException.getString(
+        'Failed to get string for key "$keyName": $error',
+      );
     }
   }
 
   Future<void> _setString(String keyName, String value) {
     try {
       return prefs.setString(keyName, value);
-    } catch (e) {
-      debugPrint(e.toString());
-      return Future.error('記録が失敗しました');
+    } on LocalException catch (e) {
+      debugPrint('_setString: ${e.toString()}');
+      return Future.error('記録が失敗しました: ${e.code}');
+    } catch (error) {
+      debugPrint('_setString: Unexpected error - $error');
+      throw LocalException.setString(
+        'Failed to set string for key "$keyName": $error',
+      );
     }
   }
 
   Future<void> _setBool(PrefsKey key, bool value) async {
     try {
       await prefs.setBool(key.name, value);
-    } catch (e) {
-      debugPrint(e.toString());
+    } on LocalException catch (e) {
+      debugPrint('_setBool: ${e.toString()}');
+      rethrow;
+    } catch (error) {
+      debugPrint('_setBool: Unexpected error - $error');
+      throw LocalException.setBool(
+        'Failed to set bool for key "${key.name}": $error',
+      );
     }
   }
 
@@ -158,9 +203,16 @@ class LocalRepository implements ILocalRepository {
 
   @override
   Future<void> setMessages(String postId, List<TextMessage> messages) {
-    final objectList = messages.map(SaveTextMsg.fromTextMessage).toList();
-    final value = jsonEncode(objectList);
-    return _setString(postId, value);
+    try {
+      final objectList = messages.map(SaveTextMsg.fromTextMessage).toList();
+      final value = jsonEncode(objectList);
+      return _setString(postId, value);
+    } catch (error) {
+      debugPrint('setMessages: Serialization error - $error');
+      throw LocalException.serialization(
+        'Failed to serialize messages for postId "$postId": $error',
+      );
+    }
   }
 
   @override
