@@ -179,13 +179,15 @@ class AuthRepository implements IAuthRepository {
       await user.sendEmailVerification();
       return const Result.success(true);
     } on FirebaseAuthException catch (e) {
-      if (enableDebugPrint)
+      if (enableDebugPrint) {
         debugPrint('sendEmailVerification: ${e.toString()}');
+      }
       final msg = _manageEmailPasswordError(e);
       return Result.failure(msg);
     } catch (e) {
-      if (enableDebugPrint)
+      if (enableDebugPrint) {
         debugPrint('sendEmailVerification: ${e.toString()}');
+      }
       return Result.failure('確認メールの送信に失敗しました');
     }
   }
