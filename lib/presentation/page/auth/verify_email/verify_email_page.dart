@@ -6,9 +6,10 @@ import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_prov
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
-import 'package:great_talk/presentation/component/basic_height_box.dart';
-import 'package:great_talk/presentation/component/rounded_button.dart';
 import 'package:great_talk/presentation/notifier/verify_email/verify_email_view_model.dart';
+import 'package:great_talk/presentation/page/auth/verify_email/components/verify_email_header.dart';
+import 'package:great_talk/presentation/page/auth/verify_email/components/verify_email_content.dart';
+import 'package:great_talk/presentation/page/auth/verify_email/components/verify_email_actions.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -121,66 +122,28 @@ class VerifyEmailPage extends HookConsumerWidget {
       ),
       body: AsyncScreen(
         asyncValue: asyncValue,
-        data:
-            (state) => Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: SizeUtil.defaultPadding(context),
-              ),
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.email_outlined,
-                        size: 80,
-                        color: Colors.blue,
-                      ),
-                      const BasicHeightBox(),
-                      const Text(
-                        'メールアドレスの確認',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const BasicHeightBox(),
-                      Text(
-                        '${state.email}\nに確認メールを送信しました。',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      const BasicHeightBox(),
-                      const Text(
-                        'メール内のリンクをクリックして\nメールアドレスを確認してください。',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
-                      ),
-                      const BasicHeightBox(),
-                      const BasicHeightBox(),
-                      RoundedButton(
-                        text:
-                            state.canResend
-                                ? '確認メールを再送信'
-                                : '再送信まで${state.resendSecondsLeft}秒',
-                        textColor: Colors.white,
-                        buttonColor: Theme.of(context).primaryColor,
-                        press: handleResendEmail,
-                        enabled: state.canResend,
-                      ),
-                      const BasicHeightBox(),
-                      RoundedButton(
-                        text: '確認完了をチェック',
-                        textColor: Theme.of(context).primaryColor,
-                        buttonColor: Colors.transparent,
-                        press: handleCheckEmailVerification,
-                        enabled: !asyncValue.isLoading,
-                      ),
-                    ],
+        data: (state) => Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: SizeUtil.defaultPadding(context),
+          ),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const VerifyEmailHeader(),
+                  VerifyEmailContent(email: state.email),
+                  VerifyEmailActions(
+                    state: state,
+                    isLoading: asyncValue.isLoading,
+                    onResendEmail: handleResendEmail,
+                    onCheckVerification: handleCheckEmailVerification,
                   ),
-                ),
+                ],
               ),
             ),
+          ),
+        ),
       ),
     );
   }
