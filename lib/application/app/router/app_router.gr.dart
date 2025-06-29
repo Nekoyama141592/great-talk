@@ -133,6 +133,22 @@ class EditProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [EmailAuthPage]
+class EmailAuthRoute extends PageRouteInfo<void> {
+  const EmailAuthRoute({List<PageRouteInfo>? children})
+    : super(EmailAuthRoute.name, initialChildren: children);
+
+  static const String name = 'EmailAuthRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const EmailAuthPage();
+    },
+  );
+}
+
+/// generated route for
 /// [FirstPage]
 class FirstRoute extends PageRouteInfo<void> {
   const FirstRoute({List<PageRouteInfo>? children})

@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/presentation/constant/colors.dart';
 import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:great_talk/presentation/component/rounded_button.dart';
+import 'package:great_talk/presentation/page/auth/email_auth/email_auth_page.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({
@@ -63,6 +65,16 @@ class LoginScreen extends StatelessWidget {
                     color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                 ),
+              const BasicHeightBox(),
+              RoundedButton(
+                text: 'メールアドレスで続ける',
+                textColor: Colors.white,
+                buttonColor: kSecondaryColor,
+                press: () {
+                  RouteUtil.pushPath(context, EmailAuthPage.path);
+                },
+                icon: const Icon(Icons.email, color: Colors.white),
+              ),
             ],
           ),
         ),

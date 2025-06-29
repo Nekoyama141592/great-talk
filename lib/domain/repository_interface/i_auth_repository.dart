@@ -21,4 +21,10 @@ abstract class IAuthRepository {
 
   /// Deletes the current user account
   FutureResult<bool> deleteUser();
+
+  /// Signs up a user with email and password
+  FutureResult<User> signUp(String email, String password);
+
+  /// Signs in a user with email and password
+  FutureResult<User> signIn(String email, String password);
 }

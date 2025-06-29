@@ -131,6 +131,52 @@ class AuthRepository implements IAuthRepository {
     }
   }
 
+  @override
+  FutureResult<User> signUp(String email, String password) async {
+    try {
+      final res = await instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      final user = res.user;
+      if (user == null) {
+        return const Result.failure('ユーザー作成に失敗しました');
+      } else {
+        return Result.success(user);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (enableDebugPrint) debugPrint('signUp: ${e.toString()}');
+      final msg = _manageEmailPasswordError(e);
+      return Result.failure(msg);
+    } catch (e) {
+      if (enableDebugPrint) debugPrint('signUp: ${e.toString()}');
+      return Result.failure('ユーザー作成に失敗しました');
+    }
+  }
+
+  @override
+  FutureResult<User> signIn(String email, String password) async {
+    try {
+      final res = await instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      final user = res.user;
+      if (user == null) {
+        return const Result.failure('ログインに失敗しました');
+      } else {
+        return Result.success(user);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (enableDebugPrint) debugPrint('signIn: ${e.toString()}');
+      final msg = _manageEmailPasswordError(e);
+      return Result.failure(msg);
+    } catch (e) {
+      if (enableDebugPrint) debugPrint('signIn: ${e.toString()}');
+      return Result.failure('ログインに失敗しました');
+    }
+  }
+
   String _manageErrorCredential(FirebaseAuthException e) {
     final String errorCode = e.code;
     switch (errorCode) {
@@ -140,6 +186,30 @@ class AuthRepository implements IAuthRepository {
         return 'クレデンシャルが不正、もしくは期限切れです。';
       case 'user-disabled':
         return 'ユーザーが無効化されています。';
+      default:
+        return 'エラーが発生しました';
+    }
+  }
+
+  String _manageEmailPasswordError(FirebaseAuthException e) {
+    final String errorCode = e.code;
+    switch (errorCode) {
+      case 'email-already-in-use':
+        return 'このメールアドレスは既に使用されています。';
+      case 'invalid-email':
+        return 'メールアドレスの形式が正しくありません。';
+      case 'operation-not-allowed':
+        return 'メール/パスワード認証が無効になっています。';
+      case 'weak-password':
+        return 'パスワードが弱すぎます。';
+      case 'user-not-found':
+        return 'ユーザーが見つかりません。';
+      case 'wrong-password':
+        return 'パスワードが間違っています。';
+      case 'user-disabled':
+        return 'ユーザーが無効化されています。';
+      case 'invalid-credential':
+        return 'メールアドレスまたはパスワードが正しくありません。';
       default:
         return 'エラーが発生しました';
     }

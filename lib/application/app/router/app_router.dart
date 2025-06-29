@@ -3,6 +3,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:great_talk/presentation/notifier/remote_config/remote_config_provider.dart';
 import 'package:great_talk/presentation/page/accounts_page.dart';
 import 'package:great_talk/presentation/page/admin_page.dart';
+import 'package:great_talk/presentation/page/auth/email_auth/email_auth_page.dart';
 import 'package:great_talk/presentation/page/auth/login_page.dart';
 import 'package:great_talk/presentation/page/auth/logouted_page.dart';
 import 'package:great_talk/presentation/page/auth/reauthenticate_to_delete_page.dart';
@@ -40,6 +41,7 @@ class AppRouter extends RootStackRouter {
         path: needsUpdate ? maintenancePath : rootPath,
       ),
       AutoRoute(page: LoginRoute.page, path: LoginPage.path),
+      AutoRoute(page: EmailAuthRoute.page, path: EmailAuthPage.path),
       AutoRoute(page: AccountRoute.page, path: AccountPage.path),
       AutoRoute(page: AdminRoute.page, path: AdminPage.path),
       AutoRoute(page: ChatRoute.page, path: ChatPage.path),
