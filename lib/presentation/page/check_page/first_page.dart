@@ -22,7 +22,7 @@ class FirstPage extends ConsumerWidget {
     if (authUser == null) {
       return LoginPage();
     }
-    // 統合テストの際にはコメントアウト 
+    // 統合テストの際にはコメントアウト
     if (!authUser.emailVerified) {
       return VerifyEmailPage();
     }

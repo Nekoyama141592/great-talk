@@ -39,7 +39,7 @@ void main() {
     Future<void> agreeToTermsAndLogin(WidgetTester tester) async {
       await tester.pumpWidget(app);
       await tester.pumpAndSettle();
-      
+
       // Wait for initial load
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
@@ -48,30 +48,30 @@ void main() {
       if (agreeButton.evaluate().isNotEmpty) {
         await tester.tap(agreeButton);
         await tester.pumpAndSettle();
-        
+
         // Wait for navigation to login screen after terms agreement
         await tester.pumpAndSettle(const Duration(seconds: 5));
 
         // Look for "メールアドレスで続ける" button on LoginScreen
         await tester.pumpAndSettle();
         final emailContinueButton = find.text('メールアドレスで続ける');
-        
+
         // Wait a bit more if button not found immediately
         if (emailContinueButton.evaluate().isEmpty) {
           await tester.pumpAndSettle(const Duration(seconds: 3));
         }
-        
+
         expect(emailContinueButton, findsOneWidget);
         await tester.tap(emailContinueButton);
         await tester.pumpAndSettle();
-        
+
         // Wait for EmailAuthPage to load
         await tester.pumpAndSettle(const Duration(seconds: 3));
 
         // Find email and password fields
         final emailFields = find.byType(TextFormField);
         expect(emailFields, findsAtLeast(2));
-        
+
         // Clear any existing text and enter email
         await tester.tap(emailFields.first);
         await tester.pumpAndSettle();
@@ -91,7 +91,7 @@ void main() {
         expect(loginButton, findsOneWidget);
         await tester.tap(loginButton);
         await tester.pumpAndSettle();
-        
+
         // Wait longer for authentication and navigation to complete
         await tester.pumpAndSettle(const Duration(seconds: 10));
       }
@@ -102,7 +102,7 @@ void main() {
     ) async {
       await tester.pumpWidget(app);
       await tester.pumpAndSettle();
-      
+
       // Wait for initial load
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
@@ -114,30 +114,30 @@ void main() {
       // Tap agree button
       await tester.tap(find.text('上記の内容、利用規約、プライバシーポリシーに同意する'));
       await tester.pumpAndSettle();
-      
+
       // Wait for navigation to login screen after terms agreement
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
       // Look for "メールアドレスで続ける" button on LoginScreen
       await tester.pumpAndSettle();
       final emailContinueButton = find.text('メールアドレスで続ける');
-      
+
       // Wait a bit more if button not found immediately
       if (emailContinueButton.evaluate().isEmpty) {
         await tester.pumpAndSettle(const Duration(seconds: 3));
       }
-      
+
       expect(emailContinueButton, findsOneWidget);
       await tester.tap(emailContinueButton);
       await tester.pumpAndSettle();
-      
+
       // Wait for EmailAuthPage to load
       await tester.pumpAndSettle(const Duration(seconds: 3));
 
       // Find email and password fields
       final emailFields = find.byType(TextFormField);
       expect(emailFields, findsAtLeast(2));
-      
+
       // Clear any existing text and enter email
       await tester.tap(emailFields.first);
       await tester.pumpAndSettle();
@@ -157,13 +157,14 @@ void main() {
       expect(loginButton, findsOneWidget);
       await tester.tap(loginButton);
       await tester.pumpAndSettle();
-      
+
       // Wait longer for authentication and navigation to complete
       await tester.pumpAndSettle(const Duration(seconds: 10));
 
       // Verify that we're now on MyHomePage with BottomNavigationBar
       expect(find.byType(BottomNavigationBar), findsOneWidget);
       expect(find.text('人気'), findsOneWidget);
+      expect(find.text('ユーザー'), findsOneWidget);
       expect(find.text('ホーム'), findsOneWidget);
     });
 
@@ -178,12 +179,14 @@ void main() {
 
       // Verify all navigation items exist
       expect(find.text('人気'), findsOneWidget);
+      expect(find.text('ユーザー'), findsOneWidget);
       expect(find.text('ホーム'), findsOneWidget);
       expect(find.text('最新'), findsOneWidget);
       expect(find.text('課金'), findsOneWidget);
 
       // Verify icons exist
       expect(find.byIcon(Icons.stars), findsOneWidget);
+      expect(find.byIcon(Icons.person), findsOneWidget);
       expect(find.byIcon(Icons.home), findsOneWidget);
       expect(find.byIcon(Icons.update), findsOneWidget);
       expect(find.byIcon(Icons.subscriptions), findsOneWidget);
@@ -203,7 +206,7 @@ void main() {
       final bottomNavBar = tester.widget<BottomNavigationBar>(
         find.byType(BottomNavigationBar),
       );
-      expect(bottomNavBar.currentIndex, 1); // Home tab is index 1
+      expect(bottomNavBar.currentIndex, 2); // Home tab is index 2
     });
 
     testWidgets('tap on ranking tab navigates correctly', (
@@ -227,6 +230,23 @@ void main() {
       expect(bottomNavBar.currentIndex, 0); // Ranking tab is index 0
     });
 
+    testWidgets('tap on user tab navigates correctly', (
+      WidgetTester tester,
+    ) async {
+      // First agree to terms and login
+      await agreeToTermsAndLogin(tester);
+
+      // Tap on User tab (ユーザー)
+      await tester.tap(find.text('ユーザー'));
+      await tester.pumpAndSettle();
+
+      // Verify navigation happened
+      final bottomNavBar = tester.widget<BottomNavigationBar>(
+        find.byType(BottomNavigationBar),
+      );
+      expect(bottomNavBar.currentIndex, 1); // User tab is index 1
+    });
+
     testWidgets('tap on new posts tab navigates correctly', (
       WidgetTester tester,
     ) async {
@@ -241,7 +261,7 @@ void main() {
       final bottomNavBar = tester.widget<BottomNavigationBar>(
         find.byType(BottomNavigationBar),
       );
-      expect(bottomNavBar.currentIndex, 2); // New Posts tab is index 2
+      expect(bottomNavBar.currentIndex, 3); // New Posts tab is index 3
     });
 
     testWidgets('tap on subscribe tab navigates correctly', (
@@ -258,7 +278,7 @@ void main() {
       final bottomNavBar = tester.widget<BottomNavigationBar>(
         find.byType(BottomNavigationBar),
       );
-      expect(bottomNavBar.currentIndex, 3); // Subscribe tab is index 3
+      expect(bottomNavBar.currentIndex, 4); // Subscribe tab is index 4
     });
 
     testWidgets('navigate through all tabs sequentially', (
@@ -267,7 +287,7 @@ void main() {
       // First agree to terms and login
       await agreeToTermsAndLogin(tester);
 
-      final tabs = ['人気', 'ホーム', '最新', '課金'];
+      final tabs = ['人気', 'ユーザー', 'ホーム', '最新', '課金'];
 
       for (int i = 0; i < tabs.length; i++) {
         // Tap on each tab
@@ -292,6 +312,9 @@ void main() {
       expect(find.byType(PageView), findsAtLeastNWidgets(1));
 
       // Navigate between tabs and verify PageView updates
+      await tester.tap(find.text('ユーザー'));
+      await tester.pumpAndSettle();
+
       await tester.tap(find.text('ホーム'));
       await tester.pumpAndSettle();
 

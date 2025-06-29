@@ -13,7 +13,8 @@ import 'package:great_talk/presentation/component/original_drawer.dart';
 import 'package:great_talk/presentation/page/main/components/main_floating_action_button.dart';
 import 'package:great_talk/presentation/page/main/feeds/feeds_page.dart';
 import 'package:great_talk/presentation/page/main/new_posts/new_posts_screen.dart';
-import 'package:great_talk/presentation/page/main/ranking/ranking_screen.dart';
+import 'package:great_talk/presentation/page/main/post_ranking_screen.dart';
+import 'package:great_talk/presentation/page/main/user_ranking_screen.dart';
 import 'package:great_talk/presentation/page/main/subscribe/subscribe_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -61,7 +62,8 @@ class MyHomePage extends HookConsumerWidget {
         onPageChanged: (index) => pageIndex.value = index,
         controller: pageController,
         children: const [
-          RankingScreen(),
+          PostRankingScreen(),
+          UserRankingScreen(),
           FeedsPage(),
           NewPostsScreen(),
           SubscribeScreen(),
