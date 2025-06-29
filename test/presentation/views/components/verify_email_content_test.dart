@@ -6,12 +6,12 @@ void main() {
   group('VerifyEmailContent', () {
     const testEmail = 'test@example.com';
 
-    testWidgets('should display email address correctly', (WidgetTester tester) async {
+    testWidgets('should display email address correctly', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: VerifyEmailContent(email: testEmail),
-          ),
+          home: Scaffold(body: VerifyEmailContent(email: testEmail)),
         ),
       );
 
@@ -21,24 +21,17 @@ void main() {
     testWidgets('should display instruction text', (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: VerifyEmailContent(email: testEmail),
-          ),
+          home: Scaffold(body: VerifyEmailContent(email: testEmail)),
         ),
       );
 
-      expect(
-        find.text('メール内のリンクをクリックして\nメールアドレスを確認してください。'),
-        findsOneWidget,
-      );
+      expect(find.text('メール内のリンクをクリックして\nメールアドレスを確認してください。'), findsOneWidget);
     });
 
     testWidgets('should have correct text styles', (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: VerifyEmailContent(email: testEmail),
-          ),
+          home: Scaffold(body: VerifyEmailContent(email: testEmail)),
         ),
       );
 
@@ -56,28 +49,28 @@ void main() {
       expect(instructionText.textAlign, TextAlign.center);
     });
 
-    testWidgets('should handle different email formats', (WidgetTester tester) async {
+    testWidgets('should handle different email formats', (
+      WidgetTester tester,
+    ) async {
       const longEmail = 'very.long.email.address@example.domain.com';
-      
+
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: VerifyEmailContent(email: longEmail),
-          ),
+          home: Scaffold(body: VerifyEmailContent(email: longEmail)),
         ),
       );
 
       expect(find.text('$longEmail\nに確認メールを送信しました。'), findsOneWidget);
     });
 
-    testWidgets('should handle short email addresses', (WidgetTester tester) async {
+    testWidgets('should handle short email addresses', (
+      WidgetTester tester,
+    ) async {
       const shortEmail = 'a@b.c';
-      
+
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: VerifyEmailContent(email: shortEmail),
-          ),
+          home: Scaffold(body: VerifyEmailContent(email: shortEmail)),
         ),
       );
 
@@ -86,24 +79,22 @@ void main() {
 
     testWidgets('should handle empty email', (WidgetTester tester) async {
       const emptyEmail = '';
-      
+
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: VerifyEmailContent(email: emptyEmail),
-          ),
+          home: Scaffold(body: VerifyEmailContent(email: emptyEmail)),
         ),
       );
 
       expect(find.text('$emptyEmail\nに確認メールを送信しました。'), findsOneWidget);
     });
 
-    testWidgets('should have proper spacing with BasicHeightBox', (WidgetTester tester) async {
+    testWidgets('should have proper spacing with BasicHeightBox', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: VerifyEmailContent(email: testEmail),
-          ),
+          home: Scaffold(body: VerifyEmailContent(email: testEmail)),
         ),
       );
 

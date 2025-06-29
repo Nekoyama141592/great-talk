@@ -6,8 +6,10 @@ import 'package:great_talk/presentation/page/auth/verify_email/components/verify
 void main() {
   group('VerifyEmailActions', () {
     const testEmail = 'test@example.com';
-    
-    testWidgets('should display resend button when can resend', (WidgetTester tester) async {
+
+    testWidgets('should display resend button when can resend', (
+      WidgetTester tester,
+    ) async {
       final state = VerifyEmailState(
         email: testEmail,
         canResend: true,
@@ -31,7 +33,9 @@ void main() {
       expect(find.text('確認完了をチェック'), findsOneWidget);
     });
 
-    testWidgets('should display countdown when cannot resend', (WidgetTester tester) async {
+    testWidgets('should display countdown when cannot resend', (
+      WidgetTester tester,
+    ) async {
       final state = VerifyEmailState(
         email: testEmail,
         canResend: false,
@@ -54,91 +58,102 @@ void main() {
       expect(find.text('再送信まで45秒'), findsOneWidget);
     });
 
-    testWidgets('should call onResendEmail when resend button is tapped and enabled', (WidgetTester tester) async {
-      final state = VerifyEmailState(
-        email: testEmail,
-        canResend: true,
-        resendSecondsLeft: 0,
-      );
+    testWidgets(
+      'should call onResendEmail when resend button is tapped and enabled',
+      (WidgetTester tester) async {
+        final state = VerifyEmailState(
+          email: testEmail,
+          canResend: true,
+          resendSecondsLeft: 0,
+        );
 
-      bool resendCalled = false;
+        bool resendCalled = false;
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: VerifyEmailActions(
-              state: state,
-              isLoading: false,
-              onResendEmail: () => resendCalled = true,
-              onCheckVerification: () {},
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: VerifyEmailActions(
+                state: state,
+                isLoading: false,
+                onResendEmail: () => resendCalled = true,
+                onCheckVerification: () {},
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      await tester.tap(find.text('確認メールを再送信'));
-      await tester.pump();
+        await tester.tap(find.text('確認メールを再送信'));
+        await tester.pump();
 
-      expect(resendCalled, true);
-    });
+        expect(resendCalled, true);
+      },
+    );
 
-    testWidgets('should not call onResendEmail when resend button is disabled', (WidgetTester tester) async {
-      final state = VerifyEmailState(
-        email: testEmail,
-        canResend: false,
-        resendSecondsLeft: 30,
-      );
+    testWidgets(
+      'should not call onResendEmail when resend button is disabled',
+      (WidgetTester tester) async {
+        final state = VerifyEmailState(
+          email: testEmail,
+          canResend: false,
+          resendSecondsLeft: 30,
+        );
 
-      bool resendCalled = false;
+        bool resendCalled = false;
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: VerifyEmailActions(
-              state: state,
-              isLoading: false,
-              onResendEmail: () => resendCalled = true,
-              onCheckVerification: () {},
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: VerifyEmailActions(
+                state: state,
+                isLoading: false,
+                onResendEmail: () => resendCalled = true,
+                onCheckVerification: () {},
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      await tester.tap(find.text('再送信まで30秒'));
-      await tester.pump();
+        await tester.tap(find.text('再送信まで30秒'));
+        await tester.pump();
 
-      expect(resendCalled, false);
-    });
+        expect(resendCalled, false);
+      },
+    );
 
-    testWidgets('should call onCheckVerification when check button is tapped and enabled', (WidgetTester tester) async {
-      final state = VerifyEmailState(
-        email: testEmail,
-        canResend: false,
-        resendSecondsLeft: 30,
-      );
+    testWidgets(
+      'should call onCheckVerification when check button is tapped and enabled',
+      (WidgetTester tester) async {
+        final state = VerifyEmailState(
+          email: testEmail,
+          canResend: false,
+          resendSecondsLeft: 30,
+        );
 
-      bool checkCalled = false;
+        bool checkCalled = false;
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: VerifyEmailActions(
-              state: state,
-              isLoading: false,
-              onResendEmail: () {},
-              onCheckVerification: () => checkCalled = true,
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: VerifyEmailActions(
+                state: state,
+                isLoading: false,
+                onResendEmail: () {},
+                onCheckVerification: () => checkCalled = true,
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      await tester.tap(find.text('確認完了をチェック'));
-      await tester.pump();
+        await tester.tap(find.text('確認完了をチェック'));
+        await tester.pump();
 
-      expect(checkCalled, true);
-    });
+        expect(checkCalled, true);
+      },
+    );
 
-    testWidgets('should disable check button when loading', (WidgetTester tester) async {
+    testWidgets('should disable check button when loading', (
+      WidgetTester tester,
+    ) async {
       final state = VerifyEmailState(
         email: testEmail,
         canResend: true,
@@ -166,7 +181,9 @@ void main() {
       expect(checkCalled, false);
     });
 
-    testWidgets('should have correct button styles', (WidgetTester tester) async {
+    testWidgets('should have correct button styles', (
+      WidgetTester tester,
+    ) async {
       final state = VerifyEmailState(
         email: testEmail,
         canResend: true,
@@ -195,7 +212,9 @@ void main() {
       expect(find.text('確認完了をチェック'), findsOneWidget);
     });
 
-    testWidgets('should display different countdown values correctly', (WidgetTester tester) async {
+    testWidgets('should display different countdown values correctly', (
+      WidgetTester tester,
+    ) async {
       final testCases = [1, 15, 30, 59, 60];
 
       for (final seconds in testCases) {
@@ -222,7 +241,9 @@ void main() {
       }
     });
 
-    testWidgets('should handle rapid button taps correctly', (WidgetTester tester) async {
+    testWidgets('should handle rapid button taps correctly', (
+      WidgetTester tester,
+    ) async {
       final state = VerifyEmailState(
         email: testEmail,
         canResend: true,

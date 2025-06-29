@@ -8,18 +8,11 @@ class VerifyEmailHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Icon(
-          Icons.email_outlined,
-          size: 80,
-          color: Colors.blue,
-        ),
+        const Icon(Icons.email_outlined, size: 80, color: Colors.blue),
         const BasicHeightBox(),
         const Text(
           'メールアドレスの確認',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ],
     );

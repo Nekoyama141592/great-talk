@@ -22,9 +22,10 @@ class VerifyEmailActions extends StatelessWidget {
     return Column(
       children: [
         RoundedButton(
-          text: state.canResend
-              ? '確認メールを再送信'
-              : '再送信まで${state.resendSecondsLeft}秒',
+          text:
+              state.canResend
+                  ? '確認メールを再送信'
+                  : '再送信まで${state.resendSecondsLeft}秒',
           textColor: Colors.white,
           buttonColor: Theme.of(context).primaryColor,
           press: onResendEmail,

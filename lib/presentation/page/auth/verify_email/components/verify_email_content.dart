@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 
 class VerifyEmailContent extends StatelessWidget {
-  const VerifyEmailContent({
-    super.key,
-    required this.email,
-  });
+  const VerifyEmailContent({super.key, required this.email});
 
   final String email;
 

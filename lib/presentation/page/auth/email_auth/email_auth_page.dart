@@ -4,9 +4,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/presentation/notifier/email_auth/email_auth_view_model.dart';
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
-import 'package:great_talk/presentation/component/basic_height_box.dart';
-import 'package:great_talk/presentation/component/rounded_button.dart';
 import 'package:great_talk/core/util/size_util.dart';
+import 'package:great_talk/presentation/page/auth/email_auth/components/email_auth_header.dart';
+import 'package:great_talk/presentation/page/auth/email_auth/components/email_auth_form.dart';
+import 'package:great_talk/presentation/page/auth/email_auth/components/email_auth_actions.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
@@ -74,7 +75,7 @@ class EmailAuthPage extends HookConsumerWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text(state.isSignUp ? 'アカウント作成' : 'ログイン')),
+        appBar: EmailAuthHeader(isSignUp: state.isSignUp),
         body: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: SizeUtil.defaultPadding(context),
@@ -82,54 +83,28 @@ class EmailAuthPage extends HookConsumerWidget {
           child: Center(
             child: SingleChildScrollView(
               child: ConstrainedBox(
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   maxWidth: 400, // 最大幅を制限（必要に応じて調整）
                 ),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 32),
-                      TextFormField(
-                        controller: emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: const InputDecoration(
-                          labelText: 'メールアドレス',
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: emailValidator,
-                      ),
-                      const BasicHeightBox(),
-                      TextFormField(
-                        controller: passwordController,
-                        obscureText: true,
-                        decoration: const InputDecoration(
-                          labelText: 'パスワード',
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: passwordValidator,
-                      ),
-                      const SizedBox(height: 32),
-                      RoundedButton(
-                        text: state.isSignUp ? 'アカウントを作成' : 'ログイン',
-                        textColor: Colors.white,
-                        buttonColor: Theme.of(context).primaryColor,
-                        press: state.isLoading ? null : handleAuth,
-                      ),
-                      const BasicHeightBox(),
-                      TextButton(
-                        onPressed: notifier().toggleSignUpMode,
-                        child: Text(
-                          state.isSignUp
-                              ? 'すでにアカウントをお持ちですか？ログイン'
-                              : 'アカウントをお持ちでない方はアカウント作成',
-                        ),
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    EmailAuthForm(
+                      formKey: formKey,
+                      emailController: emailController,
+                      passwordController: passwordController,
+                      emailValidator: emailValidator,
+                      passwordValidator: passwordValidator,
+                    ),
+                    EmailAuthActions(
+                      isSignUp: state.isSignUp,
+                      isLoading: state.isLoading,
+                      onAuth: handleAuth,
+                      onToggleSignUpMode: notifier().toggleSignUpMode,
+                    ),
+                  ],
                 ),
               ),
             ),

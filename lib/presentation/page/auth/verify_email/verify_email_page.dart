@@ -122,28 +122,29 @@ class VerifyEmailPage extends HookConsumerWidget {
       ),
       body: AsyncScreen(
         asyncValue: asyncValue,
-        data: (state) => Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: SizeUtil.defaultPadding(context),
-          ),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const VerifyEmailHeader(),
-                  VerifyEmailContent(email: state.email),
-                  VerifyEmailActions(
-                    state: state,
-                    isLoading: asyncValue.isLoading,
-                    onResendEmail: handleResendEmail,
-                    onCheckVerification: handleCheckEmailVerification,
+        data:
+            (state) => Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: SizeUtil.defaultPadding(context),
+              ),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const VerifyEmailHeader(),
+                      VerifyEmailContent(email: state.email),
+                      VerifyEmailActions(
+                        state: state,
+                        isLoading: asyncValue.isLoading,
+                        onResendEmail: handleResendEmail,
+                        onCheckVerification: handleCheckEmailVerification,
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
       ),
     );
   }

@@ -18,9 +18,7 @@ void main() {
           appBar: AppBar(
             title: const Text('メールアドレス確認'),
             automaticallyImplyLeading: false,
-            actions: [
-              TextButton(onPressed: () {}, child: const Text('ログアウト')),
-            ],
+            actions: [TextButton(onPressed: () {}, child: const Text('ログアウト'))],
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -46,7 +44,9 @@ void main() {
       );
     }
 
-    testWidgets('should display all components correctly when can resend', (WidgetTester tester) async {
+    testWidgets('should display all components correctly when can resend', (
+      WidgetTester tester,
+    ) async {
       const testState = VerifyEmailState(
         email: 'test@example.com',
         canResend: true,
@@ -59,24 +59,26 @@ void main() {
       expect(find.byType(VerifyEmailHeader), findsOneWidget);
       expect(find.byType(VerifyEmailContent), findsOneWidget);
       expect(find.byType(VerifyEmailActions), findsOneWidget);
-      
+
       // Check app bar
       expect(find.text('メールアドレス確認'), findsOneWidget);
       expect(find.text('ログアウト'), findsOneWidget);
-      
+
       // Check header content
       expect(find.byIcon(Icons.email_outlined), findsOneWidget);
-      
+
       // Check content
       expect(find.text('test@example.com\nに確認メールを送信しました。'), findsOneWidget);
       expect(find.text('メール内のリンクをクリックして\nメールアドレスを確認してください。'), findsOneWidget);
-      
+
       // Check actions
       expect(find.text('確認メールを再送信'), findsOneWidget);
       expect(find.text('確認完了をチェック'), findsOneWidget);
     });
 
-    testWidgets('should display countdown when cannot resend', (WidgetTester tester) async {
+    testWidgets('should display countdown when cannot resend', (
+      WidgetTester tester,
+    ) async {
       const testState = VerifyEmailState(
         email: 'user@example.com',
         canResend: false,
@@ -90,7 +92,9 @@ void main() {
       expect(find.text('確認完了をチェック'), findsOneWidget);
     });
 
-    testWidgets('should call callbacks when buttons are tapped', (WidgetTester tester) async {
+    testWidgets('should call callbacks when buttons are tapped', (
+      WidgetTester tester,
+    ) async {
       const testState = VerifyEmailState(
         email: 'test@example.com',
         canResend: true,
@@ -100,11 +104,13 @@ void main() {
       bool resendCalled = false;
       bool checkCalled = false;
 
-      await tester.pumpWidget(createTestWidget(
-        state: testState,
-        onResendEmail: () => resendCalled = true,
-        onCheckVerification: () => checkCalled = true,
-      ));
+      await tester.pumpWidget(
+        createTestWidget(
+          state: testState,
+          onResendEmail: () => resendCalled = true,
+          onCheckVerification: () => checkCalled = true,
+        ),
+      );
 
       await tester.tap(find.text('確認メールを再送信'));
       await tester.pump();
@@ -115,7 +121,9 @@ void main() {
       expect(checkCalled, true);
     });
 
-    testWidgets('should disable buttons appropriately when loading', (WidgetTester tester) async {
+    testWidgets('should disable buttons appropriately when loading', (
+      WidgetTester tester,
+    ) async {
       const testState = VerifyEmailState(
         email: 'test@example.com',
         canResend: true,
@@ -124,18 +132,22 @@ void main() {
 
       bool checkCalled = false;
 
-      await tester.pumpWidget(createTestWidget(
-        state: testState,
-        isLoading: true,
-        onCheckVerification: () => checkCalled = true,
-      ));
+      await tester.pumpWidget(
+        createTestWidget(
+          state: testState,
+          isLoading: true,
+          onCheckVerification: () => checkCalled = true,
+        ),
+      );
 
       await tester.tap(find.text('確認完了をチェック'));
       await tester.pump();
       expect(checkCalled, false); // Should not be called when loading
     });
 
-    testWidgets('should handle different email formats correctly', (WidgetTester tester) async {
+    testWidgets('should handle different email formats correctly', (
+      WidgetTester tester,
+    ) async {
       final testEmails = [
         'short@a.b',
         'normal.user@example.com',
@@ -156,7 +168,9 @@ void main() {
       }
     });
 
-    testWidgets('should have correct layout structure', (WidgetTester tester) async {
+    testWidgets('should have correct layout structure', (
+      WidgetTester tester,
+    ) async {
       const testState = VerifyEmailState(
         email: 'test@example.com',
         canResend: true,
@@ -174,7 +188,9 @@ void main() {
       expect(find.byType(Padding), findsAtLeastNWidgets(1));
     });
 
-    testWidgets('should display header icon and title correctly', (WidgetTester tester) async {
+    testWidgets('should display header icon and title correctly', (
+      WidgetTester tester,
+    ) async {
       const testState = VerifyEmailState(
         email: 'test@example.com',
         canResend: true,
@@ -188,7 +204,9 @@ void main() {
       expect(icon.color, Colors.blue);
     });
 
-    testWidgets('should handle different countdown values', (WidgetTester tester) async {
+    testWidgets('should handle different countdown values', (
+      WidgetTester tester,
+    ) async {
       final countdownValues = [1, 15, 30, 45, 59, 60];
 
       for (final seconds in countdownValues) {
@@ -203,7 +221,9 @@ void main() {
       }
     });
 
-    testWidgets('should not call resend callback when button is disabled', (WidgetTester tester) async {
+    testWidgets('should not call resend callback when button is disabled', (
+      WidgetTester tester,
+    ) async {
       const testState = VerifyEmailState(
         email: 'test@example.com',
         canResend: false,
@@ -212,10 +232,12 @@ void main() {
 
       bool resendCalled = false;
 
-      await tester.pumpWidget(createTestWidget(
-        state: testState,
-        onResendEmail: () => resendCalled = true,
-      ));
+      await tester.pumpWidget(
+        createTestWidget(
+          state: testState,
+          onResendEmail: () => resendCalled = true,
+        ),
+      );
 
       await tester.tap(find.text('再送信まで30秒'));
       await tester.pump();
