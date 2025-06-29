@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/presentation/state/edit/edit_state.dart';
-import 'package:great_talk/core/provider/view_model/edit/edit_view_model.dart';
+import 'package:great_talk/presentation/notifier/edit/edit_view_model.dart';
 import 'package:great_talk/presentation/page/edit/components/bio_field.dart';
 import 'package:great_talk/presentation/page/edit/components/username_field.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

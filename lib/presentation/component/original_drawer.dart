@@ -3,15 +3,14 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/route_util.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/local_setting/local_setting.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
+import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/presentation/notifier/local_setting/local_setting.dart';
+import 'package:great_talk/presentation/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/presentation/util/texts.dart';
 import 'package:great_talk/core/extension/number_format_extension.dart';
 import 'package:great_talk/presentation/util/style_utility.dart';
 import 'package:great_talk/presentation/page/accounts_page.dart';
 import 'package:great_talk/presentation/page/admin_page.dart';
-import 'package:great_talk/presentation/page/auth/login_page.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:great_talk/presentation/component/basic_width_box.dart';
 import 'package:great_talk/presentation/component/circle_image/circle_image.dart';
@@ -77,12 +76,7 @@ class OriginalDrawer extends ConsumerWidget {
                   ),
                 );
               } else {
-                return ListTile(
-                  title: const Text("ログインする"),
-                  onTap: () {
-                    RouteUtil.pushPath(context, LoginPage.path);
-                  },
-                );
+                return const SizedBox.shrink();
               }
             },
             loading:
@@ -100,11 +94,11 @@ class OriginalDrawer extends ConsumerWidget {
               RouteUtil.pushPath(context, AccountPage.path);
             },
           ),
+          ListTile(title: Text("モデル: ${purchaseState?.model() ?? ''}")),
           ListTile(
             title: const Text("ミュートしているユーザー"),
             onTap: () => RouteUtil.pushPath(context, MuteUsersPage.path),
           ),
-          ListTile(title: Text("モデル: ${purchaseState?.model() ?? ''}")),
           ListTile(
             title: const Text("ミュートしている投稿"),
             onTap: () => RouteUtil.pushPath(context, MutePostsPage.path),

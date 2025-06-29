@@ -266,5 +266,109 @@ void main() {
 
       expect(find.text('Pressed'), findsOneWidget);
     });
+
+    testWidgets('should be enabled by default', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: RoundedButton(text: 'Default Enabled', press: () {}),
+          ),
+        ),
+      );
+
+      final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
+      expect(button.onPressed, isNotNull);
+    });
+
+    testWidgets('should be disabled when enabled is false', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: RoundedButton(
+              text: 'Disabled Button',
+              press: () {},
+              enabled: false,
+            ),
+          ),
+        ),
+      );
+
+      final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
+      expect(button.onPressed, isNull);
+    });
+
+    testWidgets('should use gray colors when disabled', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: RoundedButton(
+              text: 'Disabled Button',
+              press: () {},
+              enabled: false,
+            ),
+          ),
+        ),
+      );
+
+      final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
+      final buttonStyle = button.style!;
+      final backgroundColor = buttonStyle.backgroundColor!.resolve({});
+
+      expect(backgroundColor, Colors.grey);
+    });
+
+    testWidgets('should not call press when disabled and tapped', (
+      WidgetTester tester,
+    ) async {
+      bool wasPressed = false;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: RoundedButton(
+              text: 'Disabled Button',
+              press: () {
+                wasPressed = true;
+              },
+              enabled: false,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(ElevatedButton));
+      await tester.pump();
+
+      expect(wasPressed, false);
+    });
+
+    testWidgets('should work normally when enabled is true', (
+      WidgetTester tester,
+    ) async {
+      bool wasPressed = false;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: RoundedButton(
+              text: 'Enabled Button',
+              press: () {
+                wasPressed = true;
+              },
+              enabled: true,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(ElevatedButton));
+      await tester.pump();
+
+      expect(wasPressed, true);
+    });
   });
 }

@@ -8,13 +8,13 @@ import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/presentation/state/chat/chat_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
+import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/post/mute_post/mute_post_use_case_provider.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/user/mute_user/mute_user_use_case_provider.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/post/delete_post/delete_post_use_case_provider.dart';
 import 'package:great_talk/core/util/route_util.dart';
-import 'package:great_talk/core/provider/view_model/chat/chat_view_model.dart';
+import 'package:great_talk/presentation/notifier/chat/chat_view_model.dart';
 import 'package:great_talk/presentation/util/chat_ui_util.dart';
 import 'package:great_talk/presentation/util/post_ui_util.dart';
 import 'package:great_talk/presentation/util/texts.dart';
@@ -64,7 +64,7 @@ class ChatPage extends HookConsumerWidget {
     }
 
     void mutePost(BuildContext innerContext, Post post) async {
-      final uid = ref.read(streamAuthUidProvider).value;
+      final uid = ref.read(authUidProvider);
       if (uid == null) return;
       final token = ref.read(tokensNotifierProvider.notifier).addMutePost(post);
       if (token == null) return;
@@ -84,8 +84,7 @@ class ChatPage extends HookConsumerWidget {
       data: (ChatState data) {
         final Post post = data.post;
         final List<TextMessage> messages = data.messages;
-        final String currentUserId =
-            ref.watch(streamAuthUidProvider).value ?? "";
+        final String currentUserId = ref.watch(authUidProvider) ?? "";
 
         return Scaffold(
           appBar: AppBar(

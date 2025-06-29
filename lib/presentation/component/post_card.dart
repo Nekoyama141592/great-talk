@@ -5,7 +5,7 @@ import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
+import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/presentation/util/texts.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/presentation/page/chat/chat_page.dart';
@@ -59,7 +59,7 @@ class PostCard extends ConsumerWidget {
               );
             }
             if (post.isInappropriate()) {
-              final authUid = ref.read(streamAuthUidProvider).value;
+              final authUid = ref.read(authUidProvider);
               return MosaicCard(
                 child: MosaicPostChild(
                   msg: post.inappropriateReason(authUid),

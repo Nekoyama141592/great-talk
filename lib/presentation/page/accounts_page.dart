@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/auth_util.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/util/route_util.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
-import 'package:great_talk/presentation/page/auth/logouted_page.dart';
-import 'package:great_talk/presentation/page/auth/reauthenticate_to_delete_page.dart';
+import 'package:great_talk/presentation/page/auth/logouted/logouted_page.dart';
+import 'package:great_talk/presentation/page/auth/reauthenticate_to_delete/reauthenticate_to_delete_page.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

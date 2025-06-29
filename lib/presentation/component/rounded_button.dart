@@ -12,6 +12,7 @@ class RoundedButton extends StatelessWidget {
     this.textColor,
     this.icon,
     this.widthRate = 0.85,
+    this.enabled = true,
   });
 
   final String text;
@@ -19,32 +20,34 @@ class RoundedButton extends StatelessWidget {
   final Function()? press;
   final Color? buttonColor, textColor;
   final Widget? icon;
+  final bool enabled;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final effectiveButtonColor =
+        enabled ? (buttonColor ?? Theme.of(context).primaryColor) : Colors.grey;
+    final effectiveTextColor =
+        enabled
+            ? (textColor ?? Theme.of(context).scaffoldBackgroundColor)
+            : Colors.grey[600];
+
     return SizedBox(
       width: size.width * widthRate,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(SizeUtil.defaultPadding(context)),
         child: ElevatedButton(
-          style: TextButton.styleFrom(
-            backgroundColor: buttonColor ?? Theme.of(context).primaryColor,
-          ),
-          onPressed: press,
+          style: TextButton.styleFrom(backgroundColor: effectiveButtonColor),
+          onPressed: enabled ? press : null,
           child:
               icon != null
                   ? Row(
                     children: [
                       icon!,
                       const SizedBox(width: 20.0),
-                      BasicBoldText(text, textColor: textColor),
+                      BasicBoldText(text, textColor: effectiveTextColor),
                     ],
                   )
-                  : BasicBoldText(
-                    text,
-                    textColor:
-                        textColor ?? Theme.of(context).scaffoldBackgroundColor,
-                  ),
+                  : BasicBoldText(text, textColor: effectiveTextColor),
         ),
       ),
     );

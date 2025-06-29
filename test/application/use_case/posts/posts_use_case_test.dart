@@ -59,7 +59,7 @@ void main() {
               'sentiment': 'positive',
               'value': 'Test Post 1',
             },
-            likeCount: 10,
+            msgCount: 10,
           ),
           Post(
             postId: 'post_2',
@@ -83,7 +83,7 @@ void main() {
               'sentiment': 'positive',
               'value': 'Test Post 2',
             },
-            likeCount: 20,
+            msgCount: 20,
           ),
         ];
 
@@ -202,8 +202,8 @@ void main() {
           // Should be sorted by like count (highest first)
           expect(result[0].post.postId, equals('post_2')); // 20 likes
           expect(result[1].post.postId, equals('post_1')); // 10 likes
-          expect(result[0].post.likeCount, equals(20));
-          expect(result[1].post.likeCount, equals(10));
+          expect(result[0].post.msgCount, equals(20));
+          expect(result[1].post.msgCount, equals(10));
         },
       );
 

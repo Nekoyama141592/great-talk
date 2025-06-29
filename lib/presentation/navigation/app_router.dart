@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/remote_config/remote_config_provider.dart';
+import 'package:great_talk/presentation/notifier/remote_config/remote_config_provider.dart';
 import 'package:great_talk/presentation/page/accounts_page.dart';
 import 'package:great_talk/presentation/page/admin_page.dart';
-import 'package:great_talk/presentation/page/auth/login_page.dart';
-import 'package:great_talk/presentation/page/auth/logouted_page.dart';
-import 'package:great_talk/presentation/page/auth/reauthenticate_to_delete_page.dart';
-import 'package:great_talk/presentation/page/auth/user_deleted_page.dart';
+import 'package:great_talk/presentation/page/auth/email_auth/email_auth_page.dart';
+import 'package:great_talk/presentation/page/auth/login/login_page.dart';
+import 'package:great_talk/presentation/page/auth/logouted/logouted_page.dart';
+import 'package:great_talk/presentation/page/auth/reauthenticate_to_delete/reauthenticate_to_delete_page.dart';
+import 'package:great_talk/presentation/page/auth/user_deleted/user_deleted_page.dart';
+import 'package:great_talk/presentation/page/auth/verify_email/verify_email_page.dart';
 import 'package:great_talk/presentation/page/maintenance/maintenance_page.dart';
 import 'package:great_talk/presentation/page/check_page/first_page.dart';
 import 'package:great_talk/presentation/page/create_post/create_post_page.dart';
@@ -56,6 +58,8 @@ class AppRouter extends RootStackRouter {
       AutoRoute(page: UserDeletedRoute.page, path: UserDeletedPage.path),
       AutoRoute(page: UserProfileRoute.page, path: UserProfilePage.path),
       AutoRoute(page: GenerateImageRoute.page, path: GenerateImagePage.path),
+      AutoRoute(page: EmailAuthRoute.page, path: EmailAuthPage.path),
+      AutoRoute(page: VerifyEmailRoute.page, path: VerifyEmailPage.path),
     ];
   }
 }

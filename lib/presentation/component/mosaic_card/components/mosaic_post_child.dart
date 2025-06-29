@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
+import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/post/delete_post/delete_post_use_case_provider.dart';
 import 'package:great_talk/presentation/util/texts.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
@@ -21,7 +21,7 @@ class MosaicPostChild extends ConsumerWidget {
   final String title;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isMine = post.uid == ref.watch(streamAuthUidProvider).value;
+    final isMine = post.uid == ref.watch(authUidProvider);
     final isAdmin =
         ref.watch(currentUserNotifierProvider).value?.isAdmin() ?? false;
     final asyncValue = ref.watch(tokensNotifierProvider);

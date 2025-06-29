@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
+import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/presentation/util/texts.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
@@ -37,7 +37,7 @@ class UserCard extends ConsumerWidget {
                   child: MosaicUserChild(
                     publicUser: publicUser,
                     msg: publicUser.inappropriateReason(
-                      ref.watch(streamAuthUidProvider).value,
+                      ref.watch(authUidProvider),
                     ),
                     title: "不適切なユーザー",
                   ),

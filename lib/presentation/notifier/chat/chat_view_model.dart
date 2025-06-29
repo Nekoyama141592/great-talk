@@ -101,7 +101,7 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   List<TextMessage> _addMyMessage(String content) {
-    final uid = ref.read(streamAuthUidProvider).value;
+    final uid = ref.read(authUidProvider);
     if (uid == null) return state.value!.messages;
     final textMessage = TextMessage.user(content, uid);
     final newMessages = List<TextMessage>.from(state.value!.messages)
@@ -111,7 +111,7 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   Future<void> onSuccess(GenerateTextResponse res) async {
-    final currentUid = ref.read(streamAuthUidProvider).value;
+    final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return;
     final stateValue = state.value!;
     final post = stateValue.post;

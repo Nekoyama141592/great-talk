@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/util/route_util.dart';
-import 'package:great_talk/core/provider/view_model/edit/edit_view_model.dart';
+import 'package:great_talk/presentation/notifier/edit/edit_view_model.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/common/forms_screen.dart';
 import 'package:great_talk/presentation/page/edit/components/edit_profile_form.dart';

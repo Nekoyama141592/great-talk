@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/presentation/state/profile/profile_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
-import 'package:great_talk/core/provider/view_model/refresh_interface.dart';
+import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
+import 'package:great_talk/presentation/notifier/refresh_interface.dart';
 import 'package:great_talk/presentation/util/texts.dart';
 import 'package:great_talk/core/extension/number_format_extension.dart';
 import 'package:great_talk/core/extension/string_extension.dart';
@@ -81,8 +81,7 @@ class ProfileScreen extends ConsumerWidget {
                           ?.followingUids
                           .contains(passiveUid) ??
                       false;
-                  return passiveUser?.uid ==
-                          ref.watch(streamAuthUidProvider).value
+                  return passiveUser?.uid == ref.watch(authUidProvider)
                       ? const EditButton()
                       : FollowButton(
                         isFollow: isFollow,

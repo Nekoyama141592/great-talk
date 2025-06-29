@@ -63,6 +63,24 @@ class MockUserWithExceptions extends MockUser {
     }
     return super.delete();
   }
+
+  @override
+  Future<void> sendEmailVerification([
+    ActionCodeSettings? actionCodeSettings,
+  ]) async {
+    if (_authExceptions?.containsKey('sendEmailVerification') == true) {
+      throw _authExceptions!['sendEmailVerification']!;
+    }
+    return super.sendEmailVerification(actionCodeSettings);
+  }
+
+  @override
+  Future<void> reload() async {
+    if (_authExceptions?.containsKey('reload') == true) {
+      throw _authExceptions!['reload']!;
+    }
+    return super.reload();
+  }
 }
 
 void main() {
@@ -76,38 +94,6 @@ void main() {
         mockFirebaseAuth,
         enableDebugPrint: false,
       );
-    });
-
-    group('signInAnonymously', () {
-      test('should return success when anonymous sign in succeeds', () async {
-        final result = await authRepository.signInAnonymously();
-
-        result.when(
-          success: (user) {
-            expect(user.isAnonymous, true);
-          },
-          failure: (msg) => fail('Expected success but got failure: $msg'),
-        );
-      });
-
-      test('should return failure when anonymous sign in fails', () async {
-        mockFirebaseAuth = MockFirebaseAuthWithExceptions(
-          signInException: FirebaseAuthException(code: 'unknown'),
-        );
-        authRepository = AuthRepository(
-          mockFirebaseAuth,
-          enableDebugPrint: false,
-        );
-
-        final result = await authRepository.signInAnonymously();
-
-        result.when(
-          success: (user) => fail('Expected failure but got success'),
-          failure: (msg) {
-            expect(msg, '匿名ログインが失敗しました');
-          },
-        );
-      });
     });
 
     group('signOut', () {
@@ -365,6 +351,156 @@ void main() {
           );
         },
       );
+    });
+
+    group('sendEmailVerification', () {
+      test('should return failure when user is not signed in', () async {
+        final result = await authRepository.sendEmailVerification();
+
+        result.when(
+          success: (value) => fail('Expected failure but got success'),
+          failure: (msg) {
+            expect(msg, 'ログインしてください');
+          },
+        );
+      });
+
+      test('should return success when email verification is sent', () async {
+        final mockUser = MockUser(uid: 'test-uid', email: 'test@example.com');
+        mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
+        authRepository = AuthRepository(
+          mockFirebaseAuth,
+          enableDebugPrint: false,
+        );
+
+        final result = await authRepository.sendEmailVerification();
+
+        result.when(
+          success: (value) {
+            expect(value, true);
+          },
+          failure: (msg) => fail('Expected success but got failure: $msg'),
+        );
+      });
+
+      test(
+        'should return appropriate error message for too-many-requests',
+        () async {
+          final mockUser = MockUserWithExceptions(
+            uid: 'test-uid',
+            email: 'test@example.com',
+            authExceptions: {
+              'sendEmailVerification': FirebaseAuthException(
+                code: 'too-many-requests',
+              ),
+            },
+          );
+          mockFirebaseAuth = MockFirebaseAuth(
+            mockUser: mockUser,
+            signedIn: true,
+          );
+          authRepository = AuthRepository(
+            mockFirebaseAuth,
+            enableDebugPrint: false,
+          );
+
+          final result = await authRepository.sendEmailVerification();
+
+          result.when(
+            success: (value) => fail('Expected failure but got success'),
+            failure: (msg) {
+              expect(msg, 'リクエストが多すぎます。しばらく時間をおいてから再度お試しください。');
+            },
+          );
+        },
+      );
+
+      test(
+        'should return general error message for unknown exception',
+        () async {
+          final mockUser = MockUserWithExceptions(
+            uid: 'test-uid',
+            email: 'test@example.com',
+            authExceptions: {
+              'sendEmailVerification': FirebaseAuthException(
+                code: 'unknown-error',
+              ),
+            },
+          );
+          mockFirebaseAuth = MockFirebaseAuth(
+            mockUser: mockUser,
+            signedIn: true,
+          );
+          authRepository = AuthRepository(
+            mockFirebaseAuth,
+            enableDebugPrint: false,
+          );
+
+          final result = await authRepository.sendEmailVerification();
+
+          result.when(
+            success: (value) => fail('Expected failure but got success'),
+            failure: (msg) {
+              expect(msg, 'エラーが発生しました');
+            },
+          );
+        },
+      );
+    });
+
+    group('reloadCurrentUser', () {
+      test('should return failure when user is not signed in', () async {
+        final result = await authRepository.reloadCurrentUser();
+
+        result.when(
+          success: (value) => fail('Expected failure but got success'),
+          failure: (msg) {
+            expect(msg, 'ログインしてください');
+          },
+        );
+      });
+
+      test('should return success when user is reloaded', () async {
+        final mockUser = MockUser(uid: 'test-uid', email: 'test@example.com');
+        mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
+        authRepository = AuthRepository(
+          mockFirebaseAuth,
+          enableDebugPrint: false,
+        );
+
+        final result = await authRepository.reloadCurrentUser();
+
+        result.when(
+          success: (value) {
+            expect(value, true);
+          },
+          failure: (msg) => fail('Expected success but got failure: $msg'),
+        );
+      });
+
+      test('should return error message for FirebaseAuthException', () async {
+        final mockUser = MockUserWithExceptions(
+          uid: 'test-uid',
+          email: 'test@example.com',
+          authExceptions: {
+            'reload': FirebaseAuthException(code: 'network-request-failed'),
+          },
+        );
+        mockFirebaseAuth = MockFirebaseAuth(mockUser: mockUser, signedIn: true);
+        authRepository = AuthRepository(
+          mockFirebaseAuth,
+          enableDebugPrint: false,
+        );
+
+        final result = await authRepository.reloadCurrentUser();
+
+        result.when(
+          success: (value) => fail('Expected failure but got success'),
+          failure: (msg) {
+            expect(msg, 'ユーザー情報の更新に失敗しました');
+          },
+        );
+      });
     });
   });
 }
