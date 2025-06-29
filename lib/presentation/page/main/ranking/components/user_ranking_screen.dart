@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/provider/view_model/ranking_users/ranking_users_view_model.dart';
+import 'package:great_talk/presentation/notifier/ranking_users/ranking_users_view_model.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/presentation/component/user_card.dart';
 import 'package:great_talk/presentation/page/screen/refresh_screen/users_refresh_screen.dart';

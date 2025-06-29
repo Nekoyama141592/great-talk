@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/constant/tab_constant.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/current_user/current_user_notifier.dart';
+import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/notification/notification_provider.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/purchases/purchases_notifier.dart';
-import 'package:great_talk/core/provider/view_model/products/products_view_model.dart';
+import 'package:great_talk/presentation/notifier/purchases/purchases_notifier.dart';
+import 'package:great_talk/presentation/notifier/products/products_view_model.dart';
 import 'package:great_talk/presentation/util/flavor_ui_util.dart';
 import 'package:great_talk/presentation/page/common/bottom_navigation_bar_elements.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

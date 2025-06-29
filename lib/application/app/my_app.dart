@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/application/app/flavors.dart';
 import 'package:great_talk/core/provider/keep_alive/app_router/app_router_provider.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/local_setting/local_setting.dart';
+import 'package:great_talk/presentation/notifier/local_setting/local_setting.dart';
 import 'package:great_talk/presentation/util/theme_ui_util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

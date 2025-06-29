@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:great_talk/core/util/route_util.dart';
-import 'package:great_talk/core/provider/view_model/mute_users/mute_users_view_model.dart';
+import 'package:great_talk/presentation/notifier/mute_users/mute_users_view_model.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/presentation/page/mute/mute_users/component/mute_user_card.dart';

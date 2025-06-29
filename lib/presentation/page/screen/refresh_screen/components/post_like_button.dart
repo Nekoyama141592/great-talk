@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/core/extension/number_format_extension.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
-import 'package:great_talk/core/provider/keep_alive/notifier/tokens/tokens_notifier.dart';
+import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/post/like_post/like_post_use_case_provider.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';

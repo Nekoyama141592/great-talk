@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/presentation/util/purchase_ui_util.dart';
-import 'package:great_talk/core/provider/view_model/products/products_view_model.dart';
+import 'package:great_talk/presentation/notifier/products/products_view_model.dart';
 import 'package:great_talk/presentation/util/product_ui_util.dart';
 import 'package:great_talk/presentation/util/texts.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
