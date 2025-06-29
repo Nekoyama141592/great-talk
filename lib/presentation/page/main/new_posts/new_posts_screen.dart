@@ -11,16 +11,14 @@ class NewPostsScreen extends ConsumerWidget {
     final asyncValue = ref.watch(postsViewModelProvider(false));
     PostsViewModel notifier() =>
         ref.read(postsViewModelProvider(false).notifier);
-    return Scaffold(
-      body: AsyncScreen(
-        asyncValue: asyncValue,
-        data: (state) {
-          return PostsRefreshScreen(
-            userPosts: state.userPosts,
-            notifier: notifier,
-          );
-        },
-      ),
+    return AsyncScreen(
+      asyncValue: asyncValue,
+      data: (state) {
+        return PostsRefreshScreen(
+          userPosts: state.userPosts,
+          notifier: notifier,
+        );
+      },
     );
   }
 }

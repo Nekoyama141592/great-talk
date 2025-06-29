@@ -27,23 +27,18 @@ class MyHomePage extends HookConsumerWidget {
     ref.watch(productsViewModelProvider);
     ref.watch(notificationProvider);
     final pageIndex = useState(0);
-    final PageController pageController = usePageController();
+    final pageController = usePageController();
     return Scaffold(
-      appBar:
-          pageIndex.value != TabConstant.rankingIndex
-              ? AppBar(
-                title: BasicBoldText(FlavorUiUtil.appName()),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(SizeUtil.appBarCircular(context)),
-                  ),
-                ),
-              )
-              : null,
+      appBar: AppBar(
+        title: BasicBoldText(FlavorUiUtil.appName()),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(SizeUtil.appBarCircular(context)),
+          ),
+        ),
+      ),
       floatingActionButton: MainFloatingActionButton(
-        isShow:
-            pageIndex.value == TabConstant.rankingIndex ||
-            pageIndex.value == TabConstant.feedsIndex,
+        isShow: pageIndex.value != TabConstant.subscriveIndex,
       ),
       drawer: const OriginalDrawer(),
       bottomNavigationBar: BottomNavigationBar(
