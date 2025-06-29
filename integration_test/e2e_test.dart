@@ -14,8 +14,8 @@ void main() {
 
   group('Bottom Navigation Tests', () {
     late Widget app;
-    const testUserEmail = 'fj6b11kh0j@sute.jp';
-    const testUserPassword = 'fj6b11kh0j';
+    const testUserEmail = '';
+    const testUserPassword = '';
     setUpAll(() async {
       // Set up the test environment
       F.appFlavor = Flavor.dev;
