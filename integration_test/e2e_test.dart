@@ -35,18 +35,65 @@ void main() {
       );
     });
 
-    // Helper function to handle terms agreement
-    Future<void> agreeToTerms(WidgetTester tester) async {
+    // Helper function to handle terms agreement and login
+    Future<void> agreeToTermsAndLogin(WidgetTester tester) async {
       await tester.pumpWidget(app);
       await tester.pumpAndSettle();
-      await tester.pumpAndSettle(const Duration(seconds: 3));
+      
+      // Wait for initial load
+      await tester.pumpAndSettle(const Duration(seconds: 5));
 
       // Check if TermsScreen is displayed and agree to terms
       final agreeButton = find.text('上記の内容、利用規約、プライバシーポリシーに同意する');
       if (agreeButton.evaluate().isNotEmpty) {
         await tester.tap(agreeButton);
         await tester.pumpAndSettle();
+        
+        // Wait for navigation to login screen after terms agreement
         await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        // Look for "メールアドレスで続ける" button on LoginScreen
+        await tester.pumpAndSettle();
+        final emailContinueButton = find.text('メールアドレスで続ける');
+        
+        // Wait a bit more if button not found immediately
+        if (emailContinueButton.evaluate().isEmpty) {
+          await tester.pumpAndSettle(const Duration(seconds: 3));
+        }
+        
+        expect(emailContinueButton, findsOneWidget);
+        await tester.tap(emailContinueButton);
+        await tester.pumpAndSettle();
+        
+        // Wait for EmailAuthPage to load
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+
+        // Find email and password fields
+        final emailFields = find.byType(TextFormField);
+        expect(emailFields, findsAtLeast(2));
+        
+        // Clear any existing text and enter email
+        await tester.tap(emailFields.first);
+        await tester.pumpAndSettle();
+        await tester.enterText(emailFields.first, '');
+        await tester.enterText(emailFields.first, 'fj6b11kh0j@sute.jp');
+        await tester.pumpAndSettle();
+
+        // Clear any existing text and enter password
+        await tester.tap(emailFields.last);
+        await tester.pumpAndSettle();
+        await tester.enterText(emailFields.last, '');
+        await tester.enterText(emailFields.last, 'fj6b11kh0j');
+        await tester.pumpAndSettle();
+
+        // Find and tap login button
+        final loginButton = find.text('ログイン');
+        expect(loginButton, findsOneWidget);
+        await tester.tap(loginButton);
+        await tester.pumpAndSettle();
+        
+        // Wait longer for authentication and navigation to complete
+        await tester.pumpAndSettle(const Duration(seconds: 10));
       }
     }
 
@@ -55,7 +102,9 @@ void main() {
     ) async {
       await tester.pumpWidget(app);
       await tester.pumpAndSettle();
-      await tester.pumpAndSettle(const Duration(seconds: 3));
+      
+      // Wait for initial load
+      await tester.pumpAndSettle(const Duration(seconds: 5));
 
       // Verify TermsScreen is displayed initially
       expect(find.text('上記の内容、利用規約、プライバシーポリシーに同意する'), findsOneWidget);
@@ -65,7 +114,52 @@ void main() {
       // Tap agree button
       await tester.tap(find.text('上記の内容、利用規約、プライバシーポリシーに同意する'));
       await tester.pumpAndSettle();
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      
+      // Wait for navigation to login screen after terms agreement
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      // Look for "メールアドレスで続ける" button on LoginScreen
+      await tester.pumpAndSettle();
+      final emailContinueButton = find.text('メールアドレスで続ける');
+      
+      // Wait a bit more if button not found immediately
+      if (emailContinueButton.evaluate().isEmpty) {
+        await tester.pumpAndSettle(const Duration(seconds: 3));
+      }
+      
+      expect(emailContinueButton, findsOneWidget);
+      await tester.tap(emailContinueButton);
+      await tester.pumpAndSettle();
+      
+      // Wait for EmailAuthPage to load
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      // Find email and password fields
+      final emailFields = find.byType(TextFormField);
+      expect(emailFields, findsAtLeast(2));
+      
+      // Clear any existing text and enter email
+      await tester.tap(emailFields.first);
+      await tester.pumpAndSettle();
+      await tester.enterText(emailFields.first, '');
+      await tester.enterText(emailFields.first, 'fj6b11kh0j@sute.jp');
+      await tester.pumpAndSettle();
+
+      // Clear any existing text and enter password
+      await tester.tap(emailFields.last);
+      await tester.pumpAndSettle();
+      await tester.enterText(emailFields.last, '');
+      await tester.enterText(emailFields.last, 'fj6b11kh0j');
+      await tester.pumpAndSettle();
+
+      // Find and tap login button
+      final loginButton = find.text('ログイン');
+      expect(loginButton, findsOneWidget);
+      await tester.tap(loginButton);
+      await tester.pumpAndSettle();
+      
+      // Wait longer for authentication and navigation to complete
+      await tester.pumpAndSettle(const Duration(seconds: 10));
 
       // Verify that we're now on MyHomePage with BottomNavigationBar
       expect(find.byType(BottomNavigationBar), findsOneWidget);
@@ -76,8 +170,8 @@ void main() {
     testWidgets('bottom navigation bar shows all tabs', (
       WidgetTester tester,
     ) async {
-      // First agree to terms
-      await agreeToTerms(tester);
+      // First agree to terms and login
+      await agreeToTermsAndLogin(tester);
 
       // Verify BottomNavigationBar exists
       expect(find.byType(BottomNavigationBar), findsOneWidget);
@@ -98,8 +192,8 @@ void main() {
     testWidgets('tap on home tab navigates correctly', (
       WidgetTester tester,
     ) async {
-      // First agree to terms
-      await agreeToTerms(tester);
+      // First agree to terms and login
+      await agreeToTermsAndLogin(tester);
 
       // Tap on Home tab (ホーム)
       await tester.tap(find.text('ホーム'));
@@ -115,8 +209,8 @@ void main() {
     testWidgets('tap on ranking tab navigates correctly', (
       WidgetTester tester,
     ) async {
-      // First agree to terms
-      await agreeToTerms(tester);
+      // First agree to terms and login
+      await agreeToTermsAndLogin(tester);
 
       // Start from a different tab first
       await tester.tap(find.text('ホーム'));
@@ -136,8 +230,8 @@ void main() {
     testWidgets('tap on new posts tab navigates correctly', (
       WidgetTester tester,
     ) async {
-      // First agree to terms
-      await agreeToTerms(tester);
+      // First agree to terms and login
+      await agreeToTermsAndLogin(tester);
 
       // Tap on New Posts tab (最新)
       await tester.tap(find.text('最新'));
@@ -153,8 +247,8 @@ void main() {
     testWidgets('tap on subscribe tab navigates correctly', (
       WidgetTester tester,
     ) async {
-      // First agree to terms
-      await agreeToTerms(tester);
+      // First agree to terms and login
+      await agreeToTermsAndLogin(tester);
 
       // Tap on Subscribe tab (課金)
       await tester.tap(find.text('課金'));
@@ -170,8 +264,8 @@ void main() {
     testWidgets('navigate through all tabs sequentially', (
       WidgetTester tester,
     ) async {
-      // First agree to terms
-      await agreeToTerms(tester);
+      // First agree to terms and login
+      await agreeToTermsAndLogin(tester);
 
       final tabs = ['人気', 'ホーム', '最新', '課金'];
 
@@ -191,8 +285,8 @@ void main() {
     testWidgets('page view responds to tab changes', (
       WidgetTester tester,
     ) async {
-      // First agree to terms
-      await agreeToTerms(tester);
+      // First agree to terms and login
+      await agreeToTermsAndLogin(tester);
 
       // Verify PageView exists (there might be multiple PageViews, so use findsAtLeastNWidgets)
       expect(find.byType(PageView), findsAtLeastNWidgets(1));
