@@ -46,7 +46,7 @@ class MutePostsViewModel extends _$MutePostsViewModel
   }
 
   FutureResult<bool> onMutePostCardTap(Post post) async {
-    final currentUid = ref.read(streamAuthUidProvider).value;
+    final currentUid = ref.read(authUidProvider);
     if (currentUid == null) {
       return const Result.failure('ログインしてください');
     }

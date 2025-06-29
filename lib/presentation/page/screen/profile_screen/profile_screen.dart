@@ -81,8 +81,7 @@ class ProfileScreen extends ConsumerWidget {
                           ?.followingUids
                           .contains(passiveUid) ??
                       false;
-                  return passiveUser?.uid ==
-                          ref.watch(streamAuthUidProvider).value
+                  return passiveUser?.uid == ref.watch(authUidProvider)
                       ? const EditButton()
                       : FollowButton(
                         isFollow: isFollow,

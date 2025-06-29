@@ -64,7 +64,7 @@ class ChatPage extends HookConsumerWidget {
     }
 
     void mutePost(BuildContext innerContext, Post post) async {
-      final uid = ref.read(streamAuthUidProvider).value;
+      final uid = ref.read(authUidProvider);
       if (uid == null) return;
       final token = ref.read(tokensNotifierProvider.notifier).addMutePost(post);
       if (token == null) return;
@@ -84,8 +84,7 @@ class ChatPage extends HookConsumerWidget {
       data: (ChatState data) {
         final Post post = data.post;
         final List<TextMessage> messages = data.messages;
-        final String currentUserId =
-            ref.watch(streamAuthUidProvider).value ?? "";
+        final String currentUserId = ref.watch(authUidProvider) ?? "";
 
         return Scaffold(
           appBar: AppBar(

@@ -37,7 +37,7 @@ class UserCard extends ConsumerWidget {
                   child: MosaicUserChild(
                     publicUser: publicUser,
                     msg: publicUser.inappropriateReason(
-                      ref.watch(streamAuthUidProvider).value,
+                      ref.watch(authUidProvider),
                     ),
                     title: "不適切なユーザー",
                   ),

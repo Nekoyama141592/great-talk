@@ -75,7 +75,7 @@ class EditViewModel extends _$EditViewModel {
   /// プロフィール更新ボタン押下時
   FutureResult<bool> onPositiveButtonPressed() async {
     final s = state.value;
-    final uid = ref.read(streamAuthUidProvider).value;
+    final uid = ref.read(authUidProvider);
     if (s == null || uid == null) {
       return const Result.failure('もう一度お試しください.');
     }
@@ -141,7 +141,7 @@ class EditViewModel extends _$EditViewModel {
     String userName,
     String bio,
   ) async {
-    final uid = ref.read(streamAuthUidProvider).value;
+    final uid = ref.read(authUidProvider);
     if (uid == null) return const Result.failure('ログインしてください.');
     final repository = ref.read(databaseRepositoryProvider);
     final newUpdateLog = UserUpdateLog.fromRegister(

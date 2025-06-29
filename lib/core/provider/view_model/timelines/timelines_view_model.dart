@@ -18,7 +18,7 @@ class TimelinesViewModel extends _$TimelinesViewModel
   DatabaseRepository get _repository => _useCase.repository;
 
   Future<TimelinesState> _fetchData() async {
-    final user = ref.read(streamAuthProvider).value;
+    final user = ref.read(authProvider);
     if (user == null || user.isAnonymous) return TimelinesState();
     final currentUid = user.uid;
     final timelines = await _repository.getTimelines(currentUid);
@@ -34,7 +34,7 @@ class TimelinesViewModel extends _$TimelinesViewModel
 
   @override
   FutureResult<bool> onLoading() async {
-    final user = ref.read(streamAuthProvider).value;
+    final user = ref.read(authProvider);
     if (user == null || user.isAnonymous) {
       return const Result.failure('ログインしてください');
     }

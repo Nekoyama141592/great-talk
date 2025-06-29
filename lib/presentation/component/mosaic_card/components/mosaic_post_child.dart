@@ -21,7 +21,7 @@ class MosaicPostChild extends ConsumerWidget {
   final String title;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isMine = post.uid == ref.watch(streamAuthUidProvider).value;
+    final isMine = post.uid == ref.watch(authUidProvider);
     final isAdmin =
         ref.watch(currentUserNotifierProvider).value?.isAdmin() ?? false;
     final asyncValue = ref.watch(tokensNotifierProvider);

@@ -59,7 +59,7 @@ class PostCard extends ConsumerWidget {
               );
             }
             if (post.isInappropriate()) {
-              final authUid = ref.read(streamAuthUidProvider).value;
+              final authUid = ref.read(authUidProvider);
               return MosaicCard(
                 child: MosaicPostChild(
                   msg: post.inappropriateReason(authUid),

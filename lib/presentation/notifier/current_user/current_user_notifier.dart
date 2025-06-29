@@ -23,7 +23,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   @override
   Future<CurrentUserState> build() async {
     final initialState = CurrentUserState();
-    final authUserData = ref.watch(streamAuthProvider).value;
+    final authUserData = ref.watch(authProvider);
     if (authUserData == null) {
       await _createAnonymousUser(); // 匿名ユーザーを作成
       return initialState;
@@ -47,7 +47,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     return _authRepository.signInWithGoogle();
   }
 
-  String? _getCurrentUid() => ref.watch(streamAuthUidProvider).value;
+  String? _getCurrentUid() => ref.watch(authUidProvider);
 
   Future<PublicUser?> _createPublicUser(String uid) {
     final newUser = PublicUser.fromRegister(uid);
@@ -147,7 +147,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   Future<void> updateUser() async {
-    final uid = ref.read(streamAuthUidProvider).value;
+    final uid = ref.read(authUidProvider);
     final stateValue = state.value;
     if (uid == null || stateValue == null) return;
     state = await AsyncValue.guard(() async {

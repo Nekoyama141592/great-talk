@@ -7,12 +7,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'stream_auth_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-Stream<String?> streamAuthUid(Ref ref) {
-  final userStream = ref.watch(firebaseAuthProvider).authStateChanges();
-  return userStream.map((user) => user?.uid);
-}
-
-@Riverpod(keepAlive: true)
 Stream<User?> streamAuth(Ref ref) {
   return ref.watch(firebaseAuthProvider).authStateChanges();
+}
+@Riverpod(keepAlive: true)
+User? auth(Ref ref) {
+  return ref.watch(streamAuthProvider).value;
+}
+@Riverpod(keepAlive: true)
+String? authUid(Ref ref) {
+  return ref.watch(authProvider)?.uid;
 }

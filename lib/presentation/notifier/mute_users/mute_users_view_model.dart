@@ -58,7 +58,7 @@ class MuteUsersViewModel extends _$MuteUsersViewModel {
   }
 
   FutureResult<bool> unMuteUser(String passiveUid) async {
-    final currentUid = ref.read(streamAuthUidProvider).value;
+    final currentUid = ref.read(authUidProvider);
     if (currentUid == null) {
       return const Result.failure('ログインしてください');
     }

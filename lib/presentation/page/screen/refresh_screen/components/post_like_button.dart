@@ -33,7 +33,7 @@ class PostLikeButton extends HookConsumerWidget {
               ? InkWell(
                 child: const Icon(Icons.favorite, color: Colors.red),
                 onTap: () async {
-                  final user = ref.read(streamAuthProvider).value;
+                  final user = ref.read(authProvider);
                   if (user == null || !user.emailVerified) {
                     ToastUiUtil.showSuccessSnackBar(context, 'ログインしてください');
                     return;
@@ -58,7 +58,7 @@ class PostLikeButton extends HookConsumerWidget {
               : InkWell(
                 child: const Icon(Icons.favorite),
                 onTap: () async {
-                  final user = ref.read(streamAuthProvider).value;
+                  final user = ref.read(authProvider);
                   if (user == null || !user.emailVerified) {
                     ToastUiUtil.showSuccessSnackBar(context, 'ログインしてください');
                     return;

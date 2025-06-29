@@ -84,7 +84,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
 
   // Follow/Unfollow
   FutureResult<bool> onFollowPressed() async {
-    final currentUid = ref.read(streamAuthUidProvider).value;
+    final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return const Result.failure('ログインしてください');
     final user = state.value?.user;
     if (user == null) return const Result.failure('ユーザーが存在しません');
@@ -122,7 +122,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
   }
 
   FutureResult<bool> onUnFollowPressed() async {
-    final currentUid = ref.read(streamAuthUidProvider).value;
+    final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return const Result.failure('ログインしてください');
     final user = state.value?.user;
     if (user == null) return const Result.failure('ユーザーが存在しません');

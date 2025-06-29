@@ -18,7 +18,7 @@ part 'tokens_notifier.g.dart';
 class TokensNotifier extends _$TokensNotifier {
   @override
   Future<TokensState> build() async {
-    final user = ref.watch(streamAuthProvider).value;
+    final user = ref.watch(authProvider);
     if (user == null || user.isAnonymous) {
       return TokensState();
     }
@@ -120,7 +120,7 @@ class TokensNotifier extends _$TokensNotifier {
   }
 
   MutePostToken? addMutePost(Post post) {
-    final currentUid = ref.read(streamAuthUidProvider).value;
+    final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
     final token = MutePostToken.fromPost(post, currentUid);
     final newState = _currentState.copyWith(
@@ -140,7 +140,7 @@ class TokensNotifier extends _$TokensNotifier {
   }
 
   MuteUserToken? addMuteUser(Post post) {
-    final currentUid = ref.read(streamAuthUidProvider).value;
+    final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
     final token = MuteUserToken.fromPost(currentUid, post);
     final newState = _currentState.copyWith(

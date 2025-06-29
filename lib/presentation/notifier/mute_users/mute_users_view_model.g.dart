@@ -7,7 +7,7 @@ part of 'mute_users_view_model.dart';
 // **************************************************************************
 
 String _$muteUsersViewModelHash() =>
-    r'95ec3781904178137e28165f1c62a99ac610db56';
+    r'70c47178fd74080fd29fcfedb957194462aeca1b';
 
 /// See also [MuteUsersViewModel].
 @ProviderFor(MuteUsersViewModel)

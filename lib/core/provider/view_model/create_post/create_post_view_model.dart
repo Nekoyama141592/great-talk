@@ -76,7 +76,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     if (pickedImage == null) {
       return const Result.failure('アイコンをタップして画像をアップロードしてください');
     }
-    final currentUid = ref.read(streamAuthUidProvider).value;
+    final currentUid = ref.read(authUidProvider);
     if (currentUid == null) {
       return const Result.failure('ログインが必要です');
     }
@@ -108,7 +108,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     CreatePostState postState,
   ) async {
     final repository = ref.read(databaseRepositoryProvider);
-    final uid = ref.read(streamAuthUidProvider).value;
+    final uid = ref.read(authUidProvider);
     if (uid == null) {
       return const Result.failure('ログインしてください');
     }

@@ -22,7 +22,7 @@ class PostsViewModel extends _$PostsViewModel implements RefreshInterface {
   DatabaseRepository get _repository => _useCase.repository;
 
   Future<PostsState> _fetchData() async {
-    final user = ref.watch(streamAuthProvider).value;
+    final user = ref.watch(authProvider);
     if (user == null) return PostsState();
     final posts = await _repository.getPosts(isRankingPosts);
     final userPosts = await _useCase.createUserPosts(
