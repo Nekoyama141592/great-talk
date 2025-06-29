@@ -24,19 +24,10 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   Future<CurrentUserState> build() async {
     final initialState = CurrentUserState();
     final authUserData = ref.watch(authProvider);
-    if (authUserData == null) {
-      await _createAnonymousUser(); // 匿名ユーザーを作成
+    if (authUserData == null || authUserData.isAnonymous) {
       return initialState;
     }
-    if (authUserData.isAnonymous) {
-      return initialState;
-    }
-
     return _fetchData();
-  }
-
-  FutureResult<User> _createAnonymousUser() {
-    return _authRepository.signInAnonymously();
   }
 
   FutureResult<User> onAppleButtonPressed() {

@@ -4,9 +4,6 @@ import 'package:great_talk/infrastructure/repository/result/result.dart';
 /// Abstract interface for authentication operations including
 /// sign-in, sign-out, and user account management.
 abstract class IAuthRepository {
-  /// Signs in a user anonymously
-  FutureResult<User> signInAnonymously();
-
   /// Signs in a user with Apple authentication
   FutureResult<User> signInWithApple();
 

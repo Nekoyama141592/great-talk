@@ -10,26 +10,6 @@ class AuthRepository implements IAuthRepository {
   final bool enableDebugPrint;
 
   @override
-  FutureResult<User> signInAnonymously() async {
-    try {
-      final res = await instance.signInAnonymously();
-      final user = res.user;
-      const e = 'user not found.';
-      if (user == null) {
-        return Result.failure(e);
-      } else {
-        return Result.success(user);
-      }
-    } on FirebaseAuthException catch (e) {
-      if (enableDebugPrint) debugPrint('signInAnonymously: ${e.toString()}');
-      return Result.failure('匿名ログインが失敗しました');
-    } catch (e) {
-      if (enableDebugPrint) debugPrint('signInAnonymously: ${e.toString()}');
-      return Result.failure('匿名ログインが失敗しました');
-    }
-  }
-
-  @override
   FutureResult<User> signInWithApple() async {
     try {
       final credential = await CredentialUtil.appleCredential();

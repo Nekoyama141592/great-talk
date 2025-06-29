@@ -11,7 +11,6 @@ import 'package:great_talk/core/extension/number_format_extension.dart';
 import 'package:great_talk/presentation/util/style_utility.dart';
 import 'package:great_talk/presentation/page/accounts_page.dart';
 import 'package:great_talk/presentation/page/admin_page.dart';
-import 'package:great_talk/presentation/page/auth/login_page.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:great_talk/presentation/component/basic_width_box.dart';
 import 'package:great_talk/presentation/component/circle_image/circle_image.dart';
@@ -77,12 +76,7 @@ class OriginalDrawer extends ConsumerWidget {
                   ),
                 );
               } else {
-                return ListTile(
-                  title: const Text("ログインする"),
-                  onTap: () {
-                    RouteUtil.pushPath(context, LoginPage.path);
-                  },
-                );
+                return const SizedBox.shrink();
               }
             },
             loading:
