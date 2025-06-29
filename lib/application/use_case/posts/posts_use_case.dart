@@ -27,7 +27,7 @@ class PostsUseCase implements IPostsUseCase {
   }
 
   List<Post> _sortByLikeCount(List<Post> posts) {
-    return posts..sort((a, b) => (b.likeCount).compareTo(a.likeCount));
+    return posts..sort((a, b) => (b.msgCount).compareTo(a.msgCount));
   }
 
   @override
