@@ -165,17 +165,16 @@ class VerifyEmailPage extends HookConsumerWidget {
                                 : '再送信まで${state.resendSecondsLeft}秒',
                         textColor: Colors.white,
                         buttonColor: Theme.of(context).primaryColor,
-                        press: state.canResend ? handleResendEmail : null,
+                        press: handleResendEmail,
+                        enabled: state.canResend,
                       ),
                       const BasicHeightBox(),
                       RoundedButton(
                         text: '確認完了をチェック',
                         textColor: Theme.of(context).primaryColor,
                         buttonColor: Colors.transparent,
-                        press:
-                            asyncValue.isLoading
-                                ? null
-                                : handleCheckEmailVerification,
+                        press: handleCheckEmailVerification,
+                        enabled: !asyncValue.isLoading,
                       ),
                     ],
                   ),
