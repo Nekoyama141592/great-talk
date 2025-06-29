@@ -171,6 +171,41 @@ class AuthRepository implements IAuthRepository {
     }
   }
 
+  @override
+  FutureResult<bool> sendEmailVerification() async {
+    try {
+      final user = instance.currentUser;
+      if (user == null) return const Result.failure('ログインしてください');
+      await user.sendEmailVerification();
+      return const Result.success(true);
+    } on FirebaseAuthException catch (e) {
+      if (enableDebugPrint)
+        debugPrint('sendEmailVerification: ${e.toString()}');
+      final msg = _manageEmailPasswordError(e);
+      return Result.failure(msg);
+    } catch (e) {
+      if (enableDebugPrint)
+        debugPrint('sendEmailVerification: ${e.toString()}');
+      return Result.failure('確認メールの送信に失敗しました');
+    }
+  }
+
+  @override
+  FutureResult<bool> reloadCurrentUser() async {
+    try {
+      final user = instance.currentUser;
+      if (user == null) return const Result.failure('ログインしてください');
+      await user.reload();
+      return const Result.success(true);
+    } on FirebaseAuthException catch (e) {
+      if (enableDebugPrint) debugPrint('reloadCurrentUser: ${e.toString()}');
+      return Result.failure('ユーザー情報の更新に失敗しました');
+    } catch (e) {
+      if (enableDebugPrint) debugPrint('reloadCurrentUser: ${e.toString()}');
+      return Result.failure('ユーザー情報の更新に失敗しました');
+    }
+  }
+
   String _manageEmailPasswordError(FirebaseAuthException e) {
     final String errorCode = e.code;
     switch (errorCode) {
@@ -190,6 +225,8 @@ class AuthRepository implements IAuthRepository {
         return 'ユーザーが無効化されています。';
       case 'invalid-credential':
         return 'メールアドレスまたはパスワードが正しくありません。';
+      case 'too-many-requests':
+        return 'リクエストが多すぎます。しばらく時間をおいてから再度お試しください。';
       default:
         return 'エラーが発生しました';
     }

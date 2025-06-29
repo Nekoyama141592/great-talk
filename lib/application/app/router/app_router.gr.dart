@@ -356,3 +356,19 @@ class UserProfileRouteArgs {
   @override
   int get hashCode => key.hashCode ^ uid.hashCode;
 }
+
+/// generated route for
+/// [VerifyEmailPage]
+class VerifyEmailRoute extends PageRouteInfo<void> {
+  const VerifyEmailRoute({List<PageRouteInfo>? children})
+    : super(VerifyEmailRoute.name, initialChildren: children);
+
+  static const String name = 'VerifyEmailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const VerifyEmailPage();
+    },
+  );
+}

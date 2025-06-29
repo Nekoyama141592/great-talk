@@ -24,4 +24,10 @@ abstract class IAuthRepository {
 
   /// Signs in a user with email and password
   FutureResult<User> signIn(String email, String password);
+
+  /// Sends email verification to current user
+  FutureResult<bool> sendEmailVerification();
+
+  /// Reloads current user data
+  FutureResult<bool> reloadCurrentUser();
 }

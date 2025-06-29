@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/presentation/notifier/terms/terms_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/page/auth/login_page.dart';
+import 'package:great_talk/presentation/page/auth/verify_email/verify_email_page.dart';
 import 'package:great_talk/presentation/page/check_page/components/terms_screen.dart';
 import 'package:great_talk/presentation/page/main/my_home_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,9 +21,8 @@ class FirstPage extends ConsumerWidget {
     }
     if (authUser == null) {
       return LoginPage();
-    }
-    if (!authUser.emailVerified) {
-
+    } else if (!authUser.emailVerified) {
+      return VerifyEmailPage();
     }
     return MyHomePage();
   }

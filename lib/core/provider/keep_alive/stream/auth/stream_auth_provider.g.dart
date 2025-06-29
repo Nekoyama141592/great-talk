@@ -54,5 +54,21 @@ final authUidProvider = Provider<String?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AuthUidRef = ProviderRef<String?>;
+String _$authEmailHash() => r'643c65f439563491574e1f16f191fd44fb17fd5f';
+
+/// See also [authEmail].
+@ProviderFor(authEmail)
+final authEmailProvider = Provider<String?>.internal(
+  authEmail,
+  name: r'authEmailProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$authEmailHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AuthEmailRef = ProviderRef<String?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

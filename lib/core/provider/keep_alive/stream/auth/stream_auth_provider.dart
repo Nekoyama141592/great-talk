@@ -20,3 +20,8 @@ User? auth(Ref ref) {
 String? authUid(Ref ref) {
   return ref.watch(authProvider)?.uid;
 }
+
+@Riverpod(keepAlive: true)
+String? authEmail(Ref ref) {
+  return ref.watch(authProvider)?.email;
+}
