@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/core/provider/view_model/email_auth/email_auth_view_model.dart';
+import 'package:great_talk/presentation/notifier/email_auth/email_auth_view_model.dart';
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
