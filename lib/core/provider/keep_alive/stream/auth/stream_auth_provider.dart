@@ -10,10 +10,12 @@ part 'stream_auth_provider.g.dart';
 Stream<User?> streamAuth(Ref ref) {
   return ref.watch(firebaseAuthProvider).authStateChanges();
 }
+
 @Riverpod(keepAlive: true)
 User? auth(Ref ref) {
   return ref.watch(streamAuthProvider).value;
 }
+
 @Riverpod(keepAlive: true)
 String? authUid(Ref ref) {
   return ref.watch(authProvider)?.uid;
