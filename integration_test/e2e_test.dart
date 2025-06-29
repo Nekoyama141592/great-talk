@@ -14,7 +14,8 @@ void main() {
 
   group('Bottom Navigation Tests', () {
     late Widget app;
-
+    const testUserEmail = 'fj6b11kh0j@sute.jp';
+    const testUserPassword = 'fj6b11kh0j';
     setUpAll(() async {
       // Set up the test environment
       F.appFlavor = Flavor.dev;
@@ -76,14 +77,14 @@ void main() {
         await tester.tap(emailFields.first);
         await tester.pumpAndSettle();
         await tester.enterText(emailFields.first, '');
-        await tester.enterText(emailFields.first, 'fj6b11kh0j@sute.jp');
+        await tester.enterText(emailFields.first, testUserEmail);
         await tester.pumpAndSettle();
 
         // Clear any existing text and enter password
         await tester.tap(emailFields.last);
         await tester.pumpAndSettle();
         await tester.enterText(emailFields.last, '');
-        await tester.enterText(emailFields.last, 'fj6b11kh0j');
+        await tester.enterText(emailFields.last, testUserPassword);
         await tester.pumpAndSettle();
 
         // Find and tap login button
@@ -142,14 +143,14 @@ void main() {
       await tester.tap(emailFields.first);
       await tester.pumpAndSettle();
       await tester.enterText(emailFields.first, '');
-      await tester.enterText(emailFields.first, 'fj6b11kh0j@sute.jp');
+      await tester.enterText(emailFields.first, testUserEmail);
       await tester.pumpAndSettle();
 
       // Clear any existing text and enter password
       await tester.tap(emailFields.last);
       await tester.pumpAndSettle();
       await tester.enterText(emailFields.last, '');
-      await tester.enterText(emailFields.last, 'fj6b11kh0j');
+      await tester.enterText(emailFields.last, testUserPassword);
       await tester.pumpAndSettle();
 
       // Find and tap login button
