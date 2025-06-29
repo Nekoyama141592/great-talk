@@ -21,7 +21,9 @@ class FirstPage extends ConsumerWidget {
     }
     if (authUser == null) {
       return LoginPage();
-    } else if (!authUser.emailVerified) {
+    }
+    // 統合テストの際にはコメントアウト 
+    if (!authUser.emailVerified) {
       return VerifyEmailPage();
     }
     return MyHomePage();
