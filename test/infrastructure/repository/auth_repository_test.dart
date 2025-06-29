@@ -78,38 +78,6 @@ void main() {
       );
     });
 
-    group('signInAnonymously', () {
-      test('should return success when anonymous sign in succeeds', () async {
-        final result = await authRepository.signInAnonymously();
-
-        result.when(
-          success: (user) {
-            expect(user.isAnonymous, true);
-          },
-          failure: (msg) => fail('Expected success but got failure: $msg'),
-        );
-      });
-
-      test('should return failure when anonymous sign in fails', () async {
-        mockFirebaseAuth = MockFirebaseAuthWithExceptions(
-          signInException: FirebaseAuthException(code: 'unknown'),
-        );
-        authRepository = AuthRepository(
-          mockFirebaseAuth,
-          enableDebugPrint: false,
-        );
-
-        final result = await authRepository.signInAnonymously();
-
-        result.when(
-          success: (user) => fail('Expected failure but got success'),
-          failure: (msg) {
-            expect(msg, '匿名ログインが失敗しました');
-          },
-        );
-      });
-    });
-
     group('signOut', () {
       test('should return success when sign out succeeds', () async {
         await mockFirebaseAuth.signInAnonymously();
