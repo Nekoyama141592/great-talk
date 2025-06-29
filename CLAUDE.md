@@ -16,11 +16,11 @@ flutter run --flavor prod
 ### Building the Application
 ```bash
 # iOS builds
-flutter build ios --flavor dev -t lib/main_dev.dart --release --no-tree-shake-icons
+flutter build ios --flavor dev --release --no-tree-shake-icons
 flutter build ios --flavor prod -t lib/main_prod.dart --release --no-tree-shake-icons
 
 # Android builds
-flutter build appbundle --flavor dev -t lib/main_dev.dart --no-tree-shake-icons
+flutter build appbundle --flavor dev --no-tree-shake-icons
 flutter build appbundle --flavor prod -t lib/main_prod.dart --no-tree-shake-icons
 ```
 
