@@ -74,6 +74,8 @@ dev_dependencies:
   retrofit_generator: ^9.2.0
   riverpod_generator: ^2.6.5
   riverpod_lint: ^2.6.5
+  integration_test:
+    sdk: flutter
 dependency_overrides:
   analyzer: 7.3.0
   analyzer_plugin: 0.12.0

@@ -16,11 +16,12 @@ dev_packages=(
   "riverpod_lint"
 )
 
-
 # Loop through each package and add it as a dev dependency
 for package_name in "${dev_packages[@]}"; do
   echo "Adding ${package_name}..."
   flutter pub add --dev "${package_name}"
 done
+
+flutter pub add 'dev:integration_test:{"sdk":"flutter"}'
 
 echo "All specified development packages have been added."
