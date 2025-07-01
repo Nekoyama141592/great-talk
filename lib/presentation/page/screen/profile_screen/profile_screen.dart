@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/route_util.dart';
+import 'package:great_talk/presentation/page/screen/profile_screen/components/date_text.dart';
 import 'package:great_talk/presentation/state/profile/profile_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
@@ -55,6 +56,8 @@ class ProfileScreen extends ConsumerWidget {
           Text("フォロワー ${passiveUser?.followerCount.formatNumber() ?? 0}"),
         ],
       ),
+      const SizedBox(height: 16,),
+      DateText(createdAt: passiveUser?.createdAt, updatedAt: passiveUser?.updatedAt),
       // 横向きなら、表示崩れを防止するためにbioを表示しない。
       if (MediaQuery.of(context).orientation != Orientation.landscape)
         Align(
