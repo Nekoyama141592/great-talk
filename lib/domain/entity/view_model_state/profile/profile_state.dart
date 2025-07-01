@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/domain/entity/view_model_state/common/user_post/user_post.dart';
 
 part 'profile_state.freezed.dart';
@@ -10,7 +10,7 @@ part 'profile_state.g.dart';
 abstract class ProfileState with _$ProfileState {
   const ProfileState._();
   const factory ProfileState({
-    required PublicUser? user,
+    required PublicUserEntity? user,
     required String? base64,
     required List<UserPost> userPosts,
   }) = _ProfileState;

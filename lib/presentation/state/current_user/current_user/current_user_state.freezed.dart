@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CurrentUserState {
 
- PublicUser? get publicUser; PrivateUser? get privateUser; String? get base64;
+ PublicUserEntity? get publicUser; PrivateUser? get privateUser; String? get base64;
 /// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,11 +49,11 @@ abstract mixin class $CurrentUserStateCopyWith<$Res>  {
   factory $CurrentUserStateCopyWith(CurrentUserState value, $Res Function(CurrentUserState) _then) = _$CurrentUserStateCopyWithImpl;
 @useResult
 $Res call({
- PublicUser? publicUser, PrivateUser? privateUser, String? base64
+ PublicUserEntity? publicUser, PrivateUser? privateUser, String? base64
 });
 
 
-$PublicUserCopyWith<$Res>? get publicUser;$PrivateUserCopyWith<$Res>? get privateUser;
+$PublicUserEntityCopyWith<$Res>? get publicUser;$PrivateUserCopyWith<$Res>? get privateUser;
 
 }
 /// @nodoc
@@ -69,7 +69,7 @@ class _$CurrentUserStateCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? publicUser = freezed,Object? privateUser = freezed,Object? base64 = freezed,}) {
   return _then(_self.copyWith(
 publicUser: freezed == publicUser ? _self.publicUser : publicUser // ignore: cast_nullable_to_non_nullable
-as PublicUser?,privateUser: freezed == privateUser ? _self.privateUser : privateUser // ignore: cast_nullable_to_non_nullable
+as PublicUserEntity?,privateUser: freezed == privateUser ? _self.privateUser : privateUser // ignore: cast_nullable_to_non_nullable
 as PrivateUser?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -78,12 +78,12 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PublicUserCopyWith<$Res>? get publicUser {
+$PublicUserEntityCopyWith<$Res>? get publicUser {
     if (_self.publicUser == null) {
     return null;
   }
 
-  return $PublicUserCopyWith<$Res>(_self.publicUser!, (value) {
+  return $PublicUserEntityCopyWith<$Res>(_self.publicUser!, (value) {
     return _then(_self.copyWith(publicUser: value));
   });
 }/// Create a copy of CurrentUserState
@@ -109,7 +109,7 @@ class _CurrentUserState extends CurrentUserState {
   const _CurrentUserState({this.publicUser, this.privateUser, this.base64}): super._();
   factory _CurrentUserState.fromJson(Map<String, dynamic> json) => _$CurrentUserStateFromJson(json);
 
-@override final  PublicUser? publicUser;
+@override final  PublicUserEntity? publicUser;
 @override final  PrivateUser? privateUser;
 @override final  String? base64;
 
@@ -146,11 +146,11 @@ abstract mixin class _$CurrentUserStateCopyWith<$Res> implements $CurrentUserSta
   factory _$CurrentUserStateCopyWith(_CurrentUserState value, $Res Function(_CurrentUserState) _then) = __$CurrentUserStateCopyWithImpl;
 @override @useResult
 $Res call({
- PublicUser? publicUser, PrivateUser? privateUser, String? base64
+ PublicUserEntity? publicUser, PrivateUser? privateUser, String? base64
 });
 
 
-@override $PublicUserCopyWith<$Res>? get publicUser;@override $PrivateUserCopyWith<$Res>? get privateUser;
+@override $PublicUserEntityCopyWith<$Res>? get publicUser;@override $PrivateUserCopyWith<$Res>? get privateUser;
 
 }
 /// @nodoc
@@ -166,7 +166,7 @@ class __$CurrentUserStateCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? publicUser = freezed,Object? privateUser = freezed,Object? base64 = freezed,}) {
   return _then(_CurrentUserState(
 publicUser: freezed == publicUser ? _self.publicUser : publicUser // ignore: cast_nullable_to_non_nullable
-as PublicUser?,privateUser: freezed == privateUser ? _self.privateUser : privateUser // ignore: cast_nullable_to_non_nullable
+as PublicUserEntity?,privateUser: freezed == privateUser ? _self.privateUser : privateUser // ignore: cast_nullable_to_non_nullable
 as PrivateUser?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -176,12 +176,12 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PublicUserCopyWith<$Res>? get publicUser {
+$PublicUserEntityCopyWith<$Res>? get publicUser {
     if (_self.publicUser == null) {
     return null;
   }
 
-  return $PublicUserCopyWith<$Res>(_self.publicUser!, (value) {
+  return $PublicUserEntityCopyWith<$Res>(_self.publicUser!, (value) {
     return _then(_self.copyWith(publicUser: value));
   });
 }/// Create a copy of CurrentUserState

@@ -3,7 +3,7 @@ import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_mute/post_mute.dart';
 import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
@@ -21,12 +21,15 @@ abstract class IDatabaseRepository {
   Future<int?> countMessages();
 
   // User creation
-  Future<PublicUser?> createPublicUser(String uid, Map<String, dynamic> json);
+  Future<PublicUserEntity?> createPublicUser(
+    String uid,
+    Map<String, dynamic> json,
+  );
 
   Future<PrivateUser?> createPrivateUser(String uid, Map<String, dynamic> json);
 
   // User operations
-  Future<PublicUser?> getPublicUser(String uid);
+  Future<PublicUserEntity?> getPublicUser(String uid);
   Future<PrivateUser?> getPrivateUser(String uid);
   FutureResult<bool> deletePublicUser(String uid);
 
@@ -111,13 +114,13 @@ abstract class IDatabaseRepository {
   );
 
   // User list operations
-  Future<List<PublicUser>> getUsersByUids(List<String> uids);
-  Future<List<PublicUser>> getRankingUsers();
-  Future<List<PublicUser>> getMoreRankingUsers(PublicUser lastUser);
-  Future<List<PublicUser>> getMuteUsers(List<String> requestUids);
-  Future<List<PublicUser>> getMoreMuteUsers(
+  Future<List<PublicUserEntity>> getUsersByUids(List<String> uids);
+  Future<List<PublicUserEntity>> getRankingUsers();
+  Future<List<PublicUserEntity>> getMoreRankingUsers(PublicUserEntity lastUser);
+  Future<List<PublicUserEntity>> getMuteUsers(List<String> requestUids);
+  Future<List<PublicUserEntity>> getMoreMuteUsers(
     List<String> requestUids,
-    PublicUser lastUser,
+    PublicUserEntity lastUser,
   );
 
   // Post list operations

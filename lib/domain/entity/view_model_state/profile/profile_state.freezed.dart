@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProfileState {
 
- PublicUser? get user; String? get base64; List<UserPost> get userPosts;
+ PublicUserEntity? get user; String? get base64; List<UserPost> get userPosts;
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,11 +49,11 @@ abstract mixin class $ProfileStateCopyWith<$Res>  {
   factory $ProfileStateCopyWith(ProfileState value, $Res Function(ProfileState) _then) = _$ProfileStateCopyWithImpl;
 @useResult
 $Res call({
- PublicUser? user, String? base64, List<UserPost> userPosts
+ PublicUserEntity? user, String? base64, List<UserPost> userPosts
 });
 
 
-$PublicUserCopyWith<$Res>? get user;
+$PublicUserEntityCopyWith<$Res>? get user;
 
 }
 /// @nodoc
@@ -69,7 +69,7 @@ class _$ProfileStateCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? user = freezed,Object? base64 = freezed,Object? userPosts = null,}) {
   return _then(_self.copyWith(
 user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as PublicUser?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
+as PublicUserEntity?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
 as String?,userPosts: null == userPosts ? _self.userPosts : userPosts // ignore: cast_nullable_to_non_nullable
 as List<UserPost>,
   ));
@@ -78,12 +78,12 @@ as List<UserPost>,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PublicUserCopyWith<$Res>? get user {
+$PublicUserEntityCopyWith<$Res>? get user {
     if (_self.user == null) {
     return null;
   }
 
-  return $PublicUserCopyWith<$Res>(_self.user!, (value) {
+  return $PublicUserEntityCopyWith<$Res>(_self.user!, (value) {
     return _then(_self.copyWith(user: value));
   });
 }
@@ -97,7 +97,7 @@ class _ProfileState extends ProfileState {
   const _ProfileState({required this.user, required this.base64, required final  List<UserPost> userPosts}): _userPosts = userPosts,super._();
   factory _ProfileState.fromJson(Map<String, dynamic> json) => _$ProfileStateFromJson(json);
 
-@override final  PublicUser? user;
+@override final  PublicUserEntity? user;
 @override final  String? base64;
  final  List<UserPost> _userPosts;
 @override List<UserPost> get userPosts {
@@ -140,11 +140,11 @@ abstract mixin class _$ProfileStateCopyWith<$Res> implements $ProfileStateCopyWi
   factory _$ProfileStateCopyWith(_ProfileState value, $Res Function(_ProfileState) _then) = __$ProfileStateCopyWithImpl;
 @override @useResult
 $Res call({
- PublicUser? user, String? base64, List<UserPost> userPosts
+ PublicUserEntity? user, String? base64, List<UserPost> userPosts
 });
 
 
-@override $PublicUserCopyWith<$Res>? get user;
+@override $PublicUserEntityCopyWith<$Res>? get user;
 
 }
 /// @nodoc
@@ -160,7 +160,7 @@ class __$ProfileStateCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? user = freezed,Object? base64 = freezed,Object? userPosts = null,}) {
   return _then(_ProfileState(
 user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as PublicUser?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
+as PublicUserEntity?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
 as String?,userPosts: null == userPosts ? _self._userPosts : userPosts // ignore: cast_nullable_to_non_nullable
 as List<UserPost>,
   ));
@@ -170,12 +170,12 @@ as List<UserPost>,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PublicUserCopyWith<$Res>? get user {
+$PublicUserEntityCopyWith<$Res>? get user {
     if (_self.user == null) {
     return null;
   }
 
-  return $PublicUserCopyWith<$Res>(_self.user!, (value) {
+  return $PublicUserEntityCopyWith<$Res>(_self.user!, (value) {
     return _then(_self.copyWith(user: value));
   });
 }

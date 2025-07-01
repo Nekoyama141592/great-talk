@@ -11,7 +11,7 @@ _ProfileState _$ProfileStateFromJson(Map<String, dynamic> json) =>
       user:
           json['user'] == null
               ? null
-              : PublicUser.fromJson(json['user'] as Map<String, dynamic>),
+              : PublicUserEntity.fromJson(json['user'] as Map<String, dynamic>),
       base64: json['base64'] as String?,
       userPosts:
           (json['userPosts'] as List<dynamic>)

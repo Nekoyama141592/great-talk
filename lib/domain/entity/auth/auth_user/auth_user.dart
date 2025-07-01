@@ -8,6 +8,7 @@ part 'auth_user.g.dart';
 abstract class AuthUser with _$AuthUser {
   const AuthUser._();
   const factory AuthUser({
+    String? email,
     required String uid,
     required bool isAnonymous,
     required bool emailVerified,
@@ -19,6 +20,7 @@ abstract class AuthUser with _$AuthUser {
       uid: user.uid,
       isAnonymous: user.isAnonymous,
       emailVerified: user.emailVerified,
+      email: user.email,
     );
   }
 }

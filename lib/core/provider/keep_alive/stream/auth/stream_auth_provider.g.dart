@@ -22,11 +22,11 @@ final streamAuthProvider = StreamProvider<User?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef StreamAuthRef = StreamProviderRef<User?>;
-String _$authHash() => r'591974e3dca5f005c20826d839ad510a7c63e99c';
+String _$authHash() => r'2585445de3f74dadfed309e27dfac4ed8f71b939';
 
 /// See also [auth].
 @ProviderFor(auth)
-final authProvider = Provider<User?>.internal(
+final authProvider = Provider<AuthUser?>.internal(
   auth,
   name: r'authProvider',
   debugGetCreateSourceHash:
@@ -37,7 +37,7 @@ final authProvider = Provider<User?>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AuthRef = ProviderRef<User?>;
+typedef AuthRef = ProviderRef<AuthUser?>;
 String _$authUidHash() => r'a62e39a02a8698ef9a251373fd378912d5d8cd46';
 
 /// See also [authUid].

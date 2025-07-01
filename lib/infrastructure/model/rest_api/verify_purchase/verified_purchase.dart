@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/util/date_util.dart';
-import 'package:great_talk/core/util/purchases_util.dart';
+import 'package:great_talk/domain/entity/database/purchase_details/purchase_details_entity.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/response/android_receipt_response/android_receipt_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/response/ios_receipt_response/ios_receipt_response.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -29,8 +29,8 @@ abstract class VerifiedPurchase with _$VerifiedPurchase {
       AndroidReceiptResponse.fromJson(verifiedReceipt);
   IOSReceiptResponse get _iosReceipt =>
       IOSReceiptResponse.fromJson(verifiedReceipt);
-  PurchaseDetails typedPurchaseDetails() {
-    return PurchasesUtil.purchaseDetailsFromJson(purchaseDetails);
+  PurchaseDetailsEntity typedPurchaseDetails() {
+    return PurchaseDetailsEntity.fromJson(purchaseDetails);
   }
 
   String get productId {
@@ -53,7 +53,7 @@ abstract class VerifiedPurchase with _$VerifiedPurchase {
   }
 
   bool _isValidPurchase() {
-    final status = typedPurchaseDetails().status;
+    final status = PurchaseStatus.values.byName(typedPurchaseDetails().status);
     return status == PurchaseStatus.purchased ||
         status == PurchaseStatus.restored;
   }

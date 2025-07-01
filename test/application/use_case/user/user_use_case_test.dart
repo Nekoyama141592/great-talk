@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/application/use_case/file/file_use_case.dart';
 import 'package:great_talk/application/use_case/user/user_use_case.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,57 +24,61 @@ void main() {
     });
 
     group('usersToImageUsers', () {
-      late List<PublicUser> testUsers;
+      late List<PublicUserEntity> testUsers;
 
       setUp(() {
         testUsers = [
-          PublicUser(
+          PublicUserEntity(
             uid: 'user_1',
-            bio: const {
-              'languageCode': 'en',
-              'negativeScore': 0.1,
-              'positiveScore': 0.9,
-              'sentiment': 'positive',
-              'value': 'Bio for user 1',
-            },
-            createdAt: mockTimestamp,
-            updatedAt: mockTimestamp,
-            image: const {
-              'bucketName': 'test-bucket',
-              'value': 'user1_image.jpg',
-            },
-            userName: const {
-              'languageCode': 'en',
-              'negativeScore': 0.05,
-              'positiveScore': 0.95,
-              'sentiment': 'positive',
-              'value': 'user_one',
-            },
+            isOfficial: false,
+            postCount: 0,
+            bio: const DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 0,
+              sentiment: 'positive',
+              value: 'Bio for user 1',
+            ),
+            createdAt: mockTimestamp.toDate(),
+            updatedAt: mockTimestamp.toDate(),
+            image: const DetectedImage(
+              bucketName: 'test-bucket',
+              value: 'user1_image.jpg',
+            ),
+            userName: const DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 0,
+              sentiment: 'positive',
+              value: 'user_one',
+            ),
             followerCount: 10,
             followingCount: 5,
           ),
-          PublicUser(
+          PublicUserEntity(
             uid: 'user_2',
-            bio: const {
-              'languageCode': 'en',
-              'negativeScore': 0.1,
-              'positiveScore': 0.9,
-              'sentiment': 'positive',
-              'value': 'Bio for user 2',
-            },
-            createdAt: mockTimestamp,
-            updatedAt: mockTimestamp,
-            image: const {
-              'bucketName': 'test-bucket',
-              'value': 'user2_image.jpg',
-            },
-            userName: const {
-              'languageCode': 'en',
-              'negativeScore': 0.05,
-              'positiveScore': 0.95,
-              'sentiment': 'positive',
-              'value': 'user_two',
-            },
+            isOfficial: false,
+            postCount: 0,
+            bio: const DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 0,
+              sentiment: 'positive',
+              value: 'Bio for user 2',
+            ),
+            createdAt: mockTimestamp.toDate(),
+            updatedAt: mockTimestamp.toDate(),
+            image: const DetectedImage(
+              bucketName: 'test-bucket',
+              value: 'user2_image.jpg',
+            ),
+            userName: const DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 0,
+              sentiment: 'positive',
+              value: 'user_two',
+            ),
             followerCount: 20,
             followingCount: 15,
           ),
@@ -114,8 +120,8 @@ void main() {
 
       test('should handle users with empty image data', () async {
         final usersWithEmptyImages = [
-          testUsers[0].copyWith(image: const {}),
-          testUsers[1].copyWith(image: const {}),
+          testUsers[0].copyWith(image: const DetectedImage()),
+          testUsers[1].copyWith(image: const DetectedImage()),
         ];
 
         // Mock empty bucket name and value
@@ -167,10 +173,16 @@ void main() {
       test('should handle users with different bucket names', () async {
         final usersWithDifferentBuckets = [
           testUsers[0].copyWith(
-            image: const {'bucketName': 'bucket-1', 'value': 'image1.jpg'},
+            image: const DetectedImage(
+              bucketName: 'bucket-1',
+              value: 'image1.jpg',
+            ),
           ),
           testUsers[1].copyWith(
-            image: const {'bucketName': 'bucket-2', 'value': 'image2.jpg'},
+            image: const DetectedImage(
+              bucketName: 'bucket-2',
+              value: 'image2.jpg',
+            ),
           ),
         ];
 
@@ -239,28 +251,32 @@ void main() {
         // Create more users to test concurrent loading
         final moreUsers = List.generate(
           5,
-          (index) => PublicUser(
+          (index) => PublicUserEntity(
             uid: 'user_$index',
-            bio: {
-              'languageCode': 'en',
-              'negativeScore': 0.1,
-              'positiveScore': 0.9,
-              'sentiment': 'positive',
-              'value': 'Bio for user $index',
-            },
-            createdAt: mockTimestamp,
-            updatedAt: mockTimestamp,
-            image: {
-              'bucketName': 'test-bucket',
-              'value': 'user${index}_image.jpg',
-            },
-            userName: {
-              'languageCode': 'en',
-              'negativeScore': 0.05,
-              'positiveScore': 0.95,
-              'sentiment': 'positive',
-              'value': 'user_$index',
-            },
+            isOfficial: false,
+            postCount: 0,
+            followerCount: 0,
+            followingCount: 0,
+            bio: DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 0,
+              sentiment: 'positive',
+              value: 'Bio for user $index',
+            ),
+            createdAt: mockTimestamp.toDate(),
+            updatedAt: mockTimestamp.toDate(),
+            image: DetectedImage(
+              bucketName: 'test-bucket',
+              value: 'user${index}_image.jpg',
+            ),
+            userName: DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 0,
+              sentiment: 'positive',
+              value: 'user_$index',
+            ),
           ),
         );
 

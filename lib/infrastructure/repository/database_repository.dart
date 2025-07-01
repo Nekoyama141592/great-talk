@@ -8,6 +8,7 @@ import 'package:great_talk/infrastructure/model/database_schema/post_like/post_l
 import 'package:great_talk/infrastructure/model/database_schema/post_mute/post_mute.dart';
 import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
@@ -129,7 +130,7 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<PublicUser?> createPublicUser(
+  Future<PublicUserEntity?> createPublicUser(
     String uid,
     Map<String, dynamic> json,
   ) async {
@@ -140,7 +141,8 @@ class DatabaseRepository implements IDatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      return PublicUser.fromJson(Map<String, dynamic>.from(data));
+      final publicUser = PublicUser.fromJson(Map<String, dynamic>.from(data));
+      return PublicUserEntity.fromJson(publicUser.toJson());
     } catch (e) {
       debugPrint('createPublicUser: ${e.toString()}');
       return null;
@@ -356,13 +358,14 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<PublicUser?> getPublicUser(String uid) async {
+  Future<PublicUserEntity?> getPublicUser(String uid) async {
     try {
       final docRef = userDocRef(uid);
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      return PublicUser.fromJson(Map<String, dynamic>.from(data));
+      final publicUser = PublicUser.fromJson(Map<String, dynamic>.from(data));
+      return PublicUserEntity.fromJson(publicUser.toJson());
     } catch (e) {
       debugPrint('getPublicUser: ${e.toString()}');
       return null;
@@ -430,14 +433,15 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<PublicUser>> getUsersByUids(List<String> uids) async {
+  Future<List<PublicUserEntity>> getUsersByUids(List<String> uids) async {
     if (uids.isEmpty) return [];
     try {
       final query = usersByWhereIn(uids);
       final qSnapshot = await _getDocs(query);
-      return qSnapshot.docs
-          .map((doc) => PublicUser.fromJson(doc.data()))
-          .toList();
+      return qSnapshot.docs.map((doc) {
+        final publicUser = PublicUser.fromJson(doc.data());
+        return PublicUserEntity.fromJson(publicUser.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getUsersByUids: ${e.toString()}');
       return [];
@@ -484,13 +488,16 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<PublicUser>> getRankingUsers() async {
+  Future<List<PublicUserEntity>> getRankingUsers() async {
     try {
       final query = usersByFollowerCount();
       final qshot = await query.get();
-      return qshot.docs
-          .map((e) => PublicUser.fromJson(Map<String, dynamic>.from(e.data())))
-          .toList();
+      return qshot.docs.map((e) {
+        final publicUser = PublicUser.fromJson(
+          Map<String, dynamic>.from(e.data()),
+        );
+        return PublicUserEntity.fromJson(publicUser.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getRankingUsers: ${e.toString()}');
       return [];
@@ -498,14 +505,19 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<PublicUser>> getMoreRankingUsers(PublicUser lastUser) async {
+  Future<List<PublicUserEntity>> getMoreRankingUsers(
+    PublicUserEntity lastUser,
+  ) async {
     try {
       final doc = await _getUserDoc(lastUser.uid);
       final query = usersByFollowerCount().startAfterDocument(doc);
       final qshot = await query.get();
-      return qshot.docs
-          .map((e) => PublicUser.fromJson(Map<String, dynamic>.from(e.data())))
-          .toList();
+      return qshot.docs.map((e) {
+        final publicUser = PublicUser.fromJson(
+          Map<String, dynamic>.from(e.data()),
+        );
+        return PublicUserEntity.fromJson(publicUser.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getMoreRankingUsers: ${e.toString()}');
       return [];
@@ -513,14 +525,17 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<PublicUser>> getMuteUsers(List<String> requestUids) async {
+  Future<List<PublicUserEntity>> getMuteUsers(List<String> requestUids) async {
     if (requestUids.isEmpty) return [];
     try {
       final query = usersByWhereIn(requestUids);
       final qshot = await query.get();
-      return qshot.docs
-          .map((e) => PublicUser.fromJson(Map<String, dynamic>.from(e.data())))
-          .toList();
+      return qshot.docs.map((e) {
+        final publicUser = PublicUser.fromJson(
+          Map<String, dynamic>.from(e.data()),
+        );
+        return PublicUserEntity.fromJson(publicUser.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getMuteUsers: ${e.toString()}');
       return [];
@@ -528,18 +543,21 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<PublicUser>> getMoreMuteUsers(
+  Future<List<PublicUserEntity>> getMoreMuteUsers(
     List<String> requestUids,
-    PublicUser lastUser,
+    PublicUserEntity lastUser,
   ) async {
     if (requestUids.isEmpty) return [];
     try {
       final doc = await _getUserDoc(lastUser.uid);
       final query = usersByWhereIn(requestUids).startAfterDocument(doc);
       final qshot = await query.get();
-      return qshot.docs
-          .map((e) => PublicUser.fromJson(Map<String, dynamic>.from(e.data())))
-          .toList();
+      return qshot.docs.map((e) {
+        final publicUser = PublicUser.fromJson(
+          Map<String, dynamic>.from(e.data()),
+        );
+        return PublicUserEntity.fromJson(publicUser.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getMoreMuteUsers: ${e.toString()}');
       return [];

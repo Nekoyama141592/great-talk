@@ -7,7 +7,7 @@ part of 'verify_email_view_model.dart';
 // **************************************************************************
 
 String _$verifyEmailViewModelHash() =>
-    r'828ae550e41a8c204d08d8be057dc2b977207747';
+    r'9027a46c4e7a1c431c18d971bb550ec04759936a';
 
 /// See also [VerifyEmailViewModel].
 @ProviderFor(VerifyEmailViewModel)

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/presentation/state/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/provider/repository/api/api_repository_provider.dart';
@@ -40,7 +41,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
 
   String? _getCurrentUid() => ref.watch(authUidProvider);
 
-  Future<PublicUser?> _createPublicUser(String uid) {
+  Future<PublicUserEntity?> _createPublicUser(String uid) {
     final newUser = PublicUser.fromRegister(uid);
     final json = newUser.toJson();
     return _databaseRepository.createPublicUser(uid, json);
@@ -67,9 +68,16 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
   }
 
-  Future<PublicUser?> _getPublicUser(String uid) async {
+  Future<PublicUserEntity?> _getPublicUser(String uid) async {
     var publicUser = await _databaseRepository.getPublicUser(uid);
-    publicUser ??= await _createPublicUser(uid);
+    if (publicUser == null) {
+      final createdUser = await _createPublicUser(uid);
+      if (createdUser != null) {
+        publicUser = PublicUserEntity.fromJson(createdUser.toJson());
+      }
+    } else {
+      publicUser = PublicUserEntity.fromJson(publicUser.toJson());
+    }
     return publicUser;
   }
 
@@ -79,10 +87,11 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     return privateUser;
   }
 
-  Future<String?> _getBase64Image(PublicUser? publicUser) async {
+  Future<String?> _getBase64Image(PublicUserEntity? publicUser) async {
     if (publicUser == null) return null;
-    final bucketName = publicUser.typedImage().bucketName;
-    final fileName = publicUser.typedImage().value;
+    final oldImage = publicUser.image;
+    final bucketName = oldImage.bucketName;
+    final fileName = oldImage.value;
     if (bucketName.isEmpty || fileName.isEmpty) return null;
     final image = await ref
         .read(fileUseCaseProvider)
@@ -124,7 +133,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
     authResult.when(
       success: (_) {
-        final image = user.typedImage();
+        final image = user.image;
         ref.read(apiRepositoryProvider).deleteObject(image);
       },
       failure: (_) {},

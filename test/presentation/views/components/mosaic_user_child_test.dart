@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/presentation/component/mosaic_card/components/mosaic_user_child.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 
 void main() {
   group('MosaicUserChild', () {
-    late PublicUser testUser;
+    late PublicUserEntity testUser;
 
     setUp(() {
-      testUser = PublicUser(
+      testUser = PublicUserEntity(
         uid: 'test_uid',
-        userName: const {'value': 'Test User'},
-        bio: const {'value': 'Test bio'},
-        image: const {'value': 'test.jpg'},
+        isOfficial: false,
+        userName: const DetectedText(value: 'Test User'),
+        bio: const DetectedText(value: 'Test bio'),
+        image: const DetectedImage(value: 'test.jpg'),
         followerCount: 100,
         followingCount: 50,
         postCount: 25,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        isOfficial: false,
       );
     });
 
@@ -32,7 +34,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: MosaicUserChild(
-              publicUser: testUser,
+              publicUserEntity: testUser,
               msg: message,
               title: title,
             ),
@@ -51,7 +53,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: MosaicUserChild(
-              publicUser: testUser,
+              publicUserEntity: testUser,
               msg: 'Test message',
               title: 'Test Title',
             ),
@@ -72,7 +74,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: MosaicUserChild(
-              publicUser: testUser,
+              publicUserEntity: testUser,
               msg: 'Test message',
               title: 'Test Title',
             ),
@@ -94,7 +96,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: MosaicUserChild(
-                publicUser: testUser,
+                publicUserEntity: testUser,
                 msg: 'Test message',
                 title: title,
               ),
@@ -121,7 +123,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: MosaicUserChild(
-                publicUser: testUser,
+                publicUserEntity: testUser,
                 msg: message,
                 title: 'Test Title',
               ),
@@ -138,29 +140,29 @@ void main() {
       WidgetTester tester,
     ) async {
       final users = [
-        PublicUser(
+        PublicUserEntity(
           uid: 'user1',
-          userName: const {'value': 'Regular User'},
-          bio: const {'value': 'Bio'},
-          image: const {'value': ''},
+          isOfficial: false,
+          userName: const DetectedText(value: 'Regular User'),
+          bio: const DetectedText(value: 'Bio'),
+          image: const DetectedImage(value: ''),
           followerCount: 0,
           followingCount: 0,
           postCount: 0,
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
-          isOfficial: false,
         ),
-        PublicUser(
+        PublicUserEntity(
           uid: 'user2',
-          userName: const {'value': 'Official User'},
-          bio: const {'value': 'Official bio'},
-          image: const {'value': 'official.jpg'},
+          isOfficial: true,
+          userName: const DetectedText(value: 'Official User'),
+          bio: const DetectedText(value: 'Official bio'),
+          image: const DetectedImage(value: 'official.jpg'),
           followerCount: 10000,
           followingCount: 100,
           postCount: 500,
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
-          isOfficial: true,
         ),
       ];
 
@@ -169,7 +171,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: MosaicUserChild(
-                publicUser: user,
+                publicUserEntity: user,
                 msg: 'Message for ${user.nameValue}',
                 title: 'User Title',
               ),
@@ -187,7 +189,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: MosaicUserChild(
-              publicUser: testUser,
+              publicUserEntity: testUser,
               msg: 'Test message',
               title: 'Test Title',
             ),
@@ -208,7 +210,11 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: MosaicUserChild(publicUser: testUser, msg: '', title: ''),
+            body: MosaicUserChild(
+              publicUserEntity: testUser,
+              msg: '',
+              title: '',
+            ),
           ),
         ),
       );
@@ -235,7 +241,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: MosaicUserChild(
-                publicUser: testUser,
+                publicUserEntity: testUser,
                 msg: testCase['msg']!,
                 title: testCase['title']!,
               ),
@@ -272,7 +278,7 @@ void main() {
           MaterialApp(
             home: Scaffold(
               body: MosaicUserChild(
-                publicUser: testUser,
+                publicUserEntity: testUser,
                 msg: message,
                 title: title,
               ),
@@ -304,13 +310,13 @@ void main() {
                   child: ListView(
                     children: [
                       MosaicUserChild(
-                        publicUser: testUser,
+                        publicUserEntity: testUser,
                         msg: 'Message 1',
                         title: 'Title 1',
                       ),
                       const SizedBox(height: 10),
                       MosaicUserChild(
-                        publicUser: testUser,
+                        publicUserEntity: testUser,
                         msg: 'Message 2',
                         title: 'Title 2',
                       ),
@@ -336,7 +342,7 @@ void main() {
           theme: ThemeData.light(),
           home: Scaffold(
             body: MosaicUserChild(
-              publicUser: testUser,
+              publicUserEntity: testUser,
               msg: 'Light theme message',
               title: 'Light Theme',
             ),
@@ -353,7 +359,7 @@ void main() {
           theme: ThemeData.dark(),
           home: Scaffold(
             body: MosaicUserChild(
-              publicUser: testUser,
+              publicUserEntity: testUser,
               msg: 'Dark theme message',
               title: 'Dark Theme',
             ),
@@ -372,7 +378,11 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: MosaicUserChild(publicUser: testUser, msg: '', title: ''),
+              body: MosaicUserChild(
+                publicUserEntity: testUser,
+                msg: '',
+                title: '',
+              ),
             ),
           ),
         );
@@ -394,7 +404,7 @@ void main() {
               body: SizedBox(
                 width: 300,
                 child: MosaicUserChild(
-                  publicUser: testUser,
+                  publicUserEntity: testUser,
                   msg: longMessage,
                   title: longTitle,
                 ),

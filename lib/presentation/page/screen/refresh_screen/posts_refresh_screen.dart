@@ -56,7 +56,7 @@ class PostsRefreshScreen extends HookWidget {
           return PostCard(
             post: userPost.post,
             base64: base64,
-            publicUser: userPost.user,
+            publicUserEntity: userPost.user,
           );
         },
       ),

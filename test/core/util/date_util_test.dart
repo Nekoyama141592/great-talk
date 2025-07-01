@@ -91,5 +91,41 @@ void main() {
         );
       });
     });
+
+    group('toYyyyMmDd', () {
+      test('should convert DateTime to yyyy/mm/dd format', () {
+        final dateTime = DateTime(2023, 5, 15);
+        final result = DateUtil.toYyyyMmDd(dateTime);
+
+        expect(result, '2023/05/15');
+      });
+
+      test('should handle single digit month and day with zero padding', () {
+        final dateTime = DateTime(2023, 1, 5);
+        final result = DateUtil.toYyyyMmDd(dateTime);
+
+        expect(result, '2023/01/05');
+      });
+
+      test('should handle December and 31st day', () {
+        final dateTime = DateTime(2023, 12, 31);
+        final result = DateUtil.toYyyyMmDd(dateTime);
+
+        expect(result, '2023/12/31');
+      });
+
+      test('should return empty string for null DateTime', () {
+        final result = DateUtil.toYyyyMmDd(null);
+
+        expect(result, '');
+      });
+
+      test('should handle leap year February', () {
+        final dateTime = DateTime(2024, 2, 29);
+        final result = DateUtil.toYyyyMmDd(dateTime);
+
+        expect(result, '2024/02/29');
+      });
+    });
   });
 }

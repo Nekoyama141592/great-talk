@@ -5,7 +5,7 @@ import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/presentation/util/texts.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/presentation/component/basic_width_box.dart';
 import 'package:great_talk/presentation/component/circle_image/circle_image.dart';
@@ -21,7 +21,7 @@ class UserCard extends ConsumerWidget {
     required this.publicUser,
     required this.uint8list,
   });
-  final PublicUser publicUser;
+  final PublicUserEntity publicUser;
   final Uint8List? uint8list;
 
   @override
@@ -35,7 +35,7 @@ class UserCard extends ConsumerWidget {
                 height: SizeUtil.userImageSize(context),
                 child: MosaicCard(
                   child: MosaicUserChild(
-                    publicUser: publicUser,
+                    publicUserEntity: publicUser,
                     msg: publicUser.inappropriateReason(
                       ref.watch(authUidProvider),
                     ),
@@ -50,7 +50,7 @@ class UserCard extends ConsumerWidget {
                         state.isMutingUser(publicUser.uid)
                             ? MosaicCard(
                               child: MosaicUserChild(
-                                publicUser: publicUser,
+                                publicUserEntity: publicUser,
                                 msg: "あなたはこのユーザーをミュートしています。",
                                 title: "ミュートしている",
                               ),
