@@ -59,7 +59,7 @@ class ChatPage extends HookConsumerWidget {
     bool isAnotherDay(List<TextMessage> messages, int index) {
       if (index == 0) return true; // 最初のメッセージは常に日付を表示
       final message = messages[index];
-      return message.createdAt!.day != messages[index - 1].createdAt!.day;
+      return message.createdAt.day != messages[index - 1].createdAt.day;
     }
 
     void mutePost(BuildContext innerContext, PostEntity post) async {

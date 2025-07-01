@@ -4,6 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
@@ -101,9 +104,7 @@ void main() {
             'moderationModelVersion': '1.0',
             'value': 'test.jpg',
           },
-          'searchToken': {
-            'tokens': ['test', 'post'],
-          },
+          'searchToken': <String, dynamic>{},
           'bookmarkCount': 0,
           'exampleTexts': [],
           'genre': 'test',
@@ -152,13 +153,13 @@ void main() {
           'createdAt': mockTimestamp,
           'updatedAt': mockTimestamp,
           'customCompleteText': {'systemPrompt': 'Test prompt 1'},
+          'searchToken': <String, dynamic>{},
           'image': {
             'bucketName': 'test-bucket',
             'moderationLabels': [],
             'moderationModelVersion': '1.0',
             'value': 'test1.jpg',
           },
-          'searchToken': {'tokens': []},
           'bookmarkCount': 0,
           'exampleTexts': [],
           'genre': '',
@@ -193,13 +194,13 @@ void main() {
           'createdAt': mockTimestamp,
           'updatedAt': mockTimestamp,
           'customCompleteText': {'systemPrompt': 'Test prompt 2'},
+          'searchToken': <String, dynamic>{},
           'image': {
             'bucketName': 'test-bucket',
             'moderationLabels': [],
             'moderationModelVersion': '1.0',
             'value': 'test2.jpg',
           },
-          'searchToken': {'tokens': []},
           'bookmarkCount': 0,
           'exampleTexts': [],
           'genre': '',
@@ -245,13 +246,13 @@ void main() {
           'createdAt': mockTimestamp,
           'updatedAt': mockTimestamp,
           'customCompleteText': {'systemPrompt': 'Timeline prompt'},
+          'searchToken': <String, dynamic>{},
           'image': {
             'bucketName': 'test-bucket',
             'moderationLabels': [],
             'moderationModelVersion': '1.0',
             'value': 'timeline.jpg',
           },
-          'searchToken': {'tokens': []},
           'bookmarkCount': 0,
           'exampleTexts': [],
           'genre': '',
@@ -320,42 +321,33 @@ void main() {
         final post = PostEntity(
           uid: postUid,
           postId: postId,
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Liked Post Title',
-          },
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Liked post description',
-          },
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {'systemPrompt': 'Liked post prompt'},
-          image: const {
-            'bucketName': 'test-bucket',
-            'moderationLabels': [],
-            'moderationModelVersion': '1.0',
-            'value': 'liked.jpg',
-          },
-          searchToken: const {'tokens': []},
-          bookmarkCount: 0,
-          exampleTexts: const [],
-          genre: '',
-          hashTags: const [],
-          impressionCount: 0,
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Liked Post Title',
+          ),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Liked post description',
+          ),
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(
+            systemPrompt: 'Liked post prompt',
+          ),
+          image: const DetectedImage(
+            bucketName: 'test-bucket',
+            moderationLabels: [],
+            moderationModelVersion: '1.0',
+            value: 'liked.jpg',
+          ),
           likeCount: 0,
-          links: const [],
           msgCount: 0,
-          muteCount: 0,
-          reportCount: 0,
-          score: 0.0,
-          userCount: 0,
         );
 
         final token = LikePostToken(
@@ -494,13 +486,13 @@ void main() {
           'createdAt': mockTimestamp,
           'updatedAt': mockTimestamp,
           'customCompleteText': {'systemPrompt': 'Consistency test'},
+          'searchToken': <String, dynamic>{},
           'image': {
             'bucketName': 'test-bucket',
             'moderationLabels': [],
             'moderationModelVersion': '1.0',
             'value': 'consistency.jpg',
           },
-          'searchToken': {'tokens': []},
           'bookmarkCount': 0,
           'exampleTexts': [],
           'genre': '',

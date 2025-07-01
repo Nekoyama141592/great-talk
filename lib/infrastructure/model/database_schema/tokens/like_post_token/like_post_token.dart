@@ -24,7 +24,6 @@ abstract class LikePostToken with _$LikePostToken {
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),
       passiveUid: post.uid,
-      // postRef: post.typedRef(),
       postId: post.postId,
       tokenId: IdUtil.randomString(),
       tokenType: TokenType.likePost.name,

@@ -20,7 +20,6 @@ abstract class PostLike with _$PostLike {
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),
       passiveUid: post.uid,
-      // postRef: post.ref,
       postId: post.postId,
     );
   }

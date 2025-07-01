@@ -5,6 +5,9 @@ import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/like_post_use_case.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
 
 void main() {
@@ -32,37 +35,26 @@ void main() {
         testPost = PostEntity(
           postId: 'test_post_id',
           uid: 'test_post_owner_uid',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Test post description',
-          },
-          image: const {},
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Test Post Title',
-          },
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Test post description',
+          ),
+          image: const DetectedImage(),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Test Post Title',
+          ),
           likeCount: 10,
-          bookmarkCount: 0,
-          exampleTexts: const [],
-          genre: '',
-          hashTags: const [],
-          impressionCount: 0,
-          links: const [],
           msgCount: 0,
-          muteCount: 0,
-          reportCount: 0,
-          score: 0.0,
-          userCount: 0,
         );
 
         testToken = LikePostToken(
@@ -168,37 +160,26 @@ void main() {
         testPost = PostEntity(
           postId: 'test_post_id',
           uid: 'test_post_owner_uid',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Test post description',
-          },
-          image: const {},
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Test Post Title',
-          },
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Test post description',
+          ),
+          image: const DetectedImage(),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Test Post Title',
+          ),
           likeCount: 5,
-          bookmarkCount: 0,
-          exampleTexts: const [],
-          genre: '',
-          hashTags: const [],
-          impressionCount: 0,
-          links: const [],
           msgCount: 0,
-          muteCount: 0,
-          reportCount: 0,
-          score: 0.0,
-          userCount: 0,
         );
       });
 
@@ -297,37 +278,26 @@ void main() {
         final post = PostEntity(
           postId: 'rapid_test_post',
           uid: 'owner_uid',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Rapid test description',
-          },
-          image: const {},
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Rapid Test Post',
-          },
-          bookmarkCount: 0,
-          exampleTexts: const [],
-          genre: '',
-          hashTags: const [],
-          impressionCount: 0,
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Rapid test description',
+          ),
+          image: const DetectedImage(),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Rapid Test Post',
+          ),
           likeCount: 0,
-          links: const [],
           msgCount: 0,
-          muteCount: 0,
-          reportCount: 0,
-          score: 0.0,
-          userCount: 0,
         );
 
         final token1 = LikePostToken(
@@ -375,37 +345,26 @@ void main() {
         final post = PostEntity(
           postId: 'like_unlike_test_post',
           uid: 'owner_uid',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Like unlike test description',
-          },
-          image: const {},
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Like Unlike Test Post',
-          },
-          bookmarkCount: 0,
-          exampleTexts: const [],
-          genre: '',
-          hashTags: const [],
-          impressionCount: 0,
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Like unlike test description',
+          ),
+          image: const DetectedImage(),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Like Unlike Test Post',
+          ),
           likeCount: 0,
-          links: const [],
           msgCount: 0,
-          muteCount: 0,
-          reportCount: 0,
-          score: 0.0,
-          userCount: 0,
         );
 
         final token = LikePostToken(

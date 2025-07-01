@@ -7,6 +7,8 @@ import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/delete_post_use_case.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
 
 class FakeApiRepository implements ApiRepository {
@@ -59,42 +61,31 @@ void main() {
         testPost = PostEntity(
           postId: 'test_post_id',
           uid: 'test_post_owner_uid',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Test post description',
-          },
-          image: const {
-            'value': 'test_image.jpg',
-            'bucketName': 'test_bucket',
-            'moderationLabels': [],
-            'moderationModelVersion': 'test_version',
-          },
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Test Post Title',
-          },
-          bookmarkCount: 0,
-          exampleTexts: const [],
-          genre: '',
-          hashTags: const [],
-          impressionCount: 0,
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Test post description',
+          ),
+          image: const DetectedImage(
+            value: 'test_image.jpg',
+            bucketName: 'test_bucket',
+            moderationLabels: [],
+            moderationModelVersion: 'test_version',
+          ),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Test Post Title',
+          ),
           likeCount: 0,
-          links: const [],
           msgCount: 0,
-          muteCount: 0,
-          reportCount: 0,
-          score: 0.0,
-          userCount: 0,
         );
       });
 
@@ -184,7 +175,9 @@ void main() {
       );
 
       test('should handle post with empty image data', () async {
-        final postWithEmptyImage = testPost.copyWith(image: {});
+        final postWithEmptyImage = testPost.copyWith(
+          image: const DetectedImage(),
+        );
 
         // Create post in fake Firestore first
         await databaseRepository.createPost(
@@ -213,12 +206,12 @@ void main() {
 
       test('should handle post with null image value', () async {
         final postWithNullFileName = testPost.copyWith(
-          image: {
-            'value': null,
-            'bucketName': 'test_bucket',
-            'moderationLabels': [],
-            'moderationModelVersion': 'test_version',
-          },
+          image: const DetectedImage(
+            value: '',
+            bucketName: 'test_bucket',
+            moderationLabels: [],
+            moderationModelVersion: 'test_version',
+          ),
         );
 
         // Create post in fake Firestore first
@@ -248,12 +241,12 @@ void main() {
 
       test('should handle post with different image configurations', () async {
         final postWithDifferentImage = testPost.copyWith(
-          image: {
-            'value': 'different_image.png',
-            'bucketName': 'different_bucket',
-            'moderationLabels': [],
-            'moderationModelVersion': 'test_version',
-          },
+          image: const DetectedImage(
+            value: 'different_image.png',
+            bucketName: 'different_bucket',
+            moderationLabels: [],
+            moderationModelVersion: 'test_version',
+          ),
         );
 
         // Create post in fake Firestore first
@@ -291,12 +284,7 @@ void main() {
       test('should handle posts with high counts', () async {
         final postWithHighCounts = testPost.copyWith(
           likeCount: 9999,
-          muteCount: 100,
-          reportCount: 50,
           msgCount: 1000,
-          userCount: 500,
-          impressionCount: 10000,
-          bookmarkCount: 200,
         );
 
         // Create post in fake Firestore first
@@ -369,42 +357,31 @@ void main() {
         final post = PostEntity(
           postId: 'concurrent_test_post',
           uid: 'owner_uid',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Concurrent test description',
-          },
-          image: const {
-            'value': 'concurrent_image.jpg',
-            'bucketName': 'test_bucket',
-            'moderationLabels': [],
-            'moderationModelVersion': 'test_version',
-          },
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Concurrent Test Post',
-          },
-          bookmarkCount: 0,
-          exampleTexts: const [],
-          genre: '',
-          hashTags: const [],
-          impressionCount: 0,
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Concurrent test description',
+          ),
+          image: const DetectedImage(
+            value: 'concurrent_image.jpg',
+            bucketName: 'test_bucket',
+            moderationLabels: [],
+            moderationModelVersion: 'test_version',
+          ),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Concurrent Test Post',
+          ),
           likeCount: 0,
-          links: const [],
           msgCount: 0,
-          muteCount: 0,
-          reportCount: 0,
-          score: 0.0,
-          userCount: 0,
         );
 
         // Create post in fake Firestore first
@@ -442,42 +419,31 @@ void main() {
           final postWithSpecialChars = PostEntity(
             postId: 'special_chars_post',
             uid: 'owner_uid',
-            createdAt: mockTimestamp,
-            updatedAt: mockTimestamp,
-            customCompleteText: const {},
-            description: const {
-              'languageCode': 'en',
-              'negativeScore': 0.05,
-              'positiveScore': 0.95,
-              'sentiment': 'positive',
-              'value': 'Special chars test description',
-            },
-            image: const {
-              'value': 'image@#\$%^&*()_+.jpg',
-              'bucketName': 'test_bucket',
-              'moderationLabels': [],
-              'moderationModelVersion': 'test_version',
-            },
-            searchToken: const {},
-            title: const {
-              'languageCode': 'en',
-              'negativeScore': 0.1,
-              'positiveScore': 0.9,
-              'sentiment': 'positive',
-              'value': 'Special Chars Test Post',
-            },
-            bookmarkCount: 0,
-            exampleTexts: const [],
-            genre: '',
-            hashTags: const [],
-            impressionCount: 0,
+            createdAt: mockTimestamp.toDate(),
+            updatedAt: mockTimestamp.toDate(),
+            customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+            description: const DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 1,
+              sentiment: 'positive',
+              value: 'Special chars test description',
+            ),
+            image: const DetectedImage(
+              value: 'image@#\$%^&*()_+.jpg',
+              bucketName: 'test_bucket',
+              moderationLabels: [],
+              moderationModelVersion: 'test_version',
+            ),
+            title: const DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 1,
+              sentiment: 'positive',
+              value: 'Special Chars Test Post',
+            ),
             likeCount: 0,
-            links: const [],
             msgCount: 0,
-            muteCount: 0,
-            reportCount: 0,
-            score: 0.0,
-            userCount: 0,
           );
 
           // Create post in fake Firestore first
@@ -512,42 +478,31 @@ void main() {
         final postWithLongFileName = PostEntity(
           postId: 'long_filename_post',
           uid: 'owner_uid',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Long filename test description',
-          },
-          image: {
-            'value': longFileName,
-            'bucketName': 'test_bucket',
-            'moderationLabels': [],
-            'moderationModelVersion': 'test_version',
-          },
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Long Filename Test Post',
-          },
-          bookmarkCount: 0,
-          exampleTexts: const [],
-          genre: '',
-          hashTags: const [],
-          impressionCount: 0,
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Long filename test description',
+          ),
+          image: DetectedImage(
+            value: longFileName,
+            bucketName: 'test_bucket',
+            moderationLabels: const [],
+            moderationModelVersion: 'test_version',
+          ),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Long Filename Test Post',
+          ),
           likeCount: 0,
-          links: const [],
           msgCount: 0,
-          muteCount: 0,
-          reportCount: 0,
-          score: 0.0,
-          userCount: 0,
         );
 
         // Create post in fake Firestore first

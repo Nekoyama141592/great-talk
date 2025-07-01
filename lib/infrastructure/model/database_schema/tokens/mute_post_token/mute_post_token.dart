@@ -22,7 +22,6 @@ abstract class MutePostToken with _$MutePostToken {
     return MutePostToken(
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),
-      // postRef: post.typedRef(),
       postId: post.postId,
       tokenId: IdUtil.randomString(),
       tokenType: TokenType.mutePost.name,
