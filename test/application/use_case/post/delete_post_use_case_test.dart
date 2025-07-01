@@ -5,7 +5,7 @@ import 'package:great_talk/infrastructure/repository/api_repository.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/delete_post_use_case.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
 
@@ -53,10 +53,10 @@ void main() {
     });
 
     group('deletePost', () {
-      late Post testPost;
+      late PostEntity testPost;
 
       setUp(() {
-        testPost = Post(
+        testPost = PostEntity(
           postId: 'test_post_id',
           uid: 'test_post_owner_uid',
           createdAt: mockTimestamp,
@@ -83,6 +83,18 @@ void main() {
             'sentiment': 'positive',
             'value': 'Test Post Title',
           },
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          genre: '',
+          hashTags: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          score: 0.0,
+          userCount: 0,
         );
       });
 
@@ -354,7 +366,7 @@ void main() {
 
     group('edge cases', () {
       test('should handle concurrent deletion attempts', () async {
-        final post = Post(
+        final post = PostEntity(
           postId: 'concurrent_test_post',
           uid: 'owner_uid',
           createdAt: mockTimestamp,
@@ -381,6 +393,18 @@ void main() {
             'sentiment': 'positive',
             'value': 'Concurrent Test Post',
           },
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          genre: '',
+          hashTags: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          score: 0.0,
+          userCount: 0,
         );
 
         // Create post in fake Firestore first
@@ -415,7 +439,7 @@ void main() {
       test(
         'should handle posts with special characters in image value',
         () async {
-          final postWithSpecialChars = Post(
+          final postWithSpecialChars = PostEntity(
             postId: 'special_chars_post',
             uid: 'owner_uid',
             createdAt: mockTimestamp,
@@ -442,6 +466,18 @@ void main() {
               'sentiment': 'positive',
               'value': 'Special Chars Test Post',
             },
+            bookmarkCount: 0,
+            exampleTexts: const [],
+            genre: '',
+            hashTags: const [],
+            impressionCount: 0,
+            likeCount: 0,
+            links: const [],
+            msgCount: 0,
+            muteCount: 0,
+            reportCount: 0,
+            score: 0.0,
+            userCount: 0,
           );
 
           // Create post in fake Firestore first
@@ -473,7 +509,7 @@ void main() {
 
       test('should handle posts with very long image values', () async {
         final longFileName = 'very_long_file_name_' * 10 + '.jpg';
-        final postWithLongFileName = Post(
+        final postWithLongFileName = PostEntity(
           postId: 'long_filename_post',
           uid: 'owner_uid',
           createdAt: mockTimestamp,
@@ -500,6 +536,18 @@ void main() {
             'sentiment': 'positive',
             'value': 'Long Filename Test Post',
           },
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          genre: '',
+          hashTags: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          score: 0.0,
+          userCount: 0,
         );
 
         // Create post in fake Firestore first

@@ -14,7 +14,7 @@ import 'package:great_talk/core/provider/repository/local/local_repository_provi
 import 'package:great_talk/core/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
 part 'chat_view_model.g.dart';
 
@@ -84,12 +84,12 @@ class ChatViewModel extends _$ChatViewModel {
     return result;
   }
 
-  Future<Post?> _fetchPost(String uid, String postId) {
+  Future<PostEntity?> _fetchPost(String uid, String postId) {
     final repository = ref.read(databaseRepositoryProvider);
     return repository.getPost(uid, postId);
   }
 
-  Future<String?> _fetchPostImage(Post post) {
+  Future<String?> _fetchPostImage(PostEntity post) {
     final detectedImage = post.typedImage();
     return ref
         .read(fileUseCaseProvider)

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/presentation/state/chat/chat_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
@@ -63,7 +63,7 @@ class ChatPage extends HookConsumerWidget {
           messages[index - 1].createdAtDateTime.day;
     }
 
-    void mutePost(BuildContext innerContext, Post post) async {
+    void mutePost(BuildContext innerContext, PostEntity post) async {
       final uid = ref.read(authUidProvider);
       if (uid == null) return;
       final token = ref.read(tokensNotifierProvider.notifier).addMutePost(post);
@@ -82,7 +82,7 @@ class ChatPage extends HookConsumerWidget {
     return AsyncPage(
       asyncValue: chatStateAsync,
       data: (ChatState data) {
-        final Post post = data.post;
+        final PostEntity post = data.post;
         final List<TextMessage> messages = data.messages;
         final String currentUserId = ref.watch(authUidProvider) ?? "";
 

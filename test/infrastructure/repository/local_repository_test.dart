@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/infrastructure/repository/local_repository.dart';
@@ -239,8 +239,8 @@ void main() {
     });
 
     group('Message operations', () {
-      Post createTestPost(String postId) {
-        return Post(
+      PostEntity createTestPost(String postId) {
+        return PostEntity(
           postId: postId,
           createdAt: Timestamp.now(),
           customCompleteText: DetectedText(value: 'Complete text').toJson(),
@@ -250,6 +250,18 @@ void main() {
           title: DetectedText(value: 'Test Title').toJson(),
           uid: 'owner_uid',
           updatedAt: Timestamp.now(),
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          genre: '',
+          hashTags: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          score: 0.0,
+          userCount: 0,
         );
       }
 

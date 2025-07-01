@@ -1,4 +1,4 @@
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 /// Abstract interface for post deletion operations.
@@ -9,5 +9,5 @@ abstract class IDeletePostUseCase {
   /// [post] - The post to delete
   ///
   /// Returns a FutureResult indicating success or failure of the deletion.
-  FutureResult<bool> deletePost(Post post);
+  FutureResult<bool> deletePost(PostEntity post);
 }

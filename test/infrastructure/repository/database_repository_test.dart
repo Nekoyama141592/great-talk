@@ -3,7 +3,7 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
@@ -317,7 +317,7 @@ void main() {
         const postId = 'liked_post';
         const tokenId = 'like_token_123';
 
-        final post = Post(
+        final post = PostEntity(
           uid: postUid,
           postId: postId,
           title: const {
@@ -344,6 +344,18 @@ void main() {
             'value': 'liked.jpg',
           },
           searchToken: const {'tokens': []},
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          genre: '',
+          hashTags: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          score: 0.0,
+          userCount: 0,
         );
 
         final token = LikePostToken(

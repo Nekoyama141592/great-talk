@@ -4,7 +4,7 @@ import 'package:great_talk/domain/value/message_type.dart';
 import 'package:great_talk/core/util/id_util.dart';
 import 'package:great_talk/core/extension/custom_date_time_formatting.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/local_schema/save_text_msg/save_text_msg.dart';
 
 part 'text_message.freezed.dart';
@@ -22,7 +22,7 @@ abstract class TextMessage with _$TextMessage {
   }) = _TextMessage;
   factory TextMessage.fromJson(Map<String, dynamic> json) =>
       _$TextMessageFromJson(json);
-  factory TextMessage.assistant(String content, Post post) {
+  factory TextMessage.assistant(String content, PostEntity post) {
     return TextMessage(
       id: IdUtil.randomString(),
       createdAt: Timestamp.now(),

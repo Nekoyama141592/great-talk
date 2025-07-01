@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:great_talk/core/extension/number_format_extension.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/post/like_post/like_post_use_case_provider.dart';
@@ -17,7 +17,7 @@ class PostLikeButton extends HookConsumerWidget {
     required this.post,
   });
   final bool isHorizontal;
-  final Post post;
+  final PostEntity post;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final likeCount = useState(post.likeCount);

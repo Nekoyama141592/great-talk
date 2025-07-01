@@ -1,5 +1,5 @@
 import 'package:great_talk/core/constant/firestore_constant.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/presentation/state/tokens/tokens_state.dart';
 import 'package:great_talk/presentation/state/posts/posts_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
@@ -45,7 +45,7 @@ class MutePostsViewModel extends _$MutePostsViewModel
     return [];
   }
 
-  FutureResult<bool> onMutePostCardTap(Post post) async {
+  FutureResult<bool> onMutePostCardTap(PostEntity post) async {
     final currentUid = ref.read(authUidProvider);
     if (currentUid == null) {
       return const Result.failure('ログインしてください');
@@ -79,7 +79,7 @@ class MutePostsViewModel extends _$MutePostsViewModel
     return const Result.success(true);
   }
 
-  Future<void> _addPosts(List<Post> posts) async {
+  Future<void> _addPosts(List<PostEntity> posts) async {
     if (state.isLoading || posts.isEmpty) return;
     final currentState = state.value!;
     final currentPosts = currentState.userPosts;

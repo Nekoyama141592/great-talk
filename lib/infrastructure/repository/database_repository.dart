@@ -9,6 +9,7 @@ import 'package:great_talk/infrastructure/model/database_schema/post_mute/post_m
 import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
@@ -204,7 +205,7 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  FutureResult<bool> deletePost(Post post) {
+  FutureResult<bool> deletePost(PostEntity post) {
     final docRef = postDocRef(post.uid, post.postId);
     return _deleteDoc(docRef);
   }
@@ -258,7 +259,7 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   FutureResult<bool> createMutePostInfo(
     String currentUid,
-    Post post,
+    PostEntity post,
     MutePostToken token,
     PostMute postMute,
   ) async {
@@ -277,7 +278,7 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   FutureResult<bool> createLikePostInfo(
     String currentUid,
-    Post post,
+    PostEntity post,
     LikePostToken token,
     PostLike postLike,
   ) async {
@@ -332,7 +333,7 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   FutureResult<bool> deleteMutePostInfo(
     String currentUid,
-    Post post,
+    PostEntity post,
     String tokenId,
   ) async {
     final tokenRef = tokenDocRef(currentUid, tokenId);
@@ -347,7 +348,7 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   FutureResult<bool> deleteLikePostInfo(
     String currentUid,
-    Post post,
+    PostEntity post,
     String tokenId,
   ) async {
     final tokenRef = tokenDocRef(currentUid, tokenId);
@@ -387,13 +388,14 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<Post?> getPost(String uid, String postId) async {
+  Future<PostEntity?> getPost(String uid, String postId) async {
     try {
       final docRef = postDocRef(uid, postId);
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      return Post.fromJson(Map<String, dynamic>.from(data));
+      final post = Post.fromJson(Map<String, dynamic>.from(data));
+      return PostEntity.fromJson(post.toJson());
     } catch (e) {
       debugPrint('getPost: ${e.toString()}');
       return null;
@@ -418,14 +420,15 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Post>> getTimelinePosts(List<String> postIds) async {
+  Future<List<PostEntity>> getTimelinePosts(List<String> postIds) async {
     if (postIds.isEmpty) return [];
     try {
       final query = timelinePostsQuery(postIds);
       final qSnapshot = await _getDocs(query);
-      return qSnapshot.docs
-          .map((e) => Post.fromJson(Map<String, dynamic>.from(e.data())))
-          .toList();
+      return qSnapshot.docs.map((e) {
+        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        return PostEntity.fromJson(post.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getTimelinePosts: ${e.toString()}'); // Added debugPrint here
       return [];
@@ -449,33 +452,35 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Post>> getUserPosts(String uid) async {
+  Future<List<PostEntity>> getUserPosts(String uid) async {
     try {
       final query = userPostsByNewest(uid);
       final qshot = await _getDocs(query);
-      return qshot.docs
-          .map((e) => Post.fromJson(Map<String, dynamic>.from(e.data())))
-          .toList();
+      return qshot.docs.map((e) {
+        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        return PostEntity.fromJson(post.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getUserPosts: ${e.toString()}');
       return [];
     }
   }
 
-  Future<Doc> _getPostDoc(Post post) async {
+  Future<Doc> _getPostDoc(PostEntity post) async {
     final docRef = postDocRef(post.uid, post.postId);
     return docRef.get();
   }
 
   @override
-  Future<List<Post>> getMoreUserPosts(Post lastPost) async {
+  Future<List<PostEntity>> getMoreUserPosts(PostEntity lastPost) async {
     try {
       final doc = await _getPostDoc(lastPost);
       final query = userPostsByNewest(lastPost.uid).startAfterDocument(doc);
       final qshot = await query.get();
-      return qshot.docs
-          .map((e) => Post.fromJson(Map<String, dynamic>.from(e.data())))
-          .toList();
+      return qshot.docs.map((e) {
+        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        return PostEntity.fromJson(post.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getMoreUserPosts: ${e.toString()}');
       return [];
@@ -588,12 +593,13 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Post>> getPosts(bool isRankingPosts) async {
+  Future<List<PostEntity>> getPosts(bool isRankingPosts) async {
     try {
       final qshot = await _postsQuery(isRankingPosts).get();
-      return qshot.docs
-          .map((e) => Post.fromJson(Map<String, dynamic>.from(e.data())))
-          .toList();
+      return qshot.docs.map((e) {
+        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        return PostEntity.fromJson(post.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getPosts: ${e.toString()}');
       return [];
@@ -601,14 +607,18 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Post>> getMorePosts(bool isRankingPosts, Post lastPost) async {
+  Future<List<PostEntity>> getMorePosts(
+    bool isRankingPosts,
+    PostEntity lastPost,
+  ) async {
     try {
       final doc = await _getPostDoc(lastPost);
       final qshot =
           await _postsQuery(isRankingPosts).startAfterDocument(doc).get();
-      return qshot.docs
-          .map((e) => Post.fromJson(Map<String, dynamic>.from(e.data())))
-          .toList();
+      return qshot.docs.map((e) {
+        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        return PostEntity.fromJson(post.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getMorePosts: ${e.toString()}');
       return [];
@@ -634,14 +644,15 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Post>> getMutePosts(List<String> postIds) async {
+  Future<List<PostEntity>> getMutePosts(List<String> postIds) async {
     if (postIds.isEmpty) return [];
     try {
       final query = postsByWhereIn(postIds);
       final qshot = await query.get();
-      return qshot.docs
-          .map((e) => Post.fromJson(Map<String, dynamic>.from(e.data())))
-          .toList();
+      return qshot.docs.map((e) {
+        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        return PostEntity.fromJson(post.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getMutePosts: ${e.toString()}');
       return [];
@@ -649,18 +660,19 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Post>> getMoreMutePosts(
+  Future<List<PostEntity>> getMoreMutePosts(
     List<String> postIds,
-    Post lastPost,
+    PostEntity lastPost,
   ) async {
     if (postIds.isEmpty) return [];
     try {
       final doc = await _getPostDoc(lastPost);
       final query = postsByWhereIn(postIds).startAfterDocument(doc);
       final qshot = await query.get();
-      return qshot.docs
-          .map((e) => Post.fromJson(Map<String, dynamic>.from(e.data())))
-          .toList();
+      return qshot.docs.map((e) {
+        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        return PostEntity.fromJson(post.toJson());
+      }).toList();
     } catch (e) {
       debugPrint('getMoreMutePosts: ${e.toString()}');
       return [];

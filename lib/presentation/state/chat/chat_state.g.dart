@@ -12,7 +12,7 @@ _ChatState _$ChatStateFromJson(Map<String, dynamic> json) => _ChatState(
           ?.map((e) => TextMessage.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const [],
-  post: Post.fromJson(json['post'] as Map<String, dynamic>),
+  post: PostEntity.fromJson(json['post'] as Map<String, dynamic>),
   postImage: json['postImage'] as String?,
   isPicked: json['isPicked'] as bool? ?? false,
   pickedImage: json['pickedImage'] as String?,

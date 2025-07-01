@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/domain/entity/view_model_state/common/user_post/user_post.dart';
 
@@ -15,5 +15,5 @@ abstract class TimelinesState with _$TimelinesState {
   }) = _TimelinesState;
   factory TimelinesState.fromJson(Map<String, dynamic> json) =>
       _$TimelinesStateFromJson(json);
-  List<Post> posts() => userPosts.map((e) => e.post).toList();
+  List<PostEntity> posts() => userPosts.map((e) => e.post).toList();
 }

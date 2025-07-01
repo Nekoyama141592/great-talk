@@ -7,7 +7,7 @@ part of 'user_post.dart';
 // **************************************************************************
 
 _UserPost _$UserPostFromJson(Map<String, dynamic> json) => _UserPost(
-  post: Post.fromJson(json['post'] as Map<String, dynamic>),
+  post: PostEntity.fromJson(json['post'] as Map<String, dynamic>),
   user:
       json['user'] == null
           ? null

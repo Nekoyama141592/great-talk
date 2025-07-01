@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/application/use_case/posts/posts_use_case.dart';
 import 'package:great_talk/application/use_case/file/file_use_case.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
@@ -32,12 +32,12 @@ void main() {
     });
 
     group('createUserPosts', () {
-      late List<Post> testPosts;
+      late List<PostEntity> testPosts;
       late List<PublicUser> testUsers;
 
       setUp(() {
         testPosts = [
-          Post(
+          PostEntity(
             postId: 'post_1',
             uid: 'user_1',
             createdAt: mockTimestamp,
@@ -60,8 +60,19 @@ void main() {
               'value': 'Test Post 1',
             },
             msgCount: 10,
+            bookmarkCount: 0,
+            exampleTexts: const [],
+            genre: '',
+            hashTags: const [],
+            impressionCount: 0,
+            likeCount: 0,
+            links: const [],
+            muteCount: 0,
+            reportCount: 0,
+            score: 0.0,
+            userCount: 0,
           ),
-          Post(
+          PostEntity(
             postId: 'post_2',
             uid: 'user_2',
             createdAt: Timestamp.fromDate(DateTime(2024, 1, 2, 12, 0, 0)),
@@ -84,6 +95,17 @@ void main() {
               'value': 'Test Post 2',
             },
             msgCount: 20,
+            bookmarkCount: 0,
+            exampleTexts: const [],
+            genre: '',
+            hashTags: const [],
+            impressionCount: 0,
+            likeCount: 0,
+            links: const [],
+            muteCount: 0,
+            reportCount: 0,
+            score: 0.0,
+            userCount: 0,
           ),
         ];
 

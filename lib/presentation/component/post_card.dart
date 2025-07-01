@@ -7,7 +7,7 @@ import 'package:great_talk/domain/entity/database/public_user/public_user_entity
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/presentation/util/texts.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/presentation/page/chat/chat_page.dart';
 import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/presentation/component/circle_image/circle_image.dart';
@@ -25,7 +25,7 @@ class PostCard extends ConsumerWidget {
     required this.base64,
     required this.publicUserEntity,
   });
-  final Post post;
+  final PostEntity post;
   final String? base64;
   final PublicUserEntity? publicUserEntity;
   @override

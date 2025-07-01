@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/user/mute_user_use_case.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 
 void main() {
@@ -24,13 +24,13 @@ void main() {
     });
 
     group('muteUser', () {
-      late Post testPost;
+      late PostEntity testPost;
       late MuteUserToken testToken;
       const String testCurrentUid = 'test_current_uid';
       const String testPassiveUid = 'test_passive_uid';
 
       setUp(() {
-        testPost = Post(
+        testPost = PostEntity(
           postId: 'test_post_id',
           uid: testPassiveUid,
           createdAt: mockTimestamp,
@@ -52,6 +52,18 @@ void main() {
             'sentiment': 'positive',
             'value': 'Test Post Title',
           },
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          genre: '',
+          hashTags: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          score: 0.0,
+          userCount: 0,
         );
 
         testToken = MuteUserToken(
@@ -199,7 +211,7 @@ void main() {
         final posts =
             users
                 .map(
-                  (uid) => Post(
+                  (uid) => PostEntity(
                     postId: 'post_by_$uid',
                     uid: uid,
                     createdAt: mockTimestamp,
@@ -221,6 +233,18 @@ void main() {
                       'sentiment': 'positive',
                       'value': 'Title by $uid',
                     },
+                    bookmarkCount: 0,
+                    exampleTexts: const [],
+                    genre: '',
+                    hashTags: const [],
+                    impressionCount: 0,
+                    likeCount: 0,
+                    links: const [],
+                    msgCount: 0,
+                    muteCount: 0,
+                    reportCount: 0,
+                    score: 0.0,
+                    userCount: 0,
                   ),
                 )
                 .toList();
@@ -270,7 +294,7 @@ void main() {
       });
 
       test('should handle posts with complex user relationships', () async {
-        final complexPost = Post(
+        final complexPost = PostEntity(
           postId: 'complex_post',
           uid: 'complex_user',
           createdAt: mockTimestamp,
@@ -305,6 +329,12 @@ void main() {
           muteCount: 5,
           reportCount: 1,
           msgCount: 50,
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          impressionCount: 0,
+          links: const [],
+          score: 0.0,
+          userCount: 0,
         );
 
         final complexToken = MuteUserToken(
@@ -341,7 +371,7 @@ void main() {
 
         final posts = List.generate(
           5,
-          (index) => Post(
+          (index) => PostEntity(
             postId: 'rapid_post_$index',
             uid: targetUser,
             createdAt: mockTimestamp,
@@ -363,6 +393,18 @@ void main() {
               'sentiment': 'positive',
               'value': 'Rapid Test $index',
             },
+            bookmarkCount: 0,
+            exampleTexts: const [],
+            genre: '',
+            hashTags: const [],
+            impressionCount: 0,
+            likeCount: 0,
+            links: const [],
+            msgCount: 0,
+            muteCount: 0,
+            reportCount: 0,
+            score: 0.0,
+            userCount: 0,
           ),
         );
 
@@ -418,7 +460,7 @@ void main() {
         const userA = 'user_a';
         const userB = 'user_b';
 
-        final postByB = Post(
+        final postByB = PostEntity(
           postId: 'post_by_b',
           uid: userB,
           createdAt: mockTimestamp,
@@ -440,9 +482,21 @@ void main() {
             'sentiment': 'positive',
             'value': 'Title by User B',
           },
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          genre: '',
+          hashTags: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          score: 0.0,
+          userCount: 0,
         );
 
-        final postByA = Post(
+        final postByA = PostEntity(
           postId: 'post_by_a',
           uid: userA,
           createdAt: mockTimestamp,
@@ -464,6 +518,18 @@ void main() {
             'sentiment': 'positive',
             'value': 'Title by User A',
           },
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          genre: '',
+          hashTags: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          score: 0.0,
+          userCount: 0,
         );
 
         final tokenAMutesB = MuteUserToken(

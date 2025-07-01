@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/presentation/page/chat/chat_page.dart';
 import 'package:great_talk/presentation/page/check_page/first_page.dart';
 
@@ -17,7 +17,7 @@ class RouteUtil {
     context.router.back();
   }
 
-  static void toChatPage(BuildContext context, Post post) {
+  static void toChatPage(BuildContext context, PostEntity post) {
     pushPath(context, ChatPage.generatePath(post.uid, post.postId));
   }
 }

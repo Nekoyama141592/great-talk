@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/mute_post_use_case.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 
 void main() {
@@ -24,12 +24,12 @@ void main() {
     });
 
     group('mutePost', () {
-      late Post testPost;
+      late PostEntity testPost;
       late MutePostToken testToken;
       const String testCurrentUid = 'test_current_uid';
 
       setUp(() {
-        testPost = Post(
+        testPost = PostEntity(
           postId: 'test_post_id',
           uid: 'test_post_owner_uid',
           createdAt: mockTimestamp,
@@ -51,6 +51,18 @@ void main() {
             'sentiment': 'positive',
             'value': 'Test Post Title',
           },
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          genre: '',
+          hashTags: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          score: 0.0,
+          userCount: 0,
         );
 
         testToken = MutePostToken(
@@ -172,7 +184,7 @@ void main() {
 
     group('edge cases', () {
       test('should handle multiple rapid mute operations', () async {
-        final post1 = Post(
+        final post1 = PostEntity(
           postId: 'mute_test_post_1',
           uid: 'owner_uid_1',
           createdAt: mockTimestamp,
@@ -194,9 +206,21 @@ void main() {
             'sentiment': 'positive',
             'value': 'Mute Test Post 1',
           },
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          genre: '',
+          hashTags: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          score: 0.0,
+          userCount: 0,
         );
 
-        final post2 = Post(
+        final post2 = PostEntity(
           postId: 'mute_test_post_2',
           uid: 'owner_uid_2',
           createdAt: mockTimestamp,
@@ -218,6 +242,18 @@ void main() {
             'sentiment': 'positive',
             'value': 'Mute Test Post 2',
           },
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          genre: '',
+          hashTags: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          score: 0.0,
+          userCount: 0,
         );
 
         final token1 = MutePostToken(
@@ -274,7 +310,7 @@ void main() {
       });
 
       test('should handle posts with special content', () async {
-        final specialPost = Post(
+        final specialPost = PostEntity(
           postId: 'special_content_post',
           uid: 'special_owner',
           createdAt: mockTimestamp,
@@ -306,6 +342,15 @@ void main() {
           hashTags: const ['#special', '#テスト'],
           genre: 'test',
           score: 95.5,
+          bookmarkCount: 0,
+          exampleTexts: const [],
+          impressionCount: 0,
+          likeCount: 0,
+          links: const [],
+          msgCount: 0,
+          muteCount: 0,
+          reportCount: 0,
+          userCount: 0,
         );
 
         final specialToken = MutePostToken(
@@ -341,7 +386,7 @@ void main() {
 
         final posts = List.generate(
           3,
-          (index) => Post(
+          (index) => PostEntity(
             postId: 'multi_post_$index',
             uid: 'owner_$index',
             createdAt: mockTimestamp,
@@ -363,6 +408,18 @@ void main() {
               'sentiment': 'positive',
               'value': 'Multi Mute Test Post $index',
             },
+            bookmarkCount: 0,
+            exampleTexts: const [],
+            genre: '',
+            hashTags: const [],
+            impressionCount: 0,
+            likeCount: 0,
+            links: const [],
+            msgCount: 0,
+            muteCount: 0,
+            reportCount: 0,
+            score: 0.0,
+            userCount: 0,
           ),
         );
 

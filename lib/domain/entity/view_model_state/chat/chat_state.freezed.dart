@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatState {
 
- List<TextMessage> get messages; Post get post; String? get postImage; bool get isPicked; String? get pickedImage;
+ List<TextMessage> get messages; PostEntity get post; String? get postImage; bool get isPicked; String? get pickedImage;
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,11 +49,11 @@ abstract mixin class $ChatStateCopyWith<$Res>  {
   factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) _then) = _$ChatStateCopyWithImpl;
 @useResult
 $Res call({
- List<TextMessage> messages, Post post, String? postImage, bool isPicked, String? pickedImage
+ List<TextMessage> messages, PostEntity post, String? postImage, bool isPicked, String? pickedImage
 });
 
 
-$PostCopyWith<$Res> get post;
+$PostEntityCopyWith<$Res> get post;
 
 }
 /// @nodoc
@@ -70,7 +70,7 @@ class _$ChatStateCopyWithImpl<$Res>
   return _then(_self.copyWith(
 messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
 as List<TextMessage>,post: null == post ? _self.post : post // ignore: cast_nullable_to_non_nullable
-as Post,postImage: freezed == postImage ? _self.postImage : postImage // ignore: cast_nullable_to_non_nullable
+as PostEntity,postImage: freezed == postImage ? _self.postImage : postImage // ignore: cast_nullable_to_non_nullable
 as String?,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
 as bool,pickedImage: freezed == pickedImage ? _self.pickedImage : pickedImage // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -80,9 +80,9 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PostCopyWith<$Res> get post {
+$PostEntityCopyWith<$Res> get post {
   
-  return $PostCopyWith<$Res>(_self.post, (value) {
+  return $PostEntityCopyWith<$Res>(_self.post, (value) {
     return _then(_self.copyWith(post: value));
   });
 }
@@ -103,7 +103,7 @@ class _ChatState extends ChatState {
   return EqualUnmodifiableListView(_messages);
 }
 
-@override final  Post post;
+@override final  PostEntity post;
 @override final  String? postImage;
 @override@JsonKey() final  bool isPicked;
 @override final  String? pickedImage;
@@ -141,11 +141,11 @@ abstract mixin class _$ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Re
   factory _$ChatStateCopyWith(_ChatState value, $Res Function(_ChatState) _then) = __$ChatStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<TextMessage> messages, Post post, String? postImage, bool isPicked, String? pickedImage
+ List<TextMessage> messages, PostEntity post, String? postImage, bool isPicked, String? pickedImage
 });
 
 
-@override $PostCopyWith<$Res> get post;
+@override $PostEntityCopyWith<$Res> get post;
 
 }
 /// @nodoc
@@ -162,7 +162,7 @@ class __$ChatStateCopyWithImpl<$Res>
   return _then(_ChatState(
 messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
 as List<TextMessage>,post: null == post ? _self.post : post // ignore: cast_nullable_to_non_nullable
-as Post,postImage: freezed == postImage ? _self.postImage : postImage // ignore: cast_nullable_to_non_nullable
+as PostEntity,postImage: freezed == postImage ? _self.postImage : postImage // ignore: cast_nullable_to_non_nullable
 as String?,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
 as bool,pickedImage: freezed == pickedImage ? _self.pickedImage : pickedImage // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -173,9 +173,9 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PostCopyWith<$Res> get post {
+$PostEntityCopyWith<$Res> get post {
   
-  return $PostCopyWith<$Res>(_self.post, (value) {
+  return $PostEntityCopyWith<$Res>(_self.post, (value) {
     return _then(_self.copyWith(post: value));
   });
 }

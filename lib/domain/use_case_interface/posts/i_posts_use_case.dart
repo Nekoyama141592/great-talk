@@ -1,4 +1,4 @@
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 
 /// Abstract interface for posts processing operations.
@@ -12,7 +12,7 @@ abstract class IPostsUseCase {
   /// Returns a list of UserPost objects containing post, user, and image data.
   /// Posts are sorted either by like count (ranking) or creation date (timeline).
   Future<List<UserPost>> createUserPosts(
-    List<Post> posts, {
+    List<PostEntity> posts, {
     bool isRankingPosts = false,
   });
 }
