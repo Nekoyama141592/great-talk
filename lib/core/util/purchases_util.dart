@@ -7,22 +7,6 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
 class PurchasesUtil {
-  static PurchaseDetails purchaseDetailsFromJson(Map<String, dynamic> json) {
-    return PurchaseDetails(
-      purchaseID: json['purchaseID'],
-      productID: json['productID'],
-      verificationData: PurchaseVerificationData(
-        localVerificationData:
-            json['verificationData']['localVerificationData'],
-        serverVerificationData:
-            json['verificationData']['serverVerificationData'],
-        source: json['verificationData']['source'],
-      ),
-      transactionDate: json['transactionDate'],
-      status: PurchaseStatus.values.byName(json['status']),
-    )..pendingCompletePurchase = json['pendingCompletePurchase'] ?? false;
-  }
-
   static String basicItemId() => PurchaseUiUtil.kMonthSubscriptionId;
   static String _premiumItenId() => PurchaseUiUtil.kPremiumSubscriptionId;
 
