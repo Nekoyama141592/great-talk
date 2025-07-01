@@ -37,7 +37,7 @@ class MuteUsersPage extends ConsumerWidget {
                   return const SizedBox.shrink();
                 }
                 return MuteUserCard(
-                  passiveUser: passiveUser,
+                  passiveUserEntity: passiveUser,
                   uint8list: base64 != null ? base64Decode(base64) : null,
                   onMuteUserCardTap: () async {
                     final result = await notifier.unMuteUser(passiveUser.uid);

@@ -11,7 +11,9 @@ _CurrentUserState _$CurrentUserStateFromJson(Map<String, dynamic> json) =>
       publicUser:
           json['publicUser'] == null
               ? null
-              : PublicUser.fromJson(json['publicUser'] as Map<String, dynamic>),
+              : PublicUserEntity.fromJson(
+                json['publicUser'] as Map<String, dynamic>,
+              ),
       privateUser:
           json['privateUser'] == null
               ? null

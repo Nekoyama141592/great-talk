@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/presentation/state/common/image_user/image_user.dart';
 
 part 'ranking_users_state.freezed.dart';
@@ -12,6 +12,6 @@ abstract class RankingUsersState with _$RankingUsersState {
       _ImageUser;
   factory RankingUsersState.fromJson(Map<String, dynamic> json) =>
       _$ImageUserFromJson(json);
-  List<PublicUser> users() =>
-      imageUsers.map((e) => e.user).whereType<PublicUser>().toList();
+  List<PublicUserEntity> users() =>
+      imageUsers.map((e) => e.user).whereType<PublicUserEntity>().toList();
 }

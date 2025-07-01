@@ -7,7 +7,7 @@ part 'purchase_details_entity.g.dart';
 abstract class PurchaseDetailsEntity with _$PurchaseDetailsEntity {
   const factory PurchaseDetailsEntity({
     required String productID,
-    required String status
+    required String status,
   }) = _PurchaseDetailsEntity;
 
   factory PurchaseDetailsEntity.fromJson(Map<String, dynamic> json) =>

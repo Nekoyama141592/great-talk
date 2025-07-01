@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/application/use_case/file/file_use_case.dart';
 import 'package:great_talk/application/use_case/user/user_use_case.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,12 +22,25 @@ void main() {
     });
 
     group('usersToImageUsers', () {
-      late List<PublicUser> testUsers;
+      late List<PublicUserEntity> testUsers;
 
       setUp(() {
         testUsers = [
-          PublicUser(
+          PublicUserEntity(
             uid: 'user_1',
+            accountName: '',
+            blockCount: 0,
+            ethAddress: '',
+            isNFTicon: false,
+            isOfficial: false,
+            isSuspended: false,
+            links: const [],
+            muteCount: 0,
+            postCount: 0,
+            reportCount: 0,
+            score: 0.0,
+            searchToken: const {},
+            walletAddresses: const [],
             bio: const {
               'languageCode': 'en',
               'negativeScore': 0.1,
@@ -51,8 +64,21 @@ void main() {
             followerCount: 10,
             followingCount: 5,
           ),
-          PublicUser(
+          PublicUserEntity(
             uid: 'user_2',
+            accountName: '',
+            blockCount: 0,
+            ethAddress: '',
+            isNFTicon: false,
+            isOfficial: false,
+            isSuspended: false,
+            links: const [],
+            muteCount: 0,
+            postCount: 0,
+            reportCount: 0,
+            score: 0.0,
+            searchToken: const {},
+            walletAddresses: const [],
             bio: const {
               'languageCode': 'en',
               'negativeScore': 0.1,
@@ -239,8 +265,23 @@ void main() {
         // Create more users to test concurrent loading
         final moreUsers = List.generate(
           5,
-          (index) => PublicUser(
+          (index) => PublicUserEntity(
             uid: 'user_$index',
+            accountName: '',
+            blockCount: 0,
+            ethAddress: '',
+            isNFTicon: false,
+            isOfficial: false,
+            isSuspended: false,
+            links: const [],
+            muteCount: 0,
+            postCount: 0,
+            reportCount: 0,
+            score: 0.0,
+            searchToken: const {},
+            walletAddresses: const [],
+            followerCount: 0,
+            followingCount: 0,
             bio: {
               'languageCode': 'en',
               'negativeScore': 0.1,

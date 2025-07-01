@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 part 'current_user_state.freezed.dart';
 part 'current_user_state.g.dart';
 
@@ -8,7 +8,7 @@ part 'current_user_state.g.dart';
 abstract class CurrentUserState with _$CurrentUserState {
   const CurrentUserState._();
   const factory CurrentUserState({
-    PublicUser? publicUser,
+    PublicUserEntity? publicUser,
     PrivateUser? privateUser,
     String? base64,
   }) = _CurrentUserState;

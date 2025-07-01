@@ -47,9 +47,13 @@ class PostsUseCase implements IPostsUseCase {
             return userMap.containsKey(uid);
           })
           .map((element) async {
-            final publicUser = userMap[element.uid]!;
+            final publicUserEntity = userMap[element.uid]!;
             final userImage = await _getImageFromPost(element);
-            return UserPost(user: publicUser, post: element, base64: userImage);
+            return UserPost(
+              user: publicUserEntity,
+              post: element,
+              base64: userImage,
+            );
           }),
     );
     return userPosts;

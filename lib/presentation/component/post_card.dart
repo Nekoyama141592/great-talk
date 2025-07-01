@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/core/util/route_util.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/presentation/util/texts.dart';
@@ -23,11 +23,11 @@ class PostCard extends ConsumerWidget {
     super.key,
     required this.post,
     required this.base64,
-    required this.publicUser,
+    required this.publicUserEntity,
   });
   final Post post;
   final String? base64;
-  final PublicUser? publicUser;
+  final PublicUserEntity? publicUserEntity;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uint8list = base64 != null ? base64Decode(base64!) : null;
@@ -96,7 +96,7 @@ class PostCard extends ConsumerWidget {
                             UserProfilePage.generatePath(post.uid),
                           ),
                       child: EllipsisText(
-                        "by ${publicUser?.nameValue ?? ''}",
+                        "by ${publicUserEntity?.nameValue ?? ''}",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.secondary,
                         ),

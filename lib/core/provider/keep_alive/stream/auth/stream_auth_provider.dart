@@ -15,7 +15,9 @@ Stream<User?> streamAuth(Ref ref) {
 @Riverpod(keepAlive: true)
 AuthUser? auth(Ref ref) {
   final firebaseAuthUser = ref.watch(streamAuthProvider).value;
-  return firebaseAuthUser != null ? AuthUser.fromFirebaseAuthUser(firebaseAuthUser) : null;
+  return firebaseAuthUser != null
+      ? AuthUser.fromFirebaseAuthUser(firebaseAuthUser)
+      : null;
 }
 
 @Riverpod(keepAlive: true)

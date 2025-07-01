@@ -10,7 +10,7 @@ _ImageUser _$ImageUserFromJson(Map<String, dynamic> json) => _ImageUser(
   user:
       json['user'] == null
           ? null
-          : PublicUser.fromJson(json['user'] as Map<String, dynamic>),
+          : PublicUserEntity.fromJson(json['user'] as Map<String, dynamic>),
   base64: json['base64'] as String?,
 );
 

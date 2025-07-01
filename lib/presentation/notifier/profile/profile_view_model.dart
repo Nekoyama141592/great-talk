@@ -1,6 +1,6 @@
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 import 'package:great_talk/presentation/state/profile/profile_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
@@ -29,7 +29,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     return ProfileState(user: user, base64: base64, userPosts: userPosts);
   }
 
-  Future<PublicUser?> _fetchUser() async {
+  Future<PublicUserEntity?> _fetchUser() async {
     return _repository.getPublicUser(passiveUid);
   }
 
@@ -41,7 +41,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     return image;
   }
 
-  Future<String?> _getImageFromUser(PublicUser? user) async {
+  Future<String?> _getImageFromUser(PublicUserEntity? user) async {
     if (user == null) return null;
     final detectedImage = user.typedImage();
     final image = await ref
@@ -51,7 +51,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
   }
 
   Future<List<UserPost>> _fetchUserPosts(
-    PublicUser? user,
+    PublicUserEntity? user,
     String? base64,
   ) async {
     final posts = await _repository.getUserPosts(passiveUid);
@@ -94,7 +94,10 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     return await _follow(currentUid, user);
   }
 
-  FutureResult<bool> _follow(String currentUid, PublicUser passiveUser) async {
+  FutureResult<bool> _follow(
+    String currentUid,
+    PublicUserEntity passiveUser,
+  ) async {
     // 楽観的に増やす
     final newUser = passiveUser.copyWith(
       followerCount: passiveUser.followerCount + 1,
@@ -132,7 +135,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     return _unfollow(currentUid, user);
   }
 
-  FutureResult<bool> _unfollow(String currentUid, PublicUser user) async {
+  FutureResult<bool> _unfollow(String currentUid, PublicUserEntity user) async {
     final newUser = user.copyWith(followerCount: user.followerCount - 1);
     state = AsyncValue.data(state.value!.copyWith(user: newUser));
     final token = ref
