@@ -5,10 +5,9 @@ import 'package:great_talk/presentation/util/toast_ui_util.dart';
 
 class ChatUiUtil {
   static void descriptionDialog(BuildContext context, PostEntity post) {
-    final title = "タイトル:\n${post.typedTitle().value}";
+    final title = "タイトル:\n${post.title.value}";
 
-    final systemPrompt =
-        "システムプロンプト:\n${post.typedCustomCompleteText().systemPrompt}";
+    final systemPrompt = "システムプロンプト:\n${post.customCompleteText.systemPrompt}";
 
     String msgText = "累計メッセージ数:\n${post.msgCount.formatNumber()}";
 

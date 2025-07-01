@@ -88,7 +88,7 @@ class PostCard extends ConsumerWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: CircleImage(uint8list: uint8list),
                     ),
-                    EllipsisText(post.typedTitle().value),
+                    EllipsisText(post.title.value),
                     TextButton(
                       onPressed:
                           () => RouteUtil.pushPath(

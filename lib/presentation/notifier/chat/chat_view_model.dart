@@ -32,7 +32,7 @@ class ChatViewModel extends _$ChatViewModel {
     final localMessages = _getLocalMessages(post.postId);
     final messages =
         localMessages.isEmpty
-            ? [TextMessage.assistant(post.typedDescription().value, post)]
+            ? [TextMessage.assistant(post.description.value, post)]
             : localMessages;
     return ChatState(post: post, postImage: postImage, messages: messages);
   }
@@ -70,7 +70,7 @@ class ChatViewModel extends _$ChatViewModel {
           ..insert(
             0,
             GenerateTextRequestMessage.system(
-              state.value!.post.typedDescription().value,
+              state.value!.post.description.value,
             ),
           );
     final model =
@@ -90,7 +90,7 @@ class ChatViewModel extends _$ChatViewModel {
   }
 
   Future<String?> _fetchPostImage(PostEntity post) {
-    final detectedImage = post.typedImage();
+    final detectedImage = post.image;
     return ref
         .read(fileUseCaseProvider)
         .getObject(detectedImage.bucketName, detectedImage.value);

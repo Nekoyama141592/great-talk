@@ -34,7 +34,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
   }
 
   Future<String?> _getImageFromPost(PostEntity post) async {
-    final detectedImage = post.typedImage();
+    final detectedImage = post.image;
     final image = await ref
         .read(fileUseCaseProvider)
         .getObject(detectedImage.bucketName, detectedImage.value);

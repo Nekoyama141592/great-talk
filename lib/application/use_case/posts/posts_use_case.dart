@@ -9,7 +9,7 @@ class PostsUseCase implements IPostsUseCase {
   final DatabaseRepository repository;
   final FileUseCase fileUseCase;
   Future<String?> _getImageFromPost(PostEntity post) async {
-    final detectedImage = post.typedImage();
+    final detectedImage = post.image;
     final image = await fileUseCase.getObject(
       detectedImage.bucketName,
       detectedImage.value,
@@ -22,8 +22,7 @@ class PostsUseCase implements IPostsUseCase {
   }
 
   List<PostEntity> _sortByCreatedAt(List<PostEntity> posts) {
-    return posts
-      ..sort((a, b) => (b.typedCreatedAt()).compareTo(a.typedCreatedAt()));
+    return posts..sort((a, b) => (b.createdAt!).compareTo(a.createdAt!));
   }
 
   List<PostEntity> _sortByLikeCount(List<PostEntity> posts) {

@@ -88,7 +88,7 @@ class ChatPage extends HookConsumerWidget {
 
         return Scaffold(
           appBar: AppBar(
-            title: EllipsisText(post.typedTitle().value),
+            title: EllipsisText(post.title.value),
             actions: [
               // 自分の投稿、もしくは管理者なら削除ボタン、それ以外ならレポートボタンを表示
               if (post.uid == currentUserId || isAdmin)

@@ -17,7 +17,7 @@ class DeletePostUseCase implements IDeletePostUseCase {
     final result = await firestoreRepository.deletePost(post);
     result.when(
       success: (_) {
-        final image = post.typedImage();
+        final image = post.image;
         apiRepository.deleteObject(image);
       },
       failure: (_) {},

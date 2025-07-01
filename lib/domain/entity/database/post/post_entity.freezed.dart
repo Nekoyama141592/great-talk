@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostEntity {
 
- dynamic get createdAt; Map<String, dynamic> get customCompleteText; Map<String, dynamic> get description; Map<String, dynamic> get image; int get likeCount; int get msgCount; String get postId; Map<String, dynamic> get title; String get uid; dynamic get updatedAt;
+@TimestampConverter() DateTime? get createdAt; CustomCompleteText get customCompleteText; DetectedText get description; DetectedImage get image; int get likeCount; int get msgCount; String get postId; DetectedText get title; String get uid;@TimestampConverter() DateTime? get updatedAt;
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,12 +29,12 @@ $PostEntityCopyWith<PostEntity> get copyWith => _$PostEntityCopyWithImpl<PostEnt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostEntity&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&const DeepCollectionEquality().equals(other.customCompleteText, customCompleteText)&&const DeepCollectionEquality().equals(other.description, description)&&const DeepCollectionEquality().equals(other.image, image)&&(identical(other.likeCount, likeCount) || other.likeCount == likeCount)&&(identical(other.msgCount, msgCount) || other.msgCount == msgCount)&&(identical(other.postId, postId) || other.postId == postId)&&const DeepCollectionEquality().equals(other.title, title)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostEntity&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.customCompleteText, customCompleteText) || other.customCompleteText == customCompleteText)&&(identical(other.description, description) || other.description == description)&&(identical(other.image, image) || other.image == image)&&(identical(other.likeCount, likeCount) || other.likeCount == likeCount)&&(identical(other.msgCount, msgCount) || other.msgCount == msgCount)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.title, title) || other.title == title)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(createdAt),const DeepCollectionEquality().hash(customCompleteText),const DeepCollectionEquality().hash(description),const DeepCollectionEquality().hash(image),likeCount,msgCount,postId,const DeepCollectionEquality().hash(title),uid,const DeepCollectionEquality().hash(updatedAt));
+int get hashCode => Object.hash(runtimeType,createdAt,customCompleteText,description,image,likeCount,msgCount,postId,title,uid,updatedAt);
 
 @override
 String toString() {
@@ -49,11 +49,11 @@ abstract mixin class $PostEntityCopyWith<$Res>  {
   factory $PostEntityCopyWith(PostEntity value, $Res Function(PostEntity) _then) = _$PostEntityCopyWithImpl;
 @useResult
 $Res call({
- dynamic createdAt, Map<String, dynamic> customCompleteText, Map<String, dynamic> description, Map<String, dynamic> image, int likeCount, int msgCount, String postId, Map<String, dynamic> title, String uid, dynamic updatedAt
+@TimestampConverter() DateTime? createdAt, CustomCompleteText customCompleteText, DetectedText description, DetectedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime? updatedAt
 });
 
 
-
+$CustomCompleteTextCopyWith<$Res> get customCompleteText;$DetectedTextCopyWith<$Res> get description;$DetectedImageCopyWith<$Res> get image;$DetectedTextCopyWith<$Res> get title;
 
 }
 /// @nodoc
@@ -69,19 +69,55 @@ class _$PostEntityCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? createdAt = freezed,Object? customCompleteText = null,Object? description = null,Object? image = null,Object? likeCount = null,Object? msgCount = null,Object? postId = null,Object? title = null,Object? uid = null,Object? updatedAt = freezed,}) {
   return _then(_self.copyWith(
 createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as dynamic,customCompleteText: null == customCompleteText ? _self.customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
+as DateTime?,customCompleteText: null == customCompleteText ? _self.customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
+as CustomCompleteText,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as DetectedText,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as DetectedImage,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
 as int,msgCount: null == msgCount ? _self.msgCount : msgCount // ignore: cast_nullable_to_non_nullable
 as int,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
+as DetectedText,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as dynamic,
+as DateTime?,
   ));
 }
-
+/// Create a copy of PostEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CustomCompleteTextCopyWith<$Res> get customCompleteText {
+  
+  return $CustomCompleteTextCopyWith<$Res>(_self.customCompleteText, (value) {
+    return _then(_self.copyWith(customCompleteText: value));
+  });
+}/// Create a copy of PostEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedTextCopyWith<$Res> get description {
+  
+  return $DetectedTextCopyWith<$Res>(_self.description, (value) {
+    return _then(_self.copyWith(description: value));
+  });
+}/// Create a copy of PostEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedImageCopyWith<$Res> get image {
+  
+  return $DetectedImageCopyWith<$Res>(_self.image, (value) {
+    return _then(_self.copyWith(image: value));
+  });
+}/// Create a copy of PostEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedTextCopyWith<$Res> get title {
+  
+  return $DetectedTextCopyWith<$Res>(_self.title, (value) {
+    return _then(_self.copyWith(title: value));
+  });
+}
 }
 
 
@@ -89,43 +125,19 @@ as dynamic,
 @JsonSerializable()
 
 class _PostEntity extends PostEntity {
-  const _PostEntity({required this.createdAt, required final  Map<String, dynamic> customCompleteText, required final  Map<String, dynamic> description, required final  Map<String, dynamic> image, required this.likeCount, required this.msgCount, required this.postId, required final  Map<String, dynamic> title, required this.uid, required this.updatedAt}): _customCompleteText = customCompleteText,_description = description,_image = image,_title = title,super._();
+  const _PostEntity({@TimestampConverter() this.createdAt, required this.customCompleteText, required this.description, required this.image, required this.likeCount, required this.msgCount, required this.postId, required this.title, required this.uid, @TimestampConverter() this.updatedAt}): super._();
   factory _PostEntity.fromJson(Map<String, dynamic> json) => _$PostEntityFromJson(json);
 
-@override final  dynamic createdAt;
- final  Map<String, dynamic> _customCompleteText;
-@override Map<String, dynamic> get customCompleteText {
-  if (_customCompleteText is EqualUnmodifiableMapView) return _customCompleteText;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_customCompleteText);
-}
-
- final  Map<String, dynamic> _description;
-@override Map<String, dynamic> get description {
-  if (_description is EqualUnmodifiableMapView) return _description;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_description);
-}
-
- final  Map<String, dynamic> _image;
-@override Map<String, dynamic> get image {
-  if (_image is EqualUnmodifiableMapView) return _image;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_image);
-}
-
+@override@TimestampConverter() final  DateTime? createdAt;
+@override final  CustomCompleteText customCompleteText;
+@override final  DetectedText description;
+@override final  DetectedImage image;
 @override final  int likeCount;
 @override final  int msgCount;
 @override final  String postId;
- final  Map<String, dynamic> _title;
-@override Map<String, dynamic> get title {
-  if (_title is EqualUnmodifiableMapView) return _title;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_title);
-}
-
+@override final  DetectedText title;
 @override final  String uid;
-@override final  dynamic updatedAt;
+@override@TimestampConverter() final  DateTime? updatedAt;
 
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -140,12 +152,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostEntity&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&const DeepCollectionEquality().equals(other._customCompleteText, _customCompleteText)&&const DeepCollectionEquality().equals(other._description, _description)&&const DeepCollectionEquality().equals(other._image, _image)&&(identical(other.likeCount, likeCount) || other.likeCount == likeCount)&&(identical(other.msgCount, msgCount) || other.msgCount == msgCount)&&(identical(other.postId, postId) || other.postId == postId)&&const DeepCollectionEquality().equals(other._title, _title)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostEntity&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.customCompleteText, customCompleteText) || other.customCompleteText == customCompleteText)&&(identical(other.description, description) || other.description == description)&&(identical(other.image, image) || other.image == image)&&(identical(other.likeCount, likeCount) || other.likeCount == likeCount)&&(identical(other.msgCount, msgCount) || other.msgCount == msgCount)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.title, title) || other.title == title)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(createdAt),const DeepCollectionEquality().hash(_customCompleteText),const DeepCollectionEquality().hash(_description),const DeepCollectionEquality().hash(_image),likeCount,msgCount,postId,const DeepCollectionEquality().hash(_title),uid,const DeepCollectionEquality().hash(updatedAt));
+int get hashCode => Object.hash(runtimeType,createdAt,customCompleteText,description,image,likeCount,msgCount,postId,title,uid,updatedAt);
 
 @override
 String toString() {
@@ -160,11 +172,11 @@ abstract mixin class _$PostEntityCopyWith<$Res> implements $PostEntityCopyWith<$
   factory _$PostEntityCopyWith(_PostEntity value, $Res Function(_PostEntity) _then) = __$PostEntityCopyWithImpl;
 @override @useResult
 $Res call({
- dynamic createdAt, Map<String, dynamic> customCompleteText, Map<String, dynamic> description, Map<String, dynamic> image, int likeCount, int msgCount, String postId, Map<String, dynamic> title, String uid, dynamic updatedAt
+@TimestampConverter() DateTime? createdAt, CustomCompleteText customCompleteText, DetectedText description, DetectedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime? updatedAt
 });
 
 
-
+@override $CustomCompleteTextCopyWith<$Res> get customCompleteText;@override $DetectedTextCopyWith<$Res> get description;@override $DetectedImageCopyWith<$Res> get image;@override $DetectedTextCopyWith<$Res> get title;
 
 }
 /// @nodoc
@@ -180,20 +192,56 @@ class __$PostEntityCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? createdAt = freezed,Object? customCompleteText = null,Object? description = null,Object? image = null,Object? likeCount = null,Object? msgCount = null,Object? postId = null,Object? title = null,Object? uid = null,Object? updatedAt = freezed,}) {
   return _then(_PostEntity(
 createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as dynamic,customCompleteText: null == customCompleteText ? _self._customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,description: null == description ? _self._description : description // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,image: null == image ? _self._image : image // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
+as DateTime?,customCompleteText: null == customCompleteText ? _self.customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
+as CustomCompleteText,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as DetectedText,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as DetectedImage,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
 as int,msgCount: null == msgCount ? _self.msgCount : msgCount // ignore: cast_nullable_to_non_nullable
 as int,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self._title : title // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
+as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as DetectedText,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as dynamic,
+as DateTime?,
   ));
 }
 
-
+/// Create a copy of PostEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$CustomCompleteTextCopyWith<$Res> get customCompleteText {
+  
+  return $CustomCompleteTextCopyWith<$Res>(_self.customCompleteText, (value) {
+    return _then(_self.copyWith(customCompleteText: value));
+  });
+}/// Create a copy of PostEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedTextCopyWith<$Res> get description {
+  
+  return $DetectedTextCopyWith<$Res>(_self.description, (value) {
+    return _then(_self.copyWith(description: value));
+  });
+}/// Create a copy of PostEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedImageCopyWith<$Res> get image {
+  
+  return $DetectedImageCopyWith<$Res>(_self.image, (value) {
+    return _then(_self.copyWith(image: value));
+  });
+}/// Create a copy of PostEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedTextCopyWith<$Res> get title {
+  
+  return $DetectedTextCopyWith<$Res>(_self.title, (value) {
+    return _then(_self.copyWith(title: value));
+  });
+}
 }
 
 // dart format on
