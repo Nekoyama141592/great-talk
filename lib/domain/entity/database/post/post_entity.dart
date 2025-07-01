@@ -12,27 +12,16 @@ part 'post_entity.g.dart';
 abstract class PostEntity with _$PostEntity {
   const PostEntity._();
   const factory PostEntity({
-    required int bookmarkCount,
     required dynamic createdAt,
     required Map<String, dynamic> customCompleteText,
     required Map<String, dynamic> description,
-    required List<Map<String, dynamic>> exampleTexts,
-    required String genre,
-    required List<String> hashTags,
     required Map<String, dynamic> image,
-    required int impressionCount,
     required int likeCount,
-    required List<Map<String, dynamic>> links,
     required int msgCount,
-    required int muteCount,
     required String postId,
-    required int reportCount,
-    required double score,
-    required Map<String, dynamic> searchToken,
     required Map<String, dynamic> title,
     required String uid,
     required dynamic updatedAt,
-    required int userCount,
   }) = _PostEntity;
 
   factory PostEntity.fromJson(Map<String, dynamic> json) =>
