@@ -13,27 +13,16 @@ part 'public_user_entity.g.dart';
 abstract class PublicUserEntity with _$PublicUserEntity {
   const PublicUserEntity._();
   factory PublicUserEntity({
-    required String accountName,
     required Map<String, dynamic> bio,
-    required int blockCount,
     @TimestampConverter() DateTime? createdAt,
-    required String ethAddress,
     required int followerCount,
     required int followingCount,
-    required bool isNFTicon,
     required bool isOfficial,
-    required bool isSuspended,
-    required List<Map<String, dynamic>> links,
-    required int muteCount,
     required int postCount,
-    required int reportCount,
-    required double score,
-    required Map<String, dynamic> searchToken,
     required String uid,
     @TimestampConverter() DateTime? updatedAt,
     required Map<String, dynamic> image,
     required Map<String, dynamic> userName,
-    required List<Map<String, dynamic>> walletAddresses,
   }) = _PublicUserEntity;
 
   factory PublicUserEntity.fromJson(Map<String, dynamic> json) =>
