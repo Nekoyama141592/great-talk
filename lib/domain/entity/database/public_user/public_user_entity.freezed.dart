@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PublicUserEntity {
 
- Map<String, dynamic> get bio;@TimestampConverter() DateTime? get createdAt; int get followerCount; int get followingCount; bool get isOfficial; int get postCount; String get uid;@TimestampConverter() DateTime? get updatedAt; Map<String, dynamic> get image; Map<String, dynamic> get userName;
+ DetectedText get bio;@TimestampConverter() DateTime? get createdAt; int get followerCount; int get followingCount; bool get isOfficial; int get postCount; String get uid;@TimestampConverter() DateTime? get updatedAt; DetectedImage get image; DetectedText get userName;
 /// Create a copy of PublicUserEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,12 +29,12 @@ $PublicUserEntityCopyWith<PublicUserEntity> get copyWith => _$PublicUserEntityCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PublicUserEntity&&const DeepCollectionEquality().equals(other.bio, bio)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.followerCount, followerCount) || other.followerCount == followerCount)&&(identical(other.followingCount, followingCount) || other.followingCount == followingCount)&&(identical(other.isOfficial, isOfficial) || other.isOfficial == isOfficial)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other.image, image)&&const DeepCollectionEquality().equals(other.userName, userName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PublicUserEntity&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.followerCount, followerCount) || other.followerCount == followerCount)&&(identical(other.followingCount, followingCount) || other.followingCount == followingCount)&&(identical(other.isOfficial, isOfficial) || other.isOfficial == isOfficial)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.image, image) || other.image == image)&&(identical(other.userName, userName) || other.userName == userName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(bio),createdAt,followerCount,followingCount,isOfficial,postCount,uid,updatedAt,const DeepCollectionEquality().hash(image),const DeepCollectionEquality().hash(userName));
+int get hashCode => Object.hash(runtimeType,bio,createdAt,followerCount,followingCount,isOfficial,postCount,uid,updatedAt,image,userName);
 
 @override
 String toString() {
@@ -49,11 +49,11 @@ abstract mixin class $PublicUserEntityCopyWith<$Res>  {
   factory $PublicUserEntityCopyWith(PublicUserEntity value, $Res Function(PublicUserEntity) _then) = _$PublicUserEntityCopyWithImpl;
 @useResult
 $Res call({
- Map<String, dynamic> bio,@TimestampConverter() DateTime? createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime? updatedAt, Map<String, dynamic> image, Map<String, dynamic> userName
+ DetectedText bio,@TimestampConverter() DateTime? createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime? updatedAt, DetectedImage image, DetectedText userName
 });
 
 
-
+$DetectedTextCopyWith<$Res> get bio;$DetectedImageCopyWith<$Res> get image;$DetectedTextCopyWith<$Res> get userName;
 
 }
 /// @nodoc
@@ -69,7 +69,7 @@ class _$PublicUserEntityCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? bio = null,Object? createdAt = freezed,Object? followerCount = null,Object? followingCount = null,Object? isOfficial = null,Object? postCount = null,Object? uid = null,Object? updatedAt = freezed,Object? image = null,Object? userName = null,}) {
   return _then(_self.copyWith(
 bio: null == bio ? _self.bio : bio // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DetectedText,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,followerCount: null == followerCount ? _self.followerCount : followerCount // ignore: cast_nullable_to_non_nullable
 as int,followingCount: null == followingCount ? _self.followingCount : followingCount // ignore: cast_nullable_to_non_nullable
 as int,isOfficial: null == isOfficial ? _self.isOfficial : isOfficial // ignore: cast_nullable_to_non_nullable
@@ -77,11 +77,38 @@ as bool,postCount: null == postCount ? _self.postCount : postCount // ignore: ca
 as int,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,
+as DetectedImage,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as DetectedText,
   ));
 }
-
+/// Create a copy of PublicUserEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedTextCopyWith<$Res> get bio {
+  
+  return $DetectedTextCopyWith<$Res>(_self.bio, (value) {
+    return _then(_self.copyWith(bio: value));
+  });
+}/// Create a copy of PublicUserEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedImageCopyWith<$Res> get image {
+  
+  return $DetectedImageCopyWith<$Res>(_self.image, (value) {
+    return _then(_self.copyWith(image: value));
+  });
+}/// Create a copy of PublicUserEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedTextCopyWith<$Res> get userName {
+  
+  return $DetectedTextCopyWith<$Res>(_self.userName, (value) {
+    return _then(_self.copyWith(userName: value));
+  });
+}
 }
 
 
@@ -89,16 +116,10 @@ as Map<String, dynamic>,
 @JsonSerializable()
 
 class _PublicUserEntity extends PublicUserEntity {
-   _PublicUserEntity({required final  Map<String, dynamic> bio, @TimestampConverter() this.createdAt, required this.followerCount, required this.followingCount, required this.isOfficial, required this.postCount, required this.uid, @TimestampConverter() this.updatedAt, required final  Map<String, dynamic> image, required final  Map<String, dynamic> userName}): _bio = bio,_image = image,_userName = userName,super._();
+   _PublicUserEntity({required this.bio, @TimestampConverter() this.createdAt, required this.followerCount, required this.followingCount, required this.isOfficial, required this.postCount, required this.uid, @TimestampConverter() this.updatedAt, required this.image, required this.userName}): super._();
   factory _PublicUserEntity.fromJson(Map<String, dynamic> json) => _$PublicUserEntityFromJson(json);
 
- final  Map<String, dynamic> _bio;
-@override Map<String, dynamic> get bio {
-  if (_bio is EqualUnmodifiableMapView) return _bio;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_bio);
-}
-
+@override final  DetectedText bio;
 @override@TimestampConverter() final  DateTime? createdAt;
 @override final  int followerCount;
 @override final  int followingCount;
@@ -106,20 +127,8 @@ class _PublicUserEntity extends PublicUserEntity {
 @override final  int postCount;
 @override final  String uid;
 @override@TimestampConverter() final  DateTime? updatedAt;
- final  Map<String, dynamic> _image;
-@override Map<String, dynamic> get image {
-  if (_image is EqualUnmodifiableMapView) return _image;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_image);
-}
-
- final  Map<String, dynamic> _userName;
-@override Map<String, dynamic> get userName {
-  if (_userName is EqualUnmodifiableMapView) return _userName;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_userName);
-}
-
+@override final  DetectedImage image;
+@override final  DetectedText userName;
 
 /// Create a copy of PublicUserEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -134,12 +143,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PublicUserEntity&&const DeepCollectionEquality().equals(other._bio, _bio)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.followerCount, followerCount) || other.followerCount == followerCount)&&(identical(other.followingCount, followingCount) || other.followingCount == followingCount)&&(identical(other.isOfficial, isOfficial) || other.isOfficial == isOfficial)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other._image, _image)&&const DeepCollectionEquality().equals(other._userName, _userName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PublicUserEntity&&(identical(other.bio, bio) || other.bio == bio)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.followerCount, followerCount) || other.followerCount == followerCount)&&(identical(other.followingCount, followingCount) || other.followingCount == followingCount)&&(identical(other.isOfficial, isOfficial) || other.isOfficial == isOfficial)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&(identical(other.image, image) || other.image == image)&&(identical(other.userName, userName) || other.userName == userName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_bio),createdAt,followerCount,followingCount,isOfficial,postCount,uid,updatedAt,const DeepCollectionEquality().hash(_image),const DeepCollectionEquality().hash(_userName));
+int get hashCode => Object.hash(runtimeType,bio,createdAt,followerCount,followingCount,isOfficial,postCount,uid,updatedAt,image,userName);
 
 @override
 String toString() {
@@ -154,11 +163,11 @@ abstract mixin class _$PublicUserEntityCopyWith<$Res> implements $PublicUserEnti
   factory _$PublicUserEntityCopyWith(_PublicUserEntity value, $Res Function(_PublicUserEntity) _then) = __$PublicUserEntityCopyWithImpl;
 @override @useResult
 $Res call({
- Map<String, dynamic> bio,@TimestampConverter() DateTime? createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime? updatedAt, Map<String, dynamic> image, Map<String, dynamic> userName
+ DetectedText bio,@TimestampConverter() DateTime? createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime? updatedAt, DetectedImage image, DetectedText userName
 });
 
 
-
+@override $DetectedTextCopyWith<$Res> get bio;@override $DetectedImageCopyWith<$Res> get image;@override $DetectedTextCopyWith<$Res> get userName;
 
 }
 /// @nodoc
@@ -173,21 +182,48 @@ class __$PublicUserEntityCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? bio = null,Object? createdAt = freezed,Object? followerCount = null,Object? followingCount = null,Object? isOfficial = null,Object? postCount = null,Object? uid = null,Object? updatedAt = freezed,Object? image = null,Object? userName = null,}) {
   return _then(_PublicUserEntity(
-bio: null == bio ? _self._bio : bio // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+bio: null == bio ? _self.bio : bio // ignore: cast_nullable_to_non_nullable
+as DetectedText,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,followerCount: null == followerCount ? _self.followerCount : followerCount // ignore: cast_nullable_to_non_nullable
 as int,followingCount: null == followingCount ? _self.followingCount : followingCount // ignore: cast_nullable_to_non_nullable
 as int,isOfficial: null == isOfficial ? _self.isOfficial : isOfficial // ignore: cast_nullable_to_non_nullable
 as bool,postCount: null == postCount ? _self.postCount : postCount // ignore: cast_nullable_to_non_nullable
 as int,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,image: null == image ? _self._image : image // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,userName: null == userName ? _self._userName : userName // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,
+as DateTime?,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as DetectedImage,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as DetectedText,
   ));
 }
 
-
+/// Create a copy of PublicUserEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedTextCopyWith<$Res> get bio {
+  
+  return $DetectedTextCopyWith<$Res>(_self.bio, (value) {
+    return _then(_self.copyWith(bio: value));
+  });
+}/// Create a copy of PublicUserEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedImageCopyWith<$Res> get image {
+  
+  return $DetectedImageCopyWith<$Res>(_self.image, (value) {
+    return _then(_self.copyWith(image: value));
+  });
+}/// Create a copy of PublicUserEntity
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedTextCopyWith<$Res> get userName {
+  
+  return $DetectedTextCopyWith<$Res>(_self.userName, (value) {
+    return _then(_self.copyWith(userName: value));
+  });
+}
 }
 
 // dart format on

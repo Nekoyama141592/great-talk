@@ -12,7 +12,7 @@ class UserUseCase implements IUserUseCase {
   ) async {
     final futures =
         users.map((user) async {
-          final detectedImage = user.typedImage();
+          final detectedImage = user.image;
           final base64 = await fileUseCase.getObject(
             detectedImage.bucketName,
             detectedImage.value,

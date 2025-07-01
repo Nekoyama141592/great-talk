@@ -126,7 +126,7 @@ class EditViewModel extends _$EditViewModel {
     } else {
       // 写真がそのまま場合の処理
       updateUserResult = await _createUserUpdateLog(
-        publicUser.typedImage().value,
+        publicUser.image.value,
         userName,
         bio,
       );

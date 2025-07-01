@@ -8,7 +8,7 @@ part of 'public_user_entity.dart';
 
 _PublicUserEntity _$PublicUserEntityFromJson(Map<String, dynamic> json) =>
     _PublicUserEntity(
-      bio: json['bio'] as Map<String, dynamic>,
+      bio: DetectedText.fromJson(json['bio'] as Map<String, dynamic>),
       createdAt: const TimestampConverter().fromJson(
         json['createdAt'] as Timestamp?,
       ),
@@ -20,8 +20,8 @@ _PublicUserEntity _$PublicUserEntityFromJson(Map<String, dynamic> json) =>
       updatedAt: const TimestampConverter().fromJson(
         json['updatedAt'] as Timestamp?,
       ),
-      image: json['image'] as Map<String, dynamic>,
-      userName: json['userName'] as Map<String, dynamic>,
+      image: DetectedImage.fromJson(json['image'] as Map<String, dynamic>),
+      userName: DetectedText.fromJson(json['userName'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PublicUserEntityToJson(_PublicUserEntity instance) =>

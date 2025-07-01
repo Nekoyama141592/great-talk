@@ -89,8 +89,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
 
   Future<String?> _getBase64Image(PublicUserEntity? publicUser) async {
     if (publicUser == null) return null;
-    final bucketName = publicUser.typedImage().bucketName;
-    final fileName = publicUser.typedImage().value;
+    final oldImage = publicUser.image;
+    final bucketName = oldImage.bucketName;
+    final fileName = oldImage.value;
     if (bucketName.isEmpty || fileName.isEmpty) return null;
     final image = await ref
         .read(fileUseCaseProvider)
@@ -132,7 +133,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
     authResult.when(
       success: (_) {
-        final image = user.typedImage();
+        final image = user.image;
         ref.read(apiRepositoryProvider).deleteObject(image);
       },
       failure: (_) {},

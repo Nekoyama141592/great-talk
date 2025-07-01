@@ -59,9 +59,7 @@ class ProfileScreen extends ConsumerWidget {
       if (MediaQuery.of(context).orientation != Orientation.landscape)
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            passiveUser?.typedBio().value.removeNewlinesAndSpaces() ?? '',
-          ),
+          child: Text(passiveUser?.bioValue.removeNewlinesAndSpaces() ?? ''),
         ),
       if ((passiveUser?.isOfficial ?? false)) const OfficialMark(),
     ];
