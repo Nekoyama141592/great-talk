@@ -6,7 +6,7 @@ part of 'profile_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$profileViewModelHash() => r'2c5efa154d50824bb7c70d24bb4cbc1166eb8656';
+String _$profileViewModelHash() => r'cb3144bd86544cdf8093bfc0f1d719304dcb566f';
 
 /// Copied from Dart SDK
 class _SystemHash {
