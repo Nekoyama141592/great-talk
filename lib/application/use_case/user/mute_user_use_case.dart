@@ -1,6 +1,5 @@
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
@@ -17,8 +16,7 @@ class MuteUserUseCase implements IMuteUserUseCase {
     MuteUserToken token,
   ) {
     final passiveUid = post.uid;
-    final originalPost = Post.fromJson(post.toJson());
-    final userMute = UserMute.fromPost(currentUid, originalPost);
+    final userMute = UserMute.fromPost(currentUid, passiveUid);
     return firestoreRepository.createMuteUserInfo(
       currentUid,
       passiveUid,

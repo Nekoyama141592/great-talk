@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -98,8 +97,7 @@ class TokensNotifier extends _$TokensNotifier {
   }
 
   LikePostToken? addLikePost(String currentUid, PostEntity post) {
-    final originalPost = Post.fromJson(post.toJson());
-    final token = LikePostToken.fromPost(originalPost, currentUid);
+    final token = LikePostToken.fromPost(post.postId, post.uid, currentUid);
     final newState = _currentState.copyWith(
       likePostTokens: [..._currentState.likePostTokens, token],
     );
@@ -124,8 +122,7 @@ class TokensNotifier extends _$TokensNotifier {
   MutePostToken? addMutePost(PostEntity post) {
     final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
-    final originalPost = Post.fromJson(post.toJson());
-    final token = MutePostToken.fromPost(originalPost, currentUid);
+    final token = MutePostToken.fromPost(post.postId, currentUid);
     final newState = _currentState.copyWith(
       mutePostTokens: [..._currentState.mutePostTokens, token],
     );
@@ -145,8 +142,7 @@ class TokensNotifier extends _$TokensNotifier {
   MuteUserToken? addMuteUser(PostEntity post) {
     final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
-    final originalPost = Post.fromJson(post.toJson());
-    final token = MuteUserToken.fromPost(currentUid, originalPost);
+    final token = MuteUserToken.fromPost(currentUid, post.uid);
     final newState = _currentState.copyWith(
       muteUserTokens: [..._currentState.muteUserTokens, token],
     );

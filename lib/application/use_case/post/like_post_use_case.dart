@@ -1,6 +1,5 @@
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
@@ -16,8 +15,7 @@ class LikePostUseCase implements ILikePostUseCase {
     LikePostToken token,
     PostEntity post,
   ) {
-    final originalPost = Post.fromJson(post.toJson());
-    final postLike = PostLike.fromPost(originalPost, currentUid);
+    final postLike = PostLike.fromPost(post.postId, post.uid, currentUid);
     return firestoreRepository.createLikePostInfo(
       currentUid,
       post,
