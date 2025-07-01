@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/constant/moderate_constant.dart';
+import 'package:great_talk/domain/converter/timestamp_converter.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
@@ -15,7 +16,7 @@ abstract class PublicUserEntity with _$PublicUserEntity {
     required String accountName,
     required Map<String, dynamic> bio,
     required int blockCount,
-    required dynamic createdAt,
+    @TimestampConverter() DateTime? createdAt,
     required String ethAddress,
     required int followerCount,
     required int followingCount,
@@ -29,7 +30,7 @@ abstract class PublicUserEntity with _$PublicUserEntity {
     required double score,
     required Map<String, dynamic> searchToken,
     required String uid,
-    required dynamic updatedAt,
+    @TimestampConverter() DateTime? updatedAt,
     required Map<String, dynamic> image,
     required Map<String, dynamic> userName,
     required List<Map<String, dynamic>> walletAddresses,
@@ -39,9 +40,7 @@ abstract class PublicUserEntity with _$PublicUserEntity {
       _$PublicUserEntityFromJson(json);
 
   DetectedText typedBio() => DetectedText.fromJson(bio);
-  Timestamp typedCreatedAt() => createdAt as Timestamp;
   DetectedImage typedImage() => DetectedImage.fromJson(image);
-  Timestamp typedUpdatedAtAt() => updatedAt as Timestamp;
   DetectedText typedUserName() => DetectedText.fromJson(userName);
 
   String get bioValue => typedBio().value;

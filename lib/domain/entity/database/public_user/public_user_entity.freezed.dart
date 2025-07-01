@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PublicUserEntity {
 
- String get accountName; Map<String, dynamic> get bio; int get blockCount; dynamic get createdAt; String get ethAddress; int get followerCount; int get followingCount; bool get isNFTicon; bool get isOfficial; bool get isSuspended; List<Map<String, dynamic>> get links; int get muteCount; int get postCount; int get reportCount; double get score; Map<String, dynamic> get searchToken; String get uid; dynamic get updatedAt; Map<String, dynamic> get image; Map<String, dynamic> get userName; List<Map<String, dynamic>> get walletAddresses;
+ String get accountName; Map<String, dynamic> get bio; int get blockCount;@TimestampConverter() DateTime? get createdAt; String get ethAddress; int get followerCount; int get followingCount; bool get isNFTicon; bool get isOfficial; bool get isSuspended; List<Map<String, dynamic>> get links; int get muteCount; int get postCount; int get reportCount; double get score; Map<String, dynamic> get searchToken; String get uid;@TimestampConverter() DateTime? get updatedAt; Map<String, dynamic> get image; Map<String, dynamic> get userName; List<Map<String, dynamic>> get walletAddresses;
 /// Create a copy of PublicUserEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,12 +29,12 @@ $PublicUserEntityCopyWith<PublicUserEntity> get copyWith => _$PublicUserEntityCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PublicUserEntity&&(identical(other.accountName, accountName) || other.accountName == accountName)&&const DeepCollectionEquality().equals(other.bio, bio)&&(identical(other.blockCount, blockCount) || other.blockCount == blockCount)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.followerCount, followerCount) || other.followerCount == followerCount)&&(identical(other.followingCount, followingCount) || other.followingCount == followingCount)&&(identical(other.isNFTicon, isNFTicon) || other.isNFTicon == isNFTicon)&&(identical(other.isOfficial, isOfficial) || other.isOfficial == isOfficial)&&(identical(other.isSuspended, isSuspended) || other.isSuspended == isSuspended)&&const DeepCollectionEquality().equals(other.links, links)&&(identical(other.muteCount, muteCount) || other.muteCount == muteCount)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.reportCount, reportCount) || other.reportCount == reportCount)&&(identical(other.score, score) || other.score == score)&&const DeepCollectionEquality().equals(other.searchToken, searchToken)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt)&&const DeepCollectionEquality().equals(other.image, image)&&const DeepCollectionEquality().equals(other.userName, userName)&&const DeepCollectionEquality().equals(other.walletAddresses, walletAddresses));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PublicUserEntity&&(identical(other.accountName, accountName) || other.accountName == accountName)&&const DeepCollectionEquality().equals(other.bio, bio)&&(identical(other.blockCount, blockCount) || other.blockCount == blockCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.followerCount, followerCount) || other.followerCount == followerCount)&&(identical(other.followingCount, followingCount) || other.followingCount == followingCount)&&(identical(other.isNFTicon, isNFTicon) || other.isNFTicon == isNFTicon)&&(identical(other.isOfficial, isOfficial) || other.isOfficial == isOfficial)&&(identical(other.isSuspended, isSuspended) || other.isSuspended == isSuspended)&&const DeepCollectionEquality().equals(other.links, links)&&(identical(other.muteCount, muteCount) || other.muteCount == muteCount)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.reportCount, reportCount) || other.reportCount == reportCount)&&(identical(other.score, score) || other.score == score)&&const DeepCollectionEquality().equals(other.searchToken, searchToken)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other.image, image)&&const DeepCollectionEquality().equals(other.userName, userName)&&const DeepCollectionEquality().equals(other.walletAddresses, walletAddresses));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,accountName,const DeepCollectionEquality().hash(bio),blockCount,const DeepCollectionEquality().hash(createdAt),ethAddress,followerCount,followingCount,isNFTicon,isOfficial,isSuspended,const DeepCollectionEquality().hash(links),muteCount,postCount,reportCount,score,const DeepCollectionEquality().hash(searchToken),uid,const DeepCollectionEquality().hash(updatedAt),const DeepCollectionEquality().hash(image),const DeepCollectionEquality().hash(userName),const DeepCollectionEquality().hash(walletAddresses)]);
+int get hashCode => Object.hashAll([runtimeType,accountName,const DeepCollectionEquality().hash(bio),blockCount,createdAt,ethAddress,followerCount,followingCount,isNFTicon,isOfficial,isSuspended,const DeepCollectionEquality().hash(links),muteCount,postCount,reportCount,score,const DeepCollectionEquality().hash(searchToken),uid,updatedAt,const DeepCollectionEquality().hash(image),const DeepCollectionEquality().hash(userName),const DeepCollectionEquality().hash(walletAddresses)]);
 
 @override
 String toString() {
@@ -49,7 +49,7 @@ abstract mixin class $PublicUserEntityCopyWith<$Res>  {
   factory $PublicUserEntityCopyWith(PublicUserEntity value, $Res Function(PublicUserEntity) _then) = _$PublicUserEntityCopyWithImpl;
 @useResult
 $Res call({
- String accountName, Map<String, dynamic> bio, int blockCount, dynamic createdAt, String ethAddress, int followerCount, int followingCount, bool isNFTicon, bool isOfficial, bool isSuspended, List<Map<String, dynamic>> links, int muteCount, int postCount, int reportCount, double score, Map<String, dynamic> searchToken, String uid, dynamic updatedAt, Map<String, dynamic> image, Map<String, dynamic> userName, List<Map<String, dynamic>> walletAddresses
+ String accountName, Map<String, dynamic> bio, int blockCount,@TimestampConverter() DateTime? createdAt, String ethAddress, int followerCount, int followingCount, bool isNFTicon, bool isOfficial, bool isSuspended, List<Map<String, dynamic>> links, int muteCount, int postCount, int reportCount, double score, Map<String, dynamic> searchToken, String uid,@TimestampConverter() DateTime? updatedAt, Map<String, dynamic> image, Map<String, dynamic> userName, List<Map<String, dynamic>> walletAddresses
 });
 
 
@@ -72,7 +72,7 @@ accountName: null == accountName ? _self.accountName : accountName // ignore: ca
 as String,bio: null == bio ? _self.bio : bio // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>,blockCount: null == blockCount ? _self.blockCount : blockCount // ignore: cast_nullable_to_non_nullable
 as int,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as dynamic,ethAddress: null == ethAddress ? _self.ethAddress : ethAddress // ignore: cast_nullable_to_non_nullable
+as DateTime?,ethAddress: null == ethAddress ? _self.ethAddress : ethAddress // ignore: cast_nullable_to_non_nullable
 as String,followerCount: null == followerCount ? _self.followerCount : followerCount // ignore: cast_nullable_to_non_nullable
 as int,followingCount: null == followingCount ? _self.followingCount : followingCount // ignore: cast_nullable_to_non_nullable
 as int,isNFTicon: null == isNFTicon ? _self.isNFTicon : isNFTicon // ignore: cast_nullable_to_non_nullable
@@ -86,7 +86,7 @@ as int,score: null == score ? _self.score : score // ignore: cast_nullable_to_no
 as double,searchToken: null == searchToken ? _self.searchToken : searchToken // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as dynamic,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as DateTime?,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>,walletAddresses: null == walletAddresses ? _self.walletAddresses : walletAddresses // ignore: cast_nullable_to_non_nullable
 as List<Map<String, dynamic>>,
@@ -100,7 +100,7 @@ as List<Map<String, dynamic>>,
 @JsonSerializable()
 
 class _PublicUserEntity extends PublicUserEntity {
-   _PublicUserEntity({required this.accountName, required final  Map<String, dynamic> bio, required this.blockCount, required this.createdAt, required this.ethAddress, required this.followerCount, required this.followingCount, required this.isNFTicon, required this.isOfficial, required this.isSuspended, required final  List<Map<String, dynamic>> links, required this.muteCount, required this.postCount, required this.reportCount, required this.score, required final  Map<String, dynamic> searchToken, required this.uid, required this.updatedAt, required final  Map<String, dynamic> image, required final  Map<String, dynamic> userName, required final  List<Map<String, dynamic>> walletAddresses}): _bio = bio,_links = links,_searchToken = searchToken,_image = image,_userName = userName,_walletAddresses = walletAddresses,super._();
+   _PublicUserEntity({required this.accountName, required final  Map<String, dynamic> bio, required this.blockCount, @TimestampConverter() this.createdAt, required this.ethAddress, required this.followerCount, required this.followingCount, required this.isNFTicon, required this.isOfficial, required this.isSuspended, required final  List<Map<String, dynamic>> links, required this.muteCount, required this.postCount, required this.reportCount, required this.score, required final  Map<String, dynamic> searchToken, required this.uid, @TimestampConverter() this.updatedAt, required final  Map<String, dynamic> image, required final  Map<String, dynamic> userName, required final  List<Map<String, dynamic>> walletAddresses}): _bio = bio,_links = links,_searchToken = searchToken,_image = image,_userName = userName,_walletAddresses = walletAddresses,super._();
   factory _PublicUserEntity.fromJson(Map<String, dynamic> json) => _$PublicUserEntityFromJson(json);
 
 @override final  String accountName;
@@ -112,7 +112,7 @@ class _PublicUserEntity extends PublicUserEntity {
 }
 
 @override final  int blockCount;
-@override final  dynamic createdAt;
+@override@TimestampConverter() final  DateTime? createdAt;
 @override final  String ethAddress;
 @override final  int followerCount;
 @override final  int followingCount;
@@ -138,7 +138,7 @@ class _PublicUserEntity extends PublicUserEntity {
 }
 
 @override final  String uid;
-@override final  dynamic updatedAt;
+@override@TimestampConverter() final  DateTime? updatedAt;
  final  Map<String, dynamic> _image;
 @override Map<String, dynamic> get image {
   if (_image is EqualUnmodifiableMapView) return _image;
@@ -174,12 +174,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PublicUserEntity&&(identical(other.accountName, accountName) || other.accountName == accountName)&&const DeepCollectionEquality().equals(other._bio, _bio)&&(identical(other.blockCount, blockCount) || other.blockCount == blockCount)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.followerCount, followerCount) || other.followerCount == followerCount)&&(identical(other.followingCount, followingCount) || other.followingCount == followingCount)&&(identical(other.isNFTicon, isNFTicon) || other.isNFTicon == isNFTicon)&&(identical(other.isOfficial, isOfficial) || other.isOfficial == isOfficial)&&(identical(other.isSuspended, isSuspended) || other.isSuspended == isSuspended)&&const DeepCollectionEquality().equals(other._links, _links)&&(identical(other.muteCount, muteCount) || other.muteCount == muteCount)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.reportCount, reportCount) || other.reportCount == reportCount)&&(identical(other.score, score) || other.score == score)&&const DeepCollectionEquality().equals(other._searchToken, _searchToken)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt)&&const DeepCollectionEquality().equals(other._image, _image)&&const DeepCollectionEquality().equals(other._userName, _userName)&&const DeepCollectionEquality().equals(other._walletAddresses, _walletAddresses));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PublicUserEntity&&(identical(other.accountName, accountName) || other.accountName == accountName)&&const DeepCollectionEquality().equals(other._bio, _bio)&&(identical(other.blockCount, blockCount) || other.blockCount == blockCount)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.followerCount, followerCount) || other.followerCount == followerCount)&&(identical(other.followingCount, followingCount) || other.followingCount == followingCount)&&(identical(other.isNFTicon, isNFTicon) || other.isNFTicon == isNFTicon)&&(identical(other.isOfficial, isOfficial) || other.isOfficial == isOfficial)&&(identical(other.isSuspended, isSuspended) || other.isSuspended == isSuspended)&&const DeepCollectionEquality().equals(other._links, _links)&&(identical(other.muteCount, muteCount) || other.muteCount == muteCount)&&(identical(other.postCount, postCount) || other.postCount == postCount)&&(identical(other.reportCount, reportCount) || other.reportCount == reportCount)&&(identical(other.score, score) || other.score == score)&&const DeepCollectionEquality().equals(other._searchToken, _searchToken)&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other._image, _image)&&const DeepCollectionEquality().equals(other._userName, _userName)&&const DeepCollectionEquality().equals(other._walletAddresses, _walletAddresses));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,accountName,const DeepCollectionEquality().hash(_bio),blockCount,const DeepCollectionEquality().hash(createdAt),ethAddress,followerCount,followingCount,isNFTicon,isOfficial,isSuspended,const DeepCollectionEquality().hash(_links),muteCount,postCount,reportCount,score,const DeepCollectionEquality().hash(_searchToken),uid,const DeepCollectionEquality().hash(updatedAt),const DeepCollectionEquality().hash(_image),const DeepCollectionEquality().hash(_userName),const DeepCollectionEquality().hash(_walletAddresses)]);
+int get hashCode => Object.hashAll([runtimeType,accountName,const DeepCollectionEquality().hash(_bio),blockCount,createdAt,ethAddress,followerCount,followingCount,isNFTicon,isOfficial,isSuspended,const DeepCollectionEquality().hash(_links),muteCount,postCount,reportCount,score,const DeepCollectionEquality().hash(_searchToken),uid,updatedAt,const DeepCollectionEquality().hash(_image),const DeepCollectionEquality().hash(_userName),const DeepCollectionEquality().hash(_walletAddresses)]);
 
 @override
 String toString() {
@@ -194,7 +194,7 @@ abstract mixin class _$PublicUserEntityCopyWith<$Res> implements $PublicUserEnti
   factory _$PublicUserEntityCopyWith(_PublicUserEntity value, $Res Function(_PublicUserEntity) _then) = __$PublicUserEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String accountName, Map<String, dynamic> bio, int blockCount, dynamic createdAt, String ethAddress, int followerCount, int followingCount, bool isNFTicon, bool isOfficial, bool isSuspended, List<Map<String, dynamic>> links, int muteCount, int postCount, int reportCount, double score, Map<String, dynamic> searchToken, String uid, dynamic updatedAt, Map<String, dynamic> image, Map<String, dynamic> userName, List<Map<String, dynamic>> walletAddresses
+ String accountName, Map<String, dynamic> bio, int blockCount,@TimestampConverter() DateTime? createdAt, String ethAddress, int followerCount, int followingCount, bool isNFTicon, bool isOfficial, bool isSuspended, List<Map<String, dynamic>> links, int muteCount, int postCount, int reportCount, double score, Map<String, dynamic> searchToken, String uid,@TimestampConverter() DateTime? updatedAt, Map<String, dynamic> image, Map<String, dynamic> userName, List<Map<String, dynamic>> walletAddresses
 });
 
 
@@ -217,7 +217,7 @@ accountName: null == accountName ? _self.accountName : accountName // ignore: ca
 as String,bio: null == bio ? _self._bio : bio // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>,blockCount: null == blockCount ? _self.blockCount : blockCount // ignore: cast_nullable_to_non_nullable
 as int,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as dynamic,ethAddress: null == ethAddress ? _self.ethAddress : ethAddress // ignore: cast_nullable_to_non_nullable
+as DateTime?,ethAddress: null == ethAddress ? _self.ethAddress : ethAddress // ignore: cast_nullable_to_non_nullable
 as String,followerCount: null == followerCount ? _self.followerCount : followerCount // ignore: cast_nullable_to_non_nullable
 as int,followingCount: null == followingCount ? _self.followingCount : followingCount // ignore: cast_nullable_to_non_nullable
 as int,isNFTicon: null == isNFTicon ? _self.isNFTicon : isNFTicon // ignore: cast_nullable_to_non_nullable
@@ -231,7 +231,7 @@ as int,score: null == score ? _self.score : score // ignore: cast_nullable_to_no
 as double,searchToken: null == searchToken ? _self._searchToken : searchToken // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as dynamic,image: null == image ? _self._image : image // ignore: cast_nullable_to_non_nullable
+as DateTime?,image: null == image ? _self._image : image // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>,userName: null == userName ? _self._userName : userName // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>,walletAddresses: null == walletAddresses ? _self._walletAddresses : walletAddresses // ignore: cast_nullable_to_non_nullable
 as List<Map<String, dynamic>>,
