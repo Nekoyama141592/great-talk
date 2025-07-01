@@ -13,9 +13,10 @@ class ModernSliverAppBar extends StatelessWidget {
       backgroundColor: Colors.transparent,
       flexibleSpace: FlexibleSpaceBar(
         title: ShaderMask(
-          shaderCallback: (bounds) => const LinearGradient(
-            colors: [Colors.white, Color(0xFFf093fb)],
-          ).createShader(bounds),
+          shaderCallback:
+              (bounds) => const LinearGradient(
+                colors: [Colors.white, Color(0xFFf093fb)],
+              ).createShader(bounds),
           child: const Text(
             'AI画像生成',
             style: TextStyle(

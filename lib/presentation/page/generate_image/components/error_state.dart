@@ -10,18 +10,11 @@ class ErrorState extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.red.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.red.withValues(alpha: 0.3),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.red.withValues(alpha: 0.3), width: 1),
       ),
       child: const Column(
         children: [
-          Icon(
-            Icons.error_outline,
-            color: Colors.red,
-            size: 48,
-          ),
+          Icon(Icons.error_outline, color: Colors.red, size: 48),
           SizedBox(height: 16),
           Text(
             'エラーが発生しました',

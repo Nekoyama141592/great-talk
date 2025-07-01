@@ -40,19 +40,21 @@ void main() {
         expect(find.byType(TextFormField), findsOneWidget);
       });
 
-      testWidgets('should have glassmorphic styling', (WidgetTester tester) async {
+      testWidgets('should have glassmorphic styling', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         final containers = tester.widgetList<Container>(find.byType(Container));
-        
+
         // Find the main container with glassmorphic styling
         bool hasGlassMorphism = containers.any((container) {
           final decoration = container.decoration as BoxDecoration?;
-          return decoration?.color != null && 
-                 decoration!.borderRadius != null &&
-                 decoration.border != null;
+          return decoration?.color != null &&
+              decoration!.borderRadius != null &&
+              decoration.border != null;
         });
-        
+
         expect(hasGlassMorphism, isTrue);
       });
 
@@ -81,7 +83,9 @@ void main() {
         expect(controller.text, equals(testText));
       });
 
-      testWidgets('should call onChanged when text changes', (WidgetTester tester) async {
+      testWidgets('should call onChanged when text changes', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         const testText = 'テスト入力';
@@ -102,17 +106,19 @@ void main() {
         expect(controller.text, equals(multilineText));
       });
 
-      testWidgets('should support maximum of 3 lines', (WidgetTester tester) async {
+      testWidgets('should support maximum of 3 lines', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         // Verify the text field exists and accept that we can't directly access maxLines
         expect(find.byType(TextFormField), findsOneWidget);
-        
+
         // Test multiline functionality by entering multiline text
         const multilineText = 'Line 1\nLine 2\nLine 3';
         await tester.enterText(find.byType(TextFormField), multilineText);
         await tester.pump();
-        
+
         expect(controller.text, equals(multilineText));
       });
 
@@ -128,7 +134,8 @@ void main() {
       testWidgets('should handle long text input', (WidgetTester tester) async {
         await tester.pumpWidget(createTestWidget());
 
-        const longText = 'This is a very long text input that should test how the modern prompt input component handles extended text and whether it behaves correctly with glassmorphic styling and proper text wrapping.';
+        const longText =
+            'This is a very long text input that should test how the modern prompt input component handles extended text and whether it behaves correctly with glassmorphic styling and proper text wrapping.';
         await tester.enterText(find.byType(TextFormField), longText);
         await tester.pump();
 
@@ -147,18 +154,22 @@ void main() {
         expect(find.byType(BackdropFilter), findsOneWidget);
       });
 
-      testWidgets('should have text input functionality', (WidgetTester tester) async {
+      testWidgets('should have text input functionality', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         const testText = 'Test input';
         await tester.enterText(find.byType(TextFormField), testText);
         await tester.pump();
-        
+
         expect(controller.text, equals(testText));
         expect(find.text(testText), findsOneWidget);
       });
 
-      testWidgets('should have prefix icon and hint text', (WidgetTester tester) async {
+      testWidgets('should have prefix icon and hint text', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         expect(find.byIcon(Icons.auto_awesome), findsOneWidget);
@@ -169,12 +180,12 @@ void main() {
         await tester.pumpWidget(createTestWidget());
 
         final containers = tester.widgetList<Container>(find.byType(Container));
-        
+
         bool hasRoundedCorners = containers.any((container) {
           final decoration = container.decoration as BoxDecoration?;
           return decoration?.borderRadius != null;
         });
-        
+
         expect(hasRoundedCorners, isTrue);
       });
     });
@@ -184,7 +195,7 @@ void main() {
         await tester.pumpWidget(createTestWidget());
 
         expect(find.byType(TextFormField), findsOneWidget);
-        
+
         // Verify semantic elements are present
         expect(find.byType(Semantics), findsAtLeastNWidgets(1));
       });
@@ -202,7 +213,9 @@ void main() {
     });
 
     group('Edge Cases', () {
-      testWidgets('should handle controller changes', (WidgetTester tester) async {
+      testWidgets('should handle controller changes', (
+        WidgetTester tester,
+      ) async {
         final controller1 = TextEditingController(text: 'Initial text');
         final controller2 = TextEditingController(text: 'New text');
 
@@ -216,7 +229,9 @@ void main() {
         controller2.dispose();
       });
 
-      testWidgets('should handle null onChanged callback', (WidgetTester tester) async {
+      testWidgets('should handle null onChanged callback', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget(onChanged: null));
 
         // Should not throw error when onChanged is null
@@ -226,7 +241,9 @@ void main() {
         expect(find.text('test'), findsOneWidget);
       });
 
-      testWidgets('should work with different themes', (WidgetTester tester) async {
+      testWidgets('should work with different themes', (
+        WidgetTester tester,
+      ) async {
         for (final theme in [ThemeData.light(), ThemeData.dark()]) {
           await tester.pumpWidget(
             MaterialApp(
@@ -257,7 +274,9 @@ void main() {
         expect(changedText, equals(japaneseText));
       });
 
-      testWidgets('should handle special characters', (WidgetTester tester) async {
+      testWidgets('should handle special characters', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         const specialText = '!@#\$%^&*()_+-=[]{}|;:,.<>?';

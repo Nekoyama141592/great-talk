@@ -9,25 +9,31 @@ import 'package:great_talk/presentation/page/generate_image/components/modern_sl
 void main() {
   group('GenerateImagePage Basic Tests', () {
     Widget createTestWidget() {
-      return const ProviderScope(
-        child: MaterialApp(
-          home: GenerateImagePage(),
-        ),
-      );
+      return const ProviderScope(child: MaterialApp(home: GenerateImagePage()));
     }
 
     group('UI Structure Tests', () {
-      testWidgets('should render main scaffold structure', (WidgetTester tester) async {
+      testWidgets('should render main scaffold structure', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         expect(find.byType(GenerateImagePage), findsOneWidget);
         expect(find.byType(Scaffold), findsOneWidget);
-        expect(find.byType(Stack), findsAtLeastNWidgets(1)); // Multiple Stack widgets expected
-        expect(find.byType(SafeArea), findsAtLeastNWidgets(1)); // Multiple SafeArea widgets possible
+        expect(
+          find.byType(Stack),
+          findsAtLeastNWidgets(1),
+        ); // Multiple Stack widgets expected
+        expect(
+          find.byType(SafeArea),
+          findsAtLeastNWidgets(1),
+        ); // Multiple SafeArea widgets possible
         expect(find.byType(CustomScrollView), findsOneWidget);
       });
 
-      testWidgets('should render background components', (WidgetTester tester) async {
+      testWidgets('should render background components', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         expect(find.byType(AnimatedGradientBackground), findsOneWidget);
@@ -41,7 +47,9 @@ void main() {
         expect(find.text('AI画像生成'), findsOneWidget);
       });
 
-      testWidgets('should render sliver components', (WidgetTester tester) async {
+      testWidgets('should render sliver components', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         expect(find.byType(SliverAppBar), findsOneWidget);
@@ -50,7 +58,9 @@ void main() {
     });
 
     group('Animation Tests', () {
-      testWidgets('should have animation controllers', (WidgetTester tester) async {
+      testWidgets('should have animation controllers', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         // Check for animated builders (background + particles)
@@ -69,7 +79,9 @@ void main() {
         expect(find.byType(FloatingParticles), findsOneWidget);
       });
 
-      testWidgets('should render floating particles', (WidgetTester tester) async {
+      testWidgets('should render floating particles', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         expect(find.byType(FloatingParticles), findsOneWidget);
@@ -78,7 +90,9 @@ void main() {
     });
 
     group('Responsive Design Tests', () {
-      testWidgets('should handle different screen sizes', (WidgetTester tester) async {
+      testWidgets('should handle different screen sizes', (
+        WidgetTester tester,
+      ) async {
         final sizes = [
           const Size(360, 640), // Small phone
           const Size(414, 896), // Large phone
@@ -87,7 +101,7 @@ void main() {
 
         for (final size in sizes) {
           await tester.binding.setSurfaceSize(size);
-          
+
           await tester.pumpWidget(createTestWidget());
           await tester.pump();
 
@@ -111,25 +125,34 @@ void main() {
     });
 
     group('Integration Tests', () {
-      testWidgets('should render all background components together', 
-          (WidgetTester tester) async {
+      testWidgets('should render all background components together', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         // Background components
         expect(find.byType(AnimatedGradientBackground), findsOneWidget);
         expect(find.byType(FloatingParticles), findsOneWidget);
-        
+
         // App bar
         expect(find.byType(ModernSliverAppBar), findsOneWidget);
         expect(find.text('AI画像生成'), findsOneWidget);
-        
+
         // Layout components
-        expect(find.byType(Stack), findsAtLeastNWidgets(1)); // Multiple Stack widgets expected
-        expect(find.byType(SafeArea), findsAtLeastNWidgets(1)); // Multiple SafeArea widgets possible
+        expect(
+          find.byType(Stack),
+          findsAtLeastNWidgets(1),
+        ); // Multiple Stack widgets expected
+        expect(
+          find.byType(SafeArea),
+          findsAtLeastNWidgets(1),
+        ); // Multiple SafeArea widgets possible
         expect(find.byType(CustomScrollView), findsOneWidget);
       });
 
-      testWidgets('should handle continuous animation', (WidgetTester tester) async {
+      testWidgets('should handle continuous animation', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         // Run animation for extended period
@@ -141,7 +164,9 @@ void main() {
     });
 
     group('Widget Tree Tests', () {
-      testWidgets('should have proper widget hierarchy', (WidgetTester tester) async {
+      testWidgets('should have proper widget hierarchy', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         // Verify the widget tree structure
@@ -149,30 +174,37 @@ void main() {
         expect(find.byType(MaterialApp), findsOneWidget);
         expect(find.byType(GenerateImagePage), findsOneWidget);
         expect(find.byType(Scaffold), findsOneWidget);
-        expect(find.byType(Stack), findsAtLeastNWidgets(1)); // Multiple Stack widgets expected
-        
+        expect(
+          find.byType(Stack),
+          findsAtLeastNWidgets(1),
+        ); // Multiple Stack widgets expected
+
         // Background layers should be in stack
         expect(find.byType(AnimatedGradientBackground), findsOneWidget);
         expect(find.byType(FloatingParticles), findsOneWidget);
-        
+
         // Main content in SafeArea
-        expect(find.byType(SafeArea), findsAtLeastNWidgets(1)); // Multiple SafeArea widgets possible
+        expect(
+          find.byType(SafeArea),
+          findsAtLeastNWidgets(1),
+        ); // Multiple SafeArea widgets possible
         expect(find.byType(CustomScrollView), findsOneWidget);
       });
 
-      testWidgets('should maintain widget structure across rebuilds', 
-          (WidgetTester tester) async {
+      testWidgets('should maintain widget structure across rebuilds', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
-        
+
         // Initial structure check
         expect(find.byType(GenerateImagePage), findsOneWidget);
         expect(find.byType(AnimatedGradientBackground), findsOneWidget);
-        
+
         // Rebuild and check structure is maintained
         await tester.pump();
         expect(find.byType(GenerateImagePage), findsOneWidget);
         expect(find.byType(AnimatedGradientBackground), findsOneWidget);
-        
+
         // Multiple rebuilds
         for (int i = 0; i < 5; i++) {
           await tester.pump(const Duration(milliseconds: 50));
@@ -182,7 +214,9 @@ void main() {
     });
 
     group('Performance Tests', () {
-      testWidgets('should handle rapid frame updates', (WidgetTester tester) async {
+      testWidgets('should handle rapid frame updates', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         // Simulate rapid frame updates
@@ -193,13 +227,15 @@ void main() {
         expect(find.byType(GenerateImagePage), findsOneWidget);
       });
 
-      testWidgets('should handle widget tree complexity', (WidgetTester tester) async {
+      testWidgets('should handle widget tree complexity', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
 
         // Count the number of widgets in the tree
         final widgets = tester.allWidgets.toList();
         expect(widgets.length, greaterThan(10)); // Should have many widgets
-        
+
         // Core components should still be present
         expect(find.byType(GenerateImagePage), findsOneWidget);
         expect(find.byType(AnimatedGradientBackground), findsOneWidget);
@@ -208,14 +244,16 @@ void main() {
     });
 
     group('Error Resilience Tests', () {
-      testWidgets('should handle hot reload simulation', (WidgetTester tester) async {
+      testWidgets('should handle hot reload simulation', (
+        WidgetTester tester,
+      ) async {
         await tester.pumpWidget(createTestWidget());
         expect(find.byType(GenerateImagePage), findsOneWidget);
 
         // Simulate hot reload by rebuilding the same widget
         await tester.pumpWidget(createTestWidget());
         expect(find.byType(GenerateImagePage), findsOneWidget);
-        
+
         // Should maintain all components
         expect(find.byType(AnimatedGradientBackground), findsOneWidget);
         expect(find.byType(FloatingParticles), findsOneWidget);
@@ -229,12 +267,10 @@ void main() {
         // Replace with different widget
         await tester.pumpWidget(
           const ProviderScope(
-            child: MaterialApp(
-              home: Scaffold(body: Text('Different Widget')),
-            ),
+            child: MaterialApp(home: Scaffold(body: Text('Different Widget'))),
           ),
         );
-        
+
         expect(find.byType(GenerateImagePage), findsNothing);
         expect(find.text('Different Widget'), findsOneWidget);
       });

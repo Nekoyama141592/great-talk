@@ -4,7 +4,7 @@ import 'package:great_talk/core/constant/generate_image_constants.dart';
 
 class SizeSelector extends StatelessWidget {
   const SizeSelector({super.key, required this.size});
-  
+
   final ValueNotifier<String> size;
 
   @override
@@ -60,15 +60,19 @@ class SizeSelector extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
-                icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white),
+                icon: const Icon(
+                  Icons.keyboard_arrow_down,
+                  color: Colors.white,
+                ),
                 onChanged: (value) => size.value = value ?? '',
-                items: GenerateImageEnum.values.map((e) {
-                  final text = e.text();
-                  return DropdownMenuItem<String>(
-                    value: text,
-                    child: Text(text),
-                  );
-                }).toList(),
+                items:
+                    GenerateImageEnum.values.map((e) {
+                      final text = e.text();
+                      return DropdownMenuItem<String>(
+                        value: text,
+                        child: Text(text),
+                      );
+                    }).toList(),
               ),
             ),
           ],

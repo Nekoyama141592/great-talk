@@ -19,7 +19,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class GenerateImagePage extends HookConsumerWidget {
   const GenerateImagePage({super.key});
   static const path = "/generateImage";
-  
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     GenerateImageViewModel notifier() =>
@@ -52,13 +52,14 @@ class GenerateImagePage extends HookConsumerWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: state.when(
-                      data: (data) => _BuildMainContent(
-                        data: data,
-                        promptController: promptController,
-                        size: size,
-                        notifier: notifier,
-                        context: context,
-                      ),
+                      data:
+                          (data) => _BuildMainContent(
+                            data: data,
+                            promptController: promptController,
+                            size: size,
+                            notifier: notifier,
+                            context: context,
+                          ),
                       loading: () => const LoadingState(),
                       error: (e, s) => const ErrorState(),
                     ),
@@ -91,7 +92,7 @@ class _BuildMainContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final base64 = data.base64;
-    
+
     return Column(
       children: [
         if (base64 != null) ...[

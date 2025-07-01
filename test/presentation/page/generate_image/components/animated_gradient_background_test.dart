@@ -19,7 +19,9 @@ void main() {
       );
     }
 
-    testWidgets('should render with AnimationController', (WidgetTester tester) async {
+    testWidgets('should render with AnimationController', (
+      WidgetTester tester,
+    ) async {
       // Create a test animation controller
       await tester.pumpWidget(
         MaterialApp(
@@ -30,7 +32,9 @@ void main() {
                   duration: const Duration(seconds: 1),
                   vsync: const TestVSync(),
                 );
-                return AnimatedGradientBackground(animationController: controller);
+                return AnimatedGradientBackground(
+                  animationController: controller,
+                );
               },
             ),
           ),
@@ -52,7 +56,9 @@ void main() {
                   duration: const Duration(seconds: 1),
                   vsync: const TestVSync(),
                 );
-                return AnimatedGradientBackground(animationController: controller);
+                return AnimatedGradientBackground(
+                  animationController: controller,
+                );
               },
             ),
           ),
@@ -61,17 +67,19 @@ void main() {
 
       final container = tester.widget<Container>(find.byType(Container));
       final decoration = container.decoration as BoxDecoration;
-      
+
       expect(decoration.gradient, isNotNull);
       expect(decoration.gradient, isA<LinearGradient>());
-      
+
       final gradient = decoration.gradient as LinearGradient;
       expect(gradient.colors.length, equals(6)); // 6 colors in the gradient
     });
 
-    testWidgets('should animate gradient rotation', (WidgetTester tester) async {
+    testWidgets('should animate gradient rotation', (
+      WidgetTester tester,
+    ) async {
       AnimationController? controller;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -81,7 +89,9 @@ void main() {
                   duration: const Duration(seconds: 1),
                   vsync: const TestVSync(),
                 );
-                return AnimatedGradientBackground(animationController: controller!);
+                return AnimatedGradientBackground(
+                  animationController: controller!,
+                );
               },
             ),
           ),
@@ -94,13 +104,15 @@ void main() {
       await tester.pump(const Duration(milliseconds: 500)); // Half way through
 
       expect(find.byType(AnimatedGradientBackground), findsOneWidget);
-      
+
       // Complete animation
       await tester.pump(const Duration(milliseconds: 500));
       expect(find.byType(AnimatedGradientBackground), findsOneWidget);
     });
 
-    testWidgets('should have proper gradient colors', (WidgetTester tester) async {
+    testWidgets('should have proper gradient colors', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -110,7 +122,9 @@ void main() {
                   duration: const Duration(seconds: 1),
                   vsync: const TestVSync(),
                 );
-                return AnimatedGradientBackground(animationController: controller);
+                return AnimatedGradientBackground(
+                  animationController: controller,
+                );
               },
             ),
           ),
@@ -120,19 +134,21 @@ void main() {
       final container = tester.widget<Container>(find.byType(Container));
       final decoration = container.decoration as BoxDecoration;
       final gradient = decoration.gradient as LinearGradient;
-      
+
       // Check that we have the expected colors
       expect(gradient.colors.length, equals(6));
-      
+
       // Verify the colors are semi-transparent (alpha < 1.0)
       for (final color in gradient.colors) {
         expect(color.alpha, lessThan(255)); // Semi-transparent
       }
     });
 
-    testWidgets('should handle different animation states', (WidgetTester tester) async {
+    testWidgets('should handle different animation states', (
+      WidgetTester tester,
+    ) async {
       AnimationController? controller;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -142,7 +158,9 @@ void main() {
                   duration: const Duration(seconds: 1),
                   vsync: const TestVSync(),
                 );
-                return AnimatedGradientBackground(animationController: controller!);
+                return AnimatedGradientBackground(
+                  animationController: controller!,
+                );
               },
             ),
           ),
@@ -173,7 +191,9 @@ void main() {
                   duration: const Duration(seconds: 1),
                   vsync: const TestVSync(),
                 );
-                return AnimatedGradientBackground(animationController: controller);
+                return AnimatedGradientBackground(
+                  animationController: controller,
+                );
               },
             ),
           ),
@@ -183,7 +203,9 @@ void main() {
       expect(find.byType(AnimatedGradientBackground), findsOneWidget);
     });
 
-    testWidgets('should work with different animation durations', (WidgetTester tester) async {
+    testWidgets('should work with different animation durations', (
+      WidgetTester tester,
+    ) async {
       for (final duration in [
         const Duration(milliseconds: 500),
         const Duration(seconds: 1),
@@ -198,7 +220,9 @@ void main() {
                     duration: duration,
                     vsync: const TestVSync(),
                   );
-                  return AnimatedGradientBackground(animationController: controller);
+                  return AnimatedGradientBackground(
+                    animationController: controller,
+                  );
                 },
               ),
             ),
@@ -209,9 +233,11 @@ void main() {
       }
     });
 
-    testWidgets('should properly dispose resources', (WidgetTester tester) async {
+    testWidgets('should properly dispose resources', (
+      WidgetTester tester,
+    ) async {
       AnimationController? controller;
-      
+
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -221,7 +247,9 @@ void main() {
                   duration: const Duration(seconds: 1),
                   vsync: const TestVSync(),
                 );
-                return AnimatedGradientBackground(animationController: controller!);
+                return AnimatedGradientBackground(
+                  animationController: controller!,
+                );
               },
             ),
           ),
@@ -231,7 +259,9 @@ void main() {
       expect(find.byType(AnimatedGradientBackground), findsOneWidget);
 
       // Widget should handle being removed from tree
-      await tester.pumpWidget(const MaterialApp(home: Scaffold(body: SizedBox())));
+      await tester.pumpWidget(
+        const MaterialApp(home: Scaffold(body: SizedBox())),
+      );
       expect(find.byType(AnimatedGradientBackground), findsNothing);
     });
   });

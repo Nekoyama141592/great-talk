@@ -4,7 +4,7 @@ import 'package:great_talk/presentation/page/generate_image/components/generated
 
 class GlassmorphicImageContainer extends StatelessWidget {
   const GlassmorphicImageContainer({super.key, required this.base64});
-  
+
   final String base64;
 
   @override

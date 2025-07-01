@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class GenerateButton extends StatelessWidget {
   const GenerateButton({super.key, required this.onPressed});
-  
+
   final VoidCallback onPressed;
 
   @override
