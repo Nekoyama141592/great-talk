@@ -54,6 +54,33 @@ void main() {
       );
     });
 
+    // Helper function to create Firestore-compatible post data
+    Map<String, dynamic> createFirestorePostData(PostEntity post) {
+      return {
+        'uid': post.uid,
+        'postId': post.postId,
+        'title': post.title.toJson(),
+        'description': post.description.toJson(),
+        'createdAt': Timestamp.fromDate(post.createdAt!),
+        'updatedAt': Timestamp.fromDate(post.updatedAt!),
+        'customCompleteText': post.customCompleteText.toJson(),
+        'image': post.image.toJson(),
+        'searchToken': <String, dynamic>{},
+        'bookmarkCount': 0,
+        'exampleTexts': [],
+        'genre': '',
+        'hashTags': [],
+        'impressionCount': 0,
+        'likeCount': post.likeCount,
+        'links': [],
+        'msgCount': post.msgCount,
+        'muteCount': 0,
+        'reportCount': 0,
+        'score': 0.0,
+        'userCount': 0,
+      };
+    }
+
     group('deletePost', () {
       late PostEntity testPost;
 
@@ -94,7 +121,7 @@ void main() {
         await databaseRepository.createPost(
           testPost.uid,
           testPost.postId,
-          testPost.toJson(),
+          createFirestorePostData(testPost),
         );
 
         // Verify post exists before deletion
@@ -129,7 +156,7 @@ void main() {
           await databaseRepository.createPost(
             testPost.uid,
             testPost.postId,
-            testPost.toJson(),
+            createFirestorePostData(testPost),
           );
 
           fakeApiRepository.shouldSucceed = true;
@@ -150,7 +177,7 @@ void main() {
           await databaseRepository.createPost(
             testPost.uid,
             testPost.postId,
-            testPost.toJson(),
+            createFirestorePostData(testPost),
           );
 
           fakeApiRepository.shouldSucceed = false;
@@ -183,7 +210,7 @@ void main() {
         await databaseRepository.createPost(
           postWithEmptyImage.uid,
           postWithEmptyImage.postId,
-          postWithEmptyImage.toJson(),
+          createFirestorePostData(postWithEmptyImage),
         );
 
         fakeApiRepository.shouldSucceed = true;
@@ -218,7 +245,7 @@ void main() {
         await databaseRepository.createPost(
           postWithNullFileName.uid,
           postWithNullFileName.postId,
-          postWithNullFileName.toJson(),
+          createFirestorePostData(postWithNullFileName),
         );
 
         fakeApiRepository.shouldSucceed = true;
@@ -253,7 +280,7 @@ void main() {
         await databaseRepository.createPost(
           postWithDifferentImage.uid,
           postWithDifferentImage.postId,
-          postWithDifferentImage.toJson(),
+          createFirestorePostData(postWithDifferentImage),
         );
 
         fakeApiRepository.shouldSucceed = true;
@@ -291,7 +318,7 @@ void main() {
         await databaseRepository.createPost(
           postWithHighCounts.uid,
           postWithHighCounts.postId,
-          postWithHighCounts.toJson(),
+          createFirestorePostData(postWithHighCounts),
         );
 
         fakeApiRepository.shouldSucceed = true;
@@ -388,7 +415,7 @@ void main() {
         await databaseRepository.createPost(
           post.uid,
           post.postId,
-          post.toJson(),
+          createFirestorePostData(post),
         );
 
         fakeApiRepository.shouldSucceed = true;
@@ -450,7 +477,7 @@ void main() {
           await databaseRepository.createPost(
             postWithSpecialChars.uid,
             postWithSpecialChars.postId,
-            postWithSpecialChars.toJson(),
+            createFirestorePostData(postWithSpecialChars),
           );
 
           fakeApiRepository.shouldSucceed = true;
@@ -509,7 +536,7 @@ void main() {
         await databaseRepository.createPost(
           postWithLongFileName.uid,
           postWithLongFileName.postId,
-          postWithLongFileName.toJson(),
+          createFirestorePostData(postWithLongFileName),
         );
 
         fakeApiRepository.shouldSucceed = true;
