@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/date_util.dart';
 
 class DateText extends StatelessWidget {
-  const DateText({
-    super.key,
-    required this.createdAt,
-    required this.updatedAt,
-  });
+  const DateText({super.key, required this.createdAt, required this.updatedAt});
 
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -20,9 +16,9 @@ class DateText extends StatelessWidget {
 
     return Text(
       dateText,
-      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-        color: Colors.grey[600],
-      ),
+      style: Theme.of(
+        context,
+      ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
     );
   }
 }

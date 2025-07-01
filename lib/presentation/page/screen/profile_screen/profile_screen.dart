@@ -56,8 +56,11 @@ class ProfileScreen extends ConsumerWidget {
           Text("フォロワー ${passiveUser?.followerCount.formatNumber() ?? 0}"),
         ],
       ),
-      const SizedBox(height: 16,),
-      DateText(createdAt: passiveUser?.createdAt, updatedAt: passiveUser?.updatedAt),
+      const SizedBox(height: 16),
+      DateText(
+        createdAt: passiveUser?.createdAt,
+        updatedAt: passiveUser?.updatedAt,
+      ),
       // 横向きなら、表示崩れを防止するためにbioを表示しない。
       if (MediaQuery.of(context).orientation != Orientation.landscape)
         Align(

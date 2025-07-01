@@ -4,18 +4,16 @@ import 'package:great_talk/presentation/page/screen/profile_screen/components/da
 
 void main() {
   group('DateText', () {
-    testWidgets('should display formatted dates for both created and updated',
-        (WidgetTester tester) async {
+    testWidgets('should display formatted dates for both created and updated', (
+      WidgetTester tester,
+    ) async {
       final createdAt = DateTime(2023, 5, 15);
       final updatedAt = DateTime(2023, 8, 20);
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DateText(
-              createdAt: createdAt,
-              updatedAt: updatedAt,
-            ),
+            body: DateText(createdAt: createdAt, updatedAt: updatedAt),
           ),
         ),
       );
@@ -23,84 +21,73 @@ void main() {
       expect(find.text('2023/05/15作成, 2023/08/20更新'), findsOneWidget);
     });
 
-    testWidgets('should handle null createdAt and updatedAt', (WidgetTester tester) async {
+    testWidgets('should handle null createdAt and updatedAt', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: DateText(
-              createdAt: null,
-              updatedAt: null,
-            ),
-          ),
+          home: Scaffold(body: DateText(createdAt: null, updatedAt: null)),
         ),
       );
 
       expect(find.text('作成, 更新'), findsOneWidget);
     });
 
-    testWidgets('should handle null createdAt with valid updatedAt', (WidgetTester tester) async {
+    testWidgets('should handle null createdAt with valid updatedAt', (
+      WidgetTester tester,
+    ) async {
       final updatedAt = DateTime(2023, 12, 25);
 
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: DateText(
-              createdAt: null,
-              updatedAt: updatedAt,
-            ),
-          ),
+          home: Scaffold(body: DateText(createdAt: null, updatedAt: updatedAt)),
         ),
       );
 
       expect(find.text('作成, 2023/12/25更新'), findsOneWidget);
     });
 
-    testWidgets('should handle valid createdAt with null updatedAt', (WidgetTester tester) async {
+    testWidgets('should handle valid createdAt with null updatedAt', (
+      WidgetTester tester,
+    ) async {
       final createdAt = DateTime(2023, 1, 1);
 
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: DateText(
-              createdAt: createdAt,
-              updatedAt: null,
-            ),
-          ),
+          home: Scaffold(body: DateText(createdAt: createdAt, updatedAt: null)),
         ),
       );
 
       expect(find.text('2023/01/01作成, 更新'), findsOneWidget);
     });
 
-    testWidgets('should format dates with zero padding for single digit months and days',
-        (WidgetTester tester) async {
-      final createdAt = DateTime(2023, 1, 5);
-      final updatedAt = DateTime(2023, 9, 8);
+    testWidgets(
+      'should format dates with zero padding for single digit months and days',
+      (WidgetTester tester) async {
+        final createdAt = DateTime(2023, 1, 5);
+        final updatedAt = DateTime(2023, 9, 8);
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: DateText(
-              createdAt: createdAt,
-              updatedAt: updatedAt,
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: DateText(createdAt: createdAt, updatedAt: updatedAt),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.text('2023/01/05作成, 2023/09/08更新'), findsOneWidget);
-    });
+        expect(find.text('2023/01/05作成, 2023/09/08更新'), findsOneWidget);
+      },
+    );
 
-    testWidgets('should handle same date for created and updated', (WidgetTester tester) async {
+    testWidgets('should handle same date for created and updated', (
+      WidgetTester tester,
+    ) async {
       final sameDate = DateTime(2023, 6, 15);
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DateText(
-              createdAt: sameDate,
-              updatedAt: sameDate,
-            ),
+            body: DateText(createdAt: sameDate, updatedAt: sameDate),
           ),
         ),
       );
@@ -115,10 +102,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DateText(
-              createdAt: createdAt,
-              updatedAt: updatedAt,
-            ),
+            body: DateText(createdAt: createdAt, updatedAt: updatedAt),
           ),
         ),
       );
@@ -133,10 +117,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DateText(
-              createdAt: createdAt,
-              updatedAt: updatedAt,
-            ),
+            body: DateText(createdAt: createdAt, updatedAt: updatedAt),
           ),
         ),
       );
@@ -152,10 +133,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DateText(
-              createdAt: createdAt,
-              updatedAt: updatedAt,
-            ),
+            body: DateText(createdAt: createdAt, updatedAt: updatedAt),
           ),
         ),
       );
@@ -164,17 +142,16 @@ void main() {
       expect(find.byType(DateText), findsOneWidget);
     });
 
-    testWidgets('should handle year boundaries correctly', (WidgetTester tester) async {
+    testWidgets('should handle year boundaries correctly', (
+      WidgetTester tester,
+    ) async {
       final createdAt = DateTime(2022, 12, 31);
       final updatedAt = DateTime(2023, 1, 1);
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DateText(
-              createdAt: createdAt,
-              updatedAt: updatedAt,
-            ),
+            body: DateText(createdAt: createdAt, updatedAt: updatedAt),
           ),
         ),
       );
@@ -190,10 +167,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: DateText(
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-              ),
+              body: DateText(createdAt: createdAt, updatedAt: updatedAt),
             ),
           ),
         );
@@ -208,10 +182,7 @@ void main() {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
-              body: DateText(
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-              ),
+              body: DateText(createdAt: createdAt, updatedAt: updatedAt),
             ),
           ),
         );
@@ -221,22 +192,19 @@ void main() {
     });
 
     group('Theme integration', () {
-      testWidgets('should respect theme text style', (WidgetTester tester) async {
+      testWidgets('should respect theme text style', (
+        WidgetTester tester,
+      ) async {
         final createdAt = DateTime(2023, 5, 15);
         final updatedAt = DateTime(2023, 8, 20);
 
         await tester.pumpWidget(
           MaterialApp(
             theme: ThemeData(
-              textTheme: const TextTheme(
-                bodySmall: TextStyle(fontSize: 10),
-              ),
+              textTheme: const TextTheme(bodySmall: TextStyle(fontSize: 10)),
             ),
             home: Scaffold(
-              body: DateText(
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-              ),
+              body: DateText(createdAt: createdAt, updatedAt: updatedAt),
             ),
           ),
         );
@@ -254,10 +222,7 @@ void main() {
           MaterialApp(
             theme: ThemeData.dark(),
             home: Scaffold(
-              body: DateText(
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-              ),
+              body: DateText(createdAt: createdAt, updatedAt: updatedAt),
             ),
           ),
         );
