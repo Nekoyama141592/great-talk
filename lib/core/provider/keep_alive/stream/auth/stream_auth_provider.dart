@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:great_talk/core/provider/keep_alive/infrastructure/firebase/firebath_auth/firebase_auth_provider.dart';
-import 'package:great_talk/domain/entity/global/current_user/auth_user/auth_user.dart';
+import 'package:great_talk/domain/entity/auth/auth_user/auth_user.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'stream_auth_provider.g.dart';
