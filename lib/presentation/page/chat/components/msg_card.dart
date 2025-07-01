@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/extension/custom_date_time_formatting.dart';
 import 'package:great_talk/presentation/util/padding_core.dart';
@@ -20,7 +19,7 @@ class MsgCard extends StatelessWidget {
   final bool isMyMsg;
   final bool isAnotherDay;
   final String text;
-  final Timestamp? createdAt;
+  final DateTime? createdAt;
   final Uint8List? postImage; // Uint8List? 型で画像データを受け取る
 
   @override
@@ -35,7 +34,7 @@ class MsgCard extends StatelessWidget {
       Column(
         children: [
           if (isMyMsg) const Text("既読"),
-          if (createdAt != null) Text(createdAt!.toDate().timeString()),
+          if (createdAt != null) Text(createdAt!.timeString()),
         ],
       ),
       const SizedBox(width: 4.0),
@@ -83,7 +82,7 @@ class MsgCard extends StatelessWidget {
         ? Column(
           children: [
             const BasicHeightBox(),
-            Text(createdAt!.toDate().japaneseDifference()),
+            Text(createdAt!.japaneseDifference()),
             const BasicHeightBox(),
             child,
           ],

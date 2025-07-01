@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
+import 'package:great_talk/infrastructure/model/local_schema/text_message/text_message.dart';
 import 'package:great_talk/presentation/state/chat/chat_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
@@ -59,8 +59,7 @@ class ChatPage extends HookConsumerWidget {
     bool isAnotherDay(List<TextMessage> messages, int index) {
       if (index == 0) return true; // 最初のメッセージは常に日付を表示
       final message = messages[index];
-      return message.createdAtDateTime.day !=
-          messages[index - 1].createdAtDateTime.day;
+      return message.createdAt!.day != messages[index - 1].createdAt!.day;
     }
 
     void mutePost(BuildContext innerContext, PostEntity post) async {
@@ -197,7 +196,7 @@ class ChatPage extends HookConsumerWidget {
                         isMyMsg: isMyMessage,
                         isAnotherDay: isAnotherDay(messages, index),
                         text: text,
-                        createdAt: message.typedCreatedAt(),
+                        createdAt: message.createdAt,
                         postImage: image != null ? base64Decode(image) : null,
                       );
                     }),

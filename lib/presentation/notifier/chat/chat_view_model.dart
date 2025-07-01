@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/core/constant/chat_constants.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/generate_text_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/message/generate_text_request_message.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
@@ -15,7 +16,7 @@ import 'package:great_talk/core/provider/keep_alive/usecase/file/file_use_case_p
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
+import 'package:great_talk/infrastructure/model/local_schema/text_message/text_message.dart';
 part 'chat_view_model.g.dart';
 
 @riverpod
@@ -64,7 +65,7 @@ class ChatViewModel extends _$ChatViewModel {
             final role = e.role(postId);
             return GenerateTextRequestMessage(
               role: role,
-              content: e.typedText().value,
+              content: DetectedText.fromJson(e.text).value,
             );
           }).toList()
           ..insert(

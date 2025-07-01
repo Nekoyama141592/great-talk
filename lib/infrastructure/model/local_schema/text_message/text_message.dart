@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/domain/value/message_type.dart';
 import 'package:great_talk/core/util/id_util.dart';
-import 'package:great_talk/core/extension/custom_date_time_formatting.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/local_schema/save_text_msg/save_text_msg.dart';
 
 part 'text_message.freezed.dart';
 part 'text_message.g.dart';
@@ -14,7 +11,7 @@ part 'text_message.g.dart';
 abstract class TextMessage with _$TextMessage {
   const TextMessage._();
   const factory TextMessage({
-    required dynamic createdAt,
+    required DateTime createdAt,
     required String id,
     required String messageType,
     required String senderUid,
@@ -25,7 +22,7 @@ abstract class TextMessage with _$TextMessage {
   factory TextMessage.assistant(String content, PostEntity post) {
     return TextMessage(
       id: IdUtil.randomString(),
-      createdAt: Timestamp.now(),
+      createdAt: DateTime.now(),
       messageType: MessageType.text.name,
       text: DetectedText(value: content).toJson(),
       senderUid: post.postId,
@@ -34,27 +31,14 @@ abstract class TextMessage with _$TextMessage {
   factory TextMessage.user(String content, String currentUid) {
     return TextMessage(
       id: IdUtil.randomString(),
-      createdAt: Timestamp.now(),
+      createdAt: DateTime.now(),
       messageType: MessageType.text.name,
       text: DetectedText(value: content).toJson(),
       senderUid: currentUid,
     );
   }
-  factory TextMessage.fromSaveTextMsg(SaveTextMsg stm) => TextMessage(
-    createdAt: Timestamp.fromDate(stm.createdAt),
-    id: stm.id,
-    messageType: stm.messageType,
-    senderUid: stm.senderUid,
-    text: DetectedText.fromJson(stm.text).toJson(),
-  );
 
-  Timestamp typedCreatedAt() => createdAt as Timestamp;
   DetectedText typedText() => DetectedText.fromJson(text);
-  Timestamp typedUpdatedAtAt() => createdAt as Timestamp;
-
-  DateTime get createdAtDateTime => typedCreatedAt().toDate();
-  String timeCreatedAt() => createdAtDateTime.timeString();
-
   String role(String postId) {
     return senderUid == postId ? 'assistant' : 'user';
   }
