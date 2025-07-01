@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/presentation/component/mosaic_card/components/mosaic_user_child.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 
 void main() {
   group('MosaicUserChild', () {
@@ -11,9 +13,9 @@ void main() {
       testUser = PublicUserEntity(
         uid: 'test_uid',
         isOfficial: false,
-        userName: const {'value': 'Test User'},
-        bio: const {'value': 'Test bio'},
-        image: const {'value': 'test.jpg'},
+        userName: const DetectedText(value: 'Test User'),
+        bio: const DetectedText(value: 'Test bio'),
+        image: const DetectedImage(value: 'test.jpg'),
         followerCount: 100,
         followingCount: 50,
         postCount: 25,
@@ -141,9 +143,9 @@ void main() {
         PublicUserEntity(
           uid: 'user1',
           isOfficial: false,
-          userName: const {'value': 'Regular User'},
-          bio: const {'value': 'Bio'},
-          image: const {'value': ''},
+          userName: const DetectedText(value: 'Regular User'),
+          bio: const DetectedText(value: 'Bio'),
+          image: const DetectedImage(value: ''),
           followerCount: 0,
           followingCount: 0,
           postCount: 0,
@@ -153,9 +155,9 @@ void main() {
         PublicUserEntity(
           uid: 'user2',
           isOfficial: true,
-          userName: const {'value': 'Official User'},
-          bio: const {'value': 'Official bio'},
-          image: const {'value': 'official.jpg'},
+          userName: const DetectedText(value: 'Official User'),
+          bio: const DetectedText(value: 'Official bio'),
+          image: const DetectedImage(value: 'official.jpg'),
           followerCount: 10000,
           followingCount: 100,
           postCount: 500,
