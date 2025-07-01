@@ -1,8 +1,8 @@
+import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_mute/post_mute.dart';
-import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
@@ -26,11 +26,14 @@ abstract class IDatabaseRepository {
     Map<String, dynamic> json,
   );
 
-  Future<PrivateUser?> createPrivateUser(String uid, Map<String, dynamic> json);
+  Future<PrivateUserEntity?> createPrivateUser(
+    String uid,
+    Map<String, dynamic> json,
+  );
 
   // User operations
   Future<PublicUserEntity?> getPublicUser(String uid);
-  Future<PrivateUser?> getPrivateUser(String uid);
+  Future<PrivateUserEntity?> getPrivateUser(String uid);
   FutureResult<bool> deletePublicUser(String uid);
 
   // Post operations

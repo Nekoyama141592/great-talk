@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CurrentUserState {
 
- PublicUserEntity? get publicUser; PrivateUser? get privateUser; String? get base64;
+ PublicUserEntity? get publicUser; PrivateUserEntity? get privateUser; String? get base64;
 /// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,11 +49,11 @@ abstract mixin class $CurrentUserStateCopyWith<$Res>  {
   factory $CurrentUserStateCopyWith(CurrentUserState value, $Res Function(CurrentUserState) _then) = _$CurrentUserStateCopyWithImpl;
 @useResult
 $Res call({
- PublicUserEntity? publicUser, PrivateUser? privateUser, String? base64
+ PublicUserEntity? publicUser, PrivateUserEntity? privateUser, String? base64
 });
 
 
-$PublicUserEntityCopyWith<$Res>? get publicUser;$PrivateUserCopyWith<$Res>? get privateUser;
+$PublicUserEntityCopyWith<$Res>? get publicUser;$PrivateUserEntityCopyWith<$Res>? get privateUser;
 
 }
 /// @nodoc
@@ -70,7 +70,7 @@ class _$CurrentUserStateCopyWithImpl<$Res>
   return _then(_self.copyWith(
 publicUser: freezed == publicUser ? _self.publicUser : publicUser // ignore: cast_nullable_to_non_nullable
 as PublicUserEntity?,privateUser: freezed == privateUser ? _self.privateUser : privateUser // ignore: cast_nullable_to_non_nullable
-as PrivateUser?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
+as PrivateUserEntity?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -90,12 +90,12 @@ $PublicUserEntityCopyWith<$Res>? get publicUser {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PrivateUserCopyWith<$Res>? get privateUser {
+$PrivateUserEntityCopyWith<$Res>? get privateUser {
     if (_self.privateUser == null) {
     return null;
   }
 
-  return $PrivateUserCopyWith<$Res>(_self.privateUser!, (value) {
+  return $PrivateUserEntityCopyWith<$Res>(_self.privateUser!, (value) {
     return _then(_self.copyWith(privateUser: value));
   });
 }
@@ -110,7 +110,7 @@ class _CurrentUserState extends CurrentUserState {
   factory _CurrentUserState.fromJson(Map<String, dynamic> json) => _$CurrentUserStateFromJson(json);
 
 @override final  PublicUserEntity? publicUser;
-@override final  PrivateUser? privateUser;
+@override final  PrivateUserEntity? privateUser;
 @override final  String? base64;
 
 /// Create a copy of CurrentUserState
@@ -146,11 +146,11 @@ abstract mixin class _$CurrentUserStateCopyWith<$Res> implements $CurrentUserSta
   factory _$CurrentUserStateCopyWith(_CurrentUserState value, $Res Function(_CurrentUserState) _then) = __$CurrentUserStateCopyWithImpl;
 @override @useResult
 $Res call({
- PublicUserEntity? publicUser, PrivateUser? privateUser, String? base64
+ PublicUserEntity? publicUser, PrivateUserEntity? privateUser, String? base64
 });
 
 
-@override $PublicUserEntityCopyWith<$Res>? get publicUser;@override $PrivateUserCopyWith<$Res>? get privateUser;
+@override $PublicUserEntityCopyWith<$Res>? get publicUser;@override $PrivateUserEntityCopyWith<$Res>? get privateUser;
 
 }
 /// @nodoc
@@ -167,7 +167,7 @@ class __$CurrentUserStateCopyWithImpl<$Res>
   return _then(_CurrentUserState(
 publicUser: freezed == publicUser ? _self.publicUser : publicUser // ignore: cast_nullable_to_non_nullable
 as PublicUserEntity?,privateUser: freezed == privateUser ? _self.privateUser : privateUser // ignore: cast_nullable_to_non_nullable
-as PrivateUser?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
+as PrivateUserEntity?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -188,12 +188,12 @@ $PublicUserEntityCopyWith<$Res>? get publicUser {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PrivateUserCopyWith<$Res>? get privateUser {
+$PrivateUserEntityCopyWith<$Res>? get privateUser {
     if (_self.privateUser == null) {
     return null;
   }
 
-  return $PrivateUserCopyWith<$Res>(_self.privateUser!, (value) {
+  return $PrivateUserEntityCopyWith<$Res>(_self.privateUser!, (value) {
     return _then(_self.copyWith(privateUser: value));
   });
 }

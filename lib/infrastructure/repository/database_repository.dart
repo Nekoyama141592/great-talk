@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/core/constant/firestore_constant.dart';
+import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
@@ -151,18 +152,14 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<PrivateUser?> createPrivateUser(
+  Future<PrivateUserEntity?> createPrivateUser(
     String uid,
     Map<String, dynamic> json,
   ) async {
     final docRef = privateUserDocRef(uid);
     try {
       await docRef.set(json);
-      // Retrieve the document to ensure type safety
-      final doc = await docRef.get();
-      final data = doc.data();
-      if (data == null) return null;
-      return PrivateUser.fromJson(Map<String, dynamic>.from(data));
+      return PrivateUserEntity();
     } catch (e) {
       debugPrint('createPrivateUser: ${e.toString()}');
       return null;
@@ -374,13 +371,14 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<PrivateUser?> getPrivateUser(String uid) async {
+  Future<PrivateUserEntity?> getPrivateUser(String uid) async {
     try {
       final docRef = privateUserDocRef(uid);
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      return PrivateUser.fromJson(Map<String, dynamic>.from(data));
+      final privateUser = PrivateUser.fromJson(Map<String, dynamic>.from(data));
+      return PrivateUserEntity.fromJson(privateUser.toJson());
     } catch (e) {
       debugPrint('getPrivateUser: ${e.toString()}');
       return null;
