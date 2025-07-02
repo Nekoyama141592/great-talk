@@ -79,7 +79,9 @@ class ChatViewModel extends _$ChatViewModel {
     final messagesJson = requestMessages.map((e) => e.toJson()).toList();
     final oldState = state.value!;
     state = AsyncValue.loading();
-    final result = await ref.read(apiRepositoryProvider).generateText(model, messagesJson);
+    final result = await ref
+        .read(apiRepositoryProvider)
+        .generateText(model, messagesJson);
     state = AsyncData(oldState);
     return result;
   }

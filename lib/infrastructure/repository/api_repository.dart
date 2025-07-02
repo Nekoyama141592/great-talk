@@ -110,10 +110,7 @@ class ApiRepository implements IApiRepository {
   ) async {
     try {
       const name = 'generateTextV2';
-      final request = GenerateTextRequest(
-        model: model,
-        messages: messages,
-      );
+      final request = GenerateTextRequest(model: model, messages: messages);
       final requestData = request.toJson();
       final result = await _call(name, requestData);
       final res = GenerateTextResponse.fromJson(result);
