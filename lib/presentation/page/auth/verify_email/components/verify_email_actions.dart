@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:great_talk/presentation/component/rounded_button.dart';
-import 'package:great_talk/domain/entity/view_model_state/verify_email/verify_email_state.dart';
+import 'package:great_talk/presentation/state/verify_email/verify_email_state.dart';
 
 class VerifyEmailActions extends StatelessWidget {
   const VerifyEmailActions({

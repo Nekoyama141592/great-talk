@@ -1,5 +1,5 @@
 import 'package:great_talk/infrastructure/repository/result/result.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
@@ -13,9 +13,9 @@ class LikePostUseCase implements ILikePostUseCase {
   FutureResult<bool> likePost(
     String currentUid,
     LikePostToken token,
-    Post post,
+    PostEntity post,
   ) {
-    final postLike = PostLike.fromPost(post, currentUid);
+    final postLike = PostLike.fromPost(post.postId, post.uid, currentUid);
     return firestoreRepository.createLikePostInfo(
       currentUid,
       post,
@@ -25,7 +25,11 @@ class LikePostUseCase implements ILikePostUseCase {
   }
 
   @override
-  FutureResult<bool> unLikePost(String currentUid, String tokenId, Post post) {
+  FutureResult<bool> unLikePost(
+    String currentUid,
+    String tokenId,
+    PostEntity post,
+  ) {
     return firestoreRepository.deleteLikePostInfo(currentUid, post, tokenId);
   }
 }

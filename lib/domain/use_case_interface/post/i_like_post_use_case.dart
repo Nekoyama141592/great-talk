@@ -1,4 +1,4 @@
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 
@@ -15,7 +15,7 @@ abstract class ILikePostUseCase {
   FutureResult<bool> likePost(
     String currentUid,
     LikePostToken token,
-    Post post,
+    PostEntity post,
   );
 
   /// Unlikes a post by removing the like record from the database.
@@ -25,5 +25,9 @@ abstract class ILikePostUseCase {
   /// [post] - The post to unlike
   ///
   /// Returns a FutureResult indicating success or failure of the unlike operation.
-  FutureResult<bool> unLikePost(String currentUid, String tokenId, Post post);
+  FutureResult<bool> unLikePost(
+    String currentUid,
+    String tokenId,
+    PostEntity post,
+  );
 }

@@ -4,7 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/application/use_case/posts/posts_use_case.dart';
 import 'package:great_talk/application/use_case/file/file_use_case.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
@@ -32,58 +35,64 @@ void main() {
     });
 
     group('createUserPosts', () {
-      late List<Post> testPosts;
+      late List<PostEntity> testPosts;
       late List<PublicUser> testUsers;
 
       setUp(() {
         testPosts = [
-          Post(
+          PostEntity(
             postId: 'post_1',
             uid: 'user_1',
-            createdAt: mockTimestamp,
-            updatedAt: mockTimestamp,
-            customCompleteText: const {},
-            description: const {
-              'languageCode': 'en',
-              'negativeScore': 0.05,
-              'positiveScore': 0.95,
-              'sentiment': 'positive',
-              'value': 'First test post',
-            },
-            image: const {'bucketName': 'test-bucket', 'value': 'image1.jpg'},
-            searchToken: const {},
-            title: const {
-              'languageCode': 'en',
-              'negativeScore': 0.1,
-              'positiveScore': 0.9,
-              'sentiment': 'positive',
-              'value': 'Test Post 1',
-            },
+            createdAt: mockTimestamp.toDate(),
+            updatedAt: mockTimestamp.toDate(),
+            customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+            description: const DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 1,
+              sentiment: 'positive',
+              value: 'First test post',
+            ),
+            image: const DetectedImage(
+              bucketName: 'test-bucket',
+              value: 'image1.jpg',
+            ),
+            title: const DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 1,
+              sentiment: 'positive',
+              value: 'Test Post 1',
+            ),
             msgCount: 10,
+            likeCount: 0,
           ),
-          Post(
+          PostEntity(
             postId: 'post_2',
             uid: 'user_2',
-            createdAt: Timestamp.fromDate(DateTime(2024, 1, 2, 12, 0, 0)),
-            updatedAt: Timestamp.fromDate(DateTime(2024, 1, 2, 12, 0, 0)),
-            customCompleteText: const {},
-            description: const {
-              'languageCode': 'en',
-              'negativeScore': 0.1,
-              'positiveScore': 0.9,
-              'sentiment': 'positive',
-              'value': 'Second test post',
-            },
-            image: const {'bucketName': 'test-bucket', 'value': 'image2.jpg'},
-            searchToken: const {},
-            title: const {
-              'languageCode': 'en',
-              'negativeScore': 0.05,
-              'positiveScore': 0.95,
-              'sentiment': 'positive',
-              'value': 'Test Post 2',
-            },
+            createdAt: DateTime(2024, 1, 2, 12, 0, 0),
+            updatedAt: DateTime(2024, 1, 2, 12, 0, 0),
+            customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+            description: const DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 1,
+              sentiment: 'positive',
+              value: 'Second test post',
+            ),
+            image: const DetectedImage(
+              bucketName: 'test-bucket',
+              value: 'image2.jpg',
+            ),
+            title: const DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 1,
+              sentiment: 'positive',
+              value: 'Test Post 2',
+            ),
             msgCount: 20,
+            likeCount: 0,
           ),
         ];
 
@@ -254,8 +263,8 @@ void main() {
 
       test('should handle posts with empty image data', () async {
         final postsWithEmptyImages = [
-          testPosts[0].copyWith(image: const {}),
-          testPosts[1].copyWith(image: const {}),
+          testPosts[0].copyWith(image: const DetectedImage()),
+          testPosts[1].copyWith(image: const DetectedImage()),
         ];
 
         // Mock empty bucket name and value

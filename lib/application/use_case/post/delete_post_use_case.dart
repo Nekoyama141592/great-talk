@@ -1,6 +1,6 @@
 import 'package:great_talk/infrastructure/repository/api_repository.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/domain/use_case_interface/post/i_delete_post_use_case.dart';
 
@@ -13,11 +13,11 @@ class DeletePostUseCase implements IDeletePostUseCase {
   final ApiRepository apiRepository;
 
   @override
-  FutureResult<bool> deletePost(Post post) async {
+  FutureResult<bool> deletePost(PostEntity post) async {
     final result = await firestoreRepository.deletePost(post);
     result.when(
       success: (_) {
-        final image = post.typedImage();
+        final image = post.image;
         apiRepository.deleteObject(image);
       },
       failure: (_) {},

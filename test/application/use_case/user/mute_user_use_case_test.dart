@@ -4,7 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/user/mute_user_use_case.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 
 void main() {
@@ -24,34 +27,35 @@ void main() {
     });
 
     group('muteUser', () {
-      late Post testPost;
+      late PostEntity testPost;
       late MuteUserToken testToken;
       const String testCurrentUid = 'test_current_uid';
       const String testPassiveUid = 'test_passive_uid';
 
       setUp(() {
-        testPost = Post(
+        testPost = PostEntity(
           postId: 'test_post_id',
           uid: testPassiveUid,
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Test post description',
-          },
-          image: const {},
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Test Post Title',
-          },
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Test post description',
+          ),
+          image: const DetectedImage(),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Test Post Title',
+          ),
+          likeCount: 0,
+          msgCount: 0,
         );
 
         testToken = MuteUserToken(
@@ -199,28 +203,31 @@ void main() {
         final posts =
             users
                 .map(
-                  (uid) => Post(
+                  (uid) => PostEntity(
                     postId: 'post_by_$uid',
                     uid: uid,
-                    createdAt: mockTimestamp,
-                    updatedAt: mockTimestamp,
-                    customCompleteText: const {},
-                    description: {
-                      'languageCode': 'en',
-                      'negativeScore': 0.05,
-                      'positiveScore': 0.95,
-                      'sentiment': 'positive',
-                      'value': 'Post by $uid',
-                    },
-                    image: const {},
-                    searchToken: const {},
-                    title: {
-                      'languageCode': 'en',
-                      'negativeScore': 0.1,
-                      'positiveScore': 0.9,
-                      'sentiment': 'positive',
-                      'value': 'Title by $uid',
-                    },
+                    createdAt: mockTimestamp.toDate(),
+                    updatedAt: mockTimestamp.toDate(),
+                    customCompleteText: const CustomCompleteText(
+                      systemPrompt: 'test',
+                    ),
+                    description: DetectedText(
+                      languageCode: 'en',
+                      negativeScore: 0,
+                      positiveScore: 1,
+                      sentiment: 'positive',
+                      value: 'Post by $uid',
+                    ),
+                    image: const DetectedImage(),
+                    title: DetectedText(
+                      languageCode: 'en',
+                      negativeScore: 0,
+                      positiveScore: 1,
+                      sentiment: 'positive',
+                      value: 'Title by $uid',
+                    ),
+                    likeCount: 0,
+                    msgCount: 0,
                   ),
                 )
                 .toList();
@@ -270,40 +277,35 @@ void main() {
       });
 
       test('should handle posts with complex user relationships', () async {
-        final complexPost = Post(
+        final complexPost = PostEntity(
           postId: 'complex_post',
           uid: 'complex_user',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {'systemPrompt': 'Complex user prompt'},
-          description: const {
-            'languageCode': 'ja',
-            'negativeScore': 0.2,
-            'positiveScore': 0.8,
-            'sentiment': 'positive',
-            'value': '複雑なユーザーの投稿',
-          },
-          image: const {
-            'value': 'complex_user_image.jpg',
-            'bucketName': 'user_content',
-            'moderationLabels': ['safe'],
-            'moderationModelVersion': '2.0',
-          },
-          searchToken: const {
-            'tokens': ['複雑', 'ユーザー', 'complex'],
-          },
-          title: const {
-            'languageCode': 'ja',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': '複雑なユーザーのタイトル',
-          },
-          hashTags: const ['#complex', '#ユーザー'],
-          genre: 'user_content',
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(
+            systemPrompt: 'Complex user prompt',
+          ),
+          description: const DetectedText(
+            languageCode: 'ja',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: '複雑なユーザーの投稿',
+          ),
+          image: const DetectedImage(
+            value: 'complex_user_image.jpg',
+            bucketName: 'user_content',
+            moderationLabels: [],
+            moderationModelVersion: '2.0',
+          ),
+          title: const DetectedText(
+            languageCode: 'ja',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: '複雑なユーザーのタイトル',
+          ),
           likeCount: 150,
-          muteCount: 5,
-          reportCount: 1,
           msgCount: 50,
         );
 
@@ -341,28 +343,29 @@ void main() {
 
         final posts = List.generate(
           5,
-          (index) => Post(
+          (index) => PostEntity(
             postId: 'rapid_post_$index',
             uid: targetUser,
-            createdAt: mockTimestamp,
-            updatedAt: mockTimestamp,
-            customCompleteText: const {},
-            description: {
-              'languageCode': 'en',
-              'negativeScore': 0.05,
-              'positiveScore': 0.95,
-              'sentiment': 'positive',
-              'value': 'Rapid test post $index',
-            },
-            image: const {},
-            searchToken: const {},
-            title: {
-              'languageCode': 'en',
-              'negativeScore': 0.1,
-              'positiveScore': 0.9,
-              'sentiment': 'positive',
-              'value': 'Rapid Test $index',
-            },
+            createdAt: mockTimestamp.toDate(),
+            updatedAt: mockTimestamp.toDate(),
+            customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+            description: DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 1,
+              sentiment: 'positive',
+              value: 'Rapid test post $index',
+            ),
+            image: const DetectedImage(),
+            title: DetectedText(
+              languageCode: 'en',
+              negativeScore: 0,
+              positiveScore: 1,
+              sentiment: 'positive',
+              value: 'Rapid Test $index',
+            ),
+            likeCount: 0,
+            msgCount: 0,
           ),
         );
 
@@ -418,52 +421,54 @@ void main() {
         const userA = 'user_a';
         const userB = 'user_b';
 
-        final postByB = Post(
+        final postByB = PostEntity(
           postId: 'post_by_b',
           uid: userB,
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Post by User B',
-          },
-          image: const {},
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Title by User B',
-          },
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Post by User B',
+          ),
+          image: const DetectedImage(),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Title by User B',
+          ),
+          likeCount: 0,
+          msgCount: 0,
         );
 
-        final postByA = Post(
+        final postByA = PostEntity(
           postId: 'post_by_a',
           uid: userA,
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Post by User A',
-          },
-          image: const {},
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Title by User A',
-          },
+          createdAt: mockTimestamp.toDate(),
+          updatedAt: mockTimestamp.toDate(),
+          customCompleteText: const CustomCompleteText(systemPrompt: 'test'),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Post by User A',
+          ),
+          image: const DetectedImage(),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 0,
+            positiveScore: 1,
+            sentiment: 'positive',
+            value: 'Title by User A',
+          ),
+          likeCount: 0,
+          msgCount: 0,
         );
 
         final tokenAMutesB = MuteUserToken(

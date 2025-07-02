@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:collection/collection.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -96,8 +96,8 @@ class TokensNotifier extends _$TokensNotifier {
     return deleteToken;
   }
 
-  LikePostToken? addLikePost(String currentUid, Post post) {
-    final token = LikePostToken.fromPost(post, currentUid);
+  LikePostToken? addLikePost(String currentUid, PostEntity post) {
+    final token = LikePostToken.fromPost(post.postId, post.uid, currentUid);
     final newState = _currentState.copyWith(
       likePostTokens: [..._currentState.likePostTokens, token],
     );
@@ -119,10 +119,10 @@ class TokensNotifier extends _$TokensNotifier {
     return deleteToken;
   }
 
-  MutePostToken? addMutePost(Post post) {
+  MutePostToken? addMutePost(PostEntity post) {
     final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
-    final token = MutePostToken.fromPost(post, currentUid);
+    final token = MutePostToken.fromPost(post.postId, currentUid);
     final newState = _currentState.copyWith(
       mutePostTokens: [..._currentState.mutePostTokens, token],
     );
@@ -139,10 +139,10 @@ class TokensNotifier extends _$TokensNotifier {
     _updateState(newState);
   }
 
-  MuteUserToken? addMuteUser(Post post) {
+  MuteUserToken? addMuteUser(PostEntity post) {
     final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
-    final token = MuteUserToken.fromPost(currentUid, post);
+    final token = MuteUserToken.fromPost(currentUid, post.uid);
     final newState = _currentState.copyWith(
       muteUserTokens: [..._currentState.muteUserTokens, token],
     );

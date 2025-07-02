@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/core/exception/local_exception.dart';
 import 'package:great_talk/core/extension/shared_preferences_extension.dart';
-import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
-import 'package:great_talk/infrastructure/model/local_schema/save_text_msg/save_text_msg.dart';
+import 'package:great_talk/infrastructure/model/local_schema/text_message/text_message.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -207,7 +206,7 @@ class LocalRepository implements ILocalRepository {
   @override
   Future<void> setMessages(String postId, List<TextMessage> messages) {
     try {
-      final objectList = messages.map(SaveTextMsg.fromTextMessage).toList();
+      final objectList = messages.map((e) => e.toJson()).toList();
       final value = jsonEncode(objectList);
       return _setString(postId, value);
     } catch (error) {
@@ -220,9 +219,6 @@ class LocalRepository implements ILocalRepository {
 
   @override
   List<TextMessage> getMessages(String postId) {
-    return _fetchList(
-      postId,
-      (e) => TextMessage.fromSaveTextMsg(SaveTextMsg.fromJson(e)),
-    );
+    return _fetchList(postId, (e) => TextMessage.fromJson(e));
   }
 }

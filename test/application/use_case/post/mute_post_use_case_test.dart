@@ -4,53 +4,57 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/mute_post_use_case.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 
 void main() {
   group('MutePostUseCase', () {
     late MutePostUseCase mutePostUseCase;
     late DatabaseRepository databaseRepository;
     late FakeFirebaseFirestore fakeFirestore;
-    late Timestamp mockTimestamp;
+    late DateTime mockDateTime;
 
     setUp(() {
       fakeFirestore = FakeFirebaseFirestore();
       databaseRepository = DatabaseRepository(instance: fakeFirestore);
-      mockTimestamp = Timestamp.fromDate(DateTime(2024, 1, 1, 12, 0, 0));
+      mockDateTime = DateTime(2024, 1, 1, 12, 0, 0);
       mutePostUseCase = MutePostUseCase(
         firestoreRepository: databaseRepository,
       );
     });
 
     group('mutePost', () {
-      late Post testPost;
+      late PostEntity testPost;
       late MutePostToken testToken;
       const String testCurrentUid = 'test_current_uid';
 
       setUp(() {
-        testPost = Post(
+        testPost = PostEntity(
           postId: 'test_post_id',
           uid: 'test_post_owner_uid',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Test post description',
-          },
-          image: const {},
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Test Post Title',
-          },
+          createdAt: mockDateTime,
+          updatedAt: mockDateTime,
+          customCompleteText: const CustomCompleteText(systemPrompt: ''),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 5,
+            positiveScore: 95,
+            sentiment: 'positive',
+            value: 'Test post description',
+          ),
+          image: const DetectedImage(),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 10,
+            positiveScore: 90,
+            sentiment: 'positive',
+            value: 'Test Post Title',
+          ),
+          likeCount: 0,
+          msgCount: 0,
         );
 
         testToken = MutePostToken(
@@ -58,7 +62,7 @@ void main() {
           postId: 'test_post_id',
           activeUid: testCurrentUid,
           tokenType: 'mute_post',
-          createdAt: mockTimestamp,
+          createdAt: Timestamp.fromDate(mockDateTime),
         );
       });
 
@@ -117,7 +121,6 @@ void main() {
           postId: 'different_post_id',
           uid: 'different_owner_uid',
           likeCount: 100,
-          muteCount: 5,
         );
 
         final result = await mutePostUseCase.mutePost(
@@ -138,12 +141,7 @@ void main() {
       });
 
       test('should handle posts with various counts', () async {
-        final postWithCounts = testPost.copyWith(
-          likeCount: 50,
-          muteCount: 10,
-          reportCount: 3,
-          msgCount: 25,
-        );
+        final postWithCounts = testPost.copyWith(likeCount: 50, msgCount: 25);
 
         final result = await mutePostUseCase.mutePost(
           postWithCounts,
@@ -172,52 +170,54 @@ void main() {
 
     group('edge cases', () {
       test('should handle multiple rapid mute operations', () async {
-        final post1 = Post(
+        final post1 = PostEntity(
           postId: 'mute_test_post_1',
           uid: 'owner_uid_1',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Mute test description 1',
-          },
-          image: const {},
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Mute Test Post 1',
-          },
+          createdAt: mockDateTime,
+          updatedAt: mockDateTime,
+          customCompleteText: const CustomCompleteText(systemPrompt: ''),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 5,
+            positiveScore: 95,
+            sentiment: 'positive',
+            value: 'Mute test description 1',
+          ),
+          image: const DetectedImage(),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 10,
+            positiveScore: 90,
+            sentiment: 'positive',
+            value: 'Mute Test Post 1',
+          ),
+          likeCount: 0,
+          msgCount: 0,
         );
 
-        final post2 = Post(
+        final post2 = PostEntity(
           postId: 'mute_test_post_2',
           uid: 'owner_uid_2',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {},
-          description: const {
-            'languageCode': 'en',
-            'negativeScore': 0.05,
-            'positiveScore': 0.95,
-            'sentiment': 'positive',
-            'value': 'Mute test description 2',
-          },
-          image: const {},
-          searchToken: const {},
-          title: const {
-            'languageCode': 'en',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': 'Mute Test Post 2',
-          },
+          createdAt: mockDateTime,
+          updatedAt: mockDateTime,
+          customCompleteText: const CustomCompleteText(systemPrompt: ''),
+          description: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 5,
+            positiveScore: 95,
+            sentiment: 'positive',
+            value: 'Mute test description 2',
+          ),
+          image: const DetectedImage(),
+          title: const DetectedText(
+            languageCode: 'en',
+            negativeScore: 10,
+            positiveScore: 90,
+            sentiment: 'positive',
+            value: 'Mute Test Post 2',
+          ),
+          likeCount: 0,
+          msgCount: 0,
         );
 
         final token1 = MutePostToken(
@@ -225,7 +225,7 @@ void main() {
           postId: 'mute_test_post_1',
           activeUid: 'test_user',
           tokenType: 'mute_post',
-          createdAt: mockTimestamp,
+          createdAt: Timestamp.fromDate(mockDateTime),
         );
 
         final token2 = MutePostToken(
@@ -233,7 +233,7 @@ void main() {
           postId: 'mute_test_post_2',
           activeUid: 'test_user',
           tokenType: 'mute_post',
-          createdAt: mockTimestamp,
+          createdAt: Timestamp.fromDate(mockDateTime),
         );
 
         final result1 = await mutePostUseCase.mutePost(
@@ -274,38 +274,36 @@ void main() {
       });
 
       test('should handle posts with special content', () async {
-        final specialPost = Post(
+        final specialPost = PostEntity(
           postId: 'special_content_post',
           uid: 'special_owner',
-          createdAt: mockTimestamp,
-          updatedAt: mockTimestamp,
-          customCompleteText: const {'systemPrompt': 'Special system prompt'},
-          description: const {
-            'languageCode': 'ja',
-            'negativeScore': 0.3,
-            'positiveScore': 0.7,
-            'sentiment': 'positive',
-            'value': '特別なテスト投稿の説明',
-          },
-          image: const {
-            'value': 'special_image.png',
-            'bucketName': 'special_bucket',
-            'moderationLabels': ['safe', 'appropriate'],
-            'moderationModelVersion': '2.0',
-          },
-          searchToken: const {
-            'tokens': ['特別', 'テスト', 'special'],
-          },
-          title: const {
-            'languageCode': 'ja',
-            'negativeScore': 0.1,
-            'positiveScore': 0.9,
-            'sentiment': 'positive',
-            'value': '特別なテスト投稿',
-          },
-          hashTags: const ['#special', '#テスト'],
-          genre: 'test',
-          score: 95.5,
+          createdAt: mockDateTime,
+          updatedAt: mockDateTime,
+          customCompleteText: const CustomCompleteText(
+            systemPrompt: 'Special system prompt',
+          ),
+          description: const DetectedText(
+            languageCode: 'ja',
+            negativeScore: 30,
+            positiveScore: 70,
+            sentiment: 'positive',
+            value: '特別なテスト投稿の説明',
+          ),
+          image: const DetectedImage(
+            value: 'special_image.png',
+            bucketName: 'special_bucket',
+            moderationLabels: [],
+            moderationModelVersion: '2.0',
+          ),
+          title: const DetectedText(
+            languageCode: 'ja',
+            negativeScore: 10,
+            positiveScore: 90,
+            sentiment: 'positive',
+            value: '特別なテスト投稿',
+          ),
+          likeCount: 0,
+          msgCount: 0,
         );
 
         final specialToken = MutePostToken(
@@ -313,7 +311,7 @@ void main() {
           postId: 'special_content_post',
           activeUid: 'test_user',
           tokenType: 'mute_post',
-          createdAt: mockTimestamp,
+          createdAt: Timestamp.fromDate(mockDateTime),
         );
 
         final result = await mutePostUseCase.mutePost(
@@ -341,28 +339,29 @@ void main() {
 
         final posts = List.generate(
           3,
-          (index) => Post(
+          (index) => PostEntity(
             postId: 'multi_post_$index',
             uid: 'owner_$index',
-            createdAt: mockTimestamp,
-            updatedAt: mockTimestamp,
-            customCompleteText: const {},
-            description: {
-              'languageCode': 'en',
-              'negativeScore': 0.05,
-              'positiveScore': 0.95,
-              'sentiment': 'positive',
-              'value': 'Multi mute test description $index',
-            },
-            image: const {},
-            searchToken: const {},
-            title: {
-              'languageCode': 'en',
-              'negativeScore': 0.1,
-              'positiveScore': 0.9,
-              'sentiment': 'positive',
-              'value': 'Multi Mute Test Post $index',
-            },
+            createdAt: mockDateTime,
+            updatedAt: mockDateTime,
+            customCompleteText: const CustomCompleteText(systemPrompt: ''),
+            description: DetectedText(
+              languageCode: 'en',
+              negativeScore: 5,
+              positiveScore: 95,
+              sentiment: 'positive',
+              value: 'Multi mute test description $index',
+            ),
+            image: const DetectedImage(),
+            title: DetectedText(
+              languageCode: 'en',
+              negativeScore: 10,
+              positiveScore: 90,
+              sentiment: 'positive',
+              value: 'Multi Mute Test Post $index',
+            ),
+            likeCount: 0,
+            msgCount: 0,
           ),
         );
 
@@ -373,7 +372,7 @@ void main() {
             postId: 'multi_post_$index',
             activeUid: testUser,
             tokenType: 'mute_post',
-            createdAt: mockTimestamp,
+            createdAt: Timestamp.fromDate(mockDateTime),
           ),
         );
 

@@ -1,8 +1,8 @@
+import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_mute/post_mute.dart';
-import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
@@ -26,11 +26,14 @@ abstract class IDatabaseRepository {
     Map<String, dynamic> json,
   );
 
-  Future<PrivateUser?> createPrivateUser(String uid, Map<String, dynamic> json);
+  Future<PrivateUserEntity?> createPrivateUser(
+    String uid,
+    Map<String, dynamic> json,
+  );
 
   // User operations
   Future<PublicUserEntity?> getPublicUser(String uid);
-  Future<PrivateUser?> getPrivateUser(String uid);
+  Future<PrivateUserEntity?> getPrivateUser(String uid);
   FutureResult<bool> deletePublicUser(String uid);
 
   // Post operations
@@ -40,8 +43,8 @@ abstract class IDatabaseRepository {
     Map<String, dynamic> json,
   );
 
-  Future<Post?> getPost(String uid, String postId);
-  FutureResult<bool> deletePost(Post post);
+  Future<PostEntity?> getPost(String uid, String postId);
+  FutureResult<bool> deletePost(PostEntity post);
 
   // User update logs
   FutureResult<bool> createUserUpdateLog(String uid, Map<String, dynamic> json);
@@ -77,28 +80,28 @@ abstract class IDatabaseRepository {
   // Mute post operations
   FutureResult<bool> createMutePostInfo(
     String currentUid,
-    Post post,
+    PostEntity post,
     MutePostToken token,
     PostMute postMute,
   );
 
   FutureResult<bool> deleteMutePostInfo(
     String currentUid,
-    Post post,
+    PostEntity post,
     String tokenId,
   );
 
   // Like post operations
   FutureResult<bool> createLikePostInfo(
     String currentUid,
-    Post post,
+    PostEntity post,
     LikePostToken token,
     PostLike postLike,
   );
 
   FutureResult<bool> deleteLikePostInfo(
     String currentUid,
-    Post post,
+    PostEntity post,
     String tokenId,
   );
 
@@ -107,7 +110,7 @@ abstract class IDatabaseRepository {
 
   // Timeline operations
   Future<List<Timeline>> getTimelines(String currentUid);
-  Future<List<Post>> getTimelinePosts(List<String> postIds);
+  Future<List<PostEntity>> getTimelinePosts(List<String> postIds);
   Future<List<Timeline>> getMoreTimelines(
     String currentUid,
     Timeline lastTimeline,
@@ -124,10 +127,16 @@ abstract class IDatabaseRepository {
   );
 
   // Post list operations
-  Future<List<Post>> getUserPosts(String uid);
-  Future<List<Post>> getMoreUserPosts(Post lastPost);
-  Future<List<Post>> getPosts(bool isRankingPosts);
-  Future<List<Post>> getMorePosts(bool isRankingPosts, Post lastPost);
-  Future<List<Post>> getMutePosts(List<String> postIds);
-  Future<List<Post>> getMoreMutePosts(List<String> postIds, Post lastPost);
+  Future<List<PostEntity>> getUserPosts(String uid);
+  Future<List<PostEntity>> getMoreUserPosts(PostEntity lastPost);
+  Future<List<PostEntity>> getPosts(bool isRankingPosts);
+  Future<List<PostEntity>> getMorePosts(
+    bool isRankingPosts,
+    PostEntity lastPost,
+  );
+  Future<List<PostEntity>> getMutePosts(List<String> postIds);
+  Future<List<PostEntity>> getMoreMutePosts(
+    List<String> postIds,
+    PostEntity lastPost,
+  );
 }

@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/core/extension/number_format_extension.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
 
 class ChatUiUtil {
-  static void descriptionDialog(BuildContext context, Post post) {
-    final title = "タイトル:\n${post.typedTitle().value}";
+  static void descriptionDialog(BuildContext context, PostEntity post) {
+    final title = "タイトル:\n${post.title.value}";
 
-    final systemPrompt =
-        "システムプロンプト:\n${post.typedCustomCompleteText().systemPrompt}";
+    final systemPrompt = "システムプロンプト:\n${post.customCompleteText.systemPrompt}";
 
     String msgText = "累計メッセージ数:\n${post.msgCount.formatNumber()}";
 
@@ -21,7 +20,7 @@ class ChatUiUtil {
 
   static void menu({
     required BuildContext context,
-    required Post post,
+    required PostEntity post,
     required void Function(BuildContext context) cleanLocalMessage,
   }) async {
     ToastUiUtil.showPopup(

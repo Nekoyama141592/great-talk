@@ -3,8 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
-import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
+import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
+import 'package:great_talk/infrastructure/model/local_schema/text_message/text_message.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/infrastructure/repository/local_repository.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
@@ -239,17 +240,20 @@ void main() {
     });
 
     group('Message operations', () {
-      Post createTestPost(String postId) {
-        return Post(
+      PostEntity createTestPost(String postId) {
+        return PostEntity(
           postId: postId,
-          createdAt: Timestamp.now(),
-          customCompleteText: DetectedText(value: 'Complete text').toJson(),
-          description: DetectedText(value: 'Test description').toJson(),
-          image: DetectedImage(value: 'test.jpg').toJson(),
-          searchToken: {'token': 'test'},
-          title: DetectedText(value: 'Test Title').toJson(),
+          createdAt: Timestamp.now().toDate(),
+          customCompleteText: const CustomCompleteText(
+            systemPrompt: 'Complete text',
+          ),
+          description: const DetectedText(value: 'Test description'),
+          image: const DetectedImage(value: 'test.jpg'),
+          title: const DetectedText(value: 'Test Title'),
           uid: 'owner_uid',
-          updatedAt: Timestamp.now(),
+          updatedAt: Timestamp.now().toDate(),
+          likeCount: 0,
+          msgCount: 0,
         );
       }
 

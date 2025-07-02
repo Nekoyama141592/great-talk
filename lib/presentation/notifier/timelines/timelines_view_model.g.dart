@@ -7,7 +7,7 @@ part of 'timelines_view_model.dart';
 // **************************************************************************
 
 String _$timelinesViewModelHash() =>
-    r'd76784bb46f1da0f36df44f63b7945347dc6c903';
+    r'693fc860037e68ac784eb88c92d8ae746d8a5ad4';
 
 /// See also [TimelinesViewModel].
 @ProviderFor(TimelinesViewModel)

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 
 part 'user_mute.freezed.dart';
 part 'user_mute.g.dart';
@@ -14,8 +13,7 @@ abstract class UserMute with _$UserMute {
   }) = _UserMute;
   factory UserMute.fromJson(Map<String, dynamic> json) =>
       _$UserMuteFromJson(json);
-  factory UserMute.fromPost(String currentUid, Post post) {
-    final passiveUid = post.uid;
+  factory UserMute.fromPost(String currentUid, String passiveUid) {
     return UserMute(
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),

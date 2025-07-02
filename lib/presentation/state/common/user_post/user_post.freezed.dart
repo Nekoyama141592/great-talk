@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserPost {
 
- Post get post; PublicUserEntity? get user; String? get base64;
+ PostEntity get post; PublicUserEntity? get user; String? get base64;
 /// Create a copy of UserPost
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,11 +49,11 @@ abstract mixin class $UserPostCopyWith<$Res>  {
   factory $UserPostCopyWith(UserPost value, $Res Function(UserPost) _then) = _$UserPostCopyWithImpl;
 @useResult
 $Res call({
- Post post, PublicUserEntity? user, String? base64
+ PostEntity post, PublicUserEntity? user, String? base64
 });
 
 
-$PostCopyWith<$Res> get post;$PublicUserEntityCopyWith<$Res>? get user;
+$PostEntityCopyWith<$Res> get post;$PublicUserEntityCopyWith<$Res>? get user;
 
 }
 /// @nodoc
@@ -69,7 +69,7 @@ class _$UserPostCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? post = null,Object? user = freezed,Object? base64 = freezed,}) {
   return _then(_self.copyWith(
 post: null == post ? _self.post : post // ignore: cast_nullable_to_non_nullable
-as Post,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
+as PostEntity,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
 as PublicUserEntity?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -78,9 +78,9 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PostCopyWith<$Res> get post {
+$PostEntityCopyWith<$Res> get post {
   
-  return $PostCopyWith<$Res>(_self.post, (value) {
+  return $PostEntityCopyWith<$Res>(_self.post, (value) {
     return _then(_self.copyWith(post: value));
   });
 }/// Create a copy of UserPost
@@ -106,7 +106,7 @@ class _UserPost implements UserPost {
   const _UserPost({required this.post, required this.user, required this.base64});
   factory _UserPost.fromJson(Map<String, dynamic> json) => _$UserPostFromJson(json);
 
-@override final  Post post;
+@override final  PostEntity post;
 @override final  PublicUserEntity? user;
 @override final  String? base64;
 
@@ -143,11 +143,11 @@ abstract mixin class _$UserPostCopyWith<$Res> implements $UserPostCopyWith<$Res>
   factory _$UserPostCopyWith(_UserPost value, $Res Function(_UserPost) _then) = __$UserPostCopyWithImpl;
 @override @useResult
 $Res call({
- Post post, PublicUserEntity? user, String? base64
+ PostEntity post, PublicUserEntity? user, String? base64
 });
 
 
-@override $PostCopyWith<$Res> get post;@override $PublicUserEntityCopyWith<$Res>? get user;
+@override $PostEntityCopyWith<$Res> get post;@override $PublicUserEntityCopyWith<$Res>? get user;
 
 }
 /// @nodoc
@@ -163,7 +163,7 @@ class __$UserPostCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? post = null,Object? user = freezed,Object? base64 = freezed,}) {
   return _then(_UserPost(
 post: null == post ? _self.post : post // ignore: cast_nullable_to_non_nullable
-as Post,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
+as PostEntity,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
 as PublicUserEntity?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -173,9 +173,9 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$PostCopyWith<$Res> get post {
+$PostEntityCopyWith<$Res> get post {
   
-  return $PostCopyWith<$Res>(_self.post, (value) {
+  return $PostEntityCopyWith<$Res>(_self.post, (value) {
     return _then(_self.copyWith(post: value));
   });
 }/// Create a copy of UserPost

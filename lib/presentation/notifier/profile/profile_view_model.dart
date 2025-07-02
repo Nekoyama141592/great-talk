@@ -1,5 +1,5 @@
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 import 'package:great_talk/presentation/state/profile/profile_state.dart';
@@ -33,8 +33,8 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     return _repository.getPublicUser(passiveUid);
   }
 
-  Future<String?> _getImageFromPost(Post post) async {
-    final detectedImage = post.typedImage();
+  Future<String?> _getImageFromPost(PostEntity post) async {
+    final detectedImage = post.image;
     final image = await ref
         .read(fileUseCaseProvider)
         .getObject(detectedImage.bucketName, detectedImage.value);
@@ -59,7 +59,7 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     return userPosts;
   }
 
-  Future<List<UserPost>> _postsToUserPosts(List<Post> posts) async {
+  Future<List<UserPost>> _postsToUserPosts(List<PostEntity> posts) async {
     final uids = posts.map((e) => e.uid).toSet();
     final fetchedUsers = await _repository.getUsersByUids(uids.toList());
     final userMap = {for (final user in fetchedUsers) user.uid: user};

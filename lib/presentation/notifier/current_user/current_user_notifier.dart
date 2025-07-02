@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
@@ -47,7 +48,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     return _databaseRepository.createPublicUser(uid, json);
   }
 
-  Future<PrivateUser?> _createPrivateUser(String uid) {
+  Future<PrivateUserEntity?> _createPrivateUser(String uid) {
     final newPrivateUser = PrivateUser.fromUid(uid);
     final json = newPrivateUser.toJson();
     return _databaseRepository.createPrivateUser(uid, json);
@@ -81,7 +82,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     return publicUser;
   }
 
-  Future<PrivateUser?> _getPrivateUser(String uid) async {
+  Future<PrivateUserEntity?> _getPrivateUser(String uid) async {
     var privateUser = await _databaseRepository.getPrivateUser(uid);
     privateUser ??= await _createPrivateUser(uid);
     return privateUser;

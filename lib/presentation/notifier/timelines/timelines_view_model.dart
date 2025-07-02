@@ -1,4 +1,4 @@
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/presentation/state/timelines/timelines_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/posts/posts_use_case_provider.dart';
@@ -28,7 +28,7 @@ class TimelinesViewModel extends _$TimelinesViewModel
     return TimelinesState(timelines: timelines, userPosts: userPosts);
   }
 
-  Future<List<Post>> _timelinesToPostsResult(List<String> postIds) {
+  Future<List<PostEntity>> _timelinesToPostsResult(List<String> postIds) {
     return _repository.getTimelinePosts(postIds);
   }
 

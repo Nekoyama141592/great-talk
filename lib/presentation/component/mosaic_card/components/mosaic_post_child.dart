@@ -5,7 +5,7 @@ import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/post/delete_post/delete_post_use_case_provider.dart';
 import 'package:great_talk/presentation/util/texts.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -17,7 +17,7 @@ class MosaicPostChild extends ConsumerWidget {
     required this.title,
   });
   final String msg;
-  final Post post;
+  final PostEntity post;
   final String title;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

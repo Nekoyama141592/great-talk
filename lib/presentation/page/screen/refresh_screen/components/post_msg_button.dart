@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/extension/number_format_extension.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -11,7 +11,7 @@ class PostMsgButton extends ConsumerWidget {
     required this.post,
   });
   final bool isHorizontal;
-  final Post post;
+  final PostEntity post;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final children = [

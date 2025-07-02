@@ -1,4 +1,4 @@
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/application/use_case/file/file_use_case.dart';
@@ -8,8 +8,8 @@ class PostsUseCase implements IPostsUseCase {
   PostsUseCase({required this.repository, required this.fileUseCase});
   final DatabaseRepository repository;
   final FileUseCase fileUseCase;
-  Future<String?> _getImageFromPost(Post post) async {
-    final detectedImage = post.typedImage();
+  Future<String?> _getImageFromPost(PostEntity post) async {
+    final detectedImage = post.image;
     final image = await fileUseCase.getObject(
       detectedImage.bucketName,
       detectedImage.value,
@@ -17,22 +17,21 @@ class PostsUseCase implements IPostsUseCase {
     return image;
   }
 
-  List<Post> _getSorted(List<Post> posts, bool isRankingPosts) {
+  List<PostEntity> _getSorted(List<PostEntity> posts, bool isRankingPosts) {
     return isRankingPosts ? _sortByLikeCount(posts) : _sortByCreatedAt(posts);
   }
 
-  List<Post> _sortByCreatedAt(List<Post> posts) {
-    return posts
-      ..sort((a, b) => (b.typedCreatedAt()).compareTo(a.typedCreatedAt()));
+  List<PostEntity> _sortByCreatedAt(List<PostEntity> posts) {
+    return posts..sort((a, b) => (b.createdAt!).compareTo(a.createdAt!));
   }
 
-  List<Post> _sortByLikeCount(List<Post> posts) {
+  List<PostEntity> _sortByLikeCount(List<PostEntity> posts) {
     return posts..sort((a, b) => (b.msgCount).compareTo(a.msgCount));
   }
 
   @override
   Future<List<UserPost>> createUserPosts(
-    List<Post> posts, {
+    List<PostEntity> posts, {
     bool isRankingPosts = false,
   }) async {
     if (posts.isEmpty) return [];

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/core/constant/chat_constants.dart';
+import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/generate_text_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/message/generate_text_request_message.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
@@ -14,8 +15,8 @@ import 'package:great_talk/core/provider/repository/local/local_repository_provi
 import 'package:great_talk/core/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
-import 'package:great_talk/infrastructure/model/database_schema/text_message/text_message.dart';
+import 'package:great_talk/domain/entity/database/post/post_entity.dart';
+import 'package:great_talk/infrastructure/model/local_schema/text_message/text_message.dart';
 part 'chat_view_model.g.dart';
 
 @riverpod
@@ -32,7 +33,7 @@ class ChatViewModel extends _$ChatViewModel {
     final localMessages = _getLocalMessages(post.postId);
     final messages =
         localMessages.isEmpty
-            ? [TextMessage.assistant(post.typedDescription().value, post)]
+            ? [TextMessage.assistant(post.description.value, post)]
             : localMessages;
     return ChatState(post: post, postImage: postImage, messages: messages);
   }
@@ -64,13 +65,13 @@ class ChatViewModel extends _$ChatViewModel {
             final role = e.role(postId);
             return GenerateTextRequestMessage(
               role: role,
-              content: e.typedText().value,
+              content: DetectedText.fromJson(e.text).value,
             );
           }).toList()
           ..insert(
             0,
             GenerateTextRequestMessage.system(
-              state.value!.post.typedDescription().value,
+              state.value!.post.description.value,
             ),
           );
     final model =
@@ -84,13 +85,13 @@ class ChatViewModel extends _$ChatViewModel {
     return result;
   }
 
-  Future<Post?> _fetchPost(String uid, String postId) {
+  Future<PostEntity?> _fetchPost(String uid, String postId) {
     final repository = ref.read(databaseRepositoryProvider);
     return repository.getPost(uid, postId);
   }
 
-  Future<String?> _fetchPostImage(Post post) {
-    final detectedImage = post.typedImage();
+  Future<String?> _fetchPostImage(PostEntity post) {
+    final detectedImage = post.image;
     return ref
         .read(fileUseCaseProvider)
         .getObject(detectedImage.bucketName, detectedImage.value);
