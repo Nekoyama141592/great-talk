@@ -75,16 +75,24 @@ void main() {
 
         expect(result, isA<Result<bool>>());
         result.when(
-          success: (value) => expect(value, isTrue),
-          failure: (error) => fail('Expected success but got failure: $error'),
-        );
+          success: (value) {
+            expect(value, isTrue);
 
-        // Verify token was created in fake Firestore
-        final tokens = await databaseRepository.getTokens(testCurrentUid);
-        expect(tokens.isNotEmpty, isTrue);
-        expect(
-          tokens.any((token) => token['tokenId'] == 'test_token_id'),
-          isTrue,
+            // Verify token was created in fake Firestore
+            databaseRepository.getTokens(testCurrentUid).then((tokens) {
+              expect(tokens.isNotEmpty, isTrue);
+              expect(
+                tokens.any(
+                  (token) =>
+                      token['postId'] == 'test_post_id' &&
+                      token['activeUid'] == testCurrentUid &&
+                      token['tokenType'] == 'mutePost',
+                ),
+                isTrue,
+              );
+            });
+          },
+          failure: (error) => fail('Expected success but got failure: $error'),
         );
       });
 
@@ -94,7 +102,10 @@ void main() {
         // Verify token was created with correct data
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         final createdToken = tokens.firstWhere(
-          (token) => token['tokenId'] == 'test_token_id',
+          (token) =>
+              token['postId'] == testPost.postId &&
+              token['activeUid'] == testCurrentUid &&
+              token['tokenType'] == 'mutePost',
         );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['postId'], equals(testPost.postId));
@@ -263,11 +274,21 @@ void main() {
         // Verify both tokens were created
         final tokens = await databaseRepository.getTokens('test_user');
         expect(
-          tokens.any((token) => token['tokenId'] == 'mute_token_1'),
+          tokens.any(
+            (token) =>
+                token['postId'] == 'mute_test_post_1' &&
+                token['activeUid'] == 'test_user' &&
+                token['tokenType'] == 'mutePost',
+          ),
           isTrue,
         );
         expect(
-          tokens.any((token) => token['tokenId'] == 'mute_token_2'),
+          tokens.any(
+            (token) =>
+                token['postId'] == 'mute_test_post_2' &&
+                token['activeUid'] == 'test_user' &&
+                token['tokenType'] == 'mutePost',
+          ),
           isTrue,
         );
         expect(tokens.length, greaterThanOrEqualTo(2));
@@ -329,7 +350,12 @@ void main() {
         // Verify token was created
         final tokens = await databaseRepository.getTokens('test_user');
         expect(
-          tokens.any((token) => token['tokenId'] == 'special_mute_token'),
+          tokens.any(
+            (token) =>
+                token['postId'] == 'special_content_post' &&
+                token['activeUid'] == 'test_user' &&
+                token['tokenType'] == 'mutePost',
+          ),
           isTrue,
         );
       });
@@ -402,7 +428,10 @@ void main() {
         for (int i = 0; i < 3; i++) {
           expect(
             userTokens.any(
-              (token) => token['tokenId'] == 'multi_mute_token_$i',
+              (token) =>
+                  token['postId'] == 'multi_post_$i' &&
+                  token['activeUid'] == testUser &&
+                  token['tokenType'] == 'mutePost',
             ),
             isTrue,
           );

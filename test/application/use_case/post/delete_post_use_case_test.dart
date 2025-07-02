@@ -18,11 +18,11 @@ class FakeApiRepository implements ApiRepository {
   List<String> deletedObjects = [];
 
   @override
-  FutureResult<DeleteObjectResponse> deleteObject(DetectedImage image) async {
-    capturedArguments = {'method': 'deleteObject', 'image': image};
+  FutureResult<DeleteObjectResponse> deleteObject(String object) async {
+    capturedArguments = {'method': 'deleteObject', 'object': object};
 
     if (shouldSucceed) {
-      deletedObjects.add(image.value);
+      deletedObjects.add(object);
       return const Result.success(DeleteObjectResponse(httpStatusCode: 200));
     } else {
       return Result.failure(errorMessage ?? 'API error');
@@ -165,7 +165,7 @@ void main() {
 
           final capturedArgs = fakeApiRepository.capturedArguments;
           expect(capturedArgs['method'], equals('deleteObject'));
-          expect(capturedArgs['image'], isA<DetectedImage>());
+          expect(capturedArgs['object'], equals('test_image.jpg'));
           expect(fakeApiRepository.deletedObjects, contains('test_image.jpg'));
         },
       );

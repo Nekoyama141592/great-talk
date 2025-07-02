@@ -84,7 +84,13 @@ void main() {
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         expect(tokens.isNotEmpty, isTrue);
         expect(
-          tokens.any((token) => token['tokenId'] == 'test_token_id'),
+          tokens.any(
+            (token) =>
+                token['postId'] == 'test_post_id' &&
+                token['activeUid'] == testCurrentUid &&
+                token['passiveUid'] == 'test_post_owner_uid' &&
+                token['tokenType'] == 'likePost',
+          ),
           isTrue,
         );
       });
@@ -96,7 +102,11 @@ void main() {
         // In a real app, we'd verify the PostLike document exists in the post's subcollection
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         final createdToken = tokens.firstWhere(
-          (token) => token['tokenId'] == 'test_token_id',
+          (token) =>
+              token['postId'] == testPost.postId &&
+              token['activeUid'] == testCurrentUid &&
+              token['passiveUid'] == testPost.uid &&
+              token['tokenType'] == 'likePost',
         );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['postId'], equals(testPost.postId));
@@ -337,8 +347,26 @@ void main() {
         // Verify both tokens were created
         final tokens1 = await databaseRepository.getTokens('user_1');
         final tokens2 = await databaseRepository.getTokens('user_2');
-        expect(tokens1.any((token) => token['tokenId'] == 'token_1'), isTrue);
-        expect(tokens2.any((token) => token['tokenId'] == 'token_2'), isTrue);
+        expect(
+          tokens1.any(
+            (token) =>
+                token['postId'] == 'rapid_test_post' &&
+                token['activeUid'] == 'user_1' &&
+                token['passiveUid'] == 'owner_uid' &&
+                token['tokenType'] == 'likePost',
+          ),
+          isTrue,
+        );
+        expect(
+          tokens2.any(
+            (token) =>
+                token['postId'] == 'rapid_test_post' &&
+                token['activeUid'] == 'user_2' &&
+                token['passiveUid'] == 'owner_uid' &&
+                token['tokenType'] == 'likePost',
+          ),
+          isTrue,
+        );
       });
 
       test('should handle like and unlike operations on same post', () async {

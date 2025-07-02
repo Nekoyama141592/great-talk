@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/infrastructure/model/rest_api/get_object/request/get_object_request.dart';
 import 'package:great_talk/infrastructure/repository/local_repository.dart';
 import 'package:great_talk/infrastructure/repository/api_repository.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
@@ -35,7 +34,7 @@ class FakeApiRepository implements ApiRepository {
   String? responseData;
 
   @override
-  Future<Result<String>> getObject(GetObjectRequest request) async {
+  Future<Result<String>> getObject(String object) async {
     if (shouldSucceed && responseData != null) {
       return Result.success(responseData!);
     } else {

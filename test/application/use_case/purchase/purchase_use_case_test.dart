@@ -16,11 +16,41 @@ void main() {
     late PurchaseUseCase purchaseUseCase;
     late MockApiRepository mockApiRepository;
     late MockPurchaseDetails mockPurchaseDetails;
+    late Map<String, dynamic> expectedPurchaseDetailsJson;
 
     setUp(() {
       mockApiRepository = MockApiRepository();
       mockPurchaseDetails = MockPurchaseDetails();
       purchaseUseCase = PurchaseUseCase(mockApiRepository);
+
+      expectedPurchaseDetailsJson = {
+        'error': '',
+        'productID': 'test_product',
+        'purchaseID': 'test_purchase_id',
+        'verificationData': {
+          'localVerificationData': 'local_data',
+          'serverVerificationData': 'server_data',
+          'source': 'test_source',
+        },
+        'transactionDate': '2023-01-01',
+        'status': 'purchased',
+        'pendingCompletePurchase': false,
+      };
+
+      // Stub all properties needed by the toJson() extension method
+      when(mockPurchaseDetails.error).thenReturn(null);
+      when(mockPurchaseDetails.productID).thenReturn('test_product');
+      when(mockPurchaseDetails.purchaseID).thenReturn('test_purchase_id');
+      when(mockPurchaseDetails.verificationData).thenReturn(
+        PurchaseVerificationData(
+          localVerificationData: 'local_data',
+          serverVerificationData: 'server_data',
+          source: 'test_source',
+        ),
+      );
+      when(mockPurchaseDetails.transactionDate).thenReturn('2023-01-01');
+      when(mockPurchaseDetails.status).thenReturn(PurchaseStatus.purchased);
+      when(mockPurchaseDetails.pendingCompletePurchase).thenReturn(false);
     });
 
     group('verifyPurchase', () {
@@ -83,17 +113,21 @@ void main() {
 
           if (Platform.isAndroid) {
             verify(
-              mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
+              mockApiRepository.verifyAndroidReceipt(
+                expectedPurchaseDetailsJson,
+              ),
             ).called(1);
             verifyNever(
-              mockApiRepository.verifyIOSReceipt(mockPurchaseDetails),
+              mockApiRepository.verifyIOSReceipt(expectedPurchaseDetailsJson),
             );
           } else {
             verify(
-              mockApiRepository.verifyIOSReceipt(mockPurchaseDetails),
+              mockApiRepository.verifyIOSReceipt(expectedPurchaseDetailsJson),
             ).called(1);
             verifyNever(
-              mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
+              mockApiRepository.verifyAndroidReceipt(
+                expectedPurchaseDetailsJson,
+              ),
             );
           }
 
@@ -122,16 +156,18 @@ void main() {
 
         if (!Platform.isAndroid) {
           verify(
-            mockApiRepository.verifyIOSReceipt(mockPurchaseDetails),
+            mockApiRepository.verifyIOSReceipt(expectedPurchaseDetailsJson),
           ).called(1);
           verifyNever(
-            mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
+            mockApiRepository.verifyAndroidReceipt(expectedPurchaseDetailsJson),
           );
         } else {
           verify(
-            mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
+            mockApiRepository.verifyAndroidReceipt(expectedPurchaseDetailsJson),
           ).called(1);
-          verifyNever(mockApiRepository.verifyIOSReceipt(mockPurchaseDetails));
+          verifyNever(
+            mockApiRepository.verifyIOSReceipt(expectedPurchaseDetailsJson),
+          );
         }
 
         result.when(
@@ -250,15 +286,17 @@ void main() {
         // Should call the appropriate method based on current platform
         if (Platform.isAndroid) {
           verify(
-            mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
-          ).called(1);
-          verifyNever(mockApiRepository.verifyIOSReceipt(mockPurchaseDetails));
-        } else {
-          verify(
-            mockApiRepository.verifyIOSReceipt(mockPurchaseDetails),
+            mockApiRepository.verifyAndroidReceipt(expectedPurchaseDetailsJson),
           ).called(1);
           verifyNever(
-            mockApiRepository.verifyAndroidReceipt(mockPurchaseDetails),
+            mockApiRepository.verifyIOSReceipt(expectedPurchaseDetailsJson),
+          );
+        } else {
+          verify(
+            mockApiRepository.verifyIOSReceipt(expectedPurchaseDetailsJson),
+          ).called(1);
+          verifyNever(
+            mockApiRepository.verifyAndroidReceipt(expectedPurchaseDetailsJson),
           );
         }
 

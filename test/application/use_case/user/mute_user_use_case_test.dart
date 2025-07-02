@@ -84,7 +84,12 @@ void main() {
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         expect(tokens.isNotEmpty, isTrue);
         expect(
-          tokens.any((token) => token['tokenId'] == 'test_token_id'),
+          tokens.any(
+            (token) =>
+                token['activeUid'] == testCurrentUid &&
+                token['passiveUid'] == testPassiveUid &&
+                token['tokenType'] == 'muteUser',
+          ),
           isTrue,
         );
       });
@@ -95,7 +100,10 @@ void main() {
         // Verify token was created with correct data
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         final createdToken = tokens.firstWhere(
-          (token) => token['tokenId'] == 'test_token_id',
+          (token) =>
+              token['activeUid'] == testCurrentUid &&
+              token['passiveUid'] == testPost.uid &&
+              token['tokenType'] == 'muteUser',
         );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['passiveUid'], equals(testPost.uid));
@@ -107,11 +115,14 @@ void main() {
         // Verify token was created with correct relationships
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         final createdToken = tokens.firstWhere(
-          (token) => token['tokenId'] == 'test_token_id',
+          (token) =>
+              token['activeUid'] == testCurrentUid &&
+              token['passiveUid'] == testPost.uid &&
+              token['tokenType'] == 'muteUser',
         );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['passiveUid'], equals(testPost.uid));
-        expect(createdToken['tokenType'], equals('mute_user'));
+        expect(createdToken['tokenType'], equals('muteUser'));
       });
 
       test('should handle empty currentUid', () async {
@@ -177,7 +188,10 @@ void main() {
         // Verify token relationships
         final tokens = await databaseRepository.getTokens(sameUid);
         final createdToken = tokens.firstWhere(
-          (token) => token['tokenId'] == selfToken.tokenId,
+          (token) =>
+              token['activeUid'] == sameUid &&
+              token['passiveUid'] == sameUid &&
+              token['tokenType'] == 'muteUser',
         );
         expect(createdToken['activeUid'], equals(sameUid));
         expect(createdToken['passiveUid'], equals(sameUid));
@@ -270,7 +284,12 @@ void main() {
         expect(userTokens.length, greaterThanOrEqualTo(3));
         for (final user in users) {
           expect(
-            userTokens.any((token) => token['tokenId'] == 'mute_${user}_token'),
+            userTokens.any(
+              (token) =>
+                  token['activeUid'] == muterUid &&
+                  token['passiveUid'] == user &&
+                  token['tokenType'] == 'muteUser',
+            ),
             isTrue,
           );
         }
@@ -332,7 +351,12 @@ void main() {
         // Verify token was created
         final tokens = await databaseRepository.getTokens('muting_user');
         expect(
-          tokens.any((token) => token['tokenId'] == 'complex_mute_token'),
+          tokens.any(
+            (token) =>
+                token['activeUid'] == 'muting_user' &&
+                token['passiveUid'] == 'complex_user' &&
+                token['tokenType'] == 'muteUser',
+          ),
           isTrue,
         );
       });
@@ -403,17 +427,16 @@ void main() {
         final userTokens = await databaseRepository.getTokens(rapidMuter);
         expect(userTokens.isNotEmpty, isTrue);
 
-        // Check that at least some tokens were created
-        bool hasAtLeastOneToken = false;
-        for (int i = 0; i < 5; i++) {
-          if (userTokens.any(
-            (token) => token['tokenId'] == 'rapid_mute_token_$i',
-          )) {
-            hasAtLeastOneToken = true;
-            break;
-          }
-        }
-        expect(hasAtLeastOneToken, isTrue);
+        // Check that tokens were created for the target user
+        expect(
+          userTokens.any(
+            (token) =>
+                token['activeUid'] == rapidMuter &&
+                token['passiveUid'] == targetUser &&
+                token['tokenType'] == 'muteUser',
+          ),
+          isTrue,
+        );
       });
 
       test('should handle cross-user mute scenarios', () async {
@@ -518,8 +541,24 @@ void main() {
         final tokensA = await databaseRepository.getTokens(userA);
         final tokensB = await databaseRepository.getTokens(userB);
 
-        expect(tokensA.any((token) => token['tokenId'] == 'a_mutes_b'), isTrue);
-        expect(tokensB.any((token) => token['tokenId'] == 'b_mutes_a'), isTrue);
+        expect(
+          tokensA.any(
+            (token) =>
+                token['activeUid'] == userA &&
+                token['passiveUid'] == userB &&
+                token['tokenType'] == 'muteUser',
+          ),
+          isTrue,
+        );
+        expect(
+          tokensB.any(
+            (token) =>
+                token['activeUid'] == userB &&
+                token['passiveUid'] == userA &&
+                token['tokenType'] == 'muteUser',
+          ),
+          isTrue,
+        );
       });
     });
   });
