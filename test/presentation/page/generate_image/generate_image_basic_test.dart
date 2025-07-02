@@ -7,7 +7,7 @@ import 'package:great_talk/presentation/page/generate_image/components/floating_
 import 'package:great_talk/presentation/page/generate_image/components/modern_sliver_app_bar.dart';
 
 void main() {
-group('GenerateImagePage Basic Tests', () {
+  group('GenerateImagePage Basic Tests', () {
     Widget createTestWidget() {
       return const ProviderScope(child: MaterialApp(home: GenerateImagePage()));
     }
@@ -113,7 +113,7 @@ group('GenerateImagePage Basic Tests', () {
     });
 
     group('Responsive Design Tests', () {
-testWidgets('should handle different screen sizes', (
+      testWidgets('should handle different screen sizes', (
         WidgetTester tester,
       ) async {
         final sizes = [
@@ -125,7 +125,7 @@ testWidgets('should handle different screen sizes', (
         for (final size in sizes) {
           await tester.binding.setSurfaceSize(size);
           await tester.pumpWidget(createTestWidget());
-          
+
           // Just pump once since animations are continuous
           await tester.pump();
 

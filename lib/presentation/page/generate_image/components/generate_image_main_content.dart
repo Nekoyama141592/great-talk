@@ -40,9 +40,7 @@ class GenerateImageMainContent extends StatelessWidget {
           onSizeChanged: onSizeChanged,
         ),
         const SizedBox(height: 32),
-        GenerateButton(
-          onPressed: onGenerate,
-        ),
+        GenerateButton(onPressed: onGenerate),
         const SizedBox(height: 32),
       ],
     );

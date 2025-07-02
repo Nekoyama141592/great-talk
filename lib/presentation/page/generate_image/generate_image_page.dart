@@ -64,14 +64,16 @@ class GenerateImagePage extends HookConsumerWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: state.when(
-                      data: (data) => GenerateImageMainContent(
-                        base64: data.base64,
-                        promptController: promptController,
-                        selectedSize: size.value,
-                        onPromptChanged: (text) => promptController.text = text ?? '',
-                        onSizeChanged: (newSize) => size.value = newSize,
-                        onGenerate: handleGenerate,
-                      ),
+                      data:
+                          (data) => GenerateImageMainContent(
+                            base64: data.base64,
+                            promptController: promptController,
+                            selectedSize: size.value,
+                            onPromptChanged:
+                                (text) => promptController.text = text ?? '',
+                            onSizeChanged: (newSize) => size.value = newSize,
+                            onGenerate: handleGenerate,
+                          ),
                       loading: () => const LoadingState(),
                       error: (e, s) => const ErrorState(),
                     ),
