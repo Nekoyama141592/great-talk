@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/domain/entity/view_model_state/verify_email/verify_email_state.dart';
+import 'package:great_talk/presentation/state/verify_email/verify_email_state.dart';
 import 'package:great_talk/presentation/page/auth/verify_email/components/verify_email_actions.dart';
 
 void main() {
