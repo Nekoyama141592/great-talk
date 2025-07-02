@@ -144,7 +144,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final data = doc.data();
       if (data == null) return null;
       final publicUser = PublicUser.fromJson(Map<String, dynamic>.from(data));
-      return PublicUserEntity.fromJson(publicUser.toJson());
+      return PublicUserEntity.fromModel(publicUser);
     } catch (e) {
       debugPrint('createPublicUser: ${e.toString()}');
       return null;
@@ -361,7 +361,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final data = doc.data();
       if (data == null) return null;
       final publicUser = PublicUser.fromJson(Map<String, dynamic>.from(data));
-      return PublicUserEntity.fromJson(publicUser.toJson());
+      return PublicUserEntity.fromModel(publicUser);
     } catch (e) {
       debugPrint('getPublicUser: ${e.toString()}');
       return null;
@@ -376,7 +376,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final data = doc.data();
       if (data == null) return null;
       final privateUser = PrivateUser.fromJson(Map<String, dynamic>.from(data));
-      return PrivateUserEntity.fromJson(privateUser.toJson());
+      return PrivateUserEntity.fromModel(privateUser);
     } catch (e) {
       debugPrint('getPrivateUser: ${e.toString()}');
       return null;
@@ -391,7 +391,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final data = doc.data();
       if (data == null) return null;
       final post = Post.fromJson(Map<String, dynamic>.from(data));
-      return PostEntity.fromJson(post.toJson());
+      return PostEntity.fromModel(post);
     } catch (e) {
       debugPrint('getPost: ${e.toString()}');
       return null;
@@ -423,7 +423,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qSnapshot = await _getDocs(query);
       return qSnapshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getTimelinePosts: ${e.toString()}'); // Added debugPrint here
@@ -439,7 +439,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qSnapshot = await _getDocs(query);
       return qSnapshot.docs.map((doc) {
         final publicUser = PublicUser.fromJson(doc.data());
-        return PublicUserEntity.fromJson(publicUser.toJson());
+        return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
       debugPrint('getUsersByUids: ${e.toString()}');
@@ -454,7 +454,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qshot = await _getDocs(query);
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getUserPosts: ${e.toString()}');
@@ -473,7 +473,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getMoreUserPosts: ${e.toString()}');
@@ -490,7 +490,7 @@ class DatabaseRepository implements IDatabaseRepository {
         final publicUser = PublicUser.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
-        return PublicUserEntity.fromJson(publicUser.toJson());
+        return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
       debugPrint('getRankingUsers: ${e.toString()}');
@@ -508,7 +508,7 @@ class DatabaseRepository implements IDatabaseRepository {
         final publicUser = PublicUser.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
-        return PublicUserEntity.fromJson(publicUser.toJson());
+        return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
       debugPrint('getMoreRankingUsers: ${e.toString()}');
@@ -526,7 +526,7 @@ class DatabaseRepository implements IDatabaseRepository {
         final publicUser = PublicUser.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
-        return PublicUserEntity.fromJson(publicUser.toJson());
+        return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
       debugPrint('getMuteUsers: ${e.toString()}');
@@ -548,7 +548,7 @@ class DatabaseRepository implements IDatabaseRepository {
         final publicUser = PublicUser.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
-        return PublicUserEntity.fromJson(publicUser.toJson());
+        return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
       debugPrint('getMoreMuteUsers: ${e.toString()}');
@@ -585,7 +585,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qshot = await _postsQuery(isRankingPosts).get();
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getPosts: ${e.toString()}');
@@ -605,7 +605,7 @@ class DatabaseRepository implements IDatabaseRepository {
           await _postsQuery(isRankingPosts).startAfterDocument(doc).get();
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getMorePosts: ${e.toString()}');
@@ -639,7 +639,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getMutePosts: ${e.toString()}');
@@ -660,7 +660,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getMoreMutePosts: ${e.toString()}');
