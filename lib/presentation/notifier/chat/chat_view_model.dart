@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:great_talk/core/constant/chat_constants.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/generate_text_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/message/generate_text_request_message.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
 import 'package:great_talk/presentation/state/chat/chat_state.dart';
@@ -77,10 +76,10 @@ class ChatViewModel extends _$ChatViewModel {
     final model =
         ref.read(purchasesNotifierProvider).value?.model() ??
         ChatConstants.basicModel;
-    final request = GenerateTextRequest.fromMessages(model, requestMessages);
+    final messagesJson = requestMessages.map((e) => e.toJson()).toList();
     final oldState = state.value!;
     state = AsyncValue.loading();
-    final result = await ref.read(apiRepositoryProvider).generateText(request);
+    final result = await ref.read(apiRepositoryProvider).generateText(model, messagesJson);
     state = AsyncData(oldState);
     return result;
   }

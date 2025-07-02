@@ -2,7 +2,6 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:great_talk/core/util/json_util.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_image/request/generate_image_request.dart';
@@ -14,8 +13,6 @@ import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/r
 import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/response/put_object_response.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart' as rs;
-import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:great_talk/core/extension/purchase_details_extension.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/request/receipt_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/domain/repository_interface/i_api_repository.dart';
@@ -40,9 +37,16 @@ class ApiRepository implements IApiRepository {
   }
 
   @override
-  rs.FutureResult<PutObjectResponse> putObject(PutObjectRequest request) async {
+  rs.FutureResult<PutObjectResponse> putObject(
+    String base64Image,
+    String object,
+  ) async {
     try {
       const name = 'putObjectV2';
+      final request = PutObjectRequest(
+        base64Image: base64Image,
+        object: object,
+      );
       final result = await _call(name, request.toJson());
       final res = PutObjectResponse.fromJson(result);
       return rs.Result.success(res);
@@ -53,9 +57,10 @@ class ApiRepository implements IApiRepository {
   }
 
   @override
-  rs.FutureResult<String> getObject(GetObjectRequest request) async {
+  rs.FutureResult<String> getObject(String object) async {
     try {
       const name = 'getObjectV2';
+      final request = GetObjectRequest(object: object);
       final result = await _call(name, request.toJson());
       final res = GetObjectResponse.fromJson(result);
       final base64Image = res.base64Image;
@@ -67,12 +72,10 @@ class ApiRepository implements IApiRepository {
   }
 
   @override
-  rs.FutureResult<DeleteObjectResponse> deleteObject(
-    DetectedImage image,
-  ) async {
+  rs.FutureResult<DeleteObjectResponse> deleteObject(String object) async {
     try {
       const name = 'deleteObjectV2';
-      final request = DeleteObjectRequest(object: image.value);
+      final request = DeleteObjectRequest(object: object);
       final result = await _call(name, request.toJson());
       final res = DeleteObjectResponse.fromJson(result);
       debugPrint('画像の削除が成功しました');
@@ -102,10 +105,15 @@ class ApiRepository implements IApiRepository {
 
   @override
   rs.FutureResult<GenerateTextResponse> generateText(
-    GenerateTextRequest request,
+    String model,
+    List<Map<String, dynamic>> messages,
   ) async {
     try {
       const name = 'generateTextV2';
+      final request = GenerateTextRequest(
+        model: model,
+        messages: messages,
+      );
       final requestData = request.toJson();
       final result = await _call(name, requestData);
       final res = GenerateTextResponse.fromJson(result);
@@ -118,11 +126,11 @@ class ApiRepository implements IApiRepository {
 
   @override
   rs.FutureResult<VerifiedPurchase> verifyAndroidReceipt(
-    PurchaseDetails purchaseDetails,
+    Map<String, dynamic> purchaseDetailsJson,
   ) async {
     try {
       const name = 'verifyAndroidReceipt';
-      final request = ReceiptRequest(purchaseDetails: purchaseDetails.toJson());
+      final request = ReceiptRequest(purchaseDetails: purchaseDetailsJson);
       final result = await _call(name, request.toJson());
       final res = VerifiedPurchase.fromJson(result);
       return rs.Result.success(res);
@@ -134,11 +142,11 @@ class ApiRepository implements IApiRepository {
 
   @override
   rs.FutureResult<VerifiedPurchase> verifyIOSReceipt(
-    PurchaseDetails purchaseDetails,
+    Map<String, dynamic> purchaseDetailsJson,
   ) async {
     try {
       const name = 'verifyIOSReceipt';
-      final request = ReceiptRequest(purchaseDetails: purchaseDetails.toJson());
+      final request = ReceiptRequest(purchaseDetails: purchaseDetailsJson);
       final result = await _call(name, request.toJson());
       final res = VerifiedPurchase.fromJson(result);
       return rs.Result.success(res);
