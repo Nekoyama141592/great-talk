@@ -43,7 +43,7 @@ class TimelinesViewModel extends _$TimelinesViewModel
     final lastTimeline = currentState.timelines.last;
     final timelines = await _repository.getMoreTimelines(
       currentUid,
-      lastTimeline,
+      lastTimeline.postId,
     );
     final postIds = timelines.map((e) => e.postId).toList();
     final postResult = await _timelinesToPostsResult(postIds);

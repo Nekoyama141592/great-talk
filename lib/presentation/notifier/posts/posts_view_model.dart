@@ -36,7 +36,11 @@ class PostsViewModel extends _$PostsViewModel implements RefreshInterface {
   FutureResult<bool> onLoading() async {
     final currentState = state.value!;
     final lastPost = currentState.userPosts.last.post;
-    final posts = await _repository.getMorePosts(isRankingPosts, lastPost);
+    final posts = await _repository.getMorePosts(
+      isRankingPosts,
+      lastPost.uid,
+      lastPost.postId,
+    );
     _addPosts(posts);
     return const Result.success(true);
   }

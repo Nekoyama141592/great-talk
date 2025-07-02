@@ -26,7 +26,7 @@ class RankingUsersViewModel extends _$RankingUsersViewModel {
     final stateValue = state.value!;
     state = await AsyncValue.guard(() async {
       final oldUsers = stateValue.users();
-      final users = await _repository.getMoreRankingUsers(oldUsers.last);
+      final users = await _repository.getMoreRankingUsers(oldUsers.last.uid);
       final newUsers = [...oldUsers, ...users];
       final imageUsers = await ref
           .read(userUseCaseProvider)

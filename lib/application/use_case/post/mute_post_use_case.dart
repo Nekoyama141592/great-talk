@@ -1,6 +1,5 @@
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post_mute/post_mute.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/domain/use_case_interface/post/i_mute_post_use_case.dart';
@@ -15,12 +14,10 @@ class MutePostUseCase implements IMutePostUseCase {
     String currentUid,
     MutePostToken token,
   ) {
-    final postMute = PostMute.fromPost(post.postId, currentUid);
     return firestoreRepository.createMutePostInfo(
       currentUid,
-      post,
-      token,
-      postMute,
+      post.uid,
+      post.postId,
     );
   }
 }
