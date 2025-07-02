@@ -5,19 +5,6 @@ import 'package:great_talk/presentation/page/generate_image/components/animated_
 
 void main() {
   group('AnimatedGradientBackground', () {
-    late AnimationController animationController;
-
-    setUp(() {
-      // This will be set up in the test widget context
-    });
-
-    Widget createTestWidget({required AnimationController controller}) {
-      return MaterialApp(
-        home: Scaffold(
-          body: AnimatedGradientBackground(animationController: controller),
-        ),
-      );
-    }
 
 testWidgets('should render with AnimationController', (
       WidgetTester tester,

@@ -5,13 +5,6 @@ import 'package:great_talk/presentation/page/generate_image/components/floating_
 
 void main() {
   group('FloatingParticles', () {
-    Widget createTestWidget({required AnimationController controller}) {
-      return MaterialApp(
-        home: Scaffold(
-          body: FloatingParticles(animationController: controller),
-        ),
-      );
-    }
 
 testWidgets('should render with AnimationController', (
       WidgetTester tester,

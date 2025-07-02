@@ -92,7 +92,7 @@ void main() {
 
         expect(buttonPressed, isFalse);
 
-        await tester.tap(find.byType(GenerateButton));
+        await tester.tap(find.byType(GenerateButton), warnIfMissed: false);
         await tester.pump();
 
         expect(buttonPressed, isTrue);
@@ -129,7 +129,7 @@ void main() {
 
         // Tap multiple times
         for (int i = 1; i <= 3; i++) {
-          await tester.tap(find.byType(GenerateButton));
+          await tester.tap(find.byType(GenerateButton), warnIfMissed: false);
           await tester.pump();
           expect(tapCount, equals(i));
         }
@@ -141,9 +141,9 @@ void main() {
         await tester.pumpWidget(createTestWidget(onPressed: () => tapCount++));
 
         // Rapid taps without pump in between
-        await tester.tap(find.byType(GenerateButton));
-        await tester.tap(find.byType(GenerateButton));
-        await tester.tap(find.byType(GenerateButton));
+        await tester.tap(find.byType(GenerateButton), warnIfMissed: false);
+        await tester.tap(find.byType(GenerateButton), warnIfMissed: false);
+        await tester.tap(find.byType(GenerateButton), warnIfMissed: false);
         await tester.pump();
 
         expect(tapCount, equals(3));
