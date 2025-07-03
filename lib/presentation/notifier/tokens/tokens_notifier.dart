@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:collection/collection.dart';
+import 'package:great_talk/core/util/tokens_util.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
@@ -39,17 +39,18 @@ class TokensNotifier extends _$TokensNotifier {
   TokensState get _currentState => state.valueOrNull ?? TokensState();
 
   String addDeletePostId(String postId) {
-    final newState = _currentState.copyWith(
-      deletePostIds: [..._currentState.deletePostIds, postId],
+    final newList = TokensUtil.addToTokenList(
+      _currentState.deletePostIds,
+      postId,
     );
+    final newState = _currentState.copyWith(deletePostIds: newList);
     _updateState(newState);
     return postId;
   }
 
   String removeDeletePostId(String postId) {
-    final newState = _currentState.copyWith(
-      deletePostIds: [..._currentState.deletePostIds]..remove(postId),
-    );
+    final newList = [..._currentState.deletePostIds]..remove(postId);
+    final newState = _currentState.copyWith(deletePostIds: newList);
     _updateState(newState);
     return postId;
   }
@@ -57,49 +58,49 @@ class TokensNotifier extends _$TokensNotifier {
   FollowingTokenEntity addFollowing(String passiveUid) {
     final followingToken = FollowingToken.fromUid(passiveUid);
     final followingTokenEntity = FollowingTokenEntity.fromModel(followingToken);
-    final newState = _currentState.copyWith(
-      followingTokens: [..._currentState.followingTokens, followingTokenEntity],
+    final newList = TokensUtil.addToTokenList(
+      _currentState.followingTokens,
+      followingTokenEntity,
     );
+    final newState = _currentState.copyWith(followingTokens: newList);
     _updateState(newState);
     return followingTokenEntity;
   }
 
   FollowingTokenEntity? removeFollowing(String uid) {
-    final deleteToken = state.value?.followingTokens.firstWhereOrNull(
-      (element) => element.passiveUid == uid,
+    final result = TokensUtil.removeByPassiveUid(
+      _currentState.followingTokens,
+      uid,
+      (token) => token.passiveUid,
     );
-    if (deleteToken == null) return null;
-    final newList =
-        _currentState.followingTokens
-            .where((token) => token.tokenId != deleteToken.tokenId)
-            .toList();
-    final newState = _currentState.copyWith(followingTokens: newList);
+    if (!result.wasRemoved) return null;
+    final newState = _currentState.copyWith(followingTokens: result.newList);
     _updateState(newState);
-    return deleteToken;
+    return result.removedToken;
   }
 
   LikePostTokenEntity? addLikePost(String currentUid, PostEntity post) {
     final token = LikePostToken.fromPost(post.postId, post.uid, currentUid);
     final tokenEntity = LikePostTokenEntity.fromModel(token);
-    final newState = _currentState.copyWith(
-      likePostTokens: [..._currentState.likePostTokens, tokenEntity],
+    final newList = TokensUtil.addToTokenList(
+      _currentState.likePostTokens,
+      tokenEntity,
     );
+    final newState = _currentState.copyWith(likePostTokens: newList);
     _updateState(newState);
     return tokenEntity;
   }
 
   LikePostTokenEntity? removeLikePost(String postId) {
-    final deleteToken = state.value?.likePostTokens.firstWhereOrNull(
-      (element) => element.postId == postId,
+    final result = TokensUtil.removeByPostId(
+      _currentState.likePostTokens,
+      postId,
+      (token) => token.postId,
     );
-    if (deleteToken == null) return null;
-    final newList =
-        _currentState.likePostTokens
-            .where((token) => token.postId != postId)
-            .toList();
-    final newState = _currentState.copyWith(likePostTokens: newList);
+    if (!result.wasRemoved) return null;
+    final newState = _currentState.copyWith(likePostTokens: result.newList);
     _updateState(newState);
-    return deleteToken;
+    return result.removedToken;
   }
 
   MutePostTokenEntity? addMutePost(PostEntity post) {
@@ -107,19 +108,21 @@ class TokensNotifier extends _$TokensNotifier {
     if (currentUid == null) return null;
     final token = MutePostToken.fromPost(post.postId, currentUid);
     final tokenEntity = MutePostTokenEntity.fromModel(token);
-    final newState = _currentState.copyWith(
-      mutePostTokens: [..._currentState.mutePostTokens, tokenEntity],
+    final newList = TokensUtil.addToTokenList(
+      _currentState.mutePostTokens,
+      tokenEntity,
     );
+    final newState = _currentState.copyWith(mutePostTokens: newList);
     _updateState(newState);
     return tokenEntity;
   }
 
   void removeMutePost(MutePostTokenEntity mutePostToken) {
-    final newList =
-        _currentState.mutePostTokens
-            .where((token) => token.postId != mutePostToken.postId)
-            .toList();
-    final newState = _currentState.copyWith(mutePostTokens: newList);
+    final result = TokensUtil.removeSpecificToken(
+      _currentState.mutePostTokens,
+      mutePostToken,
+    );
+    final newState = _currentState.copyWith(mutePostTokens: result.newList);
     _updateState(newState);
   }
 
@@ -128,26 +131,24 @@ class TokensNotifier extends _$TokensNotifier {
     if (currentUid == null) return null;
     final token = MuteUserToken.fromPost(currentUid, post.uid);
     final tokenEntity = MuteUserTokenEntity.fromModel(token);
-    final newState = _currentState.copyWith(
-      muteUserTokens: [..._currentState.muteUserTokens, tokenEntity],
+    final newList = TokensUtil.addToTokenList(
+      _currentState.muteUserTokens,
+      tokenEntity,
     );
+    final newState = _currentState.copyWith(muteUserTokens: newList);
     _updateState(newState);
     return tokenEntity;
   }
 
   MuteUserTokenEntity? removeMuteUser(String passiveUid) {
-    final deleteToken = ref
-        .read(tokensNotifierProvider)
-        .value
-        ?.muteUserTokens
-        .firstWhereOrNull((e) => e.passiveUid == passiveUid);
-    if (deleteToken == null) return null;
-    final newList =
-        _currentState.muteUserTokens
-            .where((token) => token.passiveUid != deleteToken.passiveUid)
-            .toList();
-    final newState = _currentState.copyWith(muteUserTokens: newList);
+    final result = TokensUtil.removeByPassiveUid(
+      _currentState.muteUserTokens,
+      passiveUid,
+      (token) => token.passiveUid,
+    );
+    if (!result.wasRemoved) return null;
+    final newState = _currentState.copyWith(muteUserTokens: result.newList);
     _updateState(newState);
-    return deleteToken;
+    return result.removedToken;
   }
 }

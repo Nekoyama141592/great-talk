@@ -8,6 +8,7 @@ import 'package:great_talk/infrastructure/model/database_schema/detected_image/d
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 void main() {
@@ -418,8 +419,11 @@ void main() {
         const uid = 'token_test_user';
 
         final tokens = await repository.getTokens(uid);
-        expect(tokens, isA<List<Map<String, dynamic>>>());
-        expect(tokens, isEmpty); // Should be empty for new user
+        expect(tokens, isA<Tokens>());
+        expect(tokens.followingTokens, isEmpty);
+        expect(tokens.likePostTokens, isEmpty);
+        expect(tokens.mutePostTokens, isEmpty);
+        expect(tokens.muteUserTokens, isEmpty);
       });
     });
 
