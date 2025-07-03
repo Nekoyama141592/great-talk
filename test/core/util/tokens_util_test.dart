@@ -78,18 +78,18 @@ void main() {
     group('addToTokenList', () {
       test('should add token to empty list', () {
         const List<MockToken> emptyList = [];
-        
+
         final result = TokensUtil.addToTokenList(emptyList, token1);
-        
+
         expect(result, hasLength(1));
         expect(result.first, equals(token1));
       });
 
       test('should add token to existing list', () {
         final initialList = [token1, token2];
-        
+
         final result = TokensUtil.addToTokenList(initialList, token3);
-        
+
         expect(result, hasLength(3));
         expect(result, contains(token1));
         expect(result, contains(token2));
@@ -100,18 +100,18 @@ void main() {
       test('should not modify original list', () {
         final originalList = [token1, token2];
         final originalLength = originalList.length;
-        
+
         TokensUtil.addToTokenList(originalList, token3);
-        
+
         expect(originalList, hasLength(originalLength));
         expect(originalList, isNot(contains(token3)));
       });
 
       test('should handle adding duplicate tokens', () {
         final initialList = [token1, token2];
-        
+
         final result = TokensUtil.addToTokenList(initialList, token1);
-        
+
         expect(result, hasLength(3));
         expect(result.where((token) => token == token1), hasLength(2));
       });
@@ -123,7 +123,7 @@ void main() {
           testTokens,
           (token) => token.id == '2',
         );
-        
+
         expect(result.wasRemoved, isTrue);
         expect(result.removedToken, equals(token2));
         expect(result.newList, hasLength(2));
@@ -137,7 +137,7 @@ void main() {
           testTokens,
           (token) => token.id == 'nonexistent',
         );
-        
+
         expect(result.wasRemoved, isFalse);
         expect(result.removedToken, isNull);
         expect(result.newList, equals(testTokens));
@@ -145,12 +145,12 @@ void main() {
 
       test('should handle empty list', () {
         const List<MockToken> emptyList = [];
-        
+
         final result = TokensUtil.removeFromTokenList(
           emptyList,
           (token) => token.id == '1',
         );
-        
+
         expect(result.wasRemoved, isFalse);
         expect(result.removedToken, isNull);
         expect(result.newList, isEmpty);
@@ -158,15 +158,18 @@ void main() {
 
       test('should remove first matching token only', () {
         final duplicateList = [token1, token2, token1, token3];
-        
+
         final result = TokensUtil.removeFromTokenList(
           duplicateList,
           (token) => token.id == '1',
         );
-        
+
         expect(result.wasRemoved, isTrue);
         expect(result.removedToken, equals(token1));
-        expect(result.newList, hasLength(3)); // Removes only the first matching token
+        expect(
+          result.newList,
+          hasLength(3),
+        ); // Removes only the first matching token
         expect(result.newList.where((token) => token.id == '1'), hasLength(1));
       });
     });
@@ -174,7 +177,7 @@ void main() {
     group('removeSpecificToken', () {
       test('should remove specific token instance', () {
         final result = TokensUtil.removeSpecificToken(testTokens, token2);
-        
+
         expect(result.wasRemoved, isTrue);
         expect(result.removedToken, equals(token2));
         expect(result.newList, hasLength(2));
@@ -189,9 +192,12 @@ void main() {
           tokenId: 'token99',
           name: 'Non-existent Token',
         );
-        
-        final result = TokensUtil.removeSpecificToken(testTokens, nonExistentToken);
-        
+
+        final result = TokensUtil.removeSpecificToken(
+          testTokens,
+          nonExistentToken,
+        );
+
         expect(result.wasRemoved, isFalse);
         expect(result.removedToken, isNull);
         expect(result.newList, equals(testTokens));
@@ -199,9 +205,9 @@ void main() {
 
       test('should handle empty list', () {
         const List<MockToken> emptyList = [];
-        
+
         final result = TokensUtil.removeSpecificToken(emptyList, token1);
-        
+
         expect(result.wasRemoved, isFalse);
         expect(result.removedToken, isNull);
         expect(result.newList, isEmpty);
@@ -209,9 +215,9 @@ void main() {
 
       test('should remove all instances of token', () {
         final duplicateList = [token1, token2, token1, token3];
-        
+
         final result = TokensUtil.removeSpecificToken(duplicateList, token1);
-        
+
         expect(result.wasRemoved, isTrue);
         expect(result.removedToken, equals(token1));
         expect(result.newList, hasLength(2));
@@ -227,7 +233,7 @@ void main() {
           testTokens,
           (token) => token.name == 'Second Token',
         );
-        
+
         expect(result, equals(token2));
       });
 
@@ -236,29 +242,29 @@ void main() {
           testTokens,
           (token) => token.name == 'Nonexistent Token',
         );
-        
+
         expect(result, isNull);
       });
 
       test('should return first matching token', () {
         final duplicateList = [token1, token2, token1, token3];
-        
+
         final result = TokensUtil.findToken(
           duplicateList,
           (token) => token.id == '1',
         );
-        
+
         expect(result, equals(token1));
       });
 
       test('should handle empty list', () {
         const List<MockToken> emptyList = [];
-        
+
         final result = TokensUtil.findToken(
           emptyList,
           (token) => token.id == '1',
         );
-        
+
         expect(result, isNull);
       });
     });
@@ -270,7 +276,7 @@ void main() {
           '2',
           (token) => token.id,
         );
-        
+
         expect(result, hasLength(2));
         expect(result, isNot(contains(token2)));
         expect(result, contains(token1));
@@ -283,19 +289,19 @@ void main() {
           'nonexistent',
           (token) => token.id,
         );
-        
+
         expect(result, equals(testTokens));
       });
 
       test('should handle empty list', () {
         const List<MockToken> emptyList = [];
-        
+
         final result = TokensUtil.removeById(
           emptyList,
           '1',
           (token) => token.id,
         );
-        
+
         expect(result, isEmpty);
       });
     });
@@ -307,7 +313,7 @@ void main() {
           'post2',
           (token) => token.postId,
         );
-        
+
         expect(result.wasRemoved, isTrue);
         expect(result.removedToken, equals(token2));
         expect(result.newList, hasLength(2));
@@ -320,12 +326,18 @@ void main() {
           'post1', // Both token1 and token3 have this postId
           (token) => token.postId,
         );
-        
+
         expect(result.wasRemoved, isTrue);
         expect(result.removedToken, equals(token1)); // First one found
         expect(result.newList, hasLength(2));
-        expect(result.newList, contains(token3)); // token3 should still be there
-        expect(result.newList, contains(token2)); // token2 should still be there
+        expect(
+          result.newList,
+          contains(token3),
+        ); // token3 should still be there
+        expect(
+          result.newList,
+          contains(token2),
+        ); // token2 should still be there
       });
 
       test('should return null when postId not found', () {
@@ -334,7 +346,7 @@ void main() {
           'nonexistent_post',
           (token) => token.postId,
         );
-        
+
         expect(result.wasRemoved, isFalse);
         expect(result.removedToken, isNull);
         expect(result.newList, equals(testTokens));
@@ -348,7 +360,7 @@ void main() {
           'user2',
           (token) => token.passiveUid,
         );
-        
+
         expect(result.wasRemoved, isTrue);
         expect(result.removedToken, equals(token2));
         expect(result.newList, hasLength(2));
@@ -361,7 +373,7 @@ void main() {
           'nonexistent_user',
           (token) => token.passiveUid,
         );
-        
+
         expect(result.wasRemoved, isFalse);
         expect(result.removedToken, isNull);
         expect(result.newList, equals(testTokens));
@@ -375,7 +387,7 @@ void main() {
           'token3',
           (token) => token.tokenId,
         );
-        
+
         expect(result.wasRemoved, isTrue);
         expect(result.removedToken, equals(token3));
         expect(result.newList, hasLength(2));
@@ -388,7 +400,7 @@ void main() {
           'nonexistent_token',
           (token) => token.tokenId,
         );
-        
+
         expect(result.wasRemoved, isFalse);
         expect(result.removedToken, isNull);
         expect(result.newList, equals(testTokens));
@@ -407,7 +419,7 @@ void main() {
             name: 'Test Token',
           ),
         );
-        
+
         expect(result.wasRemoved, isTrue);
       });
 
@@ -416,7 +428,7 @@ void main() {
           newList: [],
           removedToken: null,
         );
-        
+
         expect(result.wasRemoved, isFalse);
       });
     });
@@ -435,15 +447,15 @@ void main() {
         );
 
         final stopwatch = Stopwatch()..start();
-        
+
         final result = TokensUtil.removeByPostId(
           largeList,
           'post500',
           (token) => token.postId,
         );
-        
+
         stopwatch.stop();
-        
+
         expect(result.wasRemoved, isTrue);
         expect(result.newList, hasLength(999));
         expect(stopwatch.elapsedMilliseconds, lessThan(100)); // Should be fast
@@ -458,25 +470,25 @@ void main() {
           name: '',
         );
         final listWithNulls = [tokenWithNulls];
-        
+
         final result = TokensUtil.removeByPostId(
           listWithNulls,
           '',
           (token) => token.postId,
         );
-        
+
         expect(result.wasRemoved, isTrue);
         expect(result.newList, isEmpty);
       });
 
       test('should maintain list order after operations', () {
         final orderedList = [token1, token2, token3];
-        
+
         final result = TokensUtil.removeFromTokenList(
           orderedList,
           (token) => token.id == '2',
         );
-        
+
         expect(result.newList[0], equals(token1));
         expect(result.newList[1], equals(token3));
       });
@@ -485,9 +497,9 @@ void main() {
     group('Type Safety', () {
       test('should work with different token types', () {
         final stringList = ['a', 'b', 'c'];
-        
+
         final result = TokensUtil.addToTokenList(stringList, 'd');
-        
+
         expect(result, hasLength(4));
         expect(result.last, equals('d'));
       });
@@ -497,12 +509,12 @@ void main() {
           {'id': '1', 'name': 'first'},
           {'id': '2', 'name': 'second'},
         ];
-        
+
         final result = TokensUtil.removeFromTokenList(
           mapList,
           (map) => map['id'] == '1',
         );
-        
+
         expect(result.wasRemoved, isTrue);
         expect(result.newList, hasLength(1));
         expect(result.newList.first['name'], equals('second'));
