@@ -4,7 +4,7 @@ import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_prov
 import 'package:great_talk/core/provider/keep_alive/usecase/posts/posts_use_case_provider.dart';
 import 'package:great_talk/presentation/notifier/refresh_interface.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/application/use_case/posts/posts_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'timelines_view_model.g.dart';

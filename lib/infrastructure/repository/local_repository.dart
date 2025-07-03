@@ -5,7 +5,7 @@ import 'package:great_talk/core/exception/local_exception.dart';
 import 'package:great_talk/core/extension/shared_preferences_extension.dart';
 import 'package:great_talk/infrastructure/model/local_schema/text_message/text_message.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:great_talk/domain/repository_interface/i_local_repository.dart';
 

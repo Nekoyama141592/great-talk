@@ -3,7 +3,7 @@ import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_image/
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/response/put_object_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart' as rs;
+import 'package:great_talk/infrastructure/model/result/result.dart' as rs;
 
 /// Abstract interface for API operations including image handling,
 /// AI text/image generation, and purchase verification.

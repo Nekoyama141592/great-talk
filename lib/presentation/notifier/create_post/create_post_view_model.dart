@@ -8,7 +8,7 @@ import 'package:great_talk/presentation/state/create_post/create_post_state.dart
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/presentation/util/image_ui_util.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';

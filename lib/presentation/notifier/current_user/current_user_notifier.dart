@@ -8,7 +8,7 @@ import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_prov
 import 'package:great_talk/core/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/core/provider/repository/auth/auth_repository_provider.dart';
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/core/util/credential_util.dart';
 import 'package:great_talk/infrastructure/repository/auth_repository.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';

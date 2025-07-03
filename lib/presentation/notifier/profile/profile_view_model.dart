@@ -8,7 +8,7 @@ import 'package:great_talk/core/provider/repository/database/database_repository
 import 'package:great_talk/core/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/presentation/notifier/refresh_interface.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'profile_view_model.g.dart';

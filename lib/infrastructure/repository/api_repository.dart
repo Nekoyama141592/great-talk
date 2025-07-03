@@ -12,7 +12,7 @@ import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/r
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/response/put_object_response.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart' as rs;
+import 'package:great_talk/infrastructure/model/result/result.dart' as rs;
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/request/receipt_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/domain/repository_interface/i_api_repository.dart';

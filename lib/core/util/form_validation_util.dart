@@ -1,4 +1,4 @@
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 
 /// Utility class for common form validation patterns
 class FormValidationUtil {

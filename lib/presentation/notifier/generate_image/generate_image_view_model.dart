@@ -2,7 +2,7 @@ import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_image/
 import 'package:great_talk/presentation/state/generate_image/generate_image_state.dart';
 import 'package:great_talk/presentation/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/core/provider/repository/api/api_repository_provider.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'generate_image_view_model.g.dart';
 

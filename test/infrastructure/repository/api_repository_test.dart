@@ -8,7 +8,7 @@ import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_image/
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/generate_text_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart' as rs;
+import 'package:great_talk/infrastructure/model/result/result.dart' as rs;
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:great_talk/core/extension/purchase_details_extension.dart';
 
@@ -53,7 +53,7 @@ void main() {
         final result = await repository.putObject(request);
 
         expect(result, isA<rs.Failure<PutObjectResponse>>());
-        expect((result as rs.Failure).e, '画像のアップロードが失敗しました');
+        expect((result as rs.Failure).message, '画像のアップロードが失敗しました');
       });
     });
 
@@ -87,7 +87,7 @@ void main() {
         final result = await repository.getObject(request);
 
         expect(result, isA<rs.Failure<String>>());
-        expect((result as rs.Failure).e, '画像の取得が失敗しました');
+        expect((result as rs.Failure).message, '画像の取得が失敗しました');
       });
     });
 
@@ -125,7 +125,7 @@ void main() {
         final result = await repository.deleteObject(image);
 
         expect(result, isA<rs.Failure<DeleteObjectResponse>>());
-        expect((result as rs.Failure).e, '画像の削除が失敗しました');
+        expect((result as rs.Failure).message, '画像の削除が失敗しました');
       });
     });
 
@@ -155,7 +155,7 @@ void main() {
         final result = await repository.generateImage(prompt, size);
 
         expect(result, isA<rs.Failure<GenerateImageResponse?>>());
-        expect((result as rs.Failure).e, '画像の生成に失敗しました');
+        expect((result as rs.Failure).message, '画像の生成に失敗しました');
       });
     });
 
@@ -196,7 +196,7 @@ void main() {
         final result = await repository.generateText(request);
 
         expect(result, isA<rs.Failure<GenerateTextResponse>>());
-        expect((result as rs.Failure).e, 'テキストの生成に失敗しました');
+        expect((result as rs.Failure).message, 'テキストの生成に失敗しました');
       });
     });
 
@@ -212,7 +212,7 @@ void main() {
         final result = await repository.putObject(request);
 
         expect(result, isA<rs.Failure<PutObjectResponse>>());
-        expect((result as rs.Failure).e, '画像のアップロードが失敗しました');
+        expect((result as rs.Failure).message, '画像のアップロードが失敗しました');
       });
 
       test('should handle null response data', () async {
@@ -223,7 +223,7 @@ void main() {
         final result = await repository.getObject(request);
 
         expect(result, isA<rs.Failure<String>>());
-        expect((result as rs.Failure).e, '画像の取得が失敗しました');
+        expect((result as rs.Failure).message, '画像の取得が失敗しました');
       });
     });
 
@@ -328,8 +328,8 @@ void main() {
 
         expect(androidResult, isA<rs.Failure<VerifiedPurchase>>());
         expect(iosResult, isA<rs.Failure<VerifiedPurchase>>());
-        expect((androidResult as rs.Failure).e, '購入の検証が失敗しました');
-        expect((iosResult as rs.Failure).e, '購入の検証が失敗しました');
+        expect((androidResult as rs.Failure).message, '購入の検証が失敗しました');
+        expect((iosResult as rs.Failure).message, '購入の検証が失敗しました');
       });
     });
   });
