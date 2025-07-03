@@ -107,7 +107,7 @@ void main() {
         final result = await repository.buyNonConsumable(purchaseParam);
 
         expect(result, isA<Failure<bool>>());
-        expect((result as Failure).e, '購入が失敗しました');
+        expect((result as Failure).message, '購入が失敗しました');
       });
     });
 
@@ -131,7 +131,7 @@ void main() {
         final result = await repository.restorePurchases();
 
         expect(result, isA<Failure<bool>>());
-        expect((result as Failure).e, '購入の復元が失敗しました');
+        expect((result as Failure).message, '購入の復元が失敗しました');
       });
     });
 
