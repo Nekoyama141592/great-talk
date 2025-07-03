@@ -86,10 +86,9 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
-flutter_icons:
+lutter_icons:
   android: true
   ios: true
-  image_path: 'assets/images/logo.png'
 # Flavorの設定
 flavorizr:
   app:
