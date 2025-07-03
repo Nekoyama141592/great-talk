@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' 
 # lib/constants/remote_config_constants.dartのappVersionも変更
-version: 6.0.22+239
+version: 6.0.23+240
 
 environment:
   sdk: ^3.7.2
@@ -86,10 +86,9 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
-flutter_icons:
+lutter_icons:
   android: true
   ios: true
-  image_path: 'assets/images/logo.png'
 # Flavorの設定
 flavorizr:
   app:
