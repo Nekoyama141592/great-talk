@@ -1,6 +1,6 @@
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/domain/entity/database/tokens/mute_user_token_entity/mute_user_token_entity.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 
 /// Abstract interface for user muting operations.
 /// Handles muting users to prevent their content from appearing in feeds.

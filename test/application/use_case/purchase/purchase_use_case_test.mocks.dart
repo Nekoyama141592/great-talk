@@ -18,7 +18,7 @@ import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verifie
     as _i11;
 import 'package:great_talk/infrastructure/repository/api_repository.dart'
     as _i5;
-import 'package:great_talk/infrastructure/repository/result/result.dart' as _i3;
+import 'package:great_talk/infrastructure/model/result/result.dart' as _i3;
 import 'package:in_app_purchase_platform_interface/src/errors/in_app_purchase_error.dart'
     as _i15;
 import 'package:in_app_purchase_platform_interface/src/types/purchase_details.dart'

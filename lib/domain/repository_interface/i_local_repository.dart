@@ -1,6 +1,6 @@
 import 'package:great_talk/infrastructure/model/local_schema/text_message/text_message.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 
 /// Abstract interface for local storage operations including
 /// preferences, purchases, chat logs, and image caching.

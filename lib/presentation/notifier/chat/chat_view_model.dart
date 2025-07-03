@@ -12,7 +12,7 @@ import 'package:great_talk/core/provider/repository/api/api_repository_provider.
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/core/provider/repository/local/local_repository_provider.dart';
 import 'package:great_talk/core/provider/keep_alive/usecase/file/file_use_case_provider.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/local_schema/text_message/text_message.dart';

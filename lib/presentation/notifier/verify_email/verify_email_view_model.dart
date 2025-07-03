@@ -1,7 +1,7 @@
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/state/verify_email/verify_email_state.dart';
 import 'package:great_talk/core/provider/repository/auth/auth_repository_provider.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'verify_email_view_model.g.dart';

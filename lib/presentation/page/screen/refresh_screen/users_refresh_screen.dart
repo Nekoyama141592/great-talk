@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 

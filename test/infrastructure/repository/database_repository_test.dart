@@ -9,7 +9,7 @@ import 'package:great_talk/infrastructure/model/database_schema/detected_text/de
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 
 void main() {
   group('DatabaseRepository Enhanced Tests', () {

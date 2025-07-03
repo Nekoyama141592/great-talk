@@ -18,7 +18,7 @@ import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
 import 'package:great_talk/infrastructure/model/database_schema/user_mute/user_mute.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/domain/repository_interface/i_database_repository.dart';
 
 typedef QSnapshot = QuerySnapshot<Map<String, dynamic>>;

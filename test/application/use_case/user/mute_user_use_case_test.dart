@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/application/use_case/user/mute_user_use_case.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';

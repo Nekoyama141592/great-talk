@@ -5,7 +5,7 @@ import 'package:great_talk/presentation/state/purchases/purchases_state.dart';
 import 'package:great_talk/presentation/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/core/provider/repository/purchase/purchase_repository_provider.dart';
 import 'package:great_talk/infrastructure/repository/purchase_repository.dart';
-import 'package:great_talk/infrastructure/repository/result/result.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 part 'products_view_model.g.dart';
