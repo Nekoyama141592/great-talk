@@ -46,7 +46,7 @@ class MuteUsersViewModel extends _$MuteUsersViewModel {
       final oldUsers = stateValue.users();
       final users = await _repository.getMoreMuteUsers(
         _createRequestUids(),
-        oldUsers.last,
+        oldUsers.last.uid,
       );
       final newUsers = [...oldUsers, ...users];
       final imageUsers = await ref

@@ -13,7 +13,6 @@ import 'package:great_talk/presentation/util/image_ui_util.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:great_talk/presentation/constant/form_consts.dart';
-import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/core/util/aws_s3_util.dart';
 
 part 'create_post_view_model.g.dart';
@@ -87,11 +86,8 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     final postId = IdUtil.randomString();
     final fileName = AWSS3Util.postObject(currentUid, postId);
     final repository = ref.read(apiRepositoryProvider);
-    final request = PutObjectRequest.fromUint8List(
-      uint8list: base64Decode(pickedImage),
-      fileName: fileName,
-    );
-    final putObjectResult = await repository.putObject(request);
+    final base64Image = base64Encode(base64Decode(pickedImage));
+    final putObjectResult = await repository.putObject(base64Image, fileName);
 
     final createPostResult = await putObjectResult.when<FutureResult<bool>>(
       success: (res) => _createPost(postId, fileName, currentState),

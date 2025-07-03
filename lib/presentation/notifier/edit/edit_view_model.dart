@@ -12,7 +12,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/presentation/constant/form_consts.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
 import 'package:great_talk/core/extension/string_extension.dart';
-import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log.dart';
 import 'package:great_talk/core/util/aws_s3_util.dart';
 import 'package:great_talk/presentation/state/edit/edit_state.dart';
@@ -104,12 +103,9 @@ class EditViewModel extends _$EditViewModel {
     if (s.isPicked) {
       final fileName = AWSS3Util.profileObject(uid);
       final uint8list = base64;
-      final request = PutObjectRequest.fromUint8List(
-        uint8list: base64Decode(uint8list),
-        fileName: fileName,
-      );
+      final base64Image = base64Encode(base64Decode(uint8list));
       final repository = ref.read(apiRepositoryProvider);
-      final result = await repository.putObject(request);
+      final result = await repository.putObject(base64Image, fileName);
       await result.when(
         success: (res) async {
           updateUserResult = await _createUserUpdateLog(

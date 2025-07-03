@@ -62,7 +62,8 @@ class MutePostsViewModel extends _$MutePostsViewModel
 
     return await _repository.deleteMutePostInfo(
       currentUid,
-      post,
+      post.uid,
+      post.postId,
       deleteToken.tokenId,
     );
   }
@@ -73,7 +74,8 @@ class MutePostsViewModel extends _$MutePostsViewModel
     final lastPost = currentState.userPosts.last.post;
     final posts = await _repository.getMoreMutePosts(
       _createRequestPostIds(),
-      lastPost,
+      lastPost.uid,
+      lastPost.postId,
     );
     _addPosts(posts);
     return const Result.success(true);

@@ -1,4 +1,3 @@
-import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/presentation/state/common/user_post/user_post.dart';
@@ -103,16 +102,8 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
       followerCount: passiveUser.followerCount + 1,
     );
     state = AsyncValue.data(state.value!.copyWith(user: newUser));
-    final follower = Follower.fromUid(currentUid, passiveUid);
-    final token = ref
-        .read(tokensNotifierProvider.notifier)
-        .addFollowing(passiveUid);
-    return await _repository.createFollowInfo(
-      currentUid,
-      passiveUid,
-      token,
-      follower,
-    );
+    ref.read(tokensNotifierProvider.notifier).addFollowing(passiveUid);
+    return await _repository.createFollowInfo(currentUid, passiveUid);
   }
 
   void onFollowFailed() {
@@ -163,7 +154,10 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     final stateValue = state.value!;
     state = await AsyncValue.guard(() async {
       final oldPosts = stateValue.posts();
-      final posts = await _repository.getMoreUserPosts(oldPosts.last);
+      final posts = await _repository.getMoreUserPosts(
+        passiveUid,
+        oldPosts.last.postId,
+      );
       final newPosts = [...oldPosts, ...posts];
       final userPosts = await _postsToUserPosts(newPosts);
       return stateValue.copyWith(userPosts: userPosts);

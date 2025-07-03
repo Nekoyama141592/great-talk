@@ -9,6 +9,7 @@ import 'package:great_talk/infrastructure/model/database_schema/detected_image/d
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/domain/entity/database/tokens/mute_user_token_entity/mute_user_token_entity.dart';
 
 void main() {
   group('MuteUserUseCase', () {
@@ -28,7 +29,7 @@ void main() {
 
     group('muteUser', () {
       late PostEntity testPost;
-      late MuteUserToken testToken;
+      late MuteUserTokenEntity testToken;
       const String testCurrentUid = 'test_current_uid';
       const String testPassiveUid = 'test_passive_uid';
 
@@ -58,13 +59,14 @@ void main() {
           msgCount: 0,
         );
 
-        testToken = MuteUserToken(
+        final muteUserToken = MuteUserToken(
           tokenId: 'test_token_id',
           activeUid: testCurrentUid,
           passiveUid: testPassiveUid,
           tokenType: 'mute_user',
           createdAt: mockTimestamp,
         );
+        testToken = MuteUserTokenEntity.fromModel(muteUserToken);
       });
 
       test('should return success when muting user succeeds', () async {
@@ -84,7 +86,12 @@ void main() {
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         expect(tokens.isNotEmpty, isTrue);
         expect(
-          tokens.any((token) => token['tokenId'] == 'test_token_id'),
+          tokens.any(
+            (token) =>
+                token['activeUid'] == testCurrentUid &&
+                token['passiveUid'] == testPassiveUid &&
+                token['tokenType'] == 'muteUser',
+          ),
           isTrue,
         );
       });
@@ -95,7 +102,10 @@ void main() {
         // Verify token was created with correct data
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         final createdToken = tokens.firstWhere(
-          (token) => token['tokenId'] == 'test_token_id',
+          (token) =>
+              token['activeUid'] == testCurrentUid &&
+              token['passiveUid'] == testPost.uid &&
+              token['tokenType'] == 'muteUser',
         );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['passiveUid'], equals(testPost.uid));
@@ -107,11 +117,14 @@ void main() {
         // Verify token was created with correct relationships
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         final createdToken = tokens.firstWhere(
-          (token) => token['tokenId'] == 'test_token_id',
+          (token) =>
+              token['activeUid'] == testCurrentUid &&
+              token['passiveUid'] == testPost.uid &&
+              token['tokenType'] == 'muteUser',
         );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['passiveUid'], equals(testPost.uid));
-        expect(createdToken['tokenType'], equals('mute_user'));
+        expect(createdToken['tokenType'], equals('muteUser'));
       });
 
       test('should handle empty currentUid', () async {
@@ -157,10 +170,14 @@ void main() {
         const sameUid = 'same_user_uid';
 
         final selfPost = testPost.copyWith(uid: sameUid);
-        final selfToken = testToken.copyWith(
+        final selfMuteUserToken = MuteUserToken(
+          tokenId: 'test_token_id',
           activeUid: sameUid,
           passiveUid: sameUid,
+          tokenType: 'mute_user',
+          createdAt: mockTimestamp,
         );
+        final selfToken = MuteUserTokenEntity.fromModel(selfMuteUserToken);
 
         final result = await muteUserUseCase.muteUser(
           selfPost,
@@ -177,7 +194,10 @@ void main() {
         // Verify token relationships
         final tokens = await databaseRepository.getTokens(sameUid);
         final createdToken = tokens.firstWhere(
-          (token) => token['tokenId'] == selfToken.tokenId,
+          (token) =>
+              token['activeUid'] == sameUid &&
+              token['passiveUid'] == sameUid &&
+              token['tokenType'] == 'muteUser',
         );
         expect(createdToken['activeUid'], equals(sameUid));
         expect(createdToken['passiveUid'], equals(sameUid));
@@ -232,7 +252,7 @@ void main() {
                 )
                 .toList();
 
-        final tokens =
+        final modelTokens =
             users
                 .map(
                   (uid) => MuteUserToken(
@@ -243,6 +263,10 @@ void main() {
                     createdAt: mockTimestamp,
                   ),
                 )
+                .toList();
+        final tokens =
+            modelTokens
+                .map((token) => MuteUserTokenEntity.fromModel(token))
                 .toList();
 
         // Mute all users
@@ -270,7 +294,12 @@ void main() {
         expect(userTokens.length, greaterThanOrEqualTo(3));
         for (final user in users) {
           expect(
-            userTokens.any((token) => token['tokenId'] == 'mute_${user}_token'),
+            userTokens.any(
+              (token) =>
+                  token['activeUid'] == muterUid &&
+                  token['passiveUid'] == user &&
+                  token['tokenType'] == 'muteUser',
+            ),
             isTrue,
           );
         }
@@ -309,12 +338,15 @@ void main() {
           msgCount: 50,
         );
 
-        final complexToken = MuteUserToken(
+        final complexMuteUserToken = MuteUserToken(
           tokenId: 'complex_mute_token',
           activeUid: 'muting_user',
           passiveUid: 'complex_user',
           tokenType: 'mute_user',
           createdAt: mockTimestamp,
+        );
+        final complexToken = MuteUserTokenEntity.fromModel(
+          complexMuteUserToken,
         );
 
         final result = await muteUserUseCase.muteUser(
@@ -332,7 +364,12 @@ void main() {
         // Verify token was created
         final tokens = await databaseRepository.getTokens('muting_user');
         expect(
-          tokens.any((token) => token['tokenId'] == 'complex_mute_token'),
+          tokens.any(
+            (token) =>
+                token['activeUid'] == 'muting_user' &&
+                token['passiveUid'] == 'complex_user' &&
+                token['tokenType'] == 'muteUser',
+          ),
           isTrue,
         );
       });
@@ -369,7 +406,7 @@ void main() {
           ),
         );
 
-        final tokens = List.generate(
+        final modelTokens = List.generate(
           5,
           (index) => MuteUserToken(
             tokenId: 'rapid_mute_token_$index',
@@ -379,6 +416,10 @@ void main() {
             createdAt: mockTimestamp,
           ),
         );
+        final tokens =
+            modelTokens
+                .map((token) => MuteUserTokenEntity.fromModel(token))
+                .toList();
 
         // Execute mutes rapidly
         final futures = <Future<Result<bool>>>[];
@@ -403,17 +444,16 @@ void main() {
         final userTokens = await databaseRepository.getTokens(rapidMuter);
         expect(userTokens.isNotEmpty, isTrue);
 
-        // Check that at least some tokens were created
-        bool hasAtLeastOneToken = false;
-        for (int i = 0; i < 5; i++) {
-          if (userTokens.any(
-            (token) => token['tokenId'] == 'rapid_mute_token_$i',
-          )) {
-            hasAtLeastOneToken = true;
-            break;
-          }
-        }
-        expect(hasAtLeastOneToken, isTrue);
+        // Check that tokens were created for the target user
+        expect(
+          userTokens.any(
+            (token) =>
+                token['activeUid'] == rapidMuter &&
+                token['passiveUid'] == targetUser &&
+                token['tokenType'] == 'muteUser',
+          ),
+          isTrue,
+        );
       });
 
       test('should handle cross-user mute scenarios', () async {
@@ -471,21 +511,23 @@ void main() {
           msgCount: 0,
         );
 
-        final tokenAMutesB = MuteUserToken(
+        final modelTokenAMutesB = MuteUserToken(
           tokenId: 'a_mutes_b',
           activeUid: userA,
           passiveUid: userB,
           tokenType: 'mute_user',
           createdAt: mockTimestamp,
         );
+        final tokenAMutesB = MuteUserTokenEntity.fromModel(modelTokenAMutesB);
 
-        final tokenBMutesA = MuteUserToken(
+        final modelTokenBMutesA = MuteUserToken(
           tokenId: 'b_mutes_a',
           activeUid: userB,
           passiveUid: userA,
           tokenType: 'mute_user',
           createdAt: mockTimestamp,
         );
+        final tokenBMutesA = MuteUserTokenEntity.fromModel(modelTokenBMutesA);
 
         // A mutes B
         final resultAMutesB = await muteUserUseCase.muteUser(
@@ -518,8 +560,24 @@ void main() {
         final tokensA = await databaseRepository.getTokens(userA);
         final tokensB = await databaseRepository.getTokens(userB);
 
-        expect(tokensA.any((token) => token['tokenId'] == 'a_mutes_b'), isTrue);
-        expect(tokensB.any((token) => token['tokenId'] == 'b_mutes_a'), isTrue);
+        expect(
+          tokensA.any(
+            (token) =>
+                token['activeUid'] == userA &&
+                token['passiveUid'] == userB &&
+                token['tokenType'] == 'muteUser',
+          ),
+          isTrue,
+        );
+        expect(
+          tokensB.any(
+            (token) =>
+                token['activeUid'] == userB &&
+                token['passiveUid'] == userA &&
+                token['tokenType'] == 'muteUser',
+          ),
+          isTrue,
+        );
       });
     });
   });

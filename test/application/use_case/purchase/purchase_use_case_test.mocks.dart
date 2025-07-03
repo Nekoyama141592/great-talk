@@ -6,30 +6,29 @@
 import 'dart:async' as _i6;
 
 import 'package:cloud_functions/cloud_functions.dart' as _i2;
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart'
-    as _i11;
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart'
-    as _i10;
-import 'package:great_talk/infrastructure/model/rest_api/get_object/request/get_object_request.dart'
-    as _i9;
-import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_image/response/generate_image_response.dart'
-    as _i12;
-import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/generate_text_request.dart'
-    as _i14;
-import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart'
-    as _i13;
-import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart'
     as _i8;
+import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_image/response/generate_image_response.dart'
+    as _i9;
+import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart'
+    as _i10;
 import 'package:great_talk/infrastructure/model/rest_api/put_object/response/put_object_response.dart'
     as _i7;
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart'
-    as _i15;
+    as _i11;
 import 'package:great_talk/infrastructure/repository/api_repository.dart'
     as _i5;
 import 'package:great_talk/infrastructure/repository/result/result.dart' as _i3;
-import 'package:in_app_purchase/in_app_purchase.dart' as _i4;
+import 'package:in_app_purchase_platform_interface/src/errors/in_app_purchase_error.dart'
+    as _i15;
+import 'package:in_app_purchase_platform_interface/src/types/purchase_details.dart'
+    as _i12;
+import 'package:in_app_purchase_platform_interface/src/types/purchase_status.dart'
+    as _i14;
+import 'package:in_app_purchase_platform_interface/src/types/purchase_verification_data.dart'
+    as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i16;
+import 'package:mockito/src/dummies.dart' as _i13;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -83,116 +82,117 @@ class MockApiRepository extends _i1.Mock implements _i5.ApiRepository {
 
   @override
   _i6.Future<_i3.Result<_i7.PutObjectResponse>> putObject(
-    _i8.PutObjectRequest? request,
+    String? base64Image,
+    String? object,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#putObject, [request]),
+            Invocation.method(#putObject, [base64Image, object]),
             returnValue: _i6.Future<_i3.Result<_i7.PutObjectResponse>>.value(
               _FakeResult_1<_i7.PutObjectResponse>(
                 this,
-                Invocation.method(#putObject, [request]),
+                Invocation.method(#putObject, [base64Image, object]),
               ),
             ),
           )
           as _i6.Future<_i3.Result<_i7.PutObjectResponse>>);
 
   @override
-  _i6.Future<_i3.Result<String>> getObject(_i9.GetObjectRequest? request) =>
+  _i6.Future<_i3.Result<String>> getObject(String? object) =>
       (super.noSuchMethod(
-            Invocation.method(#getObject, [request]),
+            Invocation.method(#getObject, [object]),
             returnValue: _i6.Future<_i3.Result<String>>.value(
               _FakeResult_1<String>(
                 this,
-                Invocation.method(#getObject, [request]),
+                Invocation.method(#getObject, [object]),
               ),
             ),
           )
           as _i6.Future<_i3.Result<String>>);
 
   @override
-  _i6.Future<_i3.Result<_i10.DeleteObjectResponse>> deleteObject(
-    _i11.DetectedImage? image,
+  _i6.Future<_i3.Result<_i8.DeleteObjectResponse>> deleteObject(
+    String? object,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#deleteObject, [image]),
-            returnValue:
-                _i6.Future<_i3.Result<_i10.DeleteObjectResponse>>.value(
-                  _FakeResult_1<_i10.DeleteObjectResponse>(
-                    this,
-                    Invocation.method(#deleteObject, [image]),
-                  ),
-                ),
+            Invocation.method(#deleteObject, [object]),
+            returnValue: _i6.Future<_i3.Result<_i8.DeleteObjectResponse>>.value(
+              _FakeResult_1<_i8.DeleteObjectResponse>(
+                this,
+                Invocation.method(#deleteObject, [object]),
+              ),
+            ),
           )
-          as _i6.Future<_i3.Result<_i10.DeleteObjectResponse>>);
+          as _i6.Future<_i3.Result<_i8.DeleteObjectResponse>>);
 
   @override
-  _i6.Future<_i3.Result<_i12.GenerateImageResponse?>> generateImage(
+  _i6.Future<_i3.Result<_i9.GenerateImageResponse?>> generateImage(
     String? prompt,
     String? size,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#generateImage, [prompt, size]),
             returnValue:
-                _i6.Future<_i3.Result<_i12.GenerateImageResponse?>>.value(
-                  _FakeResult_1<_i12.GenerateImageResponse?>(
+                _i6.Future<_i3.Result<_i9.GenerateImageResponse?>>.value(
+                  _FakeResult_1<_i9.GenerateImageResponse?>(
                     this,
                     Invocation.method(#generateImage, [prompt, size]),
                   ),
                 ),
           )
-          as _i6.Future<_i3.Result<_i12.GenerateImageResponse?>>);
+          as _i6.Future<_i3.Result<_i9.GenerateImageResponse?>>);
 
   @override
-  _i6.Future<_i3.Result<_i13.GenerateTextResponse>> generateText(
-    _i14.GenerateTextRequest? request,
+  _i6.Future<_i3.Result<_i10.GenerateTextResponse>> generateText(
+    String? model,
+    List<Map<String, dynamic>>? messages,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#generateText, [request]),
+            Invocation.method(#generateText, [model, messages]),
             returnValue:
-                _i6.Future<_i3.Result<_i13.GenerateTextResponse>>.value(
-                  _FakeResult_1<_i13.GenerateTextResponse>(
+                _i6.Future<_i3.Result<_i10.GenerateTextResponse>>.value(
+                  _FakeResult_1<_i10.GenerateTextResponse>(
                     this,
-                    Invocation.method(#generateText, [request]),
+                    Invocation.method(#generateText, [model, messages]),
                   ),
                 ),
           )
-          as _i6.Future<_i3.Result<_i13.GenerateTextResponse>>);
+          as _i6.Future<_i3.Result<_i10.GenerateTextResponse>>);
 
   @override
-  _i6.Future<_i3.Result<_i15.VerifiedPurchase>> verifyAndroidReceipt(
-    _i4.PurchaseDetails? purchaseDetails,
+  _i6.Future<_i3.Result<_i11.VerifiedPurchase>> verifyAndroidReceipt(
+    Map<String, dynamic>? purchaseDetailsJson,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#verifyAndroidReceipt, [purchaseDetails]),
-            returnValue: _i6.Future<_i3.Result<_i15.VerifiedPurchase>>.value(
-              _FakeResult_1<_i15.VerifiedPurchase>(
+            Invocation.method(#verifyAndroidReceipt, [purchaseDetailsJson]),
+            returnValue: _i6.Future<_i3.Result<_i11.VerifiedPurchase>>.value(
+              _FakeResult_1<_i11.VerifiedPurchase>(
                 this,
-                Invocation.method(#verifyAndroidReceipt, [purchaseDetails]),
+                Invocation.method(#verifyAndroidReceipt, [purchaseDetailsJson]),
               ),
             ),
           )
-          as _i6.Future<_i3.Result<_i15.VerifiedPurchase>>);
+          as _i6.Future<_i3.Result<_i11.VerifiedPurchase>>);
 
   @override
-  _i6.Future<_i3.Result<_i15.VerifiedPurchase>> verifyIOSReceipt(
-    _i4.PurchaseDetails? purchaseDetails,
+  _i6.Future<_i3.Result<_i11.VerifiedPurchase>> verifyIOSReceipt(
+    Map<String, dynamic>? purchaseDetailsJson,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#verifyIOSReceipt, [purchaseDetails]),
-            returnValue: _i6.Future<_i3.Result<_i15.VerifiedPurchase>>.value(
-              _FakeResult_1<_i15.VerifiedPurchase>(
+            Invocation.method(#verifyIOSReceipt, [purchaseDetailsJson]),
+            returnValue: _i6.Future<_i3.Result<_i11.VerifiedPurchase>>.value(
+              _FakeResult_1<_i11.VerifiedPurchase>(
                 this,
-                Invocation.method(#verifyIOSReceipt, [purchaseDetails]),
+                Invocation.method(#verifyIOSReceipt, [purchaseDetailsJson]),
               ),
             ),
           )
-          as _i6.Future<_i3.Result<_i15.VerifiedPurchase>>);
+          as _i6.Future<_i3.Result<_i11.VerifiedPurchase>>);
 }
 
 /// A class which mocks [PurchaseDetails].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPurchaseDetails extends _i1.Mock implements _i4.PurchaseDetails {
+class MockPurchaseDetails extends _i1.Mock implements _i12.PurchaseDetails {
   MockPurchaseDetails() {
     _i1.throwOnMissingStub(this);
   }
@@ -201,7 +201,7 @@ class MockPurchaseDetails extends _i1.Mock implements _i4.PurchaseDetails {
   String get productID =>
       (super.noSuchMethod(
             Invocation.getter(#productID),
-            returnValue: _i16.dummyValue<String>(
+            returnValue: _i13.dummyValue<String>(
               this,
               Invocation.getter(#productID),
             ),
@@ -220,21 +220,21 @@ class MockPurchaseDetails extends _i1.Mock implements _i4.PurchaseDetails {
           as _i4.PurchaseVerificationData);
 
   @override
-  _i4.PurchaseStatus get status =>
+  _i14.PurchaseStatus get status =>
       (super.noSuchMethod(
             Invocation.getter(#status),
-            returnValue: _i4.PurchaseStatus.pending,
+            returnValue: _i14.PurchaseStatus.pending,
           )
-          as _i4.PurchaseStatus);
+          as _i14.PurchaseStatus);
 
   @override
-  set status(_i4.PurchaseStatus? _status) => super.noSuchMethod(
+  set status(_i14.PurchaseStatus? _status) => super.noSuchMethod(
     Invocation.setter(#status, _status),
     returnValueForMissingStub: null,
   );
 
   @override
-  set error(_i4.IAPError? _error) => super.noSuchMethod(
+  set error(_i15.IAPError? _error) => super.noSuchMethod(
     Invocation.setter(#error, _error),
     returnValueForMissingStub: null,
   );

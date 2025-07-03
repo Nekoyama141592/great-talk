@@ -8,10 +8,7 @@ import 'package:great_talk/infrastructure/model/database_schema/detected_image/d
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
-import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 void main() {
@@ -281,24 +278,9 @@ void main() {
         const passiveUid = 'followed_user';
         const tokenId = 'follow_token_123';
 
-        final followingToken = FollowingToken(
-          tokenId: tokenId,
-          passiveUid: passiveUid,
-          createdAt: mockTimestamp,
-          tokenType: 'following',
-        );
-
-        final follower = Follower(
-          activeUid: currentUid,
-          createdAt: mockTimestamp,
-          passiveUid: passiveUid,
-        );
-
         final result = await repository.createFollowInfo(
           currentUid,
           passiveUid,
-          followingToken,
-          follower,
         );
 
         expect(result, isA<Success<bool>>());
@@ -316,7 +298,6 @@ void main() {
         const currentUid = 'liker_user';
         const postUid = 'post_owner';
         const postId = 'liked_post';
-        const tokenId = 'like_token_123';
 
         final post = PostEntity(
           uid: postUid,
@@ -350,27 +331,10 @@ void main() {
           msgCount: 0,
         );
 
-        final token = LikePostToken(
-          tokenId: tokenId,
-          activeUid: currentUid,
-          passiveUid: postUid,
-          postId: postId,
-          createdAt: mockTimestamp,
-          tokenType: 'likePost',
-        );
-
-        final postLike = PostLike(
-          activeUid: currentUid,
-          createdAt: mockTimestamp,
-          passiveUid: postUid,
-          postId: postId,
-        );
-
         final result = await repository.createLikePostInfo(
           currentUid,
-          post,
-          token,
-          postLike,
+          post.uid,
+          post.postId,
         );
 
         expect(result, isA<Success<bool>>());
@@ -455,8 +419,11 @@ void main() {
         const uid = 'token_test_user';
 
         final tokens = await repository.getTokens(uid);
-        expect(tokens, isA<List<Map<String, dynamic>>>());
-        expect(tokens, isEmpty); // Should be empty for new user
+        expect(tokens, isA<Tokens>());
+        expect(tokens.followingTokens, isEmpty);
+        expect(tokens.likePostTokens, isEmpty);
+        expect(tokens.mutePostTokens, isEmpty);
+        expect(tokens.muteUserTokens, isEmpty);
       });
     });
 
@@ -514,7 +481,10 @@ void main() {
         expect(retrievedPost, isNotNull);
 
         // Delete post
-        final deleteResult = await repository.deletePost(retrievedPost!);
+        final deleteResult = await repository.deletePost(
+          retrievedPost!.uid,
+          retrievedPost.postId,
+        );
         expect(deleteResult, isA<Success<bool>>());
 
         // Verify post is deleted

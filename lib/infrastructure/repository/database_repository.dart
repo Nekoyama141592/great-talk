@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/core/constant/firestore_constant.dart';
 import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
+import 'package:great_talk/domain/value/token_type.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
@@ -15,6 +16,7 @@ import 'package:great_talk/infrastructure/model/database_schema/tokens/following
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
 import 'package:great_talk/infrastructure/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/domain/repository_interface/i_database_repository.dart';
@@ -144,7 +146,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final data = doc.data();
       if (data == null) return null;
       final publicUser = PublicUser.fromJson(Map<String, dynamic>.from(data));
-      return PublicUserEntity.fromJson(publicUser.toJson());
+      return PublicUserEntity.fromModel(publicUser);
     } catch (e) {
       debugPrint('createPublicUser: ${e.toString()}');
       return null;
@@ -202,8 +204,8 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  FutureResult<bool> deletePost(PostEntity post) {
-    final docRef = postDocRef(post.uid, post.postId);
+  FutureResult<bool> deletePost(String uid, String postId) {
+    final docRef = postDocRef(uid, postId);
     return _deleteDoc(docRef);
   }
 
@@ -225,9 +227,9 @@ class DatabaseRepository implements IDatabaseRepository {
   FutureResult<bool> createFollowInfo(
     String currentUid,
     String passiveUid,
-    FollowingToken followingToken,
-    Follower follower,
   ) async {
+    final followingToken = FollowingToken.fromUid(passiveUid);
+    final follower = Follower.fromUid(currentUid, passiveUid);
     final tokenRef = tokenDocRef(currentUid, followingToken.tokenId);
     final followerRef = followerDocRef(currentUid, passiveUid);
     final requestList = [
@@ -241,9 +243,9 @@ class DatabaseRepository implements IDatabaseRepository {
   FutureResult<bool> createMuteUserInfo(
     String currentUid,
     String passiveUid,
-    MuteUserToken token,
-    UserMute userMute,
   ) async {
+    final token = MuteUserToken.fromPost(currentUid, passiveUid);
+    final userMute = UserMute.fromPost(currentUid, passiveUid);
     final tokenRef = tokenDocRef(currentUid, token.tokenId);
     final userMuteRef = userMuteDocRef(passiveUid, currentUid);
     final requests = [
@@ -256,15 +258,13 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   FutureResult<bool> createMutePostInfo(
     String currentUid,
-    PostEntity post,
-    MutePostToken token,
-    PostMute postMute,
+    String postUid,
+    String postId,
   ) async {
+    final token = MutePostToken.fromPost(postId, currentUid);
+    final postMute = PostMute.fromPost(postId, currentUid);
     final tokenRef = tokenDocRef(currentUid, token.tokenId);
-    final postMuteRef = postMuteDocRef(
-      postDocRef(post.uid, post.postId),
-      currentUid,
-    );
+    final postMuteRef = postMuteDocRef(postDocRef(postUid, postId), currentUid);
     final requestList = [
       FirestoreRequest(tokenRef, token.toJson()),
       FirestoreRequest(postMuteRef, postMute.toJson()),
@@ -275,12 +275,13 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   FutureResult<bool> createLikePostInfo(
     String currentUid,
-    PostEntity post,
-    LikePostToken token,
-    PostLike postLike,
+    String postUid,
+    String postId,
   ) async {
+    final token = LikePostToken.fromPost(postId, postUid, currentUid);
+    final postLike = PostLike.fromPost(postId, postUid, currentUid);
     final tokenRef = tokenDocRef(currentUid, token.tokenId);
-    final postRef = postDocRef(post.uid, post.postId);
+    final postRef = postDocRef(postUid, postId);
     final postLikeRef = postLikeDocRef(postRef, currentUid);
     final requestList = [
       FirestoreRequest(tokenRef, token.toJson()),
@@ -330,14 +331,12 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   FutureResult<bool> deleteMutePostInfo(
     String currentUid,
-    PostEntity post,
+    String postUid,
+    String postId,
     String tokenId,
   ) async {
     final tokenRef = tokenDocRef(currentUid, tokenId);
-    final postMuteRef = postMuteDocRef(
-      postDocRef(post.uid, post.postId),
-      currentUid,
-    );
+    final postMuteRef = postMuteDocRef(postDocRef(postUid, postId), currentUid);
     final docRefList = [tokenRef, postMuteRef];
     return _deleteDocs(docRefList);
   }
@@ -345,11 +344,12 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   FutureResult<bool> deleteLikePostInfo(
     String currentUid,
-    PostEntity post,
+    String postUid,
+    String postId,
     String tokenId,
   ) async {
     final tokenRef = tokenDocRef(currentUid, tokenId);
-    final postRef = postDocRef(post.uid, post.postId);
+    final postRef = postDocRef(postUid, postId);
     final postLikeRef = postLikeDocRef(postRef, currentUid);
     final docRefList = [tokenRef, postLikeRef];
     return _deleteDocs(docRefList);
@@ -363,7 +363,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final data = doc.data();
       if (data == null) return null;
       final publicUser = PublicUser.fromJson(Map<String, dynamic>.from(data));
-      return PublicUserEntity.fromJson(publicUser.toJson());
+      return PublicUserEntity.fromModel(publicUser);
     } catch (e) {
       debugPrint('getPublicUser: ${e.toString()}');
       return null;
@@ -378,7 +378,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final data = doc.data();
       if (data == null) return null;
       final privateUser = PrivateUser.fromJson(Map<String, dynamic>.from(data));
-      return PrivateUserEntity.fromJson(privateUser.toJson());
+      return PrivateUserEntity.fromModel(privateUser);
     } catch (e) {
       debugPrint('getPrivateUser: ${e.toString()}');
       return null;
@@ -393,7 +393,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final data = doc.data();
       if (data == null) return null;
       final post = Post.fromJson(Map<String, dynamic>.from(data));
-      return PostEntity.fromJson(post.toJson());
+      return PostEntity.fromModel(post);
     } catch (e) {
       debugPrint('getPost: ${e.toString()}');
       return null;
@@ -405,15 +405,37 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getTokens(String uid) async {
+  Future<Tokens> getTokens(String uid) async {
     try {
       final query = tokensColRef(uid);
       final qSnapshot = await query.get();
       final qDocs = qSnapshot.docs;
-      return qDocs.map((doc) => doc.data()).toList();
+      final allTokensData = qDocs.map((doc) => doc.data()).toList();
+      return Tokens(
+        followingTokens:
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.following.name)
+                .map((map) => FollowingToken.fromJson(map))
+                .toList(),
+        likePostTokens:
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.likePost.name)
+                .map((map) => LikePostToken.fromJson(map))
+                .toList(),
+        muteUserTokens:
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.muteUser.name)
+                .map((map) => MuteUserToken.fromJson(map))
+                .toList(),
+        mutePostTokens:
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.mutePost.name)
+                .map((map) => MutePostToken.fromJson(map))
+                .toList(),
+      );
     } catch (e) {
       debugPrint('getTokens: ${e.toString()}');
-      return [];
+      return Tokens();
     }
   }
 
@@ -425,7 +447,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qSnapshot = await _getDocs(query);
       return qSnapshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getTimelinePosts: ${e.toString()}'); // Added debugPrint here
@@ -441,7 +463,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qSnapshot = await _getDocs(query);
       return qSnapshot.docs.map((doc) {
         final publicUser = PublicUser.fromJson(doc.data());
-        return PublicUserEntity.fromJson(publicUser.toJson());
+        return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
       debugPrint('getUsersByUids: ${e.toString()}');
@@ -456,7 +478,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qshot = await _getDocs(query);
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getUserPosts: ${e.toString()}');
@@ -464,30 +486,23 @@ class DatabaseRepository implements IDatabaseRepository {
     }
   }
 
-  Future<Doc> _getPostDoc(PostEntity post) async {
-    final docRef = postDocRef(post.uid, post.postId);
-    return docRef.get();
-  }
-
   @override
-  Future<List<PostEntity>> getMoreUserPosts(PostEntity lastPost) async {
+  Future<List<PostEntity>> getMoreUserPosts(
+    String uid,
+    String lastPostId,
+  ) async {
     try {
-      final doc = await _getPostDoc(lastPost);
-      final query = userPostsByNewest(lastPost.uid).startAfterDocument(doc);
+      final doc = await postDocRef(uid, lastPostId).get();
+      final query = userPostsByNewest(uid).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getMoreUserPosts: ${e.toString()}');
       return [];
     }
-  }
-
-  Future<Doc> _getUserDoc(String uid) async {
-    final docRef = userDocRef(uid);
-    return docRef.get();
   }
 
   @override
@@ -499,7 +514,7 @@ class DatabaseRepository implements IDatabaseRepository {
         final publicUser = PublicUser.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
-        return PublicUserEntity.fromJson(publicUser.toJson());
+        return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
       debugPrint('getRankingUsers: ${e.toString()}');
@@ -508,18 +523,16 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<PublicUserEntity>> getMoreRankingUsers(
-    PublicUserEntity lastUser,
-  ) async {
+  Future<List<PublicUserEntity>> getMoreRankingUsers(String lastUserUid) async {
     try {
-      final doc = await _getUserDoc(lastUser.uid);
+      final doc = await userDocRef(lastUserUid).get();
       final query = usersByFollowerCount().startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
         final publicUser = PublicUser.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
-        return PublicUserEntity.fromJson(publicUser.toJson());
+        return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
       debugPrint('getMoreRankingUsers: ${e.toString()}');
@@ -537,7 +550,7 @@ class DatabaseRepository implements IDatabaseRepository {
         final publicUser = PublicUser.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
-        return PublicUserEntity.fromJson(publicUser.toJson());
+        return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
       debugPrint('getMuteUsers: ${e.toString()}');
@@ -548,18 +561,18 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   Future<List<PublicUserEntity>> getMoreMuteUsers(
     List<String> requestUids,
-    PublicUserEntity lastUser,
+    String lastUserUid,
   ) async {
     if (requestUids.isEmpty) return [];
     try {
-      final doc = await _getUserDoc(lastUser.uid);
+      final doc = await userDocRef(lastUserUid).get();
       final query = usersByWhereIn(requestUids).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
         final publicUser = PublicUser.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
-        return PublicUserEntity.fromJson(publicUser.toJson());
+        return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
       debugPrint('getMoreMuteUsers: ${e.toString()}');
@@ -596,7 +609,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qshot = await _postsQuery(isRankingPosts).get();
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getPosts: ${e.toString()}');
@@ -607,15 +620,16 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   Future<List<PostEntity>> getMorePosts(
     bool isRankingPosts,
-    PostEntity lastPost,
+    String lastPostUid,
+    String lastPostId,
   ) async {
     try {
-      final doc = await _getPostDoc(lastPost);
+      final doc = await postDocRef(lastPostUid, lastPostId).get();
       final qshot =
           await _postsQuery(isRankingPosts).startAfterDocument(doc).get();
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getMorePosts: ${e.toString()}');
@@ -626,10 +640,10 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   Future<List<Timeline>> getMoreTimelines(
     String currentUid,
-    Timeline lastTimeline,
+    String lastTimelinePostId,
   ) async {
     try {
-      final doc = await timelinesDocRef(currentUid, lastTimeline.postId).get();
+      final doc = await timelinesDocRef(currentUid, lastTimelinePostId).get();
       final query = timelinesQuery(currentUid);
       final qshot = await query.startAfterDocument(doc).get();
       return qshot.docs
@@ -649,7 +663,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qshot = await query.get();
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getMutePosts: ${e.toString()}');
@@ -660,16 +674,17 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   Future<List<PostEntity>> getMoreMutePosts(
     List<String> postIds,
-    PostEntity lastPost,
+    String lastPostUid,
+    String lastPostId,
   ) async {
     if (postIds.isEmpty) return [];
     try {
-      final doc = await _getPostDoc(lastPost);
+      final doc = await postDocRef(lastPostUid, lastPostId).get();
       final query = postsByWhereIn(postIds).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
         final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
-        return PostEntity.fromJson(post.toJson());
+        return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
       debugPrint('getMoreMutePosts: ${e.toString()}');

@@ -9,8 +9,8 @@ on:
       - main
 
 jobs:
-  build-android:
-    runs-on: ubuntu-latest
+  flutter-ci:
+    runs-on: ubuntu-latest # もしくは macos-latest
 
     steps:
       - name: Checkout code
@@ -43,42 +43,3 @@ jobs:
 
       - name: Run tests
         run: flutter test
-
-      # - name: Build Android
-      #   run: flutter build apk --release
-
-  build-ios:
-    runs-on: macos-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.32.2'
-          channel: 'stable'
-          cache: true
-      - name: Cache Pub dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.PUB_CACHE }}
-          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pub-
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Format code
-        run: dart format --set-exit-if-changed .
-
-      - name: Analyze code
-        run: flutter analyze
-
-      - name: Run tests
-        run: flutter test
-
-      # - name: Build iOS
-      #   run: flutter build ios --no-codesign

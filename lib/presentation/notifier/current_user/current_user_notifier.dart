@@ -134,8 +134,10 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
     authResult.when(
       success: (_) {
-        final image = user.image;
-        ref.read(apiRepositoryProvider).deleteObject(image);
+        final imageValue = user.image.value;
+        if (imageValue.isNotEmpty) {
+          ref.read(apiRepositoryProvider).deleteObject(imageValue);
+        }
       },
       failure: (_) {},
     );

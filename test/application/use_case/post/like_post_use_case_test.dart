@@ -8,6 +8,7 @@ import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/domain/entity/database/tokens/like_post_token_entity/like_post_token_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
 
 void main() {
@@ -28,7 +29,7 @@ void main() {
 
     group('likePost', () {
       late PostEntity testPost;
-      late LikePostToken testToken;
+      late LikePostTokenEntity testToken;
       const String testCurrentUid = 'test_current_uid';
 
       setUp(() {
@@ -57,7 +58,7 @@ void main() {
           msgCount: 0,
         );
 
-        testToken = LikePostToken(
+        final likePostToken = LikePostToken(
           tokenId: 'test_token_id',
           postId: 'test_post_id',
           activeUid: testCurrentUid,
@@ -65,6 +66,7 @@ void main() {
           tokenType: 'like_post',
           createdAt: mockTimestamp,
         );
+        testToken = LikePostTokenEntity.fromModel(likePostToken);
       });
 
       test('should return success when liking post succeeds', () async {
@@ -84,7 +86,13 @@ void main() {
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         expect(tokens.isNotEmpty, isTrue);
         expect(
-          tokens.any((token) => token['tokenId'] == 'test_token_id'),
+          tokens.any(
+            (token) =>
+                token['postId'] == 'test_post_id' &&
+                token['activeUid'] == testCurrentUid &&
+                token['passiveUid'] == 'test_post_owner_uid' &&
+                token['tokenType'] == 'likePost',
+          ),
           isTrue,
         );
       });
@@ -96,7 +104,11 @@ void main() {
         // In a real app, we'd verify the PostLike document exists in the post's subcollection
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         final createdToken = tokens.firstWhere(
-          (token) => token['tokenId'] == 'test_token_id',
+          (token) =>
+              token['postId'] == testPost.postId &&
+              token['activeUid'] == testCurrentUid &&
+              token['passiveUid'] == testPost.uid &&
+              token['tokenType'] == 'likePost',
         );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['postId'], equals(testPost.postId));
@@ -185,7 +197,7 @@ void main() {
 
       test('should return success when unliking post succeeds', () async {
         // First create a like to unlike
-        final token = LikePostToken(
+        final tokenModel = LikePostToken(
           tokenId: testTokenId,
           postId: testPost.postId,
           activeUid: testCurrentUid,
@@ -193,6 +205,7 @@ void main() {
           tokenType: 'like_post',
           createdAt: mockTimestamp,
         );
+        final token = LikePostTokenEntity.fromModel(tokenModel);
 
         await likePostUseCase.likePost(testCurrentUid, token, testPost);
 
@@ -300,7 +313,7 @@ void main() {
           msgCount: 0,
         );
 
-        final token1 = LikePostToken(
+        final token1Model = LikePostToken(
           tokenId: 'token_1',
           postId: 'rapid_test_post',
           activeUid: 'user_1',
@@ -308,8 +321,9 @@ void main() {
           tokenType: 'like_post',
           createdAt: mockTimestamp,
         );
+        final token1 = LikePostTokenEntity.fromModel(token1Model);
 
-        final token2 = LikePostToken(
+        final token2Model = LikePostToken(
           tokenId: 'token_2',
           postId: 'rapid_test_post',
           activeUid: 'user_2',
@@ -317,6 +331,7 @@ void main() {
           tokenType: 'like_post',
           createdAt: mockTimestamp,
         );
+        final token2 = LikePostTokenEntity.fromModel(token2Model);
 
         final result1 = await likePostUseCase.likePost('user_1', token1, post);
         final result2 = await likePostUseCase.likePost('user_2', token2, post);
@@ -337,8 +352,26 @@ void main() {
         // Verify both tokens were created
         final tokens1 = await databaseRepository.getTokens('user_1');
         final tokens2 = await databaseRepository.getTokens('user_2');
-        expect(tokens1.any((token) => token['tokenId'] == 'token_1'), isTrue);
-        expect(tokens2.any((token) => token['tokenId'] == 'token_2'), isTrue);
+        expect(
+          tokens1.any(
+            (token) =>
+                token['postId'] == 'rapid_test_post' &&
+                token['activeUid'] == 'user_1' &&
+                token['passiveUid'] == 'owner_uid' &&
+                token['tokenType'] == 'likePost',
+          ),
+          isTrue,
+        );
+        expect(
+          tokens2.any(
+            (token) =>
+                token['postId'] == 'rapid_test_post' &&
+                token['activeUid'] == 'user_2' &&
+                token['passiveUid'] == 'owner_uid' &&
+                token['tokenType'] == 'likePost',
+          ),
+          isTrue,
+        );
       });
 
       test('should handle like and unlike operations on same post', () async {
@@ -367,7 +400,7 @@ void main() {
           msgCount: 0,
         );
 
-        final token = LikePostToken(
+        final tokenModel = LikePostToken(
           tokenId: 'like_unlike_token',
           postId: 'like_unlike_test_post',
           activeUid: 'test_user',
@@ -375,6 +408,7 @@ void main() {
           tokenType: 'like_post',
           createdAt: mockTimestamp,
         );
+        final token = LikePostTokenEntity.fromModel(tokenModel);
 
         // Like the post
         final likeResult = await likePostUseCase.likePost(

@@ -5,6 +5,7 @@ import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/mute_post_use_case.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
+import 'package:great_talk/domain/entity/database/tokens/mute_post_token_entity/mute_post_token_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
@@ -28,7 +29,7 @@ void main() {
 
     group('mutePost', () {
       late PostEntity testPost;
-      late MutePostToken testToken;
+      late MutePostTokenEntity testToken;
       const String testCurrentUid = 'test_current_uid';
 
       setUp(() {
@@ -57,13 +58,14 @@ void main() {
           msgCount: 0,
         );
 
-        testToken = MutePostToken(
+        final mutePostToken = MutePostToken(
           tokenId: 'test_token_id',
           postId: 'test_post_id',
           activeUid: testCurrentUid,
           tokenType: 'mute_post',
           createdAt: Timestamp.fromDate(mockDateTime),
         );
+        testToken = MutePostTokenEntity.fromModel(mutePostToken);
       });
 
       test('should return success when muting post succeeds', () async {
@@ -75,16 +77,24 @@ void main() {
 
         expect(result, isA<Result<bool>>());
         result.when(
-          success: (value) => expect(value, isTrue),
-          failure: (error) => fail('Expected success but got failure: $error'),
-        );
+          success: (value) {
+            expect(value, isTrue);
 
-        // Verify token was created in fake Firestore
-        final tokens = await databaseRepository.getTokens(testCurrentUid);
-        expect(tokens.isNotEmpty, isTrue);
-        expect(
-          tokens.any((token) => token['tokenId'] == 'test_token_id'),
-          isTrue,
+            // Verify token was created in fake Firestore
+            databaseRepository.getTokens(testCurrentUid).then((tokens) {
+              expect(tokens.isNotEmpty, isTrue);
+              expect(
+                tokens.any(
+                  (token) =>
+                      token['postId'] == 'test_post_id' &&
+                      token['activeUid'] == testCurrentUid &&
+                      token['tokenType'] == 'mutePost',
+                ),
+                isTrue,
+              );
+            });
+          },
+          failure: (error) => fail('Expected success but got failure: $error'),
         );
       });
 
@@ -94,7 +104,10 @@ void main() {
         // Verify token was created with correct data
         final tokens = await databaseRepository.getTokens(testCurrentUid);
         final createdToken = tokens.firstWhere(
-          (token) => token['tokenId'] == 'test_token_id',
+          (token) =>
+              token['postId'] == testPost.postId &&
+              token['activeUid'] == testCurrentUid &&
+              token['tokenType'] == 'mutePost',
         );
         expect(createdToken['activeUid'], equals(testCurrentUid));
         expect(createdToken['postId'], equals(testPost.postId));
@@ -239,12 +252,12 @@ void main() {
         final result1 = await mutePostUseCase.mutePost(
           post1,
           'test_user',
-          token1,
+          MutePostTokenEntity.fromModel(token1),
         );
         final result2 = await mutePostUseCase.mutePost(
           post2,
           'test_user',
-          token2,
+          MutePostTokenEntity.fromModel(token2),
         );
 
         expect(result1, isA<Result<bool>>());
@@ -263,11 +276,21 @@ void main() {
         // Verify both tokens were created
         final tokens = await databaseRepository.getTokens('test_user');
         expect(
-          tokens.any((token) => token['tokenId'] == 'mute_token_1'),
+          tokens.any(
+            (token) =>
+                token['postId'] == 'mute_test_post_1' &&
+                token['activeUid'] == 'test_user' &&
+                token['tokenType'] == 'mutePost',
+          ),
           isTrue,
         );
         expect(
-          tokens.any((token) => token['tokenId'] == 'mute_token_2'),
+          tokens.any(
+            (token) =>
+                token['postId'] == 'mute_test_post_2' &&
+                token['activeUid'] == 'test_user' &&
+                token['tokenType'] == 'mutePost',
+          ),
           isTrue,
         );
         expect(tokens.length, greaterThanOrEqualTo(2));
@@ -317,7 +340,7 @@ void main() {
         final result = await mutePostUseCase.mutePost(
           specialPost,
           'test_user',
-          specialToken,
+          MutePostTokenEntity.fromModel(specialToken),
         );
 
         expect(result, isA<Result<bool>>());
@@ -329,7 +352,12 @@ void main() {
         // Verify token was created
         final tokens = await databaseRepository.getTokens('test_user');
         expect(
-          tokens.any((token) => token['tokenId'] == 'special_mute_token'),
+          tokens.any(
+            (token) =>
+                token['postId'] == 'special_content_post' &&
+                token['activeUid'] == 'test_user' &&
+                token['tokenType'] == 'mutePost',
+          ),
           isTrue,
         );
       });
@@ -382,7 +410,7 @@ void main() {
           final result = await mutePostUseCase.mutePost(
             posts[i],
             testUser,
-            tokens[i],
+            MutePostTokenEntity.fromModel(tokens[i]),
           );
           results.add(result);
         }
@@ -402,7 +430,10 @@ void main() {
         for (int i = 0; i < 3; i++) {
           expect(
             userTokens.any(
-              (token) => token['tokenId'] == 'multi_mute_token_$i',
+              (token) =>
+                  token['postId'] == 'multi_post_$i' &&
+                  token['activeUid'] == testUser &&
+                  token['tokenType'] == 'mutePost',
             ),
             isTrue,
           );

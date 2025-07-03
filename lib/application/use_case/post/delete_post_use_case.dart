@@ -14,11 +14,13 @@ class DeletePostUseCase implements IDeletePostUseCase {
 
   @override
   FutureResult<bool> deletePost(PostEntity post) async {
-    final result = await firestoreRepository.deletePost(post);
+    final result = await firestoreRepository.deletePost(post.uid, post.postId);
     result.when(
       success: (_) {
-        final image = post.image;
-        apiRepository.deleteObject(image);
+        final imageValue = post.image.value;
+        if (imageValue.isNotEmpty) {
+          apiRepository.deleteObject(imageValue);
+        }
       },
       failure: (_) {},
     );
