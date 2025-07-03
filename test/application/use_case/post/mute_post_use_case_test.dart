@@ -5,6 +5,7 @@ import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/application/use_case/post/mute_post_use_case.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
+import 'package:great_talk/domain/entity/database/tokens/mute_post_token_entity/mute_post_token_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
@@ -28,7 +29,7 @@ void main() {
 
     group('mutePost', () {
       late PostEntity testPost;
-      late MutePostToken testToken;
+      late MutePostTokenEntity testToken;
       const String testCurrentUid = 'test_current_uid';
 
       setUp(() {
@@ -57,13 +58,14 @@ void main() {
           msgCount: 0,
         );
 
-        testToken = MutePostToken(
+        final mutePostToken = MutePostToken(
           tokenId: 'test_token_id',
           postId: 'test_post_id',
           activeUid: testCurrentUid,
           tokenType: 'mute_post',
           createdAt: Timestamp.fromDate(mockDateTime),
         );
+        testToken = MutePostTokenEntity.fromModel(mutePostToken);
       });
 
       test('should return success when muting post succeeds', () async {
@@ -250,12 +252,12 @@ void main() {
         final result1 = await mutePostUseCase.mutePost(
           post1,
           'test_user',
-          token1,
+          MutePostTokenEntity.fromModel(token1),
         );
         final result2 = await mutePostUseCase.mutePost(
           post2,
           'test_user',
-          token2,
+          MutePostTokenEntity.fromModel(token2),
         );
 
         expect(result1, isA<Result<bool>>());
@@ -338,7 +340,7 @@ void main() {
         final result = await mutePostUseCase.mutePost(
           specialPost,
           'test_user',
-          specialToken,
+          MutePostTokenEntity.fromModel(specialToken),
         );
 
         expect(result, isA<Result<bool>>());
@@ -408,7 +410,7 @@ void main() {
           final result = await mutePostUseCase.mutePost(
             posts[i],
             testUser,
-            tokens[i],
+            MutePostTokenEntity.fromModel(tokens[i]),
           );
           results.add(result);
         }

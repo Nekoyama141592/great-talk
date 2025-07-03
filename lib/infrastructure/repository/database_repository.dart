@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:great_talk/core/constant/firestore_constant.dart';
 import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
+import 'package:great_talk/domain/value/token_type.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
@@ -15,6 +16,7 @@ import 'package:great_talk/infrastructure/model/database_schema/tokens/following
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
 import 'package:great_talk/infrastructure/model/database_schema/user_mute/user_mute.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 import 'package:great_talk/domain/repository_interface/i_database_repository.dart';
@@ -403,15 +405,37 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getTokens(String uid) async {
+  Future<Tokens> getTokens(String uid) async {
     try {
       final query = tokensColRef(uid);
       final qSnapshot = await query.get();
       final qDocs = qSnapshot.docs;
-      return qDocs.map((doc) => doc.data()).toList();
+      final allTokensData = qDocs.map((doc) => doc.data()).toList();
+      return Tokens(
+        followingTokens:
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.following.name)
+                .map((map) => FollowingToken.fromJson(map))
+                .toList(),
+        likePostTokens:
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.likePost.name)
+                .map((map) => LikePostToken.fromJson(map))
+                .toList(),
+        muteUserTokens:
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.muteUser.name)
+                .map((map) => MuteUserToken.fromJson(map))
+                .toList(),
+        mutePostTokens:
+            allTokensData
+                .where((map) => map['tokenType'] == TokenType.mutePost.name)
+                .map((map) => MutePostToken.fromJson(map))
+                .toList(),
+      );
     } catch (e) {
       debugPrint('getTokens: ${e.toString()}');
-      return [];
+      return Tokens();
     }
   }
 

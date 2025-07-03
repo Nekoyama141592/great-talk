@@ -2,6 +2,7 @@ import 'package:great_talk/domain/entity/database/private_user/private_user_enti
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 /// Abstract interface for database operations including user management,
@@ -88,7 +89,7 @@ abstract class IDatabaseRepository {
   );
 
   // Token operations
-  Future<List<Map<String, dynamic>>> getTokens(String uid);
+  Future<Tokens> getTokens(String uid);
 
   // Timeline operations
   Future<List<Timeline>> getTimelines(String currentUid);

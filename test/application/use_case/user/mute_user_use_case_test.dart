@@ -9,6 +9,7 @@ import 'package:great_talk/infrastructure/model/database_schema/detected_image/d
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/domain/entity/database/tokens/mute_user_token_entity/mute_user_token_entity.dart';
 
 void main() {
   group('MuteUserUseCase', () {
@@ -28,7 +29,7 @@ void main() {
 
     group('muteUser', () {
       late PostEntity testPost;
-      late MuteUserToken testToken;
+      late MuteUserTokenEntity testToken;
       const String testCurrentUid = 'test_current_uid';
       const String testPassiveUid = 'test_passive_uid';
 
@@ -58,13 +59,14 @@ void main() {
           msgCount: 0,
         );
 
-        testToken = MuteUserToken(
+        final muteUserToken = MuteUserToken(
           tokenId: 'test_token_id',
           activeUid: testCurrentUid,
           passiveUid: testPassiveUid,
           tokenType: 'mute_user',
           createdAt: mockTimestamp,
         );
+        testToken = MuteUserTokenEntity.fromModel(muteUserToken);
       });
 
       test('should return success when muting user succeeds', () async {
@@ -168,10 +170,14 @@ void main() {
         const sameUid = 'same_user_uid';
 
         final selfPost = testPost.copyWith(uid: sameUid);
-        final selfToken = testToken.copyWith(
+        final selfMuteUserToken = MuteUserToken(
+          tokenId: 'test_token_id',
           activeUid: sameUid,
           passiveUid: sameUid,
+          tokenType: 'mute_user',
+          createdAt: mockTimestamp,
         );
+        final selfToken = MuteUserTokenEntity.fromModel(selfMuteUserToken);
 
         final result = await muteUserUseCase.muteUser(
           selfPost,
@@ -246,7 +252,7 @@ void main() {
                 )
                 .toList();
 
-        final tokens =
+        final modelTokens =
             users
                 .map(
                   (uid) => MuteUserToken(
@@ -257,6 +263,10 @@ void main() {
                     createdAt: mockTimestamp,
                   ),
                 )
+                .toList();
+        final tokens =
+            modelTokens
+                .map((token) => MuteUserTokenEntity.fromModel(token))
                 .toList();
 
         // Mute all users
@@ -328,12 +338,15 @@ void main() {
           msgCount: 50,
         );
 
-        final complexToken = MuteUserToken(
+        final complexMuteUserToken = MuteUserToken(
           tokenId: 'complex_mute_token',
           activeUid: 'muting_user',
           passiveUid: 'complex_user',
           tokenType: 'mute_user',
           createdAt: mockTimestamp,
+        );
+        final complexToken = MuteUserTokenEntity.fromModel(
+          complexMuteUserToken,
         );
 
         final result = await muteUserUseCase.muteUser(
@@ -393,7 +406,7 @@ void main() {
           ),
         );
 
-        final tokens = List.generate(
+        final modelTokens = List.generate(
           5,
           (index) => MuteUserToken(
             tokenId: 'rapid_mute_token_$index',
@@ -403,6 +416,10 @@ void main() {
             createdAt: mockTimestamp,
           ),
         );
+        final tokens =
+            modelTokens
+                .map((token) => MuteUserTokenEntity.fromModel(token))
+                .toList();
 
         // Execute mutes rapidly
         final futures = <Future<Result<bool>>>[];
@@ -494,21 +511,23 @@ void main() {
           msgCount: 0,
         );
 
-        final tokenAMutesB = MuteUserToken(
+        final modelTokenAMutesB = MuteUserToken(
           tokenId: 'a_mutes_b',
           activeUid: userA,
           passiveUid: userB,
           tokenType: 'mute_user',
           createdAt: mockTimestamp,
         );
+        final tokenAMutesB = MuteUserTokenEntity.fromModel(modelTokenAMutesB);
 
-        final tokenBMutesA = MuteUserToken(
+        final modelTokenBMutesA = MuteUserToken(
           tokenId: 'b_mutes_a',
           activeUid: userB,
           passiveUid: userA,
           tokenType: 'mute_user',
           createdAt: mockTimestamp,
         );
+        final tokenBMutesA = MuteUserTokenEntity.fromModel(modelTokenBMutesA);
 
         // A mutes B
         final resultAMutesB = await muteUserUseCase.muteUser(

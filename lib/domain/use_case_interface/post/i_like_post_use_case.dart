@@ -1,5 +1,5 @@
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/domain/entity/database/tokens/like_post_token_entity/like_post_token_entity.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 /// Abstract interface for post like/unlike operations.
@@ -14,7 +14,7 @@ abstract class ILikePostUseCase {
   /// Returns a FutureResult indicating success or failure of the like operation.
   FutureResult<bool> likePost(
     String currentUid,
-    LikePostToken token,
+    LikePostTokenEntity token,
     PostEntity post,
   );
 

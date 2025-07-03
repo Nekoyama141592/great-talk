@@ -4,8 +4,10 @@ import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import 'package:great_talk/domain/value/token_type.dart';
+import 'package:great_talk/domain/entity/database/tokens/following_token_entity/following_token_entity.dart';
+import 'package:great_talk/domain/entity/database/tokens/like_post_token_entity/like_post_token_entity.dart';
+import 'package:great_talk/domain/entity/database/tokens/mute_post_token_entity/mute_post_token_entity.dart';
+import 'package:great_talk/domain/entity/database/tokens/mute_user_token_entity/mute_user_token_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
@@ -25,30 +27,9 @@ class TokensNotifier extends _$TokensNotifier {
 
     final repository = ref.watch(databaseRepositoryProvider);
     final uid = user.uid;
-    final allTokensData = await repository.getTokens(uid);
+    final tokens = await repository.getTokens(uid);
 
-    return TokensState(
-      followingTokens:
-          allTokensData
-              .where((map) => map['tokenType'] == TokenType.following.name)
-              .map((map) => FollowingToken.fromJson(map))
-              .toList(),
-      likePostTokens:
-          allTokensData
-              .where((map) => map['tokenType'] == TokenType.likePost.name)
-              .map((map) => LikePostToken.fromJson(map))
-              .toList(),
-      muteUserTokens:
-          allTokensData
-              .where((map) => map['tokenType'] == TokenType.muteUser.name)
-              .map((map) => MuteUserToken.fromJson(map))
-              .toList(),
-      mutePostTokens:
-          allTokensData
-              .where((map) => map['tokenType'] == TokenType.mutePost.name)
-              .map((map) => MutePostToken.fromJson(map))
-              .toList(),
-    );
+    return TokensState.fromModel(tokens);
   }
 
   void _updateState(TokensState newState) {
@@ -73,39 +54,41 @@ class TokensNotifier extends _$TokensNotifier {
     return postId;
   }
 
-  FollowingToken addFollowing(String passiveUid) {
+  FollowingTokenEntity addFollowing(String passiveUid) {
     final followingToken = FollowingToken.fromUid(passiveUid);
+    final followingTokenEntity = FollowingTokenEntity.fromModel(followingToken);
     final newState = _currentState.copyWith(
-      followingTokens: [..._currentState.followingTokens, followingToken],
+      followingTokens: [..._currentState.followingTokens, followingTokenEntity],
     );
     _updateState(newState);
-    return followingToken;
+    return followingTokenEntity;
   }
 
-  FollowingToken? removeFollowing(String uid) {
+  FollowingTokenEntity? removeFollowing(String uid) {
     final deleteToken = state.value?.followingTokens.firstWhereOrNull(
       (element) => element.passiveUid == uid,
     );
     if (deleteToken == null) return null;
     final newList =
         _currentState.followingTokens
-            .where((token) => token.tokenId == deleteToken.tokenId)
+            .where((token) => token.tokenId != deleteToken.tokenId)
             .toList();
     final newState = _currentState.copyWith(followingTokens: newList);
     _updateState(newState);
     return deleteToken;
   }
 
-  LikePostToken? addLikePost(String currentUid, PostEntity post) {
+  LikePostTokenEntity? addLikePost(String currentUid, PostEntity post) {
     final token = LikePostToken.fromPost(post.postId, post.uid, currentUid);
+    final tokenEntity = LikePostTokenEntity.fromModel(token);
     final newState = _currentState.copyWith(
-      likePostTokens: [..._currentState.likePostTokens, token],
+      likePostTokens: [..._currentState.likePostTokens, tokenEntity],
     );
     _updateState(newState);
-    return token;
+    return tokenEntity;
   }
 
-  LikePostToken? removeLikePost(String postId) {
+  LikePostTokenEntity? removeLikePost(String postId) {
     final deleteToken = state.value?.likePostTokens.firstWhereOrNull(
       (element) => element.postId == postId,
     );
@@ -119,18 +102,19 @@ class TokensNotifier extends _$TokensNotifier {
     return deleteToken;
   }
 
-  MutePostToken? addMutePost(PostEntity post) {
+  MutePostTokenEntity? addMutePost(PostEntity post) {
     final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
     final token = MutePostToken.fromPost(post.postId, currentUid);
+    final tokenEntity = MutePostTokenEntity.fromModel(token);
     final newState = _currentState.copyWith(
-      mutePostTokens: [..._currentState.mutePostTokens, token],
+      mutePostTokens: [..._currentState.mutePostTokens, tokenEntity],
     );
     _updateState(newState);
-    return token;
+    return tokenEntity;
   }
 
-  void removeMutePost(MutePostToken mutePostToken) {
+  void removeMutePost(MutePostTokenEntity mutePostToken) {
     final newList =
         _currentState.mutePostTokens
             .where((token) => token.postId != mutePostToken.postId)
@@ -139,18 +123,19 @@ class TokensNotifier extends _$TokensNotifier {
     _updateState(newState);
   }
 
-  MuteUserToken? addMuteUser(PostEntity post) {
+  MuteUserTokenEntity? addMuteUser(PostEntity post) {
     final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
     final token = MuteUserToken.fromPost(currentUid, post.uid);
+    final tokenEntity = MuteUserTokenEntity.fromModel(token);
     final newState = _currentState.copyWith(
-      muteUserTokens: [..._currentState.muteUserTokens, token],
+      muteUserTokens: [..._currentState.muteUserTokens, tokenEntity],
     );
     _updateState(newState);
-    return token;
+    return tokenEntity;
   }
 
-  MuteUserToken? removeMuteUser(String passiveUid) {
+  MuteUserTokenEntity? removeMuteUser(String passiveUid) {
     final deleteToken = ref
         .read(tokensNotifierProvider)
         .value

@@ -1,5 +1,5 @@
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/domain/entity/database/tokens/mute_user_token_entity/mute_user_token_entity.dart';
 import 'package:great_talk/infrastructure/repository/result/result.dart';
 
 /// Abstract interface for user muting operations.
@@ -15,6 +15,6 @@ abstract class IMuteUserUseCase {
   FutureResult<bool> muteUser(
     PostEntity post,
     String currentUid,
-    MuteUserToken token,
+    MuteUserTokenEntity token,
   );
 }
