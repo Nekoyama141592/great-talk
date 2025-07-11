@@ -22,5 +22,4 @@ abstract class Follower with _$Follower {
       passiveUid: passiveUid,
     );
   }
-  Timestamp typedCreatedAt() => createdAt as Timestamp;
 }
