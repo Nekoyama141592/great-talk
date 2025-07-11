@@ -4,7 +4,7 @@ import 'package:great_talk/core/constant/firestore_constant.dart';
 import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
 import 'package:great_talk/domain/value/token_type.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
-import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
+import 'package:great_talk/infrastructure/model/database_schema/follower/follower_model.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_mute/post_mute.dart';
@@ -229,7 +229,7 @@ class DatabaseRepository implements IDatabaseRepository {
     String passiveUid,
   ) async {
     final followingToken = FollowingToken.fromUid(passiveUid);
-    final follower = Follower.fromUid(currentUid, passiveUid);
+    final follower = FollowerModel.fromUid(currentUid, passiveUid);
     final tokenRef = tokenDocRef(currentUid, followingToken.tokenId);
     final followerRef = followerDocRef(currentUid, passiveUid);
     final requestList = [
