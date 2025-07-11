@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token_model.dart';
 
 part 'like_post_token_entity.freezed.dart';
 part 'like_post_token_entity.g.dart';

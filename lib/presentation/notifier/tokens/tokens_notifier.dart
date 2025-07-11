@@ -8,10 +8,10 @@ import 'package:great_talk/domain/entity/database/tokens/following_token_entity/
 import 'package:great_talk/domain/entity/database/tokens/like_post_token_entity/like_post_token_entity.dart';
 import 'package:great_talk/domain/entity/database/tokens/mute_post_token_entity/mute_post_token_entity.dart';
 import 'package:great_talk/domain/entity/database/tokens/mute_user_token_entity/mute_user_token_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token_model.dart';
 import 'package:great_talk/presentation/state/tokens/tokens_state.dart';
 
 part 'tokens_notifier.g.dart';

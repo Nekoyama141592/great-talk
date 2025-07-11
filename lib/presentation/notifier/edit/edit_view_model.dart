@@ -12,7 +12,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/presentation/constant/form_consts.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
 import 'package:great_talk/core/extension/string_extension.dart';
-import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log.dart';
+import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log_model.dart';
 import 'package:great_talk/core/util/aws_s3_util.dart';
 import 'package:great_talk/presentation/state/edit/edit_state.dart';
 

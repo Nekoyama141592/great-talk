@@ -1,8 +1,8 @@
 import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
+import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens_model.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
 
 /// Abstract interface for database operations including user management,

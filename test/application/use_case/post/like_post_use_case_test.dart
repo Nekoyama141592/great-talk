@@ -9,7 +9,7 @@ import 'package:great_talk/infrastructure/model/database_schema/detected_image/d
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/domain/entity/database/tokens/like_post_token_entity/like_post_token_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token_model.dart';
 
 void main() {
   group('LikePostUseCase', () {

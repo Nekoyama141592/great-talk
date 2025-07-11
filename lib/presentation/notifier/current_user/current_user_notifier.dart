@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
+import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user_model.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user_model.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/presentation/state/current_user/current_user/current_user_state.dart';

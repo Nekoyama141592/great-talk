@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
+import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user_model.dart';
 
 part 'private_user_entity.freezed.dart';
 part 'private_user_entity.g.dart';
