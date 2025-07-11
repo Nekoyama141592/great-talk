@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/util/search_util.dart';
+import 'package:great_talk/domain/converter/custom_complete_text_converter.dart';
 import 'package:great_talk/domain/converter/detected_text_converter.dart';
 import 'package:great_talk/domain/converter/moderated_image_converter.dart';
 import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
 
 part 'post_model.freezed.dart';
 part 'post_model.g.dart';
@@ -15,7 +17,7 @@ abstract class PostModel with _$PostModel {
   const factory PostModel({
     @Default(0) int bookmarkCount,
     required dynamic createdAt,
-    required Map<String, dynamic> customCompleteText,
+    @CustomCompleteTextConverter() required CustomCompleteText customCompleteText,
     @DetectedTextConverter() required DetectedText description,
     @Default([]) List<Map<String, dynamic>> exampleTexts,
     @Default("") String genre,
@@ -48,7 +50,7 @@ abstract class PostModel with _$PostModel {
     final now = FieldValue.serverTimestamp();
     return PostModel(
       createdAt: now,
-      customCompleteText: customCompleteText,
+      customCompleteText: CustomCompleteText.fromJson(customCompleteText),
       description: DetectedText(value: description),
       image: ModeratedImage(value: fileName),
       postId: postId,

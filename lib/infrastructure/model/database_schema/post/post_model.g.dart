@@ -9,7 +9,9 @@ part of 'post_model.dart';
 _PostModel _$PostModelFromJson(Map<String, dynamic> json) => _PostModel(
   bookmarkCount: (json['bookmarkCount'] as num?)?.toInt() ?? 0,
   createdAt: json['createdAt'],
-  customCompleteText: json['customCompleteText'] as Map<String, dynamic>,
+  customCompleteText: const CustomCompleteTextConverter().fromJson(
+    json['customCompleteText'] as Map<String, dynamic>,
+  ),
   description: const DetectedTextConverter().fromJson(
     json['description'] as Map<String, dynamic>,
   ),
@@ -50,7 +52,9 @@ Map<String, dynamic> _$PostModelToJson(_PostModel instance) =>
     <String, dynamic>{
       'bookmarkCount': instance.bookmarkCount,
       'createdAt': instance.createdAt,
-      'customCompleteText': instance.customCompleteText,
+      'customCompleteText': const CustomCompleteTextConverter().toJson(
+        instance.customCompleteText,
+      ),
       'description': const DetectedTextConverter().toJson(instance.description),
       'exampleTexts': instance.exampleTexts,
       'genre': instance.genre,
