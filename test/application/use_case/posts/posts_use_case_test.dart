@@ -5,9 +5,9 @@ import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/application/use_case/posts/posts_use_case.dart';
 import 'package:great_talk/application/use_case/file/file_use_case.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user_model.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
@@ -53,7 +53,7 @@ void main() {
               sentiment: 'positive',
               value: 'First test post',
             ),
-            image: const DetectedImage(
+            image: const ModeratedImage(
               bucketName: 'test-bucket',
               value: 'image1.jpg',
             ),
@@ -80,7 +80,7 @@ void main() {
               sentiment: 'positive',
               value: 'Second test post',
             ),
-            image: const DetectedImage(
+            image: const ModeratedImage(
               bucketName: 'test-bucket',
               value: 'image2.jpg',
             ),
@@ -263,8 +263,8 @@ void main() {
 
       test('should handle posts with empty image data', () async {
         final postsWithEmptyImages = [
-          testPosts[0].copyWith(image: const DetectedImage()),
-          testPosts[1].copyWith(image: const DetectedImage()),
+          testPosts[0].copyWith(image: const ModeratedImage()),
+          testPosts[1].copyWith(image: const ModeratedImage()),
         ];
 
         // Mock empty bucket name and value

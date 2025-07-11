@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/util/search_util.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
 
 part 'post_model.freezed.dart';
 part 'post_model.g.dart';
@@ -48,7 +48,7 @@ abstract class PostModel with _$PostModel {
       createdAt: now,
       customCompleteText: customCompleteText,
       description: DetectedText(value: description).toJson(),
-      image: DetectedImage(value: fileName).toJson(),
+      image: ModeratedImage(value: fileName).toJson(),
       postId: postId,
       searchToken: SearchUtil.returnSearchToken(title),
       title: DetectedText(value: title).toJson(),

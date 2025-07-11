@@ -71,7 +71,7 @@ service cloud.firestore {
       "searchToken" in user && user.searchToken is map &&
       "uid" in user && user.uid is string &&
       "updatedAt" in user && user.updatedAt is timestamp &&
-      "image" in user && isValidDetectedImage(user.image) &&
+      "image" in user && isValidModeratedImage(user.image) &&
       "userName" in user && isValidDetectedText(user.userName, 32) &&
       "walletAddresses" in user && user.walletAddresses is list;
   }
@@ -85,7 +85,7 @@ service cloud.firestore {
       "exampleTexts" in post && post.exampleTexts is list &&
       "genre" in post && post.genre is string &&
       "hashTags" in post && post.hashTags is list &&
-      "image" in post && isValidDetectedImage(post.image) &&
+      "image" in post && isValidModeratedImage(post.image) &&
       "impressionCount" in post && post.impressionCount == 0 &&
       "likeCount" in post && post.likeCount == 0 &&
       "links" in post && post.links is list &&
@@ -169,7 +169,7 @@ service cloud.firestore {
     && detectedText.value.size() <= valueLimit;
   }
   
-  function isValidDetectedImage(detectedImage) {
+  function isValidModeratedImage(detectedImage) {
     return detectedImage.size() == 4
     && "bucketName" in detectedImage && detectedImage.bucketName is string
     && "moderationLabels" in detectedImage && detectedImage.moderationLabels is list

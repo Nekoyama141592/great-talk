@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
 
 part 'public_user_model.freezed.dart';
 part 'public_user_model.g.dart';
@@ -52,8 +52,8 @@ abstract class PublicUserModel with _$PublicUserModel {
       updatedAt: now,
       image:
           imageValue != null
-              ? DetectedImage(value: imageValue).toJson()
-              : DetectedImage().toJson(),
+              ? ModeratedImage(value: imageValue).toJson()
+              : ModeratedImage().toJson(),
       userName:
           userName != null
               ? DetectedText(value: userName).toJson()

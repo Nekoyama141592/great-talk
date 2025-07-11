@@ -3,8 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/constant/moderate_constant.dart';
 import 'package:great_talk/domain/converter/timestamp_converter.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user_model.dart';
 
 part 'public_user_entity.freezed.dart';
@@ -22,7 +22,7 @@ abstract class PublicUserEntity with _$PublicUserEntity {
     required int postCount,
     required String uid,
     @TimestampConverter() DateTime? updatedAt,
-    required DetectedImage image,
+    required ModeratedImage image,
     required DetectedText userName,
   }) = _PublicUserEntity;
 
@@ -45,7 +45,7 @@ abstract class PublicUserEntity with _$PublicUserEntity {
           model.updatedAt is Timestamp
               ? (model.updatedAt as Timestamp).toDate()
               : model.updatedAt,
-      image: DetectedImage.fromJson(model.image),
+      image: ModeratedImage.fromJson(model.image),
       userName: DetectedText.fromJson(model.userName),
     );
   }

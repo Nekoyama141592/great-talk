@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostEntity {
 
-@TimestampConverter() DateTime? get createdAt; CustomCompleteText get customCompleteText; DetectedText get description; DetectedImage get image; int get likeCount; int get msgCount; String get postId; DetectedText get title; String get uid;@TimestampConverter() DateTime? get updatedAt;
+@TimestampConverter() DateTime? get createdAt; CustomCompleteText get customCompleteText; DetectedText get description; ModeratedImage get image; int get likeCount; int get msgCount; String get postId; DetectedText get title; String get uid;@TimestampConverter() DateTime? get updatedAt;
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,11 +49,11 @@ abstract mixin class $PostEntityCopyWith<$Res>  {
   factory $PostEntityCopyWith(PostEntity value, $Res Function(PostEntity) _then) = _$PostEntityCopyWithImpl;
 @useResult
 $Res call({
-@TimestampConverter() DateTime? createdAt, CustomCompleteText customCompleteText, DetectedText description, DetectedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime? updatedAt
+@TimestampConverter() DateTime? createdAt, CustomCompleteText customCompleteText, DetectedText description, ModeratedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime? updatedAt
 });
 
 
-$CustomCompleteTextCopyWith<$Res> get customCompleteText;$DetectedTextCopyWith<$Res> get description;$DetectedImageCopyWith<$Res> get image;$DetectedTextCopyWith<$Res> get title;
+$CustomCompleteTextCopyWith<$Res> get customCompleteText;$DetectedTextCopyWith<$Res> get description;$ModeratedImageCopyWith<$Res> get image;$DetectedTextCopyWith<$Res> get title;
 
 }
 /// @nodoc
@@ -72,7 +72,7 @@ createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nu
 as DateTime?,customCompleteText: null == customCompleteText ? _self.customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
 as CustomCompleteText,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as DetectedText,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as DetectedImage,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
+as ModeratedImage,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
 as int,msgCount: null == msgCount ? _self.msgCount : msgCount // ignore: cast_nullable_to_non_nullable
 as int,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -103,9 +103,9 @@ $DetectedTextCopyWith<$Res> get description {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DetectedImageCopyWith<$Res> get image {
+$ModeratedImageCopyWith<$Res> get image {
   
-  return $DetectedImageCopyWith<$Res>(_self.image, (value) {
+  return $ModeratedImageCopyWith<$Res>(_self.image, (value) {
     return _then(_self.copyWith(image: value));
   });
 }/// Create a copy of PostEntity
@@ -131,7 +131,7 @@ class _PostEntity extends PostEntity {
 @override@TimestampConverter() final  DateTime? createdAt;
 @override final  CustomCompleteText customCompleteText;
 @override final  DetectedText description;
-@override final  DetectedImage image;
+@override final  ModeratedImage image;
 @override final  int likeCount;
 @override final  int msgCount;
 @override final  String postId;
@@ -172,11 +172,11 @@ abstract mixin class _$PostEntityCopyWith<$Res> implements $PostEntityCopyWith<$
   factory _$PostEntityCopyWith(_PostEntity value, $Res Function(_PostEntity) _then) = __$PostEntityCopyWithImpl;
 @override @useResult
 $Res call({
-@TimestampConverter() DateTime? createdAt, CustomCompleteText customCompleteText, DetectedText description, DetectedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime? updatedAt
+@TimestampConverter() DateTime? createdAt, CustomCompleteText customCompleteText, DetectedText description, ModeratedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime? updatedAt
 });
 
 
-@override $CustomCompleteTextCopyWith<$Res> get customCompleteText;@override $DetectedTextCopyWith<$Res> get description;@override $DetectedImageCopyWith<$Res> get image;@override $DetectedTextCopyWith<$Res> get title;
+@override $CustomCompleteTextCopyWith<$Res> get customCompleteText;@override $DetectedTextCopyWith<$Res> get description;@override $ModeratedImageCopyWith<$Res> get image;@override $DetectedTextCopyWith<$Res> get title;
 
 }
 /// @nodoc
@@ -195,7 +195,7 @@ createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nu
 as DateTime?,customCompleteText: null == customCompleteText ? _self.customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
 as CustomCompleteText,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as DetectedText,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as DetectedImage,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
+as ModeratedImage,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
 as int,msgCount: null == msgCount ? _self.msgCount : msgCount // ignore: cast_nullable_to_non_nullable
 as int,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -227,9 +227,9 @@ $DetectedTextCopyWith<$Res> get description {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DetectedImageCopyWith<$Res> get image {
+$ModeratedImageCopyWith<$Res> get image {
   
-  return $DetectedImageCopyWith<$Res>(_self.image, (value) {
+  return $ModeratedImageCopyWith<$Res>(_self.image, (value) {
     return _then(_self.copyWith(image: value));
   });
 }/// Create a copy of PostEntity

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PublicUserEntity {
 
- DetectedText get bio;@TimestampConverter() DateTime? get createdAt; int get followerCount; int get followingCount; bool get isOfficial; int get postCount; String get uid;@TimestampConverter() DateTime? get updatedAt; DetectedImage get image; DetectedText get userName;
+ DetectedText get bio;@TimestampConverter() DateTime? get createdAt; int get followerCount; int get followingCount; bool get isOfficial; int get postCount; String get uid;@TimestampConverter() DateTime? get updatedAt; ModeratedImage get image; DetectedText get userName;
 /// Create a copy of PublicUserEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,11 +49,11 @@ abstract mixin class $PublicUserEntityCopyWith<$Res>  {
   factory $PublicUserEntityCopyWith(PublicUserEntity value, $Res Function(PublicUserEntity) _then) = _$PublicUserEntityCopyWithImpl;
 @useResult
 $Res call({
- DetectedText bio,@TimestampConverter() DateTime? createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime? updatedAt, DetectedImage image, DetectedText userName
+ DetectedText bio,@TimestampConverter() DateTime? createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime? updatedAt, ModeratedImage image, DetectedText userName
 });
 
 
-$DetectedTextCopyWith<$Res> get bio;$DetectedImageCopyWith<$Res> get image;$DetectedTextCopyWith<$Res> get userName;
+$DetectedTextCopyWith<$Res> get bio;$ModeratedImageCopyWith<$Res> get image;$DetectedTextCopyWith<$Res> get userName;
 
 }
 /// @nodoc
@@ -77,7 +77,7 @@ as bool,postCount: null == postCount ? _self.postCount : postCount // ignore: ca
 as int,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as DetectedImage,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as ModeratedImage,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
 as DetectedText,
   ));
 }
@@ -94,9 +94,9 @@ $DetectedTextCopyWith<$Res> get bio {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DetectedImageCopyWith<$Res> get image {
+$ModeratedImageCopyWith<$Res> get image {
   
-  return $DetectedImageCopyWith<$Res>(_self.image, (value) {
+  return $ModeratedImageCopyWith<$Res>(_self.image, (value) {
     return _then(_self.copyWith(image: value));
   });
 }/// Create a copy of PublicUserEntity
@@ -127,7 +127,7 @@ class _PublicUserEntity extends PublicUserEntity {
 @override final  int postCount;
 @override final  String uid;
 @override@TimestampConverter() final  DateTime? updatedAt;
-@override final  DetectedImage image;
+@override final  ModeratedImage image;
 @override final  DetectedText userName;
 
 /// Create a copy of PublicUserEntity
@@ -163,11 +163,11 @@ abstract mixin class _$PublicUserEntityCopyWith<$Res> implements $PublicUserEnti
   factory _$PublicUserEntityCopyWith(_PublicUserEntity value, $Res Function(_PublicUserEntity) _then) = __$PublicUserEntityCopyWithImpl;
 @override @useResult
 $Res call({
- DetectedText bio,@TimestampConverter() DateTime? createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime? updatedAt, DetectedImage image, DetectedText userName
+ DetectedText bio,@TimestampConverter() DateTime? createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime? updatedAt, ModeratedImage image, DetectedText userName
 });
 
 
-@override $DetectedTextCopyWith<$Res> get bio;@override $DetectedImageCopyWith<$Res> get image;@override $DetectedTextCopyWith<$Res> get userName;
+@override $DetectedTextCopyWith<$Res> get bio;@override $ModeratedImageCopyWith<$Res> get image;@override $DetectedTextCopyWith<$Res> get userName;
 
 }
 /// @nodoc
@@ -191,7 +191,7 @@ as bool,postCount: null == postCount ? _self.postCount : postCount // ignore: ca
 as int,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
-as DetectedImage,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
+as ModeratedImage,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
 as DetectedText,
   ));
 }
@@ -209,9 +209,9 @@ $DetectedTextCopyWith<$Res> get bio {
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DetectedImageCopyWith<$Res> get image {
+$ModeratedImageCopyWith<$Res> get image {
   
-  return $DetectedImageCopyWith<$Res>(_self.image, (value) {
+  return $ModeratedImageCopyWith<$Res>(_self.image, (value) {
     return _then(_self.copyWith(image: value));
   });
 }/// Create a copy of PublicUserEntity

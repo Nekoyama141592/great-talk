@@ -7,9 +7,9 @@ import 'package:great_talk/application/use_case/post/mute_post_use_case.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/domain/entity/database/tokens/mute_post_token_entity/mute_post_token_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token_model.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
 
 void main() {
   group('MutePostUseCase', () {
@@ -46,7 +46,7 @@ void main() {
             sentiment: 'positive',
             value: 'Test post description',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 10,
@@ -196,7 +196,7 @@ void main() {
             sentiment: 'positive',
             value: 'Mute test description 1',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 10,
@@ -221,7 +221,7 @@ void main() {
             sentiment: 'positive',
             value: 'Mute test description 2',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 10,
@@ -312,7 +312,7 @@ void main() {
             sentiment: 'positive',
             value: '特別なテスト投稿の説明',
           ),
-          image: const DetectedImage(
+          image: const ModeratedImage(
             value: 'special_image.png',
             bucketName: 'special_bucket',
             moderationLabels: [],
@@ -380,7 +380,7 @@ void main() {
               sentiment: 'positive',
               value: 'Multi mute test description $index',
             ),
-            image: const DetectedImage(),
+            image: const ModeratedImage(),
             title: DetectedText(
               languageCode: 'en',
               negativeScore: 10,

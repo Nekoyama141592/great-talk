@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/domain/value/message_type.dart';
 import 'package:great_talk/core/util/id_util.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 
 part 'text_message.freezed.dart';

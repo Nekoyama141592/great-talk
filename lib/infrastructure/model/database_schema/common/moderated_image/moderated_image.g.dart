@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'detected_image.dart';
+part of 'moderated_image.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_DetectedImage _$DetectedImageFromJson(Map<String, dynamic> json) =>
-    _DetectedImage(
+_ModeratedImage _$ModeratedImageFromJson(Map<String, dynamic> json) =>
+    _ModeratedImage(
       bucketName: json['bucketName'] as String? ?? "",
       moderationLabels:
           (json['moderationLabels'] as List<dynamic>?)
@@ -18,7 +18,7 @@ _DetectedImage _$DetectedImageFromJson(Map<String, dynamic> json) =>
       value: json['value'] as String? ?? "",
     );
 
-Map<String, dynamic> _$DetectedImageToJson(_DetectedImage instance) =>
+Map<String, dynamic> _$ModeratedImageToJson(_ModeratedImage instance) =>
     <String, dynamic>{
       'bucketName': instance.bucketName,
       'moderationLabels': instance.moderationLabels,

@@ -20,7 +20,7 @@ _PublicUserEntity _$PublicUserEntityFromJson(Map<String, dynamic> json) =>
       updatedAt: const TimestampConverter().fromJson(
         json['updatedAt'] as Timestamp?,
       ),
-      image: DetectedImage.fromJson(json['image'] as Map<String, dynamic>),
+      image: ModeratedImage.fromJson(json['image'] as Map<String, dynamic>),
       userName: DetectedText.fromJson(json['userName'] as Map<String, dynamic>),
     );
 

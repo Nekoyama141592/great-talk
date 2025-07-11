@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:great_talk/core/util/id_util.dart';
 import 'package:great_talk/core/util/image_util.dart';
-import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/post_model.dart';
 import 'package:great_talk/presentation/state/create_post/create_post_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';

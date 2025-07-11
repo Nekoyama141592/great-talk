@@ -5,9 +5,9 @@ import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/application/use_case/post/like_post_use_case.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/domain/entity/database/tokens/like_post_token_entity/like_post_token_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token_model.dart';
 
@@ -46,7 +46,7 @@ void main() {
             sentiment: 'positive',
             value: 'Test post description',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 0,
@@ -182,7 +182,7 @@ void main() {
             sentiment: 'positive',
             value: 'Test post description',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 0,
@@ -301,7 +301,7 @@ void main() {
             sentiment: 'positive',
             value: 'Rapid test description',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 0,
@@ -388,7 +388,7 @@ void main() {
             sentiment: 'positive',
             value: 'Like unlike test description',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 0,

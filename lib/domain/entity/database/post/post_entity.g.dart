@@ -16,7 +16,7 @@ _PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => _PostEntity(
   description: DetectedText.fromJson(
     json['description'] as Map<String, dynamic>,
   ),
-  image: DetectedImage.fromJson(json['image'] as Map<String, dynamic>),
+  image: ModeratedImage.fromJson(json['image'] as Map<String, dynamic>),
   likeCount: (json['likeCount'] as num).toInt(),
   msgCount: (json['msgCount'] as num).toInt(),
   postId: json['postId'] as String,

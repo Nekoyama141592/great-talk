@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/util/search_util.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
 
 part 'user_update_log_model.freezed.dart';
 part 'user_update_log_model.g.dart';
@@ -30,7 +30,7 @@ abstract class UserUpdateLog with _$UserUpdateLog {
       stringBio: bio.trim(),
       stringUserName: userName.trim(),
       uid: uid,
-      image: DetectedImage(value: fileName).toJson(),
+      image: ModeratedImage(value: fileName).toJson(),
     );
   }
 }

@@ -6,9 +6,9 @@ import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/application/use_case/post/delete_post_use_case.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
 
 class FakeApiRepository implements ApiRepository {
@@ -98,7 +98,7 @@ void main() {
             sentiment: 'positive',
             value: 'Test post description',
           ),
-          image: const DetectedImage(
+          image: const ModeratedImage(
             value: 'test_image.jpg',
             bucketName: 'test_bucket',
             moderationLabels: [],
@@ -203,7 +203,7 @@ void main() {
 
       test('should handle post with empty image data', () async {
         final postWithEmptyImage = testPost.copyWith(
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
         );
 
         // Create post in fake Firestore first
@@ -233,7 +233,7 @@ void main() {
 
       test('should handle post with null image value', () async {
         final postWithNullFileName = testPost.copyWith(
-          image: const DetectedImage(
+          image: const ModeratedImage(
             value: '',
             bucketName: 'test_bucket',
             moderationLabels: [],
@@ -268,7 +268,7 @@ void main() {
 
       test('should handle post with different image configurations', () async {
         final postWithDifferentImage = testPost.copyWith(
-          image: const DetectedImage(
+          image: const ModeratedImage(
             value: 'different_image.png',
             bucketName: 'different_bucket',
             moderationLabels: [],
@@ -394,7 +394,7 @@ void main() {
             sentiment: 'positive',
             value: 'Concurrent test description',
           ),
-          image: const DetectedImage(
+          image: const ModeratedImage(
             value: 'concurrent_image.jpg',
             bucketName: 'test_bucket',
             moderationLabels: [],
@@ -456,7 +456,7 @@ void main() {
               sentiment: 'positive',
               value: 'Special chars test description',
             ),
-            image: const DetectedImage(
+            image: const ModeratedImage(
               value: 'image@#\$%^&*()_+.jpg',
               bucketName: 'test_bucket',
               moderationLabels: [],
@@ -515,7 +515,7 @@ void main() {
             sentiment: 'positive',
             value: 'Long filename test description',
           ),
-          image: DetectedImage(
+          image: ModeratedImage(
             value: longFileName,
             bucketName: 'test_bucket',
             moderationLabels: const [],
