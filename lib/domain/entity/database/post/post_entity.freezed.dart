@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostEntity {
 
-@TimestampConverter() DateTime? get createdAt; CustomCompleteText get customCompleteText; DetectedText get description; ModeratedImage get image; int get likeCount; int get msgCount; String get postId; DetectedText get title; String get uid;@TimestampConverter() DateTime? get updatedAt;
+@TimestampConverter() DateTime get createdAt; CustomCompleteText get customCompleteText; DetectedText get description; ModeratedImage get image; int get likeCount; int get msgCount; String get postId; DetectedText get title; String get uid;@TimestampConverter() DateTime get updatedAt;
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $PostEntityCopyWith<$Res>  {
   factory $PostEntityCopyWith(PostEntity value, $Res Function(PostEntity) _then) = _$PostEntityCopyWithImpl;
 @useResult
 $Res call({
-@TimestampConverter() DateTime? createdAt, CustomCompleteText customCompleteText, DetectedText description, ModeratedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime? updatedAt
+@TimestampConverter() DateTime createdAt, CustomCompleteText customCompleteText, DetectedText description, ModeratedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime updatedAt
 });
 
 
@@ -66,10 +66,10 @@ class _$PostEntityCopyWithImpl<$Res>
 
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? createdAt = freezed,Object? customCompleteText = null,Object? description = null,Object? image = null,Object? likeCount = null,Object? msgCount = null,Object? postId = null,Object? title = null,Object? uid = null,Object? updatedAt = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? createdAt = null,Object? customCompleteText = null,Object? description = null,Object? image = null,Object? likeCount = null,Object? msgCount = null,Object? postId = null,Object? title = null,Object? uid = null,Object? updatedAt = null,}) {
   return _then(_self.copyWith(
-createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,customCompleteText: null == customCompleteText ? _self.customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
+createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,customCompleteText: null == customCompleteText ? _self.customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
 as CustomCompleteText,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as DetectedText,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as ModeratedImage,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
@@ -77,8 +77,8 @@ as int,msgCount: null == msgCount ? _self.msgCount : msgCount // ignore: cast_nu
 as int,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as DetectedText,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
   ));
 }
 /// Create a copy of PostEntity
@@ -125,10 +125,10 @@ $DetectedTextCopyWith<$Res> get title {
 @JsonSerializable()
 
 class _PostEntity extends PostEntity {
-  const _PostEntity({@TimestampConverter() this.createdAt, required this.customCompleteText, required this.description, required this.image, required this.likeCount, required this.msgCount, required this.postId, required this.title, required this.uid, @TimestampConverter() this.updatedAt}): super._();
+  const _PostEntity({@TimestampConverter() required this.createdAt, required this.customCompleteText, required this.description, required this.image, required this.likeCount, required this.msgCount, required this.postId, required this.title, required this.uid, @TimestampConverter() required this.updatedAt}): super._();
   factory _PostEntity.fromJson(Map<String, dynamic> json) => _$PostEntityFromJson(json);
 
-@override@TimestampConverter() final  DateTime? createdAt;
+@override@TimestampConverter() final  DateTime createdAt;
 @override final  CustomCompleteText customCompleteText;
 @override final  DetectedText description;
 @override final  ModeratedImage image;
@@ -137,7 +137,7 @@ class _PostEntity extends PostEntity {
 @override final  String postId;
 @override final  DetectedText title;
 @override final  String uid;
-@override@TimestampConverter() final  DateTime? updatedAt;
+@override@TimestampConverter() final  DateTime updatedAt;
 
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -172,7 +172,7 @@ abstract mixin class _$PostEntityCopyWith<$Res> implements $PostEntityCopyWith<$
   factory _$PostEntityCopyWith(_PostEntity value, $Res Function(_PostEntity) _then) = __$PostEntityCopyWithImpl;
 @override @useResult
 $Res call({
-@TimestampConverter() DateTime? createdAt, CustomCompleteText customCompleteText, DetectedText description, ModeratedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime? updatedAt
+@TimestampConverter() DateTime createdAt, CustomCompleteText customCompleteText, DetectedText description, ModeratedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime updatedAt
 });
 
 
@@ -189,10 +189,10 @@ class __$PostEntityCopyWithImpl<$Res>
 
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? createdAt = freezed,Object? customCompleteText = null,Object? description = null,Object? image = null,Object? likeCount = null,Object? msgCount = null,Object? postId = null,Object? title = null,Object? uid = null,Object? updatedAt = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? createdAt = null,Object? customCompleteText = null,Object? description = null,Object? image = null,Object? likeCount = null,Object? msgCount = null,Object? postId = null,Object? title = null,Object? uid = null,Object? updatedAt = null,}) {
   return _then(_PostEntity(
-createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,customCompleteText: null == customCompleteText ? _self.customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
+createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,customCompleteText: null == customCompleteText ? _self.customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
 as CustomCompleteText,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as DetectedText,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as ModeratedImage,likeCount: null == likeCount ? _self.likeCount : likeCount // ignore: cast_nullable_to_non_nullable
@@ -200,8 +200,8 @@ as int,msgCount: null == msgCount ? _self.msgCount : msgCount // ignore: cast_nu
 as int,postId: null == postId ? _self.postId : postId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as DetectedText,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
   ));
 }
 

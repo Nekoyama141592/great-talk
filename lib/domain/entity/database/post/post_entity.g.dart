@@ -8,7 +8,7 @@ part of 'post_entity.dart';
 
 _PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => _PostEntity(
   createdAt: const TimestampConverter().fromJson(
-    json['createdAt'] as Timestamp?,
+    json['createdAt'] as Timestamp,
   ),
   customCompleteText: CustomCompleteText.fromJson(
     json['customCompleteText'] as Map<String, dynamic>,
@@ -23,7 +23,7 @@ _PostEntity _$PostEntityFromJson(Map<String, dynamic> json) => _PostEntity(
   title: DetectedText.fromJson(json['title'] as Map<String, dynamic>),
   uid: json['uid'] as String,
   updatedAt: const TimestampConverter().fromJson(
-    json['updatedAt'] as Timestamp?,
+    json['updatedAt'] as Timestamp,
   ),
 );
 

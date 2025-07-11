@@ -15,13 +15,13 @@ abstract class PublicUserEntity with _$PublicUserEntity {
   const PublicUserEntity._();
   factory PublicUserEntity({
     required DetectedText bio,
-    @TimestampConverter() DateTime? createdAt,
+    @TimestampConverter() required DateTime createdAt,
     required int followerCount,
     required int followingCount,
     required bool isOfficial,
     required int postCount,
     required String uid,
-    @TimestampConverter() DateTime? updatedAt,
+    @TimestampConverter() required DateTime updatedAt,
     required ModeratedImage image,
     required DetectedText userName,
   }) = _PublicUserEntity;
@@ -35,7 +35,7 @@ abstract class PublicUserEntity with _$PublicUserEntity {
       createdAt:
           model.createdAt is Timestamp
               ? (model.createdAt as Timestamp).toDate()
-              : model.createdAt,
+              : model.createdAt ?? DateTime.now(),
       followerCount: model.followerCount,
       followingCount: model.followingCount,
       isOfficial: model.isOfficial,
@@ -44,7 +44,7 @@ abstract class PublicUserEntity with _$PublicUserEntity {
       updatedAt:
           model.updatedAt is Timestamp
               ? (model.updatedAt as Timestamp).toDate()
-              : model.updatedAt,
+              : model.updatedAt ?? DateTime.now(),
       image: model.image,
       userName: model.userName,
     );

@@ -10,7 +10,7 @@ _PublicUserEntity _$PublicUserEntityFromJson(Map<String, dynamic> json) =>
     _PublicUserEntity(
       bio: DetectedText.fromJson(json['bio'] as Map<String, dynamic>),
       createdAt: const TimestampConverter().fromJson(
-        json['createdAt'] as Timestamp?,
+        json['createdAt'] as Timestamp,
       ),
       followerCount: (json['followerCount'] as num).toInt(),
       followingCount: (json['followingCount'] as num).toInt(),
@@ -18,7 +18,7 @@ _PublicUserEntity _$PublicUserEntityFromJson(Map<String, dynamic> json) =>
       postCount: (json['postCount'] as num).toInt(),
       uid: json['uid'] as String,
       updatedAt: const TimestampConverter().fromJson(
-        json['updatedAt'] as Timestamp?,
+        json['updatedAt'] as Timestamp,
       ),
       image: ModeratedImage.fromJson(json['image'] as Map<String, dynamic>),
       userName: DetectedText.fromJson(json['userName'] as Map<String, dynamic>),

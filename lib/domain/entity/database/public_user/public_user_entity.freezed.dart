@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PublicUserEntity {
 
- DetectedText get bio;@TimestampConverter() DateTime? get createdAt; int get followerCount; int get followingCount; bool get isOfficial; int get postCount; String get uid;@TimestampConverter() DateTime? get updatedAt; ModeratedImage get image; DetectedText get userName;
+ DetectedText get bio;@TimestampConverter() DateTime get createdAt; int get followerCount; int get followingCount; bool get isOfficial; int get postCount; String get uid;@TimestampConverter() DateTime get updatedAt; ModeratedImage get image; DetectedText get userName;
 /// Create a copy of PublicUserEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $PublicUserEntityCopyWith<$Res>  {
   factory $PublicUserEntityCopyWith(PublicUserEntity value, $Res Function(PublicUserEntity) _then) = _$PublicUserEntityCopyWithImpl;
 @useResult
 $Res call({
- DetectedText bio,@TimestampConverter() DateTime? createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime? updatedAt, ModeratedImage image, DetectedText userName
+ DetectedText bio,@TimestampConverter() DateTime createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime updatedAt, ModeratedImage image, DetectedText userName
 });
 
 
@@ -66,17 +66,17 @@ class _$PublicUserEntityCopyWithImpl<$Res>
 
 /// Create a copy of PublicUserEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? bio = null,Object? createdAt = freezed,Object? followerCount = null,Object? followingCount = null,Object? isOfficial = null,Object? postCount = null,Object? uid = null,Object? updatedAt = freezed,Object? image = null,Object? userName = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? bio = null,Object? createdAt = null,Object? followerCount = null,Object? followingCount = null,Object? isOfficial = null,Object? postCount = null,Object? uid = null,Object? updatedAt = null,Object? image = null,Object? userName = null,}) {
   return _then(_self.copyWith(
 bio: null == bio ? _self.bio : bio // ignore: cast_nullable_to_non_nullable
-as DetectedText,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,followerCount: null == followerCount ? _self.followerCount : followerCount // ignore: cast_nullable_to_non_nullable
+as DetectedText,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,followerCount: null == followerCount ? _self.followerCount : followerCount // ignore: cast_nullable_to_non_nullable
 as int,followingCount: null == followingCount ? _self.followingCount : followingCount // ignore: cast_nullable_to_non_nullable
 as int,isOfficial: null == isOfficial ? _self.isOfficial : isOfficial // ignore: cast_nullable_to_non_nullable
 as bool,postCount: null == postCount ? _self.postCount : postCount // ignore: cast_nullable_to_non_nullable
 as int,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as ModeratedImage,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
 as DetectedText,
   ));
@@ -116,17 +116,17 @@ $DetectedTextCopyWith<$Res> get userName {
 @JsonSerializable()
 
 class _PublicUserEntity extends PublicUserEntity {
-   _PublicUserEntity({required this.bio, @TimestampConverter() this.createdAt, required this.followerCount, required this.followingCount, required this.isOfficial, required this.postCount, required this.uid, @TimestampConverter() this.updatedAt, required this.image, required this.userName}): super._();
+   _PublicUserEntity({required this.bio, @TimestampConverter() required this.createdAt, required this.followerCount, required this.followingCount, required this.isOfficial, required this.postCount, required this.uid, @TimestampConverter() required this.updatedAt, required this.image, required this.userName}): super._();
   factory _PublicUserEntity.fromJson(Map<String, dynamic> json) => _$PublicUserEntityFromJson(json);
 
 @override final  DetectedText bio;
-@override@TimestampConverter() final  DateTime? createdAt;
+@override@TimestampConverter() final  DateTime createdAt;
 @override final  int followerCount;
 @override final  int followingCount;
 @override final  bool isOfficial;
 @override final  int postCount;
 @override final  String uid;
-@override@TimestampConverter() final  DateTime? updatedAt;
+@override@TimestampConverter() final  DateTime updatedAt;
 @override final  ModeratedImage image;
 @override final  DetectedText userName;
 
@@ -163,7 +163,7 @@ abstract mixin class _$PublicUserEntityCopyWith<$Res> implements $PublicUserEnti
   factory _$PublicUserEntityCopyWith(_PublicUserEntity value, $Res Function(_PublicUserEntity) _then) = __$PublicUserEntityCopyWithImpl;
 @override @useResult
 $Res call({
- DetectedText bio,@TimestampConverter() DateTime? createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime? updatedAt, ModeratedImage image, DetectedText userName
+ DetectedText bio,@TimestampConverter() DateTime createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime updatedAt, ModeratedImage image, DetectedText userName
 });
 
 
@@ -180,17 +180,17 @@ class __$PublicUserEntityCopyWithImpl<$Res>
 
 /// Create a copy of PublicUserEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? bio = null,Object? createdAt = freezed,Object? followerCount = null,Object? followingCount = null,Object? isOfficial = null,Object? postCount = null,Object? uid = null,Object? updatedAt = freezed,Object? image = null,Object? userName = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? bio = null,Object? createdAt = null,Object? followerCount = null,Object? followingCount = null,Object? isOfficial = null,Object? postCount = null,Object? uid = null,Object? updatedAt = null,Object? image = null,Object? userName = null,}) {
   return _then(_PublicUserEntity(
 bio: null == bio ? _self.bio : bio // ignore: cast_nullable_to_non_nullable
-as DetectedText,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,followerCount: null == followerCount ? _self.followerCount : followerCount // ignore: cast_nullable_to_non_nullable
+as DetectedText,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as DateTime,followerCount: null == followerCount ? _self.followerCount : followerCount // ignore: cast_nullable_to_non_nullable
 as int,followingCount: null == followingCount ? _self.followingCount : followingCount // ignore: cast_nullable_to_non_nullable
 as int,isOfficial: null == isOfficial ? _self.isOfficial : isOfficial // ignore: cast_nullable_to_non_nullable
 as bool,postCount: null == postCount ? _self.postCount : postCount // ignore: cast_nullable_to_non_nullable
 as int,uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
-as String,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
-as DateTime?,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
+as String,updatedAt: null == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
+as DateTime,image: null == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as ModeratedImage,userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
 as DetectedText,
   ));

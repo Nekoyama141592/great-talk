@@ -14,7 +14,7 @@ part 'post_entity.g.dart';
 abstract class PostEntity with _$PostEntity {
   const PostEntity._();
   const factory PostEntity({
-    @TimestampConverter() DateTime? createdAt,
+    @TimestampConverter() required DateTime createdAt,
     required CustomCompleteText customCompleteText,
     required DetectedText description,
     required ModeratedImage image,
@@ -23,7 +23,7 @@ abstract class PostEntity with _$PostEntity {
     required String postId,
     required DetectedText title,
     required String uid,
-    @TimestampConverter() DateTime? updatedAt,
+    @TimestampConverter() required DateTime updatedAt,
   }) = _PostEntity;
 
   factory PostEntity.fromJson(Map<String, dynamic> json) =>
@@ -34,7 +34,7 @@ abstract class PostEntity with _$PostEntity {
       createdAt:
           model.createdAt is Timestamp
               ? (model.createdAt as Timestamp).toDate()
-              : model.createdAt,
+              : model.createdAt ?? DateTime.now(),
       customCompleteText: model.customCompleteText,
       description: model.description,
       image: model.image,
@@ -46,7 +46,7 @@ abstract class PostEntity with _$PostEntity {
       updatedAt:
           model.updatedAt is Timestamp
               ? (model.updatedAt as Timestamp).toDate()
-              : model.updatedAt,
+              : model.updatedAt ?? DateTime.now(),
     );
   }
 
