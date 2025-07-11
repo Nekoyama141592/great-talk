@@ -3,13 +3,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 
-part 'public_user.freezed.dart';
-part 'public_user.g.dart';
+part 'public_user_model.freezed.dart';
+part 'public_user_model.g.dart';
 
 @freezed
-abstract class PublicUser with _$PublicUser {
-  const PublicUser._();
-  factory PublicUser({
+abstract class PublicUserModel with _$PublicUserModel {
+  const PublicUserModel._();
+  factory PublicUserModel({
     @Default("") String accountName,
     required Map<String, dynamic> bio,
     @Default(0) int blockCount,
@@ -31,18 +31,18 @@ abstract class PublicUser with _$PublicUser {
     required Map<String, dynamic> image,
     required Map<String, dynamic> userName,
     @Default([]) List<Map<String, dynamic>> walletAddresses,
-  }) = _PublicUser;
+  }) = _PublicUserModel;
 
-  factory PublicUser.fromJson(Map<String, dynamic> json) =>
-      _$PublicUserFromJson(json);
-  factory PublicUser.fromRegister(
+  factory PublicUserModel.fromJson(Map<String, dynamic> json) =>
+      _$PublicUserModelFromJson(json);
+  factory PublicUserModel.fromRegister(
     String uid, {
     String? userName,
     String? bio,
     String? imageValue,
   }) {
     final now = FieldValue.serverTimestamp();
-    return PublicUser(
+    return PublicUserModel(
       createdAt: now,
       bio:
           bio != null

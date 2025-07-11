@@ -9,7 +9,7 @@ import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_mute/post_mute.dart';
 import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user_model.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
@@ -145,7 +145,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      final publicUser = PublicUser.fromJson(Map<String, dynamic>.from(data));
+      final publicUser = PublicUserModel.fromJson(Map<String, dynamic>.from(data));
       return PublicUserEntity.fromModel(publicUser);
     } catch (e) {
       debugPrint('createPublicUser: ${e.toString()}');
@@ -362,7 +362,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      final publicUser = PublicUser.fromJson(Map<String, dynamic>.from(data));
+      final publicUser = PublicUserModel.fromJson(Map<String, dynamic>.from(data));
       return PublicUserEntity.fromModel(publicUser);
     } catch (e) {
       debugPrint('getPublicUser: ${e.toString()}');
@@ -462,7 +462,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = usersByWhereIn(uids);
       final qSnapshot = await _getDocs(query);
       return qSnapshot.docs.map((doc) {
-        final publicUser = PublicUser.fromJson(doc.data());
+        final publicUser = PublicUserModel.fromJson(doc.data());
         return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
@@ -511,7 +511,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = usersByFollowerCount();
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final publicUser = PublicUser.fromJson(
+        final publicUser = PublicUserModel.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
         return PublicUserEntity.fromModel(publicUser);
@@ -529,7 +529,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = usersByFollowerCount().startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final publicUser = PublicUser.fromJson(
+        final publicUser = PublicUserModel.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
         return PublicUserEntity.fromModel(publicUser);
@@ -547,7 +547,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = usersByWhereIn(requestUids);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final publicUser = PublicUser.fromJson(
+        final publicUser = PublicUserModel.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
         return PublicUserEntity.fromModel(publicUser);
@@ -569,7 +569,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = usersByWhereIn(requestUids).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final publicUser = PublicUser.fromJson(
+        final publicUser = PublicUserModel.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
         return PublicUserEntity.fromModel(publicUser);

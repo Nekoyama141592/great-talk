@@ -8,7 +8,7 @@ import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user_model.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 
@@ -36,7 +36,7 @@ void main() {
 
     group('createUserPosts', () {
       late List<PostEntity> testPosts;
-      late List<PublicUser> testUsers;
+      late List<PublicUserModel> testUsers;
 
       setUp(() {
         testPosts = [
@@ -97,7 +97,7 @@ void main() {
         ];
 
         testUsers = [
-          PublicUser(
+          PublicUserModel(
             uid: 'user_1',
             bio: const {
               'languageCode': 'en',
@@ -119,7 +119,7 @@ void main() {
             followerCount: 10,
             followingCount: 5,
           ),
-          PublicUser(
+          PublicUserModel(
             uid: 'user_2',
             bio: const {
               'languageCode': 'en',

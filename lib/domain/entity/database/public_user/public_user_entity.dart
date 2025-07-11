@@ -5,7 +5,7 @@ import 'package:great_talk/domain/converter/timestamp_converter.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user_model.dart';
 
 part 'public_user_entity.freezed.dart';
 part 'public_user_entity.g.dart';
@@ -29,7 +29,7 @@ abstract class PublicUserEntity with _$PublicUserEntity {
   factory PublicUserEntity.fromJson(Map<String, dynamic> json) =>
       _$PublicUserEntityFromJson(json);
 
-  factory PublicUserEntity.fromModel(PublicUser model) {
+  factory PublicUserEntity.fromModel(PublicUserModel model) {
     return PublicUserEntity(
       bio: DetectedText.fromJson(model.bio),
       createdAt:
