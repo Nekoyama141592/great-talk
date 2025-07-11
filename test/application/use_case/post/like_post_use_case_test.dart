@@ -58,7 +58,7 @@ void main() {
           msgCount: 0,
         );
 
-        final likePostToken = LikePostToken(
+        final likePostToken = LikePostTokenModel(
           tokenId: 'test_token_id',
           postId: 'test_post_id',
           activeUid: testCurrentUid,
@@ -197,7 +197,7 @@ void main() {
 
       test('should return success when unliking post succeeds', () async {
         // First create a like to unlike
-        final tokenModel = LikePostToken(
+        final tokenModel = LikePostTokenModel(
           tokenId: testTokenId,
           postId: testPost.postId,
           activeUid: testCurrentUid,
@@ -313,7 +313,7 @@ void main() {
           msgCount: 0,
         );
 
-        final token1Model = LikePostToken(
+        final token1Model = LikePostTokenModel(
           tokenId: 'token_1',
           postId: 'rapid_test_post',
           activeUid: 'user_1',
@@ -323,7 +323,7 @@ void main() {
         );
         final token1 = LikePostTokenEntity.fromModel(token1Model);
 
-        final token2Model = LikePostToken(
+        final token2Model = LikePostTokenModel(
           tokenId: 'token_2',
           postId: 'rapid_test_post',
           activeUid: 'user_2',
@@ -400,7 +400,7 @@ void main() {
           msgCount: 0,
         );
 
-        final tokenModel = LikePostToken(
+        final tokenModel = LikePostTokenModel(
           tokenId: 'like_unlike_token',
           postId: 'like_unlike_test_post',
           activeUid: 'test_user',

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Tokens {
 
- List<FollowingToken> get followingTokens; List<LikePostToken> get likePostTokens; List<MutePostToken> get mutePostTokens; List<MuteUserToken> get muteUserTokens;
+ List<FollowingTokenModel> get followingTokens; List<LikePostTokenModel> get likePostTokens; List<MutePostTokenModel> get mutePostTokens; List<MuteUserTokenModel> get muteUserTokens;
 /// Create a copy of Tokens
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $TokensCopyWith<$Res>  {
   factory $TokensCopyWith(Tokens value, $Res Function(Tokens) _then) = _$TokensCopyWithImpl;
 @useResult
 $Res call({
- List<FollowingToken> followingTokens, List<LikePostToken> likePostTokens, List<MutePostToken> mutePostTokens, List<MuteUserToken> muteUserTokens
+ List<FollowingTokenModel> followingTokens, List<LikePostTokenModel> likePostTokens, List<MutePostTokenModel> mutePostTokens, List<MuteUserTokenModel> muteUserTokens
 });
 
 
@@ -69,10 +69,10 @@ class _$TokensCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? followingTokens = null,Object? likePostTokens = null,Object? mutePostTokens = null,Object? muteUserTokens = null,}) {
   return _then(_self.copyWith(
 followingTokens: null == followingTokens ? _self.followingTokens : followingTokens // ignore: cast_nullable_to_non_nullable
-as List<FollowingToken>,likePostTokens: null == likePostTokens ? _self.likePostTokens : likePostTokens // ignore: cast_nullable_to_non_nullable
-as List<LikePostToken>,mutePostTokens: null == mutePostTokens ? _self.mutePostTokens : mutePostTokens // ignore: cast_nullable_to_non_nullable
-as List<MutePostToken>,muteUserTokens: null == muteUserTokens ? _self.muteUserTokens : muteUserTokens // ignore: cast_nullable_to_non_nullable
-as List<MuteUserToken>,
+as List<FollowingTokenModel>,likePostTokens: null == likePostTokens ? _self.likePostTokens : likePostTokens // ignore: cast_nullable_to_non_nullable
+as List<LikePostTokenModel>,mutePostTokens: null == mutePostTokens ? _self.mutePostTokens : mutePostTokens // ignore: cast_nullable_to_non_nullable
+as List<MutePostTokenModel>,muteUserTokens: null == muteUserTokens ? _self.muteUserTokens : muteUserTokens // ignore: cast_nullable_to_non_nullable
+as List<MuteUserTokenModel>,
   ));
 }
 
@@ -83,32 +83,32 @@ as List<MuteUserToken>,
 @JsonSerializable()
 
 class _Tokens extends Tokens {
-  const _Tokens({final  List<FollowingToken> followingTokens = const <FollowingToken>[], final  List<LikePostToken> likePostTokens = const <LikePostToken>[], final  List<MutePostToken> mutePostTokens = const <MutePostToken>[], final  List<MuteUserToken> muteUserTokens = const <MuteUserToken>[]}): _followingTokens = followingTokens,_likePostTokens = likePostTokens,_mutePostTokens = mutePostTokens,_muteUserTokens = muteUserTokens,super._();
+  const _Tokens({final  List<FollowingTokenModel> followingTokens = const <FollowingTokenModel>[], final  List<LikePostTokenModel> likePostTokens = const <LikePostTokenModel>[], final  List<MutePostTokenModel> mutePostTokens = const <MutePostTokenModel>[], final  List<MuteUserTokenModel> muteUserTokens = const <MuteUserTokenModel>[]}): _followingTokens = followingTokens,_likePostTokens = likePostTokens,_mutePostTokens = mutePostTokens,_muteUserTokens = muteUserTokens,super._();
   factory _Tokens.fromJson(Map<String, dynamic> json) => _$TokensFromJson(json);
 
- final  List<FollowingToken> _followingTokens;
-@override@JsonKey() List<FollowingToken> get followingTokens {
+ final  List<FollowingTokenModel> _followingTokens;
+@override@JsonKey() List<FollowingTokenModel> get followingTokens {
   if (_followingTokens is EqualUnmodifiableListView) return _followingTokens;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_followingTokens);
 }
 
- final  List<LikePostToken> _likePostTokens;
-@override@JsonKey() List<LikePostToken> get likePostTokens {
+ final  List<LikePostTokenModel> _likePostTokens;
+@override@JsonKey() List<LikePostTokenModel> get likePostTokens {
   if (_likePostTokens is EqualUnmodifiableListView) return _likePostTokens;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_likePostTokens);
 }
 
- final  List<MutePostToken> _mutePostTokens;
-@override@JsonKey() List<MutePostToken> get mutePostTokens {
+ final  List<MutePostTokenModel> _mutePostTokens;
+@override@JsonKey() List<MutePostTokenModel> get mutePostTokens {
   if (_mutePostTokens is EqualUnmodifiableListView) return _mutePostTokens;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_mutePostTokens);
 }
 
- final  List<MuteUserToken> _muteUserTokens;
-@override@JsonKey() List<MuteUserToken> get muteUserTokens {
+ final  List<MuteUserTokenModel> _muteUserTokens;
+@override@JsonKey() List<MuteUserTokenModel> get muteUserTokens {
   if (_muteUserTokens is EqualUnmodifiableListView) return _muteUserTokens;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_muteUserTokens);
@@ -148,7 +148,7 @@ abstract mixin class _$TokensCopyWith<$Res> implements $TokensCopyWith<$Res> {
   factory _$TokensCopyWith(_Tokens value, $Res Function(_Tokens) _then) = __$TokensCopyWithImpl;
 @override @useResult
 $Res call({
- List<FollowingToken> followingTokens, List<LikePostToken> likePostTokens, List<MutePostToken> mutePostTokens, List<MuteUserToken> muteUserTokens
+ List<FollowingTokenModel> followingTokens, List<LikePostTokenModel> likePostTokens, List<MutePostTokenModel> mutePostTokens, List<MuteUserTokenModel> muteUserTokens
 });
 
 
@@ -168,10 +168,10 @@ class __$TokensCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? followingTokens = null,Object? likePostTokens = null,Object? mutePostTokens = null,Object? muteUserTokens = null,}) {
   return _then(_Tokens(
 followingTokens: null == followingTokens ? _self._followingTokens : followingTokens // ignore: cast_nullable_to_non_nullable
-as List<FollowingToken>,likePostTokens: null == likePostTokens ? _self._likePostTokens : likePostTokens // ignore: cast_nullable_to_non_nullable
-as List<LikePostToken>,mutePostTokens: null == mutePostTokens ? _self._mutePostTokens : mutePostTokens // ignore: cast_nullable_to_non_nullable
-as List<MutePostToken>,muteUserTokens: null == muteUserTokens ? _self._muteUserTokens : muteUserTokens // ignore: cast_nullable_to_non_nullable
-as List<MuteUserToken>,
+as List<FollowingTokenModel>,likePostTokens: null == likePostTokens ? _self._likePostTokens : likePostTokens // ignore: cast_nullable_to_non_nullable
+as List<LikePostTokenModel>,mutePostTokens: null == mutePostTokens ? _self._mutePostTokens : mutePostTokens // ignore: cast_nullable_to_non_nullable
+as List<MutePostTokenModel>,muteUserTokens: null == muteUserTokens ? _self._muteUserTokens : muteUserTokens // ignore: cast_nullable_to_non_nullable
+as List<MuteUserTokenModel>,
   ));
 }
 

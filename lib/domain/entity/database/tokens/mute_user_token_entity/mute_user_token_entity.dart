@@ -16,7 +16,7 @@ abstract class MuteUserTokenEntity with _$MuteUserTokenEntity {
   factory MuteUserTokenEntity.fromJson(Map<String, dynamic> json) =>
       _$MuteUserTokenEntityFromJson(json);
 
-  factory MuteUserTokenEntity.fromModel(MuteUserToken model) {
+  factory MuteUserTokenEntity.fromModel(MuteUserTokenModel model) {
     return MuteUserTokenEntity(
       activeUid: model.activeUid,
       passiveUid: model.passiveUid,

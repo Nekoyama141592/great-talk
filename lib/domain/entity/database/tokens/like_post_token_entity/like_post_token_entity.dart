@@ -17,7 +17,7 @@ abstract class LikePostTokenEntity with _$LikePostTokenEntity {
   factory LikePostTokenEntity.fromJson(Map<String, dynamic> json) =>
       _$LikePostTokenEntityFromJson(json);
 
-  factory LikePostTokenEntity.fromModel(LikePostToken model) {
+  factory LikePostTokenEntity.fromModel(LikePostTokenModel model) {
     return LikePostTokenEntity(
       activeUid: model.activeUid,
       passiveUid: model.passiveUid,

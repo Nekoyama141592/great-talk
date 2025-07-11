@@ -56,7 +56,7 @@ class TokensNotifier extends _$TokensNotifier {
   }
 
   FollowingTokenEntity addFollowing(String passiveUid) {
-    final followingToken = FollowingToken.fromUid(passiveUid);
+    final followingToken = FollowingTokenModel.fromUid(passiveUid);
     final followingTokenEntity = FollowingTokenEntity.fromModel(followingToken);
     final newList = TokensUtil.addToTokenList(
       _currentState.followingTokens,
@@ -80,7 +80,7 @@ class TokensNotifier extends _$TokensNotifier {
   }
 
   LikePostTokenEntity? addLikePost(String currentUid, PostEntity post) {
-    final token = LikePostToken.fromPost(post.postId, post.uid, currentUid);
+    final token = LikePostTokenModel.fromPost(post.postId, post.uid, currentUid);
     final tokenEntity = LikePostTokenEntity.fromModel(token);
     final newList = TokensUtil.addToTokenList(
       _currentState.likePostTokens,
@@ -106,7 +106,7 @@ class TokensNotifier extends _$TokensNotifier {
   MutePostTokenEntity? addMutePost(PostEntity post) {
     final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
-    final token = MutePostToken.fromPost(post.postId, currentUid);
+    final token = MutePostTokenModel.fromPost(post.postId, currentUid);
     final tokenEntity = MutePostTokenEntity.fromModel(token);
     final newList = TokensUtil.addToTokenList(
       _currentState.mutePostTokens,
@@ -129,7 +129,7 @@ class TokensNotifier extends _$TokensNotifier {
   MuteUserTokenEntity? addMuteUser(PostEntity post) {
     final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
-    final token = MuteUserToken.fromPost(currentUid, post.uid);
+    final token = MuteUserTokenModel.fromPost(currentUid, post.uid);
     final tokenEntity = MuteUserTokenEntity.fromModel(token);
     final newList = TokensUtil.addToTokenList(
       _currentState.muteUserTokens,

@@ -15,7 +15,7 @@ abstract class FollowingTokenEntity with _$FollowingTokenEntity {
   factory FollowingTokenEntity.fromJson(Map<String, dynamic> json) =>
       _$FollowingTokenEntityFromJson(json);
 
-  factory FollowingTokenEntity.fromModel(FollowingToken model) {
+  factory FollowingTokenEntity.fromModel(FollowingTokenModel model) {
     return FollowingTokenEntity(
       passiveUid: model.passiveUid,
       tokenId: model.tokenId,

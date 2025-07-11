@@ -411,7 +411,7 @@ void main() {
         const currentUid = 'timeline_test_user';
 
         final timelines = await repository.getTimelines(currentUid);
-        expect(timelines, isA<List<Timeline>>());
+        expect(timelines, isA<List<TimelineModel>>());
         expect(timelines, isEmpty); // Should be empty for new user
       });
 

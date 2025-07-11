@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TimelinesState {
 
- List<UserPost> get userPosts; List<Timeline> get timelines;
+ List<UserPost> get userPosts; List<TimelineModel> get timelines;
 /// Create a copy of TimelinesState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $TimelinesStateCopyWith<$Res>  {
   factory $TimelinesStateCopyWith(TimelinesState value, $Res Function(TimelinesState) _then) = _$TimelinesStateCopyWithImpl;
 @useResult
 $Res call({
- List<UserPost> userPosts, List<Timeline> timelines
+ List<UserPost> userPosts, List<TimelineModel> timelines
 });
 
 
@@ -70,7 +70,7 @@ class _$TimelinesStateCopyWithImpl<$Res>
   return _then(_self.copyWith(
 userPosts: null == userPosts ? _self.userPosts : userPosts // ignore: cast_nullable_to_non_nullable
 as List<UserPost>,timelines: null == timelines ? _self.timelines : timelines // ignore: cast_nullable_to_non_nullable
-as List<Timeline>,
+as List<TimelineModel>,
   ));
 }
 
@@ -81,7 +81,7 @@ as List<Timeline>,
 @JsonSerializable()
 
 class _TimelinesState extends TimelinesState {
-  const _TimelinesState({final  List<UserPost> userPosts = const [], final  List<Timeline> timelines = const []}): _userPosts = userPosts,_timelines = timelines,super._();
+  const _TimelinesState({final  List<UserPost> userPosts = const [], final  List<TimelineModel> timelines = const []}): _userPosts = userPosts,_timelines = timelines,super._();
   factory _TimelinesState.fromJson(Map<String, dynamic> json) => _$TimelinesStateFromJson(json);
 
  final  List<UserPost> _userPosts;
@@ -91,8 +91,8 @@ class _TimelinesState extends TimelinesState {
   return EqualUnmodifiableListView(_userPosts);
 }
 
- final  List<Timeline> _timelines;
-@override@JsonKey() List<Timeline> get timelines {
+ final  List<TimelineModel> _timelines;
+@override@JsonKey() List<TimelineModel> get timelines {
   if (_timelines is EqualUnmodifiableListView) return _timelines;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_timelines);
@@ -132,7 +132,7 @@ abstract mixin class _$TimelinesStateCopyWith<$Res> implements $TimelinesStateCo
   factory _$TimelinesStateCopyWith(_TimelinesState value, $Res Function(_TimelinesState) _then) = __$TimelinesStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<UserPost> userPosts, List<Timeline> timelines
+ List<UserPost> userPosts, List<TimelineModel> timelines
 });
 
 
@@ -153,7 +153,7 @@ class __$TimelinesStateCopyWithImpl<$Res>
   return _then(_TimelinesState(
 userPosts: null == userPosts ? _self._userPosts : userPosts // ignore: cast_nullable_to_non_nullable
 as List<UserPost>,timelines: null == timelines ? _self._timelines : timelines // ignore: cast_nullable_to_non_nullable
-as List<Timeline>,
+as List<TimelineModel>,
   ));
 }
 

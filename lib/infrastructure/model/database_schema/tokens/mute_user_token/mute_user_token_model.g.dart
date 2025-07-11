@@ -6,8 +6,8 @@ part of 'mute_user_token_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_MuteUserToken _$MuteUserTokenFromJson(Map<String, dynamic> json) =>
-    _MuteUserToken(
+_MuteUserTokenModel _$MuteUserTokenModelFromJson(Map<String, dynamic> json) =>
+    _MuteUserTokenModel(
       activeUid: json['activeUid'] as String,
       createdAt: json['createdAt'],
       passiveUid: json['passiveUid'] as String,
@@ -15,7 +15,7 @@ _MuteUserToken _$MuteUserTokenFromJson(Map<String, dynamic> json) =>
       tokenType: json['tokenType'] as String,
     );
 
-Map<String, dynamic> _$MuteUserTokenToJson(_MuteUserToken instance) =>
+Map<String, dynamic> _$MuteUserTokenModelToJson(_MuteUserTokenModel instance) =>
     <String, dynamic>{
       'activeUid': instance.activeUid,
       'createdAt': instance.createdAt,

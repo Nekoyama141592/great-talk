@@ -5,16 +5,16 @@ part 'post_mute_model.freezed.dart';
 part 'post_mute_model.g.dart';
 
 @freezed
-abstract class PostMute with _$PostMute {
-  const factory PostMute({
+abstract class PostMuteModel with _$PostMuteModel {
+  const factory PostMuteModel({
     required String activeUid,
     required dynamic createdAt,
     required String postId,
-  }) = _PostMute;
-  factory PostMute.fromJson(Map<String, dynamic> json) =>
-      _$PostMuteFromJson(json);
-  factory PostMute.fromPost(String postId, String currentUid) {
-    return PostMute(
+  }) = _PostMuteModel;
+  factory PostMuteModel.fromJson(Map<String, dynamic> json) =>
+      _$PostMuteModelFromJson(json);
+  factory PostMuteModel.fromPost(String postId, String currentUid) {
+    return PostMuteModel(
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),
       postId: postId,

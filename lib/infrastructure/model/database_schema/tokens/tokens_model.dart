@@ -11,10 +11,10 @@ part 'tokens_model.g.dart';
 abstract class Tokens with _$Tokens {
   const Tokens._();
   const factory Tokens({
-    @Default(<FollowingToken>[]) List<FollowingToken> followingTokens,
-    @Default(<LikePostToken>[]) List<LikePostToken> likePostTokens,
-    @Default(<MutePostToken>[]) List<MutePostToken> mutePostTokens,
-    @Default(<MuteUserToken>[]) List<MuteUserToken> muteUserTokens,
+    @Default(<FollowingTokenModel>[]) List<FollowingTokenModel> followingTokens,
+    @Default(<LikePostTokenModel>[]) List<LikePostTokenModel> likePostTokens,
+    @Default(<MutePostTokenModel>[]) List<MutePostTokenModel> mutePostTokens,
+    @Default(<MuteUserTokenModel>[]) List<MuteUserTokenModel> muteUserTokens,
   }) = _Tokens;
   factory Tokens.fromJson(Map<String, dynamic> json) => _$TokensFromJson(json);
 

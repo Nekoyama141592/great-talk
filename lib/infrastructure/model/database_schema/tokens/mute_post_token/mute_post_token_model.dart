@@ -7,18 +7,18 @@ part 'mute_post_token_model.freezed.dart';
 part 'mute_post_token_model.g.dart';
 
 @freezed
-abstract class MutePostToken with _$MutePostToken {
-  const factory MutePostToken({
+abstract class MutePostTokenModel with _$MutePostTokenModel {
+  const factory MutePostTokenModel({
     required String activeUid,
     required dynamic createdAt,
     required String postId,
     required String tokenId,
     required String tokenType,
-  }) = _MutePostToken;
-  factory MutePostToken.fromJson(Map<String, dynamic> json) =>
-      _$MutePostTokenFromJson(json);
-  factory MutePostToken.fromPost(String postId, String currentUid) {
-    return MutePostToken(
+  }) = _MutePostTokenModel;
+  factory MutePostTokenModel.fromJson(Map<String, dynamic> json) =>
+      _$MutePostTokenModelFromJson(json);
+  factory MutePostTokenModel.fromPost(String postId, String currentUid) {
+    return MutePostTokenModel(
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),
       postId: postId,

@@ -5,21 +5,22 @@ part 'post_like_model.freezed.dart';
 part 'post_like_model.g.dart';
 
 @freezed
-abstract class PostLike with _$PostLike {
-  const factory PostLike({
+abstract class PostLikeModel with _$PostLikeModel {
+  const PostLikeModel._();
+  const factory PostLikeModel({
     required String activeUid,
     required dynamic createdAt,
     required String passiveUid,
     required String postId,
-  }) = _PostLike;
-  factory PostLike.fromJson(Map<String, dynamic> json) =>
-      _$PostLikeFromJson(json);
-  factory PostLike.fromPost(
+  }) = _PostLikeModel;
+  factory PostLikeModel.fromJson(Map<String, dynamic> json) =>
+      _$PostLikeModelFromJson(json);
+  factory PostLikeModel.fromPost(
     String postId,
     String passiveUid,
     String currentUid,
   ) {
-    return PostLike(
+    return PostLikeModel(
       activeUid: currentUid,
       createdAt: FieldValue.serverTimestamp(),
       passiveUid: passiveUid,

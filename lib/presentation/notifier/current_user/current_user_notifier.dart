@@ -49,7 +49,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   Future<PrivateUserEntity?> _createPrivateUser(String uid) {
-    final newPrivateUser = PrivateUser.fromUid(uid);
+    final newPrivateUser = PrivateUserModel.fromUid(uid);
     final json = newPrivateUser.toJson();
     return _databaseRepository.createPrivateUser(uid, json);
   }

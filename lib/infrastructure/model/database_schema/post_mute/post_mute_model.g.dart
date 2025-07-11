@@ -6,14 +6,16 @@ part of 'post_mute_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_PostMute _$PostMuteFromJson(Map<String, dynamic> json) => _PostMute(
-  activeUid: json['activeUid'] as String,
-  createdAt: json['createdAt'],
-  postId: json['postId'] as String,
-);
+_PostMuteModel _$PostMuteModelFromJson(Map<String, dynamic> json) =>
+    _PostMuteModel(
+      activeUid: json['activeUid'] as String,
+      createdAt: json['createdAt'],
+      postId: json['postId'] as String,
+    );
 
-Map<String, dynamic> _$PostMuteToJson(_PostMute instance) => <String, dynamic>{
-  'activeUid': instance.activeUid,
-  'createdAt': instance.createdAt,
-  'postId': instance.postId,
-};
+Map<String, dynamic> _$PostMuteModelToJson(_PostMuteModel instance) =>
+    <String, dynamic>{
+      'activeUid': instance.activeUid,
+      'createdAt': instance.createdAt,
+      'postId': instance.postId,
+    };

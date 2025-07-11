@@ -92,9 +92,9 @@ abstract class IDatabaseRepository {
   Future<Tokens> getTokens(String uid);
 
   // Timeline operations
-  Future<List<Timeline>> getTimelines(String currentUid);
+  Future<List<TimelineModel>> getTimelines(String currentUid);
   Future<List<PostEntity>> getTimelinePosts(List<String> postIds);
-  Future<List<Timeline>> getMoreTimelines(
+  Future<List<TimelineModel>> getMoreTimelines(
     String currentUid,
     String lastTimelinePostId,
   );

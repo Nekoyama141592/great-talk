@@ -59,7 +59,7 @@ void main() {
           msgCount: 0,
         );
 
-        final muteUserToken = MuteUserToken(
+        final muteUserToken = MuteUserTokenModel(
           tokenId: 'test_token_id',
           activeUid: testCurrentUid,
           passiveUid: testPassiveUid,
@@ -170,7 +170,7 @@ void main() {
         const sameUid = 'same_user_uid';
 
         final selfPost = testPost.copyWith(uid: sameUid);
-        final selfMuteUserToken = MuteUserToken(
+        final selfMuteUserToken = MuteUserTokenModel(
           tokenId: 'test_token_id',
           activeUid: sameUid,
           passiveUid: sameUid,
@@ -255,7 +255,7 @@ void main() {
         final modelTokens =
             users
                 .map(
-                  (uid) => MuteUserToken(
+                  (uid) => MuteUserTokenModel(
                     tokenId: 'mute_${uid}_token',
                     activeUid: muterUid,
                     passiveUid: uid,
@@ -338,7 +338,7 @@ void main() {
           msgCount: 50,
         );
 
-        final complexMuteUserToken = MuteUserToken(
+        final complexMuteUserToken = MuteUserTokenModel(
           tokenId: 'complex_mute_token',
           activeUid: 'muting_user',
           passiveUid: 'complex_user',
@@ -408,7 +408,7 @@ void main() {
 
         final modelTokens = List.generate(
           5,
-          (index) => MuteUserToken(
+          (index) => MuteUserTokenModel(
             tokenId: 'rapid_mute_token_$index',
             activeUid: rapidMuter,
             passiveUid: targetUser,
@@ -511,7 +511,7 @@ void main() {
           msgCount: 0,
         );
 
-        final modelTokenAMutesB = MuteUserToken(
+        final modelTokenAMutesB = MuteUserTokenModel(
           tokenId: 'a_mutes_b',
           activeUid: userA,
           passiveUid: userB,
@@ -520,7 +520,7 @@ void main() {
         );
         final tokenAMutesB = MuteUserTokenEntity.fromModel(modelTokenAMutesB);
 
-        final modelTokenBMutesA = MuteUserToken(
+        final modelTokenBMutesA = MuteUserTokenModel(
           tokenId: 'b_mutes_a',
           activeUid: userB,
           passiveUid: userA,

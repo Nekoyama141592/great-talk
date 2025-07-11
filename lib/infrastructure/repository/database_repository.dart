@@ -228,7 +228,7 @@ class DatabaseRepository implements IDatabaseRepository {
     String currentUid,
     String passiveUid,
   ) async {
-    final followingToken = FollowingToken.fromUid(passiveUid);
+    final followingToken = FollowingTokenModel.fromUid(passiveUid);
     final follower = FollowerModel.fromUid(currentUid, passiveUid);
     final tokenRef = tokenDocRef(currentUid, followingToken.tokenId);
     final followerRef = followerDocRef(currentUid, passiveUid);
@@ -244,7 +244,7 @@ class DatabaseRepository implements IDatabaseRepository {
     String currentUid,
     String passiveUid,
   ) async {
-    final token = MuteUserToken.fromPost(currentUid, passiveUid);
+    final token = MuteUserTokenModel.fromPost(currentUid, passiveUid);
     final userMute = UserMute.fromPost(currentUid, passiveUid);
     final tokenRef = tokenDocRef(currentUid, token.tokenId);
     final userMuteRef = userMuteDocRef(passiveUid, currentUid);
@@ -261,8 +261,8 @@ class DatabaseRepository implements IDatabaseRepository {
     String postUid,
     String postId,
   ) async {
-    final token = MutePostToken.fromPost(postId, currentUid);
-    final postMute = PostMute.fromPost(postId, currentUid);
+    final token = MutePostTokenModel.fromPost(postId, currentUid);
+    final postMute = PostMuteModel.fromPost(postId, currentUid);
     final tokenRef = tokenDocRef(currentUid, token.tokenId);
     final postMuteRef = postMuteDocRef(postDocRef(postUid, postId), currentUid);
     final requestList = [
@@ -278,8 +278,8 @@ class DatabaseRepository implements IDatabaseRepository {
     String postUid,
     String postId,
   ) async {
-    final token = LikePostToken.fromPost(postId, postUid, currentUid);
-    final postLike = PostLike.fromPost(postId, postUid, currentUid);
+    final token = LikePostTokenModel.fromPost(postId, postUid, currentUid);
+    final postLike = PostLikeModel.fromPost(postId, postUid, currentUid);
     final tokenRef = tokenDocRef(currentUid, token.tokenId);
     final postRef = postDocRef(postUid, postId);
     final postLikeRef = postLikeDocRef(postRef, currentUid);
@@ -377,7 +377,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      final privateUser = PrivateUser.fromJson(Map<String, dynamic>.from(data));
+      final privateUser = PrivateUserModel.fromJson(Map<String, dynamic>.from(data));
       return PrivateUserEntity.fromModel(privateUser);
     } catch (e) {
       debugPrint('getPrivateUser: ${e.toString()}');
@@ -415,22 +415,22 @@ class DatabaseRepository implements IDatabaseRepository {
         followingTokens:
             allTokensData
                 .where((map) => map['tokenType'] == TokenType.following.name)
-                .map((map) => FollowingToken.fromJson(map))
+                .map((map) => FollowingTokenModel.fromJson(map))
                 .toList(),
         likePostTokens:
             allTokensData
                 .where((map) => map['tokenType'] == TokenType.likePost.name)
-                .map((map) => LikePostToken.fromJson(map))
+                .map((map) => LikePostTokenModel.fromJson(map))
                 .toList(),
         muteUserTokens:
             allTokensData
                 .where((map) => map['tokenType'] == TokenType.muteUser.name)
-                .map((map) => MuteUserToken.fromJson(map))
+                .map((map) => MuteUserTokenModel.fromJson(map))
                 .toList(),
         mutePostTokens:
             allTokensData
                 .where((map) => map['tokenType'] == TokenType.mutePost.name)
-                .map((map) => MutePostToken.fromJson(map))
+                .map((map) => MutePostTokenModel.fromJson(map))
                 .toList(),
       );
     } catch (e) {
@@ -581,13 +581,13 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Timeline>> getTimelines(String currentUid) async {
+  Future<List<TimelineModel>> getTimelines(String currentUid) async {
     try {
       final qshot = await timelinesQuery(currentUid).get();
       final timelines =
           qshot.docs
               .map(
-                (e) => Timeline.fromJson(Map<String, dynamic>.from(e.data())),
+                (e) => TimelineModel.fromJson(Map<String, dynamic>.from(e.data())),
               )
               .toList();
       final sorted = [...timelines]
@@ -638,7 +638,7 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Timeline>> getMoreTimelines(
+  Future<List<TimelineModel>> getMoreTimelines(
     String currentUid,
     String lastTimelinePostId,
   ) async {
@@ -647,7 +647,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = timelinesQuery(currentUid);
       final qshot = await query.startAfterDocument(doc).get();
       return qshot.docs
-          .map((e) => Timeline.fromJson(Map<String, dynamic>.from(e.data())))
+          .map((e) => TimelineModel.fromJson(Map<String, dynamic>.from(e.data())))
           .toList();
     } catch (e) {
       debugPrint('getMoreTimelines: ${e.toString()}');

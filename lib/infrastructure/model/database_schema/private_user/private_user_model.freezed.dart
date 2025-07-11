@@ -14,22 +14,22 @@ part of 'private_user_model.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$PrivateUser {
+mixin _$PrivateUserModel {
 
  String? get accessToken; dynamic get createdAt; String get ethAddress; String? get fcmToken; String get gender; String get ipAddress; bool get isAdmin; String get uid; dynamic get updatedAt;
-/// Create a copy of PrivateUser
+/// Create a copy of PrivateUserModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$PrivateUserCopyWith<PrivateUser> get copyWith => _$PrivateUserCopyWithImpl<PrivateUser>(this as PrivateUser, _$identity);
+$PrivateUserModelCopyWith<PrivateUserModel> get copyWith => _$PrivateUserModelCopyWithImpl<PrivateUserModel>(this as PrivateUserModel, _$identity);
 
-  /// Serializes this PrivateUser to a JSON map.
+  /// Serializes this PrivateUserModel to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrivateUser&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.ipAddress, ipAddress) || other.ipAddress == ipAddress)&&(identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PrivateUserModel&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.ipAddress, ipAddress) || other.ipAddress == ipAddress)&&(identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -38,15 +38,15 @@ int get hashCode => Object.hash(runtimeType,accessToken,const DeepCollectionEqua
 
 @override
 String toString() {
-  return 'PrivateUser(accessToken: $accessToken, createdAt: $createdAt, ethAddress: $ethAddress, fcmToken: $fcmToken, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, uid: $uid, updatedAt: $updatedAt)';
+  return 'PrivateUserModel(accessToken: $accessToken, createdAt: $createdAt, ethAddress: $ethAddress, fcmToken: $fcmToken, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, uid: $uid, updatedAt: $updatedAt)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $PrivateUserCopyWith<$Res>  {
-  factory $PrivateUserCopyWith(PrivateUser value, $Res Function(PrivateUser) _then) = _$PrivateUserCopyWithImpl;
+abstract mixin class $PrivateUserModelCopyWith<$Res>  {
+  factory $PrivateUserModelCopyWith(PrivateUserModel value, $Res Function(PrivateUserModel) _then) = _$PrivateUserModelCopyWithImpl;
 @useResult
 $Res call({
  String? accessToken, dynamic createdAt, String ethAddress, String? fcmToken, String gender, String ipAddress, bool isAdmin, String uid, dynamic updatedAt
@@ -57,14 +57,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$PrivateUserCopyWithImpl<$Res>
-    implements $PrivateUserCopyWith<$Res> {
-  _$PrivateUserCopyWithImpl(this._self, this._then);
+class _$PrivateUserModelCopyWithImpl<$Res>
+    implements $PrivateUserModelCopyWith<$Res> {
+  _$PrivateUserModelCopyWithImpl(this._self, this._then);
 
-  final PrivateUser _self;
-  final $Res Function(PrivateUser) _then;
+  final PrivateUserModel _self;
+  final $Res Function(PrivateUserModel) _then;
 
-/// Create a copy of PrivateUser
+/// Create a copy of PrivateUserModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? accessToken = freezed,Object? createdAt = freezed,Object? ethAddress = null,Object? fcmToken = freezed,Object? gender = null,Object? ipAddress = null,Object? isAdmin = null,Object? uid = null,Object? updatedAt = freezed,}) {
   return _then(_self.copyWith(
@@ -87,9 +87,9 @@ as dynamic,
 /// @nodoc
 @JsonSerializable()
 
-class _PrivateUser extends PrivateUser {
-  const _PrivateUser({this.accessToken = "", required this.createdAt, this.ethAddress = "", this.fcmToken = "", this.gender = "", this.ipAddress = "", this.isAdmin = false, required this.uid, required this.updatedAt}): super._();
-  factory _PrivateUser.fromJson(Map<String, dynamic> json) => _$PrivateUserFromJson(json);
+class _PrivateUserModel extends PrivateUserModel {
+  const _PrivateUserModel({this.accessToken = "", required this.createdAt, this.ethAddress = "", this.fcmToken = "", this.gender = "", this.ipAddress = "", this.isAdmin = false, required this.uid, required this.updatedAt}): super._();
+  factory _PrivateUserModel.fromJson(Map<String, dynamic> json) => _$PrivateUserModelFromJson(json);
 
 @override@JsonKey() final  String? accessToken;
 @override final  dynamic createdAt;
@@ -101,20 +101,20 @@ class _PrivateUser extends PrivateUser {
 @override final  String uid;
 @override final  dynamic updatedAt;
 
-/// Create a copy of PrivateUser
+/// Create a copy of PrivateUserModel
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$PrivateUserCopyWith<_PrivateUser> get copyWith => __$PrivateUserCopyWithImpl<_PrivateUser>(this, _$identity);
+_$PrivateUserModelCopyWith<_PrivateUserModel> get copyWith => __$PrivateUserModelCopyWithImpl<_PrivateUserModel>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$PrivateUserToJson(this, );
+  return _$PrivateUserModelToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrivateUser&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.ipAddress, ipAddress) || other.ipAddress == ipAddress)&&(identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PrivateUserModel&&(identical(other.accessToken, accessToken) || other.accessToken == accessToken)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&(identical(other.ethAddress, ethAddress) || other.ethAddress == ethAddress)&&(identical(other.fcmToken, fcmToken) || other.fcmToken == fcmToken)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.ipAddress, ipAddress) || other.ipAddress == ipAddress)&&(identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -123,15 +123,15 @@ int get hashCode => Object.hash(runtimeType,accessToken,const DeepCollectionEqua
 
 @override
 String toString() {
-  return 'PrivateUser(accessToken: $accessToken, createdAt: $createdAt, ethAddress: $ethAddress, fcmToken: $fcmToken, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, uid: $uid, updatedAt: $updatedAt)';
+  return 'PrivateUserModel(accessToken: $accessToken, createdAt: $createdAt, ethAddress: $ethAddress, fcmToken: $fcmToken, gender: $gender, ipAddress: $ipAddress, isAdmin: $isAdmin, uid: $uid, updatedAt: $updatedAt)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$PrivateUserCopyWith<$Res> implements $PrivateUserCopyWith<$Res> {
-  factory _$PrivateUserCopyWith(_PrivateUser value, $Res Function(_PrivateUser) _then) = __$PrivateUserCopyWithImpl;
+abstract mixin class _$PrivateUserModelCopyWith<$Res> implements $PrivateUserModelCopyWith<$Res> {
+  factory _$PrivateUserModelCopyWith(_PrivateUserModel value, $Res Function(_PrivateUserModel) _then) = __$PrivateUserModelCopyWithImpl;
 @override @useResult
 $Res call({
  String? accessToken, dynamic createdAt, String ethAddress, String? fcmToken, String gender, String ipAddress, bool isAdmin, String uid, dynamic updatedAt
@@ -142,17 +142,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$PrivateUserCopyWithImpl<$Res>
-    implements _$PrivateUserCopyWith<$Res> {
-  __$PrivateUserCopyWithImpl(this._self, this._then);
+class __$PrivateUserModelCopyWithImpl<$Res>
+    implements _$PrivateUserModelCopyWith<$Res> {
+  __$PrivateUserModelCopyWithImpl(this._self, this._then);
 
-  final _PrivateUser _self;
-  final $Res Function(_PrivateUser) _then;
+  final _PrivateUserModel _self;
+  final $Res Function(_PrivateUserModel) _then;
 
-/// Create a copy of PrivateUser
+/// Create a copy of PrivateUserModel
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? accessToken = freezed,Object? createdAt = freezed,Object? ethAddress = null,Object? fcmToken = freezed,Object? gender = null,Object? ipAddress = null,Object? isAdmin = null,Object? uid = null,Object? updatedAt = freezed,}) {
-  return _then(_PrivateUser(
+  return _then(_PrivateUserModel(
 accessToken: freezed == accessToken ? _self.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,ethAddress: null == ethAddress ? _self.ethAddress : ethAddress // ignore: cast_nullable_to_non_nullable

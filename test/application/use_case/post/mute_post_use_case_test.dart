@@ -58,7 +58,7 @@ void main() {
           msgCount: 0,
         );
 
-        final mutePostToken = MutePostToken(
+        final mutePostToken = MutePostTokenModel(
           tokenId: 'test_token_id',
           postId: 'test_post_id',
           activeUid: testCurrentUid,
@@ -233,7 +233,7 @@ void main() {
           msgCount: 0,
         );
 
-        final token1 = MutePostToken(
+        final token1 = MutePostTokenModel(
           tokenId: 'mute_token_1',
           postId: 'mute_test_post_1',
           activeUid: 'test_user',
@@ -241,7 +241,7 @@ void main() {
           createdAt: Timestamp.fromDate(mockDateTime),
         );
 
-        final token2 = MutePostToken(
+        final token2 = MutePostTokenModel(
           tokenId: 'mute_token_2',
           postId: 'mute_test_post_2',
           activeUid: 'test_user',
@@ -329,7 +329,7 @@ void main() {
           msgCount: 0,
         );
 
-        final specialToken = MutePostToken(
+        final specialToken = MutePostTokenModel(
           tokenId: 'special_mute_token',
           postId: 'special_content_post',
           activeUid: 'test_user',
@@ -395,7 +395,7 @@ void main() {
 
         final tokens = List.generate(
           3,
-          (index) => MutePostToken(
+          (index) => MutePostTokenModel(
             tokenId: 'multi_mute_token_$index',
             postId: 'multi_post_$index',
             activeUid: testUser,

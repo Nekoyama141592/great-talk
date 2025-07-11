@@ -12,7 +12,7 @@ abstract class PrivateUserEntity with _$PrivateUserEntity {
   factory PrivateUserEntity.fromJson(Map<String, dynamic> json) =>
       _$PrivateUserEntityFromJson(json);
 
-  factory PrivateUserEntity.fromModel(PrivateUser model) {
+  factory PrivateUserEntity.fromModel(PrivateUserModel model) {
     return PrivateUserEntity(isAdmin: model.isAdmin);
   }
 }

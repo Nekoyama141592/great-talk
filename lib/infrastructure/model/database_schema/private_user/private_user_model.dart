@@ -6,9 +6,9 @@ part 'private_user_model.freezed.dart';
 part 'private_user_model.g.dart';
 
 @freezed
-abstract class PrivateUser with _$PrivateUser {
-  const PrivateUser._();
-  const factory PrivateUser({
+abstract class PrivateUserModel with _$PrivateUserModel {
+  const PrivateUserModel._();
+  const factory PrivateUserModel({
     @Default("") String? accessToken,
     required dynamic createdAt,
     @Default("") String ethAddress,
@@ -18,12 +18,12 @@ abstract class PrivateUser with _$PrivateUser {
     @Default(false) bool isAdmin,
     required String uid,
     required dynamic updatedAt,
-  }) = _PrivateUser;
-  factory PrivateUser.fromJson(Map<String, dynamic> json) =>
-      _$PrivateUserFromJson(json);
-  factory PrivateUser.fromUid(String uid) {
+  }) = _PrivateUserModel;
+  factory PrivateUserModel.fromJson(Map<String, dynamic> json) =>
+      _$PrivateUserModelFromJson(json);
+  factory PrivateUserModel.fromUid(String uid) {
     final now = FieldValue.serverTimestamp();
-    return PrivateUser(
+    return PrivateUserModel(
       accessToken: IdUtil.randomString(),
       createdAt: now,
       uid: uid,

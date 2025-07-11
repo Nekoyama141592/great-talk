@@ -15,7 +15,7 @@ _TimelinesState _$TimelinesStateFromJson(Map<String, dynamic> json) =>
           const [],
       timelines:
           (json['timelines'] as List<dynamic>?)
-              ?.map((e) => Timeline.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => TimelineModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );
