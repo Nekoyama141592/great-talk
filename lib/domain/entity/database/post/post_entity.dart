@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/constant/moderate_constant.dart';
-import 'package:great_talk/domain/converter/timestamp_converter.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
@@ -14,7 +13,7 @@ part 'post_entity.g.dart';
 abstract class PostEntity with _$PostEntity {
   const PostEntity._();
   const factory PostEntity({
-    @TimestampConverter() required DateTime createdAt,
+    required DateTime createdAt,
     required CustomCompleteText customCompleteText,
     required DetectedText description,
     required ModeratedImage image,
@@ -23,7 +22,7 @@ abstract class PostEntity with _$PostEntity {
     required String postId,
     required DetectedText title,
     required String uid,
-    @TimestampConverter() required DateTime updatedAt,
+    required DateTime updatedAt,
   }) = _PostEntity;
 
   factory PostEntity.fromJson(Map<String, dynamic> json) =>

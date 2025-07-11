@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/constant/moderate_constant.dart';
-import 'package:great_talk/domain/converter/timestamp_converter.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
 import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
@@ -15,13 +14,13 @@ abstract class PublicUserEntity with _$PublicUserEntity {
   const PublicUserEntity._();
   factory PublicUserEntity({
     required DetectedText bio,
-    @TimestampConverter() required DateTime createdAt,
+    required DateTime createdAt,
     required int followerCount,
     required int followingCount,
     required bool isOfficial,
     required int postCount,
     required String uid,
-    @TimestampConverter() required DateTime updatedAt,
+    required DateTime updatedAt,
     required ModeratedImage image,
     required DetectedText userName,
   }) = _PublicUserEntity;

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PublicUserEntity {
 
- DetectedText get bio;@TimestampConverter() DateTime get createdAt; int get followerCount; int get followingCount; bool get isOfficial; int get postCount; String get uid;@TimestampConverter() DateTime get updatedAt; ModeratedImage get image; DetectedText get userName;
+ DetectedText get bio; DateTime get createdAt; int get followerCount; int get followingCount; bool get isOfficial; int get postCount; String get uid; DateTime get updatedAt; ModeratedImage get image; DetectedText get userName;
 /// Create a copy of PublicUserEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $PublicUserEntityCopyWith<$Res>  {
   factory $PublicUserEntityCopyWith(PublicUserEntity value, $Res Function(PublicUserEntity) _then) = _$PublicUserEntityCopyWithImpl;
 @useResult
 $Res call({
- DetectedText bio,@TimestampConverter() DateTime createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime updatedAt, ModeratedImage image, DetectedText userName
+ DetectedText bio, DateTime createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid, DateTime updatedAt, ModeratedImage image, DetectedText userName
 });
 
 
@@ -116,17 +116,17 @@ $DetectedTextCopyWith<$Res> get userName {
 @JsonSerializable()
 
 class _PublicUserEntity extends PublicUserEntity {
-   _PublicUserEntity({required this.bio, @TimestampConverter() required this.createdAt, required this.followerCount, required this.followingCount, required this.isOfficial, required this.postCount, required this.uid, @TimestampConverter() required this.updatedAt, required this.image, required this.userName}): super._();
+   _PublicUserEntity({required this.bio, required this.createdAt, required this.followerCount, required this.followingCount, required this.isOfficial, required this.postCount, required this.uid, required this.updatedAt, required this.image, required this.userName}): super._();
   factory _PublicUserEntity.fromJson(Map<String, dynamic> json) => _$PublicUserEntityFromJson(json);
 
 @override final  DetectedText bio;
-@override@TimestampConverter() final  DateTime createdAt;
+@override final  DateTime createdAt;
 @override final  int followerCount;
 @override final  int followingCount;
 @override final  bool isOfficial;
 @override final  int postCount;
 @override final  String uid;
-@override@TimestampConverter() final  DateTime updatedAt;
+@override final  DateTime updatedAt;
 @override final  ModeratedImage image;
 @override final  DetectedText userName;
 
@@ -163,7 +163,7 @@ abstract mixin class _$PublicUserEntityCopyWith<$Res> implements $PublicUserEnti
   factory _$PublicUserEntityCopyWith(_PublicUserEntity value, $Res Function(_PublicUserEntity) _then) = __$PublicUserEntityCopyWithImpl;
 @override @useResult
 $Res call({
- DetectedText bio,@TimestampConverter() DateTime createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid,@TimestampConverter() DateTime updatedAt, ModeratedImage image, DetectedText userName
+ DetectedText bio, DateTime createdAt, int followerCount, int followingCount, bool isOfficial, int postCount, String uid, DateTime updatedAt, ModeratedImage image, DetectedText userName
 });
 
 

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PostEntity {
 
-@TimestampConverter() DateTime get createdAt; CustomCompleteText get customCompleteText; DetectedText get description; ModeratedImage get image; int get likeCount; int get msgCount; String get postId; DetectedText get title; String get uid;@TimestampConverter() DateTime get updatedAt;
+ DateTime get createdAt; CustomCompleteText get customCompleteText; DetectedText get description; ModeratedImage get image; int get likeCount; int get msgCount; String get postId; DetectedText get title; String get uid; DateTime get updatedAt;
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $PostEntityCopyWith<$Res>  {
   factory $PostEntityCopyWith(PostEntity value, $Res Function(PostEntity) _then) = _$PostEntityCopyWithImpl;
 @useResult
 $Res call({
-@TimestampConverter() DateTime createdAt, CustomCompleteText customCompleteText, DetectedText description, ModeratedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime updatedAt
+ DateTime createdAt, CustomCompleteText customCompleteText, DetectedText description, ModeratedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid, DateTime updatedAt
 });
 
 
@@ -125,10 +125,10 @@ $DetectedTextCopyWith<$Res> get title {
 @JsonSerializable()
 
 class _PostEntity extends PostEntity {
-  const _PostEntity({@TimestampConverter() required this.createdAt, required this.customCompleteText, required this.description, required this.image, required this.likeCount, required this.msgCount, required this.postId, required this.title, required this.uid, @TimestampConverter() required this.updatedAt}): super._();
+  const _PostEntity({required this.createdAt, required this.customCompleteText, required this.description, required this.image, required this.likeCount, required this.msgCount, required this.postId, required this.title, required this.uid, required this.updatedAt}): super._();
   factory _PostEntity.fromJson(Map<String, dynamic> json) => _$PostEntityFromJson(json);
 
-@override@TimestampConverter() final  DateTime createdAt;
+@override final  DateTime createdAt;
 @override final  CustomCompleteText customCompleteText;
 @override final  DetectedText description;
 @override final  ModeratedImage image;
@@ -137,7 +137,7 @@ class _PostEntity extends PostEntity {
 @override final  String postId;
 @override final  DetectedText title;
 @override final  String uid;
-@override@TimestampConverter() final  DateTime updatedAt;
+@override final  DateTime updatedAt;
 
 /// Create a copy of PostEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -172,7 +172,7 @@ abstract mixin class _$PostEntityCopyWith<$Res> implements $PostEntityCopyWith<$
   factory _$PostEntityCopyWith(_PostEntity value, $Res Function(_PostEntity) _then) = __$PostEntityCopyWithImpl;
 @override @useResult
 $Res call({
-@TimestampConverter() DateTime createdAt, CustomCompleteText customCompleteText, DetectedText description, ModeratedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid,@TimestampConverter() DateTime updatedAt
+ DateTime createdAt, CustomCompleteText customCompleteText, DetectedText description, ModeratedImage image, int likeCount, int msgCount, String postId, DetectedText title, String uid, DateTime updatedAt
 });
 
 
