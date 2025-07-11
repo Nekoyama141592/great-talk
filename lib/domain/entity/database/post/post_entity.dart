@@ -36,12 +36,12 @@ abstract class PostEntity with _$PostEntity {
               ? (model.createdAt as Timestamp).toDate()
               : model.createdAt,
       customCompleteText: CustomCompleteText.fromJson(model.customCompleteText),
-      description: DetectedText.fromJson(model.description),
-      image: ModeratedImage.fromJson(model.image),
+      description: model.description,
+      image: model.image,
       likeCount: model.likeCount,
       msgCount: model.msgCount,
       postId: model.postId,
-      title: DetectedText.fromJson(model.title),
+      title: model.title,
       uid: model.uid,
       updatedAt:
           model.updatedAt is Timestamp

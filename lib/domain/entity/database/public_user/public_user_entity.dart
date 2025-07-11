@@ -31,7 +31,7 @@ abstract class PublicUserEntity with _$PublicUserEntity {
 
   factory PublicUserEntity.fromModel(PublicUserModel model) {
     return PublicUserEntity(
-      bio: DetectedText.fromJson(model.bio),
+      bio: model.bio,
       createdAt:
           model.createdAt is Timestamp
               ? (model.createdAt as Timestamp).toDate()
@@ -45,8 +45,8 @@ abstract class PublicUserEntity with _$PublicUserEntity {
           model.updatedAt is Timestamp
               ? (model.updatedAt as Timestamp).toDate()
               : model.updatedAt,
-      image: ModeratedImage.fromJson(model.image),
-      userName: DetectedText.fromJson(model.userName),
+      image: model.image,
+      userName: model.userName,
     );
   }
 

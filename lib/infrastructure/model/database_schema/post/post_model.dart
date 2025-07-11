@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/util/search_util.dart';
+import 'package:great_talk/domain/converter/detected_text_converter.dart';
+import 'package:great_talk/domain/converter/moderated_image_converter.dart';
 import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
 
@@ -14,11 +16,11 @@ abstract class PostModel with _$PostModel {
     @Default(0) int bookmarkCount,
     required dynamic createdAt,
     required Map<String, dynamic> customCompleteText,
-    required Map<String, dynamic> description,
+    @DetectedTextConverter() required DetectedText description,
     @Default([]) List<Map<String, dynamic>> exampleTexts,
     @Default("") String genre,
     @Default([]) List<String> hashTags,
-    required Map<String, dynamic> image,
+    @ModeratedImageConverter() required ModeratedImage image,
     @Default(0) int impressionCount,
     @Default(0) int likeCount,
     @Default([]) List<Map<String, dynamic>> links,
@@ -28,7 +30,7 @@ abstract class PostModel with _$PostModel {
     @Default(0) int reportCount,
     @Default(0.0) double score,
     required Map<String, dynamic> searchToken,
-    required Map<String, dynamic> title,
+    @DetectedTextConverter() required DetectedText title,
     required String uid,
     required dynamic updatedAt,
     @Default(0) int userCount,
@@ -47,11 +49,11 @@ abstract class PostModel with _$PostModel {
     return PostModel(
       createdAt: now,
       customCompleteText: customCompleteText,
-      description: DetectedText(value: description).toJson(),
-      image: ModeratedImage(value: fileName).toJson(),
+      description: DetectedText(value: description),
+      image: ModeratedImage(value: fileName),
       postId: postId,
       searchToken: SearchUtil.returnSearchToken(title),
-      title: DetectedText(value: title).toJson(),
+      title: DetectedText(value: title),
       updatedAt: now,
       uid: uid,
     );

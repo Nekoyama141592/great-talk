@@ -9,7 +9,9 @@ part of 'public_user_model.dart';
 _PublicUserModel _$PublicUserModelFromJson(Map<String, dynamic> json) =>
     _PublicUserModel(
       accountName: json['accountName'] as String? ?? "",
-      bio: json['bio'] as Map<String, dynamic>,
+      bio: const DetectedTextConverter().fromJson(
+        json['bio'] as Map<String, dynamic>,
+      ),
       blockCount: (json['blockCount'] as num?)?.toInt() ?? 0,
       createdAt: json['createdAt'],
       ethAddress: json['ethAddress'] as String? ?? "",
@@ -30,8 +32,12 @@ _PublicUserModel _$PublicUserModelFromJson(Map<String, dynamic> json) =>
       searchToken: json['searchToken'] as Map<String, dynamic>? ?? const {},
       uid: json['uid'] as String,
       updatedAt: json['updatedAt'],
-      image: json['image'] as Map<String, dynamic>,
-      userName: json['userName'] as Map<String, dynamic>,
+      image: const ModeratedImageConverter().fromJson(
+        json['image'] as Map<String, dynamic>,
+      ),
+      userName: const DetectedTextConverter().fromJson(
+        json['userName'] as Map<String, dynamic>,
+      ),
       walletAddresses:
           (json['walletAddresses'] as List<dynamic>?)
               ?.map((e) => e as Map<String, dynamic>)
@@ -42,7 +48,7 @@ _PublicUserModel _$PublicUserModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$PublicUserModelToJson(_PublicUserModel instance) =>
     <String, dynamic>{
       'accountName': instance.accountName,
-      'bio': instance.bio,
+      'bio': const DetectedTextConverter().toJson(instance.bio),
       'blockCount': instance.blockCount,
       'createdAt': instance.createdAt,
       'ethAddress': instance.ethAddress,
@@ -59,7 +65,7 @@ Map<String, dynamic> _$PublicUserModelToJson(_PublicUserModel instance) =>
       'searchToken': instance.searchToken,
       'uid': instance.uid,
       'updatedAt': instance.updatedAt,
-      'image': instance.image,
-      'userName': instance.userName,
+      'image': const ModeratedImageConverter().toJson(instance.image),
+      'userName': const DetectedTextConverter().toJson(instance.userName),
       'walletAddresses': instance.walletAddresses,
     };

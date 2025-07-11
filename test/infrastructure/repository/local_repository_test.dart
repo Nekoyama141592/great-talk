@@ -283,11 +283,11 @@ void main() {
 
         expect(retrievedMessages, hasLength(2));
         expect(
-          retrievedMessages[0].text['value'],
+          retrievedMessages[0].text.value,
           'Hello, this is a test message',
         );
         expect(
-          retrievedMessages[1].text['value'],
+          retrievedMessages[1].text.value,
           'Hello! How can I help you?',
         );
       });
@@ -306,7 +306,7 @@ void main() {
         final retrievedMessages = localRepository.getMessages(postId);
 
         expect(retrievedMessages, hasLength(1));
-        expect(retrievedMessages.first.text['value'], 'Single test message');
+        expect(retrievedMessages.first.text.value, 'Single test message');
       });
 
       test('should update existing messages', () async {
@@ -329,8 +329,8 @@ void main() {
         final updatedMessages = localRepository.getMessages(postId);
 
         expect(updatedMessages, hasLength(2));
-        expect(updatedMessages[0].text['value'], 'New message 1');
-        expect(updatedMessages[1].text['value'], 'New message 2');
+        expect(updatedMessages[0].text.value, 'New message 1');
+        expect(updatedMessages[1].text.value, 'New message 2');
       });
     });
 

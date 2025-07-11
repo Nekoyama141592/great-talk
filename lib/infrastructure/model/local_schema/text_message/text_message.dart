@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/domain/value/message_type.dart';
 import 'package:great_talk/core/util/id_util.dart';
+import 'package:great_talk/domain/converter/detected_text_converter.dart';
 import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 
@@ -15,7 +16,7 @@ abstract class TextMessage with _$TextMessage {
     required String id,
     required String messageType,
     required String senderUid,
-    required Map<String, dynamic> text,
+    @DetectedTextConverter() required DetectedText text,
   }) = _TextMessage;
   factory TextMessage.fromJson(Map<String, dynamic> json) =>
       _$TextMessageFromJson(json);
@@ -24,7 +25,7 @@ abstract class TextMessage with _$TextMessage {
       id: IdUtil.randomString(),
       createdAt: DateTime.now(),
       messageType: MessageType.text.name,
-      text: DetectedText(value: content).toJson(),
+      text: DetectedText(value: content),
       senderUid: post.postId,
     );
   }
@@ -33,12 +34,12 @@ abstract class TextMessage with _$TextMessage {
       id: IdUtil.randomString(),
       createdAt: DateTime.now(),
       messageType: MessageType.text.name,
-      text: DetectedText(value: content).toJson(),
+      text: DetectedText(value: content),
       senderUid: currentUid,
     );
   }
 
-  DetectedText typedText() => DetectedText.fromJson(text);
+  DetectedText typedText() => text;
   String role(String postId) {
     return senderUid == postId ? 'assistant' : 'user';
   }

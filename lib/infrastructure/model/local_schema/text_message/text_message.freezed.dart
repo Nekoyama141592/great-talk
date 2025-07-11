@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TextMessage {
 
- DateTime get createdAt; String get id; String get messageType; String get senderUid; Map<String, dynamic> get text;
+ DateTime get createdAt; String get id; String get messageType; String get senderUid;@DetectedTextConverter() DetectedText get text;
 /// Create a copy of TextMessage
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,12 +29,12 @@ $TextMessageCopyWith<TextMessage> get copyWith => _$TextMessageCopyWithImpl<Text
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TextMessage&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.id, id) || other.id == id)&&(identical(other.messageType, messageType) || other.messageType == messageType)&&(identical(other.senderUid, senderUid) || other.senderUid == senderUid)&&const DeepCollectionEquality().equals(other.text, text));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TextMessage&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.id, id) || other.id == id)&&(identical(other.messageType, messageType) || other.messageType == messageType)&&(identical(other.senderUid, senderUid) || other.senderUid == senderUid)&&(identical(other.text, text) || other.text == text));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,createdAt,id,messageType,senderUid,const DeepCollectionEquality().hash(text));
+int get hashCode => Object.hash(runtimeType,createdAt,id,messageType,senderUid,text);
 
 @override
 String toString() {
@@ -49,11 +49,11 @@ abstract mixin class $TextMessageCopyWith<$Res>  {
   factory $TextMessageCopyWith(TextMessage value, $Res Function(TextMessage) _then) = _$TextMessageCopyWithImpl;
 @useResult
 $Res call({
- DateTime createdAt, String id, String messageType, String senderUid, Map<String, dynamic> text
+ DateTime createdAt, String id, String messageType, String senderUid,@DetectedTextConverter() DetectedText text
 });
 
 
-
+$DetectedTextCopyWith<$Res> get text;
 
 }
 /// @nodoc
@@ -73,10 +73,19 @@ as DateTime,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nulla
 as String,messageType: null == messageType ? _self.messageType : messageType // ignore: cast_nullable_to_non_nullable
 as String,senderUid: null == senderUid ? _self.senderUid : senderUid // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,
+as DetectedText,
   ));
 }
-
+/// Create a copy of TextMessage
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedTextCopyWith<$Res> get text {
+  
+  return $DetectedTextCopyWith<$Res>(_self.text, (value) {
+    return _then(_self.copyWith(text: value));
+  });
+}
 }
 
 
@@ -84,20 +93,14 @@ as Map<String, dynamic>,
 @JsonSerializable()
 
 class _TextMessage extends TextMessage {
-  const _TextMessage({required this.createdAt, required this.id, required this.messageType, required this.senderUid, required final  Map<String, dynamic> text}): _text = text,super._();
+  const _TextMessage({required this.createdAt, required this.id, required this.messageType, required this.senderUid, @DetectedTextConverter() required this.text}): super._();
   factory _TextMessage.fromJson(Map<String, dynamic> json) => _$TextMessageFromJson(json);
 
 @override final  DateTime createdAt;
 @override final  String id;
 @override final  String messageType;
 @override final  String senderUid;
- final  Map<String, dynamic> _text;
-@override Map<String, dynamic> get text {
-  if (_text is EqualUnmodifiableMapView) return _text;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(_text);
-}
-
+@override@DetectedTextConverter() final  DetectedText text;
 
 /// Create a copy of TextMessage
 /// with the given fields replaced by the non-null parameter values.
@@ -112,12 +115,12 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TextMessage&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.id, id) || other.id == id)&&(identical(other.messageType, messageType) || other.messageType == messageType)&&(identical(other.senderUid, senderUid) || other.senderUid == senderUid)&&const DeepCollectionEquality().equals(other._text, _text));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TextMessage&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.id, id) || other.id == id)&&(identical(other.messageType, messageType) || other.messageType == messageType)&&(identical(other.senderUid, senderUid) || other.senderUid == senderUid)&&(identical(other.text, text) || other.text == text));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,createdAt,id,messageType,senderUid,const DeepCollectionEquality().hash(_text));
+int get hashCode => Object.hash(runtimeType,createdAt,id,messageType,senderUid,text);
 
 @override
 String toString() {
@@ -132,11 +135,11 @@ abstract mixin class _$TextMessageCopyWith<$Res> implements $TextMessageCopyWith
   factory _$TextMessageCopyWith(_TextMessage value, $Res Function(_TextMessage) _then) = __$TextMessageCopyWithImpl;
 @override @useResult
 $Res call({
- DateTime createdAt, String id, String messageType, String senderUid, Map<String, dynamic> text
+ DateTime createdAt, String id, String messageType, String senderUid,@DetectedTextConverter() DetectedText text
 });
 
 
-
+@override $DetectedTextCopyWith<$Res> get text;
 
 }
 /// @nodoc
@@ -155,12 +158,21 @@ createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nulla
 as DateTime,id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,messageType: null == messageType ? _self.messageType : messageType // ignore: cast_nullable_to_non_nullable
 as String,senderUid: null == senderUid ? _self.senderUid : senderUid // ignore: cast_nullable_to_non_nullable
-as String,text: null == text ? _self._text : text // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,
+as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+as DetectedText,
   ));
 }
 
-
+/// Create a copy of TextMessage
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DetectedTextCopyWith<$Res> get text {
+  
+  return $DetectedTextCopyWith<$Res>(_self.text, (value) {
+    return _then(_self.copyWith(text: value));
+  });
+}
 }
 
 // dart format on
