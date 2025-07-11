@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:great_talk/core/util/id_util.dart';
 import 'package:great_talk/core/util/image_util.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post_model.dart';
 import 'package:great_talk/presentation/state/create_post/create_post_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/core/provider/repository/api/api_repository_provider.dart';
@@ -113,7 +113,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
       systemPrompt: postState.systemPrompt.trim(),
     );
 
-    final newPost = Post.fromRegister(
+    final newPost = PostModel.fromRegister(
       postState.systemPrompt.trim(),
       postState.title.trim(),
       postState.description.trim(),

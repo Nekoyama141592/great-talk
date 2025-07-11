@@ -4,13 +4,13 @@ import 'package:great_talk/core/util/search_util.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
 
-part 'post.freezed.dart';
-part 'post.g.dart';
+part 'post_model.freezed.dart';
+part 'post_model.g.dart';
 
 @freezed
-abstract class Post with _$Post {
-  const Post._();
-  const factory Post({
+abstract class PostModel with _$PostModel {
+  const PostModel._();
+  const factory PostModel({
     @Default(0) int bookmarkCount,
     required dynamic createdAt,
     required Map<String, dynamic> customCompleteText,
@@ -32,9 +32,9 @@ abstract class Post with _$Post {
     required String uid,
     required dynamic updatedAt,
     @Default(0) int userCount,
-  }) = _Post;
-  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
-  factory Post.fromRegister(
+  }) = _PostModel;
+  factory PostModel.fromJson(Map<String, dynamic> json) => _$PostModelFromJson(json);
+  factory PostModel.fromRegister(
     String systemPrompt,
     String title,
     String description,
@@ -44,7 +44,7 @@ abstract class Post with _$Post {
     String uid,
   ) {
     final now = FieldValue.serverTimestamp();
-    return Post(
+    return PostModel(
       createdAt: now,
       customCompleteText: customCompleteText,
       description: DetectedText(value: description).toJson(),

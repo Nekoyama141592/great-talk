@@ -5,7 +5,7 @@ import 'package:great_talk/domain/converter/timestamp_converter.dart';
 import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
 import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post_model.dart';
 
 part 'post_entity.freezed.dart';
 part 'post_entity.g.dart';
@@ -29,7 +29,7 @@ abstract class PostEntity with _$PostEntity {
   factory PostEntity.fromJson(Map<String, dynamic> json) =>
       _$PostEntityFromJson(json);
 
-  factory PostEntity.fromModel(Post model) {
+  factory PostEntity.fromModel(PostModel model) {
     return PostEntity(
       createdAt:
           model.createdAt is Timestamp

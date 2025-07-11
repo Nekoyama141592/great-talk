@@ -5,7 +5,7 @@ import 'package:great_talk/domain/entity/database/private_user/private_user_enti
 import 'package:great_talk/domain/value/token_type.dart';
 import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
 import 'package:great_talk/infrastructure/model/database_schema/follower/follower_model.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post_model.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
 import 'package:great_talk/infrastructure/model/database_schema/post_mute/post_mute.dart';
 import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
@@ -392,7 +392,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      final post = Post.fromJson(Map<String, dynamic>.from(data));
+      final post = PostModel.fromJson(Map<String, dynamic>.from(data));
       return PostEntity.fromModel(post);
     } catch (e) {
       debugPrint('getPost: ${e.toString()}');
@@ -446,7 +446,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = timelinePostsQuery(postIds);
       final qSnapshot = await _getDocs(query);
       return qSnapshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -477,7 +477,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = userPostsByNewest(uid);
       final qshot = await _getDocs(query);
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -496,7 +496,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = userPostsByNewest(uid).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -608,7 +608,7 @@ class DatabaseRepository implements IDatabaseRepository {
     try {
       final qshot = await _postsQuery(isRankingPosts).get();
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -628,7 +628,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qshot =
           await _postsQuery(isRankingPosts).startAfterDocument(doc).get();
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -662,7 +662,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = postsByWhereIn(postIds);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -683,7 +683,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = postsByWhereIn(postIds).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {

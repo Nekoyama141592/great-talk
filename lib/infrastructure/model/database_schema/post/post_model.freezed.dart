@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'post.dart';
+part of 'post_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,22 +14,22 @@ part of 'post.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$Post {
+mixin _$PostModel {
 
  int get bookmarkCount; dynamic get createdAt; Map<String, dynamic> get customCompleteText; Map<String, dynamic> get description; List<Map<String, dynamic>> get exampleTexts; String get genre; List<String> get hashTags; Map<String, dynamic> get image; int get impressionCount; int get likeCount; List<Map<String, dynamic>> get links; int get msgCount; int get muteCount; String get postId; int get reportCount; double get score; Map<String, dynamic> get searchToken; Map<String, dynamic> get title; String get uid; dynamic get updatedAt; int get userCount;
-/// Create a copy of Post
+/// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$PostCopyWith<Post> get copyWith => _$PostCopyWithImpl<Post>(this as Post, _$identity);
+$PostModelCopyWith<PostModel> get copyWith => _$PostModelCopyWithImpl<PostModel>(this as PostModel, _$identity);
 
-  /// Serializes this Post to a JSON map.
+  /// Serializes this PostModel to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Post&&(identical(other.bookmarkCount, bookmarkCount) || other.bookmarkCount == bookmarkCount)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&const DeepCollectionEquality().equals(other.customCompleteText, customCompleteText)&&const DeepCollectionEquality().equals(other.description, description)&&const DeepCollectionEquality().equals(other.exampleTexts, exampleTexts)&&(identical(other.genre, genre) || other.genre == genre)&&const DeepCollectionEquality().equals(other.hashTags, hashTags)&&const DeepCollectionEquality().equals(other.image, image)&&(identical(other.impressionCount, impressionCount) || other.impressionCount == impressionCount)&&(identical(other.likeCount, likeCount) || other.likeCount == likeCount)&&const DeepCollectionEquality().equals(other.links, links)&&(identical(other.msgCount, msgCount) || other.msgCount == msgCount)&&(identical(other.muteCount, muteCount) || other.muteCount == muteCount)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.reportCount, reportCount) || other.reportCount == reportCount)&&(identical(other.score, score) || other.score == score)&&const DeepCollectionEquality().equals(other.searchToken, searchToken)&&const DeepCollectionEquality().equals(other.title, title)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt)&&(identical(other.userCount, userCount) || other.userCount == userCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PostModel&&(identical(other.bookmarkCount, bookmarkCount) || other.bookmarkCount == bookmarkCount)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&const DeepCollectionEquality().equals(other.customCompleteText, customCompleteText)&&const DeepCollectionEquality().equals(other.description, description)&&const DeepCollectionEquality().equals(other.exampleTexts, exampleTexts)&&(identical(other.genre, genre) || other.genre == genre)&&const DeepCollectionEquality().equals(other.hashTags, hashTags)&&const DeepCollectionEquality().equals(other.image, image)&&(identical(other.impressionCount, impressionCount) || other.impressionCount == impressionCount)&&(identical(other.likeCount, likeCount) || other.likeCount == likeCount)&&const DeepCollectionEquality().equals(other.links, links)&&(identical(other.msgCount, msgCount) || other.msgCount == msgCount)&&(identical(other.muteCount, muteCount) || other.muteCount == muteCount)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.reportCount, reportCount) || other.reportCount == reportCount)&&(identical(other.score, score) || other.score == score)&&const DeepCollectionEquality().equals(other.searchToken, searchToken)&&const DeepCollectionEquality().equals(other.title, title)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt)&&(identical(other.userCount, userCount) || other.userCount == userCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -38,15 +38,15 @@ int get hashCode => Object.hashAll([runtimeType,bookmarkCount,const DeepCollecti
 
 @override
 String toString() {
-  return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, image: $image, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, postId: $postId, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, uid: $uid, updatedAt: $updatedAt, userCount: $userCount)';
+  return 'PostModel(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, image: $image, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, postId: $postId, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, uid: $uid, updatedAt: $updatedAt, userCount: $userCount)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $PostCopyWith<$Res>  {
-  factory $PostCopyWith(Post value, $Res Function(Post) _then) = _$PostCopyWithImpl;
+abstract mixin class $PostModelCopyWith<$Res>  {
+  factory $PostModelCopyWith(PostModel value, $Res Function(PostModel) _then) = _$PostModelCopyWithImpl;
 @useResult
 $Res call({
  int bookmarkCount, dynamic createdAt, Map<String, dynamic> customCompleteText, Map<String, dynamic> description, List<Map<String, dynamic>> exampleTexts, String genre, List<String> hashTags, Map<String, dynamic> image, int impressionCount, int likeCount, List<Map<String, dynamic>> links, int msgCount, int muteCount, String postId, int reportCount, double score, Map<String, dynamic> searchToken, Map<String, dynamic> title, String uid, dynamic updatedAt, int userCount
@@ -57,14 +57,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$PostCopyWithImpl<$Res>
-    implements $PostCopyWith<$Res> {
-  _$PostCopyWithImpl(this._self, this._then);
+class _$PostModelCopyWithImpl<$Res>
+    implements $PostModelCopyWith<$Res> {
+  _$PostModelCopyWithImpl(this._self, this._then);
 
-  final Post _self;
-  final $Res Function(Post) _then;
+  final PostModel _self;
+  final $Res Function(PostModel) _then;
 
-/// Create a copy of Post
+/// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? bookmarkCount = null,Object? createdAt = freezed,Object? customCompleteText = null,Object? description = null,Object? exampleTexts = null,Object? genre = null,Object? hashTags = null,Object? image = null,Object? impressionCount = null,Object? likeCount = null,Object? links = null,Object? msgCount = null,Object? muteCount = null,Object? postId = null,Object? reportCount = null,Object? score = null,Object? searchToken = null,Object? title = null,Object? uid = null,Object? updatedAt = freezed,Object? userCount = null,}) {
   return _then(_self.copyWith(
@@ -99,9 +99,9 @@ as int,
 /// @nodoc
 @JsonSerializable()
 
-class _Post extends Post {
-  const _Post({this.bookmarkCount = 0, required this.createdAt, required final  Map<String, dynamic> customCompleteText, required final  Map<String, dynamic> description, final  List<Map<String, dynamic>> exampleTexts = const [], this.genre = "", final  List<String> hashTags = const [], required final  Map<String, dynamic> image, this.impressionCount = 0, this.likeCount = 0, final  List<Map<String, dynamic>> links = const [], this.msgCount = 0, this.muteCount = 0, required this.postId, this.reportCount = 0, this.score = 0.0, required final  Map<String, dynamic> searchToken, required final  Map<String, dynamic> title, required this.uid, required this.updatedAt, this.userCount = 0}): _customCompleteText = customCompleteText,_description = description,_exampleTexts = exampleTexts,_hashTags = hashTags,_image = image,_links = links,_searchToken = searchToken,_title = title,super._();
-  factory _Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+class _PostModel extends PostModel {
+  const _PostModel({this.bookmarkCount = 0, required this.createdAt, required final  Map<String, dynamic> customCompleteText, required final  Map<String, dynamic> description, final  List<Map<String, dynamic>> exampleTexts = const [], this.genre = "", final  List<String> hashTags = const [], required final  Map<String, dynamic> image, this.impressionCount = 0, this.likeCount = 0, final  List<Map<String, dynamic>> links = const [], this.msgCount = 0, this.muteCount = 0, required this.postId, this.reportCount = 0, this.score = 0.0, required final  Map<String, dynamic> searchToken, required final  Map<String, dynamic> title, required this.uid, required this.updatedAt, this.userCount = 0}): _customCompleteText = customCompleteText,_description = description,_exampleTexts = exampleTexts,_hashTags = hashTags,_image = image,_links = links,_searchToken = searchToken,_title = title,super._();
+  factory _PostModel.fromJson(Map<String, dynamic> json) => _$PostModelFromJson(json);
 
 @override@JsonKey() final  int bookmarkCount;
 @override final  dynamic createdAt;
@@ -173,20 +173,20 @@ class _Post extends Post {
 @override final  dynamic updatedAt;
 @override@JsonKey() final  int userCount;
 
-/// Create a copy of Post
+/// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$PostCopyWith<_Post> get copyWith => __$PostCopyWithImpl<_Post>(this, _$identity);
+_$PostModelCopyWith<_PostModel> get copyWith => __$PostModelCopyWithImpl<_PostModel>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$PostToJson(this, );
+  return _$PostModelToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Post&&(identical(other.bookmarkCount, bookmarkCount) || other.bookmarkCount == bookmarkCount)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&const DeepCollectionEquality().equals(other._customCompleteText, _customCompleteText)&&const DeepCollectionEquality().equals(other._description, _description)&&const DeepCollectionEquality().equals(other._exampleTexts, _exampleTexts)&&(identical(other.genre, genre) || other.genre == genre)&&const DeepCollectionEquality().equals(other._hashTags, _hashTags)&&const DeepCollectionEquality().equals(other._image, _image)&&(identical(other.impressionCount, impressionCount) || other.impressionCount == impressionCount)&&(identical(other.likeCount, likeCount) || other.likeCount == likeCount)&&const DeepCollectionEquality().equals(other._links, _links)&&(identical(other.msgCount, msgCount) || other.msgCount == msgCount)&&(identical(other.muteCount, muteCount) || other.muteCount == muteCount)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.reportCount, reportCount) || other.reportCount == reportCount)&&(identical(other.score, score) || other.score == score)&&const DeepCollectionEquality().equals(other._searchToken, _searchToken)&&const DeepCollectionEquality().equals(other._title, _title)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt)&&(identical(other.userCount, userCount) || other.userCount == userCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PostModel&&(identical(other.bookmarkCount, bookmarkCount) || other.bookmarkCount == bookmarkCount)&&const DeepCollectionEquality().equals(other.createdAt, createdAt)&&const DeepCollectionEquality().equals(other._customCompleteText, _customCompleteText)&&const DeepCollectionEquality().equals(other._description, _description)&&const DeepCollectionEquality().equals(other._exampleTexts, _exampleTexts)&&(identical(other.genre, genre) || other.genre == genre)&&const DeepCollectionEquality().equals(other._hashTags, _hashTags)&&const DeepCollectionEquality().equals(other._image, _image)&&(identical(other.impressionCount, impressionCount) || other.impressionCount == impressionCount)&&(identical(other.likeCount, likeCount) || other.likeCount == likeCount)&&const DeepCollectionEquality().equals(other._links, _links)&&(identical(other.msgCount, msgCount) || other.msgCount == msgCount)&&(identical(other.muteCount, muteCount) || other.muteCount == muteCount)&&(identical(other.postId, postId) || other.postId == postId)&&(identical(other.reportCount, reportCount) || other.reportCount == reportCount)&&(identical(other.score, score) || other.score == score)&&const DeepCollectionEquality().equals(other._searchToken, _searchToken)&&const DeepCollectionEquality().equals(other._title, _title)&&(identical(other.uid, uid) || other.uid == uid)&&const DeepCollectionEquality().equals(other.updatedAt, updatedAt)&&(identical(other.userCount, userCount) || other.userCount == userCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -195,15 +195,15 @@ int get hashCode => Object.hashAll([runtimeType,bookmarkCount,const DeepCollecti
 
 @override
 String toString() {
-  return 'Post(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, image: $image, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, postId: $postId, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, uid: $uid, updatedAt: $updatedAt, userCount: $userCount)';
+  return 'PostModel(bookmarkCount: $bookmarkCount, createdAt: $createdAt, customCompleteText: $customCompleteText, description: $description, exampleTexts: $exampleTexts, genre: $genre, hashTags: $hashTags, image: $image, impressionCount: $impressionCount, likeCount: $likeCount, links: $links, msgCount: $msgCount, muteCount: $muteCount, postId: $postId, reportCount: $reportCount, score: $score, searchToken: $searchToken, title: $title, uid: $uid, updatedAt: $updatedAt, userCount: $userCount)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
-  factory _$PostCopyWith(_Post value, $Res Function(_Post) _then) = __$PostCopyWithImpl;
+abstract mixin class _$PostModelCopyWith<$Res> implements $PostModelCopyWith<$Res> {
+  factory _$PostModelCopyWith(_PostModel value, $Res Function(_PostModel) _then) = __$PostModelCopyWithImpl;
 @override @useResult
 $Res call({
  int bookmarkCount, dynamic createdAt, Map<String, dynamic> customCompleteText, Map<String, dynamic> description, List<Map<String, dynamic>> exampleTexts, String genre, List<String> hashTags, Map<String, dynamic> image, int impressionCount, int likeCount, List<Map<String, dynamic>> links, int msgCount, int muteCount, String postId, int reportCount, double score, Map<String, dynamic> searchToken, Map<String, dynamic> title, String uid, dynamic updatedAt, int userCount
@@ -214,17 +214,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$PostCopyWithImpl<$Res>
-    implements _$PostCopyWith<$Res> {
-  __$PostCopyWithImpl(this._self, this._then);
+class __$PostModelCopyWithImpl<$Res>
+    implements _$PostModelCopyWith<$Res> {
+  __$PostModelCopyWithImpl(this._self, this._then);
 
-  final _Post _self;
-  final $Res Function(_Post) _then;
+  final _PostModel _self;
+  final $Res Function(_PostModel) _then;
 
-/// Create a copy of Post
+/// Create a copy of PostModel
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? bookmarkCount = null,Object? createdAt = freezed,Object? customCompleteText = null,Object? description = null,Object? exampleTexts = null,Object? genre = null,Object? hashTags = null,Object? image = null,Object? impressionCount = null,Object? likeCount = null,Object? links = null,Object? msgCount = null,Object? muteCount = null,Object? postId = null,Object? reportCount = null,Object? score = null,Object? searchToken = null,Object? title = null,Object? uid = null,Object? updatedAt = freezed,Object? userCount = null,}) {
-  return _then(_Post(
+  return _then(_PostModel(
 bookmarkCount: null == bookmarkCount ? _self.bookmarkCount : bookmarkCount // ignore: cast_nullable_to_non_nullable
 as int,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as dynamic,customCompleteText: null == customCompleteText ? _self._customCompleteText : customCompleteText // ignore: cast_nullable_to_non_nullable
