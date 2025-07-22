@@ -18,9 +18,11 @@ class S3Image extends StatelessWidget {
         child: SizedBox(
           width: width ?? SizeUtil.userImageSize(context),
           height: height ?? SizeUtil.userImageSize(context),
-          child: Align(
-            alignment: Alignment.center,
-            child: Image.memory(uint8list),
+          child: Image.memory(
+            uint8list,
+            fit: BoxFit.cover,
+            width: width ?? SizeUtil.userImageSize(context),
+            height: height ?? SizeUtil.userImageSize(context),
           ),
         ),
       ),
