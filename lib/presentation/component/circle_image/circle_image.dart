@@ -30,6 +30,6 @@ class CircleImage extends StatelessWidget {
               color: Colors.grey[600],
             ),
           )
-        : S3Image(uint8list: uint8list!, width: width, height: height);
+        : S3Image(uint8list: uint8list!, width: height ?? width, height: height);
   }
 }
