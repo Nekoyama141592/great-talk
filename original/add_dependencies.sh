@@ -49,6 +49,7 @@ packages=(
   "url_launcher"
   "uuid"
   "gpt_markdown"
+  "shimmer"
 )
 
 echo "Adding packages to dependencies..."

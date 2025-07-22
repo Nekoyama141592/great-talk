@@ -60,6 +60,7 @@ dependencies:
   fake_cloud_firestore: ^3.1.0
   fake_firebase_security_rules: ^0.5.3
   firebase_auth_mocks: ^0.14.2
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
