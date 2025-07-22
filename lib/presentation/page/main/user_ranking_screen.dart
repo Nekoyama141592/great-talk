@@ -7,6 +7,7 @@ import 'package:great_talk/presentation/page/screen/refresh_screen/users_refresh
 import 'package:great_talk/presentation/component/circle_image/circle_image.dart';
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/presentation/page/user_profile_page.dart';
+import 'package:great_talk/presentation/constant/colors.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UserRankingScreen extends ConsumerWidget {
@@ -23,8 +24,8 @@ class UserRankingScreen extends ConsumerWidget {
           isEmpty: imageUsers.isEmpty,
           onLoading: notifier.onLoading,
           child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[50],
+            decoration: const BoxDecoration(
+              color: kContentColorDarkTheme,
             ),
             child: CustomScrollView(
               slivers: [
@@ -39,19 +40,16 @@ class UserRankingScreen extends ConsumerWidget {
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: kPrimaryColor.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(16),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.05),
-                                    blurRadius: 20,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
+                                border: Border.all(
+                                  color: kPrimaryColor.withValues(alpha: 0.3),
+                                  width: 1,
+                                ),
                               ),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.leaderboard,
-                                color: Colors.amber[600],
+                                color: kPrimaryColor,
                                 size: 28,
                               ),
                             ),
@@ -60,12 +58,12 @@ class UserRankingScreen extends ConsumerWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'User Ranking',
                                     style: TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.grey[800],
+                                      color: Colors.white,
                                       letterSpacing: -0.5,
                                     ),
                                   ),
@@ -73,7 +71,7 @@ class UserRankingScreen extends ConsumerWidget {
                                     'Top users by followers',
                                     style: TextStyle(
                                       fontSize: 14,
-                                      color: Colors.grey[600],
+                                      color: Colors.white.withValues(alpha: 0.7),
                                     ),
                                   ),
                                 ],
@@ -148,10 +146,10 @@ class UserRankingScreen extends ConsumerWidget {
     
     if (publicUser == null) return const SizedBox();
     
-    final colors = {
-      1: Colors.amber[400]!,
-      2: Colors.grey[400]!,
-      3: Colors.brown[300]!,
+    const colors = {
+      1: kPrimaryColor,
+      2: Color(0xFF64B5F6),
+      3: Color(0xFFFFB74D),
     };
     
     return Expanded(
@@ -163,16 +161,20 @@ class UserRankingScreen extends ConsumerWidget {
         child: Container(
           height: height,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: kContentColorDarkTheme.withValues(alpha: 0.8),
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(24),
               topRight: Radius.circular(24),
             ),
+            border: Border.all(
+              color: colors[rank]!.withValues(alpha: 0.3),
+              width: 2,
+            ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.08),
-                blurRadius: 20,
-                offset: const Offset(0, -4),
+                color: colors[rank]!.withValues(alpha: 0.2),
+                blurRadius: 15,
+                offset: const Offset(0, -2),
               ),
             ],
           ),
@@ -216,10 +218,10 @@ class UserRankingScreen extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       child: Text(
                         publicUser.nameValue,
-                        style: TextStyle(
-                          fontSize: rank == 1 ? 13 : 10,
+                        style: const TextStyle(
+                          fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: Colors.grey[800],
+                          color: Colors.white,
                         ),
                         textAlign: TextAlign.center,
                         maxLines: 2,
@@ -258,11 +260,15 @@ class UserRankingScreen extends ConsumerWidget {
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: kContentColorDarkTheme.withValues(alpha: 0.6),
               borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: kPrimaryColor.withValues(alpha: 0.2),
+                width: 1,
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.04),
+                  color: kPrimaryColor.withValues(alpha: 0.1),
                   blurRadius: 16,
                   offset: const Offset(0, 2),
                 ),
@@ -274,7 +280,7 @@ class UserRankingScreen extends ConsumerWidget {
                   width: 35,
                   height: 35,
                   decoration: BoxDecoration(
-                    color: rank <= 3 ? Colors.amber[50] : Colors.grey[50],
+                    color: rank <= 3 ? kPrimaryColor.withValues(alpha: 0.2) : Colors.white.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Center(
@@ -283,7 +289,7 @@ class UserRankingScreen extends ConsumerWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: rank <= 3 ? Colors.amber[600] : Colors.grey[600],
+                        color: rank <= 3 ? kPrimaryColor : Colors.white.withValues(alpha: 0.8),
                       ),
                     ),
                   ),
@@ -320,10 +326,10 @@ class UserRankingScreen extends ConsumerWidget {
                           Flexible(
                             child: Text(
                               publicUser.nameValue,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.grey[800],
+                                color: Colors.white,
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -334,13 +340,13 @@ class UserRankingScreen extends ConsumerWidget {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                                 decoration: BoxDecoration(
-                                  color: Colors.blue[50],
+                                  color: kPrimaryColor.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(6),
                                 ),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.verified,
                                   size: 12,
-                                  color: Colors.blue[600],
+                                  color: kPrimaryColor,
                                 ),
                               ),
                             ),
@@ -354,7 +360,7 @@ class UserRankingScreen extends ConsumerWidget {
                           Icon(
                             Icons.people_outline,
                             size: 14,
-                            color: Colors.grey[600],
+                            color: Colors.white.withValues(alpha: 0.7),
                           ),
                           const SizedBox(width: 4),
                           Flexible(
@@ -362,7 +368,7 @@ class UserRankingScreen extends ConsumerWidget {
                               '${publicUser.followerCount} followers',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: Colors.grey[600],
+                                color: Colors.white.withValues(alpha: 0.7),
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -377,7 +383,7 @@ class UserRankingScreen extends ConsumerWidget {
                   child: Icon(
                     Icons.arrow_forward_ios,
                     size: 12,
-                    color: Colors.grey[500],
+                    color: kPrimaryColor.withValues(alpha: 0.8),
                   ),
                 ),
               ],
