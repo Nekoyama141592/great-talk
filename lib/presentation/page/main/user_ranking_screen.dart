@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:great_talk/presentation/notifier/ranking_users/ranking_users_view_model.dart';
-import 'package:great_talk/presentation/page/common/async_page/async_screen/async_screen.dart';
 import 'package:great_talk/presentation/page/screen/refresh_screen/users_refresh_screen.dart';
 import 'package:great_talk/presentation/component/circle_image/circle_image.dart';
+import 'package:great_talk/presentation/component/user_ranking_skeleton.dart';
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/presentation/page/user_profile_page.dart';
 import 'package:great_talk/presentation/constant/colors.dart';
@@ -16,8 +16,8 @@ class UserRankingScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(rankingUsersViewModelProvider);
     final notifier = ref.read(rankingUsersViewModelProvider.notifier);
-    return AsyncScreen(
-      asyncValue: asyncValue,
+    
+    return asyncValue.when(
       data: (state) {
         final imageUsers = state.imageUsers;
         return UsersRefreshScreen(
@@ -114,6 +114,32 @@ class UserRankingScreen extends ConsumerWidget {
           ),
         );
       },
+      error: (error, stackTrace) => Container(
+        decoration: const BoxDecoration(
+          color: kContentColorDarkTheme,
+        ),
+        child: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 64,
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Failed to load ranking',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      loading: () => const UserRankingSkeleton(),
     );
   }
   
