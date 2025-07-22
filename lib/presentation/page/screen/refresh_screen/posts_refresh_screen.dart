@@ -54,15 +54,6 @@ class PostsRefreshScreen extends HookWidget {
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                'Posts will appear here when they are created',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white.withValues(alpha: 0.7),
-                ),
-                textAlign: TextAlign.center,
-              ),
             ],
           ),
         ),
