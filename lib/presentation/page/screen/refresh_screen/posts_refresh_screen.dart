@@ -47,7 +47,7 @@ class PostsRefreshScreen extends HookWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                title ?? 'No posts yet',
+                title ?? 'まだ投稿はありません',
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
