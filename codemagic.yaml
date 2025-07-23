@@ -44,21 +44,6 @@ workflows:
       - flutter_drive.log
       - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
     publishing:
-      # https://github.com/codemagic-ci-cd/codemagic-sample-projects/blob/bfcf910be8894ba63b875af6c942ac7e1dace526/integrations/firebase_crashlytics_demo_project/codemagic.yaml
-      scripts:
-        - name: Upload debug symbols to Firebase Crashlytics
-          script: |
-            echo "Find build artifacts"
-            dsymPath=$(find $CM_BUILD_DIR/build/ios/archive/Runner.xcarchive -name "*.dSYM" | head -1)
-            if [[ -z ${dsymPath} ]]
-            then
-              echo "No debug symbols were found, skip publishing to Firebase Crashlytics"
-            else
-              echo "Publishing debug symbols from $dsymPath to Firebase Crashlytics"
-              ls -d -- ios/Pods/*
-              $CM_BUILD_DIR/ios/Pods/FirebaseCrashlytics/upload-symbols \
-                -p ios $dsymPath
-            fi
       app_store_connect:
         auth: integration
         submit_to_testflight: true
