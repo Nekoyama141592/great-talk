@@ -2,7 +2,7 @@ workflows:
   test-flight-ios-workflow:
     name: TestFlight iOS Workflow
     integrations:
-      app_store_connect: Publisher
+      app_store_connect: great_talk_codemagic_key
     labels:
       - iOS
     max_build_duration: 60
