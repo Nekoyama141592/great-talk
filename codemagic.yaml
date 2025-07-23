@@ -47,8 +47,6 @@ workflows:
       app_store_connect:
         auth: integration
         submit_to_testflight: true
-        beta_groups:
-          - GreatTalkDevTesters
   test-flight-ios-workflow-prod:
     name: TestFlight iOS Workflow Prod
     integrations:
@@ -97,5 +95,3 @@ workflows:
       app_store_connect:
         auth: integration
         submit_to_testflight: true
-        beta_groups:
-          - GreatTalkTesters
