@@ -162,7 +162,6 @@ class LocalRepository implements ILocalRepository {
     }
   }
 
-
   @override
   bool getNeedFirstMessage() {
     return _getBool(PrefsKey.needFirstMessage) ?? true;

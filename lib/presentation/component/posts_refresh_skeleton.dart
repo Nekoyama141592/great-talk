@@ -8,9 +8,7 @@ class PostsRefreshSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: kContentColorDarkTheme,
-      ),
+      decoration: const BoxDecoration(color: kContentColorDarkTheme),
       child: CustomScrollView(
         slivers: [
           // Header skeleton
@@ -20,7 +18,7 @@ class PostsRefreshSkeleton extends StatelessWidget {
               child: _buildHeaderSkeleton(),
             ),
           ),
-          
+
           // Posts list skeleton
           SliverList(
             delegate: SliverChildBuilderDelegate(
@@ -31,11 +29,9 @@ class PostsRefreshSkeleton extends StatelessWidget {
               childCount: 5, // Show 5 skeleton cards
             ),
           ),
-          
+
           // Bottom spacing
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 100),
-          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
       ),
     );
@@ -50,10 +46,7 @@ class PostsRefreshSkeleton extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.grey[700],
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: Colors.grey[600]!,
-            width: 1,
-          ),
+          border: Border.all(color: Colors.grey[600]!, width: 1),
         ),
         child: Row(
           children: [
@@ -105,10 +98,7 @@ class PostsRefreshSkeleton extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.grey[700],
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color: Colors.grey[600]!,
-            width: 1.5,
-          ),
+          border: Border.all(color: Colors.grey[600]!, width: 1.5),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,9 +150,9 @@ class PostsRefreshSkeleton extends StatelessWidget {
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Content skeleton
             Container(
               width: double.infinity,
@@ -203,9 +193,9 @@ class PostsRefreshSkeleton extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // Action buttons skeleton
             Row(
               children: [

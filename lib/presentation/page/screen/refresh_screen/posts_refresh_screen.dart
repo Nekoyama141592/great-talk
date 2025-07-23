@@ -26,9 +26,7 @@ class PostsRefreshScreen extends HookWidget {
     }, []);
     if (userPosts.isEmpty) {
       return Container(
-        decoration: const BoxDecoration(
-          color: kContentColorDarkTheme,
-        ),
+        decoration: const BoxDecoration(color: kContentColorDarkTheme),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -59,11 +57,9 @@ class PostsRefreshScreen extends HookWidget {
         ),
       );
     }
-    
+
     return Container(
-      decoration: const BoxDecoration(
-        color: kContentColorDarkTheme,
-      ),
+      decoration: const BoxDecoration(color: kContentColorDarkTheme),
       child: SmartRefresher(
         controller: refreshController,
         enablePullDown: false, // trueだとiosもAndroidも反応しなくなる
@@ -73,9 +69,11 @@ class PostsRefreshScreen extends HookWidget {
           final result = await notifier().onLoading();
           result.when(
             success:
-                (_) => ToastUiUtil.showSuccessSnackBar(context, '追加の読み込みが完了しました'),
+                (_) =>
+                    ToastUiUtil.showSuccessSnackBar(context, '追加の読み込みが完了しました'),
             failure:
-                (_) => ToastUiUtil.showFailureSnackBar(context, '追加の読み込みが失敗しました'),
+                (_) =>
+                    ToastUiUtil.showFailureSnackBar(context, '追加の読み込みが失敗しました'),
           );
           refreshController.loadComplete();
         },
@@ -143,30 +141,28 @@ class PostsRefreshScreen extends HookWidget {
                 ),
               ),
             ),
-            
+
             // Posts list
             SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final userPost = userPosts[index];
-                  final base64 = userPost.base64;
-                  return Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: PostCard(
-                      post: userPost.post,
-                      base64: base64,
-                      publicUserEntity: userPost.user,
-                    ),
-                  );
-                },
-                childCount: userPosts.length,
-              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final userPost = userPosts[index];
+                final base64 = userPost.base64;
+                return Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: PostCard(
+                    post: userPost.post,
+                    base64: base64,
+                    publicUserEntity: userPost.user,
+                  ),
+                );
+              }, childCount: userPosts.length),
             ),
-            
+
             // Bottom spacing
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 100),
-            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 100)),
           ],
         ),
       ),

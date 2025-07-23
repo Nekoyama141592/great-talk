@@ -150,52 +150,47 @@ class OriginalDrawer extends ConsumerWidget {
                   return const SizedBox.shrink();
                 }
               },
-              loading: () => Container(
-                height: 280,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      kPrimaryColor.withAlpha(204),
-                      kPrimaryColor,
-                    ],
-                  ),
-                ),
-                child: const SafeArea(
-                  bottom: false,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              loading:
+                  () => Container(
+                    height: 280,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [kPrimaryColor.withAlpha(204), kPrimaryColor],
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              error: (err, stack) => Container(
-                height: 280,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      kPrimaryColor.withAlpha(204),
-                      kPrimaryColor,
-                    ],
-                  ),
-                ),
-                child: const SafeArea(
-                  bottom: false,
-                  child: Center(
-                    child: Text(
-                      "ユーザー情報の取得に失敗しました",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
+                    child: const SafeArea(
+                      bottom: false,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
+              error:
+                  (err, stack) => Container(
+                    height: 280,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [kPrimaryColor.withAlpha(204), kPrimaryColor],
+                      ),
+                    ),
+                    child: const SafeArea(
+                      bottom: false,
+                      child: Center(
+                        child: Text(
+                          "ユーザー情報の取得に失敗しました",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                    ),
+                  ),
             ),
             Expanded(
               child: Container(
@@ -206,7 +201,8 @@ class OriginalDrawer extends ConsumerWidget {
                     _buildModernListTile(
                       icon: Icons.account_circle_outlined,
                       title: "アカウント情報",
-                      onTap: () => RouteUtil.pushPath(context, AccountPage.path),
+                      onTap:
+                          () => RouteUtil.pushPath(context, AccountPage.path),
                     ),
                     _buildInfoTile(
                       icon: Icons.smart_toy_outlined,
@@ -216,24 +212,30 @@ class OriginalDrawer extends ConsumerWidget {
                     _buildModernListTile(
                       icon: Icons.person_off_outlined,
                       title: "ミュートしているユーザー",
-                      onTap: () => RouteUtil.pushPath(context, MuteUsersPage.path),
+                      onTap:
+                          () => RouteUtil.pushPath(context, MuteUsersPage.path),
                     ),
                     _buildModernListTile(
                       icon: Icons.post_add_outlined,
                       title: "ミュートしている投稿",
-                      onTap: () => RouteUtil.pushPath(context, MutePostsPage.path),
+                      onTap:
+                          () => RouteUtil.pushPath(context, MutePostsPage.path),
                     ),
                     _buildSwitchTile(
                       icon: Icons.message_outlined,
                       title: "最初のメッセージを受け取る",
                       value: settingState.needFirstMessage,
-                      onChanged: ref.read(localSettingProvider.notifier).onNeedFirstMessageSwichChanged,
+                      onChanged:
+                          ref
+                              .read(localSettingProvider.notifier)
+                              .onNeedFirstMessageSwichChanged,
                     ),
                     if (isAdmin)
                       _buildModernListTile(
                         icon: Icons.admin_panel_settings_outlined,
                         title: "管理者専用ページ",
-                        onTap: () => RouteUtil.pushPath(context, AdminPage.path),
+                        onTap:
+                            () => RouteUtil.pushPath(context, AdminPage.path),
                         isAdmin: true,
                       ),
                   ],
@@ -260,10 +262,7 @@ class OriginalDrawer extends ConsumerWidget {
         const SizedBox(width: 8.0),
         Text(
           label,
-          style: TextStyle(
-            color: Colors.white.withAlpha(204),
-            fontSize: 12,
-          ),
+          style: TextStyle(color: Colors.white.withAlpha(204), fontSize: 12),
         ),
       ],
     );
@@ -278,22 +277,20 @@ class OriginalDrawer extends ConsumerWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       decoration: BoxDecoration(
-        color: isAdmin
-            ? kPrimaryColor.withAlpha(26)
-            : Colors.white.withAlpha(13),
+        color:
+            isAdmin ? kPrimaryColor.withAlpha(26) : Colors.white.withAlpha(13),
         borderRadius: BorderRadius.circular(12),
-        border: isAdmin
-            ? Border.all(color: kPrimaryColor.withAlpha(77))
-            : null,
+        border: isAdmin ? Border.all(color: kPrimaryColor.withAlpha(77)) : null,
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: isAdmin
-                ? kPrimaryColor.withAlpha(51)
-                : Colors.white.withAlpha(26),
+            color:
+                isAdmin
+                    ? kPrimaryColor.withAlpha(51)
+                    : Colors.white.withAlpha(26),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(
@@ -312,15 +309,14 @@ class OriginalDrawer extends ConsumerWidget {
         ),
         trailing: Icon(
           Icons.arrow_forward_ios,
-          color: isAdmin
-              ? kPrimaryColor.withAlpha(179)
-              : Colors.white.withAlpha(153),
+          color:
+              isAdmin
+                  ? kPrimaryColor.withAlpha(179)
+                  : Colors.white.withAlpha(153),
           size: 16,
         ),
         onTap: onTap,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     );
   }
@@ -344,11 +340,7 @@ class OriginalDrawer extends ConsumerWidget {
             color: Colors.white.withAlpha(26),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(
-            icon,
-            color: Colors.white.withAlpha(204),
-            size: 20,
-          ),
+          child: Icon(icon, color: Colors.white.withAlpha(204), size: 20),
         ),
         title: Text(
           title,
@@ -358,16 +350,17 @@ class OriginalDrawer extends ConsumerWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        subtitle: subtitle.isNotEmpty
-            ? Text(
-                subtitle,
-                style: TextStyle(
-                  color: kPrimaryColor.withAlpha(204),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              )
-            : null,
+        subtitle:
+            subtitle.isNotEmpty
+                ? Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: kPrimaryColor.withAlpha(204),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )
+                : null,
       ),
     );
   }
@@ -392,11 +385,7 @@ class OriginalDrawer extends ConsumerWidget {
             color: Colors.white.withAlpha(26),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(
-            icon,
-            color: Colors.white.withAlpha(204),
-            size: 20,
-          ),
+          child: Icon(icon, color: Colors.white.withAlpha(204), size: 20),
         ),
         title: Text(
           title,

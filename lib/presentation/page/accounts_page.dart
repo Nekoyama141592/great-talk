@@ -72,16 +72,10 @@ class AccountPage extends ConsumerWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            kPrimaryColor.withAlpha(26),
-            kPrimaryColor.withAlpha(51),
-          ],
+          colors: [kPrimaryColor.withAlpha(26), kPrimaryColor.withAlpha(51)],
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: kPrimaryColor.withAlpha(77),
-          width: 1,
-        ),
+        border: Border.all(color: kPrimaryColor.withAlpha(77), width: 1),
       ),
       child: Row(
         children: [
@@ -113,10 +107,7 @@ class AccountPage extends ConsumerWidget {
                 SizedBox(height: 8),
                 Text(
                   "認証情報とアカウント設定",
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
+                  style: TextStyle(color: Colors.white70, fontSize: 14),
                 ),
               ],
             ),
@@ -131,10 +122,7 @@ class AccountPage extends ConsumerWidget {
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(13),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.white.withAlpha(26),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withAlpha(26), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,10 +176,7 @@ class AccountPage extends ConsumerWidget {
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(13),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.white.withAlpha(26),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withAlpha(26), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -245,7 +230,6 @@ class AccountPage extends ConsumerWidget {
     );
   }
 
-
   Widget _buildInfoItem(String label, String value, IconData icon) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -257,11 +241,7 @@ class AccountPage extends ConsumerWidget {
               color: Colors.white.withAlpha(13),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(
-              icon,
-              color: Colors.white.withAlpha(179),
-              size: 18,
-            ),
+            child: Icon(icon, color: Colors.white.withAlpha(179), size: 18),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -294,70 +274,71 @@ class AccountPage extends ConsumerWidget {
 
   Widget _buildCopyableInfoItem(String label, String value, IconData icon) {
     return Builder(
-      builder: (context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white.withAlpha(13),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Icon(
-                icon,
-                color: Colors.white.withAlpha(179),
-                size: 18,
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    label,
-                    style: TextStyle(
-                      color: Colors.white.withAlpha(179),
-                      fontSize: 12,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  SelectableText(
-                    value,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            if (value.isNotEmpty && value != "未取得")
-              InkWell(
-                onTap: () {
-                  Clipboard.setData(ClipboardData(text: value));
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("コピーしました"),
-                      duration: Duration(seconds: 1),
-                    ),
-                  );
-                },
-                borderRadius: BorderRadius.circular(8),
-                child: Container(
+      builder:
+          (context) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            child: Row(
+              children: [
+                Container(
                   padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withAlpha(13),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Icon(
-                    Icons.copy_outlined,
-                    color: kPrimaryColor.withAlpha(179),
+                    icon,
+                    color: Colors.white.withAlpha(179),
                     size: 18,
                   ),
                 ),
-              ),
-          ],
-        ),
-      ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        label,
+                        style: TextStyle(
+                          color: Colors.white.withAlpha(179),
+                          fontSize: 12,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      SelectableText(
+                        value,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                if (value.isNotEmpty && value != "未取得")
+                  InkWell(
+                    onTap: () {
+                      Clipboard.setData(ClipboardData(text: value));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("コピーしました"),
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
+                    },
+                    borderRadius: BorderRadius.circular(8),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      child: Icon(
+                        Icons.copy_outlined,
+                        color: kPrimaryColor.withAlpha(179),
+                        size: 18,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
     );
   }
 
@@ -382,11 +363,7 @@ class AccountPage extends ConsumerWidget {
                 color: iconColor.withAlpha(26),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
-                icon,
-                color: iconColor,
-                size: 18,
-              ),
+              child: Icon(icon, color: iconColor, size: 18),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -436,16 +413,10 @@ class AccountPage extends ConsumerWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            kErrorColor.withAlpha(26),
-            kErrorColor.withAlpha(51),
-          ],
+          colors: [kErrorColor.withAlpha(26), kErrorColor.withAlpha(51)],
         ),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: kErrorColor.withAlpha(128),
-          width: 2,
-        ),
+        border: Border.all(color: kErrorColor.withAlpha(128), width: 2),
         boxShadow: [
           BoxShadow(
             color: kErrorColor.withAlpha(51),
@@ -474,11 +445,7 @@ class AccountPage extends ConsumerWidget {
                     ),
                   ],
                 ),
-                child: Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 24,
-                ),
+                child: Icon(icon, color: Colors.white, size: 24),
               ),
               const SizedBox(width: 20),
               Expanded(
@@ -553,24 +520,17 @@ class AccountPage extends ConsumerWidget {
   }
 
   void _handleLogout(BuildContext context, dynamic notifier) {
-    ToastUiUtil.cupertinoAlertDialog(
-      context,
-      "ログアウトしますが本当によろしいですか？",
-      () async {
-        final result = await notifier.signOut();
-        result.when(
-          success: (_) {
-            RouteUtil.pushPath(context, LogoutedPage.path);
-          },
-          failure: (_) {
-            ToastUiUtil.showFailureSnackBar(
-              context,
-              "ログアウトできませんでした",
-            );
-            RouteUtil.back(context);
-          },
-        );
-      },
-    );
+    ToastUiUtil.cupertinoAlertDialog(context, "ログアウトしますが本当によろしいですか？", () async {
+      final result = await notifier.signOut();
+      result.when(
+        success: (_) {
+          RouteUtil.pushPath(context, LogoutedPage.path);
+        },
+        failure: (_) {
+          ToastUiUtil.showFailureSnackBar(context, "ログアウトできませんでした");
+          RouteUtil.back(context);
+        },
+      );
+    });
   }
 }

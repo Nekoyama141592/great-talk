@@ -8,9 +8,7 @@ class UserRankingSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: kContentColorDarkTheme,
-      ),
+      decoration: const BoxDecoration(color: kContentColorDarkTheme),
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -32,9 +30,7 @@ class UserRankingSkeleton extends StatelessWidget {
               childCount: 8, // Show 8 skeleton cards
             ),
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 100),
-          ),
+          const SliverToBoxAdapter(child: SizedBox(height: 100)),
         ],
       ),
     );
@@ -118,10 +114,7 @@ class UserRankingSkeleton extends StatelessWidget {
             topLeft: Radius.circular(24),
             topRight: Radius.circular(24),
           ),
-          border: Border.all(
-            color: Colors.grey[600]!,
-            width: 2,
-          ),
+          border: Border.all(color: Colors.grey[600]!, width: 2),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
@@ -192,10 +185,7 @@ class UserRankingSkeleton extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.grey[700],
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: Colors.grey[600]!,
-              width: 1,
-            ),
+            border: Border.all(color: Colors.grey[600]!, width: 1),
           ),
           child: Row(
             children: [

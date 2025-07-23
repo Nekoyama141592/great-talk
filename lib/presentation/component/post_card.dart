@@ -28,12 +28,12 @@ class PostCard extends ConsumerWidget {
   final PostEntity post;
   final String? base64;
   final PublicUserEntity? publicUserEntity;
-  
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final uint8list = base64 != null ? base64Decode(base64!) : null;
     final asyncValue = ref.watch(tokensNotifierProvider);
-    
+
     return InkWell(
       child: Padding(
         padding: EdgeInsets.all(SizeUtil.defaultPadding(context)),
@@ -69,7 +69,7 @@ class PostCard extends ConsumerWidget {
                 ),
               );
             }
-            
+
             return Material(
               color: Colors.transparent,
               child: InkWell(
@@ -120,7 +120,9 @@ class PostCard extends ConsumerWidget {
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: kPrimaryColor.withValues(alpha: 0.2),
+                                      color: kPrimaryColor.withValues(
+                                        alpha: 0.2,
+                                      ),
                                       blurRadius: 12,
                                       offset: const Offset(0, 3),
                                     ),
@@ -139,12 +141,16 @@ class PostCard extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   GestureDetector(
-                                    onTap: () => RouteUtil.pushPath(
-                                      context,
-                                      UserProfilePage.generatePath(post.uid),
-                                    ),
+                                    onTap:
+                                        () => RouteUtil.pushPath(
+                                          context,
+                                          UserProfilePage.generatePath(
+                                            post.uid,
+                                          ),
+                                        ),
                                     child: Text(
-                                      publicUserEntity?.nameValue ?? 'Unknown User',
+                                      publicUserEntity?.nameValue ??
+                                          'Unknown User',
                                       style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600,
@@ -161,7 +167,9 @@ class PostCard extends ConsumerWidget {
                                       Icon(
                                         Icons.access_time_rounded,
                                         size: 12,
-                                        color: Colors.white.withValues(alpha: 0.6),
+                                        color: Colors.white.withValues(
+                                          alpha: 0.6,
+                                        ),
                                       ),
                                       const SizedBox(width: 3),
                                       Flexible(
@@ -169,7 +177,9 @@ class PostCard extends ConsumerWidget {
                                           _formatDate(post.createdAt),
                                           style: TextStyle(
                                             fontSize: 11,
-                                            color: Colors.white.withValues(alpha: 0.6),
+                                            color: Colors.white.withValues(
+                                              alpha: 0.6,
+                                            ),
                                           ),
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
@@ -196,7 +206,7 @@ class PostCard extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      
+
                       // Post content
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -224,9 +234,9 @@ class PostCard extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      
+
                       const SizedBox(height: 16),
-                      
+
                       // Action buttons
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -234,7 +244,10 @@ class PostCard extends ConsumerWidget {
                           child: Row(
                             children: [
                               Container(
-                                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                  horizontal: 12,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.white.withValues(alpha: 0.05),
                                   borderRadius: BorderRadius.circular(16),
@@ -243,11 +256,17 @@ class PostCard extends ConsumerWidget {
                                     width: 0.5,
                                   ),
                                 ),
-                                child: PostMsgButton(isHorizontal: false, post: post),
+                                child: PostMsgButton(
+                                  isHorizontal: false,
+                                  post: post,
+                                ),
                               ),
                               const Expanded(child: SizedBox()),
                               Container(
-                                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                  horizontal: 12,
+                                ),
                                 decoration: BoxDecoration(
                                   color: Colors.white.withValues(alpha: 0.05),
                                   borderRadius: BorderRadius.circular(16),
@@ -256,7 +275,10 @@ class PostCard extends ConsumerWidget {
                                     width: 0.5,
                                   ),
                                 ),
-                                child: PostLikeButton(isHorizontal: false, post: post),
+                                child: PostLikeButton(
+                                  isHorizontal: false,
+                                  post: post,
+                                ),
                               ),
                             ],
                           ),
@@ -272,11 +294,11 @@ class PostCard extends ConsumerWidget {
       ),
     );
   }
-  
+
   String _formatDate(DateTime dateTime) {
     final now = DateTime.now();
     final difference = now.difference(dateTime);
-    
+
     if (difference.inMinutes < 1) {
       return 'Just now';
     } else if (difference.inHours < 1) {

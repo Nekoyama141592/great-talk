@@ -126,7 +126,6 @@ void main() {
       );
     });
 
-
     group('First message preferences', () {
       test('should return default need first message when not set', () async {
         final prefs = await SharedPreferences.getInstance();
@@ -255,10 +254,7 @@ void main() {
           retrievedMessages[0].text.value,
           'Hello, this is a test message',
         );
-        expect(
-          retrievedMessages[1].text.value,
-          'Hello! How can I help you?',
-        );
+        expect(retrievedMessages[1].text.value, 'Hello! How can I help you?');
       });
 
       test('should handle single message', () async {

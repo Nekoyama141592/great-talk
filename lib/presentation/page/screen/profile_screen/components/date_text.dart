@@ -18,10 +18,7 @@ class DateText extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(13),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: Colors.white.withAlpha(26),
-          width: 1,
-        ),
+        border: Border.all(color: Colors.white.withAlpha(26), width: 1),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -64,11 +61,7 @@ class DateText extends StatelessWidget {
             color: color.withAlpha(26),
             borderRadius: BorderRadius.circular(6),
           ),
-          child: Icon(
-            icon,
-            size: 14,
-            color: color,
-          ),
+          child: Icon(icon, size: 14, color: color),
         ),
         const SizedBox(width: 8),
         Column(

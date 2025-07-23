@@ -16,7 +16,7 @@ class UserRankingScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncValue = ref.watch(rankingUsersViewModelProvider);
     final notifier = ref.read(rankingUsersViewModelProvider.notifier);
-    
+
     return asyncValue.when(
       data: (state) {
         final imageUsers = state.imageUsers;
@@ -24,9 +24,7 @@ class UserRankingScreen extends ConsumerWidget {
           isEmpty: imageUsers.isEmpty,
           onLoading: notifier.onLoading,
           child: Container(
-            decoration: const BoxDecoration(
-              color: kContentColorDarkTheme,
-            ),
+            decoration: const BoxDecoration(color: kContentColorDarkTheme),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -71,7 +69,9 @@ class UserRankingScreen extends ConsumerWidget {
                                     'Top users by followers',
                                     style: TextStyle(
                                       fontSize: 14,
-                                      color: Colors.white.withValues(alpha: 0.7),
+                                      color: Colors.white.withValues(
+                                        alpha: 0.7,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -80,69 +80,58 @@ class UserRankingScreen extends ConsumerWidget {
                           ],
                         ),
                         const SizedBox(height: 24),
-                        if (imageUsers.isNotEmpty) ..._buildPodiumSection(context, imageUsers),
+                        if (imageUsers.isNotEmpty)
+                          ..._buildPodiumSection(context, imageUsers),
                       ],
                     ),
                   ),
                 ),
                 SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      if (index >= imageUsers.length) return null;
-                      final imageUser = imageUsers[index];
-                      final publicUser = imageUser.user;
-                      final base64 = imageUser.base64;
-                      final uint8list = base64 != null ? base64Decode(base64) : null;
-                      
-                      if (publicUser == null) return const SizedBox.shrink();
-                      
-                      return _buildRankingCard(
-                        context,
-                        publicUser,
-                        uint8list,
-                        index + 1,
-                      );
-                    },
-                    childCount: imageUsers.length,
-                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    if (index >= imageUsers.length) return null;
+                    final imageUser = imageUsers[index];
+                    final publicUser = imageUser.user;
+                    final base64 = imageUser.base64;
+                    final uint8list =
+                        base64 != null ? base64Decode(base64) : null;
+
+                    if (publicUser == null) return const SizedBox.shrink();
+
+                    return _buildRankingCard(
+                      context,
+                      publicUser,
+                      uint8list,
+                      index + 1,
+                    );
+                  }, childCount: imageUsers.length),
                 ),
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 100),
-                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 100)),
               ],
             ),
           ),
         );
       },
-      error: (error, stackTrace) => Container(
-        decoration: const BoxDecoration(
-          color: kContentColorDarkTheme,
-        ),
-        child: const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.error_outline,
-                color: Colors.red,
-                size: 64,
+      error:
+          (error, stackTrace) => Container(
+            decoration: const BoxDecoration(color: kContentColorDarkTheme),
+            child: const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.error_outline, color: Colors.red, size: 64),
+                  SizedBox(height: 16),
+                  Text(
+                    'Failed to load ranking',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ],
               ),
-              SizedBox(height: 16),
-              Text(
-                'Failed to load ranking',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
       loading: () => const UserRankingSkeleton(),
     );
   }
-  
+
   List<Widget> _buildPodiumSection(BuildContext context, List imageUsers) {
     return [
       Container(
@@ -152,38 +141,47 @@ class UserRankingScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             // 2nd place
-            if (imageUsers.length > 1) _buildPodiumItem(context, imageUsers[1], 2, 140),
+            if (imageUsers.length > 1)
+              _buildPodiumItem(context, imageUsers[1], 2, 140),
             const SizedBox(width: 8),
             // 1st place
-            if (imageUsers.isNotEmpty) _buildPodiumItem(context, imageUsers[0], 1, 180),
+            if (imageUsers.isNotEmpty)
+              _buildPodiumItem(context, imageUsers[0], 1, 180),
             const SizedBox(width: 8),
             // 3rd place
-            if (imageUsers.length > 2) _buildPodiumItem(context, imageUsers[2], 3, 120),
+            if (imageUsers.length > 2)
+              _buildPodiumItem(context, imageUsers[2], 3, 120),
           ],
         ),
       ),
     ];
   }
-  
-  Widget _buildPodiumItem(BuildContext context, dynamic imageUser, int rank, double height) {
+
+  Widget _buildPodiumItem(
+    BuildContext context,
+    dynamic imageUser,
+    int rank,
+    double height,
+  ) {
     final publicUser = imageUser.user;
     final base64 = imageUser.base64;
     final uint8list = base64 != null ? base64Decode(base64) : null;
-    
+
     if (publicUser == null) return const SizedBox();
-    
+
     const colors = {
       1: kPrimaryColor,
       2: Color(0xFF64B5F6),
       3: Color(0xFFFFB74D),
     };
-    
+
     return Expanded(
       child: GestureDetector(
-        onTap: () => RouteUtil.pushPath(
-          context,
-          UserProfilePage.generatePath(publicUser.uid),
-        ),
+        onTap:
+            () => RouteUtil.pushPath(
+              context,
+              UserProfilePage.generatePath(publicUser.uid),
+            ),
         child: Container(
           height: height,
           decoration: BoxDecoration(
@@ -271,17 +269,23 @@ class UserRankingScreen extends ConsumerWidget {
       ),
     );
   }
-  
-  Widget _buildRankingCard(BuildContext context, dynamic publicUser, dynamic uint8list, int rank) {
+
+  Widget _buildRankingCard(
+    BuildContext context,
+    dynamic publicUser,
+    dynamic uint8list,
+    int rank,
+  ) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () => RouteUtil.pushPath(
-            context,
-            UserProfilePage.generatePath(publicUser.uid),
-          ),
+          onTap:
+              () => RouteUtil.pushPath(
+                context,
+                UserProfilePage.generatePath(publicUser.uid),
+              ),
           borderRadius: BorderRadius.circular(20),
           child: Container(
             padding: const EdgeInsets.all(16),
@@ -306,7 +310,10 @@ class UserRankingScreen extends ConsumerWidget {
                   width: 35,
                   height: 35,
                   decoration: BoxDecoration(
-                    color: rank <= 3 ? kPrimaryColor.withValues(alpha: 0.2) : Colors.white.withValues(alpha: 0.1),
+                    color:
+                        rank <= 3
+                            ? kPrimaryColor.withValues(alpha: 0.2)
+                            : Colors.white.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Center(
@@ -315,7 +322,10 @@ class UserRankingScreen extends ConsumerWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: rank <= 3 ? kPrimaryColor : Colors.white.withValues(alpha: 0.8),
+                        color:
+                            rank <= 3
+                                ? kPrimaryColor
+                                : Colors.white.withValues(alpha: 0.8),
                       ),
                     ),
                   ),
@@ -364,7 +374,10 @@ class UserRankingScreen extends ConsumerWidget {
                             const SizedBox(width: 6),
                             Flexible(
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4,
+                                  vertical: 2,
+                                ),
                                 decoration: BoxDecoration(
                                   color: kPrimaryColor.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(6),

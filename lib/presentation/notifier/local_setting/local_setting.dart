@@ -10,9 +10,7 @@ class LocalSetting extends _$LocalSetting {
   LocalSettingState build() {
     final repository = ref.watch(localRepositoryProvider);
     final needFirstMessage = repository.getNeedFirstMessage();
-    return LocalSettingState(
-      needFirstMessage: needFirstMessage,
-    );
+    return LocalSettingState(needFirstMessage: needFirstMessage);
   }
 
   void onNeedFirstMessageSwichChanged(bool value) async {

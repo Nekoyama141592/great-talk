@@ -5,10 +5,7 @@ import 'package:great_talk/presentation/page/screen/profile_screen/components/da
 void main() {
   group('DateText', () {
     Widget createTestApp(Widget child) {
-      return MaterialApp(
-        theme: ThemeData.dark(),
-        home: Scaffold(body: child),
-      );
+      return MaterialApp(theme: ThemeData.dark(), home: Scaffold(body: child));
     }
 
     testWidgets('should display formatted dates for both created and updated', (
@@ -105,7 +102,9 @@ void main() {
       expect(find.text('2024/02/29'), findsAtLeastNWidgets(2));
     });
 
-    testWidgets('should display container with proper styling', (WidgetTester tester) async {
+    testWidgets('should display container with proper styling', (
+      WidgetTester tester,
+    ) async {
       final createdAt = DateTime(2023, 5, 15);
       final updatedAt = DateTime(2023, 8, 20);
 

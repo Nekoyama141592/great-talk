@@ -17,7 +17,8 @@ abstract class PostModel with _$PostModel {
   const factory PostModel({
     @Default(0) int bookmarkCount,
     required dynamic createdAt,
-    @CustomCompleteTextConverter() required CustomCompleteText customCompleteText,
+    @CustomCompleteTextConverter()
+    required CustomCompleteText customCompleteText,
     @DetectedTextConverter() required DetectedText description,
     @Default([]) List<Map<String, dynamic>> exampleTexts,
     @Default("") String genre,
@@ -37,7 +38,8 @@ abstract class PostModel with _$PostModel {
     required dynamic updatedAt,
     @Default(0) int userCount,
   }) = _PostModel;
-  factory PostModel.fromJson(Map<String, dynamic> json) => _$PostModelFromJson(json);
+  factory PostModel.fromJson(Map<String, dynamic> json) =>
+      _$PostModelFromJson(json);
   factory PostModel.fromRegister(
     String systemPrompt,
     String title,

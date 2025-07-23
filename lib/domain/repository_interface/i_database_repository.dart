@@ -14,13 +14,9 @@ abstract class IDatabaseRepository {
   Future<int?> countMessages();
 
   // User creation
-  Future<PublicUserEntity?> createPublicUser(
-    String uid,
-  );
+  Future<PublicUserEntity?> createPublicUser(String uid);
 
-  Future<PrivateUserEntity?> createPrivateUser(
-    String uid,
-  );
+  Future<PrivateUserEntity?> createPrivateUser(String uid);
 
   // User operations
   Future<PublicUserEntity?> getPublicUser(String uid);

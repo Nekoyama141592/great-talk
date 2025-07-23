@@ -46,10 +46,7 @@ abstract class PublicUserModel with _$PublicUserModel {
     final now = FieldValue.serverTimestamp();
     return PublicUserModel(
       createdAt: now,
-      bio:
-          bio != null
-              ? DetectedText(value: bio)
-              : const DetectedText(),
+      bio: bio != null ? DetectedText(value: bio) : const DetectedText(),
       uid: uid,
       updatedAt: now,
       image:

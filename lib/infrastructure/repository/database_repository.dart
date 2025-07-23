@@ -134,9 +134,7 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<PublicUserEntity?> createPublicUser(
-    String uid,
-  ) async {
+  Future<PublicUserEntity?> createPublicUser(String uid) async {
     try {
       final docRef = userDocRef(uid);
       final oldDoc = await docRef.get();
@@ -147,7 +145,9 @@ class DatabaseRepository implements IDatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      final publicUser = PublicUserModel.fromJson(Map<String, dynamic>.from(data));
+      final publicUser = PublicUserModel.fromJson(
+        Map<String, dynamic>.from(data),
+      );
       return PublicUserEntity.fromModel(publicUser);
     } catch (e) {
       debugPrint('createPublicUser: ${e.toString()}');
@@ -156,9 +156,7 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<PrivateUserEntity?> createPrivateUser(
-    String uid,
-  ) async {
+  Future<PrivateUserEntity?> createPrivateUser(String uid) async {
     try {
       final docRef = privateUserDocRef(uid);
       final oldDoc = await docRef.get();
@@ -367,7 +365,9 @@ class DatabaseRepository implements IDatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      final publicUser = PublicUserModel.fromJson(Map<String, dynamic>.from(data));
+      final publicUser = PublicUserModel.fromJson(
+        Map<String, dynamic>.from(data),
+      );
       return PublicUserEntity.fromModel(publicUser);
     } catch (e) {
       debugPrint('getPublicUser: ${e.toString()}');
@@ -382,7 +382,9 @@ class DatabaseRepository implements IDatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      final privateUser = PrivateUserModel.fromJson(Map<String, dynamic>.from(data));
+      final privateUser = PrivateUserModel.fromJson(
+        Map<String, dynamic>.from(data),
+      );
       return PrivateUserEntity.fromModel(privateUser);
     } catch (e) {
       debugPrint('getPrivateUser: ${e.toString()}');
@@ -592,7 +594,8 @@ class DatabaseRepository implements IDatabaseRepository {
       final timelines =
           qshot.docs
               .map(
-                (e) => TimelineModel.fromJson(Map<String, dynamic>.from(e.data())),
+                (e) =>
+                    TimelineModel.fromJson(Map<String, dynamic>.from(e.data())),
               )
               .toList();
       final sorted = [...timelines]
@@ -652,7 +655,9 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = timelinesQuery(currentUid);
       final qshot = await query.startAfterDocument(doc).get();
       return qshot.docs
-          .map((e) => TimelineModel.fromJson(Map<String, dynamic>.from(e.data())))
+          .map(
+            (e) => TimelineModel.fromJson(Map<String, dynamic>.from(e.data())),
+          )
           .toList();
     } catch (e) {
       debugPrint('getMoreTimelines: ${e.toString()}');

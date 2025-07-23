@@ -80,7 +80,11 @@ class TokensNotifier extends _$TokensNotifier {
   }
 
   LikePostTokenEntity? addLikePost(String currentUid, PostEntity post) {
-    final token = LikePostTokenModel.fromPost(post.postId, post.uid, currentUid);
+    final token = LikePostTokenModel.fromPost(
+      post.postId,
+      post.uid,
+      currentUid,
+    );
     final tokenEntity = LikePostTokenEntity.fromModel(token);
     final newList = TokensUtil.addToTokenList(
       _currentState.likePostTokens,

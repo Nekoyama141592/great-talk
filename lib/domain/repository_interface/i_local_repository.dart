@@ -14,7 +14,6 @@ abstract class ILocalRepository {
   Future<void> setMessages(String postId, List<TextMessage> messages);
   List<TextMessage> getMessages(String postId);
 
-
   // First message preferences
   bool getNeedFirstMessage();
   Future<void> setNeedFirstMessage(bool value);
