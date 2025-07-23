@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token_model.dart';
 
 part 'following_token_entity.freezed.dart';
 part 'following_token_entity.g.dart';
@@ -15,7 +15,7 @@ abstract class FollowingTokenEntity with _$FollowingTokenEntity {
   factory FollowingTokenEntity.fromJson(Map<String, dynamic> json) =>
       _$FollowingTokenEntityFromJson(json);
 
-  factory FollowingTokenEntity.fromModel(FollowingToken model) {
+  factory FollowingTokenEntity.fromModel(FollowingTokenModel model) {
     return FollowingTokenEntity(
       passiveUid: model.passiveUid,
       tokenId: model.tokenId,

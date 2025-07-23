@@ -3,7 +3,7 @@ import 'package:great_talk/domain/entity/database/tokens/following_token_entity/
 import 'package:great_talk/domain/entity/database/tokens/like_post_token_entity/like_post_token_entity.dart';
 import 'package:great_talk/domain/entity/database/tokens/mute_post_token_entity/mute_post_token_entity.dart';
 import 'package:great_talk/domain/entity/database/tokens/mute_user_token_entity/mute_user_token_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens_model.dart';
 
 part 'tokens_state.freezed.dart';
 part 'tokens_state.g.dart';

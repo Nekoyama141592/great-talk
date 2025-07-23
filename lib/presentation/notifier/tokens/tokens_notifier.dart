@@ -8,10 +8,10 @@ import 'package:great_talk/domain/entity/database/tokens/following_token_entity/
 import 'package:great_talk/domain/entity/database/tokens/like_post_token_entity/like_post_token_entity.dart';
 import 'package:great_talk/domain/entity/database/tokens/mute_post_token_entity/mute_post_token_entity.dart';
 import 'package:great_talk/domain/entity/database/tokens/mute_user_token_entity/mute_user_token_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token_model.dart';
 import 'package:great_talk/presentation/state/tokens/tokens_state.dart';
 
 part 'tokens_notifier.g.dart';
@@ -56,7 +56,7 @@ class TokensNotifier extends _$TokensNotifier {
   }
 
   FollowingTokenEntity addFollowing(String passiveUid) {
-    final followingToken = FollowingToken.fromUid(passiveUid);
+    final followingToken = FollowingTokenModel.fromUid(passiveUid);
     final followingTokenEntity = FollowingTokenEntity.fromModel(followingToken);
     final newList = TokensUtil.addToTokenList(
       _currentState.followingTokens,
@@ -80,7 +80,11 @@ class TokensNotifier extends _$TokensNotifier {
   }
 
   LikePostTokenEntity? addLikePost(String currentUid, PostEntity post) {
-    final token = LikePostToken.fromPost(post.postId, post.uid, currentUid);
+    final token = LikePostTokenModel.fromPost(
+      post.postId,
+      post.uid,
+      currentUid,
+    );
     final tokenEntity = LikePostTokenEntity.fromModel(token);
     final newList = TokensUtil.addToTokenList(
       _currentState.likePostTokens,
@@ -106,7 +110,7 @@ class TokensNotifier extends _$TokensNotifier {
   MutePostTokenEntity? addMutePost(PostEntity post) {
     final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
-    final token = MutePostToken.fromPost(post.postId, currentUid);
+    final token = MutePostTokenModel.fromPost(post.postId, currentUid);
     final tokenEntity = MutePostTokenEntity.fromModel(token);
     final newList = TokensUtil.addToTokenList(
       _currentState.mutePostTokens,
@@ -129,7 +133,7 @@ class TokensNotifier extends _$TokensNotifier {
   MuteUserTokenEntity? addMuteUser(PostEntity post) {
     final currentUid = ref.read(authUidProvider);
     if (currentUid == null) return null;
-    final token = MuteUserToken.fromPost(currentUid, post.uid);
+    final token = MuteUserTokenModel.fromPost(currentUid, post.uid);
     final tokenEntity = MuteUserTokenEntity.fromModel(token);
     final newList = TokensUtil.addToTokenList(
       _currentState.muteUserTokens,

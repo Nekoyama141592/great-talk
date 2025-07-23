@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
 import 'package:great_talk/application/use_case/file/file_use_case.dart';
 import 'package:great_talk/application/use_case/user/user_use_case.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -41,7 +41,7 @@ void main() {
             ),
             createdAt: mockTimestamp.toDate(),
             updatedAt: mockTimestamp.toDate(),
-            image: const DetectedImage(
+            image: const ModeratedImage(
               bucketName: 'test-bucket',
               value: 'user1_image.jpg',
             ),
@@ -68,7 +68,7 @@ void main() {
             ),
             createdAt: mockTimestamp.toDate(),
             updatedAt: mockTimestamp.toDate(),
-            image: const DetectedImage(
+            image: const ModeratedImage(
               bucketName: 'test-bucket',
               value: 'user2_image.jpg',
             ),
@@ -120,8 +120,8 @@ void main() {
 
       test('should handle users with empty image data', () async {
         final usersWithEmptyImages = [
-          testUsers[0].copyWith(image: const DetectedImage()),
-          testUsers[1].copyWith(image: const DetectedImage()),
+          testUsers[0].copyWith(image: const ModeratedImage()),
+          testUsers[1].copyWith(image: const ModeratedImage()),
         ];
 
         // Mock empty bucket name and value
@@ -173,13 +173,13 @@ void main() {
       test('should handle users with different bucket names', () async {
         final usersWithDifferentBuckets = [
           testUsers[0].copyWith(
-            image: const DetectedImage(
+            image: const ModeratedImage(
               bucketName: 'bucket-1',
               value: 'image1.jpg',
             ),
           ),
           testUsers[1].copyWith(
-            image: const DetectedImage(
+            image: const ModeratedImage(
               bucketName: 'bucket-2',
               value: 'image2.jpg',
             ),
@@ -266,7 +266,7 @@ void main() {
             ),
             createdAt: mockTimestamp.toDate(),
             updatedAt: mockTimestamp.toDate(),
-            image: DetectedImage(
+            image: ModeratedImage(
               bucketName: 'test-bucket',
               value: 'user${index}_image.jpg',
             ),

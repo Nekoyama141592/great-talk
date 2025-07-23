@@ -17,7 +17,23 @@ class CircleImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return uint8list == null
-        ? const Icon(Icons.person)
-        : S3Image(uint8list: uint8list!, width: height);
+        ? Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            Icons.person,
+            size: (width ?? 50) * 0.6,
+            color: Colors.grey[600],
+          ),
+        )
+        : S3Image(
+          uint8list: uint8list!,
+          width: height ?? width,
+          height: height,
+        );
   }
 }

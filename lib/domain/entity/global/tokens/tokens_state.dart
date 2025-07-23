@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token_model.dart';
 
 part 'tokens_state.freezed.dart';
 part 'tokens_state.g.dart';
@@ -11,10 +11,10 @@ part 'tokens_state.g.dart';
 abstract class TokensState with _$TokensState {
   const TokensState._();
   const factory TokensState({
-    @Default(<FollowingToken>[]) List<FollowingToken> followingTokens,
-    @Default(<LikePostToken>[]) List<LikePostToken> likePostTokens,
-    @Default(<MutePostToken>[]) List<MutePostToken> mutePostTokens,
-    @Default(<MuteUserToken>[]) List<MuteUserToken> muteUserTokens,
+    @Default(<FollowingTokenModel>[]) List<FollowingTokenModel> followingTokens,
+    @Default(<LikePostTokenModel>[]) List<LikePostTokenModel> likePostTokens,
+    @Default(<MutePostTokenModel>[]) List<MutePostTokenModel> mutePostTokens,
+    @Default(<MuteUserTokenModel>[]) List<MuteUserTokenModel> muteUserTokens,
     @Default(<String>[]) List<String> deletePostIds,
   }) = _TokensState;
   factory TokensState.fromJson(Map<String, dynamic> json) =>

@@ -1,14 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log.dart';
+import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log_model.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens_model.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
 
 void main() {
@@ -41,7 +41,7 @@ void main() {
         expect(detectedText.keys.length, 5);
       });
 
-      test('should validate complete DetectedImage structure', () async {
+      test('should validate complete ModeratedImage structure', () async {
         final detectedImage = {
           'bucketName': 'test-bucket',
           'moderationLabels': ['safe'],
@@ -321,7 +321,7 @@ void main() {
           customCompleteText: const CustomCompleteText(
             systemPrompt: 'Liked post prompt',
           ),
-          image: const DetectedImage(
+          image: const ModeratedImage(
             bucketName: 'test-bucket',
             moderationLabels: [],
             moderationModelVersion: '1.0',
@@ -411,7 +411,7 @@ void main() {
         const currentUid = 'timeline_test_user';
 
         final timelines = await repository.getTimelines(currentUid);
-        expect(timelines, isA<List<Timeline>>());
+        expect(timelines, isA<List<TimelineModel>>());
         expect(timelines, isEmpty); // Should be empty for new user
       });
 
@@ -503,14 +503,14 @@ void main() {
         };
         expect(minimalDetectedText.keys.length, 5);
 
-        // Test minimum required structure for DetectedImage
-        final minimalDetectedImage = {
+        // Test minimum required structure for ModeratedImage
+        final minimalModeratedImage = {
           'bucketName': '',
           'moderationLabels': <String>[],
           'moderationModelVersion': '',
           'value': '',
         };
-        expect(minimalDetectedImage.keys.length, 4);
+        expect(minimalModeratedImage.keys.length, 4);
 
         // Test minimum required structure for CustomCompleteText
         final minimalCustomCompleteText = {'systemPrompt': ''};

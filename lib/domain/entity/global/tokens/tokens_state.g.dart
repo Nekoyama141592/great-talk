@@ -9,24 +9,24 @@ part of 'tokens_state.dart';
 _TokensState _$TokensStateFromJson(Map<String, dynamic> json) => _TokensState(
   followingTokens:
       (json['followingTokens'] as List<dynamic>?)
-          ?.map((e) => FollowingToken.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => FollowingTokenModel.fromJson(e as Map<String, dynamic>))
           .toList() ??
-      const <FollowingToken>[],
+      const <FollowingTokenModel>[],
   likePostTokens:
       (json['likePostTokens'] as List<dynamic>?)
-          ?.map((e) => LikePostToken.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => LikePostTokenModel.fromJson(e as Map<String, dynamic>))
           .toList() ??
-      const <LikePostToken>[],
+      const <LikePostTokenModel>[],
   mutePostTokens:
       (json['mutePostTokens'] as List<dynamic>?)
-          ?.map((e) => MutePostToken.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => MutePostTokenModel.fromJson(e as Map<String, dynamic>))
           .toList() ??
-      const <MutePostToken>[],
+      const <MutePostTokenModel>[],
   muteUserTokens:
       (json['muteUserTokens'] as List<dynamic>?)
-          ?.map((e) => MuteUserToken.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => MuteUserTokenModel.fromJson(e as Map<String, dynamic>))
           .toList() ??
-      const <MuteUserToken>[],
+      const <MuteUserTokenModel>[],
   deletePostIds:
       (json['deletePostIds'] as List<dynamic>?)
           ?.map((e) => e as String)

@@ -80,10 +80,18 @@ class PostLikeButton extends HookConsumerWidget {
                   );
                 },
               ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(isHorizontal ? likeCount.value.formatNumber() : ""),
-          ),
+          if (likeCount.value > 0)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                likeCount.value.formatNumber(),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              ),
+            ),
         ];
         return Padding(
           padding: const EdgeInsets.only(left: 8.0),

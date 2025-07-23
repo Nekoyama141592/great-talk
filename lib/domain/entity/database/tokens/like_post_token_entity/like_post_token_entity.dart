@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token_model.dart';
 
 part 'like_post_token_entity.freezed.dart';
 part 'like_post_token_entity.g.dart';
@@ -17,7 +17,7 @@ abstract class LikePostTokenEntity with _$LikePostTokenEntity {
   factory LikePostTokenEntity.fromJson(Map<String, dynamic> json) =>
       _$LikePostTokenEntityFromJson(json);
 
-  factory LikePostTokenEntity.fromModel(LikePostToken model) {
+  factory LikePostTokenEntity.fromModel(LikePostTokenModel model) {
     return LikePostTokenEntity(
       activeUid: model.activeUid,
       passiveUid: model.passiveUid,

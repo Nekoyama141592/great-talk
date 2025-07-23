@@ -3,21 +3,21 @@ import 'package:flutter/foundation.dart';
 import 'package:great_talk/core/constant/firestore_constant.dart';
 import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
 import 'package:great_talk/domain/value/token_type.dart';
-import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
-import 'package:great_talk/infrastructure/model/database_schema/follower/follower.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post_mute/post_mute.dart';
-import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/follower/follower_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post_like/post_like_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post_mute/post_mute_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user_model.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
-import 'package:great_talk/infrastructure/model/database_schema/user_mute/user_mute.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/following_token/following_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/user_mute/user_mute_model.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/domain/repository_interface/i_database_repository.dart';
 
@@ -134,18 +134,20 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<PublicUserEntity?> createPublicUser(
-    String uid,
-    Map<String, dynamic> json,
-  ) async {
-    final docRef = userDocRef(uid);
+  Future<PublicUserEntity?> createPublicUser(String uid) async {
     try {
+      final docRef = userDocRef(uid);
+      final oldDoc = await docRef.get();
+      if (oldDoc.exists) return null;
+      final newUser = PublicUserModel.fromRegister(uid);
+      final json = newUser.toJson();
       await docRef.set(json);
-      // Retrieve the document to ensure type safety
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      final publicUser = PublicUser.fromJson(Map<String, dynamic>.from(data));
+      final publicUser = PublicUserModel.fromJson(
+        Map<String, dynamic>.from(data),
+      );
       return PublicUserEntity.fromModel(publicUser);
     } catch (e) {
       debugPrint('createPublicUser: ${e.toString()}');
@@ -154,12 +156,13 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<PrivateUserEntity?> createPrivateUser(
-    String uid,
-    Map<String, dynamic> json,
-  ) async {
-    final docRef = privateUserDocRef(uid);
+  Future<PrivateUserEntity?> createPrivateUser(String uid) async {
     try {
+      final docRef = privateUserDocRef(uid);
+      final oldDoc = await docRef.get();
+      if (oldDoc.exists) return null;
+      final newPrivateUser = PrivateUserModel.fromUid(uid);
+      final json = newPrivateUser.toJson();
       await docRef.set(json);
       return PrivateUserEntity();
     } catch (e) {
@@ -228,8 +231,8 @@ class DatabaseRepository implements IDatabaseRepository {
     String currentUid,
     String passiveUid,
   ) async {
-    final followingToken = FollowingToken.fromUid(passiveUid);
-    final follower = Follower.fromUid(currentUid, passiveUid);
+    final followingToken = FollowingTokenModel.fromUid(passiveUid);
+    final follower = FollowerModel.fromUid(currentUid, passiveUid);
     final tokenRef = tokenDocRef(currentUid, followingToken.tokenId);
     final followerRef = followerDocRef(currentUid, passiveUid);
     final requestList = [
@@ -244,7 +247,7 @@ class DatabaseRepository implements IDatabaseRepository {
     String currentUid,
     String passiveUid,
   ) async {
-    final token = MuteUserToken.fromPost(currentUid, passiveUid);
+    final token = MuteUserTokenModel.fromPost(currentUid, passiveUid);
     final userMute = UserMute.fromPost(currentUid, passiveUid);
     final tokenRef = tokenDocRef(currentUid, token.tokenId);
     final userMuteRef = userMuteDocRef(passiveUid, currentUid);
@@ -261,8 +264,8 @@ class DatabaseRepository implements IDatabaseRepository {
     String postUid,
     String postId,
   ) async {
-    final token = MutePostToken.fromPost(postId, currentUid);
-    final postMute = PostMute.fromPost(postId, currentUid);
+    final token = MutePostTokenModel.fromPost(postId, currentUid);
+    final postMute = PostMuteModel.fromPost(postId, currentUid);
     final tokenRef = tokenDocRef(currentUid, token.tokenId);
     final postMuteRef = postMuteDocRef(postDocRef(postUid, postId), currentUid);
     final requestList = [
@@ -278,8 +281,8 @@ class DatabaseRepository implements IDatabaseRepository {
     String postUid,
     String postId,
   ) async {
-    final token = LikePostToken.fromPost(postId, postUid, currentUid);
-    final postLike = PostLike.fromPost(postId, postUid, currentUid);
+    final token = LikePostTokenModel.fromPost(postId, postUid, currentUid);
+    final postLike = PostLikeModel.fromPost(postId, postUid, currentUid);
     final tokenRef = tokenDocRef(currentUid, token.tokenId);
     final postRef = postDocRef(postUid, postId);
     final postLikeRef = postLikeDocRef(postRef, currentUid);
@@ -362,7 +365,9 @@ class DatabaseRepository implements IDatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      final publicUser = PublicUser.fromJson(Map<String, dynamic>.from(data));
+      final publicUser = PublicUserModel.fromJson(
+        Map<String, dynamic>.from(data),
+      );
       return PublicUserEntity.fromModel(publicUser);
     } catch (e) {
       debugPrint('getPublicUser: ${e.toString()}');
@@ -377,7 +382,9 @@ class DatabaseRepository implements IDatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      final privateUser = PrivateUser.fromJson(Map<String, dynamic>.from(data));
+      final privateUser = PrivateUserModel.fromJson(
+        Map<String, dynamic>.from(data),
+      );
       return PrivateUserEntity.fromModel(privateUser);
     } catch (e) {
       debugPrint('getPrivateUser: ${e.toString()}');
@@ -392,7 +399,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
-      final post = Post.fromJson(Map<String, dynamic>.from(data));
+      final post = PostModel.fromJson(Map<String, dynamic>.from(data));
       return PostEntity.fromModel(post);
     } catch (e) {
       debugPrint('getPost: ${e.toString()}');
@@ -415,22 +422,22 @@ class DatabaseRepository implements IDatabaseRepository {
         followingTokens:
             allTokensData
                 .where((map) => map['tokenType'] == TokenType.following.name)
-                .map((map) => FollowingToken.fromJson(map))
+                .map((map) => FollowingTokenModel.fromJson(map))
                 .toList(),
         likePostTokens:
             allTokensData
                 .where((map) => map['tokenType'] == TokenType.likePost.name)
-                .map((map) => LikePostToken.fromJson(map))
+                .map((map) => LikePostTokenModel.fromJson(map))
                 .toList(),
         muteUserTokens:
             allTokensData
                 .where((map) => map['tokenType'] == TokenType.muteUser.name)
-                .map((map) => MuteUserToken.fromJson(map))
+                .map((map) => MuteUserTokenModel.fromJson(map))
                 .toList(),
         mutePostTokens:
             allTokensData
                 .where((map) => map['tokenType'] == TokenType.mutePost.name)
-                .map((map) => MutePostToken.fromJson(map))
+                .map((map) => MutePostTokenModel.fromJson(map))
                 .toList(),
       );
     } catch (e) {
@@ -446,7 +453,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = timelinePostsQuery(postIds);
       final qSnapshot = await _getDocs(query);
       return qSnapshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -462,7 +469,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = usersByWhereIn(uids);
       final qSnapshot = await _getDocs(query);
       return qSnapshot.docs.map((doc) {
-        final publicUser = PublicUser.fromJson(doc.data());
+        final publicUser = PublicUserModel.fromJson(doc.data());
         return PublicUserEntity.fromModel(publicUser);
       }).toList();
     } catch (e) {
@@ -477,7 +484,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = userPostsByNewest(uid);
       final qshot = await _getDocs(query);
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -496,7 +503,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = userPostsByNewest(uid).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -511,7 +518,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = usersByFollowerCount();
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final publicUser = PublicUser.fromJson(
+        final publicUser = PublicUserModel.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
         return PublicUserEntity.fromModel(publicUser);
@@ -529,7 +536,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = usersByFollowerCount().startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final publicUser = PublicUser.fromJson(
+        final publicUser = PublicUserModel.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
         return PublicUserEntity.fromModel(publicUser);
@@ -547,7 +554,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = usersByWhereIn(requestUids);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final publicUser = PublicUser.fromJson(
+        final publicUser = PublicUserModel.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
         return PublicUserEntity.fromModel(publicUser);
@@ -569,7 +576,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = usersByWhereIn(requestUids).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final publicUser = PublicUser.fromJson(
+        final publicUser = PublicUserModel.fromJson(
           Map<String, dynamic>.from(e.data()),
         );
         return PublicUserEntity.fromModel(publicUser);
@@ -581,13 +588,14 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Timeline>> getTimelines(String currentUid) async {
+  Future<List<TimelineModel>> getTimelines(String currentUid) async {
     try {
       final qshot = await timelinesQuery(currentUid).get();
       final timelines =
           qshot.docs
               .map(
-                (e) => Timeline.fromJson(Map<String, dynamic>.from(e.data())),
+                (e) =>
+                    TimelineModel.fromJson(Map<String, dynamic>.from(e.data())),
               )
               .toList();
       final sorted = [...timelines]
@@ -608,7 +616,7 @@ class DatabaseRepository implements IDatabaseRepository {
     try {
       final qshot = await _postsQuery(isRankingPosts).get();
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -628,7 +636,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final qshot =
           await _postsQuery(isRankingPosts).startAfterDocument(doc).get();
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -638,7 +646,7 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  Future<List<Timeline>> getMoreTimelines(
+  Future<List<TimelineModel>> getMoreTimelines(
     String currentUid,
     String lastTimelinePostId,
   ) async {
@@ -647,7 +655,9 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = timelinesQuery(currentUid);
       final qshot = await query.startAfterDocument(doc).get();
       return qshot.docs
-          .map((e) => Timeline.fromJson(Map<String, dynamic>.from(e.data())))
+          .map(
+            (e) => TimelineModel.fromJson(Map<String, dynamic>.from(e.data())),
+          )
           .toList();
     } catch (e) {
       debugPrint('getMoreTimelines: ${e.toString()}');
@@ -662,7 +672,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = postsByWhereIn(postIds);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {
@@ -683,7 +693,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final query = postsByWhereIn(postIds).startAfterDocument(doc);
       final qshot = await query.get();
       return qshot.docs.map((e) {
-        final post = Post.fromJson(Map<String, dynamic>.from(e.data()));
+        final post = PostModel.fromJson(Map<String, dynamic>.from(e.data()));
         return PostEntity.fromModel(post);
       }).toList();
     } catch (e) {

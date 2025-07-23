@@ -15,7 +15,6 @@ enum PrefsKey {
   chatCountToday,
   initialPeople,
   isAgreedToTerms,
-  isDarkTheme,
   isV3initialized,
   lastChatDate,
   latestReceipt,
@@ -161,16 +160,6 @@ class LocalRepository implements ILocalRepository {
         'Failed to set bool for key "${key.name}": $error',
       );
     }
-  }
-
-  @override
-  bool getIsDarkTheme() {
-    return _getBool(PrefsKey.isDarkTheme) ?? true;
-  }
-
-  @override
-  Future<void> setIsDarkTheme(bool value) {
-    return _setBool(PrefsKey.isDarkTheme, value);
   }
 
   @override

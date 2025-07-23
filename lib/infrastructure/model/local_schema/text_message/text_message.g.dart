@@ -11,7 +11,9 @@ _TextMessage _$TextMessageFromJson(Map<String, dynamic> json) => _TextMessage(
   id: json['id'] as String,
   messageType: json['messageType'] as String,
   senderUid: json['senderUid'] as String,
-  text: json['text'] as Map<String, dynamic>,
+  text: const DetectedTextConverter().fromJson(
+    json['text'] as Map<String, dynamic>,
+  ),
 );
 
 Map<String, dynamic> _$TextMessageToJson(_TextMessage instance) =>
@@ -20,5 +22,5 @@ Map<String, dynamic> _$TextMessageToJson(_TextMessage instance) =>
       'id': instance.id,
       'messageType': instance.messageType,
       'senderUid': instance.senderUid,
-      'text': instance.text,
+      'text': const DetectedTextConverter().toJson(instance.text),
     };

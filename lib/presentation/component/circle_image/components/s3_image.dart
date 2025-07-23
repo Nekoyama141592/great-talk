@@ -9,18 +9,23 @@ class S3Image extends StatelessWidget {
   final Uint8List uint8list;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).primaryColor),
-        shape: BoxShape.circle,
-      ),
-      child: ClipOval(
-        child: SizedBox(
-          width: width ?? SizeUtil.userImageSize(context),
-          height: height ?? SizeUtil.userImageSize(context),
-          child: Align(
-            alignment: Alignment.center,
-            child: Image.memory(uint8list),
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Theme.of(context).primaryColor),
+          shape: BoxShape.circle,
+        ),
+        child: ClipOval(
+          child: SizedBox(
+            width: width ?? SizeUtil.userImageSize(context),
+            height: height ?? SizeUtil.userImageSize(context),
+            child: Image.memory(
+              uint8list,
+              fit: BoxFit.cover,
+              width: width ?? SizeUtil.userImageSize(context),
+              height: height ?? SizeUtil.userImageSize(context),
+            ),
           ),
         ),
       ),

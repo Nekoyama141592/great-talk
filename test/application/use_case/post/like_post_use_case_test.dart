@@ -5,11 +5,11 @@ import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/application/use_case/post/like_post_use_case.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/domain/entity/database/tokens/like_post_token_entity/like_post_token_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/like_post_token/like_post_token_model.dart';
 
 void main() {
   group('LikePostUseCase', () {
@@ -46,7 +46,7 @@ void main() {
             sentiment: 'positive',
             value: 'Test post description',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 0,
@@ -58,7 +58,7 @@ void main() {
           msgCount: 0,
         );
 
-        final likePostToken = LikePostToken(
+        final likePostToken = LikePostTokenModel(
           tokenId: 'test_token_id',
           postId: 'test_post_id',
           activeUid: testCurrentUid,
@@ -182,7 +182,7 @@ void main() {
             sentiment: 'positive',
             value: 'Test post description',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 0,
@@ -197,7 +197,7 @@ void main() {
 
       test('should return success when unliking post succeeds', () async {
         // First create a like to unlike
-        final tokenModel = LikePostToken(
+        final tokenModel = LikePostTokenModel(
           tokenId: testTokenId,
           postId: testPost.postId,
           activeUid: testCurrentUid,
@@ -301,7 +301,7 @@ void main() {
             sentiment: 'positive',
             value: 'Rapid test description',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 0,
@@ -313,7 +313,7 @@ void main() {
           msgCount: 0,
         );
 
-        final token1Model = LikePostToken(
+        final token1Model = LikePostTokenModel(
           tokenId: 'token_1',
           postId: 'rapid_test_post',
           activeUid: 'user_1',
@@ -323,7 +323,7 @@ void main() {
         );
         final token1 = LikePostTokenEntity.fromModel(token1Model);
 
-        final token2Model = LikePostToken(
+        final token2Model = LikePostTokenModel(
           tokenId: 'token_2',
           postId: 'rapid_test_post',
           activeUid: 'user_2',
@@ -388,7 +388,7 @@ void main() {
             sentiment: 'positive',
             value: 'Like unlike test description',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 0,
@@ -400,7 +400,7 @@ void main() {
           msgCount: 0,
         );
 
-        final tokenModel = LikePostToken(
+        final tokenModel = LikePostTokenModel(
           tokenId: 'like_unlike_token',
           postId: 'like_unlike_test_post',
           activeUid: 'test_user',

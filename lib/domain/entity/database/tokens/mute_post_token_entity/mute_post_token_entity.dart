@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_post_token/mute_post_token_model.dart';
 
 part 'mute_post_token_entity.freezed.dart';
 part 'mute_post_token_entity.g.dart';
@@ -16,7 +16,7 @@ abstract class MutePostTokenEntity with _$MutePostTokenEntity {
   factory MutePostTokenEntity.fromJson(Map<String, dynamic> json) =>
       _$MutePostTokenEntityFromJson(json);
 
-  factory MutePostTokenEntity.fromModel(MutePostToken model) {
+  factory MutePostTokenEntity.fromModel(MutePostTokenModel model) {
     return MutePostTokenEntity(
       activeUid: model.activeUid,
       postId: model.postId,

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/response/put_object_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
@@ -93,7 +93,7 @@ void main() {
 
     group('deleteObject', () {
       test('should return success when deletion succeeds', () async {
-        final image = DetectedImage(
+        final image = ModeratedImage(
           bucketName: 'test-bucket',
           moderationLabels: [],
           moderationModelVersion: '1.0',
@@ -110,7 +110,7 @@ void main() {
       });
 
       test('should return failure when deletion fails', () async {
-        final image = DetectedImage(
+        final image = ModeratedImage(
           bucketName: 'test-bucket',
           moderationLabels: [],
           moderationModelVersion: '1.0',
@@ -255,7 +255,7 @@ void main() {
         await repository.putObject(putRequest);
         await repository.getObject(getRequest);
         await repository.deleteObject(
-          DetectedImage(
+          ModeratedImage(
             bucketName: 'bucket',
             moderationLabels: [],
             moderationModelVersion: '1.0',
@@ -386,7 +386,7 @@ class TestableApiRepository {
   }
 
   rs.FutureResult<DeleteObjectResponse> deleteObject(
-    DetectedImage image,
+    ModeratedImage image,
   ) async {
     try {
       const name = 'deleteObjectV2';

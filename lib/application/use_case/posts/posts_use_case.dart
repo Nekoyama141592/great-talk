@@ -22,7 +22,7 @@ class PostsUseCase implements IPostsUseCase {
   }
 
   List<PostEntity> _sortByCreatedAt(List<PostEntity> posts) {
-    return posts..sort((a, b) => (b.createdAt!).compareTo(a.createdAt!));
+    return posts..sort((a, b) => b.createdAt.compareTo(a.createdAt));
   }
 
   List<PostEntity> _sortByLikeCount(List<PostEntity> posts) {

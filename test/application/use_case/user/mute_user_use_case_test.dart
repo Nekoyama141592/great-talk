@@ -5,10 +5,10 @@ import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/application/use_case/user/mute_user_use_case.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/mute_user_token/mute_user_token_model.dart';
 import 'package:great_talk/domain/entity/database/tokens/mute_user_token_entity/mute_user_token_entity.dart';
 
 void main() {
@@ -47,7 +47,7 @@ void main() {
             sentiment: 'positive',
             value: 'Test post description',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 0,
@@ -59,7 +59,7 @@ void main() {
           msgCount: 0,
         );
 
-        final muteUserToken = MuteUserToken(
+        final muteUserToken = MuteUserTokenModel(
           tokenId: 'test_token_id',
           activeUid: testCurrentUid,
           passiveUid: testPassiveUid,
@@ -170,7 +170,7 @@ void main() {
         const sameUid = 'same_user_uid';
 
         final selfPost = testPost.copyWith(uid: sameUid);
-        final selfMuteUserToken = MuteUserToken(
+        final selfMuteUserToken = MuteUserTokenModel(
           tokenId: 'test_token_id',
           activeUid: sameUid,
           passiveUid: sameUid,
@@ -238,7 +238,7 @@ void main() {
                       sentiment: 'positive',
                       value: 'Post by $uid',
                     ),
-                    image: const DetectedImage(),
+                    image: const ModeratedImage(),
                     title: DetectedText(
                       languageCode: 'en',
                       negativeScore: 0,
@@ -255,7 +255,7 @@ void main() {
         final modelTokens =
             users
                 .map(
-                  (uid) => MuteUserToken(
+                  (uid) => MuteUserTokenModel(
                     tokenId: 'mute_${uid}_token',
                     activeUid: muterUid,
                     passiveUid: uid,
@@ -321,7 +321,7 @@ void main() {
             sentiment: 'positive',
             value: '複雑なユーザーの投稿',
           ),
-          image: const DetectedImage(
+          image: const ModeratedImage(
             value: 'complex_user_image.jpg',
             bucketName: 'user_content',
             moderationLabels: [],
@@ -338,7 +338,7 @@ void main() {
           msgCount: 50,
         );
 
-        final complexMuteUserToken = MuteUserToken(
+        final complexMuteUserToken = MuteUserTokenModel(
           tokenId: 'complex_mute_token',
           activeUid: 'muting_user',
           passiveUid: 'complex_user',
@@ -393,7 +393,7 @@ void main() {
               sentiment: 'positive',
               value: 'Rapid test post $index',
             ),
-            image: const DetectedImage(),
+            image: const ModeratedImage(),
             title: DetectedText(
               languageCode: 'en',
               negativeScore: 0,
@@ -408,7 +408,7 @@ void main() {
 
         final modelTokens = List.generate(
           5,
-          (index) => MuteUserToken(
+          (index) => MuteUserTokenModel(
             tokenId: 'rapid_mute_token_$index',
             activeUid: rapidMuter,
             passiveUid: targetUser,
@@ -474,7 +474,7 @@ void main() {
             sentiment: 'positive',
             value: 'Post by User B',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 0,
@@ -499,7 +499,7 @@ void main() {
             sentiment: 'positive',
             value: 'Post by User A',
           ),
-          image: const DetectedImage(),
+          image: const ModeratedImage(),
           title: const DetectedText(
             languageCode: 'en',
             negativeScore: 0,
@@ -511,7 +511,7 @@ void main() {
           msgCount: 0,
         );
 
-        final modelTokenAMutesB = MuteUserToken(
+        final modelTokenAMutesB = MuteUserTokenModel(
           tokenId: 'a_mutes_b',
           activeUid: userA,
           passiveUid: userB,
@@ -520,7 +520,7 @@ void main() {
         );
         final tokenAMutesB = MuteUserTokenEntity.fromModel(modelTokenAMutesB);
 
-        final modelTokenBMutesA = MuteUserToken(
+        final modelTokenBMutesA = MuteUserTokenModel(
           tokenId: 'b_mutes_a',
           activeUid: userB,
           passiveUid: userA,

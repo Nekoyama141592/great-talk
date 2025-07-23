@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/infrastructure/model/local_schema/text_message/text_message.dart';
 import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
@@ -126,38 +126,6 @@ void main() {
       );
     });
 
-    group('Theme preferences', () {
-      test('should return default dark theme when not set', () async {
-        final prefs = await SharedPreferences.getInstance();
-        localRepository = LocalRepository(prefs);
-
-        final isDarkTheme = localRepository.getIsDarkTheme();
-
-        expect(isDarkTheme, true);
-      });
-
-      test('should set and get dark theme preference', () async {
-        final prefs = await SharedPreferences.getInstance();
-        localRepository = LocalRepository(prefs);
-
-        await localRepository.setIsDarkTheme(false);
-        final isDarkTheme = localRepository.getIsDarkTheme();
-
-        expect(isDarkTheme, false);
-      });
-
-      test('should update dark theme preference', () async {
-        final prefs = await SharedPreferences.getInstance();
-        localRepository = LocalRepository(prefs);
-
-        await localRepository.setIsDarkTheme(false);
-        expect(localRepository.getIsDarkTheme(), false);
-
-        await localRepository.setIsDarkTheme(true);
-        expect(localRepository.getIsDarkTheme(), true);
-      });
-    });
-
     group('First message preferences', () {
       test('should return default need first message when not set', () async {
         final prefs = await SharedPreferences.getInstance();
@@ -248,7 +216,7 @@ void main() {
             systemPrompt: 'Complete text',
           ),
           description: const DetectedText(value: 'Test description'),
-          image: const DetectedImage(value: 'test.jpg'),
+          image: const ModeratedImage(value: 'test.jpg'),
           title: const DetectedText(value: 'Test Title'),
           uid: 'owner_uid',
           updatedAt: Timestamp.now().toDate(),
@@ -283,13 +251,10 @@ void main() {
 
         expect(retrievedMessages, hasLength(2));
         expect(
-          retrievedMessages[0].text['value'],
+          retrievedMessages[0].text.value,
           'Hello, this is a test message',
         );
-        expect(
-          retrievedMessages[1].text['value'],
-          'Hello! How can I help you?',
-        );
+        expect(retrievedMessages[1].text.value, 'Hello! How can I help you?');
       });
 
       test('should handle single message', () async {
@@ -306,7 +271,7 @@ void main() {
         final retrievedMessages = localRepository.getMessages(postId);
 
         expect(retrievedMessages, hasLength(1));
-        expect(retrievedMessages.first.text['value'], 'Single test message');
+        expect(retrievedMessages.first.text.value, 'Single test message');
       });
 
       test('should update existing messages', () async {
@@ -329,8 +294,8 @@ void main() {
         final updatedMessages = localRepository.getMessages(postId);
 
         expect(updatedMessages, hasLength(2));
-        expect(updatedMessages[0].text['value'], 'New message 1');
-        expect(updatedMessages[1].text['value'], 'New message 2');
+        expect(updatedMessages[0].text.value, 'New message 1');
+        expect(updatedMessages[1].text.value, 'New message 2');
       });
     });
 

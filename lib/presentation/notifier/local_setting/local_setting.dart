@@ -9,17 +9,8 @@ class LocalSetting extends _$LocalSetting {
   @override
   LocalSettingState build() {
     final repository = ref.watch(localRepositoryProvider);
-    final isDarkTheme = repository.getIsDarkTheme();
     final needFirstMessage = repository.getNeedFirstMessage();
-    return LocalSettingState(
-      isDarkTheme: isDarkTheme,
-      needFirstMessage: needFirstMessage,
-    );
-  }
-
-  void onThemeSwichChanged(bool value) async {
-    state = state.copyWith(isDarkTheme: value);
-    ref.read(localRepositoryProvider).setIsDarkTheme(value);
+    return LocalSettingState(needFirstMessage: needFirstMessage);
   }
 
   void onNeedFirstMessageSwichChanged(bool value) async {

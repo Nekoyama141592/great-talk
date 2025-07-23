@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/constant/moderate_constant.dart';
-import 'package:great_talk/domain/converter/timestamp_converter.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user_model.dart';
 
 part 'public_user_entity.freezed.dart';
 part 'public_user_entity.g.dart';
@@ -15,27 +14,27 @@ abstract class PublicUserEntity with _$PublicUserEntity {
   const PublicUserEntity._();
   factory PublicUserEntity({
     required DetectedText bio,
-    @TimestampConverter() DateTime? createdAt,
+    required DateTime createdAt,
     required int followerCount,
     required int followingCount,
     required bool isOfficial,
     required int postCount,
     required String uid,
-    @TimestampConverter() DateTime? updatedAt,
-    required DetectedImage image,
+    required DateTime updatedAt,
+    required ModeratedImage image,
     required DetectedText userName,
   }) = _PublicUserEntity;
 
   factory PublicUserEntity.fromJson(Map<String, dynamic> json) =>
       _$PublicUserEntityFromJson(json);
 
-  factory PublicUserEntity.fromModel(PublicUser model) {
+  factory PublicUserEntity.fromModel(PublicUserModel model) {
     return PublicUserEntity(
-      bio: DetectedText.fromJson(model.bio),
+      bio: model.bio,
       createdAt:
           model.createdAt is Timestamp
               ? (model.createdAt as Timestamp).toDate()
-              : model.createdAt,
+              : model.createdAt ?? DateTime.now(),
       followerCount: model.followerCount,
       followingCount: model.followingCount,
       isOfficial: model.isOfficial,
@@ -44,9 +43,9 @@ abstract class PublicUserEntity with _$PublicUserEntity {
       updatedAt:
           model.updatedAt is Timestamp
               ? (model.updatedAt as Timestamp).toDate()
-              : model.updatedAt,
-      image: DetectedImage.fromJson(model.image),
-      userName: DetectedText.fromJson(model.userName),
+              : model.updatedAt ?? DateTime.now(),
+      image: model.image,
+      userName: model.userName,
     );
   }
 

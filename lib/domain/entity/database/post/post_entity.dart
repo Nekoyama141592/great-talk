@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:great_talk/core/constant/moderate_constant.dart';
-import 'package:great_talk/domain/converter/timestamp_converter.dart';
-import 'package:great_talk/infrastructure/model/database_schema/custom_complete_text/custom_complete_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_image/detected_image.dart';
-import 'package:great_talk/infrastructure/model/database_schema/detected_text/detected_text.dart';
-import 'package:great_talk/infrastructure/model/database_schema/post/post.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/custom_complete_text/custom_complete_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/moderated_image/moderated_image.dart';
+import 'package:great_talk/infrastructure/model/database_schema/common/detected_text/detected_text.dart';
+import 'package:great_talk/infrastructure/model/database_schema/post/post_model.dart';
 
 part 'post_entity.freezed.dart';
 part 'post_entity.g.dart';
@@ -14,39 +13,39 @@ part 'post_entity.g.dart';
 abstract class PostEntity with _$PostEntity {
   const PostEntity._();
   const factory PostEntity({
-    @TimestampConverter() DateTime? createdAt,
+    required DateTime createdAt,
     required CustomCompleteText customCompleteText,
     required DetectedText description,
-    required DetectedImage image,
+    required ModeratedImage image,
     required int likeCount,
     required int msgCount,
     required String postId,
     required DetectedText title,
     required String uid,
-    @TimestampConverter() DateTime? updatedAt,
+    required DateTime updatedAt,
   }) = _PostEntity;
 
   factory PostEntity.fromJson(Map<String, dynamic> json) =>
       _$PostEntityFromJson(json);
 
-  factory PostEntity.fromModel(Post model) {
+  factory PostEntity.fromModel(PostModel model) {
     return PostEntity(
       createdAt:
           model.createdAt is Timestamp
               ? (model.createdAt as Timestamp).toDate()
-              : model.createdAt,
-      customCompleteText: CustomCompleteText.fromJson(model.customCompleteText),
-      description: DetectedText.fromJson(model.description),
-      image: DetectedImage.fromJson(model.image),
+              : model.createdAt ?? DateTime.now(),
+      customCompleteText: model.customCompleteText,
+      description: model.description,
+      image: model.image,
       likeCount: model.likeCount,
       msgCount: model.msgCount,
       postId: model.postId,
-      title: DetectedText.fromJson(model.title),
+      title: model.title,
       uid: model.uid,
       updatedAt:
           model.updatedAt is Timestamp
               ? (model.updatedAt as Timestamp).toDate()
-              : model.updatedAt,
+              : model.updatedAt ?? DateTime.now(),
     );
   }
 

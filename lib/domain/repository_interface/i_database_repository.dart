@@ -1,8 +1,8 @@
 import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline.dart';
-import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens.dart';
+import 'package:great_talk/infrastructure/model/database_schema/timeline/timeline_model.dart';
+import 'package:great_talk/infrastructure/model/database_schema/tokens/tokens_model.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
 
 /// Abstract interface for database operations including user management,
@@ -14,15 +14,9 @@ abstract class IDatabaseRepository {
   Future<int?> countMessages();
 
   // User creation
-  Future<PublicUserEntity?> createPublicUser(
-    String uid,
-    Map<String, dynamic> json,
-  );
+  Future<PublicUserEntity?> createPublicUser(String uid);
 
-  Future<PrivateUserEntity?> createPrivateUser(
-    String uid,
-    Map<String, dynamic> json,
-  );
+  Future<PrivateUserEntity?> createPrivateUser(String uid);
 
   // User operations
   Future<PublicUserEntity?> getPublicUser(String uid);
@@ -92,9 +86,9 @@ abstract class IDatabaseRepository {
   Future<Tokens> getTokens(String uid);
 
   // Timeline operations
-  Future<List<Timeline>> getTimelines(String currentUid);
+  Future<List<TimelineModel>> getTimelines(String currentUid);
   Future<List<PostEntity>> getTimelinePosts(List<String> postIds);
-  Future<List<Timeline>> getMoreTimelines(
+  Future<List<TimelineModel>> getMoreTimelines(
     String currentUid,
     String lastTimelinePostId,
   );
