@@ -286,7 +286,7 @@ class PostCard extends ConsumerWidget {
     } else if (difference.inDays < 7) {
       return '${difference.inDays}d ago';
     } else {
-      return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+      return '${dateTime.year}/${dateTime.month.toString().padLeft(2, '0')}/${dateTime.day.toString().padLeft(2, '0')}';
     }
   }
 }
