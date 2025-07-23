@@ -14,9 +14,6 @@ abstract class ILocalRepository {
   Future<void> setMessages(String postId, List<TextMessage> messages);
   List<TextMessage> getMessages(String postId);
 
-  // Theme preferences
-  bool getIsDarkTheme();
-  Future<void> setIsDarkTheme(bool value);
 
   // First message preferences
   bool getNeedFirstMessage();

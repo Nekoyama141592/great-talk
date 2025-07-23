@@ -7,7 +7,6 @@ part 'local_setting_state.g.dart';
 abstract class LocalSettingState with _$LocalSettingState {
   const LocalSettingState._();
   const factory LocalSettingState({
-    @Default(true) bool isDarkTheme,
     @Default(true) bool needFirstMessage,
   }) = _LocalSettingState;
   factory LocalSettingState.fromJson(Map<String, dynamic> json) =>

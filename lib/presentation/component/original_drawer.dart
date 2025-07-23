@@ -224,12 +224,6 @@ class OriginalDrawer extends ConsumerWidget {
                       onTap: () => RouteUtil.pushPath(context, MutePostsPage.path),
                     ),
                     _buildSwitchTile(
-                      icon: Icons.dark_mode_outlined,
-                      title: "テーマ切り替え",
-                      value: settingState.isDarkTheme,
-                      onChanged: ref.read(localSettingProvider.notifier).onThemeSwichChanged,
-                    ),
-                    _buildSwitchTile(
                       icon: Icons.message_outlined,
                       title: "最初のメッセージを受け取る",
                       value: settingState.needFirstMessage,
