@@ -136,12 +136,14 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   Future<PublicUserEntity?> createPublicUser(
     String uid,
-    Map<String, dynamic> json,
   ) async {
-    final docRef = userDocRef(uid);
     try {
+      final docRef = userDocRef(uid);
+      final oldDoc = await docRef.get();
+      if (oldDoc.exists) return null;
+      final newUser = PublicUserModel.fromRegister(uid);
+      final json = newUser.toJson();
       await docRef.set(json);
-      // Retrieve the document to ensure type safety
       final doc = await docRef.get();
       final data = doc.data();
       if (data == null) return null;
@@ -156,10 +158,13 @@ class DatabaseRepository implements IDatabaseRepository {
   @override
   Future<PrivateUserEntity?> createPrivateUser(
     String uid,
-    Map<String, dynamic> json,
   ) async {
-    final docRef = privateUserDocRef(uid);
     try {
+      final docRef = privateUserDocRef(uid);
+      final oldDoc = await docRef.get();
+      if (oldDoc.exists) return null;
+      final newPrivateUser = PrivateUserModel.fromUid(uid);
+      final json = newPrivateUser.toJson();
       await docRef.set(json);
       return PrivateUserEntity();
     } catch (e) {

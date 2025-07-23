@@ -247,17 +247,17 @@ class OriginalDrawer extends ConsumerWidget {
   }
 
   Widget _buildStatItem(String label, String value) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
       children: [
         Text(
           value,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
+        const SizedBox(width: 8.0),
         Text(
           label,
           style: TextStyle(

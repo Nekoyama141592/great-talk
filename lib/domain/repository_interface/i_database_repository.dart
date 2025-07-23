@@ -16,12 +16,10 @@ abstract class IDatabaseRepository {
   // User creation
   Future<PublicUserEntity?> createPublicUser(
     String uid,
-    Map<String, dynamic> json,
   );
 
   Future<PrivateUserEntity?> createPrivateUser(
     String uid,
-    Map<String, dynamic> json,
   );
 
   // User operations

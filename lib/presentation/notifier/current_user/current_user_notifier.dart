@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:great_talk/domain/entity/database/private_user/private_user_entity.dart';
-import 'package:great_talk/infrastructure/model/database_schema/private_user/private_user_model.dart';
-import 'package:great_talk/infrastructure/model/database_schema/public_user/public_user_model.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/presentation/state/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
@@ -42,18 +40,6 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
 
   String? _getCurrentUid() => ref.watch(authUidProvider);
 
-  Future<PublicUserEntity?> _createPublicUser(String uid) {
-    final newUser = PublicUserModel.fromRegister(uid);
-    final json = newUser.toJson();
-    return _databaseRepository.createPublicUser(uid, json);
-  }
-
-  Future<PrivateUserEntity?> _createPrivateUser(String uid) {
-    final newPrivateUser = PrivateUserModel.fromUid(uid);
-    final json = newPrivateUser.toJson();
-    return _databaseRepository.createPrivateUser(uid, json);
-  }
-
   Future<CurrentUserState> _fetchData() async {
     final uid = _getCurrentUid();
     if (uid == null) {
@@ -72,19 +58,17 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   Future<PublicUserEntity?> _getPublicUser(String uid) async {
     var publicUser = await _databaseRepository.getPublicUser(uid);
     if (publicUser == null) {
-      final createdUser = await _createPublicUser(uid);
+      final createdUser = await _databaseRepository.createPublicUser(uid);
       if (createdUser != null) {
         publicUser = PublicUserEntity.fromJson(createdUser.toJson());
       }
-    } else {
-      publicUser = PublicUserEntity.fromJson(publicUser.toJson());
     }
     return publicUser;
   }
 
   Future<PrivateUserEntity?> _getPrivateUser(String uid) async {
     var privateUser = await _databaseRepository.getPrivateUser(uid);
-    privateUser ??= await _createPrivateUser(uid);
+    privateUser ??= await _databaseRepository.createPrivateUser(uid);
     return privateUser;
   }
 
