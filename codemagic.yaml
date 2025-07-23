@@ -1,6 +1,6 @@
 workflows:
   test-flight-ios-workflow:
-    name: TestFlight iOS Workflow
+    name: TestFlight iOS Workflow Dev
     integrations:
       app_store_connect: Publisher
     labels:
@@ -11,6 +11,56 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.firebaseapp.greatTalkDev
+      vars:
+        APP_ID: 6449397516
+      flutter: v3.32.2
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: "develop"
+          include: true
+          source: true
+    scripts:
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles
+      - name: Get Flutter packages
+        script: |
+          flutter packages pub get
+      - name: Install pods
+        script: |
+          find . -name "Podfile" -execdir pod install \;
+      - name: Flutter build ipa and automatic versioning
+        script: |
+          flutter build ipa --release --flavor dev \
+            --export-options-plist=/Users/builder/export_options.plist \
+            --build-number=$(($(app-store-connect get-latest-testflight-build-number "$APP_ID") + 1))
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        beta_groups:
+          - Developer
+  test-flight-ios-workflow:
+    name: TestFlight iOS Workflow Prod
+    integrations:
+      app_store_connect: Publisher
+    labels:
+      - iOS
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.firebaseapp.greatTalk
       vars:
         APP_ID: 1667705303
       flutter: v3.32.2
@@ -35,7 +85,7 @@ workflows:
           find . -name "Podfile" -execdir pod install \;
       - name: Flutter build ipa and automatic versioning
         script: |
-          flutter build ipa --release --flavor dev \
+          flutter build ipa --release --flavor prod \
             --export-options-plist=/Users/builder/export_options.plist \
             --build-number=$(($(app-store-connect get-latest-testflight-build-number "$APP_ID") + 1))
     artifacts:
