@@ -126,37 +126,6 @@ void main() {
       );
     });
 
-    group('Theme preferences', () {
-      test('should return default dark theme when not set', () async {
-        final prefs = await SharedPreferences.getInstance();
-        localRepository = LocalRepository(prefs);
-
-        final isDarkTheme = localRepository.getIsDarkTheme();
-
-        expect(isDarkTheme, true);
-      });
-
-      test('should set and get dark theme preference', () async {
-        final prefs = await SharedPreferences.getInstance();
-        localRepository = LocalRepository(prefs);
-
-        await localRepository.setIsDarkTheme(false);
-        final isDarkTheme = localRepository.getIsDarkTheme();
-
-        expect(isDarkTheme, false);
-      });
-
-      test('should update dark theme preference', () async {
-        final prefs = await SharedPreferences.getInstance();
-        localRepository = LocalRepository(prefs);
-
-        await localRepository.setIsDarkTheme(false);
-        expect(localRepository.getIsDarkTheme(), false);
-
-        await localRepository.setIsDarkTheme(true);
-        expect(localRepository.getIsDarkTheme(), true);
-      });
-    });
 
     group('First message preferences', () {
       test('should return default need first message when not set', () async {

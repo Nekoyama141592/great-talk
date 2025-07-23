@@ -4,6 +4,13 @@ import 'package:great_talk/presentation/page/screen/profile_screen/components/da
 
 void main() {
   group('DateText', () {
+    Widget createTestApp(Widget child) {
+      return MaterialApp(
+        theme: ThemeData.dark(),
+        home: Scaffold(body: child),
+      );
+    }
+
     testWidgets('should display formatted dates for both created and updated', (
       WidgetTester tester,
     ) async {
@@ -11,26 +18,25 @@ void main() {
       final updatedAt = DateTime(2023, 8, 20);
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: DateText(createdAt: createdAt, updatedAt: updatedAt),
-          ),
-        ),
+        createTestApp(DateText(createdAt: createdAt, updatedAt: updatedAt)),
       );
 
-      expect(find.text('2023/05/15作成, 2023/08/20更新'), findsOneWidget);
+      expect(find.text('作成日'), findsOneWidget);
+      expect(find.text('2023/05/15'), findsOneWidget);
+      expect(find.text('更新日'), findsOneWidget);
+      expect(find.text('2023/08/20'), findsOneWidget);
     });
 
     testWidgets('should handle null createdAt and updatedAt', (
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(body: DateText(createdAt: null, updatedAt: null)),
-        ),
+        createTestApp(const DateText(createdAt: null, updatedAt: null)),
       );
 
-      expect(find.text('作成, 更新'), findsOneWidget);
+      expect(find.text('作成日'), findsOneWidget);
+      expect(find.text('更新日'), findsOneWidget);
+      expect(find.text(''), findsAtLeastNWidgets(2));
     });
 
     testWidgets('should handle null createdAt with valid updatedAt', (
@@ -39,12 +45,12 @@ void main() {
       final updatedAt = DateTime(2023, 12, 25);
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(body: DateText(createdAt: null, updatedAt: updatedAt)),
-        ),
+        createTestApp(DateText(createdAt: null, updatedAt: updatedAt)),
       );
 
-      expect(find.text('作成, 2023/12/25更新'), findsOneWidget);
+      expect(find.text('作成日'), findsOneWidget);
+      expect(find.text('更新日'), findsOneWidget);
+      expect(find.text('2023/12/25'), findsOneWidget);
     });
 
     testWidgets('should handle valid createdAt with null updatedAt', (
@@ -53,12 +59,12 @@ void main() {
       final createdAt = DateTime(2023, 1, 1);
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(body: DateText(createdAt: createdAt, updatedAt: null)),
-        ),
+        createTestApp(DateText(createdAt: createdAt, updatedAt: null)),
       );
 
-      expect(find.text('2023/01/01作成, 更新'), findsOneWidget);
+      expect(find.text('作成日'), findsOneWidget);
+      expect(find.text('2023/01/01'), findsOneWidget);
+      expect(find.text('更新日'), findsOneWidget);
     });
 
     testWidgets(
@@ -68,14 +74,11 @@ void main() {
         final updatedAt = DateTime(2023, 9, 8);
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: DateText(createdAt: createdAt, updatedAt: updatedAt),
-            ),
-          ),
+          createTestApp(DateText(createdAt: createdAt, updatedAt: updatedAt)),
         );
 
-        expect(find.text('2023/01/05作成, 2023/09/08更新'), findsOneWidget);
+        expect(find.text('2023/01/05'), findsOneWidget);
+        expect(find.text('2023/09/08'), findsOneWidget);
       },
     );
 
@@ -85,14 +88,10 @@ void main() {
       final sameDate = DateTime(2023, 6, 15);
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: DateText(createdAt: sameDate, updatedAt: sameDate),
-          ),
-        ),
+        createTestApp(DateText(createdAt: sameDate, updatedAt: sameDate)),
       );
 
-      expect(find.text('2023/06/15作成, 2023/06/15更新'), findsOneWidget);
+      expect(find.text('2023/06/15'), findsAtLeastNWidgets(2));
     });
 
     testWidgets('should handle leap year dates', (WidgetTester tester) async {
@@ -100,45 +99,21 @@ void main() {
       final updatedAt = DateTime(2024, 2, 29);
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: DateText(createdAt: createdAt, updatedAt: updatedAt),
-          ),
-        ),
+        createTestApp(DateText(createdAt: createdAt, updatedAt: updatedAt)),
       );
 
-      expect(find.text('2024/02/29作成, 2024/02/29更新'), findsOneWidget);
+      expect(find.text('2024/02/29'), findsAtLeastNWidgets(2));
     });
 
-    testWidgets('should use correct text style', (WidgetTester tester) async {
+    testWidgets('should display container with proper styling', (WidgetTester tester) async {
       final createdAt = DateTime(2023, 5, 15);
       final updatedAt = DateTime(2023, 8, 20);
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: DateText(createdAt: createdAt, updatedAt: updatedAt),
-          ),
-        ),
+        createTestApp(DateText(createdAt: createdAt, updatedAt: updatedAt)),
       );
 
-      final textWidget = tester.widget<Text>(find.byType(Text));
-      expect(textWidget.style?.color, Colors.grey[600]);
-    });
-
-    testWidgets('should be a single Text widget', (WidgetTester tester) async {
-      final createdAt = DateTime(2023, 5, 15);
-      final updatedAt = DateTime(2023, 8, 20);
-
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: DateText(createdAt: createdAt, updatedAt: updatedAt),
-          ),
-        ),
-      );
-
-      expect(find.byType(Text), findsOneWidget);
+      expect(find.byType(Container), findsAtLeastNWidgets(1));
       expect(find.byType(DateText), findsOneWidget);
     });
 
@@ -149,14 +124,11 @@ void main() {
       final updatedAt = DateTime(2023, 1, 1);
 
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: DateText(createdAt: createdAt, updatedAt: updatedAt),
-          ),
-        ),
+        createTestApp(DateText(createdAt: createdAt, updatedAt: updatedAt)),
       );
 
-      expect(find.text('2022/12/31作成, 2023/01/01更新'), findsOneWidget);
+      expect(find.text('2022/12/31'), findsOneWidget);
+      expect(find.text('2023/01/01'), findsOneWidget);
     });
 
     group('Edge cases', () {
@@ -165,14 +137,11 @@ void main() {
         final updatedAt = DateTime(1950, 12, 31);
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: DateText(createdAt: createdAt, updatedAt: updatedAt),
-            ),
-          ),
+          createTestApp(DateText(createdAt: createdAt, updatedAt: updatedAt)),
         );
 
-        expect(find.text('1900/01/01作成, 1950/12/31更新'), findsOneWidget);
+        expect(find.text('1900/01/01'), findsOneWidget);
+        expect(find.text('1950/12/31'), findsOneWidget);
       });
 
       testWidgets('should handle future dates', (WidgetTester tester) async {
@@ -180,38 +149,27 @@ void main() {
         final updatedAt = DateTime(2035, 9, 20);
 
         await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              body: DateText(createdAt: createdAt, updatedAt: updatedAt),
-            ),
-          ),
+          createTestApp(DateText(createdAt: createdAt, updatedAt: updatedAt)),
         );
 
-        expect(find.text('2030/06/15作成, 2035/09/20更新'), findsOneWidget);
+        expect(find.text('2030/06/15'), findsOneWidget);
+        expect(find.text('2035/09/20'), findsOneWidget);
       });
     });
 
     group('Theme integration', () {
-      testWidgets('should respect theme text style', (
+      testWidgets('should respect theme and display icons', (
         WidgetTester tester,
       ) async {
         final createdAt = DateTime(2023, 5, 15);
         final updatedAt = DateTime(2023, 8, 20);
 
         await tester.pumpWidget(
-          MaterialApp(
-            theme: ThemeData(
-              textTheme: const TextTheme(bodySmall: TextStyle(fontSize: 10)),
-            ),
-            home: Scaffold(
-              body: DateText(createdAt: createdAt, updatedAt: updatedAt),
-            ),
-          ),
+          createTestApp(DateText(createdAt: createdAt, updatedAt: updatedAt)),
         );
 
-        final textWidget = tester.widget<Text>(find.byType(Text));
-        expect(textWidget.style?.fontSize, 10);
-        expect(textWidget.style?.color, Colors.grey[600]);
+        expect(find.byIcon(Icons.calendar_month_outlined), findsOneWidget);
+        expect(find.byIcon(Icons.update_outlined), findsOneWidget);
       });
 
       testWidgets('should work with dark theme', (WidgetTester tester) async {
@@ -219,17 +177,13 @@ void main() {
         final updatedAt = DateTime(2023, 8, 20);
 
         await tester.pumpWidget(
-          MaterialApp(
-            theme: ThemeData.dark(),
-            home: Scaffold(
-              body: DateText(createdAt: createdAt, updatedAt: updatedAt),
-            ),
-          ),
+          createTestApp(DateText(createdAt: createdAt, updatedAt: updatedAt)),
         );
 
-        expect(find.text('2023/05/15作成, 2023/08/20更新'), findsOneWidget);
-        final textWidget = tester.widget<Text>(find.byType(Text));
-        expect(textWidget.style?.color, Colors.grey[600]);
+        expect(find.text('作成日'), findsOneWidget);
+        expect(find.text('更新日'), findsOneWidget);
+        expect(find.text('2023/05/15'), findsOneWidget);
+        expect(find.text('2023/08/20'), findsOneWidget);
       });
     });
   });
