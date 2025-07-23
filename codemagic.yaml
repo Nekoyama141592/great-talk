@@ -1,5 +1,5 @@
 workflows:
-  test-flight-ios-workflow:
+  test-flight-ios-workflow-dev:
     name: TestFlight iOS Workflow Dev
     integrations:
       app_store_connect: Publisher
@@ -49,7 +49,7 @@ workflows:
         submit_to_testflight: true
         beta_groups:
           - Developer
-  test-flight-ios-workflow:
+  test-flight-ios-workflow-prod:
     name: TestFlight iOS Workflow Prod
     integrations:
       app_store_connect: Publisher
