@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:great_talk/presentation/constant/colors.dart';
 import 'package:great_talk/presentation/notifier/reset_password/reset_password_view_model.dart';
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
@@ -59,7 +60,6 @@ class ResetPasswordPage extends HookConsumerWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('パスワードをリセット'),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () => RouteUtil.back(context),
@@ -100,10 +100,12 @@ class ResetPasswordPage extends HookConsumerWidget {
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           validator: emailValidator,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             hintText: 'メールアドレス',
+                            hintStyle: TextStyle(
+                              color: Colors.white.withValues(alpha: 0.7),
+                            ),
                             border: InputBorder.none,
-                            prefixIcon: Icon(Icons.email),
                           ),
                         ),
                       ),
@@ -121,7 +123,7 @@ class ResetPasswordPage extends HookConsumerWidget {
                         onPressed: () => RouteUtil.back(context),
                         child: const Text(
                           'ログイン画面に戻る',
-                          style: TextStyle(color: Colors.blue, fontSize: 16),
+                          style: TextStyle(color: kPrimaryColor, fontSize: 16),
                         ),
                       ),
                     ],

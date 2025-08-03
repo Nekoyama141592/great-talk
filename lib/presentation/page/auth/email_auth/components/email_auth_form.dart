@@ -30,8 +30,9 @@ class EmailAuthForm extends StatelessWidget {
           TextFormField(
             controller: emailController,
             keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              labelText: 'メールアドレス',
+            decoration: InputDecoration(
+              hintText: 'メールアドレス',
+              hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.7)),
               border: OutlineInputBorder(),
             ),
             validator: emailValidator,
@@ -40,8 +41,9 @@ class EmailAuthForm extends StatelessWidget {
           TextFormField(
             controller: passwordController,
             obscureText: true,
-            decoration: const InputDecoration(
-              labelText: 'パスワード',
+            decoration: InputDecoration(
+              hintText: 'パスワード',
+              hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.7)),
               border: OutlineInputBorder(),
             ),
             validator: passwordValidator,
