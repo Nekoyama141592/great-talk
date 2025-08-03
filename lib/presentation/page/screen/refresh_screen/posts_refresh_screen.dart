@@ -12,11 +12,11 @@ class PostsRefreshScreen extends HookWidget {
     super.key,
     required this.userPosts,
     required this.notifier,
-    this.title,
+    required this.title,
   });
   final List<UserPost> userPosts;
   final RefreshInterface Function() notifier;
-  final String? title;
+  final String title;
   @override
   Widget build(BuildContext context) {
     RefreshController refreshController = RefreshController();
@@ -45,7 +45,7 @@ class PostsRefreshScreen extends HookWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                title ?? 'まだ投稿はありません',
+                title,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -119,7 +119,7 @@ class PostsRefreshScreen extends HookWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            title ?? 'Posts Feed',
+                            title,
                             style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -127,13 +127,6 @@ class PostsRefreshScreen extends HookWidget {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          Text(
-                            '${userPosts.length} ${userPosts.length == 1 ? 'post' : 'posts'}',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white.withValues(alpha: 0.7),
-                            ),
-                          ),
                         ],
                       ),
                     ),

@@ -15,6 +15,7 @@ class NewPostsScreen extends ConsumerWidget {
       asyncValue: asyncValue,
       data: (state) {
         return PostsRefreshScreen(
+          title: '新しい投稿',
           userPosts: state.userPosts,
           notifier: notifier,
         );
