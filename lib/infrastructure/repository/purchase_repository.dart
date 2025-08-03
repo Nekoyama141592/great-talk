@@ -59,22 +59,19 @@ class PurchaseRepository implements IPurchaseRepository {
 
   /// 指定したパッケージIDの商品を購入する
   @override
-  FutureResult<bool> buyProduct(String packageId) async {
+  FutureResult<bool> buyProduct(String packageId, bool isPro) async {
     try {
       final offerings = await Purchases.getOfferings();
-      final packages = [
-        ...offerings.all['pro']?.availablePackages ?? [],
-        ...offerings.all['premium']?.availablePackages ?? [],
-      ];
+      final entitlementId = isPro ? 'pro' : 'premium';
+      final packages = offerings.all[entitlementId]?.availablePackages;
+      if (packages == null) {
+        return const Result.failure('商品情報が読み込めません');
+      }
       final package = packages.firstWhere((e) => e.identifier == packageId);
       final purchaseResult = await Purchases.purchasePackage(package);
       // pro, premium どちらかが有効なら true
-      final isProActive = _getIsActive(purchaseResult.customerInfo, 'pro');
-      final isPremiumActive = _getIsActive(
-        purchaseResult.customerInfo,
-        'premium',
-      );
-      return Result.success(isProActive || isPremiumActive);
+      final isActive = _getIsActive(purchaseResult.customerInfo, entitlementId);
+      return Result.success(isActive);
     } catch (e) {
       debugPrint('buyProduct: ${e.toString()}');
       return const Result.failure('購入が失敗しました');

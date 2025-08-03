@@ -34,8 +34,11 @@ class ProductsNotifier extends _$ProductsNotifier {
     );
   }
 
-  FutureResult<bool> onPurchaseButtonPressed(ProductEntity product) async {
-    final result = await repository.buyProduct(product.packageId);
+  FutureResult<bool> onPurchaseButtonPressed(
+    ProductEntity product,
+    bool isPro,
+  ) async {
+    final result = await repository.buyProduct(product.packageId, isPro);
     return result;
   }
 

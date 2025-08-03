@@ -10,7 +10,7 @@ abstract class IPurchaseRepository {
   Future<(List<ProductEntity>?, List<ProductEntity>?)> getProducts();
 
   /// 指定したパッケージIDの商品を購入する
-  FutureResult<bool> buyProduct(String packageId);
+  FutureResult<bool> buyProduct(String packageId, bool isPro);
 
   /// 購入の復元を行う
   FutureResult<bool> restorePurchases();

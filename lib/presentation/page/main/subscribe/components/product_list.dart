@@ -23,12 +23,15 @@ class ProductList extends ConsumerWidget {
         final proProduct = state.proProducts.first;
         final premiumProduct = state.premiumProducts.first;
 
-        void onPressed(ProductEntity product) async {
+        void onPressed(ProductEntity product, bool isPro) async {
           ToastUiUtil.showSuccessSnackBar(
             context,
             '情報を取得しています。 \nしばらくお待ちください。',
           );
-          final result = await notifier().onPurchaseButtonPressed(product);
+          final result = await notifier().onPurchaseButtonPressed(
+            product,
+            isPro,
+          );
           result.when(
             success: (_) {
               ToastUiUtil.showSuccessSnackBar(context, '購入が成功しました');
@@ -76,7 +79,7 @@ class ProProductCard extends StatelessWidget {
 
   final ProductEntity product;
   final bool isPurchased;
-  final void Function(ProductEntity) onPurchaseButtonPressed;
+  final void Function(ProductEntity, bool) onPurchaseButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +230,8 @@ class ProProductCard extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: isPurchased ? null : () => onPurchaseButtonPressed(product),
+          onTap:
+              isPurchased ? null : () => onPurchaseButtonPressed(product, true),
           child: Center(
             child: Text(
               isPurchased ? '購入済み' : '今すぐ始める',
@@ -258,7 +262,7 @@ class PremiumProductCard extends StatefulWidget {
 
   final ProductEntity product;
   final bool isPurchased;
-  final void Function(ProductEntity) onPurchaseButtonPressed;
+  final void Function(ProductEntity, bool) onPurchaseButtonPressed;
 
   @override
   State<PremiumProductCard> createState() => _PremiumProductCardState();
@@ -359,48 +363,48 @@ class _PremiumProductCardState extends State<PremiumProductCard>
                   );
                 },
               ),
-              // Premium Badge
-              Positioned(
-                top: 20,
-                right: 20,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.amber.withValues(alpha: 0.5),
-                        blurRadius: 12,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Icon(
-                        Icons.workspace_premium,
-                        size: 16,
-                        color: Colors.black87,
-                      ),
-                      SizedBox(width: 4),
-                      Text(
-                        'PREMIUM',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.black87,
-                          letterSpacing: 1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              // // Premium Badge
+              // Positioned(
+              //   top: 20,
+              //   right: 20,
+              //   child: Container(
+              //     padding: const EdgeInsets.symmetric(
+              //       horizontal: 16,
+              //       vertical: 8,
+              //     ),
+              //     decoration: BoxDecoration(
+              //       color: Colors.amber,
+              //       borderRadius: BorderRadius.circular(20),
+              //       boxShadow: [
+              //         BoxShadow(
+              //           color: Colors.amber.withValues(alpha: 0.5),
+              //           blurRadius: 12,
+              //           offset: const Offset(0, 4),
+              //         ),
+              //       ],
+              //     ),
+              //     child: Row(
+              //       mainAxisSize: MainAxisSize.min,
+              //       children: const [
+              //         Icon(
+              //           Icons.workspace_premium,
+              //           size: 16,
+              //           color: Colors.black87,
+              //         ),
+              //         SizedBox(width: 4),
+              //         Text(
+              //           'PREMIUM',
+              //           style: TextStyle(
+              //             fontSize: 12,
+              //             fontWeight: FontWeight.w900,
+              //             color: Colors.black87,
+              //             letterSpacing: 1,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               // Content
               Padding(
                 padding: const EdgeInsets.all(24.0),
@@ -539,7 +543,7 @@ class _PremiumProductCardState extends State<PremiumProductCard>
           onTap:
               widget.isPurchased
                   ? null
-                  : () => widget.onPurchaseButtonPressed(widget.product),
+                  : () => widget.onPurchaseButtonPressed(widget.product, false),
           child: Center(
             child: Row(
               mainAxisSize: MainAxisSize.min,
