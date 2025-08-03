@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' 
 # lib/constants/remote_config_constants.dartのappVersionも変更
-version: 6.0.23+240
+version: 6.0.24+243
 
 environment:
   sdk: ^3.7.2
@@ -40,9 +40,6 @@ dependencies:
   image: ^4.5.4
   image_cropper: ^9.1.0
   image_picker: ^1.1.2
-  in_app_purchase: ^3.2.3
-  in_app_purchase_android: ^0.4.0+1
-  in_app_purchase_storekit: ^0.4.0
   in_app_review: ^2.0.10
   intl: ^0.20.2
   markdown: ^7.3.0
@@ -61,6 +58,8 @@ dependencies:
   fake_firebase_security_rules: ^0.5.3
   firebase_auth_mocks: ^0.14.2
   shimmer: ^3.0.0
+  purchases_flutter: ^9.1.0
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -85,6 +84,7 @@ dependency_overrides:
 flutter:
   uses-material-design: true
   assets:
+    - assets/env/
     - assets/images/
     - assets/svgs/
 lutter_icons:

@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:great_talk/core/util/route_util.dart';
-import 'package:great_talk/presentation/constant/colors.dart';
 import 'package:great_talk/core/util/size_util.dart';
-import 'package:great_talk/presentation/component/basic_height_box.dart';
 import 'package:great_talk/presentation/component/rounded_button.dart';
 import 'package:great_talk/presentation/page/auth/email_auth/email_auth_page.dart';
 
@@ -49,31 +47,40 @@ class LoginScreen extends StatelessWidget {
               RoundedButton(
                 text: 'Googleで続ける',
                 textColor: Colors.white,
-                buttonColor: kSecondaryColor,
+                buttonColor: const Color(0xFF4285F4),
                 press: onGoogleButtonPressed,
-                icon: const Icon(FontAwesomeIcons.google, color: Colors.black),
+                icon: const Icon(
+                  FontAwesomeIcons.google,
+                  color: Colors.white,
+                  size: 20,
+                ),
               ),
-              const BasicHeightBox(),
+              const SizedBox(height: 16),
               if (Platform.isIOS)
                 RoundedButton(
                   text: 'Appleで続ける',
-                  textColor: Theme.of(context).scaffoldBackgroundColor,
-                  buttonColor: Theme.of(context).focusColor,
+                  textColor: Colors.white,
+                  buttonColor: Colors.black,
                   press: onAppleButtonPressed,
-                  icon: Icon(
+                  icon: const Icon(
                     FontAwesomeIcons.apple,
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Colors.white,
+                    size: 20,
                   ),
                 ),
-              const BasicHeightBox(),
+              const SizedBox(height: 16),
               RoundedButton(
                 text: 'メールアドレスで続ける',
                 textColor: Colors.white,
-                buttonColor: kSecondaryColor,
+                buttonColor: const Color(0xFF6C63FF),
                 press: () {
                   RouteUtil.pushPath(context, EmailAuthPage.path);
                 },
-                icon: const Icon(Icons.email, color: Colors.white),
+                icon: const Icon(
+                  Icons.email_outlined,
+                  color: Colors.white,
+                  size: 20,
+                ),
               ),
             ],
           ),

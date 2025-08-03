@@ -1,5 +1,6 @@
 import 'package:great_talk/application/app/flavors.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:great_talk/domain/entity/purchase/product/product_entity.dart';
+import 'package:great_talk/presentation/constant/purchase_constants.dart';
 
 class PurchaseUiUtil {
   static bool get _isProd => F.appFlavor == Flavor.prod;
@@ -21,24 +22,27 @@ class PurchaseUiUtil {
     kPremiumSubscriptionId,
   ];
 
-  static List<ProductDetails> get mockProductList => [
-    ProductDetails(
-      id: kMonthSubscriptionId,
-      title: "月額プラン",
-      description: "一月使えます",
-      price: "¥980",
-      rawPrice: 500,
-      currencyCode: "JPY",
-      currencySymbol: "¥",
-    ),
-    ProductDetails(
-      id: kPremiumSubscriptionId,
-      title: "プレミアムプラン",
-      description: "一月使えます",
-      price: "¥3980",
-      rawPrice: 5000,
-      currencyCode: "JPY",
-      currencySymbol: "¥",
-    ),
-  ];
+  static List<ProductEntity> mockProProducts() {
+    return [
+      ProductEntity(
+        isPro: true,
+        packageId: kMonthSubscriptionId,
+        title: PurchaseConstants.proTitle,
+        description: "AIとチャットできます",
+        price: PurchaseConstants.proPrice,
+      ),
+    ];
+  }
+
+  static List<ProductEntity> mockPremiumProducts() {
+    return [
+      ProductEntity(
+        isPro: false,
+        packageId: kPremiumSubscriptionId,
+        title: PurchaseConstants.premiumTitle,
+        description: "高性能なAIとチャットしたり、画像を生成できたりします",
+        price: PurchaseConstants.premiumPrice,
+      ),
+    ];
+  }
 }

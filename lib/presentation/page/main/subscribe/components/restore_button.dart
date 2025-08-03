@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:great_talk/presentation/notifier/products/products_view_model.dart';
+import 'package:great_talk/presentation/notifier/products/products_notifier.dart';
+import 'package:great_talk/presentation/notifier/purchases/purchases_notifier.dart';
 import 'package:great_talk/presentation/util/toast_ui_util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -15,12 +16,13 @@ class RestoreButton extends ConsumerWidget {
           onPressed: () async {
             final result =
                 await ref
-                    .read(productsViewModelProvider.notifier)
+                    .read(productsNotifierProvider.notifier)
                     .onRestoreButtonPressed();
             result.when(
-              success:
-                  (_) =>
-                      ToastUiUtil.showSuccessSnackBar(context, '購入の検証が成功しました'),
+              success: (_) {
+                ToastUiUtil.showSuccessSnackBar(context, '購入の検証が成功しました');
+                ref.invalidate(purchasesNotifierProvider);
+              },
               failure: (msg) => ToastUiUtil.showFailureSnackBar(context, msg),
             );
           },

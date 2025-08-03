@@ -2,7 +2,6 @@ import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_image/response/generate_image_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/response/put_object_response.dart';
-import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart' as rs;
 
 /// Abstract interface for API operations including image handling,
@@ -30,15 +29,5 @@ abstract class IApiRepository {
   rs.FutureResult<GenerateTextResponse> generateText(
     String model,
     List<Map<String, dynamic>> messages,
-  );
-
-  /// Verifies Android purchase receipt
-  rs.FutureResult<VerifiedPurchase> verifyAndroidReceipt(
-    Map<String, dynamic> purchaseDetailsJson,
-  );
-
-  /// Verifies iOS purchase receipt
-  rs.FutureResult<VerifiedPurchase> verifyIOSReceipt(
-    Map<String, dynamic> purchaseDetailsJson,
   );
 }

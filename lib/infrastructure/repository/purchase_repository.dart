@@ -1,100 +1,100 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:great_talk/core/util/purchases_util.dart';
-import 'package:great_talk/core/extension/purchase_details_extension.dart';
-import 'package:great_talk/infrastructure/model/result/result.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:in_app_purchase_android/billing_client_wrappers.dart';
-import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
+import 'package:great_talk/domain/entity/purchase/product/product_entity.dart';
 import 'package:great_talk/domain/repository_interface/i_purchase_repository.dart';
+import 'package:great_talk/infrastructure/model/result/result.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 class PurchaseRepository implements IPurchaseRepository {
-  PurchaseRepository({
-    required this.inAppPurchase,
-    required this.client,
-    required this.wrapper,
-  });
-  final InAppPurchase inAppPurchase;
-  final BillingClient client;
-  final SKPaymentQueueWrapper wrapper;
-
+  /// サブスクリプションが有効かどうかを返す
+  /// (pro, premium) の順で返す
   @override
-  Future<void> cancelTransctions() async {
-    if (!Platform.isIOS) return;
+  Future<(bool, bool)> isActive() async {
     try {
-      final transactions = await wrapper.transactions();
-      for (final tx in transactions) {
-        await wrapper.finishTransaction(tx);
+      final customerInfo = await Purchases.getCustomerInfo();
+      final isProActive = _getIsActive(customerInfo, 'pro');
+      final isPremiumActive = _getIsActive(customerInfo, 'premium');
+      return (isProActive, isPremiumActive);
+    } catch (e) {
+      debugPrint('isActive: ${e.toString()}');
+      return (false, false);
+    }
+  }
+
+  /// 購入可能なプロダクト一覧を取得する
+  /// Premium,Proの順番
+  @override
+  Future<(List<ProductEntity>?, List<ProductEntity>?)> getProducts() async {
+    try {
+      final offerings = await Purchases.getOfferings();
+      final premiumPackages = offerings.all['premium']?.availablePackages;
+      final proPackages = offerings.all['pro']?.availablePackages;
+      final premiumProducts =
+          premiumPackages?.map((e) {
+            final product = e.storeProduct;
+            return ProductEntity(
+              isPro: false,
+              packageId: e.identifier,
+              title: product.title,
+              description: product.description,
+              price: product.priceString,
+            );
+          }).toList();
+      final proProducts =
+          proPackages?.map((e) {
+            final product = e.storeProduct;
+            return ProductEntity(
+              isPro: true,
+              packageId: e.identifier,
+              title: product.title,
+              description: product.description,
+              price: product.priceString,
+            );
+          }).toList();
+      return (premiumProducts, proProducts);
+    } catch (e) {
+      debugPrint('getProducts: ${e.toString()}');
+      return (null, null);
+    }
+  }
+
+  /// 指定したパッケージIDの商品を購入する
+  @override
+  FutureResult<bool> buyProduct(String packageId, bool isPro) async {
+    try {
+      final offerings = await Purchases.getOfferings();
+      final entitlementId = isPro ? 'pro' : 'premium';
+      final packages = offerings.all[entitlementId]?.availablePackages;
+      if (packages == null) {
+        return const Result.failure('商品情報が読み込めません');
       }
+      final package = packages.firstWhere((e) => e.identifier == packageId);
+      final purchaseResult = await Purchases.purchasePackage(package);
+      // pro, premium どちらかが有効なら true
+      final isActive = _getIsActive(purchaseResult.customerInfo, entitlementId);
+      return Result.success(isActive);
     } catch (e) {
-      debugPrint('cancelTransactions: ${e.toString()}');
+      debugPrint('buyProduct: ${e.toString()}');
+      return const Result.failure('購入が失敗しました');
     }
   }
 
-  @override
-  Future<void> completePurchase(PurchaseDetails details) async {
-    if (!details.pendingCompletePurchase) return;
-    try {
-      await inAppPurchase.completePurchase(details);
-    } catch (e) {
-      debugPrint('completePurchase: ${e.toString()}');
-    }
-  }
-
-  @override
-  Future<bool> isAvailable() async {
-    try {
-      return inAppPurchase.isAvailable();
-    } catch (e) {
-      debugPrint('isAvailable: ${e.toString()}');
-      return false;
-    }
-  }
-
-  @override
-  Future<void> acknowledge(PurchaseDetails details) async {
-    if (!Platform.isAndroid || details.isPending) return;
-    try {
-      // 承認を行う.行わないと払い戻しが行われる.
-      final serverVerificationData =
-          details.verificationData.serverVerificationData;
-      await client.acknowledgePurchase(serverVerificationData);
-    } catch (e) {
-      debugPrint('acknowledge: ${e.toString()}');
-    }
-  }
-
-  @override
-  Future<List<ProductDetails>?> queryProductDetails() async {
-    try {
-      final identifiers = PurchasesUtil.productIds();
-      final res = await inAppPurchase.queryProductDetails(identifiers);
-      return res.productDetails;
-    } catch (e) {
-      debugPrint('queryProductDetails: ${e.toString()}');
-      return null;
-    }
-  }
-
-  @override
-  FutureResult<bool> buyNonConsumable(PurchaseParam purchaseParam) async {
-    try {
-      await inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
-      return const Result.success(true);
-    } catch (e) {
-      debugPrint('buyNonConsumable: ${e.toString()}');
-      return Result.failure('購入が失敗しました');
-    }
-  }
-
+  /// 購入の復元を行う
   @override
   FutureResult<bool> restorePurchases() async {
     try {
-      await inAppPurchase.restorePurchases();
-      return const Result.success(true);
+      final customerInfo = await Purchases.restorePurchases();
+      final isProActive = _getIsActive(customerInfo, 'pro');
+      final isPremiumActive = _getIsActive(customerInfo, 'premium');
+      return Result.success(isProActive || isPremiumActive);
     } catch (e) {
       debugPrint('restorePurchases: ${e.toString()}');
-      return Result.failure('購入の復元が失敗しました');
+      return const Result.failure('購入の復元が失敗しました');
     }
+  }
+
+  /// entitlementId（pro, premium など）が有効かどうか
+  bool _getIsActive(CustomerInfo purchaserInfo, String entitlementId) {
+    final ent = purchaserInfo.entitlements.all[entitlementId];
+    return ent?.isActive ?? false;
   }
 }

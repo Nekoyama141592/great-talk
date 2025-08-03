@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/presentation/page/edit/components/update_button_widget.dart';
+import 'package:great_talk/presentation/component/rounded_button.dart';
 
 void main() {
   group('UpdateButtonWidget', () {
@@ -22,9 +23,9 @@ void main() {
       );
 
       expect(find.text('更新する'), findsOneWidget);
-      expect(find.byType(ElevatedButton), findsOneWidget);
+      expect(find.byType(RoundedButton), findsOneWidget);
 
-      await tester.tap(find.byType(ElevatedButton));
+      await tester.tap(find.byType(RoundedButton));
       await tester.pump();
 
       expect(wasPressed, true);
@@ -39,7 +40,7 @@ void main() {
       );
 
       expect(find.text('更新する'), findsOneWidget);
-      expect(find.byType(ElevatedButton), findsOneWidget);
+      expect(find.byType(RoundedButton), findsOneWidget);
     });
 
     testWidgets('should work in different themes', (WidgetTester tester) async {
@@ -54,7 +55,7 @@ void main() {
         );
 
         expect(find.text('更新する'), findsOneWidget);
-        expect(find.byType(ElevatedButton), findsOneWidget);
+        expect(find.byType(RoundedButton), findsOneWidget);
       }
     });
 
@@ -73,12 +74,12 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byType(ElevatedButton));
+      await tester.tap(find.byType(RoundedButton));
       await tester.pump();
 
       expect(tapCount, 1);
 
-      await tester.tap(find.byType(ElevatedButton));
+      await tester.tap(find.byType(RoundedButton));
       await tester.pump();
 
       expect(tapCount, 2);
@@ -91,8 +92,8 @@ void main() {
         MaterialApp(home: Scaffold(body: UpdateButtonWidget(onPressed: () {}))),
       );
 
-      // RoundedButton creates an ElevatedButton internally
-      expect(find.byType(ElevatedButton), findsOneWidget);
+      // RoundedButton creates an RoundedButton internally
+      expect(find.byType(RoundedButton), findsOneWidget);
       expect(find.text('更新する'), findsOneWidget);
     });
 
@@ -113,7 +114,7 @@ void main() {
       );
 
       expect(find.text('更新する'), findsNWidgets(2));
-      expect(find.byType(ElevatedButton), findsNWidgets(2));
+      expect(find.byType(RoundedButton), findsNWidgets(2));
     });
   });
 }

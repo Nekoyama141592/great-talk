@@ -13,8 +13,6 @@ import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/r
 import 'package:great_talk/infrastructure/model/rest_api/put_object/request/put_object_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/put_object/response/put_object_response.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart' as rs;
-import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/request/receipt_request.dart';
-import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/domain/repository_interface/i_api_repository.dart';
 
 class ApiRepository implements IApiRepository {
@@ -118,38 +116,6 @@ class ApiRepository implements IApiRepository {
     } on FirebaseFunctionsException catch (e) {
       debugPrint('generateText: ${e.toString()}');
       return rs.Result.failure('テキストの生成に失敗しました');
-    }
-  }
-
-  @override
-  rs.FutureResult<VerifiedPurchase> verifyAndroidReceipt(
-    Map<String, dynamic> purchaseDetailsJson,
-  ) async {
-    try {
-      const name = 'verifyAndroidReceipt';
-      final request = ReceiptRequest(purchaseDetails: purchaseDetailsJson);
-      final result = await _call(name, request.toJson());
-      final res = VerifiedPurchase.fromJson(result);
-      return rs.Result.success(res);
-    } on FirebaseFunctionsException catch (e) {
-      debugPrint('verifyAndroidReceipt: ${e.toString()}');
-      return rs.Result.failure('購入の検証が失敗しました');
-    }
-  }
-
-  @override
-  rs.FutureResult<VerifiedPurchase> verifyIOSReceipt(
-    Map<String, dynamic> purchaseDetailsJson,
-  ) async {
-    try {
-      const name = 'verifyIOSReceipt';
-      final request = ReceiptRequest(purchaseDetails: purchaseDetailsJson);
-      final result = await _call(name, request.toJson());
-      final res = VerifiedPurchase.fromJson(result);
-      return rs.Result.success(res);
-    } on FirebaseFunctionsException catch (e) {
-      debugPrint('verifyIOSReceipt: ${e.toString()}');
-      return rs.Result.failure('購入の検証が失敗しました');
     }
   }
 }
