@@ -15,6 +15,7 @@ class PostRankingScreen extends ConsumerWidget {
       asyncValue: asyncValue,
       data: (state) {
         return PostsRefreshScreen(
+          title: '人気の投稿',
           userPosts: state.userPosts,
           notifier: notifier,
         );

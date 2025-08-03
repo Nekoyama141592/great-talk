@@ -57,7 +57,7 @@ class UserRankingScreen extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    'User Ranking',
+                                    'ユーザーランキング',
                                     style: TextStyle(
                                       fontSize: 24,
                                       fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ class UserRankingScreen extends ConsumerWidget {
                                     ),
                                   ),
                                   Text(
-                                    'Top users by followers',
+                                    '(フォロワー数順)',
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Colors.white.withValues(

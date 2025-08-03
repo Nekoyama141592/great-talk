@@ -13,7 +13,7 @@ AIからの返事は誤った内容が含まれることがあります。
   // text
   static const String tosText = "利用規約";
   static const String privacyPolicyText = "プライバシーポリシー";
-  static const String agreeText = "上記の内容、利用規約、プライバシーポリシーに同意する";
+  static const String agreeText = "上記の内容に同意する";
 
   static const String okText = "OK";
   static const String cancelText = "キャンセル";

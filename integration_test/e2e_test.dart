@@ -108,12 +108,12 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
       // Verify TermsScreen is displayed initially
-      expect(find.text('上記の内容、利用規約、プライバシーポリシーに同意する'), findsOneWidget);
+      expect(find.text('上記の内容'), findsOneWidget);
       expect(find.text('利用規約'), findsOneWidget);
       expect(find.text('プライバシーポリシー'), findsOneWidget);
 
       // Tap agree button
-      await tester.tap(find.text('上記の内容、利用規約、プライバシーポリシーに同意する'));
+      await tester.tap(find.text('上記の内容'));
       await tester.pumpAndSettle();
 
       // Wait for navigation to login screen after terms agreement

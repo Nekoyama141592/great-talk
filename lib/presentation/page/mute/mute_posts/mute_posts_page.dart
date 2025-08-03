@@ -21,6 +21,7 @@ class MutePostsPage extends ConsumerWidget {
         asyncValue: asyncValue,
         data: (state) {
           return PostsRefreshScreen(
+            title: 'ミュートされている投稿',
             userPosts: state.userPosts,
             notifier: notifier,
           );

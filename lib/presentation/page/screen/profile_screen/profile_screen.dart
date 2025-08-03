@@ -98,7 +98,11 @@ class ProfileScreen extends ConsumerWidget {
           ),
         ),
       ),
-      child: PostsRefreshScreen(userPosts: state.userPosts, notifier: notifier),
+      child: PostsRefreshScreen(
+        title: 'ユーザーの投稿',
+        userPosts: state.userPosts,
+        notifier: notifier,
+      ),
     );
   }
 }
