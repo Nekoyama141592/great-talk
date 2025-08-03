@@ -89,6 +89,8 @@ class ProductCard extends StatelessWidget {
           const BasicHeightBox(),
           BasicBoldText("${product.price}/月"),
           const BasicHeightBox(),
+          BasicBoldText(product.description),
+          const BasicHeightBox(),
           PurchaseButton(
             isPurchased: isPurchased,
             onPressed: () => onPurchaseButtonPressed(product),
