@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:great_talk/core/util/chat_util.dart';
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/presentation/notifier/local_setting/local_setting.dart';
@@ -27,6 +28,8 @@ class OriginalDrawer extends ConsumerWidget {
     final isAdmin = currentUser?.isAdmin() ?? false;
     final image = currentUser?.base64;
     final purchaseState = ref.watch(purchasesNotifierProvider).value;
+    final isProActive = purchaseState?.isProActive ?? false;
+    final isPremiumActive = purchaseState?.isPremiumActive ?? false;
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -204,11 +207,15 @@ class OriginalDrawer extends ConsumerWidget {
                       onTap:
                           () => RouteUtil.pushPath(context, AccountPage.path),
                     ),
-                    _buildInfoTile(
-                      icon: Icons.smart_toy_outlined,
-                      title: "モデル",
-                      subtitle: purchaseState?.model() ?? '',
-                    ),
+                    if (isProActive || isPremiumActive)
+                      _buildInfoTile(
+                        icon: Icons.smart_toy_outlined,
+                        title: "モデル",
+                        subtitle: ChatUtil.model(
+                          isPremiumActive: isPremiumActive,
+                          isProActive: isProActive,
+                        ),
+                      ),
                     _buildModernListTile(
                       icon: Icons.person_off_outlined,
                       title: "ミュートしているユーザー",

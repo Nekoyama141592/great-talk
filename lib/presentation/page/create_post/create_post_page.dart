@@ -58,7 +58,7 @@ class CreatePostPage extends HookConsumerWidget {
         ),
         ImagePickerWidget(
           state: state,
-          isPremiumSubscribing: purchaseState?.isPremiumSubscribing() ?? false,
+          isPremiumSubscribing: purchaseState?.isPremiumActive ?? false,
         ),
         SubmitButtonWidget(
           isLoading: stateAsync.isLoading,

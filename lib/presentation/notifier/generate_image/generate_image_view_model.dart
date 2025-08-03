@@ -18,8 +18,7 @@ class GenerateImageViewModel extends _$GenerateImageViewModel {
     String size,
   ) async {
     final isPremiumSubscribing =
-        ref.read(purchasesNotifierProvider).value?.isPremiumSubscribing() ??
-        false;
+        ref.read(purchasesNotifierProvider).value?.isPremiumActive ?? false;
     if (!isPremiumSubscribing) {
       return Result.failure('プレミアムプランに加入する必要があります');
     }

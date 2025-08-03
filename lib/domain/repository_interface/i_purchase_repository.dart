@@ -1,27 +1,17 @@
+import 'package:great_talk/domain/entity/purchase/product/product_entity.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
 
-/// Abstract interface for in-app purchase operations including
-/// product queries, purchase handling, and transaction management.
 abstract class IPurchaseRepository {
-  /// Cancels pending transactions (iOS only)
-  Future<void> cancelTransctions();
+  /// サブスクリプションが有効かどうかを返す
+  Future<(bool, bool)> isActive();
 
-  /// Completes a pending purchase
-  Future<void> completePurchase(PurchaseDetails details);
+  /// 購入可能なプロダクト一覧を取得する
+  /// Premium,Proの順番
+  Future<(List<ProductEntity>?, List<ProductEntity>?)> getProducts();
 
-  /// Checks if in-app purchases are available on the device
-  Future<bool> isAvailable();
+  /// 指定したパッケージIDの商品を購入する
+  FutureResult<bool> buyProduct(String packageId);
 
-  /// Acknowledges a purchase (Android only)
-  Future<void> acknowledge(PurchaseDetails details);
-
-  /// Queries available product details for configured product IDs
-  Future<List<ProductDetails>?> queryProductDetails();
-
-  /// Initiates a non-consumable purchase
-  FutureResult<bool> buyNonConsumable(PurchaseParam purchaseParam);
-
-  /// Restores previous purchases
+  /// 購入の復元を行う
   FutureResult<bool> restorePurchases();
 }

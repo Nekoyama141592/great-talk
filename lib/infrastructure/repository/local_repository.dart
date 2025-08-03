@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:great_talk/core/exception/local_exception.dart';
 import 'package:great_talk/core/extension/shared_preferences_extension.dart';
 import 'package:great_talk/infrastructure/model/local_schema/text_message/text_message.dart';
-import 'package:great_talk/infrastructure/model/rest_api/verify_purchase/verified_purchase.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:great_talk/domain/repository_interface/i_local_repository.dart';
@@ -19,8 +18,6 @@ enum PrefsKey {
   lastChatDate,
   latestReceipt,
   needFirstMessage,
-  // Repository
-  verifiedPurchases,
 }
 
 class LocalRepository implements ILocalRepository {
@@ -54,40 +51,6 @@ class LocalRepository implements ILocalRepository {
       debugPrint('_fetchList: Error accessing key "$keyName": $error');
       return [];
     }
-  }
-
-  FutureResult<bool> _addElement(
-    PrefsKey key,
-    Map<String, dynamic> newElement,
-  ) async {
-    try {
-      final keyName = key.name;
-      final oldValue = prefs.getJsonList(keyName) ?? [];
-      final newValue = [...oldValue, newElement];
-      await prefs.setJsonList(keyName, newValue);
-      return const Result.success(true);
-    } on LocalException catch (e) {
-      debugPrint('_addElement: ${e.toString()}');
-      return Result.failure('追加が失敗しました: ${e.code}');
-    } catch (error) {
-      debugPrint('_addElement: Unexpected error - $error');
-      throw LocalException.add(
-        'Failed to add element for key "${key.name}": $error',
-      );
-    }
-  }
-
-  @override
-  FutureResult<bool> addVerifiedPurchase(VerifiedPurchase value) {
-    return _addElement(PrefsKey.verifiedPurchases, value.toJson());
-  }
-
-  @override
-  List<VerifiedPurchase> fetchVerifiedPurchases() {
-    return _fetchList(
-      PrefsKey.verifiedPurchases.name,
-      VerifiedPurchase.fromJson,
-    );
   }
 
   @override

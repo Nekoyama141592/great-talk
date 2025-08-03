@@ -33,9 +33,6 @@ packages=(
   "image"
   "image_cropper"
   "image_picker"
-  "in_app_purchase"
-  "in_app_purchase_android"
-  "in_app_purchase_storekit"
   "in_app_review"
   "intl"
   "markdown"
@@ -50,6 +47,8 @@ packages=(
   "uuid"
   "gpt_markdown"
   "shimmer"
+  "purchases_flutter"
+  "flutter_dotenv"
 )
 
 echo "Adding packages to dependencies..."

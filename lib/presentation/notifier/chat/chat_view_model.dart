@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:great_talk/core/constant/chat_constants.dart';
+import 'package:great_talk/core/util/chat_util.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/request/message/generate_text_request_message.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
 import 'package:great_talk/presentation/state/chat/chat_state.dart';
@@ -55,6 +55,12 @@ class ChatViewModel extends _$ChatViewModel {
     ScrollController scrollController,
     String content,
   ) async {
+    final purchaseState = ref.read(purchasesNotifierProvider);
+    final isPremiumActive = purchaseState.value?.isPremiumActive ?? false;
+    final isProActive = purchaseState.value?.isProActive ?? false;
+    if (!isPremiumActive && !isProActive) {
+      return const Result.failure('有料プランに登録してください');
+    }
     final messages = _addMyMessage(content);
     // UIを一番下にスクロール
     _scrollToBottom(scrollController);
@@ -72,9 +78,10 @@ class ChatViewModel extends _$ChatViewModel {
               state.value!.post.description.value,
             ),
           );
-    final model =
-        ref.read(purchasesNotifierProvider).value?.model() ??
-        ChatConstants.basicModel;
+    final model = ChatUtil.model(
+      isPremiumActive: isPremiumActive,
+      isProActive: isProActive,
+    );
     final messagesJson = requestMessages.map((e) => e.toJson()).toList();
     final oldState = state.value!;
     state = AsyncValue.loading();
