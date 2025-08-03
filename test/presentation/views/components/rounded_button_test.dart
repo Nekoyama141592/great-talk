@@ -64,7 +64,9 @@ void main() {
         ),
       );
 
-      final buttonWidget = tester.widget<RoundedButton>(find.byType(RoundedButton));
+      final buttonWidget = tester.widget<RoundedButton>(
+        find.byType(RoundedButton),
+      );
       expect(buttonWidget.widthRate, 0.85); // default widthRate
     });
 
@@ -83,7 +85,9 @@ void main() {
         ),
       );
 
-      final buttonWidget = tester.widget<RoundedButton>(find.byType(RoundedButton));
+      final buttonWidget = tester.widget<RoundedButton>(
+        find.byType(RoundedButton),
+      );
       expect(buttonWidget.widthRate, customWidthRate);
     });
 
@@ -198,7 +202,9 @@ void main() {
       );
 
       await tester.pumpAndSettle();
-      final buttonWidget = tester.widget<RoundedButton>(find.byType(RoundedButton));
+      final buttonWidget = tester.widget<RoundedButton>(
+        find.byType(RoundedButton),
+      );
       // Verify the button's widthRate property matches expected calculation
       expect(buttonWidget.widthRate, 0.85);
 
@@ -291,7 +297,10 @@ void main() {
 
       final button = tester.widget<RoundedButton>(find.byType(RoundedButton));
       expect(button.enabled, false);
-      expect(button.press, isNotNull); // press callback exists but button is disabled
+      expect(
+        button.press,
+        isNotNull,
+      ); // press callback exists but button is disabled
     });
 
     testWidgets('should use gray colors when disabled', (
