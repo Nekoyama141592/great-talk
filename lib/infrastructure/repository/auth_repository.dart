@@ -208,6 +208,25 @@ class AuthRepository implements IAuthRepository {
     }
   }
 
+  @override
+  FutureResult<void> sendPasswordResetEmail(String email) async {
+    try {
+      await instance.sendPasswordResetEmail(email: email);
+      return const Result.success(null);
+    } on FirebaseAuthException catch (e) {
+      if (enableDebugPrint) {
+        debugPrint('sendPasswordResetEmail: ${e.toString()}');
+      }
+      final msg = _managePasswordResetError(e);
+      return Result.failure(msg);
+    } catch (e) {
+      if (enableDebugPrint) {
+        debugPrint('sendPasswordResetEmail: ${e.toString()}');
+      }
+      return Result.failure('パスワードリセットメールの送信に失敗しました');
+    }
+  }
+
   String _manageEmailPasswordError(FirebaseAuthException e) {
     final String errorCode = e.code;
     switch (errorCode) {
@@ -231,6 +250,20 @@ class AuthRepository implements IAuthRepository {
         return 'リクエストが多すぎます。しばらく時間をおいてから再度お試しください。';
       default:
         return 'エラーが発生しました';
+    }
+  }
+
+  String _managePasswordResetError(FirebaseAuthException e) {
+    final String errorCode = e.code;
+    switch (errorCode) {
+      case 'invalid-email':
+        return 'メールアドレスの形式が正しくありません。';
+      case 'user-not-found':
+        return 'このメールアドレスは登録されていません。';
+      case 'too-many-requests':
+        return 'リクエストが多すぎます。しばらく時間をおいてから再度お試しください。';
+      default:
+        return 'パスワードリセットメールの送信に失敗しました';
     }
   }
 }

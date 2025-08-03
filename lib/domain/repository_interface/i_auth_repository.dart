@@ -30,4 +30,7 @@ abstract class IAuthRepository {
 
   /// Reloads current user data
   FutureResult<bool> reloadCurrentUser();
+
+  /// Sends password reset email to the specified email address
+  FutureResult<void> sendPasswordResetEmail(String email);
 }

@@ -8,6 +8,8 @@ import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/page/auth/email_auth/components/email_auth_header.dart';
 import 'package:great_talk/presentation/page/auth/email_auth/components/email_auth_form.dart';
 import 'package:great_talk/presentation/page/auth/email_auth/components/email_auth_actions.dart';
+import 'package:great_talk/presentation/page/auth/reset_password/reset_password_page.dart';
+import 'package:great_talk/presentation/constant/colors.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 @RoutePage()
@@ -104,6 +106,22 @@ class EmailAuthPage extends HookConsumerWidget {
                       onAuth: handleAuth,
                       onToggleSignUpMode: notifier().toggleSignUpMode,
                     ),
+                    if (!state.isSignUp) ...[
+                      const SizedBox(height: 16),
+                      TextButton(
+                        onPressed: () {
+                          RouteUtil.pushPath(context, ResetPasswordPage.path);
+                        },
+                        child: const Text(
+                          'パスワードを忘れた方はこちら',
+                          style: TextStyle(
+                            color: kPrimaryColor,
+                            fontSize: 16,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),
