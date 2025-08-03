@@ -8,6 +8,8 @@ workflows:
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
+      groups: 
+        - great_talk_dev
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.firebaseapp.greatTalkDev
@@ -33,6 +35,9 @@ workflows:
       - name: Install pods
         script: |
           find . -name "Podfile" -execdir pod install \;
+      - name: Copy env file
+        script: |
+          echo $ENV | base64 --decode> $FCI_BUILD_DIR/assets/env/.env.dev
       - name: Flutter build ipa and automatic versioning
         script: |
           flutter build ipa --release --flavor dev \
@@ -56,6 +61,8 @@ workflows:
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
+      groups: 
+        - great_talk_prod
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.firebaseapp.greatTalk
@@ -81,6 +88,9 @@ workflows:
       - name: Install pods
         script: |
           find . -name "Podfile" -execdir pod install \;
+      - name: Copy env file
+        script: |
+          echo $ENV | base64 --decode> $FCI_BUILD_DIR/assets/env/.env.prod
       - name: Flutter build ipa and automatic versioning
         script: |
           flutter build ipa --release --flavor prod \
