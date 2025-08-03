@@ -113,7 +113,7 @@ void main() {
       expect(find.text('プライバシーポリシー'), findsOneWidget);
 
       // Tap agree button
-      await tester.tap(find.text('上記の内容、利用規約、プライバシーポリシーに同意する'));
+      await tester.tap(find.text('上記の内容'));
       await tester.pumpAndSettle();
 
       // Wait for navigation to login screen after terms agreement
