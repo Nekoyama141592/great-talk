@@ -7,6 +7,7 @@ import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/presentation/component/rounded_button.dart';
 import 'package:great_talk/presentation/page/auth/email_auth/email_auth_page.dart';
+import 'package:great_talk/presentation/page/auth/reset_password/reset_password_page.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({
@@ -80,6 +81,20 @@ class LoginScreen extends StatelessWidget {
                   Icons.email_outlined,
                   color: Colors.white,
                   size: 20,
+                ),
+              ),
+              const SizedBox(height: 24),
+              TextButton(
+                onPressed: () {
+                  RouteUtil.pushPath(context, ResetPasswordPage.path);
+                },
+                child: const Text(
+                  'パスワードを忘れた方はこちら',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 16,
+                    decoration: TextDecoration.underline,
+                  ),
                 ),
               ),
             ],

@@ -7,6 +7,7 @@ import 'package:great_talk/presentation/page/auth/email_auth/email_auth_page.dar
 import 'package:great_talk/presentation/page/auth/login/login_page.dart';
 import 'package:great_talk/presentation/page/auth/logouted/logouted_page.dart';
 import 'package:great_talk/presentation/page/auth/reauthenticate_to_delete/reauthenticate_to_delete_page.dart';
+import 'package:great_talk/presentation/page/auth/reset_password/reset_password_page.dart';
 import 'package:great_talk/presentation/page/auth/user_deleted/user_deleted_page.dart';
 import 'package:great_talk/presentation/page/auth/verify_email/verify_email_page.dart';
 import 'package:great_talk/presentation/page/maintenance/maintenance_page.dart';
@@ -54,6 +55,7 @@ class AppRouter extends RootStackRouter {
         page: ReauthenticateToDeleteRoute.page,
         path: ReauthenticateToDeletePage.path,
       ),
+      AutoRoute(page: ResetPasswordRoute.page, path: ResetPasswordPage.path),
       AutoRoute(page: SubscribeRoute.page, path: SubscribePage.path),
       AutoRoute(page: UserDeletedRoute.page, path: UserDeletedPage.path),
       AutoRoute(page: UserProfileRoute.page, path: UserProfilePage.path),

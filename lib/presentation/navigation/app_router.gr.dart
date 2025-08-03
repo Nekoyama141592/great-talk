@@ -277,6 +277,22 @@ class ReauthenticateToDeleteRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [ResetPasswordPage]
+class ResetPasswordRoute extends PageRouteInfo<void> {
+  const ResetPasswordRoute({List<PageRouteInfo>? children})
+    : super(ResetPasswordRoute.name, initialChildren: children);
+
+  static const String name = 'ResetPasswordRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const ResetPasswordPage();
+    },
+  );
+}
+
+/// generated route for
 /// [SubscribePage]
 class SubscribeRoute extends PageRouteInfo<void> {
   const SubscribeRoute({List<PageRouteInfo>? children})
