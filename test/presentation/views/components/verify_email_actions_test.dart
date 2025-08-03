@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/presentation/state/verify_email/verify_email_state.dart';
 import 'package:great_talk/presentation/page/auth/verify_email/components/verify_email_actions.dart';
+import 'package:great_talk/presentation/component/rounded_button.dart';
 
 void main() {
   group('VerifyEmailActions', () {
@@ -204,7 +205,7 @@ void main() {
         ),
       );
 
-      final resendButtons = find.byType(ElevatedButton);
+      final resendButtons = find.byType(RoundedButton);
       expect(resendButtons, findsExactly(2));
 
       // Check that we have the expected buttons

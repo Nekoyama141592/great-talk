@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:great_talk/presentation/page/create_post/components/submit_button_widget.dart';
+import 'package:great_talk/presentation/component/rounded_button.dart';
 
 void main() {
   group('SubmitButtonWidget', () {
@@ -23,9 +24,9 @@ void main() {
       );
 
       expect(find.text('送信'), findsOneWidget);
-      expect(find.byType(ElevatedButton), findsOneWidget);
+      expect(find.byType(RoundedButton), findsOneWidget);
 
-      await tester.tap(find.byType(ElevatedButton));
+      await tester.tap(find.byType(RoundedButton));
       await tester.pump();
 
       expect(wasPressed, true);
@@ -49,7 +50,7 @@ void main() {
 
       expect(find.text('送信'), findsOneWidget);
 
-      await tester.tap(find.byType(ElevatedButton));
+      await tester.tap(find.byType(RoundedButton));
       await tester.pump();
 
       expect(wasPressed, false);
@@ -67,10 +68,10 @@ void main() {
       );
 
       expect(find.text('送信'), findsOneWidget);
-      expect(find.byType(ElevatedButton), findsOneWidget);
+      expect(find.byType(RoundedButton), findsOneWidget);
 
-      final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
-      expect(button.onPressed, isNull);
+      final button = tester.widget<RoundedButton>(find.byType(RoundedButton));
+      expect(button.press, isNull);
     });
 
     testWidgets('should have correct styling', (WidgetTester tester) async {
@@ -84,7 +85,7 @@ void main() {
       );
 
       expect(find.text('送信'), findsOneWidget);
-      expect(find.byType(ElevatedButton), findsOneWidget);
+      expect(find.byType(RoundedButton), findsOneWidget);
     });
 
     testWidgets('should work in different themes', (WidgetTester tester) async {
@@ -101,7 +102,7 @@ void main() {
         );
 
         expect(find.text('送信'), findsOneWidget);
-        expect(find.byType(ElevatedButton), findsOneWidget);
+        expect(find.byType(RoundedButton), findsOneWidget);
       }
     });
   });
