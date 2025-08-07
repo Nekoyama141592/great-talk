@@ -56,20 +56,15 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   }
 
   Future<PublicUserEntity?> _getPublicUser(String uid) async {
-    var publicUser = await _databaseRepository.getPublicUser(uid);
-    if (publicUser == null) {
-      final createdUser = await _databaseRepository.createPublicUser(uid);
-      if (createdUser != null) {
-        publicUser = PublicUserEntity.fromJson(createdUser.toJson());
-      }
-    }
-    return publicUser;
+    final publicUser = await _databaseRepository.getPublicUser(uid);
+    if (publicUser != null) return publicUser;
+    return await _databaseRepository.createPublicUser(uid);
   }
 
   Future<PrivateUserEntity?> _getPrivateUser(String uid) async {
-    var privateUser = await _databaseRepository.getPrivateUser(uid);
-    privateUser ??= await _databaseRepository.createPrivateUser(uid);
-    return privateUser;
+    final privateUser = await _databaseRepository.getPrivateUser(uid);
+    if (privateUser != null) return privateUser;
+    return await _databaseRepository.createPrivateUser(uid);
   }
 
   Future<String?> _getBase64Image(PublicUserEntity? publicUser) async {
@@ -99,7 +94,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     return await _reauthenticateToDelete(credential);
   }
 
-  Future<Result<bool>> _reauthenticateToDelete(AuthCredential credential) async {
+  Future<Result<bool>> _reauthenticateToDelete(
+    AuthCredential credential,
+  ) async {
     return await _authRepository.reauthenticateWithCredential(credential);
   }
 
