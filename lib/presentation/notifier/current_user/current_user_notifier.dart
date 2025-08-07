@@ -30,12 +30,12 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     return _fetchData();
   }
 
-  FutureResult<User> onAppleButtonPressed() {
-    return _authRepository.signInWithApple();
+  FutureResult<User> onAppleButtonPressed() async {
+    return await _authRepository.signInWithApple();
   }
 
-  FutureResult<User> onGoogleButtonPressed() {
-    return _authRepository.signInWithGoogle();
+  FutureResult<User> onGoogleButtonPressed() async {
+    return await _authRepository.signInWithGoogle();
   }
 
   String? _getCurrentUid() => ref.watch(authUidProvider);
@@ -96,11 +96,11 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
 
   FutureResult<bool> reauthenticateWithGoogleToDelete() async {
     final credential = await CredentialUtil.googleCredential();
-    return _reauthenticateToDelete(credential);
+    return await _reauthenticateToDelete(credential);
   }
 
-  FutureResult<bool> _reauthenticateToDelete(AuthCredential credential) {
-    return _authRepository.reauthenticateWithCredential(credential);
+  Future<Result<bool>> _reauthenticateToDelete(AuthCredential credential) async {
+    return await _authRepository.reauthenticateWithCredential(credential);
   }
 
   FutureResult<bool> deletePublicUser() async {
