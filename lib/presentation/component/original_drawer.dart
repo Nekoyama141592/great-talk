@@ -174,26 +174,29 @@ class OriginalDrawer extends ConsumerWidget {
                       ),
                     ),
                   ),
-              error:
-                  (err, stack) => Container(
-                    height: 280,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [kPrimaryColor.withAlpha(204), kPrimaryColor],
-                      ),
+              error: (err, stack) {
+                debugPrint(err.toString());
+                debugPrint(stack.toString());
+                return Container(
+                  height: 280,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [kPrimaryColor.withAlpha(204), kPrimaryColor],
                     ),
-                    child: const SafeArea(
-                      bottom: false,
-                      child: Center(
-                        child: Text(
-                          "ユーザー情報の取得に失敗しました",
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
+                  ),
+                  child: const SafeArea(
+                    bottom: false,
+                    child: Center(
+                      child: Text(
+                        "ユーザー情報の取得に失敗しました",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
                   ),
+                );
+              },
             ),
             Expanded(
               child: Container(
