@@ -8,7 +8,7 @@ void main() {
   group('EditProfileForm', () {
     testWidgets('should display all form fields', (WidgetTester tester) async {
       final formKey = GlobalKey<FormState>();
-      final editState = EditState(
+      final editState = const EditState(
         userName: 'Test User',
         bio: 'Test Bio',
         base64: null,
@@ -33,7 +33,7 @@ void main() {
       WidgetTester tester,
     ) async {
       final formKey = GlobalKey<FormState>();
-      final editState = EditState(
+      final editState = const EditState(
         userName: 'Initial Username',
         bio: 'Initial Bio Text',
         base64: null,
@@ -57,7 +57,7 @@ void main() {
       WidgetTester tester,
     ) async {
       final formKey = GlobalKey<FormState>();
-      final editState = EditState(
+      final editState = const EditState(
         userName: 'Test User',
         bio: 'Test Bio',
         base64: null,
@@ -83,7 +83,7 @@ void main() {
 
     testWidgets('should be scrollable', (WidgetTester tester) async {
       final formKey = GlobalKey<FormState>();
-      final editState = EditState(
+      final editState = const EditState(
         userName: 'Test User',
         bio: 'Test Bio',
         base64: null,
@@ -106,7 +106,7 @@ void main() {
       WidgetTester tester,
     ) async {
       final formKey = GlobalKey<FormState>();
-      final editState = EditState(
+      final editState = const EditState(
         userName: 'Test User',
         bio: 'Test Bio',
         base64: null,
@@ -127,7 +127,7 @@ void main() {
 
     testWidgets('should validate form properly', (WidgetTester tester) async {
       final formKey = GlobalKey<FormState>();
-      final editState = EditState(userName: '', bio: '', base64: null);
+      final editState = const EditState(userName: '', bio: '', base64: null);
 
       await tester.pumpWidget(
         ProviderScope(
@@ -147,7 +147,7 @@ void main() {
       WidgetTester tester,
     ) async {
       final formKey = GlobalKey<FormState>();
-      final editState = EditState(
+      final editState = const EditState(
         userName: '日本語ユーザー名',
         bio: '日本語の自己紹介文です。\n複数行のテキストもサポートしています。',
         base64: null,
@@ -169,7 +169,7 @@ void main() {
 
     testWidgets('should have SizedBox container', (WidgetTester tester) async {
       final formKey = GlobalKey<FormState>();
-      final editState = EditState(
+      final editState = const EditState(
         userName: 'Test User',
         bio: 'Test Bio',
         base64: null,

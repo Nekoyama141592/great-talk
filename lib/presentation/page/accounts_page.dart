@@ -454,7 +454,7 @@ class AccountPage extends ConsumerWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.warning_amber_rounded,
                           color: kErrorColor,
                           size: 16,
@@ -498,7 +498,7 @@ class AccountPage extends ConsumerWidget {
                   color: kErrorColor.withAlpha(51),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.white,
                   size: 16,

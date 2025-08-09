@@ -48,7 +48,7 @@ class EditViewModel extends _$EditViewModel {
       return const Result.failure(FormConsts.bigImageRequestMsg);
     }
     state = AsyncData(state.value!.copyWith(base64: result, isPicked: true));
-    return Result.success(true);
+    return const Result.success(true);
   }
 
   /// 初期化

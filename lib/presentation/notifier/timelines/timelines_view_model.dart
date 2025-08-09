@@ -19,7 +19,7 @@ class TimelinesViewModel extends _$TimelinesViewModel
 
   Future<TimelinesState> _fetchData() async {
     final user = ref.read(authProvider);
-    if (user == null || user.isAnonymous) return TimelinesState();
+    if (user == null || user.isAnonymous) return const TimelinesState();
     final currentUid = user.uid;
     final timelines = await _repository.getTimelines(currentUid);
     final postIds = timelines.map((e) => e.postId).toList();

@@ -81,7 +81,7 @@ void main() {
       Widget buildWithTheme(ThemeData theme) {
         return MaterialApp(
           theme: theme,
-          home: Scaffold(body: LatexText(data: testData)),
+          home: const Scaffold(body: LatexText(data: testData)),
         );
       }
 
@@ -129,10 +129,10 @@ This is a paragraph with multiple lines.
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: Column(
-              children: const [
+              children: [
                 Text('Header'),
                 LatexText(data: 'First content'),
                 SizedBox(height: 10),

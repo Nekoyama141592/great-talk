@@ -22,7 +22,7 @@ class UsersRefreshScreen extends HookWidget {
       return refreshController.dispose;
     }, []);
     if (isEmpty) {
-      return Align(alignment: Alignment.center, child: const Text('データがありません'));
+      return const Align(alignment: Alignment.center, child: Text('データがありません'));
     }
     return SmartRefresher(
       controller: refreshController,

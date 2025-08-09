@@ -5,7 +5,7 @@ void main() {
   group('Result Pattern Matching', () {
     test('should handle success case correctly', () {
       const value = 'test value';
-      final result = Result.success(value);
+      final result = const Result.success(value);
 
       final output = result.when(
         success: (val) => 'Success: $val',
@@ -17,7 +17,7 @@ void main() {
 
     test('should handle failure case correctly', () {
       const errorMsg = 'Something went wrong';
-      final result = Result<String>.failure(errorMsg);
+      final result = const Result<String>.failure(errorMsg);
 
       final output = result.when(
         success: (val) => 'Success: $val',
@@ -28,8 +28,8 @@ void main() {
     });
 
     test('should distinguish between success and failure types', () {
-      final successResult = Result.success(42);
-      final failureResult = Result<int>.failure('error');
+      final successResult = const Result.success(42);
+      final failureResult = const Result<int>.failure('error');
 
       expect(successResult, isA<Success<int>>());
       expect(failureResult, isA<Failure<int>>());
@@ -37,11 +37,11 @@ void main() {
 
     test('should work with FutureResult typedef', () async {
       FutureResult<String> successFuture() async {
-        return Result.success('async success');
+        return const Result.success('async success');
       }
 
       FutureResult<String> failureFuture() async {
-        return Result.failure('async error');
+        return const Result.failure('async error');
       }
 
       final successResult = await successFuture();
@@ -69,7 +69,7 @@ void main() {
     });
 
     test('should handle null values', () {
-      final result = Result<String?>.success(null);
+      final result = const Result<String?>.success(null);
 
       final output = result.when(
         success: (val) => val == null ? 'null value' : 'not null',

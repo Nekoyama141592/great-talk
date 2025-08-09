@@ -115,7 +115,7 @@ void main() {
       Widget buildWithTheme(ThemeData theme) {
         return MaterialApp(
           theme: theme,
-          home: Scaffold(body: MainFloatingActionButton(isShow: true)),
+          home: const Scaffold(body: MainFloatingActionButton(isShow: true)),
         );
       }
 
@@ -204,10 +204,10 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: Column(
-              children: const [
+              children: [
                 MainFloatingActionButton(isShow: true),
                 MainFloatingActionButton(isShow: false),
                 MainFloatingActionButton(isShow: true),

@@ -20,10 +20,10 @@ class GenerateImageViewModel extends _$GenerateImageViewModel {
     final isPremiumSubscribing =
         ref.read(purchasesNotifierProvider).value?.isPremiumActive ?? false;
     if (!isPremiumSubscribing) {
-      return Result.failure('プレミアムプランに加入する必要があります');
+      return const Result.failure('プレミアムプランに加入する必要があります');
     }
     if (prompt.isEmpty || size.isEmpty) {
-      return Result.failure('プロンプトを入力してください');
+      return const Result.failure('プロンプトを入力してください');
     }
     final repository = ref.read(apiRepositoryProvider);
     return await repository.generateImage(prompt, size);

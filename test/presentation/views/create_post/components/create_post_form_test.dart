@@ -33,7 +33,7 @@ void main() {
       WidgetTester tester,
     ) async {
       final formKey = GlobalKey<FormState>();
-      final state = CreatePostState(
+      final state = const CreatePostState(
         systemPrompt: 'Test system prompt',
         description: 'Test description',
         title: 'Test title',

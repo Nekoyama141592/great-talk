@@ -82,14 +82,10 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: Row(
-              children: [
-                const Text('User Name'),
-                const SizedBox(width: 8),
-                const OfficialMark(),
-              ],
+              children: [Text('User Name'), SizedBox(width: 8), OfficialMark()],
             ),
           ),
         ),
@@ -117,12 +113,12 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: Column(
               children: [
-                Row(children: [const Text('User 1'), const OfficialMark()]),
-                Row(children: [const Text('User 2'), const OfficialMark()]),
+                Row(children: [Text('User 1'), OfficialMark()]),
+                Row(children: [Text('User 2'), OfficialMark()]),
               ],
             ),
           ),

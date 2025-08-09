@@ -129,7 +129,7 @@ class DatabaseRepository implements IDatabaseRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint('_createDoc: ${e.toString()}');
-      return Result.failure('作成が失敗しました');
+      return const Result.failure('作成が失敗しました');
     }
   }
 
@@ -164,7 +164,7 @@ class DatabaseRepository implements IDatabaseRepository {
       final newPrivateUser = PrivateUserModel.fromUid(uid);
       final json = newPrivateUser.toJson();
       await docRef.set(json);
-      return PrivateUserEntity();
+      return const PrivateUserEntity();
     } catch (e) {
       debugPrint('createPrivateUser: ${e.toString()}');
       return null;
@@ -196,7 +196,7 @@ class DatabaseRepository implements IDatabaseRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint('_deleteDoc: ${e.toString()}');
-      return Result.failure('削除が失敗しました');
+      return const Result.failure('削除が失敗しました');
     }
   }
 
@@ -222,7 +222,7 @@ class DatabaseRepository implements IDatabaseRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint('_createDocs: ${e.toString()}');
-      return Result.failure('作成が失敗しました');
+      return const Result.failure('作成が失敗しました');
     }
   }
 
@@ -303,7 +303,7 @@ class DatabaseRepository implements IDatabaseRepository {
       return const Result.success(true);
     } catch (e) {
       debugPrint('_deleteDocs: ${e.toString()}');
-      return Result.failure('削除が失敗しました');
+      return const Result.failure('削除が失敗しました');
     }
   }
 
@@ -442,7 +442,7 @@ class DatabaseRepository implements IDatabaseRepository {
       );
     } catch (e) {
       debugPrint('getTokens: ${e.toString()}');
-      return Tokens();
+      return const Tokens();
     }
   }
 
