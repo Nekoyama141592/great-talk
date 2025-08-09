@@ -121,8 +121,8 @@ void main() {
     testWidgets('should work with different child widgets', (
       WidgetTester tester,
     ) async {
-      final textField = TextField(
-        decoration: const InputDecoration(
+      final textField = const TextField(
+        decoration: InputDecoration(
           hintText: 'Enter text',
           border: InputBorder.none,
         ),
@@ -183,16 +183,16 @@ void main() {
     testWidgets('should work with complex child layouts', (
       WidgetTester tester,
     ) async {
-      final complexChild = Column(
+      final complexChild = const Column(
         children: [
-          const TextField(
+          TextField(
             decoration: InputDecoration(
               hintText: 'Username',
               border: InputBorder.none,
             ),
           ),
-          const Divider(),
-          const TextField(
+          Divider(),
+          TextField(
             decoration: InputDecoration(
               hintText: 'Password',
               border: InputBorder.none,

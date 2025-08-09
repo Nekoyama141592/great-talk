@@ -62,7 +62,7 @@ class ImageUtil {
     final instance = ImageCropper();
     final result = await instance.cropImage(
       sourcePath: xFile.path,
-      aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
     );
     return result;
   }

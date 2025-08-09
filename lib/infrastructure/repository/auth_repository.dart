@@ -17,7 +17,7 @@ class AuthRepository implements IAuthRepository {
       final user = res.user;
       if (user == null) {
         const e = 'Signin Failed.';
-        return Result.failure(e);
+        return const Result.failure(e);
       } else {
         return Result.success(user);
       }
@@ -36,7 +36,7 @@ class AuthRepository implements IAuthRepository {
       final user = res.user;
       if (user == null) {
         const e = 'Signin Failed.';
-        return Result.failure(e);
+        return const Result.failure(e);
       } else {
         return Result.success(user);
       }
@@ -54,10 +54,10 @@ class AuthRepository implements IAuthRepository {
       return const Result.success(true);
     } on FirebaseAuthException catch (e) {
       if (enableDebugPrint) debugPrint('signOut: ${e.toString()}');
-      return Result.failure('ログアウトが失敗しました');
+      return const Result.failure('ログアウトが失敗しました');
     } catch (e) {
       if (enableDebugPrint) debugPrint('signOut: ${e.toString()}');
-      return Result.failure('ログアウトが失敗しました');
+      return const Result.failure('ログアウトが失敗しました');
     }
   }
 
@@ -130,7 +130,7 @@ class AuthRepository implements IAuthRepository {
       return Result.failure(msg);
     } catch (e) {
       if (enableDebugPrint) debugPrint('signUp: ${e.toString()}');
-      return Result.failure('ユーザー作成に失敗しました');
+      return const Result.failure('ユーザー作成に失敗しました');
     }
   }
 
@@ -153,7 +153,7 @@ class AuthRepository implements IAuthRepository {
       return Result.failure(msg);
     } catch (e) {
       if (enableDebugPrint) debugPrint('signIn: ${e.toString()}');
-      return Result.failure('ログインに失敗しました');
+      return const Result.failure('ログインに失敗しました');
     }
   }
 
@@ -188,7 +188,7 @@ class AuthRepository implements IAuthRepository {
       if (enableDebugPrint) {
         debugPrint('sendEmailVerification: ${e.toString()}');
       }
-      return Result.failure('確認メールの送信に失敗しました');
+      return const Result.failure('確認メールの送信に失敗しました');
     }
   }
 
@@ -201,10 +201,10 @@ class AuthRepository implements IAuthRepository {
       return const Result.success(true);
     } on FirebaseAuthException catch (e) {
       if (enableDebugPrint) debugPrint('reloadCurrentUser: ${e.toString()}');
-      return Result.failure('ユーザー情報の更新に失敗しました');
+      return const Result.failure('ユーザー情報の更新に失敗しました');
     } catch (e) {
       if (enableDebugPrint) debugPrint('reloadCurrentUser: ${e.toString()}');
-      return Result.failure('ユーザー情報の更新に失敗しました');
+      return const Result.failure('ユーザー情報の更新に失敗しました');
     }
   }
 
@@ -223,7 +223,7 @@ class AuthRepository implements IAuthRepository {
       if (enableDebugPrint) {
         debugPrint('sendPasswordResetEmail: ${e.toString()}');
       }
-      return Result.failure('パスワードリセットメールの送信に失敗しました');
+      return const Result.failure('パスワードリセットメールの送信に失敗しました');
     }
   }
 

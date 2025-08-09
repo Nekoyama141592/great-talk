@@ -22,7 +22,7 @@ class TokensNotifier extends _$TokensNotifier {
   Future<TokensState> build() async {
     final user = ref.watch(authProvider);
     if (user == null || user.isAnonymous) {
-      return TokensState();
+      return const TokensState();
     }
 
     final repository = ref.watch(databaseRepositoryProvider);
@@ -36,7 +36,7 @@ class TokensNotifier extends _$TokensNotifier {
     state = AsyncValue.data(newState);
   }
 
-  TokensState get _currentState => state.valueOrNull ?? TokensState();
+  TokensState get _currentState => state.valueOrNull ?? const TokensState();
 
   String addDeletePostId(String postId) {
     final newList = TokensUtil.addToTokenList(

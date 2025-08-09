@@ -6,11 +6,11 @@ class VerifyEmailHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        const Icon(Icons.email_outlined, size: 80, color: Colors.blue),
-        const BasicHeightBox(),
-        const Text(
+        Icon(Icons.email_outlined, size: 80, color: Colors.blue),
+        BasicHeightBox(),
+        Text(
           'メールアドレスの確認',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),

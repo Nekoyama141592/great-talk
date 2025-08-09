@@ -50,7 +50,7 @@ class ApiRepository implements IApiRepository {
       return rs.Result.success(res);
     } on FirebaseFunctionsException catch (e) {
       debugPrint('putObject: ${e.toString()}');
-      return rs.Result.failure('画像のアップロードが失敗しました');
+      return const rs.Result.failure('画像のアップロードが失敗しました');
     }
   }
 
@@ -65,7 +65,7 @@ class ApiRepository implements IApiRepository {
       return rs.Result.success(base64Image);
     } on FirebaseFunctionsException catch (e) {
       debugPrint('getObject: ${e.toString()}');
-      return rs.Result.failure('画像の取得が失敗しました');
+      return const rs.Result.failure('画像の取得が失敗しました');
     }
   }
 
@@ -80,7 +80,7 @@ class ApiRepository implements IApiRepository {
       return rs.Result.success(res);
     } on FirebaseFunctionsException catch (e) {
       debugPrint('deleteObject: ${e.toString()}');
-      return rs.Result.failure('画像の削除が失敗しました');
+      return const rs.Result.failure('画像の削除が失敗しました');
     }
   }
 
@@ -97,7 +97,7 @@ class ApiRepository implements IApiRepository {
       return rs.Result.success(res);
     } on FirebaseFunctionsException catch (e) {
       debugPrint('generateImage: ${e.toString()}');
-      return rs.Result.failure('画像の生成に失敗しました');
+      return const rs.Result.failure('画像の生成に失敗しました');
     }
   }
 
@@ -115,7 +115,7 @@ class ApiRepository implements IApiRepository {
       return rs.Result.success(res);
     } on FirebaseFunctionsException catch (e) {
       debugPrint('generateText: ${e.toString()}');
-      return rs.Result.failure('テキストの生成に失敗しました');
+      return const rs.Result.failure('テキストの生成に失敗しました');
     }
   }
 }

@@ -52,7 +52,7 @@ abstract class PublicUserModel with _$PublicUserModel {
       image:
           imageValue != null
               ? ModeratedImage(value: imageValue)
-              : ModeratedImage(),
+              : const ModeratedImage(),
       userName:
           userName != null
               ? DetectedText(value: userName)

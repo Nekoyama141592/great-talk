@@ -33,7 +33,7 @@ class EmailAuthForm extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'メールアドレス',
               hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.7)),
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
             validator: emailValidator,
           ),
@@ -44,7 +44,7 @@ class EmailAuthForm extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'パスワード',
               hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.7)),
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
             validator: passwordValidator,
           ),

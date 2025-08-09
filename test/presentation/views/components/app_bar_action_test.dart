@@ -117,13 +117,9 @@ void main() {
     ) async {
       bool wasTapped = false;
 
-      final complexChild = Row(
+      final complexChild = const Row(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.person),
-          const SizedBox(width: 4),
-          const Text('Profile'),
-        ],
+        children: [Icon(Icons.person), SizedBox(width: 4), Text('Profile')],
       );
 
       await tester.pumpWidget(

@@ -22,7 +22,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
       ref.watch(databaseRepositoryProvider);
   @override
   Future<CurrentUserState> build() async {
-    final initialState = CurrentUserState();
+    final initialState = const CurrentUserState();
     final authUserData = ref.watch(authProvider);
     if (authUserData == null || authUserData.isAnonymous) {
       return initialState;
@@ -43,7 +43,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   Future<CurrentUserState> _fetchData() async {
     final uid = _getCurrentUid();
     if (uid == null) {
-      return CurrentUserState();
+      return const CurrentUserState();
     }
     final publicUser = await _getPublicUser(uid);
     final privateUser = await _getPrivateUser(uid);

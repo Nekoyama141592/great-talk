@@ -17,15 +17,15 @@ class FirstPage extends ConsumerWidget {
     final isAgreedToTerms = ref.watch(termsNotifierProvider);
     final authUser = ref.watch(authProvider);
     if (!isAgreedToTerms) {
-      return Scaffold(body: const TermsScreen());
+      return const Scaffold(body: TermsScreen());
     }
     if (authUser == null) {
-      return LoginPage();
+      return const LoginPage();
     }
     // 統合テストの際にはコメントアウト
     if (!authUser.emailVerified) {
-      return VerifyEmailPage();
+      return const VerifyEmailPage();
     }
-    return MyHomePage();
+    return const MyHomePage();
   }
 }

@@ -11,7 +11,7 @@ void main() {
     testWidgets('should display resend button when can resend', (
       WidgetTester tester,
     ) async {
-      final state = VerifyEmailState(
+      final state = const VerifyEmailState(
         email: testEmail,
         canResend: true,
         resendSecondsLeft: 0,
@@ -37,7 +37,7 @@ void main() {
     testWidgets('should display countdown when cannot resend', (
       WidgetTester tester,
     ) async {
-      final state = VerifyEmailState(
+      final state = const VerifyEmailState(
         email: testEmail,
         canResend: false,
         resendSecondsLeft: 45,
@@ -62,7 +62,7 @@ void main() {
     testWidgets(
       'should call onResendEmail when resend button is tapped and enabled',
       (WidgetTester tester) async {
-        final state = VerifyEmailState(
+        final state = const VerifyEmailState(
           email: testEmail,
           canResend: true,
           resendSecondsLeft: 0,
@@ -93,7 +93,7 @@ void main() {
     testWidgets(
       'should not call onResendEmail when resend button is disabled',
       (WidgetTester tester) async {
-        final state = VerifyEmailState(
+        final state = const VerifyEmailState(
           email: testEmail,
           canResend: false,
           resendSecondsLeft: 30,
@@ -124,7 +124,7 @@ void main() {
     testWidgets(
       'should call onCheckVerification when check button is tapped and enabled',
       (WidgetTester tester) async {
-        final state = VerifyEmailState(
+        final state = const VerifyEmailState(
           email: testEmail,
           canResend: false,
           resendSecondsLeft: 30,
@@ -155,7 +155,7 @@ void main() {
     testWidgets('should disable check button when loading', (
       WidgetTester tester,
     ) async {
-      final state = VerifyEmailState(
+      final state = const VerifyEmailState(
         email: testEmail,
         canResend: true,
         resendSecondsLeft: 0,
@@ -185,7 +185,7 @@ void main() {
     testWidgets('should have correct button styles', (
       WidgetTester tester,
     ) async {
-      final state = VerifyEmailState(
+      final state = const VerifyEmailState(
         email: testEmail,
         canResend: true,
         resendSecondsLeft: 0,
@@ -245,7 +245,7 @@ void main() {
     testWidgets('should handle rapid button taps correctly', (
       WidgetTester tester,
     ) async {
-      final state = VerifyEmailState(
+      final state = const VerifyEmailState(
         email: testEmail,
         canResend: true,
         resendSecondsLeft: 0,

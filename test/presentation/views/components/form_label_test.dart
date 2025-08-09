@@ -153,10 +153,10 @@ void main() {
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: Column(
-              children: const [
+              children: [
                 Text('Form Header'),
                 FormLabel(
                   title: 'First Field',
@@ -303,7 +303,7 @@ void main() {
         const helpMessage = 'Help for long title';
 
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Scaffold(
               body: SizedBox(
                 width: 300,
@@ -324,7 +324,7 @@ void main() {
         const specialHelp = 'Help @#\$%';
 
         await tester.pumpWidget(
-          MaterialApp(
+          const MaterialApp(
             home: Scaffold(
               body: FormLabel(title: specialTitle, helpMsg: specialHelp),
             ),

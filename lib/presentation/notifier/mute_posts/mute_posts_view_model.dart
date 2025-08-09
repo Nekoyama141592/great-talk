@@ -19,7 +19,7 @@ class MutePostsViewModel extends _$MutePostsViewModel
   DatabaseRepository get _repository => _useCase.repository;
   TokensNotifier _tokensNotifier() => ref.read(tokensNotifierProvider.notifier);
   TokensState _tokensState() =>
-      ref.read(tokensNotifierProvider).value ?? TokensState();
+      ref.read(tokensNotifierProvider).value ?? const TokensState();
   @override
   FutureOr<PostsState> build() => _fetchData();
 
