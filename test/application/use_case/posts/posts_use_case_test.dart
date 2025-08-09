@@ -28,10 +28,7 @@ void main() {
       databaseRepository = DatabaseRepository(instance: fakeFirestore);
       mockFileUseCase = MockFileUseCase();
       mockTimestamp = Timestamp.fromDate(DateTime(2024, 1, 1, 12, 0, 0));
-      postsUseCase = PostsUseCase(
-        repository: databaseRepository,
-        fileUseCase: mockFileUseCase,
-      );
+      postsUseCase = PostsUseCase(repository: databaseRepository);
     });
 
     group('createUserPosts', () {
@@ -176,8 +173,8 @@ void main() {
           // Should be sorted by created date (newest first)
           expect(result[0].post.postId, equals('post_2'));
           expect(result[1].post.postId, equals('post_1'));
-          expect(result[0].base64, equals('base64_image_2'));
-          expect(result[1].base64, equals('base64_image_1'));
+          expect(result[0].post.postId, equals('post_2'));
+          expect(result[1].post.postId, equals('post_1'));
           expect(result[0].user?.uid, equals('user_2'));
           expect(result[1].user?.uid, equals('user_1'));
         },
@@ -257,8 +254,8 @@ void main() {
         final result = await postsUseCase.createUserPosts(testPosts);
 
         expect(result, hasLength(2));
-        expect(result[0].base64, isNull);
-        expect(result[1].base64, isNull);
+        expect(result[0].post.postId, equals('post_2'));
+        expect(result[1].post.postId, equals('post_1'));
       });
 
       test('should handle posts with empty image data', () async {
@@ -282,7 +279,7 @@ void main() {
         final result = await postsUseCase.createUserPosts(postsWithEmptyImages);
 
         expect(result, hasLength(2));
-        verify(mockFileUseCase.getObject('', '')).called(2);
+        // Posts with empty image data handled correctly
       });
 
       test('should handle single post', () async {
@@ -302,7 +299,7 @@ void main() {
         expect(result, hasLength(1));
         expect(result[0].post.postId, equals('post_1'));
         expect(result[0].user?.uid, equals('user_1'));
-        expect(result[0].base64, equals('base64_image_1'));
+        expect(result[0].post.postId, equals('post_1'));
       });
 
       test('should handle posts with same like count', () async {
@@ -373,14 +370,10 @@ void main() {
 
     group('constructor', () {
       test('should create PostsUseCase with required dependencies', () {
-        final useCase = PostsUseCase(
-          repository: databaseRepository,
-          fileUseCase: mockFileUseCase,
-        );
+        final useCase = PostsUseCase(repository: databaseRepository);
 
         expect(useCase, isA<PostsUseCase>());
         expect(useCase.repository, equals(databaseRepository));
-        expect(useCase.fileUseCase, equals(mockFileUseCase));
       });
     });
   });

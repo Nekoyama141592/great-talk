@@ -10,7 +10,6 @@ abstract class ChatState with _$ChatState {
   const factory ChatState({
     @Default([]) List<TextMessage> messages,
     required PostEntity post,
-    String? postImage,
     @Default(false) bool isPicked,
     String? pickedImage,
   }) = _ChatState;

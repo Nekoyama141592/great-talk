@@ -139,7 +139,6 @@ class PostsRefreshScreen extends HookWidget {
             SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
                 final userPost = userPosts[index];
-                final base64 = userPost.base64;
                 return Container(
                   margin: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -147,7 +146,6 @@ class PostsRefreshScreen extends HookWidget {
                   ),
                   child: PostCard(
                     post: userPost.post,
-                    base64: base64,
                     publicUserEntity: userPost.user,
                   ),
                 );

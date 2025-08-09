@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/core/util/route_util.dart';
+import 'package:great_talk/core/util/image_url_util.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/presentation/util/texts.dart';
@@ -16,13 +16,8 @@ import 'package:great_talk/presentation/page/user_profile_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UserCard extends ConsumerWidget {
-  const UserCard({
-    super.key,
-    required this.publicUser,
-    required this.uint8list,
-  });
+  const UserCard({super.key, required this.publicUser});
   final PublicUserEntity publicUser;
-  final Uint8List? uint8list;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -76,7 +71,16 @@ class UserCard extends ConsumerWidget {
                                     ),
                                 child: Row(
                                   children: [
-                                    CircleImage(uint8list: uint8list),
+                                    CircleImage(
+                                      isModerated:
+                                          publicUser
+                                              .image
+                                              .moderationModelVersion
+                                              .isNotEmpty,
+                                      imageUrl: ImageUrlUtil.getUserImageUrl(
+                                        publicUser.uid,
+                                      ),
+                                    ),
                                     const BasicWidthBox(),
                                     Expanded(
                                       child: EllipsisText(publicUser.nameValue),

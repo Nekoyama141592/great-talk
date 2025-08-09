@@ -11,7 +11,6 @@ abstract class ProfileState with _$ProfileState {
   const ProfileState._();
   const factory ProfileState({
     required PublicUserEntity? user,
-    required String? base64,
     required List<UserPost> userPosts,
   }) = _ProfileState;
   factory ProfileState.fromJson(Map<String, dynamic> json) =>

@@ -50,9 +50,7 @@ abstract class PublicUserModel with _$PublicUserModel {
       uid: uid,
       updatedAt: now,
       image:
-          imageValue != null
-              ? ModeratedImage(value: imageValue)
-              : const ModeratedImage(),
+          imageValue != null ? const ModeratedImage() : const ModeratedImage(),
       userName:
           userName != null
               ? DetectedText(value: userName)

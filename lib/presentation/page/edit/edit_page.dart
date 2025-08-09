@@ -44,7 +44,7 @@ class EditProfilePage extends HookConsumerWidget {
             EditProfileForm(formKey: formKey, editModelData: editModelData),
             const SizedBox(height: 16.0),
             ProfileImageWidget(
-              base64Image: editModelData.base64,
+              base64: editModelData.base64,
               onImageTap: onImageTap,
             ),
             const SizedBox(height: 16.0),

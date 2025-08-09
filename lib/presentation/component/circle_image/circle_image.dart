@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:great_talk/presentation/component/circle_image/components/s3_image.dart';
 
@@ -8,15 +6,17 @@ class CircleImage extends StatelessWidget {
     super.key,
     this.width,
     this.height,
-    this.uint8list,
+    this.imageUrl,
+    required this.isModerated,
     this.onTap,
   });
-  final Uint8List? uint8list;
+  final String? imageUrl;
+  final bool isModerated;
   final double? width, height;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return uint8list == null
+    return imageUrl == null || imageUrl!.isEmpty
         ? Container(
           width: width,
           height: height,
@@ -31,7 +31,8 @@ class CircleImage extends StatelessWidget {
           ),
         )
         : S3Image(
-          uint8list: uint8list!,
+          isModerated: isModerated,
+          imageUrl: imageUrl!,
           width: height ?? width,
           height: height,
         );

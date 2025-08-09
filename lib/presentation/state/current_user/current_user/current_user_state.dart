@@ -10,7 +10,6 @@ abstract class CurrentUserState with _$CurrentUserState {
   const factory CurrentUserState({
     PublicUserEntity? publicUser,
     PrivateUserEntity? privateUser,
-    String? base64,
   }) = _CurrentUserState;
   factory CurrentUserState.fromJson(Map<String, dynamic> json) =>
       _$CurrentUserStateFromJson(json);

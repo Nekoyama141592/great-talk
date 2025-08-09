@@ -6,7 +6,7 @@ part of 'posts_use_case_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$postsUseCaseHash() => r'9a7d186d0bd2da0edba609b0bc636694e9bb93db';
+String _$postsUseCaseHash() => r'45140e964dd066856ebbdd2b7f8c91b135ab5332';
 
 /// See also [postsUseCase].
 @ProviderFor(postsUseCase)

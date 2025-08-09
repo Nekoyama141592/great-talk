@@ -8,10 +8,8 @@ part 'moderated_image.g.dart';
 abstract class ModeratedImage with _$ModeratedImage {
   const ModeratedImage._();
   const factory ModeratedImage({
-    @Default("") String bucketName,
     @Default([]) List<Map<String, dynamic>> moderationLabels,
     @Default("") String moderationModelVersion,
-    @Default("") String value, // S3のファイル名
   }) = _ModeratedImage;
   factory ModeratedImage.fromJson(Map<String, dynamic> json) =>
       _$ModeratedImageFromJson(json);

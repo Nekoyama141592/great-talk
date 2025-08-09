@@ -10,7 +10,6 @@ import 'package:great_talk/presentation/notifier/purchases/purchases_notifier.da
 import 'package:great_talk/core/provider/repository/api/api_repository_provider.dart';
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
 import 'package:great_talk/core/provider/repository/local/local_repository_provider.dart';
-import 'package:great_talk/core/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:great_talk/domain/entity/database/post/post_entity.dart';
@@ -26,14 +25,12 @@ class ChatViewModel extends _$ChatViewModel {
     if (post == null) {
       throw Exception('情報が取得できませんでした');
     }
-    // 投稿画像とローカルのチャット履歴を取得
-    final postImage = await _fetchPostImage(post);
     final localMessages = _getLocalMessages(post.postId);
     final messages =
         localMessages.isEmpty
             ? [TextMessage.assistant(post.description.value, post)]
             : localMessages;
-    return ChatState(post: post, postImage: postImage, messages: messages);
+    return ChatState(post: post, messages: messages);
   }
 
   /// メッセージ送信ボタンが押されたときの処理
@@ -95,13 +92,6 @@ class ChatViewModel extends _$ChatViewModel {
   Future<PostEntity?> _fetchPost(String uid, String postId) {
     final repository = ref.read(databaseRepositoryProvider);
     return repository.getPost(uid, postId);
-  }
-
-  Future<String?> _fetchPostImage(PostEntity post) {
-    final detectedImage = post.image;
-    return ref
-        .read(fileUseCaseProvider)
-        .getObject(detectedImage.bucketName, detectedImage.value);
   }
 
   List<TextMessage> _getLocalMessages(String postId) {

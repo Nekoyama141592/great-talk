@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/size_util.dart';
 import 'package:great_talk/core/util/route_util.dart';
+import 'package:great_talk/core/util/image_url_util.dart';
 import 'package:great_talk/domain/entity/database/public_user/public_user_entity.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
@@ -22,16 +21,13 @@ class PostCard extends ConsumerWidget {
   const PostCard({
     super.key,
     required this.post,
-    required this.base64,
     required this.publicUserEntity,
   });
   final PostEntity post;
-  final String? base64;
   final PublicUserEntity? publicUserEntity;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final uint8list = base64 != null ? base64Decode(base64!) : null;
     final asyncValue = ref.watch(tokensNotifierProvider);
 
     return InkWell(
@@ -129,7 +125,15 @@ class PostCard extends ConsumerWidget {
                                   ],
                                 ),
                                 child: CircleImage(
-                                  uint8list: uint8list,
+                                  isModerated:
+                                      post
+                                          .image
+                                          .moderationModelVersion
+                                          .isNotEmpty,
+                                  imageUrl: ImageUrlUtil.getPostImageUrl(
+                                    post.uid,
+                                    post.postId,
+                                  ),
                                   width: 48,
                                   height: 48,
                                 ),

@@ -54,7 +54,7 @@ abstract class PostModel with _$PostModel {
       createdAt: now,
       customCompleteText: CustomCompleteText.fromJson(customCompleteText),
       description: DetectedText(value: description),
-      image: ModeratedImage(value: fileName),
+      image: const ModeratedImage(),
       postId: postId,
       searchToken: SearchUtil.returnSearchToken(title),
       title: DetectedText(value: title),
