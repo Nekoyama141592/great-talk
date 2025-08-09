@@ -108,10 +108,7 @@ class EditViewModel extends _$EditViewModel {
       final result = await repository.putObject(base64Image, fileName);
       await result.when(
         success: (res) async {
-          updateUserResult = await _createUserUpdateLog(
-            userName,
-            bio,
-          );
+          updateUserResult = await _createUserUpdateLog(userName, bio);
         },
         failure: (e) {
           updateUserResult = const Result.failure("画像のアップロードが失敗しました");
@@ -120,28 +117,18 @@ class EditViewModel extends _$EditViewModel {
       );
     } else {
       // 写真がそのまま場合の処理
-      updateUserResult = await _createUserUpdateLog(
-        userName,
-        bio,
-      );
+      updateUserResult = await _createUserUpdateLog(userName, bio);
     }
     // 完了時はstateを元に戻す
     state = AsyncData(s.copyWith(isPicked: false));
     return updateUserResult;
   }
 
-  FutureResult<bool> _createUserUpdateLog(
-    String userName,
-    String bio,
-  ) async {
+  FutureResult<bool> _createUserUpdateLog(String userName, String bio) async {
     final uid = ref.read(authUidProvider);
     if (uid == null) return const Result.failure('ログインしてください.');
     final repository = ref.read(databaseRepositoryProvider);
-    final newUpdateLog = UserUpdateLog.fromRegister(
-      uid,
-      userName,
-      bio,
-    );
+    final newUpdateLog = UserUpdateLog.fromRegister(uid, userName, bio);
     final json = newUpdateLog.toJson();
     final result = await repository.createUserUpdateLog(uid, json);
     return result;

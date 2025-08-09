@@ -343,11 +343,7 @@ void main() {
         const userName = 'Updated Name';
         const bio = 'Updated biography';
 
-        final userUpdateLog = UserUpdateLog.fromRegister(
-          uid,
-          userName,
-          bio,
-        );
+        final userUpdateLog = UserUpdateLog.fromRegister(uid, userName, bio);
 
         expect(userUpdateLog.uid, uid);
         expect(userUpdateLog.stringUserName, userName);

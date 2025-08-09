@@ -72,7 +72,11 @@ class UserCard extends ConsumerWidget {
                                 child: Row(
                                   children: [
                                     CircleImage(
-                                      isModerated: publicUser.image.moderationModelVersion.isNotEmpty,
+                                      isModerated:
+                                          publicUser
+                                              .image
+                                              .moderationModelVersion
+                                              .isNotEmpty,
                                       imageUrl: ImageUrlUtil.getUserImageUrl(
                                         publicUser.uid,
                                       ),

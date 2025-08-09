@@ -15,7 +15,7 @@ class MsgCard extends StatelessWidget {
     required this.text,
     this.createdAt,
     this.senderUid, // 送信者のUID
-    required this.post
+    required this.post,
   });
 
   final bool isMyMsg;
@@ -62,7 +62,10 @@ class MsgCard extends StatelessWidget {
         ),
       ),
       if (!isMyMsg && senderUid != null)
-        CircleImage(isModerated: true,imageUrl: ImageUrlUtil.getPostImageUrl(post.uid,post.postId))
+        CircleImage(
+          isModerated: true,
+          imageUrl: ImageUrlUtil.getPostImageUrl(post.uid, post.postId),
+        )
       else
         const SizedBox.shrink(),
     ];

@@ -18,11 +18,7 @@ abstract class UserUpdateLog with _$UserUpdateLog {
   }) = _UserUpdateLog;
   factory UserUpdateLog.fromJson(Map<String, dynamic> json) =>
       _$UserUpdateLogFromJson(json);
-  factory UserUpdateLog.fromRegister(
-    String uid,
-    String userName,
-    String bio,
-  ) {
+  factory UserUpdateLog.fromRegister(String uid, String userName, String bio) {
     return UserUpdateLog(
       logCreatedAt: FieldValue.serverTimestamp(),
       searchToken: SearchUtil.returnSearchToken(userName),

@@ -46,10 +46,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     }
     final publicUser = await _getPublicUser(uid);
     final privateUser = await _getPrivateUser(uid);
-    return CurrentUserState(
-      publicUser: publicUser,
-      privateUser: privateUser,
-    );
+    return CurrentUserState(publicUser: publicUser, privateUser: privateUser);
   }
 
   Future<PublicUserEntity?> _getPublicUser(String uid) async {

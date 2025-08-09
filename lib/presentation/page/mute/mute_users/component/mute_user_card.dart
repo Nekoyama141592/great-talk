@@ -15,7 +15,6 @@ class MuteUserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      
       leading: CircleImage(
         isModerated: passiveUserEntity.image.moderationModelVersion.isNotEmpty,
         imageUrl: ImageUrlUtil.getUserImageUrl(passiveUserEntity.uid),

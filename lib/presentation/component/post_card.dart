@@ -125,10 +125,14 @@ class PostCard extends ConsumerWidget {
                                   ],
                                 ),
                                 child: CircleImage(
-                                  isModerated: post.image.moderationModelVersion.isNotEmpty,
+                                  isModerated:
+                                      post
+                                          .image
+                                          .moderationModelVersion
+                                          .isNotEmpty,
                                   imageUrl: ImageUrlUtil.getPostImageUrl(
                                     post.uid,
-                                    post.postId
+                                    post.postId,
                                   ),
                                   width: 48,
                                   height: 48,

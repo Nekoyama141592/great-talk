@@ -31,40 +31,41 @@ class S3Image extends StatelessWidget {
           child: SizedBox(
             width: imageSize,
             height: imageSize,
-            child: isModerated
-                ? CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    fit: BoxFit.cover,
-                    width: imageSize,
-                    height: imageSize,
-                    placeholder: (context, url) =>
-                        Shimmer.fromColors(
-                      baseColor: Colors.grey[300]!,
-                      highlightColor: Colors.grey[100]!,
-                      child: Container(
-                        color: Colors.white,
-                        child: Icon(
-                          Icons.person,
-                          size: imageSize * 0.6,
-                          color: Colors.grey[600],
-                        ),
-                      ),
+            child:
+                isModerated
+                    ? CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      fit: BoxFit.cover,
+                      width: imageSize,
+                      height: imageSize,
+                      placeholder:
+                          (context, url) => Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Container(
+                              color: Colors.white,
+                              child: Icon(
+                                Icons.person,
+                                size: imageSize * 0.6,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ),
+                      errorWidget:
+                          (context, url, error) => Container(
+                            color: Colors.grey[300],
+                            child: Icon(
+                              Icons.person,
+                              size: imageSize * 0.6,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                    )
+                    : Icon(
+                      Icons.person,
+                      size: imageSize * 0.6,
+                      color: Colors.grey[600],
                     ),
-                    errorWidget: (context, url, error) =>
-                        Container(
-                      color: Colors.grey[300],
-                      child: Icon(
-                        Icons.person,
-                        size: imageSize * 0.6,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                  )
-                : Icon(
-                    Icons.person,
-                    size: imageSize * 0.6,
-                    color: Colors.grey[600],
-                  ),
           ),
         ),
       ),

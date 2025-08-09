@@ -218,7 +218,8 @@ class UserRankingScreen extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 2),
                   child: CircleImage(
-                    isModerated: publicUser.image.moderationModelVersion.isNotEmpty,
+                    isModerated:
+                        publicUser.image.moderationModelVersion.isNotEmpty,
                     imageUrl: ImageUrlUtil.getUserImageUrl(publicUser.uid),
                     width: rank == 1 ? 55 : 40,
                     height: rank == 1 ? 55 : 40,
@@ -330,7 +331,8 @@ class UserRankingScreen extends ConsumerWidget {
                       ],
                     ),
                     child: CircleImage(
-                      isModerated: publicUser.image.moderationModelVersion.isNotEmpty,
+                      isModerated:
+                          publicUser.image.moderationModelVersion.isNotEmpty,
                       imageUrl: ImageUrlUtil.getUserImageUrl(publicUser.uid),
                       width: 45,
                       height: 45,
