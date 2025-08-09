@@ -1,6 +1,6 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/extension/custom_date_time_formatting.dart';
+import 'package:great_talk/core/util/image_url_util.dart';
 import 'package:great_talk/presentation/util/padding_core.dart';
 import 'package:great_talk/presentation/util/text_core.dart';
 import 'package:great_talk/presentation/component/basic_height_box.dart';
@@ -13,14 +13,14 @@ class MsgCard extends StatelessWidget {
     required this.isAnotherDay,
     required this.text,
     this.createdAt,
-    this.postImage, // 追加: 投稿者のアイコン画像
+    this.senderUid, // 送信者のUID
   });
 
   final bool isMyMsg;
   final bool isAnotherDay;
   final String text;
   final DateTime? createdAt;
-  final Uint8List? postImage; // Uint8List? 型で画像データを受け取る
+  final String? senderUid; // 送信者のUID
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +59,8 @@ class MsgCard extends StatelessWidget {
           child: Text(text),
         ),
       ),
-      if (!isMyMsg && postImage != null)
-        CircleImage(uint8list: postImage)
+      if (!isMyMsg && senderUid != null)
+        CircleImage(imageUrl: ImageUrlUtil.getUserImageUrl(senderUid!))
       else
         const SizedBox.shrink(),
     ];

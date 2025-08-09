@@ -1,12 +1,11 @@
-import 'dart:typed_data';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/size_util.dart';
 
 class S3Image extends StatelessWidget {
-  const S3Image({super.key, this.width, this.height, required this.uint8list});
+  const S3Image({super.key, this.width, this.height, required this.imageUrl});
   final double? width, height;
-  final Uint8List uint8list;
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -20,11 +19,29 @@ class S3Image extends StatelessWidget {
           child: SizedBox(
             width: width ?? SizeUtil.userImageSize(context),
             height: height ?? SizeUtil.userImageSize(context),
-            child: Image.memory(
-              uint8list,
+            child: CachedNetworkImage(
+              imageUrl: imageUrl,
               fit: BoxFit.cover,
               width: width ?? SizeUtil.userImageSize(context),
               height: height ?? SizeUtil.userImageSize(context),
+              placeholder:
+                  (context, url) => Container(
+                    color: Colors.grey[300],
+                    child: Icon(
+                      Icons.person,
+                      size: (width ?? SizeUtil.userImageSize(context)) * 0.6,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+              errorWidget:
+                  (context, url, error) => Container(
+                    color: Colors.grey[300],
+                    child: Icon(
+                      Icons.person,
+                      size: (width ?? SizeUtil.userImageSize(context)) * 0.6,
+                      color: Colors.grey[600],
+                    ),
+                  ),
             ),
           ),
         ),

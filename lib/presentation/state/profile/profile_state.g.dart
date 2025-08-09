@@ -12,7 +12,6 @@ _ProfileState _$ProfileStateFromJson(Map<String, dynamic> json) =>
           json['user'] == null
               ? null
               : PublicUserEntity.fromJson(json['user'] as Map<String, dynamic>),
-      base64: json['base64'] as String?,
       userPosts:
           (json['userPosts'] as List<dynamic>)
               .map((e) => UserPost.fromJson(e as Map<String, dynamic>))
@@ -20,8 +19,4 @@ _ProfileState _$ProfileStateFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$ProfileStateToJson(_ProfileState instance) =>
-    <String, dynamic>{
-      'user': instance.user,
-      'base64': instance.base64,
-      'userPosts': instance.userPosts,
-    };
+    <String, dynamic>{'user': instance.user, 'userPosts': instance.userPosts};

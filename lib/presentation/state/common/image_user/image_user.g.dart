@@ -11,8 +11,7 @@ _ImageUser _$ImageUserFromJson(Map<String, dynamic> json) => _ImageUser(
       json['user'] == null
           ? null
           : PublicUserEntity.fromJson(json['user'] as Map<String, dynamic>),
-  base64: json['base64'] as String?,
 );
 
 Map<String, dynamic> _$ImageUserToJson(_ImageUser instance) =>
-    <String, dynamic>{'user': instance.user, 'base64': instance.base64};
+    <String, dynamic>{'user': instance.user};

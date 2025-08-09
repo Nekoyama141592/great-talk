@@ -5,11 +5,13 @@ class ImageUrlUtil {
 
   static String getUserImageUrl(String uid) {
     final baseUrl = '${_getR2Endpoint()}/users/$uid';
+    print(baseUrl);
     return baseUrl;
   }
 
   static String getPostImageUrl(String uid, String postId) {
     final baseUrl = '${_getR2Endpoint()}/users/$uid/posts/$postId';
+    print(baseUrl);
     return baseUrl;
   }
 }

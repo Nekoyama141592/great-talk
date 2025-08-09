@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/route_util.dart';
+import 'package:great_talk/core/util/image_url_util.dart';
 import 'package:great_talk/presentation/page/screen/profile_screen/components/date_text.dart';
 import 'package:great_talk/presentation/state/profile/profile_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
@@ -37,7 +36,6 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final passiveUser = state.user;
-    final image = state.base64;
     final children = <Widget>[
       Align(
         alignment: Alignment.centerLeft,
@@ -49,7 +47,7 @@ class ProfileScreen extends ConsumerWidget {
       EllipsisText(passiveUser?.nameValue ?? '', style: StyleUiUtil.bold25()),
       Row(
         children: [
-          if (image != null) CircleImage(uint8list: base64Decode(image)),
+          CircleImage(imageUrl: ImageUrlUtil.getUserImageUrl(passiveUid)),
           const BasicWidthBox(),
           Text("フォロー ${passiveUser?.followingCount.formatNumber() ?? 0}"),
           const BasicWidthBox(),

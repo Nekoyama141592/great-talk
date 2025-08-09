@@ -5,7 +5,6 @@ import 'package:great_talk/presentation/state/profile/profile_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
 import 'package:great_talk/presentation/notifier/tokens/tokens_notifier.dart';
 import 'package:great_talk/core/provider/repository/database/database_repository_provider.dart';
-import 'package:great_talk/core/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:great_talk/presentation/notifier/refresh_interface.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
 import 'package:great_talk/infrastructure/model/result/result.dart';
@@ -23,36 +22,15 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
 
   Future<ProfileState> _fetchData() async {
     final user = await _fetchUser();
-    final base64 = await _getImageFromUser(user);
-    final userPosts = await _fetchUserPosts(user, base64);
-    return ProfileState(user: user, base64: base64, userPosts: userPosts);
+    final userPosts = await _fetchUserPosts(user);
+    return ProfileState(user: user, userPosts: userPosts);
   }
 
   Future<PublicUserEntity?> _fetchUser() async {
     return _repository.getPublicUser(passiveUid);
   }
 
-  Future<String?> _getImageFromPost(PostEntity post) async {
-    final detectedImage = post.image;
-    final image = await ref
-        .read(fileUseCaseProvider)
-        .getObject(detectedImage.bucketName, detectedImage.value);
-    return image;
-  }
-
-  Future<String?> _getImageFromUser(PublicUserEntity? user) async {
-    if (user == null) return null;
-    final detectedImage = user.image;
-    final image = await ref
-        .read(fileUseCaseProvider)
-        .getObject(detectedImage.bucketName, detectedImage.value);
-    return image;
-  }
-
-  Future<List<UserPost>> _fetchUserPosts(
-    PublicUserEntity? user,
-    String? base64,
-  ) async {
+  Future<List<UserPost>> _fetchUserPosts(PublicUserEntity? user) async {
     final posts = await _repository.getUserPosts(passiveUid);
     final userPosts = await _postsToUserPosts(posts);
     return userPosts;
@@ -62,23 +40,16 @@ class ProfileViewModel extends _$ProfileViewModel implements RefreshInterface {
     final uids = posts.map((e) => e.uid).toSet();
     final fetchedUsers = await _repository.getUsersByUids(uids.toList());
     final userMap = {for (final user in fetchedUsers) user.uid: user};
-    final futures =
+    final userPosts =
         posts
             .where((post) {
               return userMap.containsKey(post.uid);
             })
-            .map((post) async {
-              final userImageBase64 = await _getImageFromPost(post);
-              return UserPost(
-                post: post,
-                user: userMap[post.uid]!,
-                base64: userImageBase64,
-              );
+            .map((post) {
+              return UserPost(post: post, user: userMap[post.uid]!);
             })
             .toList();
-
-    final results = await Future.wait(futures);
-    return results;
+    return userPosts;
   }
 
   // Follow/Unfollow

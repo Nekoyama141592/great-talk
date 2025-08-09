@@ -13,7 +13,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: ProfileImageWidget(
-              base64Image: null,
+              base64: null,
               onImageTap: () {
                 wasTapped = true;
               },
@@ -22,7 +22,7 @@ void main() {
         ),
       );
 
-      expect(find.byIcon(Icons.image), findsOneWidget);
+      expect(find.byIcon(Icons.person), findsOneWidget);
       expect(find.byType(InkWell), findsOneWidget);
 
       await tester.tap(find.byType(InkWell));
@@ -43,7 +43,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: ProfileImageWidget(
-              base64Image: base64Image,
+              base64: base64Image,
               onImageTap: () {
                 wasTapped = true;
               },
@@ -67,13 +67,13 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ProfileImageWidget(base64Image: null, onImageTap: () {}),
+            body: ProfileImageWidget(base64: null, onImageTap: () {}),
           ),
         ),
       );
 
       expect(find.byType(InkWell), findsOneWidget);
-      expect(find.byIcon(Icons.image), findsOneWidget);
+      expect(find.byIcon(Icons.person), findsOneWidget);
     });
 
     testWidgets('should be tappable in both states', (
@@ -86,7 +86,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: ProfileImageWidget(
-              base64Image: null,
+              base64: null,
               onImageTap: () {
                 tapCount++;
               },
@@ -107,7 +107,7 @@ void main() {
         MaterialApp(
           home: Scaffold(
             body: ProfileImageWidget(
-              base64Image: base64Image,
+              base64: base64Image,
               onImageTap: () {
                 tapCount++;
               },
@@ -130,10 +130,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ProfileImageWidget(
-              base64Image: base64Image,
-              onImageTap: () {},
-            ),
+            body: ProfileImageWidget(base64: base64Image, onImageTap: () {}),
           ),
         ),
       );
@@ -148,13 +145,13 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ProfileImageWidget(base64Image: null, onImageTap: () {}),
+            body: ProfileImageWidget(base64: null, onImageTap: () {}),
           ),
         ),
       );
 
-      final icon = tester.widget<Icon>(find.byIcon(Icons.image));
-      expect(icon.size, 128);
+      final icon = tester.widget<Icon>(find.byIcon(Icons.person));
+      expect(icon.size, 64);
     });
   });
 }

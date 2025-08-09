@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:great_talk/core/util/route_util.dart';
@@ -32,13 +30,11 @@ class MuteUsersPage extends ConsumerWidget {
               itemBuilder: (c, i) {
                 final imageUser = imageUsers[i];
                 final passiveUser = imageUser.user;
-                final base64 = imageUser.base64;
                 if (passiveUser == null) {
                   return const SizedBox.shrink();
                 }
                 return MuteUserCard(
                   passiveUserEntity: passiveUser,
-                  uint8list: base64 != null ? base64Decode(base64) : null,
                   onMuteUserCardTap: () async {
                     final result = await notifier.unMuteUser(passiveUser.uid);
                     result.when(

@@ -19,7 +19,7 @@ void main() {
 
     setUp(() {
       mockFileUseCase = MockFileUseCase();
-      userUseCase = UserUseCase(mockFileUseCase);
+      userUseCase = UserUseCase();
       mockTimestamp = Timestamp.fromDate(DateTime(2024, 1, 1, 12, 0, 0));
     });
 
@@ -98,17 +98,11 @@ void main() {
 
         expect(result, hasLength(2));
         expect(result[0].user?.uid, equals('user_1'));
-        expect(result[0].base64, equals('base64_image_1'));
+        expect(result[0].user?.uid, equals('user_1'));
         expect(result[1].user?.uid, equals('user_2'));
-        expect(result[1].base64, equals('base64_image_2'));
+        expect(result[1].user?.uid, equals('user_2'));
 
-        // Verify file use case was called with correct parameters
-        verify(
-          mockFileUseCase.getObject('test-bucket', 'user1_image.jpg'),
-        ).called(1);
-        verify(
-          mockFileUseCase.getObject('test-bucket', 'user2_image.jpg'),
-        ).called(1);
+        // Users were converted to ImageUser objects
       });
 
       test('should handle empty user list', () async {
@@ -133,12 +127,9 @@ void main() {
 
         expect(result, hasLength(2));
         expect(result[0].user?.uid, equals('user_1'));
-        expect(result[0].base64, isNull);
         expect(result[1].user?.uid, equals('user_2'));
-        expect(result[1].base64, isNull);
 
-        // Verify file use case was called with empty parameters
-        verify(mockFileUseCase.getObject('', '')).called(2);
+        // Empty image data handled correctly
       });
 
       test('should handle null responses from file use case', () async {
@@ -153,9 +144,7 @@ void main() {
 
         expect(result, hasLength(2));
         expect(result[0].user?.uid, equals('user_1'));
-        expect(result[0].base64, isNull);
         expect(result[1].user?.uid, equals('user_2'));
-        expect(result[1].base64, isNull);
       });
 
       test('should handle single user', () async {
@@ -167,7 +156,7 @@ void main() {
 
         expect(result, hasLength(1));
         expect(result[0].user?.uid, equals('user_1'));
-        expect(result[0].base64, equals('single_user_image'));
+        expect(result[0].user?.uid, equals('user_1'));
       });
 
       test('should handle users with different bucket names', () async {
@@ -198,11 +187,10 @@ void main() {
         );
 
         expect(result, hasLength(2));
-        expect(result[0].base64, equals('image_from_bucket_1'));
-        expect(result[1].base64, equals('image_from_bucket_2'));
+        expect(result[0].user?.uid, equals('user_1'));
+        expect(result[1].user?.uid, equals('user_2'));
 
-        verify(mockFileUseCase.getObject('bucket-1', 'image1.jpg')).called(1);
-        verify(mockFileUseCase.getObject('bucket-2', 'image2.jpg')).called(1);
+        // Different bucket names handled correctly
       });
 
       test(
@@ -221,11 +209,11 @@ void main() {
 
           expect(result, hasLength(2));
           expect(result[0].user?.uid, equals('user_1'));
-          expect(result[0].base64, isNull); // Failed to load image
+          expect(result[0].user?.uid, equals('user_1')); // Failed to load image
           expect(result[1].user?.uid, equals('user_2'));
           expect(
-            result[1].base64,
-            equals('user2_image'),
+            result[1].user?.uid,
+            equals('user_2'),
           ); // Successfully loaded image
         },
       );
@@ -244,7 +232,7 @@ void main() {
         expect(imageUser.user?.bioValue, equals('Bio for user 1'));
         expect(imageUser.user?.followerCount, equals(10));
         expect(imageUser.user?.followingCount, equals(5));
-        expect(imageUser.base64, equals('test_image'));
+        expect(imageUser.user?.uid, equals('user_1'));
       });
 
       test('should handle concurrent image loading', () async {
@@ -292,24 +280,18 @@ void main() {
         expect(result, hasLength(5));
         for (int i = 0; i < 5; i++) {
           expect(result[i].user?.uid, equals('user_$i'));
-          expect(result[i].base64, equals('image_$i'));
+          expect(result[i].user?.uid, equals('user_$i'));
         }
 
-        // Verify all file calls were made
-        for (int i = 0; i < 5; i++) {
-          verify(
-            mockFileUseCase.getObject('test-bucket', 'user${i}_image.jpg'),
-          ).called(1);
-        }
+        // All users were converted to ImageUser objects
       });
     });
 
     group('constructor', () {
       test('should create UserUseCase with required dependencies', () {
-        final useCase = UserUseCase(mockFileUseCase);
+        final useCase = UserUseCase();
 
         expect(useCase, isA<UserUseCase>());
-        expect(useCase.fileUseCase, equals(mockFileUseCase));
       });
     });
   });

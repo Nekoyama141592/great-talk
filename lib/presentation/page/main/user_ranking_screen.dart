@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:great_talk/core/util/image_url_util.dart';
 import 'package:great_talk/presentation/notifier/ranking_users/ranking_users_view_model.dart';
 import 'package:great_talk/presentation/page/screen/refresh_screen/users_refresh_screen.dart';
 import 'package:great_talk/presentation/component/circle_image/circle_image.dart';
@@ -91,18 +90,10 @@ class UserRankingScreen extends ConsumerWidget {
                     if (index >= imageUsers.length) return null;
                     final imageUser = imageUsers[index];
                     final publicUser = imageUser.user;
-                    final base64 = imageUser.base64;
-                    final uint8list =
-                        base64 != null ? base64Decode(base64) : null;
 
                     if (publicUser == null) return const SizedBox.shrink();
 
-                    return _buildRankingCard(
-                      context,
-                      publicUser,
-                      uint8list,
-                      index + 1,
-                    );
+                    return _buildRankingCard(context, publicUser, index + 1);
                   }, childCount: imageUsers.length),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 100)),
@@ -164,8 +155,6 @@ class UserRankingScreen extends ConsumerWidget {
     double height,
   ) {
     final publicUser = imageUser.user;
-    final base64 = imageUser.base64;
-    final uint8list = base64 != null ? base64Decode(base64) : null;
 
     if (publicUser == null) return const SizedBox();
 
@@ -229,7 +218,7 @@ class UserRankingScreen extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 2),
                   child: CircleImage(
-                    uint8list: uint8list,
+                    imageUrl: ImageUrlUtil.getUserImageUrl(publicUser.uid),
                     width: rank == 1 ? 55 : 40,
                     height: rank == 1 ? 55 : 40,
                   ),
@@ -270,12 +259,7 @@ class UserRankingScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildRankingCard(
-    BuildContext context,
-    dynamic publicUser,
-    dynamic uint8list,
-    int rank,
-  ) {
+  Widget _buildRankingCard(BuildContext context, dynamic publicUser, int rank) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
       child: Material(
@@ -345,7 +329,7 @@ class UserRankingScreen extends ConsumerWidget {
                       ],
                     ),
                     child: CircleImage(
-                      uint8list: uint8list,
+                      imageUrl: ImageUrlUtil.getUserImageUrl(publicUser.uid),
                       width: 45,
                       height: 45,
                     ),

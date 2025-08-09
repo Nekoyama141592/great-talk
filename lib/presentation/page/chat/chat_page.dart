@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -185,7 +184,6 @@ class ChatPage extends HookConsumerWidget {
                     controller: scrollController,
                     itemCount: messages.length,
                     itemBuilder: ((context, index) {
-                      final image = data.postImage;
                       // 通常のメッセージ表示
                       final message = messages[index];
                       final String text = message.typedText().value;
@@ -197,7 +195,7 @@ class ChatPage extends HookConsumerWidget {
                         isAnotherDay: isAnotherDay(messages, index),
                         text: text,
                         createdAt: message.createdAt,
-                        postImage: image != null ? base64Decode(image) : null,
+                        senderUid: isMyMessage ? null : uid,
                       );
                     }),
                   ),
