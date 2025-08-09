@@ -49,6 +49,7 @@ packages=(
   "shimmer"
   "purchases_flutter"
   "flutter_dotenv"
+  "cached_network_image"
 )
 
 echo "Adding packages to dependencies..."
