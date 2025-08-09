@@ -47,7 +47,7 @@ class ProfileScreen extends ConsumerWidget {
       EllipsisText(passiveUser?.nameValue ?? '', style: StyleUiUtil.bold25()),
       Row(
         children: [
-          CircleImage(imageUrl: ImageUrlUtil.getUserImageUrl(passiveUid)),
+          CircleImage(isModerated: passiveUser?.image.moderationModelVersion.isNotEmpty ?? false,imageUrl: ImageUrlUtil.getUserImageUrl(passiveUid)),
           const BasicWidthBox(),
           Text("フォロー ${passiveUser?.followingCount.formatNumber() ?? 0}"),
           const BasicWidthBox(),

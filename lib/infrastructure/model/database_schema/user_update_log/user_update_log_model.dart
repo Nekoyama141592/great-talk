@@ -22,7 +22,6 @@ abstract class UserUpdateLog with _$UserUpdateLog {
     String uid,
     String userName,
     String bio,
-    String fileName,
   ) {
     return UserUpdateLog(
       logCreatedAt: FieldValue.serverTimestamp(),
@@ -30,7 +29,7 @@ abstract class UserUpdateLog with _$UserUpdateLog {
       stringBio: bio.trim(),
       stringUserName: userName.trim(),
       uid: uid,
-      image: ModeratedImage(value: fileName).toJson(),
+      image: const ModeratedImage().toJson(),
     );
   }
 }

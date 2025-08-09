@@ -7,9 +7,11 @@ class CircleImage extends StatelessWidget {
     this.width,
     this.height,
     this.imageUrl,
+    required this.isModerated,
     this.onTap,
   });
   final String? imageUrl;
+  final bool isModerated;
   final double? width, height;
   final void Function()? onTap;
   @override
@@ -28,6 +30,6 @@ class CircleImage extends StatelessWidget {
             color: Colors.grey[600],
           ),
         )
-        : S3Image(imageUrl: imageUrl!, width: height ?? width, height: height);
+        : S3Image(isModerated: isModerated,imageUrl: imageUrl!, width: height ?? width, height: height);
   }
 }

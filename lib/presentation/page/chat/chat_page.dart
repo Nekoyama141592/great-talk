@@ -192,6 +192,7 @@ class ChatPage extends HookConsumerWidget {
 
                       return MsgCard(
                         isMyMsg: isMyMessage,
+                        post: post,
                         isAnotherDay: isAnotherDay(messages, index),
                         text: text,
                         createdAt: message.createdAt,

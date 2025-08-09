@@ -109,7 +109,6 @@ class EditViewModel extends _$EditViewModel {
       await result.when(
         success: (res) async {
           updateUserResult = await _createUserUpdateLog(
-            fileName,
             userName,
             bio,
           );
@@ -122,7 +121,6 @@ class EditViewModel extends _$EditViewModel {
     } else {
       // 写真がそのまま場合の処理
       updateUserResult = await _createUserUpdateLog(
-        publicUser.image.value,
         userName,
         bio,
       );
@@ -133,7 +131,6 @@ class EditViewModel extends _$EditViewModel {
   }
 
   FutureResult<bool> _createUserUpdateLog(
-    String fileName,
     String userName,
     String bio,
   ) async {
@@ -144,7 +141,6 @@ class EditViewModel extends _$EditViewModel {
       uid,
       userName,
       bio,
-      fileName,
     );
     final json = newUpdateLog.toJson();
     final result = await repository.createUserUpdateLog(uid, json);

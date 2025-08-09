@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/size_util.dart';
 
 class S3Image extends StatelessWidget {
-  const S3Image({super.key, this.width, this.height, required this.imageUrl});
+  const S3Image({super.key, this.width, this.height, required this.isModerated,required this.imageUrl});
   final double? width, height;
+  final bool isModerated;
   final String imageUrl;
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class S3Image extends StatelessWidget {
           child: SizedBox(
             width: width ?? SizeUtil.userImageSize(context),
             height: height ?? SizeUtil.userImageSize(context),
-            child: CachedNetworkImage(
+            child: isModerated ? CachedNetworkImage(
               imageUrl: imageUrl,
               fit: BoxFit.cover,
               width: width ?? SizeUtil.userImageSize(context),
@@ -42,7 +43,11 @@ class S3Image extends StatelessWidget {
                       color: Colors.grey[600],
                     ),
                   ),
-            ),
+            ) : Icon(
+                      Icons.person,
+                      size: (width ?? SizeUtil.userImageSize(context)) * 0.6,
+                      color: Colors.grey[600],
+                    ),
           ),
         ),
       ),

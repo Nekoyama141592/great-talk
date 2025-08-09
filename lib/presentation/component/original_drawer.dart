@@ -97,6 +97,7 @@ class OriginalDrawer extends ConsumerWidget {
                                       imageUrl: ImageUrlUtil.getUserImageUrl(
                                         user.uid,
                                       ),
+                                      isModerated: user.image.moderationModelVersion.isNotEmpty,
                                       width: 70,
                                       height: 70,
                                     ),

@@ -10,7 +10,6 @@ import 'package:great_talk/infrastructure/model/result/result.dart';
 import 'package:great_talk/core/util/credential_util.dart';
 import 'package:great_talk/infrastructure/repository/auth_repository.dart';
 import 'package:great_talk/infrastructure/repository/database_repository.dart';
-import 'package:great_talk/core/provider/keep_alive/usecase/file/file_use_case_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'current_user_notifier.g.dart';
@@ -47,11 +46,9 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     }
     final publicUser = await _getPublicUser(uid);
     final privateUser = await _getPrivateUser(uid);
-    final base64 = await _getBase64Image(publicUser);
     return CurrentUserState(
       publicUser: publicUser,
       privateUser: privateUser,
-      base64: base64,
     );
   }
 
@@ -65,18 +62,6 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     final privateUser = await _databaseRepository.getPrivateUser(uid);
     if (privateUser != null) return privateUser;
     return await _databaseRepository.createPrivateUser(uid);
-  }
-
-  Future<String?> _getBase64Image(PublicUserEntity? publicUser) async {
-    if (publicUser == null) return null;
-    final oldImage = publicUser.image;
-    final bucketName = oldImage.bucketName;
-    final fileName = oldImage.value;
-    if (bucketName.isEmpty || fileName.isEmpty) return null;
-    final image = await ref
-        .read(fileUseCaseProvider)
-        .getObject(bucketName, fileName);
-    return image;
   }
 
   FutureResult<bool> signOut() async {
@@ -115,7 +100,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     );
     authResult.when(
       success: (_) {
-        final imageValue = user.image.value;
+        final imageValue = user.image.moderationModelVersion;
         if (imageValue.isNotEmpty) {
           ref.read(apiRepositoryProvider).deleteObject(imageValue);
         }
@@ -136,8 +121,7 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
     if (uid == null || stateValue == null) return;
     state = await AsyncValue.guard(() async {
       final publicUser = await _getPublicUser(uid);
-      final base64 = await _getBase64Image(publicUser);
-      return stateValue.copyWith(publicUser: publicUser, base64: base64);
+      return stateValue.copyWith(publicUser: publicUser);
     });
   }
 }

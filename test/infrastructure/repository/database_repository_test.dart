@@ -322,10 +322,8 @@ void main() {
             systemPrompt: 'Liked post prompt',
           ),
           image: const ModeratedImage(
-            bucketName: 'test-bucket',
             moderationLabels: [],
             moderationModelVersion: '1.0',
-            value: 'liked.jpg',
           ),
           likeCount: 0,
           msgCount: 0,
@@ -344,13 +342,11 @@ void main() {
         const uid = 'update_user';
         const userName = 'Updated Name';
         const bio = 'Updated biography';
-        const fileName = 'updated_image.jpg';
 
         final userUpdateLog = UserUpdateLog.fromRegister(
           uid,
           userName,
           bio,
-          fileName,
         );
 
         expect(userUpdateLog.uid, uid);
