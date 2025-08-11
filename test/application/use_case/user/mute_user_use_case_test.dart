@@ -322,8 +322,6 @@ void main() {
             value: '複雑なユーザーの投稿',
           ),
           image: const ModeratedImage(
-            value: 'complex_user_image.jpg',
-            bucketName: 'user_content',
             moderationLabels: [],
             moderationModelVersion: '2.0',
           ),

@@ -51,8 +51,6 @@ void main() {
               value: 'First test post',
             ),
             image: const ModeratedImage(
-              bucketName: 'test-bucket',
-              value: 'image1.jpg',
             ),
             title: const DetectedText(
               languageCode: 'en',
@@ -78,8 +76,6 @@ void main() {
               value: 'Second test post',
             ),
             image: const ModeratedImage(
-              bucketName: 'test-bucket',
-              value: 'image2.jpg',
             ),
             title: const DetectedText(
               languageCode: 'en',

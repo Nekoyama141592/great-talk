@@ -41,10 +41,7 @@ void main() {
             ),
             createdAt: mockTimestamp.toDate(),
             updatedAt: mockTimestamp.toDate(),
-            image: const ModeratedImage(
-              bucketName: 'test-bucket',
-              value: 'user1_image.jpg',
-            ),
+            image: const ModeratedImage(),
             userName: const DetectedText(
               languageCode: 'en',
               negativeScore: 0,
@@ -68,10 +65,7 @@ void main() {
             ),
             createdAt: mockTimestamp.toDate(),
             updatedAt: mockTimestamp.toDate(),
-            image: const ModeratedImage(
-              bucketName: 'test-bucket',
-              value: 'user2_image.jpg',
-            ),
+            image: const ModeratedImage(),
             userName: const DetectedText(
               languageCode: 'en',
               negativeScore: 0,
@@ -162,16 +156,10 @@ void main() {
       test('should handle users with different bucket names', () async {
         final usersWithDifferentBuckets = [
           testUsers[0].copyWith(
-            image: const ModeratedImage(
-              bucketName: 'bucket-1',
-              value: 'image1.jpg',
-            ),
+            image: const ModeratedImage(),
           ),
           testUsers[1].copyWith(
-            image: const ModeratedImage(
-              bucketName: 'bucket-2',
-              value: 'image2.jpg',
-            ),
+            image: const ModeratedImage(),
           ),
         ];
 
@@ -254,10 +242,7 @@ void main() {
             ),
             createdAt: mockTimestamp.toDate(),
             updatedAt: mockTimestamp.toDate(),
-            image: ModeratedImage(
-              bucketName: 'test-bucket',
-              value: 'user${index}_image.jpg',
-            ),
+            image: ModeratedImage(),
             userName: DetectedText(
               languageCode: 'en',
               negativeScore: 0,
