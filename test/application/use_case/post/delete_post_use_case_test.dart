@@ -163,9 +163,9 @@ void main() {
 
           final capturedArgs = fakeApiRepository.capturedArguments;
           expect(capturedArgs['method'], equals('deleteObject'));
-          // valueが削除されたので、ここは空文字列やnullなどに合わせて修正が必要かもしれません
-          expect(capturedArgs['object'], anyOf(isEmpty, isNull));
-          expect(fakeApiRepository.deletedObjects, anyOf(contains(''), isEmpty));
+          // The DeletePostUseCase uses moderationModelVersion as the object to delete
+          expect(capturedArgs['object'], equals('test_version'));
+          expect(fakeApiRepository.deletedObjects, contains('test_version'));
         },
       );
 
@@ -290,10 +290,10 @@ void main() {
           failure: (error) => fail('Expected success but got failure: $error'),
         );
 
-        // valueが削除されたので、ここは空文字列やnullなどに合わせて修正が必要かもしれません
+        // The DeletePostUseCase uses moderationModelVersion as the object to delete
         expect(
           fakeApiRepository.deletedObjects,
-          anyOf(contains(''), isEmpty),
+          contains('test_version'),
         );
 
         // Verify post was deleted
@@ -485,10 +485,10 @@ void main() {
                 (error) => fail('Expected success but got failure: $error'),
           );
 
-          // valueが削除されたので、ここは空文字列やnullなどに合わせて修正が必要かもしれません
+          // The DeletePostUseCase uses moderationModelVersion as the object to delete
           expect(
             fakeApiRepository.deletedObjects,
-            anyOf(contains(''), isEmpty),
+            contains('test_version'),
           );
         },
       );
@@ -540,8 +540,8 @@ void main() {
           failure: (error) => fail('Expected success but got failure: $error'),
         );
 
-        // valueが削除されたので、ここは空文字列やnullなどに合わせて修正が必要かもしれません
-        expect(fakeApiRepository.deletedObjects, anyOf(contains(''), isEmpty));
+        // The DeletePostUseCase uses moderationModelVersion as the object to delete
+        expect(fakeApiRepository.deletedObjects, contains('test_version'));
       });
     });
   });
