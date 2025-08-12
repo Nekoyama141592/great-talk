@@ -6,10 +6,7 @@ part 'image_user.g.dart';
 
 @freezed
 abstract class ImageUser with _$ImageUser {
-  const factory ImageUser({
-    required PublicUserEntity? user,
-    required String? base64,
-  }) = _ImageUser;
+  const factory ImageUser({required PublicUserEntity? user}) = _ImageUser;
   factory ImageUser.fromJson(Map<String, dynamic> json) =>
       _$ImageUserFromJson(json);
 }

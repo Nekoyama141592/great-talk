@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:great_talk/core/util/chat_util.dart';
 import 'package:great_talk/core/util/route_util.dart';
+import 'package:great_talk/core/util/image_url_util.dart';
 import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/presentation/notifier/local_setting/local_setting.dart';
 import 'package:great_talk/presentation/notifier/purchases/purchases_notifier.dart';
@@ -26,7 +25,6 @@ class OriginalDrawer extends ConsumerWidget {
     final asyncValue = ref.watch(currentUserNotifierProvider);
     final currentUser = asyncValue.value;
     final isAdmin = currentUser?.isAdmin() ?? false;
-    final image = currentUser?.base64;
     final purchaseState = ref.watch(purchasesNotifierProvider).value;
     final isProActive = purchaseState?.isProActive ?? false;
     final isPremiumActive = purchaseState?.isPremiumActive ?? false;
@@ -80,28 +78,34 @@ class OriginalDrawer extends ConsumerWidget {
                             children: [
                               Row(
                                 children: [
-                                  if (image != null)
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Colors.white.withAlpha(77),
-                                          width: 3,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.white.withAlpha(77),
+                                        width: 3,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withAlpha(51),
+                                          blurRadius: 12,
+                                          offset: const Offset(0, 4),
                                         ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withAlpha(51),
-                                            blurRadius: 12,
-                                            offset: const Offset(0, 4),
-                                          ),
-                                        ],
-                                      ),
-                                      child: CircleImage(
-                                        uint8list: base64Decode(image),
-                                        width: 70,
-                                        height: 70,
-                                      ),
+                                      ],
                                     ),
+                                    child: CircleImage(
+                                      imageUrl: ImageUrlUtil.getUserImageUrl(
+                                        user.uid,
+                                      ),
+                                      isModerated:
+                                          user
+                                              .image
+                                              .moderationModelVersion
+                                              .isNotEmpty,
+                                      width: 70,
+                                      height: 70,
+                                    ),
+                                  ),
                                   const Spacer(),
                                   Container(
                                     padding: const EdgeInsets.symmetric(

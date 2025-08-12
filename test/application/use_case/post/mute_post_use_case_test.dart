@@ -313,8 +313,6 @@ void main() {
             value: '特別なテスト投稿の説明',
           ),
           image: const ModeratedImage(
-            value: 'special_image.png',
-            bucketName: 'special_bucket',
             moderationLabels: [],
             moderationModelVersion: '2.0',
           ),

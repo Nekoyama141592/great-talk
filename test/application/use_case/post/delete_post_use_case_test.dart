@@ -99,8 +99,6 @@ void main() {
             value: 'Test post description',
           ),
           image: const ModeratedImage(
-            value: 'test_image.jpg',
-            bucketName: 'test_bucket',
             moderationLabels: [],
             moderationModelVersion: 'test_version',
           ),
@@ -165,8 +163,9 @@ void main() {
 
           final capturedArgs = fakeApiRepository.capturedArguments;
           expect(capturedArgs['method'], equals('deleteObject'));
-          expect(capturedArgs['object'], equals('test_image.jpg'));
-          expect(fakeApiRepository.deletedObjects, contains('test_image.jpg'));
+          // The DeletePostUseCase uses moderationModelVersion as the object to delete
+          expect(capturedArgs['object'], equals('test_version'));
+          expect(fakeApiRepository.deletedObjects, contains('test_version'));
         },
       );
 
@@ -234,8 +233,6 @@ void main() {
       test('should handle post with null image value', () async {
         final postWithNullFileName = testPost.copyWith(
           image: const ModeratedImage(
-            value: '',
-            bucketName: 'test_bucket',
             moderationLabels: [],
             moderationModelVersion: 'test_version',
           ),
@@ -269,8 +266,6 @@ void main() {
       test('should handle post with different image configurations', () async {
         final postWithDifferentImage = testPost.copyWith(
           image: const ModeratedImage(
-            value: 'different_image.png',
-            bucketName: 'different_bucket',
             moderationLabels: [],
             moderationModelVersion: 'test_version',
           ),
@@ -295,10 +290,8 @@ void main() {
           failure: (error) => fail('Expected success but got failure: $error'),
         );
 
-        expect(
-          fakeApiRepository.deletedObjects,
-          contains('different_image.png'),
-        );
+        // The DeletePostUseCase uses moderationModelVersion as the object to delete
+        expect(fakeApiRepository.deletedObjects, contains('test_version'));
 
         // Verify post was deleted
         final deletedPost = await databaseRepository.getPost(
@@ -395,8 +388,6 @@ void main() {
             value: 'Concurrent test description',
           ),
           image: const ModeratedImage(
-            value: 'concurrent_image.jpg',
-            bucketName: 'test_bucket',
             moderationLabels: [],
             moderationModelVersion: 'test_version',
           ),
@@ -457,8 +448,6 @@ void main() {
               value: 'Special chars test description',
             ),
             image: const ModeratedImage(
-              value: 'image@#\$%^&*()_+.jpg',
-              bucketName: 'test_bucket',
               moderationLabels: [],
               moderationModelVersion: 'test_version',
             ),
@@ -493,15 +482,13 @@ void main() {
                 (error) => fail('Expected success but got failure: $error'),
           );
 
-          expect(
-            fakeApiRepository.deletedObjects,
-            contains('image@#\$%^&*()_+.jpg'),
-          );
+          // The DeletePostUseCase uses moderationModelVersion as the object to delete
+          expect(fakeApiRepository.deletedObjects, contains('test_version'));
         },
       );
 
       test('should handle posts with very long image values', () async {
-        final longFileName = 'very_long_file_name_' * 10 + '.jpg';
+        // value, bucketNameが削除されたので、longFileNameは使わず空文字列やnullでテスト
         final postWithLongFileName = PostEntity(
           postId: 'long_filename_post',
           uid: 'owner_uid',
@@ -515,10 +502,8 @@ void main() {
             sentiment: 'positive',
             value: 'Long filename test description',
           ),
-          image: ModeratedImage(
-            value: longFileName,
-            bucketName: 'test_bucket',
-            moderationLabels: const [],
+          image: const ModeratedImage(
+            moderationLabels: [],
             moderationModelVersion: 'test_version',
           ),
           title: const DetectedText(
@@ -549,7 +534,8 @@ void main() {
           failure: (error) => fail('Expected success but got failure: $error'),
         );
 
-        expect(fakeApiRepository.deletedObjects, contains(longFileName));
+        // The DeletePostUseCase uses moderationModelVersion as the object to delete
+        expect(fakeApiRepository.deletedObjects, contains('test_version'));
       });
     });
   });

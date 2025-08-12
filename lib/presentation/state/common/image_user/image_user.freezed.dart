@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ImageUser {
 
- PublicUserEntity? get user; String? get base64;
+ PublicUserEntity? get user;
 /// Create a copy of ImageUser
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $ImageUserCopyWith<ImageUser> get copyWith => _$ImageUserCopyWithImpl<ImageUser>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ImageUser&&(identical(other.user, user) || other.user == user)&&(identical(other.base64, base64) || other.base64 == base64));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ImageUser&&(identical(other.user, user) || other.user == user));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,user,base64);
+int get hashCode => Object.hash(runtimeType,user);
 
 @override
 String toString() {
-  return 'ImageUser(user: $user, base64: $base64)';
+  return 'ImageUser(user: $user)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $ImageUserCopyWith<$Res>  {
   factory $ImageUserCopyWith(ImageUser value, $Res Function(ImageUser) _then) = _$ImageUserCopyWithImpl;
 @useResult
 $Res call({
- PublicUserEntity? user, String? base64
+ PublicUserEntity? user
 });
 
 
@@ -66,11 +66,10 @@ class _$ImageUserCopyWithImpl<$Res>
 
 /// Create a copy of ImageUser
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? user = freezed,Object? base64 = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? user = freezed,}) {
   return _then(_self.copyWith(
 user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as PublicUserEntity?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
-as String?,
+as PublicUserEntity?,
   ));
 }
 /// Create a copy of ImageUser
@@ -93,11 +92,10 @@ $PublicUserEntityCopyWith<$Res>? get user {
 @JsonSerializable()
 
 class _ImageUser implements ImageUser {
-  const _ImageUser({required this.user, required this.base64});
+  const _ImageUser({required this.user});
   factory _ImageUser.fromJson(Map<String, dynamic> json) => _$ImageUserFromJson(json);
 
 @override final  PublicUserEntity? user;
-@override final  String? base64;
 
 /// Create a copy of ImageUser
 /// with the given fields replaced by the non-null parameter values.
@@ -112,16 +110,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ImageUser&&(identical(other.user, user) || other.user == user)&&(identical(other.base64, base64) || other.base64 == base64));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ImageUser&&(identical(other.user, user) || other.user == user));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,user,base64);
+int get hashCode => Object.hash(runtimeType,user);
 
 @override
 String toString() {
-  return 'ImageUser(user: $user, base64: $base64)';
+  return 'ImageUser(user: $user)';
 }
 
 
@@ -132,7 +130,7 @@ abstract mixin class _$ImageUserCopyWith<$Res> implements $ImageUserCopyWith<$Re
   factory _$ImageUserCopyWith(_ImageUser value, $Res Function(_ImageUser) _then) = __$ImageUserCopyWithImpl;
 @override @useResult
 $Res call({
- PublicUserEntity? user, String? base64
+ PublicUserEntity? user
 });
 
 
@@ -149,11 +147,10 @@ class __$ImageUserCopyWithImpl<$Res>
 
 /// Create a copy of ImageUser
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? user = freezed,Object? base64 = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? user = freezed,}) {
   return _then(_ImageUser(
 user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as PublicUserEntity?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
-as String?,
+as PublicUserEntity?,
   ));
 }
 
