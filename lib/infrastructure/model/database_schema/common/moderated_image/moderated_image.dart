@@ -10,6 +10,7 @@ abstract class ModeratedImage with _$ModeratedImage {
   const factory ModeratedImage({
     @Default([]) List<Map<String, dynamic>> moderationLabels,
     @Default("") String moderationModelVersion,
+    String? key,
   }) = _ModeratedImage;
   factory ModeratedImage.fromJson(Map<String, dynamic> json) =>
       _$ModeratedImageFromJson(json);

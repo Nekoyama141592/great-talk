@@ -49,6 +49,7 @@ abstract class PostEntity with _$PostEntity {
     );
   }
 
+  String imageKey() => image.key ?? 'image.jpg';
   bool isInappropriate() =>
       image.moderationLabels.isNotEmpty ||
       description.negativeScore > ModerateConstant.negativeLimit;

@@ -172,16 +172,6 @@ class DatabaseRepository implements IDatabaseRepository {
   }
 
   @override
-  FutureResult<bool> createPost(
-    String uid,
-    String postId,
-    Map<String, dynamic> json,
-  ) async {
-    final docRef = postDocRef(uid, postId);
-    return _createDoc(docRef, json);
-  }
-
-  @override
   FutureResult<bool> createUserUpdateLog(
     String uid,
     Map<String, dynamic> json,

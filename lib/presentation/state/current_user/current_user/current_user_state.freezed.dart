@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CurrentUserState {
 
- PublicUserEntity? get publicUser; PrivateUserEntity? get privateUser; String? get base64;
+ PublicUserEntity? get publicUser; PrivateUserEntity? get privateUser;
 /// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $CurrentUserStateCopyWith<CurrentUserState> get copyWith => _$CurrentUserStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CurrentUserState&&(identical(other.publicUser, publicUser) || other.publicUser == publicUser)&&(identical(other.privateUser, privateUser) || other.privateUser == privateUser)&&(identical(other.base64, base64) || other.base64 == base64));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CurrentUserState&&(identical(other.publicUser, publicUser) || other.publicUser == publicUser)&&(identical(other.privateUser, privateUser) || other.privateUser == privateUser));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,publicUser,privateUser,base64);
+int get hashCode => Object.hash(runtimeType,publicUser,privateUser);
 
 @override
 String toString() {
-  return 'CurrentUserState(publicUser: $publicUser, privateUser: $privateUser, base64: $base64)';
+  return 'CurrentUserState(publicUser: $publicUser, privateUser: $privateUser)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $CurrentUserStateCopyWith<$Res>  {
   factory $CurrentUserStateCopyWith(CurrentUserState value, $Res Function(CurrentUserState) _then) = _$CurrentUserStateCopyWithImpl;
 @useResult
 $Res call({
- PublicUserEntity? publicUser, PrivateUserEntity? privateUser, String? base64
+ PublicUserEntity? publicUser, PrivateUserEntity? privateUser
 });
 
 
@@ -66,12 +66,11 @@ class _$CurrentUserStateCopyWithImpl<$Res>
 
 /// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? publicUser = freezed,Object? privateUser = freezed,Object? base64 = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? publicUser = freezed,Object? privateUser = freezed,}) {
   return _then(_self.copyWith(
 publicUser: freezed == publicUser ? _self.publicUser : publicUser // ignore: cast_nullable_to_non_nullable
 as PublicUserEntity?,privateUser: freezed == privateUser ? _self.privateUser : privateUser // ignore: cast_nullable_to_non_nullable
-as PrivateUserEntity?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
-as String?,
+as PrivateUserEntity?,
   ));
 }
 /// Create a copy of CurrentUserState
@@ -106,12 +105,11 @@ $PrivateUserEntityCopyWith<$Res>? get privateUser {
 @JsonSerializable()
 
 class _CurrentUserState extends CurrentUserState {
-  const _CurrentUserState({this.publicUser, this.privateUser, this.base64}): super._();
+  const _CurrentUserState({this.publicUser, this.privateUser}): super._();
   factory _CurrentUserState.fromJson(Map<String, dynamic> json) => _$CurrentUserStateFromJson(json);
 
 @override final  PublicUserEntity? publicUser;
 @override final  PrivateUserEntity? privateUser;
-@override final  String? base64;
 
 /// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
@@ -126,16 +124,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CurrentUserState&&(identical(other.publicUser, publicUser) || other.publicUser == publicUser)&&(identical(other.privateUser, privateUser) || other.privateUser == privateUser)&&(identical(other.base64, base64) || other.base64 == base64));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CurrentUserState&&(identical(other.publicUser, publicUser) || other.publicUser == publicUser)&&(identical(other.privateUser, privateUser) || other.privateUser == privateUser));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,publicUser,privateUser,base64);
+int get hashCode => Object.hash(runtimeType,publicUser,privateUser);
 
 @override
 String toString() {
-  return 'CurrentUserState(publicUser: $publicUser, privateUser: $privateUser, base64: $base64)';
+  return 'CurrentUserState(publicUser: $publicUser, privateUser: $privateUser)';
 }
 
 
@@ -146,7 +144,7 @@ abstract mixin class _$CurrentUserStateCopyWith<$Res> implements $CurrentUserSta
   factory _$CurrentUserStateCopyWith(_CurrentUserState value, $Res Function(_CurrentUserState) _then) = __$CurrentUserStateCopyWithImpl;
 @override @useResult
 $Res call({
- PublicUserEntity? publicUser, PrivateUserEntity? privateUser, String? base64
+ PublicUserEntity? publicUser, PrivateUserEntity? privateUser
 });
 
 
@@ -163,12 +161,11 @@ class __$CurrentUserStateCopyWithImpl<$Res>
 
 /// Create a copy of CurrentUserState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? publicUser = freezed,Object? privateUser = freezed,Object? base64 = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? publicUser = freezed,Object? privateUser = freezed,}) {
   return _then(_CurrentUserState(
 publicUser: freezed == publicUser ? _self.publicUser : publicUser // ignore: cast_nullable_to_non_nullable
 as PublicUserEntity?,privateUser: freezed == privateUser ? _self.privateUser : privateUser // ignore: cast_nullable_to_non_nullable
-as PrivateUserEntity?,base64: freezed == base64 ? _self.base64 : base64 // ignore: cast_nullable_to_non_nullable
-as String?,
+as PrivateUserEntity?,
   ));
 }
 

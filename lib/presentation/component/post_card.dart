@@ -131,8 +131,9 @@ class PostCard extends ConsumerWidget {
                                           .moderationModelVersion
                                           .isNotEmpty,
                                   imageUrl: ImageUrlUtil.getPostImageUrl(
-                                    post.uid,
-                                    post.postId,
+                                    uid: post.uid,
+                                    postId: post.postId,
+                                    key: post.imageKey(),
                                   ),
                                   width: 48,
                                   height: 48,
@@ -304,15 +305,15 @@ class PostCard extends ConsumerWidget {
     final difference = now.difference(dateTime);
 
     if (difference.inMinutes < 1) {
-      return 'Just now';
+      return 'たった今';
     } else if (difference.inHours < 1) {
-      return '${difference.inMinutes}m ago';
+      return '${difference.inMinutes}分前';
     } else if (difference.inDays < 1) {
-      return '${difference.inHours}h ago';
+      return '${difference.inHours}時間前';
     } else if (difference.inDays < 7) {
-      return '${difference.inDays}d ago';
+      return '${difference.inDays}日前';
     } else {
-      return '${dateTime.year}/${dateTime.month.toString().padLeft(2, '0')}/${dateTime.day.toString().padLeft(2, '0')}';
+      return '${dateTime.year}年${dateTime.month.toString().padLeft(2, '0')}月${dateTime.day.toString().padLeft(2, '0')}日';
     }
   }
 }

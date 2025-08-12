@@ -20,12 +20,10 @@ _CurrentUserState _$CurrentUserStateFromJson(Map<String, dynamic> json) =>
               : PrivateUserEntity.fromJson(
                 json['privateUser'] as Map<String, dynamic>,
               ),
-      base64: json['base64'] as String?,
     );
 
 Map<String, dynamic> _$CurrentUserStateToJson(_CurrentUserState instance) =>
     <String, dynamic>{
       'publicUser': instance.publicUser,
       'privateUser': instance.privateUser,
-      'base64': instance.base64,
     };

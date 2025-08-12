@@ -49,6 +49,8 @@ abstract class PublicUserEntity with _$PublicUserEntity {
     );
   }
 
+  String imageKey() => image.key ?? 'profile.jpg';
+
   String get bioValue => bio.value;
   String get nameValue =>
       userName.value.isEmpty ? MsgConstants.noName : userName.value;

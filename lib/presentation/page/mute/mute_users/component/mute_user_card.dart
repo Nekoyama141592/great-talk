@@ -17,7 +17,10 @@ class MuteUserCard extends StatelessWidget {
     return ListTile(
       leading: CircleImage(
         isModerated: passiveUserEntity.image.moderationModelVersion.isNotEmpty,
-        imageUrl: ImageUrlUtil.getUserImageUrl(passiveUserEntity.uid),
+        imageUrl: ImageUrlUtil.getUserImageUrl(
+          uid: passiveUserEntity.uid,
+          key: passiveUserEntity.imageKey(),
+        ),
       ),
       title: EllipsisText(passiveUserEntity.nameValue),
       onTap: onMuteUserCardTap,

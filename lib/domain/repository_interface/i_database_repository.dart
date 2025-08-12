@@ -24,12 +24,6 @@ abstract class IDatabaseRepository {
   FutureResult<bool> deletePublicUser(String uid);
 
   // Post operations
-  FutureResult<bool> createPost(
-    String uid,
-    String postId,
-    Map<String, dynamic> json,
-  );
-
   Future<PostEntity?> getPost(String uid, String postId);
   FutureResult<bool> deletePost(String uid, String postId);
 

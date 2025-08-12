@@ -16,25 +16,31 @@ class CircleImage extends StatelessWidget {
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return imageUrl == null || imageUrl!.isEmpty
-        ? Container(
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-            color: Colors.grey[300],
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            Icons.person,
-            size: (width ?? 50) * 0.6,
-            color: Colors.grey[600],
-          ),
-        )
-        : S3Image(
-          isModerated: isModerated,
-          imageUrl: imageUrl!,
-          width: height ?? width,
-          height: height,
-        );
+    return InkWell(
+      onTap: onTap,
+      child:
+          imageUrl == null || imageUrl!.isEmpty || !isModerated
+              ? InkWell(
+                child: Container(
+                  width: width,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.person,
+                    size: (width ?? 50) * 0.6,
+                    color: Colors.grey[600],
+                  ),
+                ),
+              )
+              : S3Image(
+                isModerated: isModerated,
+                imageUrl: imageUrl!,
+                width: height ?? width,
+                height: height,
+              ),
+    );
   }
 }
