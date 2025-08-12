@@ -171,7 +171,6 @@ class DatabaseRepository implements IDatabaseRepository {
     }
   }
 
-
   @override
   FutureResult<bool> createUserUpdateLog(
     String uid,

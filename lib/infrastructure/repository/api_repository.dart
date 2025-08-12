@@ -120,6 +120,7 @@ class ApiRepository implements IApiRepository {
       return const rs.Result.failure('テキストの生成に失敗しました');
     }
   }
+
   rs.FutureResult<Map<String, dynamic>> updateUser(
     String? base64,
     String bio,

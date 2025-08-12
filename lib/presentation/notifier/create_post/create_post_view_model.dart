@@ -79,7 +79,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
 
     final repository = ref.read(apiRepositoryProvider);
     final base64Image = pickedImage;
-    
+
     final createPostResult = await repository.createPost(
       currentState.title.trim(),
       currentState.description.trim(),
@@ -89,5 +89,4 @@ class CreatePostViewModel extends _$CreatePostViewModel {
 
     return createPostResult;
   }
-
 }

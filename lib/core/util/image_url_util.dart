@@ -8,8 +8,13 @@ class ImageUrlUtil {
     return baseUrl;
   }
 
-  static String getPostImageUrl({required String uid, required String postId, required String key}) {
-    final baseUrl = '${_getR2Endpoint()}/users/$uid/posts/$postId/${key.split('/').last}';
+  static String getPostImageUrl({
+    required String uid,
+    required String postId,
+    required String key,
+  }) {
+    final baseUrl =
+        '${_getR2Endpoint()}/users/$uid/posts/$postId/${key.split('/').last}';
     return baseUrl;
   }
 }

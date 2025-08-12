@@ -23,7 +23,15 @@ class EditProfilePage extends HookConsumerWidget {
     // formKey を useMemoized を使って build メソッド内で初期化し、再ビルド間で状態を保持
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final editStateAsync = ref.watch(editViewModelProvider);
-    final isModerated = ref.watch(currentUserNotifierProvider).value?.publicUser?.image.moderationModelVersion.isNotEmpty ?? false;
+    final isModerated =
+        ref
+            .watch(currentUserNotifierProvider)
+            .value
+            ?.publicUser
+            ?.image
+            .moderationModelVersion
+            .isNotEmpty ??
+        false;
     EditViewModel notifier() => ref.read(editViewModelProvider.notifier);
     return editStateAsync.when(
       data: (state) {
@@ -45,7 +53,13 @@ class EditProfilePage extends HookConsumerWidget {
           children: [
             EditProfileForm(formKey: formKey, editModelData: state),
             const SizedBox(height: 16.0),
-            base64 != null ? ProfileImageWidget(base64: base64, onImageTap: onImageTap) : CircleImage(isModerated: isModerated,onTap: onImageTap,width: 200,),            
+            base64 != null
+                ? ProfileImageWidget(base64: base64, onImageTap: onImageTap)
+                : CircleImage(
+                  isModerated: isModerated,
+                  onTap: onImageTap,
+                  width: 200,
+                ),
             const SizedBox(height: 16.0),
             UpdateButtonWidget(
               onPressed: () async {

@@ -15,7 +15,8 @@ abstract class PostModel with _$PostModel {
   const PostModel._();
   const factory PostModel({
     required dynamic createdAt,
-    @CustomCompleteTextConverter() required CustomCompleteText customCompleteText,
+    @CustomCompleteTextConverter()
+    required CustomCompleteText customCompleteText,
     @DetectedTextConverter() required DetectedText description,
     @ModeratedImageConverter() required ModeratedImage image,
     @Default(0) int likeCount,

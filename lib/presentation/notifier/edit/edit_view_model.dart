@@ -22,11 +22,7 @@ class EditViewModel extends _$EditViewModel {
     final user = _currentUserState()?.publicUser;
     final bio = user?.bioValue ?? "";
     final userName = user?.nameValue ?? "";
-    return EditState(
-      bio: bio,
-      userName: userName,
-      isPicked: false,
-    );
+    return EditState(bio: bio, userName: userName, isPicked: false);
   }
 
   /// 画像選択時の処理
@@ -64,7 +60,15 @@ class EditViewModel extends _$EditViewModel {
       return const Result.failure('もう一度お試しください.');
     }
     final base64 = s.base64;
-    final isModerated = ref.read(currentUserNotifierProvider).value?.publicUser?.image.moderationModelVersion.isNotEmpty ?? false;
+    final isModerated =
+        ref
+            .read(currentUserNotifierProvider)
+            .value
+            ?.publicUser
+            ?.image
+            .moderationModelVersion
+            .isNotEmpty ??
+        false;
     if (base64 == null && !isModerated) {
       return const Result.failure("アイコンをタップしてプロフィール画像をアップロードしてください");
     }
@@ -88,10 +92,14 @@ class EditViewModel extends _$EditViewModel {
     late Result updateUserResult;
     if (base64 == null && isModerated) {
       // 写真がそのまま場合の処理
-      updateUserResult = await ref.read(apiRepositoryProvider).updateUser(null, bio, userName);
+      updateUserResult = await ref
+          .read(apiRepositoryProvider)
+          .updateUser(null, bio, userName);
     } else {
       // 写真が更新された場合
-      updateUserResult = await ref.read(apiRepositoryProvider).updateUser(base64!, bio, userName);
+      updateUserResult = await ref
+          .read(apiRepositoryProvider)
+          .updateUser(base64!, bio, userName);
     }
     // 完了時はstateを元に戻す
     state = AsyncData(s.copyWith(isPicked: false));

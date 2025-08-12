@@ -46,7 +46,7 @@ void main() {
 
       test('should validate CustomCompleteText structure', () async {
         final customCompleteText = {
-          'systemPrompt': 'Test system prompt content'
+          'systemPrompt': 'Test system prompt content',
         };
 
         expect(customCompleteText['systemPrompt'], isA<String>());
@@ -54,12 +54,10 @@ void main() {
       });
     });
 
-    group('Repository CRUD Operations', () {
-    });
+    group('Repository CRUD Operations', () {});
 
     group('Token and Relationship Operations', () {
       test('should handle follow operations with tokens', () async {
-
         final tokensData = const Tokens(
           followingTokens: [],
           likePostTokens: [],
@@ -104,7 +102,10 @@ void main() {
         const nonExistentUid = 'does_not_exist';
         const nonExistentPostId = 'also_does_not_exist';
 
-        final result = await repository.getPost(nonExistentUid, nonExistentPostId);
+        final result = await repository.getPost(
+          nonExistentUid,
+          nonExistentPostId,
+        );
         expect(result, isNull);
       });
 
@@ -122,7 +123,6 @@ void main() {
       });
 
       test('should handle token operations', () async {
-
         final tokensData = const Tokens(
           followingTokens: [],
           likePostTokens: [],
