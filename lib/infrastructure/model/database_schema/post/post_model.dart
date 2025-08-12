@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:great_talk/core/util/search_util.dart';
 import 'package:great_talk/domain/converter/custom_complete_text_converter.dart';
 import 'package:great_talk/domain/converter/detected_text_converter.dart';
 import 'package:great_talk/domain/converter/moderated_image_converter.dart';
@@ -15,28 +14,16 @@ part 'post_model.g.dart';
 abstract class PostModel with _$PostModel {
   const PostModel._();
   const factory PostModel({
-    @Default(0) int bookmarkCount,
     required dynamic createdAt,
-    @CustomCompleteTextConverter()
-    required CustomCompleteText customCompleteText,
+    @CustomCompleteTextConverter() required CustomCompleteText customCompleteText,
     @DetectedTextConverter() required DetectedText description,
-    @Default([]) List<Map<String, dynamic>> exampleTexts,
-    @Default("") String genre,
-    @Default([]) List<String> hashTags,
     @ModeratedImageConverter() required ModeratedImage image,
-    @Default(0) int impressionCount,
     @Default(0) int likeCount,
-    @Default([]) List<Map<String, dynamic>> links,
     @Default(0) int msgCount,
-    @Default(0) int muteCount,
     required String postId,
-    @Default(0) int reportCount,
-    @Default(0.0) double score,
-    required Map<String, dynamic> searchToken,
     @DetectedTextConverter() required DetectedText title,
     required String uid,
     required dynamic updatedAt,
-    @Default(0) int userCount,
   }) = _PostModel;
   factory PostModel.fromJson(Map<String, dynamic> json) =>
       _$PostModelFromJson(json);
@@ -56,7 +43,6 @@ abstract class PostModel with _$PostModel {
       description: DetectedText(value: description),
       image: const ModeratedImage(),
       postId: postId,
-      searchToken: SearchUtil.returnSearchToken(title),
       title: DetectedText(value: title),
       updatedAt: now,
       uid: uid,

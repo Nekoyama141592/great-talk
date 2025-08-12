@@ -1,3 +1,4 @@
+import 'package:great_talk/infrastructure/model/rest_api/create_post/response/create_post_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_image/response/generate_image_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_text/response/generate_text_response.dart';
@@ -29,5 +30,13 @@ abstract class IApiRepository {
   rs.FutureResult<GenerateTextResponse> generateText(
     String model,
     List<Map<String, dynamic>> messages,
+  );
+
+  /// Creates a new post with text and image content
+  rs.FutureResult<CreatePostResponse> createPost(
+    String title,
+    String description,
+    String base64Image,
+    String systemPrompt,
   );
 }

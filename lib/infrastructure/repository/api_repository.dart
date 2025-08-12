@@ -2,6 +2,8 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:great_talk/core/util/json_util.dart';
+import 'package:great_talk/infrastructure/model/rest_api/create_post/request/create_post_request.dart';
+import 'package:great_talk/infrastructure/model/rest_api/create_post/response/create_post_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/request/delete_object_request.dart';
 import 'package:great_talk/infrastructure/model/rest_api/delete_object/response/delete_object_response.dart';
 import 'package:great_talk/infrastructure/model/rest_api/open_ai/generate_image/request/generate_image_request.dart';
@@ -119,7 +121,7 @@ class ApiRepository implements IApiRepository {
     }
   }
   rs.FutureResult<Map<String, dynamic>> updateUser(
-    String base64,
+    String? base64,
     String bio,
     String userName,
   ) async {
@@ -132,11 +134,34 @@ class ApiRepository implements IApiRepository {
       };
       final result = await _call(name, requestData);
       final res = result;
-      print(res);
       return rs.Result.success(res);
     } on FirebaseFunctionsException catch (e) {
       debugPrint('updateUser: ${e.toString()}');
       return const rs.Result.failure('テキストの生成に失敗しました');
+    }
+  }
+
+  @override
+  rs.FutureResult<CreatePostResponse> createPost(
+    String title,
+    String description,
+    String base64Image,
+    String systemPrompt,
+  ) async {
+    try {
+      const name = 'createPost';
+      final request = CreatePostRequest(
+        title: title,
+        description: description,
+        base64Image: base64Image,
+        systemPrompt: systemPrompt,
+      );
+      final result = await _call(name, request.toJson());
+      final res = CreatePostResponse.fromJson(result);
+      return rs.Result.success(res);
+    } on FirebaseFunctionsException catch (e) {
+      debugPrint('createPost: ${e.toString()}');
+      return const rs.Result.failure('投稿の作成に失敗しました');
     }
   }
 }
