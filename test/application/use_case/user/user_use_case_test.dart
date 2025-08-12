@@ -242,7 +242,7 @@ void main() {
             ),
             createdAt: mockTimestamp.toDate(),
             updatedAt: mockTimestamp.toDate(),
-            image: ModeratedImage(),
+            image: const ModeratedImage(),
             userName: DetectedText(
               languageCode: 'en',
               negativeScore: 0,
