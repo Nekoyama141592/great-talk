@@ -50,8 +50,7 @@ void main() {
               sentiment: 'positive',
               value: 'First test post',
             ),
-            image: const ModeratedImage(
-            ),
+            image: const ModeratedImage(),
             title: const DetectedText(
               languageCode: 'en',
               negativeScore: 0,
@@ -75,8 +74,7 @@ void main() {
               sentiment: 'positive',
               value: 'Second test post',
             ),
-            image: const ModeratedImage(
-            ),
+            image: const ModeratedImage(),
             title: const DetectedText(
               languageCode: 'en',
               negativeScore: 0,

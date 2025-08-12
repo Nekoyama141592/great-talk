@@ -291,10 +291,7 @@ void main() {
         );
 
         // The DeletePostUseCase uses moderationModelVersion as the object to delete
-        expect(
-          fakeApiRepository.deletedObjects,
-          contains('test_version'),
-        );
+        expect(fakeApiRepository.deletedObjects, contains('test_version'));
 
         // Verify post was deleted
         final deletedPost = await databaseRepository.getPost(
@@ -486,10 +483,7 @@ void main() {
           );
 
           // The DeletePostUseCase uses moderationModelVersion as the object to delete
-          expect(
-            fakeApiRepository.deletedObjects,
-            contains('test_version'),
-          );
+          expect(fakeApiRepository.deletedObjects, contains('test_version'));
         },
       );
 

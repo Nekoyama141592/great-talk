@@ -155,12 +155,8 @@ void main() {
 
       test('should handle users with different bucket names', () async {
         final usersWithDifferentBuckets = [
-          testUsers[0].copyWith(
-            image: const ModeratedImage(),
-          ),
-          testUsers[1].copyWith(
-            image: const ModeratedImage(),
-          ),
+          testUsers[0].copyWith(image: const ModeratedImage()),
+          testUsers[1].copyWith(image: const ModeratedImage()),
         ];
 
         when(
