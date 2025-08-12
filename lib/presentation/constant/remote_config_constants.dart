@@ -1,5 +1,5 @@
 class RemoteConfigConstants {
-  static const int appVersion = 249;
+  static const int appVersion = 250;
   // メンテナンスメッセージ
   static const String maintenanceMsg = "メンテナンス中";
 }
