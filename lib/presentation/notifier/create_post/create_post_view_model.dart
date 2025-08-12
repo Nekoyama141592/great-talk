@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:great_talk/core/util/image_util.dart';
 import 'package:great_talk/infrastructure/model/rest_api/create_post/response/create_post_response.dart';
 import 'package:great_talk/presentation/state/create_post/create_post_state.dart';
@@ -80,7 +78,7 @@ class CreatePostViewModel extends _$CreatePostViewModel {
     state = const AsyncValue.loading();
 
     final repository = ref.read(apiRepositoryProvider);
-    final base64Image = base64Encode(base64Decode(pickedImage));
+    final base64Image = pickedImage;
     
     final createPostResult = await repository.createPost(
       currentState.title.trim(),
