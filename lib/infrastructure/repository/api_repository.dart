@@ -118,4 +118,25 @@ class ApiRepository implements IApiRepository {
       return const rs.Result.failure('テキストの生成に失敗しました');
     }
   }
+  rs.FutureResult<Map<String, dynamic>> updateUser(
+    String base64,
+    String bio,
+    String userName,
+  ) async {
+    try {
+      const name = 'updateUser';
+      final requestData = {
+        "base64Image": base64,
+        "bio": bio,
+        "userName": userName,
+      };
+      final result = await _call(name, requestData);
+      final res = result;
+      print(res);
+      return rs.Result.success(res);
+    } on FirebaseFunctionsException catch (e) {
+      debugPrint('updateUser: ${e.toString()}');
+      return const rs.Result.failure('テキストの生成に失敗しました');
+    }
+  }
 }

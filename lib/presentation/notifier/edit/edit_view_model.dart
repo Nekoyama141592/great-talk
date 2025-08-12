@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:great_talk/core/util/image_util.dart';
 import 'package:great_talk/presentation/state/current_user/current_user/current_user_state.dart';
 import 'package:great_talk/core/provider/keep_alive/stream/auth/stream_auth_provider.dart';
@@ -13,7 +11,6 @@ import 'package:great_talk/presentation/constant/form_consts.dart';
 import 'package:great_talk/presentation/constant/msg_constants.dart';
 import 'package:great_talk/core/extension/string_extension.dart';
 import 'package:great_talk/infrastructure/model/database_schema/user_update_log/user_update_log_model.dart';
-import 'package:great_talk/core/util/aws_s3_util.dart';
 import 'package:great_talk/presentation/state/edit/edit_state.dart';
 
 part 'edit_view_model.g.dart';
@@ -27,11 +24,9 @@ class EditViewModel extends _$EditViewModel {
     final user = _currentUserState()?.publicUser;
     final bio = user?.bioValue ?? "";
     final userName = user?.nameValue ?? "";
-    final base64 = _currentUserState()?.base64;
     return EditState(
       bio: bio,
       userName: userName,
-      base64: base64,
       isPicked: false,
     );
   }
@@ -51,14 +46,6 @@ class EditViewModel extends _$EditViewModel {
     return const Result.success(true);
   }
 
-  /// 初期化
-  void init() {
-    final base64 = _currentUserState()?.base64;
-    if (state.value?.base64 != null && base64 != null) {
-      state = AsyncData(state.value!.copyWith(base64: base64));
-    }
-  }
-
   /// Bioのセット
   void setBio(String? value) {
     if (value == null) return;
@@ -72,14 +59,15 @@ class EditViewModel extends _$EditViewModel {
   }
 
   /// プロフィール更新ボタン押下時
-  FutureResult<bool> onPositiveButtonPressed() async {
+  FutureResult onPositiveButtonPressed() async {
     final s = state.value;
     final uid = ref.read(authUidProvider);
     if (s == null || uid == null) {
       return const Result.failure('もう一度お試しください.');
     }
     final base64 = s.base64;
-    if (base64 == null) {
+    final isModerated = ref.read(currentUserNotifierProvider).value?.publicUser?.image.moderationModelVersion.isNotEmpty ?? false;
+    if (base64 == null && !isModerated) {
       return const Result.failure("アイコンをタップしてプロフィール画像をアップロードしてください");
     }
     final userName = s.userName;
@@ -99,25 +87,13 @@ class EditViewModel extends _$EditViewModel {
       state = AsyncData(s);
       return const Result.failure("ユーザーが見つかりません");
     }
-    late Result<bool> updateUserResult;
-    if (s.isPicked) {
-      final fileName = AWSS3Util.profileObject(uid);
-      final uint8list = base64;
-      final base64Image = base64Encode(base64Decode(uint8list));
-      final repository = ref.read(apiRepositoryProvider);
-      final result = await repository.putObject(base64Image, fileName);
-      await result.when(
-        success: (res) async {
-          updateUserResult = await _createUserUpdateLog(userName, bio);
-        },
-        failure: (e) {
-          updateUserResult = const Result.failure("画像のアップロードが失敗しました");
-          state = AsyncData(s);
-        },
-      );
-    } else {
+    late Result updateUserResult;
+    if (base64 == null && isModerated) {
       // 写真がそのまま場合の処理
       updateUserResult = await _createUserUpdateLog(userName, bio);
+    } else {
+      // 写真が更新された場合
+      updateUserResult = await ref.read(apiRepositoryProvider).updateUser(base64!, bio, userName);
     }
     // 完了時はstateを元に戻す
     state = AsyncData(s.copyWith(isPicked: false));

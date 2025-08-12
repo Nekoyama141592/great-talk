@@ -131,8 +131,9 @@ class PostCard extends ConsumerWidget {
                                           .moderationModelVersion
                                           .isNotEmpty,
                                   imageUrl: ImageUrlUtil.getPostImageUrl(
-                                    post.uid,
-                                    post.postId,
+                                    uid: post.uid,
+                                    postId: post.postId,
+                                    key: post.imageKey(),
                                   ),
                                   width: 48,
                                   height: 48,

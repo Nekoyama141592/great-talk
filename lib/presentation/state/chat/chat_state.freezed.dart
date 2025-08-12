@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatState {
 
- List<TextMessage> get messages; PostEntity get post; String? get postImage; bool get isPicked; String? get pickedImage;
+ List<TextMessage> get messages; PostEntity get post; bool get isPicked; String? get pickedImage;
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $ChatStateCopyWith<ChatState> get copyWith => _$ChatStateCopyWithImpl<ChatState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatState&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.post, post) || other.post == post)&&(identical(other.postImage, postImage) || other.postImage == postImage)&&(identical(other.isPicked, isPicked) || other.isPicked == isPicked)&&(identical(other.pickedImage, pickedImage) || other.pickedImage == pickedImage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatState&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.post, post) || other.post == post)&&(identical(other.isPicked, isPicked) || other.isPicked == isPicked)&&(identical(other.pickedImage, pickedImage) || other.pickedImage == pickedImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(messages),post,postImage,isPicked,pickedImage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(messages),post,isPicked,pickedImage);
 
 @override
 String toString() {
-  return 'ChatState(messages: $messages, post: $post, postImage: $postImage, isPicked: $isPicked, pickedImage: $pickedImage)';
+  return 'ChatState(messages: $messages, post: $post, isPicked: $isPicked, pickedImage: $pickedImage)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $ChatStateCopyWith<$Res>  {
   factory $ChatStateCopyWith(ChatState value, $Res Function(ChatState) _then) = _$ChatStateCopyWithImpl;
 @useResult
 $Res call({
- List<TextMessage> messages, PostEntity post, String? postImage, bool isPicked, String? pickedImage
+ List<TextMessage> messages, PostEntity post, bool isPicked, String? pickedImage
 });
 
 
@@ -66,12 +66,11 @@ class _$ChatStateCopyWithImpl<$Res>
 
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? messages = null,Object? post = null,Object? postImage = freezed,Object? isPicked = null,Object? pickedImage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? messages = null,Object? post = null,Object? isPicked = null,Object? pickedImage = freezed,}) {
   return _then(_self.copyWith(
 messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
 as List<TextMessage>,post: null == post ? _self.post : post // ignore: cast_nullable_to_non_nullable
-as PostEntity,postImage: freezed == postImage ? _self.postImage : postImage // ignore: cast_nullable_to_non_nullable
-as String?,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
+as PostEntity,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
 as bool,pickedImage: freezed == pickedImage ? _self.pickedImage : pickedImage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -93,7 +92,7 @@ $PostEntityCopyWith<$Res> get post {
 @JsonSerializable()
 
 class _ChatState extends ChatState {
-  const _ChatState({final  List<TextMessage> messages = const [], required this.post, this.postImage, this.isPicked = false, this.pickedImage}): _messages = messages,super._();
+  const _ChatState({final  List<TextMessage> messages = const [], required this.post, this.isPicked = false, this.pickedImage}): _messages = messages,super._();
   factory _ChatState.fromJson(Map<String, dynamic> json) => _$ChatStateFromJson(json);
 
  final  List<TextMessage> _messages;
@@ -104,7 +103,6 @@ class _ChatState extends ChatState {
 }
 
 @override final  PostEntity post;
-@override final  String? postImage;
 @override@JsonKey() final  bool isPicked;
 @override final  String? pickedImage;
 
@@ -121,16 +119,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatState&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.post, post) || other.post == post)&&(identical(other.postImage, postImage) || other.postImage == postImage)&&(identical(other.isPicked, isPicked) || other.isPicked == isPicked)&&(identical(other.pickedImage, pickedImage) || other.pickedImage == pickedImage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatState&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.post, post) || other.post == post)&&(identical(other.isPicked, isPicked) || other.isPicked == isPicked)&&(identical(other.pickedImage, pickedImage) || other.pickedImage == pickedImage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_messages),post,postImage,isPicked,pickedImage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_messages),post,isPicked,pickedImage);
 
 @override
 String toString() {
-  return 'ChatState(messages: $messages, post: $post, postImage: $postImage, isPicked: $isPicked, pickedImage: $pickedImage)';
+  return 'ChatState(messages: $messages, post: $post, isPicked: $isPicked, pickedImage: $pickedImage)';
 }
 
 
@@ -141,7 +139,7 @@ abstract mixin class _$ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Re
   factory _$ChatStateCopyWith(_ChatState value, $Res Function(_ChatState) _then) = __$ChatStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<TextMessage> messages, PostEntity post, String? postImage, bool isPicked, String? pickedImage
+ List<TextMessage> messages, PostEntity post, bool isPicked, String? pickedImage
 });
 
 
@@ -158,12 +156,11 @@ class __$ChatStateCopyWithImpl<$Res>
 
 /// Create a copy of ChatState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? messages = null,Object? post = null,Object? postImage = freezed,Object? isPicked = null,Object? pickedImage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? messages = null,Object? post = null,Object? isPicked = null,Object? pickedImage = freezed,}) {
   return _then(_ChatState(
 messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
 as List<TextMessage>,post: null == post ? _self.post : post // ignore: cast_nullable_to_non_nullable
-as PostEntity,postImage: freezed == postImage ? _self.postImage : postImage // ignore: cast_nullable_to_non_nullable
-as String?,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
+as PostEntity,isPicked: null == isPicked ? _self.isPicked : isPicked // ignore: cast_nullable_to_non_nullable
 as bool,pickedImage: freezed == pickedImage ? _self.pickedImage : pickedImage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));

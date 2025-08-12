@@ -220,7 +220,10 @@ class UserRankingScreen extends ConsumerWidget {
                   child: CircleImage(
                     isModerated:
                         publicUser.image.moderationModelVersion.isNotEmpty,
-                    imageUrl: ImageUrlUtil.getUserImageUrl(publicUser.uid),
+                    imageUrl: ImageUrlUtil.getUserImageUrl(
+                      uid: publicUser.uid,
+                      key: publicUser.imageKey(),
+                    ),
                     width: rank == 1 ? 55 : 40,
                     height: rank == 1 ? 55 : 40,
                   ),
@@ -333,7 +336,10 @@ class UserRankingScreen extends ConsumerWidget {
                     child: CircleImage(
                       isModerated:
                           publicUser.image.moderationModelVersion.isNotEmpty,
-                      imageUrl: ImageUrlUtil.getUserImageUrl(publicUser.uid),
+                      imageUrl: ImageUrlUtil.getUserImageUrl(
+                        uid: publicUser.uid,
+                        key: publicUser.imageKey(),
+                      ),
                       width: 45,
                       height: 45,
                     ),

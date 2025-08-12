@@ -50,7 +50,10 @@ class ProfileScreen extends ConsumerWidget {
           CircleImage(
             isModerated:
                 passiveUser?.image.moderationModelVersion.isNotEmpty ?? false,
-            imageUrl: ImageUrlUtil.getUserImageUrl(passiveUid),
+            imageUrl: ImageUrlUtil.getUserImageUrl(
+              uid: passiveUid,
+              key: passiveUser?.imageKey() ?? 'profile.jpg',
+            ),
           ),
           const BasicWidthBox(),
           Text("フォロー ${passiveUser?.followingCount.formatNumber() ?? 0}"),

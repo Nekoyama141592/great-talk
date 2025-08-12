@@ -95,7 +95,8 @@ class OriginalDrawer extends ConsumerWidget {
                                     ),
                                     child: CircleImage(
                                       imageUrl: ImageUrlUtil.getUserImageUrl(
-                                        user.uid,
+                                        uid: user.uid,
+                                        key: user.imageKey(),
                                       ),
                                       isModerated:
                                           user

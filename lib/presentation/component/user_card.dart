@@ -78,7 +78,8 @@ class UserCard extends ConsumerWidget {
                                               .moderationModelVersion
                                               .isNotEmpty,
                                       imageUrl: ImageUrlUtil.getUserImageUrl(
-                                        publicUser.uid,
+                                        uid: publicUser.uid,
+                                        key: publicUser.imageKey(),
                                       ),
                                     ),
                                     const BasicWidthBox(),

@@ -64,7 +64,11 @@ class MsgCard extends StatelessWidget {
       if (!isMyMsg && senderUid != null)
         CircleImage(
           isModerated: true,
-          imageUrl: ImageUrlUtil.getPostImageUrl(post.uid, post.postId),
+          imageUrl: ImageUrlUtil.getPostImageUrl(
+            uid: post.uid,
+            postId: post.postId,
+            key: post.imageKey(),
+          ),
         )
       else
         const SizedBox.shrink(),

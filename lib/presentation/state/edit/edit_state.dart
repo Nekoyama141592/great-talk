@@ -9,7 +9,7 @@ abstract class EditState with _$EditState {
   const factory EditState({
     required String bio,
     required String userName,
-    required String? base64,
+    String? base64,
     @Default(false) bool isPicked,
   }) = _EditState;
   factory EditState.fromJson(Map<String, dynamic> json) =>

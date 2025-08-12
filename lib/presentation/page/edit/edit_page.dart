@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:great_talk/presentation/component/circle_image/circle_image.dart';
 import 'package:great_talk/presentation/notifier/current_user/current_user_notifier.dart';
 import 'package:great_talk/core/util/route_util.dart';
 import 'package:great_talk/presentation/notifier/edit/edit_view_model.dart';
@@ -22,10 +23,11 @@ class EditProfilePage extends HookConsumerWidget {
     // formKey を useMemoized を使って build メソッド内で初期化し、再ビルド間で状態を保持
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final editStateAsync = ref.watch(editViewModelProvider);
+    final isModerated = ref.watch(currentUserNotifierProvider).value?.publicUser?.image.moderationModelVersion.isNotEmpty ?? false;
     EditViewModel notifier() => ref.read(editViewModelProvider.notifier);
-
     return editStateAsync.when(
-      data: (editModelData) {
+      data: (state) {
+        final base64 = state.base64;
         void onImageTap() async {
           final result = await notifier().onImagePickButtonPressed();
           result.when(
@@ -41,12 +43,9 @@ class EditProfilePage extends HookConsumerWidget {
         return FormsScreen(
           appBarText: "ユーザー情報を編集",
           children: [
-            EditProfileForm(formKey: formKey, editModelData: editModelData),
+            EditProfileForm(formKey: formKey, editModelData: state),
             const SizedBox(height: 16.0),
-            ProfileImageWidget(
-              base64: editModelData.base64,
-              onImageTap: onImageTap,
-            ),
+            base64 != null ? ProfileImageWidget(base64: base64, onImageTap: onImageTap) : CircleImage(isModerated: isModerated,onTap: onImageTap,width: 200,),            
             const SizedBox(height: 16.0),
             UpdateButtonWidget(
               onPressed: () async {
