@@ -55,6 +55,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '281295610190',
     projectId: 'great-talk-verification',
     storageBucket: 'great-talk-verification.appspot.com',
+    androidClientId:
+        '539254486556-eqrr8rautqgm7rfqgtis5ss3ftr4mgif.apps.googleusercontent.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(

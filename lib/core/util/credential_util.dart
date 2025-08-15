@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:great_talk/application/app/run_app.dart';
@@ -22,9 +24,14 @@ class CredentialUtil {
   }
 
   static Future<AuthCredential> googleCredential() async {
-    final clientId = RunApp.getFirebaseOption(F.appFlavor).iosClientId;
+    final option = RunApp.getFirebaseOption(F.appFlavor);
+    final clientId = Platform.isIOS ? option.iosClientId : null;
+    final serverClientId = Platform.isAndroid ? option.androidClientId : null;
     final GoogleSignInAccount? googleUser =
-        await GoogleSignIn(clientId: clientId).signIn();
+        await GoogleSignIn(
+          clientId: clientId,
+          serverClientId: serverClientId,
+        ).signIn();
 
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
