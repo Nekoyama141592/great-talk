@@ -55,6 +55,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '70509935268',
     projectId: 'great-talk-dev',
     storageBucket: 'great-talk-dev.appspot.com',
+    androidClientId:
+        '70509935268-iuuupn725d5gm04ukun3tbpj0ca3hvd6.apps.googleusercontent.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
