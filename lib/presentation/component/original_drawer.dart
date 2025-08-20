@@ -15,6 +15,7 @@ import 'package:great_talk/presentation/page/mute/mute_posts/mute_posts_page.dar
 import 'package:great_talk/presentation/page/mute/mute_users/mute_users_page.dart';
 import 'package:great_talk/presentation/page/user_profile_page.dart';
 import 'package:great_talk/presentation/constant/colors.dart';
+import 'package:great_talk/presentation/util/drawer_ui_util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class OriginalDrawer extends ConsumerWidget {
@@ -257,6 +258,7 @@ class OriginalDrawer extends ConsumerWidget {
                 ),
               ),
             ),
+            _buildVersionDisplay(),
           ],
         ),
       ),
@@ -419,6 +421,55 @@ class OriginalDrawer extends ConsumerWidget {
             thumbColor: Colors.white,
             inactiveTrackColor: Colors.white.withAlpha(51),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVersionDisplay() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Colors.white.withAlpha(13),
+              Colors.white.withAlpha(26),
+              Colors.white.withAlpha(13),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.white.withAlpha(51), width: 0.5),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: kPrimaryColor.withAlpha(77),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: const Icon(
+                Icons.info_outline,
+                color: Colors.white,
+                size: 16,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Text(
+              DrawerUiUtil.version,
+              style: TextStyle(
+                color: Colors.white.withAlpha(204),
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ],
         ),
       ),
     );
